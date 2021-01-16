@@ -22,7 +22,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="no_log" eType="#//EBooleanPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="debugger" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="debugger" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EListPassed"
         containment="true"/>
@@ -47,7 +47,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ETaskHandler" eSuperTypes="#//EExecution">
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//ETaskHandlerErrorHandling"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="asynchronous_settings"
         eType="#//EAsynchronousSettings" containment="true"/>
@@ -63,9 +63,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlay" eSuperTypes="#//EBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="play_exe_settings" eType="#//EPlayExeSettings"
         containment="true"/>
@@ -93,7 +93,7 @@
         eType="#//EHandler" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBlock" eSuperTypes="#//EExecution #//EBlockTask">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockAndRoleErrorHandling"
         containment="true"/>
@@ -105,7 +105,7 @@
         eType="#//ETask" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETask" eSuperTypes="#//EBlockTask #//ETaskHandler">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EStringPassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHandler" eSuperTypes="#//ETaskHandler">
@@ -126,7 +126,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockAndRoleErrorHandling"
         containment="true"/>
@@ -175,13 +175,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="EPrivilegeEscalation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="become" eType="#//EBooleanPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="become_exe" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="become_exe" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="become_flags" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="become_flags" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="become_method" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="become_method" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="become_user" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="become_user" eType="#//EStringPassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EValidationMode">
@@ -191,11 +191,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EConnection">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//ENumberPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="remote_user" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="remote_user" eType="#//EStringPassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EExeSettings">
@@ -205,11 +205,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlayExeSettings" eSuperTypes="#//EExeSettings">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="serial_list" eType="#//EListPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="#//EStringPassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EExecutionExeSettings" eSuperTypes="#//EExeSettings"/>
@@ -239,11 +239,11 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="gather_timeout" eType="#//ENumberPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fact_path" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fact_path" eType="#//EStringPassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDelegation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate_to" eType="#//EJinjaExpressionAndString"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegate_to" eType="#//EStringPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="delegate_facts" eType="#//EBooleanPassed"
         containment="true"/>
@@ -264,11 +264,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionOrString">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionAndString" eSuperTypes="#//EValuePassed">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="new_line_command" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionAndString" eSuperTypes="#//EStringPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression_and_string"
         upperBound="-1" eType="#//EJinjaExpressionOrString" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EMultiLineExpression" eSuperTypes="#//EStringPassed">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="new_line_command" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//EJinjaExpressionAndString" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringPassed" eSuperTypes="#//EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EComposedValue" eSuperTypes="#//EValueWithoutString"/>

@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString delegate_to;
+  protected EStringPassed delegate_to;
 
   /**
    * The cached value of the '{@link #getDelegate_facts() <em>Delegate facts</em>}' containment reference.
@@ -80,7 +80,7 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getDelegate_to()
+  public EStringPassed getDelegate_to()
   {
     return delegate_to;
   }
@@ -90,9 +90,9 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDelegate_to(EJinjaExpressionAndString newDelegate_to, NotificationChain msgs)
+  public NotificationChain basicSetDelegate_to(EStringPassed newDelegate_to, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldDelegate_to = delegate_to;
+    EStringPassed oldDelegate_to = delegate_to;
     delegate_to = newDelegate_to;
     if (eNotificationRequired())
     {
@@ -108,7 +108,7 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
    * @generated
    */
   @Override
-  public void setDelegate_to(EJinjaExpressionAndString newDelegate_to)
+  public void setDelegate_to(EStringPassed newDelegate_to)
   {
     if (newDelegate_to != delegate_to)
     {
@@ -221,7 +221,7 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
     switch (featureID)
     {
       case AnsibleDslPackage.EDELEGATION__DELEGATE_TO:
-        setDelegate_to((EJinjaExpressionAndString)newValue);
+        setDelegate_to((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EDELEGATION__DELEGATE_FACTS:
         setDelegate_facts((EBooleanPassed)newValue);
@@ -241,7 +241,7 @@ public class EDelegationImpl extends MinimalEObjectImpl.Container implements EDe
     switch (featureID)
     {
       case AnsibleDslPackage.EDELEGATION__DELEGATE_TO:
-        setDelegate_to((EJinjaExpressionAndString)null);
+        setDelegate_to((EStringPassed)null);
         return;
       case AnsibleDslPackage.EDELEGATION__DELEGATE_FACTS:
         setDelegate_facts((EBooleanPassed)null);

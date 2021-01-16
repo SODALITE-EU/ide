@@ -29,12 +29,12 @@ public interface EDelegation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Delegate to</em>' containment reference.
-   * @see #setDelegate_to(EJinjaExpressionAndString)
+   * @see #setDelegate_to(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEDelegation_Delegate_to()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getDelegate_to();
+  EStringPassed getDelegate_to();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EDelegation#getDelegate_to <em>Delegate to</em>}' containment reference.
@@ -44,7 +44,7 @@ public interface EDelegation extends EObject
    * @see #getDelegate_to()
    * @generated
    */
-  void setDelegate_to(EJinjaExpressionAndString value);
+  void setDelegate_to(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Delegate facts</b></em>' containment reference.

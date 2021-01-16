@@ -45,13 +45,13 @@ EPlay:
 	'play:'
 	BEGIN
 	(
-		('play_name:' name=EJinjaExpressionAndString)? &
-		('hosts:' hosts=EJinjaExpressionAndString)? &
+		('play_name:' name=EStringPassed)? &
+		('hosts:' hosts=EStringPassed)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
 		(validation_mode=EValidationMode)? &
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
-		('debugger:' debugger=EJinjaExpressionAndString)? &
+		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
@@ -92,12 +92,12 @@ EBlock:
 	'block:'
 	BEGIN
 	(
-		('block_name:' name=EJinjaExpressionAndString)? &
+		('block_name:' name=EStringPassed)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
 		(validation_mode=EValidationMode)? &
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
-		('debugger:' debugger=EJinjaExpressionAndString)? &
+		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
@@ -131,12 +131,12 @@ ETask:
 	'task:'
 	BEGIN
 	(
-		('task_name:' name=EJinjaExpressionAndString)? &
+		('task_name:' name=EStringPassed)? &
 		(privilege_escalation=EPrivilegeEscalation)? &
 		(validation_mode=EValidationMode)? &
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
-		('debugger:' debugger=EJinjaExpressionAndString)? &
+		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
@@ -149,7 +149,7 @@ ETask:
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
 		(error_handling=ETaskHandlerErrorHandling)? &
-		('action:' action=EJinjaExpressionAndString)? &
+		('action:' action=EStringPassed)? &
 		(asynchronous_settings=EAsynchronousSettings)? &
 		('args:' args=EDictionaryPassed)? &
 		(module=EModuleCall) &
@@ -165,12 +165,12 @@ EHandler:
 	'handler:'
 	BEGIN
 	(
-		('handler_name:' name=STRING)? & //could not use EJinjaExpressionAndString because if so the scoping doesn't work
+		('handler_name:' name=STRING)? & //could not use EStringPassed because if so the scoping doesn't work
 		(privilege_escalation=EPrivilegeEscalation)? &
 		(validation_mode=EValidationMode)? &
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
-		('debugger:' debugger=EJinjaExpressionAndString)? &
+		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
 		('environment:' environment=EListPassed)? &
 		('collections:' collections=EListPassed)? &
@@ -183,7 +183,7 @@ EHandler:
 		(delegation=EDelegation)? &
 		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
 		(error_handling=ETaskHandlerErrorHandling)? &
-		('action:' action=EJinjaExpressionAndString)? &
+		('action:' action=EStringPassed)? &
 		(asynchronous_settings=EAsynchronousSettings)? &
 		('args:' args=EDictionaryPassed)? &
 		(module=EModuleCall) &
@@ -218,13 +218,13 @@ ERoleInclusion:
 	'role:'
 	BEGIN
 	(
-		'role_name:' name=EJinjaExpressionAndString
+		'role_name:' name=EStringPassed
 		(
 			(privilege_escalation=EPrivilegeEscalation)? &
 			(validation_mode=EValidationMode)? &
 			(connection=EConnection)? &
 			('no_log:' no_log=EBooleanPassed)? &
-			('debugger:' debugger=EJinjaExpressionAndString)? &
+			('debugger:' debugger=EStringPassed)? &
 			('module_defaults:' module_defaults=EListPassed)? &
 			('environment:' environment=EListPassed)? &
 			('collections:' collections=EListPassed)? &
@@ -301,10 +301,10 @@ EPrivilegeEscalation:
 	BEGIN
 	(	
 		('become:' become=EBooleanPassed)? &
-		('become_exe:' become_exe=EJinjaExpressionAndString)? &
-		('become_flags:' become_flags=EJinjaExpressionAndString)? &
-		('become_method:' become_method=EJinjaExpressionAndString)? &
-		('become_user:' become_user=EJinjaExpressionAndString)?
+		('become_exe:' become_exe=EStringPassed)? &
+		('become_flags:' become_flags=EStringPassed)? &
+		('become_method:' become_method=EStringPassed)? &
+		('become_user:' become_user=EStringPassed)?
 	)
 	END
 ;
@@ -323,9 +323,9 @@ EConnection:
 	'connection_info:'
 	BEGIN
 	(
-		('connection:' connection=EJinjaExpressionAndString)? &
+		('connection:' connection=EStringPassed)? &
 		('port:' port=ENumberPassed)? &
-		('remote_user:' remote_user=EJinjaExpressionAndString)?
+		('remote_user:' remote_user=EStringPassed)?
 	)
 	END
 ;
@@ -338,9 +338,9 @@ EPlayExeSettings:
 	'play_exe_settings:'
 	BEGIN
 	(
-		('strategy:' strategy=EJinjaExpressionAndString)? &
+		('strategy:' strategy=EStringPassed)? &
 		('serial:' serial_list=EListPassed)? &
-		('order:' order=EJinjaExpressionAndString)? &
+		('order:' order=EStringPassed)? &
 		('throttle:' throttle=ENumberPassed)? &
 		('run_once:' run_once=EBooleanPassed)?
 	)
@@ -404,7 +404,7 @@ EFactsSettings:
 		('gather_facts:' gather_facts=EBooleanPassed)? &
 		('gather_subset:' gather_subset=EListPassed)? &
 		('gather_timeout:'gather_timeout=ENumberPassed)? &
-		('fact_path:' fact_path=EJinjaExpressionAndString)?
+		('fact_path:' fact_path=EStringPassed)?
 	)
 	END
 ;
@@ -413,7 +413,7 @@ EDelegation:
 	'delegation:'
 	BEGIN
 	(
-		('delegate_to:' delegate_to=EJinjaExpressionAndString)? &
+		('delegate_to:' delegate_to=EStringPassed)? &
 		('delegate_facts:' delegate_facts=EBooleanPassed)?
 	)
 	END
@@ -446,11 +446,22 @@ EJinjaExpressionOrString:
 ;
 
 EJinjaExpressionAndString:
-	(new_line_command=('>' | '|'))? (jinja_expression_and_string+=EJinjaExpressionOrString)+
+	(jinja_expression_and_string+=EJinjaExpressionOrString)+
+;
+
+EMultiLineExpression:
+	new_line_command=('>' | '|')
+	BEGIN
+		('line:' expressions+=EJinjaExpressionAndString)+
+	END
+;
+
+EStringPassed:
+	EJinjaExpressionAndString | EMultiLineExpression
 ;
 
 EValuePassed:
-	EJinjaExpressionAndString | EValueWithoutString
+	EStringPassed | EValueWithoutString
 ;
 
 EValuePassedToJinjaExpression:

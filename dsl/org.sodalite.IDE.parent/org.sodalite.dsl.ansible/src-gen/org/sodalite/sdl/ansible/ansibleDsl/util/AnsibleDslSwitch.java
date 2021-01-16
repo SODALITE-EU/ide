@@ -370,7 +370,25 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EJinjaExpressionAndString eJinjaExpressionAndString = (EJinjaExpressionAndString)theEObject;
         T result = caseEJinjaExpressionAndString(eJinjaExpressionAndString);
+        if (result == null) result = caseEStringPassed(eJinjaExpressionAndString);
         if (result == null) result = caseEValuePassed(eJinjaExpressionAndString);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EMULTI_LINE_EXPRESSION:
+      {
+        EMultiLineExpression eMultiLineExpression = (EMultiLineExpression)theEObject;
+        T result = caseEMultiLineExpression(eMultiLineExpression);
+        if (result == null) result = caseEStringPassed(eMultiLineExpression);
+        if (result == null) result = caseEValuePassed(eMultiLineExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ESTRING_PASSED:
+      {
+        EStringPassed eStringPassed = (EStringPassed)theEObject;
+        T result = caseEStringPassed(eStringPassed);
+        if (result == null) result = caseEValuePassed(eStringPassed);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1418,6 +1436,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEJinjaExpressionAndString(EJinjaExpressionAndString object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EMulti Line Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EMulti Line Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEMultiLineExpression(EMultiLineExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EString Passed</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EString Passed</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEStringPassed(EStringPassed object)
   {
     return null;
   }

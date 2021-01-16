@@ -127,12 +127,12 @@ public interface EBase extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Debugger</em>' containment reference.
-   * @see #setDebugger(EJinjaExpressionAndString)
+   * @see #setDebugger(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Debugger()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getDebugger();
+  EStringPassed getDebugger();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getDebugger <em>Debugger</em>}' containment reference.
@@ -142,7 +142,7 @@ public interface EBase extends EObject
    * @see #getDebugger()
    * @generated
    */
-  void setDebugger(EJinjaExpressionAndString value);
+  void setDebugger(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Module defaults</b></em>' containment reference.

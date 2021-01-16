@@ -27,7 +27,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
@@ -35,6 +34,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
@@ -125,7 +125,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString debugger;
+  protected EStringPassed debugger;
 
   /**
    * The cached value of the '{@link #getModule_defaults() <em>Module defaults</em>}' containment reference.
@@ -225,7 +225,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString action;
+  protected EStringPassed action;
 
   /**
    * The cached value of the '{@link #getAsynchronous_settings() <em>Asynchronous settings</em>}' containment reference.
@@ -295,7 +295,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString name;
+  protected EStringPassed name;
 
   /**
    * <!-- begin-user-doc -->
@@ -524,7 +524,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getDebugger()
+  public EStringPassed getDebugger()
   {
     return debugger;
   }
@@ -534,9 +534,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDebugger(EJinjaExpressionAndString newDebugger, NotificationChain msgs)
+  public NotificationChain basicSetDebugger(EStringPassed newDebugger, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldDebugger = debugger;
+    EStringPassed oldDebugger = debugger;
     debugger = newDebugger;
     if (eNotificationRequired())
     {
@@ -552,7 +552,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setDebugger(EJinjaExpressionAndString newDebugger)
+  public void setDebugger(EStringPassed newDebugger)
   {
     if (newDebugger != debugger)
     {
@@ -989,7 +989,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getAction()
+  public EStringPassed getAction()
   {
     return action;
   }
@@ -999,9 +999,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(EJinjaExpressionAndString newAction, NotificationChain msgs)
+  public NotificationChain basicSetAction(EStringPassed newAction, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldAction = action;
+    EStringPassed oldAction = action;
     action = newAction;
     if (eNotificationRequired())
     {
@@ -1017,7 +1017,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setAction(EJinjaExpressionAndString newAction)
+  public void setAction(EStringPassed newAction)
   {
     if (newAction != action)
     {
@@ -1304,7 +1304,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getName()
+  public EStringPassed getName()
   {
     return name;
   }
@@ -1314,9 +1314,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  public NotificationChain basicSetName(EStringPassed newName, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldName = name;
+    EStringPassed oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -1332,7 +1332,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setName(EJinjaExpressionAndString newName)
+  public void setName(EStringPassed newName)
   {
     if (newName != name)
     {
@@ -1488,7 +1488,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setNo_log((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger((EJinjaExpressionAndString)newValue);
+        setDebugger((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)newValue);
@@ -1519,7 +1519,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setError_handling((ETaskHandlerErrorHandling)newValue);
         return;
       case AnsibleDslPackage.ETASK__ACTION:
-        setAction((EJinjaExpressionAndString)newValue);
+        setAction((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)newValue);
@@ -1541,7 +1541,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setRegister((ERegisterVariable)newValue);
         return;
       case AnsibleDslPackage.ETASK__NAME:
-        setName((EJinjaExpressionAndString)newValue);
+        setName((EStringPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1570,7 +1570,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setNo_log((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.ETASK__DEBUGGER:
-        setDebugger((EJinjaExpressionAndString)null);
+        setDebugger((EStringPassed)null);
         return;
       case AnsibleDslPackage.ETASK__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)null);
@@ -1600,7 +1600,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setError_handling((ETaskHandlerErrorHandling)null);
         return;
       case AnsibleDslPackage.ETASK__ACTION:
-        setAction((EJinjaExpressionAndString)null);
+        setAction((EStringPassed)null);
         return;
       case AnsibleDslPackage.ETASK__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)null);
@@ -1621,7 +1621,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setRegister((ERegisterVariable)null);
         return;
       case AnsibleDslPackage.ETASK__NAME:
-        setName((EJinjaExpressionAndString)null);
+        setName((EStringPassed)null);
         return;
     }
     super.eUnset(featureID);

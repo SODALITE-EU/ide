@@ -375,6 +375,24 @@ public interface AnsibleDslFactory extends EFactory
   EJinjaExpressionAndString createEJinjaExpressionAndString();
 
   /**
+   * Returns a new object of class '<em>EMulti Line Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EMulti Line Expression</em>'.
+   * @generated
+   */
+  EMultiLineExpression createEMultiLineExpression();
+
+  /**
+   * Returns a new object of class '<em>EString Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EString Passed</em>'.
+   * @generated
+   */
+  EStringPassed createEStringPassed();
+
+  /**
    * Returns a new object of class '<em>EValue Passed</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

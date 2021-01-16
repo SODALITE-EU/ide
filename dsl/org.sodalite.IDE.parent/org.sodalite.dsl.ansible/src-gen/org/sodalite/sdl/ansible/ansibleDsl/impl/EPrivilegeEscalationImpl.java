@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString become_exe;
+  protected EStringPassed become_exe;
 
   /**
    * The cached value of the '{@link #getBecome_flags() <em>Become flags</em>}' containment reference.
@@ -64,7 +64,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString become_flags;
+  protected EStringPassed become_flags;
 
   /**
    * The cached value of the '{@link #getBecome_method() <em>Become method</em>}' containment reference.
@@ -74,7 +74,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString become_method;
+  protected EStringPassed become_method;
 
   /**
    * The cached value of the '{@link #getBecome_user() <em>Become user</em>}' containment reference.
@@ -84,7 +84,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString become_user;
+  protected EStringPassed become_user;
 
   /**
    * <!-- begin-user-doc -->
@@ -163,7 +163,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getBecome_exe()
+  public EStringPassed getBecome_exe()
   {
     return become_exe;
   }
@@ -173,9 +173,9 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBecome_exe(EJinjaExpressionAndString newBecome_exe, NotificationChain msgs)
+  public NotificationChain basicSetBecome_exe(EStringPassed newBecome_exe, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldBecome_exe = become_exe;
+    EStringPassed oldBecome_exe = become_exe;
     become_exe = newBecome_exe;
     if (eNotificationRequired())
     {
@@ -191,7 +191,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setBecome_exe(EJinjaExpressionAndString newBecome_exe)
+  public void setBecome_exe(EStringPassed newBecome_exe)
   {
     if (newBecome_exe != become_exe)
     {
@@ -213,7 +213,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getBecome_flags()
+  public EStringPassed getBecome_flags()
   {
     return become_flags;
   }
@@ -223,9 +223,9 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBecome_flags(EJinjaExpressionAndString newBecome_flags, NotificationChain msgs)
+  public NotificationChain basicSetBecome_flags(EStringPassed newBecome_flags, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldBecome_flags = become_flags;
+    EStringPassed oldBecome_flags = become_flags;
     become_flags = newBecome_flags;
     if (eNotificationRequired())
     {
@@ -241,7 +241,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setBecome_flags(EJinjaExpressionAndString newBecome_flags)
+  public void setBecome_flags(EStringPassed newBecome_flags)
   {
     if (newBecome_flags != become_flags)
     {
@@ -263,7 +263,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getBecome_method()
+  public EStringPassed getBecome_method()
   {
     return become_method;
   }
@@ -273,9 +273,9 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBecome_method(EJinjaExpressionAndString newBecome_method, NotificationChain msgs)
+  public NotificationChain basicSetBecome_method(EStringPassed newBecome_method, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldBecome_method = become_method;
+    EStringPassed oldBecome_method = become_method;
     become_method = newBecome_method;
     if (eNotificationRequired())
     {
@@ -291,7 +291,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setBecome_method(EJinjaExpressionAndString newBecome_method)
+  public void setBecome_method(EStringPassed newBecome_method)
   {
     if (newBecome_method != become_method)
     {
@@ -313,7 +313,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getBecome_user()
+  public EStringPassed getBecome_user()
   {
     return become_user;
   }
@@ -323,9 +323,9 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBecome_user(EJinjaExpressionAndString newBecome_user, NotificationChain msgs)
+  public NotificationChain basicSetBecome_user(EStringPassed newBecome_user, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldBecome_user = become_user;
+    EStringPassed oldBecome_user = become_user;
     become_user = newBecome_user;
     if (eNotificationRequired())
     {
@@ -341,7 +341,7 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
-  public void setBecome_user(EJinjaExpressionAndString newBecome_user)
+  public void setBecome_user(EStringPassed newBecome_user)
   {
     if (newBecome_user != become_user)
     {
@@ -419,16 +419,16 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
         setBecome((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_EXE:
-        setBecome_exe((EJinjaExpressionAndString)newValue);
+        setBecome_exe((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_FLAGS:
-        setBecome_flags((EJinjaExpressionAndString)newValue);
+        setBecome_flags((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_METHOD:
-        setBecome_method((EJinjaExpressionAndString)newValue);
+        setBecome_method((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_USER:
-        setBecome_user((EJinjaExpressionAndString)newValue);
+        setBecome_user((EStringPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -448,16 +448,16 @@ public class EPrivilegeEscalationImpl extends MinimalEObjectImpl.Container imple
         setBecome((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_EXE:
-        setBecome_exe((EJinjaExpressionAndString)null);
+        setBecome_exe((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_FLAGS:
-        setBecome_flags((EJinjaExpressionAndString)null);
+        setBecome_flags((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_METHOD:
-        setBecome_method((EJinjaExpressionAndString)null);
+        setBecome_method((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPRIVILEGE_ESCALATION__BECOME_USER:
-        setBecome_user((EJinjaExpressionAndString)null);
+        setBecome_user((EStringPassed)null);
         return;
     }
     super.eUnset(featureID);

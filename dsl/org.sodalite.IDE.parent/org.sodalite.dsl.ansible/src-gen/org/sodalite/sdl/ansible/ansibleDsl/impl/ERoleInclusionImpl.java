@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString name;
+  protected EStringPassed name;
 
   /**
    * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
@@ -79,7 +79,7 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getName()
+  public EStringPassed getName()
   {
     return name;
   }
@@ -89,9 +89,9 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  public NotificationChain basicSetName(EStringPassed newName, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldName = name;
+    EStringPassed oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -107,7 +107,7 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
    * @generated
    */
   @Override
-  public void setName(EJinjaExpressionAndString newName)
+  public void setName(EStringPassed newName)
   {
     if (newName != name)
     {
@@ -220,7 +220,7 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
     switch (featureID)
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
-        setName((EJinjaExpressionAndString)newValue);
+        setName((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
         setError_handling((EBlockAndRoleErrorHandling)newValue);
@@ -240,7 +240,7 @@ public class ERoleInclusionImpl extends EExecutionImpl implements ERoleInclusion
     switch (featureID)
     {
       case AnsibleDslPackage.EROLE_INCLUSION__NAME:
-        setName((EJinjaExpressionAndString)null);
+        setName((EStringPassed)null);
         return;
       case AnsibleDslPackage.EROLE_INCLUSION__ERROR_HANDLING:
         setError_handling((EBlockAndRoleErrorHandling)null);

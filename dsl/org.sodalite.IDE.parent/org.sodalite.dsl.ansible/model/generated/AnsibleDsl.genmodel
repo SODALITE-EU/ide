@@ -179,9 +179,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaExpressionOrString/string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionAndString">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaExpressionAndString/new_line_command"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionAndString/jinja_expression_and_string"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EMultiLineExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EMultiLineExpression/new_line_command"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EMultiLineExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EStringPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EValuePassedToJinjaExpression"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EComposedValue"/>

@@ -23,13 +23,13 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString name;
+  protected EStringPassed name;
 
   /**
    * The cached value of the '{@link #getHosts() <em>Hosts</em>}' containment reference.
@@ -77,7 +77,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString hosts;
+  protected EStringPassed hosts;
 
   /**
    * The cached value of the '{@link #getPlay_exe_settings() <em>Play exe settings</em>}' containment reference.
@@ -226,7 +226,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getName()
+  public EStringPassed getName()
   {
     return name;
   }
@@ -236,9 +236,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  public NotificationChain basicSetName(EStringPassed newName, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldName = name;
+    EStringPassed oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -254,7 +254,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setName(EJinjaExpressionAndString newName)
+  public void setName(EStringPassed newName)
   {
     if (newName != name)
     {
@@ -276,7 +276,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getHosts()
+  public EStringPassed getHosts()
   {
     return hosts;
   }
@@ -286,9 +286,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetHosts(EJinjaExpressionAndString newHosts, NotificationChain msgs)
+  public NotificationChain basicSetHosts(EStringPassed newHosts, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldHosts = hosts;
+    EStringPassed oldHosts = hosts;
     hosts = newHosts;
     if (eNotificationRequired())
     {
@@ -304,7 +304,7 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setHosts(EJinjaExpressionAndString newHosts)
+  public void setHosts(EStringPassed newHosts)
   {
     if (newHosts != hosts)
     {
@@ -876,10 +876,10 @@ public class EPlayImpl extends EBaseImpl implements EPlay
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY__NAME:
-        setName((EJinjaExpressionAndString)newValue);
+        setName((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY__HOSTS:
-        setHosts((EJinjaExpressionAndString)newValue);
+        setHosts((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)newValue);
@@ -936,10 +936,10 @@ public class EPlayImpl extends EBaseImpl implements EPlay
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY__NAME:
-        setName((EJinjaExpressionAndString)null);
+        setName((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPLAY__HOSTS:
-        setHosts((EJinjaExpressionAndString)null);
+        setHosts((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPLAY__PLAY_EXE_SETTINGS:
         setPlay_exe_settings((EPlayExeSettings)null);

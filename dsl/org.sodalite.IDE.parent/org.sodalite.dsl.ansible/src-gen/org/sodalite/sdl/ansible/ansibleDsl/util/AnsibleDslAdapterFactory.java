@@ -271,6 +271,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEJinjaExpressionAndStringAdapter();
       }
       @Override
+      public Adapter caseEMultiLineExpression(EMultiLineExpression object)
+      {
+        return createEMultiLineExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEStringPassed(EStringPassed object)
+      {
+        return createEStringPassedAdapter();
+      }
+      @Override
       public Adapter caseEValuePassed(EValuePassed object)
       {
         return createEValuePassedAdapter();
@@ -1123,6 +1133,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEJinjaExpressionAndStringAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression <em>EMulti Line Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression
+   * @generated
+   */
+  public Adapter createEMultiLineExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EStringPassed <em>EString Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EStringPassed
+   * @generated
+   */
+  public Adapter createEStringPassedAdapter()
   {
     return null;
   }

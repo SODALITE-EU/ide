@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,7 +75,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString fact_path;
+  protected EStringPassed fact_path;
 
   /**
    * <!-- begin-user-doc -->
@@ -254,7 +254,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getFact_path()
+  public EStringPassed getFact_path()
   {
     return fact_path;
   }
@@ -264,9 +264,9 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFact_path(EJinjaExpressionAndString newFact_path, NotificationChain msgs)
+  public NotificationChain basicSetFact_path(EStringPassed newFact_path, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldFact_path = fact_path;
+    EStringPassed oldFact_path = fact_path;
     fact_path = newFact_path;
     if (eNotificationRequired())
     {
@@ -282,7 +282,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setFact_path(EJinjaExpressionAndString newFact_path)
+  public void setFact_path(EStringPassed newFact_path)
   {
     if (newFact_path != fact_path)
     {
@@ -362,7 +362,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
         setGather_timeout((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
-        setFact_path((EJinjaExpressionAndString)newValue);
+        setFact_path((EStringPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -388,7 +388,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
         setGather_timeout((ENumberPassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__FACT_PATH:
-        setFact_path((EJinjaExpressionAndString)null);
+        setFact_path((EStringPassed)null);
         return;
     }
     super.eUnset(featureID);

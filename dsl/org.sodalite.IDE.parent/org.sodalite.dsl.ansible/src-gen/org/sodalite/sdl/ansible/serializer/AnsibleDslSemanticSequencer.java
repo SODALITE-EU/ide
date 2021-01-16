@@ -51,6 +51,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
+import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
@@ -207,6 +208,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EMODULE_CALL:
 				sequence_EModuleCall(context, (EModuleCall) semanticObject); 
 				return; 
+			case AnsibleDslPackage.EMULTI_LINE_EXPRESSION:
+				sequence_EMultiLineExpression(context, (EMultiLineExpression) semanticObject); 
+				return; 
 			case AnsibleDslPackage.ENOTIFIED_HANDLER:
 				sequence_ENotifiedHandler(context, (ENotifiedHandler) semanticObject); 
 				return; 
@@ -354,12 +358,12 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=EJinjaExpressionAndString | 
+	 *         name=EStringPassed | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger=EJinjaExpressionAndString | 
+	 *         debugger=EStringPassed | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 
@@ -408,7 +412,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EConnection returns EConnection
 	 *
 	 * Constraint:
-	 *     (connection=EJinjaExpressionAndString | port=ENumberPassed | remote_user=EJinjaExpressionAndString)+
+	 *     (connection=EStringPassed | port=ENumberPassed | remote_user=EStringPassed)+
 	 */
 	protected void sequence_EConnection(ISerializationContext context, EConnection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -420,7 +424,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EDelegation returns EDelegation
 	 *
 	 * Constraint:
-	 *     (delegate_to=EJinjaExpressionAndString | delegate_facts=EBooleanPassed)+
+	 *     (delegate_to=EStringPassed | delegate_facts=EBooleanPassed)+
 	 */
 	protected void sequence_EDelegation(ISerializationContext context, EDelegation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -549,7 +553,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFactsSettings returns EFactsSettings
 	 *
 	 * Constraint:
-	 *     (gather_facts=EBooleanPassed | gather_subset=EListPassed | gather_timeout=ENumberPassed | fact_path=EJinjaExpressionAndString)+
+	 *     (gather_facts=EBooleanPassed | gather_subset=EListPassed | gather_timeout=ENumberPassed | fact_path=EStringPassed)+
 	 */
 	protected void sequence_EFactsSettings(ISerializationContext context, EFactsSettings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -620,7 +624,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             validation_mode=EValidationMode | 
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
-	 *             debugger=EJinjaExpressionAndString | 
+	 *             debugger=EStringPassed | 
 	 *             module_defaults=EListPassed | 
 	 *             environment=EListPassed | 
 	 *             collections=EListPassed | 
@@ -630,7 +634,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             delegation=EDelegation | 
 	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
 	 *             error_handling=ETaskHandlerErrorHandling | 
-	 *             action=EJinjaExpressionAndString | 
+	 *             action=EStringPassed | 
 	 *             asynchronous_settings=EAsynchronousSettings | 
 	 *             args=EDictionaryPassed | 
 	 *             module=EModuleCall | 
@@ -772,10 +776,11 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	/**
 	 * Contexts:
 	 *     EJinjaExpressionAndString returns EJinjaExpressionAndString
+	 *     EStringPassed returns EJinjaExpressionAndString
 	 *     EValuePassed returns EJinjaExpressionAndString
 	 *
 	 * Constraint:
-	 *     ((new_line_command='>' | new_line_command='|')? jinja_expression_and_string+=EJinjaExpressionOrString+)
+	 *     jinja_expression_and_string+=EJinjaExpressionOrString+
 	 */
 	protected void sequence_EJinjaExpressionAndString(ISerializationContext context, EJinjaExpressionAndString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -905,6 +910,20 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (name=ID direct_parameter=EValuePassed? parameters+=EParameter*)
 	 */
 	protected void sequence_EModuleCall(ISerializationContext context, EModuleCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EMultiLineExpression returns EMultiLineExpression
+	 *     EStringPassed returns EMultiLineExpression
+	 *     EValuePassed returns EMultiLineExpression
+	 *
+	 * Constraint:
+	 *     ((new_line_command='>' | new_line_command='|') expressions+=EJinjaExpressionAndString+)
+	 */
+	protected void sequence_EMultiLineExpression(ISerializationContext context, EMultiLineExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1053,7 +1072,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPlayExeSettings returns EPlayExeSettings
 	 *
 	 * Constraint:
-	 *     (strategy=EJinjaExpressionAndString | serial_list=EListPassed | order=EJinjaExpressionAndString | throttle=ENumberPassed | run_once=EBooleanPassed)+
+	 *     (strategy=EStringPassed | serial_list=EListPassed | order=EStringPassed | throttle=ENumberPassed | run_once=EBooleanPassed)+
 	 */
 	protected void sequence_EPlayExeSettings(ISerializationContext context, EPlayExeSettings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1067,13 +1086,13 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=EJinjaExpressionAndString | 
-	 *         hosts=EJinjaExpressionAndString | 
+	 *         name=EStringPassed | 
+	 *         hosts=EStringPassed | 
 	 *         privilege_escalation=EPrivilegeEscalation | 
 	 *         validation_mode=EValidationMode | 
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
-	 *         debugger=EJinjaExpressionAndString | 
+	 *         debugger=EStringPassed | 
 	 *         module_defaults=EListPassed | 
 	 *         environment=EListPassed | 
 	 *         collections=EListPassed | 
@@ -1128,13 +1147,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPrivilegeEscalation returns EPrivilegeEscalation
 	 *
 	 * Constraint:
-	 *     (
-	 *         become=EBooleanPassed | 
-	 *         become_exe=EJinjaExpressionAndString | 
-	 *         become_flags=EJinjaExpressionAndString | 
-	 *         become_method=EJinjaExpressionAndString | 
-	 *         become_user=EJinjaExpressionAndString
-	 *     )+
+	 *     (become=EBooleanPassed | become_exe=EStringPassed | become_flags=EStringPassed | become_method=EStringPassed | become_user=EStringPassed)+
 	 */
 	protected void sequence_EPrivilegeEscalation(ISerializationContext context, EPrivilegeEscalation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1187,13 +1200,13 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=EJinjaExpressionAndString 
+	 *         name=EStringPassed 
 	 *         (
 	 *             privilege_escalation=EPrivilegeEscalation | 
 	 *             validation_mode=EValidationMode | 
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
-	 *             debugger=EJinjaExpressionAndString | 
+	 *             debugger=EStringPassed | 
 	 *             module_defaults=EListPassed | 
 	 *             environment=EListPassed | 
 	 *             collections=EListPassed | 
@@ -1344,12 +1357,12 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 * Constraint:
 	 *     (
 	 *         (
-	 *             name=EJinjaExpressionAndString | 
+	 *             name=EStringPassed | 
 	 *             privilege_escalation=EPrivilegeEscalation | 
 	 *             validation_mode=EValidationMode | 
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
-	 *             debugger=EJinjaExpressionAndString | 
+	 *             debugger=EStringPassed | 
 	 *             module_defaults=EListPassed | 
 	 *             environment=EListPassed | 
 	 *             collections=EListPassed | 
@@ -1359,7 +1372,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             delegation=EDelegation | 
 	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
 	 *             error_handling=ETaskHandlerErrorHandling | 
-	 *             action=EJinjaExpressionAndString | 
+	 *             action=EStringPassed | 
 	 *             asynchronous_settings=EAsynchronousSettings | 
 	 *             args=EDictionaryPassed | 
 	 *             module=EModuleCall | 

@@ -27,12 +27,12 @@ public interface ETask extends EBlockTask, ETaskHandler
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(EJinjaExpressionAndString)
+   * @see #setName(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETask_Name()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getName();
+  EStringPassed getName();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETask#getName <em>Name</em>}' containment reference.
@@ -42,6 +42,6 @@ public interface ETask extends EBlockTask, ETaskHandler
    * @see #getName()
    * @generated
    */
-  void setName(EJinjaExpressionAndString value);
+  void setName(EStringPassed value);
 
 } // ETask

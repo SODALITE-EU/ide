@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString connection;
+  protected EStringPassed connection;
 
   /**
    * The cached value of the '{@link #getPort() <em>Port</em>}' containment reference.
@@ -62,7 +62,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString remote_user;
+  protected EStringPassed remote_user;
 
   /**
    * <!-- begin-user-doc -->
@@ -91,7 +91,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getConnection()
+  public EStringPassed getConnection()
   {
     return connection;
   }
@@ -101,9 +101,9 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConnection(EJinjaExpressionAndString newConnection, NotificationChain msgs)
+  public NotificationChain basicSetConnection(EStringPassed newConnection, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldConnection = connection;
+    EStringPassed oldConnection = connection;
     connection = newConnection;
     if (eNotificationRequired())
     {
@@ -119,7 +119,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public void setConnection(EJinjaExpressionAndString newConnection)
+  public void setConnection(EStringPassed newConnection)
   {
     if (newConnection != connection)
     {
@@ -191,7 +191,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getRemote_user()
+  public EStringPassed getRemote_user()
   {
     return remote_user;
   }
@@ -201,9 +201,9 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRemote_user(EJinjaExpressionAndString newRemote_user, NotificationChain msgs)
+  public NotificationChain basicSetRemote_user(EStringPassed newRemote_user, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldRemote_user = remote_user;
+    EStringPassed oldRemote_user = remote_user;
     remote_user = newRemote_user;
     if (eNotificationRequired())
     {
@@ -219,7 +219,7 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
    * @generated
    */
   @Override
-  public void setRemote_user(EJinjaExpressionAndString newRemote_user)
+  public void setRemote_user(EStringPassed newRemote_user)
   {
     if (newRemote_user != remote_user)
     {
@@ -286,13 +286,13 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
     switch (featureID)
     {
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
-        setConnection((EJinjaExpressionAndString)newValue);
+        setConnection((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__PORT:
         setPort((ENumberPassed)newValue);
         return;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
-        setRemote_user((EJinjaExpressionAndString)newValue);
+        setRemote_user((EStringPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -309,13 +309,13 @@ public class EConnectionImpl extends MinimalEObjectImpl.Container implements ECo
     switch (featureID)
     {
       case AnsibleDslPackage.ECONNECTION__CONNECTION:
-        setConnection((EJinjaExpressionAndString)null);
+        setConnection((EStringPassed)null);
         return;
       case AnsibleDslPackage.ECONNECTION__PORT:
         setPort((ENumberPassed)null);
         return;
       case AnsibleDslPackage.ECONNECTION__REMOTE_USER:
-        setRemote_user((EJinjaExpressionAndString)null);
+        setRemote_user((EStringPassed)null);
         return;
     }
     super.eUnset(featureID);

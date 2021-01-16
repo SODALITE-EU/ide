@@ -203,6 +203,8 @@ Diff : 'diff:';
 
 Endif : 'endif';
 
+Line : 'line:';
+
 Loop : 'loop:';
 
 Play : 'play:';

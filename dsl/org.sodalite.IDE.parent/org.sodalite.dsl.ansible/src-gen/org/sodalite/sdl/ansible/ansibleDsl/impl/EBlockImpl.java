@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 
 /**
@@ -51,7 +51,7 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString name;
+  protected EStringPassed name;
 
   /**
    * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
@@ -120,7 +120,7 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getName()
+  public EStringPassed getName()
   {
     return name;
   }
@@ -130,9 +130,9 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EJinjaExpressionAndString newName, NotificationChain msgs)
+  public NotificationChain basicSetName(EStringPassed newName, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldName = name;
+    EStringPassed oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -148,7 +148,7 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
    * @generated
    */
   @Override
-  public void setName(EJinjaExpressionAndString newName)
+  public void setName(EStringPassed newName)
   {
     if (newName != name)
     {
@@ -319,7 +319,7 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
     switch (featureID)
     {
       case AnsibleDslPackage.EBLOCK__NAME:
-        setName((EJinjaExpressionAndString)newValue);
+        setName((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
         setError_handling((EBlockAndRoleErrorHandling)newValue);
@@ -351,7 +351,7 @@ public class EBlockImpl extends EExecutionImpl implements EBlock
     switch (featureID)
     {
       case AnsibleDslPackage.EBLOCK__NAME:
-        setName((EJinjaExpressionAndString)null);
+        setName((EStringPassed)null);
         return;
       case AnsibleDslPackage.EBLOCK__ERROR_HANDLING:
         setError_handling((EBlockAndRoleErrorHandling)null);

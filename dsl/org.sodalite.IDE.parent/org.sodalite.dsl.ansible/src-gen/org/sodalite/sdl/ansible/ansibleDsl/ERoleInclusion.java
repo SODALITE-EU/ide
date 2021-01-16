@@ -28,12 +28,12 @@ public interface ERoleInclusion extends EExecution
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(EJinjaExpressionAndString)
+   * @see #setName(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getERoleInclusion_Name()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getName();
+  EStringPassed getName();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion#getName <em>Name</em>}' containment reference.
@@ -43,7 +43,7 @@ public interface ERoleInclusion extends EExecution
    * @see #getName()
    * @generated
    */
-  void setName(EJinjaExpressionAndString value);
+  void setName(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Error handling</b></em>' containment reference.

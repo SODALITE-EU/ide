@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString strategy;
+  protected EStringPassed strategy;
 
   /**
    * The cached value of the '{@link #getSerial_list() <em>Serial list</em>}' containment reference.
@@ -61,7 +61,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString order;
+  protected EStringPassed order;
 
   /**
    * <!-- begin-user-doc -->
@@ -90,7 +90,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getStrategy()
+  public EStringPassed getStrategy()
   {
     return strategy;
   }
@@ -100,9 +100,9 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetStrategy(EJinjaExpressionAndString newStrategy, NotificationChain msgs)
+  public NotificationChain basicSetStrategy(EStringPassed newStrategy, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldStrategy = strategy;
+    EStringPassed oldStrategy = strategy;
     strategy = newStrategy;
     if (eNotificationRequired())
     {
@@ -118,7 +118,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public void setStrategy(EJinjaExpressionAndString newStrategy)
+  public void setStrategy(EStringPassed newStrategy)
   {
     if (newStrategy != strategy)
     {
@@ -190,7 +190,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getOrder()
+  public EStringPassed getOrder()
   {
     return order;
   }
@@ -200,9 +200,9 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetOrder(EJinjaExpressionAndString newOrder, NotificationChain msgs)
+  public NotificationChain basicSetOrder(EStringPassed newOrder, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldOrder = order;
+    EStringPassed oldOrder = order;
     order = newOrder;
     if (eNotificationRequired())
     {
@@ -218,7 +218,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public void setOrder(EJinjaExpressionAndString newOrder)
+  public void setOrder(EStringPassed newOrder)
   {
     if (newOrder != order)
     {
@@ -285,13 +285,13 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
-        setStrategy((EJinjaExpressionAndString)newValue);
+        setStrategy((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
         setSerial_list((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
-        setOrder((EJinjaExpressionAndString)newValue);
+        setOrder((EStringPassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -308,13 +308,13 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
     switch (featureID)
     {
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__STRATEGY:
-        setStrategy((EJinjaExpressionAndString)null);
+        setStrategy((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
         setSerial_list((EListPassed)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
-        setOrder((EJinjaExpressionAndString)null);
+        setOrder((EStringPassed)null);
         return;
     }
     super.eUnset(featureID);

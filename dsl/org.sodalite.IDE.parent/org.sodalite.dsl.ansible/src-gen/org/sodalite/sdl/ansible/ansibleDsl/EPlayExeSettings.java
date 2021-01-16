@@ -29,12 +29,12 @@ public interface EPlayExeSettings extends EExeSettings
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Strategy</em>' containment reference.
-   * @see #setStrategy(EJinjaExpressionAndString)
+   * @see #setStrategy(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Strategy()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getStrategy();
+  EStringPassed getStrategy();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getStrategy <em>Strategy</em>}' containment reference.
@@ -44,7 +44,7 @@ public interface EPlayExeSettings extends EExeSettings
    * @see #getStrategy()
    * @generated
    */
-  void setStrategy(EJinjaExpressionAndString value);
+  void setStrategy(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Serial list</b></em>' containment reference.
@@ -73,12 +73,12 @@ public interface EPlayExeSettings extends EExeSettings
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Order</em>' containment reference.
-   * @see #setOrder(EJinjaExpressionAndString)
+   * @see #setOrder(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Order()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getOrder();
+  EStringPassed getOrder();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getOrder <em>Order</em>}' containment reference.
@@ -88,6 +88,6 @@ public interface EPlayExeSettings extends EExeSettings
    * @see #getOrder()
    * @generated
    */
-  void setOrder(EJinjaExpressionAndString value);
+  void setOrder(EStringPassed value);
 
 } // EPlayExeSettings

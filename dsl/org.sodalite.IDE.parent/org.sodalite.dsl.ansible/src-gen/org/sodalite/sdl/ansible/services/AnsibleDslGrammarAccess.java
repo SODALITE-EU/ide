@@ -243,11 +243,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
 		private final Keyword cPlay_nameKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
 		private final Assignment cNameAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
-		private final RuleCall cNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0 = (RuleCall)cNameAssignment_3_0_1.eContents().get(0);
+		private final RuleCall cNameEStringPassedParserRuleCall_3_0_1_0 = (RuleCall)cNameAssignment_3_0_1.eContents().get(0);
 		private final Group cGroup_3_1 = (Group)cUnorderedGroup_3.eContents().get(1);
 		private final Keyword cHostsKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
 		private final Assignment cHostsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cHostsEJinjaExpressionAndStringParserRuleCall_3_1_1_0 = (RuleCall)cHostsAssignment_3_1_1.eContents().get(0);
+		private final RuleCall cHostsEStringPassedParserRuleCall_3_1_1_0 = (RuleCall)cHostsAssignment_3_1_1.eContents().get(0);
 		private final Assignment cPrivilege_escalationAssignment_3_2 = (Assignment)cUnorderedGroup_3.eContents().get(2);
 		private final RuleCall cPrivilege_escalationEPrivilegeEscalationParserRuleCall_3_2_0 = (RuleCall)cPrivilege_escalationAssignment_3_2.eContents().get(0);
 		private final Assignment cValidation_modeAssignment_3_3 = (Assignment)cUnorderedGroup_3.eContents().get(3);
@@ -261,7 +261,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_6 = (Group)cUnorderedGroup_3.eContents().get(6);
 		private final Keyword cDebuggerKeyword_3_6_0 = (Keyword)cGroup_3_6.eContents().get(0);
 		private final Assignment cDebuggerAssignment_3_6_1 = (Assignment)cGroup_3_6.eContents().get(1);
-		private final RuleCall cDebuggerEJinjaExpressionAndStringParserRuleCall_3_6_1_0 = (RuleCall)cDebuggerAssignment_3_6_1.eContents().get(0);
+		private final RuleCall cDebuggerEStringPassedParserRuleCall_3_6_1_0 = (RuleCall)cDebuggerAssignment_3_6_1.eContents().get(0);
 		private final Group cGroup_3_7 = (Group)cUnorderedGroup_3.eContents().get(7);
 		private final Keyword cModule_defaultsKeyword_3_7_0 = (Keyword)cGroup_3_7.eContents().get(0);
 		private final Assignment cModule_defaultsAssignment_3_7_1 = (Assignment)cGroup_3_7.eContents().get(1);
@@ -335,11 +335,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EPlay:
 		//	{EPlay}
 		//	'play:'
-		//	BEGIN (('play_name:' name=EJinjaExpressionAndString)? & ('hosts:' hosts=EJinjaExpressionAndString)? &
+		//	BEGIN (('play_name:' name=EStringPassed)? & ('hosts:' hosts=EStringPassed)? &
 		//	privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? & connection=EConnection? & ('no_log:'
-		//	no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? & ('module_defaults:'
-		//	module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)?
-		//	& ('tags:' tags=EListPassed)? & ('vars:'
+		//	no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? &
+		//	('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? &
+		//	('vars:'
 		//	BEGIN
 		//	variable_declarations+=EVariableDeclaration+
 		//	END)? & play_exe_settings=EPlayExeSettings? & error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? &
@@ -359,16 +359,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	END)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EPlay} 'play:' BEGIN (('play_name:' name=EJinjaExpressionAndString)? & ('hosts:' hosts=EJinjaExpressionAndString)? &
+		//{EPlay} 'play:' BEGIN (('play_name:' name=EStringPassed)? & ('hosts:' hosts=EStringPassed)? &
 		//privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? & connection=EConnection? & ('no_log:'
-		//no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? & ('module_defaults:'
-		//module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? &
-		//('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+ END)? &
-		//play_exe_settings=EPlayExeSettings? & error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? &
-		//('vars_files:' vars_files=EListPassed)? & ('vars_prompt:' vars_prompt=EListPassed)? & ('force_handlers:'
-		//force_handlers=EBooleanPassed)? & playbook_inclusion=EPlaybookInclusion? & ('pre_tasks:' BEGIN
-		//pre_tasks_list+=EBlockTask+ END)? & roles_inclusions=ERoleInclusions? & ('tasks_list:' BEGIN tasks_list+=EBlockTask+
-		//END)? & ('post_tasks:' BEGIN post_tasks_list+=EBlockTask+ END)? & ('handlers:' BEGIN handlers+=EHandler+ END)?) END
+		//no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? &
+		//('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? &
+		//('vars:' BEGIN variable_declarations+=EVariableDeclaration+ END)? & play_exe_settings=EPlayExeSettings? &
+		//error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? & ('vars_files:' vars_files=EListPassed)? &
+		//('vars_prompt:' vars_prompt=EListPassed)? & ('force_handlers:' force_handlers=EBooleanPassed)? &
+		//playbook_inclusion=EPlaybookInclusion? & ('pre_tasks:' BEGIN pre_tasks_list+=EBlockTask+ END)? &
+		//roles_inclusions=ERoleInclusions? & ('tasks_list:' BEGIN tasks_list+=EBlockTask+ END)? & ('post_tasks:' BEGIN
+		//post_tasks_list+=EBlockTask+ END)? & ('handlers:' BEGIN handlers+=EHandler+ END)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//{EPlay}
@@ -380,41 +380,41 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
 		
-		//(('play_name:' name=EJinjaExpressionAndString)? & ('hosts:' hosts=EJinjaExpressionAndString)? &
-		//privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? & connection=EConnection? & ('no_log:'
-		//no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? & ('module_defaults:'
-		//module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? &
-		//('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+ END)? &
-		//play_exe_settings=EPlayExeSettings? & error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? &
-		//('vars_files:' vars_files=EListPassed)? & ('vars_prompt:' vars_prompt=EListPassed)? & ('force_handlers:'
-		//force_handlers=EBooleanPassed)? & playbook_inclusion=EPlaybookInclusion? & ('pre_tasks:' BEGIN
-		//pre_tasks_list+=EBlockTask+ END)? & roles_inclusions=ERoleInclusions? & ('tasks_list:' BEGIN tasks_list+=EBlockTask+
-		//END)? & ('post_tasks:' BEGIN post_tasks_list+=EBlockTask+ END)? & ('handlers:' BEGIN handlers+=EHandler+ END)?)
+		//(('play_name:' name=EStringPassed)? & ('hosts:' hosts=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
+		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
+		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
+		//variable_declarations+=EVariableDeclaration+ END)? & play_exe_settings=EPlayExeSettings? &
+		//error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? & ('vars_files:' vars_files=EListPassed)? &
+		//('vars_prompt:' vars_prompt=EListPassed)? & ('force_handlers:' force_handlers=EBooleanPassed)? &
+		//playbook_inclusion=EPlaybookInclusion? & ('pre_tasks:' BEGIN pre_tasks_list+=EBlockTask+ END)? &
+		//roles_inclusions=ERoleInclusions? & ('tasks_list:' BEGIN tasks_list+=EBlockTask+ END)? & ('post_tasks:' BEGIN
+		//post_tasks_list+=EBlockTask+ END)? & ('handlers:' BEGIN handlers+=EHandler+ END)?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
-		//('play_name:' name=EJinjaExpressionAndString)?
+		//('play_name:' name=EStringPassed)?
 		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'play_name:'
 		public Keyword getPlay_nameKeyword_3_0_0() { return cPlay_nameKeyword_3_0_0; }
 		
-		//name=EJinjaExpressionAndString
+		//name=EStringPassed
 		public Assignment getNameAssignment_3_0_1() { return cNameAssignment_3_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0() { return cNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0; }
+		//EStringPassed
+		public RuleCall getNameEStringPassedParserRuleCall_3_0_1_0() { return cNameEStringPassedParserRuleCall_3_0_1_0; }
 		
-		//('hosts:' hosts=EJinjaExpressionAndString)?
+		//('hosts:' hosts=EStringPassed)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//'hosts:'
 		public Keyword getHostsKeyword_3_1_0() { return cHostsKeyword_3_1_0; }
 		
-		//hosts=EJinjaExpressionAndString
+		//hosts=EStringPassed
 		public Assignment getHostsAssignment_3_1_1() { return cHostsAssignment_3_1_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getHostsEJinjaExpressionAndStringParserRuleCall_3_1_1_0() { return cHostsEJinjaExpressionAndStringParserRuleCall_3_1_1_0; }
+		//EStringPassed
+		public RuleCall getHostsEStringPassedParserRuleCall_3_1_1_0() { return cHostsEStringPassedParserRuleCall_3_1_1_0; }
 		
 		//privilege_escalation=EPrivilegeEscalation?
 		public Assignment getPrivilege_escalationAssignment_3_2() { return cPrivilege_escalationAssignment_3_2; }
@@ -446,17 +446,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getNo_logEBooleanPassedParserRuleCall_3_5_1_0() { return cNo_logEBooleanPassedParserRuleCall_3_5_1_0; }
 		
-		//('debugger:' debugger=EJinjaExpressionAndString)?
+		//('debugger:' debugger=EStringPassed)?
 		public Group getGroup_3_6() { return cGroup_3_6; }
 		
 		//'debugger:'
 		public Keyword getDebuggerKeyword_3_6_0() { return cDebuggerKeyword_3_6_0; }
 		
-		//debugger=EJinjaExpressionAndString
+		//debugger=EStringPassed
 		public Assignment getDebuggerAssignment_3_6_1() { return cDebuggerAssignment_3_6_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDebuggerEJinjaExpressionAndStringParserRuleCall_3_6_1_0() { return cDebuggerEJinjaExpressionAndStringParserRuleCall_3_6_1_0; }
+		//EStringPassed
+		public RuleCall getDebuggerEStringPassedParserRuleCall_3_6_1_0() { return cDebuggerEStringPassedParserRuleCall_3_6_1_0; }
 		
 		//('module_defaults:' module_defaults=EListPassed)?
 		public Group getGroup_3_7() { return cGroup_3_7; }
@@ -674,7 +674,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
 		private final Keyword cBlock_nameKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cNameAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cNameEJinjaExpressionAndStringParserRuleCall_2_0_1_0 = (RuleCall)cNameAssignment_2_0_1.eContents().get(0);
+		private final RuleCall cNameEStringPassedParserRuleCall_2_0_1_0 = (RuleCall)cNameAssignment_2_0_1.eContents().get(0);
 		private final Assignment cPrivilege_escalationAssignment_2_1 = (Assignment)cUnorderedGroup_2.eContents().get(1);
 		private final RuleCall cPrivilege_escalationEPrivilegeEscalationParserRuleCall_2_1_0 = (RuleCall)cPrivilege_escalationAssignment_2_1.eContents().get(0);
 		private final Assignment cValidation_modeAssignment_2_2 = (Assignment)cUnorderedGroup_2.eContents().get(2);
@@ -688,7 +688,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_5 = (Group)cUnorderedGroup_2.eContents().get(5);
 		private final Keyword cDebuggerKeyword_2_5_0 = (Keyword)cGroup_2_5.eContents().get(0);
 		private final Assignment cDebuggerAssignment_2_5_1 = (Assignment)cGroup_2_5.eContents().get(1);
-		private final RuleCall cDebuggerEJinjaExpressionAndStringParserRuleCall_2_5_1_0 = (RuleCall)cDebuggerAssignment_2_5_1.eContents().get(0);
+		private final RuleCall cDebuggerEStringPassedParserRuleCall_2_5_1_0 = (RuleCall)cDebuggerAssignment_2_5_1.eContents().get(0);
 		private final Group cGroup_2_6 = (Group)cUnorderedGroup_2.eContents().get(6);
 		private final Keyword cModule_defaultsKeyword_2_6_0 = (Keyword)cGroup_2_6.eContents().get(0);
 		private final Assignment cModule_defaultsAssignment_2_6_1 = (Assignment)cGroup_2_6.eContents().get(1);
@@ -743,9 +743,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EBlock:
 		//	'block:'
-		//	BEGIN (('block_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+		//	BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 		//	BEGIN
 		//	variable_declarations+=EVariableDeclaration+
@@ -762,9 +762,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	END)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'block:' BEGIN (('block_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+		//'block:' BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling? &
@@ -778,27 +778,27 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('block_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
-		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
-		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
-		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
-		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling? &
-		//'tasks:' BEGIN tasks+=ETask+ END & ('rescue_tasks:' BEGIN rescue_tasks+=ETask+ END)? & ('always_tasks:' BEGIN
+		//(('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? &
+		//connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
+		//('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
+		//collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+
+		//END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
+		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling? & 'tasks:'
+		//BEGIN tasks+=ETask+ END & ('rescue_tasks:' BEGIN rescue_tasks+=ETask+ END)? & ('always_tasks:' BEGIN
 		//always_tasks+=ETask+ END)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('block_name:' name=EJinjaExpressionAndString)?
+		//('block_name:' name=EStringPassed)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//'block_name:'
 		public Keyword getBlock_nameKeyword_2_0_0() { return cBlock_nameKeyword_2_0_0; }
 		
-		//name=EJinjaExpressionAndString
+		//name=EStringPassed
 		public Assignment getNameAssignment_2_0_1() { return cNameAssignment_2_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getNameEJinjaExpressionAndStringParserRuleCall_2_0_1_0() { return cNameEJinjaExpressionAndStringParserRuleCall_2_0_1_0; }
+		//EStringPassed
+		public RuleCall getNameEStringPassedParserRuleCall_2_0_1_0() { return cNameEStringPassedParserRuleCall_2_0_1_0; }
 		
 		//privilege_escalation=EPrivilegeEscalation?
 		public Assignment getPrivilege_escalationAssignment_2_1() { return cPrivilege_escalationAssignment_2_1; }
@@ -830,17 +830,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getNo_logEBooleanPassedParserRuleCall_2_4_1_0() { return cNo_logEBooleanPassedParserRuleCall_2_4_1_0; }
 		
-		//('debugger:' debugger=EJinjaExpressionAndString)?
+		//('debugger:' debugger=EStringPassed)?
 		public Group getGroup_2_5() { return cGroup_2_5; }
 		
 		//'debugger:'
 		public Keyword getDebuggerKeyword_2_5_0() { return cDebuggerKeyword_2_5_0; }
 		
-		//debugger=EJinjaExpressionAndString
+		//debugger=EStringPassed
 		public Assignment getDebuggerAssignment_2_5_1() { return cDebuggerAssignment_2_5_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDebuggerEJinjaExpressionAndStringParserRuleCall_2_5_1_0() { return cDebuggerEJinjaExpressionAndStringParserRuleCall_2_5_1_0; }
+		//EStringPassed
+		public RuleCall getDebuggerEStringPassedParserRuleCall_2_5_1_0() { return cDebuggerEStringPassedParserRuleCall_2_5_1_0; }
 		
 		//('module_defaults:' module_defaults=EListPassed)?
 		public Group getGroup_2_6() { return cGroup_2_6; }
@@ -1005,7 +1005,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
 		private final Keyword cTask_nameKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
 		private final Assignment cNameAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
-		private final RuleCall cNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0 = (RuleCall)cNameAssignment_3_0_1.eContents().get(0);
+		private final RuleCall cNameEStringPassedParserRuleCall_3_0_1_0 = (RuleCall)cNameAssignment_3_0_1.eContents().get(0);
 		private final Assignment cPrivilege_escalationAssignment_3_1 = (Assignment)cUnorderedGroup_3.eContents().get(1);
 		private final RuleCall cPrivilege_escalationEPrivilegeEscalationParserRuleCall_3_1_0 = (RuleCall)cPrivilege_escalationAssignment_3_1.eContents().get(0);
 		private final Assignment cValidation_modeAssignment_3_2 = (Assignment)cUnorderedGroup_3.eContents().get(2);
@@ -1019,7 +1019,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_5 = (Group)cUnorderedGroup_3.eContents().get(5);
 		private final Keyword cDebuggerKeyword_3_5_0 = (Keyword)cGroup_3_5.eContents().get(0);
 		private final Assignment cDebuggerAssignment_3_5_1 = (Assignment)cGroup_3_5.eContents().get(1);
-		private final RuleCall cDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0 = (RuleCall)cDebuggerAssignment_3_5_1.eContents().get(0);
+		private final RuleCall cDebuggerEStringPassedParserRuleCall_3_5_1_0 = (RuleCall)cDebuggerAssignment_3_5_1.eContents().get(0);
 		private final Group cGroup_3_6 = (Group)cUnorderedGroup_3.eContents().get(6);
 		private final Keyword cModule_defaultsKeyword_3_6_0 = (Keyword)cGroup_3_6.eContents().get(0);
 		private final Assignment cModule_defaultsAssignment_3_6_1 = (Assignment)cGroup_3_6.eContents().get(1);
@@ -1055,7 +1055,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_15 = (Group)cUnorderedGroup_3.eContents().get(15);
 		private final Keyword cActionKeyword_3_15_0 = (Keyword)cGroup_3_15.eContents().get(0);
 		private final Assignment cActionAssignment_3_15_1 = (Assignment)cGroup_3_15.eContents().get(1);
-		private final RuleCall cActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0 = (RuleCall)cActionAssignment_3_15_1.eContents().get(0);
+		private final RuleCall cActionEStringPassedParserRuleCall_3_15_1_0 = (RuleCall)cActionAssignment_3_15_1.eContents().get(0);
 		private final Assignment cAsynchronous_settingsAssignment_3_16 = (Assignment)cUnorderedGroup_3.eContents().get(16);
 		private final RuleCall cAsynchronous_settingsEAsynchronousSettingsParserRuleCall_3_16_0 = (RuleCall)cAsynchronous_settingsAssignment_3_16.eContents().get(0);
 		private final Group cGroup_3_17 = (Group)cUnorderedGroup_3.eContents().get(17);
@@ -1081,28 +1081,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ETask:
 		//	{ETask}
 		//	'task:'
-		//	BEGIN (('task_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+		//	BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 		//	BEGIN
 		//	variable_declarations+=EVariableDeclaration+
 		//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
-		//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//	action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//	module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
 		//	register=ERegisterVariable?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ETask} 'task:' BEGIN (('task_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+		//{ETask} 'task:' BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
-		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
-		//loop=ELoop? & register=ERegisterVariable?) END
+		//('action:' action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//register=ERegisterVariable?) END
 		public Group getGroup() { return cGroup; }
 		
 		//{ETask}
@@ -1114,28 +1114,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
 		
-		//(('task_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
-		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
-		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
-		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
-		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
-		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
-		//loop=ELoop? & register=ERegisterVariable?)
+		//(('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? &
+		//connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
+		//('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
+		//collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+
+		//END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
+		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
+		//action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//register=ERegisterVariable?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
-		//('task_name:' name=EJinjaExpressionAndString)?
+		//('task_name:' name=EStringPassed)?
 		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'task_name:'
 		public Keyword getTask_nameKeyword_3_0_0() { return cTask_nameKeyword_3_0_0; }
 		
-		//name=EJinjaExpressionAndString
+		//name=EStringPassed
 		public Assignment getNameAssignment_3_0_1() { return cNameAssignment_3_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0() { return cNameEJinjaExpressionAndStringParserRuleCall_3_0_1_0; }
+		//EStringPassed
+		public RuleCall getNameEStringPassedParserRuleCall_3_0_1_0() { return cNameEStringPassedParserRuleCall_3_0_1_0; }
 		
 		//privilege_escalation=EPrivilegeEscalation?
 		public Assignment getPrivilege_escalationAssignment_3_1() { return cPrivilege_escalationAssignment_3_1; }
@@ -1167,17 +1167,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getNo_logEBooleanPassedParserRuleCall_3_4_1_0() { return cNo_logEBooleanPassedParserRuleCall_3_4_1_0; }
 		
-		//('debugger:' debugger=EJinjaExpressionAndString)?
+		//('debugger:' debugger=EStringPassed)?
 		public Group getGroup_3_5() { return cGroup_3_5; }
 		
 		//'debugger:'
 		public Keyword getDebuggerKeyword_3_5_0() { return cDebuggerKeyword_3_5_0; }
 		
-		//debugger=EJinjaExpressionAndString
+		//debugger=EStringPassed
 		public Assignment getDebuggerAssignment_3_5_1() { return cDebuggerAssignment_3_5_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0() { return cDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0; }
+		//EStringPassed
+		public RuleCall getDebuggerEStringPassedParserRuleCall_3_5_1_0() { return cDebuggerEStringPassedParserRuleCall_3_5_1_0; }
 		
 		//('module_defaults:' module_defaults=EListPassed)?
 		public Group getGroup_3_6() { return cGroup_3_6; }
@@ -1275,17 +1275,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ETaskHandlerErrorHandling
 		public RuleCall getError_handlingETaskHandlerErrorHandlingParserRuleCall_3_14_0() { return cError_handlingETaskHandlerErrorHandlingParserRuleCall_3_14_0; }
 		
-		//('action:' action=EJinjaExpressionAndString)?
+		//('action:' action=EStringPassed)?
 		public Group getGroup_3_15() { return cGroup_3_15; }
 		
 		//'action:'
 		public Keyword getActionKeyword_3_15_0() { return cActionKeyword_3_15_0; }
 		
-		//action=EJinjaExpressionAndString
+		//action=EStringPassed
 		public Assignment getActionAssignment_3_15_1() { return cActionAssignment_3_15_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0() { return cActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0; }
+		//EStringPassed
+		public RuleCall getActionEStringPassedParserRuleCall_3_15_1_0() { return cActionEStringPassedParserRuleCall_3_15_1_0; }
 		
 		//asynchronous_settings=EAsynchronousSettings?
 		public Assignment getAsynchronous_settingsAssignment_3_16() { return cAsynchronous_settingsAssignment_3_16; }
@@ -1374,7 +1374,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_5 = (Group)cUnorderedGroup_3.eContents().get(5);
 		private final Keyword cDebuggerKeyword_3_5_0 = (Keyword)cGroup_3_5.eContents().get(0);
 		private final Assignment cDebuggerAssignment_3_5_1 = (Assignment)cGroup_3_5.eContents().get(1);
-		private final RuleCall cDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0 = (RuleCall)cDebuggerAssignment_3_5_1.eContents().get(0);
+		private final RuleCall cDebuggerEStringPassedParserRuleCall_3_5_1_0 = (RuleCall)cDebuggerAssignment_3_5_1.eContents().get(0);
 		private final Group cGroup_3_6 = (Group)cUnorderedGroup_3.eContents().get(6);
 		private final Keyword cModule_defaultsKeyword_3_6_0 = (Keyword)cGroup_3_6.eContents().get(0);
 		private final Assignment cModule_defaultsAssignment_3_6_1 = (Assignment)cGroup_3_6.eContents().get(1);
@@ -1410,7 +1410,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_3_15 = (Group)cUnorderedGroup_3.eContents().get(15);
 		private final Keyword cActionKeyword_3_15_0 = (Keyword)cGroup_3_15.eContents().get(0);
 		private final Assignment cActionAssignment_3_15_1 = (Assignment)cGroup_3_15.eContents().get(1);
-		private final RuleCall cActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0 = (RuleCall)cActionAssignment_3_15_1.eContents().get(0);
+		private final RuleCall cActionEStringPassedParserRuleCall_3_15_1_0 = (RuleCall)cActionAssignment_3_15_1.eContents().get(0);
 		private final Assignment cAsynchronous_settingsAssignment_3_16 = (Assignment)cUnorderedGroup_3.eContents().get(16);
 		private final RuleCall cAsynchronous_settingsEAsynchronousSettingsParserRuleCall_3_16_0 = (RuleCall)cAsynchronous_settingsAssignment_3_16.eContents().get(0);
 		private final Group cGroup_3_17 = (Group)cUnorderedGroup_3.eContents().get(17);
@@ -1442,27 +1442,27 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	{EHandler}
 		//	'handler:'
 		//	BEGIN (('handler_name:' name=STRING)? & privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode?
-		//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? &
+		//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
 		//	('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
 		//	collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 		//	BEGIN
 		//	variable_declarations+=EVariableDeclaration+
 		//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
-		//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-		//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//	action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//	module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
 		//	register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EHandler} 'handler:' BEGIN (('handler_name:' name=STRING)? & privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? &
-		//('action:' action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:'
-		//args=EDictionaryPassed)? & module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? &
-		//loop=ELoop? & register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END
+		//('action:' action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+		//register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//{EHandler}
@@ -1475,12 +1475,12 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
 		
 		//(('handler_name:' name=STRING)? & privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? &
-		//connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? &
+		//connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
 		//('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
 		//collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+
 		//END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
-		//action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+		//action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
 		//module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
 		//register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
@@ -1497,7 +1497,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_3_0_1_0() { return cNameSTRINGTerminalRuleCall_3_0_1_0; }
 		
-		////could not use EJinjaExpressionAndString because if so the scoping doesn't work
+		////could not use EStringPassed because if so the scoping doesn't work
 		//privilege_escalation=EPrivilegeEscalation?
 		public Assignment getPrivilege_escalationAssignment_3_1() { return cPrivilege_escalationAssignment_3_1; }
 		
@@ -1528,17 +1528,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getNo_logEBooleanPassedParserRuleCall_3_4_1_0() { return cNo_logEBooleanPassedParserRuleCall_3_4_1_0; }
 		
-		//('debugger:' debugger=EJinjaExpressionAndString)?
+		//('debugger:' debugger=EStringPassed)?
 		public Group getGroup_3_5() { return cGroup_3_5; }
 		
 		//'debugger:'
 		public Keyword getDebuggerKeyword_3_5_0() { return cDebuggerKeyword_3_5_0; }
 		
-		//debugger=EJinjaExpressionAndString
+		//debugger=EStringPassed
 		public Assignment getDebuggerAssignment_3_5_1() { return cDebuggerAssignment_3_5_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0() { return cDebuggerEJinjaExpressionAndStringParserRuleCall_3_5_1_0; }
+		//EStringPassed
+		public RuleCall getDebuggerEStringPassedParserRuleCall_3_5_1_0() { return cDebuggerEStringPassedParserRuleCall_3_5_1_0; }
 		
 		//('module_defaults:' module_defaults=EListPassed)?
 		public Group getGroup_3_6() { return cGroup_3_6; }
@@ -1636,17 +1636,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ETaskHandlerErrorHandling
 		public RuleCall getError_handlingETaskHandlerErrorHandlingParserRuleCall_3_14_0() { return cError_handlingETaskHandlerErrorHandlingParserRuleCall_3_14_0; }
 		
-		//('action:' action=EJinjaExpressionAndString)?
+		//('action:' action=EStringPassed)?
 		public Group getGroup_3_15() { return cGroup_3_15; }
 		
 		//'action:'
 		public Keyword getActionKeyword_3_15_0() { return cActionKeyword_3_15_0; }
 		
-		//action=EJinjaExpressionAndString
+		//action=EStringPassed
 		public Assignment getActionAssignment_3_15_1() { return cActionAssignment_3_15_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0() { return cActionEJinjaExpressionAndStringParserRuleCall_3_15_1_0; }
+		//EStringPassed
+		public RuleCall getActionEStringPassedParserRuleCall_3_15_1_0() { return cActionEStringPassedParserRuleCall_3_15_1_0; }
 		
 		//asynchronous_settings=EAsynchronousSettings?
 		public Assignment getAsynchronous_settingsAssignment_3_16() { return cAsynchronous_settingsAssignment_3_16; }
@@ -1848,7 +1848,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cRole_nameKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cNameAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cNameEJinjaExpressionAndStringParserRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
+		private final RuleCall cNameEStringPassedParserRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_2_2 = (UnorderedGroup)cGroup_2.eContents().get(2);
 		private final Assignment cPrivilege_escalationAssignment_2_2_0 = (Assignment)cUnorderedGroup_2_2.eContents().get(0);
 		private final RuleCall cPrivilege_escalationEPrivilegeEscalationParserRuleCall_2_2_0_0 = (RuleCall)cPrivilege_escalationAssignment_2_2_0.eContents().get(0);
@@ -1863,7 +1863,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_2_4 = (Group)cUnorderedGroup_2_2.eContents().get(4);
 		private final Keyword cDebuggerKeyword_2_2_4_0 = (Keyword)cGroup_2_2_4.eContents().get(0);
 		private final Assignment cDebuggerAssignment_2_2_4_1 = (Assignment)cGroup_2_2_4.eContents().get(1);
-		private final RuleCall cDebuggerEJinjaExpressionAndStringParserRuleCall_2_2_4_1_0 = (RuleCall)cDebuggerAssignment_2_2_4_1.eContents().get(0);
+		private final RuleCall cDebuggerEStringPassedParserRuleCall_2_2_4_1_0 = (RuleCall)cDebuggerAssignment_2_2_4_1.eContents().get(0);
 		private final Group cGroup_2_2_5 = (Group)cUnorderedGroup_2_2.eContents().get(5);
 		private final Keyword cModule_defaultsKeyword_2_2_5_0 = (Keyword)cGroup_2_2_5.eContents().get(0);
 		private final Assignment cModule_defaultsAssignment_2_2_5_1 = (Assignment)cGroup_2_2_5.eContents().get(1);
@@ -1900,19 +1900,19 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ERoleInclusion:
 		//	'role:'
-		//	BEGIN ('role_name:' name=EJinjaExpressionAndString (privilege_escalation=EPrivilegeEscalation? &
-		//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
-		//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
+		//	BEGIN ('role_name:' name=EStringPassed (privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode?
+		//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
+		//	('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
+		//	collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 		//	BEGIN
 		//	variable_declarations+=EVariableDeclaration+
 		//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 		//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling?)) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'role:' BEGIN ('role_name:' name=EJinjaExpressionAndString (privilege_escalation=EPrivilegeEscalation? &
+		//'role:' BEGIN ('role_name:' name=EStringPassed (privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
 		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
 		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling?)) END
@@ -1924,29 +1924,29 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//('role_name:' name=EJinjaExpressionAndString (privilege_escalation=EPrivilegeEscalation? &
-		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-		//debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
-		//environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
-		//variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? &
-		//('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling?))
+		//('role_name:' name=EStringPassed (privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? &
+		//connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
+		//('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
+		//collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+
+		//END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
+		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling?))
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'role_name:'
 		public Keyword getRole_nameKeyword_2_0() { return cRole_nameKeyword_2_0; }
 		
-		//name=EJinjaExpressionAndString
+		//name=EStringPassed
 		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getNameEJinjaExpressionAndStringParserRuleCall_2_1_0() { return cNameEJinjaExpressionAndStringParserRuleCall_2_1_0; }
+		//EStringPassed
+		public RuleCall getNameEStringPassedParserRuleCall_2_1_0() { return cNameEStringPassedParserRuleCall_2_1_0; }
 		
 		//(privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? & connection=EConnection? & ('no_log:'
-		//no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? & ('module_defaults:'
-		//module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? &
-		//('tags:' tags=EListPassed)? & ('vars:' BEGIN variable_declarations+=EVariableDeclaration+ END)? &
-		//exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
-		//when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=EBlockAndRoleErrorHandling?)
+		//no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? &
+		//('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? &
+		//('vars:' BEGIN variable_declarations+=EVariableDeclaration+ END)? & exe_settings=EExecutionExeSettings? &
+		//delegation=EDelegation? & ('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		//error_handling=EBlockAndRoleErrorHandling?)
 		public UnorderedGroup getUnorderedGroup_2_2() { return cUnorderedGroup_2_2; }
 		
 		//privilege_escalation=EPrivilegeEscalation?
@@ -1979,17 +1979,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getNo_logEBooleanPassedParserRuleCall_2_2_3_1_0() { return cNo_logEBooleanPassedParserRuleCall_2_2_3_1_0; }
 		
-		//('debugger:' debugger=EJinjaExpressionAndString)?
+		//('debugger:' debugger=EStringPassed)?
 		public Group getGroup_2_2_4() { return cGroup_2_2_4; }
 		
 		//'debugger:'
 		public Keyword getDebuggerKeyword_2_2_4_0() { return cDebuggerKeyword_2_2_4_0; }
 		
-		//debugger=EJinjaExpressionAndString
+		//debugger=EStringPassed
 		public Assignment getDebuggerAssignment_2_2_4_1() { return cDebuggerAssignment_2_2_4_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDebuggerEJinjaExpressionAndStringParserRuleCall_2_2_4_1_0() { return cDebuggerEJinjaExpressionAndStringParserRuleCall_2_2_4_1_0; }
+		//EStringPassed
+		public RuleCall getDebuggerEStringPassedParserRuleCall_2_2_4_1_0() { return cDebuggerEStringPassedParserRuleCall_2_2_4_1_0; }
 		
 		//('module_defaults:' module_defaults=EListPassed)?
 		public Group getGroup_2_2_5() { return cGroup_2_2_5; }
@@ -2483,31 +2483,31 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cBecome_exeKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cBecome_exeAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cBecome_exeEJinjaExpressionAndStringParserRuleCall_2_1_1_0 = (RuleCall)cBecome_exeAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cBecome_exeEStringPassedParserRuleCall_2_1_1_0 = (RuleCall)cBecome_exeAssignment_2_1_1.eContents().get(0);
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
 		private final Keyword cBecome_flagsKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
 		private final Assignment cBecome_flagsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cBecome_flagsEJinjaExpressionAndStringParserRuleCall_2_2_1_0 = (RuleCall)cBecome_flagsAssignment_2_2_1.eContents().get(0);
+		private final RuleCall cBecome_flagsEStringPassedParserRuleCall_2_2_1_0 = (RuleCall)cBecome_flagsAssignment_2_2_1.eContents().get(0);
 		private final Group cGroup_2_3 = (Group)cUnorderedGroup_2.eContents().get(3);
 		private final Keyword cBecome_methodKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
 		private final Assignment cBecome_methodAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
-		private final RuleCall cBecome_methodEJinjaExpressionAndStringParserRuleCall_2_3_1_0 = (RuleCall)cBecome_methodAssignment_2_3_1.eContents().get(0);
+		private final RuleCall cBecome_methodEStringPassedParserRuleCall_2_3_1_0 = (RuleCall)cBecome_methodAssignment_2_3_1.eContents().get(0);
 		private final Group cGroup_2_4 = (Group)cUnorderedGroup_2.eContents().get(4);
 		private final Keyword cBecome_userKeyword_2_4_0 = (Keyword)cGroup_2_4.eContents().get(0);
 		private final Assignment cBecome_userAssignment_2_4_1 = (Assignment)cGroup_2_4.eContents().get(1);
-		private final RuleCall cBecome_userEJinjaExpressionAndStringParserRuleCall_2_4_1_0 = (RuleCall)cBecome_userAssignment_2_4_1.eContents().get(0);
+		private final RuleCall cBecome_userEStringPassedParserRuleCall_2_4_1_0 = (RuleCall)cBecome_userAssignment_2_4_1.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EPrivilegeEscalation:
 		//	'privilege_escalation:'
-		//	BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EJinjaExpressionAndString)? & ('become_flags:'
-		//	become_flags=EJinjaExpressionAndString)? & ('become_method:' become_method=EJinjaExpressionAndString)? &
-		//	('become_user:' become_user=EJinjaExpressionAndString)?) END;
+		//	BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EStringPassed)? & ('become_flags:'
+		//	become_flags=EStringPassed)? & ('become_method:' become_method=EStringPassed)? & ('become_user:'
+		//	become_user=EStringPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'privilege_escalation:' BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:'
-		//become_exe=EJinjaExpressionAndString)? & ('become_flags:' become_flags=EJinjaExpressionAndString)? & ('become_method:'
-		//become_method=EJinjaExpressionAndString)? & ('become_user:' become_user=EJinjaExpressionAndString)?) END
+		//'privilege_escalation:' BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EStringPassed)? &
+		//('become_flags:' become_flags=EStringPassed)? & ('become_method:' become_method=EStringPassed)? & ('become_user:'
+		//become_user=EStringPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//'privilege_escalation:'
@@ -2516,9 +2516,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EJinjaExpressionAndString)? & ('become_flags:'
-		//become_flags=EJinjaExpressionAndString)? & ('become_method:' become_method=EJinjaExpressionAndString)? &
-		//('become_user:' become_user=EJinjaExpressionAndString)?)
+		//(('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EStringPassed)? & ('become_flags:'
+		//become_flags=EStringPassed)? & ('become_method:' become_method=EStringPassed)? & ('become_user:'
+		//become_user=EStringPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//('become:' become=EBooleanPassed)?
@@ -2533,53 +2533,53 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getBecomeEBooleanPassedParserRuleCall_2_0_1_0() { return cBecomeEBooleanPassedParserRuleCall_2_0_1_0; }
 		
-		//('become_exe:' become_exe=EJinjaExpressionAndString)?
+		//('become_exe:' become_exe=EStringPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//'become_exe:'
 		public Keyword getBecome_exeKeyword_2_1_0() { return cBecome_exeKeyword_2_1_0; }
 		
-		//become_exe=EJinjaExpressionAndString
+		//become_exe=EStringPassed
 		public Assignment getBecome_exeAssignment_2_1_1() { return cBecome_exeAssignment_2_1_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getBecome_exeEJinjaExpressionAndStringParserRuleCall_2_1_1_0() { return cBecome_exeEJinjaExpressionAndStringParserRuleCall_2_1_1_0; }
+		//EStringPassed
+		public RuleCall getBecome_exeEStringPassedParserRuleCall_2_1_1_0() { return cBecome_exeEStringPassedParserRuleCall_2_1_1_0; }
 		
-		//('become_flags:' become_flags=EJinjaExpressionAndString)?
+		//('become_flags:' become_flags=EStringPassed)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 		
 		//'become_flags:'
 		public Keyword getBecome_flagsKeyword_2_2_0() { return cBecome_flagsKeyword_2_2_0; }
 		
-		//become_flags=EJinjaExpressionAndString
+		//become_flags=EStringPassed
 		public Assignment getBecome_flagsAssignment_2_2_1() { return cBecome_flagsAssignment_2_2_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getBecome_flagsEJinjaExpressionAndStringParserRuleCall_2_2_1_0() { return cBecome_flagsEJinjaExpressionAndStringParserRuleCall_2_2_1_0; }
+		//EStringPassed
+		public RuleCall getBecome_flagsEStringPassedParserRuleCall_2_2_1_0() { return cBecome_flagsEStringPassedParserRuleCall_2_2_1_0; }
 		
-		//('become_method:' become_method=EJinjaExpressionAndString)?
+		//('become_method:' become_method=EStringPassed)?
 		public Group getGroup_2_3() { return cGroup_2_3; }
 		
 		//'become_method:'
 		public Keyword getBecome_methodKeyword_2_3_0() { return cBecome_methodKeyword_2_3_0; }
 		
-		//become_method=EJinjaExpressionAndString
+		//become_method=EStringPassed
 		public Assignment getBecome_methodAssignment_2_3_1() { return cBecome_methodAssignment_2_3_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getBecome_methodEJinjaExpressionAndStringParserRuleCall_2_3_1_0() { return cBecome_methodEJinjaExpressionAndStringParserRuleCall_2_3_1_0; }
+		//EStringPassed
+		public RuleCall getBecome_methodEStringPassedParserRuleCall_2_3_1_0() { return cBecome_methodEStringPassedParserRuleCall_2_3_1_0; }
 		
-		//('become_user:' become_user=EJinjaExpressionAndString)?
+		//('become_user:' become_user=EStringPassed)?
 		public Group getGroup_2_4() { return cGroup_2_4; }
 		
 		//'become_user:'
 		public Keyword getBecome_userKeyword_2_4_0() { return cBecome_userKeyword_2_4_0; }
 		
-		//become_user=EJinjaExpressionAndString
+		//become_user=EStringPassed
 		public Assignment getBecome_userAssignment_2_4_1() { return cBecome_userAssignment_2_4_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getBecome_userEJinjaExpressionAndStringParserRuleCall_2_4_1_0() { return cBecome_userEJinjaExpressionAndStringParserRuleCall_2_4_1_0; }
+		//EStringPassed
+		public RuleCall getBecome_userEStringPassedParserRuleCall_2_4_1_0() { return cBecome_userEStringPassedParserRuleCall_2_4_1_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
@@ -2653,7 +2653,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
 		private final Keyword cConnectionKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cConnectionAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cConnectionEJinjaExpressionAndStringParserRuleCall_2_0_1_0 = (RuleCall)cConnectionAssignment_2_0_1.eContents().get(0);
+		private final RuleCall cConnectionEStringPassedParserRuleCall_2_0_1_0 = (RuleCall)cConnectionAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cPortKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cPortAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
@@ -2661,17 +2661,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
 		private final Keyword cRemote_userKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
 		private final Assignment cRemote_userAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cRemote_userEJinjaExpressionAndStringParserRuleCall_2_2_1_0 = (RuleCall)cRemote_userAssignment_2_2_1.eContents().get(0);
+		private final RuleCall cRemote_userEStringPassedParserRuleCall_2_2_1_0 = (RuleCall)cRemote_userAssignment_2_2_1.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EConnection:
 		//	'connection_info:'
-		//	BEGIN (('connection:' connection=EJinjaExpressionAndString)? & ('port:' port=ENumberPassed)? & ('remote_user:'
-		//	remote_user=EJinjaExpressionAndString)?) END;
+		//	BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+		//	remote_user=EStringPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'connection_info:' BEGIN (('connection:' connection=EJinjaExpressionAndString)? & ('port:' port=ENumberPassed)? &
-		//('remote_user:' remote_user=EJinjaExpressionAndString)?) END
+		//'connection_info:' BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+		//remote_user=EStringPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//'connection_info:'
@@ -2680,21 +2680,21 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('connection:' connection=EJinjaExpressionAndString)? & ('port:' port=ENumberPassed)? & ('remote_user:'
-		//remote_user=EJinjaExpressionAndString)?)
+		//(('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+		//remote_user=EStringPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('connection:' connection=EJinjaExpressionAndString)?
+		//('connection:' connection=EStringPassed)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//'connection:'
 		public Keyword getConnectionKeyword_2_0_0() { return cConnectionKeyword_2_0_0; }
 		
-		//connection=EJinjaExpressionAndString
+		//connection=EStringPassed
 		public Assignment getConnectionAssignment_2_0_1() { return cConnectionAssignment_2_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getConnectionEJinjaExpressionAndStringParserRuleCall_2_0_1_0() { return cConnectionEJinjaExpressionAndStringParserRuleCall_2_0_1_0; }
+		//EStringPassed
+		public RuleCall getConnectionEStringPassedParserRuleCall_2_0_1_0() { return cConnectionEStringPassedParserRuleCall_2_0_1_0; }
 		
 		//('port:' port=ENumberPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
@@ -2708,17 +2708,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ENumberPassed
 		public RuleCall getPortENumberPassedParserRuleCall_2_1_1_0() { return cPortENumberPassedParserRuleCall_2_1_1_0; }
 		
-		//('remote_user:' remote_user=EJinjaExpressionAndString)?
+		//('remote_user:' remote_user=EStringPassed)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 		
 		//'remote_user:'
 		public Keyword getRemote_userKeyword_2_2_0() { return cRemote_userKeyword_2_2_0; }
 		
-		//remote_user=EJinjaExpressionAndString
+		//remote_user=EStringPassed
 		public Assignment getRemote_userAssignment_2_2_1() { return cRemote_userAssignment_2_2_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getRemote_userEJinjaExpressionAndStringParserRuleCall_2_2_1_0() { return cRemote_userEJinjaExpressionAndStringParserRuleCall_2_2_1_0; }
+		//EStringPassed
+		public RuleCall getRemote_userEStringPassedParserRuleCall_2_2_1_0() { return cRemote_userEStringPassedParserRuleCall_2_2_1_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
@@ -2751,7 +2751,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
 		private final Keyword cStrategyKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cStrategyAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cStrategyEJinjaExpressionAndStringParserRuleCall_2_0_1_0 = (RuleCall)cStrategyAssignment_2_0_1.eContents().get(0);
+		private final RuleCall cStrategyEStringPassedParserRuleCall_2_0_1_0 = (RuleCall)cStrategyAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cSerialKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cSerial_listAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
@@ -2759,7 +2759,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
 		private final Keyword cOrderKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
 		private final Assignment cOrderAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cOrderEJinjaExpressionAndStringParserRuleCall_2_2_1_0 = (RuleCall)cOrderAssignment_2_2_1.eContents().get(0);
+		private final RuleCall cOrderEStringPassedParserRuleCall_2_2_1_0 = (RuleCall)cOrderAssignment_2_2_1.eContents().get(0);
 		private final Group cGroup_2_3 = (Group)cUnorderedGroup_2.eContents().get(3);
 		private final Keyword cThrottleKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
 		private final Assignment cThrottleAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
@@ -2772,14 +2772,12 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EPlayExeSettings:
 		//	'play_exe_settings:'
-		//	BEGIN (('strategy:' strategy=EJinjaExpressionAndString)? & ('serial:' serial_list=EListPassed)? & ('order:'
-		//	order=EJinjaExpressionAndString)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?)
-		//	END;
+		//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)?
+		//	& ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'play_exe_settings:' BEGIN (('strategy:' strategy=EJinjaExpressionAndString)? & ('serial:' serial_list=EListPassed)? &
-		//('order:' order=EJinjaExpressionAndString)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:'
-		//run_once=EBooleanPassed)?) END
+		//'play_exe_settings:' BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:'
+		//order=EStringPassed)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//'play_exe_settings:'
@@ -2788,21 +2786,21 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('strategy:' strategy=EJinjaExpressionAndString)? & ('serial:' serial_list=EListPassed)? & ('order:'
-		//order=EJinjaExpressionAndString)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?)
+		//(('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)? &
+		//('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('strategy:' strategy=EJinjaExpressionAndString)?
+		//('strategy:' strategy=EStringPassed)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//'strategy:'
 		public Keyword getStrategyKeyword_2_0_0() { return cStrategyKeyword_2_0_0; }
 		
-		//strategy=EJinjaExpressionAndString
+		//strategy=EStringPassed
 		public Assignment getStrategyAssignment_2_0_1() { return cStrategyAssignment_2_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getStrategyEJinjaExpressionAndStringParserRuleCall_2_0_1_0() { return cStrategyEJinjaExpressionAndStringParserRuleCall_2_0_1_0; }
+		//EStringPassed
+		public RuleCall getStrategyEStringPassedParserRuleCall_2_0_1_0() { return cStrategyEStringPassedParserRuleCall_2_0_1_0; }
 		
 		//('serial:' serial_list=EListPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
@@ -2816,17 +2814,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EListPassed
 		public RuleCall getSerial_listEListPassedParserRuleCall_2_1_1_0() { return cSerial_listEListPassedParserRuleCall_2_1_1_0; }
 		
-		//('order:' order=EJinjaExpressionAndString)?
+		//('order:' order=EStringPassed)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 		
 		//'order:'
 		public Keyword getOrderKeyword_2_2_0() { return cOrderKeyword_2_2_0; }
 		
-		//order=EJinjaExpressionAndString
+		//order=EStringPassed
 		public Assignment getOrderAssignment_2_2_1() { return cOrderAssignment_2_2_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getOrderEJinjaExpressionAndStringParserRuleCall_2_2_1_0() { return cOrderEJinjaExpressionAndStringParserRuleCall_2_2_1_0; }
+		//EStringPassed
+		public RuleCall getOrderEStringPassedParserRuleCall_2_2_1_0() { return cOrderEStringPassedParserRuleCall_2_2_1_0; }
 		
 		//('throttle:' throttle=ENumberPassed)?
 		public Group getGroup_2_3() { return cGroup_2_3; }
@@ -3249,17 +3247,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_3 = (Group)cUnorderedGroup_2.eContents().get(3);
 		private final Keyword cFact_pathKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
 		private final Assignment cFact_pathAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
-		private final RuleCall cFact_pathEJinjaExpressionAndStringParserRuleCall_2_3_1_0 = (RuleCall)cFact_pathAssignment_2_3_1.eContents().get(0);
+		private final RuleCall cFact_pathEStringPassedParserRuleCall_2_3_1_0 = (RuleCall)cFact_pathAssignment_2_3_1.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EFactsSettings:
 		//	'facts_settings:'
 		//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? &
-		//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EJinjaExpressionAndString)?) END;
+		//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'facts_settings:' BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)?
-		//& ('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EJinjaExpressionAndString)?) END
+		//& ('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//'facts_settings:'
@@ -3269,7 +3267,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
 		//(('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? & ('gather_timeout:'
-		//gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EJinjaExpressionAndString)?)
+		//gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//('gather_facts:' gather_facts=EBooleanPassed)?
@@ -3308,17 +3306,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ENumberPassed
 		public RuleCall getGather_timeoutENumberPassedParserRuleCall_2_2_1_0() { return cGather_timeoutENumberPassedParserRuleCall_2_2_1_0; }
 		
-		//('fact_path:' fact_path=EJinjaExpressionAndString)?
+		//('fact_path:' fact_path=EStringPassed)?
 		public Group getGroup_2_3() { return cGroup_2_3; }
 		
 		//'fact_path:'
 		public Keyword getFact_pathKeyword_2_3_0() { return cFact_pathKeyword_2_3_0; }
 		
-		//fact_path=EJinjaExpressionAndString
+		//fact_path=EStringPassed
 		public Assignment getFact_pathAssignment_2_3_1() { return cFact_pathAssignment_2_3_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getFact_pathEJinjaExpressionAndStringParserRuleCall_2_3_1_0() { return cFact_pathEJinjaExpressionAndStringParserRuleCall_2_3_1_0; }
+		//EStringPassed
+		public RuleCall getFact_pathEStringPassedParserRuleCall_2_3_1_0() { return cFact_pathEStringPassedParserRuleCall_2_3_1_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
@@ -3332,7 +3330,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
 		private final Keyword cDelegate_toKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cDelegate_toAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cDelegate_toEJinjaExpressionAndStringParserRuleCall_2_0_1_0 = (RuleCall)cDelegate_toAssignment_2_0_1.eContents().get(0);
+		private final RuleCall cDelegate_toEStringPassedParserRuleCall_2_0_1_0 = (RuleCall)cDelegate_toAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cDelegate_factsKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cDelegate_factsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
@@ -3341,12 +3339,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EDelegation:
 		//	'delegation:'
-		//	BEGIN (('delegate_to:' delegate_to=EJinjaExpressionAndString)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?)
-		//	END;
+		//	BEGIN (('delegate_to:' delegate_to=EStringPassed)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'delegation:' BEGIN (('delegate_to:' delegate_to=EJinjaExpressionAndString)? & ('delegate_facts:'
-		//delegate_facts=EBooleanPassed)?) END
+		//'delegation:' BEGIN (('delegate_to:' delegate_to=EStringPassed)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?)
+		//END
 		public Group getGroup() { return cGroup; }
 		
 		//'delegation:'
@@ -3355,20 +3352,20 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('delegate_to:' delegate_to=EJinjaExpressionAndString)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?)
+		//(('delegate_to:' delegate_to=EStringPassed)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('delegate_to:' delegate_to=EJinjaExpressionAndString)?
+		//('delegate_to:' delegate_to=EStringPassed)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//'delegate_to:'
 		public Keyword getDelegate_toKeyword_2_0_0() { return cDelegate_toKeyword_2_0_0; }
 		
-		//delegate_to=EJinjaExpressionAndString
+		//delegate_to=EStringPassed
 		public Assignment getDelegate_toAssignment_2_0_1() { return cDelegate_toAssignment_2_0_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getDelegate_toEJinjaExpressionAndStringParserRuleCall_2_0_1_0() { return cDelegate_toEJinjaExpressionAndStringParserRuleCall_2_0_1_0; }
+		//EStringPassed
+		public RuleCall getDelegate_toEStringPassedParserRuleCall_2_0_1_0() { return cDelegate_toEStringPassedParserRuleCall_2_0_1_0; }
 		
 		//('delegate_facts:' delegate_facts=EBooleanPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
@@ -3535,22 +3532,42 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	public class EJinjaExpressionAndStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+		private final Assignment cJinja_expression_and_stringAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0 = (RuleCall)cJinja_expression_and_stringAssignment.eContents().get(0);
+		
+		//EJinjaExpressionAndString:
+		//	jinja_expression_and_string+=EJinjaExpressionOrString+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//jinja_expression_and_string+=EJinjaExpressionOrString+
+		public Assignment getJinja_expression_and_stringAssignment() { return cJinja_expression_and_stringAssignment; }
+		
+		//EJinjaExpressionOrString
+		public RuleCall getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0() { return cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0; }
+	}
+	public class EMultiLineExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EMultiLineExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNew_line_commandAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Alternatives cNew_line_commandAlternatives_0_0 = (Alternatives)cNew_line_commandAssignment_0.eContents().get(0);
 		private final Keyword cNew_line_commandGreaterThanSignKeyword_0_0_0 = (Keyword)cNew_line_commandAlternatives_0_0.eContents().get(0);
 		private final Keyword cNew_line_commandVerticalLineKeyword_0_0_1 = (Keyword)cNew_line_commandAlternatives_0_0.eContents().get(1);
-		private final Assignment cJinja_expression_and_stringAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_1_0 = (RuleCall)cJinja_expression_and_stringAssignment_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLineKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cExpressionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0 = (RuleCall)cExpressionsAssignment_2_1.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//EJinjaExpressionAndString:
-		//	new_line_command=('>' | '|')? jinja_expression_and_string+=EJinjaExpressionOrString+;
+		//EMultiLineExpression:
+		//	new_line_command=('>' | '|') BEGIN ('line:' expressions+=EJinjaExpressionAndString)+
+		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//new_line_command=('>' | '|')? jinja_expression_and_string+=EJinjaExpressionOrString+
+		//new_line_command=('>' | '|') BEGIN ('line:' expressions+=EJinjaExpressionAndString)+ END
 		public Group getGroup() { return cGroup; }
 		
-		//new_line_command=('>' | '|')?
+		//new_line_command=('>' | '|')
 		public Assignment getNew_line_commandAssignment_0() { return cNew_line_commandAssignment_0; }
 		
 		//('>' | '|')
@@ -3562,27 +3579,58 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//'|'
 		public Keyword getNew_line_commandVerticalLineKeyword_0_0_1() { return cNew_line_commandVerticalLineKeyword_0_0_1; }
 		
-		//jinja_expression_and_string+=EJinjaExpressionOrString+
-		public Assignment getJinja_expression_and_stringAssignment_1() { return cJinja_expression_and_stringAssignment_1; }
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//EJinjaExpressionOrString
-		public RuleCall getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_1_0() { return cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_1_0; }
+		//('line:' expressions+=EJinjaExpressionAndString)+
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'line:'
+		public Keyword getLineKeyword_2_0() { return cLineKeyword_2_0; }
+		
+		//expressions+=EJinjaExpressionAndString
+		public Assignment getExpressionsAssignment_2_1() { return cExpressionsAssignment_2_1; }
+		
+		//EJinjaExpressionAndString
+		public RuleCall getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0() { return cExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
 	}
-	public class EValuePassedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+	public class EStringPassedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EStringPassed");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEJinjaExpressionAndStringParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEValueWithoutStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEMultiLineExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//EValuePassed:
-		//	EJinjaExpressionAndString | EValueWithoutString;
+		//EStringPassed:
+		//	EJinjaExpressionAndString | EMultiLineExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EJinjaExpressionAndString | EValueWithoutString
+		//EJinjaExpressionAndString | EMultiLineExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//EJinjaExpressionAndString
 		public RuleCall getEJinjaExpressionAndStringParserRuleCall_0() { return cEJinjaExpressionAndStringParserRuleCall_0; }
+		
+		//EMultiLineExpression
+		public RuleCall getEMultiLineExpressionParserRuleCall_1() { return cEMultiLineExpressionParserRuleCall_1; }
+	}
+	public class EValuePassedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEStringPassedParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEValueWithoutStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//EValuePassed:
+		//	EStringPassed | EValueWithoutString;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EStringPassed | EValueWithoutString
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EStringPassed
+		public RuleCall getEStringPassedParserRuleCall_0() { return cEStringPassedParserRuleCall_0; }
 		
 		//EValueWithoutString
 		public RuleCall getEValueWithoutStringParserRuleCall_1() { return cEValueWithoutStringParserRuleCall_1; }
@@ -5535,6 +5583,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ENotifiedTopicElements pENotifiedTopic;
 	private final EJinjaExpressionOrStringElements pEJinjaExpressionOrString;
 	private final EJinjaExpressionAndStringElements pEJinjaExpressionAndString;
+	private final EMultiLineExpressionElements pEMultiLineExpression;
+	private final EStringPassedElements pEStringPassed;
 	private final EValuePassedElements pEValuePassed;
 	private final EValuePassedToJinjaExpressionElements pEValuePassedToJinjaExpression;
 	private final EComposedValueElements pEComposedValue;
@@ -5641,6 +5691,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pENotifiedTopic = new ENotifiedTopicElements();
 		this.pEJinjaExpressionOrString = new EJinjaExpressionOrStringElements();
 		this.pEJinjaExpressionAndString = new EJinjaExpressionAndStringElements();
+		this.pEMultiLineExpression = new EMultiLineExpressionElements();
+		this.pEStringPassed = new EStringPassedElements();
 		this.pEValuePassed = new EValuePassedElements();
 		this.pEValuePassedToJinjaExpression = new EValuePassedToJinjaExpressionElements();
 		this.pEComposedValue = new EComposedValueElements();
@@ -5807,11 +5859,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//EPlay:
 	//	{EPlay}
 	//	'play:'
-	//	BEGIN (('play_name:' name=EJinjaExpressionAndString)? & ('hosts:' hosts=EJinjaExpressionAndString)? &
+	//	BEGIN (('play_name:' name=EStringPassed)? & ('hosts:' hosts=EStringPassed)? &
 	//	privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode? & connection=EConnection? & ('no_log:'
-	//	no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? & ('module_defaults:'
-	//	module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)?
-	//	& ('tags:' tags=EListPassed)? & ('vars:'
+	//	no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? &
+	//	('environment:' environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? &
+	//	('vars:'
 	//	BEGIN
 	//	variable_declarations+=EVariableDeclaration+
 	//	END)? & play_exe_settings=EPlayExeSettings? & error_handling=EPlayErrorHandling? & facts_settings=EFactsSettings? &
@@ -5839,9 +5891,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EBlock:
 	//	'block:'
-	//	BEGIN (('block_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+	//	BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 	//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-	//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+	//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 	//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 	//	BEGIN
 	//	variable_declarations+=EVariableDeclaration+
@@ -5867,16 +5919,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//ETask:
 	//	{ETask}
 	//	'task:'
-	//	BEGIN (('task_name:' name=EJinjaExpressionAndString)? & privilege_escalation=EPrivilegeEscalation? &
+	//	BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 	//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-	//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
+	//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 	//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 	//	BEGIN
 	//	variable_declarations+=EVariableDeclaration+
 	//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 	//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
-	//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+	//	action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+	//	module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
 	//	register=ERegisterVariable?) END;
 	public ETaskElements getETaskAccess() {
 		return pETask;
@@ -5890,15 +5942,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//	{EHandler}
 	//	'handler:'
 	//	BEGIN (('handler_name:' name=STRING)? & privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode?
-	//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EJinjaExpressionAndString)? &
+	//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
 	//	('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
 	//	collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 	//	BEGIN
 	//	variable_declarations+=EVariableDeclaration+
 	//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
 	//	when_expression=EJinjaExpressionEvaluationWithoutBrackets)? & error_handling=ETaskHandlerErrorHandling? & ('action:'
-	//	action=EJinjaExpressionAndString)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)?
-	//	& module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
+	//	action=EStringPassed)? & asynchronous_settings=EAsynchronousSettings? & ('args:' args=EDictionaryPassed)? &
+	//	module=EModuleCall & ('notify:' notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? &
 	//	register=ERegisterVariable? & ('listen:' listen_to+=[ENotifiedTopic|STRING]+)?) END;
 	public EHandlerElements getEHandlerAccess() {
 		return pEHandler;
@@ -5933,10 +5985,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//ERoleInclusion:
 	//	'role:'
-	//	BEGIN ('role_name:' name=EJinjaExpressionAndString (privilege_escalation=EPrivilegeEscalation? &
-	//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
-	//	debugger=EJinjaExpressionAndString)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
-	//	environment=EListPassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
+	//	BEGIN ('role_name:' name=EStringPassed (privilege_escalation=EPrivilegeEscalation? & validation_mode=EValidationMode?
+	//	& connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:' debugger=EStringPassed)? &
+	//	('module_defaults:' module_defaults=EListPassed)? & ('environment:' environment=EListPassed)? & ('collections:'
+	//	collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:'
 	//	BEGIN
 	//	variable_declarations+=EVariableDeclaration+
 	//	END)? & exe_settings=EExecutionExeSettings? & delegation=EDelegation? & ('when:'
@@ -6033,9 +6085,9 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EPrivilegeEscalation:
 	//	'privilege_escalation:'
-	//	BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EJinjaExpressionAndString)? & ('become_flags:'
-	//	become_flags=EJinjaExpressionAndString)? & ('become_method:' become_method=EJinjaExpressionAndString)? &
-	//	('become_user:' become_user=EJinjaExpressionAndString)?) END;
+	//	BEGIN (('become:' become=EBooleanPassed)? & ('become_exe:' become_exe=EStringPassed)? & ('become_flags:'
+	//	become_flags=EStringPassed)? & ('become_method:' become_method=EStringPassed)? & ('become_user:'
+	//	become_user=EStringPassed)?) END;
 	public EPrivilegeEscalationElements getEPrivilegeEscalationAccess() {
 		return pEPrivilegeEscalation;
 	}
@@ -6057,8 +6109,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EConnection:
 	//	'connection_info:'
-	//	BEGIN (('connection:' connection=EJinjaExpressionAndString)? & ('port:' port=ENumberPassed)? & ('remote_user:'
-	//	remote_user=EJinjaExpressionAndString)?) END;
+	//	BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+	//	remote_user=EStringPassed)?) END;
 	public EConnectionElements getEConnectionAccess() {
 		return pEConnection;
 	}
@@ -6079,9 +6131,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EPlayExeSettings:
 	//	'play_exe_settings:'
-	//	BEGIN (('strategy:' strategy=EJinjaExpressionAndString)? & ('serial:' serial_list=EListPassed)? & ('order:'
-	//	order=EJinjaExpressionAndString)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?)
-	//	END;
+	//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)?
+	//	& ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END;
 	public EPlayExeSettingsElements getEPlayExeSettingsAccess() {
 		return pEPlayExeSettings;
 	}
@@ -6152,7 +6203,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//EFactsSettings:
 	//	'facts_settings:'
 	//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? &
-	//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EJinjaExpressionAndString)?) END;
+	//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END;
 	public EFactsSettingsElements getEFactsSettingsAccess() {
 		return pEFactsSettings;
 	}
@@ -6163,8 +6214,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EDelegation:
 	//	'delegation:'
-	//	BEGIN (('delegate_to:' delegate_to=EJinjaExpressionAndString)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?)
-	//	END;
+	//	BEGIN (('delegate_to:' delegate_to=EStringPassed)? & ('delegate_facts:' delegate_facts=EBooleanPassed)?) END;
 	public EDelegationElements getEDelegationAccess() {
 		return pEDelegation;
 	}
@@ -6225,7 +6275,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EJinjaExpressionAndString:
-	//	new_line_command=('>' | '|')? jinja_expression_and_string+=EJinjaExpressionOrString+;
+	//	jinja_expression_and_string+=EJinjaExpressionOrString+;
 	public EJinjaExpressionAndStringElements getEJinjaExpressionAndStringAccess() {
 		return pEJinjaExpressionAndString;
 	}
@@ -6234,8 +6284,29 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getEJinjaExpressionAndStringAccess().getRule();
 	}
 	
+	//EMultiLineExpression:
+	//	new_line_command=('>' | '|') BEGIN ('line:' expressions+=EJinjaExpressionAndString)+
+	//	END;
+	public EMultiLineExpressionElements getEMultiLineExpressionAccess() {
+		return pEMultiLineExpression;
+	}
+	
+	public ParserRule getEMultiLineExpressionRule() {
+		return getEMultiLineExpressionAccess().getRule();
+	}
+	
+	//EStringPassed:
+	//	EJinjaExpressionAndString | EMultiLineExpression;
+	public EStringPassedElements getEStringPassedAccess() {
+		return pEStringPassed;
+	}
+	
+	public ParserRule getEStringPassedRule() {
+		return getEStringPassedAccess().getRule();
+	}
+	
 	//EValuePassed:
-	//	EJinjaExpressionAndString | EValueWithoutString;
+	//	EStringPassed | EValueWithoutString;
 	public EValuePassedElements getEValuePassedAccess() {
 		return pEValuePassed;
 	}

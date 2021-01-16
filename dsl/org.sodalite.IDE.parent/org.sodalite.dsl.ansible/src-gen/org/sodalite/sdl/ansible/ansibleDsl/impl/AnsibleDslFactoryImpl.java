@@ -104,6 +104,8 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
       case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING: return createEJinjaExpressionOrString();
       case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING: return createEJinjaExpressionAndString();
+      case AnsibleDslPackage.EMULTI_LINE_EXPRESSION: return createEMultiLineExpression();
+      case AnsibleDslPackage.ESTRING_PASSED: return createEStringPassed();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION: return createEValuePassedToJinjaExpression();
       case AnsibleDslPackage.ECOMPOSED_VALUE: return createEComposedValue();
@@ -625,6 +627,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EJinjaExpressionAndStringImpl eJinjaExpressionAndString = new EJinjaExpressionAndStringImpl();
     return eJinjaExpressionAndString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EMultiLineExpression createEMultiLineExpression()
+  {
+    EMultiLineExpressionImpl eMultiLineExpression = new EMultiLineExpressionImpl();
+    return eMultiLineExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EStringPassed createEStringPassed()
+  {
+    EStringPassedImpl eStringPassed = new EStringPassedImpl();
+    return eStringPassed;
   }
 
   /**

@@ -41,12 +41,12 @@ public interface EPlay extends EBase
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(EJinjaExpressionAndString)
+   * @see #setName(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Name()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getName();
+  EStringPassed getName();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getName <em>Name</em>}' containment reference.
@@ -56,19 +56,19 @@ public interface EPlay extends EBase
    * @see #getName()
    * @generated
    */
-  void setName(EJinjaExpressionAndString value);
+  void setName(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Hosts</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Hosts</em>' containment reference.
-   * @see #setHosts(EJinjaExpressionAndString)
+   * @see #setHosts(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Hosts()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getHosts();
+  EStringPassed getHosts();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getHosts <em>Hosts</em>}' containment reference.
@@ -78,7 +78,7 @@ public interface EPlay extends EBase
    * @see #getHosts()
    * @generated
    */
-  void setHosts(EJinjaExpressionAndString value);
+  void setHosts(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Play exe settings</b></em>' containment reference.

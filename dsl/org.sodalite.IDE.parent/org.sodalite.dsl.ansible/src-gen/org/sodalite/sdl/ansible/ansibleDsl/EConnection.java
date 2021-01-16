@@ -30,12 +30,12 @@ public interface EConnection extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Connection</em>' containment reference.
-   * @see #setConnection(EJinjaExpressionAndString)
+   * @see #setConnection(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Connection()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getConnection();
+  EStringPassed getConnection();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getConnection <em>Connection</em>}' containment reference.
@@ -45,7 +45,7 @@ public interface EConnection extends EObject
    * @see #getConnection()
    * @generated
    */
-  void setConnection(EJinjaExpressionAndString value);
+  void setConnection(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Port</b></em>' containment reference.
@@ -74,12 +74,12 @@ public interface EConnection extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Remote user</em>' containment reference.
-   * @see #setRemote_user(EJinjaExpressionAndString)
+   * @see #setRemote_user(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEConnection_Remote_user()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getRemote_user();
+  EStringPassed getRemote_user();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EConnection#getRemote_user <em>Remote user</em>}' containment reference.
@@ -89,6 +89,6 @@ public interface EConnection extends EObject
    * @see #getRemote_user()
    * @generated
    */
-  void setRemote_user(EJinjaExpressionAndString value);
+  void setRemote_user(EStringPassed value);
 
 } // EConnection

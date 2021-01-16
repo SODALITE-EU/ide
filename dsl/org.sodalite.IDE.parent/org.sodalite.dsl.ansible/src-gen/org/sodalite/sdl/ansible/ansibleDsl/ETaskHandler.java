@@ -57,12 +57,12 @@ public interface ETaskHandler extends EExecution
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
-   * @see #setAction(EJinjaExpressionAndString)
+   * @see #setAction(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETaskHandler_Action()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getAction();
+  EStringPassed getAction();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler#getAction <em>Action</em>}' containment reference.
@@ -72,7 +72,7 @@ public interface ETaskHandler extends EExecution
    * @see #getAction()
    * @generated
    */
-  void setAction(EJinjaExpressionAndString value);
+  void setAction(EStringPassed value);
 
   /**
    * Returns the value of the '<em><b>Asynchronous settings</b></em>' containment reference.

@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 
@@ -69,7 +69,7 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString action;
+  protected EStringPassed action;
 
   /**
    * The cached value of the '{@link #getAsynchronous_settings() <em>Asynchronous settings</em>}' containment reference.
@@ -208,7 +208,7 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getAction()
+  public EStringPassed getAction()
   {
     return action;
   }
@@ -218,9 +218,9 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(EJinjaExpressionAndString newAction, NotificationChain msgs)
+  public NotificationChain basicSetAction(EStringPassed newAction, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldAction = action;
+    EStringPassed oldAction = action;
     action = newAction;
     if (eNotificationRequired())
     {
@@ -236,7 +236,7 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
    * @generated
    */
   @Override
-  public void setAction(EJinjaExpressionAndString newAction)
+  public void setAction(EStringPassed newAction)
   {
     if (newAction != action)
     {
@@ -592,7 +592,7 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
         setError_handling((ETaskHandlerErrorHandling)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER__ACTION:
-        setAction((EJinjaExpressionAndString)newValue);
+        setAction((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK_HANDLER__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)newValue);
@@ -631,7 +631,7 @@ public class ETaskHandlerImpl extends EExecutionImpl implements ETaskHandler
         setError_handling((ETaskHandlerErrorHandling)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER__ACTION:
-        setAction((EJinjaExpressionAndString)null);
+        setAction((EStringPassed)null);
         return;
       case AnsibleDslPackage.ETASK_HANDLER__ASYNCHRONOUS_SETTINGS:
         setAsynchronous_settings((EAsynchronousSettings)null);

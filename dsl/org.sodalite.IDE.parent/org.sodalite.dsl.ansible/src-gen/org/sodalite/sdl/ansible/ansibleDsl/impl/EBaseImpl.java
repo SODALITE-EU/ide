@@ -23,9 +23,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
@@ -101,7 +101,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionAndString debugger;
+  protected EStringPassed debugger;
 
   /**
    * The cached value of the '{@link #getModule_defaults() <em>Module defaults</em>}' containment reference.
@@ -380,7 +380,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString getDebugger()
+  public EStringPassed getDebugger()
   {
     return debugger;
   }
@@ -390,9 +390,9 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDebugger(EJinjaExpressionAndString newDebugger, NotificationChain msgs)
+  public NotificationChain basicSetDebugger(EStringPassed newDebugger, NotificationChain msgs)
   {
-    EJinjaExpressionAndString oldDebugger = debugger;
+    EStringPassed oldDebugger = debugger;
     debugger = newDebugger;
     if (eNotificationRequired())
     {
@@ -408,7 +408,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public void setDebugger(EJinjaExpressionAndString newDebugger)
+  public void setDebugger(EStringPassed newDebugger)
   {
     if (newDebugger != debugger)
     {
@@ -731,7 +731,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setNo_log((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__DEBUGGER:
-        setDebugger((EJinjaExpressionAndString)newValue);
+        setDebugger((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)newValue);
@@ -776,7 +776,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setNo_log((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EBASE__DEBUGGER:
-        setDebugger((EJinjaExpressionAndString)null);
+        setDebugger((EStringPassed)null);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
         setModule_defaults((EListPassed)null);

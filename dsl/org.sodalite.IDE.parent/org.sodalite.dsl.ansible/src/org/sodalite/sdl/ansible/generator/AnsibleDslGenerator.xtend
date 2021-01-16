@@ -71,6 +71,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible
+import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression
+import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed
 
 /**
  * Generates code from your model files on save.
@@ -99,16 +101,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compilePlay(EPlay play, String space) '''
 		«IF play.name !== null»
-			- name: «compileJinjaExpressionAndString(play.name, space)»
+			- name: «compileStringPassed(play.name, space, false)»
 			«IF play.hosts !== null»
-				«space»hosts: «compileJinjaExpressionAndString(play.hosts, space)»
+				«space»hosts: «compileStringPassed(play.hosts, space, false)»
 			«ENDIF»
 			«IF play.playbook_inclusion !== null»
 				«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
 			«ENDIF»
 		«ELSE»
 			«IF play.hosts !== null»
-				- hosts: «compileJinjaExpressionAndString(play.hosts, space)»
+				- hosts: «compileStringPassed(play.hosts, space, false)»
 				«IF play.playbook_inclusion !== null»
 					«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
 				«ENDIF»
@@ -192,7 +194,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
-		«space»- role: «compileJinjaExpressionAndString(roleInclusion.name, space)»
+		«space»- role: «compileStringPassed(roleInclusion.name, space, false)»
 		«compileBaseAttributes(roleInclusion, space.concat('  '))»
 		«compileExecutionAttributes(roleInclusion, space.concat('  '))»
 		«IF roleInclusion.error_handling !== null»
@@ -206,16 +208,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«space»become: «compileBooleanPassed(base.privilege_escalation.become, space)»
 			«ENDIF»
 			«IF base.privilege_escalation.become_exe !== null»
-				«space»become_exe: «compileJinjaExpressionAndString(base.privilege_escalation.become_exe, space)»
+				«space»become_exe: «compileStringPassed(base.privilege_escalation.become_exe, space, false)»
 			«ENDIF»
 			«IF base.privilege_escalation.become_flags !== null»
-				«space»become_flags: «compileJinjaExpressionAndString(base.privilege_escalation.become_flags, space)»
+				«space»become_flags: «compileStringPassed(base.privilege_escalation.become_flags, space, false)»
 			«ENDIF»
 			«IF base.privilege_escalation.become_method !== null»
-				«space»become_method: «compileJinjaExpressionAndString(base.privilege_escalation.become_method, space)»
+				«space»become_method: «compileStringPassed(base.privilege_escalation.become_method, space, false)»
 			«ENDIF»
 			«IF base.privilege_escalation.become_user !== null»
-				«space»become_user: «compileJinjaExpressionAndString(base.privilege_escalation.become_user, space)»
+				«space»become_user: «compileStringPassed(base.privilege_escalation.become_user, space, false)»
 			«ENDIF»
 		«ENDIF»
 		«IF base.validation_mode !== null»
@@ -228,20 +230,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«IF base.connection !== null»
 			«IF base.connection.connection !== null»
-				«space»connection: «compileJinjaExpressionAndString(base.connection.connection, space)»
+				«space»connection: «compileStringPassed(base.connection.connection, space, false)»
 			«ENDIF»
 			«IF base.connection.port !== null»
 				«space»port: «compileNumberPassed(base.connection.port, space)»
 			«ENDIF»
 			«IF base.connection.remote_user !== null»
-				«space»remote_user: «compileJinjaExpressionAndString(base.connection.remote_user, space)»
+				«space»remote_user: «compileStringPassed(base.connection.remote_user, space, false)»
 			«ENDIF»
 		«ENDIF»
 		«IF base.no_log !== null»
 			«space»no_log: «compileBooleanPassed(base.no_log, space)»
 		«ENDIF»
 		«IF base.debugger !== null»
-			«space»debugger: «compileJinjaExpressionAndString(base.debugger, space)»
+			«space»debugger: «compileStringPassed(base.debugger, space, false)»
 		«ENDIF»
 		«IF base.module_defaults !== null»
 			«space»module_defaults: «compileListPassed(base.module_defaults, space)»
@@ -258,20 +260,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF base.variable_declarations.size !== 0»
 			«space»vars:
 			«FOR variable_declaration: base.variable_declarations»
-				«space.concat('  ')»«variable_declaration.name»: «compileValuePassed(variable_declaration.value_passed, space.concat('  ')).toString()»
+				«space.concat('  ')»«variable_declaration.name»: «compileValuePassed(variable_declaration.value_passed, space.concat('  '), false).toString()»
 			«ENDFOR»
 		«ENDIF»
 	'''
 	
 	def compilePlayExeSettings(EPlayExeSettings playExeSettings, String space) '''
 		«IF playExeSettings.strategy !== null»
-			«space»strategy: «compileJinjaExpressionAndString(playExeSettings.strategy, space)»
+			«space»strategy: «compileStringPassed(playExeSettings.strategy, space, false)»
 		«ENDIF»
 		«IF playExeSettings.serial_list !== null»
 			«space»serial: «compileListPassed(playExeSettings.serial_list, space)»
 		«ENDIF»
 		«IF playExeSettings.order !== null»
-			«space»order: «compileJinjaExpressionAndString(playExeSettings.order, space)»
+			«space»order: «compileStringPassed(playExeSettings.order, space, false)»
 		«ENDIF»
 		«IF playExeSettings.throttle !== null»
 			«space»throttle: «compileNumberPassed(playExeSettings.throttle, space)»
@@ -307,7 +309,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»gather_timeout: «compileNumberPassed(factsSettings.gather_timeout, space)»
 		«ENDIF»
 		«IF factsSettings.fact_path !== null»
-			«space»fact_path: «compileJinjaExpressionAndString(factsSettings.fact_path, space)»
+			«space»fact_path: «compileStringPassed(factsSettings.fact_path, space, false)»
 		«ENDIF»
 	'''
 	
@@ -322,7 +324,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileBlock(EBlock block, String space) '''
 		«IF block.name !== null»
-			«space»- name: «compileJinjaExpressionAndString(block.name, space.concat('  '))»
+			«space»- name: «compileStringPassed(block.name, space.concat('  '), false)»
 			«space.concat('  ')»block:
 		«ELSE»
 			«space»- block:
@@ -376,7 +378,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 		«IF execution.delegation !== null»
 			«IF execution.delegation.delegate_to !== null»
-				«space»delegate_to: «compileJinjaExpressionAndString(execution.delegation.delegate_to, space)»
+				«space»delegate_to: «compileStringPassed(execution.delegation.delegate_to, space, false)»
 			«ENDIF»
 			«IF execution.delegation.delegate_facts !== null»
 				«space»delegate_facts: «compileBooleanPassed(execution.delegation.delegate_facts, space)»
@@ -391,8 +393,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	//to distinguish between the 2 different cases and get the name of task/handler
 	def taskHandlerName(ETaskHandler taskHandler, String space){
 		if (taskHandler instanceof ETask){
-			//this check is necessary in order to not pass null to compileJinjaExpressionAndString
-			if (taskHandler.name !== null) return compileJinjaExpressionAndString(taskHandler.name, space)
+			//this check is necessary in order to not pass null to compileStringPassed
+			if (taskHandler.name !== null) return compileStringPassed(taskHandler.name, space, false)
 			else return null
 		} 
 		else if (taskHandler instanceof EHandler) return taskHandler.name
@@ -403,16 +405,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF taskHandlerName(taskHandler, space) !== null»
 			«space»- name: «taskHandlerName(taskHandler, space.concat('  '))»
 			«IF taskHandler.module !== null»
-				«space.concat('  ')»«taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '))»«ENDIF»
+				«space.concat('  ')»«taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
 				«FOR parameter: taskHandler.module.parameters»
-					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '))»
+					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '), false)»
 				«ENDFOR»
 			«ENDIF»
 		«ELSE»
 			«IF taskHandler.module !== null»
-				«space»- «taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '))»«ENDIF»
+				«space»- «taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
 				«FOR parameter: taskHandler.module.parameters»
-					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '))»
+					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '), false)»
 				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
@@ -446,7 +448,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 		«ENDIF»
 		«IF taskHandler.action !== null»
-			«space»action: «compileJinjaExpressionAndString(taskHandler.action, space)»
+			«space»action: «compileStringPassed(taskHandler.action, space, false)»
 		«ENDIF»
 		«IF taskHandler.asynchronous_settings !== null»
 			«IF taskHandler.asynchronous_settings.async !== null»
@@ -467,7 +469,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«space»loop: «compileLoopList((taskHandler.loop as ELoopOverList).loop_list, space)»
 				«IF (taskHandler.loop as ELoopOverList).loop_control !== null»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
-						«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space)»
+						«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space, false)»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
 						«space»pause: «compileNumberPassed((taskHandler.loop as ELoopOverList).loop_control.pause, space)»
@@ -496,7 +498,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 			«IF taskHandler.loop instanceof EWithLookup»
 				«IF (taskHandler.loop as EWithLookup).lookup !== null && (taskHandler.loop as EWithLookup).with_list !== null»
-					«space»with_«(taskHandler.loop as EWithLookup).lookup»: «compileValuePassed((taskHandler.loop as EWithLookup).with_list, space).toString()»
+					«space»with_«(taskHandler.loop as EWithLookup).lookup»: «compileValuePassed((taskHandler.loop as EWithLookup).with_list, space, false).toString()»
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
@@ -670,51 +672,58 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (list instanceof EListInLine){
 			var newList = new ArrayList()
 			for (element : list.elements){
-				newList.add(compileValuePassed(element, space))
+				newList.add(compileValuePassed(element, space, false))
 			}
 			return newList			
 		}
 		else if (list instanceof EListIndented){
 			var listString = ""
 			for (element : list.elements){
-				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileValuePassed(element, space.concat("  ")).toString())
+				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileValuePassed(element, space.concat("  "), false).toString())
 			}
 			return listString
 		}
 
 	}
 	
-	def compileValuePassed(EValuePassed valuePassed, String space){
-		if (valuePassed instanceof EJinjaExpressionAndString){
-			return compileJinjaExpressionAndString(valuePassed, space)
+	def compileValuePassed(EValuePassed valuePassed, String space, boolean isInMultiLine){
+		if (valuePassed instanceof EStringPassed){
+			return compileStringPassed(valuePassed, space, isInMultiLine)
 		}
 		else if (valuePassed instanceof EValueWithoutString){
 			return compileValueWithoutString(valuePassed, space)
 		}
 	}
-	
-	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja, String space){
-		//if jinja.new_line_command is not null, then a new line is needed for each element
-		if (jinja.new_line_command !== null){
-			var stringToReturn = jinja.new_line_command
-			for (jinjaOr : jinja.jinja_expression_and_string){
-				stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(compileJinjaExpressionOrString(jinjaOr, space.concat("  ")).toString())
-			}
-			return stringToReturn
-		}
-		//else, all the elements can just be concatenated in line
-		else {
-			var stringToReturn = "\""
-			for (jinjaOr : jinja.jinja_expression_and_string){
-				stringToReturn = stringToReturn.concat(compileJinjaExpressionOrString(jinjaOr, space).toString())
-			}
-			stringToReturn = stringToReturn.concat("\"")
-			return stringToReturn			
-		}
 
+	def compileStringPassed(EStringPassed stringPassed, String space, boolean isInMultiLine){
+		if (stringPassed instanceof EJinjaExpressionAndString){
+			return compileJinjaExpressionAndString(stringPassed, space, isInMultiLine)
+		}
+		else if (stringPassed instanceof EMultiLineExpression){
+			return compileMultiLineExpression(stringPassed, space)
+		}
+	}
+
+	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja, String space, boolean isInMultiLine){
+		var stringToReturn = ""
+		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
+		for (jinjaOr : jinja.jinja_expression_and_string){
+			stringToReturn = stringToReturn.concat(compileJinjaExpressionOrString(jinjaOr, space, isInMultiLine).toString())
+		}
+		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
+		return stringToReturn
 	}
 	
-	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja, String space){
+	def compileMultiLineExpression(EMultiLineExpression multiLineExpression, String space){
+		var stringToReturn = ""
+		if (multiLineExpression.new_line_command !== null) stringToReturn = stringToReturn.concat(multiLineExpression.new_line_command)
+		for (jinjaAndString : multiLineExpression.expressions){
+			stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(compileJinjaExpressionAndString(jinjaAndString, space, true).toString())
+		}
+		return stringToReturn
+	}
+	
+	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja, String space, boolean isInMultiLine){
 		if (jinja.string !== null){
 			return jinja.string
 		}
@@ -722,7 +731,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			return compileJinjaExpressionEvaluation(jinja, space)
 		}
 		else if (jinja instanceof EJinjaStatement){
-			return compileJinjaStatement(jinja, space)
+			return compileJinjaStatement(jinja, space, isInMultiLine)
 		}
 	}
 	
@@ -730,28 +739,28 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return "{{ ".concat(compileJinjaExpressionEvaluationWithoutBrackets(jinja.jinja_expression, space).toString()).concat(" }}")
 	}
 	
-	def compileJinjaStatement(EJinjaStatement jinjaStatement, String space){
+	def compileJinjaStatement(EJinjaStatement jinjaStatement, String space, boolean isInMultiLine){
 		if (jinjaStatement instanceof EIfStatement){
 			var stringToReturn = "{%"
 			if (jinjaStatement.if_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.if_block_sign)
 			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.if_condition, space)).concat(" %}")
-			stringToReturn = stringToReturn.concat(" ").concat(compileValuePassed(jinjaStatement.if_body, space).toString())
+			stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.if_body, space, isInMultiLine).toString())
 			//the elif blocks, if present
 			for (elif : jinjaStatement.elif_blocks){
-				stringToReturn = stringToReturn.concat(" {%")
+				stringToReturn = stringToReturn.concat("{%")
 				if (elif.elif_block_sign !== null) stringToReturn = stringToReturn.concat(elif.elif_block_sign)
 				stringToReturn = stringToReturn.concat(" elif ").concat(compileFilteredExpression(elif.elif_condition, space)).concat(" %}")
-				stringToReturn = stringToReturn.concat(" ").concat(compileValuePassed(elif.elif_body, space).toString())
+				stringToReturn = stringToReturn.concat(compileValuePassed(elif.elif_body, space, isInMultiLine).toString())
 			}
 			//the else block, if present
 			if (jinjaStatement.else_body !== null){
-				stringToReturn = stringToReturn.concat(" {%")
+				stringToReturn = stringToReturn.concat("{%")
 				if (jinjaStatement.else_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.else_block_sign)
 				stringToReturn = stringToReturn.concat(" else %}")
-				stringToReturn = stringToReturn.concat(" ").concat(compileValuePassed(jinjaStatement.else_body, space).toString())
+				stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.else_body, space, isInMultiLine).toString())
 			}
 			//the endif part
-			stringToReturn = stringToReturn.concat(" {%")
+			stringToReturn = stringToReturn.concat("{%")
 			if (jinjaStatement.endif_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.endif_block_sign)
 			stringToReturn = stringToReturn.concat(" endif %}")
 			return stringToReturn
@@ -773,20 +782,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			stringToReturn = stringToReturn.concat(" in ").concat(compileFilteredExpression(jinjaStatement.list, space))
 			//the filter, if present
 			if (jinjaStatement.condition !== null) stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.condition, space))
-			//the recursive keywork, if present
+			//the recursive keyword, if present
 			if (jinjaStatement.recursive !== null) stringToReturn = stringToReturn.concat(" recursive")
 			stringToReturn = stringToReturn.concat(" %}")
 			//body of the for
-			stringToReturn = stringToReturn.concat(" ").concat(compileValuePassed(jinjaStatement.for_body, space).toString())
+			stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.for_body, space, isInMultiLine).toString())
 			//the else block, if present
 			if (jinjaStatement.else_body !== null){
-				stringToReturn = stringToReturn.concat(" {%")
+				stringToReturn = stringToReturn.concat("{%")
 				if (jinjaStatement.else_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.else_block_sign)
 				stringToReturn = stringToReturn.concat(" else %}")
-				stringToReturn = stringToReturn.concat(" ").concat(compileValuePassed(jinjaStatement.else_body, space).toString())
+				stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.else_body, space, isInMultiLine).toString())
 			}
 			//the endfor part
-			stringToReturn = stringToReturn.concat(" {%")
+			stringToReturn = stringToReturn.concat("{%")
 			if (jinjaStatement.endfor_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.endfor_block_sign)
 			stringToReturn = stringToReturn.concat(" endfor %}")
 			return stringToReturn
@@ -837,8 +846,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileLoopList(EValuePassed loopList, String space){
-		if (loopList instanceof EJinjaExpressionAndString || loopList instanceof EList) return compileValuePassed(loopList, space)
-		else return "[".concat(compileValuePassed(loopList, space).toString()).concat("]")
+		if (loopList instanceof EJinjaExpressionAndString || loopList instanceof EList) return compileValuePassed(loopList, space, false)
+		else return "[".concat(compileValuePassed(loopList, space, false).toString()).concat("]")
 	}
 	
 	
@@ -861,7 +870,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (dictionary instanceof EDictionaryInLine){
 			var dictionaryString = '{'
 			for (dictionary_pair : dictionary.dictionary_pairs){
-				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space).toString()).concat(', ')
+				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space, false).toString()).concat(', ')
 			}
 			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
 			dictionaryString = dictionaryString.concat('}')
@@ -870,7 +879,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (dictionary instanceof EDictionaryIndented){
 			var dictionaryString = ""
 			for (dictionary_pair : dictionary.dictionary_pairs){
-				dictionaryString = dictionaryString.concat('\n').concat(space).concat("  ").concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space.concat("  ")).toString())
+				dictionaryString = dictionaryString.concat('\n').concat(space).concat("  ").concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space.concat("  "), false).toString())
 			}
 			return dictionaryString
 		}

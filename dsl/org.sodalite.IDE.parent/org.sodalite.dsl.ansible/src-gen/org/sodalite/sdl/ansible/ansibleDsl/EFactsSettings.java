@@ -97,12 +97,12 @@ public interface EFactsSettings extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fact path</em>' containment reference.
-   * @see #setFact_path(EJinjaExpressionAndString)
+   * @see #setFact_path(EStringPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Fact_path()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionAndString getFact_path();
+  EStringPassed getFact_path();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getFact_path <em>Fact path</em>}' containment reference.
@@ -112,6 +112,6 @@ public interface EFactsSettings extends EObject
    * @see #getFact_path()
    * @generated
    */
-  void setFact_path(EJinjaExpressionAndString value);
+  void setFact_path(EStringPassed value);
 
 } // EFactsSettings
