@@ -9,10 +9,7 @@ Model:
 
 EPlaybook:
 	'playbook_name:' name=STRING
-	('used_by:'
-	BEGIN
-		used_by=EUsedByBody
-	END)?
+	(used_by=EUsedByBody)?
 	'plays:'
 	BEGIN
 		(plays+=EPlay+)
@@ -20,8 +17,13 @@ EPlaybook:
 ;
 
 EUsedByBody:
-	'node_type:' node_type=[rm::ENodeType|STRING]
-	'operation:' operation=[rm::EOperationDefinition|STRING]
+	'used_by:'
+	BEGIN
+	(
+		'node_type:' node_type=[rm::ENodeType|STRING]
+		'operation:' operation=[rm::EOperationDefinition|STRING]
+	)
+	END
 ;
 
 EBase:
@@ -532,7 +534,7 @@ EIsExpression:
 ;
 
 EParenthesisedExpression:
-	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EFilteredExpression ')') (square_bracket_elements+=ESquareBracketElement)* ('.' tail+=ETailElement)*
+	(basic_value=EValuePassedToJinjaExpression | '(' parenthesised_term=EJinjaExpressionEvaluationWithoutBrackets ')') (square_bracket_elements+=ESquareBracketElement)* ('.' tail+=ETailElement)*
 ;
 
 EJinjaStatement:

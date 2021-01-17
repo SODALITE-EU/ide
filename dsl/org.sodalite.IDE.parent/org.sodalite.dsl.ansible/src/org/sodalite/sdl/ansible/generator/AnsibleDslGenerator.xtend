@@ -658,7 +658,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression, String space){
 		var stringToReturn = ""
 		if (parenthesisedExpression.basic_value !== null) stringToReturn = stringToReturn.concat(compileValuePassedToJinjaExpression(parenthesisedExpression.basic_value, space))
-		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(compileFilteredExpression(parenthesisedExpression.parenthesised_term, space).toString()).concat(")")
+		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(compileJinjaExpressionEvaluationWithoutBrackets(parenthesisedExpression.parenthesised_term, space).toString()).concat(")")
 		for (squareBracketElement : parenthesisedExpression.square_bracket_elements){
 			stringToReturn = stringToReturn.concat(squareBracketElement.compileSquareBracketElement)
 		}

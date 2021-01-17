@@ -356,7 +356,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EParenthesisedExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="basic_value" eType="#//EValuePassedToJinjaExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EFilteredExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parenthesised_term" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>

@@ -75,8 +75,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEBooleanPassedAccess().getAlternatives(), "rule__EBooleanPassed__Alternatives");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getAlternatives(), "rule__EBooleanAnsible__Alternatives");
 			builder.put(grammarAccess.getEPlaybookAccess().getGroup(), "rule__EPlaybook__Group__0");
-			builder.put(grammarAccess.getEPlaybookAccess().getGroup_2(), "rule__EPlaybook__Group_2__0");
 			builder.put(grammarAccess.getEUsedByBodyAccess().getGroup(), "rule__EUsedByBody__Group__0");
+			builder.put(grammarAccess.getEUsedByBodyAccess().getGroup_2(), "rule__EUsedByBody__Group_2__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup(), "rule__EPlay__Group__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup_3_0(), "rule__EPlay__Group_3_0__0");
 			builder.put(grammarAccess.getEPlayAccess().getGroup_3_1(), "rule__EPlay__Group_3_1__0");
@@ -272,10 +272,10 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEListIndentedAccess().getGroup_1(), "rule__EListIndented__Group_1__0");
 			builder.put(grammarAccess.getEEmptyCurlyBracesAccess().getGroup(), "rule__EEmptyCurlyBraces__Group__0");
 			builder.put(grammarAccess.getEPlaybookAccess().getNameAssignment_1(), "rule__EPlaybook__NameAssignment_1");
-			builder.put(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2_2(), "rule__EPlaybook__Used_byAssignment_2_2");
+			builder.put(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2(), "rule__EPlaybook__Used_byAssignment_2");
 			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_5(), "rule__EPlaybook__PlaysAssignment_5");
-			builder.put(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_1(), "rule__EUsedByBody__Node_typeAssignment_1");
-			builder.put(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_3(), "rule__EUsedByBody__OperationAssignment_3");
+			builder.put(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_2_1(), "rule__EUsedByBody__Node_typeAssignment_2_1");
+			builder.put(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_2_3(), "rule__EUsedByBody__OperationAssignment_2_3");
 			builder.put(grammarAccess.getEPlayAccess().getNameAssignment_3_0_1(), "rule__EPlay__NameAssignment_3_0_1");
 			builder.put(grammarAccess.getEPlayAccess().getHostsAssignment_3_1_1(), "rule__EPlay__HostsAssignment_3_1_1");
 			builder.put(grammarAccess.getEPlayAccess().getPrivilege_escalationAssignment_3_2(), "rule__EPlay__Privilege_escalationAssignment_3_2");

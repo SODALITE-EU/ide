@@ -11137,20 +11137,20 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EPlaybook__Group__2__Impl"
-    // InternalAnsibleDslParser.g:3400:1: rule__EPlaybook__Group__2__Impl : ( ( rule__EPlaybook__Group_2__0 )? ) ;
+    // InternalAnsibleDslParser.g:3400:1: rule__EPlaybook__Group__2__Impl : ( ( rule__EPlaybook__Used_byAssignment_2 )? ) ;
     public final void rule__EPlaybook__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3404:1: ( ( ( rule__EPlaybook__Group_2__0 )? ) )
-            // InternalAnsibleDslParser.g:3405:1: ( ( rule__EPlaybook__Group_2__0 )? )
+            // InternalAnsibleDslParser.g:3404:1: ( ( ( rule__EPlaybook__Used_byAssignment_2 )? ) )
+            // InternalAnsibleDslParser.g:3405:1: ( ( rule__EPlaybook__Used_byAssignment_2 )? )
             {
-            // InternalAnsibleDslParser.g:3405:1: ( ( rule__EPlaybook__Group_2__0 )? )
-            // InternalAnsibleDslParser.g:3406:2: ( rule__EPlaybook__Group_2__0 )?
+            // InternalAnsibleDslParser.g:3405:1: ( ( rule__EPlaybook__Used_byAssignment_2 )? )
+            // InternalAnsibleDslParser.g:3406:2: ( rule__EPlaybook__Used_byAssignment_2 )?
             {
-             before(grammarAccess.getEPlaybookAccess().getGroup_2()); 
-            // InternalAnsibleDslParser.g:3407:2: ( rule__EPlaybook__Group_2__0 )?
+             before(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2()); 
+            // InternalAnsibleDslParser.g:3407:2: ( rule__EPlaybook__Used_byAssignment_2 )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -11159,10 +11159,10 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             }
             switch (alt40) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:3407:3: rule__EPlaybook__Group_2__0
+                    // InternalAnsibleDslParser.g:3407:3: rule__EPlaybook__Used_byAssignment_2
                     {
                     pushFollow(FOLLOW_2);
-                    rule__EPlaybook__Group_2__0();
+                    rule__EPlaybook__Used_byAssignment_2();
 
                     state._fsp--;
 
@@ -11172,7 +11172,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
             }
 
-             after(grammarAccess.getEPlaybookAccess().getGroup_2()); 
+             after(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2()); 
 
             }
 
@@ -11542,322 +11542,17 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__EPlaybook__Group__6__Impl"
 
 
-    // $ANTLR start "rule__EPlaybook__Group_2__0"
-    // InternalAnsibleDslParser.g:3530:1: rule__EPlaybook__Group_2__0 : rule__EPlaybook__Group_2__0__Impl rule__EPlaybook__Group_2__1 ;
-    public final void rule__EPlaybook__Group_2__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3534:1: ( rule__EPlaybook__Group_2__0__Impl rule__EPlaybook__Group_2__1 )
-            // InternalAnsibleDslParser.g:3535:2: rule__EPlaybook__Group_2__0__Impl rule__EPlaybook__Group_2__1
-            {
-            pushFollow(FOLLOW_6);
-            rule__EPlaybook__Group_2__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__EPlaybook__Group_2__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__0"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__0__Impl"
-    // InternalAnsibleDslParser.g:3542:1: rule__EPlaybook__Group_2__0__Impl : ( Used_by ) ;
-    public final void rule__EPlaybook__Group_2__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3546:1: ( ( Used_by ) )
-            // InternalAnsibleDslParser.g:3547:1: ( Used_by )
-            {
-            // InternalAnsibleDslParser.g:3547:1: ( Used_by )
-            // InternalAnsibleDslParser.g:3548:2: Used_by
-            {
-             before(grammarAccess.getEPlaybookAccess().getUsed_byKeyword_2_0()); 
-            match(input,Used_by,FOLLOW_2); 
-             after(grammarAccess.getEPlaybookAccess().getUsed_byKeyword_2_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__0__Impl"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__1"
-    // InternalAnsibleDslParser.g:3557:1: rule__EPlaybook__Group_2__1 : rule__EPlaybook__Group_2__1__Impl rule__EPlaybook__Group_2__2 ;
-    public final void rule__EPlaybook__Group_2__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3561:1: ( rule__EPlaybook__Group_2__1__Impl rule__EPlaybook__Group_2__2 )
-            // InternalAnsibleDslParser.g:3562:2: rule__EPlaybook__Group_2__1__Impl rule__EPlaybook__Group_2__2
-            {
-            pushFollow(FOLLOW_10);
-            rule__EPlaybook__Group_2__1__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__EPlaybook__Group_2__2();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__1"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__1__Impl"
-    // InternalAnsibleDslParser.g:3569:1: rule__EPlaybook__Group_2__1__Impl : ( RULE_BEGIN ) ;
-    public final void rule__EPlaybook__Group_2__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3573:1: ( ( RULE_BEGIN ) )
-            // InternalAnsibleDslParser.g:3574:1: ( RULE_BEGIN )
-            {
-            // InternalAnsibleDslParser.g:3574:1: ( RULE_BEGIN )
-            // InternalAnsibleDslParser.g:3575:2: RULE_BEGIN
-            {
-             before(grammarAccess.getEPlaybookAccess().getBEGINTerminalRuleCall_2_1()); 
-            match(input,RULE_BEGIN,FOLLOW_2); 
-             after(grammarAccess.getEPlaybookAccess().getBEGINTerminalRuleCall_2_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__1__Impl"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__2"
-    // InternalAnsibleDslParser.g:3584:1: rule__EPlaybook__Group_2__2 : rule__EPlaybook__Group_2__2__Impl rule__EPlaybook__Group_2__3 ;
-    public final void rule__EPlaybook__Group_2__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3588:1: ( rule__EPlaybook__Group_2__2__Impl rule__EPlaybook__Group_2__3 )
-            // InternalAnsibleDslParser.g:3589:2: rule__EPlaybook__Group_2__2__Impl rule__EPlaybook__Group_2__3
-            {
-            pushFollow(FOLLOW_8);
-            rule__EPlaybook__Group_2__2__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__EPlaybook__Group_2__3();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__2"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__2__Impl"
-    // InternalAnsibleDslParser.g:3596:1: rule__EPlaybook__Group_2__2__Impl : ( ( rule__EPlaybook__Used_byAssignment_2_2 ) ) ;
-    public final void rule__EPlaybook__Group_2__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3600:1: ( ( ( rule__EPlaybook__Used_byAssignment_2_2 ) ) )
-            // InternalAnsibleDslParser.g:3601:1: ( ( rule__EPlaybook__Used_byAssignment_2_2 ) )
-            {
-            // InternalAnsibleDslParser.g:3601:1: ( ( rule__EPlaybook__Used_byAssignment_2_2 ) )
-            // InternalAnsibleDslParser.g:3602:2: ( rule__EPlaybook__Used_byAssignment_2_2 )
-            {
-             before(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2_2()); 
-            // InternalAnsibleDslParser.g:3603:2: ( rule__EPlaybook__Used_byAssignment_2_2 )
-            // InternalAnsibleDslParser.g:3603:3: rule__EPlaybook__Used_byAssignment_2_2
-            {
-            pushFollow(FOLLOW_2);
-            rule__EPlaybook__Used_byAssignment_2_2();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__2__Impl"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__3"
-    // InternalAnsibleDslParser.g:3611:1: rule__EPlaybook__Group_2__3 : rule__EPlaybook__Group_2__3__Impl ;
-    public final void rule__EPlaybook__Group_2__3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3615:1: ( rule__EPlaybook__Group_2__3__Impl )
-            // InternalAnsibleDslParser.g:3616:2: rule__EPlaybook__Group_2__3__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__EPlaybook__Group_2__3__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__3"
-
-
-    // $ANTLR start "rule__EPlaybook__Group_2__3__Impl"
-    // InternalAnsibleDslParser.g:3622:1: rule__EPlaybook__Group_2__3__Impl : ( RULE_END ) ;
-    public final void rule__EPlaybook__Group_2__3__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalAnsibleDslParser.g:3626:1: ( ( RULE_END ) )
-            // InternalAnsibleDslParser.g:3627:1: ( RULE_END )
-            {
-            // InternalAnsibleDslParser.g:3627:1: ( RULE_END )
-            // InternalAnsibleDslParser.g:3628:2: RULE_END
-            {
-             before(grammarAccess.getEPlaybookAccess().getENDTerminalRuleCall_2_3()); 
-            match(input,RULE_END,FOLLOW_2); 
-             after(grammarAccess.getEPlaybookAccess().getENDTerminalRuleCall_2_3()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__EPlaybook__Group_2__3__Impl"
-
-
     // $ANTLR start "rule__EUsedByBody__Group__0"
-    // InternalAnsibleDslParser.g:3638:1: rule__EUsedByBody__Group__0 : rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1 ;
+    // InternalAnsibleDslParser.g:3530:1: rule__EUsedByBody__Group__0 : rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1 ;
     public final void rule__EUsedByBody__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3642:1: ( rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1 )
-            // InternalAnsibleDslParser.g:3643:2: rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1
+            // InternalAnsibleDslParser.g:3534:1: ( rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1 )
+            // InternalAnsibleDslParser.g:3535:2: rule__EUsedByBody__Group__0__Impl rule__EUsedByBody__Group__1
             {
-            pushFollow(FOLLOW_4);
+            pushFollow(FOLLOW_6);
             rule__EUsedByBody__Group__0__Impl();
 
             state._fsp--;
@@ -11886,21 +11581,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__0__Impl"
-    // InternalAnsibleDslParser.g:3650:1: rule__EUsedByBody__Group__0__Impl : ( Node_type ) ;
+    // InternalAnsibleDslParser.g:3542:1: rule__EUsedByBody__Group__0__Impl : ( Used_by ) ;
     public final void rule__EUsedByBody__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3654:1: ( ( Node_type ) )
-            // InternalAnsibleDslParser.g:3655:1: ( Node_type )
+            // InternalAnsibleDslParser.g:3546:1: ( ( Used_by ) )
+            // InternalAnsibleDslParser.g:3547:1: ( Used_by )
             {
-            // InternalAnsibleDslParser.g:3655:1: ( Node_type )
-            // InternalAnsibleDslParser.g:3656:2: Node_type
+            // InternalAnsibleDslParser.g:3547:1: ( Used_by )
+            // InternalAnsibleDslParser.g:3548:2: Used_by
             {
-             before(grammarAccess.getEUsedByBodyAccess().getNode_typeKeyword_0()); 
-            match(input,Node_type,FOLLOW_2); 
-             after(grammarAccess.getEUsedByBodyAccess().getNode_typeKeyword_0()); 
+             before(grammarAccess.getEUsedByBodyAccess().getUsed_byKeyword_0()); 
+            match(input,Used_by,FOLLOW_2); 
+             after(grammarAccess.getEUsedByBodyAccess().getUsed_byKeyword_0()); 
 
             }
 
@@ -11923,16 +11618,16 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__1"
-    // InternalAnsibleDslParser.g:3665:1: rule__EUsedByBody__Group__1 : rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2 ;
+    // InternalAnsibleDslParser.g:3557:1: rule__EUsedByBody__Group__1 : rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2 ;
     public final void rule__EUsedByBody__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3669:1: ( rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2 )
-            // InternalAnsibleDslParser.g:3670:2: rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2
+            // InternalAnsibleDslParser.g:3561:1: ( rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2 )
+            // InternalAnsibleDslParser.g:3562:2: rule__EUsedByBody__Group__1__Impl rule__EUsedByBody__Group__2
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__EUsedByBody__Group__1__Impl();
 
             state._fsp--;
@@ -11961,31 +11656,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__1__Impl"
-    // InternalAnsibleDslParser.g:3677:1: rule__EUsedByBody__Group__1__Impl : ( ( rule__EUsedByBody__Node_typeAssignment_1 ) ) ;
+    // InternalAnsibleDslParser.g:3569:1: rule__EUsedByBody__Group__1__Impl : ( RULE_BEGIN ) ;
     public final void rule__EUsedByBody__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3681:1: ( ( ( rule__EUsedByBody__Node_typeAssignment_1 ) ) )
-            // InternalAnsibleDslParser.g:3682:1: ( ( rule__EUsedByBody__Node_typeAssignment_1 ) )
+            // InternalAnsibleDslParser.g:3573:1: ( ( RULE_BEGIN ) )
+            // InternalAnsibleDslParser.g:3574:1: ( RULE_BEGIN )
             {
-            // InternalAnsibleDslParser.g:3682:1: ( ( rule__EUsedByBody__Node_typeAssignment_1 ) )
-            // InternalAnsibleDslParser.g:3683:2: ( rule__EUsedByBody__Node_typeAssignment_1 )
+            // InternalAnsibleDslParser.g:3574:1: ( RULE_BEGIN )
+            // InternalAnsibleDslParser.g:3575:2: RULE_BEGIN
             {
-             before(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_1()); 
-            // InternalAnsibleDslParser.g:3684:2: ( rule__EUsedByBody__Node_typeAssignment_1 )
-            // InternalAnsibleDslParser.g:3684:3: rule__EUsedByBody__Node_typeAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__EUsedByBody__Node_typeAssignment_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_1()); 
+             before(grammarAccess.getEUsedByBodyAccess().getBEGINTerminalRuleCall_1()); 
+            match(input,RULE_BEGIN,FOLLOW_2); 
+             after(grammarAccess.getEUsedByBodyAccess().getBEGINTerminalRuleCall_1()); 
 
             }
 
@@ -12008,16 +11693,16 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__2"
-    // InternalAnsibleDslParser.g:3692:1: rule__EUsedByBody__Group__2 : rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3 ;
+    // InternalAnsibleDslParser.g:3584:1: rule__EUsedByBody__Group__2 : rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3 ;
     public final void rule__EUsedByBody__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3696:1: ( rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3 )
-            // InternalAnsibleDslParser.g:3697:2: rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3
+            // InternalAnsibleDslParser.g:3588:1: ( rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3 )
+            // InternalAnsibleDslParser.g:3589:2: rule__EUsedByBody__Group__2__Impl rule__EUsedByBody__Group__3
             {
-            pushFollow(FOLLOW_4);
+            pushFollow(FOLLOW_8);
             rule__EUsedByBody__Group__2__Impl();
 
             state._fsp--;
@@ -12046,21 +11731,31 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__2__Impl"
-    // InternalAnsibleDslParser.g:3704:1: rule__EUsedByBody__Group__2__Impl : ( Operation ) ;
+    // InternalAnsibleDslParser.g:3596:1: rule__EUsedByBody__Group__2__Impl : ( ( rule__EUsedByBody__Group_2__0 ) ) ;
     public final void rule__EUsedByBody__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3708:1: ( ( Operation ) )
-            // InternalAnsibleDslParser.g:3709:1: ( Operation )
+            // InternalAnsibleDslParser.g:3600:1: ( ( ( rule__EUsedByBody__Group_2__0 ) ) )
+            // InternalAnsibleDslParser.g:3601:1: ( ( rule__EUsedByBody__Group_2__0 ) )
             {
-            // InternalAnsibleDslParser.g:3709:1: ( Operation )
-            // InternalAnsibleDslParser.g:3710:2: Operation
+            // InternalAnsibleDslParser.g:3601:1: ( ( rule__EUsedByBody__Group_2__0 ) )
+            // InternalAnsibleDslParser.g:3602:2: ( rule__EUsedByBody__Group_2__0 )
             {
-             before(grammarAccess.getEUsedByBodyAccess().getOperationKeyword_2()); 
-            match(input,Operation,FOLLOW_2); 
-             after(grammarAccess.getEUsedByBodyAccess().getOperationKeyword_2()); 
+             before(grammarAccess.getEUsedByBodyAccess().getGroup_2()); 
+            // InternalAnsibleDslParser.g:3603:2: ( rule__EUsedByBody__Group_2__0 )
+            // InternalAnsibleDslParser.g:3603:3: rule__EUsedByBody__Group_2__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Group_2__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getEUsedByBodyAccess().getGroup_2()); 
 
             }
 
@@ -12083,14 +11778,14 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__3"
-    // InternalAnsibleDslParser.g:3719:1: rule__EUsedByBody__Group__3 : rule__EUsedByBody__Group__3__Impl ;
+    // InternalAnsibleDslParser.g:3611:1: rule__EUsedByBody__Group__3 : rule__EUsedByBody__Group__3__Impl ;
     public final void rule__EUsedByBody__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3723:1: ( rule__EUsedByBody__Group__3__Impl )
-            // InternalAnsibleDslParser.g:3724:2: rule__EUsedByBody__Group__3__Impl
+            // InternalAnsibleDslParser.g:3615:1: ( rule__EUsedByBody__Group__3__Impl )
+            // InternalAnsibleDslParser.g:3616:2: rule__EUsedByBody__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__EUsedByBody__Group__3__Impl();
@@ -12116,31 +11811,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUsedByBody__Group__3__Impl"
-    // InternalAnsibleDslParser.g:3730:1: rule__EUsedByBody__Group__3__Impl : ( ( rule__EUsedByBody__OperationAssignment_3 ) ) ;
+    // InternalAnsibleDslParser.g:3622:1: rule__EUsedByBody__Group__3__Impl : ( RULE_END ) ;
     public final void rule__EUsedByBody__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:3734:1: ( ( ( rule__EUsedByBody__OperationAssignment_3 ) ) )
-            // InternalAnsibleDslParser.g:3735:1: ( ( rule__EUsedByBody__OperationAssignment_3 ) )
+            // InternalAnsibleDslParser.g:3626:1: ( ( RULE_END ) )
+            // InternalAnsibleDslParser.g:3627:1: ( RULE_END )
             {
-            // InternalAnsibleDslParser.g:3735:1: ( ( rule__EUsedByBody__OperationAssignment_3 ) )
-            // InternalAnsibleDslParser.g:3736:2: ( rule__EUsedByBody__OperationAssignment_3 )
+            // InternalAnsibleDslParser.g:3627:1: ( RULE_END )
+            // InternalAnsibleDslParser.g:3628:2: RULE_END
             {
-             before(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_3()); 
-            // InternalAnsibleDslParser.g:3737:2: ( rule__EUsedByBody__OperationAssignment_3 )
-            // InternalAnsibleDslParser.g:3737:3: rule__EUsedByBody__OperationAssignment_3
-            {
-            pushFollow(FOLLOW_2);
-            rule__EUsedByBody__OperationAssignment_3();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_3()); 
+             before(grammarAccess.getEUsedByBodyAccess().getENDTerminalRuleCall_3()); 
+            match(input,RULE_END,FOLLOW_2); 
+             after(grammarAccess.getEUsedByBodyAccess().getENDTerminalRuleCall_3()); 
 
             }
 
@@ -12160,6 +11845,321 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         return ;
     }
     // $ANTLR end "rule__EUsedByBody__Group__3__Impl"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__0"
+    // InternalAnsibleDslParser.g:3638:1: rule__EUsedByBody__Group_2__0 : rule__EUsedByBody__Group_2__0__Impl rule__EUsedByBody__Group_2__1 ;
+    public final void rule__EUsedByBody__Group_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3642:1: ( rule__EUsedByBody__Group_2__0__Impl rule__EUsedByBody__Group_2__1 )
+            // InternalAnsibleDslParser.g:3643:2: rule__EUsedByBody__Group_2__0__Impl rule__EUsedByBody__Group_2__1
+            {
+            pushFollow(FOLLOW_4);
+            rule__EUsedByBody__Group_2__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Group_2__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__0"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__0__Impl"
+    // InternalAnsibleDslParser.g:3650:1: rule__EUsedByBody__Group_2__0__Impl : ( Node_type ) ;
+    public final void rule__EUsedByBody__Group_2__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3654:1: ( ( Node_type ) )
+            // InternalAnsibleDslParser.g:3655:1: ( Node_type )
+            {
+            // InternalAnsibleDslParser.g:3655:1: ( Node_type )
+            // InternalAnsibleDslParser.g:3656:2: Node_type
+            {
+             before(grammarAccess.getEUsedByBodyAccess().getNode_typeKeyword_2_0()); 
+            match(input,Node_type,FOLLOW_2); 
+             after(grammarAccess.getEUsedByBodyAccess().getNode_typeKeyword_2_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__0__Impl"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__1"
+    // InternalAnsibleDslParser.g:3665:1: rule__EUsedByBody__Group_2__1 : rule__EUsedByBody__Group_2__1__Impl rule__EUsedByBody__Group_2__2 ;
+    public final void rule__EUsedByBody__Group_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3669:1: ( rule__EUsedByBody__Group_2__1__Impl rule__EUsedByBody__Group_2__2 )
+            // InternalAnsibleDslParser.g:3670:2: rule__EUsedByBody__Group_2__1__Impl rule__EUsedByBody__Group_2__2
+            {
+            pushFollow(FOLLOW_11);
+            rule__EUsedByBody__Group_2__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Group_2__2();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__1"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__1__Impl"
+    // InternalAnsibleDslParser.g:3677:1: rule__EUsedByBody__Group_2__1__Impl : ( ( rule__EUsedByBody__Node_typeAssignment_2_1 ) ) ;
+    public final void rule__EUsedByBody__Group_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3681:1: ( ( ( rule__EUsedByBody__Node_typeAssignment_2_1 ) ) )
+            // InternalAnsibleDslParser.g:3682:1: ( ( rule__EUsedByBody__Node_typeAssignment_2_1 ) )
+            {
+            // InternalAnsibleDslParser.g:3682:1: ( ( rule__EUsedByBody__Node_typeAssignment_2_1 ) )
+            // InternalAnsibleDslParser.g:3683:2: ( rule__EUsedByBody__Node_typeAssignment_2_1 )
+            {
+             before(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_2_1()); 
+            // InternalAnsibleDslParser.g:3684:2: ( rule__EUsedByBody__Node_typeAssignment_2_1 )
+            // InternalAnsibleDslParser.g:3684:3: rule__EUsedByBody__Node_typeAssignment_2_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Node_typeAssignment_2_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getEUsedByBodyAccess().getNode_typeAssignment_2_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__1__Impl"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__2"
+    // InternalAnsibleDslParser.g:3692:1: rule__EUsedByBody__Group_2__2 : rule__EUsedByBody__Group_2__2__Impl rule__EUsedByBody__Group_2__3 ;
+    public final void rule__EUsedByBody__Group_2__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3696:1: ( rule__EUsedByBody__Group_2__2__Impl rule__EUsedByBody__Group_2__3 )
+            // InternalAnsibleDslParser.g:3697:2: rule__EUsedByBody__Group_2__2__Impl rule__EUsedByBody__Group_2__3
+            {
+            pushFollow(FOLLOW_4);
+            rule__EUsedByBody__Group_2__2__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Group_2__3();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__2"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__2__Impl"
+    // InternalAnsibleDslParser.g:3704:1: rule__EUsedByBody__Group_2__2__Impl : ( Operation ) ;
+    public final void rule__EUsedByBody__Group_2__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3708:1: ( ( Operation ) )
+            // InternalAnsibleDslParser.g:3709:1: ( Operation )
+            {
+            // InternalAnsibleDslParser.g:3709:1: ( Operation )
+            // InternalAnsibleDslParser.g:3710:2: Operation
+            {
+             before(grammarAccess.getEUsedByBodyAccess().getOperationKeyword_2_2()); 
+            match(input,Operation,FOLLOW_2); 
+             after(grammarAccess.getEUsedByBodyAccess().getOperationKeyword_2_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__2__Impl"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__3"
+    // InternalAnsibleDslParser.g:3719:1: rule__EUsedByBody__Group_2__3 : rule__EUsedByBody__Group_2__3__Impl ;
+    public final void rule__EUsedByBody__Group_2__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3723:1: ( rule__EUsedByBody__Group_2__3__Impl )
+            // InternalAnsibleDslParser.g:3724:2: rule__EUsedByBody__Group_2__3__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__Group_2__3__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__3"
+
+
+    // $ANTLR start "rule__EUsedByBody__Group_2__3__Impl"
+    // InternalAnsibleDslParser.g:3730:1: rule__EUsedByBody__Group_2__3__Impl : ( ( rule__EUsedByBody__OperationAssignment_2_3 ) ) ;
+    public final void rule__EUsedByBody__Group_2__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalAnsibleDslParser.g:3734:1: ( ( ( rule__EUsedByBody__OperationAssignment_2_3 ) ) )
+            // InternalAnsibleDslParser.g:3735:1: ( ( rule__EUsedByBody__OperationAssignment_2_3 ) )
+            {
+            // InternalAnsibleDslParser.g:3735:1: ( ( rule__EUsedByBody__OperationAssignment_2_3 ) )
+            // InternalAnsibleDslParser.g:3736:2: ( rule__EUsedByBody__OperationAssignment_2_3 )
+            {
+             before(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_2_3()); 
+            // InternalAnsibleDslParser.g:3737:2: ( rule__EUsedByBody__OperationAssignment_2_3 )
+            // InternalAnsibleDslParser.g:3737:3: rule__EUsedByBody__OperationAssignment_2_3
+            {
+            pushFollow(FOLLOW_2);
+            rule__EUsedByBody__OperationAssignment_2_3();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getEUsedByBodyAccess().getOperationAssignment_2_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__EUsedByBody__Group_2__3__Impl"
 
 
     // $ANTLR start "rule__EPlay__Group__0"
@@ -70059,9 +70059,9 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__EPlaybook__NameAssignment_1"
 
 
-    // $ANTLR start "rule__EPlaybook__Used_byAssignment_2_2"
-    // InternalAnsibleDslParser.g:22366:1: rule__EPlaybook__Used_byAssignment_2_2 : ( ruleEUsedByBody ) ;
-    public final void rule__EPlaybook__Used_byAssignment_2_2() throws RecognitionException {
+    // $ANTLR start "rule__EPlaybook__Used_byAssignment_2"
+    // InternalAnsibleDslParser.g:22366:1: rule__EPlaybook__Used_byAssignment_2 : ( ruleEUsedByBody ) ;
+    public final void rule__EPlaybook__Used_byAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -70072,13 +70072,13 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             // InternalAnsibleDslParser.g:22371:2: ( ruleEUsedByBody )
             // InternalAnsibleDslParser.g:22372:3: ruleEUsedByBody
             {
-             before(grammarAccess.getEPlaybookAccess().getUsed_byEUsedByBodyParserRuleCall_2_2_0()); 
+             before(grammarAccess.getEPlaybookAccess().getUsed_byEUsedByBodyParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
             ruleEUsedByBody();
 
             state._fsp--;
 
-             after(grammarAccess.getEPlaybookAccess().getUsed_byEUsedByBodyParserRuleCall_2_2_0()); 
+             after(grammarAccess.getEPlaybookAccess().getUsed_byEUsedByBodyParserRuleCall_2_0()); 
 
             }
 
@@ -70097,7 +70097,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EPlaybook__Used_byAssignment_2_2"
+    // $ANTLR end "rule__EPlaybook__Used_byAssignment_2"
 
 
     // $ANTLR start "rule__EPlaybook__PlaysAssignment_5"
@@ -70141,9 +70141,9 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__EPlaybook__PlaysAssignment_5"
 
 
-    // $ANTLR start "rule__EUsedByBody__Node_typeAssignment_1"
-    // InternalAnsibleDslParser.g:22396:1: rule__EUsedByBody__Node_typeAssignment_1 : ( ( RULE_STRING ) ) ;
-    public final void rule__EUsedByBody__Node_typeAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__EUsedByBody__Node_typeAssignment_2_1"
+    // InternalAnsibleDslParser.g:22396:1: rule__EUsedByBody__Node_typeAssignment_2_1 : ( ( RULE_STRING ) ) ;
+    public final void rule__EUsedByBody__Node_typeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -70154,17 +70154,17 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             // InternalAnsibleDslParser.g:22401:2: ( ( RULE_STRING ) )
             // InternalAnsibleDslParser.g:22402:3: ( RULE_STRING )
             {
-             before(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeCrossReference_1_0()); 
+             before(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeCrossReference_2_1_0()); 
             // InternalAnsibleDslParser.g:22403:3: ( RULE_STRING )
             // InternalAnsibleDslParser.g:22404:4: RULE_STRING
             {
-             before(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_1_0_1()); 
+             before(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_2_1_0_1()); 
             match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_1_0_1()); 
+             after(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_2_1_0_1()); 
 
             }
 
-             after(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeCrossReference_1_0()); 
+             after(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeCrossReference_2_1_0()); 
 
             }
 
@@ -70183,12 +70183,12 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EUsedByBody__Node_typeAssignment_1"
+    // $ANTLR end "rule__EUsedByBody__Node_typeAssignment_2_1"
 
 
-    // $ANTLR start "rule__EUsedByBody__OperationAssignment_3"
-    // InternalAnsibleDslParser.g:22415:1: rule__EUsedByBody__OperationAssignment_3 : ( ( RULE_STRING ) ) ;
-    public final void rule__EUsedByBody__OperationAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__EUsedByBody__OperationAssignment_2_3"
+    // InternalAnsibleDslParser.g:22415:1: rule__EUsedByBody__OperationAssignment_2_3 : ( ( RULE_STRING ) ) ;
+    public final void rule__EUsedByBody__OperationAssignment_2_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -70199,17 +70199,17 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             // InternalAnsibleDslParser.g:22420:2: ( ( RULE_STRING ) )
             // InternalAnsibleDslParser.g:22421:3: ( RULE_STRING )
             {
-             before(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionCrossReference_3_0()); 
+             before(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionCrossReference_2_3_0()); 
             // InternalAnsibleDslParser.g:22422:3: ( RULE_STRING )
             // InternalAnsibleDslParser.g:22423:4: RULE_STRING
             {
-             before(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_3_0_1()); 
+             before(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_2_3_0_1()); 
             match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_3_0_1()); 
+             after(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_2_3_0_1()); 
 
             }
 
-             after(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionCrossReference_3_0()); 
+             after(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionCrossReference_2_3_0()); 
 
             }
 
@@ -70228,7 +70228,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EUsedByBody__OperationAssignment_3"
+    // $ANTLR end "rule__EUsedByBody__OperationAssignment_2_3"
 
 
     // $ANTLR start "rule__EPlay__NameAssignment_3_0_1"
@@ -78529,25 +78529,25 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1"
-    // InternalAnsibleDslParser.g:25499:1: rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1 : ( ruleEFilteredExpression ) ;
+    // InternalAnsibleDslParser.g:25499:1: rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1 : ( ruleEJinjaExpressionEvaluationWithoutBrackets ) ;
     public final void rule__EParenthesisedExpression__Parenthesised_termAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:25503:1: ( ( ruleEFilteredExpression ) )
-            // InternalAnsibleDslParser.g:25504:2: ( ruleEFilteredExpression )
+            // InternalAnsibleDslParser.g:25503:1: ( ( ruleEJinjaExpressionEvaluationWithoutBrackets ) )
+            // InternalAnsibleDslParser.g:25504:2: ( ruleEJinjaExpressionEvaluationWithoutBrackets )
             {
-            // InternalAnsibleDslParser.g:25504:2: ( ruleEFilteredExpression )
-            // InternalAnsibleDslParser.g:25505:3: ruleEFilteredExpression
+            // InternalAnsibleDslParser.g:25504:2: ( ruleEJinjaExpressionEvaluationWithoutBrackets )
+            // InternalAnsibleDslParser.g:25505:3: ruleEJinjaExpressionEvaluationWithoutBrackets
             {
-             before(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termEFilteredExpressionParserRuleCall_0_1_1_0()); 
+             before(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_0_1_1_0()); 
             pushFollow(FOLLOW_2);
-            ruleEFilteredExpression();
+            ruleEJinjaExpressionEvaluationWithoutBrackets();
 
             state._fsp--;
 
-             after(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termEFilteredExpressionParserRuleCall_0_1_1_0()); 
+             after(grammarAccess.getEParenthesisedExpressionAccess().getParenthesised_termEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_0_1_1_0()); 
 
             }
 

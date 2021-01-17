@@ -149,6 +149,16 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"	- loop_var   -> identifier of the var\n"+
 	"	- extended   -> bool"
 	
+	final String USED_BY_DESCRIPTION =
+	"This is the bridge between this Ansible model and the TOSCA RM.\n\n"+
+	"Here it can be defined which is the TOSCA operation that will use this\n"+
+	"playbook for its implementation.\n\n"+
+	"The attributes that can be set are (they are both strings):\n\n"+
+	"	- node_type: the node type containing the operation.\n"+
+	"	- operation: the operation that uses this playbook for its implementation\n."+
+	"			The operation must be contained in an interface of the selected\n"+
+	"			node type."
+	
 	final String PLAYBOOK_INCLUSION_DESCRIPTION =
 	"This is used for importing a playbook yaml file.\n\n"+
 	"The attributes that can be set are:\n\n"+
@@ -218,6 +228,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	override void complete_EPlaybookInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("playbook_inclusion:", new StyledString("playbook_inclusion:"), context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
+	}
+	
+	override void complete_EUsedByBody(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("used_by:", new StyledString("used_by:"), context, USED_BY_DESCRIPTION, acceptor)
 	}
 	
 	override void completeEPlaybookInclusion_Playbook_file_name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -331,22 +345,27 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 					for (input : inputsProperties.properties){
 						createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
 					}
-				}				
+				}
 			}
 
 		}
 	}
 	
 	override void completeEUsedByBody_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val useByBody = EcoreUtil2.getContainerOfType(model, EUsedByBodyImpl)
-		val nodeType = useByBody.node_type
-			if (nodeType !== null){
-				val candidatesOperation = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
-				for (candidate: candidatesOperation){
-					val interfaceDefinition = EcoreUtil2.getContainerOfType(candidate, EInterfaceDefinitionImpl)
-					createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(interfaceDefinition.name, StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor)
+		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (playbook !== null){
+			val usedByBody = playbook.used_by
+			if (usedByBody !== null){
+				val nodeType = usedByBody.node_type
+				if (nodeType !== null){
+					val candidatesOperation = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
+					for (candidate: candidatesOperation){
+						val interfaceDefinition = EcoreUtil2.getContainerOfType(candidate, EInterfaceDefinitionImpl)
+						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(interfaceDefinition.name, StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor)
+					}
 				}
-			}		
+			}
+		}
 	}
 	
 	//the suggested topics to which listen to are only the once defined in the current play
@@ -375,6 +394,64 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		lookups.add("random_choice")
 		
 		for (lookup : lookups) acceptor.accept(createCompletionProposal(lookup, context))
+	}
+	
+	//suggest the "special variables": the ones described here: https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+	//even if not listed in the web site linked above, "item" is suggested here as well
+	override void completeESpecialVariable_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var specialVariables = new ArrayList<String>
+		specialVariables.add("item")
+		//"magic variables" (see web site linked above)
+		specialVariables.add("ansible_check_mode")
+		specialVariables.add("ansible_config_file")
+		specialVariables.add("ansible_dependent_role_names")
+		specialVariables.add("ansible_diff_mode")
+		specialVariables.add("ansible_forks")
+		specialVariables.add("ansible_inventory_sources")
+		specialVariables.add("ansible_limit")
+		specialVariables.add("ansible_loop")
+		specialVariables.add("ansible_loop_var")
+		specialVariables.add("ansible_index_var")
+		specialVariables.add("ansible_parent_role_names")
+		specialVariables.add("ansible_parent_role_paths")
+		specialVariables.add("ansible_play_batch")
+		specialVariables.add("ansible_play_hosts")
+		specialVariables.add("ansible_play_hosts_all")
+		specialVariables.add("ansible_play_roles_names")
+		specialVariables.add("ansible_playbook_python")
+		specialVariables.add("ansible_role_names")
+		specialVariables.add("ansible_role_name")
+		specialVariables.add("ansible_collection_name")
+		specialVariables.add("ansible_run_tags")
+		specialVariables.add("ansible_search_path")
+		specialVariables.add("ansible_skip_tags")
+		specialVariables.add("ansible_verbosity")
+		specialVariables.add("ansible_version")
+		specialVariables.add("group_names")
+		specialVariables.add("groups")
+		specialVariables.add("hostvars")
+		specialVariables.add("inventory_hostname")
+		specialVariables.add("inventory_hostname_short")
+		specialVariables.add("inventory_dir")
+		specialVariables.add("inventory_file")
+		specialVariables.add("omit")
+		specialVariables.add("play_hosts")
+		specialVariables.add("ansible_play_name")
+		specialVariables.add("playbook_dir")
+		specialVariables.add("role_name")
+		specialVariables.add("role_names")
+		specialVariables.add("role_path")
+		//"facts" (see web site linked above)
+		specialVariables.add("ansible_facts")
+		specialVariables.add("ansible_local")
+		//"connection variables" (see website linked above)
+		specialVariables.add("ansible_become_user")
+		specialVariables.add("ansible_connection")
+		specialVariables.add("ansible_host")
+		specialVariables.add("ansible_python_interpreter")
+		specialVariables.add("ansible_user")
+		
+		for (specialVariable : specialVariables) acceptor.accept(createCompletionProposal(specialVariable, context))
 	}
 	
 	def void createNonEditableCompletionProposal(String proposalText, StyledString displayText,

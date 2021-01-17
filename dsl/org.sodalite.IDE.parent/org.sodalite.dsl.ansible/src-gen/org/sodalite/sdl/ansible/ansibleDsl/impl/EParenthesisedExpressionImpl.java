@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
@@ -62,7 +62,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    * @ordered
    */
-  protected EFilteredExpression parenthesised_term;
+  protected EJinjaExpressionEvaluationWithoutBrackets parenthesised_term;
 
   /**
    * The cached value of the '{@link #getSquare_bracket_elements() <em>Square bracket elements</em>}' containment reference list.
@@ -161,7 +161,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public EFilteredExpression getParenthesised_term()
+  public EJinjaExpressionEvaluationWithoutBrackets getParenthesised_term()
   {
     return parenthesised_term;
   }
@@ -171,9 +171,9 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetParenthesised_term(EFilteredExpression newParenthesised_term, NotificationChain msgs)
+  public NotificationChain basicSetParenthesised_term(EJinjaExpressionEvaluationWithoutBrackets newParenthesised_term, NotificationChain msgs)
   {
-    EFilteredExpression oldParenthesised_term = parenthesised_term;
+    EJinjaExpressionEvaluationWithoutBrackets oldParenthesised_term = parenthesised_term;
     parenthesised_term = newParenthesised_term;
     if (eNotificationRequired())
     {
@@ -189,7 +189,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
    * @generated
    */
   @Override
-  public void setParenthesised_term(EFilteredExpression newParenthesised_term)
+  public void setParenthesised_term(EJinjaExpressionEvaluationWithoutBrackets newParenthesised_term)
   {
     if (newParenthesised_term != parenthesised_term)
     {
@@ -294,7 +294,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         setBasic_value((EValuePassedToJinjaExpression)newValue);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
-        setParenthesised_term((EFilteredExpression)newValue);
+        setParenthesised_term((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();
@@ -322,7 +322,7 @@ public class EParenthesisedExpressionImpl extends MinimalEObjectImpl.Container i
         setBasic_value((EValuePassedToJinjaExpression)null);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__PARENTHESISED_TERM:
-        setParenthesised_term((EFilteredExpression)null);
+        setParenthesised_term((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
       case AnsibleDslPackage.EPARENTHESISED_EXPRESSION__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();

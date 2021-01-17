@@ -1658,10 +1658,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if (_tripleNotEquals) {
       stringToReturn = stringToReturn.concat(this.compileValuePassedToJinjaExpression(parenthesisedExpression.getBasic_value(), space));
     } else {
-      EFilteredExpression _parenthesised_term = parenthesisedExpression.getParenthesised_term();
+      EJinjaExpressionEvaluationWithoutBrackets _parenthesised_term = parenthesisedExpression.getParenthesised_term();
       boolean _tripleNotEquals_1 = (_parenthesised_term != null);
       if (_tripleNotEquals_1) {
-        stringToReturn = stringToReturn.concat("(").concat(this.compileFilteredExpression(parenthesisedExpression.getParenthesised_term(), space).toString()).concat(")");
+        stringToReturn = stringToReturn.concat("(").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(parenthesisedExpression.getParenthesised_term(), space).toString()).concat(")");
       }
     }
     EList<ESquareBracketElement> _square_bracket_elements = parenthesisedExpression.getSquare_bracket_elements();

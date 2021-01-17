@@ -1043,7 +1043,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EFilteredExpression) 
+	 *         (basic_value=EValuePassedToJinjaExpression | parenthesised_term=EJinjaExpressionEvaluationWithoutBrackets) 
 	 *         square_bracket_elements+=ESquareBracketElement* 
 	 *         tail+=ETailElement*
 	 *     )
@@ -1440,8 +1440,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__NODE_TYPE, false));
-		feeder.accept(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_3_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION, false));
+		feeder.accept(grammarAccess.getEUsedByBodyAccess().getNode_typeENodeTypeSTRINGTerminalRuleCall_2_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__NODE_TYPE, false));
+		feeder.accept(grammarAccess.getEUsedByBodyAccess().getOperationEOperationDefinitionSTRINGTerminalRuleCall_2_3_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION, false));
 		feeder.finish();
 	}
 	

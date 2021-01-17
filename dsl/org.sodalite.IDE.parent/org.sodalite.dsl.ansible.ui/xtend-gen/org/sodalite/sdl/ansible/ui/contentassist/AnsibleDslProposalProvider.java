@@ -34,7 +34,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
 
@@ -144,6 +143,15 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "\t- loop_var   -> identifier of the var\n") + 
     "\t- extended   -> bool");
   
+  private final String USED_BY_DESCRIPTION = ((((((("This is the bridge between this Ansible model and the TOSCA RM.\n\n" + 
+    "Here it can be defined which is the TOSCA operation that will use this\n") + 
+    "playbook for its implementation.\n\n") + 
+    "The attributes that can be set are (they are both strings):\n\n") + 
+    "\t- node_type: the node type containing the operation.\n") + 
+    "\t- operation: the operation that uses this playbook for its implementation\n.") + 
+    "\t\t\tThe operation must be contained in an interface of the selected\n") + 
+    "\t\t\tnode type.");
+  
   private final String PLAYBOOK_INCLUSION_DESCRIPTION = ((("This is used for importing a playbook yaml file.\n\n" + 
     "The attributes that can be set are:\n\n") + 
     "\t- import_playbook   -> the name of the yaml file\n") + 
@@ -241,6 +249,12 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   public void complete_EPlaybookInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     StyledString _styledString = new StyledString("playbook_inclusion:");
     this.createNonEditableCompletionProposal("playbook_inclusion:", _styledString, context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
+  }
+  
+  @Override
+  public void complete_EUsedByBody(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    StyledString _styledString = new StyledString("used_by:");
+    this.createNonEditableCompletionProposal("used_by:", _styledString, context, this.USED_BY_DESCRIPTION, acceptor);
   }
   
   @Override
@@ -375,15 +389,20 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void completeEUsedByBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EUsedByBodyImpl useByBody = EcoreUtil2.<EUsedByBodyImpl>getContainerOfType(model, EUsedByBodyImpl.class);
-    final ENodeType nodeType = useByBody.getNode_type();
-    if ((nodeType != null)) {
-      final List<EOperationDefinitionImpl> candidatesOperation = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
-      for (final EOperationDefinitionImpl candidate : candidatesOperation) {
-        {
-          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(candidate, EInterfaceDefinitionImpl.class);
-          String _concat = candidate.getName().concat(" - Interface: ");
-          this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), new StyledString(_concat).append(interfaceDefinition.getName(), StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor);
+    final EPlaybookImpl playbook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    if ((playbook != null)) {
+      final EUsedByBody usedByBody = playbook.getUsed_by();
+      if ((usedByBody != null)) {
+        final ENodeType nodeType = usedByBody.getNode_type();
+        if ((nodeType != null)) {
+          final List<EOperationDefinitionImpl> candidatesOperation = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
+          for (final EOperationDefinitionImpl candidate : candidatesOperation) {
+            {
+              final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(candidate, EInterfaceDefinitionImpl.class);
+              String _concat = candidate.getName().concat(" - Interface: ");
+              this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), new StyledString(_concat).append(interfaceDefinition.getName(), StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor);
+            }
+          }
         }
       }
     }
@@ -416,6 +435,61 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     lookups.add("random_choice");
     for (final String lookup : lookups) {
       acceptor.accept(this.createCompletionProposal(lookup, context));
+    }
+  }
+  
+  @Override
+  public void completeESpecialVariable_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    ArrayList<String> specialVariables = new ArrayList<String>();
+    specialVariables.add("item");
+    specialVariables.add("ansible_check_mode");
+    specialVariables.add("ansible_config_file");
+    specialVariables.add("ansible_dependent_role_names");
+    specialVariables.add("ansible_diff_mode");
+    specialVariables.add("ansible_forks");
+    specialVariables.add("ansible_inventory_sources");
+    specialVariables.add("ansible_limit");
+    specialVariables.add("ansible_loop");
+    specialVariables.add("ansible_loop_var");
+    specialVariables.add("ansible_index_var");
+    specialVariables.add("ansible_parent_role_names");
+    specialVariables.add("ansible_parent_role_paths");
+    specialVariables.add("ansible_play_batch");
+    specialVariables.add("ansible_play_hosts");
+    specialVariables.add("ansible_play_hosts_all");
+    specialVariables.add("ansible_play_roles_names");
+    specialVariables.add("ansible_playbook_python");
+    specialVariables.add("ansible_role_names");
+    specialVariables.add("ansible_role_name");
+    specialVariables.add("ansible_collection_name");
+    specialVariables.add("ansible_run_tags");
+    specialVariables.add("ansible_search_path");
+    specialVariables.add("ansible_skip_tags");
+    specialVariables.add("ansible_verbosity");
+    specialVariables.add("ansible_version");
+    specialVariables.add("group_names");
+    specialVariables.add("groups");
+    specialVariables.add("hostvars");
+    specialVariables.add("inventory_hostname");
+    specialVariables.add("inventory_hostname_short");
+    specialVariables.add("inventory_dir");
+    specialVariables.add("inventory_file");
+    specialVariables.add("omit");
+    specialVariables.add("play_hosts");
+    specialVariables.add("ansible_play_name");
+    specialVariables.add("playbook_dir");
+    specialVariables.add("role_name");
+    specialVariables.add("role_names");
+    specialVariables.add("role_path");
+    specialVariables.add("ansible_facts");
+    specialVariables.add("ansible_local");
+    specialVariables.add("ansible_become_user");
+    specialVariables.add("ansible_connection");
+    specialVariables.add("ansible_host");
+    specialVariables.add("ansible_python_interpreter");
+    specialVariables.add("ansible_user");
+    for (final String specialVariable : specialVariables) {
+      acceptor.accept(this.createCompletionProposal(specialVariable, context));
     }
   }
   

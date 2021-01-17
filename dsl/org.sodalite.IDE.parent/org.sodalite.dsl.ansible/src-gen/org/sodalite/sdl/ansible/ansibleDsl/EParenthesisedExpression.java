@@ -55,12 +55,12 @@ public interface EParenthesisedExpression extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parenthesised term</em>' containment reference.
-   * @see #setParenthesised_term(EFilteredExpression)
+   * @see #setParenthesised_term(EJinjaExpressionEvaluationWithoutBrackets)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEParenthesisedExpression_Parenthesised_term()
    * @model containment="true"
    * @generated
    */
-  EFilteredExpression getParenthesised_term();
+  EJinjaExpressionEvaluationWithoutBrackets getParenthesised_term();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression#getParenthesised_term <em>Parenthesised term</em>}' containment reference.
@@ -70,7 +70,7 @@ public interface EParenthesisedExpression extends EObject
    * @see #getParenthesised_term()
    * @generated
    */
-  void setParenthesised_term(EFilteredExpression value);
+  void setParenthesised_term(EJinjaExpressionEvaluationWithoutBrackets value);
 
   /**
    * Returns the value of the '<em><b>Square bracket elements</b></em>' containment reference list.
