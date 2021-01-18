@@ -420,22 +420,22 @@ public interface AnsibleDslFactory extends EFactory
   EComposedValue createEComposedValue();
 
   /**
-   * Returns a new object of class '<em>EComposed Value In Line</em>'.
+   * Returns a new object of class '<em>EComposed Value Jinja</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EComposed Value In Line</em>'.
+   * @return a new object of class '<em>EComposed Value Jinja</em>'.
    * @generated
    */
-  EComposedValueInLine createEComposedValueInLine();
+  EComposedValueJinja createEComposedValueJinja();
 
   /**
-   * Returns a new object of class '<em>EValue In Line</em>'.
+   * Returns a new object of class '<em>EValue Jinja</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EValue In Line</em>'.
+   * @return a new object of class '<em>EValue Jinja</em>'.
    * @generated
    */
-  EValueInLine createEValueInLine();
+  EValueJinja createEValueJinja();
 
   /**
    * Returns a new object of class '<em>EValue Without String</em>'.
@@ -456,13 +456,13 @@ public interface AnsibleDslFactory extends EFactory
   ESimpleValueWithoutString createESimpleValueWithoutString();
 
   /**
-   * Returns a new object of class '<em>ESimple Value In Line</em>'.
+   * Returns a new object of class '<em>ESimple Value Jinja</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>ESimple Value In Line</em>'.
+   * @return a new object of class '<em>ESimple Value Jinja</em>'.
    * @generated
    */
-  ESimpleValueInLine createESimpleValueInLine();
+  ESimpleValueJinja createESimpleValueJinja();
 
   /**
    * Returns a new object of class '<em>EJinja Expression Evaluation</em>'.
@@ -483,13 +483,13 @@ public interface AnsibleDslFactory extends EFactory
   EJinjaExpressionEvaluationWithoutBrackets createEJinjaExpressionEvaluationWithoutBrackets();
 
   /**
-   * Returns a new object of class '<em>EFunction Call</em>'.
+   * Returns a new object of class '<em>EFunction Call Or Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EFunction Call</em>'.
+   * @return a new object of class '<em>EFunction Call Or Variable</em>'.
    * @generated
    */
-  EFunctionCall createEFunctionCall();
+  EFunctionCallOrVariable createEFunctionCallOrVariable();
 
   /**
    * Returns a new object of class '<em>EIf Block</em>'.
@@ -762,6 +762,24 @@ public interface AnsibleDslFactory extends EFactory
   EDictionaryPair createEDictionaryPair();
 
   /**
+   * Returns a new object of class '<em>EDictionary Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Jinja</em>'.
+   * @generated
+   */
+  EDictionaryJinja createEDictionaryJinja();
+
+  /**
+   * Returns a new object of class '<em>EDictionary Pair Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Pair Jinja</em>'.
+   * @generated
+   */
+  EDictionaryPairJinja createEDictionaryPairJinja();
+
+  /**
    * Returns a new object of class '<em>EList</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -787,6 +805,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EListIndented createEListIndented();
+
+  /**
+   * Returns a new object of class '<em>EList Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EList Jinja</em>'.
+   * @generated
+   */
+  EListJinja createEListJinja();
 
   /**
    * Returns a new object of class '<em>EDictionary Passed</em>'.
@@ -823,15 +850,6 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EBooleanPassed createEBooleanPassed();
-
-  /**
-   * Returns a new object of class '<em>EEmpty Curly Braces</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EEmpty Curly Braces</em>'.
-   * @generated
-   */
-  EEmptyCurlyBraces createEEmptyCurlyBraces();
 
   /**
    * Returns a new object of class '<em>EBoolean Ansible</em>'.

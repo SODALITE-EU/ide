@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
 
@@ -33,6 +33,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getFunction_call <em>Function call</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getNumber <em>Number</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  * </ul>
  *
@@ -48,7 +49,27 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    * @ordered
    */
-  protected EFunctionCall function_call;
+  protected EFunctionCallOrVariable function_call;
+
+  /**
+   * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNumber()
+   * @generated
+   * @ordered
+   */
+  protected static final String NUMBER_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNumber()
+   * @generated
+   * @ordered
+   */
+  protected String number = NUMBER_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getSquare_bracket_elements() <em>Square bracket elements</em>}' containment reference list.
@@ -87,7 +108,7 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public EFunctionCall getFunction_call()
+  public EFunctionCallOrVariable getFunction_call()
   {
     return function_call;
   }
@@ -97,9 +118,9 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFunction_call(EFunctionCall newFunction_call, NotificationChain msgs)
+  public NotificationChain basicSetFunction_call(EFunctionCallOrVariable newFunction_call, NotificationChain msgs)
   {
-    EFunctionCall oldFunction_call = function_call;
+    EFunctionCallOrVariable oldFunction_call = function_call;
     function_call = newFunction_call;
     if (eNotificationRequired())
     {
@@ -115,7 +136,7 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public void setFunction_call(EFunctionCall newFunction_call)
+  public void setFunction_call(EFunctionCallOrVariable newFunction_call)
   {
     if (newFunction_call != function_call)
     {
@@ -129,6 +150,31 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL, newFunction_call, newFunction_call));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getNumber()
+  {
+    return number;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNumber(String newNumber)
+  {
+    String oldNumber = number;
+    number = newNumber;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__NUMBER, oldNumber, number));
   }
 
   /**
@@ -176,6 +222,8 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return getFunction_call();
+      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
+        return getNumber();
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         return getSquare_bracket_elements();
     }
@@ -194,7 +242,10 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     switch (featureID)
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
-        setFunction_call((EFunctionCall)newValue);
+        setFunction_call((EFunctionCallOrVariable)newValue);
+        return;
+      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
+        setNumber((String)newValue);
         return;
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();
@@ -215,7 +266,10 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     switch (featureID)
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
-        setFunction_call((EFunctionCall)null);
+        setFunction_call((EFunctionCallOrVariable)null);
+        return;
+      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
+        setNumber(NUMBER_EDEFAULT);
         return;
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();
@@ -236,10 +290,29 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return function_call != null;
+      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
+        return NUMBER_EDEFAULT == null ? number != null : !NUMBER_EDEFAULT.equals(number);
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         return square_bracket_elements != null && !square_bracket_elements.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (number: ");
+    result.append(number);
+    result.append(')');
+    return result.toString();
   }
 
 } //ETailElementImpl

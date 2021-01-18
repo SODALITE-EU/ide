@@ -296,14 +296,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEComposedValueAdapter();
       }
       @Override
-      public Adapter caseEComposedValueInLine(EComposedValueInLine object)
+      public Adapter caseEComposedValueJinja(EComposedValueJinja object)
       {
-        return createEComposedValueInLineAdapter();
+        return createEComposedValueJinjaAdapter();
       }
       @Override
-      public Adapter caseEValueInLine(EValueInLine object)
+      public Adapter caseEValueJinja(EValueJinja object)
       {
-        return createEValueInLineAdapter();
+        return createEValueJinjaAdapter();
       }
       @Override
       public Adapter caseEValueWithoutString(EValueWithoutString object)
@@ -316,9 +316,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createESimpleValueWithoutStringAdapter();
       }
       @Override
-      public Adapter caseESimpleValueInLine(ESimpleValueInLine object)
+      public Adapter caseESimpleValueJinja(ESimpleValueJinja object)
       {
-        return createESimpleValueInLineAdapter();
+        return createESimpleValueJinjaAdapter();
       }
       @Override
       public Adapter caseEJinjaExpressionEvaluation(EJinjaExpressionEvaluation object)
@@ -331,9 +331,9 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEJinjaExpressionEvaluationWithoutBracketsAdapter();
       }
       @Override
-      public Adapter caseEFunctionCall(EFunctionCall object)
+      public Adapter caseEFunctionCallOrVariable(EFunctionCallOrVariable object)
       {
-        return createEFunctionCallAdapter();
+        return createEFunctionCallOrVariableAdapter();
       }
       @Override
       public Adapter caseEIfBlock(EIfBlock object)
@@ -486,6 +486,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEDictionaryPairAdapter();
       }
       @Override
+      public Adapter caseEDictionaryJinja(EDictionaryJinja object)
+      {
+        return createEDictionaryJinjaAdapter();
+      }
+      @Override
+      public Adapter caseEDictionaryPairJinja(EDictionaryPairJinja object)
+      {
+        return createEDictionaryPairJinjaAdapter();
+      }
+      @Override
       public Adapter caseEList(EList object)
       {
         return createEListAdapter();
@@ -499,6 +509,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEListIndented(EListIndented object)
       {
         return createEListIndentedAdapter();
+      }
+      @Override
+      public Adapter caseEListJinja(EListJinja object)
+      {
+        return createEListJinjaAdapter();
       }
       @Override
       public Adapter caseEDictionaryPassed(EDictionaryPassed object)
@@ -519,11 +534,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEBooleanPassed(EBooleanPassed object)
       {
         return createEBooleanPassedAdapter();
-      }
-      @Override
-      public Adapter caseEEmptyCurlyBraces(EEmptyCurlyBraces object)
-      {
-        return createEEmptyCurlyBracesAdapter();
       }
       @Override
       public Adapter caseEBooleanAnsible(EBooleanAnsible object)
@@ -1213,31 +1223,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EComposedValueInLine <em>EComposed Value In Line</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja <em>EComposed Value Jinja</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EComposedValueInLine
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja
    * @generated
    */
-  public Adapter createEComposedValueInLineAdapter()
+  public Adapter createEComposedValueJinjaAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValueInLine <em>EValue In Line</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValueJinja <em>EValue Jinja</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EValueInLine
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValueJinja
    * @generated
    */
-  public Adapter createEValueInLineAdapter()
+  public Adapter createEValueJinjaAdapter()
   {
     return null;
   }
@@ -1273,16 +1283,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine <em>ESimple Value In Line</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja <em>ESimple Value Jinja</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja
    * @generated
    */
-  public Adapter createESimpleValueInLineAdapter()
+  public Adapter createESimpleValueJinjaAdapter()
   {
     return null;
   }
@@ -1318,16 +1328,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall <em>EFunction Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable <em>EFunction Call Or Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable
    * @generated
    */
-  public Adapter createEFunctionCallAdapter()
+  public Adapter createEFunctionCallOrVariableAdapter()
   {
     return null;
   }
@@ -1783,6 +1793,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja <em>EDictionary Jinja</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja
+   * @generated
+   */
+  public Adapter createEDictionaryJinjaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja <em>EDictionary Pair Jinja</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja
+   * @generated
+   */
+  public Adapter createEDictionaryPairJinjaAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EList <em>EList</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1823,6 +1863,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEListIndentedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListJinja <em>EList Jinja</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListJinja
+   * @generated
+   */
+  public Adapter createEListJinjaAdapter()
   {
     return null;
   }
@@ -1883,21 +1938,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEBooleanPassedAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces <em>EEmpty Curly Braces</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
-   * @generated
-   */
-  public Adapter createEEmptyCurlyBracesAdapter()
   {
     return null;
   }

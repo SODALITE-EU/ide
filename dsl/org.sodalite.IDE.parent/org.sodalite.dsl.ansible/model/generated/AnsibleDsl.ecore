@@ -277,15 +277,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EComposedValue" eSuperTypes="#//EValueWithoutString"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EComposedValueInLine" eSuperTypes="#//EValueInLine"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EValueInLine" eSuperTypes="#//EValuePassedToJinjaExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EComposedValueJinja" eSuperTypes="#//EValueJinja"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EValueJinja" eSuperTypes="#//EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValueWithoutString" eSuperTypes="#//EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueWithoutString" eSuperTypes="#//EValueWithoutString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_boolean" eType="#//EBooleanAnsible"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueInLine" eSuperTypes="#//EValueInLine">
+  <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueJinja" eSuperTypes="#//EValueJinja">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -299,10 +299,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="if_chain" upperBound="-1"
         eType="#//EIfBlock" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EFunctionCall" eSuperTypes="#//EValuePassedToJinjaExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="EFunctionCallOrVariable" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//EFilteredExpression" containment="true"/>
+        eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty_brackets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIfBlock">
@@ -439,8 +439,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETailElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCall"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCallOrVariable"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
   </eClassifiers>
@@ -452,19 +453,32 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary_pairs" upperBound="-1"
         eType="#//EDictionaryPair" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryInLine" eSuperTypes="#//EComposedValueInLine #//EDictionary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryInLine" eSuperTypes="#//EDictionary"/>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryIndented" eSuperTypes="#//EDictionary"/>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPair">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValuePassed"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryJinja" eSuperTypes="#//EComposedValueJinja">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary_pairs" upperBound="-1"
+        eType="#//EDictionaryPairJinja" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPairJinja">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EList" eSuperTypes="#//EComposedValue #//EListPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//EValuePassed" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EListInLine" eSuperTypes="#//EComposedValueInLine #//EList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EListInLine" eSuperTypes="#//EList"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListIndented" eSuperTypes="#//EList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EListJinja" eSuperTypes="#//EComposedValueJinja">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="ENumberPassed">
@@ -474,10 +488,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="boolean_passed" eType="#//EBooleanAnsible"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_passed_null" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EEmptyCurlyBraces" eSuperTypes="#//EValuePassedToJinjaExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left_curly_brace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right_curly_brace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBooleanAnsible">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_ansible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

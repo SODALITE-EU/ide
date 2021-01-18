@@ -6,22 +6,22 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>ESimple Value In Line</b></em>'.
+ * A representation of the model object '<em><b>ESimple Value Jinja</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine#getSimple_value_string <em>Simple value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine#getSimple_value <em>Simple value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value_string <em>Simple value string</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value <em>Simple value</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueInLine()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueJinja()
  * @model
  * @generated
  */
-public interface ESimpleValueInLine extends EValueInLine
+public interface ESimpleValueJinja extends EValueJinja
 {
   /**
    * Returns the value of the '<em><b>Simple value string</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface ESimpleValueInLine extends EValueInLine
    * <!-- end-user-doc -->
    * @return the value of the '<em>Simple value string</em>' attribute.
    * @see #setSimple_value_string(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueInLine_Simple_value_string()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueJinja_Simple_value_string()
    * @model
    * @generated
    */
   String getSimple_value_string();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine#getSimple_value_string <em>Simple value string</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value_string <em>Simple value string</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Simple value string</em>' attribute.
@@ -51,14 +51,14 @@ public interface ESimpleValueInLine extends EValueInLine
    * <!-- end-user-doc -->
    * @return the value of the '<em>Simple value</em>' attribute.
    * @see #setSimple_value(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueInLine_Simple_value()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueJinja_Simple_value()
    * @model
    * @generated
    */
   String getSimple_value();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine#getSimple_value <em>Simple value</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value <em>Simple value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Simple value</em>' attribute.
@@ -67,4 +67,4 @@ public interface ESimpleValueInLine extends EValueInLine
    */
   void setSimple_value(String value);
 
-} // ESimpleValueInLine
+} // ESimpleValueJinja

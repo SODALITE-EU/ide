@@ -14,6 +14,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EListInLine extends EComposedValueInLine, EList
+public interface EListInLine extends EList
 {
 } // EListInLine

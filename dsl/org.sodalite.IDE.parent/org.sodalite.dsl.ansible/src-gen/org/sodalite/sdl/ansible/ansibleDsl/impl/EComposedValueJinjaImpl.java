@@ -6,23 +6,23 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EComposed Value In Line</b></em>'.
+ * An implementation of the model object '<em><b>EComposed Value Jinja</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EComposedValueInLineImpl extends EValueInLineImpl implements EComposedValueInLine
+public class EComposedValueJinjaImpl extends EValueJinjaImpl implements EComposedValueJinja
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EComposedValueInLineImpl()
+  protected EComposedValueJinjaImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class EComposedValueInLineImpl extends EValueInLineImpl implements ECompo
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.ECOMPOSED_VALUE_IN_LINE;
+    return AnsibleDslPackage.Literals.ECOMPOSED_VALUE_JINJA;
   }
 
-} //EComposedValueInLineImpl
+} //EComposedValueJinjaImpl

@@ -3,50 +3,20 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
-import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
-import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>EList In Line</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListInLineImpl#getElements <em>Elements</em>}</li>
- * </ul>
  *
  * @generated
  */
-public class EListInLineImpl extends EComposedValueInLineImpl implements EListInLine
+public class EListInLineImpl extends EListImpl implements EListInLine
 {
-  /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getElements()
-   * @generated
-   * @ordered
-   */
-  protected EList<EValuePassed> elements;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,199 +36,6 @@ public class EListInLineImpl extends EComposedValueInLineImpl implements EListIn
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.ELIST_IN_LINE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<EValuePassed> getElements()
-  {
-    if (elements == null)
-    {
-      elements = new EObjectContainmentEList<EValuePassed>(EValuePassed.class, this, AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS);
-    }
-    return elements;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return getElements();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends EValuePassed>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        getElements().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return elements != null && !elements.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == EValuePassed.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EValueWithoutString.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EComposedValue.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EListPassed.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == org.sodalite.sdl.ansible.ansibleDsl.EList.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS: return AnsibleDslPackage.ELIST__ELEMENTS;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == EValuePassed.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EValueWithoutString.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EComposedValue.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == EListPassed.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == org.sodalite.sdl.ansible.ansibleDsl.EList.class)
-    {
-      switch (baseFeatureID)
-      {
-        case AnsibleDslPackage.ELIST__ELEMENTS: return AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
 } //EListInLineImpl

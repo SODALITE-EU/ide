@@ -7,23 +7,23 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EFunction Call</b></em>'.
+ * A representation of the model object '<em><b>EFunction Call Or Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets <em>Empty brackets</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable#getEmpty_brackets <em>Empty brackets</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCallOrVariable()
  * @model
  * @generated
  */
-public interface EFunctionCall extends EValuePassedToJinjaExpression
+public interface EFunctionCallOrVariable extends EValuePassedToJinjaExpression
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -31,14 +31,14 @@ public interface EFunctionCall extends EValuePassedToJinjaExpression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall_Name()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCallOrVariable_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -49,15 +49,15 @@ public interface EFunctionCall extends EValuePassedToJinjaExpression
 
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression}.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameters</em>' containment reference list.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall_Parameters()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCallOrVariable_Parameters()
    * @model containment="true"
    * @generated
    */
-  EList<EFilteredExpression> getParameters();
+  EList<EJinjaExpressionEvaluationWithoutBrackets> getParameters();
 
   /**
    * Returns the value of the '<em><b>Empty brackets</b></em>' attribute.
@@ -65,14 +65,14 @@ public interface EFunctionCall extends EValuePassedToJinjaExpression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Empty brackets</em>' attribute.
    * @see #setEmpty_brackets(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCall_Empty_brackets()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFunctionCallOrVariable_Empty_brackets()
    * @model
    * @generated
    */
   String getEmpty_brackets();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall#getEmpty_brackets <em>Empty brackets</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable#getEmpty_brackets <em>Empty brackets</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Empty brackets</em>' attribute.
@@ -81,4 +81,4 @@ public interface EFunctionCall extends EValuePassedToJinjaExpression
    */
   void setEmpty_brackets(String value);
 
-} // EFunctionCall
+} // EFunctionCallOrVariable

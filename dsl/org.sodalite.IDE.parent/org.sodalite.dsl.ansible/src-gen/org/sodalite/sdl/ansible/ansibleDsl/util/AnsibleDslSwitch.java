@@ -415,20 +415,20 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.ECOMPOSED_VALUE_IN_LINE:
+      case AnsibleDslPackage.ECOMPOSED_VALUE_JINJA:
       {
-        EComposedValueInLine eComposedValueInLine = (EComposedValueInLine)theEObject;
-        T result = caseEComposedValueInLine(eComposedValueInLine);
-        if (result == null) result = caseEValueInLine(eComposedValueInLine);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eComposedValueInLine);
+        EComposedValueJinja eComposedValueJinja = (EComposedValueJinja)theEObject;
+        T result = caseEComposedValueJinja(eComposedValueJinja);
+        if (result == null) result = caseEValueJinja(eComposedValueJinja);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eComposedValueJinja);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EVALUE_IN_LINE:
+      case AnsibleDslPackage.EVALUE_JINJA:
       {
-        EValueInLine eValueInLine = (EValueInLine)theEObject;
-        T result = caseEValueInLine(eValueInLine);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eValueInLine);
+        EValueJinja eValueJinja = (EValueJinja)theEObject;
+        T result = caseEValueJinja(eValueJinja);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eValueJinja);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -449,12 +449,12 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA:
       {
-        ESimpleValueInLine eSimpleValueInLine = (ESimpleValueInLine)theEObject;
-        T result = caseESimpleValueInLine(eSimpleValueInLine);
-        if (result == null) result = caseEValueInLine(eSimpleValueInLine);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eSimpleValueInLine);
+        ESimpleValueJinja eSimpleValueJinja = (ESimpleValueJinja)theEObject;
+        T result = caseESimpleValueJinja(eSimpleValueJinja);
+        if (result == null) result = caseEValueJinja(eSimpleValueJinja);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eSimpleValueJinja);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -477,11 +477,11 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EFUNCTION_CALL:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE:
       {
-        EFunctionCall eFunctionCall = (EFunctionCall)theEObject;
-        T result = caseEFunctionCall(eFunctionCall);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eFunctionCall);
+        EFunctionCallOrVariable eFunctionCallOrVariable = (EFunctionCallOrVariable)theEObject;
+        T result = caseEFunctionCallOrVariable(eFunctionCallOrVariable);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eFunctionCallOrVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -701,12 +701,9 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EDictionaryInLine eDictionaryInLine = (EDictionaryInLine)theEObject;
         T result = caseEDictionaryInLine(eDictionaryInLine);
-        if (result == null) result = caseEComposedValueInLine(eDictionaryInLine);
         if (result == null) result = caseEDictionary(eDictionaryInLine);
-        if (result == null) result = caseEValueInLine(eDictionaryInLine);
         if (result == null) result = caseEComposedValue(eDictionaryInLine);
         if (result == null) result = caseEDictionaryPassed(eDictionaryInLine);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eDictionaryInLine);
         if (result == null) result = caseEValueWithoutString(eDictionaryInLine);
         if (result == null) result = caseEValuePassed(eDictionaryInLine);
         if (result == null) result = defaultCase(theEObject);
@@ -731,6 +728,23 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AnsibleDslPackage.EDICTIONARY_JINJA:
+      {
+        EDictionaryJinja eDictionaryJinja = (EDictionaryJinja)theEObject;
+        T result = caseEDictionaryJinja(eDictionaryJinja);
+        if (result == null) result = caseEComposedValueJinja(eDictionaryJinja);
+        if (result == null) result = caseEValueJinja(eDictionaryJinja);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eDictionaryJinja);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.EDICTIONARY_PAIR_JINJA:
+      {
+        EDictionaryPairJinja eDictionaryPairJinja = (EDictionaryPairJinja)theEObject;
+        T result = caseEDictionaryPairJinja(eDictionaryPairJinja);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AnsibleDslPackage.ELIST:
       {
         EList eList = (EList)theEObject;
@@ -746,12 +760,9 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EListInLine eListInLine = (EListInLine)theEObject;
         T result = caseEListInLine(eListInLine);
-        if (result == null) result = caseEComposedValueInLine(eListInLine);
         if (result == null) result = caseEList(eListInLine);
-        if (result == null) result = caseEValueInLine(eListInLine);
         if (result == null) result = caseEComposedValue(eListInLine);
         if (result == null) result = caseEListPassed(eListInLine);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eListInLine);
         if (result == null) result = caseEValueWithoutString(eListInLine);
         if (result == null) result = caseEValuePassed(eListInLine);
         if (result == null) result = defaultCase(theEObject);
@@ -766,6 +777,16 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = caseEListPassed(eListIndented);
         if (result == null) result = caseEValueWithoutString(eListIndented);
         if (result == null) result = caseEValuePassed(eListIndented);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ELIST_JINJA:
+      {
+        EListJinja eListJinja = (EListJinja)theEObject;
+        T result = caseEListJinja(eListJinja);
+        if (result == null) result = caseEComposedValueJinja(eListJinja);
+        if (result == null) result = caseEValueJinja(eListJinja);
+        if (result == null) result = caseEValuePassedToJinjaExpression(eListJinja);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -794,14 +815,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EBooleanPassed eBooleanPassed = (EBooleanPassed)theEObject;
         T result = caseEBooleanPassed(eBooleanPassed);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AnsibleDslPackage.EEMPTY_CURLY_BRACES:
-      {
-        EEmptyCurlyBraces eEmptyCurlyBraces = (EEmptyCurlyBraces)theEObject;
-        T result = caseEEmptyCurlyBraces(eEmptyCurlyBraces);
-        if (result == null) result = caseEValuePassedToJinjaExpression(eEmptyCurlyBraces);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1521,33 +1534,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EComposed Value In Line</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EComposed Value Jinja</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EComposed Value In Line</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EComposed Value Jinja</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEComposedValueInLine(EComposedValueInLine object)
+  public T caseEComposedValueJinja(EComposedValueJinja object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EValue In Line</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EValue Jinja</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EValue In Line</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EValue Jinja</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEValueInLine(EValueInLine object)
+  public T caseEValueJinja(EValueJinja object)
   {
     return null;
   }
@@ -1585,17 +1598,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ESimple Value In Line</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ESimple Value Jinja</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ESimple Value In Line</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ESimple Value Jinja</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseESimpleValueInLine(ESimpleValueInLine object)
+  public T caseESimpleValueJinja(ESimpleValueJinja object)
   {
     return null;
   }
@@ -1633,17 +1646,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EFunction Call</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EFunction Call Or Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EFunction Call</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EFunction Call Or Variable</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEFunctionCall(EFunctionCall object)
+  public T caseEFunctionCallOrVariable(EFunctionCallOrVariable object)
   {
     return null;
   }
@@ -2129,6 +2142,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>EDictionary Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDictionary Jinja</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDictionaryJinja(EDictionaryJinja object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EDictionary Pair Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EDictionary Pair Jinja</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEDictionaryPairJinja(EDictionaryPairJinja object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EList</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -2172,6 +2217,22 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEListIndented(EListIndented object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EList Jinja</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EList Jinja</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEListJinja(EListJinja object)
   {
     return null;
   }
@@ -2236,22 +2297,6 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEBooleanPassed(EBooleanPassed object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>EEmpty Curly Braces</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EEmpty Curly Braces</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEEmptyCurlyBraces(EEmptyCurlyBraces object)
   {
     return null;
   }

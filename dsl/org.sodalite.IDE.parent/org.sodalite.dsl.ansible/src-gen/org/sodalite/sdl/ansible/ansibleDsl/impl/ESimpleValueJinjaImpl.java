@@ -10,23 +10,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ESimple Value In Line</b></em>'.
+ * An implementation of the model object '<em><b>ESimple Value Jinja</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueInLineImpl#getSimple_value_string <em>Simple value string</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueInLineImpl#getSimple_value <em>Simple value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl#getSimple_value_string <em>Simple value string</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl#getSimple_value <em>Simple value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleValueInLine
+public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleValueJinja
 {
   /**
    * The default value of the '{@link #getSimple_value_string() <em>Simple value string</em>}' attribute.
@@ -73,7 +73,7 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ESimpleValueInLineImpl()
+  protected ESimpleValueJinjaImpl()
   {
     super();
   }
@@ -86,7 +86,7 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.ESIMPLE_VALUE_IN_LINE;
+    return AnsibleDslPackage.Literals.ESIMPLE_VALUE_JINJA;
   }
 
   /**
@@ -111,7 +111,7 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
     String oldSimple_value_string = simple_value_string;
     simple_value_string = newSimple_value_string;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE_STRING, oldSimple_value_string, simple_value_string));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING, oldSimple_value_string, simple_value_string));
   }
 
   /**
@@ -136,7 +136,7 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
     String oldSimple_value = simple_value;
     simple_value = newSimple_value;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE, oldSimple_value, simple_value));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE, oldSimple_value, simple_value));
   }
 
   /**
@@ -149,9 +149,9 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE_STRING:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING:
         return getSimple_value_string();
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         return getSimple_value();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -167,10 +167,10 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE_STRING:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING:
         setSimple_value_string((String)newValue);
         return;
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         setSimple_value((String)newValue);
         return;
     }
@@ -187,10 +187,10 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE_STRING:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING:
         setSimple_value_string(SIMPLE_VALUE_STRING_EDEFAULT);
         return;
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         setSimple_value(SIMPLE_VALUE_EDEFAULT);
         return;
     }
@@ -207,9 +207,9 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE_STRING:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING:
         return SIMPLE_VALUE_STRING_EDEFAULT == null ? simple_value_string != null : !SIMPLE_VALUE_STRING_EDEFAULT.equals(simple_value_string);
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE__SIMPLE_VALUE:
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         return SIMPLE_VALUE_EDEFAULT == null ? simple_value != null : !SIMPLE_VALUE_EDEFAULT.equals(simple_value);
     }
     return super.eIsSet(featureID);
@@ -234,4 +234,4 @@ public class ESimpleValueInLineImpl extends EValueInLineImpl implements ESimpleV
     return result.toString();
   }
 
-} //ESimpleValueInLineImpl
+} //ESimpleValueJinjaImpl

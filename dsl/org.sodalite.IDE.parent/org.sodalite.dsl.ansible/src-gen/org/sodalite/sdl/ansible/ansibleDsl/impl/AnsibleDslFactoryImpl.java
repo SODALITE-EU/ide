@@ -109,14 +109,14 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
       case AnsibleDslPackage.EVALUE_PASSED_TO_JINJA_EXPRESSION: return createEValuePassedToJinjaExpression();
       case AnsibleDslPackage.ECOMPOSED_VALUE: return createEComposedValue();
-      case AnsibleDslPackage.ECOMPOSED_VALUE_IN_LINE: return createEComposedValueInLine();
-      case AnsibleDslPackage.EVALUE_IN_LINE: return createEValueInLine();
+      case AnsibleDslPackage.ECOMPOSED_VALUE_JINJA: return createEComposedValueJinja();
+      case AnsibleDslPackage.EVALUE_JINJA: return createEValueJinja();
       case AnsibleDslPackage.EVALUE_WITHOUT_STRING: return createEValueWithoutString();
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING: return createESimpleValueWithoutString();
-      case AnsibleDslPackage.ESIMPLE_VALUE_IN_LINE: return createESimpleValueInLine();
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA: return createESimpleValueJinja();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
-      case AnsibleDslPackage.EFUNCTION_CALL: return createEFunctionCall();
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE: return createEFunctionCallOrVariable();
       case AnsibleDslPackage.EIF_BLOCK: return createEIfBlock();
       case AnsibleDslPackage.EFILTERED_EXPRESSION: return createEFilteredExpression();
       case AnsibleDslPackage.EOR_EXPRESSION: return createEOrExpression();
@@ -147,14 +147,16 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EDICTIONARY_IN_LINE: return createEDictionaryInLine();
       case AnsibleDslPackage.EDICTIONARY_INDENTED: return createEDictionaryIndented();
       case AnsibleDslPackage.EDICTIONARY_PAIR: return createEDictionaryPair();
+      case AnsibleDslPackage.EDICTIONARY_JINJA: return createEDictionaryJinja();
+      case AnsibleDslPackage.EDICTIONARY_PAIR_JINJA: return createEDictionaryPairJinja();
       case AnsibleDslPackage.ELIST: return createEList();
       case AnsibleDslPackage.ELIST_IN_LINE: return createEListInLine();
       case AnsibleDslPackage.ELIST_INDENTED: return createEListIndented();
+      case AnsibleDslPackage.ELIST_JINJA: return createEListJinja();
       case AnsibleDslPackage.EDICTIONARY_PASSED: return createEDictionaryPassed();
       case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
       case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
       case AnsibleDslPackage.EBOOLEAN_PASSED: return createEBooleanPassed();
-      case AnsibleDslPackage.EEMPTY_CURLY_BRACES: return createEEmptyCurlyBraces();
       case AnsibleDslPackage.EBOOLEAN_ANSIBLE: return createEBooleanAnsible();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -695,10 +697,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EComposedValueInLine createEComposedValueInLine()
+  public EComposedValueJinja createEComposedValueJinja()
   {
-    EComposedValueInLineImpl eComposedValueInLine = new EComposedValueInLineImpl();
-    return eComposedValueInLine;
+    EComposedValueJinjaImpl eComposedValueJinja = new EComposedValueJinjaImpl();
+    return eComposedValueJinja;
   }
 
   /**
@@ -707,10 +709,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EValueInLine createEValueInLine()
+  public EValueJinja createEValueJinja()
   {
-    EValueInLineImpl eValueInLine = new EValueInLineImpl();
-    return eValueInLine;
+    EValueJinjaImpl eValueJinja = new EValueJinjaImpl();
+    return eValueJinja;
   }
 
   /**
@@ -743,10 +745,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public ESimpleValueInLine createESimpleValueInLine()
+  public ESimpleValueJinja createESimpleValueJinja()
   {
-    ESimpleValueInLineImpl eSimpleValueInLine = new ESimpleValueInLineImpl();
-    return eSimpleValueInLine;
+    ESimpleValueJinjaImpl eSimpleValueJinja = new ESimpleValueJinjaImpl();
+    return eSimpleValueJinja;
   }
 
   /**
@@ -779,10 +781,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EFunctionCall createEFunctionCall()
+  public EFunctionCallOrVariable createEFunctionCallOrVariable()
   {
-    EFunctionCallImpl eFunctionCall = new EFunctionCallImpl();
-    return eFunctionCall;
+    EFunctionCallOrVariableImpl eFunctionCallOrVariable = new EFunctionCallOrVariableImpl();
+    return eFunctionCallOrVariable;
   }
 
   /**
@@ -1151,6 +1153,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
+  public EDictionaryJinja createEDictionaryJinja()
+  {
+    EDictionaryJinjaImpl eDictionaryJinja = new EDictionaryJinjaImpl();
+    return eDictionaryJinja;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDictionaryPairJinja createEDictionaryPairJinja()
+  {
+    EDictionaryPairJinjaImpl eDictionaryPairJinja = new EDictionaryPairJinjaImpl();
+    return eDictionaryPairJinja;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList createEList()
   {
     EListImpl eList = new EListImpl();
@@ -1179,6 +1205,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EListIndentedImpl eListIndented = new EListIndentedImpl();
     return eListIndented;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListJinja createEListJinja()
+  {
+    EListJinjaImpl eListJinja = new EListJinjaImpl();
+    return eListJinja;
   }
 
   /**
@@ -1227,18 +1265,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EBooleanPassedImpl eBooleanPassed = new EBooleanPassedImpl();
     return eBooleanPassed;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EEmptyCurlyBraces createEEmptyCurlyBraces()
-  {
-    EEmptyCurlyBracesImpl eEmptyCurlyBraces = new EEmptyCurlyBracesImpl();
-    return eEmptyCurlyBraces;
   }
 
   /**

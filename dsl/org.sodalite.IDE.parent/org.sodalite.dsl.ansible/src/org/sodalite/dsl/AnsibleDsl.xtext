@@ -467,19 +467,19 @@ EValuePassed:
 ;
 
 EValuePassedToJinjaExpression:
-	EValueInLine | ESpecialVariable | EVariableReference | EFunctionCall | EEmptyCurlyBraces
+	EValueJinja | ESpecialVariable | EVariableReference | EFunctionCallOrVariable
 ;
 
 EComposedValue:
 	EDictionary | EList
 ;
 
-EComposedValueInLine:
-	EDictionaryInLine | EListInLine
+EComposedValueJinja:
+	EDictionaryJinja | EListJinja
 ;
 
-EValueInLine:
-	EComposedValueInLine | ESimpleValueInLine
+EValueJinja:
+	EComposedValueJinja | ESimpleValueJinja
 ;
 
 EValueWithoutString:
@@ -489,7 +489,7 @@ EValueWithoutString:
 ESimpleValueWithoutString:
 	simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
 ;
-ESimpleValueInLine:
+ESimpleValueJinja:
 	simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
 ;
 
@@ -501,8 +501,8 @@ EJinjaExpressionEvaluationWithoutBrackets:
 	expression_to_evaluate=EFilteredExpression (if_chain+=EIfBlock)*
 ;
 
-EFunctionCall:
-	name=ID ('(' parameters+=EFilteredExpression (',' parameters+=EFilteredExpression)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
+EFunctionCallOrVariable:
+	name=ID ('(' parameters+=EJinjaExpressionEvaluationWithoutBrackets (',' parameters+=EJinjaExpressionEvaluationWithoutBrackets)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
 ;
 
 EIfBlock:
@@ -610,7 +610,7 @@ ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices
 ;
 
 ETailElement:
-	function_call=EFunctionCall (square_bracket_elements+=ESquareBracketElement)*
+	(function_call=EFunctionCallOrVariable | number=NUMBER) (square_bracket_elements+=ESquareBracketElement)*
 ;
 
 ESquareBracketElement:
@@ -635,6 +635,15 @@ EDictionaryPair:
 	name=ID ':' value=EValuePassed
 ;
 
+EDictionaryJinja:
+	{EDictionaryJinja}
+	'{' (dictionary_pairs+=EDictionaryPairJinja (',' dictionary_pairs+=EDictionaryPairJinja)*)? '}'
+;
+
+EDictionaryPairJinja:
+	(name=ID | name=STRING) ':' value=EJinjaExpressionEvaluationWithoutBrackets
+;
+
 EList:
 	EListInLine | EListIndented
 ;
@@ -647,6 +656,11 @@ EListIndented:
 	BEGIN
 		( '-' elements+=EValuePassed)+
 	END
+;
+
+EListJinja:
+	{EListJinja}
+	'[' (elements+=EJinjaExpressionEvaluationWithoutBrackets (',' elements+=EJinjaExpressionEvaluationWithoutBrackets)*)? ']'
 ;
 
 EDictionaryPassed:
@@ -663,10 +677,6 @@ ENumberPassed:
 
 EBooleanPassed:
 	EJinjaExpressionEvaluation | boolean_passed=EBooleanAnsible | boolean_passed_null=NULL
-;
-
-EEmptyCurlyBraces:
-	left_curly_brace='{' right_curly_brace='}'
 ;
 
 EBooleanAnsible:

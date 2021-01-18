@@ -29,7 +29,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation
@@ -57,22 +56,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
-import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement
 import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement
-import org.sodalite.sdl.ansible.ansibleDsl.EValueInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented
-import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible
 import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable
+import org.sodalite.sdl.ansible.ansibleDsl.EValueJinja
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja
+import org.sodalite.sdl.ansible.ansibleDsl.EListJinja
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja
 
 /**
  * Generates code from your model files on save.
@@ -551,6 +554,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTailElement(ETailElement tailElement, String space){
 		var tailElementString = ""
 		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(compileFunctionCall(tailElement.function_call, space))
+		else if (tailElement.number !== null) tailElementString = tailElementString.concat(tailElement.number)
 		for (squareBracketElement : tailElement.square_bracket_elements){
 			tailElementString = tailElementString.concat(squareBracketElement.compileSquareBracketElement)
 		}
@@ -576,17 +580,17 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return stringToReturn
 	}
 
-	def compileFunctionCall(EFunctionCall functionCall, String space){
+	def compileFunctionCall(EFunctionCallOrVariable functionCall, String space){
 		var stringToReturn = functionCall.name
 		if (functionCall.parameters.size !== 0){
 			stringToReturn = stringToReturn.concat("(")
 			for (var index = 0; index < functionCall.parameters.size; index++){	
 				//the first parameter shouldn't have a comma before it, the others yes
 				if (index == 0){
-					stringToReturn = stringToReturn.concat(compileFilteredExpression(functionCall.parameters.get(index), space).toString())
+					stringToReturn = stringToReturn.concat(compileJinjaExpressionEvaluationWithoutBrackets(functionCall.parameters.get(index), space).toString())
 				}
 				else {
-					stringToReturn = stringToReturn.concat(", ").concat(compileFilteredExpression(functionCall.parameters.get(index), space).toString())
+					stringToReturn = stringToReturn.concat(", ").concat(compileJinjaExpressionEvaluationWithoutBrackets(functionCall.parameters.get(index), space).toString())
 				}
 			}
 			stringToReturn = stringToReturn.concat(")")	
@@ -803,7 +807,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression, String space){
-		if (valuePassedToJinjaExpression instanceof EValueInLine) return compileValueInLine(valuePassedToJinjaExpression, space).toString()
+		if (valuePassedToJinjaExpression instanceof EValueJinja) return compileValueJinja(valuePassedToJinjaExpression, space).toString()
 		else if (valuePassedToJinjaExpression instanceof ESpecialVariable){
 			var specialVariableString = valuePassedToJinjaExpression.name
 			return specialVariableString
@@ -837,11 +841,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			var setFactVariableReferenceString = ""
 			setFactVariableReferenceString = setFactVariableReferenceString.concat(valuePassedToJinjaExpression.name.name)
 		}
-		else if (valuePassedToJinjaExpression instanceof EFunctionCall){
+		else if (valuePassedToJinjaExpression instanceof EFunctionCallOrVariable){
 			return compileFunctionCall(valuePassedToJinjaExpression, space)
-		}
-		else if (valuePassedToJinjaExpression instanceof EEmptyCurlyBraces){
-			return "{}"
 		}
 	}
 	
@@ -851,9 +852,42 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	
-	def compileValueInLine(EValueInLine valueInLine, String space){
-		if (valueInLine instanceof EComposedValue) return compileComposedValue(valueInLine, space)
-		else if (valueInLine instanceof ESimpleValueInLine) return valueInLine.compileSimpleValueInLine
+	def compileValueJinja(EValueJinja valueJinja, String space){
+		if (valueJinja instanceof EComposedValueJinja) return compileComposedValueJinja(valueJinja, space)
+		else if (valueJinja instanceof ESimpleValueJinja) return valueJinja.compileSimpleValueJinja
+	}
+	
+	def compileComposedValueJinja(EComposedValueJinja composedValueJinja, String space){
+		if (composedValueJinja instanceof EDictionaryJinja){
+			var dictionaryString = "{"
+			for (var index = 0; index < composedValueJinja.dictionary_pairs.size; index++){
+				if (index == 0){
+					dictionaryString = dictionaryString.concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space))
+				}
+				else {
+					dictionaryString = dictionaryString.concat(", ").concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space))
+				}
+			}
+			dictionaryString = dictionaryString.concat("}")
+			return dictionaryString
+		}
+		else if (composedValueJinja instanceof EListJinja){
+			var listString = "["
+			for (var index = 0; index < composedValueJinja.elements.size; index++){
+				if (index == 0){
+					listString = listString.concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space).toString())
+				}
+				else {
+					listString = listString.concat(", ").concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space).toString())
+				}
+			}
+			listString = listString.concat("]")
+			return listString
+		}
+	}
+	
+	def compileDictionaryPairJinja(EDictionaryPairJinja dictionaryPairJinja, String space){
+		return "\'".concat(dictionaryPairJinja.name).concat("\'").concat(": ").concat(compileJinjaExpressionEvaluationWithoutBrackets(dictionaryPairJinja.value, space).toString())
 	}
 	
 	def compileValueWithoutString(EValueWithoutString valueWithoutString, String space){
@@ -885,7 +919,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 	
-	def compileSimpleValueInLine(ESimpleValueInLine simpleValueInLine){
+	def compileSimpleValueJinja(ESimpleValueJinja simpleValueInLine){
 		if (simpleValueInLine.simple_value !== null) return simpleValueInLine.simple_value
 		else if (simpleValueInLine.simple_value_string !== null) return "\'".concat(simpleValueInLine.simple_value_string).concat("\'")
 	}

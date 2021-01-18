@@ -24,21 +24,23 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
+import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
-import org.sodalite.sdl.ansible.ansibleDsl.EEmptyCurlyBraces;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
@@ -54,6 +56,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
+import org.sodalite.sdl.ansible.ansibleDsl.EListJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -79,7 +82,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
-import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
@@ -91,7 +94,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
-import org.sodalite.sdl.ansible.ansibleDsl.EValueInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
@@ -1504,10 +1507,16 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileTailElement(final ETailElement tailElement, final String space) {
     String tailElementString = "";
-    EFunctionCall _function_call = tailElement.getFunction_call();
+    EFunctionCallOrVariable _function_call = tailElement.getFunction_call();
     boolean _tripleNotEquals = (_function_call != null);
     if (_tripleNotEquals) {
       tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call(), space));
+    } else {
+      String _number = tailElement.getNumber();
+      boolean _tripleNotEquals_1 = (_number != null);
+      if (_tripleNotEquals_1) {
+        tailElementString = tailElementString.concat(tailElement.getNumber());
+      }
     }
     EList<ESquareBracketElement> _square_bracket_elements = tailElement.getSquare_bracket_elements();
     for (final ESquareBracketElement squareBracketElement : _square_bracket_elements) {
@@ -1553,7 +1562,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return stringToReturn;
   }
   
-  public String compileFunctionCall(final EFunctionCall functionCall, final String space) {
+  public String compileFunctionCall(final EFunctionCallOrVariable functionCall, final String space) {
     String stringToReturn = functionCall.getName();
     int _size = functionCall.getParameters().size();
     boolean _tripleNotEquals = (_size != 0);
@@ -1561,9 +1570,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       stringToReturn = stringToReturn.concat("(");
       for (int index = 0; (index < functionCall.getParameters().size()); index++) {
         if ((index == 0)) {
-          stringToReturn = stringToReturn.concat(this.compileFilteredExpression(functionCall.getParameters().get(index), space).toString());
+          stringToReturn = stringToReturn.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(functionCall.getParameters().get(index), space).toString());
         } else {
-          stringToReturn = stringToReturn.concat(", ").concat(this.compileFilteredExpression(functionCall.getParameters().get(index), space).toString());
+          stringToReturn = stringToReturn.concat(", ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(functionCall.getParameters().get(index), space).toString());
         }
       }
       stringToReturn = stringToReturn.concat(")");
@@ -1866,8 +1875,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileValuePassedToJinjaExpression(final EValuePassedToJinjaExpression valuePassedToJinjaExpression, final String space) {
     String _xifexpression = null;
-    if ((valuePassedToJinjaExpression instanceof EValueInLine)) {
-      return this.compileValueInLine(((EValueInLine)valuePassedToJinjaExpression), space).toString();
+    if ((valuePassedToJinjaExpression instanceof EValueJinja)) {
+      return this.compileValueJinja(((EValueJinja)valuePassedToJinjaExpression), space).toString();
     } else {
       String _xifexpression_1 = null;
       if ((valuePassedToJinjaExpression instanceof ESpecialVariable)) {
@@ -1913,12 +1922,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                     }
                     _xifexpression_7 = _xblockexpression;
                   } else {
-                    if ((valuePassedToJinjaExpression instanceof EFunctionCall)) {
-                      return this.compileFunctionCall(((EFunctionCall)valuePassedToJinjaExpression), space);
-                    } else {
-                      if ((valuePassedToJinjaExpression instanceof EEmptyCurlyBraces)) {
-                        return "{}";
-                      }
+                    if ((valuePassedToJinjaExpression instanceof EFunctionCallOrVariable)) {
+                      return this.compileFunctionCall(((EFunctionCallOrVariable)valuePassedToJinjaExpression), space);
                     }
                   }
                   _xifexpression_6 = _xifexpression_7;
@@ -1946,18 +1951,51 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     }
   }
   
-  public Serializable compileValueInLine(final EValueInLine valueInLine, final String space) {
-    if ((valueInLine instanceof EComposedValue)) {
-      return this.compileComposedValue(((EComposedValue)valueInLine), space);
+  public String compileValueJinja(final EValueJinja valueJinja, final String space) {
+    if ((valueJinja instanceof EComposedValueJinja)) {
+      return this.compileComposedValueJinja(((EComposedValueJinja)valueJinja), space);
     } else {
-      if ((valueInLine instanceof ESimpleValueInLine)) {
-        return this.compileSimpleValueInLine(((ESimpleValueInLine)valueInLine));
+      if ((valueJinja instanceof ESimpleValueJinja)) {
+        return this.compileSimpleValueJinja(((ESimpleValueJinja)valueJinja));
       }
     }
     return null;
   }
   
-  public Object compileValueWithoutString(final EValueWithoutString valueWithoutString, final String space) {
+  public String compileComposedValueJinja(final EComposedValueJinja composedValueJinja, final String space) {
+    if ((composedValueJinja instanceof EDictionaryJinja)) {
+      String dictionaryString = "{";
+      for (int index = 0; (index < ((EDictionaryJinja)composedValueJinja).getDictionary_pairs().size()); index++) {
+        if ((index == 0)) {
+          dictionaryString = dictionaryString.concat(this.compileDictionaryPairJinja(((EDictionaryJinja)composedValueJinja).getDictionary_pairs().get(index), space));
+        } else {
+          dictionaryString = dictionaryString.concat(", ").concat(this.compileDictionaryPairJinja(((EDictionaryJinja)composedValueJinja).getDictionary_pairs().get(index), space));
+        }
+      }
+      dictionaryString = dictionaryString.concat("}");
+      return dictionaryString;
+    } else {
+      if ((composedValueJinja instanceof EListJinja)) {
+        String listString = "[";
+        for (int index = 0; (index < ((EListJinja)composedValueJinja).getElements().size()); index++) {
+          if ((index == 0)) {
+            listString = listString.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(((EListJinja)composedValueJinja).getElements().get(index), space).toString());
+          } else {
+            listString = listString.concat(", ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(((EListJinja)composedValueJinja).getElements().get(index), space).toString());
+          }
+        }
+        listString = listString.concat("]");
+        return listString;
+      }
+    }
+    return null;
+  }
+  
+  public String compileDictionaryPairJinja(final EDictionaryPairJinja dictionaryPairJinja, final String space) {
+    return "\'".concat(dictionaryPairJinja.getName()).concat("\'").concat(": ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(dictionaryPairJinja.getValue(), space).toString());
+  }
+  
+  public Serializable compileValueWithoutString(final EValueWithoutString valueWithoutString, final String space) {
     if ((valueWithoutString instanceof EComposedValue)) {
       return this.compileComposedValue(((EComposedValue)valueWithoutString), space);
     } else {
@@ -2004,7 +2042,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return null;
   }
   
-  public String compileSimpleValueInLine(final ESimpleValueInLine simpleValueInLine) {
+  public String compileSimpleValueJinja(final ESimpleValueJinja simpleValueInLine) {
     String _simple_value = simpleValueInLine.getSimple_value();
     boolean _tripleNotEquals = (_simple_value != null);
     if (_tripleNotEquals) {

@@ -6,23 +6,23 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EValueInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EValueJinja;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EValue In Line</b></em>'.
+ * An implementation of the model object '<em><b>EValue Jinja</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EValueInLineImpl extends EValuePassedToJinjaExpressionImpl implements EValueInLine
+public class EValueJinjaImpl extends EValuePassedToJinjaExpressionImpl implements EValueJinja
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EValueInLineImpl()
+  protected EValueJinjaImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class EValueInLineImpl extends EValuePassedToJinjaExpressionImpl implemen
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EVALUE_IN_LINE;
+    return AnsibleDslPackage.Literals.EVALUE_JINJA;
   }
 
-} //EValueInLineImpl
+} //EValueJinjaImpl

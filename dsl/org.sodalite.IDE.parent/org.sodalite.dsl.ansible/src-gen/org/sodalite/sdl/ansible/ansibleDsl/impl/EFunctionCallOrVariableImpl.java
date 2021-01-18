@@ -19,25 +19,25 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCall;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EFunction Call</b></em>'.
+ * An implementation of the model object '<em><b>EFunction Call Or Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallImpl#getEmpty_brackets <em>Empty brackets</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallOrVariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallOrVariableImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallOrVariableImpl#getEmpty_brackets <em>Empty brackets</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl implements EFunctionCall
+public class EFunctionCallOrVariableImpl extends EValuePassedToJinjaExpressionImpl implements EFunctionCallOrVariable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -67,7 +67,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
    * @generated
    * @ordered
    */
-  protected EList<EFilteredExpression> parameters;
+  protected EList<EJinjaExpressionEvaluationWithoutBrackets> parameters;
 
   /**
    * The default value of the '{@link #getEmpty_brackets() <em>Empty brackets</em>}' attribute.
@@ -94,7 +94,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EFunctionCallImpl()
+  protected EFunctionCallOrVariableImpl()
   {
     super();
   }
@@ -107,7 +107,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EFUNCTION_CALL;
+    return AnsibleDslPackage.Literals.EFUNCTION_CALL_OR_VARIABLE;
   }
 
   /**
@@ -132,7 +132,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFUNCTION_CALL__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__NAME, oldName, name));
   }
 
   /**
@@ -141,11 +141,11 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
    * @generated
    */
   @Override
-  public EList<EFilteredExpression> getParameters()
+  public EList<EJinjaExpressionEvaluationWithoutBrackets> getParameters()
   {
     if (parameters == null)
     {
-      parameters = new EObjectContainmentEList<EFilteredExpression>(EFilteredExpression.class, this, AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS);
+      parameters = new EObjectContainmentEList<EJinjaExpressionEvaluationWithoutBrackets>(EJinjaExpressionEvaluationWithoutBrackets.class, this, AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS);
     }
     return parameters;
   }
@@ -172,7 +172,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
     String oldEmpty_brackets = empty_brackets;
     empty_brackets = newEmpty_brackets;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS, oldEmpty_brackets, empty_brackets));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS, oldEmpty_brackets, empty_brackets));
   }
 
   /**
@@ -185,7 +185,7 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -201,11 +201,11 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFUNCTION_CALL__NAME:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__NAME:
         return getName();
-      case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         return getParameters();
-      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS:
         return getEmpty_brackets();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -222,14 +222,14 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFUNCTION_CALL__NAME:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         getParameters().clear();
-        getParameters().addAll((Collection<? extends EFilteredExpression>)newValue);
+        getParameters().addAll((Collection<? extends EJinjaExpressionEvaluationWithoutBrackets>)newValue);
         return;
-      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS:
         setEmpty_brackets((String)newValue);
         return;
     }
@@ -246,13 +246,13 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFUNCTION_CALL__NAME:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         getParameters().clear();
         return;
-      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS:
         setEmpty_brackets(EMPTY_BRACKETS_EDEFAULT);
         return;
     }
@@ -269,11 +269,11 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EFUNCTION_CALL__NAME:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.EFUNCTION_CALL__PARAMETERS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
-      case AnsibleDslPackage.EFUNCTION_CALL__EMPTY_BRACKETS:
+      case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS:
         return EMPTY_BRACKETS_EDEFAULT == null ? empty_brackets != null : !EMPTY_BRACKETS_EDEFAULT.equals(empty_brackets);
     }
     return super.eIsSet(featureID);
@@ -298,4 +298,4 @@ public class EFunctionCallImpl extends EValuePassedToJinjaExpressionImpl impleme
     return result.toString();
   }
 
-} //EFunctionCallImpl
+} //EFunctionCallOrVariableImpl
