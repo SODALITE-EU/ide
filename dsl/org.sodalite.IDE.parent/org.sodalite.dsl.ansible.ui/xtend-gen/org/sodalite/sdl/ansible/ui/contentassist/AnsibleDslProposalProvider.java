@@ -291,6 +291,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
+  public void completeEForStatement_Recursive(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    acceptor.accept(this.createCompletionProposal("recursive", context));
+  }
+  
+  @Override
   public void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
     if ((rootPlay != null)) {

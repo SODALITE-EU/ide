@@ -41,6 +41,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
@@ -1570,9 +1571,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       stringToReturn = stringToReturn.concat("(");
       for (int index = 0; (index < functionCall.getParameters().size()); index++) {
         if ((index == 0)) {
-          stringToReturn = stringToReturn.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(functionCall.getParameters().get(index), space).toString());
+          stringToReturn = stringToReturn.concat(this.compileFunctionInput(functionCall.getParameters().get(index), space));
         } else {
-          stringToReturn = stringToReturn.concat(", ").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(functionCall.getParameters().get(index), space).toString());
+          stringToReturn = stringToReturn.concat(", ").concat(this.compileFunctionInput(functionCall.getParameters().get(index), space));
         }
       }
       stringToReturn = stringToReturn.concat(")");
@@ -1582,6 +1583,21 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_1) {
         stringToReturn = stringToReturn.concat("()");
       }
+    }
+    return stringToReturn;
+  }
+  
+  public String compileFunctionInput(final EFunctionInput functionInput, final String space) {
+    String stringToReturn = "";
+    String _parameter_name = functionInput.getParameter_name();
+    boolean _tripleNotEquals = (_parameter_name != null);
+    if (_tripleNotEquals) {
+      stringToReturn = stringToReturn.concat(functionInput.getParameter_name()).concat("=");
+    }
+    EJinjaExpressionEvaluationWithoutBrackets _value = functionInput.getValue();
+    boolean _tripleNotEquals_1 = (_value != null);
+    if (_tripleNotEquals_1) {
+      stringToReturn = stringToReturn.concat(this.compileJinjaExpressionEvaluationWithoutBrackets(functionInput.getValue(), space).toString());
     }
     return stringToReturn;
   }
@@ -1844,7 +1860,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _recursive = ((EForStatement)jinjaStatement).getRecursive();
         boolean _tripleNotEquals_6 = (_recursive != null);
         if (_tripleNotEquals_6) {
-          stringToReturn_1 = stringToReturn_1.concat(" recursive");
+          stringToReturn_1 = stringToReturn_1.concat(" ").concat(((EForStatement)jinjaStatement).getRecursive());
         }
         stringToReturn_1 = stringToReturn_1.concat(" %}");
         stringToReturn_1 = stringToReturn_1.concat(this.compileValuePassed(((EForStatement)jinjaStatement).getFor_body(), space, isInMultiLine).toString());

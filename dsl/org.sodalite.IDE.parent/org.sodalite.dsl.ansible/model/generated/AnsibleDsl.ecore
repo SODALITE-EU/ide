@@ -302,8 +302,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="EFunctionCallOrVariable" eSuperTypes="#//EValuePassedToJinjaExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>
+        eType="#//EFunctionInput" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty_brackets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EFunctionInput">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameter_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIfBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="if_condition" eType="#//EFilteredExpression"

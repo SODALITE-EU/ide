@@ -336,6 +336,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEFunctionCallOrVariableAdapter();
       }
       @Override
+      public Adapter caseEFunctionInput(EFunctionInput object)
+      {
+        return createEFunctionInputAdapter();
+      }
+      @Override
       public Adapter caseEIfBlock(EIfBlock object)
       {
         return createEIfBlockAdapter();
@@ -1338,6 +1343,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEFunctionCallOrVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput <em>EFunction Input</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput
+   * @generated
+   */
+  public Adapter createEFunctionInputAdapter()
   {
     return null;
   }

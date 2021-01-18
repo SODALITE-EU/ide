@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class EFunctionCallOrVariableImpl extends EValuePassedToJinjaExpressionIm
    * @generated
    * @ordered
    */
-  protected EList<EJinjaExpressionEvaluationWithoutBrackets> parameters;
+  protected EList<EFunctionInput> parameters;
 
   /**
    * The default value of the '{@link #getEmpty_brackets() <em>Empty brackets</em>}' attribute.
@@ -141,11 +141,11 @@ public class EFunctionCallOrVariableImpl extends EValuePassedToJinjaExpressionIm
    * @generated
    */
   @Override
-  public EList<EJinjaExpressionEvaluationWithoutBrackets> getParameters()
+  public EList<EFunctionInput> getParameters()
   {
     if (parameters == null)
     {
-      parameters = new EObjectContainmentEList<EJinjaExpressionEvaluationWithoutBrackets>(EJinjaExpressionEvaluationWithoutBrackets.class, this, AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS);
+      parameters = new EObjectContainmentEList<EFunctionInput>(EFunctionInput.class, this, AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS);
     }
     return parameters;
   }
@@ -227,7 +227,7 @@ public class EFunctionCallOrVariableImpl extends EValuePassedToJinjaExpressionIm
         return;
       case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__PARAMETERS:
         getParameters().clear();
-        getParameters().addAll((Collection<? extends EJinjaExpressionEvaluationWithoutBrackets>)newValue);
+        getParameters().addAll((Collection<? extends EFunctionInput>)newValue);
         return;
       case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS:
         setEmpty_brackets((String)newValue);

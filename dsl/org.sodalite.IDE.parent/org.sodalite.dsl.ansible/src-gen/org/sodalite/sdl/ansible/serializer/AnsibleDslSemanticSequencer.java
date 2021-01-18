@@ -35,6 +35,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
@@ -161,6 +162,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE:
 				sequence_EFunctionCallOrVariable(context, (EFunctionCallOrVariable) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EFUNCTION_INPUT:
+				sequence_EFunctionInput(context, (EFunctionInput) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EHANDLER:
 				sequence_EHandler(context, (EHandler) semanticObject); 
@@ -595,7 +599,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         identifiers+=ID* 
 	 *         list=EFilteredExpression 
 	 *         condition=EFilteredExpression? 
-	 *         recursive='recursive'? 
+	 *         recursive=ID? 
 	 *         for_body=EValuePassed 
 	 *         ((else_block_sign='+' | else_block_sign='-')? else_body=EValuePassed)? 
 	 *         (endfor_block_sign='+' | endfor_block_sign='-')?
@@ -612,12 +616,21 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFunctionCallOrVariable returns EFunctionCallOrVariable
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=ID 
-	 *         ((parameters+=EJinjaExpressionEvaluationWithoutBrackets parameters+=EJinjaExpressionEvaluationWithoutBrackets*) | empty_brackets='()')?
-	 *     )
+	 *     (name=ID ((parameters+=EFunctionInput parameters+=EFunctionInput*) | empty_brackets='()')?)
 	 */
 	protected void sequence_EFunctionCallOrVariable(ISerializationContext context, EFunctionCallOrVariable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EFunctionInput returns EFunctionInput
+	 *
+	 * Constraint:
+	 *     (parameter_name=ID? value=EJinjaExpressionEvaluationWithoutBrackets)
+	 */
+	protected void sequence_EFunctionInput(ISerializationContext context, EFunctionInput semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1345,7 +1358,22 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ETailElement returns ETailElement
 	 *
 	 * Constraint:
-	 *     ((function_call=EFunctionCallOrVariable | number=NUMBER) square_bracket_elements+=ESquareBracketElement*)
+	 *     (
+	 *         (
+	 *             function_call=EFunctionCallOrVariable | 
+	 *             number='0' | 
+	 *             number='1' | 
+	 *             number='2' | 
+	 *             number='3' | 
+	 *             number='4' | 
+	 *             number='5' | 
+	 *             number='6' | 
+	 *             number='7' | 
+	 *             number='8' | 
+	 *             number='9'
+	 *         ) 
+	 *         square_bracket_elements+=ESquareBracketElement*
+	 *     )
 	 */
 	protected void sequence_ETailElement(ISerializationContext context, ETailElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

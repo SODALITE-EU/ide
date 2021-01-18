@@ -117,6 +117,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION: return createEJinjaExpressionEvaluation();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS: return createEJinjaExpressionEvaluationWithoutBrackets();
       case AnsibleDslPackage.EFUNCTION_CALL_OR_VARIABLE: return createEFunctionCallOrVariable();
+      case AnsibleDslPackage.EFUNCTION_INPUT: return createEFunctionInput();
       case AnsibleDslPackage.EIF_BLOCK: return createEIfBlock();
       case AnsibleDslPackage.EFILTERED_EXPRESSION: return createEFilteredExpression();
       case AnsibleDslPackage.EOR_EXPRESSION: return createEOrExpression();
@@ -785,6 +786,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EFunctionCallOrVariableImpl eFunctionCallOrVariable = new EFunctionCallOrVariableImpl();
     return eFunctionCallOrVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EFunctionInput createEFunctionInput()
+  {
+    EFunctionInputImpl eFunctionInput = new EFunctionInputImpl();
+    return eFunctionInput;
   }
 
   /**

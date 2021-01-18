@@ -43,6 +43,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
@@ -479,6 +480,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eFunctionCallOrVariableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eFunctionInputEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2676,6 +2684,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getEFunctionInput()
+  {
+    return eFunctionInputEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEFunctionInput_Parameter_name()
+  {
+    return (EAttribute)eFunctionInputEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEFunctionInput_Value()
+  {
+    return (EReference)eFunctionInputEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEIfBlock()
   {
     return eIfBlockEClass;
@@ -4141,6 +4182,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eFunctionCallOrVariableEClass, EFUNCTION_CALL_OR_VARIABLE__PARAMETERS);
     createEAttribute(eFunctionCallOrVariableEClass, EFUNCTION_CALL_OR_VARIABLE__EMPTY_BRACKETS);
 
+    eFunctionInputEClass = createEClass(EFUNCTION_INPUT);
+    createEAttribute(eFunctionInputEClass, EFUNCTION_INPUT__PARAMETER_NAME);
+    createEReference(eFunctionInputEClass, EFUNCTION_INPUT__VALUE);
+
     eIfBlockEClass = createEClass(EIF_BLOCK);
     createEReference(eIfBlockEClass, EIF_BLOCK__IF_CONDITION);
     createEReference(eIfBlockEClass, EIF_BLOCK__ELSE_EXPRESSION);
@@ -4600,8 +4645,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eFunctionCallOrVariableEClass, EFunctionCallOrVariable.class, "EFunctionCallOrVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEFunctionCallOrVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EFunctionCallOrVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEFunctionCallOrVariable_Parameters(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "parameters", null, 0, -1, EFunctionCallOrVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFunctionCallOrVariable_Parameters(), this.getEFunctionInput(), null, "parameters", null, 0, -1, EFunctionCallOrVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEFunctionCallOrVariable_Empty_brackets(), ecorePackage.getEString(), "empty_brackets", null, 0, 1, EFunctionCallOrVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eFunctionInputEClass, EFunctionInput.class, "EFunctionInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEFunctionInput_Parameter_name(), ecorePackage.getEString(), "parameter_name", null, 0, 1, EFunctionInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFunctionInput_Value(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "value", null, 0, 1, EFunctionInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIfBlockEClass, EIfBlock.class, "EIfBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEIfBlock_If_condition(), this.getEFilteredExpression(), null, "if_condition", null, 0, 1, EIfBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

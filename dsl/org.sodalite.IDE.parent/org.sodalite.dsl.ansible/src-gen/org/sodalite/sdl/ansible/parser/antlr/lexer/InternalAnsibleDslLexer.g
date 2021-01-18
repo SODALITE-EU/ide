@@ -143,8 +143,6 @@ Handlers : 'handlers:';
 
 Loop_var : 'loop_var:';
 
-Recursive : 'recursive';
-
 Register : 'register:';
 
 Run_once : 'run_once:';
@@ -283,9 +281,31 @@ FullStop : '.';
 
 Solidus : '/';
 
+DigitZero : '0';
+
+DigitOne : '1';
+
+DigitTwo : '2';
+
+DigitThree : '3';
+
+DigitFour : '4';
+
+DigitFive : '5';
+
+DigitSix : '6';
+
+DigitSeven : '7';
+
+DigitEight : '8';
+
+DigitNine : '9';
+
 Colon : ':';
 
 LessThanSign : '<';
+
+EqualsSign : '=';
 
 GreaterThanSign : '>';
 

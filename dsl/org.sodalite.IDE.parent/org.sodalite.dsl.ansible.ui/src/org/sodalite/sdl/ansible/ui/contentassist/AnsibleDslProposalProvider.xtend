@@ -260,6 +260,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor)
 	}
 	
+	override void completeEForStatement_Recursive(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		acceptor.accept(createCompletionProposal("recursive", context))
+	}
+	
 	//suggests variables declared only in this specific play
 	override void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)

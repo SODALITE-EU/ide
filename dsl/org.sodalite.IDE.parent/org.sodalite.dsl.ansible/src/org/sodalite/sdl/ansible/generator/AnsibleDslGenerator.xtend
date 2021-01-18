@@ -76,6 +76,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListJinja
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja
+import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput
 
 /**
  * Generates code from your model files on save.
@@ -585,12 +586,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (functionCall.parameters.size !== 0){
 			stringToReturn = stringToReturn.concat("(")
 			for (var index = 0; index < functionCall.parameters.size; index++){	
-				//the first parameter shouldn't have a comma before it, the others yes
+				//the first parameter passed shouldn't have a comma before it, the others yes
 				if (index == 0){
-					stringToReturn = stringToReturn.concat(compileJinjaExpressionEvaluationWithoutBrackets(functionCall.parameters.get(index), space).toString())
+					stringToReturn = stringToReturn.concat(compileFunctionInput(functionCall.parameters.get(index), space))
 				}
 				else {
-					stringToReturn = stringToReturn.concat(", ").concat(compileJinjaExpressionEvaluationWithoutBrackets(functionCall.parameters.get(index), space).toString())
+					stringToReturn = stringToReturn.concat(", ").concat(compileFunctionInput(functionCall.parameters.get(index), space))
 				}
 			}
 			stringToReturn = stringToReturn.concat(")")	
@@ -598,6 +599,13 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (functionCall.empty_brackets !== null){
 			stringToReturn = stringToReturn.concat("()")
 		}
+		return stringToReturn
+	}
+	
+	def compileFunctionInput(EFunctionInput functionInput, String space){
+		var stringToReturn = ""
+		if (functionInput.parameter_name !== null) stringToReturn = stringToReturn.concat(functionInput.parameter_name).concat("=")
+		if (functionInput.value !== null) stringToReturn = stringToReturn.concat(compileJinjaExpressionEvaluationWithoutBrackets(functionInput.value, space).toString())
 		return stringToReturn
 	}
 	
@@ -787,7 +795,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			//the filter, if present
 			if (jinjaStatement.condition !== null) stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.condition, space))
 			//the recursive keyword, if present
-			if (jinjaStatement.recursive !== null) stringToReturn = stringToReturn.concat(" recursive")
+			if (jinjaStatement.recursive !== null) stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.recursive)
 			stringToReturn = stringToReturn.concat(" %}")
 			//body of the for
 			stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.for_body, space, isInMultiLine).toString())

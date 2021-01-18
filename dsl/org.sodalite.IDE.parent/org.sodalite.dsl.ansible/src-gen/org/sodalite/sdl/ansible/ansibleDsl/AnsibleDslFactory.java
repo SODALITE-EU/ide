@@ -492,6 +492,15 @@ public interface AnsibleDslFactory extends EFactory
   EFunctionCallOrVariable createEFunctionCallOrVariable();
 
   /**
+   * Returns a new object of class '<em>EFunction Input</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EFunction Input</em>'.
+   * @generated
+   */
+  EFunctionInput createEFunctionInput();
+
+  /**
    * Returns a new object of class '<em>EIf Block</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

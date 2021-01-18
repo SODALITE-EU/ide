@@ -49,7 +49,7 @@ public interface EFunctionCallOrVariable extends EValuePassedToJinjaExpression
 
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets}.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameters</em>' containment reference list.
@@ -57,7 +57,7 @@ public interface EFunctionCallOrVariable extends EValuePassedToJinjaExpression
    * @model containment="true"
    * @generated
    */
-  EList<EJinjaExpressionEvaluationWithoutBrackets> getParameters();
+  EList<EFunctionInput> getParameters();
 
   /**
    * Returns the value of the '<em><b>Empty brackets</b></em>' attribute.
