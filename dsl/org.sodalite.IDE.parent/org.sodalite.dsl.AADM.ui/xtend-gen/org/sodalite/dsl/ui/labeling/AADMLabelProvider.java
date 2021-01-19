@@ -11,12 +11,12 @@ import org.sodalite.dsl.aADM.EAttributeAssigments;
 import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplates;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.EPropertyAssignments;
 
 /**

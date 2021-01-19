@@ -50,14 +50,12 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
-import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
@@ -75,6 +73,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
 
@@ -560,8 +560,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((model instanceof ENodeTemplateBodyImpl)) {
           type = ((ENodeTemplateBodyImpl) model).getType();
         } else {
-          if ((model instanceof EPropertyAssigmentsImpl)) {
-            EObject _eContainer = ((EPropertyAssigmentsImpl)model).eContainer();
+          if ((model instanceof EPropertyAssignmentsImpl)) {
+            EObject _eContainer = ((EPropertyAssignmentsImpl)model).eContainer();
             type = ((ENodeTemplateBodyImpl) _eContainer).getType();
           } else {
             if ((model instanceof ENodeTemplateImpl)) {

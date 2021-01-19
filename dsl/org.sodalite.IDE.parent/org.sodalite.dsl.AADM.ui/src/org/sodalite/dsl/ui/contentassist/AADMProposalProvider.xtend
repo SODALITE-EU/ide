@@ -58,10 +58,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
-import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -397,7 +397,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			
 			if (model instanceof ENodeTemplateBodyImpl)
 				type = (model as ENodeTemplateBodyImpl).type
-			else if (model instanceof EPropertyAssigmentsImpl)
+			else if (model instanceof EPropertyAssignmentsImpl)
 				type = (model.eContainer as ENodeTemplateBodyImpl).type
 			else if (model instanceof ENodeTemplateImpl)
 				type = (model as ENodeTemplateImpl).node.type
