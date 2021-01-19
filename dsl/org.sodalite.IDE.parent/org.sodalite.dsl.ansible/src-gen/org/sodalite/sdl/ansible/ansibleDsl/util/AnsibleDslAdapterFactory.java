@@ -531,6 +531,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEListJinjaAdapter();
       }
       @Override
+      public Adapter caseECondition(ECondition object)
+      {
+        return createEConditionAdapter();
+      }
+      @Override
+      public Adapter caseEListOfConditions(EListOfConditions object)
+      {
+        return createEListOfConditionsAdapter();
+      }
+      @Override
       public Adapter caseEDictionaryPassed(EDictionaryPassed object)
       {
         return createEDictionaryPassedAdapter();
@@ -1938,6 +1948,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEListJinjaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECondition <em>ECondition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECondition
+   * @generated
+   */
+  public Adapter createEConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions <em>EList Of Conditions</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
+   * @generated
+   */
+  public Adapter createEListOfConditionsAdapter()
   {
     return null;
   }

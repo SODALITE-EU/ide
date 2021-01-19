@@ -1676,9 +1676,9 @@ ruleEBlock returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEBlockAccess().getWhen_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_13_1_0());
+											newCompositeNode(grammarAccess.getEBlockAccess().getWhen_expressionEConditionParserRuleCall_2_13_1_0());
 										}
-										lv_when_expression_27_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_when_expression_27_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEBlockRule());
@@ -1687,7 +1687,7 @@ ruleEBlock returns [EObject current=null]
 												$current,
 												"when_expression",
 												lv_when_expression_27_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -2337,9 +2337,9 @@ ruleETask returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getETaskAccess().getWhen_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_3_13_1_0());
+											newCompositeNode(grammarAccess.getETaskAccess().getWhen_expressionEConditionParserRuleCall_3_13_1_0());
 										}
-										lv_when_expression_28_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_when_expression_28_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getETaskRule());
@@ -2348,7 +2348,7 @@ ruleETask returns [EObject current=null]
 												$current,
 												"when_expression",
 												lv_when_expression_28_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -3110,9 +3110,9 @@ ruleEHandler returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEHandlerAccess().getWhen_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_3_13_1_0());
+											newCompositeNode(grammarAccess.getEHandlerAccess().getWhen_expressionEConditionParserRuleCall_3_13_1_0());
 										}
-										lv_when_expression_28_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_when_expression_28_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEHandlerRule());
@@ -3121,7 +3121,7 @@ ruleEHandler returns [EObject current=null]
 												$current,
 												"when_expression",
 												lv_when_expression_28_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -4066,9 +4066,9 @@ ruleERoleInclusion returns [EObject current=null]
 									(
 										(
 											{
-												newCompositeNode(grammarAccess.getERoleInclusionAccess().getWhen_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_2_12_1_0());
+												newCompositeNode(grammarAccess.getERoleInclusionAccess().getWhen_expressionEConditionParserRuleCall_2_2_12_1_0());
 											}
-											lv_when_expression_27_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+											lv_when_expression_27_0=ruleECondition
 											{
 												if ($current==null) {
 													$current = createModelElementForParent(grammarAccess.getERoleInclusionRule());
@@ -4077,7 +4077,7 @@ ruleERoleInclusion returns [EObject current=null]
 													$current,
 													"when_expression",
 													lv_when_expression_27_0,
-													"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+													"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 												afterParserOrEnumRuleCall();
 											}
 										)
@@ -4257,9 +4257,9 @@ ruleEPlaybookInclusion returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEPlaybookInclusionAccess().getWhen_expressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getEPlaybookInclusionAccess().getWhen_expressionEConditionParserRuleCall_2_1_1_0());
 										}
-										lv_when_expression_6_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_when_expression_6_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEPlaybookInclusionRule());
@@ -4268,7 +4268,7 @@ ruleEPlaybookInclusion returns [EObject current=null]
 												$current,
 												"when_expression",
 												lv_when_expression_6_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -5991,9 +5991,9 @@ ruleETaskHandlerErrorHandling returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getChanged_whenEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0());
+											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getChanged_whenEConditionParserRuleCall_2_0_1_0());
 										}
-										lv_changed_when_4_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_changed_when_4_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getETaskHandlerErrorHandlingRule());
@@ -6002,7 +6002,7 @@ ruleETaskHandlerErrorHandling returns [EObject current=null]
 												$current,
 												"changed_when",
 												lv_changed_when_4_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -6025,9 +6025,9 @@ ruleETaskHandlerErrorHandling returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getFailed_whenEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getETaskHandlerErrorHandlingAccess().getFailed_whenEConditionParserRuleCall_2_1_1_0());
 										}
-										lv_failed_when_6_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+										lv_failed_when_6_0=ruleECondition
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getETaskHandlerErrorHandlingRule());
@@ -6036,7 +6036,7 @@ ruleETaskHandlerErrorHandling returns [EObject current=null]
 												$current,
 												"failed_when",
 												lv_failed_when_6_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+												"org.sodalite.sdl.ansible.AnsibleDsl.ECondition");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -10312,6 +10312,94 @@ ruleEListJinja returns [EObject current=null]
 		otherlv_5=RightSquareBracket
 		{
 			newLeafNode(otherlv_5, grammarAccess.getEListJinjaAccess().getRightSquareBracketKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleECondition
+entryRuleECondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEConditionRule()); }
+	iv_ruleECondition=ruleECondition
+	{ $current=$iv_ruleECondition.current; }
+	EOF;
+
+// Rule ECondition
+ruleECondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEConditionAccess().getEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_0());
+		}
+		this_EJinjaExpressionEvaluationWithoutBrackets_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+		{
+			$current = $this_EJinjaExpressionEvaluationWithoutBrackets_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEConditionAccess().getEListOfConditionsParserRuleCall_1());
+		}
+		this_EListOfConditions_1=ruleEListOfConditions
+		{
+			$current = $this_EListOfConditions_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleEListOfConditions
+entryRuleEListOfConditions returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEListOfConditionsRule()); }
+	iv_ruleEListOfConditions=ruleEListOfConditions
+	{ $current=$iv_ruleEListOfConditions.current; }
+	EOF;
+
+// Rule EListOfConditions
+ruleEListOfConditions returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_BEGIN_0=RULE_BEGIN
+		{
+			newLeafNode(this_BEGIN_0, grammarAccess.getEListOfConditionsAccess().getBEGINTerminalRuleCall_0());
+		}
+		(
+			otherlv_1=When_condition
+			{
+				newLeafNode(otherlv_1, grammarAccess.getEListOfConditionsAccess().getWhen_conditionKeyword_1_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEListOfConditionsAccess().getConditionsEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_1_0());
+					}
+					lv_conditions_2_0=ruleEJinjaExpressionEvaluationWithoutBrackets
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEListOfConditionsRule());
+						}
+						add(
+							$current,
+							"conditions",
+							lv_conditions_2_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)+
+		this_END_3=RULE_END
+		{
+			newLeafNode(this_END_3, grammarAccess.getEListOfConditionsAccess().getENDTerminalRuleCall_2());
 		}
 	)
 ;

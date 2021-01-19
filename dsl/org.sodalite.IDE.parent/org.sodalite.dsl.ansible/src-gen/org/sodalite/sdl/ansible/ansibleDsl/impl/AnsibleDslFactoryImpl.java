@@ -156,6 +156,8 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED: return createEDictionaryOfListIndented();
       case AnsibleDslPackage.EELEMENT_OF_LIST_INDENTED: return createEElementOfListIndented();
       case AnsibleDslPackage.ELIST_JINJA: return createEListJinja();
+      case AnsibleDslPackage.ECONDITION: return createECondition();
+      case AnsibleDslPackage.ELIST_OF_CONDITIONS: return createEListOfConditions();
       case AnsibleDslPackage.EDICTIONARY_PASSED: return createEDictionaryPassed();
       case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
       case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
@@ -1256,6 +1258,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EListJinjaImpl eListJinja = new EListJinjaImpl();
     return eListJinja;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ECondition createECondition()
+  {
+    EConditionImpl eCondition = new EConditionImpl();
+    return eCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EListOfConditions createEListOfConditions()
+  {
+    EListOfConditionsImpl eListOfConditions = new EListOfConditionsImpl();
+    return eListOfConditions;
   }
 
   /**

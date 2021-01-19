@@ -24,6 +24,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja;
+import org.sodalite.sdl.ansible.ansibleDsl.ECondition;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
@@ -63,6 +64,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EListJinja;
+import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
@@ -755,6 +757,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eListJinjaEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eListOfConditionsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -3888,6 +3904,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EClass getECondition()
+  {
+    return eConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEListOfConditions()
+  {
+    return eListOfConditionsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEListOfConditions_Conditions()
+  {
+    return (EReference)eListOfConditionsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEDictionaryPassed()
   {
     return eDictionaryPassedEClass;
@@ -4378,6 +4427,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eListJinjaEClass = createEClass(ELIST_JINJA);
     createEReference(eListJinjaEClass, ELIST_JINJA__ELEMENTS);
 
+    eConditionEClass = createEClass(ECONDITION);
+
+    eListOfConditionsEClass = createEClass(ELIST_OF_CONDITIONS);
+    createEReference(eListOfConditionsEClass, ELIST_OF_CONDITIONS__CONDITIONS);
+
     eDictionaryPassedEClass = createEClass(EDICTIONARY_PASSED);
 
     eListPassedEClass = createEClass(ELIST_PASSED);
@@ -4461,6 +4515,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEListPassed());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getENumberPassed());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEBooleanPassed());
+    eJinjaExpressionEvaluationWithoutBracketsEClass.getESuperTypes().add(this.getECondition());
     eFunctionCallOrVariableEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eJinjaStatementEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
     eIfStatementEClass.getESuperTypes().add(this.getEJinjaStatement());
@@ -4486,6 +4541,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eListIndentedEClass.getESuperTypes().add(this.getEList());
     eDictionaryOfListIndentedEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eListJinjaEClass.getESuperTypes().add(this.getEComposedValueJinja());
+    eListOfConditionsEClass.getESuperTypes().add(this.getECondition());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4514,7 +4570,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eExecutionEClass, EExecution.class, "EExecution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEExecution_Exe_settings(), this.getEExecutionExeSettings(), null, "exe_settings", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEExecution_Delegation(), this.getEDelegation(), null, "delegation", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEExecution_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExecution_When_expression(), this.getECondition(), null, "when_expression", null, 0, 1, EExecution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBlockTaskEClass, EBlockTask.class, "EBlockTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4576,7 +4632,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(ePlaybookInclusionEClass, EPlaybookInclusion.class, "EPlaybookInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPlaybookInclusion_Playbook_file_name(), ecorePackage.getEString(), "playbook_file_name", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlaybookInclusion_When_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "when_expression", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlaybookInclusion_When_expression(), this.getECondition(), null, "when_expression", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eLoopEClass, ELoop.class, "ELoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4638,8 +4694,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlayErrorHandling_Max_fail_percentage(), this.getENumberPassed(), null, "max_fail_percentage", null, 0, 1, EPlayErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTaskHandlerErrorHandlingEClass, ETaskHandlerErrorHandling.class, "ETaskHandlerErrorHandling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerErrorHandling_Changed_when(), this.getECondition(), null, "changed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETaskHandlerErrorHandling_Failed_when(), this.getECondition(), null, "failed_when", null, 0, 1, ETaskHandlerErrorHandling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eFactsSettingsEClass, EFactsSettings.class, "EFactsSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFactsSettings_Gather_facts(), this.getEBooleanPassed(), null, "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4853,6 +4909,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eListJinjaEClass, EListJinja.class, "EListJinja", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEListJinja_Elements(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "elements", null, 0, -1, EListJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConditionEClass, ECondition.class, "ECondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eListOfConditionsEClass, EListOfConditions.class, "EListOfConditions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEListOfConditions_Conditions(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "conditions", null, 0, -1, EListOfConditions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryPassedEClass, EDictionaryPassed.class, "EDictionaryPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -843,6 +843,24 @@ public interface AnsibleDslFactory extends EFactory
   EListJinja createEListJinja();
 
   /**
+   * Returns a new object of class '<em>ECondition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECondition</em>'.
+   * @generated
+   */
+  ECondition createECondition();
+
+  /**
+   * Returns a new object of class '<em>EList Of Conditions</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EList Of Conditions</em>'.
+   * @generated
+   */
+  EListOfConditions createEListOfConditions();
+
+  /**
    * Returns a new object of class '<em>EDictionary Passed</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

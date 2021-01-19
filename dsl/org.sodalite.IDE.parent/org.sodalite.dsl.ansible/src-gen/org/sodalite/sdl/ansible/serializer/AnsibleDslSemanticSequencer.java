@@ -52,6 +52,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EListJinja;
+import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopControl;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoopOverList;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
@@ -214,6 +215,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.ELIST_JINJA:
 				sequence_EListJinja(context, (EListJinja) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ELIST_OF_CONDITIONS:
+				sequence_EListOfConditions(context, (EListOfConditions) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ELOOP_CONTROL:
 				sequence_ELoopControl(context, (ELoopControl) semanticObject); 
@@ -387,7 +391,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         variable_declarations+=EVariableDeclaration | 
 	 *         exe_settings=EExecutionExeSettings | 
 	 *         delegation=EDelegation | 
-	 *         when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
+	 *         when_expression=ECondition | 
 	 *         error_handling=EBlockAndRoleErrorHandling | 
 	 *         tasks+=ETask | 
 	 *         rescue_tasks+=ETask | 
@@ -667,7 +671,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             variable_declarations+=EVariableDeclaration | 
 	 *             exe_settings=EExecutionExeSettings | 
 	 *             delegation=EDelegation | 
-	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
+	 *             when_expression=ECondition | 
 	 *             error_handling=ETaskHandlerErrorHandling | 
 	 *             action=EStringPassed | 
 	 *             asynchronous_settings=EAsynchronousSettings | 
@@ -826,6 +830,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	/**
 	 * Contexts:
 	 *     EJinjaExpressionEvaluationWithoutBrackets returns EJinjaExpressionEvaluationWithoutBrackets
+	 *     ECondition returns EJinjaExpressionEvaluationWithoutBrackets
 	 *
 	 * Constraint:
 	 *     (expression_to_evaluate=EFilteredExpression if_chain+=EIfBlock*)
@@ -923,6 +928,19 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     (elements+=EJinjaExpressionEvaluationWithoutBrackets elements+=EJinjaExpressionEvaluationWithoutBrackets*)?
 	 */
 	protected void sequence_EListJinja(ISerializationContext context, EListJinja semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ECondition returns EListOfConditions
+	 *     EListOfConditions returns EListOfConditions
+	 *
+	 * Constraint:
+	 *     conditions+=EJinjaExpressionEvaluationWithoutBrackets+
+	 */
+	protected void sequence_EListOfConditions(ISerializationContext context, EListOfConditions semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1173,7 +1191,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPlaybookInclusion returns EPlaybookInclusion
 	 *
 	 * Constraint:
-	 *     (playbook_file_name=STRING | when_expression=EJinjaExpressionEvaluationWithoutBrackets)+
+	 *     (playbook_file_name=STRING | when_expression=ECondition)+
 	 */
 	protected void sequence_EPlaybookInclusion(ISerializationContext context, EPlaybookInclusion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1265,7 +1283,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             variable_declarations+=EVariableDeclaration | 
 	 *             exe_settings=EExecutionExeSettings | 
 	 *             delegation=EDelegation | 
-	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
+	 *             when_expression=ECondition | 
 	 *             error_handling=EBlockAndRoleErrorHandling
 	 *         )*
 	 *     )
@@ -1385,13 +1403,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ETaskHandlerErrorHandling returns ETaskHandlerErrorHandling
 	 *
 	 * Constraint:
-	 *     (
-	 *         changed_when=EJinjaExpressionEvaluationWithoutBrackets | 
-	 *         failed_when=EJinjaExpressionEvaluationWithoutBrackets | 
-	 *         any_errors_fatal=EBooleanPassed | 
-	 *         ignore_errors=EBooleanPassed | 
-	 *         ignore_unreachable=EBooleanPassed
-	 *     )+
+	 *     (changed_when=ECondition | failed_when=ECondition | any_errors_fatal=EBooleanPassed | ignore_errors=EBooleanPassed | ignore_unreachable=EBooleanPassed)+
 	 */
 	protected void sequence_ETaskHandlerErrorHandling(ISerializationContext context, ETaskHandlerErrorHandling semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1422,7 +1434,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             variable_declarations+=EVariableDeclaration | 
 	 *             exe_settings=EExecutionExeSettings | 
 	 *             delegation=EDelegation | 
-	 *             when_expression=EJinjaExpressionEvaluationWithoutBrackets | 
+	 *             when_expression=ECondition | 
 	 *             error_handling=ETaskHandlerErrorHandling | 
 	 *             action=EStringPassed | 
 	 *             asynchronous_settings=EAsynchronousSettings | 

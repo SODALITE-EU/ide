@@ -5,8 +5,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>EJinja Expression Evaluation Without Brackets</b></em>'.
@@ -24,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface EJinjaExpressionEvaluationWithoutBrackets extends EObject
+public interface EJinjaExpressionEvaluationWithoutBrackets extends ECondition
 {
   /**
    * Returns the value of the '<em><b>Expression to evaluate</b></em>' containment reference.

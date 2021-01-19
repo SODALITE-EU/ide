@@ -3060,6 +3060,25 @@ public interface AnsibleDslPackage extends EPackage
   int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 4;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl <em>ECondition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getECondition()
+   * @generated
+   */
+  int ECONDITION = 91;
+
+  /**
+   * The number of structural features of the '<em>ECondition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ECONDITION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationWithoutBracketsImpl <em>EJinja Expression Evaluation Without Brackets</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3076,7 +3095,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__EXPRESSION_TO_EVALUATE = 0;
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__EXPRESSION_TO_EVALUATE = ECONDITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>If chain</b></em>' containment reference list.
@@ -3085,7 +3104,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__IF_CHAIN = 1;
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS__IF_CHAIN = ECONDITION_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EJinja Expression Evaluation Without Brackets</em>' class.
@@ -3094,7 +3113,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT = 2;
+  int EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS_FEATURE_COUNT = ECONDITION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EFunctionCallOrVariableImpl <em>EFunction Call Or Variable</em>}' class.
@@ -4586,6 +4605,34 @@ public interface AnsibleDslPackage extends EPackage
   int ELIST_JINJA_FEATURE_COUNT = ECOMPOSED_VALUE_JINJA_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListOfConditionsImpl <em>EList Of Conditions</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EListOfConditionsImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListOfConditions()
+   * @generated
+   */
+  int ELIST_OF_CONDITIONS = 92;
+
+  /**
+   * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELIST_OF_CONDITIONS__CONDITIONS = ECONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EList Of Conditions</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELIST_OF_CONDITIONS_FEATURE_COUNT = ECONDITION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPassedImpl <em>EDictionary Passed</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4593,7 +4640,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 91;
+  int EDICTIONARY_PASSED = 93;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -4612,7 +4659,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 92;
+  int ELIST_PASSED = 94;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -4631,7 +4678,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 93;
+  int ENUMBER_PASSED = 95;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' attribute.
@@ -4659,7 +4706,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 94;
+  int EBOOLEAN_PASSED = 96;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
@@ -4696,7 +4743,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanAnsible()
    * @generated
    */
-  int EBOOLEAN_ANSIBLE = 95;
+  int EBOOLEAN_ANSIBLE = 97;
 
   /**
    * The feature id for the '<em><b>Boolean ansible</b></em>' attribute.
@@ -7652,6 +7699,37 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEListJinja_Elements();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECondition <em>ECondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ECondition</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECondition
+   * @generated
+   */
+  EClass getECondition();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions <em>EList Of Conditions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EList Of Conditions</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
+   * @generated
+   */
+  EClass getEListOfConditions();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions#getConditions <em>Conditions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Conditions</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions#getConditions()
+   * @see #getEListOfConditions()
+   * @generated
+   */
+  EReference getEListOfConditions_Conditions();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed <em>EDictionary Passed</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -10149,6 +10227,34 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference ELIST_JINJA__ELEMENTS = eINSTANCE.getEListJinja_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl <em>ECondition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getECondition()
+     * @generated
+     */
+    EClass ECONDITION = eINSTANCE.getECondition();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListOfConditionsImpl <em>EList Of Conditions</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EListOfConditionsImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListOfConditions()
+     * @generated
+     */
+    EClass ELIST_OF_CONDITIONS = eINSTANCE.getEListOfConditions();
+
+    /**
+     * The meta object literal for the '<em><b>Conditions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELIST_OF_CONDITIONS__CONDITIONS = eINSTANCE.getEListOfConditions_Conditions();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPassedImpl <em>EDictionary Passed</em>}' class.

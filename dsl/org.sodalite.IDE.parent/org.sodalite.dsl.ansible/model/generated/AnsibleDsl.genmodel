@@ -354,6 +354,10 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EListJinja">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EListJinja/elements"/>
     </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ECondition"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EListOfConditions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EListOfConditions/conditions"/>
+    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EListPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ENumberPassed">

@@ -110,7 +110,7 @@ EBlock:
 		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('when:' when_expression=ECondition)? &
 		(error_handling=EBlockAndRoleErrorHandling)? &
 		('tasks:'
 		BEGIN
@@ -149,7 +149,7 @@ ETask:
 		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('when:' when_expression=ECondition)? &
 		(error_handling=ETaskHandlerErrorHandling)? &
 		('action:' action=EStringPassed)? &
 		(asynchronous_settings=EAsynchronousSettings)? &
@@ -183,7 +183,7 @@ EHandler:
 		END)? &
 		(exe_settings=EExecutionExeSettings)? &
 		(delegation=EDelegation)? &
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('when:' when_expression=ECondition)? &
 		(error_handling=ETaskHandlerErrorHandling)? &
 		('action:' action=EStringPassed)? &
 		(asynchronous_settings=EAsynchronousSettings)? &
@@ -237,7 +237,7 @@ ERoleInclusion:
 			END)? &
 			(exe_settings=EExecutionExeSettings)? &
 			(delegation=EDelegation)? &
-			('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)? &
+			('when:' when_expression=ECondition)? &
 			(error_handling=EBlockAndRoleErrorHandling)?
 		)
 	)
@@ -256,7 +256,7 @@ EPlaybookInclusion:
 	BEGIN
 	(
 		('import_playbook:' playbook_file_name=STRING)&
-		('when:' when_expression=EJinjaExpressionEvaluationWithoutBrackets)?
+		('when:' when_expression=ECondition)?
 	)
 	END
 ;
@@ -390,8 +390,8 @@ ETaskHandlerErrorHandling:
 	'error_handling:'
 	BEGIN
 	(
-		('changed_when:' changed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
-		('failed_when:' failed_when=EJinjaExpressionEvaluationWithoutBrackets)? &
+		('changed_when:' changed_when=ECondition)? &
+		('failed_when:' failed_when=ECondition)? &
 		('any_errors_fatal:' any_errors_fatal=EBooleanPassed)? &
 		('ignore_errors:' ignore_errors=EBooleanPassed)? &
 		('ignore_unreachable:' ignore_unreachable=EBooleanPassed)?
@@ -673,6 +673,16 @@ EElementOfListIndented:
 EListJinja:
 	{EListJinja}
 	'[' (elements+=EJinjaExpressionEvaluationWithoutBrackets (',' elements+=EJinjaExpressionEvaluationWithoutBrackets)*)? ']'
+;
+
+ECondition:
+	EJinjaExpressionEvaluationWithoutBrackets | EListOfConditions
+;
+
+EListOfConditions:
+	BEGIN
+		('when_condition:' conditions+=EJinjaExpressionEvaluationWithoutBrackets)+
+	END
 ;
 
 EDictionaryPassed:

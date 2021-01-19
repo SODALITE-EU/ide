@@ -61,6 +61,8 @@ Gather_timeout : 'gather_timeout:';
 
 Line_of_string : 'line_of_string:';
 
+When_condition : 'when_condition:';
+
 Become_method : 'become_method:';
 
 Gather_subset : 'gather_subset:';

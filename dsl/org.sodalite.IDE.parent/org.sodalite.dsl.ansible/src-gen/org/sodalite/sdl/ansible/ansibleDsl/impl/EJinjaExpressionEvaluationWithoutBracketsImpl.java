@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -38,7 +37,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrac
  *
  * @generated
  */
-public class EJinjaExpressionEvaluationWithoutBracketsImpl extends MinimalEObjectImpl.Container implements EJinjaExpressionEvaluationWithoutBrackets
+public class EJinjaExpressionEvaluationWithoutBracketsImpl extends EConditionImpl implements EJinjaExpressionEvaluationWithoutBrackets
 {
   /**
    * The cached value of the '{@link #getExpression_to_evaluate() <em>Expression to evaluate</em>}' containment reference.

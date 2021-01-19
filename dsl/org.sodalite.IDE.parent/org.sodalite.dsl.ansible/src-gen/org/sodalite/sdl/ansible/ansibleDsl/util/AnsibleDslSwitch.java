@@ -478,6 +478,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EJinjaExpressionEvaluationWithoutBrackets eJinjaExpressionEvaluationWithoutBrackets = (EJinjaExpressionEvaluationWithoutBrackets)theEObject;
         T result = caseEJinjaExpressionEvaluationWithoutBrackets(eJinjaExpressionEvaluationWithoutBrackets);
+        if (result == null) result = caseECondition(eJinjaExpressionEvaluationWithoutBrackets);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -817,6 +818,21 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = caseEComposedValueJinja(eListJinja);
         if (result == null) result = caseEValueJinja(eListJinja);
         if (result == null) result = caseEValuePassedToJinjaExpression(eListJinja);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ECONDITION:
+      {
+        ECondition eCondition = (ECondition)theEObject;
+        T result = caseECondition(eCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AnsibleDslPackage.ELIST_OF_CONDITIONS:
+      {
+        EListOfConditions eListOfConditions = (EListOfConditions)theEObject;
+        T result = caseEListOfConditions(eListOfConditions);
+        if (result == null) result = caseECondition(eListOfConditions);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -2311,6 +2327,38 @@ public class AnsibleDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEListJinja(EListJinja object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseECondition(ECondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EList Of Conditions</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EList Of Conditions</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEListOfConditions(EListOfConditions object)
   {
     return null;
   }

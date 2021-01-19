@@ -80,6 +80,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput
 import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
+import org.sodalite.sdl.ansible.ansibleDsl.ECondition
+import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
 
 /**
  * Generates code from your model files on save.
@@ -195,7 +197,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				- import_playbook: «playbookInclusion.playbook_file_name»
 			«ENDIF»			
 			«IF playbookInclusion.when_expression !== null»
-				«space»when: «compileJinjaExpressionEvaluationWithoutBrackets(playbookInclusion.when_expression, space)»
+				«space»when: «compileCondition(playbookInclusion.when_expression, space)»
 			«ENDIF»
 		«ENDIF»
 	'''
@@ -392,7 +394,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 		«ENDIF»
 		«IF execution.when_expression !== null»
-			«space»when: «compileJinjaExpressionEvaluationWithoutBrackets(execution.when_expression, space)»
+			«space»when: «compileCondition(execution.when_expression, space)»
 		«ENDIF»
 	'''
 	
@@ -439,10 +441,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTaskHandlerAttributes(ETaskHandler taskHandler, String space) '''
 		«IF taskHandler.error_handling !== null»
 			«IF taskHandler.error_handling.changed_when !== null»
-				«space»change_when: «compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.error_handling.changed_when, space)»
+				«space»change_when: «compileCondition(taskHandler.error_handling.changed_when, space)»
 			«ENDIF»
 			«IF taskHandler.error_handling.failed_when !== null»
-				«space»failed_when: «compileJinjaExpressionEvaluationWithoutBrackets(taskHandler.error_handling.failed_when, space)»
+				«space»failed_when: «compileCondition(taskHandler.error_handling.failed_when, space)»
 			«ENDIF»
 			«IF taskHandler.error_handling.any_errors_fatal !== null»
 				«space»any_errors_fatal: «compileBooleanPassed(taskHandler.error_handling.any_errors_fatal, space)»
@@ -744,7 +746,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja, String space, boolean isInMultiLine){
 		if (jinja.string !== null){
-			return jinja.string
+			return jinja.string.compileString
 		}
 		else if (jinja instanceof EJinjaExpressionEvaluation){
 			return compileJinjaExpressionEvaluation(jinja, space)
@@ -752,6 +754,17 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (jinja instanceof EJinjaStatement){
 			return compileJinjaStatement(jinja, space, isInMultiLine)
 		}
+	}
+	
+	//if there is the " inside a string, then in the original string there was a \"
+	def compileString(String string){
+		var stringToReturn = ""
+		for (var index = 0; index < string.length; index++){
+			val character = string.charAt(index)
+			if (character !== '"'.charAt(0)) stringToReturn = stringToReturn.concat(character.toString())
+			else stringToReturn = stringToReturn.concat("\\").concat(character.toString())
+		}
+		return stringToReturn
 	}
 	
 	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja, String space){
@@ -961,6 +974,17 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileBooleanAnsible(EBooleanAnsible booleanAnsible){
 		if (booleanAnsible.boolean_ansible !== null) return booleanAnsible.boolean_ansible
+	}
+	
+	def compileCondition(ECondition condition, String space){
+		if (condition instanceof EJinjaExpressionEvaluationWithoutBrackets) return compileJinjaExpressionEvaluationWithoutBrackets(condition, space)
+		else if (condition instanceof EListOfConditions){
+			var listString = ""
+			for (element : condition.conditions){
+				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileJinjaExpressionEvaluationWithoutBrackets(element, space.concat("  ")))
+			}
+			return listString
+		}
 	}
 
 }

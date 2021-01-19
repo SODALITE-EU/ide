@@ -72,6 +72,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEDictionaryPairJinjaAccess().getAlternatives_0(), "rule__EDictionaryPairJinja__Alternatives_0");
 			builder.put(grammarAccess.getEListAccess().getAlternatives(), "rule__EList__Alternatives");
 			builder.put(grammarAccess.getEElementOfListIndentedAccess().getAlternatives(), "rule__EElementOfListIndented__Alternatives");
+			builder.put(grammarAccess.getEConditionAccess().getAlternatives(), "rule__ECondition__Alternatives");
 			builder.put(grammarAccess.getEDictionaryPassedAccess().getAlternatives(), "rule__EDictionaryPassed__Alternatives");
 			builder.put(grammarAccess.getEListPassedAccess().getAlternatives(), "rule__EListPassed__Alternatives");
 			builder.put(grammarAccess.getENumberPassedAccess().getAlternatives(), "rule__ENumberPassed__Alternatives");
@@ -282,6 +283,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEListJinjaAccess().getGroup(), "rule__EListJinja__Group__0");
 			builder.put(grammarAccess.getEListJinjaAccess().getGroup_2(), "rule__EListJinja__Group_2__0");
 			builder.put(grammarAccess.getEListJinjaAccess().getGroup_2_1(), "rule__EListJinja__Group_2_1__0");
+			builder.put(grammarAccess.getEListOfConditionsAccess().getGroup(), "rule__EListOfConditions__Group__0");
+			builder.put(grammarAccess.getEListOfConditionsAccess().getGroup_1(), "rule__EListOfConditions__Group_1__0");
 			builder.put(grammarAccess.getEPlaybookAccess().getNameAssignment_1(), "rule__EPlaybook__NameAssignment_1");
 			builder.put(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2(), "rule__EPlaybook__Used_byAssignment_2");
 			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_5(), "rule__EPlaybook__PlaysAssignment_5");
@@ -549,6 +552,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEDictionaryOfListIndentedAccess().getDictionary_pairsAssignment(), "rule__EDictionaryOfListIndented__Dictionary_pairsAssignment");
 			builder.put(grammarAccess.getEListJinjaAccess().getElementsAssignment_2_0(), "rule__EListJinja__ElementsAssignment_2_0");
 			builder.put(grammarAccess.getEListJinjaAccess().getElementsAssignment_2_1_1(), "rule__EListJinja__ElementsAssignment_2_1_1");
+			builder.put(grammarAccess.getEListOfConditionsAccess().getConditionsAssignment_1_1(), "rule__EListOfConditions__ConditionsAssignment_1_1");
 			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_1(), "rule__ENumberPassed__Number_passedAssignment_1");
 			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_2(), "rule__ENumberPassed__Number_passedAssignment_2");
 			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_1(), "rule__EBooleanPassed__Boolean_passedAssignment_1");

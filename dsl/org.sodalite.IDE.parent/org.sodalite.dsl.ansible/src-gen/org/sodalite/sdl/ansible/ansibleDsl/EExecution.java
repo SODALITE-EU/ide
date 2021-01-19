@@ -73,12 +73,12 @@ public interface EExecution extends EBase
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>When expression</em>' containment reference.
-   * @see #setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets)
+   * @see #setWhen_expression(ECondition)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEExecution_When_expression()
    * @model containment="true"
    * @generated
    */
-  EJinjaExpressionEvaluationWithoutBrackets getWhen_expression();
+  ECondition getWhen_expression();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EExecution#getWhen_expression <em>When expression</em>}' containment reference.
@@ -88,6 +88,6 @@ public interface EExecution extends EBase
    * @see #getWhen_expression()
    * @generated
    */
-  void setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets value);
+  void setWhen_expression(ECondition value);
 
 } // EExecution

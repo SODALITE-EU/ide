@@ -22,12 +22,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.ECondition;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ELoop;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
@@ -206,7 +206,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EJinjaExpressionEvaluationWithoutBrackets when_expression;
+  protected ECondition when_expression;
 
   /**
    * The cached value of the '{@link #getError_handling() <em>Error handling</em>}' containment reference.
@@ -890,7 +890,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EJinjaExpressionEvaluationWithoutBrackets getWhen_expression()
+  public ECondition getWhen_expression()
   {
     return when_expression;
   }
@@ -900,9 +900,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression, NotificationChain msgs)
+  public NotificationChain basicSetWhen_expression(ECondition newWhen_expression, NotificationChain msgs)
   {
-    EJinjaExpressionEvaluationWithoutBrackets oldWhen_expression = when_expression;
+    ECondition oldWhen_expression = when_expression;
     when_expression = newWhen_expression;
     if (eNotificationRequired())
     {
@@ -918,7 +918,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setWhen_expression(EJinjaExpressionEvaluationWithoutBrackets newWhen_expression)
+  public void setWhen_expression(ECondition newWhen_expression)
   {
     if (newWhen_expression != when_expression)
     {
@@ -1514,7 +1514,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setDelegation((EDelegation)newValue);
         return;
       case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)newValue);
+        setWhen_expression((ECondition)newValue);
         return;
       case AnsibleDslPackage.ETASK__ERROR_HANDLING:
         setError_handling((ETaskHandlerErrorHandling)newValue);
@@ -1595,7 +1595,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setDelegation((EDelegation)null);
         return;
       case AnsibleDslPackage.ETASK__WHEN_EXPRESSION:
-        setWhen_expression((EJinjaExpressionEvaluationWithoutBrackets)null);
+        setWhen_expression((ECondition)null);
         return;
       case AnsibleDslPackage.ETASK__ERROR_HANDLING:
         setError_handling((ETaskHandlerErrorHandling)null);

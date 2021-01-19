@@ -40,7 +40,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="delegation" eType="#//EDelegation"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//ECondition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBlockTask"/>
@@ -137,7 +137,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPlaybookInclusion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="playbook_file_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//ECondition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ELoop"/>
@@ -227,9 +227,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETaskHandlerErrorHandling" eSuperTypes="#//EErrorHandling">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="changed_when" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="changed_when" eType="#//ECondition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="failed_when" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="failed_when" eType="#//ECondition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFactsSettings">
@@ -293,7 +293,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluationWithoutBrackets">
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluationWithoutBrackets"
+      eSuperTypes="#//ECondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression_to_evaluate"
         eType="#//EFilteredExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="if_chain" upperBound="-1"
@@ -489,6 +490,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="EElementOfListIndented"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListJinja" eSuperTypes="#//EComposedValueJinja">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EListOfConditions" eSuperTypes="#//ECondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
         eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPassed"/>
