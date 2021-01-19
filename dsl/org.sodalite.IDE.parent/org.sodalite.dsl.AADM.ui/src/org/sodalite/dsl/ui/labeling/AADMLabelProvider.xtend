@@ -15,8 +15,9 @@ import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.aADM.ENodeTemplate
 import org.sodalite.dsl.aADM.ERequirementAssignment
+import org.sodalite.dsl.aADM.EPropertyAssignment
+import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EPropertyAssignments
-import org.sodalite.dsl.rM.EPropertyAssignment
 
 /**
  * Provides labels for EObjects.
@@ -62,7 +63,11 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	def text (ENodeTemplate entry){
-		entry.name + "->" + entry.node.type
+		entry.name + "->" + renderType(entry.node.type)
+	}
+		
+	def renderType(EPREFIX_TYPE type) {
+		return type.module !== null? type.module + '/' + type.type: type.type
 	}
 	
 	def image (EPropertyAssignments entry){

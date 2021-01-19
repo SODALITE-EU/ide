@@ -16,19 +16,16 @@ public class RMTokenSource extends AbstractIndentationTokenSource {
 
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
-		// TODO Review assumption
 		return token.getType() == InternalRMParser.RULE_WS;
 	}
 
 	@Override
 	protected int getBeginTokenType() {
-		// TODO Review assumption
 		return InternalRMParser.RULE_BEGIN;
 	}
 
 	@Override
 	protected int getEndTokenType() {
-		// TODO Review assumption
 		return InternalRMParser.RULE_END;
 	}
 

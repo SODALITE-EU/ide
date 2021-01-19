@@ -16,19 +16,16 @@ public class OptimizationTokenSource extends AbstractIndentationTokenSource {
 
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
-		// TODO Review assumption
 		return token.getType() == InternalOptimizationParser.RULE_WS;
 	}
 
 	@Override
 	protected int getBeginTokenType() {
-		// TODO Review assumption
 		return InternalOptimizationParser.RULE_BEGIN;
 	}
 
 	@Override
 	protected int getEndTokenType() {
-		// TODO Review assumption
 		return InternalOptimizationParser.RULE_END;
 	}
 

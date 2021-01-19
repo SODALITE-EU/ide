@@ -34,7 +34,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		Properties prop = readDefaultProperties();
 		String kb_reasoner_uri = prop.getProperty(PreferenceConstants.KB_REASONER_URI);
 		if (kb_reasoner_uri == null)
-			kb_reasoner_uri = "http://160.40.52.200:8084/reasoner-api/v0.6/";
+			// kb_reasoner_uri = "http://160.40.52.200:8084/reasoner-api/v0.6/";
+			kb_reasoner_uri = "http://35.193.124.143:8080/reasoner-api/v0.6/";
 		String iac_uri = prop.getProperty(PreferenceConstants.IaC_URI);
 		if (iac_uri == null)
 			iac_uri = "http://154.48.185.202:8080/";

@@ -7,34 +7,34 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.sodalite.dsl.ui.backend.BackendProxy;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 
 public class AADMSaveHandler implements IHandler {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	private BackendProxy backendProxy = new BackendProxy();
+	private AADMBackendProxy backendProxy = new AADMBackendProxy();
 
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			if (PlatformUI.getWorkbench().saveAllEditors(true)) //Ask to save model before continue
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) // Ask to save model before continue
 				backendProxy.processSaveAADM(event);
-		}catch (Exception ex) {
-			ex.printStackTrace();
-			MessageDialog.openError(parent, "Save AADM Error", "There were an error reported by the KB:\n" + ex.getMessage());
+		} catch (Exception ex) {
+			MessageDialog.openError(parent, "Save AADM Error",
+					"There were an error reported by the KB:\n" + ex.getMessage());
 		}
 		return this;
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
 		// TODO Validate AADM before enabling
@@ -43,13 +43,11 @@ public class AADMSaveHandler implements IHandler {
 
 	@Override
 	public boolean isHandled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public void removeHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
 
 	}
 

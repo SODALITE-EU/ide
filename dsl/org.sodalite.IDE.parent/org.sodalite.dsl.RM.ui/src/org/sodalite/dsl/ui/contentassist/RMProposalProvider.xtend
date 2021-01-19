@@ -29,6 +29,8 @@ import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.ui.backend.BackendLogger
 import org.eclipse.jface.dialogs.MessageDialog
 import org.eclipse.swt.widgets.Shell
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
+
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -150,71 +152,77 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EDataType::supertype property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
-		System.out.println ("Data types retrieved from KB:")
-		for (type: types.elements){
-			System.out.println ("\tData type: " + type.label)
-			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
-			val proposalText = qtype
-			val displayText = qtype
-			val additionalProposalInfo = type.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+			System.out.println ("Data types retrieved from KB:")
+			for (type: types.elements){
+				System.out.println ("\tData type: " + type.label)
+				val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val proposalText = qtype
+				val displayText = qtype
+				val additionalProposalInfo = type.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other data types defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (dataType: rootModel.dataTypes.dataTypes){
+				val EPREFIX_TYPE ePrefixType = dataType.name as EPREFIX_TYPE
+				System.out.println ("\tLocal node: " + ePrefixType.type)
+				val proposalText = module + "/" + ePrefixType.type 
+				val displayText = module + "/" + ePrefixType.type 
+				val additionalProposalInfo = dataType.data.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}		
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		
-		//Add other data types defined locally in the model
-		val rootModel = findModel(model) as RM_Model
-		
-		for (dataType: rootModel.dataTypes.dataTypes){
-			val EPREFIX_TYPE ePrefixType = dataType.name as EPREFIX_TYPE
-			System.out.println ("\tLocal node: " + ePrefixType.type)
-			val proposalText = module + "/" + ePrefixType.type 
-			val displayText = module + "/" + ePrefixType.type 
-			val additionalProposalInfo = dataType.data.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}		
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeENodeTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for NodeType::superType property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
-		System.out.println ("Nodes retrieved from KB:")
-		for (node: nodes.elements){
-			System.out.println ("\tNode: " + node.label)
-			val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
-			val proposalText = qnode
-			val displayText = qnode
-			val additionalProposalInfo = node.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
+			System.out.println ("Nodes retrieved from KB:")
+			for (node: nodes.elements){
+				System.out.println ("\tNode: " + node.label)
+				val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+				val proposalText = qnode
+				val displayText = qnode
+				val additionalProposalInfo = node.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other nodes defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (nodeType: rootModel.nodeTypes.nodeTypes){
+				System.out.println ("\tLocal node: " + nodeType.name)
+				val proposalText = module + "/" + nodeType.name 
+				val displayText = module + "/" + nodeType.name 
+				val additionalProposalInfo = nodeType.node.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		
-		//Add other nodes defined locally in the model
-		val rootModel = findModel(model) as RM_Model
-		
-		for (nodeType: rootModel.nodeTypes.nodeTypes){
-			System.out.println ("\tLocal node: " + nodeType.name)
-			val proposalText = module + "/" + nodeType.name 
-			val displayText = module + "/" + nodeType.name 
-			val additionalProposalInfo = nodeType.node.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	def getLastSegment(String string, String delimiter) {
@@ -223,105 +231,113 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeERelationshipTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for RelationshipType::supertype property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> relationships = getKBReasoner().getRelationshipTypes(importedModules)
-		System.out.println ("Relationships retrieved from KB:")
-		for (relationship: relationships.elements){
-			System.out.println ("\tRelationship: " + relationship.label)
-			val qrelationship = relationship.module !== null ?getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
-			val proposalText = qrelationship
-			val displayText = qrelationship
-			val additionalProposalInfo = relationship.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> relationships = getKBReasoner().getRelationshipTypes(importedModules)
+			System.out.println ("Relationships retrieved from KB:")
+			for (relationship: relationships.elements){
+				System.out.println ("\tRelationship: " + relationship.label)
+				val qrelationship = relationship.module !== null ?getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
+				val proposalText = qrelationship
+				val displayText = qrelationship
+				val additionalProposalInfo = relationship.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other relationships defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (relationshipType: rootModel.relationshipTypes.relationshipTypes){
+				System.out.println ("\tLocal relationship type: " + relationshipType.name)
+				val proposalText = module + "/" + relationshipType.name 
+				val displayText = module + "/" + relationshipType.name 
+				val additionalProposalInfo = relationshipType.relationship.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		
-		//Add other relationships defined locally in the model
-		val rootModel = findModel(model) as RM_Model
-		
-		for (relationshipType: rootModel.relationshipTypes.relationshipTypes){
-			System.out.println ("\tLocal relationship type: " + relationshipType.name)
-			val proposalText = module + "/" + relationshipType.name 
-			val displayText = module + "/" + relationshipType.name 
-			val additionalProposalInfo = relationshipType.relationship.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeECapabilityTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for CapabilityType::supertype property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> capabilitiess = getKBReasoner().getCapabilityTypes(importedModules)
-		System.out.println ("Capabilities retrieved from KB:")
-		for (cap: capabilitiess.elements){
-			System.out.println ("\tCapability: " + cap.label)
-			val qcap = cap.module !== null ?getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
-			val proposalText = qcap
-			val displayText = qcap
-			val additionalProposalInfo = cap.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> capabilitiess = getKBReasoner().getCapabilityTypes(importedModules)
+			System.out.println ("Capabilities retrieved from KB:")
+			for (cap: capabilitiess.elements){
+				System.out.println ("\tCapability: " + cap.label)
+				val qcap = cap.module !== null ?getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
+				val proposalText = qcap
+				val displayText = qcap
+				val additionalProposalInfo = cap.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other capabilities defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (cap: rootModel.capabilityTypes.capabilityTypes){
+				System.out.println ("\tLocal capability type: " + cap.name)
+				val proposalText = module + "/" + cap.name 
+				val displayText = module + "/" + cap.name 
+				val additionalProposalInfo = cap.capability.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
 		}
-		
-		//Add other capabilities defined locally in the model
-		val rootModel = findModel(model) as RM_Model
-		
-		for (cap: rootModel.capabilityTypes.capabilityTypes){
-			System.out.println ("\tLocal capability type: " + cap.name)
-			val proposalText = module + "/" + cap.name 
-			val displayText = module + "/" + cap.name 
-			val additionalProposalInfo = cap.capability.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
 	}
 	
 	override void completeEInterfaceDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for InterfaceDefinition::type property")
-		
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
-		System.out.println ("Interfaces retrieved from KB:")
-		for (interface: interfaces.elements){
-			System.out.println ("\tCapability: " + interface.label)
-			val qinterface = interface.module !== null ?getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
-			val proposalText = qinterface
-			val displayText = qinterface
-			val additionalProposalInfo = interface.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-		
-		//Add other interfaces defined locally in the model
-		val rootModel = findModel(model) as RM_Model
-		
-		for (interface: rootModel.interfaceTypes.interfaceTypes){
-			System.out.println ("\tLocal interface type: " + interface.name)
-			val proposalText = module + "/" + interface.name 
-			val displayText = module + "/" + interface.name 
-			val additionalProposalInfo = interface.interface.description
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-
-		super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
+			System.out.println ("Interfaces retrieved from KB:")
+			for (interface: interfaces.elements){
+				System.out.println ("\tCapability: " + interface.label)
+				val qinterface = interface.module !== null ?getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
+				val proposalText = qinterface
+				val displayText = qinterface
+				val additionalProposalInfo = interface.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other interfaces defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (interface: rootModel.interfaceTypes.interfaceTypes){
+				System.out.println ("\tLocal interface type: " + interface.name)
+				val proposalText = module + "/" + interface.name 
+				val displayText = module + "/" + interface.name 
+				val additionalProposalInfo = interface.interface.description
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			}
 	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}		
 	}
 	
 	override void completeEPropertyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -349,12 +365,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeGetAttributeBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
+		//TODO implement body
 	
 	}
 	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
+		//TODO implement body
 
 	}
 	
@@ -585,6 +601,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			configurable.setAdditionalProposalInfo(additionalProposalInfo);
 		}
 		acceptor.accept(proposal)
+	}
+	
+	protected def showReadPermissionErrorDialog(){
+		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		MessageDialog.openError(parent, "Role Permissions error", 
+			"Your account does not have permissions to read some declared imports or module. \nPlease, check and fix them")
 	}
 	
 	static enum Boolean{

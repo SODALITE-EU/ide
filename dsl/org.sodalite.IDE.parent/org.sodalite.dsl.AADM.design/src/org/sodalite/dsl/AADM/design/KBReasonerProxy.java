@@ -100,7 +100,7 @@ public class KBReasonerProxy {
 				types.add(renderType(n));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting types", e);
 		}
 
 		return types;
@@ -127,7 +127,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting attributes", e);
 		}
 
 		return result;
@@ -146,7 +146,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting properties", e);
 		}
 
 		return result;
@@ -165,7 +165,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting capabilities", e);
 		}
 
 		return result;
@@ -184,7 +184,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting requirements", e);
 		}
 
 		return result;
@@ -228,7 +228,7 @@ public class KBReasonerProxy {
 				types.add(renderType(dt));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting data types", e);
 		}
 
 		return types;

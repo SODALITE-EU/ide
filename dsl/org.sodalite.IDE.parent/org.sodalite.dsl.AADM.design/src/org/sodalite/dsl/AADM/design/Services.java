@@ -243,6 +243,8 @@ public class Services {
 		String module = AADM_Helper.getModule(property);
 		// Get entity in this GetProperty body. If null, return
 		ENodeTemplate node = getEntity(property);
+		if (node == null)
+			return proposals;
 		GetPropertyBody body = ((GetProperty) property.getValue()).getProperty();
 		// Get the properties defined within the selected node requirements or
 		// capabilities

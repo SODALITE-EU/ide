@@ -1,0 +1,93 @@
+inputs:  
+    vm-name:  
+      type: list 
+    rules:  
+      type: list 
+    vpc-id:  
+      type: string 
+    region:  
+      type: string 
+    aws-access-key:  
+      type: string 
+    aws-secret-key:  
+      type: string    
+    vpc-subnet-id:
+      type: string 
+    ssh-key-name: 
+      type: string 
+    image-name: 
+      type: string 
+    security-groups: 
+      type: list 
+    flavor-name: 
+      type: string 
+    username: 
+      type: string 
+
+node_templates: 
+
+    security-aws-test:  
+      type: sodalite.nodes.AWS.SecurityRules 
+      properties:        
+        group_name:  "aws_test" 
+        group_description:  "AWS test security group" 
+        rules: 					 get_input: rules 
+        vpc_id:                  get_input: vpc-id  
+        region:                  get_input: region  
+        aws_access_key:          get_input: aws-access-key  
+        aws_secret_key:          get_input: aws-secret-key  
+
+    aws-test-vm:  
+      type: sodalite.nodes.AWS.VM
+      properties:  
+        name:  					  get_input: vm-name 
+        key_name:                 get_input: ssh-key-name  
+        image:                    get_input: image-name 
+        network:                  get_input: vpc-subnet-id  
+        security_groups:          get_input: security-groups  
+        flavor:                   get_input: flavor-name 
+        username:                 get_input: username 
+        region:                   get_input: region  
+        aws_access_key:           get_input: aws-access-key  
+        aws_secret_key:           get_input: aws-secret-key  
+      requirements:  
+      	protected_by:
+      		node: security-aws-test   
+       
+    aws-docker-host:  
+      type: sodalite.nodes.DockerHost 
+      requirements:  
+      	host:
+      		node: aws-test-vm      
+
+    docker-public-registry:
+      type: sodalite.nodes.DockerRegistry
+      properties:  
+        docker_registry_url: "registry.hub.docker.com"
+      requirements:
+      	host:
+      		node: aws-test-vm
+        
+    site:
+      type: sodalite.nodes.nginx.Site
+      properties:  
+        destination: "/tmp/index.html"
+      requirements:
+      	host:
+      		node: aws-test-vm
+        
+    nginx-container:
+      type: sodalite.nodes.DockerizedComponent
+      properties:
+        image_name: "library/nginx:latest"
+        volumes: ["/tmp/index.html:/usr/share/nginx/html/index.html"]
+        ports: ['80:80']
+        alias: "nginx-sodalite-test"
+        registry_url: "fixme"
+      requirements:
+		host:
+			node: aws-docker-host
+		registry:
+			node: docker-public-registry   
+		dependency: 
+			node: site     

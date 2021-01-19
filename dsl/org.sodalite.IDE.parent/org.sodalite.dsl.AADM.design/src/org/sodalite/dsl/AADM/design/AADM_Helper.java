@@ -18,6 +18,7 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
+import org.sodalite.dsl.ui.backend.BackendLogger;
 
 public class AADM_Helper {
 
@@ -49,7 +50,7 @@ public class AADM_Helper {
 					return c.getType().getLabel();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			BackendLogger.log("Error getting type capabilities", e);
 		}
 
 		return result;
@@ -95,7 +96,8 @@ public class AADM_Helper {
 	}
 
 	public static String renderTemplate(ENodeTemplate type) {
-		return (getModule(type) != null ? renderModule(getModule(type)) + "/" : "") + type.getName();
+		String module = getModule(type);
+		return (module != null ? renderModule(module) + "/" : "") + type.getName();
 	}
 
 	public static String renderModule(String module) {
@@ -117,12 +119,18 @@ public class AADM_Helper {
 
 	public static String getModule(EObject obj) {
 		AADM_Model model = findModel(obj);
-		return model.getModule();
+		if (model != null)
+			return model.getModule();
+		else
+			return null;
 	}
 
 	public static List<String> getImports(EObject obj) {
 		AADM_Model model = findModel(obj);
-		return model.getImports();
+		if (model != null)
+			return model.getImports();
+		else
+			return null;
 	}
 
 	public static String renderType(Type type) {
@@ -152,11 +160,15 @@ public class AADM_Helper {
 		for (ERequirementAssignment req : template.getNode().getRequirements().getRequirements()) {
 			if (req.getName().equals(requirement)) {
 				AADM_Model model = (AADM_Model) findModel(template);
-				String module = model.getModule();
-				if (req.getNode().getModule().equals(module)) {
-					node = findNode(model, req.getNode().getId());
-				} else {
-					// TODO Find node in KB
+				if (model != null) {
+					String module = model.getModule();
+					if (module != null) {
+						if (req.getNode().getModule().equals(module)) {
+							node = findNode(model, req.getNode().getId());
+						} else {
+							// TODO Find node in KB
+						}
+					}
 				}
 			}
 		}

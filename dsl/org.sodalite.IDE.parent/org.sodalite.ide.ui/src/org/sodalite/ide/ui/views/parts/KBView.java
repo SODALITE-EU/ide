@@ -42,6 +42,7 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -200,7 +201,7 @@ public class KBView {
 
 			private void createGeneralContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
 				// ACTION: Refresh KB
-				// workspace)
+				// workspace
 				Action refreshAction = new Action() {
 					public void run() {
 
@@ -210,7 +211,7 @@ public class KBView {
 							viewer.setInput(root);
 							viewer.refresh();
 						} catch (Exception e) {
-							e.printStackTrace();
+							BackendLogger.log("Error", e);
 						}
 					}
 				};
@@ -236,7 +237,7 @@ public class KBView {
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
 								modelData = getKBReasoner().getAADMsInModule(module);
 							}
-							if (!modelData.getElements().isEmpty()) {
+							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
 								IContainer root = getWorkspaceRoot();
 								String msg = "Select a workspace folder where to upload the models of the selected module";
@@ -262,7 +263,7 @@ public class KBView {
 								}
 							}
 						} catch (Exception ex) {
-							ex.printStackTrace();
+							BackendLogger.log("Error", ex);
 						}
 					}
 				};
@@ -281,7 +282,7 @@ public class KBView {
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
 								modelData = getKBReasoner().getAADMsInModule(module);
 							}
-							if (!modelData.getElements().isEmpty()) {
+							if (modelData != null && !modelData.getElements().isEmpty()) {
 								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
 										"Do you want to delete all the models in module " + module);
 								if (confirmed) {
@@ -303,7 +304,7 @@ public class KBView {
 								}
 							}
 						} catch (Exception ex) {
-							ex.printStackTrace();
+							BackendLogger.log("Error", ex);
 						}
 					}
 				};
@@ -383,7 +384,7 @@ public class KBView {
 					targetFile.delete(false, null);
 					saveContentInFile(filecontent, targetFile);
 				} catch (CoreException e) {
-					e.printStackTrace();
+					BackendLogger.log("Error", e);
 				}
 
 			}
@@ -396,7 +397,7 @@ public class KBView {
 			InputStream source = new ByteArrayInputStream(bytes);
 			targetFile.create(source, IResource.NONE, null);
 		} catch (CoreException e) {
-			e.printStackTrace();
+			BackendLogger.log("Error", e);
 		}
 	}
 

@@ -2,14 +2,12 @@ package org.sodalite.dsl.ui.wizards;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -27,6 +25,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 
 public class DeploymentWizardMainPage extends WizardPage {
@@ -43,12 +42,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 	public Map<String, String> getInputs() {
 		Map<String, String> inputs = new HashMap<>();
-		for (String key: inputWidgets.keySet()) {
+		for (String key : inputWidgets.keySet()) {
 			String type = inputDefs.get(key).getType();
 			String value = inputWidgets.get(key).getText();
-			if (type!=null && (type.contains("map") || type.contains("list")))
+			if (type != null && (type.contains("map") || type.contains("list")))
 				value = "\n" + value;
-			inputs.put (key, value);
+			inputs.put(key, value);
 		}
 		return inputs;
 //		return inputWidgets.entrySet().stream()
@@ -71,7 +70,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 		buttonSelectFile.addListener(SWT.Selection, new Listener() {
 			private String current_key = null;
 			private String current_value = null;
-			
+
 			public void handleEvent(Event event) {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
@@ -84,12 +83,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 					System.out.println("Selected inputs file: " + selectedInputFile);
 					File file = new File(selectedInputFile);
 					// Read inputs from file
-					try {
-						Files.lines(file.toPath()).forEach(
+					try (Stream<String> lines = Files.lines(file.toPath())) {
+						lines.forEach(
 								// Assign inputs values in wizard form
 								input -> processInput(input));
 					} catch (IOException e) {
-						e.printStackTrace();
+						BackendLogger.log("Error", e);
 					}
 				}
 			}
@@ -105,18 +104,17 @@ public class DeploymentWizardMainPage extends WizardPage {
 							input_value += ":" + st.nextToken();
 						inputWidgets.get(current_key).setText(input_value);
 					}
-				}else {
+				} else {
 					if (st.hasMoreTokens()) {
 						String input_value = st.nextToken();
 						while (st.hasMoreTokens())
 							input_value += ":" + st.nextToken();
 						current_value = inputWidgets.get(current_key).getText();
-						
-						inputWidgets.get(current_key).setText(
-								current_value + input_name + ":" + input_value + "\n");
+
+						inputWidgets.get(current_key).setText(current_value + input_name + ":" + input_value + "\n");
 					}
 				}
-				
+
 				return input;
 			}
 		});
@@ -143,7 +141,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 			// Text
 			Text text = null;
 			String inputType = inputDefs.get(input).getType();
-			if (inputType!=null && (inputType.contains("map") || inputType.contains("list"))) {
+			if (inputType != null && (inputType.contains("map") || inputType.contains("list"))) {
 				int number_lines = 5;
 				text = new Text(container, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
 				GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
@@ -155,13 +153,13 @@ public class DeploymentWizardMainPage extends WizardPage {
 				text.setLayoutData(gd);
 			}
 			text.setText("");
-			
+
 			text.addModifyListener(new ModifyListener() {
 				public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
 					getWizard().getContainer().updateButtons();
 				};
 			});
-			
+
 			inputWidgets.put(input, text);
 		}
 
