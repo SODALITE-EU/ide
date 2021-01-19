@@ -68,8 +68,23 @@ public class AADMLabelProvider extends DefaultEObjectLabelProvider {
   public String text(final ENodeTemplate entry) {
     String _name = entry.getName();
     String _plus = (_name + "->");
-    EPREFIX_TYPE _type = entry.getNode().getType();
-    return (_plus + _type);
+    String _renderType = this.renderType(entry.getNode().getType());
+    return (_plus + _renderType);
+  }
+  
+  public String renderType(final EPREFIX_TYPE type) {
+    String _xifexpression = null;
+    String _module = type.getModule();
+    boolean _tripleNotEquals = (_module != null);
+    if (_tripleNotEquals) {
+      String _module_1 = type.getModule();
+      String _plus = (_module_1 + "/");
+      String _type = type.getType();
+      _xifexpression = (_plus + _type);
+    } else {
+      _xifexpression = type.getType();
+    }
+    return _xifexpression;
   }
   
   public String image(final EPropertyAssigments entry) {
