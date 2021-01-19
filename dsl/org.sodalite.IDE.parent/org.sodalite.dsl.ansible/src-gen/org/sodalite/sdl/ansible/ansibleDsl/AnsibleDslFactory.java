@@ -816,6 +816,24 @@ public interface AnsibleDslFactory extends EFactory
   EListIndented createEListIndented();
 
   /**
+   * Returns a new object of class '<em>EDictionary Of List Indented</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EDictionary Of List Indented</em>'.
+   * @generated
+   */
+  EDictionaryOfListIndented createEDictionaryOfListIndented();
+
+  /**
+   * Returns a new object of class '<em>EElement Of List Indented</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EElement Of List Indented</em>'.
+   * @generated
+   */
+  EElementOfListIndented createEElementOfListIndented();
+
+  /**
    * Returns a new object of class '<em>EList Jinja</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

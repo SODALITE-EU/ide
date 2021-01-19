@@ -21,7 +21,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface ESimpleValueWithoutString extends EValueWithoutString
+public interface ESimpleValueWithoutString extends EValueWithoutString, EElementOfListIndented
 {
   /**
    * Returns the value of the '<em><b>Simple value boolean</b></em>' containment reference.

@@ -16,40 +16,40 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
-import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EList In Line</b></em>'.
+ * An implementation of the model object '<em><b>EDictionary Of List Indented</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListInLineImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryOfListIndentedImpl#getDictionary_pairs <em>Dictionary pairs</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EListInLineImpl extends EListImpl implements EListInLine
+public class EDictionaryOfListIndentedImpl extends EElementOfListIndentedImpl implements EDictionaryOfListIndented
 {
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getDictionary_pairs() <em>Dictionary pairs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElements()
+   * @see #getDictionary_pairs()
    * @generated
    * @ordered
    */
-  protected EList<EValuePassed> elements;
+  protected EList<EDictionaryPair> dictionary_pairs;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EListInLineImpl()
+  protected EDictionaryOfListIndentedImpl()
   {
     super();
   }
@@ -62,7 +62,7 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.ELIST_IN_LINE;
+    return AnsibleDslPackage.Literals.EDICTIONARY_OF_LIST_INDENTED;
   }
 
   /**
@@ -71,13 +71,13 @@ public class EListInLineImpl extends EListImpl implements EListInLine
    * @generated
    */
   @Override
-  public EList<EValuePassed> getElements()
+  public EList<EDictionaryPair> getDictionary_pairs()
   {
-    if (elements == null)
+    if (dictionary_pairs == null)
     {
-      elements = new EObjectContainmentEList<EValuePassed>(EValuePassed.class, this, AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS);
+      dictionary_pairs = new EObjectContainmentEList<EDictionaryPair>(EDictionaryPair.class, this, AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS);
     }
-    return elements;
+    return dictionary_pairs;
   }
 
   /**
@@ -90,8 +90,8 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS:
+        return ((InternalEList<?>)getDictionary_pairs()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return getElements();
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS:
+        return getDictionary_pairs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends EValuePassed>)newValue);
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS:
+        getDictionary_pairs().clear();
+        getDictionary_pairs().addAll((Collection<? extends EDictionaryPair>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        getElements().clear();
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS:
+        getDictionary_pairs().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +158,10 @@ public class EListInLineImpl extends EListImpl implements EListInLine
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ELIST_IN_LINE__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS:
+        return dictionary_pairs != null && !dictionary_pairs.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EListInLineImpl
+} //EDictionaryOfListIndentedImpl

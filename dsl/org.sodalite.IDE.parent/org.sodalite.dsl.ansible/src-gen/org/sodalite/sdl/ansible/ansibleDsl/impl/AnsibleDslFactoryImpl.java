@@ -153,6 +153,8 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ELIST: return createEList();
       case AnsibleDslPackage.ELIST_IN_LINE: return createEListInLine();
       case AnsibleDslPackage.ELIST_INDENTED: return createEListIndented();
+      case AnsibleDslPackage.EDICTIONARY_OF_LIST_INDENTED: return createEDictionaryOfListIndented();
+      case AnsibleDslPackage.EELEMENT_OF_LIST_INDENTED: return createEElementOfListIndented();
       case AnsibleDslPackage.ELIST_JINJA: return createEListJinja();
       case AnsibleDslPackage.EDICTIONARY_PASSED: return createEDictionaryPassed();
       case AnsibleDslPackage.ELIST_PASSED: return createEListPassed();
@@ -1218,6 +1220,30 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EListIndentedImpl eListIndented = new EListIndentedImpl();
     return eListIndented;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EDictionaryOfListIndented createEDictionaryOfListIndented()
+  {
+    EDictionaryOfListIndentedImpl eDictionaryOfListIndented = new EDictionaryOfListIndentedImpl();
+    return eDictionaryOfListIndented;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EElementOfListIndented createEElementOfListIndented()
+  {
+    EElementOfListIndentedImpl eElementOfListIndented = new EElementOfListIndentedImpl();
+    return eElementOfListIndented;
   }
 
   /**

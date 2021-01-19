@@ -33,7 +33,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getFunction_call <em>Function call</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getNumber <em>Number</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ETailElementImpl#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  * </ul>
  *
@@ -50,26 +49,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @ordered
    */
   protected EFunctionCallOrVariable function_call;
-
-  /**
-   * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNumber()
-   * @generated
-   * @ordered
-   */
-  protected static final String NUMBER_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNumber()
-   * @generated
-   * @ordered
-   */
-  protected String number = NUMBER_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getSquare_bracket_elements() <em>Square bracket elements</em>}' containment reference list.
@@ -158,31 +137,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
    * @generated
    */
   @Override
-  public String getNumber()
-  {
-    return number;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setNumber(String newNumber)
-  {
-    String oldNumber = number;
-    number = newNumber;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ETAIL_ELEMENT__NUMBER, oldNumber, number));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<ESquareBracketElement> getSquare_bracket_elements()
   {
     if (square_bracket_elements == null)
@@ -222,8 +176,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return getFunction_call();
-      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
-        return getNumber();
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         return getSquare_bracket_elements();
     }
@@ -243,9 +195,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCallOrVariable)newValue);
-        return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
-        setNumber((String)newValue);
         return;
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();
@@ -268,9 +217,6 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         setFunction_call((EFunctionCallOrVariable)null);
         return;
-      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
-        setNumber(NUMBER_EDEFAULT);
-        return;
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         getSquare_bracket_elements().clear();
         return;
@@ -290,29 +236,10 @@ public class ETailElementImpl extends MinimalEObjectImpl.Container implements ET
     {
       case AnsibleDslPackage.ETAIL_ELEMENT__FUNCTION_CALL:
         return function_call != null;
-      case AnsibleDslPackage.ETAIL_ELEMENT__NUMBER:
-        return NUMBER_EDEFAULT == null ? number != null : !NUMBER_EDEFAULT.equals(number);
       case AnsibleDslPackage.ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS:
         return square_bracket_elements != null && !square_bracket_elements.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (number: ");
-    result.append(number);
-    result.append(')');
-    return result.toString();
   }
 
 } //ETailElementImpl

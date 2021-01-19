@@ -5,24 +5,26 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EList;
+import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EList</b></em>'.
+ * An implementation of the model object '<em><b>EElement Of List Indented</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class EListImpl extends EComposedValueImpl implements EList
+public class EElementOfListIndentedImpl extends MinimalEObjectImpl.Container implements EElementOfListIndented
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EListImpl()
+  protected EElementOfListIndentedImpl()
   {
     super();
   }
@@ -35,7 +37,7 @@ public class EListImpl extends EComposedValueImpl implements EList
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.ELIST;
+    return AnsibleDslPackage.Literals.EELEMENT_OF_LIST_INDENTED;
   }
 
-} //EListImpl
+} //EElementOfListIndentedImpl

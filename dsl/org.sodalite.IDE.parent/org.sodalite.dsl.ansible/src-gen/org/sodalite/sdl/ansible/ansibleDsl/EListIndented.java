@@ -9,6 +9,12 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * A representation of the model object '<em><b>EList Indented</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EListIndented#getElements <em>Elements</em>}</li>
+ * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEListIndented()
  * @model
@@ -16,4 +22,16 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  */
 public interface EListIndented extends EList
 {
+  /**
+   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Elements</em>' containment reference list.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEListIndented_Elements()
+   * @model containment="true"
+   * @generated
+   */
+  org.eclipse.emf.common.util.EList<EElementOfListIndented> getElements();
+
 } // EListIndented

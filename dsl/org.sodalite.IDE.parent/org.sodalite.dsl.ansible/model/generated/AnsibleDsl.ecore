@@ -26,7 +26,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EListPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EListPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EValuePassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" eType="#//EListPassed"
         containment="true"/>
@@ -273,14 +273,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//EJinjaExpressionAndString" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EStringPassed" eSuperTypes="#//EValuePassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringPassed" eSuperTypes="#//EValuePassed #//EElementOfListIndented"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EComposedValue" eSuperTypes="#//EValueWithoutString"/>
   <eClassifiers xsi:type="ecore:EClass" name="EComposedValueJinja" eSuperTypes="#//EValueJinja"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValueJinja" eSuperTypes="#//EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValueWithoutString" eSuperTypes="#//EValuePassed"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueWithoutString" eSuperTypes="#//EValueWithoutString">
+  <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueWithoutString" eSuperTypes="#//EValueWithoutString #//EElementOfListIndented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_boolean" eType="#//EBooleanAnsible"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -446,7 +446,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ETailElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function_call" eType="#//EFunctionCallOrVariable"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="square_bracket_elements"
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
   </eClassifiers>
@@ -458,7 +457,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary_pairs" upperBound="-1"
         eType="#//EDictionaryPair" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryInLine" eSuperTypes="#//EDictionary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryInLine" eSuperTypes="#//EDictionary #//EElementOfListIndented"/>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryIndented" eSuperTypes="#//EDictionary"/>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPair">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -474,12 +473,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EList" eSuperTypes="#//EComposedValue #//EListPassed">
+  <eClassifiers xsi:type="ecore:EClass" name="EList" eSuperTypes="#//EComposedValue #//EElementOfListIndented #//EListPassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EListInLine" eSuperTypes="#//EList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//EValuePassed" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EListInLine" eSuperTypes="#//EList"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EListIndented" eSuperTypes="#//EList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EListIndented" eSuperTypes="#//EList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//EElementOfListIndented" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryOfListIndented" eSuperTypes="#//EElementOfListIndented">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dictionary_pairs" upperBound="-1"
+        eType="#//EDictionaryPair" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EElementOfListIndented"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListJinja" eSuperTypes="#//EComposedValueJinja">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//EJinjaExpressionEvaluationWithoutBrackets" containment="true"/>

@@ -14,6 +14,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EDictionaryInLine extends EDictionary
+public interface EDictionaryInLine extends EDictionary, EElementOfListIndented
 {
 } // EDictionaryInLine

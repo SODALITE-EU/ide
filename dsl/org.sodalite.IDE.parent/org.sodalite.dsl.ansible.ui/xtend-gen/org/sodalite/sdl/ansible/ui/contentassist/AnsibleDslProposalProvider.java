@@ -275,9 +275,11 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void complete_BOOLEAN_YES_NO(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_BOOLEAN_ONLY_ANSIBLE(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("no", context));
     acceptor.accept(this.createCompletionProposal("yes", context));
+    acceptor.accept(this.createCompletionProposal("false", context));
+    acceptor.accept(this.createCompletionProposal("true", context));
   }
   
   @Override
@@ -324,6 +326,55 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
       final List<EHandlerImpl> candidates = EcoreUtil2.<EHandlerImpl>getAllContentsOfType(rootPlay, EHandlerImpl.class);
       for (final EHandlerImpl candidate : candidates) {
         acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
+      }
+    }
+  }
+  
+  @Override
+  public void completeEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    if ((rootPlaybook != null)) {
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+          for (final EParameterDefinitionImpl candidate : candidatesInputVariableOperation) {
+            String _concat = "\"".concat(candidate.getName()).concat("\"");
+            String _concat_1 = "\"".concat(candidate.getName()).concat("\"");
+            StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
+            String _name = operation.getName();
+            String _plus = ("An input variable from the \'" + _name);
+            String _plus_1 = (_plus + "\' operation.");
+            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+          }
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void completeEInputInterfaceVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    if ((rootPlaybook != null)) {
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
+          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
+          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
+          EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+          for (final EPropertyDefinition input : _properties) {
+            String _concat = "\"".concat(input.getName()).concat("\"");
+            String _concat_1 = "\"".concat(input.getName()).concat("\"");
+            StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
+            String _name = interfaceDefinition.getName();
+            String _plus = ("An input variable from the \'" + _name);
+            String _plus_1 = (_plus + "\' interface.");
+            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+          }
+        }
       }
     }
   }

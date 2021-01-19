@@ -39,6 +39,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETask;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
 /**
@@ -145,7 +146,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EListPassed environment;
+  protected EValuePassed environment;
 
   /**
    * The cached value of the '{@link #getCollections() <em>Collections</em>}' containment reference.
@@ -624,7 +625,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EListPassed getEnvironment()
+  public EValuePassed getEnvironment()
   {
     return environment;
   }
@@ -634,9 +635,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetEnvironment(EListPassed newEnvironment, NotificationChain msgs)
+  public NotificationChain basicSetEnvironment(EValuePassed newEnvironment, NotificationChain msgs)
   {
-    EListPassed oldEnvironment = environment;
+    EValuePassed oldEnvironment = environment;
     environment = newEnvironment;
     if (eNotificationRequired())
     {
@@ -652,7 +653,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setEnvironment(EListPassed newEnvironment)
+  public void setEnvironment(EValuePassed newEnvironment)
   {
     if (newEnvironment != environment)
     {
@@ -1494,7 +1495,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setModule_defaults((EListPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        setEnvironment((EListPassed)newValue);
+        setEnvironment((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__COLLECTIONS:
         setCollections((EListPassed)newValue);
@@ -1576,7 +1577,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setModule_defaults((EListPassed)null);
         return;
       case AnsibleDslPackage.ETASK__ENVIRONMENT:
-        setEnvironment((EListPassed)null);
+        setEnvironment((EValuePassed)null);
         return;
       case AnsibleDslPackage.ETASK__COLLECTIONS:
         setCollections((EListPassed)null);

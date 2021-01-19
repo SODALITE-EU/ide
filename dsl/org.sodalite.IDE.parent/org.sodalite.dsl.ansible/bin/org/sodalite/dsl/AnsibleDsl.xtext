@@ -55,7 +55,7 @@ EPlay:
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
-		('environment:' environment=EListPassed)? &
+		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
 		('vars:'
@@ -101,7 +101,7 @@ EBlock:
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
-		('environment:' environment=EListPassed)? &
+		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
 		('vars:'
@@ -140,7 +140,7 @@ ETask:
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
-		('environment:' environment=EListPassed)? &
+		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
 		('vars:'
@@ -174,7 +174,7 @@ EHandler:
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EListPassed)? &
-		('environment:' environment=EListPassed)? &
+		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
 		('vars:'
@@ -198,7 +198,7 @@ EHandler:
 ;
 
 EModuleCall:
-	'module:' name=ID
+	'module:' name=STRING
 	(
 		BEGIN
 		(
@@ -228,7 +228,7 @@ ERoleInclusion:
 			('no_log:' no_log=EBooleanPassed)? &
 			('debugger:' debugger=EStringPassed)? &
 			('module_defaults:' module_defaults=EListPassed)? &
-			('environment:' environment=EListPassed)? &
+			('environment:' environment=EValuePassed)? &
 			('collections:' collections=EListPassed)? &
 			('tags:' tags=EListPassed)? &
 			('vars:'
@@ -454,7 +454,7 @@ EJinjaExpressionAndString:
 EMultiLineExpression:
 	new_line_command=('>' | '|')
 	BEGIN
-		('line:' expressions+=EJinjaExpressionAndString)+
+		('line_of_string:' expressions+=EJinjaExpressionAndString)+
 	END
 ;
 
@@ -614,7 +614,7 @@ ESpecialVariable: //https://docs.ansible.com/ansible/latest/reference_appendices
 ;
 
 ETailElement:
-	(function_call=EFunctionCallOrVariable | number=NUMBER) (square_bracket_elements+=ESquareBracketElement)*
+	(function_call=EFunctionCallOrVariable) (square_bracket_elements+=ESquareBracketElement)*
 ;
 
 ESquareBracketElement:
@@ -636,7 +636,7 @@ EDictionaryIndented:
 ;
 
 EDictionaryPair:
-	name=ID ':' value=EValuePassed
+	(name=ID | name=STRING) ':' value=EValuePassed
 ;
 
 EDictionaryJinja:
@@ -658,8 +658,16 @@ EListInLine:
 
 EListIndented:
 	BEGIN
-		( '-' elements+=EValuePassed)+
+		( '-' elements+=EElementOfListIndented)+
 	END
+;
+
+EDictionaryOfListIndented:
+	(dictionary_pairs+=EDictionaryPair)+
+;
+
+EElementOfListIndented:
+	EStringPassed | ESimpleValueWithoutString | EDictionaryInLine | EDictionaryOfListIndented | EList
 ;
 
 EListJinja:
@@ -684,15 +692,16 @@ EBooleanPassed:
 ;
 
 EBooleanAnsible:
-	boolean_ansible=BOOLEAN | boolean_ansible=BOOLEAN_YES_NO
+	boolean_ansible=BOOLEAN | boolean_ansible=BOOLEAN_ONLY_ANSIBLE
 ;
 
 terminal BOOLEAN:
 	'True' |'False'
 ;
 
-terminal BOOLEAN_YES_NO:
-	'yes' | 'no'
+//boolean accepted in Ansible but not in jinja
+terminal BOOLEAN_ONLY_ANSIBLE:
+	'yes' | 'no' | 'true' | 'false'
 ;
 
 terminal NULL:

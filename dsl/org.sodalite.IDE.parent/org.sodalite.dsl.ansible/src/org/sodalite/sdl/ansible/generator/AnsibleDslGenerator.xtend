@@ -77,6 +77,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionInput
+import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 
 /**
  * Generates code from your model files on save.
@@ -253,7 +256,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»module_defaults: «compileListPassed(base.module_defaults, space)»
 		«ENDIF»
 		«IF base.environment !== null»
-			«space»environment: «compileListPassed(base.environment, space)»
+			«space»environment: «compileValuePassed(base.environment, space, false)»
 		«ENDIF»
 		«IF base.collections !== null»
 			«space»collections: «compileListPassed(base.collections, space)»
@@ -401,7 +404,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			if (taskHandler.name !== null) return compileStringPassed(taskHandler.name, space, false)
 			else return null
 		} 
-		else if (taskHandler instanceof EHandler) return taskHandler.name
+		else if (taskHandler instanceof EHandler) return "\"".concat(taskHandler.name).concat("\"")
 	}
 	
 	//if the task/handler has a name, indent it correctly. the name of the module used is the first thing to show
@@ -426,7 +429,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«compileExecutionAttributes(taskHandler, space.concat('  '))»
 		«compileTaskHandlerAttributes(taskHandler, space.concat('  '))»
 		«IF taskHandler instanceof EHandler»
-			«IF taskHandler.listen_to !== null»
+			«IF taskHandler.listen_to.size !== 0»
 				«space.concat('  ')»listen: «compileNotifiedTopics(taskHandler)»
 			«ENDIF»
 		«ENDIF»
@@ -515,10 +518,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		var newList = new ArrayList()
 		for (notifiable : taskHandler.notifiables){
 			if (notifiable instanceof ENotifiedTopic){
-				newList.add("\"".concat(notifiable.name).concat("\""))	
+				newList.add("\"".concat(notifiable.name).concat("\""))
 			}
 			else if (notifiable instanceof ENotifiedHandler){
-				newList.add(notifiable.name.name)
+				newList.add("\"".concat(notifiable.name.name).concat("\""))
 			}
 		}
 		return newList
@@ -555,7 +558,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileTailElement(ETailElement tailElement, String space){
 		var tailElementString = ""
 		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(compileFunctionCall(tailElement.function_call, space))
-		else if (tailElement.number !== null) tailElementString = tailElementString.concat(tailElement.number)
 		for (squareBracketElement : tailElement.square_bracket_elements){
 			tailElementString = tailElementString.concat(squareBracketElement.compileSquareBracketElement)
 		}
@@ -691,11 +693,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (list instanceof EListIndented){
 			var listString = ""
 			for (element : list.elements){
-				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileValuePassed(element, space.concat("  "), false).toString())
+				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileElementOfListIndented(element, space.concat("  "), false).toString())
 			}
 			return listString
 		}
 
+	}
+	
+	def compileElementOfListIndented(EElementOfListIndented element, String space, boolean isInMultiLine){
+		if (element instanceof EValuePassed) return compileValuePassed(element, space, isInMultiLine)
+		else if (element instanceof EDictionaryOfListIndented) return compileDictionaryOfListIndented(element, space)
 	}
 	
 	def compileValuePassed(EValuePassed valuePassed, String space, boolean isInMultiLine){
@@ -912,7 +919,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (dictionary instanceof EDictionaryInLine){
 			var dictionaryString = '{'
 			for (dictionary_pair : dictionary.dictionary_pairs){
-				dictionaryString = dictionaryString.concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space, false).toString()).concat(', ')
+				dictionaryString = dictionaryString.concat(compileDictionaryPair(dictionary_pair, space.concat("  "))).concat(', ')
 			}
 			dictionaryString = dictionaryString.substring(0, dictionaryString.length() - 2)
 			dictionaryString = dictionaryString.concat('}')
@@ -921,10 +928,25 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (dictionary instanceof EDictionaryIndented){
 			var dictionaryString = ""
 			for (dictionary_pair : dictionary.dictionary_pairs){
-				dictionaryString = dictionaryString.concat('\n').concat(space).concat("  ").concat(dictionary_pair.name).concat(': ').concat(compileValuePassed(dictionary_pair.value, space.concat("  "), false).toString())
+				dictionaryString = dictionaryString.concat('\n').concat(space).concat("  ").concat(compileDictionaryPair(dictionary_pair, space.concat("  ")))
 			}
 			return dictionaryString
 		}
+	}
+	
+	def compileDictionaryPair(EDictionaryPair dictionaryPair, String space){
+		return "\'".concat(dictionaryPair.name).concat("\'").concat(": ").concat(compileValuePassed(dictionaryPair.value, space, false).toString())
+	}
+	
+	def compileDictionaryOfListIndented(EDictionaryOfListIndented dictionary, String space){
+		var dictionaryString= ""
+		for (var index = 0; index < dictionary.dictionary_pairs.size; index++){
+			if (index == 0) dictionaryString = dictionaryString.concat(compileDictionaryPair(dictionary.dictionary_pairs.get(index), space.concat("  ")))
+			else {
+				dictionaryString = dictionaryString.concat('\n').concat(space).concat("  ").concat(compileDictionaryPair(dictionary.dictionary_pairs.get(index), space.concat("  ")))
+			}
+		}
+		return dictionaryString
 	}
 	
 	def compileSimpleValueJinja(ESimpleValueJinja simpleValueInLine){

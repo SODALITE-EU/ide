@@ -59,6 +59,8 @@ Force_handlers : 'force_handlers:';
 
 Gather_timeout : 'gather_timeout:';
 
+Line_of_string : 'line_of_string:';
+
 Become_method : 'become_method:';
 
 Gather_subset : 'gather_subset:';
@@ -201,8 +203,6 @@ Diff : 'diff:';
 
 Endif : 'endif';
 
-Line : 'line:';
-
 Loop : 'loop:';
 
 Play : 'play:';
@@ -281,26 +281,6 @@ FullStop : '.';
 
 Solidus : '/';
 
-DigitZero : '0';
-
-DigitOne : '1';
-
-DigitTwo : '2';
-
-DigitThree : '3';
-
-DigitFour : '4';
-
-DigitFive : '5';
-
-DigitSix : '6';
-
-DigitSeven : '7';
-
-DigitEight : '8';
-
-DigitNine : '9';
-
 Colon : ':';
 
 LessThanSign : '<';
@@ -321,7 +301,7 @@ RightCurlyBracket : '}';
 
 RULE_BOOLEAN : ('True'|'False');
 
-RULE_BOOLEAN_YES_NO : ('yes'|'no');
+RULE_BOOLEAN_ONLY_ANSIBLE : ('yes'|'no'|'true'|'false');
 
 RULE_NULL : 'Null';
 

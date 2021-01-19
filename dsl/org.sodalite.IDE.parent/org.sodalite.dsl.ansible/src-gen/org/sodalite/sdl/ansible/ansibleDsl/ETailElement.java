@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getFunction_call <em>Function call</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getNumber <em>Number</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getSquare_bracket_elements <em>Square bracket elements</em>}</li>
  * </ul>
  *
@@ -48,28 +47,6 @@ public interface ETailElement extends EObject
    * @generated
    */
   void setFunction_call(EFunctionCallOrVariable value);
-
-  /**
-   * Returns the value of the '<em><b>Number</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Number</em>' attribute.
-   * @see #setNumber(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getETailElement_Number()
-   * @model
-   * @generated
-   */
-  String getNumber();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getNumber <em>Number</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Number</em>' attribute.
-   * @see #getNumber()
-   * @generated
-   */
-  void setNumber(String value);
 
   /**
    * Returns the value of the '<em><b>Square bracket elements</b></em>' containment reference list.

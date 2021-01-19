@@ -14,7 +14,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl

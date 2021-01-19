@@ -30,10 +30,12 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
@@ -732,6 +734,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eListIndentedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eDictionaryOfListIndentedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eElementOfListIndentedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -3586,20 +3602,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getETailElement_Number()
-  {
-    return (EAttribute)eTailElementEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getETailElement_Square_bracket_elements()
   {
-    return (EReference)eTailElementEClass.getEStructuralFeatures().get(2);
+    return (EReference)eTailElementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3784,17 +3789,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEList_Elements()
-  {
-    return (EReference)eListEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEListInLine()
   {
     return eListInLineEClass;
@@ -3806,9 +3800,64 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getEListInLine_Elements()
+  {
+    return (EReference)eListInLineEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEListIndented()
   {
     return eListIndentedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEListIndented_Elements()
+  {
+    return (EReference)eListIndentedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEDictionaryOfListIndented()
+  {
+    return eDictionaryOfListIndentedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEDictionaryOfListIndented_Dictionary_pairs()
+  {
+    return (EReference)eDictionaryOfListIndentedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEElementOfListIndented()
+  {
+    return eElementOfListIndentedEClass;
   }
 
   /**
@@ -4289,7 +4338,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eTailElementEClass = createEClass(ETAIL_ELEMENT);
     createEReference(eTailElementEClass, ETAIL_ELEMENT__FUNCTION_CALL);
-    createEAttribute(eTailElementEClass, ETAIL_ELEMENT__NUMBER);
     createEReference(eTailElementEClass, ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS);
 
     eSquareBracketElementEClass = createEClass(ESQUARE_BRACKET_ELEMENT);
@@ -4315,11 +4363,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eDictionaryPairJinjaEClass, EDICTIONARY_PAIR_JINJA__VALUE);
 
     eListEClass = createEClass(ELIST);
-    createEReference(eListEClass, ELIST__ELEMENTS);
 
     eListInLineEClass = createEClass(ELIST_IN_LINE);
+    createEReference(eListInLineEClass, ELIST_IN_LINE__ELEMENTS);
 
     eListIndentedEClass = createEClass(ELIST_INDENTED);
+    createEReference(eListIndentedEClass, ELIST_INDENTED__ELEMENTS);
+
+    eDictionaryOfListIndentedEClass = createEClass(EDICTIONARY_OF_LIST_INDENTED);
+    createEReference(eDictionaryOfListIndentedEClass, EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS);
+
+    eElementOfListIndentedEClass = createEClass(EELEMENT_OF_LIST_INDENTED);
 
     eListJinjaEClass = createEClass(ELIST_JINJA);
     createEReference(eListJinjaEClass, ELIST_JINJA__ELEMENTS);
@@ -4394,11 +4448,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eJinjaExpressionAndStringEClass.getESuperTypes().add(this.getEStringPassed());
     eMultiLineExpressionEClass.getESuperTypes().add(this.getEStringPassed());
     eStringPassedEClass.getESuperTypes().add(this.getEValuePassed());
+    eStringPassedEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eComposedValueEClass.getESuperTypes().add(this.getEValueWithoutString());
     eComposedValueJinjaEClass.getESuperTypes().add(this.getEValueJinja());
     eValueJinjaEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eValueWithoutStringEClass.getESuperTypes().add(this.getEValuePassed());
     eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEValueWithoutString());
+    eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eSimpleValueJinjaEClass.getESuperTypes().add(this.getEValueJinja());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEDictionaryPassed());
@@ -4420,12 +4476,15 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eDictionaryEClass.getESuperTypes().add(this.getEComposedValue());
     eDictionaryEClass.getESuperTypes().add(this.getEDictionaryPassed());
     eDictionaryInLineEClass.getESuperTypes().add(this.getEDictionary());
+    eDictionaryInLineEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eDictionaryIndentedEClass.getESuperTypes().add(this.getEDictionary());
     eDictionaryJinjaEClass.getESuperTypes().add(this.getEComposedValueJinja());
     eListEClass.getESuperTypes().add(this.getEComposedValue());
+    eListEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eListEClass.getESuperTypes().add(this.getEListPassed());
     eListInLineEClass.getESuperTypes().add(this.getEList());
     eListIndentedEClass.getESuperTypes().add(this.getEList());
+    eDictionaryOfListIndentedEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eListJinjaEClass.getESuperTypes().add(this.getEComposedValueJinja());
 
     // Initialize classes and features; add operations and parameters
@@ -4447,7 +4506,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEBase_No_log(), this.getEBooleanPassed(), null, "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Debugger(), this.getEStringPassed(), null, "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Module_defaults(), this.getEListPassed(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Environment(), this.getEListPassed(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Environment(), this.getEValuePassed(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Collections(), this.getEListPassed(), null, "collections", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Tags(), this.getEListPassed(), null, "tags", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Variable_declarations(), this.getEVariableDeclaration(), null, "variable_declarations", null, 0, -1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4755,7 +4814,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eTailElementEClass, ETailElement.class, "ETailElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getETailElement_Function_call(), this.getEFunctionCallOrVariable(), null, "function_call", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getETailElement_Number(), ecorePackage.getEString(), "number", null, 0, 1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getETailElement_Square_bracket_elements(), this.getESquareBracketElement(), null, "square_bracket_elements", null, 0, -1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eSquareBracketElementEClass, ESquareBracketElement.class, "ESquareBracketElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4781,11 +4839,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEDictionaryPairJinja_Value(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "value", null, 0, 1, EDictionaryPairJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eListEClass, EList.class, "EList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEList_Elements(), this.getEValuePassed(), null, "elements", null, 0, -1, EList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eListInLineEClass, EListInLine.class, "EListInLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEListInLine_Elements(), this.getEValuePassed(), null, "elements", null, 0, -1, EListInLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eListIndentedEClass, EListIndented.class, "EListIndented", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEListIndented_Elements(), this.getEElementOfListIndented(), null, "elements", null, 0, -1, EListIndented.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eDictionaryOfListIndentedEClass, EDictionaryOfListIndented.class, "EDictionaryOfListIndented", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEDictionaryOfListIndented_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionaryOfListIndented.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eElementOfListIndentedEClass, EElementOfListIndented.class, "EElementOfListIndented", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eListJinjaEClass, EListJinja.class, "EListJinja", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEListJinja_Elements(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "elements", null, 0, -1, EListJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

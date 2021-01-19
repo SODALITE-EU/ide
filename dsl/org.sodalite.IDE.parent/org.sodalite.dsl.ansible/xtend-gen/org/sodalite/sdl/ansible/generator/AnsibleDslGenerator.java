@@ -31,9 +31,11 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
@@ -580,13 +582,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EListPassed _environment = base.getEnvironment();
+      EValuePassed _environment = base.getEnvironment();
       boolean _tripleNotEquals_16 = (_environment != null);
       if (_tripleNotEquals_16) {
         _builder.append(space);
         _builder.append("environment: ");
-        Serializable _compileListPassed_1 = this.compileListPassed(base.getEnvironment(), space);
-        _builder.append(_compileListPassed_1);
+        Object _compileValuePassed = this.compileValuePassed(base.getEnvironment(), space, false);
+        _builder.append(_compileValuePassed);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -596,8 +598,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_17) {
         _builder.append(space);
         _builder.append("collections: ");
-        Serializable _compileListPassed_2 = this.compileListPassed(base.getCollections(), space);
-        _builder.append(_compileListPassed_2);
+        Serializable _compileListPassed_1 = this.compileListPassed(base.getCollections(), space);
+        _builder.append(_compileListPassed_1);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -607,8 +609,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_18) {
         _builder.append(space);
         _builder.append("tags: ");
-        Serializable _compileListPassed_3 = this.compileListPassed(base.getTags(), space);
-        _builder.append(_compileListPassed_3);
+        Serializable _compileListPassed_2 = this.compileListPassed(base.getTags(), space);
+        _builder.append(_compileListPassed_2);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1028,7 +1030,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     } else {
       if ((taskHandler instanceof EHandler)) {
-        return ((EHandler)taskHandler).getName();
+        return "\"".concat(((EHandler)taskHandler).getName()).concat("\"");
       }
     }
     return null;
@@ -1128,8 +1130,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     {
       if ((taskHandler instanceof EHandler)) {
         {
-          EList<ENotifiedTopic> _listen_to = ((EHandler)taskHandler).getListen_to();
-          boolean _tripleNotEquals_5 = (_listen_to != null);
+          int _size = ((EHandler)taskHandler).getListen_to().size();
+          boolean _tripleNotEquals_5 = (_size != 0);
           if (_tripleNotEquals_5) {
             String _concat_3 = space.concat("  ");
             _builder.append(_concat_3);
@@ -1442,7 +1444,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         newList.add("\"".concat(((ENotifiedTopic)notifiable).getName()).concat("\""));
       } else {
         if ((notifiable instanceof ENotifiedHandler)) {
-          newList.add(((ENotifiedHandler)notifiable).getName().getName());
+          newList.add("\"".concat(((ENotifiedHandler)notifiable).getName().getName()).concat("\""));
         }
       }
     }
@@ -1512,12 +1514,6 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     boolean _tripleNotEquals = (_function_call != null);
     if (_tripleNotEquals) {
       tailElementString = tailElementString.concat(this.compileFunctionCall(tailElement.getFunction_call(), space));
-    } else {
-      String _number = tailElement.getNumber();
-      boolean _tripleNotEquals_1 = (_number != null);
-      if (_tripleNotEquals_1) {
-        tailElementString = tailElementString.concat(tailElement.getNumber());
-      }
     }
     EList<ESquareBracketElement> _square_bracket_elements = tailElement.getSquare_bracket_elements();
     for (final ESquareBracketElement squareBracketElement : _square_bracket_elements) {
@@ -1711,11 +1707,22 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     } else {
       if ((list instanceof EListIndented)) {
         String listString = "";
-        EList<EValuePassed> _elements_1 = ((EListIndented)list).getElements();
-        for (final EValuePassed element_1 : _elements_1) {
-          listString = listString.concat("\n").concat(space).concat("  - ").concat(this.compileValuePassed(element_1, space.concat("  "), false).toString());
+        EList<EElementOfListIndented> _elements_1 = ((EListIndented)list).getElements();
+        for (final EElementOfListIndented element_1 : _elements_1) {
+          listString = listString.concat("\n").concat(space).concat("  - ").concat(this.compileElementOfListIndented(element_1, space.concat("  "), false).toString());
         }
         return listString;
+      }
+    }
+    return null;
+  }
+  
+  public Object compileElementOfListIndented(final EElementOfListIndented element, final String space, final boolean isInMultiLine) {
+    if ((element instanceof EValuePassed)) {
+      return this.compileValuePassed(((EValuePassed)element), space, isInMultiLine);
+    } else {
+      if ((element instanceof EDictionaryOfListIndented)) {
+        return this.compileDictionaryOfListIndented(((EDictionaryOfListIndented)element), space);
       }
     }
     return null;
@@ -2038,7 +2045,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       String dictionaryString = "{";
       EList<EDictionaryPair> _dictionary_pairs = ((EDictionaryInLine)dictionary).getDictionary_pairs();
       for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
-        dictionaryString = dictionaryString.concat(dictionary_pair.getName()).concat(": ").concat(this.compileValuePassed(dictionary_pair.getValue(), space, false).toString()).concat(", ");
+        dictionaryString = dictionaryString.concat(this.compileDictionaryPair(dictionary_pair, space.concat("  "))).concat(", ");
       }
       int _length = dictionaryString.length();
       int _minus = (_length - 2);
@@ -2050,12 +2057,28 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String dictionaryString_1 = "";
         EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryIndented)dictionary).getDictionary_pairs();
         for (final EDictionaryPair dictionary_pair_1 : _dictionary_pairs_1) {
-          dictionaryString_1 = dictionaryString_1.concat("\n").concat(space).concat("  ").concat(dictionary_pair_1.getName()).concat(": ").concat(this.compileValuePassed(dictionary_pair_1.getValue(), space.concat("  "), false).toString());
+          dictionaryString_1 = dictionaryString_1.concat("\n").concat(space).concat("  ").concat(this.compileDictionaryPair(dictionary_pair_1, space.concat("  ")));
         }
         return dictionaryString_1;
       }
     }
     return null;
+  }
+  
+  public String compileDictionaryPair(final EDictionaryPair dictionaryPair, final String space) {
+    return "\'".concat(dictionaryPair.getName()).concat("\'").concat(": ").concat(this.compileValuePassed(dictionaryPair.getValue(), space, false).toString());
+  }
+  
+  public String compileDictionaryOfListIndented(final EDictionaryOfListIndented dictionary, final String space) {
+    String dictionaryString = "";
+    for (int index = 0; (index < dictionary.getDictionary_pairs().size()); index++) {
+      if ((index == 0)) {
+        dictionaryString = dictionaryString.concat(this.compileDictionaryPair(dictionary.getDictionary_pairs().get(index), space.concat("  ")));
+      } else {
+        dictionaryString = dictionaryString.concat("\n").concat(space).concat("  ").concat(this.compileDictionaryPair(dictionary.getDictionary_pairs().get(index), space.concat("  ")));
+      }
+    }
+    return dictionaryString;
   }
   
   public String compileSimpleValueJinja(final ESimpleValueJinja simpleValueInLine) {

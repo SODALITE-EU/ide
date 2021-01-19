@@ -4195,22 +4195,13 @@ public interface AnsibleDslPackage extends EPackage
   int ETAIL_ELEMENT__FUNCTION_CALL = 0;
 
   /**
-   * The feature id for the '<em><b>Number</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ETAIL_ELEMENT__NUMBER = 1;
-
-  /**
    * The feature id for the '<em><b>Square bracket elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS = 2;
+  int ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS = 1;
 
   /**
    * The number of structural features of the '<em>ETail Element</em>' class.
@@ -4219,7 +4210,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ETAIL_ELEMENT_FEATURE_COUNT = 3;
+  int ETAIL_ELEMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl <em>ESquare Bracket Element</em>}' class.
@@ -4455,22 +4446,13 @@ public interface AnsibleDslPackage extends EPackage
   int ELIST = 85;
 
   /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELIST__ELEMENTS = ECOMPOSED_VALUE_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>EList</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELIST_FEATURE_COUNT = ECOMPOSED_VALUE_FEATURE_COUNT + 1;
+  int ELIST_FEATURE_COUNT = ECOMPOSED_VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListInLineImpl <em>EList In Line</em>}' class.
@@ -4489,7 +4471,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_IN_LINE__ELEMENTS = ELIST__ELEMENTS;
+  int ELIST_IN_LINE__ELEMENTS = ELIST_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EList In Line</em>' class.
@@ -4498,7 +4480,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_IN_LINE_FEATURE_COUNT = ELIST_FEATURE_COUNT + 0;
+  int ELIST_IN_LINE_FEATURE_COUNT = ELIST_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListIndentedImpl <em>EList Indented</em>}' class.
@@ -4517,7 +4499,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_INDENTED__ELEMENTS = ELIST__ELEMENTS;
+  int ELIST_INDENTED__ELEMENTS = ELIST_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EList Indented</em>' class.
@@ -4526,7 +4508,54 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELIST_INDENTED_FEATURE_COUNT = ELIST_FEATURE_COUNT + 0;
+  int ELIST_INDENTED_FEATURE_COUNT = ELIST_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EElementOfListIndentedImpl <em>EElement Of List Indented</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EElementOfListIndentedImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElementOfListIndented()
+   * @generated
+   */
+  int EELEMENT_OF_LIST_INDENTED = 89;
+
+  /**
+   * The number of structural features of the '<em>EElement Of List Indented</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EELEMENT_OF_LIST_INDENTED_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryOfListIndentedImpl <em>EDictionary Of List Indented</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryOfListIndentedImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryOfListIndented()
+   * @generated
+   */
+  int EDICTIONARY_OF_LIST_INDENTED = 88;
+
+  /**
+   * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS = EELEMENT_OF_LIST_INDENTED_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>EDictionary Of List Indented</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EDICTIONARY_OF_LIST_INDENTED_FEATURE_COUNT = EELEMENT_OF_LIST_INDENTED_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListJinjaImpl <em>EList Jinja</em>}' class.
@@ -4536,7 +4565,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListJinja()
    * @generated
    */
-  int ELIST_JINJA = 88;
+  int ELIST_JINJA = 90;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4564,7 +4593,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 89;
+  int EDICTIONARY_PASSED = 91;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -4583,7 +4612,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 90;
+  int ELIST_PASSED = 92;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -4602,7 +4631,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 91;
+  int ENUMBER_PASSED = 93;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' attribute.
@@ -4630,7 +4659,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 92;
+  int EBOOLEAN_PASSED = 94;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
@@ -4667,7 +4696,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanAnsible()
    * @generated
    */
-  int EBOOLEAN_ANSIBLE = 93;
+  int EBOOLEAN_ANSIBLE = 95;
 
   /**
    * The feature id for the '<em><b>Boolean ansible</b></em>' attribute.
@@ -7350,17 +7379,6 @@ public interface AnsibleDslPackage extends EPackage
   EReference getETailElement_Function_call();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getNumber <em>Number</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Number</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getNumber()
-   * @see #getETailElement()
-   * @generated
-   */
-  EAttribute getETailElement_Number();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.ETailElement#getSquare_bracket_elements <em>Square bracket elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7540,17 +7558,6 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEList();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EList#getElements <em>Elements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EList#getElements()
-   * @see #getEList()
-   * @generated
-   */
-  EReference getEList_Elements();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListInLine <em>EList In Line</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7561,6 +7568,17 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEListInLine();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EListInLine#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListInLine#getElements()
+   * @see #getEListInLine()
+   * @generated
+   */
+  EReference getEListInLine_Elements();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListIndented <em>EList Indented</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7569,6 +7587,48 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EClass getEListIndented();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EListIndented#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EListIndented#getElements()
+   * @see #getEListIndented()
+   * @generated
+   */
+  EReference getEListIndented_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented <em>EDictionary Of List Indented</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EDictionary Of List Indented</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented
+   * @generated
+   */
+  EClass getEDictionaryOfListIndented();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented#getDictionary_pairs <em>Dictionary pairs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Dictionary pairs</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented#getDictionary_pairs()
+   * @see #getEDictionaryOfListIndented()
+   * @generated
+   */
+  EReference getEDictionaryOfListIndented_Dictionary_pairs();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented <em>EElement Of List Indented</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EElement Of List Indented</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented
+   * @generated
+   */
+  EClass getEElementOfListIndented();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EListJinja <em>EList Jinja</em>}'.
@@ -9857,14 +9917,6 @@ public interface AnsibleDslPackage extends EPackage
     EReference ETAIL_ELEMENT__FUNCTION_CALL = eINSTANCE.getETailElement_Function_call();
 
     /**
-     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ETAIL_ELEMENT__NUMBER = eINSTANCE.getETailElement_Number();
-
-    /**
      * The meta object literal for the '<em><b>Square bracket elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10017,14 +10069,6 @@ public interface AnsibleDslPackage extends EPackage
     EClass ELIST = eINSTANCE.getEList();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELIST__ELEMENTS = eINSTANCE.getEList_Elements();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListInLineImpl <em>EList In Line</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10035,6 +10079,14 @@ public interface AnsibleDslPackage extends EPackage
     EClass ELIST_IN_LINE = eINSTANCE.getEListInLine();
 
     /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELIST_IN_LINE__ELEMENTS = eINSTANCE.getEListInLine_Elements();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListIndentedImpl <em>EList Indented</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10043,6 +10095,42 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass ELIST_INDENTED = eINSTANCE.getEListIndented();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELIST_INDENTED__ELEMENTS = eINSTANCE.getEListIndented_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryOfListIndentedImpl <em>EDictionary Of List Indented</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryOfListIndentedImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryOfListIndented()
+     * @generated
+     */
+    EClass EDICTIONARY_OF_LIST_INDENTED = eINSTANCE.getEDictionaryOfListIndented();
+
+    /**
+     * The meta object literal for the '<em><b>Dictionary pairs</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EDICTIONARY_OF_LIST_INDENTED__DICTIONARY_PAIRS = eINSTANCE.getEDictionaryOfListIndented_Dictionary_pairs();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EElementOfListIndentedImpl <em>EElement Of List Indented</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EElementOfListIndentedImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElementOfListIndented()
+     * @generated
+     */
+    EClass EELEMENT_OF_LIST_INDENTED = eINSTANCE.getEElementOfListIndented();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EListJinjaImpl <em>EList Jinja</em>}' class.

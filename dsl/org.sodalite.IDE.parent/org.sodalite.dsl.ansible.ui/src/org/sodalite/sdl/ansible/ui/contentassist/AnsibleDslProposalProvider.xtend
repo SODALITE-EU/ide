@@ -247,9 +247,11 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("True", context));
 	}
 
-	override void complete_BOOLEAN_YES_NO(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void complete_BOOLEAN_ONLY_ANSIBLE(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("no", context));
 		acceptor.accept(createCompletionProposal("yes", context));
+		acceptor.accept(createCompletionProposal("false", context));
+		acceptor.accept(createCompletionProposal("true", context));
 	}
 	
 	override void complete_NULL(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -294,6 +296,42 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			for (candidate: candidates){
 				acceptor.accept(createCompletionProposal("\"".concat(candidate.name).concat("\""), context))
 			}
+		}
+	}
+
+	//suggest variables given in input by the tosca operation
+	override void completeEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (rootPlaybook !== null){
+			val usedByBody = rootPlaybook.used_by
+			if (usedByBody !== null){
+				val operation = usedByBody.operation
+				if (operation !== null){
+					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+					for (candidate: candidatesInputVariableOperation){
+						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
+					}
+				}
+			}	
+		}
+	}
+	
+	//suggest variables given in input by the tosca interface
+	override void completeEInputInterfaceVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (rootPlaybook !== null){
+			val usedByBody = rootPlaybook.used_by
+			if (usedByBody !== null){
+				val operation = usedByBody.operation
+				if (operation !== null){
+					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
+					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
+					val inputsProperties = interfaceDefinitionBody.inputs
+					for (input : inputsProperties.properties){
+						createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+					}
+				}				
+			}			
 		}
 	}
 	

@@ -216,7 +216,7 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (BEGIN END)?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID (ambiguity) (rule end)
+	 *     name=STRING (ambiguity) (rule end)
 	 */
 	protected void emit_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

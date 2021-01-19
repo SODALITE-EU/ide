@@ -27,6 +27,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
 
 /**
@@ -121,7 +122,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    * @ordered
    */
-  protected EListPassed environment;
+  protected EValuePassed environment;
 
   /**
    * The cached value of the '{@link #getCollections() <em>Collections</em>}' containment reference.
@@ -480,7 +481,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public EListPassed getEnvironment()
+  public EValuePassed getEnvironment()
   {
     return environment;
   }
@@ -490,9 +491,9 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetEnvironment(EListPassed newEnvironment, NotificationChain msgs)
+  public NotificationChain basicSetEnvironment(EValuePassed newEnvironment, NotificationChain msgs)
   {
-    EListPassed oldEnvironment = environment;
+    EValuePassed oldEnvironment = environment;
     environment = newEnvironment;
     if (eNotificationRequired())
     {
@@ -508,7 +509,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public void setEnvironment(EListPassed newEnvironment)
+  public void setEnvironment(EValuePassed newEnvironment)
   {
     if (newEnvironment != environment)
     {
@@ -737,7 +738,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setModule_defaults((EListPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
-        setEnvironment((EListPassed)newValue);
+        setEnvironment((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__COLLECTIONS:
         setCollections((EListPassed)newValue);
@@ -782,7 +783,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setModule_defaults((EListPassed)null);
         return;
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
-        setEnvironment((EListPassed)null);
+        setEnvironment((EValuePassed)null);
         return;
       case AnsibleDslPackage.EBASE__COLLECTIONS:
         setCollections((EListPassed)null);

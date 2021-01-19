@@ -171,12 +171,12 @@ public interface EBase extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Environment</em>' containment reference.
-   * @see #setEnvironment(EListPassed)
+   * @see #setEnvironment(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Environment()
    * @model containment="true"
    * @generated
    */
-  EListPassed getEnvironment();
+  EValuePassed getEnvironment();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getEnvironment <em>Environment</em>}' containment reference.
@@ -186,7 +186,7 @@ public interface EBase extends EObject
    * @see #getEnvironment()
    * @generated
    */
-  void setEnvironment(EListPassed value);
+  void setEnvironment(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Collections</b></em>' containment reference.
