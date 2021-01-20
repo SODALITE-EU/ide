@@ -393,6 +393,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
+	//the operations suggested must belong to an interface of the selected node type
 	override void completeEUsedByBody_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
 		if (playbook !== null){

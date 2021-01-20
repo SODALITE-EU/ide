@@ -1,0 +1,19 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/add_network.yml
+playbook_name: "docker/add_network"
+used_by:
+	node_type: "sodalite.nodes.DockerNetwork"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: yes
+		privilege_escalation:
+			become: yes
+		tasks_list:
+			task:
+				task_name: "Create a network"
+				module: "docker_network"
+					parameters:
+						name: {{ operation_input: "docker_network_name" }}
+						state: "present"

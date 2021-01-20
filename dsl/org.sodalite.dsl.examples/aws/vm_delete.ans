@@ -1,0 +1,21 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/aws/playbooks/vm_delete.yml
+playbook_name: "aws/vm_delete"
+used_by:
+	node_type: "sodalite.nodes.AWS.VM"
+	operation: "delete"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task:
+				task_name: "Delete VM"
+				module: "ec2"
+					parameters:
+						state: "absent"
+						instance_ids:
+							- {{ operation_input: "id" }}
+						region: {{ region }} // region input is missing in the RM file
+						aws_access_key: {{ operation_input: "aws_access_key" }}
+						aws_secret_key: {{ operation_input: "aws_secret_key" }}

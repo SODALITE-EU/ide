@@ -1,0 +1,61 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/create_docker_host.yml
+playbook_name: "docker/create_docker_host"
+used_by:
+	//PROBLEM: we have 2 node types with the same name (in docker_component.rm and snow.rm), it scopes to the snow.rm one arbitrary
+	//but here we would like to scope instead the one in docker_component.rm
+	node_type: "sodalite.nodes.DockerHost"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "docker"
+		pre_tasks:
+			task:
+				task_name: "update cache"
+				module: "package"
+					parameters:
+						update_cache: yes
+			task:
+				task_name: "Set vars for Cent OS backward compatibility"
+				module: "set_fact"
+					parameters:
+						docker_package: "docker-ce-19.03.5-3.el7"
+						pip_package: "python-pip"
+				when: ansible_distribution == "CentOS"
+		
+		tasks_list:
+			task:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							public_address: {{ host_public_address }} // host_public_address input is missing in the RM file (because it scopes in snow.rm)
+							//ansible_user: same problem of host_public_address
+							username: {{ ansible_user }}
+			block:
+				block_name: "Configure the docker mtu for OpenStack and restart docker host"
+				tasks:
+					task:
+						module: "lineinfile"
+							parameters:
+								path: "/etc/docker/daemon.json"
+								line: "{\"mtu\": 1450}"
+								create: yes
+					task:
+						module: "service"
+							parameters:
+								name: "docker"
+								state: "restarted"
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.repo-epel"
+				when: ansible_distribution == "CentOS"
+			role:
+				role_name: "geerlingguy.pip"
+			role:
+				role_name: "geerlingguy.docker"

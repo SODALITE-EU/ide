@@ -1,0 +1,30 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/aws/playbooks/security_rule_create.yml
+playbook_name: "aws/security_rule_create"
+used_by:
+	node_type: "sodalite.nodes.AWS.SecurityRules"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task:
+				task_name: "Create security group"
+				module: "ec2_group"
+					parameters:
+						name: {{ operation_input: "group_name" }}
+						state: "present"
+						description: {{ operation_input: "group_description" }}
+						region: {{ operation_input: "region" }}
+						vpc_id: {{ operation_input: "vpc_id" }}
+						rules: {{ operation_input: "rules" }}
+						aws_access_key: {{ operation_input: "aws_access_key" }}
+						aws_secret_key: {{ operation_input: "aws_secret_key" }}
+				register: group_info
+			task:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							group_id: {{ registered_variable: group_info.group_id }}

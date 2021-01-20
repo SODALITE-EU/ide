@@ -1,0 +1,56 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/playbooks/configure-gridftp-client.yml
+//here, for the moment, we don't connect this ansible model with data_mover.rm, since the RM defined there is not compliant with https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/main.yml
+playbook_name: "hpc/data/mover/configure-gridftp-client"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task:
+				task_name: "Install gridftp client and proxy on Ubuntu"
+				privilege_escalation:
+					become: yes
+				module: "apt"
+					parameters:
+						name:
+							- "globus-proxy-utils"
+							- "globus-gass-copy-progs"
+							- "tree"
+						state: "present"
+						update_cache: yes
+			task:
+				task_name: "Create certs directory"
+				module: "file"
+					parameters:
+						path: {{ cert_path }}
+						state: "directory"
+			block:
+				block_name: "Copy certs artifacts"
+				tasks:
+					task:
+						module: "copy"
+							parameters:
+								src: "certs/"
+								dest: {{ cert_path }}"/"
+			block:
+				block_name: "Copy initial data artifacts"
+				tasks:
+					task:
+						module: "copy"
+							parameters:
+								src: "data/"
+								dest: {{ initial_data_path }}
+			task:
+				task_name: "Adding hostnames"
+				privilege_escalation:
+					become: yes
+				module: "lineinfile"
+					parameters:
+						dest: "/etc/hosts"
+						regexp: ".*"{{ special_variable: item.key }}"$"
+						line: {{ special_variable: item.value }}" "{{ special_variable: item.key }}
+						state: "present"
+				loop:
+					with dict: {{ hostnames }}
+				when: hostnames is defined

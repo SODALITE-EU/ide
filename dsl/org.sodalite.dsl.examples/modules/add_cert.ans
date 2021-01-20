@@ -1,0 +1,145 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/add_cert.yml
+playbook_name: "docker/add_cert"
+used_by:
+	node_type: "sodalite.nodes.RegistryCertificate"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "cryptography"
+		pre_tasks:
+			task:
+				task_name: "Set vars for Cent OS backward compatibility"
+				module: "set_fact"
+					parameters:
+						pip_package: "python-pip"
+				when: ansible_distribution == "CentOS"
+		tasks_list:
+			task:
+				module: "set_fact"
+					parameters:
+						alt_name: "IP:"{{ operation_input: "public_ipv4_address" }}
+				when: operation_input: "public_ipv4_address" != "localhost"
+			task:
+				module: "set_fact"
+					parameters:
+						alt_name: "URI:"{{ operation_input: "public_ipv4_address" }}
+				when: operation_input: "public_ipv4_address" == "localhost"
+			task:
+				module: "set_fact"
+					parameters:
+						cert_path: "/etc/docker/certs.d/"{{ operation_input: "registry_ip" }}
+			block:
+				block_name: "Create fresh certs folder"
+				tasks:
+					task:
+						module: "file"
+							parameters:
+								path: {{ fact_set: cert_path }}
+								state: "absent"
+					task:
+						module: "file"
+							parameters:
+								path: {{ fact_set: cert_path }}
+								state: "directory"
+			block:
+				block_name: "Copy root CA files"
+				tasks:
+					task:
+						module: "copy"
+							parameters:
+								src: "ca.crt"
+								dest: {{ fact_set: cert_path }}"/ca.crt"
+					task:
+						module: "copy"
+							parameters:
+								src: "ca.key"
+								dest: {{ fact_set: cert_path }}"/ca.key"
+			block:
+				block_name: "Install root CA"
+				tasks:
+					task:
+						module: "command"
+							direct_parameter: "cp "{{ fact_set: cert_path }}"/ca.crt /etc/pki/ca-trust/source/anchors/ca.crt"
+					task:
+						module: "command"
+							direct_parameter: "update-ca-trust"
+				when: ansible_distribution == "CentOS"
+			block:
+				block_name: "Install root CA"
+				tasks:
+					task:
+						module: "file"
+							parameters:
+								path: "/usr/local/share/ca-certificates/opera"
+								state: "directory"
+					task:
+						module: "command"
+							direct_parameter: "cp "{{ fact_set: cert_path }}"/ca.crt /usr/local/share/ca-certificates/opera/ca.crt"
+					task:
+						module: "command"
+							direct_parameter: "update-ca-certificates"
+				when: ansible_distribution == "Ubuntu"
+			block:
+				block_name: "Generate certificates for communication with the registry and clean up"
+				tasks:
+					task:
+						module: "openssl_privatekey"
+							parameters:
+								path: {{ fact_set: cert_path }}"/client.key"
+								size: 4096
+					task:
+						module: "openssl_csr"
+							parameters:
+								path: {{ fact_set: cert_path }}"/client.csr"
+								privatekey_path: {{ fact_set: cert_path }}"/client.key"
+								country_name: {{ operation_input: "country_name" }}
+								organization_name: {{ operation_input: "organization_name" }}
+								email_address: {{ operation_input: "email_address" }}
+								common_name: {{ common_name }} // common_name input is missing in the RM file
+								subject_alt_name: {{ fact_set: alt_name }}
+					task:
+						module: "openssl_certificate"
+							parameters:
+								path: {{ fact_set: cert_path }}"/client.cert"
+								csr_path: {{ fact_set: cert_path }}"/client.csr"
+								ownca_path: {{ fact_set: cert_path }}"/ca.crt"
+								ownca_privatekey_path: {{ fact_set: cert_path }}"/ca.key"
+								provider: "ownca"
+					task:
+						module: "file"
+							parameters:
+								state: "absent"
+								path: {{ fact_set: cert_path }}"/client.csr"
+					task:
+						module: "file"
+							parameters:
+								state: "absent"
+								path: {{ fact_set: cert_path }}"/ca.key"
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.pip"
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								

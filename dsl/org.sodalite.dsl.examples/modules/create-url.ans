@@ -1,0 +1,42 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/playbooks/create-url.yml
+playbook_name: "hpc/data/mover/create-url"
+used_by:
+	node_type: "sodalite.data.mover.url"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task:
+				task_name: >
+					line_of_string: "Create temporary inventory for remote_host,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "remote_host"
+						groups: "remote_host"
+						ansible_host: {{ operation_input: "remote_host_public_address" }}
+						ansible_user: {{ operation_input: "remote_host_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "remote_host_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		hosts: "remote_host"
+		facts_settings:
+			gather_facts: yes
+		vars:
+			dst_parsed: {{ (operation_input: "dst" == None) | ternary("", dst) }}
+			dst_path: {{ (declared_variable: dst_parsed != "" and declared_variable: dst_parsed[0] == "/") | ternary(declared_variable: dst_parsed, ansible_env.HOME + "/" + declared_variable: dst_parsed) }}
+		tasks_list:
+			task:
+				task_name: "Move data via get_url"
+				module: "get_url"
+					parameters:
+						url: {{ operation_input: "src" }}
+						dest: {{ declared_variable: dst_path }}

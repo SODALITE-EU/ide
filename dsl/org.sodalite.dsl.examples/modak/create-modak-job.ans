@@ -1,0 +1,71 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/modak/job/playbooks/create-modak-job.yml
+playbook_name:"hpc/modak/job/create-modak-job"
+used_by:
+	node_type: "sodalite.nodes.modak.job"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task:
+				task_name: "Create optimization.ai_training.config.type variable"
+				module: "set_fact"
+					parameters:
+						optimisation_updated_params: {{ operation_input: "optimisation" | combine( { 'app_type-ai_training': { 'config': {'type': declared_variable: ai_config_type } } }, recursive=True ) }}
+				vars:
+					ai_config_type: {{ operation_input: "optimisation"["app_type-ai_training"]["config"]["config_type"] }}
+				when: operation_input: "optimisation"["app_type-ai_training"]["config"]["config_type"] is defined
+			task:
+				task_name: "Create request data"
+				module: "set_fact"
+					parameters:
+						request:
+							job:
+								job_options: {{ operation_input: "job_options" }}
+								application: {{ operation_input: "application" }}
+								target: {{ operation_input: "target" }}
+								optimisation: {{ fact_set: optimisation_updated_params if fact_set: optimisation_updated_params is defined else operation_input: "optimisation" }}
+			//just for debugging purposes
+			task:
+				module: "copy"
+					parameters:
+						content: {{ fact_set: request | to_nice_json }}
+						dest:"/tmp/ansible-request-"{{ fact_set: request }}".json"
+			task:
+				task_name: "Send request to MODAK"
+				module: "uri"
+					parameters:
+						url: {{ operation_input: "modak_endpoint" }}
+						method: "POST"
+						body_format: "json"
+						body: {{ fact_set: request }}
+				register: response
+			//just for debugging purposes
+			task:
+				module: "copy"
+					parameters:
+						content: {{ registered_variable: response.json | to_nice_json }}
+						dest: "/tmp/ansible-response-"{{ fact_set: request['job']['application']['app_tag'] }}".json"
+			task:
+				module: "set_fact"
+					parameters:
+						artifact_url: {{ registered_variable: response.json.job.job_script }}
+			task:
+				module: "set_fact"
+					parameters:
+						container_runtime: {{ registered_variable: response.json.job.application.container_runtime if registered_variable: response.json.job.application.container_runtime is defined else ''}}
+			task:
+				task_name: "Set artifact url"
+				module: "set_stats"
+					parameters:
+						data:
+							artifact_url: {{ fact_set: artifact_url }}
+							container_runtime: {{ fact_set: container_runtime }}
+			task:
+				task_name: "Save job"
+				module: "get_url"
+					parameters:
+						url: {{ fact_set: artifact_url }}
+						dest: {{ operation_input: "job_script" }}
