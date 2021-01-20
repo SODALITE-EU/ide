@@ -487,10 +487,10 @@ EValueWithoutString:
 ;
 
 ESimpleValueWithoutString:
-	simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
+	simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value_number=ENumber | simple_value=NONE
 ;
 ESimpleValueJinja:
-	simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE
+	simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value_number=ENumber | simple_value=NONE
 ;
 
 EJinjaExpressionEvaluation:
@@ -564,10 +564,6 @@ EForStatement:
 	'{%' (endfor_block_sign=('+' | '-'))? 'endfor' '%}'
 ;
 
-EDictionaryPairReference:
-	name=[EDictionaryPair|ID] ('[' index=NUMBER ']')?
-;
-
 EVariableDeclarationVariableReference:
 	'declared_variable:' variable_declaration_variable_reference=[EVariableDeclaration|ID]
 ;
@@ -618,7 +614,7 @@ ETailElement:
 ;
 
 ESquareBracketElement:
-	'[' (index=NUMBER | field=STRING) ']'
+	'[' (index=ENumber | field=STRING) ']'
 ;
 
 EDictionary:
@@ -694,7 +690,7 @@ EListPassed:
 ;
 
 ENumberPassed:
-	EJinjaExpressionEvaluation | number_passed=NUMBER | number_passed=NULL
+	EJinjaExpressionEvaluation | number_passed=ENumber | number_passed_null=NULL
 ;
 
 EBooleanPassed:
@@ -724,6 +720,10 @@ terminal NONE:
 
 terminal NUMBER:
 	(('1'..'9')('0'..'9')* | '0') ('.'('0'..'9')+)?
+;
+
+ENumber:
+	('number_of_initial_zeros:' initial_zeros=NUMBER ',')? number=NUMBER
 ;
 
 //Positional blocks delimited with indentation

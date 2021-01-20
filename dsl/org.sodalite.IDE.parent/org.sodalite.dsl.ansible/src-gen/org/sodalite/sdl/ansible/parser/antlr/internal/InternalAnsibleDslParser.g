@@ -7174,19 +7174,20 @@ ruleESimpleValueWithoutString returns [EObject current=null]
 		    |
 		(
 			(
-				lv_simple_value_2_0=RULE_NUMBER
 				{
-					newLeafNode(lv_simple_value_2_0, grammarAccess.getESimpleValueWithoutStringAccess().getSimple_valueNUMBERTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getESimpleValueWithoutStringAccess().getSimple_value_numberENumberParserRuleCall_2_0());
 				}
+				lv_simple_value_number_2_0=ruleENumber
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getESimpleValueWithoutStringRule());
+						$current = createModelElementForParent(grammarAccess.getESimpleValueWithoutStringRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
-						"simple_value",
-						lv_simple_value_2_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+						"simple_value_number",
+						lv_simple_value_number_2_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -7287,19 +7288,20 @@ ruleESimpleValueJinja returns [EObject current=null]
 		    |
 		(
 			(
-				lv_simple_value_3_0=RULE_NUMBER
 				{
-					newLeafNode(lv_simple_value_3_0, grammarAccess.getESimpleValueJinjaAccess().getSimple_valueNUMBERTerminalRuleCall_3_0());
+					newCompositeNode(grammarAccess.getESimpleValueJinjaAccess().getSimple_value_numberENumberParserRuleCall_3_0());
 				}
+				lv_simple_value_number_3_0=ruleENumber
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getESimpleValueJinjaRule());
+						$current = createModelElementForParent(grammarAccess.getESimpleValueJinjaRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
-						"simple_value",
-						lv_simple_value_3_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+						"simple_value_number",
+						lv_simple_value_number_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -9540,19 +9542,20 @@ ruleESquareBracketElement returns [EObject current=null]
 		(
 			(
 				(
-					lv_index_1_0=RULE_NUMBER
 					{
-						newLeafNode(lv_index_1_0, grammarAccess.getESquareBracketElementAccess().getIndexNUMBERTerminalRuleCall_1_0_0());
+						newCompositeNode(grammarAccess.getESquareBracketElementAccess().getIndexENumberParserRuleCall_1_0_0());
 					}
+					lv_index_1_0=ruleENumber
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getESquareBracketElementRule());
+							$current = createModelElementForParent(grammarAccess.getESquareBracketElementRule());
 						}
-						setWithLastConsumed(
+						set(
 							$current,
 							"index",
 							lv_index_1_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+							"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -10503,28 +10506,29 @@ ruleENumberPassed returns [EObject current=null]
 		    |
 		(
 			(
-				lv_number_passed_1_0=RULE_NUMBER
 				{
-					newLeafNode(lv_number_passed_1_0, grammarAccess.getENumberPassedAccess().getNumber_passedNUMBERTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_1_0());
 				}
+				lv_number_passed_1_0=ruleENumber
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getENumberPassedRule());
+						$current = createModelElementForParent(grammarAccess.getENumberPassedRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"number_passed",
 						lv_number_passed_1_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+						"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		    |
 		(
 			(
-				lv_number_passed_2_0=RULE_NULL
+				lv_number_passed_null_2_0=RULE_NULL
 				{
-					newLeafNode(lv_number_passed_2_0, grammarAccess.getENumberPassedAccess().getNumber_passedNULLTerminalRuleCall_2_0());
+					newLeafNode(lv_number_passed_null_2_0, grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -10532,8 +10536,8 @@ ruleENumberPassed returns [EObject current=null]
 					}
 					setWithLastConsumed(
 						$current,
-						"number_passed",
-						lv_number_passed_2_0,
+						"number_passed_null",
+						lv_number_passed_null_2_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
 				}
 			)
@@ -10657,6 +10661,71 @@ ruleEBooleanAnsible returns [EObject current=null]
 						"boolean_ansible",
 						lv_boolean_ansible_1_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN_ONLY_ANSIBLE");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleENumber
+entryRuleENumber returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getENumberRule()); }
+	iv_ruleENumber=ruleENumber
+	{ $current=$iv_ruleENumber.current; }
+	EOF;
+
+// Rule ENumber
+ruleENumber returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0=Number_of_initial_zeros
+			{
+				newLeafNode(otherlv_0, grammarAccess.getENumberAccess().getNumber_of_initial_zerosKeyword_0_0());
+			}
+			(
+				(
+					lv_initial_zeros_1_0=RULE_NUMBER
+					{
+						newLeafNode(lv_initial_zeros_1_0, grammarAccess.getENumberAccess().getInitial_zerosNUMBERTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getENumberRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"initial_zeros",
+							lv_initial_zeros_1_0,
+							"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+					}
+				)
+			)
+			otherlv_2=Comma
+			{
+				newLeafNode(otherlv_2, grammarAccess.getENumberAccess().getCommaKeyword_0_2());
+			}
+		)?
+		(
+			(
+				lv_number_3_0=RULE_NUMBER
+				{
+					newLeafNode(lv_number_3_0, grammarAccess.getENumberAccess().getNumberNUMBERTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getENumberRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"number",
+						lv_number_3_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
 				}
 			)
 		)

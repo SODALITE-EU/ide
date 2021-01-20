@@ -18,6 +18,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 
 /**
@@ -29,6 +30,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getNumber_passed <em>Number passed</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getNumber_passed_null <em>Number passed null</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getBoolean_passed <em>Boolean passed</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getBoolean_passed_null <em>Boolean passed null</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl#getJinja_expression <em>Jinja expression</em>}</li>
@@ -39,24 +41,34 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl implements EJinjaExpressionEvaluation
 {
   /**
-   * The default value of the '{@link #getNumber_passed() <em>Number passed</em>}' attribute.
+   * The cached value of the '{@link #getNumber_passed() <em>Number passed</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getNumber_passed()
    * @generated
    * @ordered
    */
-  protected static final String NUMBER_PASSED_EDEFAULT = null;
+  protected ENumber number_passed;
 
   /**
-   * The cached value of the '{@link #getNumber_passed() <em>Number passed</em>}' attribute.
+   * The default value of the '{@link #getNumber_passed_null() <em>Number passed null</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNumber_passed()
+   * @see #getNumber_passed_null()
    * @generated
    * @ordered
    */
-  protected String number_passed = NUMBER_PASSED_EDEFAULT;
+  protected static final String NUMBER_PASSED_NULL_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNumber_passed_null() <em>Number passed null</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNumber_passed_null()
+   * @generated
+   * @ordered
+   */
+  protected String number_passed_null = NUMBER_PASSED_NULL_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getBoolean_passed() <em>Boolean passed</em>}' containment reference.
@@ -125,7 +137,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
    * @generated
    */
   @Override
-  public String getNumber_passed()
+  public ENumber getNumber_passed()
   {
     return number_passed;
   }
@@ -135,13 +147,63 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setNumber_passed(String newNumber_passed)
+  public NotificationChain basicSetNumber_passed(ENumber newNumber_passed, NotificationChain msgs)
   {
-    String oldNumber_passed = number_passed;
+    ENumber oldNumber_passed = number_passed;
     number_passed = newNumber_passed;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED, oldNumber_passed, number_passed));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED, oldNumber_passed, newNumber_passed);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNumber_passed(ENumber newNumber_passed)
+  {
+    if (newNumber_passed != number_passed)
+    {
+      NotificationChain msgs = null;
+      if (number_passed != null)
+        msgs = ((InternalEObject)number_passed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED, null, msgs);
+      if (newNumber_passed != null)
+        msgs = ((InternalEObject)newNumber_passed).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED, null, msgs);
+      msgs = basicSetNumber_passed(newNumber_passed, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED, newNumber_passed, newNumber_passed));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getNumber_passed_null()
+  {
+    return number_passed_null;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNumber_passed_null(String newNumber_passed_null)
+  {
+    String oldNumber_passed_null = number_passed_null;
+    number_passed_null = newNumber_passed_null;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL, oldNumber_passed_null, number_passed_null));
   }
 
   /**
@@ -279,6 +341,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
+        return basicSetNumber_passed(null, msgs);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         return basicSetBoolean_passed(null, msgs);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION:
@@ -299,6 +363,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     {
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
         return getNumber_passed();
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL:
+        return getNumber_passed_null();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         return getBoolean_passed();
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
@@ -320,7 +386,10 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     switch (featureID)
     {
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
-        setNumber_passed((String)newValue);
+        setNumber_passed((ENumber)newValue);
+        return;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL:
+        setNumber_passed_null((String)newValue);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         setBoolean_passed((EBooleanAnsible)newValue);
@@ -346,7 +415,10 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     switch (featureID)
     {
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
-        setNumber_passed(NUMBER_PASSED_EDEFAULT);
+        setNumber_passed((ENumber)null);
+        return;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL:
+        setNumber_passed_null(NUMBER_PASSED_NULL_EDEFAULT);
         return;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         setBoolean_passed((EBooleanAnsible)null);
@@ -372,7 +444,9 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     switch (featureID)
     {
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED:
-        return NUMBER_PASSED_EDEFAULT == null ? number_passed != null : !NUMBER_PASSED_EDEFAULT.equals(number_passed);
+        return number_passed != null;
+      case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL:
+        return NUMBER_PASSED_NULL_EDEFAULT == null ? number_passed_null != null : !NUMBER_PASSED_NULL_EDEFAULT.equals(number_passed_null);
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED:
         return boolean_passed != null;
       case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL:
@@ -410,6 +484,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
       switch (derivedFeatureID)
       {
         case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED: return AnsibleDslPackage.ENUMBER_PASSED__NUMBER_PASSED;
+        case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL: return AnsibleDslPackage.ENUMBER_PASSED__NUMBER_PASSED_NULL;
         default: return -1;
       }
     }
@@ -452,6 +527,7 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
       switch (baseFeatureID)
       {
         case AnsibleDslPackage.ENUMBER_PASSED__NUMBER_PASSED: return AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED;
+        case AnsibleDslPackage.ENUMBER_PASSED__NUMBER_PASSED_NULL: return AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL;
         default: return -1;
       }
     }
@@ -478,8 +554,8 @@ public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (number_passed: ");
-    result.append(number_passed);
+    result.append(" (number_passed_null: ");
+    result.append(number_passed_null);
     result.append(", boolean_passed_null: ");
     result.append(boolean_passed_null);
     result.append(')');

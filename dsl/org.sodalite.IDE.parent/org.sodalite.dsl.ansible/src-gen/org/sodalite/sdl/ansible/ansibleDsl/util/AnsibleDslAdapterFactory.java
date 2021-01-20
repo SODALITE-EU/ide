@@ -401,11 +401,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEForStatementAdapter();
       }
       @Override
-      public Adapter caseEDictionaryPairReference(EDictionaryPairReference object)
-      {
-        return createEDictionaryPairReferenceAdapter();
-      }
-      @Override
       public Adapter caseEVariableDeclarationVariableReference(EVariableDeclarationVariableReference object)
       {
         return createEVariableDeclarationVariableReferenceAdapter();
@@ -564,6 +559,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEBooleanAnsible(EBooleanAnsible object)
       {
         return createEBooleanAnsibleAdapter();
+      }
+      @Override
+      public Adapter caseENumber(ENumber object)
+      {
+        return createENumberAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1563,21 +1563,6 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference
-   * @generated
-   */
-  public Adapter createEDictionaryPairReferenceAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference <em>EVariable Declaration Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -2053,6 +2038,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEBooleanAnsibleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber <em>ENumber</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumber
+   * @generated
+   */
+  public Adapter createENumberAdapter()
   {
     return null;
   }

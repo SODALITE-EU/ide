@@ -4,12 +4,15 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 
 /**
@@ -22,6 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl#getSimple_value_string <em>Simple value string</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl#getSimple_value <em>Simple value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl#getSimple_value_number <em>Simple value number</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,6 +71,16 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
    * @ordered
    */
   protected String simple_value = SIMPLE_VALUE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getSimple_value_number() <em>Simple value number</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSimple_value_number()
+   * @generated
+   * @ordered
+   */
+  protected ENumber simple_value_number;
 
   /**
    * <!-- begin-user-doc -->
@@ -145,6 +159,72 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
    * @generated
    */
   @Override
+  public ENumber getSimple_value_number()
+  {
+    return simple_value_number;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSimple_value_number(ENumber newSimple_value_number, NotificationChain msgs)
+  {
+    ENumber oldSimple_value_number = simple_value_number;
+    simple_value_number = newSimple_value_number;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER, oldSimple_value_number, newSimple_value_number);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSimple_value_number(ENumber newSimple_value_number)
+  {
+    if (newSimple_value_number != simple_value_number)
+    {
+      NotificationChain msgs = null;
+      if (simple_value_number != null)
+        msgs = ((InternalEObject)simple_value_number).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER, null, msgs);
+      if (newSimple_value_number != null)
+        msgs = ((InternalEObject)newSimple_value_number).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER, null, msgs);
+      msgs = basicSetSimple_value_number(newSimple_value_number, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER, newSimple_value_number, newSimple_value_number));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER:
+        return basicSetSimple_value_number(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -153,6 +233,8 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
         return getSimple_value_string();
       case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         return getSimple_value();
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER:
+        return getSimple_value_number();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -172,6 +254,9 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
         return;
       case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         setSimple_value((String)newValue);
+        return;
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER:
+        setSimple_value_number((ENumber)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -193,6 +278,9 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
       case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         setSimple_value(SIMPLE_VALUE_EDEFAULT);
         return;
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER:
+        setSimple_value_number((ENumber)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -211,6 +299,8 @@ public class ESimpleValueJinjaImpl extends EValueJinjaImpl implements ESimpleVal
         return SIMPLE_VALUE_STRING_EDEFAULT == null ? simple_value_string != null : !SIMPLE_VALUE_STRING_EDEFAULT.equals(simple_value_string);
       case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE:
         return SIMPLE_VALUE_EDEFAULT == null ? simple_value != null : !SIMPLE_VALUE_EDEFAULT.equals(simple_value);
+      case AnsibleDslPackage.ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER:
+        return simple_value_number != null;
     }
     return super.eIsSet(featureID);
   }

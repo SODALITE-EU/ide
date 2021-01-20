@@ -609,15 +609,6 @@ public interface AnsibleDslFactory extends EFactory
   EForStatement createEForStatement();
 
   /**
-   * Returns a new object of class '<em>EDictionary Pair Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EDictionary Pair Reference</em>'.
-   * @generated
-   */
-  EDictionaryPairReference createEDictionaryPairReference();
-
-  /**
    * Returns a new object of class '<em>EVariable Declaration Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -904,6 +895,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EBooleanAnsible createEBooleanAnsible();
+
+  /**
+   * Returns a new object of class '<em>ENumber</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ENumber</em>'.
+   * @generated
+   */
+  ENumber createENumber();
 
   /**
    * Returns the package supported by this factory.

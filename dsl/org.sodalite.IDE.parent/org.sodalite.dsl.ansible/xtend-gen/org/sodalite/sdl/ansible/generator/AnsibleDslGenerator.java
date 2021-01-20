@@ -71,6 +71,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
@@ -1488,10 +1489,16 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if ((numberPassed instanceof EJinjaExpressionEvaluation)) {
       return "\"".concat(this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)numberPassed), space)).concat("\"");
     } else {
-      String _number_passed = numberPassed.getNumber_passed();
+      ENumber _number_passed = numberPassed.getNumber_passed();
       boolean _tripleNotEquals = (_number_passed != null);
       if (_tripleNotEquals) {
-        return numberPassed.getNumber_passed();
+        return this.compileNumber(numberPassed.getNumber_passed());
+      } else {
+        String _number_passed_null = numberPassed.getNumber_passed_null();
+        boolean _tripleNotEquals_1 = (_number_passed_null != null);
+        if (_tripleNotEquals_1) {
+          return numberPassed.getNumber_passed_null();
+        }
       }
     }
     return null;
@@ -1526,10 +1533,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileSquareBracketElement(final ESquareBracketElement squareBracketElement) {
     String stringToReturn = "";
-    String _index = squareBracketElement.getIndex();
+    ENumber _index = squareBracketElement.getIndex();
     boolean _tripleNotEquals = (_index != null);
     if (_tripleNotEquals) {
-      stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.getIndex()).concat("]");
+      stringToReturn = stringToReturn.concat("[").concat(this.compileNumber(squareBracketElement.getIndex())).concat("]");
     } else {
       String _field = squareBracketElement.getField();
       boolean _tripleNotEquals_1 = (_field != null);
@@ -2100,16 +2107,22 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return dictionaryString;
   }
   
-  public String compileSimpleValueJinja(final ESimpleValueJinja simpleValueInLine) {
-    String _simple_value = simpleValueInLine.getSimple_value();
+  public String compileSimpleValueJinja(final ESimpleValueJinja simpleValueJinja) {
+    String _simple_value = simpleValueJinja.getSimple_value();
     boolean _tripleNotEquals = (_simple_value != null);
     if (_tripleNotEquals) {
-      return simpleValueInLine.getSimple_value();
+      return simpleValueJinja.getSimple_value();
     } else {
-      String _simple_value_string = simpleValueInLine.getSimple_value_string();
-      boolean _tripleNotEquals_1 = (_simple_value_string != null);
+      ENumber _simple_value_number = simpleValueJinja.getSimple_value_number();
+      boolean _tripleNotEquals_1 = (_simple_value_number != null);
       if (_tripleNotEquals_1) {
-        return "\'".concat(simpleValueInLine.getSimple_value_string()).concat("\'");
+        return this.compileNumber(simpleValueJinja.getSimple_value_number());
+      } else {
+        String _simple_value_string = simpleValueJinja.getSimple_value_string();
+        boolean _tripleNotEquals_2 = (_simple_value_string != null);
+        if (_tripleNotEquals_2) {
+          return "\'".concat(simpleValueJinja.getSimple_value_string()).concat("\'");
+        }
       }
     }
     return null;
@@ -2121,10 +2134,16 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if (_tripleNotEquals) {
       return this.compileBooleanAnsible(simpleValueWithoutString.getSimple_value_boolean());
     } else {
-      String _simple_value = simpleValueWithoutString.getSimple_value();
-      boolean _tripleNotEquals_1 = (_simple_value != null);
+      ENumber _simple_value_number = simpleValueWithoutString.getSimple_value_number();
+      boolean _tripleNotEquals_1 = (_simple_value_number != null);
       if (_tripleNotEquals_1) {
-        return simpleValueWithoutString.getSimple_value();
+        return this.compileNumber(simpleValueWithoutString.getSimple_value_number());
+      } else {
+        String _simple_value = simpleValueWithoutString.getSimple_value();
+        boolean _tripleNotEquals_2 = (_simple_value != null);
+        if (_tripleNotEquals_2) {
+          return simpleValueWithoutString.getSimple_value();
+        }
       }
     }
     return null;
@@ -2137,6 +2156,20 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       return booleanAnsible.getBoolean_ansible();
     }
     return null;
+  }
+  
+  public String compileNumber(final ENumber number) {
+    String stringToReturn = "";
+    String _initial_zeros = number.getInitial_zeros();
+    boolean _tripleNotEquals = (_initial_zeros != null);
+    if (_tripleNotEquals) {
+      final int numberOfZeros = Integer.parseInt(number.getInitial_zeros());
+      for (int counter = 0; (counter < numberOfZeros); counter++) {
+        stringToReturn = stringToReturn.concat("0");
+      }
+    }
+    stringToReturn = stringToReturn.concat(number.getNumber());
+    return stringToReturn;
   }
   
   public String compileCondition(final ECondition condition, final String space) {

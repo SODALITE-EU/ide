@@ -284,10 +284,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_boolean" eType="#//EBooleanAnsible"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_number" eType="#//ENumber"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESimpleValueJinja" eSuperTypes="#//EValueJinja">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value_string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple_value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_number" eType="#//ENumber"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluation" eSuperTypes="#//EJinjaExpressionOrString #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
@@ -404,10 +408,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endfor_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPairReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EDictionaryPair"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EVariableDeclarationVariableReference"
       eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable_declaration_variable_reference"
@@ -451,7 +451,8 @@
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESquareBracketElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//ENumber"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EDictionary" eSuperTypes="#//EComposedValue #//EDictionaryPassed">
@@ -500,7 +501,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="EDictionaryPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="ENumberPassed">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number_passed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="number_passed" eType="#//ENumber"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number_passed_null" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boolean_passed" eType="#//EBooleanAnsible"
@@ -509,5 +512,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBooleanAnsible">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_ansible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ENumber">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial_zeros" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

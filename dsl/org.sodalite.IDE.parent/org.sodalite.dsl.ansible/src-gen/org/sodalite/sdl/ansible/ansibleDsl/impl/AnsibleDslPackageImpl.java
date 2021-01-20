@@ -34,7 +34,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
@@ -74,6 +73,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
@@ -581,13 +581,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eDictionaryPairReferenceEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eVariableDeclarationVariableReferenceEClass = null;
 
   /**
@@ -806,6 +799,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eBooleanAnsibleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eNumberEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -2584,6 +2584,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getESimpleValueWithoutString_Simple_value_number()
+  {
+    return (EReference)eSimpleValueWithoutStringEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getESimpleValueJinja()
   {
     return eSimpleValueJinjaEClass;
@@ -2609,6 +2620,17 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EAttribute getESimpleValueJinja_Simple_value()
   {
     return (EAttribute)eSimpleValueJinjaEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESimpleValueJinja_Simple_value_number()
+  {
+    return (EReference)eSimpleValueJinjaEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3321,39 +3343,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEDictionaryPairReference()
-  {
-    return eDictionaryPairReferenceEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getEDictionaryPairReference_Name()
-  {
-    return (EReference)eDictionaryPairReferenceEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEDictionaryPairReference_Index()
-  {
-    return (EAttribute)eDictionaryPairReferenceEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getEVariableDeclarationVariableReference()
   {
     return eVariableDeclarationVariableReferenceEClass;
@@ -3640,9 +3629,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getESquareBracketElement_Index()
+  public EReference getESquareBracketElement_Index()
   {
-    return (EAttribute)eSquareBracketElementEClass.getEStructuralFeatures().get(0);
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3970,9 +3959,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getENumberPassed_Number_passed()
+  public EReference getENumberPassed_Number_passed()
   {
-    return (EAttribute)eNumberPassedEClass.getEStructuralFeatures().get(0);
+    return (EReference)eNumberPassedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getENumberPassed_Number_passed_null()
+  {
+    return (EAttribute)eNumberPassedEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -4028,6 +4028,39 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   public EAttribute getEBooleanAnsible_Boolean_ansible()
   {
     return (EAttribute)eBooleanAnsibleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getENumber()
+  {
+    return eNumberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getENumber_Initial_zeros()
+  {
+    return (EAttribute)eNumberEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getENumber_Number()
+  {
+    return (EAttribute)eNumberEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -4263,10 +4296,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eSimpleValueWithoutStringEClass = createEClass(ESIMPLE_VALUE_WITHOUT_STRING);
     createEReference(eSimpleValueWithoutStringEClass, ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN);
     createEAttribute(eSimpleValueWithoutStringEClass, ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE);
+    createEReference(eSimpleValueWithoutStringEClass, ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER);
 
     eSimpleValueJinjaEClass = createEClass(ESIMPLE_VALUE_JINJA);
     createEAttribute(eSimpleValueJinjaEClass, ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_STRING);
     createEAttribute(eSimpleValueJinjaEClass, ESIMPLE_VALUE_JINJA__SIMPLE_VALUE);
+    createEReference(eSimpleValueJinjaEClass, ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER);
 
     eJinjaExpressionEvaluationEClass = createEClass(EJINJA_EXPRESSION_EVALUATION);
     createEReference(eJinjaExpressionEvaluationEClass, EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION);
@@ -4348,10 +4383,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eForStatementEClass, EFOR_STATEMENT__FOR_BODY);
     createEAttribute(eForStatementEClass, EFOR_STATEMENT__ENDFOR_BLOCK_SIGN);
 
-    eDictionaryPairReferenceEClass = createEClass(EDICTIONARY_PAIR_REFERENCE);
-    createEReference(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__NAME);
-    createEAttribute(eDictionaryPairReferenceEClass, EDICTIONARY_PAIR_REFERENCE__INDEX);
-
     eVariableDeclarationVariableReferenceEClass = createEClass(EVARIABLE_DECLARATION_VARIABLE_REFERENCE);
     createEReference(eVariableDeclarationVariableReferenceEClass, EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE);
 
@@ -4390,7 +4421,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(eTailElementEClass, ETAIL_ELEMENT__SQUARE_BRACKET_ELEMENTS);
 
     eSquareBracketElementEClass = createEClass(ESQUARE_BRACKET_ELEMENT);
-    createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__INDEX);
+    createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__INDEX);
     createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__FIELD);
 
     eDictionaryEClass = createEClass(EDICTIONARY);
@@ -4437,7 +4468,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eListPassedEClass = createEClass(ELIST_PASSED);
 
     eNumberPassedEClass = createEClass(ENUMBER_PASSED);
-    createEAttribute(eNumberPassedEClass, ENUMBER_PASSED__NUMBER_PASSED);
+    createEReference(eNumberPassedEClass, ENUMBER_PASSED__NUMBER_PASSED);
+    createEAttribute(eNumberPassedEClass, ENUMBER_PASSED__NUMBER_PASSED_NULL);
 
     eBooleanPassedEClass = createEClass(EBOOLEAN_PASSED);
     createEReference(eBooleanPassedEClass, EBOOLEAN_PASSED__BOOLEAN_PASSED);
@@ -4445,6 +4477,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eBooleanAnsibleEClass = createEClass(EBOOLEAN_ANSIBLE);
     createEAttribute(eBooleanAnsibleEClass, EBOOLEAN_ANSIBLE__BOOLEAN_ANSIBLE);
+
+    eNumberEClass = createEClass(ENUMBER);
+    createEAttribute(eNumberEClass, ENUMBER__INITIAL_ZEROS);
+    createEAttribute(eNumberEClass, ENUMBER__NUMBER);
   }
 
   /**
@@ -4746,10 +4782,12 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eSimpleValueWithoutStringEClass, ESimpleValueWithoutString.class, "ESimpleValueWithoutString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getESimpleValueWithoutString_Simple_value_boolean(), this.getEBooleanAnsible(), null, "simple_value_boolean", null, 0, 1, ESimpleValueWithoutString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESimpleValueWithoutString_Simple_value(), ecorePackage.getEString(), "simple_value", null, 0, 1, ESimpleValueWithoutString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESimpleValueWithoutString_Simple_value_number(), this.getENumber(), null, "simple_value_number", null, 0, 1, ESimpleValueWithoutString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eSimpleValueJinjaEClass, ESimpleValueJinja.class, "ESimpleValueJinja", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getESimpleValueJinja_Simple_value_string(), ecorePackage.getEString(), "simple_value_string", null, 0, 1, ESimpleValueJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESimpleValueJinja_Simple_value(), ecorePackage.getEString(), "simple_value", null, 0, 1, ESimpleValueJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESimpleValueJinja_Simple_value_number(), this.getENumber(), null, "simple_value_number", null, 0, 1, ESimpleValueJinja.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eJinjaExpressionEvaluationEClass, EJinjaExpressionEvaluation.class, "EJinjaExpressionEvaluation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEJinjaExpressionEvaluation_Jinja_expression(), this.getEJinjaExpressionEvaluationWithoutBrackets(), null, "jinja_expression", null, 0, 1, EJinjaExpressionEvaluation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4831,10 +4869,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEForStatement_For_body(), this.getEValuePassed(), null, "for_body", null, 0, 1, EForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEForStatement_Endfor_block_sign(), ecorePackage.getEString(), "endfor_block_sign", null, 0, 1, EForStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eDictionaryPairReferenceEClass, EDictionaryPairReference.class, "EDictionaryPairReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEDictionaryPairReference_Name(), this.getEDictionaryPair(), null, "name", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEDictionaryPairReference_Index(), ecorePackage.getEString(), "index", null, 0, 1, EDictionaryPairReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(eVariableDeclarationVariableReferenceEClass, EVariableDeclarationVariableReference.class, "EVariableDeclarationVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEVariableDeclarationVariableReference_Variable_declaration_variable_reference(), this.getEVariableDeclaration(), null, "variable_declaration_variable_reference", null, 0, 1, EVariableDeclarationVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4873,7 +4907,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getETailElement_Square_bracket_elements(), this.getESquareBracketElement(), null, "square_bracket_elements", null, 0, -1, ETailElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eSquareBracketElementEClass, ESquareBracketElement.class, "ESquareBracketElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getESquareBracketElement_Index(), ecorePackage.getEString(), "index", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESquareBracketElement_Index(), this.getENumber(), null, "index", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESquareBracketElement_Field(), ecorePackage.getEString(), "field", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4920,7 +4954,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eListPassedEClass, EListPassed.class, "EListPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eNumberPassedEClass, ENumberPassed.class, "ENumberPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getENumberPassed_Number_passed(), ecorePackage.getEString(), "number_passed", null, 0, 1, ENumberPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getENumberPassed_Number_passed(), this.getENumber(), null, "number_passed", null, 0, 1, ENumberPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getENumberPassed_Number_passed_null(), ecorePackage.getEString(), "number_passed_null", null, 0, 1, ENumberPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eBooleanPassedEClass, EBooleanPassed.class, "EBooleanPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEBooleanPassed_Boolean_passed(), this.getEBooleanAnsible(), null, "boolean_passed", null, 0, 1, EBooleanPassed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4928,6 +4963,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eBooleanAnsibleEClass, EBooleanAnsible.class, "EBooleanAnsible", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEBooleanAnsible_Boolean_ansible(), ecorePackage.getEString(), "boolean_ansible", null, 0, 1, EBooleanAnsible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eNumberEClass, ENumber.class, "ENumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getENumber_Initial_zeros(), ecorePackage.getEString(), "initial_zeros", null, 0, 1, ENumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getENumber_Number(), ecorePackage.getEString(), "number", null, 0, 1, ENumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

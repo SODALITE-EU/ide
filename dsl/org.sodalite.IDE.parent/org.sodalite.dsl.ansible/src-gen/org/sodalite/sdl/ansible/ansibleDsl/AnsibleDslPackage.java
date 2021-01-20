@@ -2950,13 +2950,22 @@ public interface AnsibleDslPackage extends EPackage
   int ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE = EVALUE_WITHOUT_STRING_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Simple value number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER = EVALUE_WITHOUT_STRING_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>ESimple Value Without String</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESIMPLE_VALUE_WITHOUT_STRING_FEATURE_COUNT = EVALUE_WITHOUT_STRING_FEATURE_COUNT + 2;
+  int ESIMPLE_VALUE_WITHOUT_STRING_FEATURE_COUNT = EVALUE_WITHOUT_STRING_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl <em>ESimple Value Jinja</em>}' class.
@@ -2987,13 +2996,22 @@ public interface AnsibleDslPackage extends EPackage
   int ESIMPLE_VALUE_JINJA__SIMPLE_VALUE = EVALUE_JINJA_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Simple value number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER = EVALUE_JINJA_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>ESimple Value Jinja</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESIMPLE_VALUE_JINJA_FEATURE_COUNT = EVALUE_JINJA_FEATURE_COUNT + 2;
+  int ESIMPLE_VALUE_JINJA_FEATURE_COUNT = EVALUE_JINJA_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
@@ -3015,7 +3033,7 @@ public interface AnsibleDslPackage extends EPackage
   int EJINJA_EXPRESSION_EVALUATION__STRING = EJINJA_EXPRESSION_OR_STRING__STRING;
 
   /**
-   * The feature id for the '<em><b>Number passed</b></em>' attribute.
+   * The feature id for the '<em><b>Number passed</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -3024,13 +3042,22 @@ public interface AnsibleDslPackage extends EPackage
   int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 1;
+  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Boolean passed null</b></em>' attribute.
@@ -3039,7 +3066,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 2;
+  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Jinja expression</b></em>' containment reference.
@@ -3048,7 +3075,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 3;
+  int EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>EJinja Expression Evaluation</em>' class.
@@ -3057,7 +3084,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 4;
+  int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl <em>ECondition</em>}' class.
@@ -3067,7 +3094,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getECondition()
    * @generated
    */
-  int ECONDITION = 91;
+  int ECONDITION = 90;
 
   /**
    * The number of structural features of the '<em>ECondition</em>' class.
@@ -3850,43 +3877,6 @@ public interface AnsibleDslPackage extends EPackage
   int EFOR_STATEMENT_FEATURE_COUNT = EJINJA_STATEMENT_FEATURE_COUNT + 7;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
-   * @generated
-   */
-  int EDICTIONARY_PAIR_REFERENCE = 65;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDICTIONARY_PAIR_REFERENCE__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDICTIONARY_PAIR_REFERENCE__INDEX = 1;
-
-  /**
-   * The number of structural features of the '<em>EDictionary Pair Reference</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EDICTIONARY_PAIR_REFERENCE_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableReferenceImpl <em>EVariable Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3894,7 +3884,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableReference()
    * @generated
    */
-  int EVARIABLE_REFERENCE = 75;
+  int EVARIABLE_REFERENCE = 74;
 
   /**
    * The number of structural features of the '<em>EVariable Reference</em>' class.
@@ -3913,7 +3903,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclarationVariableReference()
    * @generated
    */
-  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 66;
+  int EVARIABLE_DECLARATION_VARIABLE_REFERENCE = 65;
 
   /**
    * The feature id for the '<em><b>Variable declaration variable reference</b></em>' reference.
@@ -3941,7 +3931,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariableReference()
    * @generated
    */
-  int EREGISTER_VARIABLE_REFERENCE = 67;
+  int EREGISTER_VARIABLE_REFERENCE = 66;
 
   /**
    * The feature id for the '<em><b>Register variable reference</b></em>' reference.
@@ -3969,7 +3959,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEVariableDeclaration()
    * @generated
    */
-  int EVARIABLE_DECLARATION = 68;
+  int EVARIABLE_DECLARATION = 67;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4006,7 +3996,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIndexOrLoopVariable()
    * @generated
    */
-  int EINDEX_OR_LOOP_VARIABLE = 69;
+  int EINDEX_OR_LOOP_VARIABLE = 68;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4034,7 +4024,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEIndexOrLoopVariableReference()
    * @generated
    */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 70;
+  int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 69;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -4062,7 +4052,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getERegisterVariable()
    * @generated
    */
-  int EREGISTER_VARIABLE = 71;
+  int EREGISTER_VARIABLE = 70;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4090,7 +4080,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputOperationVariableReference()
    * @generated
    */
-  int EINPUT_OPERATION_VARIABLE_REFERENCE = 72;
+  int EINPUT_OPERATION_VARIABLE_REFERENCE = 71;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -4118,7 +4108,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEInputInterfaceVariableReference()
    * @generated
    */
-  int EINPUT_INTERFACE_VARIABLE_REFERENCE = 73;
+  int EINPUT_INTERFACE_VARIABLE_REFERENCE = 72;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -4146,7 +4136,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESetFactVariableReference()
    * @generated
    */
-  int ESET_FACT_VARIABLE_REFERENCE = 74;
+  int ESET_FACT_VARIABLE_REFERENCE = 73;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' reference.
@@ -4174,7 +4164,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESpecialVariable()
    * @generated
    */
-  int ESPECIAL_VARIABLE = 76;
+  int ESPECIAL_VARIABLE = 75;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4202,7 +4192,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getETailElement()
    * @generated
    */
-  int ETAIL_ELEMENT = 77;
+  int ETAIL_ELEMENT = 76;
 
   /**
    * The feature id for the '<em><b>Function call</b></em>' containment reference.
@@ -4239,10 +4229,10 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESquareBracketElement()
    * @generated
    */
-  int ESQUARE_BRACKET_ELEMENT = 78;
+  int ESQUARE_BRACKET_ELEMENT = 77;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * The feature id for the '<em><b>Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -4276,7 +4266,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 79;
+  int EDICTIONARY = 78;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4304,7 +4294,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryInLine()
    * @generated
    */
-  int EDICTIONARY_IN_LINE = 80;
+  int EDICTIONARY_IN_LINE = 79;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4332,7 +4322,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryIndented()
    * @generated
    */
-  int EDICTIONARY_INDENTED = 81;
+  int EDICTIONARY_INDENTED = 80;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4360,7 +4350,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 82;
+  int EDICTIONARY_PAIR = 81;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4397,7 +4387,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryJinja()
    * @generated
    */
-  int EDICTIONARY_JINJA = 83;
+  int EDICTIONARY_JINJA = 82;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4425,7 +4415,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairJinja()
    * @generated
    */
-  int EDICTIONARY_PAIR_JINJA = 84;
+  int EDICTIONARY_PAIR_JINJA = 83;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4462,7 +4452,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 85;
+  int ELIST = 84;
 
   /**
    * The number of structural features of the '<em>EList</em>' class.
@@ -4481,7 +4471,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListInLine()
    * @generated
    */
-  int ELIST_IN_LINE = 86;
+  int ELIST_IN_LINE = 85;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4509,7 +4499,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListIndented()
    * @generated
    */
-  int ELIST_INDENTED = 87;
+  int ELIST_INDENTED = 86;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4537,7 +4527,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElementOfListIndented()
    * @generated
    */
-  int EELEMENT_OF_LIST_INDENTED = 89;
+  int EELEMENT_OF_LIST_INDENTED = 88;
 
   /**
    * The number of structural features of the '<em>EElement Of List Indented</em>' class.
@@ -4556,7 +4546,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryOfListIndented()
    * @generated
    */
-  int EDICTIONARY_OF_LIST_INDENTED = 88;
+  int EDICTIONARY_OF_LIST_INDENTED = 87;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4584,7 +4574,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListJinja()
    * @generated
    */
-  int ELIST_JINJA = 90;
+  int ELIST_JINJA = 89;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4612,7 +4602,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListOfConditions()
    * @generated
    */
-  int ELIST_OF_CONDITIONS = 92;
+  int ELIST_OF_CONDITIONS = 91;
 
   /**
    * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -4640,7 +4630,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 93;
+  int EDICTIONARY_PASSED = 92;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -4659,7 +4649,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 94;
+  int ELIST_PASSED = 93;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -4678,10 +4668,10 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 95;
+  int ENUMBER_PASSED = 94;
 
   /**
-   * The feature id for the '<em><b>Number passed</b></em>' attribute.
+   * The feature id for the '<em><b>Number passed</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -4690,13 +4680,22 @@ public interface AnsibleDslPackage extends EPackage
   int ENUMBER_PASSED__NUMBER_PASSED = 0;
 
   /**
+   * The feature id for the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMBER_PASSED__NUMBER_PASSED_NULL = 1;
+
+  /**
    * The number of structural features of the '<em>ENumber Passed</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENUMBER_PASSED_FEATURE_COUNT = 1;
+  int ENUMBER_PASSED_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBooleanPassedImpl <em>EBoolean Passed</em>}' class.
@@ -4706,7 +4705,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 96;
+  int EBOOLEAN_PASSED = 95;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
@@ -4743,7 +4742,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanAnsible()
    * @generated
    */
-  int EBOOLEAN_ANSIBLE = 97;
+  int EBOOLEAN_ANSIBLE = 96;
 
   /**
    * The feature id for the '<em><b>Boolean ansible</b></em>' attribute.
@@ -4762,6 +4761,43 @@ public interface AnsibleDslPackage extends EPackage
    * @ordered
    */
   int EBOOLEAN_ANSIBLE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl <em>ENumber</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumber()
+   * @generated
+   */
+  int ENUMBER = 97;
+
+  /**
+   * The feature id for the '<em><b>Initial zeros</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMBER__INITIAL_ZEROS = 0;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMBER__NUMBER = 1;
+
+  /**
+   * The number of structural features of the '<em>ENumber</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMBER_FEATURE_COUNT = 2;
 
 
   /**
@@ -6422,6 +6458,17 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getESimpleValueWithoutString_Simple_value();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_number <em>Simple value number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Simple value number</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_number()
+   * @see #getESimpleValueWithoutString()
+   * @generated
+   */
+  EReference getESimpleValueWithoutString_Simple_value_number();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja <em>ESimple Value Jinja</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6452,6 +6499,17 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EAttribute getESimpleValueJinja_Simple_value();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value_number <em>Simple value number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Simple value number</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja#getSimple_value_number()
+   * @see #getESimpleValueJinja()
+   * @generated
+   */
+  EReference getESimpleValueJinja_Simple_value_number();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation <em>EJinja Expression Evaluation</em>}'.
@@ -7142,38 +7200,6 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getEForStatement_Endfor_block_sign();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference <em>EDictionary Pair Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EDictionary Pair Reference</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference
-   * @generated
-   */
-  EClass getEDictionaryPairReference();
-
-  /**
-   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Name</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getName()
-   * @see #getEDictionaryPairReference()
-   * @generated
-   */
-  EReference getEDictionaryPairReference_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getIndex <em>Index</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference#getIndex()
-   * @see #getEDictionaryPairReference()
-   * @generated
-   */
-  EAttribute getEDictionaryPairReference_Index();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference <em>EVariable Declaration Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7447,15 +7473,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getESquareBracketElement();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Index</em>'.
+   * @return the meta object for the containment reference '<em>Index</em>'.
    * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex()
    * @see #getESquareBracketElement()
    * @generated
    */
-  EAttribute getESquareBracketElement_Index();
+  EReference getESquareBracketElement_Index();
 
   /**
    * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}'.
@@ -7760,15 +7786,26 @@ public interface AnsibleDslPackage extends EPackage
   EClass getENumberPassed();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed <em>Number passed</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed <em>Number passed</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Number passed</em>'.
+   * @return the meta object for the containment reference '<em>Number passed</em>'.
    * @see org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed()
    * @see #getENumberPassed()
    * @generated
    */
-  EAttribute getENumberPassed_Number_passed();
+  EReference getENumberPassed_Number_passed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed_null <em>Number passed null</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Number passed null</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed_null()
+   * @see #getENumberPassed()
+   * @generated
+   */
+  EAttribute getENumberPassed_Number_passed_null();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed <em>EBoolean Passed</em>}'.
@@ -7822,6 +7859,38 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EAttribute getEBooleanAnsible_Boolean_ansible();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber <em>ENumber</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ENumber</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumber
+   * @generated
+   */
+  EClass getENumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber#getInitial_zeros <em>Initial zeros</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Initial zeros</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumber#getInitial_zeros()
+   * @see #getENumber()
+   * @generated
+   */
+  EAttribute getENumber_Initial_zeros();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber#getNumber <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Number</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumber#getNumber()
+   * @see #getENumber()
+   * @generated
+   */
+  EAttribute getENumber_Number();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -9183,6 +9252,14 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE = eINSTANCE.getESimpleValueWithoutString_Simple_value();
 
     /**
+     * The meta object literal for the '<em><b>Simple value number</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER = eINSTANCE.getESimpleValueWithoutString_Simple_value_number();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueJinjaImpl <em>ESimple Value Jinja</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9207,6 +9284,14 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EAttribute ESIMPLE_VALUE_JINJA__SIMPLE_VALUE = eINSTANCE.getESimpleValueJinja_Simple_value();
+
+    /**
+     * The meta object literal for the '<em><b>Simple value number</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESIMPLE_VALUE_JINJA__SIMPLE_VALUE_NUMBER = eINSTANCE.getESimpleValueJinja_Simple_value_number();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionEvaluationImpl <em>EJinja Expression Evaluation</em>}' class.
@@ -9753,32 +9838,6 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute EFOR_STATEMENT__ENDFOR_BLOCK_SIGN = eINSTANCE.getEForStatement_Endfor_block_sign();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl <em>EDictionary Pair Reference</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairReferenceImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairReference()
-     * @generated
-     */
-    EClass EDICTIONARY_PAIR_REFERENCE = eINSTANCE.getEDictionaryPairReference();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EDICTIONARY_PAIR_REFERENCE__NAME = eINSTANCE.getEDictionaryPairReference_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EDICTIONARY_PAIR_REFERENCE__INDEX = eINSTANCE.getEDictionaryPairReference_Index();
-
-    /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl <em>EVariable Declaration Variable Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10013,12 +10072,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass ESQUARE_BRACKET_ELEMENT = eINSTANCE.getESquareBracketElement();
 
     /**
-     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ESQUARE_BRACKET_ELEMENT__INDEX = eINSTANCE.getESquareBracketElement_Index();
+    EReference ESQUARE_BRACKET_ELEMENT__INDEX = eINSTANCE.getESquareBracketElement_Index();
 
     /**
      * The meta object literal for the '<em><b>Field</b></em>' attribute feature.
@@ -10287,12 +10346,20 @@ public interface AnsibleDslPackage extends EPackage
     EClass ENUMBER_PASSED = eINSTANCE.getENumberPassed();
 
     /**
-     * The meta object literal for the '<em><b>Number passed</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Number passed</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ENUMBER_PASSED__NUMBER_PASSED = eINSTANCE.getENumberPassed_Number_passed();
+    EReference ENUMBER_PASSED__NUMBER_PASSED = eINSTANCE.getENumberPassed_Number_passed();
+
+    /**
+     * The meta object literal for the '<em><b>Number passed null</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENUMBER_PASSED__NUMBER_PASSED_NULL = eINSTANCE.getENumberPassed_Number_passed_null();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EBooleanPassedImpl <em>EBoolean Passed</em>}' class.
@@ -10337,6 +10404,32 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EAttribute EBOOLEAN_ANSIBLE__BOOLEAN_ANSIBLE = eINSTANCE.getEBooleanAnsible_Boolean_ansible();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl <em>ENumber</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumber()
+     * @generated
+     */
+    EClass ENUMBER = eINSTANCE.getENumber();
+
+    /**
+     * The meta object literal for the '<em><b>Initial zeros</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENUMBER__INITIAL_ZEROS = eINSTANCE.getENumber_Initial_zeros();
+
+    /**
+     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENUMBER__NUMBER = eINSTANCE.getENumber_Number();
 
   }
 

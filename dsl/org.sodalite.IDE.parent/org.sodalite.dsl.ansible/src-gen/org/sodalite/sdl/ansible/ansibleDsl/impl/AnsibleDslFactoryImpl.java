@@ -130,7 +130,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.EIF_STATEMENT: return createEIfStatement();
       case AnsibleDslPackage.EELIF_BLOCK: return createEElifBlock();
       case AnsibleDslPackage.EFOR_STATEMENT: return createEForStatement();
-      case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE: return createEDictionaryPairReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION_VARIABLE_REFERENCE: return createEVariableDeclarationVariableReference();
       case AnsibleDslPackage.EREGISTER_VARIABLE_REFERENCE: return createERegisterVariableReference();
       case AnsibleDslPackage.EVARIABLE_DECLARATION: return createEVariableDeclaration();
@@ -163,6 +162,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENUMBER_PASSED: return createENumberPassed();
       case AnsibleDslPackage.EBOOLEAN_PASSED: return createEBooleanPassed();
       case AnsibleDslPackage.EBOOLEAN_ANSIBLE: return createEBooleanAnsible();
+      case AnsibleDslPackage.ENUMBER: return createENumber();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -954,18 +954,6 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EDictionaryPairReference createEDictionaryPairReference()
-  {
-    EDictionaryPairReferenceImpl eDictionaryPairReference = new EDictionaryPairReferenceImpl();
-    return eDictionaryPairReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EVariableDeclarationVariableReference createEVariableDeclarationVariableReference()
   {
     EVariableDeclarationVariableReferenceImpl eVariableDeclarationVariableReference = new EVariableDeclarationVariableReferenceImpl();
@@ -1342,6 +1330,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     EBooleanAnsibleImpl eBooleanAnsible = new EBooleanAnsibleImpl();
     return eBooleanAnsible;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ENumber createENumber()
+  {
+    ENumberImpl eNumber = new ENumberImpl();
+    return eNumber;
   }
 
   /**

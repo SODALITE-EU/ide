@@ -15,6 +15,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_boolean <em>Simple value boolean</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value <em>Simple value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_number <em>Simple value number</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueWithoutString()
@@ -66,5 +67,27 @@ public interface ESimpleValueWithoutString extends EValueWithoutString, EElement
    * @generated
    */
   void setSimple_value(String value);
+
+  /**
+   * Returns the value of the '<em><b>Simple value number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Simple value number</em>' containment reference.
+   * @see #setSimple_value_number(ENumber)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESimpleValueWithoutString_Simple_value_number()
+   * @model containment="true"
+   * @generated
+   */
+  ENumber getSimple_value_number();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString#getSimple_value_number <em>Simple value number</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Simple value number</em>' containment reference.
+   * @see #getSimple_value_number()
+   * @generated
+   */
+  void setSimple_value_number(ENumber value);
 
 } // ESimpleValueWithoutString

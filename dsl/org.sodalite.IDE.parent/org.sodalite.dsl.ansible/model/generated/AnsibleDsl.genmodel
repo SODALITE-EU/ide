@@ -195,10 +195,12 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValueWithoutString">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValueWithoutString/simple_value_boolean"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueWithoutString/simple_value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValueWithoutString/simple_value_number"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESimpleValueJinja">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueJinja/simple_value_string"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESimpleValueJinja/simple_value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESimpleValueJinja/simple_value_number"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionEvaluation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionEvaluation/jinja_expression"/>
@@ -280,10 +282,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EForStatement/for_body"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EForStatement/endfor_block_sign"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPairReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionaryPairReference/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EDictionaryPairReference/index"/>
-    </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EVariableDeclarationVariableReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EVariableDeclarationVariableReference/variable_declaration_variable_reference"/>
     </genClasses>
@@ -321,7 +319,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ETailElement/square_bracket_elements"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESquareBracketElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/field"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
@@ -361,7 +359,8 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionaryPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EListPassed"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ENumberPassed">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumberPassed/number_passed"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ENumberPassed/number_passed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumberPassed/number_passed_null"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBooleanPassed">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EBooleanPassed/boolean_passed"/>
@@ -369,6 +368,10 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EBooleanAnsible">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanAnsible/boolean_ansible"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ENumber">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumber/initial_zeros"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumber/number"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

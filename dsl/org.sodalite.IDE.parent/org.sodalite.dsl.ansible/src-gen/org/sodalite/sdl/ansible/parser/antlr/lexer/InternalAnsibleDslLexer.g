@@ -11,6 +11,8 @@ package org.sodalite.sdl.ansible.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
+Number_of_initial_zeros : 'number_of_initial_zeros:';
+
 Asynchronous_settings : 'asynchronous_settings:';
 
 Privilege_escalation : 'privilege_escalation:';

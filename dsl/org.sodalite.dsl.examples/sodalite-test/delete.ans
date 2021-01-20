@@ -1,0 +1,17 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/misc/site/playbooks/delete.yaml
+playbook_name: "misc/site/delete"
+used_by:
+	node_type: "sodalite.nodes.nginx.Site"
+	operation: "delete"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become: yes
+		tasks_list:
+			task:
+				task_name:	"Install sample site"
+				module: "file"
+					parameters:
+						path: {{ interface_input: "destination" }}
+						state: "absent"

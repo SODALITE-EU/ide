@@ -25,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ESquareBracketElement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * Returns the value of the '<em><b>Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Index</em>' attribute.
-   * @see #setIndex(String)
+   * @return the value of the '<em>Index</em>' containment reference.
+   * @see #setIndex(ENumber)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Index()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getIndex();
+  ENumber getIndex();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index</em>' attribute.
+   * @param value the new value of the '<em>Index</em>' containment reference.
    * @see #getIndex()
    * @generated
    */
-  void setIndex(String value);
+  void setIndex(ENumber value);
 
   /**
    * Returns the value of the '<em><b>Field</b></em>' attribute.

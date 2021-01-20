@@ -11,6 +11,8 @@ package org.sodalite.sdl.ansible.ide.contentassist.antlr.lexer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 }
 
+Number_of_initial_zeros : 'number_of_initial_zeros:';
+
 Asynchronous_settings : 'asynchronous_settings:';
 
 Privilege_escalation : 'privilege_escalation:';

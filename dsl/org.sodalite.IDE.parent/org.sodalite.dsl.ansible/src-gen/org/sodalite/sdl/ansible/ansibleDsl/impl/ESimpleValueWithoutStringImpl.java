@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 
 /**
@@ -25,6 +26,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value_boolean <em>Simple value boolean</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value <em>Simple value</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl#getSimple_value_number <em>Simple value number</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,6 +62,16 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
    * @ordered
    */
   protected String simple_value = SIMPLE_VALUE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getSimple_value_number() <em>Simple value number</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSimple_value_number()
+   * @generated
+   * @ordered
+   */
+  protected ENumber simple_value_number;
 
   /**
    * <!-- begin-user-doc -->
@@ -163,12 +175,64 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
    * @generated
    */
   @Override
+  public ENumber getSimple_value_number()
+  {
+    return simple_value_number;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSimple_value_number(ENumber newSimple_value_number, NotificationChain msgs)
+  {
+    ENumber oldSimple_value_number = simple_value_number;
+    simple_value_number = newSimple_value_number;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER, oldSimple_value_number, newSimple_value_number);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSimple_value_number(ENumber newSimple_value_number)
+  {
+    if (newSimple_value_number != simple_value_number)
+    {
+      NotificationChain msgs = null;
+      if (simple_value_number != null)
+        msgs = ((InternalEObject)simple_value_number).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER, null, msgs);
+      if (newSimple_value_number != null)
+        msgs = ((InternalEObject)newSimple_value_number).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER, null, msgs);
+      msgs = basicSetSimple_value_number(newSimple_value_number, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER, newSimple_value_number, newSimple_value_number));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_BOOLEAN:
         return basicSetSimple_value_boolean(null, msgs);
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER:
+        return basicSetSimple_value_number(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -187,6 +251,8 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
         return getSimple_value_boolean();
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         return getSimple_value();
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER:
+        return getSimple_value_number();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -206,6 +272,9 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
         return;
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         setSimple_value((String)newValue);
+        return;
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER:
+        setSimple_value_number((ENumber)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -227,6 +296,9 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         setSimple_value(SIMPLE_VALUE_EDEFAULT);
         return;
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER:
+        setSimple_value_number((ENumber)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -245,6 +317,8 @@ public class ESimpleValueWithoutStringImpl extends EValueWithoutStringImpl imple
         return simple_value_boolean != null;
       case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE:
         return SIMPLE_VALUE_EDEFAULT == null ? simple_value != null : !SIMPLE_VALUE_EDEFAULT.equals(simple_value);
+      case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING__SIMPLE_VALUE_NUMBER:
+        return simple_value_number != null;
     }
     return super.eIsSet(featureID);
   }

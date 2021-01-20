@@ -4,13 +4,16 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 
 /**
@@ -30,24 +33,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container implements ESquareBracketElement
 {
   /**
-   * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getIndex()
    * @generated
    * @ordered
    */
-  protected static final String INDEX_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getIndex()
-   * @generated
-   * @ordered
-   */
-  protected String index = INDEX_EDEFAULT;
+  protected ENumber index;
 
   /**
    * The default value of the '{@link #getField() <em>Field</em>}' attribute.
@@ -96,7 +89,7 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public String getIndex()
+  public ENumber getIndex()
   {
     return index;
   }
@@ -106,13 +99,38 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setIndex(String newIndex)
+  public NotificationChain basicSetIndex(ENumber newIndex, NotificationChain msgs)
   {
-    String oldIndex = index;
+    ENumber oldIndex = index;
     index = newIndex;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, oldIndex, index));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, oldIndex, newIndex);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setIndex(ENumber newIndex)
+  {
+    if (newIndex != index)
+    {
+      NotificationChain msgs = null;
+      if (index != null)
+        msgs = ((InternalEObject)index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, null, msgs);
+      if (newIndex != null)
+        msgs = ((InternalEObject)newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, null, msgs);
+      msgs = basicSetIndex(newIndex, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, newIndex, newIndex));
   }
 
   /**
@@ -146,6 +164,22 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
+        return basicSetIndex(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -169,7 +203,7 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        setIndex((String)newValue);
+        setIndex((ENumber)newValue);
         return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         setField((String)newValue);
@@ -189,7 +223,7 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        setIndex(INDEX_EDEFAULT);
+        setIndex((ENumber)null);
         return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         setField(FIELD_EDEFAULT);
@@ -209,7 +243,7 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        return INDEX_EDEFAULT == null ? index != null : !INDEX_EDEFAULT.equals(index);
+        return index != null;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         return FIELD_EDEFAULT == null ? field != null : !FIELD_EDEFAULT.equals(field);
     }
@@ -227,9 +261,7 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (index: ");
-    result.append(index);
-    result.append(", field: ");
+    result.append(" (field: ");
     result.append(field);
     result.append(')');
     return result.toString();

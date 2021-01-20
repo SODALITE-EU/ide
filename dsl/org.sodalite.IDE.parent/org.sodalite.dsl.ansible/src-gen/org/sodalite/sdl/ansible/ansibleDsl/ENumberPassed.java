@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed <em>Number passed</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed_null <em>Number passed null</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getENumberPassed()
@@ -24,25 +25,47 @@ import org.eclipse.emf.ecore.EObject;
 public interface ENumberPassed extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Number passed</b></em>' attribute.
+   * Returns the value of the '<em><b>Number passed</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Number passed</em>' attribute.
-   * @see #setNumber_passed(String)
+   * @return the value of the '<em>Number passed</em>' containment reference.
+   * @see #setNumber_passed(ENumber)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getENumberPassed_Number_passed()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getNumber_passed();
+  ENumber getNumber_passed();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed <em>Number passed</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed <em>Number passed</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Number passed</em>' attribute.
+   * @param value the new value of the '<em>Number passed</em>' containment reference.
    * @see #getNumber_passed()
    * @generated
    */
-  void setNumber_passed(String value);
+  void setNumber_passed(ENumber value);
+
+  /**
+   * Returns the value of the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Number passed null</em>' attribute.
+   * @see #setNumber_passed_null(String)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getENumberPassed_Number_passed_null()
+   * @model
+   * @generated
+   */
+  String getNumber_passed_null();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed#getNumber_passed_null <em>Number passed null</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Number passed null</em>' attribute.
+   * @see #getNumber_passed_null()
+   * @generated
+   */
+  void setNumber_passed_null(String value);
 
 } // ENumberPassed

@@ -82,6 +82,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 import org.sodalite.sdl.ansible.ansibleDsl.ECondition
 import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber
 
 /**
  * Generates code from your model files on save.
@@ -549,7 +550,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileNumberPassed(ENumberPassed numberPassed, String space){
 		if (numberPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(numberPassed, space)).concat("\"")
-		else if (numberPassed.number_passed !== null) return numberPassed.number_passed
+		else if (numberPassed.number_passed !== null) return numberPassed.number_passed.compileNumber
+		else if (numberPassed.number_passed_null !== null) return numberPassed.number_passed_null
 	}
 	
 	def compileBooleanPassed(EBooleanPassed booleanPassed, String space){
@@ -568,7 +570,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileSquareBracketElement(ESquareBracketElement squareBracketElement){
 		var stringToReturn = ""
-		if (squareBracketElement.index !== null) stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.index).concat("]")
+		if (squareBracketElement.index !== null) stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.index.compileNumber).concat("]")
 		else if (squareBracketElement.field !== null) stringToReturn = stringToReturn.concat("['").concat(squareBracketElement.field).concat("']")
 		return stringToReturn
 	}
@@ -962,18 +964,32 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return dictionaryString
 	}
 	
-	def compileSimpleValueJinja(ESimpleValueJinja simpleValueInLine){
-		if (simpleValueInLine.simple_value !== null) return simpleValueInLine.simple_value
-		else if (simpleValueInLine.simple_value_string !== null) return "\'".concat(simpleValueInLine.simple_value_string).concat("\'")
+	def compileSimpleValueJinja(ESimpleValueJinja simpleValueJinja){
+		if (simpleValueJinja.simple_value !== null) return simpleValueJinja.simple_value
+		else if (simpleValueJinja.simple_value_number !== null) return compileNumber(simpleValueJinja.simple_value_number)
+		else if (simpleValueJinja.simple_value_string !== null) return "\'".concat(simpleValueJinja.simple_value_string).concat("\'")
 	}
 	
 	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){
 		if (simpleValueWithoutString.simple_value_boolean !== null) return compileBooleanAnsible(simpleValueWithoutString.simple_value_boolean)
+		else if (simpleValueWithoutString.simple_value_number !== null) return compileNumber(simpleValueWithoutString.simple_value_number)
 		else if (simpleValueWithoutString.simple_value !== null) return simpleValueWithoutString.simple_value
 	}
 	
 	def compileBooleanAnsible(EBooleanAnsible booleanAnsible){
 		if (booleanAnsible.boolean_ansible !== null) return booleanAnsible.boolean_ansible
+	}
+	
+	def compileNumber(ENumber number){
+		var stringToReturn = ""
+		if (number.initial_zeros !== null){
+			val numberOfZeros = Integer.parseInt(number.initial_zeros)
+			for (var counter = 0; counter < numberOfZeros; counter++){
+				stringToReturn = stringToReturn.concat("0")
+			}
+		}
+		stringToReturn = stringToReturn.concat(number.number)
+		return stringToReturn
 	}
 	
 	def compileCondition(ECondition condition, String space){

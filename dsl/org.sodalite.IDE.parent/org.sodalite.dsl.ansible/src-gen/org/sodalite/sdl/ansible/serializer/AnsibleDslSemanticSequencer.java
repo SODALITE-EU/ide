@@ -29,7 +29,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
-import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
@@ -59,6 +58,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ENotifiedTopic;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
@@ -147,9 +147,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EDICTIONARY_PAIR_JINJA:
 				sequence_EDictionaryPairJinja(context, (EDictionaryPairJinja) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EDICTIONARY_PAIR_REFERENCE:
-				sequence_EDictionaryPairReference(context, (EDictionaryPairReference) semanticObject); 
-				return; 
 			case AnsibleDslPackage.EELIF_BLOCK:
 				sequence_EElifBlock(context, (EElifBlock) semanticObject); 
 				return; 
@@ -236,6 +233,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.ENOTIFIED_TOPIC:
 				sequence_ENotifiedTopic(context, (ENotifiedTopic) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ENUMBER:
+				sequence_ENumber(context, (ENumber) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ENUMBER_PASSED:
 				sequence_ENumberPassed(context, (ENumberPassed) semanticObject); 
@@ -522,18 +522,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ((name=ID | name=STRING) value=EJinjaExpressionEvaluationWithoutBrackets)
 	 */
 	protected void sequence_EDictionaryPairJinja(ISerializationContext context, EDictionaryPairJinja semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EDictionaryPairReference returns EDictionaryPairReference
-	 *
-	 * Constraint:
-	 *     (name=[EDictionaryPair|ID] index=NUMBER?)
-	 */
-	protected void sequence_EDictionaryPairReference(ISerializationContext context, EDictionaryPairReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1040,9 +1028,21 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ENumberPassed returns ENumberPassed
 	 *
 	 * Constraint:
-	 *     (number_passed=NUMBER | number_passed=NULL)
+	 *     (number_passed=ENumber | number_passed_null=NULL)
 	 */
 	protected void sequence_ENumberPassed(ISerializationContext context, ENumberPassed semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ENumber returns ENumber
+	 *
+	 * Constraint:
+	 *     (initial_zeros=NUMBER? number=NUMBER)
+	 */
+	protected void sequence_ENumber(ISerializationContext context, ENumber semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1332,7 +1332,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESimpleValueJinja returns ESimpleValueJinja
 	 *
 	 * Constraint:
-	 *     (simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
+	 *     (simple_value_string=STRING | simple_value=BOOLEAN | simple_value=NULL | simple_value_number=ENumber | simple_value=NONE)
 	 */
 	protected void sequence_ESimpleValueJinja(ISerializationContext context, ESimpleValueJinja semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1347,7 +1347,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EElementOfListIndented returns ESimpleValueWithoutString
 	 *
 	 * Constraint:
-	 *     (simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value=NUMBER | simple_value=NONE)
+	 *     (simple_value_boolean=EBooleanAnsible | simple_value=NULL | simple_value_number=ENumber | simple_value=NONE)
 	 */
 	protected void sequence_ESimpleValueWithoutString(ISerializationContext context, ESimpleValueWithoutString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1378,7 +1378,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESquareBracketElement returns ESquareBracketElement
 	 *
 	 * Constraint:
-	 *     (index=NUMBER | field=STRING)
+	 *     (index=ENumber | field=STRING)
 	 */
 	protected void sequence_ESquareBracketElement(ISerializationContext context, ESquareBracketElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
