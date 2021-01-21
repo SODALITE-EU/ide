@@ -91,7 +91,7 @@ EPlay:
 ;
 
 EBlock:
-	'block:'
+	'block_to_execute:'
 	BEGIN
 	(
 		('block_name:' name=EStringPassed)? &
@@ -130,7 +130,7 @@ EBlock:
 
 ETask:
 	{ETask}
-	'task:'
+	'task_to_execute:'
 	BEGIN
 	(
 		('task_name:' name=EStringPassed)? &
@@ -502,7 +502,7 @@ EJinjaExpressionEvaluationWithoutBrackets:
 ;
 
 EFunctionCallOrVariable:
-	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
+	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')?
 ;
 
 EFunctionInput:
@@ -701,6 +701,10 @@ EBooleanAnsible:
 	boolean_ansible=BOOLEAN | boolean_ansible=BOOLEAN_ONLY_ANSIBLE
 ;
 
+ENumber:
+	number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER
+;
+
 terminal BOOLEAN:
 	'True' |'False'
 ;
@@ -718,12 +722,21 @@ terminal NONE:
 	'None'
 ;
 
-terminal NUMBER:
-	(('1'..'9')('0'..'9')* | '0') ('.'('0'..'9')+)?
+terminal OCTAL_NUMBER:
+	('0o'|'0')(('1'..'7')('0'..'7')* | '0')
 ;
 
-ENumber:
-	('number_of_initial_zeros:' initial_zeros=NUMBER ',')? number=NUMBER
+terminal HEXADECIMAL_NUMBER:
+	'0x'(('1'..'9' | 'a'..'f' | 'A'..'F') ('0'..'9' | 'a'..'f' | 'A'..'F')* | '0')
+;
+
+
+terminal SIMPLE_NUMBER:
+	('+'|'-')?(('1'..'9')('0'..'9')* | '0') ('.'('0'..'9')+)?
+;
+
+terminal EXPONENTIAL_NUMBER:
+	SIMPLE_NUMBER('e'|'E')SIMPLE_NUMBER
 ;
 
 //Positional blocks delimited with indentation

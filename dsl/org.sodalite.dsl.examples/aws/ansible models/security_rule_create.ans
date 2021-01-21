@@ -9,7 +9,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Create security group"
 				module: "ec2_group"
 					parameters:
@@ -22,7 +22,7 @@ plays:
 						aws_access_key: {{ operation_input: "aws_access_key" }}
 						aws_secret_key: {{ operation_input: "aws_secret_key" }}
 				register: group_info
-			task:
+			task_to_execute:
 				task_name: "Set attributes"
 				module: "set_stats"
 					parameters:

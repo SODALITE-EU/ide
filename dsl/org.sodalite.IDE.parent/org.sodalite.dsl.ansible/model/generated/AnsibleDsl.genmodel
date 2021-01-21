@@ -370,7 +370,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EBooleanAnsible/boolean_ansible"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ENumber">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumber/initial_zeros"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENumber/number"/>
     </genClasses>
   </genPackages>

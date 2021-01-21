@@ -79,11 +79,9 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Port", "'port:'");
 		tokenNameToValue.put("Role", "'role:'");
 		tokenNameToValue.put("Tags", "'tags:'");
-		tokenNameToValue.put("Task", "'task:'");
 		tokenNameToValue.put("Vars", "'vars:'");
 		tokenNameToValue.put("When", "'when:'");
 		tokenNameToValue.put("Async", "'async:'");
-		tokenNameToValue.put("Block", "'block:'");
 		tokenNameToValue.put("Delay", "'delay:'");
 		tokenNameToValue.put("Endfor", "'endfor'");
 		tokenNameToValue.put("Hosts", "'hosts:'");
@@ -162,8 +160,10 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Interface_input", "'interface_input:'");
 		tokenNameToValue.put("Module_defaults", "'module_defaults:'");
 		tokenNameToValue.put("Operation_input", "'operation_input:'");
+		tokenNameToValue.put("Task_to_execute", "'task_to_execute:'");
 		tokenNameToValue.put("Validation_mode", "'validation_mode:'");
 		tokenNameToValue.put("Any_errors_fatal", "'any_errors_fatal:'");
+		tokenNameToValue.put("Block_to_execute", "'block_to_execute:'");
 		tokenNameToValue.put("Direct_parameter", "'direct_parameter:'");
 		tokenNameToValue.put("Roles_inclusions", "'roles_inclusions:'");
 		tokenNameToValue.put("Special_variable", "'special_variable:'");
@@ -176,7 +176,6 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Registered_variable", "'registered_variable:'");
 		tokenNameToValue.put("Privilege_escalation", "'privilege_escalation:'");
 		tokenNameToValue.put("Asynchronous_settings", "'asynchronous_settings:'");
-		tokenNameToValue.put("Number_of_initial_zeros", "'number_of_initial_zeros:'");
 	}
 
 	public void setGrammarAccess(AnsibleDslGrammarAccess grammarAccess) {
@@ -2577,9 +2576,9 @@ ruleENumber
 	}
 	:
 	(
-		{ before(grammarAccess.getENumberAccess().getGroup()); }
-		(rule__ENumber__Group__0)
-		{ after(grammarAccess.getENumberAccess().getGroup()); }
+		{ before(grammarAccess.getENumberAccess().getAlternatives()); }
+		(rule__ENumber__Alternatives)
+		{ after(grammarAccess.getENumberAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -3630,6 +3629,39 @@ rule__EBooleanAnsible__Alternatives
 		{ before(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_1()); }
 		(rule__EBooleanAnsible__Boolean_ansibleAssignment_1)
 		{ after(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_1()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ENumber__Alternatives
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberAssignment_0()); }
+		(rule__ENumber__NumberAssignment_0)
+		{ after(grammarAccess.getENumberAccess().getNumberAssignment_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberAssignment_1()); }
+		(rule__ENumber__NumberAssignment_1)
+		{ after(grammarAccess.getENumberAccess().getNumberAssignment_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberAssignment_2()); }
+		(rule__ENumber__NumberAssignment_2)
+		{ after(grammarAccess.getENumberAccess().getNumberAssignment_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberAssignment_3()); }
+		(rule__ENumber__NumberAssignment_3)
+		{ after(grammarAccess.getENumberAccess().getNumberAssignment_3()); }
 	)
 ;
 finally {
@@ -5370,9 +5402,9 @@ rule__EBlock__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEBlockAccess().getBlockKeyword_0()); }
-	Block
-	{ after(grammarAccess.getEBlockAccess().getBlockKeyword_0()); }
+	{ before(grammarAccess.getEBlockAccess().getBlock_to_executeKeyword_0()); }
+	Block_to_execute
+	{ after(grammarAccess.getEBlockAccess().getBlock_to_executeKeyword_0()); }
 )
 ;
 finally {
@@ -6397,9 +6429,9 @@ rule__ETask__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getETaskAccess().getTaskKeyword_1()); }
-	Task
-	{ after(grammarAccess.getETaskAccess().getTaskKeyword_1()); }
+	{ before(grammarAccess.getETaskAccess().getTask_to_executeKeyword_1()); }
+	Task_to_execute
+	{ after(grammarAccess.getETaskAccess().getTask_to_executeKeyword_1()); }
 )
 ;
 finally {
@@ -18842,141 +18874,6 @@ finally {
 }
 
 
-rule__ENumber__Group__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__ENumber__Group__0__Impl
-	rule__ENumber__Group__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getENumberAccess().getGroup_0()); }
-	(rule__ENumber__Group_0__0)?
-	{ after(grammarAccess.getENumberAccess().getGroup_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__ENumber__Group__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getENumberAccess().getNumberAssignment_1()); }
-	(rule__ENumber__NumberAssignment_1)
-	{ after(grammarAccess.getENumberAccess().getNumberAssignment_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__ENumber__Group_0__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__ENumber__Group_0__0__Impl
-	rule__ENumber__Group_0__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group_0__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getENumberAccess().getNumber_of_initial_zerosKeyword_0_0()); }
-	Number_of_initial_zeros
-	{ after(grammarAccess.getENumberAccess().getNumber_of_initial_zerosKeyword_0_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group_0__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__ENumber__Group_0__1__Impl
-	rule__ENumber__Group_0__2
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group_0__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getENumberAccess().getInitial_zerosAssignment_0_1()); }
-	(rule__ENumber__Initial_zerosAssignment_0_1)
-	{ after(grammarAccess.getENumberAccess().getInitial_zerosAssignment_0_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group_0__2
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__ENumber__Group_0__2__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ENumber__Group_0__2__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getENumberAccess().getCommaKeyword_0_2()); }
-	Comma
-	{ after(grammarAccess.getENumberAccess().getCommaKeyword_0_2()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
 rule__EPlay__UnorderedGroup_3
 	@init {
 		int stackSize = keepStackSize();
@@ -27629,15 +27526,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ENumber__Initial_zerosAssignment_0_1
+rule__ENumber__NumberAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getENumberAccess().getInitial_zerosNUMBERTerminalRuleCall_0_1_0()); }
-		RULE_NUMBER
-		{ after(grammarAccess.getENumberAccess().getInitial_zerosNUMBERTerminalRuleCall_0_1_0()); }
+		{ before(grammarAccess.getENumberAccess().getNumberOCTAL_NUMBERTerminalRuleCall_0_0()); }
+		RULE_OCTAL_NUMBER
+		{ after(grammarAccess.getENumberAccess().getNumberOCTAL_NUMBERTerminalRuleCall_0_0()); }
 	)
 ;
 finally {
@@ -27650,9 +27547,39 @@ rule__ENumber__NumberAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getENumberAccess().getNumberNUMBERTerminalRuleCall_1_0()); }
-		RULE_NUMBER
-		{ after(grammarAccess.getENumberAccess().getNumberNUMBERTerminalRuleCall_1_0()); }
+		{ before(grammarAccess.getENumberAccess().getNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0()); }
+		RULE_HEXADECIMAL_NUMBER
+		{ after(grammarAccess.getENumberAccess().getNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ENumber__NumberAssignment_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberSIMPLE_NUMBERTerminalRuleCall_2_0()); }
+		RULE_SIMPLE_NUMBER
+		{ after(grammarAccess.getENumberAccess().getNumberSIMPLE_NUMBERTerminalRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ENumber__NumberAssignment_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getENumberAccess().getNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0()); }
+		RULE_EXPONENTIAL_NUMBER
+		{ after(grammarAccess.getENumberAccess().getNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0()); }
 	)
 ;
 finally {

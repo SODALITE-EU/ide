@@ -514,7 +514,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_ansible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENumber">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial_zeros" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

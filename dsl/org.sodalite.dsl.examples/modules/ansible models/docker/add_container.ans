@@ -13,12 +13,12 @@ plays:
 			project_home: {{ lookup('env', 'HOME') }}
 			image_path: {{ operation_input: "image_name" }}
 		tasks_list:
-			task:
+			task_to_execute:
 				module: "set_fact"
 					parameters:
 						image_path: {{ operation_input: "registry_url" }}"/"{{ operation_input: "image_name" }}
 				when: operation_input: "registry_url" is defined
-			task:
+			task_to_execute:
 				task_name: "Launch "{{ operation_input: "alias" }}" container and connect to network"
 				module: "docker_container"
 					parameters:
@@ -47,7 +47,7 @@ plays:
 					    		- {{ operation_input: "alias" }}
 				notify: "{{ alias }} sleep"
 				when: docker_network_name != None
-			task:
+			task_to_execute:
 				task_name: "Launch "{{ operation_input: "alias" }}" container"
 				module: "docker_container"
 					parameters:
@@ -72,12 +72,12 @@ plays:
 						labels: {{ labels }}
 				notify: "{{ alias }} sleep"
 				when: docker_network_name == None
-			task:
+			task_to_execute:
 				module: "shell"
 					direct_parameter: "docker inspect --format '{''{ .NetworkSettings.IPAddress }''}' "{{ operation_input: "alias" }}
 				register: result
 				when: docker_network_name != None
-			task:
+			task_to_execute:
 				task_name: "Extract ip address"
 				module: "set_stats"
 					parameters:

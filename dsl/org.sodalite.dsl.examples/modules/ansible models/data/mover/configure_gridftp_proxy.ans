@@ -7,7 +7,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Create proxy"
 				module: "shell"
 				 direct_parameter: "grid-proxy-init -debug -verify -cert "{{ cert_path }}"/"{{ key }}" -certdir "{{ cert_path }}"/"{{ certdir }}

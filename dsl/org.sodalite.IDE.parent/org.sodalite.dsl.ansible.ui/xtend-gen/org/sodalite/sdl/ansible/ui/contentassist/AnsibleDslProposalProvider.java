@@ -288,7 +288,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void complete_NUMBER(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_SIMPLE_NUMBER(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor);
   }
   

@@ -11,8 +11,6 @@ package org.sodalite.sdl.ansible.ide.contentassist.antlr.lexer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 }
 
-Number_of_initial_zeros : 'number_of_initial_zeros:';
-
 Asynchronous_settings : 'asynchronous_settings:';
 
 Privilege_escalation : 'privilege_escalation:';
@@ -33,6 +31,8 @@ Play_exe_settings : 'play_exe_settings:';
 
 Any_errors_fatal : 'any_errors_fatal:';
 
+Block_to_execute : 'block_to_execute:';
+
 Direct_parameter : 'direct_parameter:';
 
 Roles_inclusions : 'roles_inclusions:';
@@ -48,6 +48,8 @@ Interface_input : 'interface_input:';
 Module_defaults : 'module_defaults:';
 
 Operation_input : 'operation_input:';
+
+Task_to_execute : 'task_to_execute:';
 
 Validation_mode : 'validation_mode:';
 
@@ -179,8 +181,6 @@ Serial : 'serial:';
 
 Async : 'async:';
 
-Block : 'block:';
-
 Delay : 'delay:';
 
 Endfor : 'endfor';
@@ -218,8 +218,6 @@ Port : 'port:';
 Role : 'role:';
 
 Tags : 'tags:';
-
-Task : 'task:';
 
 Vars : 'vars:';
 
@@ -311,7 +309,13 @@ RULE_NULL : 'Null';
 
 RULE_NONE : 'None';
 
-RULE_NUMBER : ('1'..'9' ('0'..'9')*|'0') ('.' ('0'..'9')+)?;
+RULE_OCTAL_NUMBER : ('0o'|'0') ('1'..'7' ('0'..'7')*|'0');
+
+RULE_HEXADECIMAL_NUMBER : '0x' (('1'..'9'|'a'..'f'|'A'..'F') ('0'..'9'|'a'..'f'|'A'..'F')*|'0');
+
+RULE_SIMPLE_NUMBER : ('+'|'-')? ('1'..'9' ('0'..'9')*|'0') ('.' ('0'..'9')+)?;
+
+RULE_EXPONENTIAL_NUMBER : RULE_SIMPLE_NUMBER ('e'|'E') RULE_SIMPLE_NUMBER;
 
 fragment RULE_BEGIN : ;
 

@@ -9,7 +9,7 @@ plays:
 		privilege_escalation:
 			become: yes
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name:	"Install sample site"
 				module: "file"
 					parameters:

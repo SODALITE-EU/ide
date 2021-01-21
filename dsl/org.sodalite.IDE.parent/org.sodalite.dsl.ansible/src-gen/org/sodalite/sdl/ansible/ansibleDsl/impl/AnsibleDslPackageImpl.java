@@ -4047,20 +4047,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getENumber_Initial_zeros()
-  {
-    return (EAttribute)eNumberEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getENumber_Number()
   {
-    return (EAttribute)eNumberEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eNumberEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -4479,7 +4468,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eBooleanAnsibleEClass, EBOOLEAN_ANSIBLE__BOOLEAN_ANSIBLE);
 
     eNumberEClass = createEClass(ENUMBER);
-    createEAttribute(eNumberEClass, ENUMBER__INITIAL_ZEROS);
     createEAttribute(eNumberEClass, ENUMBER__NUMBER);
   }
 
@@ -4965,7 +4953,6 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEBooleanAnsible_Boolean_ansible(), ecorePackage.getEString(), "boolean_ansible", null, 0, 1, EBooleanAnsible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNumberEClass, ENumber.class, "ENumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getENumber_Initial_zeros(), ecorePackage.getEString(), "initial_zeros", null, 0, 1, ENumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getENumber_Number(), ecorePackage.getEString(), "number", null, 0, 1, ENumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

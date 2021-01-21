@@ -7,7 +7,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Install gridftp client and proxy on Ubuntu"
 				privilege_escalation:
 					become: yes
@@ -19,29 +19,29 @@ plays:
 							- "tree"
 						state: "present"
 						update_cache: yes
-			task:
+			task_to_execute:
 				task_name: "Create certs directory"
 				module: "file"
 					parameters:
 						path: {{ cert_path }}
 						state: "directory"
-			block:
+			block_to_execute:
 				block_name: "Copy certs artifacts"
 				tasks:
-					task:
+					task_to_execute:
 						module: "copy"
 							parameters:
 								src: "certs/"
 								dest: {{ cert_path }}"/"
-			block:
+			block_to_execute:
 				block_name: "Copy initial data artifacts"
 				tasks:
-					task:
+					task_to_execute:
 						module: "copy"
 							parameters:
 								src: "data/"
 								dest: {{ initial_data_path }}
-			task:
+			task_to_execute:
 				task_name: "Adding hostnames"
 				privilege_escalation:
 					become: yes

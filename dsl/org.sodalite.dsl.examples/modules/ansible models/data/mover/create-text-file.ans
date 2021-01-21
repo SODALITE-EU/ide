@@ -9,7 +9,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: >
 					line_of_string: "Create temporary inventory for remote_host,"
 					line_of_string: "since opera requires internal envvars to access the target."
@@ -32,7 +32,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Ansible create file with content example"
 				module: "copy"
 					parameters:

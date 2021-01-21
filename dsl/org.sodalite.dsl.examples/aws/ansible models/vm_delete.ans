@@ -9,7 +9,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Delete VM"
 				module: "ec2"
 					parameters:

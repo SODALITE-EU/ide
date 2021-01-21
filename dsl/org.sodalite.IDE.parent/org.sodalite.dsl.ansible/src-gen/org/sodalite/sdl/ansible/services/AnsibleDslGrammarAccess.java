@@ -668,7 +668,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	public class EBlockElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EBlock");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cBlockKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cBlock_to_executeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
@@ -742,7 +742,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EBlock:
-		//	'block:'
+		//	'block_to_execute:'
 		//	BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 		//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
@@ -762,7 +762,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	END)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'block:' BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
+		//'block_to_execute:' BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EValuePassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
@@ -771,8 +771,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//('rescue_tasks:' BEGIN rescue_tasks+=ETask+ END)? & ('always_tasks:' BEGIN always_tasks+=ETask+ END)?) END
 		public Group getGroup() { return cGroup; }
 		
-		//'block:'
-		public Keyword getBlockKeyword_0() { return cBlockKeyword_0; }
+		//'block_to_execute:'
+		public Keyword getBlock_to_executeKeyword_0() { return cBlock_to_executeKeyword_0; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
@@ -997,7 +997,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ETask");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cETaskAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cTaskKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cTask_to_executeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cBEGINTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
 		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
@@ -1078,7 +1078,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//ETask:
 		//	{ETask}
-		//	'task:'
+		//	'task_to_execute:'
 		//	BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 		//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
@@ -1091,7 +1091,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	notifiables+=ENotifiable (',' notifiables+=ENotifiable)*)? & loop=ELoop? & register=ERegisterVariable?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ETask} 'task:' BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
+		//{ETask} 'task_to_execute:' BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 		//validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 		//debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
 		//environment=EValuePassed)? & ('collections:' collections=EListPassed)? & ('tags:' tags=EListPassed)? & ('vars:' BEGIN
@@ -1104,8 +1104,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//{ETask}
 		public Action getETaskAction_0() { return cETaskAction_0; }
 		
-		//'task:'
-		public Keyword getTaskKeyword_1() { return cTaskKeyword_1; }
+		//'task_to_execute:'
+		public Keyword getTask_to_executeKeyword_1() { return cTask_to_executeKeyword_1; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2() { return cBEGINTerminalRuleCall_2; }
@@ -3898,8 +3898,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Keyword cEmpty_bracketsLeftParenthesisRightParenthesisKeyword_1_1_0 = (Keyword)cEmpty_bracketsAssignment_1_1.eContents().get(0);
 		
 		//EFunctionCallOrVariable:
-		//	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
-		//;
+		//	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')?
@@ -5760,42 +5759,46 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	public class ENumberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cNumber_of_initial_zerosKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cInitial_zerosAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cInitial_zerosNUMBERTerminalRuleCall_0_1_0 = (RuleCall)cInitial_zerosAssignment_0_1.eContents().get(0);
-		private final Keyword cCommaKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Assignment cNumberAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNumberNUMBERTerminalRuleCall_1_0 = (RuleCall)cNumberAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cNumberAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cNumberOCTAL_NUMBERTerminalRuleCall_0_0 = (RuleCall)cNumberAssignment_0.eContents().get(0);
+		private final Assignment cNumberAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0 = (RuleCall)cNumberAssignment_1.eContents().get(0);
+		private final Assignment cNumberAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cNumberSIMPLE_NUMBERTerminalRuleCall_2_0 = (RuleCall)cNumberAssignment_2.eContents().get(0);
+		private final Assignment cNumberAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0 = (RuleCall)cNumberAssignment_3.eContents().get(0);
 		
 		//ENumber:
-		//	('number_of_initial_zeros:' initial_zeros=NUMBER ',')? number=NUMBER;
+		//	number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('number_of_initial_zeros:' initial_zeros=NUMBER ',')? number=NUMBER
-		public Group getGroup() { return cGroup; }
+		//number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//('number_of_initial_zeros:' initial_zeros=NUMBER ',')?
-		public Group getGroup_0() { return cGroup_0; }
+		//number=OCTAL_NUMBER
+		public Assignment getNumberAssignment_0() { return cNumberAssignment_0; }
 		
-		//'number_of_initial_zeros:'
-		public Keyword getNumber_of_initial_zerosKeyword_0_0() { return cNumber_of_initial_zerosKeyword_0_0; }
+		//OCTAL_NUMBER
+		public RuleCall getNumberOCTAL_NUMBERTerminalRuleCall_0_0() { return cNumberOCTAL_NUMBERTerminalRuleCall_0_0; }
 		
-		//initial_zeros=NUMBER
-		public Assignment getInitial_zerosAssignment_0_1() { return cInitial_zerosAssignment_0_1; }
-		
-		//NUMBER
-		public RuleCall getInitial_zerosNUMBERTerminalRuleCall_0_1_0() { return cInitial_zerosNUMBERTerminalRuleCall_0_1_0; }
-		
-		//','
-		public Keyword getCommaKeyword_0_2() { return cCommaKeyword_0_2; }
-		
-		//number=NUMBER
+		//number=HEXADECIMAL_NUMBER
 		public Assignment getNumberAssignment_1() { return cNumberAssignment_1; }
 		
-		//NUMBER
-		public RuleCall getNumberNUMBERTerminalRuleCall_1_0() { return cNumberNUMBERTerminalRuleCall_1_0; }
+		//HEXADECIMAL_NUMBER
+		public RuleCall getNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0() { return cNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0; }
+		
+		//number=SIMPLE_NUMBER
+		public Assignment getNumberAssignment_2() { return cNumberAssignment_2; }
+		
+		//SIMPLE_NUMBER
+		public RuleCall getNumberSIMPLE_NUMBERTerminalRuleCall_2_0() { return cNumberSIMPLE_NUMBERTerminalRuleCall_2_0; }
+		
+		//number=EXPONENTIAL_NUMBER
+		public Assignment getNumberAssignment_3() { return cNumberAssignment_3; }
+		
+		//EXPONENTIAL_NUMBER
+		public RuleCall getNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0() { return cNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0; }
 	}
 	
 	
@@ -5896,12 +5899,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ENumberPassedElements pENumberPassed;
 	private final EBooleanPassedElements pEBooleanPassed;
 	private final EBooleanAnsibleElements pEBooleanAnsible;
+	private final ENumberElements pENumber;
 	private final TerminalRule tBOOLEAN;
 	private final TerminalRule tBOOLEAN_ONLY_ANSIBLE;
 	private final TerminalRule tNULL;
 	private final TerminalRule tNONE;
-	private final TerminalRule tNUMBER;
-	private final ENumberElements pENumber;
+	private final TerminalRule tOCTAL_NUMBER;
+	private final TerminalRule tHEXADECIMAL_NUMBER;
+	private final TerminalRule tSIMPLE_NUMBER;
+	private final TerminalRule tEXPONENTIAL_NUMBER;
 	private final TerminalRule tBEGIN;
 	private final TerminalRule tEND;
 	
@@ -6011,12 +6017,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pENumberPassed = new ENumberPassedElements();
 		this.pEBooleanPassed = new EBooleanPassedElements();
 		this.pEBooleanAnsible = new EBooleanAnsibleElements();
+		this.pENumber = new ENumberElements();
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN");
 		this.tBOOLEAN_ONLY_ANSIBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.BOOLEAN_ONLY_ANSIBLE");
 		this.tNULL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.NULL");
 		this.tNONE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.NONE");
-		this.tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
-		this.pENumber = new ENumberElements();
+		this.tOCTAL_NUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.OCTAL_NUMBER");
+		this.tHEXADECIMAL_NUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.HEXADECIMAL_NUMBER");
+		this.tSIMPLE_NUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.SIMPLE_NUMBER");
+		this.tEXPONENTIAL_NUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EXPONENTIAL_NUMBER");
 		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.BEGIN");
 		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.END");
 	}
@@ -6158,7 +6167,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EBlock:
-	//	'block:'
+	//	'block_to_execute:'
 	//	BEGIN (('block_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 	//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 	//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
@@ -6186,7 +6195,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//ETask:
 	//	{ETask}
-	//	'task:'
+	//	'task_to_execute:'
 	//	BEGIN (('task_name:' name=EStringPassed)? & privilege_escalation=EPrivilegeEscalation? &
 	//	validation_mode=EValidationMode? & connection=EConnection? & ('no_log:' no_log=EBooleanPassed)? & ('debugger:'
 	//	debugger=EStringPassed)? & ('module_defaults:' module_defaults=EListPassed)? & ('environment:'
@@ -6673,8 +6682,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EFunctionCallOrVariable:
-	//	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')? //TODO maybe it's better to call it "function_name" instead of "name"
-	//;
+	//	name=ID ('(' parameters+=EFunctionInput (',' parameters+=EFunctionInput)* ')' | empty_brackets='()')?;
 	public EFunctionCallOrVariableElements getEFunctionCallOrVariableAccess() {
 		return pEFunctionCallOrVariable;
 	}
@@ -7150,6 +7158,16 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getEBooleanAnsibleAccess().getRule();
 	}
 	
+	//ENumber:
+	//	number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER;
+	public ENumberElements getENumberAccess() {
+		return pENumber;
+	}
+	
+	public ParserRule getENumberRule() {
+		return getENumberAccess().getRule();
+	}
+	
 	//terminal BOOLEAN:
 	//	'True' | 'False';
 	public TerminalRule getBOOLEANRule() {
@@ -7174,20 +7192,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return tNONE;
 	}
 	
-	//terminal NUMBER:
-	//	('1'..'9' '0'..'9'* | '0') ('.' '0'..'9'+)?;
-	public TerminalRule getNUMBERRule() {
-		return tNUMBER;
+	//terminal OCTAL_NUMBER:
+	//	('0o' | '0') ('1'..'7' '0'..'7'* | '0');
+	public TerminalRule getOCTAL_NUMBERRule() {
+		return tOCTAL_NUMBER;
 	}
 	
-	//ENumber:
-	//	('number_of_initial_zeros:' initial_zeros=NUMBER ',')? number=NUMBER;
-	public ENumberElements getENumberAccess() {
-		return pENumber;
+	//terminal HEXADECIMAL_NUMBER:
+	//	'0x' (('1'..'9' | 'a'..'f' | 'A'..'F') ('0'..'9' | 'a'..'f' | 'A'..'F')* | '0');
+	public TerminalRule getHEXADECIMAL_NUMBERRule() {
+		return tHEXADECIMAL_NUMBER;
 	}
 	
-	public ParserRule getENumberRule() {
-		return getENumberAccess().getRule();
+	//terminal SIMPLE_NUMBER:
+	//	('+' | '-')? ('1'..'9' '0'..'9'* | '0') ('.' '0'..'9'+)?;
+	public TerminalRule getSIMPLE_NUMBERRule() {
+		return tSIMPLE_NUMBER;
+	}
+	
+	//terminal EXPONENTIAL_NUMBER:
+	//	SIMPLE_NUMBER ('e' | 'E') SIMPLE_NUMBER;
+	public TerminalRule getEXPONENTIAL_NUMBERRule() {
+		return tEXPONENTIAL_NUMBER;
 	}
 	
 	//terminal BEGIN:

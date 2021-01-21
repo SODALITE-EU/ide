@@ -27,7 +27,7 @@ plays:
 				delegation:
 					delegate_to: "delegate_to"
 		tasks_list:
-			block:
+			block_to_execute:
 				vars:
 					varrrr1: 55
 				block_name: "this is a block"
@@ -36,20 +36,20 @@ plays:
 					any_errors_fatal: True
 					ignore_errors: False
 				tasks:
-					task:
+					task_to_execute:
 						task_name:"this is a task"
 						delegation:
 							delegate_to:"ao"
 						when: declared_variable:var4[0] | map("aaa") is not defined
-						module: this_is_a_module
+						module: "this_is_a_module"
 							parameters:
 								parameter1: {{ declared_variable: var1 }}
 								parameter2: "path/"{{declared_variable: var2}}"/path"
 						register: registered_output
-						notify: "this is a handler" topic: "this is a notified topic"
-					task:
+						notify: "this is a handler", topic: "this is a notified topic"
+					task_to_execute:
 						task_name: "Create temporary inventory for wm, since opera requires internal envars to access the target. Need more examples to access static nodes without specifying them in the inventory file"					
-						module: add_host
+						module: "add_host"
 							parameters:
 								name: "wm"
 								groups: "wm"
@@ -62,7 +62,7 @@ plays:
 				handler_name: "this is a handler"
 				delegation:
 					delegate_to: "delegate_to"
-				module: shell
+				module: "shell"
 					direct_parameter: "shell command"
 				loop:
 					until: registered_variable: registered_output > 10

@@ -4773,22 +4773,13 @@ public interface AnsibleDslPackage extends EPackage
   int ENUMBER = 97;
 
   /**
-   * The feature id for the '<em><b>Initial zeros</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUMBER__INITIAL_ZEROS = 0;
-
-  /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENUMBER__NUMBER = 1;
+  int ENUMBER__NUMBER = 0;
 
   /**
    * The number of structural features of the '<em>ENumber</em>' class.
@@ -4797,7 +4788,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENUMBER_FEATURE_COUNT = 2;
+  int ENUMBER_FEATURE_COUNT = 1;
 
 
   /**
@@ -7871,17 +7862,6 @@ public interface AnsibleDslPackage extends EPackage
   EClass getENumber();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber#getInitial_zeros <em>Initial zeros</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Initial zeros</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumber#getInitial_zeros()
-   * @see #getENumber()
-   * @generated
-   */
-  EAttribute getENumber_Initial_zeros();
-
-  /**
    * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumber#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -10414,14 +10394,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EClass ENUMBER = eINSTANCE.getENumber();
-
-    /**
-     * The meta object literal for the '<em><b>Initial zeros</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ENUMBER__INITIAL_ZEROS = eINSTANCE.getENumber_Initial_zeros();
 
     /**
      * The meta object literal for the '<em><b>Number</b></em>' attribute feature.

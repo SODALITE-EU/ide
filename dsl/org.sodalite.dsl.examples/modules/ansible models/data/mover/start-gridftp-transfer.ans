@@ -7,7 +7,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Transfer data"
 				module: "shell"
 					direct_parameter: >

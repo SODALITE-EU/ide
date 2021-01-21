@@ -1040,7 +1040,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ENumber returns ENumber
 	 *
 	 * Constraint:
-	 *     (initial_zeros=NUMBER? number=NUMBER)
+	 *     (number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER)
 	 */
 	protected void sequence_ENumber(ISerializationContext context, ENumber semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

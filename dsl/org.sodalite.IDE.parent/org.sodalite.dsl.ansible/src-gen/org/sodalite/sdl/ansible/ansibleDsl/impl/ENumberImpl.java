@@ -21,7 +21,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl#getInitial_zeros <em>Initial zeros</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ENumberImpl#getNumber <em>Number</em>}</li>
  * </ul>
  *
@@ -29,26 +28,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
  */
 public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
 {
-  /**
-   * The default value of the '{@link #getInitial_zeros() <em>Initial zeros</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInitial_zeros()
-   * @generated
-   * @ordered
-   */
-  protected static final String INITIAL_ZEROS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getInitial_zeros() <em>Initial zeros</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInitial_zeros()
-   * @generated
-   * @ordered
-   */
-  protected String initial_zeros = INITIAL_ZEROS_EDEFAULT;
-
   /**
    * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -96,31 +75,6 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
    * @generated
    */
   @Override
-  public String getInitial_zeros()
-  {
-    return initial_zeros;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setInitial_zeros(String newInitial_zeros)
-  {
-    String oldInitial_zeros = initial_zeros;
-    initial_zeros = newInitial_zeros;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ENUMBER__INITIAL_ZEROS, oldInitial_zeros, initial_zeros));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public String getNumber()
   {
     return number;
@@ -150,8 +104,6 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ENUMBER__INITIAL_ZEROS:
-        return getInitial_zeros();
       case AnsibleDslPackage.ENUMBER__NUMBER:
         return getNumber();
     }
@@ -168,9 +120,6 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ENUMBER__INITIAL_ZEROS:
-        setInitial_zeros((String)newValue);
-        return;
       case AnsibleDslPackage.ENUMBER__NUMBER:
         setNumber((String)newValue);
         return;
@@ -188,9 +137,6 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ENUMBER__INITIAL_ZEROS:
-        setInitial_zeros(INITIAL_ZEROS_EDEFAULT);
-        return;
       case AnsibleDslPackage.ENUMBER__NUMBER:
         setNumber(NUMBER_EDEFAULT);
         return;
@@ -208,8 +154,6 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ENUMBER__INITIAL_ZEROS:
-        return INITIAL_ZEROS_EDEFAULT == null ? initial_zeros != null : !INITIAL_ZEROS_EDEFAULT.equals(initial_zeros);
       case AnsibleDslPackage.ENUMBER__NUMBER:
         return NUMBER_EDEFAULT == null ? number != null : !NUMBER_EDEFAULT.equals(number);
     }
@@ -227,9 +171,7 @@ public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (initial_zeros: ");
-    result.append(initial_zeros);
-    result.append(", number: ");
+    result.append(" (number: ");
     result.append(number);
     result.append(')');
     return result.toString();

@@ -9,7 +9,7 @@ plays:
 		facts_settings:
 			gather_facts: no
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Create optimization.ai_training.config.type variable"
 				module: "set_fact"
 					parameters:
@@ -17,7 +17,7 @@ plays:
 				vars:
 					ai_config_type: {{ operation_input: "optimisation"["app_type-ai_training"]["config"]["config_type"] }}
 				when: operation_input: "optimisation"["app_type-ai_training"]["config"]["config_type"] is defined
-			task:
+			task_to_execute:
 				task_name: "Create request data"
 				module: "set_fact"
 					parameters:
@@ -28,12 +28,12 @@ plays:
 								target: {{ operation_input: "target" }}
 								optimisation: {{ fact_set: optimisation_updated_params if fact_set: optimisation_updated_params is defined else operation_input: "optimisation" }}
 			//just for debugging purposes
-			task:
+			task_to_execute:
 				module: "copy"
 					parameters:
 						content: {{ fact_set: request | to_nice_json }}
 						dest:"/tmp/ansible-request-"{{ fact_set: request }}".json"
-			task:
+			task_to_execute:
 				task_name: "Send request to MODAK"
 				module: "uri"
 					parameters:
@@ -43,27 +43,27 @@ plays:
 						body: {{ fact_set: request }}
 				register: response
 			//just for debugging purposes
-			task:
+			task_to_execute:
 				module: "copy"
 					parameters:
 						content: {{ registered_variable: response.json | to_nice_json }}
 						dest: "/tmp/ansible-response-"{{ fact_set: request['job']['application']['app_tag'] }}".json"
-			task:
+			task_to_execute:
 				module: "set_fact"
 					parameters:
 						artifact_url: {{ registered_variable: response.json.job.job_script }}
-			task:
+			task_to_execute:
 				module: "set_fact"
 					parameters:
 						container_runtime: {{ registered_variable: response.json.job.application.container_runtime if registered_variable: response.json.job.application.container_runtime is defined else ''}}
-			task:
+			task_to_execute:
 				task_name: "Set artifact url"
 				module: "set_stats"
 					parameters:
 						data:
 							artifact_url: {{ fact_set: artifact_url }}
 							container_runtime: {{ fact_set: container_runtime }}
-			task:
+			task_to_execute:
 				task_name: "Save job"
 				module: "get_url"
 					parameters:

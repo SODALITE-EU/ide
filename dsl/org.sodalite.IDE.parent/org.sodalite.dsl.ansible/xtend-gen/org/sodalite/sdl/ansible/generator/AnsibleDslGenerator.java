@@ -2160,14 +2160,6 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileNumber(final ENumber number) {
     String stringToReturn = "";
-    String _initial_zeros = number.getInitial_zeros();
-    boolean _tripleNotEquals = (_initial_zeros != null);
-    if (_tripleNotEquals) {
-      final int numberOfZeros = Integer.parseInt(number.getInitial_zeros());
-      for (int counter = 0; (counter < numberOfZeros); counter++) {
-        stringToReturn = stringToReturn.concat("0");
-      }
-    }
     stringToReturn = stringToReturn.concat(number.getNumber());
     return stringToReturn;
   }

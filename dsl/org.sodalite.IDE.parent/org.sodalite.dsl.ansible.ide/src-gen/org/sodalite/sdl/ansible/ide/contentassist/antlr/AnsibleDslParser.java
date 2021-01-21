@@ -78,6 +78,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENumberPassedAccess().getAlternatives(), "rule__ENumberPassed__Alternatives");
 			builder.put(grammarAccess.getEBooleanPassedAccess().getAlternatives(), "rule__EBooleanPassed__Alternatives");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getAlternatives(), "rule__EBooleanAnsible__Alternatives");
+			builder.put(grammarAccess.getENumberAccess().getAlternatives(), "rule__ENumber__Alternatives");
 			builder.put(grammarAccess.getEPlaybookAccess().getGroup(), "rule__EPlaybook__Group__0");
 			builder.put(grammarAccess.getEUsedByBodyAccess().getGroup(), "rule__EUsedByBody__Group__0");
 			builder.put(grammarAccess.getEUsedByBodyAccess().getGroup_2(), "rule__EUsedByBody__Group_2__0");
@@ -283,8 +284,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEListJinjaAccess().getGroup_2_1(), "rule__EListJinja__Group_2_1__0");
 			builder.put(grammarAccess.getEListOfConditionsAccess().getGroup(), "rule__EListOfConditions__Group__0");
 			builder.put(grammarAccess.getEListOfConditionsAccess().getGroup_1(), "rule__EListOfConditions__Group_1__0");
-			builder.put(grammarAccess.getENumberAccess().getGroup(), "rule__ENumber__Group__0");
-			builder.put(grammarAccess.getENumberAccess().getGroup_0(), "rule__ENumber__Group_0__0");
 			builder.put(grammarAccess.getEPlaybookAccess().getNameAssignment_1(), "rule__EPlaybook__NameAssignment_1");
 			builder.put(grammarAccess.getEPlaybookAccess().getUsed_byAssignment_2(), "rule__EPlaybook__Used_byAssignment_2");
 			builder.put(grammarAccess.getEPlaybookAccess().getPlaysAssignment_5(), "rule__EPlaybook__PlaysAssignment_5");
@@ -557,8 +556,10 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_2(), "rule__EBooleanPassed__Boolean_passed_nullAssignment_2");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_0(), "rule__EBooleanAnsible__Boolean_ansibleAssignment_0");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_1(), "rule__EBooleanAnsible__Boolean_ansibleAssignment_1");
-			builder.put(grammarAccess.getENumberAccess().getInitial_zerosAssignment_0_1(), "rule__ENumber__Initial_zerosAssignment_0_1");
+			builder.put(grammarAccess.getENumberAccess().getNumberAssignment_0(), "rule__ENumber__NumberAssignment_0");
 			builder.put(grammarAccess.getENumberAccess().getNumberAssignment_1(), "rule__ENumber__NumberAssignment_1");
+			builder.put(grammarAccess.getENumberAccess().getNumberAssignment_2(), "rule__ENumber__NumberAssignment_2");
+			builder.put(grammarAccess.getENumberAccess().getNumberAssignment_3(), "rule__ENumber__NumberAssignment_3");
 			builder.put(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), "rule__EPlay__UnorderedGroup_3");
 			builder.put(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), "rule__EBlock__UnorderedGroup_2");
 			builder.put(grammarAccess.getETaskAccess().getUnorderedGroup_3(), "rule__ETask__UnorderedGroup_3");

@@ -11,7 +11,7 @@ plays:
 		privilege_escalation:
 			become: yes
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Create a network"
 				module: "docker_network"
 					parameters:

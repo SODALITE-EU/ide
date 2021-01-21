@@ -9,15 +9,15 @@ plays:
 		privilege_escalation:
 			become: yes
 		tasks_list:
-			task:
+			task_to_execute:
 				task_name: "Install sample site"
 				module: "copy"
 					parameters:
 						dest: {{ interface_input: "destination" }}
 						src: "site.html"
-			task:
+			task_to_execute:
 				task_name: "Change permissions"
 				module: "file"
 					parameters:
 						path: {{ interface_input: "destination" }}
-						mode: number_of_initial_zeros: 1, 777
+						mode: 0777

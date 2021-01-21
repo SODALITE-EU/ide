@@ -1229,9 +1229,9 @@ ruleEBlock returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=Block
+		otherlv_0=Block_to_execute
 		{
-			newLeafNode(otherlv_0, grammarAccess.getEBlockAccess().getBlockKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getEBlockAccess().getBlock_to_executeKeyword_0());
 		}
 		this_BEGIN_1=RULE_BEGIN
 		{
@@ -1890,9 +1890,9 @@ ruleETask returns [EObject current=null]
 					$current);
 			}
 		)
-		otherlv_1=Task
+		otherlv_1=Task_to_execute
 		{
-			newLeafNode(otherlv_1, grammarAccess.getETaskAccess().getTaskKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getETaskAccess().getTask_to_executeKeyword_1());
 		}
 		this_BEGIN_2=RULE_BEGIN
 		{
@@ -10684,38 +10684,67 @@ ruleENumber returns [EObject current=null]
 }:
 	(
 		(
-			otherlv_0=Number_of_initial_zeros
-			{
-				newLeafNode(otherlv_0, grammarAccess.getENumberAccess().getNumber_of_initial_zerosKeyword_0_0());
-			}
 			(
-				(
-					lv_initial_zeros_1_0=RULE_NUMBER
-					{
-						newLeafNode(lv_initial_zeros_1_0, grammarAccess.getENumberAccess().getInitial_zerosNUMBERTerminalRuleCall_0_1_0());
+				lv_number_0_0=RULE_OCTAL_NUMBER
+				{
+					newLeafNode(lv_number_0_0, grammarAccess.getENumberAccess().getNumberOCTAL_NUMBERTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getENumberRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getENumberRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"initial_zeros",
-							lv_initial_zeros_1_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
-					}
-				)
+					setWithLastConsumed(
+						$current,
+						"number",
+						lv_number_0_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.OCTAL_NUMBER");
+				}
 			)
-			otherlv_2=Comma
-			{
-				newLeafNode(otherlv_2, grammarAccess.getENumberAccess().getCommaKeyword_0_2());
-			}
-		)?
+		)
+		    |
 		(
 			(
-				lv_number_3_0=RULE_NUMBER
+				lv_number_1_0=RULE_HEXADECIMAL_NUMBER
 				{
-					newLeafNode(lv_number_3_0, grammarAccess.getENumberAccess().getNumberNUMBERTerminalRuleCall_1_0());
+					newLeafNode(lv_number_1_0, grammarAccess.getENumberAccess().getNumberHEXADECIMAL_NUMBERTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getENumberRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"number",
+						lv_number_1_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.HEXADECIMAL_NUMBER");
+				}
+			)
+		)
+		    |
+		(
+			(
+				lv_number_2_0=RULE_SIMPLE_NUMBER
+				{
+					newLeafNode(lv_number_2_0, grammarAccess.getENumberAccess().getNumberSIMPLE_NUMBERTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getENumberRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"number",
+						lv_number_2_0,
+						"org.sodalite.sdl.ansible.AnsibleDsl.SIMPLE_NUMBER");
+				}
+			)
+		)
+		    |
+		(
+			(
+				lv_number_3_0=RULE_EXPONENTIAL_NUMBER
+				{
+					newLeafNode(lv_number_3_0, grammarAccess.getENumberAccess().getNumberEXPONENTIAL_NUMBERTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -10725,7 +10754,7 @@ ruleENumber returns [EObject current=null]
 						$current,
 						"number",
 						lv_number_3_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.NUMBER");
+						"org.sodalite.sdl.ansible.AnsibleDsl.EXPONENTIAL_NUMBER");
 				}
 			)
 		)

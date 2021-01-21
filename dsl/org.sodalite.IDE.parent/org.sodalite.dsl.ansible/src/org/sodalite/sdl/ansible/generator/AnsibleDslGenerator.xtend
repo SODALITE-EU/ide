@@ -982,12 +982,6 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileNumber(ENumber number){
 		var stringToReturn = ""
-		if (number.initial_zeros !== null){
-			val numberOfZeros = Integer.parseInt(number.initial_zeros)
-			for (var counter = 0; counter < numberOfZeros; counter++){
-				stringToReturn = stringToReturn.concat("0")
-			}
-		}
 		stringToReturn = stringToReturn.concat(number.number)
 		return stringToReturn
 	}
