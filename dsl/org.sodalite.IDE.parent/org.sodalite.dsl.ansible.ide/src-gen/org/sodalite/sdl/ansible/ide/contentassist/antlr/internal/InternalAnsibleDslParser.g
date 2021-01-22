@@ -76,13 +76,11 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Loop", "'loop:'");
 		tokenNameToValue.put("Play", "'play:'");
 		tokenNameToValue.put("Poll", "'poll:'");
-		tokenNameToValue.put("Port", "'port:'");
 		tokenNameToValue.put("Role", "'role:'");
 		tokenNameToValue.put("Tags", "'tags:'");
 		tokenNameToValue.put("Vars", "'vars:'");
 		tokenNameToValue.put("When", "'when:'");
 		tokenNameToValue.put("Async", "'async:'");
-		tokenNameToValue.put("Delay", "'delay:'");
 		tokenNameToValue.put("Endfor", "'endfor'");
 		tokenNameToValue.put("Hosts", "'hosts:'");
 		tokenNameToValue.put("Label", "'label:'");
@@ -155,8 +153,10 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Force_handlers", "'force_handlers:'");
 		tokenNameToValue.put("Gather_timeout", "'gather_timeout:'");
 		tokenNameToValue.put("Line_of_string", "'line_of_string:'");
+		tokenNameToValue.put("Port_attribute", "'port_attribute:'");
 		tokenNameToValue.put("When_condition", "'when_condition:'");
 		tokenNameToValue.put("Connection_info", "'connection_info:'");
+		tokenNameToValue.put("Delay_attribute", "'delay_attribute:'");
 		tokenNameToValue.put("Import_playbook", "'import_playbook:'");
 		tokenNameToValue.put("Interface_input", "'interface_input:'");
 		tokenNameToValue.put("Module_defaults", "'module_defaults:'");
@@ -10678,9 +10678,9 @@ rule__EUntil__Group_2_1__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0()); }
-	Delay
-	{ after(grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0()); }
+	{ before(grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0()); }
+	Delay_attribute
+	{ after(grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0()); }
 )
 ;
 finally {
@@ -11488,9 +11488,9 @@ rule__EConnection__Group_2_1__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0()); }
-	Port
-	{ after(grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0()); }
+	{ before(grammarAccess.getEConnectionAccess().getPort_attributeKeyword_2_1_0()); }
+	Port_attribute
+	{ after(grammarAccess.getEConnectionAccess().getPort_attributeKeyword_2_1_0()); }
 )
 ;
 finally {

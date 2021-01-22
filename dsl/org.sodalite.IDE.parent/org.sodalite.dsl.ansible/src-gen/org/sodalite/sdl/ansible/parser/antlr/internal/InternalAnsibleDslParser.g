@@ -4804,9 +4804,9 @@ ruleEUntil returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1);
 					}
-								({true}?=>(otherlv_5=Delay
+								({true}?=>(otherlv_5=Delay_attribute
 								{
-									newLeafNode(otherlv_5, grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0());
+									newLeafNode(otherlv_5, grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0());
 								}
 								(
 									(
@@ -5241,9 +5241,9 @@ ruleEConnection returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1);
 					}
-								({true}?=>(otherlv_5=Port
+								({true}?=>(otherlv_5=Port_attribute
 								{
-									newLeafNode(otherlv_5, grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0());
+									newLeafNode(otherlv_5, grammarAccess.getEConnectionAccess().getPort_attributeKeyword_2_1_0());
 								}
 								(
 									(

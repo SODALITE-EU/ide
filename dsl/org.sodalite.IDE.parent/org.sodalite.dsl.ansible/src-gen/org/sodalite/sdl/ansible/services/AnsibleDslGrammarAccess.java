@@ -2432,17 +2432,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cRetriesAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
 		private final RuleCall cRetriesENumberPassedParserRuleCall_2_0_1_0 = (RuleCall)cRetriesAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cDelayKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cDelay_attributeKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cDelayAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
 		private final RuleCall cDelayENumberPassedParserRuleCall_2_1_1_0 = (RuleCall)cDelayAssignment_2_1_1.eContents().get(0);
 		
 		//EUntil:
-		//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay:'
+		//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
 		//	delay=ENumberPassed)? //number of seconds
 		//);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay:'
+		//'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
 		//delay=ENumberPassed)? //number of seconds
 		//)
 		public Group getGroup() { return cGroup; }
@@ -2456,7 +2456,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EJinjaExpressionEvaluationWithoutBrackets
 		public RuleCall getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0() { return cUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0; }
 		
-		//(('retries:' retries=ENumberPassed)? & ('delay:' delay=ENumberPassed)? //number of seconds
+		//(('retries:' retries=ENumberPassed)? & ('delay_attribute:' delay=ENumberPassed)? //number of seconds
 		//)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
@@ -2472,11 +2472,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ENumberPassed
 		public RuleCall getRetriesENumberPassedParserRuleCall_2_0_1_0() { return cRetriesENumberPassedParserRuleCall_2_0_1_0; }
 		
-		//('delay:' delay=ENumberPassed)?
+		//('delay_attribute:' delay=ENumberPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
-		//'delay:'
-		public Keyword getDelayKeyword_2_1_0() { return cDelayKeyword_2_1_0; }
+		//'delay_attribute:'
+		public Keyword getDelay_attributeKeyword_2_1_0() { return cDelay_attributeKeyword_2_1_0; }
 		
 		//delay=ENumberPassed
 		public Assignment getDelayAssignment_2_1_1() { return cDelayAssignment_2_1_1; }
@@ -2669,7 +2669,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Assignment cConnectionAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
 		private final RuleCall cConnectionEStringPassedParserRuleCall_2_0_1_0 = (RuleCall)cConnectionAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cPortKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cPort_attributeKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cPortAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
 		private final RuleCall cPortENumberPassedParserRuleCall_2_1_1_0 = (RuleCall)cPortAssignment_2_1_1.eContents().get(0);
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
@@ -2680,12 +2680,12 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EConnection:
 		//	'connection_info:'
-		//	BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+		//	BEGIN (('connection:' connection=EStringPassed)? & ('port_attribute:' port=ENumberPassed)? & ('remote_user:'
 		//	remote_user=EStringPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'connection_info:' BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
-		//remote_user=EStringPassed)?) END
+		//'connection_info:' BEGIN (('connection:' connection=EStringPassed)? & ('port_attribute:' port=ENumberPassed)? &
+		//('remote_user:' remote_user=EStringPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
 		//'connection_info:'
@@ -2694,7 +2694,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+		//(('connection:' connection=EStringPassed)? & ('port_attribute:' port=ENumberPassed)? & ('remote_user:'
 		//remote_user=EStringPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
@@ -2710,11 +2710,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EStringPassed
 		public RuleCall getConnectionEStringPassedParserRuleCall_2_0_1_0() { return cConnectionEStringPassedParserRuleCall_2_0_1_0; }
 		
-		//('port:' port=ENumberPassed)?
+		//('port_attribute:' port=ENumberPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
-		//'port:'
-		public Keyword getPortKeyword_2_1_0() { return cPortKeyword_2_1_0; }
+		//'port_attribute:'
+		public Keyword getPort_attributeKeyword_2_1_0() { return cPort_attributeKeyword_2_1_0; }
 		
 		//port=ENumberPassed
 		public Assignment getPortAssignment_2_1_1() { return cPortAssignment_2_1_1; }
@@ -6372,7 +6372,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EUntil:
-	//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay:'
+	//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
 	//	delay=ENumberPassed)? //number of seconds
 	//);
 	public EUntilElements getEUntilAccess() {
@@ -6409,7 +6409,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EConnection:
 	//	'connection_info:'
-	//	BEGIN (('connection:' connection=EStringPassed)? & ('port:' port=ENumberPassed)? & ('remote_user:'
+	//	BEGIN (('connection:' connection=EStringPassed)? & ('port_attribute:' port=ENumberPassed)? & ('remote_user:'
 	//	remote_user=EStringPassed)?) END;
 	public EConnectionElements getEConnectionAccess() {
 		return pEConnection;

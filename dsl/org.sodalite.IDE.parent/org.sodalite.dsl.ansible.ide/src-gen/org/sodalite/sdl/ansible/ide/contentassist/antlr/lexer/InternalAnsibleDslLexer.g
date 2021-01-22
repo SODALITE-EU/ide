@@ -41,6 +41,8 @@ Special_variable : 'special_variable:';
 
 Connection_info : 'connection_info:';
 
+Delay_attribute : 'delay_attribute:';
+
 Import_playbook : 'import_playbook:';
 
 Interface_input : 'interface_input:';
@@ -64,6 +66,8 @@ Force_handlers : 'force_handlers:';
 Gather_timeout : 'gather_timeout:';
 
 Line_of_string : 'line_of_string:';
+
+Port_attribute : 'port_attribute:';
 
 When_condition : 'when_condition:';
 
@@ -183,8 +187,6 @@ Serial : 'serial:';
 
 Async : 'async:';
 
-Delay : 'delay:';
-
 Endfor : 'endfor';
 
 Hosts : 'hosts:';
@@ -214,8 +216,6 @@ Loop : 'loop:';
 Play : 'play:';
 
 Poll : 'poll:';
-
-Port : 'port:';
 
 Role : 'role:';
 

@@ -1,0 +1,47 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/openstack/playbooks/security_rule_create.yml
+playbook_name: "openstack/security_rule_create"
+used_by:
+	//PROBLEM: we have 2 node types with the same name (in openstack_security_rule.rm and snow.rm), it scopes to the snow.rm one arbitrary
+	//but here we would like to scope instead the one in openstack_security_rule.rm
+	node_type: "sodalite.nodes.OpenStack.SecurityRules"
+	operation: "create"
+plays:
+	play:
+		play_name: "Refresh token and update env"
+		external_file_inclusion:
+			import_playbook: "egi_refresh_token.yml"
+			when: env.checkin_env is defined
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						os_env: {{ env.os_env }}
+				when: env.os_env is defined
+			
+			task_to_execute:
+				task_name: "Create security group"
+				module: "os_security_group"
+					parameters:
+						name: {{ group_name }}
+						state: "present"
+						description: {{ group_description }}
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}
+			
+			task_to_execute:
+				task_name: "Add security rules"
+				module: "os_security_group_rule"
+					parameters:
+						security_group: {{ group_name }}
+						protocol: {{ item.value.protocol }}
+						port_range_min: {{ item.value.port_range_min }}
+						port_range_max: {{ item.value.port_range_max }}
+						remote_ip_prefix: {{ item.value.remote_ip_prefix }}
+						direction: {{ item.value.direction if item.value.direction is defined else 'ingress' }}
+				loop:
+					loop_over: {{ ports | dict2items }}
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}

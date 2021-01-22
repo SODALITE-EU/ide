@@ -53,7 +53,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"This is used for defining the settings of the connection.\n\n"+
 	"The attributes that can be set are:\n\n"+
 	"	- connection   -> string\n"+
-	"	- port   -> int\n"+
+	"	- port_attribute (\"port\" in classic Ansible)   -> int\n"+
 	"	- remote_user   -> string"
 	
 	final String PLAY_EXE_SETTINGS_DESCRIPTION =
@@ -137,7 +137,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"	  	  This attribute allows to specify the end condition to meet.\n"+
 	"	  	  Two additional attributes that can be set in this case are:\n"+
 	"	   	  	 - retries   -> int\n"+
-	"	   	   	 - delay   -> int\n"
+	"	   	   	 - delay_attribute (\"delay\" in classic Ansible)  -> int\n"
 	
 	final String LOOP_CONTROL_DESCRIPTION =
 	"This is used for setting up how the loop over a list is done.\n\n"+

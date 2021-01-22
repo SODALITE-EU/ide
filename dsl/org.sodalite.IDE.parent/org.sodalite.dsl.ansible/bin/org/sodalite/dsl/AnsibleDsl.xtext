@@ -297,7 +297,7 @@ EUntil:
 	'until:' until=EJinjaExpressionEvaluationWithoutBrackets
 	(
 		('retries:' retries=ENumberPassed)? &
-		('delay:' delay=ENumberPassed)? //number of seconds
+		('delay_attribute:' delay=ENumberPassed)? //number of seconds
 	)
 ;
 
@@ -329,7 +329,7 @@ EConnection:
 	BEGIN
 	(
 		('connection:' connection=EStringPassed)? &
-		('port:' port=ENumberPassed)? &
+		('port_attribute:' port=ENumberPassed)? &
 		('remote_user:' remote_user=EStringPassed)?
 	)
 	END

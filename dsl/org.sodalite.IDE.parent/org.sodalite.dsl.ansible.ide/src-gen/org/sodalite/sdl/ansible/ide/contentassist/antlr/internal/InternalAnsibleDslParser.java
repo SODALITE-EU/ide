@@ -24,171 +24,171 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalAnsibleDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "External_file_inclusion", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Block_to_execute", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Task_to_execute", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Line_of_string", "When_condition", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Include", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Delay", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Port", "Role", "Tags", "Vars", "When", "Elif", "Else", "With", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "EqualsSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_BOOLEAN_ONLY_ANSIBLE", "RULE_NULL", "RULE_NONE", "RULE_OCTAL_NUMBER", "RULE_HEXADECIMAL_NUMBER", "RULE_SIMPLE_NUMBER", "RULE_EXPONENTIAL_NUMBER", "RULE_ID", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "External_file_inclusion", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Block_to_execute", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Delay_attribute", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Task_to_execute", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Line_of_string", "Port_attribute", "When_condition", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Include", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Role", "Tags", "Vars", "When", "Elif", "Else", "With", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "EqualsSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_BOOLEAN_ONLY_ANSIBLE", "RULE_NULL", "RULE_NONE", "RULE_OCTAL_NUMBER", "RULE_HEXADECIMAL_NUMBER", "RULE_SIMPLE_NUMBER", "RULE_EXPONENTIAL_NUMBER", "RULE_ID", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int Line_of_string=30;
-    public static final int Node_type=63;
-    public static final int Rescue_tasks=43;
+    public static final int Line_of_string=31;
+    public static final int Node_type=65;
+    public static final int Rescue_tasks=45;
     public static final int Or=128;
     public static final int Privilege_escalation=6;
-    public static final int Notify=87;
-    public static final int Diff=101;
+    public static final int Notify=89;
+    public static final int Diff=102;
     public static final int Elif=111;
-    public static final int Plays=96;
-    public static final int Extended=70;
+    public static final int Plays=97;
+    public static final int Extended=72;
     public static final int Roles_inclusions=16;
     public static final int LessThanSign=142;
-    public static final int Throttle=77;
-    public static final int Play_name=65;
+    public static final int Throttle=79;
+    public static final int Play_name=67;
     public static final int LeftParenthesis=133;
-    public static final int Loop_control=42;
-    public static final int Remote_user=49;
+    public static final int Loop_control=44;
+    public static final int Remote_user=51;
     public static final int PercentSignRightCurlyBracket=118;
     public static final int Tags=108;
     public static final int GreaterThanSign=144;
-    public static final int Changed_when=38;
-    public static final int Parameters=56;
+    public static final int Changed_when=40;
+    public static final int Parameters=58;
     public static final int RULE_ID=158;
-    public static final int Exe_settings=39;
-    public static final int Gather_facts=40;
+    public static final int Exe_settings=41;
+    public static final int Gather_facts=42;
     public static final int SolidusSolidus=121;
-    public static final int Become_exe=51;
+    public static final int Become_exe=53;
     public static final int GreaterThanSignEqualsSign=124;
     public static final int EqualsSignEqualsSign=123;
-    public static final int Handler_name=41;
+    public static final int Handler_name=43;
     public static final int VerticalLine=148;
     public static final int PlusSign=136;
     public static final int RULE_INT=161;
     public static final int Max_fail_percentage=7;
     public static final int RULE_ML_COMMENT=163;
     public static final int LeftSquareBracket=145;
-    public static final int Loop_over=62;
-    public static final int Module=85;
+    public static final int Loop_over=64;
+    public static final int Module=87;
     public static final int If=125;
     public static final int Block_to_execute=14;
-    public static final int Loop_var=73;
-    public static final int Pause=95;
+    public static final int Delay_attribute=19;
+    public static final int Loop_var=75;
+    public static final int Pause=96;
     public static final int RightCurlyBracketRightCurlyBracket=131;
     public static final int In=126;
     public static final int Asynchronous_settings=5;
-    public static final int Listen=84;
+    public static final int Listen=86;
     public static final int Is=127;
-    public static final int Index_var=61;
-    public static final int Always_tasks=36;
+    public static final int Index_var=63;
+    public static final int Always_tasks=38;
     public static final int Comma=137;
     public static final int LeftParenthesisRightParenthesis=119;
     public static final int HyphenMinus=138;
-    public static final int Task_to_execute=23;
+    public static final int Task_to_execute=24;
     public static final int Index_or_loop_var=11;
     public static final int LessThanSignEqualsSign=122;
     public static final int Solidus=140;
     public static final int RightCurlyBracket=149;
-    public static final int Fact_set=71;
+    public static final int Fact_set=73;
     public static final int FullStop=139;
     public static final int Connection_info=18;
-    public static final int Block_name=52;
+    public static final int Block_name=54;
     public static final int Vars=109;
-    public static final int Connection=54;
-    public static final int Gather_subset=33;
-    public static final int Delegate_facts=25;
-    public static final int Module_defaults=21;
+    public static final int Connection=56;
+    public static final int Gather_subset=35;
+    public static final int Delegate_facts=26;
+    public static final int Module_defaults=22;
     public static final int Declared_variable=10;
     public static final int RULE_SIMPLE_NUMBER=156;
     public static final int Any_errors_fatal=13;
-    public static final int Become_method=32;
-    public static final int Handlers=72;
-    public static final int Play=104;
-    public static final int Serial=88;
-    public static final int Check_mode=53;
+    public static final int Become_method=34;
+    public static final int Handlers=74;
+    public static final int Play=105;
+    public static final int Serial=90;
+    public static final int Check_mode=55;
     public static final int When=110;
-    public static final int Register=74;
+    public static final int Register=76;
     public static final int Else=112;
-    public static final int Interface_input=20;
+    public static final int Interface_input=21;
     public static final int ExclamationMarkEqualsSign=117;
-    public static final int Gather_timeout=29;
-    public static final int Delegate_to=46;
-    public static final int Facts_settings=27;
+    public static final int Gather_timeout=30;
+    public static final int Delegate_to=48;
+    public static final int Facts_settings=28;
     public static final int LeftCurlyBracketPercentSign=129;
-    public static final int Hosts=92;
+    public static final int Hosts=93;
     public static final int External_file_inclusion=4;
     public static final int RULE_BEGIN=159;
-    public static final int Failed_when=48;
-    public static final int No_log=86;
+    public static final int Failed_when=50;
+    public static final int No_log=88;
     public static final int Registered_variable=8;
-    public static final int Port=106;
-    public static final int Import_playbook=19;
-    public static final int Label=93;
-    public static final int Post_tasks=57;
-    public static final int Include=79;
+    public static final int Import_playbook=20;
+    public static final int Label=94;
+    public static final int Post_tasks=59;
+    public static final int Include=81;
     public static final int RULE_BOOLEAN=150;
-    public static final int Fact_path=60;
-    public static final int Delay=90;
+    public static final int Fact_path=62;
     public static final int PercentSign=132;
-    public static final int Become_flags=37;
-    public static final int Used_by=81;
-    public static final int Retries=80;
-    public static final int Async=89;
+    public static final int Become_flags=39;
+    public static final int Used_by=83;
+    public static final int Retries=82;
+    public static final int Async=91;
+    public static final int Port_attribute=32;
     public static final int Ignore_unreachable=9;
-    public static final int Collections=45;
+    public static final int Collections=47;
     public static final int RightSquareBracket=146;
-    public static final int Order=94;
-    public static final int Playbook_name=35;
-    public static final int Tasks=97;
-    public static final int Run_once=75;
+    public static final int Order=95;
+    public static final int Playbook_name=37;
+    public static final int Tasks=98;
+    public static final int Run_once=77;
     public static final int For=115;
     public static final int RightParenthesis=134;
-    public static final int When_condition=31;
-    public static final int Handler=78;
+    public static final int When_condition=33;
+    public static final int Handler=80;
     public static final int Role=107;
     public static final int Not=116;
     public static final int RULE_HEXADECIMAL_NUMBER=155;
     public static final int Direct_parameter=15;
     public static final int And=114;
     public static final int AsteriskAsterisk=120;
-    public static final int Environment=47;
-    public static final int Become=83;
+    public static final int Environment=49;
+    public static final int Become=85;
     public static final int Special_variable=17;
     public static final int LeftCurlyBracketLeftCurlyBracket=130;
     public static final int RULE_NONE=153;
-    public static final int Debugger=69;
-    public static final int Error_handling=26;
-    public static final int Action=82;
+    public static final int Debugger=71;
+    public static final int Error_handling=27;
+    public static final int Action=84;
     public static final int RULE_END=160;
     public static final int RULE_STRING=162;
-    public static final int Operation=64;
+    public static final int Operation=66;
     public static final int RULE_NULL=152;
     public static final int With=113;
     public static final int RULE_SL_COMMENT=164;
-    public static final int Ignore_errors=34;
+    public static final int Ignore_errors=36;
     public static final int EqualsSign=143;
-    public static final int Task_name=68;
-    public static final int Endfor=91;
+    public static final int Task_name=70;
+    public static final int Endfor=92;
     public static final int RULE_BOOLEAN_ONLY_ANSIBLE=151;
     public static final int Play_exe_settings=12;
     public static final int Colon=141;
-    public static final int Tasks_list=58;
-    public static final int Topic=98;
+    public static final int Tasks_list=60;
+    public static final int Topic=99;
     public static final int EOF=-1;
-    public static final int Force_handlers=28;
+    public static final int Force_handlers=29;
     public static final int Asterisk=135;
-    public static final int Until=99;
-    public static final int Loop=103;
-    public static final int Operation_input=22;
-    public static final int Role_name=67;
-    public static final int Args=100;
+    public static final int Until=100;
+    public static final int Loop=104;
+    public static final int Operation_input=23;
+    public static final int Role_name=69;
+    public static final int Args=101;
     public static final int RULE_EXPONENTIAL_NUMBER=157;
     public static final int RULE_WS=165;
-    public static final int Vars_prompt=50;
-    public static final int Endif=102;
+    public static final int Vars_prompt=52;
+    public static final int Endif=103;
     public static final int LeftCurlyBracket=147;
-    public static final int Validation_mode=24;
+    public static final int Validation_mode=25;
     public static final int RULE_ANY_OTHER=166;
-    public static final int Delegation=55;
-    public static final int Vars_files=59;
-    public static final int Become_user=44;
-    public static final int Pre_tasks=66;
-    public static final int Strategy=76;
-    public static final int Poll=105;
+    public static final int Delegation=57;
+    public static final int Vars_files=61;
+    public static final int Become_user=46;
+    public static final int Pre_tasks=68;
+    public static final int Strategy=78;
+    public static final int Poll=106;
     public static final int RULE_OCTAL_NUMBER=154;
 
     // delegates
@@ -257,13 +257,11 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     		tokenNameToValue.put("Loop", "'loop:'");
     		tokenNameToValue.put("Play", "'play:'");
     		tokenNameToValue.put("Poll", "'poll:'");
-    		tokenNameToValue.put("Port", "'port:'");
     		tokenNameToValue.put("Role", "'role:'");
     		tokenNameToValue.put("Tags", "'tags:'");
     		tokenNameToValue.put("Vars", "'vars:'");
     		tokenNameToValue.put("When", "'when:'");
     		tokenNameToValue.put("Async", "'async:'");
-    		tokenNameToValue.put("Delay", "'delay:'");
     		tokenNameToValue.put("Endfor", "'endfor'");
     		tokenNameToValue.put("Hosts", "'hosts:'");
     		tokenNameToValue.put("Label", "'label:'");
@@ -336,8 +334,10 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     		tokenNameToValue.put("Force_handlers", "'force_handlers:'");
     		tokenNameToValue.put("Gather_timeout", "'gather_timeout:'");
     		tokenNameToValue.put("Line_of_string", "'line_of_string:'");
+    		tokenNameToValue.put("Port_attribute", "'port_attribute:'");
     		tokenNameToValue.put("When_condition", "'when_condition:'");
     		tokenNameToValue.put("Connection_info", "'connection_info:'");
+    		tokenNameToValue.put("Delay_attribute", "'delay_attribute:'");
     		tokenNameToValue.put("Import_playbook", "'import_playbook:'");
     		tokenNameToValue.put("Interface_input", "'interface_input:'");
     		tokenNameToValue.put("Module_defaults", "'module_defaults:'");
@@ -3179,7 +3179,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                     {
                     int LA1_3 = input.LA(2);
 
-                    if ( (LA1_3==EOF||(LA1_3>=External_file_inclusion && LA1_3<=Privilege_escalation)||LA1_3==Play_exe_settings||(LA1_3>=Direct_parameter && LA1_3<=Roles_inclusions)||LA1_3==Connection_info||LA1_3==Module_defaults||(LA1_3>=Validation_mode && LA1_3<=Line_of_string)||(LA1_3>=Become_method && LA1_3<=Gather_subset)||(LA1_3>=Always_tasks && LA1_3<=Become_flags)||(LA1_3>=Exe_settings && LA1_3<=Environment)||(LA1_3>=Remote_user && LA1_3<=Block_name)||(LA1_3>=Connection && LA1_3<=Index_var)||(LA1_3>=Play_name && LA1_3<=Pre_tasks)||(LA1_3>=Task_name && LA1_3<=Extended)||(LA1_3>=Handlers && LA1_3<=Throttle)||(LA1_3>=Action && LA1_3<=Serial)||(LA1_3>=Hosts && LA1_3<=Pause)||LA1_3==Tasks||LA1_3==Args||LA1_3==Loop||LA1_3==Port||(LA1_3>=Tags && LA1_3<=When)||(LA1_3>=LeftCurlyBracketPercentSign && LA1_3<=LeftCurlyBracketLeftCurlyBracket)||(LA1_3>=Comma && LA1_3<=HyphenMinus)||LA1_3==RightSquareBracket||LA1_3==RightCurlyBracket||LA1_3==RULE_ID||LA1_3==RULE_END||LA1_3==RULE_STRING) ) {
+                    if ( (LA1_3==EOF||(LA1_3>=External_file_inclusion && LA1_3<=Privilege_escalation)||LA1_3==Play_exe_settings||(LA1_3>=Direct_parameter && LA1_3<=Roles_inclusions)||LA1_3==Connection_info||LA1_3==Module_defaults||(LA1_3>=Validation_mode && LA1_3<=Port_attribute)||(LA1_3>=Become_method && LA1_3<=Gather_subset)||(LA1_3>=Always_tasks && LA1_3<=Become_flags)||(LA1_3>=Exe_settings && LA1_3<=Environment)||(LA1_3>=Remote_user && LA1_3<=Block_name)||(LA1_3>=Connection && LA1_3<=Index_var)||(LA1_3>=Play_name && LA1_3<=Pre_tasks)||(LA1_3>=Task_name && LA1_3<=Extended)||(LA1_3>=Handlers && LA1_3<=Throttle)||(LA1_3>=Action && LA1_3<=Serial)||(LA1_3>=Hosts && LA1_3<=Pause)||LA1_3==Tasks||LA1_3==Args||LA1_3==Loop||(LA1_3>=Tags && LA1_3<=When)||(LA1_3>=LeftCurlyBracketPercentSign && LA1_3<=LeftCurlyBracketLeftCurlyBracket)||(LA1_3>=Comma && LA1_3<=HyphenMinus)||LA1_3==RightSquareBracket||LA1_3==RightCurlyBracket||LA1_3==RULE_ID||LA1_3==RULE_END||LA1_3==RULE_STRING) ) {
                         alt1=1;
                     }
 
@@ -32733,21 +32733,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EUntil__Group_2_1__0__Impl"
-    // InternalAnsibleDslParser.g:10675:1: rule__EUntil__Group_2_1__0__Impl : ( Delay ) ;
+    // InternalAnsibleDslParser.g:10675:1: rule__EUntil__Group_2_1__0__Impl : ( Delay_attribute ) ;
     public final void rule__EUntil__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:10679:1: ( ( Delay ) )
-            // InternalAnsibleDslParser.g:10680:1: ( Delay )
+            // InternalAnsibleDslParser.g:10679:1: ( ( Delay_attribute ) )
+            // InternalAnsibleDslParser.g:10680:1: ( Delay_attribute )
             {
-            // InternalAnsibleDslParser.g:10680:1: ( Delay )
-            // InternalAnsibleDslParser.g:10681:2: Delay
+            // InternalAnsibleDslParser.g:10680:1: ( Delay_attribute )
+            // InternalAnsibleDslParser.g:10681:2: Delay_attribute
             {
-             before(grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0()); 
-            match(input,Delay,FOLLOW_2); 
-             after(grammarAccess.getEUntilAccess().getDelayKeyword_2_1_0()); 
+             before(grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0()); 
+            match(input,Delay_attribute,FOLLOW_2); 
+             after(grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0()); 
 
             }
 
@@ -35043,21 +35043,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EConnection__Group_2_1__0__Impl"
-    // InternalAnsibleDslParser.g:11485:1: rule__EConnection__Group_2_1__0__Impl : ( Port ) ;
+    // InternalAnsibleDslParser.g:11485:1: rule__EConnection__Group_2_1__0__Impl : ( Port_attribute ) ;
     public final void rule__EConnection__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:11489:1: ( ( Port ) )
-            // InternalAnsibleDslParser.g:11490:1: ( Port )
+            // InternalAnsibleDslParser.g:11489:1: ( ( Port_attribute ) )
+            // InternalAnsibleDslParser.g:11490:1: ( Port_attribute )
             {
-            // InternalAnsibleDslParser.g:11490:1: ( Port )
-            // InternalAnsibleDslParser.g:11491:2: Port
+            // InternalAnsibleDslParser.g:11490:1: ( Port_attribute )
+            // InternalAnsibleDslParser.g:11491:2: Port_attribute
             {
-             before(grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0()); 
-            match(input,Port,FOLLOW_2); 
-             after(grammarAccess.getEConnectionAccess().getPortKeyword_2_1_0()); 
+             before(grammarAccess.getEConnectionAccess().getPort_attributeKeyword_2_1_0()); 
+            match(input,Port_attribute,FOLLOW_2); 
+             after(grammarAccess.getEConnectionAccess().getPort_attributeKeyword_2_1_0()); 
 
             }
 
@@ -68421,7 +68421,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA220_0 == Retries && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0) ) {
                 alt220=1;
             }
-            else if ( LA220_0 == Delay && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA220_0 == Delay_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
                 alt220=1;
             }
             switch (alt220) {
@@ -68476,7 +68476,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA221_0 == Retries && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0) ) {
                 alt221=1;
             }
-            else if ( LA221_0 == Delay && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA221_0 == Delay_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
                 alt221=2;
             }
             else {
@@ -68623,7 +68623,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA222_0 == Retries && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0) ) {
                 alt222=1;
             }
-            else if ( LA222_0 == Delay && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA222_0 == Delay_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1) ) {
                 alt222=1;
             }
             switch (alt222) {
@@ -69654,7 +69654,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA232_0 == Connection && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0) ) {
                 alt232=1;
             }
-            else if ( LA232_0 == Port && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA232_0 == Port_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
                 alt232=1;
             }
             else if ( LA232_0 == Remote_user && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2) ) {
@@ -69712,7 +69712,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA233_0 == Connection && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0) ) {
                 alt233=1;
             }
-            else if ( LA233_0 == Port && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA233_0 == Port_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
                 alt233=2;
             }
             else if ( LA233_0 == Remote_user && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2) ) {
@@ -69908,7 +69908,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA234_0 == Connection && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0) ) {
                 alt234=1;
             }
-            else if ( LA234_0 == Port && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA234_0 == Port_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
                 alt234=1;
             }
             else if ( LA234_0 == Remote_user && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2) ) {
@@ -69969,7 +69969,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             if ( LA235_0 == Connection && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 0) ) {
                 alt235=1;
             }
-            else if ( LA235_0 == Port && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
+            else if ( LA235_0 == Port_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 1) ) {
                 alt235=1;
             }
             else if ( LA235_0 == Remote_user && getUnorderedGroupHelper().canSelect(grammarAccess.getEConnectionAccess().getUnorderedGroup_2(), 2) ) {
@@ -85109,7 +85109,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_4s = "\1\uffff\30\1\1\2";
     static final String dfa_5s = "\1\0\31\uffff}>";
     static final String[] dfa_6s = {
-            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\2\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\20\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\5\uffff\1\2\17\uffff\1\13\1\14\62\uffff\1\31",
+            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\21\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\13\1\14\62\uffff\1\31",
             "",
             "",
             "",
@@ -85238,7 +85238,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_10s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30";
     static final String dfa_11s = "\1\0\30\uffff}>";
     static final String[] dfa_12s = {
-            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\2\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\20\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\5\uffff\1\2\17\uffff\1\13\1\14",
+            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\21\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\13\1\14",
             "",
             "",
             "",
@@ -87411,7 +87411,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_16s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22";
     static final String dfa_17s = "\1\0\22\uffff}>";
     static final String[] dfa_18s = {
-            "\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\11\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\12\uffff\1\20\12\uffff\1\12\1\13\1\16",
+            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\12\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\12\1\13\1\16",
             "",
             "",
             "",
@@ -87519,7 +87519,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_22s = "\1\uffff\22\1\1\2";
     static final String dfa_23s = "\1\0\23\uffff}>";
     static final String[] dfa_24s = {
-            "\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\11\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\12\uffff\1\20\12\uffff\1\12\1\13\1\16\61\uffff\1\23",
+            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\12\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\12\1\13\1\16\61\uffff\1\23",
             "",
             "",
             "",
@@ -88862,7 +88862,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_28s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26";
     static final String dfa_29s = "\1\0\26\uffff}>";
     static final String[] dfa_30s = {
-            "\1\21\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\14\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\14\uffff\1\22\2\uffff\1\25\4\uffff\1\12\1\13\1\16",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16",
             "",
             "",
             "",
@@ -88982,7 +88982,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_34s = "\1\uffff\26\1\1\2";
     static final String dfa_35s = "\1\0\27\uffff}>";
     static final String[] dfa_36s = {
-            "\1\21\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\14\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\14\uffff\1\22\2\uffff\1\25\4\uffff\1\12\1\13\1\16\61\uffff\1\27",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16\61\uffff\1\27",
             "",
             "",
             "",
@@ -90802,7 +90802,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_37s = "\1\156\27\uffff";
     static final String dfa_38s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27";
     static final String[] dfa_39s = {
-            "\1\21\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\14\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\14\uffff\1\22\2\uffff\1\25\4\uffff\1\12\1\13\1\16",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16",
             "",
             "",
             "",
@@ -90919,7 +90919,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_41s = "\1\u00a0\30\uffff";
     static final String dfa_42s = "\1\uffff\27\1\1\2";
     static final String[] dfa_43s = {
-            "\1\21\1\2\13\uffff\1\4\2\uffff\1\7\2\uffff\1\3\1\uffff\1\17\14\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\14\uffff\1\22\2\uffff\1\25\4\uffff\1\12\1\13\1\16\61\uffff\1\30",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16\61\uffff\1\30",
             "",
             "",
             "",
@@ -92869,7 +92869,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_47s = "\1\uffff\16\1\1\2";
     static final String dfa_48s = "\1\0\17\uffff}>";
     static final String[] dfa_49s = {
-            "\1\1\13\uffff\1\3\2\uffff\1\6\2\uffff\1\2\1\uffff\1\16\14\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\25\uffff\1\11\1\12\1\15\61\uffff\1\17",
+            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\15\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\11\1\12\1\15\61\uffff\1\17",
             "",
             "",
             "",
@@ -92968,7 +92968,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_53s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16";
     static final String dfa_54s = "\1\0\16\uffff}>";
     static final String[] dfa_55s = {
-            "\1\1\13\uffff\1\3\2\uffff\1\6\2\uffff\1\2\1\uffff\1\16\14\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\25\uffff\1\11\1\12\1\15",
+            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\15\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\11\1\12\1\15",
             "",
             "",
             "",
@@ -93962,60 +93962,60 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000400000006L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000440000000L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000100020000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000200080000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000002L,0x0000010000000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x8000000000000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0E04A0001D251050L,0x0000300010400126L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000002L,0x0000020000000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x381280003A451050L,0x0000300021000498L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400110006L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000001C00004L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000004BFDB0006L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000000800A0004L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000040000000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000804000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000804002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000002L,0x0000000000004000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0090A89005240040L,0x0000700200400020L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000520D00L,0x0010000000000080L,0x00000004FF4A0020L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0080A08005240060L,0x0000709000E40430L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000001004000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000001004002L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000002L,0x0000000000010000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0242A2400A440040L,0x0000700401000080L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x00000004FF4A0020L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x020282000A440060L,0x00007120039010C0L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000080080004L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000400000000L,0x0000000400000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000800000000L,0x0000000400000000L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000200L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000200L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0080A28005240060L,0x0000709000F40430L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x02028A000A440060L,0x0000712003D010C0L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0100000000008000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0400000000008000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0080A08005240040L,0x0000700000400020L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x020282000A440040L,0x0000700001000080L});
     public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000002L,0x0000080000000000L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000080000L,0x0000000000008000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000100000L,0x0000000000020000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x4000000000000000L,0x0002000800000000L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x2000000000000000L,0x00000000A0000240L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0002001000000001L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x8000000000000000L,0x0000000140000900L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000003D000004L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000520D00L,0x0010000000000080L,0x000000047F4A0020L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000004010000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0008102100000000L,0x0000000000080000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0020000000000000L,0x0000002000000000L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0042000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x0000000041003800L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002800L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000400002200L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000400002280L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0001004400002200L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x1000010220000000L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000400002000000L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000000000000L,0x0000020002000000L});
-    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x000000047F4A0020L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000080000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0020408400000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0080000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0108000100000000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x000000008400E000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000000L,0x000000000000A000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000001000002200L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000001000002280L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0004011000002200L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x4000040840000000L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0001000004000000L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000000000000L,0x0000040008000000L});
+    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400000006L});
     public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000008L});
     public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L});
@@ -94034,18 +94034,18 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000020000L});
     public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000800L});
     public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000520D00L,0x0000000000000080L,0x000000047F4A0000L});
+    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000A20D00L,0x0000000000000200L,0x000000047F4A0000L});
     public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000000000000000L,0x0040000000000000L});
     public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000002L});
     public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L,0x0000000000000500L});
+    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000008000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0001000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000000000000L,0x4000000000000000L,0x0000000000000200L});
     public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000000000L,0x2040000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0000000008000000L,0x0000000000000500L});
+    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0000000010000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000020000L});
     public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000043C000000L});
@@ -94059,27 +94059,27 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000400L});
     public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000004FFDB0006L});
     public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000000000A0000L});
-    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000520D00L,0x0010000000000080L,0x000000047F4E0020L});
-    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0E04A0001D251052L,0x0000300010400126L});
-    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0090A89005240042L,0x0000700200400020L});
-    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0080A08005240062L,0x0000709000E40430L});
-    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0080A28005240062L,0x0000709000F40430L});
-    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0100000000008002L});
-    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0080A08005240042L,0x0000700000400020L});
-    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x2000000000000002L,0x00000000A0000240L});
-    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000000002L,0x0000000004010000L});
-    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0008102100000002L,0x0000000000080000L});
-    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0020000000000002L,0x0000002000000000L});
-    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0042000000000002L,0x0000040000000000L});
-    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000002L,0x0000000041003800L});
-    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000002L,0x0000000000002800L});
-    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000400002202L});
-    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000400002282L});
-    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0001004400002202L});
-    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x1000010220000002L});
-    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0000400002000002L});
-    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000002L,0x0000020002000000L});
+    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x000000047F4E0020L});
+    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x381280003A451052L,0x0000300021000498L});
+    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0242A2400A440042L,0x0000700401000080L});
+    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x020282000A440062L,0x00007120039010C0L});
+    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x02028A000A440062L,0x0000712003D010C0L});
+    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0400000000008002L});
+    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x020282000A440042L,0x0000700001000080L});
+    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x8000000000000002L,0x0000000140000900L});
+    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000080002L,0x0000000000040000L});
+    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0020408400000002L,0x0000000000200000L});
+    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0080000000000002L,0x0000004000000000L});
+    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0108000100000002L});
+    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000002L,0x000000008400E000L});
+    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000002L,0x000000000000A000L});
+    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000001000002202L});
+    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000001000002282L});
+    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0004011000002202L});
+    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x4000040840000002L});
+    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0001000004000002L});
+    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000002L,0x0000040008000000L});
 
 }
