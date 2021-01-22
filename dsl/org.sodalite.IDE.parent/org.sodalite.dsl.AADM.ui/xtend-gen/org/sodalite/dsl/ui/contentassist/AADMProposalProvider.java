@@ -35,6 +35,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -111,6 +112,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    super.completeRM_Model_Imports(model, assignment, context, acceptor);
+  }
+  
+  @Override
   public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     this.createEntityProposals(context, acceptor);
@@ -152,7 +158,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       }
     }
     for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+      this.createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
     }
   }
   
@@ -223,7 +229,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       }
     }
     for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+      this.createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
     }
   }
   
@@ -368,7 +374,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     final String proposalText = "node_template_id";
     final String displayText = "node_template_id";
     final String additionalProposalInfo = "The required id of the node template";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -402,7 +408,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qnode;
             final String displayText = qnode;
             final String additionalProposalInfo = node.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
@@ -435,28 +441,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       modules.add(import_);
     }
     return modules;
-  }
-  
-  @Override
-  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    try {
-      System.out.println("Invoking content assist for imports");
-      final ReasonerData<String> modules = this.getKBReasoner().getModules();
-      System.out.println("Modules retrieved from KB:");
-      List<String> _elements = modules.getElements();
-      for (final String module : _elements) {
-        {
-          System.out.println(("\tModule: " + module));
-          final String proposalText = this.extractModule(module);
-          final String displayText = proposalText;
-          final Object additionalProposalInfo = null;
-          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
-        }
-      }
-      super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   @Override
@@ -527,14 +511,14 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                 _xifexpression_2 = "";
               }
               additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-              this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+              this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
             }
           }
         }
         proposalText = "attribute_name";
         displayText = "attribute_name";
         additionalProposalInfo = "represents the name of an attribute that would be used to select an attribute\ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship\nTemplate, etc.) which is declared (or reflected from a Property definition) in its declared type \n(e.g., a Node Type, Node Template, Capability Type, etc.). ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -618,7 +602,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   _xifexpression_2 = "";
                 }
                 additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -626,7 +610,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "property_name";
         displayText = "property_name";
         additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -702,7 +686,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_4 = ("\nValid source types:" + _valid_source_types_1);
                   additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -710,7 +694,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "capability_name";
         displayText = "capability_name";
         additionalProposalInfo = "represents the symbolic name of a capability assignment ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -798,7 +782,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_8 = (_plus_7 + "]");
                   additionalProposalInfo = (_additionalProposalInfo_2 + _plus_8);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -806,7 +790,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "requirement_name";
         displayText = "requirement_name";
         additionalProposalInfo = "represents the symbolic name of a requirement assignment ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -883,7 +867,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               System.out.println(("Valid requirement node: " + qnode));
               displayText = qnode;
               proposalText = qnode;
-              this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+              this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
             }
           }
         }
@@ -933,7 +917,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String qtype = _xifexpression_3;
             proposalText = qnode;
             displayText = qnode;
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
       } catch (final Throwable _t) {
@@ -955,7 +939,9 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       try {
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
-        importedModules.add(module);
+        if ((module != null)) {
+          importedModules.add(module);
+        }
         final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
@@ -979,10 +965,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qtype;
             final String displayText = qtype;
             final String additionalProposalInfo = type.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/type.png");
+            String _module_1 = type.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -1148,7 +1139,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     final String proposalText = "node_templates:";
     final String displayText = "node_templates:";
     final String additionalProposalInfo = "A list of node template definitions for the Topology Template";
-    this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -1157,8 +1148,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
-  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
       configurable.setAdditionalProposalInfo(additionalProposalInfo);
@@ -1168,8 +1159,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
-  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
       configurable.setSelectionStart(configurable.getReplacementOffset());

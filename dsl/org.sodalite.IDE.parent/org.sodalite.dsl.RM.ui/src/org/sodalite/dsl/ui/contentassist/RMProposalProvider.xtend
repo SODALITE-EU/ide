@@ -30,7 +30,15 @@ import org.sodalite.dsl.ui.backend.BackendLogger
 import org.eclipse.jface.dialogs.MessageDialog
 import org.eclipse.swt.widgets.Shell
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
-
+import org.eclipse.swt.graphics.Image
+import java.net.URL
+import org.eclipse.core.runtime.FileLocator
+import org.eclipse.jface.resource.ImageDescriptor
+import org.osgi.framework.Bundle
+import org.eclipse.core.runtime.Path
+import java.util.Map
+import java.util.HashMap
+import org.eclipse.core.runtime.Platform
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -50,6 +58,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	final String HOST_DESCRIPTION = "A TOSCA orchestrator will interpret this keyword to refer\n" + 
 	"to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship)."
 	
+	var Map <String, Image> images = new HashMap<String, Image>();
 	
 	def KBReasoner getKBReasoner() {
 		// Configure KBReasonerClient endpoint from preference page information
@@ -130,10 +139,24 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val proposalText = extractModule(module)
 			val displayText = proposalText
 			val additionalProposalInfo = null
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+			val Image image = getImage("icons/module2.png");
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 		}
 
 		super.completeRM_Model_Imports(model, assignment, context, acceptor)
+	}
+	
+	
+	def getImage(String path){
+		if (!images.containsKey(path)){
+			val Bundle bundle = Platform.getBundle("org.sodalite.ide.ui");
+			val URL fullPathString = FileLocator.find(bundle, new Path(path), null)
+			val ImageDescriptor imageDesc = ImageDescriptor.createFromURL(fullPathString)
+			val Image image = imageDesc.createImage()
+			if (image !== null)
+				images.put(path, image)
+		}
+		return images.get(path)
 	}
 	
 	def extractModule(String module) {
@@ -147,7 +170,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.types.id"
 		val String additionalProposalInfo = "The required id of the node type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -157,7 +180,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = getImportedModules(model)
 			val String module = getModule(model)
 			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			if (module !== null)
+				importedModules.add(module)
 			
 			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
@@ -167,7 +191,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = qtype
 				val displayText = qtype
 				val additionalProposalInfo = type.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				var Image image = getImage("icons/type.png")
+				if (type.module !== null) 
+					image = getImage("icons/primitive_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
 			
 			//Add other data types defined locally in the model
@@ -179,7 +206,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = module + "/" + ePrefixType.type 
 				val displayText = module + "/" + ePrefixType.type 
 				val additionalProposalInfo = dataType.data.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				var Image image = getImage("icons/type.png")
+				if (module !== null) 
+					image = getImage("icons/primitive_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}		
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
@@ -205,7 +235,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = node.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 			
 			//Add other nodes defined locally in the model
@@ -216,7 +246,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = module + "/" + nodeType.name 
 				val displayText = module + "/" + nodeType.name 
 				val additionalProposalInfo = nodeType.node.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
@@ -246,7 +276,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = qrelationship
 				val displayText = qrelationship
 				val additionalProposalInfo = relationship.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 			
 			//Add other relationships defined locally in the model
@@ -257,7 +287,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = module + "/" + relationshipType.name 
 				val displayText = module + "/" + relationshipType.name 
 				val additionalProposalInfo = relationshipType.relationship.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
@@ -283,7 +313,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = qcap
 				val displayText = qcap
 				val additionalProposalInfo = cap.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 			
 			//Add other capabilities defined locally in the model
@@ -294,7 +324,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = module + "/" + cap.name 
 				val displayText = module + "/" + cap.name 
 				val additionalProposalInfo = cap.capability.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
@@ -320,7 +350,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = qinterface
 				val displayText = qinterface
 				val additionalProposalInfo = interface.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 			
 			//Add other interfaces defined locally in the model
@@ -331,7 +361,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				val proposalText = module + "/" + interface.name 
 				val displayText = module + "/" + interface.name 
 				val additionalProposalInfo = interface.interface.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
@@ -403,7 +433,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.datatypes.id"
 		val String additionalProposalInfo = "The required id of the data type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEArtifactType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -412,7 +442,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.artifacts.id"
 		val String additionalProposalInfo = "The required id of the artifact type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeECapabilityType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -421,7 +451,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.capabilities.id"
 		val String additionalProposalInfo = "The required id of the capability type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEInterfaceType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -430,7 +460,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.interfaces.id"
 		val String additionalProposalInfo = "The required id of the interface type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 
 	
@@ -440,7 +470,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.relationships.id"
 		val String additionalProposalInfo = "The required id of the relationship type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEPolicyType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -449,7 +479,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "tosca.policies.id"
 		val String additionalProposalInfo = "The required id of the policy type"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEPropertyDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -458,7 +488,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "property_name"
 		val String additionalProposalInfo = "The required id of the property definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEAttributeDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -467,7 +497,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "attribute_name"
 		val String additionalProposalInfo = "The required id of the attribute definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEInterfaceDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -476,7 +506,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "interface_name"
 		val String additionalProposalInfo = "The required id of the interface definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEOperationDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -485,7 +515,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "operation_name"
 		val String additionalProposalInfo = "The required id of the operation definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEParameterDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -494,7 +524,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "parameter_name"
 		val String additionalProposalInfo = "The required id of the parameter definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeECapabilityDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -503,7 +533,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "capability_name"
 		val String additionalProposalInfo = "The required id of the capability definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeERequirementDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -512,13 +542,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String displayText = "requirement_name"
 		val String additionalProposalInfo = "The required id of the requirement definition"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
 	override void completeEPropertyDefinitionBody_Required(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EPropertyDefinitionBody::required property")
-		createNonEditableCompletionProposal ("true", "true", context, "", acceptor);
-		createNonEditableCompletionProposal ("false", "false", context, "", acceptor);
+		createNonEditableCompletionProposal ("true", "true", null, context, "", acceptor);
+		createNonEditableCompletionProposal ("false", "false", null, context, "", acceptor);
 	}
 	
 	override void completeGetAttributeBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -533,29 +563,29 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeEMapEntry_Key(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMapEntry::key property")
-		createEditableCompletionProposal ("map_key_name", "map_key_name", context, "Key name for map entry", acceptor);
+		createEditableCompletionProposal ("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
 	}
 	
 	override void completeELIST_List(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ELIST::list property")
-		createEditableCompletionProposal ("\"value\"", "\"value\"", context, "Give a single String value or a comma separate list of String values", acceptor);
+		createEditableCompletionProposal ("\"value\"", "\"value\"", null, context, "Give a single String value or a comma separate list of String values", acceptor);
 	}
 	
 	override void complete_EMAP(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMAP::map property")
-		createEditableCompletionProposal ("{", "{", context, "Start a Map of key=value entries", acceptor);
+		createEditableCompletionProposal ("{", "{", null, context, "Start a Map of key=value entries", acceptor);
 	}
 	
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = selectFile ("Select implementation primary file")
-		createEditableCompletionProposal (input, input, context, "", acceptor);
+		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
 	override void completeEDependencies_Files(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = selectFile ("Select implementation dependency file")
-		createEditableCompletionProposal (input, input, context, "", acceptor);
+		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
 	protected def String selectFile (String dialogText){
@@ -572,15 +602,15 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		createNonEditableCompletionProposal ("SELF", "SELF", context, SELF_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("SOURCE", "SOURCE", context, SOURCE_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("TARGET", "TARGET", context, TARGET_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("HOST", "HOST", context, HOST_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("SELF", "SELF", null, context, SELF_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("SOURCE", "SOURCE", null, context, SOURCE_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("TARGET", "TARGET", null, context, TARGET_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("HOST", "HOST", null, context, HOST_DESCRIPTION, acceptor);
 	}
 
-	protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
+	protected def void createNonEditableCompletionProposal(String proposalText, String displayText, Image image,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
 			configurable.setAdditionalProposalInfo(additionalProposalInfo);
@@ -589,9 +619,9 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		acceptor.accept(proposal)
 	}
 	
-	protected def void createEditableCompletionProposal(String proposalText, String displayText,
+	protected def void createEditableCompletionProposal(String proposalText, String displayText, Image image,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
 			configurable.setSelectionStart(configurable.getReplacementOffset());

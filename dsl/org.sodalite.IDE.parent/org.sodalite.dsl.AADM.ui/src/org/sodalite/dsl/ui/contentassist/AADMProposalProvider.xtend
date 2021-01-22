@@ -62,6 +62,7 @@ import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
+import org.eclipse.swt.graphics.Image
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -90,6 +91,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+	
+	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeRM_Model_Imports(model, assignment, context, acceptor);
 	}
 	
 	override void completeGetPropertyBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -121,7 +126,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		
 		//Create proposals for each req or cap.
 		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+			createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
 		}
 	}
 	
@@ -170,7 +175,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		
 		//Create proposals for each found property. Prefix property with req|cap name when applies
 		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
+			createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
 		}
 	}
 	
@@ -281,7 +286,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val String displayText = "node_template_id"
 		val String additionalProposalInfo = "The required id of the node template"
 
-		createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 
 	override void completeENodeTemplateBody_Type(EObject model, Assignment assignment, ContentAssistContext context,
@@ -302,7 +307,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = node.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
@@ -325,22 +330,22 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		return modules
 	}
 	
-	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for imports")
-		
-		val ReasonerData<String> modules = getKBReasoner().modules
-		
-		System.out.println ("Modules retrieved from KB:")
-		for (module: modules.elements){
-			System.out.println ("\tModule: " + module)
-			val proposalText = extractModule(module)
-			val displayText = proposalText
-			val additionalProposalInfo = null
-			createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
-		}
-
-		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
-	}
+//	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+//		System.out.println("Invoking content assist for imports")
+//		
+//		val ReasonerData<String> modules = getKBReasoner().modules
+//		
+//		System.out.println ("Modules retrieved from KB:")
+//		for (module: modules.elements){
+//			System.out.println ("\tModule: " + module)
+//			val proposalText = extractModule(module)
+//			val displayText = proposalText
+//			val additionalProposalInfo = null
+//			createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
+//		}
+//
+//		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+//	}
 	
 	override void completeEAttributeAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EAttributeAssignment::name property")
@@ -370,7 +375,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = attribute_label
 						additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
 						additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
-						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 					}
 			}
 	
@@ -378,7 +383,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			displayText = "attribute_name"
 			additionalProposalInfo = "represents the name of an attribute that would be used to select an attribute\ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship\nTemplate, etc.) which is declared (or reflected from a Property definition) in its declared type \n(e.g., a Node Type, Node Template, Capability Type, etc.). "
 	
-			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
@@ -415,7 +420,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = property_label
 						additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
 						additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
-						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 					 }
 				}
 			}
@@ -424,7 +429,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			displayText = "property_name"
 			additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). "
 	
-			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
@@ -461,7 +466,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 							additionalProposalInfo += "\nType: " + capability.getType.getLabel
 						if (capability.getValid_source_types !== null)
 							additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types 
-						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 					}
 				}
 			}
@@ -469,7 +474,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			displayText = "capability_name"
 			additionalProposalInfo = "represents the symbolic name of a capability assignment "
 	
-			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
@@ -508,7 +513,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 							additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
 						if (requirement.getOccurrences !== null)
 							additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
-						createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 					}
 				}
 			}
@@ -516,7 +521,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			displayText = "requirement_name"
 			additionalProposalInfo = "represents the symbolic name of a requirement assignment "
 	
-			createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
@@ -552,7 +557,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					System.out.println ("Valid requirement node: " + qnode)
 				 	displayText = qnode
 					proposalText = qnode
-					createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+					createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 				}
 			}
 			
@@ -568,7 +573,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
 				proposalText = qnode
 				displayText = qnode
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 			}
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
@@ -582,7 +587,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val List<String> importedModules = getImportedModules(model)
 			val String module = getModule(model)
 			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			if (module !== null)
+				importedModules.add(module)
 			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
@@ -591,10 +597,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val proposalText = qtype
 				val displayText = qtype
 				val additionalProposalInfo = type.description
-				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);	
+				var Image image = getImage("icons/type.png")
+				if (type.module !== null) 
+					image = getImage("icons/primitive_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
 	
-			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+			//super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
@@ -696,7 +705,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val String displayText = "node_templates:"
 		val String additionalProposalInfo = "A list of node template definitions for the Topology Template"
 
-		createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+		createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 
 	// Other stuff
@@ -706,9 +715,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		return
 	}
 
-	override protected def void createNonEditableCompletionProposal(String proposalText, String displayText,
+	override protected def void createNonEditableCompletionProposal(String proposalText, String displayText, Image image, 
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
 			configurable.setAdditionalProposalInfo(additionalProposalInfo);
@@ -717,9 +726,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		acceptor.accept(proposal)
 	}
 
-	override protected def void createEditableCompletionProposal(String proposalText, String displayText,
+	override protected def void createEditableCompletionProposal(String proposalText, String displayText, Image image,
 		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
 			configurable.setSelectionStart(configurable.getReplacementOffset());

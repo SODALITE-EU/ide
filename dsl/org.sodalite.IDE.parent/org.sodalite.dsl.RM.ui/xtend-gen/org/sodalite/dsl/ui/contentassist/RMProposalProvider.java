@@ -4,14 +4,22 @@
 package org.sodalite.dsl.ui.contentassist;
 
 import com.google.common.base.Objects;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -24,6 +32,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.osgi.framework.Bundle;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
@@ -65,6 +74,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   private final String HOST_DESCRIPTION = ("A TOSCA orchestrator will interpret this keyword to refer\n" + 
     "to the all nodes that “host”the node using this reference (i.e., as identified by its HostedOn relationship).");
+  
+  private Map<String, Image> images = new HashMap<String, Image>();
   
   public KBReasoner getKBReasoner() {
     try {
@@ -153,13 +164,30 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           final String proposalText = this.extractModule(module);
           final String displayText = proposalText;
           final Object additionalProposalInfo = null;
-          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
+          final Image image = this.getImage("icons/module2.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, ((String)additionalProposalInfo), acceptor);
         }
       }
       super.completeRM_Model_Imports(model, assignment, context, acceptor);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public Image getImage(final String path) {
+    boolean _containsKey = this.images.containsKey(path);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      final Bundle bundle = Platform.getBundle("org.sodalite.ide.ui");
+      Path _path = new Path(path);
+      final URL fullPathString = FileLocator.find(bundle, _path, null);
+      final ImageDescriptor imageDesc = ImageDescriptor.createFromURL(fullPathString);
+      final Image image = imageDesc.createImage();
+      if ((image != null)) {
+        this.images.put(path, image);
+      }
+    }
+    return this.images.get(path);
   }
   
   public String extractModule(final String module) {
@@ -178,7 +206,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.types.id";
     final String displayText = "tosca.types.id";
     final String additionalProposalInfo = "The required id of the node type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -188,7 +216,9 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
-        importedModules.add(module);
+        if ((module != null)) {
+          importedModules.add(module);
+        }
         final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
@@ -212,7 +242,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             final String proposalText = qtype;
             final String displayText = qtype;
             final String additionalProposalInfo = type.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/type.png");
+            String _module_1 = type.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
         Object _findModel = this.findModel(model);
@@ -230,7 +266,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _type_2 = ePrefixType.getType();
             final String displayText = ((module + "/") + _type_2);
             final String additionalProposalInfo = dataType.getData().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/type.png");
+            if ((module != null)) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -277,7 +317,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             final String proposalText = qnode;
             final String displayText = qnode;
             final String additionalProposalInfo = node.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         Object _findModel = this.findModel(model);
@@ -293,7 +333,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _name_2 = nodeType.getName();
             final String displayText = ((module + "/") + _name_2);
             final String additionalProposalInfo = nodeType.getNode().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -344,7 +384,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             final String proposalText = qrelationship;
             final String displayText = qrelationship;
             final String additionalProposalInfo = relationship.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         Object _findModel = this.findModel(model);
@@ -360,7 +400,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _name_2 = relationshipType.getName();
             final String displayText = ((module + "/") + _name_2);
             final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -407,7 +447,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             final String proposalText = qcap;
             final String displayText = qcap;
             final String additionalProposalInfo = cap.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         Object _findModel = this.findModel(model);
@@ -423,7 +463,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _name_2 = cap_1.getName();
             final String displayText = ((module + "/") + _name_2);
             final String additionalProposalInfo = cap_1.getCapability().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -470,7 +510,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             final String proposalText = qinterface;
             final String displayText = qinterface;
             final String additionalProposalInfo = interface_.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         Object _findModel = this.findModel(model);
@@ -486,7 +526,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _name_2 = interface__1.getName();
             final String displayText = ((module + "/") + _name_2);
             final String additionalProposalInfo = interface__1.getInterface().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -578,7 +618,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.datatypes.id";
     final String displayText = "tosca.datatypes.id";
     final String additionalProposalInfo = "The required id of the data type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -587,7 +627,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.artifacts.id";
     final String displayText = "tosca.artifacts.id";
     final String additionalProposalInfo = "The required id of the artifact type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -596,7 +636,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.capabilities.id";
     final String displayText = "tosca.capabilities.id";
     final String additionalProposalInfo = "The required id of the capability type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -605,7 +645,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.interfaces.id";
     final String displayText = "tosca.interfaces.id";
     final String additionalProposalInfo = "The required id of the interface type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -614,7 +654,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.relationships.id";
     final String displayText = "tosca.relationships.id";
     final String additionalProposalInfo = "The required id of the relationship type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -623,7 +663,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "tosca.policies.id";
     final String displayText = "tosca.policies.id";
     final String additionalProposalInfo = "The required id of the policy type";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -632,7 +672,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "property_name";
     final String displayText = "property_name";
     final String additionalProposalInfo = "The required id of the property definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -641,7 +681,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "attribute_name";
     final String displayText = "attribute_name";
     final String additionalProposalInfo = "The required id of the attribute definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -650,7 +690,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "interface_name";
     final String displayText = "interface_name";
     final String additionalProposalInfo = "The required id of the interface definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -659,7 +699,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "operation_name";
     final String displayText = "operation_name";
     final String additionalProposalInfo = "The required id of the operation definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -668,7 +708,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "parameter_name";
     final String displayText = "parameter_name";
     final String additionalProposalInfo = "The required id of the parameter definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -677,7 +717,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "capability_name";
     final String displayText = "capability_name";
     final String additionalProposalInfo = "The required id of the capability definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -686,14 +726,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String proposalText = "requirement_name";
     final String displayText = "requirement_name";
     final String additionalProposalInfo = "The required id of the requirement definition";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
   public void completeEPropertyDefinitionBody_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPropertyDefinitionBody::required property");
-    this.createNonEditableCompletionProposal("true", "true", context, "", acceptor);
-    this.createNonEditableCompletionProposal("false", "false", context, "", acceptor);
+    this.createNonEditableCompletionProposal("true", "true", null, context, "", acceptor);
+    this.createNonEditableCompletionProposal("false", "false", null, context, "", acceptor);
   }
   
   @Override
@@ -711,31 +751,31 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   @Override
   public void completeEMapEntry_Key(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMapEntry::key property");
-    this.createEditableCompletionProposal("map_key_name", "map_key_name", context, "Key name for map entry", acceptor);
+    this.createEditableCompletionProposal("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
   }
   
   @Override
   public void completeELIST_List(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ELIST::list property");
-    this.createEditableCompletionProposal("\"value\"", "\"value\"", context, "Give a single String value or a comma separate list of String values", acceptor);
+    this.createEditableCompletionProposal("\"value\"", "\"value\"", null, context, "Give a single String value or a comma separate list of String values", acceptor);
   }
   
   @Override
   public void complete_EMAP(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMAP::map property");
-    this.createEditableCompletionProposal("{", "{", context, "Start a Map of key=value entries", acceptor);
+    this.createEditableCompletionProposal("{", "{", null, context, "Start a Map of key=value entries", acceptor);
   }
   
   @Override
   public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String input = this.selectFile("Select implementation primary file");
-    this.createEditableCompletionProposal(input, input, context, "", acceptor);
+    this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
   @Override
   public void completeEDependencies_Files(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String input = this.selectFile("Select implementation dependency file");
-    this.createEditableCompletionProposal(input, input, context, "", acceptor);
+    this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
   protected String selectFile(final String dialogText) {
@@ -748,14 +788,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("SELF", "SELF", context, this.SELF_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("SOURCE", "SOURCE", context, this.SOURCE_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("TARGET", "TARGET", context, this.TARGET_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("HOST", "HOST", context, this.HOST_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("SELF", "SELF", null, context, this.SELF_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("SOURCE", "SOURCE", null, context, this.SOURCE_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("TARGET", "TARGET", null, context, this.TARGET_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("HOST", "HOST", null, context, this.HOST_DESCRIPTION, acceptor);
   }
   
-  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
       configurable.setAdditionalProposalInfo(additionalProposalInfo);
@@ -764,8 +804,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     acceptor.accept(proposal);
   }
   
-  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
       configurable.setSelectionStart(configurable.getReplacementOffset());
