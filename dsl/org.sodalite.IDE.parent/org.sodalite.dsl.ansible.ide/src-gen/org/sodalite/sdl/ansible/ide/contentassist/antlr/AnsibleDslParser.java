@@ -37,6 +37,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEExecutionAccess().getAlternatives(), "rule__EExecution__Alternatives");
 			builder.put(grammarAccess.getEBlockTaskAccess().getAlternatives(), "rule__EBlockTask__Alternatives");
 			builder.put(grammarAccess.getETaskHandlerAccess().getAlternatives(), "rule__ETaskHandler__Alternatives");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getAlternatives_2_0(), "rule__EExternalFileInclusion__Alternatives_2_0");
 			builder.put(grammarAccess.getELoopAccess().getAlternatives_2(), "rule__ELoop__Alternatives_2");
 			builder.put(grammarAccess.getEExeSettingsAccess().getAlternatives(), "rule__EExeSettings__Alternatives");
 			builder.put(grammarAccess.getEErrorHandlingAccess().getAlternatives(), "rule__EErrorHandling__Alternatives");
@@ -158,9 +159,11 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getERoleInclusionAccess().getGroup_2_2_9(), "rule__ERoleInclusion__Group_2_2_9__0");
 			builder.put(grammarAccess.getERoleInclusionAccess().getGroup_2_2_12(), "rule__ERoleInclusion__Group_2_2_12__0");
 			builder.put(grammarAccess.getERoleInclusionsAccess().getGroup(), "rule__ERoleInclusions__Group__0");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getGroup(), "rule__EPlaybookInclusion__Group__0");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getGroup_2_0(), "rule__EPlaybookInclusion__Group_2_0__0");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getGroup_2_1(), "rule__EPlaybookInclusion__Group_2_1__0");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getGroup(), "rule__EExternalFileInclusion__Group__0");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getGroup_2(), "rule__EExternalFileInclusion__Group_2__0");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getGroup_2_0_0(), "rule__EExternalFileInclusion__Group_2_0_0__0");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getGroup_2_0_1(), "rule__EExternalFileInclusion__Group_2_0_1__0");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getGroup_2_1(), "rule__EExternalFileInclusion__Group_2_1__0");
 			builder.put(grammarAccess.getELoopAccess().getGroup(), "rule__ELoop__Group__0");
 			builder.put(grammarAccess.getELoopOverListAccess().getGroup(), "rule__ELoopOverList__Group__0");
 			builder.put(grammarAccess.getELoopControlAccess().getGroup(), "rule__ELoopControl__Group__0");
@@ -307,7 +310,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPlayAccess().getVars_filesAssignment_3_15_1(), "rule__EPlay__Vars_filesAssignment_3_15_1");
 			builder.put(grammarAccess.getEPlayAccess().getVars_promptAssignment_3_16_1(), "rule__EPlay__Vars_promptAssignment_3_16_1");
 			builder.put(grammarAccess.getEPlayAccess().getForce_handlersAssignment_3_17_1(), "rule__EPlay__Force_handlersAssignment_3_17_1");
-			builder.put(grammarAccess.getEPlayAccess().getPlaybook_inclusionAssignment_3_18(), "rule__EPlay__Playbook_inclusionAssignment_3_18");
+			builder.put(grammarAccess.getEPlayAccess().getExternal_file_inclusionAssignment_3_18(), "rule__EPlay__External_file_inclusionAssignment_3_18");
 			builder.put(grammarAccess.getEPlayAccess().getPre_tasks_listAssignment_3_19_2(), "rule__EPlay__Pre_tasks_listAssignment_3_19_2");
 			builder.put(grammarAccess.getEPlayAccess().getRoles_inclusionsAssignment_3_20(), "rule__EPlay__Roles_inclusionsAssignment_3_20");
 			builder.put(grammarAccess.getEPlayAccess().getTasks_listAssignment_3_21_2(), "rule__EPlay__Tasks_listAssignment_3_21_2");
@@ -399,8 +402,9 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getERoleInclusionAccess().getWhen_expressionAssignment_2_2_12_1(), "rule__ERoleInclusion__When_expressionAssignment_2_2_12_1");
 			builder.put(grammarAccess.getERoleInclusionAccess().getError_handlingAssignment_2_2_13(), "rule__ERoleInclusion__Error_handlingAssignment_2_2_13");
 			builder.put(grammarAccess.getERoleInclusionsAccess().getRolesAssignment_2(), "rule__ERoleInclusions__RolesAssignment_2");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getPlaybook_file_nameAssignment_2_0_1(), "rule__EPlaybookInclusion__Playbook_file_nameAssignment_2_0_1");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getWhen_expressionAssignment_2_1_1(), "rule__EPlaybookInclusion__When_expressionAssignment_2_1_1");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getImport_playbookAssignment_2_0_0_1(), "rule__EExternalFileInclusion__Import_playbookAssignment_2_0_0_1");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getIncludeAssignment_2_0_1_1(), "rule__EExternalFileInclusion__IncludeAssignment_2_0_1_1");
+			builder.put(grammarAccess.getEExternalFileInclusionAccess().getWhen_expressionAssignment_2_1_1(), "rule__EExternalFileInclusion__When_expressionAssignment_2_1_1");
 			builder.put(grammarAccess.getELoopOverListAccess().getLoop_listAssignment_1(), "rule__ELoopOverList__Loop_listAssignment_1");
 			builder.put(grammarAccess.getELoopOverListAccess().getLoop_controlAssignment_2(), "rule__ELoopOverList__Loop_controlAssignment_2");
 			builder.put(grammarAccess.getELoopControlAccess().getLabelAssignment_2_0_1(), "rule__ELoopControl__LabelAssignment_2_0_1");
@@ -565,7 +569,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getETaskAccess().getUnorderedGroup_3(), "rule__ETask__UnorderedGroup_3");
 			builder.put(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), "rule__EHandler__UnorderedGroup_3");
 			builder.put(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), "rule__ERoleInclusion__UnorderedGroup_2_2");
-			builder.put(grammarAccess.getEPlaybookInclusionAccess().getUnorderedGroup_2(), "rule__EPlaybookInclusion__UnorderedGroup_2");
 			builder.put(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), "rule__ELoopControl__UnorderedGroup_2");
 			builder.put(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), "rule__EUntil__UnorderedGroup_2");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getUnorderedGroup_2(), "rule__EPrivilegeEscalation__UnorderedGroup_2");

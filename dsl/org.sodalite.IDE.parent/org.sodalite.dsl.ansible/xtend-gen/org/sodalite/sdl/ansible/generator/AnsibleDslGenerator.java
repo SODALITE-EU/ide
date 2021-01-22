@@ -40,6 +40,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EElementOfListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
@@ -81,7 +82,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -161,11 +161,11 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           }
         }
         {
-          EPlaybookInclusion _playbook_inclusion = play.getPlaybook_inclusion();
-          boolean _tripleNotEquals_2 = (_playbook_inclusion != null);
+          EExternalFileInclusion _external_file_inclusion = play.getExternal_file_inclusion();
+          boolean _tripleNotEquals_2 = (_external_file_inclusion != null);
           if (_tripleNotEquals_2) {
-            CharSequence _compilePlaybookInclusion = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, false);
-            _builder.append(_compilePlaybookInclusion);
+            CharSequence _compileExternalFileInclusion = this.compileExternalFileInclusion(play.getExternal_file_inclusion(), space, false);
+            _builder.append(_compileExternalFileInclusion);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -179,21 +179,21 @@ public class AnsibleDslGenerator extends AbstractGenerator {
             _builder.append(_compileStringPassed_2);
             _builder.newLineIfNotEmpty();
             {
-              EPlaybookInclusion _playbook_inclusion_1 = play.getPlaybook_inclusion();
-              boolean _tripleNotEquals_4 = (_playbook_inclusion_1 != null);
+              EExternalFileInclusion _external_file_inclusion_1 = play.getExternal_file_inclusion();
+              boolean _tripleNotEquals_4 = (_external_file_inclusion_1 != null);
               if (_tripleNotEquals_4) {
-                CharSequence _compilePlaybookInclusion_1 = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, false);
-                _builder.append(_compilePlaybookInclusion_1);
+                CharSequence _compileExternalFileInclusion_1 = this.compileExternalFileInclusion(play.getExternal_file_inclusion(), space, false);
+                _builder.append(_compileExternalFileInclusion_1);
                 _builder.newLineIfNotEmpty();
               }
             }
           } else {
             {
-              EPlaybookInclusion _playbook_inclusion_2 = play.getPlaybook_inclusion();
-              boolean _tripleNotEquals_5 = (_playbook_inclusion_2 != null);
+              EExternalFileInclusion _external_file_inclusion_2 = play.getExternal_file_inclusion();
+              boolean _tripleNotEquals_5 = (_external_file_inclusion_2 != null);
               if (_tripleNotEquals_5) {
-                CharSequence _compilePlaybookInclusion_2 = this.compilePlaybookInclusion(play.getPlaybook_inclusion(), space, true);
-                _builder.append(_compilePlaybookInclusion_2);
+                CharSequence _compileExternalFileInclusion_2 = this.compileExternalFileInclusion(play.getExternal_file_inclusion(), space, true);
+                _builder.append(_compileExternalFileInclusion_2);
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -360,33 +360,65 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence compilePlaybookInclusion(final EPlaybookInclusion playbookInclusion, final String space, final boolean isFirstElementOfPlay) {
+  public CharSequence compileExternalFileInclusion(final EExternalFileInclusion externalFileInclusion, final String space, final boolean isFirstElementOfPlay) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      if ((playbookInclusion != null)) {
+      if ((externalFileInclusion != null)) {
         {
-          if (((playbookInclusion.getPlaybook_file_name() != null) && (!isFirstElementOfPlay))) {
-            _builder.append(space);
-            _builder.append("import_playbook: ");
-            String _playbook_file_name = playbookInclusion.getPlaybook_file_name();
-            _builder.append(_playbook_file_name);
-            _builder.newLineIfNotEmpty();
+          if ((!isFirstElementOfPlay)) {
+            {
+              String _import_playbook = externalFileInclusion.getImport_playbook();
+              boolean _tripleNotEquals = (_import_playbook != null);
+              if (_tripleNotEquals) {
+                _builder.append(space);
+                _builder.append("import_playbook: ");
+                String _import_playbook_1 = externalFileInclusion.getImport_playbook();
+                _builder.append(_import_playbook_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
           } else {
-            if (((playbookInclusion.getPlaybook_file_name() != null) && isFirstElementOfPlay)) {
-              _builder.append("- import_playbook: ");
-              String _playbook_file_name_1 = playbookInclusion.getPlaybook_file_name();
-              _builder.append(_playbook_file_name_1);
+            String _include = externalFileInclusion.getInclude();
+            boolean _tripleNotEquals_1 = (_include != null);
+            if (_tripleNotEquals_1) {
+              _builder.append(space);
+              _builder.append("include: ");
+              String _include_1 = externalFileInclusion.getInclude();
+              _builder.append(_include_1);
               _builder.newLineIfNotEmpty();
+            } else {
+              if (isFirstElementOfPlay) {
+                {
+                  String _import_playbook_2 = externalFileInclusion.getImport_playbook();
+                  boolean _tripleNotEquals_2 = (_import_playbook_2 != null);
+                  if (_tripleNotEquals_2) {
+                    _builder.append("- import_playbook: ");
+                    String _import_playbook_3 = externalFileInclusion.getImport_playbook();
+                    _builder.append(_import_playbook_3);
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              } else {
+                String _include_2 = externalFileInclusion.getInclude();
+                boolean _tripleNotEquals_3 = (_include_2 != null);
+                if (_tripleNotEquals_3) {
+                  _builder.append("- include: ");
+                  String _include_3 = externalFileInclusion.getInclude();
+                  _builder.append(_include_3);
+                  _builder.append("\t\t\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
             }
           }
         }
         {
-          ECondition _when_expression = playbookInclusion.getWhen_expression();
-          boolean _tripleNotEquals = (_when_expression != null);
-          if (_tripleNotEquals) {
+          ECondition _when_expression = externalFileInclusion.getWhen_expression();
+          boolean _tripleNotEquals_4 = (_when_expression != null);
+          if (_tripleNotEquals_4) {
             _builder.append(space);
             _builder.append("when: ");
-            String _compileCondition = this.compileCondition(playbookInclusion.getWhen_expression(), space);
+            String _compileCondition = this.compileCondition(externalFileInclusion.getWhen_expression(), space);
             _builder.append(_compileCondition);
             _builder.newLineIfNotEmpty();
           }
@@ -574,13 +606,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EListPassed _module_defaults = base.getModule_defaults();
+      EValuePassed _module_defaults = base.getModule_defaults();
       boolean _tripleNotEquals_15 = (_module_defaults != null);
       if (_tripleNotEquals_15) {
         _builder.append(space);
         _builder.append("module_defaults: ");
-        Serializable _compileListPassed = this.compileListPassed(base.getModule_defaults(), space);
-        _builder.append(_compileListPassed);
+        Object _compileValuePassed = this.compileValuePassed(base.getModule_defaults(), space, false);
+        _builder.append(_compileValuePassed);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -590,8 +622,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_16) {
         _builder.append(space);
         _builder.append("environment: ");
-        Object _compileValuePassed = this.compileValuePassed(base.getEnvironment(), space, false);
-        _builder.append(_compileValuePassed);
+        Object _compileValuePassed_1 = this.compileValuePassed(base.getEnvironment(), space, false);
+        _builder.append(_compileValuePassed_1);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -601,8 +633,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_17) {
         _builder.append(space);
         _builder.append("collections: ");
-        Serializable _compileListPassed_1 = this.compileListPassed(base.getCollections(), space);
-        _builder.append(_compileListPassed_1);
+        Serializable _compileListPassed = this.compileListPassed(base.getCollections(), space);
+        _builder.append(_compileListPassed);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -612,8 +644,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       if (_tripleNotEquals_18) {
         _builder.append(space);
         _builder.append("tags: ");
-        Serializable _compileListPassed_2 = this.compileListPassed(base.getTags(), space);
-        _builder.append(_compileListPassed_2);
+        Serializable _compileListPassed_1 = this.compileListPassed(base.getTags(), space);
+        _builder.append(_compileListPassed_1);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1810,9 +1842,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     for (int index = 0; (index < string.length()); index++) {
       {
         final char character = string.charAt(index);
-        char _charAt = "\"".charAt(0);
-        boolean _tripleNotEquals = (character != _charAt);
-        if (_tripleNotEquals) {
+        if (((character != "\"".charAt(0)) && (character != "\\".charAt(0)))) {
           stringToReturn = stringToReturn.concat(Character.valueOf(character).toString());
         } else {
           stringToReturn = stringToReturn.concat("\\").concat(Character.valueOf(character).toString());
@@ -2121,7 +2151,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         String _simple_value_string = simpleValueJinja.getSimple_value_string();
         boolean _tripleNotEquals_2 = (_simple_value_string != null);
         if (_tripleNotEquals_2) {
-          return "\'".concat(simpleValueJinja.getSimple_value_string()).concat("\'");
+          return "\'".concat(this.compileString(simpleValueJinja.getSimple_value_string())).concat("\'");
         }
       }
     }

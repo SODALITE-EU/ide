@@ -159,11 +159,14 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"			The operation must be contained in an interface of the selected\n"+
 	"			node type."
 	
-	final String PLAYBOOK_INCLUSION_DESCRIPTION =
-	"This is used for importing a playbook yaml file.\n\n"+
+	final String EXTERNAL_FILE_INCLUSION_DESCRIPTION =
+	"This is used for importing/including a yaml file.\n\n"+
 	"The attributes that can be set are:\n\n"+
 	"	- import_playbook   -> the name of the yaml file\n"+
-	"	- when   -> condition"
+	"	- include   -> the name of the yaml file\n"+
+	"	- when   -> condition\n\n"+
+	"It can be selected either \"import_playbook\" or \"include\",\n"+
+	"while \"when\" is not mandatory."
 	
 	final String WITH_LOOKUP_DESCRIPTION =
 	"This is the classic 'with_<lookup>' keyword in Ansible.\n"+
@@ -226,16 +229,12 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		createNonEditableCompletionProposal("loop_control:", new StyledString("loop_control:"), context, LOOP_CONTROL_DESCRIPTION, acceptor)
 	}
 	
-	override void complete_EPlaybookInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createNonEditableCompletionProposal("playbook_inclusion:", new StyledString("playbook_inclusion:"), context, PLAYBOOK_INCLUSION_DESCRIPTION, acceptor)
+	override void complete_EExternalFileInclusion(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createNonEditableCompletionProposal("external_file_inclusion:", new StyledString("external_file_inclusion:"), context, EXTERNAL_FILE_INCLUSION_DESCRIPTION, acceptor)
 	}
 	
 	override void complete_EUsedByBody(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("used_by:", new StyledString("used_by:"), context, USED_BY_DESCRIPTION, acceptor)
-	}
-	
-	override void completeEPlaybookInclusion_Playbook_file_name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor)
 	}
 	
 	override void complete_EWithLookup(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -273,7 +272,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		if (rootPlay !== null){
 			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
 			for (candidate: candidates){
-				acceptor.accept(createCompletionProposal(candidate.name, context))
+				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)
 			}
 		}		
 	}
@@ -284,7 +283,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		if (rootPlay !== null){
 			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
 			for (candidate: candidates){
-				acceptor.accept(createCompletionProposal(candidate.name, context))
+				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)
 			}
 		}
 	}

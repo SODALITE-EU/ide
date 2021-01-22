@@ -804,13 +804,13 @@ public interface AnsibleDslPackage extends EPackage
   int EPLAY__FORCE_HANDLERS = EBASE_FEATURE_COUNT + 7;
 
   /**
-   * The feature id for the '<em><b>Playbook inclusion</b></em>' containment reference.
+   * The feature id for the '<em><b>External file inclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAY__PLAYBOOK_INCLUSION = EBASE_FEATURE_COUNT + 8;
+  int EPLAY__EXTERNAL_FILE_INCLUSION = EBASE_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Pre tasks list</b></em>' containment reference list.
@@ -1756,23 +1756,32 @@ public interface AnsibleDslPackage extends EPackage
   int EROLE_INCLUSIONS_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookInclusionImpl <em>EPlaybook Inclusion</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExternalFileInclusionImpl <em>EExternal File Inclusion</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookInclusionImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlaybookInclusion()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EExternalFileInclusionImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExternalFileInclusion()
    * @generated
    */
-  int EPLAYBOOK_INCLUSION = 15;
+  int EEXTERNAL_FILE_INCLUSION = 15;
 
   /**
-   * The feature id for the '<em><b>Playbook file name</b></em>' attribute.
+   * The feature id for the '<em><b>Import playbook</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAYBOOK_INCLUSION__PLAYBOOK_FILE_NAME = 0;
+  int EEXTERNAL_FILE_INCLUSION__IMPORT_PLAYBOOK = 0;
+
+  /**
+   * The feature id for the '<em><b>Include</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXTERNAL_FILE_INCLUSION__INCLUDE = 1;
 
   /**
    * The feature id for the '<em><b>When expression</b></em>' containment reference.
@@ -1781,16 +1790,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPLAYBOOK_INCLUSION__WHEN_EXPRESSION = 1;
+  int EEXTERNAL_FILE_INCLUSION__WHEN_EXPRESSION = 2;
 
   /**
-   * The number of structural features of the '<em>EPlaybook Inclusion</em>' class.
+   * The number of structural features of the '<em>EExternal File Inclusion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPLAYBOOK_INCLUSION_FEATURE_COUNT = 2;
+  int EEXTERNAL_FILE_INCLUSION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopImpl <em>ELoop</em>}' class.
@@ -5246,15 +5255,15 @@ public interface AnsibleDslPackage extends EPackage
   EReference getEPlay_Force_handlers();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion <em>Playbook inclusion</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getExternal_file_inclusion <em>External file inclusion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Playbook inclusion</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion()
+   * @return the meta object for the containment reference '<em>External file inclusion</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlay#getExternal_file_inclusion()
    * @see #getEPlay()
    * @generated
    */
-  EReference getEPlay_Playbook_inclusion();
+  EReference getEPlay_External_file_inclusion();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPre_tasks_list <em>Pre tasks list</em>}'.
@@ -5558,36 +5567,47 @@ public interface AnsibleDslPackage extends EPackage
   EReference getERoleInclusions_Roles();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion <em>EPlaybook Inclusion</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion <em>EExternal File Inclusion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EPlaybook Inclusion</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
+   * @return the meta object for class '<em>EExternal File Inclusion</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion
    * @generated
    */
-  EClass getEPlaybookInclusion();
+  EClass getEExternalFileInclusion();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion#getPlaybook_file_name <em>Playbook file name</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getImport_playbook <em>Import playbook</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Playbook file name</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion#getPlaybook_file_name()
-   * @see #getEPlaybookInclusion()
+   * @return the meta object for the attribute '<em>Import playbook</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getImport_playbook()
+   * @see #getEExternalFileInclusion()
    * @generated
    */
-  EAttribute getEPlaybookInclusion_Playbook_file_name();
+  EAttribute getEExternalFileInclusion_Import_playbook();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion#getWhen_expression <em>When expression</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getInclude <em>Include</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Include</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getInclude()
+   * @see #getEExternalFileInclusion()
+   * @generated
+   */
+  EAttribute getEExternalFileInclusion_Include();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getWhen_expression <em>When expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>When expression</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion#getWhen_expression()
-   * @see #getEPlaybookInclusion()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion#getWhen_expression()
+   * @see #getEExternalFileInclusion()
    * @generated
    */
-  EReference getEPlaybookInclusion_When_expression();
+  EReference getEExternalFileInclusion_When_expression();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ELoop <em>ELoop</em>}'.
@@ -8248,12 +8268,12 @@ public interface AnsibleDslPackage extends EPackage
     EReference EPLAY__FORCE_HANDLERS = eINSTANCE.getEPlay_Force_handlers();
 
     /**
-     * The meta object literal for the '<em><b>Playbook inclusion</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>External file inclusion</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPLAY__PLAYBOOK_INCLUSION = eINSTANCE.getEPlay_Playbook_inclusion();
+    EReference EPLAY__EXTERNAL_FILE_INCLUSION = eINSTANCE.getEPlay_External_file_inclusion();
 
     /**
      * The meta object literal for the '<em><b>Pre tasks list</b></em>' containment reference list feature.
@@ -8494,22 +8514,30 @@ public interface AnsibleDslPackage extends EPackage
     EReference EROLE_INCLUSIONS__ROLES = eINSTANCE.getERoleInclusions_Roles();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookInclusionImpl <em>EPlaybook Inclusion</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EExternalFileInclusionImpl <em>EExternal File Inclusion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookInclusionImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEPlaybookInclusion()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EExternalFileInclusionImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEExternalFileInclusion()
      * @generated
      */
-    EClass EPLAYBOOK_INCLUSION = eINSTANCE.getEPlaybookInclusion();
+    EClass EEXTERNAL_FILE_INCLUSION = eINSTANCE.getEExternalFileInclusion();
 
     /**
-     * The meta object literal for the '<em><b>Playbook file name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Import playbook</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EPLAYBOOK_INCLUSION__PLAYBOOK_FILE_NAME = eINSTANCE.getEPlaybookInclusion_Playbook_file_name();
+    EAttribute EEXTERNAL_FILE_INCLUSION__IMPORT_PLAYBOOK = eINSTANCE.getEExternalFileInclusion_Import_playbook();
+
+    /**
+     * The meta object literal for the '<em><b>Include</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EEXTERNAL_FILE_INCLUSION__INCLUDE = eINSTANCE.getEExternalFileInclusion_Include();
 
     /**
      * The meta object literal for the '<em><b>When expression</b></em>' containment reference feature.
@@ -8517,7 +8545,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EPLAYBOOK_INCLUSION__WHEN_EXPRESSION = eINSTANCE.getEPlaybookInclusion_When_expression();
+    EReference EEXTERNAL_FILE_INCLUSION__WHEN_EXPRESSION = eINSTANCE.getEExternalFileInclusion_When_expression();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ELoopImpl <em>ELoop</em>}' class.

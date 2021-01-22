@@ -31,6 +31,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPairJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EElifBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
@@ -68,7 +69,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -152,6 +152,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EEXECUTION_EXE_SETTINGS:
 				sequence_EExecutionExeSettings(context, (EExecutionExeSettings) semanticObject); 
+				return; 
+			case AnsibleDslPackage.EEXTERNAL_FILE_INCLUSION:
+				sequence_EExternalFileInclusion(context, (EExternalFileInclusion) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EFACTS_SETTINGS:
 				sequence_EFactsSettings(context, (EFactsSettings) semanticObject); 
@@ -263,9 +266,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.EPLAYBOOK:
 				sequence_EPlaybook(context, (EPlaybook) semanticObject); 
-				return; 
-			case AnsibleDslPackage.EPLAYBOOK_INCLUSION:
-				sequence_EPlaybookInclusion(context, (EPlaybookInclusion) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EPRIVILEGE_ESCALATION:
 				sequence_EPrivilegeEscalation(context, (EPrivilegeEscalation) semanticObject); 
@@ -384,7 +384,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
 	 *         debugger=EStringPassed | 
-	 *         module_defaults=EListPassed | 
+	 *         module_defaults=EValuePassed | 
 	 *         environment=EValuePassed | 
 	 *         collections=EListPassed | 
 	 *         tags=EListPassed | 
@@ -565,6 +565,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     EExternalFileInclusion returns EExternalFileInclusion
+	 *
+	 * Constraint:
+	 *     ((import_playbook=STRING | include=STRING) when_expression=ECondition?)
+	 */
+	protected void sequence_EExternalFileInclusion(ISerializationContext context, EExternalFileInclusion semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EFactsSettings returns EFactsSettings
 	 *
 	 * Constraint:
@@ -652,7 +664,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
 	 *             debugger=EStringPassed | 
-	 *             module_defaults=EListPassed | 
+	 *             module_defaults=EValuePassed | 
 	 *             environment=EValuePassed | 
 	 *             collections=EListPassed | 
 	 *             tags=EListPassed | 
@@ -1162,7 +1174,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         connection=EConnection | 
 	 *         no_log=EBooleanPassed | 
 	 *         debugger=EStringPassed | 
-	 *         module_defaults=EListPassed | 
+	 *         module_defaults=EValuePassed | 
 	 *         environment=EValuePassed | 
 	 *         collections=EListPassed | 
 	 *         tags=EListPassed | 
@@ -1173,7 +1185,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *         vars_files=EListPassed | 
 	 *         vars_prompt=EListPassed | 
 	 *         force_handlers=EBooleanPassed | 
-	 *         playbook_inclusion=EPlaybookInclusion | 
+	 *         external_file_inclusion=EExternalFileInclusion | 
 	 *         pre_tasks_list+=EBlockTask | 
 	 *         roles_inclusions=ERoleInclusions | 
 	 *         tasks_list+=EBlockTask | 
@@ -1182,18 +1194,6 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     )*
 	 */
 	protected void sequence_EPlay(ISerializationContext context, EPlay semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     EPlaybookInclusion returns EPlaybookInclusion
-	 *
-	 * Constraint:
-	 *     (playbook_file_name=STRING | when_expression=ECondition)+
-	 */
-	protected void sequence_EPlaybookInclusion(ISerializationContext context, EPlaybookInclusion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1276,7 +1276,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
 	 *             debugger=EStringPassed | 
-	 *             module_defaults=EListPassed | 
+	 *             module_defaults=EValuePassed | 
 	 *             environment=EValuePassed | 
 	 *             collections=EListPassed | 
 	 *             tags=EListPassed | 
@@ -1427,7 +1427,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             connection=EConnection | 
 	 *             no_log=EBooleanPassed | 
 	 *             debugger=EStringPassed | 
-	 *             module_defaults=EListPassed | 
+	 *             module_defaults=EValuePassed | 
 	 *             environment=EValuePassed | 
 	 *             collections=EListPassed | 
 	 *             tags=EListPassed | 

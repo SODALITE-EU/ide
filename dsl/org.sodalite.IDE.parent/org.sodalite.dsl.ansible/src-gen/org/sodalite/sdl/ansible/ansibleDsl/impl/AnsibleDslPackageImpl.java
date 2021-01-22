@@ -41,6 +41,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution;
 import org.sodalite.sdl.ansible.ansibleDsl.EExecutionExeSettings;
+import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EFilteredExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EForStatement;
@@ -83,7 +84,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
@@ -231,7 +231,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass ePlaybookInclusionEClass = null;
+  private EClass eExternalFileInclusionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1341,7 +1341,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlay_Playbook_inclusion()
+  public EReference getEPlay_External_file_inclusion()
   {
     return (EReference)ePlayEClass.getEStructuralFeatures().get(8);
   }
@@ -1660,9 +1660,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEPlaybookInclusion()
+  public EClass getEExternalFileInclusion()
   {
-    return ePlaybookInclusionEClass;
+    return eExternalFileInclusionEClass;
   }
 
   /**
@@ -1671,9 +1671,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEPlaybookInclusion_Playbook_file_name()
+  public EAttribute getEExternalFileInclusion_Import_playbook()
   {
-    return (EAttribute)ePlaybookInclusionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eExternalFileInclusionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1682,9 +1682,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEPlaybookInclusion_When_expression()
+  public EAttribute getEExternalFileInclusion_Include()
   {
-    return (EReference)ePlaybookInclusionEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eExternalFileInclusionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExternalFileInclusion_When_expression()
+  {
+    return (EReference)eExternalFileInclusionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -4132,7 +4143,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEReference(ePlayEClass, EPLAY__VARS_FILES);
     createEReference(ePlayEClass, EPLAY__VARS_PROMPT);
     createEReference(ePlayEClass, EPLAY__FORCE_HANDLERS);
-    createEReference(ePlayEClass, EPLAY__PLAYBOOK_INCLUSION);
+    createEReference(ePlayEClass, EPLAY__EXTERNAL_FILE_INCLUSION);
     createEReference(ePlayEClass, EPLAY__PRE_TASKS_LIST);
     createEReference(ePlayEClass, EPLAY__ROLES_INCLUSIONS);
     createEReference(ePlayEClass, EPLAY__TASKS_LIST);
@@ -4169,9 +4180,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eRoleInclusionsEClass = createEClass(EROLE_INCLUSIONS);
     createEReference(eRoleInclusionsEClass, EROLE_INCLUSIONS__ROLES);
 
-    ePlaybookInclusionEClass = createEClass(EPLAYBOOK_INCLUSION);
-    createEAttribute(ePlaybookInclusionEClass, EPLAYBOOK_INCLUSION__PLAYBOOK_FILE_NAME);
-    createEReference(ePlaybookInclusionEClass, EPLAYBOOK_INCLUSION__WHEN_EXPRESSION);
+    eExternalFileInclusionEClass = createEClass(EEXTERNAL_FILE_INCLUSION);
+    createEAttribute(eExternalFileInclusionEClass, EEXTERNAL_FILE_INCLUSION__IMPORT_PLAYBOOK);
+    createEAttribute(eExternalFileInclusionEClass, EEXTERNAL_FILE_INCLUSION__INCLUDE);
+    createEReference(eExternalFileInclusionEClass, EEXTERNAL_FILE_INCLUSION__WHEN_EXPRESSION);
 
     eLoopEClass = createEClass(ELOOP);
 
@@ -4585,7 +4597,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEBase_Connection(), this.getEConnection(), null, "connection", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_No_log(), this.getEBooleanPassed(), null, "no_log", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Debugger(), this.getEStringPassed(), null, "debugger", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEBase_Module_defaults(), this.getEListPassed(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEBase_Module_defaults(), this.getEValuePassed(), null, "module_defaults", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Environment(), this.getEValuePassed(), null, "environment", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Collections(), this.getEListPassed(), null, "collections", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEBase_Tags(), this.getEListPassed(), null, "tags", null, 0, 1, EBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4617,7 +4629,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEReference(getEPlay_Vars_files(), this.getEListPassed(), null, "vars_files", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Vars_prompt(), this.getEListPassed(), null, "vars_prompt", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Force_handlers(), this.getEBooleanPassed(), null, "force_handlers", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlay_Playbook_inclusion(), this.getEPlaybookInclusion(), null, "playbook_inclusion", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlay_External_file_inclusion(), this.getEExternalFileInclusion(), null, "external_file_inclusion", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Pre_tasks_list(), this.getEBlockTask(), null, "pre_tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Roles_inclusions(), this.getERoleInclusions(), null, "roles_inclusions", null, 0, 1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlay_Tasks_list(), this.getEBlockTask(), null, "tasks_list", null, 0, -1, EPlay.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4654,9 +4666,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eRoleInclusionsEClass, ERoleInclusions.class, "ERoleInclusions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERoleInclusions_Roles(), this.getERoleInclusion(), null, "roles", null, 0, -1, ERoleInclusions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(ePlaybookInclusionEClass, EPlaybookInclusion.class, "EPlaybookInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEPlaybookInclusion_Playbook_file_name(), ecorePackage.getEString(), "playbook_file_name", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlaybookInclusion_When_expression(), this.getECondition(), null, "when_expression", null, 0, 1, EPlaybookInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eExternalFileInclusionEClass, EExternalFileInclusion.class, "EExternalFileInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEExternalFileInclusion_Import_playbook(), ecorePackage.getEString(), "import_playbook", null, 0, 1, EExternalFileInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEExternalFileInclusion_Include(), ecorePackage.getEString(), "include", null, 0, 1, EExternalFileInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExternalFileInclusion_When_expression(), this.getECondition(), null, "when_expression", null, 0, 1, EExternalFileInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eLoopEClass, ELoop.class, "ELoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

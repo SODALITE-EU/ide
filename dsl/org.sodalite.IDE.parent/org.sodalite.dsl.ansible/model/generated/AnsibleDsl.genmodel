@@ -53,7 +53,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_files"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/vars_prompt"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/force_handlers"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/playbook_inclusion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/external_file_inclusion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/pre_tasks_list"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/roles_inclusions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlay/tasks_list"/>
@@ -90,9 +90,10 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERoleInclusions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ERoleInclusions/roles"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EPlaybookInclusion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EPlaybookInclusion/playbook_file_name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EPlaybookInclusion/when_expression"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EExternalFileInclusion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EExternalFileInclusion/import_playbook"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EExternalFileInclusion/include"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EExternalFileInclusion/when_expression"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ELoop"/>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ELoopOverList">

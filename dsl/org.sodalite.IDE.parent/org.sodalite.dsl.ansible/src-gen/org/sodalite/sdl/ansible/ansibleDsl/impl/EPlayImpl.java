@@ -21,13 +21,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
 
@@ -47,7 +47,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getForce_handlers <em>Force handlers</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPlaybook_inclusion <em>Playbook inclusion</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getExternal_file_inclusion <em>External file inclusion</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getPre_tasks_list <em>Pre tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl#getTasks_list <em>Tasks list</em>}</li>
@@ -140,14 +140,14 @@ public class EPlayImpl extends EBaseImpl implements EPlay
   protected EBooleanPassed force_handlers;
 
   /**
-   * The cached value of the '{@link #getPlaybook_inclusion() <em>Playbook inclusion</em>}' containment reference.
+   * The cached value of the '{@link #getExternal_file_inclusion() <em>External file inclusion</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPlaybook_inclusion()
+   * @see #getExternal_file_inclusion()
    * @generated
    * @ordered
    */
-  protected EPlaybookInclusion playbook_inclusion;
+  protected EExternalFileInclusion external_file_inclusion;
 
   /**
    * The cached value of the '{@link #getPre_tasks_list() <em>Pre tasks list</em>}' containment reference list.
@@ -626,9 +626,9 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public EPlaybookInclusion getPlaybook_inclusion()
+  public EExternalFileInclusion getExternal_file_inclusion()
   {
-    return playbook_inclusion;
+    return external_file_inclusion;
   }
 
   /**
@@ -636,13 +636,13 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPlaybook_inclusion(EPlaybookInclusion newPlaybook_inclusion, NotificationChain msgs)
+  public NotificationChain basicSetExternal_file_inclusion(EExternalFileInclusion newExternal_file_inclusion, NotificationChain msgs)
   {
-    EPlaybookInclusion oldPlaybook_inclusion = playbook_inclusion;
-    playbook_inclusion = newPlaybook_inclusion;
+    EExternalFileInclusion oldExternal_file_inclusion = external_file_inclusion;
+    external_file_inclusion = newExternal_file_inclusion;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, oldPlaybook_inclusion, newPlaybook_inclusion);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION, oldExternal_file_inclusion, newExternal_file_inclusion);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -654,20 +654,20 @@ public class EPlayImpl extends EBaseImpl implements EPlay
    * @generated
    */
   @Override
-  public void setPlaybook_inclusion(EPlaybookInclusion newPlaybook_inclusion)
+  public void setExternal_file_inclusion(EExternalFileInclusion newExternal_file_inclusion)
   {
-    if (newPlaybook_inclusion != playbook_inclusion)
+    if (newExternal_file_inclusion != external_file_inclusion)
     {
       NotificationChain msgs = null;
-      if (playbook_inclusion != null)
-        msgs = ((InternalEObject)playbook_inclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, null, msgs);
-      if (newPlaybook_inclusion != null)
-        msgs = ((InternalEObject)newPlaybook_inclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, null, msgs);
-      msgs = basicSetPlaybook_inclusion(newPlaybook_inclusion, msgs);
+      if (external_file_inclusion != null)
+        msgs = ((InternalEObject)external_file_inclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION, null, msgs);
+      if (newExternal_file_inclusion != null)
+        msgs = ((InternalEObject)newExternal_file_inclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION, null, msgs);
+      msgs = basicSetExternal_file_inclusion(newExternal_file_inclusion, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION, newPlaybook_inclusion, newPlaybook_inclusion));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION, newExternal_file_inclusion, newExternal_file_inclusion));
   }
 
   /**
@@ -806,8 +806,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return basicSetVars_prompt(null, msgs);
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return basicSetForce_handlers(null, msgs);
-      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
-        return basicSetPlaybook_inclusion(null, msgs);
+      case AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION:
+        return basicSetExternal_file_inclusion(null, msgs);
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return ((InternalEList<?>)getPre_tasks_list()).basicRemove(otherEnd, msgs);
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -848,8 +848,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return getVars_prompt();
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return getForce_handlers();
-      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
-        return getPlaybook_inclusion();
+      case AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION:
+        return getExternal_file_inclusion();
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return getPre_tasks_list();
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:
@@ -899,8 +899,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         setForce_handlers((EBooleanPassed)newValue);
         return;
-      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
-        setPlaybook_inclusion((EPlaybookInclusion)newValue);
+      case AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION:
+        setExternal_file_inclusion((EExternalFileInclusion)newValue);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -959,8 +959,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         setForce_handlers((EBooleanPassed)null);
         return;
-      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
-        setPlaybook_inclusion((EPlaybookInclusion)null);
+      case AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION:
+        setExternal_file_inclusion((EExternalFileInclusion)null);
         return;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         getPre_tasks_list().clear();
@@ -1007,8 +1007,8 @@ public class EPlayImpl extends EBaseImpl implements EPlay
         return vars_prompt != null;
       case AnsibleDslPackage.EPLAY__FORCE_HANDLERS:
         return force_handlers != null;
-      case AnsibleDslPackage.EPLAY__PLAYBOOK_INCLUSION:
-        return playbook_inclusion != null;
+      case AnsibleDslPackage.EPLAY__EXTERNAL_FILE_INCLUSION:
+        return external_file_inclusion != null;
       case AnsibleDslPackage.EPLAY__PRE_TASKS_LIST:
         return pre_tasks_list != null && !pre_tasks_list.isEmpty();
       case AnsibleDslPackage.EPLAY__ROLES_INCLUSIONS:

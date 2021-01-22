@@ -24,7 +24,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="debugger" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EListPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module_defaults" eType="#//EValuePassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EValuePassed"
         containment="true"/>
@@ -79,8 +79,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="force_handlers" eType="#//EBooleanPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="playbook_inclusion" eType="#//EPlaybookInclusion"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="external_file_inclusion"
+        eType="#//EExternalFileInclusion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pre_tasks_list" upperBound="-1"
         eType="#//EBlockTask" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles_inclusions" eType="#//ERoleInclusions"
@@ -135,8 +135,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//ERoleInclusion" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EPlaybookInclusion">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="playbook_file_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EExternalFileInclusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="import_playbook" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="include" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//ECondition"
         containment="true"/>
   </eClassifiers>

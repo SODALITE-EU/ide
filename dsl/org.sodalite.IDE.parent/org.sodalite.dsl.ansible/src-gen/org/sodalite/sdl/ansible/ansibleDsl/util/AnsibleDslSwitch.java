@@ -195,10 +195,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EPLAYBOOK_INCLUSION:
+      case AnsibleDslPackage.EEXTERNAL_FILE_INCLUSION:
       {
-        EPlaybookInclusion ePlaybookInclusion = (EPlaybookInclusion)theEObject;
-        T result = caseEPlaybookInclusion(ePlaybookInclusion);
+        EExternalFileInclusion eExternalFileInclusion = (EExternalFileInclusion)theEObject;
+        T result = caseEExternalFileInclusion(eExternalFileInclusion);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1116,17 +1116,17 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EPlaybook Inclusion</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EExternal File Inclusion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EPlaybook Inclusion</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EExternal File Inclusion</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEPlaybookInclusion(EPlaybookInclusion object)
+  public T caseEExternalFileInclusion(EExternalFileInclusion object)
   {
     return null;
   }

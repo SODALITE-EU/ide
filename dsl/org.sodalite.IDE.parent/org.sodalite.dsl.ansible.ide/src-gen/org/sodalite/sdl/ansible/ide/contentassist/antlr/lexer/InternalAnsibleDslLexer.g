@@ -11,6 +11,8 @@ package org.sodalite.sdl.ansible.ide.contentassist.antlr.lexer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 }
 
+External_file_inclusion : 'external_file_inclusion:';
+
 Asynchronous_settings : 'asynchronous_settings:';
 
 Privilege_escalation : 'privilege_escalation:';
@@ -20,8 +22,6 @@ Max_fail_percentage : 'max_fail_percentage:';
 Registered_variable : 'registered_variable:';
 
 Ignore_unreachable : 'ignore_unreachable:';
-
-Playbook_inclusion : 'playbook_inclusion:';
 
 Declared_variable : 'declared_variable:';
 
@@ -160,6 +160,8 @@ Strategy : 'strategy:';
 Throttle : 'throttle:';
 
 Handler : 'handler:';
+
+Include : 'include:';
 
 Retries : 'retries:';
 
@@ -317,11 +319,11 @@ RULE_SIMPLE_NUMBER : ('+'|'-')? ('1'..'9' ('0'..'9')*|'0') ('.' ('0'..'9')+)?;
 
 RULE_EXPONENTIAL_NUMBER : RULE_SIMPLE_NUMBER ('e'|'E') RULE_SIMPLE_NUMBER;
 
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+
 fragment RULE_BEGIN : ;
 
 fragment RULE_END : ;
-
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

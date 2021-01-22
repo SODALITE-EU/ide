@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_files <em>Vars files</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getVars_prompt <em>Vars prompt</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getForce_handlers <em>Force handlers</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion <em>Playbook inclusion</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getExternal_file_inclusion <em>External file inclusion</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPre_tasks_list <em>Pre tasks list</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getRoles_inclusions <em>Roles inclusions</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getTasks_list <em>Tasks list</em>}</li>
@@ -213,26 +213,26 @@ public interface EPlay extends EBase
   void setForce_handlers(EBooleanPassed value);
 
   /**
-   * Returns the value of the '<em><b>Playbook inclusion</b></em>' containment reference.
+   * Returns the value of the '<em><b>External file inclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Playbook inclusion</em>' containment reference.
-   * @see #setPlaybook_inclusion(EPlaybookInclusion)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_Playbook_inclusion()
+   * @return the value of the '<em>External file inclusion</em>' containment reference.
+   * @see #setExternal_file_inclusion(EExternalFileInclusion)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlay_External_file_inclusion()
    * @model containment="true"
    * @generated
    */
-  EPlaybookInclusion getPlaybook_inclusion();
+  EExternalFileInclusion getExternal_file_inclusion();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getPlaybook_inclusion <em>Playbook inclusion</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlay#getExternal_file_inclusion <em>External file inclusion</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Playbook inclusion</em>' containment reference.
-   * @see #getPlaybook_inclusion()
+   * @param value the new value of the '<em>External file inclusion</em>' containment reference.
+   * @see #getExternal_file_inclusion()
    * @generated
    */
-  void setPlaybook_inclusion(EPlaybookInclusion value);
+  void setExternal_file_inclusion(EExternalFileInclusion value);
 
   /**
    * Returns the value of the '<em><b>Pre tasks list</b></em>' containment reference list.

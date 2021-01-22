@@ -159,13 +159,13 @@ public interface AnsibleDslFactory extends EFactory
   ERoleInclusions createERoleInclusions();
 
   /**
-   * Returns a new object of class '<em>EPlaybook Inclusion</em>'.
+   * Returns a new object of class '<em>EExternal File Inclusion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EPlaybook Inclusion</em>'.
+   * @return a new object of class '<em>EExternal File Inclusion</em>'.
    * @generated
    */
-  EPlaybookInclusion createEPlaybookInclusion();
+  EExternalFileInclusion createEExternalFileInclusion();
 
   /**
    * Returns a new object of class '<em>ELoop</em>'.

@@ -149,12 +149,12 @@ public interface EBase extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Module defaults</em>' containment reference.
-   * @see #setModule_defaults(EListPassed)
+   * @see #setModule_defaults(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Module_defaults()
    * @model containment="true"
    * @generated
    */
-  EListPassed getModule_defaults();
+  EValuePassed getModule_defaults();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getModule_defaults <em>Module defaults</em>}' containment reference.
@@ -164,7 +164,7 @@ public interface EBase extends EObject
    * @see #getModule_defaults()
    * @generated
    */
-  void setModule_defaults(EListPassed value);
+  void setModule_defaults(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Environment</b></em>' containment reference.

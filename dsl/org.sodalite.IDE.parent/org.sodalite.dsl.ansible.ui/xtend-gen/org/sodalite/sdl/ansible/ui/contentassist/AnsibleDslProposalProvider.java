@@ -152,10 +152,13 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "\t\t\tThe operation must be contained in an interface of the selected\n") + 
     "\t\t\tnode type.");
   
-  private final String PLAYBOOK_INCLUSION_DESCRIPTION = ((("This is used for importing a playbook yaml file.\n\n" + 
+  private final String EXTERNAL_FILE_INCLUSION_DESCRIPTION = (((((("This is used for importing/including a yaml file.\n\n" + 
     "The attributes that can be set are:\n\n") + 
     "\t- import_playbook   -> the name of the yaml file\n") + 
-    "\t- when   -> condition");
+    "\t- include   -> the name of the yaml file\n") + 
+    "\t- when   -> condition\n\n") + 
+    "It can be selected either \"import_playbook\" or \"include\",\n") + 
+    "while \"when\" is not mandatory.");
   
   private final String WITH_LOOKUP_DESCRIPTION = (("This is the classic \'with_<lookup>\' keyword in Ansible.\n" + 
     "The user is supposed to write \'with\' followed by a space and the <lookup>.\n") + 
@@ -246,20 +249,15 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void complete_EPlaybookInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    StyledString _styledString = new StyledString("playbook_inclusion:");
-    this.createNonEditableCompletionProposal("playbook_inclusion:", _styledString, context, this.PLAYBOOK_INCLUSION_DESCRIPTION, acceptor);
+  public void complete_EExternalFileInclusion(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    StyledString _styledString = new StyledString("external_file_inclusion:");
+    this.createNonEditableCompletionProposal("external_file_inclusion:", _styledString, context, this.EXTERNAL_FILE_INCLUSION_DESCRIPTION, acceptor);
   }
   
   @Override
   public void complete_EUsedByBody(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     StyledString _styledString = new StyledString("used_by:");
     this.createNonEditableCompletionProposal("used_by:", _styledString, context, this.USED_BY_DESCRIPTION, acceptor);
-  }
-  
-  @Override
-  public void completeEPlaybookInclusion_Playbook_file_name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createEditableCompletionProposal("\"playbook_imported.yaml\"", "\"playbook_imported.yaml\"", context, "The yaml file of the playbook to import.", acceptor);
   }
   
   @Override
@@ -303,7 +301,10 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     if ((rootPlay != null)) {
       final List<EVariableDeclarationImpl> candidates = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
       for (final EVariableDeclarationImpl candidate : candidates) {
-        acceptor.accept(this.createCompletionProposal(candidate.getName(), context));
+        String _name = candidate.getName();
+        String _name_1 = candidate.getName();
+        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable declared in this play.", acceptor);
       }
     }
   }
@@ -314,7 +315,10 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     if ((rootPlay != null)) {
       final List<ERegisterVariableImpl> candidates = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
       for (final ERegisterVariableImpl candidate : candidates) {
-        acceptor.accept(this.createCompletionProposal(candidate.getName(), context));
+        String _name = candidate.getName();
+        String _name_1 = candidate.getName();
+        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable registered in this play.", acceptor);
       }
     }
   }

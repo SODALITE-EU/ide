@@ -112,7 +112,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    * @ordered
    */
-  protected EListPassed module_defaults;
+  protected EValuePassed module_defaults;
 
   /**
    * The cached value of the '{@link #getEnvironment() <em>Environment</em>}' containment reference.
@@ -431,7 +431,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public EListPassed getModule_defaults()
+  public EValuePassed getModule_defaults()
   {
     return module_defaults;
   }
@@ -441,9 +441,9 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetModule_defaults(EListPassed newModule_defaults, NotificationChain msgs)
+  public NotificationChain basicSetModule_defaults(EValuePassed newModule_defaults, NotificationChain msgs)
   {
-    EListPassed oldModule_defaults = module_defaults;
+    EValuePassed oldModule_defaults = module_defaults;
     module_defaults = newModule_defaults;
     if (eNotificationRequired())
     {
@@ -459,7 +459,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
    * @generated
    */
   @Override
-  public void setModule_defaults(EListPassed newModule_defaults)
+  public void setModule_defaults(EValuePassed newModule_defaults)
   {
     if (newModule_defaults != module_defaults)
     {
@@ -735,7 +735,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setDebugger((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
-        setModule_defaults((EListPassed)newValue);
+        setModule_defaults((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
         setEnvironment((EValuePassed)newValue);
@@ -780,7 +780,7 @@ public class EBaseImpl extends MinimalEObjectImpl.Container implements EBase
         setDebugger((EStringPassed)null);
         return;
       case AnsibleDslPackage.EBASE__MODULE_DEFAULTS:
-        setModule_defaults((EListPassed)null);
+        setModule_defaults((EValuePassed)null);
         return;
       case AnsibleDslPackage.EBASE__ENVIRONMENT:
         setEnvironment((EValuePassed)null);

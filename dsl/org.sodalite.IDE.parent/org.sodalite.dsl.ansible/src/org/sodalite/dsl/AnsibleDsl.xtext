@@ -54,7 +54,7 @@ EPlay:
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
-		('module_defaults:' module_defaults=EListPassed)? &
+		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
@@ -68,7 +68,7 @@ EPlay:
 		('vars_files:' vars_files=EListPassed)? &
 		('vars_prompt:' vars_prompt=EListPassed)? &
 		('force_handlers:' force_handlers=EBooleanPassed)? &
-		(playbook_inclusion=EPlaybookInclusion)? &
+		(external_file_inclusion=EExternalFileInclusion)? &
 		('pre_tasks:'
 		BEGIN
 			(pre_tasks_list+=EBlockTask)+
@@ -100,7 +100,7 @@ EBlock:
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
-		('module_defaults:' module_defaults=EListPassed)? &
+		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
@@ -139,7 +139,7 @@ ETask:
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
-		('module_defaults:' module_defaults=EListPassed)? &
+		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
@@ -173,7 +173,7 @@ EHandler:
 		(connection=EConnection)? &
 		('no_log:' no_log=EBooleanPassed)? &
 		('debugger:' debugger=EStringPassed)? &
-		('module_defaults:' module_defaults=EListPassed)? &
+		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
 		('tags:' tags=EListPassed)? &
@@ -227,7 +227,7 @@ ERoleInclusion:
 			(connection=EConnection)? &
 			('no_log:' no_log=EBooleanPassed)? &
 			('debugger:' debugger=EStringPassed)? &
-			('module_defaults:' module_defaults=EListPassed)? &
+			('module_defaults:' module_defaults=EValuePassed)? &
 			('environment:' environment=EValuePassed)? &
 			('collections:' collections=EListPassed)? &
 			('tags:' tags=EListPassed)? &
@@ -251,11 +251,14 @@ ERoleInclusions:
 	END
 ;
 
-EPlaybookInclusion:
-	'playbook_inclusion:'
+EExternalFileInclusion:
+	'external_file_inclusion:'
 	BEGIN
 	(
-		('import_playbook:' playbook_file_name=STRING)&
+		(
+			('import_playbook:' import_playbook=STRING) |
+			('include:' include=STRING)
+		)
 		('when:' when_expression=ECondition)?
 	)
 	END
@@ -738,6 +741,10 @@ terminal SIMPLE_NUMBER:
 terminal EXPONENTIAL_NUMBER:
 	SIMPLE_NUMBER('e'|'E')SIMPLE_NUMBER
 ;
+
+@Override
+terminal ID:
+	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
 
 //Positional blocks delimited with indentation
 terminal BEGIN: 'synthetic:BEGIN';

@@ -54,7 +54,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement
 import org.sodalite.sdl.ansible.ansibleDsl.EBase
 import org.sodalite.sdl.ansible.ansibleDsl.EExecution
-import org.sodalite.sdl.ansible.ansibleDsl.EPlaybookInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockAndRoleErrorHandling
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement
@@ -83,6 +82,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
 import org.sodalite.sdl.ansible.ansibleDsl.ECondition
 import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber
+import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion
 
 /**
  * Generates code from your model files on save.
@@ -115,18 +115,18 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«IF play.hosts !== null»
 				«space»hosts: «compileStringPassed(play.hosts, space, false)»
 			«ENDIF»
-			«IF play.playbook_inclusion !== null»
-				«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
+			«IF play.external_file_inclusion !== null»
+				«compileExternalFileInclusion(play.external_file_inclusion, space, false)»
 			«ENDIF»
 		«ELSE»
 			«IF play.hosts !== null»
 				- hosts: «compileStringPassed(play.hosts, space, false)»
-				«IF play.playbook_inclusion !== null»
-					«compilePlaybookInclusion(play.playbook_inclusion, space, false)»
+				«IF play.external_file_inclusion !== null»
+					«compileExternalFileInclusion(play.external_file_inclusion, space, false)»
 				«ENDIF»
 			«ELSE»
-				«IF play.playbook_inclusion !== null»
-					«compilePlaybookInclusion(play.playbook_inclusion, space, true)»
+				«IF play.external_file_inclusion !== null»
+					«compileExternalFileInclusion(play.external_file_inclusion, space, true)»
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
@@ -189,16 +189,24 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	//isFirstElementOfPlay is true if both play.name and play.hosts are null, so if import_playbook needs the '- ' before it 
-	def compilePlaybookInclusion(EPlaybookInclusion playbookInclusion, String space, boolean isFirstElementOfPlay)'''
-		«IF playbookInclusion !== null»
-			«IF playbookInclusion.playbook_file_name !== null && !isFirstElementOfPlay»
-				«space»import_playbook: «playbookInclusion.playbook_file_name»
-			«ELSEIF playbookInclusion.playbook_file_name !== null && isFirstElementOfPlay»
-				- import_playbook: «playbookInclusion.playbook_file_name»
-			«ENDIF»			
-			«IF playbookInclusion.when_expression !== null»
-				«space»when: «compileCondition(playbookInclusion.when_expression, space)»
+	//isFirstElementOfPlay is true if both play.name and play.hosts are null, so if import_playbook/include needs the '- ' before it 
+	def compileExternalFileInclusion(EExternalFileInclusion externalFileInclusion, String space, boolean isFirstElementOfPlay)'''
+		«IF externalFileInclusion !== null»
+			«IF !isFirstElementOfPlay»
+				«IF externalFileInclusion.import_playbook !== null»
+					«space»import_playbook: «externalFileInclusion.import_playbook»
+				«ENDIF»
+				«ELSEIF externalFileInclusion.include !== null»
+					«space»include: «externalFileInclusion.include»
+			«ELSEIF isFirstElementOfPlay»
+				«IF externalFileInclusion.import_playbook !== null»
+					- import_playbook: «externalFileInclusion.import_playbook»
+				«ENDIF»
+				«ELSEIF externalFileInclusion.include !== null»
+					- include: «externalFileInclusion.include»			
+			«ENDIF»		
+			«IF externalFileInclusion.when_expression !== null»
+				«space»when: «compileCondition(externalFileInclusion.when_expression, space)»
 			«ENDIF»
 		«ENDIF»
 	'''
@@ -256,7 +264,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»debugger: «compileStringPassed(base.debugger, space, false)»
 		«ENDIF»
 		«IF base.module_defaults !== null»
-			«space»module_defaults: «compileListPassed(base.module_defaults, space)»
+			«space»module_defaults: «compileValuePassed(base.module_defaults, space, false)»
 		«ENDIF»
 		«IF base.environment !== null»
 			«space»environment: «compileValuePassed(base.environment, space, false)»
@@ -758,12 +766,14 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 	
-	//if there is the " inside a string, then in the original string there was a \"
+	//if there is the " or a \ inside a string, then in the original string there was a \, lost during the parsing"
 	def compileString(String string){
 		var stringToReturn = ""
 		for (var index = 0; index < string.length; index++){
 			val character = string.charAt(index)
-			if (character !== '"'.charAt(0)) stringToReturn = stringToReturn.concat(character.toString())
+			//if the character is different from both " and \, then it can be simply concatenated to the string to return
+			if (character !== '"'.charAt(0) && character !== '\\'.charAt(0)) stringToReturn = stringToReturn.concat(character.toString())
+			//else, before the character it must be concatenated the escape sign, wich was lost during the parsing
 			else stringToReturn = stringToReturn.concat("\\").concat(character.toString())
 		}
 		return stringToReturn
@@ -967,7 +977,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileSimpleValueJinja(ESimpleValueJinja simpleValueJinja){
 		if (simpleValueJinja.simple_value !== null) return simpleValueJinja.simple_value
 		else if (simpleValueJinja.simple_value_number !== null) return compileNumber(simpleValueJinja.simple_value_number)
-		else if (simpleValueJinja.simple_value_string !== null) return "\'".concat(simpleValueJinja.simple_value_string).concat("\'")
+		else if (simpleValueJinja.simple_value_string !== null) return "\'".concat(simpleValueJinja.simple_value_string.compileString).concat("\'")
 	}
 	
 	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){
