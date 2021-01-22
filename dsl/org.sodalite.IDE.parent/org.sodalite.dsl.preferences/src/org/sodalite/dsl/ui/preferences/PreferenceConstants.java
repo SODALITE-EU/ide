@@ -20,4 +20,6 @@ public class PreferenceConstants {
 	public static final String KEYCLOAK_USER = "KeyCloakUser";
 
 	public static final String KEYCLOAK_PASSWORD = "KeyCloakPassword";
+
+	public static final String KEYCLOAK_ENABLED = "KeyCloakEnabled";
 }

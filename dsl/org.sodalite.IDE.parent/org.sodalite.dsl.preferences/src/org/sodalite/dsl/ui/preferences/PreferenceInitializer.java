@@ -56,6 +56,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (keycloak_client_secret == null)
 			keycloak_client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
 
+		Boolean keycloak_enabled = Boolean.valueOf(prop.getProperty(PreferenceConstants.KEYCLOAK_ENABLED));
+		if (!keycloak_enabled) {
+			keycloak_enabled = true;
+		}
+
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
 				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
 						+ "KB_Reasoner endpoint: {0}, IaC endpoint: {1}, xOpera endpoint: {2}, Keycloak endpoint: {3}",
@@ -68,6 +73,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
+		defaults.put(PreferenceConstants.KEYCLOAK_ENABLED, Boolean.toString(keycloak_enabled));
 	}
 
 	private Properties readDefaultProperties() {

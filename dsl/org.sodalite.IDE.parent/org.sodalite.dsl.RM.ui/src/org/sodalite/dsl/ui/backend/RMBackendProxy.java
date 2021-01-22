@@ -118,23 +118,25 @@ public class RMBackendProxy {
 
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
 
-		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-		if (keycloak_user.isEmpty())
-			raiseConfigurationIssue("Keycloak user not set");
+		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
+			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+			if (keycloak_user.isEmpty())
+				raiseConfigurationIssue("Keycloak user not set");
 
-		String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-		if (keycloak_password.isEmpty())
-			raiseConfigurationIssue("Keycloak password not set");
+			String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+			if (keycloak_password.isEmpty())
+				raiseConfigurationIssue("Keycloak password not set");
 
-		String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-		if (keycloak_client_id.isEmpty())
-			raiseConfigurationIssue("Keycloak client_id not set");
+			String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+			if (keycloak_client_id.isEmpty())
+				raiseConfigurationIssue("Keycloak client_id not set");
 
-		String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-		if (keycloak_client_secret.isEmpty())
-			raiseConfigurationIssue("Keycloak client secret not set");
+			String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+			if (keycloak_client_secret.isEmpty())
+				raiseConfigurationIssue("Keycloak client secret not set");
 
-		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+		}
 
 		BackendLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",

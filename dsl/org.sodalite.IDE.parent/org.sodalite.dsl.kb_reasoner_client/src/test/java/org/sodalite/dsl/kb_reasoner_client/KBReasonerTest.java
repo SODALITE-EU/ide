@@ -364,18 +364,4 @@ class KBReasonerTest {
 		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
 		assertNotNull(status);
 	}
-
-	@Test
-	void testGetSecurityToken() throws Exception {
-		String token = kbclient.getSecurityToken();
-		assertNotNull(token);
-	}
-
-	@Test
-	void testIsValidToken() throws Exception {
-		String token = kbclient.getSecurityToken();
-		assertNotNull(token);
-		assertTrue(kbclient.isValidToken(token));
-	}
-
 }
