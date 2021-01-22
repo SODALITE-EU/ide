@@ -19,7 +19,6 @@ import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl
 import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
 import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl
@@ -257,7 +256,6 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("Null", context));
 	}
 	
-	//TODO: update this
 	override void complete_SIMPLE_NUMBER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor)
 	}
@@ -268,161 +266,55 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	//suggests variables declared only in this specific play
 	override void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
-		if (rootPlay !== null){
-			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
-			for (candidate: candidates){
-				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)
-			}
-		}		
+		completeDeclaredVariableReference(model, context, acceptor, false)
 	}
 
 	//suggests variables registered only in this specific play
 	override void completeERegisterVariableReference_Register_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
-		if (rootPlay !== null){
-			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
-			for (candidate: candidates){
-				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)
-			}
-		}
-	}
-	
-	//suggest handlers defined only in this specific play
-	override void completeENotifiedHandler_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
-		if (rootPlay !== null){
-			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EHandlerImpl)
-			for (candidate: candidates){
-				acceptor.accept(createCompletionProposal("\"".concat(candidate.name).concat("\""), context))
-			}
-		}
+		completeRegisteredVariableReference(model, context, acceptor, false)
 	}
 	
 	//suggest index or loop variables defined only in this specific play
 	override void completeEIndexOrLoopVariable_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
-		if (rootPlay !== null){
-			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
-			for (candidate: candidatesIndexOrLoopVariables){
-				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)
-			}
-		}
+		completeIndexOrLoopVariableReference(model, context, acceptor, false)
 	}
 	
 	//suggest variables set in a "set_fact" module in this specific playbook
 	override void completeESetFactVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
-		val candidatesSetFactsVariables = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
-		//the parameters candidates should be only the ones set in a "set_fact" module
-		var legitCandidatesSetFactsVariables = new ArrayList<EParameter>
-		for (parameter: candidatesSetFactsVariables){
-			val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
-			if (moduleCall !== null){
-				if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
-			}
-		}
-		for (candidate: legitCandidatesSetFactsVariables){
-			createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)
-		}
+		completeSetFactVariableReference(model, context, acceptor, false)
 	}
 
 	//suggest variables given in input by the tosca operation
 	override void completeEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
-		if (rootPlaybook !== null){
-			val usedByBody = rootPlaybook.used_by
-			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
-					for (candidate: candidatesInputVariableOperation){
-						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
-					}
-				}
-			}	
-		}
+		completeInputOperationVariableReference(model, context, acceptor, false)
 	}
 	
 	//suggest variables given in input by the tosca interface
 	override void completeEInputInterfaceVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
-		if (rootPlaybook !== null){
-			val usedByBody = rootPlaybook.used_by
-			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
-					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
-					val inputsProperties = interfaceDefinitionBody.inputs
-					if (inputsProperties !== null){
-						for (input : inputsProperties.properties){
-							createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
-						}
-					}
-				}				
-			}			
-		}
+		completeInputInterfaceVariableReference(model, context, acceptor, false)
 	}
 	
 	//suggest all the possible variables that can be referenced
 	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
-		if (rootPlay !== null){
-			//suggest variables declared only in this specific play
-			val candidatesDeclaredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
-			for (candidate: candidatesDeclaredVariables){
-				createNonEditableCompletionProposal("declared_variable: ".concat(candidate.name), new StyledString("declared_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)
-			}
-			//suggest variables registered only in this specific play
-			val candidatesRegisteredVariables = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
-			for (candidate: candidatesRegisteredVariables){
-				createNonEditableCompletionProposal("registered_variable: ".concat(candidate.name), new StyledString("registered_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)
-			}
-			//suggest index or loop variables defined only in this specific play
-			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
-			for (candidate: candidatesIndexOrLoopVariables){
-				createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate.name), new StyledString("index_or_loop_var: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)
-			}
-			
-			//suggest variables set in a "set_fact" module in this specific playbook
-			val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
-			val candidatesSetFactsVariables = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
-			//the parameters candidates should be only the ones set in a "set_fact" module
-			var legitCandidatesSetFactsVariables = new ArrayList<EParameter>
-			for (parameter: candidatesSetFactsVariables){
-				val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
-				if (moduleCall !== null){
-					if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
-				}
-			}
-			for (candidate: legitCandidatesSetFactsVariables){
-				createNonEditableCompletionProposal("fact_set: ".concat(candidate.name), new StyledString("fact_set: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)
-			}
-			
-			//the following piece of code is for variables given as input by the RM
-			val usedByBody = rootPlaybook.used_by
-			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					//suggest variables given in input by the tosca operation
-					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
-					for (candidate: candidatesInputVariableOperation){
-						createNonEditableCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), new StyledString("operation_input: ").append("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
-					}
-					//suggest variables given in input by the tosca interface
-					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
-					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
-					val inputsProperties = interfaceDefinitionBody.inputs
-					if (inputsProperties !== null){
-						for (input : inputsProperties.properties){
-							createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
-						}
-					}
-				}
-			}
+		//suggest variables declared only in this specific play
+		completeDeclaredVariableReference(model, context, acceptor, true)
+		
+		//suggest variables registered only in this specific play
+		completeRegisteredVariableReference(model, context, acceptor, true)
+		
+		//suggest index or loop variables defined only in this specific play
+		completeIndexOrLoopVariableReference(model, context, acceptor, true)
+		
+		//suggest variables set in a "set_fact" module in this specific playbook
+		completeSetFactVariableReference(model, context, acceptor, true)
+		
+		//the following piece of code is for variables given as input by the RM
 
-		}
+		//suggest variables given in input by the tosca operation
+		completeInputOperationVariableReference(model, context, acceptor, true)
+		
+		//suggest variables given in input by the tosca interface
+		completeInputInterfaceVariableReference(model, context, acceptor, true)
 	}
 	
 	//the operations suggested must belong to an interface of the selected node type
@@ -442,8 +334,19 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}
 	}
+
+	//suggest handlers defined only in this specific play
+	override void completeENotifiedHandler_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EHandlerImpl)
+			for (candidate: candidates){
+				acceptor.accept(createCompletionProposal("\"".concat(candidate.name).concat("\""), context))
+			}
+		}
+	}
 	
-	//the suggested topics to which listen to are only the once defined in the current play
+	//the suggested topics to which listen to are only the ones defined in the current play
 	override void completeEHandler_Listen_to(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
 		if (rootPlay !== null){
@@ -527,6 +430,130 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		specialVariables.add("ansible_user")
 		
 		for (specialVariable : specialVariables) acceptor.accept(createCompletionProposal(specialVariable, context))
+	}
+
+	//suggest variables declared only in this specific play
+	//if needsPrefix is true, the suggestion needs the "declared_variable:" prefix
+	def void completeDeclaredVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, EVariableDeclarationImpl)
+			for (candidate: candidates){
+				if (needsPrefix){
+					createNonEditableCompletionProposal("declared_variable: ".concat(candidate.name), new StyledString("declared_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)
+				}
+				else {
+					createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor)	
+				}
+			}
+		}		
+	}
+
+	//suggest variables registered only in this specific play
+	//if needsPrefix is true, the suggestion needs the "registered_variable:" prefix
+	def void completeRegisteredVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidates = EcoreUtil2.getAllContentsOfType(rootPlay, ERegisterVariableImpl)
+			for (candidate: candidates){
+				if (needsPrefix){
+					createNonEditableCompletionProposal("registered_variable: ".concat(candidate.name), new StyledString("registered_variable: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)
+				}
+				else {
+					createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor)	
+				}
+			}
+		}		
+	}
+
+	//suggest index or loops variables defined only in this specific play
+	//if needsPrefix is true, the suggestion needs the "index_or_loop_var:" prefix
+	def void completeIndexOrLoopVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
+			for (candidate: candidatesIndexOrLoopVariables){
+				if(needsPrefix){
+					createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate.name), new StyledString("index_or_loop_var: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)
+				}
+				else {
+					createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)	
+				}
+			}
+		}		
+	}
+	
+	//suggest variables set in a "set_fact" module in this specific playbook
+	//if needsPrefix is true, the suggestion needs the "fact_set:" prefix
+	def void completeSetFactVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix) {
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		val candidatesSetFactsVariables = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
+		//the parameters candidates should be only the ones set in a "set_fact" module
+		var legitCandidatesSetFactsVariables = new ArrayList<EParameter>
+		for (parameter: candidatesSetFactsVariables){
+			val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
+			if (moduleCall !== null){
+				if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
+			}
+		}
+		for (candidate: legitCandidatesSetFactsVariables){
+			if (needsPrefix){
+				createNonEditableCompletionProposal("fact_set: ".concat(candidate.name), new StyledString("fact_set: ").append(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)
+			}
+			else {
+				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)	
+			}
+		}
+	}
+	
+	//suggest variables given in input by the tosca operation
+	//if needsPrefix is true, the suggestion needs the "operation_input:" prefix
+	def void completeInputOperationVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (rootPlaybook !== null){
+			val usedByBody = rootPlaybook.used_by
+			if (usedByBody !== null){
+				val operation = usedByBody.operation
+				if (operation !== null){
+					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+					for (candidate: candidatesInputVariableOperation){
+						if (needsPrefix){
+							createNonEditableCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), new StyledString("operation_input: ").append("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
+						}
+						else {
+							createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
+						}
+					}
+				}
+			}	
+		}
+	}
+
+	//suggest variables given in input by the tosca interface
+	//if needsPrefix is true, the suggestion needs the "interface_input:" prefix	
+	def void completeInputInterfaceVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (rootPlaybook !== null){
+			val usedByBody = rootPlaybook.used_by
+			if (usedByBody !== null){
+				val operation = usedByBody.operation
+				if (operation !== null){
+					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
+					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
+					val inputsProperties = interfaceDefinitionBody.inputs
+					if (inputsProperties !== null){
+						for (input : inputsProperties.properties){
+							if (needsPrefix){
+								createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+							}
+							else {
+								createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+							}
+						}
+					}
+				}				
+			}			
+		}		
 	}
 	
 	def void createNonEditableCompletionProposal(String proposalText, StyledString displayText,

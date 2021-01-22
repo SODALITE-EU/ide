@@ -297,197 +297,42 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<EVariableDeclarationImpl> candidates = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
-      for (final EVariableDeclarationImpl candidate : candidates) {
-        String _name = candidate.getName();
-        String _name_1 = candidate.getName();
-        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
-        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable declared in this play.", acceptor);
-      }
-    }
+    this.completeDeclaredVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void completeERegisterVariableReference_Register_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<ERegisterVariableImpl> candidates = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
-      for (final ERegisterVariableImpl candidate : candidates) {
-        String _name = candidate.getName();
-        String _name_1 = candidate.getName();
-        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
-        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable registered in this play.", acceptor);
-      }
-    }
-  }
-  
-  @Override
-  public void completeENotifiedHandler_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<EHandlerImpl> candidates = EcoreUtil2.<EHandlerImpl>getAllContentsOfType(rootPlay, EHandlerImpl.class);
-      for (final EHandlerImpl candidate : candidates) {
-        acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
-      }
-    }
+    this.completeRegisteredVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void completeEIndexOrLoopVariable_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
-      for (final EIndexOrLoopVariableImpl candidate : candidatesIndexOrLoopVariables) {
-        String _name = candidate.getName();
-        String _name_1 = candidate.getName();
-        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
-        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
-      }
-    }
+    this.completeIndexOrLoopVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void completeESetFactVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
-    ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
-    for (final EParameterImpl parameter : candidatesSetFactsVariables) {
-      {
-        final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
-        if ((moduleCall != null)) {
-          String _name = moduleCall.getName();
-          boolean _equals = Objects.equal(_name, "set_fact");
-          if (_equals) {
-            legitCandidatesSetFactsVariables.add(parameter);
-          }
-        }
-      }
-    }
-    for (final EParameter candidate : legitCandidatesSetFactsVariables) {
-      String _name = candidate.getName();
-      String _name_1 = candidate.getName();
-      StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
-      this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
-    }
+    this.completeSetFactVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void completeEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    if ((rootPlaybook != null)) {
-      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
-      if ((usedByBody != null)) {
-        final EOperationDefinition operation = usedByBody.getOperation();
-        if ((operation != null)) {
-          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-          for (final EParameterDefinitionImpl candidate : candidatesInputVariableOperation) {
-            String _concat = "\"".concat(candidate.getName()).concat("\"");
-            String _concat_1 = "\"".concat(candidate.getName()).concat("\"");
-            StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
-            String _name = operation.getName();
-            String _plus = ("An input variable from the \'" + _name);
-            String _plus_1 = (_plus + "\' operation.");
-            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
-          }
-        }
-      }
-    }
+    this.completeInputOperationVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void completeEInputInterfaceVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    if ((rootPlaybook != null)) {
-      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
-      if ((usedByBody != null)) {
-        final EOperationDefinition operation = usedByBody.getOperation();
-        if ((operation != null)) {
-          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
-          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
-          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-          if ((inputsProperties != null)) {
-            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-            for (final EPropertyDefinition input : _properties) {
-              String _concat = "\"".concat(input.getName()).concat("\"");
-              String _concat_1 = "\"".concat(input.getName()).concat("\"");
-              StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
-              String _name = interfaceDefinition.getName();
-              String _plus = ("An input variable from the \'" + _name);
-              String _plus_1 = (_plus + "\' interface.");
-              this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
-            }
-          }
-        }
-      }
-    }
+    this.completeInputInterfaceVariableReference(model, context, acceptor, false);
   }
   
   @Override
   public void complete_EVariableReference(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
-    if ((rootPlay != null)) {
-      final List<EVariableDeclarationImpl> candidatesDeclaredVariables = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
-      for (final EVariableDeclarationImpl candidate : candidatesDeclaredVariables) {
-        this.createNonEditableCompletionProposal("declared_variable: ".concat(candidate.getName()), new StyledString("declared_variable: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor);
-      }
-      final List<ERegisterVariableImpl> candidatesRegisteredVariables = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
-      for (final ERegisterVariableImpl candidate_1 : candidatesRegisteredVariables) {
-        this.createNonEditableCompletionProposal("registered_variable: ".concat(candidate_1.getName()), new StyledString("registered_variable: ").append(candidate_1.getName(), StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor);
-      }
-      final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
-      for (final EIndexOrLoopVariableImpl candidate_2 : candidatesIndexOrLoopVariables) {
-        this.createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate_2.getName()), new StyledString("index_or_loop_var: ").append(candidate_2.getName(), StyledString.COUNTER_STYLER), context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
-      }
-      final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-      final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
-      ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
-      for (final EParameterImpl parameter : candidatesSetFactsVariables) {
-        {
-          final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
-          if ((moduleCall != null)) {
-            String _name = moduleCall.getName();
-            boolean _equals = Objects.equal(_name, "set_fact");
-            if (_equals) {
-              legitCandidatesSetFactsVariables.add(parameter);
-            }
-          }
-        }
-      }
-      for (final EParameter candidate_3 : legitCandidatesSetFactsVariables) {
-        this.createNonEditableCompletionProposal("fact_set: ".concat(candidate_3.getName()), new StyledString("fact_set: ").append(candidate_3.getName(), StyledString.COUNTER_STYLER), context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
-      }
-      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
-      if ((usedByBody != null)) {
-        final EOperationDefinition operation = usedByBody.getOperation();
-        if ((operation != null)) {
-          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-          for (final EParameterDefinitionImpl candidate_4 : candidatesInputVariableOperation) {
-            String _concat = "operation_input: ".concat("\"").concat(candidate_4.getName()).concat("\"");
-            StyledString _append = new StyledString("operation_input: ").append("\"".concat(candidate_4.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
-            String _name = operation.getName();
-            String _plus = ("An input variable from the \'" + _name);
-            String _plus_1 = (_plus + "\' operation.");
-            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
-          }
-          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
-          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
-          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-          if ((inputsProperties != null)) {
-            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-            for (final EPropertyDefinition input : _properties) {
-              String _concat_1 = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
-              StyledString _append_1 = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
-              String _name_1 = interfaceDefinition.getName();
-              String _plus_2 = ("An input variable from the \'" + _name_1);
-              String _plus_3 = (_plus_2 + "\' interface.");
-              this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
-            }
-          }
-        }
-      }
-    }
+    this.completeDeclaredVariableReference(model, context, acceptor, true);
+    this.completeRegisteredVariableReference(model, context, acceptor, true);
+    this.completeIndexOrLoopVariableReference(model, context, acceptor, true);
+    this.completeSetFactVariableReference(model, context, acceptor, true);
+    this.completeInputOperationVariableReference(model, context, acceptor, true);
+    this.completeInputInterfaceVariableReference(model, context, acceptor, true);
   }
   
   @Override
@@ -507,6 +352,17 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
             }
           }
         }
+      }
+    }
+  }
+  
+  @Override
+  public void completeENotifiedHandler_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EHandlerImpl> candidates = EcoreUtil2.<EHandlerImpl>getAllContentsOfType(rootPlay, EHandlerImpl.class);
+      for (final EHandlerImpl candidate : candidates) {
+        acceptor.accept(this.createCompletionProposal("\"".concat(candidate.getName()).concat("\""), context));
       }
     }
   }
@@ -593,6 +449,152 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     specialVariables.add("ansible_user");
     for (final String specialVariable : specialVariables) {
       acceptor.accept(this.createCompletionProposal(specialVariable, context));
+    }
+  }
+  
+  public void completeDeclaredVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EVariableDeclarationImpl> candidates = EcoreUtil2.<EVariableDeclarationImpl>getAllContentsOfType(rootPlay, EVariableDeclarationImpl.class);
+      for (final EVariableDeclarationImpl candidate : candidates) {
+        if (needsPrefix) {
+          this.createNonEditableCompletionProposal("declared_variable: ".concat(candidate.getName()), new StyledString("declared_variable: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable declared in this play.", acceptor);
+        } else {
+          String _name = candidate.getName();
+          String _name_1 = candidate.getName();
+          StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+          this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable declared in this play.", acceptor);
+        }
+      }
+    }
+  }
+  
+  public void completeRegisteredVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<ERegisterVariableImpl> candidates = EcoreUtil2.<ERegisterVariableImpl>getAllContentsOfType(rootPlay, ERegisterVariableImpl.class);
+      for (final ERegisterVariableImpl candidate : candidates) {
+        if (needsPrefix) {
+          this.createNonEditableCompletionProposal("registered_variable: ".concat(candidate.getName()), new StyledString("registered_variable: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable registered in this play.", acceptor);
+        } else {
+          String _name = candidate.getName();
+          String _name_1 = candidate.getName();
+          StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+          this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable registered in this play.", acceptor);
+        }
+      }
+    }
+  }
+  
+  public void completeIndexOrLoopVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
+      for (final EIndexOrLoopVariableImpl candidate : candidatesIndexOrLoopVariables) {
+        if (needsPrefix) {
+          this.createNonEditableCompletionProposal("index_or_loop_var: ".concat(candidate.getName()), new StyledString("index_or_loop_var: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
+        } else {
+          String _name = candidate.getName();
+          String _name_1 = candidate.getName();
+          StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+          this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
+        }
+      }
+    }
+  }
+  
+  public void completeSetFactVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
+    ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
+    for (final EParameterImpl parameter : candidatesSetFactsVariables) {
+      {
+        final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
+        if ((moduleCall != null)) {
+          String _name = moduleCall.getName();
+          boolean _equals = Objects.equal(_name, "set_fact");
+          if (_equals) {
+            legitCandidatesSetFactsVariables.add(parameter);
+          }
+        }
+      }
+    }
+    for (final EParameter candidate : legitCandidatesSetFactsVariables) {
+      if (needsPrefix) {
+        this.createNonEditableCompletionProposal("fact_set: ".concat(candidate.getName()), new StyledString("fact_set: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
+      } else {
+        String _name = candidate.getName();
+        String _name_1 = candidate.getName();
+        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
+      }
+    }
+  }
+  
+  public void completeInputOperationVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    if ((rootPlaybook != null)) {
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
+          for (final EParameterDefinitionImpl candidate : candidatesInputVariableOperation) {
+            if (needsPrefix) {
+              String _concat = "operation_input: ".concat("\"").concat(candidate.getName()).concat("\"");
+              StyledString _append = new StyledString("operation_input: ").append("\"".concat(candidate.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
+              String _name = operation.getName();
+              String _plus = ("An input variable from the \'" + _name);
+              String _plus_1 = (_plus + "\' operation.");
+              this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+            } else {
+              String _concat_1 = "\"".concat(candidate.getName()).concat("\"");
+              String _concat_2 = "\"".concat(candidate.getName()).concat("\"");
+              StyledString _append_1 = new StyledString(_concat_2, StyledString.COUNTER_STYLER).append(" - RM input");
+              String _name_1 = operation.getName();
+              String _plus_2 = ("An input variable from the \'" + _name_1);
+              String _plus_3 = (_plus_2 + "\' operation.");
+              this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  public void completeInputInterfaceVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    if ((rootPlaybook != null)) {
+      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
+      if ((usedByBody != null)) {
+        final EOperationDefinition operation = usedByBody.getOperation();
+        if ((operation != null)) {
+          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
+          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
+          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
+          if ((inputsProperties != null)) {
+            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+            for (final EPropertyDefinition input : _properties) {
+              if (needsPrefix) {
+                String _concat = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
+                StyledString _append = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
+                String _name = interfaceDefinition.getName();
+                String _plus = ("An input variable from the \'" + _name);
+                String _plus_1 = (_plus + "\' interface.");
+                this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+              } else {
+                String _concat_1 = "\"".concat(input.getName()).concat("\"");
+                String _concat_2 = "\"".concat(input.getName()).concat("\"");
+                StyledString _append_1 = new StyledString(_concat_2, StyledString.COUNTER_STYLER).append(" - RM input");
+                String _name_1 = interfaceDefinition.getName();
+                String _plus_2 = ("An input variable from the \'" + _name_1);
+                String _plus_3 = (_plus_2 + "\' interface.");
+                this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
+              }
+            }
+          }
+        }
+      }
     }
   }
   
