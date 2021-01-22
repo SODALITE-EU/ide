@@ -144,7 +144,6 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_22(), "rule__EHandler__Group_3_22__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup(), "rule__EModuleCall__Group__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2(), "rule__EModuleCall__Group_2__0");
-			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2_1(), "rule__EModuleCall__Group_2_1__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2_1_0(), "rule__EModuleCall__Group_2_1_0__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2_1_1(), "rule__EModuleCall__Group_2_1_1__0");
 			builder.put(grammarAccess.getEParameterAccess().getGroup(), "rule__EParameter__Group__0");
@@ -568,6 +567,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), "rule__EBlock__UnorderedGroup_2");
 			builder.put(grammarAccess.getETaskAccess().getUnorderedGroup_3(), "rule__ETask__UnorderedGroup_3");
 			builder.put(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), "rule__EHandler__UnorderedGroup_3");
+			builder.put(grammarAccess.getEModuleCallAccess().getUnorderedGroup_2_1(), "rule__EModuleCall__UnorderedGroup_2_1");
 			builder.put(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), "rule__ERoleInclusion__UnorderedGroup_2_2");
 			builder.put(grammarAccess.getELoopControlAccess().getUnorderedGroup_2(), "rule__ELoopControl__UnorderedGroup_2");
 			builder.put(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), "rule__EUntil__UnorderedGroup_2");

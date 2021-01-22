@@ -975,7 +975,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EModuleCall returns EModuleCall
 	 *
 	 * Constraint:
-	 *     (name=STRING direct_parameter=EValuePassed? parameters+=EParameter*)
+	 *     (name=STRING (direct_parameter=EValuePassed | parameters+=EParameter)*)
 	 */
 	protected void sequence_EModuleCall(ISerializationContext context, EModuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

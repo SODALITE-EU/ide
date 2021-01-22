@@ -1,0 +1,31 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/openstack/playbooks/vm_delete.yml
+playbook_name: "openstack/vm_delete"
+used_by:
+	//PROBLEM: we have 2 node types with the same name (in openstack_vm.rm and snow.rm), it scopes to the snow.rm one arbitrary
+	//but here we would like to scope instead the one in openstack_vm.rm
+	node_type: "sodalite.nodes.OpenStack.VM"
+	operation: "delete"
+plays:
+	play:
+		play_name: "Refresh token and update env"
+		external_file_inclusion:
+			import_playbook: "egi_refresh_token.yml"
+			when: env.checkin_env is defined
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						os_env: {{ env.os_env }}
+				when: env.os_env is defined
+			
+			task_to_execute:
+				task_name: "Delete VM"
+				module: "os_server"
+					parameters:
+						state: "absent"
+						name: {{ operation_input: "id" }}
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}

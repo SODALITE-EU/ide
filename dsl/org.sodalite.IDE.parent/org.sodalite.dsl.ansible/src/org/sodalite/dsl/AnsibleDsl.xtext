@@ -202,7 +202,7 @@ EModuleCall:
 	(
 		BEGIN
 		(
-			('direct_parameter:' direct_parameter=EValuePassed)?
+			('direct_parameter:' direct_parameter=EValuePassed)? &
 			('parameters:'
 			BEGIN
 				(parameters+=EParameter)+
@@ -709,12 +709,12 @@ ENumber:
 ;
 
 terminal BOOLEAN:
-	'True' |'False'
+	'True' |'False' | 'true' | 'false'
 ;
 
 //boolean accepted in Ansible but not in jinja
 terminal BOOLEAN_ONLY_ANSIBLE:
-	'yes' | 'no' | 'true' | 'false'
+	'yes' | 'no'
 ;
 
 terminal NULL:

@@ -119,7 +119,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	final String MODULE_CALL_DESCRIPTION =
 	"This is used for defining which is the module to be used in this task/handler.\n\n"+
 	"The attributes that can be set are:\n\n"+
-	"	- module: it's the identifier of the module to be used.\n"+
+	"	- module: it's the identifier (string) of the module to be used.\n"+
 	"	- direct_parameter: it's a value passed to the module without an explicit\n"+
 	"	  	  name of the parameter, like it's done for example with shell module.\n"+
 	"	  	  This attribute isn't mandatory.\n"+
@@ -244,13 +244,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("False", context));
 		acceptor.accept(createCompletionProposal("True", context));
+		acceptor.accept(createCompletionProposal("false", context));
+		acceptor.accept(createCompletionProposal("true", context));
 	}
 
 	override void complete_BOOLEAN_ONLY_ANSIBLE(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("no", context));
 		acceptor.accept(createCompletionProposal("yes", context));
-		acceptor.accept(createCompletionProposal("false", context));
-		acceptor.accept(createCompletionProposal("true", context));
 	}
 	
 	override void complete_NULL(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -298,6 +298,34 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}
 	}
+	
+	//suggest index or loop variables defined only in this specific play
+	override void completeEIndexOrLoopVariable_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val rootPlay = EcoreUtil2.getContainerOfType(model, EPlayImpl)
+		if (rootPlay !== null){
+			val candidatesIndexOrLoopVariables = EcoreUtil2.getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl)
+			for (candidate: candidatesIndexOrLoopVariables){
+				createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable defined with the 'index_var' or 'loop_var' keyword.", acceptor)
+			}
+		}
+	}
+	
+	//suggest variables set in a "set_fact" module in this specific playbook
+	override void completeESetFactVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		val candidatesSetFactsVariables = EcoreUtil2.getAllContentsOfType(rootPlaybook, EParameterImpl)
+		//the parameters candidates should be only the ones set in a "set_fact" module
+		var legitCandidatesSetFactsVariables = new ArrayList<EParameter>
+		for (parameter: candidatesSetFactsVariables){
+			val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
+			if (moduleCall !== null){
+				if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
+			}
+		}
+		for (candidate: legitCandidatesSetFactsVariables){
+			createNonEditableCompletionProposal(candidate.name, new StyledString(candidate.name, StyledString.COUNTER_STYLER), context, "A variable set with the 'set_fact' module in this playbook.", acceptor)
+		}
+	}
 
 	//suggest variables given in input by the tosca operation
 	override void completeEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -327,8 +355,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
 					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
 					val inputsProperties = interfaceDefinitionBody.inputs
-					for (input : inputsProperties.properties){
-						createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+					if (inputsProperties !== null){
+						for (input : inputsProperties.properties){
+							createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+						}
 					}
 				}				
 			}			
@@ -384,8 +414,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
 					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
 					val inputsProperties = interfaceDefinitionBody.inputs
-					for (input : inputsProperties.properties){
-						createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+					if (inputsProperties !== null){
+						for (input : inputsProperties.properties){
+							createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+						}
 					}
 				}
 			}

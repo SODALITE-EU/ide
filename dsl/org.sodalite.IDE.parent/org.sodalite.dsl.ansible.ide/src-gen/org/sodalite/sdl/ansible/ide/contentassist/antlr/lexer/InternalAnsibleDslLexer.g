@@ -303,9 +303,9 @@ VerticalLine : '|';
 
 RightCurlyBracket : '}';
 
-RULE_BOOLEAN : ('True'|'False');
+RULE_BOOLEAN : ('True'|'False'|'true'|'false');
 
-RULE_BOOLEAN_ONLY_ANSIBLE : ('yes'|'no'|'true'|'false');
+RULE_BOOLEAN_ONLY_ANSIBLE : ('yes'|'no');
 
 RULE_NULL : 'Null';
 

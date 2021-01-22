@@ -1729,12 +1729,12 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final RuleCall cBEGINTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Group cGroup_2_1_0 = (Group)cGroup_2_1.eContents().get(0);
+		private final UnorderedGroup cUnorderedGroup_2_1 = (UnorderedGroup)cGroup_2.eContents().get(1);
+		private final Group cGroup_2_1_0 = (Group)cUnorderedGroup_2_1.eContents().get(0);
 		private final Keyword cDirect_parameterKeyword_2_1_0_0 = (Keyword)cGroup_2_1_0.eContents().get(0);
 		private final Assignment cDirect_parameterAssignment_2_1_0_1 = (Assignment)cGroup_2_1_0.eContents().get(1);
 		private final RuleCall cDirect_parameterEValuePassedParserRuleCall_2_1_0_1_0 = (RuleCall)cDirect_parameterAssignment_2_1_0_1.eContents().get(0);
-		private final Group cGroup_2_1_1 = (Group)cGroup_2_1.eContents().get(1);
+		private final Group cGroup_2_1_1 = (Group)cUnorderedGroup_2_1.eContents().get(1);
 		private final Keyword cParametersKeyword_2_1_1_0 = (Keyword)cGroup_2_1_1.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_2_1_1_1 = (RuleCall)cGroup_2_1_1.eContents().get(1);
 		private final Assignment cParametersAssignment_2_1_1_2 = (Assignment)cGroup_2_1_1.eContents().get(2);
@@ -1743,13 +1743,13 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cENDTerminalRuleCall_2_2 = (RuleCall)cGroup_2.eContents().get(2);
 		
 		//EModuleCall:
-		//	'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? ('parameters:'
+		//	'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? & ('parameters:'
 		//	BEGIN
 		//	parameters+=EParameter+
 		//	END)?) END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? ('parameters:' BEGIN
+		//'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? & ('parameters:' BEGIN
 		//parameters+=EParameter+ END)?) END)?
 		public Group getGroup() { return cGroup; }
 		
@@ -1762,14 +1762,14 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 		
-		//(BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? ('parameters:' BEGIN parameters+=EParameter+ END)?) END)?
+		//(BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? & ('parameters:' BEGIN parameters+=EParameter+ END)?) END)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_2_0() { return cBEGINTerminalRuleCall_2_0; }
 		
-		//(('direct_parameter:' direct_parameter=EValuePassed)? ('parameters:' BEGIN parameters+=EParameter+ END)?)
-		public Group getGroup_2_1() { return cGroup_2_1; }
+		//(('direct_parameter:' direct_parameter=EValuePassed)? & ('parameters:' BEGIN parameters+=EParameter+ END)?)
+		public UnorderedGroup getUnorderedGroup_2_1() { return cUnorderedGroup_2_1; }
 		
 		//('direct_parameter:' direct_parameter=EValuePassed)?
 		public Group getGroup_2_1_0() { return cGroup_2_1_0; }
@@ -6261,7 +6261,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EModuleCall:
-	//	'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? ('parameters:'
+	//	'module:' name=STRING (BEGIN (('direct_parameter:' direct_parameter=EValuePassed)? & ('parameters:'
 	//	BEGIN
 	//	parameters+=EParameter+
 	//	END)?) END)?;
@@ -7194,13 +7194,13 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//terminal BOOLEAN:
-	//	'True' | 'False';
+	//	'True' | 'False' | 'true' | 'false';
 	public TerminalRule getBOOLEANRule() {
 		return tBOOLEAN;
 	}
 	
 	//terminal BOOLEAN_ONLY_ANSIBLE:
-	//	'yes' | 'no' | 'true' | 'false';
+	//	'yes' | 'no';
 	public TerminalRule getBOOLEAN_ONLY_ANSIBLERule() {
 		return tBOOLEAN_ONLY_ANSIBLE;
 	}

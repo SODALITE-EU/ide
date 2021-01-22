@@ -115,7 +115,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   private final String MODULE_CALL_DESCRIPTION = ((((((("This is used for defining which is the module to be used in this task/handler.\n\n" + 
     "The attributes that can be set are:\n\n") + 
-    "\t- module: it\'s the identifier of the module to be used.\n") + 
+    "\t- module: it\'s the identifier (string) of the module to be used.\n") + 
     "\t- direct_parameter: it\'s a value passed to the module without an explicit\n") + 
     "\t  \t  name of the parameter, like it\'s done for example with shell module.\n") + 
     "\t  \t  This attribute isn\'t mandatory.\n") + 
@@ -270,14 +270,14 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   public void complete_BOOLEAN(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("False", context));
     acceptor.accept(this.createCompletionProposal("True", context));
+    acceptor.accept(this.createCompletionProposal("false", context));
+    acceptor.accept(this.createCompletionProposal("true", context));
   }
   
   @Override
   public void complete_BOOLEAN_ONLY_ANSIBLE(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("no", context));
     acceptor.accept(this.createCompletionProposal("yes", context));
-    acceptor.accept(this.createCompletionProposal("false", context));
-    acceptor.accept(this.createCompletionProposal("true", context));
   }
   
   @Override
@@ -335,6 +335,45 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
+  public void completeEIndexOrLoopVariable_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(model, EPlayImpl.class);
+    if ((rootPlay != null)) {
+      final List<EIndexOrLoopVariableImpl> candidatesIndexOrLoopVariables = EcoreUtil2.<EIndexOrLoopVariableImpl>getAllContentsOfType(rootPlay, EIndexOrLoopVariableImpl.class);
+      for (final EIndexOrLoopVariableImpl candidate : candidatesIndexOrLoopVariables) {
+        String _name = candidate.getName();
+        String _name_1 = candidate.getName();
+        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable defined with the \'index_var\' or \'loop_var\' keyword.", acceptor);
+      }
+    }
+  }
+  
+  @Override
+  public void completeESetFactVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
+    final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
+    ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
+    for (final EParameterImpl parameter : candidatesSetFactsVariables) {
+      {
+        final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
+        if ((moduleCall != null)) {
+          String _name = moduleCall.getName();
+          boolean _equals = Objects.equal(_name, "set_fact");
+          if (_equals) {
+            legitCandidatesSetFactsVariables.add(parameter);
+          }
+        }
+      }
+    }
+    for (final EParameter candidate : legitCandidatesSetFactsVariables) {
+      String _name = candidate.getName();
+      String _name_1 = candidate.getName();
+      StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
+      this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
+    }
+  }
+  
+  @Override
   public void completeEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
     if ((rootPlaybook != null)) {
@@ -368,15 +407,17 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
           final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
           final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
           final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-          EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-          for (final EPropertyDefinition input : _properties) {
-            String _concat = "\"".concat(input.getName()).concat("\"");
-            String _concat_1 = "\"".concat(input.getName()).concat("\"");
-            StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
-            String _name = interfaceDefinition.getName();
-            String _plus = ("An input variable from the \'" + _name);
-            String _plus_1 = (_plus + "\' interface.");
-            this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+          if ((inputsProperties != null)) {
+            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+            for (final EPropertyDefinition input : _properties) {
+              String _concat = "\"".concat(input.getName()).concat("\"");
+              String _concat_1 = "\"".concat(input.getName()).concat("\"");
+              StyledString _append = new StyledString(_concat_1, StyledString.COUNTER_STYLER).append(" - RM input");
+              String _name = interfaceDefinition.getName();
+              String _plus = ("An input variable from the \'" + _name);
+              String _plus_1 = (_plus + "\' interface.");
+              this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
+            }
           }
         }
       }
@@ -433,14 +474,16 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
           final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
           final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
           final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-          EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-          for (final EPropertyDefinition input : _properties) {
-            String _concat_1 = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
-            StyledString _append_1 = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
-            String _name_1 = interfaceDefinition.getName();
-            String _plus_2 = ("An input variable from the \'" + _name_1);
-            String _plus_3 = (_plus_2 + "\' interface.");
-            this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
+          if ((inputsProperties != null)) {
+            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
+            for (final EPropertyDefinition input : _properties) {
+              String _concat_1 = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
+              StyledString _append_1 = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
+              String _name_1 = interfaceDefinition.getName();
+              String _plus_2 = ("An input variable from the \'" + _name_1);
+              String _plus_3 = (_plus_2 + "\' interface.");
+              this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
+            }
           }
         }
       }

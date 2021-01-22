@@ -1065,7 +1065,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     } else {
       if ((taskHandler instanceof EHandler)) {
-        return "\"".concat(((EHandler)taskHandler).getName()).concat("\"");
+        return "\"".concat(this.compileString(((EHandler)taskHandler).getName())).concat("\"");
       }
     }
     return null;
@@ -1476,10 +1476,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     EList<ENotifiable> _notifiables = taskHandler.getNotifiables();
     for (final ENotifiable notifiable : _notifiables) {
       if ((notifiable instanceof ENotifiedTopic)) {
-        newList.add("\"".concat(((ENotifiedTopic)notifiable).getName()).concat("\""));
+        newList.add("\"".concat(this.compileString(((ENotifiedTopic)notifiable).getName())).concat("\""));
       } else {
         if ((notifiable instanceof ENotifiedHandler)) {
-          newList.add("\"".concat(((ENotifiedHandler)notifiable).getName().getName()).concat("\""));
+          newList.add("\"".concat(this.compileString(((ENotifiedHandler)notifiable).getName().getName())).concat("\""));
         }
       }
     }
@@ -1490,7 +1490,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     ArrayList<String> newList = new ArrayList<String>();
     EList<ENotifiedTopic> _listen_to = handler.getListen_to();
     for (final ENotifiedTopic listenedTopic : _listen_to) {
-      newList.add("\"".concat(listenedTopic.getName()).concat("\""));
+      newList.add("\"".concat(this.compileString(listenedTopic.getName())).concat("\""));
     }
     return newList;
   }

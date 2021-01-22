@@ -415,7 +415,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			if (taskHandler.name !== null) return compileStringPassed(taskHandler.name, space, false)
 			else return null
 		} 
-		else if (taskHandler instanceof EHandler) return "\"".concat(taskHandler.name).concat("\"")
+		else if (taskHandler instanceof EHandler) return "\"".concat(taskHandler.name.compileString).concat("\"")
 	}
 	
 	//if the task/handler has a name, indent it correctly. the name of the module used is the first thing to show
@@ -529,10 +529,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		var newList = new ArrayList()
 		for (notifiable : taskHandler.notifiables){
 			if (notifiable instanceof ENotifiedTopic){
-				newList.add("\"".concat(notifiable.name).concat("\""))
+				newList.add("\"".concat(notifiable.name.compileString).concat("\""))
 			}
 			else if (notifiable instanceof ENotifiedHandler){
-				newList.add("\"".concat(notifiable.name.name).concat("\""))
+				newList.add("\"".concat(notifiable.name.name.compileString).concat("\""))
 			}
 		}
 		return newList
@@ -541,7 +541,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileNotifiedTopics(EHandler handler){
 		var newList = new ArrayList()
 		for (listenedTopic : handler.listen_to){
-			newList.add("\"".concat(listenedTopic.name).concat("\""))
+			newList.add("\"".concat(listenedTopic.name.compileString).concat("\""))
 		}
 		return newList
 	}
