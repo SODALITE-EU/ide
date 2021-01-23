@@ -1,6 +1,6 @@
 //this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/slurm/slurm-job/playbooks/create.yml
 playbook_name: "hpc/slurm/slurm-job/create"
-//PROBLEM: the node type  sodalite.nodes.hpc.job.slurm.configuration, that should use this playbook, is missing in the rm examples
+//PROBLEM: the node type sodalite.nodes.hpc.job.slurm.configuration, that should use this playbook, is missing in the rm examples
 //therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
 plays:
 	play:

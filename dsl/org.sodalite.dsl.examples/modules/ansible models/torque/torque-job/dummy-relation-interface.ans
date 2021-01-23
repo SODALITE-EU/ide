@@ -1,6 +1,6 @@
-//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/slurm/slurm-job/playbooks/start.yml
-playbook_name: "hpc/slurm/slurm-job/start"
-//PROBLEM: the node type sodalite.nodes.hpc.job.slurm, that should use this playbook, is missing in the rm examples
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/torque/torque-job/playbooks/dummy-relation-interface.yml
+playbook_name: "hpc/torque/torque-job/dummy-relation-interface"
+//PROBLEM: the node type sodalite.relationships.jobHostedOn, that should use this playbook, is missing in the rm examples
 //therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
 plays:
 	play:
@@ -17,6 +17,7 @@ plays:
 					parameters:
 						name: "wm"
 						groups: "wm"
+						ansible_python_interpreter: "/usr/bin/python3"
 						ansible_host: {{ wm_public_address }}
 						ansible_user: {{ wm_username }}
 						ansible_ssh_private_key_file: {{ wm_keypath }}
@@ -28,27 +29,11 @@ plays:
 	play:
 		hosts: "wm"
 		facts_settings:
-			gather_facts: yes
-		vars:
-			job_workspace_path: {{ (job_workspace != None) | ternary(job_workspace, ansible_env.HOME) }}
+			gather_facts: no
 		tasks_list:
 			task_to_execute:
-				task_name: "Submit the job"
-				module: "shell"
-					direct_parameter: "sbatch  "{{ job_name }}".slurm"
-				args:
-					chdir: {{ declared_variable: job_workspace_path }}
-				register: job
-			
-			task_to_execute:
-				task_name: "Saving job_id"
-				module: "set_fact"
-					parameters:
-						job_id: {{ registered_variable: job.stdout }}
-			
-			task_to_execute:
-				task_name: "Set attribute"
+				task_name: "set state stopped after 'C' status"
 				module: "set_stats"
 					parameters:
 						data:
-							job_id: {{ registered_variable: job.stdout | regex_search('[0-9]+') }}
+							job_id: {{ job_name }}

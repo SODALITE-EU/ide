@@ -1,7 +1,8 @@
-//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/slurm/slurm-job/playbooks/configure.yml
-playbook_name: "hpc/slurm/slurm-job/configure"
-//PROBLEM: the node type sodalite.nodes.hpc.job.slurm, that should use this playbook, is missing in the rm examples
-//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/torque/torque-job/playbooks/configure.yml
+playbook_name: "hpc/torque/torque-job/configure"
+used_by:
+	node_type: "sodalite.nodes.hpc.job.torque"
+	operation: "configure"
 plays:
 	play:
 		hosts: "all"
@@ -17,9 +18,9 @@ plays:
 					parameters:
 						name: "wm"
 						groups: "wm"
-						ansible_host: {{ wm_public_address }}
-						ansible_user: {{ wm_username }}
-						ansible_ssh_private_key_file: {{ wm_keypath }}
+						ansible_host: {{ operation_input: "wm_public_address" }}
+						ansible_user: {{ operation_input: "wm_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "wm_keypath" }}
 						ansible_ssh_common_args: >
 							line_of_string: "-o IdentitiesOnly=yes"
 							line_of_string: "-o BatchMode=yes"
@@ -30,7 +31,7 @@ plays:
 		facts_settings:
 			gather_facts: yes
 		vars:
-			job_workspace_path: {{ (job_workspace != None) | ternary(job_workspace, ansible_env.HOME) }}
+			job_workspace_path: {{ (( operation_input: "job_workspace" != None ) | ternary(operation_input: "job_workspace", ansible_env.HOME)) | replace("~", ansible_env.HOME) }}
 		tasks_list:
 			task_to_execute:
 				task_name: "There should be pulling of the singularity images for respective components"
