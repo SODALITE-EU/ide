@@ -505,7 +505,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDIF»
 			«IF taskHandler.loop instanceof EUntil»
 				«IF (taskHandler.loop as EUntil).until !== null»
-					«space»until: «compileJinjaExpressionEvaluationWithoutBrackets((taskHandler.loop as EUntil).until, space)»
+					«space»until: «compileJinjaExpressionEvaluationWithoutBrackets((taskHandler.loop as EUntil).until, space, true)»
 				«ENDIF»
 				«IF (taskHandler.loop as EUntil).retries !== null»
 					«space»retries: «compileNumberPassed((taskHandler.loop as EUntil).retries, space)»
@@ -567,9 +567,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (booleanPassed.boolean_passed !== null) return compileBooleanAnsible(booleanPassed.boolean_passed)
 	}
 	
-	def compileTailElement(ETailElement tailElement, String space){
+	def compileTailElement(ETailElement tailElement, String space, boolean isCondition){
 		var tailElementString = ""
-		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(compileFunctionCall(tailElement.function_call, space))
+		if (tailElement.function_call !== null) tailElementString = tailElementString.concat(compileFunctionCall(tailElement.function_call, space, isCondition))
 		for (squareBracketElement : tailElement.square_bracket_elements){
 			tailElementString = tailElementString.concat(squareBracketElement.compileSquareBracketElement)
 		}
@@ -583,29 +583,31 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return stringToReturn
 	}
 	
-	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja, String space){
+	//isCondition is true if this function is called inside a condition, like for example a when condition
+	//knowing that it's necessary to decide if strings should be generated with " quotation marks (isCondition == true) or ' quotation marks (isCondition == true)
+	def compileJinjaExpressionEvaluationWithoutBrackets(EJinjaExpressionEvaluationWithoutBrackets jinja, String space, boolean isCondition){
 		var stringToReturn = ""
 		if (jinja.expression_to_evaluate !== null){
-			stringToReturn = stringToReturn.concat(compileFilteredExpression(jinja.expression_to_evaluate, space))
+			stringToReturn = stringToReturn.concat(compileFilteredExpression(jinja.expression_to_evaluate, space, isCondition))
 		}
 		for (ifBlock : jinja.if_chain){
-			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(ifBlock.if_condition, space))
-			if (ifBlock.else_expression !== null) stringToReturn = stringToReturn.concat(" else ").concat(compileFilteredExpression(ifBlock.else_expression, space))
+			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(ifBlock.if_condition, space, isCondition))
+			if (ifBlock.else_expression !== null) stringToReturn = stringToReturn.concat(" else ").concat(compileFilteredExpression(ifBlock.else_expression, space, isCondition))
 		}
 		return stringToReturn
 	}
 
-	def compileFunctionCall(EFunctionCallOrVariable functionCall, String space){
+	def compileFunctionCall(EFunctionCallOrVariable functionCall, String space, boolean isCondition){
 		var stringToReturn = functionCall.name
 		if (functionCall.parameters.size !== 0){
 			stringToReturn = stringToReturn.concat("(")
 			for (var index = 0; index < functionCall.parameters.size; index++){	
 				//the first parameter passed shouldn't have a comma before it, the others yes
 				if (index == 0){
-					stringToReturn = stringToReturn.concat(compileFunctionInput(functionCall.parameters.get(index), space))
+					stringToReturn = stringToReturn.concat(compileFunctionInput(functionCall.parameters.get(index), space, isCondition))
 				}
 				else {
-					stringToReturn = stringToReturn.concat(", ").concat(compileFunctionInput(functionCall.parameters.get(index), space))
+					stringToReturn = stringToReturn.concat(", ").concat(compileFunctionInput(functionCall.parameters.get(index), space, isCondition))
 				}
 			}
 			stringToReturn = stringToReturn.concat(")")	
@@ -616,80 +618,80 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return stringToReturn
 	}
 	
-	def compileFunctionInput(EFunctionInput functionInput, String space){
+	def compileFunctionInput(EFunctionInput functionInput, String space, boolean isCondition){
 		var stringToReturn = ""
 		if (functionInput.parameter_name !== null) stringToReturn = stringToReturn.concat(functionInput.parameter_name).concat("=")
-		if (functionInput.value !== null) stringToReturn = stringToReturn.concat(compileJinjaExpressionEvaluationWithoutBrackets(functionInput.value, space).toString())
+		if (functionInput.value !== null) stringToReturn = stringToReturn.concat(compileJinjaExpressionEvaluationWithoutBrackets(functionInput.value, space, isCondition).toString())
 		return stringToReturn
 	}
 	
-	def compileFilteredExpression(EFilteredExpression filteredExpression, String space){
-		var stringToReturn = compileOrExpression(filteredExpression.to_filter, space).toString()
+	def compileFilteredExpression(EFilteredExpression filteredExpression, String space, boolean isCondition){
+		var stringToReturn = compileOrExpression(filteredExpression.to_filter, space, isCondition).toString()
 		if (filteredExpression.filter !== null){
-			stringToReturn = stringToReturn.concat(" | ").concat(compileFilteredExpression(filteredExpression.filter, space).toString())
+			stringToReturn = stringToReturn.concat(" | ").concat(compileFilteredExpression(filteredExpression.filter, space, isCondition).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileOrExpression(EOrExpression orExpression, String space){
-		var stringToReturn = compileAndExpression(orExpression.left_or, space).toString()
+	def compileOrExpression(EOrExpression orExpression, String space, boolean isCondition){
+		var stringToReturn = compileAndExpression(orExpression.left_or, space, isCondition).toString()
 		if (orExpression.right_or !== null){
-			stringToReturn = stringToReturn.concat(" or ").concat(compileOrExpression(orExpression.right_or, space).toString())
+			stringToReturn = stringToReturn.concat(" or ").concat(compileOrExpression(orExpression.right_or, space, isCondition).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileAndExpression(EAndExpression andExpression, String space){
-		var stringToReturn = compileTruthExpression(andExpression.left_and, space).toString()
+	def compileAndExpression(EAndExpression andExpression, String space, boolean isCondition){
+		var stringToReturn = compileTruthExpression(andExpression.left_and, space, isCondition).toString()
 		if (andExpression.right_and !== null){
-			stringToReturn = stringToReturn.concat(" and ").concat(compileAndExpression(andExpression.right_and, space).toString())
+			stringToReturn = stringToReturn.concat(" and ").concat(compileAndExpression(andExpression.right_and, space, isCondition).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileTruthExpression(ETruthExpression truthExpression, String space){
-		var stringToReturn = compileOperation(truthExpression.left_value, space).toString()
+	def compileTruthExpression(ETruthExpression truthExpression, String space, boolean isCondition){
+		var stringToReturn = compileOperation(truthExpression.left_value, space, isCondition).toString()
 		if (truthExpression.equality_sign !== null && truthExpression.right_value !== null){
-			stringToReturn = stringToReturn.concat(" ").concat(truthExpression.equality_sign).concat(" ").concat(compileTruthExpression(truthExpression.right_value, space).toString())
+			stringToReturn = stringToReturn.concat(" ").concat(truthExpression.equality_sign).concat(" ").concat(compileTruthExpression(truthExpression.right_value, space, isCondition).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileOperation(EOperation operation, String space){
-		var stringToReturn = compileIsExpression(operation.left_operand, space).toString()
+	def compileOperation(EOperation operation, String space, boolean isCondition){
+		var stringToReturn = compileIsExpression(operation.left_operand, space, isCondition).toString()
 		if (operation.operator !== null && operation.right_operand !== null){
-			stringToReturn = stringToReturn.concat(" ").concat(operation.operator).concat(" ").concat(compileOperation(operation.right_operand, space).toString())
+			stringToReturn = stringToReturn.concat(" ").concat(operation.operator).concat(" ").concat(compileOperation(operation.right_operand, space, isCondition).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileIsExpression(EIsExpression isExpression, String space){
+	def compileIsExpression(EIsExpression isExpression, String space, boolean isCondition){
 		var stringToReturn = ""
 		if (isExpression.not !== null) stringToReturn = stringToReturn.concat("not ")
-		stringToReturn = stringToReturn.concat(compileParenthesisedExpression(isExpression.parenthesised_expression, space).toString())
+		stringToReturn = stringToReturn.concat(compileParenthesisedExpression(isExpression.parenthesised_expression, space, isCondition).toString())
 		if (isExpression.status !== null){
-			stringToReturn = stringToReturn.concat(" is ").concat(compileIsExpression(isExpression.status, space).toString())	
+			stringToReturn = stringToReturn.concat(" is ").concat(compileIsExpression(isExpression.status, space, isCondition).toString())	
 		}
 		else if (isExpression.container_expression !== null){
 			if (isExpression.not_in !== null){
-				stringToReturn = stringToReturn.concat(" not in ").concat(compileIsExpression(isExpression.container_expression, space).toString())
+				stringToReturn = stringToReturn.concat(" not in ").concat(compileIsExpression(isExpression.container_expression, space, isCondition).toString())
 			}
 			else {
-				stringToReturn = stringToReturn.concat(" in ").concat(compileIsExpression(isExpression.container_expression, space).toString())
+				stringToReturn = stringToReturn.concat(" in ").concat(compileIsExpression(isExpression.container_expression, space, isCondition).toString())
 			}
 		}
 		return stringToReturn
 	}
 	
-	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression, String space){
+	def compileParenthesisedExpression(EParenthesisedExpression parenthesisedExpression, String space, boolean isCondition){
 		var stringToReturn = ""
-		if (parenthesisedExpression.basic_value !== null) stringToReturn = stringToReturn.concat(compileValuePassedToJinjaExpression(parenthesisedExpression.basic_value, space))
-		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(compileJinjaExpressionEvaluationWithoutBrackets(parenthesisedExpression.parenthesised_term, space).toString()).concat(")")
+		if (parenthesisedExpression.basic_value !== null) stringToReturn = stringToReturn.concat(compileValuePassedToJinjaExpression(parenthesisedExpression.basic_value, space, isCondition))
+		else if (parenthesisedExpression.parenthesised_term !== null) stringToReturn = stringToReturn.concat("(").concat(compileJinjaExpressionEvaluationWithoutBrackets(parenthesisedExpression.parenthesised_term, space, isCondition).toString()).concat(")")
 		for (squareBracketElement : parenthesisedExpression.square_bracket_elements){
 			stringToReturn = stringToReturn.concat(squareBracketElement.compileSquareBracketElement)
 		}
 		for (tailElement : parenthesisedExpression.tail){
-			stringToReturn = stringToReturn.concat(".").concat(compileTailElement(tailElement, space))
+			stringToReturn = stringToReturn.concat(".").concat(compileTailElement(tailElement, space, isCondition))
 		}
 		return stringToReturn
 	}
@@ -780,20 +782,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja, String space){
-		return "{{ ".concat(compileJinjaExpressionEvaluationWithoutBrackets(jinja.jinja_expression, space).toString()).concat(" }}")
+		return "{{ ".concat(compileJinjaExpressionEvaluationWithoutBrackets(jinja.jinja_expression, space, false).toString()).concat(" }}")
 	}
 	
 	def compileJinjaStatement(EJinjaStatement jinjaStatement, String space, boolean isInMultiLine){
 		if (jinjaStatement instanceof EIfStatement){
 			var stringToReturn = "{%"
 			if (jinjaStatement.if_block_sign !== null) stringToReturn = stringToReturn.concat(jinjaStatement.if_block_sign)
-			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.if_condition, space)).concat(" %}")
+			stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.if_condition, space, false)).concat(" %}")
 			stringToReturn = stringToReturn.concat(compileValuePassed(jinjaStatement.if_body, space, isInMultiLine).toString())
 			//the elif blocks, if present
 			for (elif : jinjaStatement.elif_blocks){
 				stringToReturn = stringToReturn.concat("{%")
 				if (elif.elif_block_sign !== null) stringToReturn = stringToReturn.concat(elif.elif_block_sign)
-				stringToReturn = stringToReturn.concat(" elif ").concat(compileFilteredExpression(elif.elif_condition, space)).concat(" %}")
+				stringToReturn = stringToReturn.concat(" elif ").concat(compileFilteredExpression(elif.elif_condition, space, false)).concat(" %}")
 				stringToReturn = stringToReturn.concat(compileValuePassed(elif.elif_body, space, isInMultiLine).toString())
 			}
 			//the else block, if present
@@ -823,9 +825,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				}
 			}
 			//the list of items to iterate after the "in"
-			stringToReturn = stringToReturn.concat(" in ").concat(compileFilteredExpression(jinjaStatement.list, space))
+			stringToReturn = stringToReturn.concat(" in ").concat(compileFilteredExpression(jinjaStatement.list, space, false))
 			//the filter, if present
-			if (jinjaStatement.condition !== null) stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.condition, space))
+			if (jinjaStatement.condition !== null) stringToReturn = stringToReturn.concat(" if ").concat(compileFilteredExpression(jinjaStatement.condition, space, false))
 			//the recursive keyword, if present
 			if (jinjaStatement.recursive !== null) stringToReturn = stringToReturn.concat(" ").concat(jinjaStatement.recursive)
 			stringToReturn = stringToReturn.concat(" %}")
@@ -846,8 +848,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 	
-	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression, String space){
-		if (valuePassedToJinjaExpression instanceof EValueJinja) return compileValueJinja(valuePassedToJinjaExpression, space).toString()
+	def compileValuePassedToJinjaExpression(EValuePassedToJinjaExpression valuePassedToJinjaExpression, String space, boolean isCondition){
+		if (valuePassedToJinjaExpression instanceof EValueJinja) return compileValueJinja(valuePassedToJinjaExpression, space, isCondition).toString()
 		else if (valuePassedToJinjaExpression instanceof ESpecialVariable){
 			var specialVariableString = valuePassedToJinjaExpression.name
 			return specialVariableString
@@ -882,7 +884,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			setFactVariableReferenceString = setFactVariableReferenceString.concat(valuePassedToJinjaExpression.name.name)
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCallOrVariable){
-			return compileFunctionCall(valuePassedToJinjaExpression, space)
+			return compileFunctionCall(valuePassedToJinjaExpression, space, isCondition)
 		}
 	}
 	
@@ -892,20 +894,20 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	
-	def compileValueJinja(EValueJinja valueJinja, String space){
-		if (valueJinja instanceof EComposedValueJinja) return compileComposedValueJinja(valueJinja, space)
-		else if (valueJinja instanceof ESimpleValueJinja) return valueJinja.compileSimpleValueJinja
+	def compileValueJinja(EValueJinja valueJinja, String space, boolean isCondition){
+		if (valueJinja instanceof EComposedValueJinja) return compileComposedValueJinja(valueJinja, space, isCondition)
+		else if (valueJinja instanceof ESimpleValueJinja) return compileSimpleValueJinja(valueJinja, isCondition)
 	}
 	
-	def compileComposedValueJinja(EComposedValueJinja composedValueJinja, String space){
+	def compileComposedValueJinja(EComposedValueJinja composedValueJinja, String space, boolean isCondition){
 		if (composedValueJinja instanceof EDictionaryJinja){
 			var dictionaryString = "{"
 			for (var index = 0; index < composedValueJinja.dictionary_pairs.size; index++){
 				if (index == 0){
-					dictionaryString = dictionaryString.concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space))
+					dictionaryString = dictionaryString.concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space, isCondition))
 				}
 				else {
-					dictionaryString = dictionaryString.concat(", ").concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space))
+					dictionaryString = dictionaryString.concat(", ").concat(compileDictionaryPairJinja(composedValueJinja.dictionary_pairs.get(index), space, isCondition))
 				}
 			}
 			dictionaryString = dictionaryString.concat("}")
@@ -915,10 +917,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			var listString = "["
 			for (var index = 0; index < composedValueJinja.elements.size; index++){
 				if (index == 0){
-					listString = listString.concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space).toString())
+					listString = listString.concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space, isCondition).toString())
 				}
 				else {
-					listString = listString.concat(", ").concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space).toString())
+					listString = listString.concat(", ").concat(compileJinjaExpressionEvaluationWithoutBrackets(composedValueJinja.elements.get(index), space, isCondition).toString())
 				}
 			}
 			listString = listString.concat("]")
@@ -926,8 +928,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 	
-	def compileDictionaryPairJinja(EDictionaryPairJinja dictionaryPairJinja, String space){
-		return "\'".concat(dictionaryPairJinja.name).concat("\'").concat(": ").concat(compileJinjaExpressionEvaluationWithoutBrackets(dictionaryPairJinja.value, space).toString())
+	def compileDictionaryPairJinja(EDictionaryPairJinja dictionaryPairJinja, String space, boolean isCondition){
+		return "\'".concat(dictionaryPairJinja.name).concat("\'").concat(": ").concat(compileJinjaExpressionEvaluationWithoutBrackets(dictionaryPairJinja.value, space, isCondition).toString())
 	}
 	
 	def compileValueWithoutString(EValueWithoutString valueWithoutString, String space){
@@ -974,10 +976,15 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return dictionaryString
 	}
 	
-	def compileSimpleValueJinja(ESimpleValueJinja simpleValueJinja){
+	//isCondition is true if this function is called inside a condition, like for example a when condition
+	//knowing that it's necessary to decide if strings should be generated with " quotation marks (isCondition == true) or ' quotation marks (isCondition == true)
+	def compileSimpleValueJinja(ESimpleValueJinja simpleValueJinja, boolean isCondition){
 		if (simpleValueJinja.simple_value !== null) return simpleValueJinja.simple_value
 		else if (simpleValueJinja.simple_value_number !== null) return compileNumber(simpleValueJinja.simple_value_number)
-		else if (simpleValueJinja.simple_value_string !== null) return "\'".concat(simpleValueJinja.simple_value_string.compileString).concat("\'")
+		else if (simpleValueJinja.simple_value_string !== null){
+			if (isCondition) return "\"".concat(simpleValueJinja.simple_value_string.compileString).concat("\"")
+			else return "\'".concat(simpleValueJinja.simple_value_string.compileString).concat("\'")
+		}
 	}
 	
 	def compileSimpleValueWithoutString(ESimpleValueWithoutString simpleValueWithoutString){
@@ -997,11 +1004,11 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileCondition(ECondition condition, String space){
-		if (condition instanceof EJinjaExpressionEvaluationWithoutBrackets) return compileJinjaExpressionEvaluationWithoutBrackets(condition, space)
+		if (condition instanceof EJinjaExpressionEvaluationWithoutBrackets) return compileJinjaExpressionEvaluationWithoutBrackets(condition, space, true)
 		else if (condition instanceof EListOfConditions){
 			var listString = ""
 			for (element : condition.conditions){
-				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileJinjaExpressionEvaluationWithoutBrackets(element, space.concat("  ")))
+				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileJinjaExpressionEvaluationWithoutBrackets(element, space.concat("  "), true))
 			}
 			return listString
 		}
