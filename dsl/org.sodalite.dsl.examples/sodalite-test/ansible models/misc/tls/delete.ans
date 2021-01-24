@@ -1,0 +1,25 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/misc/tls/playbooks/delete.yml
+playbook_name: "misc/tls/delete"
+//PROBLEM: the node type sodalite.nodes.TLS.Certificate, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "cryptography"
+				state: "absent"
+		tasks_list:
+			task_to_execute:
+				task_name: "Delete the path to certs"
+				module: "file"
+					parameters:
+						path: {{ cert_path }}
+						state: "absent"
+		
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.pip"

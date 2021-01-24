@@ -1,0 +1,49 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/misc/conf/playbooks/create_conf.yml
+playbook_name: "misc/conf/create_conf"
+//PROBLEM: the node type sodalite.nodes.Configuration, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become: yes
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						config_file_path: {{ dir }}"/"{{ filename }}
+			
+			block_to_execute:
+				block_name: "add config file to host"
+				tasks:
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: {{ dir }}
+								state: "directory"
+					
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: {{ fact_set: config_file_path }}
+								state: "absent"
+					
+					task_to_execute:
+						module: "template"
+							parameters:
+								src: {{ template_name }}
+								dest: {{ fact_set: config_file_path }}
+								
+			task_to_execute:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							config_file_path: {{ fact_set: config_file_path }}
+							
+			task_to_execute:
+				task_name: "Change permissions"
+				module: "file"
+					parameters:
+						path: {{ fact_set: config_file_path }}
+						mode: {{ permissions }}
