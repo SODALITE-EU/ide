@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement()
@@ -67,5 +69,49 @@ public interface ESquareBracketElement extends EObject
    * @generated
    */
   void setField(String value);
+
+  /**
+   * Returns the value of the '<em><b>Variable reference</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Variable reference</em>' containment reference.
+   * @see #setVariable_reference(EVariableReference)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Variable_reference()
+   * @model containment="true"
+   * @generated
+   */
+  EVariableReference getVariable_reference();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Variable reference</em>' containment reference.
+   * @see #getVariable_reference()
+   * @generated
+   */
+  void setVariable_reference(EVariableReference value);
+
+  /**
+   * Returns the value of the '<em><b>Variable or function</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Variable or function</em>' containment reference.
+   * @see #setVariable_or_function(EFunctionCallOrVariable)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Variable_or_function()
+   * @model containment="true"
+   * @generated
+   */
+  EFunctionCallOrVariable getVariable_or_function();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Variable or function</em>' containment reference.
+   * @see #getVariable_or_function()
+   * @generated
+   */
+  void setVariable_or_function(EFunctionCallOrVariable value);
 
 } // ESquareBracketElement

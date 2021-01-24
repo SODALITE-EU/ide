@@ -307,7 +307,7 @@ RULE_BOOLEAN : ('True'|'False'|'true'|'false');
 
 RULE_BOOLEAN_ONLY_ANSIBLE : ('yes'|'no');
 
-RULE_NULL : 'Null';
+RULE_NULL : 'null';
 
 RULE_NONE : 'None';
 

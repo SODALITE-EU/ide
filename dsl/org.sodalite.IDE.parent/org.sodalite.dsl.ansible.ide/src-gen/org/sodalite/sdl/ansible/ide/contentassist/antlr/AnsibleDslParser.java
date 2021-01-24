@@ -535,6 +535,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getETailElementAccess().getSquare_bracket_elementsAssignment_1(), "rule__ETailElement__Square_bracket_elementsAssignment_1");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getIndexAssignment_1_0(), "rule__ESquareBracketElement__IndexAssignment_1_0");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getFieldAssignment_1_1(), "rule__ESquareBracketElement__FieldAssignment_1_1");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_2(), "rule__ESquareBracketElement__Variable_referenceAssignment_1_2");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_3(), "rule__ESquareBracketElement__Variable_or_functionAssignment_1_3");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getDictionary_pairsAssignment_1(), "rule__EDictionaryInLine__Dictionary_pairsAssignment_1");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getDictionary_pairsAssignment_2_1(), "rule__EDictionaryInLine__Dictionary_pairsAssignment_2_1");
 			builder.put(grammarAccess.getEDictionaryIndentedAccess().getDictionary_pairsAssignment_1(), "rule__EDictionaryIndented__Dictionary_pairsAssignment_1");

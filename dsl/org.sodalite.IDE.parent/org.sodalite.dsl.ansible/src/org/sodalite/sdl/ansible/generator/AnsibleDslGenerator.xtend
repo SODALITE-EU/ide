@@ -83,6 +83,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ECondition
 import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber
 import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference
 
 /**
  * Generates code from your model files on save.
@@ -580,6 +581,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		var stringToReturn = ""
 		if (squareBracketElement.index !== null) stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.index.compileNumber).concat("]")
 		else if (squareBracketElement.field !== null) stringToReturn = stringToReturn.concat("['").concat(squareBracketElement.field).concat("']")
+		else if (squareBracketElement.variable_reference !== null) stringToReturn = stringToReturn.concat("[").concat(compileVariableReference(squareBracketElement.variable_reference)).concat("]")
+		else if (squareBracketElement.variable_or_function !== null) stringToReturn = stringToReturn.concat("[").concat(compileFunctionCall(squareBracketElement.variable_or_function, "", false)).concat("]")
 		return stringToReturn
 	}
 	
@@ -854,37 +857,44 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			var specialVariableString = valuePassedToJinjaExpression.name
 			return specialVariableString
 		}
-		else if (valuePassedToJinjaExpression instanceof EVariableDeclarationVariableReference){
-			var declaredVariableString = ""
-			declaredVariableString = declaredVariableString.concat(valuePassedToJinjaExpression.variable_declaration_variable_reference.name)
-			return declaredVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof ERegisterVariableReference){
-			var registerVariableString = ""
-			registerVariableString = registerVariableString.concat(valuePassedToJinjaExpression.register_variable_reference.name)
-			return registerVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof EInputOperationVariableReference){
-			var inputOperationVariableString = ""
-			inputOperationVariableString = inputOperationVariableString.concat(valuePassedToJinjaExpression.name.name)
-			return inputOperationVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof EInputInterfaceVariableReference){
-			var inputInterfaceVariableString = ""
-			inputInterfaceVariableString = inputInterfaceVariableString.concat(valuePassedToJinjaExpression.name.name)
-			return inputInterfaceVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof EIndexOrLoopVariableReference){
-			var indexOrLoopVariableString = ""
-			indexOrLoopVariableString = indexOrLoopVariableString.concat(valuePassedToJinjaExpression.name.name)
-			return indexOrLoopVariableString
-		}
-		else if (valuePassedToJinjaExpression instanceof ESetFactVariableReference){
-			var setFactVariableReferenceString = ""
-			setFactVariableReferenceString = setFactVariableReferenceString.concat(valuePassedToJinjaExpression.name.name)
+		else if (valuePassedToJinjaExpression instanceof EVariableReference){
+			return compileVariableReference(valuePassedToJinjaExpression)
 		}
 		else if (valuePassedToJinjaExpression instanceof EFunctionCallOrVariable){
 			return compileFunctionCall(valuePassedToJinjaExpression, space, isCondition)
+		}
+	}
+	
+	def compileVariableReference(EVariableReference variableReference){
+		if (variableReference instanceof EVariableDeclarationVariableReference){
+			var declaredVariableString = ""
+			declaredVariableString = declaredVariableString.concat(variableReference.variable_declaration_variable_reference.name)
+			return declaredVariableString
+		}
+		else if (variableReference instanceof ERegisterVariableReference){
+			var registerVariableString = ""
+			registerVariableString = registerVariableString.concat(variableReference.register_variable_reference.name)
+			return registerVariableString
+		}
+		else if (variableReference instanceof EInputOperationVariableReference){
+			var inputOperationVariableString = ""
+			inputOperationVariableString = inputOperationVariableString.concat(variableReference.name.name)
+			return inputOperationVariableString
+		}
+		else if (variableReference instanceof EInputInterfaceVariableReference){
+			var inputInterfaceVariableString = ""
+			inputInterfaceVariableString = inputInterfaceVariableString.concat(variableReference.name.name)
+			return inputInterfaceVariableString
+		}
+		else if (variableReference instanceof EIndexOrLoopVariableReference){
+			var indexOrLoopVariableString = ""
+			indexOrLoopVariableString = indexOrLoopVariableString.concat(variableReference.name.name)
+			return indexOrLoopVariableString
+		}
+		else if (variableReference instanceof ESetFactVariableReference){
+			var setFactVariableReferenceString = ""
+			setFactVariableReferenceString = setFactVariableReferenceString.concat(variableReference.name.name)
+			return setFactVariableReferenceString
 		}
 	}
 	

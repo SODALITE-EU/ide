@@ -3391,6 +3391,18 @@ rule__ESquareBracketElement__Alternatives_1
 		(rule__ESquareBracketElement__FieldAssignment_1_1)
 		{ after(grammarAccess.getESquareBracketElementAccess().getFieldAssignment_1_1()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_2()); }
+		(rule__ESquareBracketElement__Variable_referenceAssignment_1_2)
+		{ after(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_3()); }
+		(rule__ESquareBracketElement__Variable_or_functionAssignment_1_3)
+		{ after(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_3()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -27251,6 +27263,36 @@ rule__ESquareBracketElement__FieldAssignment_1_1
 		{ before(grammarAccess.getESquareBracketElementAccess().getFieldSTRINGTerminalRuleCall_1_1_0()); }
 		RULE_STRING
 		{ after(grammarAccess.getESquareBracketElementAccess().getFieldSTRINGTerminalRuleCall_1_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ESquareBracketElement__Variable_referenceAssignment_1_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getESquareBracketElementAccess().getVariable_referenceEVariableReferenceParserRuleCall_1_2_0()); }
+		ruleEVariableReference
+		{ after(grammarAccess.getESquareBracketElementAccess().getVariable_referenceEVariableReferenceParserRuleCall_1_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ESquareBracketElement__Variable_or_functionAssignment_1_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0()); }
+		ruleEFunctionCallOrVariable
+		{ after(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0()); }
 	)
 ;
 finally {

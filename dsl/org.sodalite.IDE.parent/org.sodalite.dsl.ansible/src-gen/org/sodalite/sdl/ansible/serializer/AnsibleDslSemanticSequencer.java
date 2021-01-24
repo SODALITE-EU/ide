@@ -1378,7 +1378,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESquareBracketElement returns ESquareBracketElement
 	 *
 	 * Constraint:
-	 *     (index=ENumber | field=STRING)
+	 *     (index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
 	 */
 	protected void sequence_ESquareBracketElement(ISerializationContext context, ESquareBracketElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

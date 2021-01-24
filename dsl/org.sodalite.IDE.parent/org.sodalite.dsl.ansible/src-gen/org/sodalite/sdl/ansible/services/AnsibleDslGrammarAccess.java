@@ -5140,19 +5140,25 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final RuleCall cIndexENumberParserRuleCall_1_0_0 = (RuleCall)cIndexAssignment_1_0.eContents().get(0);
 		private final Assignment cFieldAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
 		private final RuleCall cFieldSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cFieldAssignment_1_1.eContents().get(0);
+		private final Assignment cVariable_referenceAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cVariable_referenceEVariableReferenceParserRuleCall_1_2_0 = (RuleCall)cVariable_referenceAssignment_1_2.eContents().get(0);
+		private final Assignment cVariable_or_functionAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0 = (RuleCall)cVariable_or_functionAssignment_1_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ESquareBracketElement:
-		//	'[' (index=ENumber | field=STRING) ']';
+		//	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+		//	variable_or_function=EFunctionCallOrVariable) ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' (index=ENumber | field=STRING) ']'
+		//'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+		//variable_or_function=EFunctionCallOrVariable) ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//(index=ENumber | field=STRING)
+		//(index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//index=ENumber
@@ -5166,6 +5172,18 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//STRING
 		public RuleCall getFieldSTRINGTerminalRuleCall_1_1_0() { return cFieldSTRINGTerminalRuleCall_1_1_0; }
+		
+		//variable_reference=EVariableReference
+		public Assignment getVariable_referenceAssignment_1_2() { return cVariable_referenceAssignment_1_2; }
+		
+		//EVariableReference
+		public RuleCall getVariable_referenceEVariableReferenceParserRuleCall_1_2_0() { return cVariable_referenceEVariableReferenceParserRuleCall_1_2_0; }
+		
+		//variable_or_function=EFunctionCallOrVariable
+		public Assignment getVariable_or_functionAssignment_1_3() { return cVariable_or_functionAssignment_1_3; }
+		
+		//EFunctionCallOrVariable
+		public RuleCall getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0() { return cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
@@ -6977,7 +6995,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//ESquareBracketElement:
-	//	'[' (index=ENumber | field=STRING) ']';
+	//	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+	//	variable_or_function=EFunctionCallOrVariable) ']';
 	public ESquareBracketElementElements getESquareBracketElementAccess() {
 		return pESquareBracketElement;
 	}
@@ -7206,7 +7225,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//terminal NULL:
-	//	'Null';
+	//	'null';
 	public TerminalRule getNULLRule() {
 		return tNULL;
 	}

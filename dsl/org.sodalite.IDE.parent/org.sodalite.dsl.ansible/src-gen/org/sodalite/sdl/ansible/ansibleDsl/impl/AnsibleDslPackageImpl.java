@@ -3662,6 +3662,28 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getESquareBracketElement_Variable_reference()
+  {
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESquareBracketElement_Variable_or_function()
+  {
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEDictionary()
   {
     return eDictionaryEClass;
@@ -4424,6 +4446,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eSquareBracketElementEClass = createEClass(ESQUARE_BRACKET_ELEMENT);
     createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__INDEX);
     createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__FIELD);
+    createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE);
+    createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION);
 
     eDictionaryEClass = createEClass(EDICTIONARY);
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
@@ -4910,6 +4934,8 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eSquareBracketElementEClass, ESquareBracketElement.class, "ESquareBracketElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getESquareBracketElement_Index(), this.getENumber(), null, "index", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESquareBracketElement_Field(), ecorePackage.getEString(), "field", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESquareBracketElement_Variable_reference(), this.getEVariableReference(), null, "variable_reference", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESquareBracketElement_Variable_or_function(), this.getEFunctionCallOrVariable(), null, "variable_or_function", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

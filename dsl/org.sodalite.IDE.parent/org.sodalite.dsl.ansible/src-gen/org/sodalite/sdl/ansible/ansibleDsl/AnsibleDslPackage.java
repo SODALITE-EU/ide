@@ -4259,13 +4259,31 @@ public interface AnsibleDslPackage extends EPackage
   int ESQUARE_BRACKET_ELEMENT__FIELD = 1;
 
   /**
+   * The feature id for the '<em><b>Variable reference</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = 2;
+
+  /**
+   * The feature id for the '<em><b>Variable or function</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = 3;
+
+  /**
    * The number of structural features of the '<em>ESquare Bracket Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 2;
+  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.
@@ -7506,6 +7524,28 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getESquareBracketElement_Field();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Variable reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference()
+   * @see #getESquareBracketElement()
+   * @generated
+   */
+  EReference getESquareBracketElement_Variable_reference();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Variable or function</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function()
+   * @see #getESquareBracketElement()
+   * @generated
+   */
+  EReference getESquareBracketElement_Variable_or_function();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionary <em>EDictionary</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -10094,6 +10134,22 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EAttribute ESQUARE_BRACKET_ELEMENT__FIELD = eINSTANCE.getESquareBracketElement_Field();
+
+    /**
+     * The meta object literal for the '<em><b>Variable reference</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = eINSTANCE.getESquareBracketElement_Variable_reference();
+
+    /**
+     * The meta object literal for the '<em><b>Variable or function</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = eINSTANCE.getESquareBracketElement_Variable_or_function();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.

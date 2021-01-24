@@ -32,7 +32,7 @@ plays:
 				module: "copy"
 					parameters:
 						content: {{ fact_set: request | to_nice_json }}
-						dest:"/tmp/ansible-request-"{{ fact_set: request }}".json"
+						dest:"/tmp/ansible-request-"{{ fact_set: request['job']['application']['app_tag'] }}".json"
 			task_to_execute:
 				task_name: "Send request to MODAK"
 				module: "uri"

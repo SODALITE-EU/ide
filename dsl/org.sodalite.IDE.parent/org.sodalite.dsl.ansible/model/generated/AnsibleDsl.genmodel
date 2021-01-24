@@ -322,6 +322,8 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESquareBracketElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/field"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/variable_reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/variable_or_function"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionary/dictionary_pairs"/>

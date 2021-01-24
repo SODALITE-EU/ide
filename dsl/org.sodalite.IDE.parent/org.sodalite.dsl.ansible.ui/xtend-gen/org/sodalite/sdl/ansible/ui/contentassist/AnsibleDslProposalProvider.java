@@ -282,7 +282,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_NULL(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(this.createCompletionProposal("Null", context));
+    acceptor.accept(this.createCompletionProposal("null", context));
   }
   
   @Override

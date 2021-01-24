@@ -617,7 +617,7 @@ ETailElement:
 ;
 
 ESquareBracketElement:
-	'[' (index=ENumber | field=STRING) ']'
+	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable) ']'
 ;
 
 EDictionary:
@@ -718,7 +718,7 @@ terminal BOOLEAN_ONLY_ANSIBLE:
 ;
 
 terminal NULL:
-	'Null'
+	'null'
 ;
 
 terminal NONE:
