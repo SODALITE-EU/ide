@@ -1,0 +1,55 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/command/response_code.yaml
+playbook_name: "tests/command/response_code"
+//PROBLEM: the node type sodalite.nodes.Tests.Command.Return, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: yes
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Execute command (linux)"
+						module: "shell"
+							parameters:
+								chdir: {{ dir | default(omit, true) }}
+								executable: {{ executable | default(omit, true) }}
+								cmd: {{ command }}
+						register: command_output
+						when: host_os == 'linux'
+					
+					task_to_execute:
+						task_name: "Execute command (windows)"
+						module: "win_shell"
+							direct_parameter: {{ command }}
+						args:
+							chdir: {{ dir | default(omit, true) }}
+							executable: {{ executable | default(omit, true) }}
+						register: co
+						when: host_os == 'windows'
+					
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								command_output: {{ registered_variable: co }}
+						when: registered_variable: command_output is undefined
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ fact_set: command_output.rc }}
+									status: {{ fact_set: command_output.rc == response_code }}
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the command execution fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

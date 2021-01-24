@@ -1,0 +1,63 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/file/owner.yaml
+playbook_name: "tests/file/owner"
+//PROBLEM: the node type sodalite.nodes.Tests.File.Owner, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Check the file's stats"
+						module: "stat"
+							parameters:
+								path: {{ file_location }}
+								follow: {{ follow }}
+						register: file_stats
+					
+					task_to_execute:
+						task_name: "Evaluate the expression in case of user name check"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.pw_name }}
+									status: {{ registered_variable: file_stats.stat.pw_name == owner }}
+						when: not check_group and not check_id
+						
+					task_to_execute:
+						task_name: "Evaluate the expression in case of user ID check"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.uid }}
+									status: {{ registered_variable: file_stats.stat.uid == owner }}
+						when: not check_group and check_id
+						
+					task_to_execute:
+						task_name: "Evaluate the expression in case of group name check"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.gr_name }}
+									status: {{ registered_variable: file_stats.stat.gr_name == owner }}
+						when: check_group and not check_id
+						
+					task_to_execute:
+						task_name: "Evaluate the expression in case of group ID check"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.gid }}
+									status: {{ registered_variable: file_stats.stat.gid == owner }}
+						when: check_group and check_id
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the request fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

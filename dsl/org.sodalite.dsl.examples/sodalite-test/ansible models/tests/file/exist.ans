@@ -1,0 +1,35 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/file/exist.yaml
+playbook_name: "tests/file/exist"
+//PROBLEM: the node type sodalite.nodes.Tests.File.Exist, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Check that the somefile.conf exists"
+						module: "stat"
+							parameters:
+								path: {{ file_location }}
+								follow: {{ follow }}
+						register: file_stats
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.exists }}
+									status: {{ registered_variable: file_stats.stat.exists == exists }}
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the request fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}
