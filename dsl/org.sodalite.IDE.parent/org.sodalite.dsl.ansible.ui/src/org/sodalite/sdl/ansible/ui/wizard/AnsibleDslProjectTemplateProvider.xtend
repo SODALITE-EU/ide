@@ -63,9 +63,9 @@ final class HelloWorldProject {
 						play_name: "hello world play"
 						hosts: "all"
 						tasks_list:
-							task:
+							task_to_execute:
 								task_name: "hello world task"
-								module: debug
+								module: "debug"
 									parameters:
 										msg: "Hello world!"
 			''')

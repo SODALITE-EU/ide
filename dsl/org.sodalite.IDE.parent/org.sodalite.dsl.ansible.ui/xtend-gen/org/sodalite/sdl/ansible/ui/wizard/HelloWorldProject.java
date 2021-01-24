@@ -95,13 +95,13 @@ public final class HelloWorldProject extends AbstractProjectTemplate {
       _builder_1.append("tasks_list:");
       _builder_1.newLine();
       _builder_1.append("\t\t\t");
-      _builder_1.append("task:");
+      _builder_1.append("task_to_execute:");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("task_name: \"hello world task\"");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("module: debug");
+      _builder_1.append("module: \"debug\"");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t\t");
       _builder_1.append("parameters:");
