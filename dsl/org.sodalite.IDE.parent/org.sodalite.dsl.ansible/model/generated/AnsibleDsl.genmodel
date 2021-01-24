@@ -321,9 +321,18 @@
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ESquareBracketElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/slice_notation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESquareBracketElement/field"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/variable_reference"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESquareBracketElement/variable_or_function"/>
+    </genClasses>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//ESliceNotation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESliceNotation/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESliceNotation/colon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESliceNotation/stop"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESliceNotation/first_colon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//ESliceNotation/step"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ESliceNotation/second_colon"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EDictionary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EDictionary/dictionary_pairs"/>

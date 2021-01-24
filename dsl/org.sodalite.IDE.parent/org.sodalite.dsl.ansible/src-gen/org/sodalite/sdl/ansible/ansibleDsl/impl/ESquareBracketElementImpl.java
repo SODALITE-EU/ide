@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
+import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 
@@ -27,6 +28,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getSlice_notation <em>Slice notation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getField <em>Field</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getVariable_reference <em>Variable reference</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getVariable_or_function <em>Variable or function</em>}</li>
@@ -45,6 +47,16 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @ordered
    */
   protected ENumber index;
+
+  /**
+   * The cached value of the '{@link #getSlice_notation() <em>Slice notation</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSlice_notation()
+   * @generated
+   * @ordered
+   */
+  protected ESliceNotation slice_notation;
 
   /**
    * The default value of the '{@link #getField() <em>Field</em>}' attribute.
@@ -155,6 +167,56 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, newIndex, newIndex));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESliceNotation getSlice_notation()
+  {
+    return slice_notation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSlice_notation(ESliceNotation newSlice_notation, NotificationChain msgs)
+  {
+    ESliceNotation oldSlice_notation = slice_notation;
+    slice_notation = newSlice_notation;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION, oldSlice_notation, newSlice_notation);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSlice_notation(ESliceNotation newSlice_notation)
+  {
+    if (newSlice_notation != slice_notation)
+    {
+      NotificationChain msgs = null;
+      if (slice_notation != null)
+        msgs = ((InternalEObject)slice_notation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION, null, msgs);
+      if (newSlice_notation != null)
+        msgs = ((InternalEObject)newSlice_notation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION, null, msgs);
+      msgs = basicSetSlice_notation(newSlice_notation, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION, newSlice_notation, newSlice_notation));
   }
 
   /**
@@ -294,6 +356,8 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
         return basicSetIndex(null, msgs);
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
+        return basicSetSlice_notation(null, msgs);
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
         return basicSetVariable_reference(null, msgs);
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
@@ -314,6 +378,8 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
         return getIndex();
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
+        return getSlice_notation();
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         return getField();
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
@@ -336,6 +402,9 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
         setIndex((ENumber)newValue);
+        return;
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
+        setSlice_notation((ESliceNotation)newValue);
         return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         setField((String)newValue);
@@ -363,6 +432,9 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
         setIndex((ENumber)null);
         return;
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
+        setSlice_notation((ESliceNotation)null);
+        return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         setField(FIELD_EDEFAULT);
         return;
@@ -388,6 +460,8 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
     {
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
         return index != null;
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
+        return slice_notation != null;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
         return FIELD_EDEFAULT == null ? field != null : !FIELD_EDEFAULT.equals(field);
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:

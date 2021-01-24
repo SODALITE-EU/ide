@@ -726,6 +726,15 @@ public interface AnsibleDslFactory extends EFactory
   ESquareBracketElement createESquareBracketElement();
 
   /**
+   * Returns a new object of class '<em>ESlice Notation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ESlice Notation</em>'.
+   * @generated
+   */
+  ESliceNotation createESliceNotation();
+
+  /**
    * Returns a new object of class '<em>EDictionary</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

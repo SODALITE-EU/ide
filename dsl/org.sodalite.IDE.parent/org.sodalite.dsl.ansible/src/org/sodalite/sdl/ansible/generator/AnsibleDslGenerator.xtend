@@ -84,6 +84,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EListOfConditions
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber
 import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation
 
 /**
  * Generates code from your model files on save.
@@ -583,6 +584,28 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		else if (squareBracketElement.field !== null) stringToReturn = stringToReturn.concat("['").concat(squareBracketElement.field).concat("']")
 		else if (squareBracketElement.variable_reference !== null) stringToReturn = stringToReturn.concat("[").concat(compileVariableReference(squareBracketElement.variable_reference)).concat("]")
 		else if (squareBracketElement.variable_or_function !== null) stringToReturn = stringToReturn.concat("[").concat(compileFunctionCall(squareBracketElement.variable_or_function, "", false)).concat("]")
+		else if (squareBracketElement.slice_notation !== null) stringToReturn = stringToReturn.concat("[").concat(compileSliceNotation(squareBracketElement.slice_notation)).concat("]")
+		return stringToReturn
+	}
+	
+	def compileSliceNotation(ESliceNotation sliceNotation){
+		var stringToReturn = ""
+		//if this if is entered, then there are 2 colons
+		if (sliceNotation.first_colon !== null){
+			if (sliceNotation.start !== null) stringToReturn = stringToReturn.concat(compileNumber(sliceNotation.start))
+			stringToReturn = stringToReturn.concat(sliceNotation.first_colon)
+			if (sliceNotation.step !== null) stringToReturn = stringToReturn.concat(compileNumber(sliceNotation.step))
+			//it shouldn't be null, the check is done just to be safe
+			if (sliceNotation.second_colon !== null) stringToReturn = stringToReturn.concat(sliceNotation.second_colon)
+			if (sliceNotation.stop !== null) stringToReturn = stringToReturn.concat(compileNumber(sliceNotation.stop))
+		}
+		//if this else is entered, then there is 1 colon
+		else {
+			if (sliceNotation.start !== null) stringToReturn = stringToReturn.concat(compileNumber(sliceNotation.start))
+			//it shouldn't be null, the check is done just to be safe
+			if (sliceNotation.colon !== null) stringToReturn = stringToReturn.concat(sliceNotation.colon)
+			if (sliceNotation.stop !== null) stringToReturn = stringToReturn.concat(compileNumber(sliceNotation.stop))
+		}
 		return stringToReturn
 	}
 	

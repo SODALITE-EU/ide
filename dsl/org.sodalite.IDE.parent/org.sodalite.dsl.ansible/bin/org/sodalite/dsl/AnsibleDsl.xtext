@@ -617,7 +617,12 @@ ETailElement:
 ;
 
 ESquareBracketElement:
-	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable) ']'
+	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable) ']'
+;
+
+//https://stackoverflow.com/questions/509211/understanding-slice-notation
+ESliceNotation:
+	(start=ENumber)? colon=':' (stop=ENumber)? | (start=ENumber)? first_colon=':' (step=ENumber)? second_colon=':' (stop=ENumber)?
 ;
 
 EDictionary:

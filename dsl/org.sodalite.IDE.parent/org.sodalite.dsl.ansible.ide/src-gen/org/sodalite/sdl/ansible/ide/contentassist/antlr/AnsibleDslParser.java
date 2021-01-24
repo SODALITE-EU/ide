@@ -68,6 +68,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEForStatementAccess().getEndfor_block_signAlternatives_13_0(), "rule__EForStatement__Endfor_block_signAlternatives_13_0");
 			builder.put(grammarAccess.getEVariableReferenceAccess().getAlternatives(), "rule__EVariableReference__Alternatives");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getAlternatives_1(), "rule__ESquareBracketElement__Alternatives_1");
+			builder.put(grammarAccess.getESliceNotationAccess().getAlternatives(), "rule__ESliceNotation__Alternatives");
 			builder.put(grammarAccess.getEDictionaryAccess().getAlternatives(), "rule__EDictionary__Alternatives");
 			builder.put(grammarAccess.getEDictionaryPairAccess().getAlternatives_0(), "rule__EDictionaryPair__Alternatives_0");
 			builder.put(grammarAccess.getEDictionaryPairJinjaAccess().getAlternatives_0(), "rule__EDictionaryPairJinja__Alternatives_0");
@@ -269,6 +270,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getESpecialVariableAccess().getGroup(), "rule__ESpecialVariable__Group__0");
 			builder.put(grammarAccess.getETailElementAccess().getGroup(), "rule__ETailElement__Group__0");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getGroup(), "rule__ESquareBracketElement__Group__0");
+			builder.put(grammarAccess.getESliceNotationAccess().getGroup_0(), "rule__ESliceNotation__Group_0__0");
+			builder.put(grammarAccess.getESliceNotationAccess().getGroup_1(), "rule__ESliceNotation__Group_1__0");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getGroup(), "rule__EDictionaryInLine__Group__0");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getGroup_2(), "rule__EDictionaryInLine__Group_2__0");
 			builder.put(grammarAccess.getEDictionaryIndentedAccess().getGroup(), "rule__EDictionaryIndented__Group__0");
@@ -534,9 +537,18 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getETailElementAccess().getFunction_callAssignment_0(), "rule__ETailElement__Function_callAssignment_0");
 			builder.put(grammarAccess.getETailElementAccess().getSquare_bracket_elementsAssignment_1(), "rule__ETailElement__Square_bracket_elementsAssignment_1");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getIndexAssignment_1_0(), "rule__ESquareBracketElement__IndexAssignment_1_0");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getFieldAssignment_1_1(), "rule__ESquareBracketElement__FieldAssignment_1_1");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_2(), "rule__ESquareBracketElement__Variable_referenceAssignment_1_2");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_3(), "rule__ESquareBracketElement__Variable_or_functionAssignment_1_3");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getSlice_notationAssignment_1_1(), "rule__ESquareBracketElement__Slice_notationAssignment_1_1");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getFieldAssignment_1_2(), "rule__ESquareBracketElement__FieldAssignment_1_2");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_3(), "rule__ESquareBracketElement__Variable_referenceAssignment_1_3");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_4(), "rule__ESquareBracketElement__Variable_or_functionAssignment_1_4");
+			builder.put(grammarAccess.getESliceNotationAccess().getStartAssignment_0_0(), "rule__ESliceNotation__StartAssignment_0_0");
+			builder.put(grammarAccess.getESliceNotationAccess().getColonAssignment_0_1(), "rule__ESliceNotation__ColonAssignment_0_1");
+			builder.put(grammarAccess.getESliceNotationAccess().getStopAssignment_0_2(), "rule__ESliceNotation__StopAssignment_0_2");
+			builder.put(grammarAccess.getESliceNotationAccess().getStartAssignment_1_0(), "rule__ESliceNotation__StartAssignment_1_0");
+			builder.put(grammarAccess.getESliceNotationAccess().getFirst_colonAssignment_1_1(), "rule__ESliceNotation__First_colonAssignment_1_1");
+			builder.put(grammarAccess.getESliceNotationAccess().getStepAssignment_1_2(), "rule__ESliceNotation__StepAssignment_1_2");
+			builder.put(grammarAccess.getESliceNotationAccess().getSecond_colonAssignment_1_3(), "rule__ESliceNotation__Second_colonAssignment_1_3");
+			builder.put(grammarAccess.getESliceNotationAccess().getStopAssignment_1_4(), "rule__ESliceNotation__StopAssignment_1_4");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getDictionary_pairsAssignment_1(), "rule__EDictionaryInLine__Dictionary_pairsAssignment_1");
 			builder.put(grammarAccess.getEDictionaryInLineAccess().getDictionary_pairsAssignment_2_1(), "rule__EDictionaryInLine__Dictionary_pairsAssignment_2_1");
 			builder.put(grammarAccess.getEDictionaryIndentedAccess().getDictionary_pairsAssignment_1(), "rule__EDictionaryIndented__Dictionary_pairsAssignment_1");

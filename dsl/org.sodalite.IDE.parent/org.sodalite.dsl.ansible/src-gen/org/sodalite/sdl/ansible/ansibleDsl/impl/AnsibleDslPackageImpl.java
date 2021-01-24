@@ -92,6 +92,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
+import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
@@ -666,6 +667,13 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   private EClass eSquareBracketElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eSliceNotationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -3651,9 +3659,20 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
+  public EReference getESquareBracketElement_Slice_notation()
+  {
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getESquareBracketElement_Field()
   {
-    return (EAttribute)eSquareBracketElementEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)eSquareBracketElementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3664,7 +3683,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getESquareBracketElement_Variable_reference()
   {
-    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(2);
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -3675,7 +3694,84 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
   @Override
   public EReference getESquareBracketElement_Variable_or_function()
   {
-    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(3);
+    return (EReference)eSquareBracketElementEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getESliceNotation()
+  {
+    return eSliceNotationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESliceNotation_Start()
+  {
+    return (EReference)eSliceNotationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESliceNotation_Colon()
+  {
+    return (EAttribute)eSliceNotationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESliceNotation_Stop()
+  {
+    return (EReference)eSliceNotationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESliceNotation_First_colon()
+  {
+    return (EAttribute)eSliceNotationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getESliceNotation_Step()
+  {
+    return (EReference)eSliceNotationEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getESliceNotation_Second_colon()
+  {
+    return (EAttribute)eSliceNotationEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -4445,9 +4541,18 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     eSquareBracketElementEClass = createEClass(ESQUARE_BRACKET_ELEMENT);
     createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__INDEX);
+    createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION);
     createEAttribute(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__FIELD);
     createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE);
     createEReference(eSquareBracketElementEClass, ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION);
+
+    eSliceNotationEClass = createEClass(ESLICE_NOTATION);
+    createEReference(eSliceNotationEClass, ESLICE_NOTATION__START);
+    createEAttribute(eSliceNotationEClass, ESLICE_NOTATION__COLON);
+    createEReference(eSliceNotationEClass, ESLICE_NOTATION__STOP);
+    createEAttribute(eSliceNotationEClass, ESLICE_NOTATION__FIRST_COLON);
+    createEReference(eSliceNotationEClass, ESLICE_NOTATION__STEP);
+    createEAttribute(eSliceNotationEClass, ESLICE_NOTATION__SECOND_COLON);
 
     eDictionaryEClass = createEClass(EDICTIONARY);
     createEReference(eDictionaryEClass, EDICTIONARY__DICTIONARY_PAIRS);
@@ -4933,9 +5038,18 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eSquareBracketElementEClass, ESquareBracketElement.class, "ESquareBracketElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getESquareBracketElement_Index(), this.getENumber(), null, "index", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESquareBracketElement_Slice_notation(), this.getESliceNotation(), null, "slice_notation", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getESquareBracketElement_Field(), ecorePackage.getEString(), "field", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getESquareBracketElement_Variable_reference(), this.getEVariableReference(), null, "variable_reference", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getESquareBracketElement_Variable_or_function(), this.getEFunctionCallOrVariable(), null, "variable_or_function", null, 0, 1, ESquareBracketElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eSliceNotationEClass, ESliceNotation.class, "ESliceNotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getESliceNotation_Start(), this.getENumber(), null, "start", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESliceNotation_Colon(), ecorePackage.getEString(), "colon", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESliceNotation_Stop(), this.getENumber(), null, "stop", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESliceNotation_First_colon(), ecorePackage.getEString(), "first_colon", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getESliceNotation_Step(), this.getENumber(), null, "step", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getESliceNotation_Second_colon(), ecorePackage.getEString(), "second_colon", null, 0, 1, ESliceNotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eDictionaryEClass, EDictionary.class, "EDictionary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEDictionary_Dictionary_pairs(), this.getEDictionaryPair(), null, "dictionary_pairs", null, 0, -1, EDictionary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

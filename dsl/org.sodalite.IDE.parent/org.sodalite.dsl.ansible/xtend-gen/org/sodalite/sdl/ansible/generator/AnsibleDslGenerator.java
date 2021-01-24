@@ -90,6 +90,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
+import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
@@ -1585,8 +1586,60 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           boolean _tripleNotEquals_3 = (_variable_or_function != null);
           if (_tripleNotEquals_3) {
             stringToReturn = stringToReturn.concat("[").concat(this.compileFunctionCall(squareBracketElement.getVariable_or_function(), "", false)).concat("]");
+          } else {
+            ESliceNotation _slice_notation = squareBracketElement.getSlice_notation();
+            boolean _tripleNotEquals_4 = (_slice_notation != null);
+            if (_tripleNotEquals_4) {
+              stringToReturn = stringToReturn.concat("[").concat(this.compileSliceNotation(squareBracketElement.getSlice_notation())).concat("]");
+            }
           }
         }
+      }
+    }
+    return stringToReturn;
+  }
+  
+  public String compileSliceNotation(final ESliceNotation sliceNotation) {
+    String stringToReturn = "";
+    String _first_colon = sliceNotation.getFirst_colon();
+    boolean _tripleNotEquals = (_first_colon != null);
+    if (_tripleNotEquals) {
+      ENumber _start = sliceNotation.getStart();
+      boolean _tripleNotEquals_1 = (_start != null);
+      if (_tripleNotEquals_1) {
+        stringToReturn = stringToReturn.concat(this.compileNumber(sliceNotation.getStart()));
+      }
+      stringToReturn = stringToReturn.concat(sliceNotation.getFirst_colon());
+      ENumber _step = sliceNotation.getStep();
+      boolean _tripleNotEquals_2 = (_step != null);
+      if (_tripleNotEquals_2) {
+        stringToReturn = stringToReturn.concat(this.compileNumber(sliceNotation.getStep()));
+      }
+      String _second_colon = sliceNotation.getSecond_colon();
+      boolean _tripleNotEquals_3 = (_second_colon != null);
+      if (_tripleNotEquals_3) {
+        stringToReturn = stringToReturn.concat(sliceNotation.getSecond_colon());
+      }
+      ENumber _stop = sliceNotation.getStop();
+      boolean _tripleNotEquals_4 = (_stop != null);
+      if (_tripleNotEquals_4) {
+        stringToReturn = stringToReturn.concat(this.compileNumber(sliceNotation.getStop()));
+      }
+    } else {
+      ENumber _start_1 = sliceNotation.getStart();
+      boolean _tripleNotEquals_5 = (_start_1 != null);
+      if (_tripleNotEquals_5) {
+        stringToReturn = stringToReturn.concat(this.compileNumber(sliceNotation.getStart()));
+      }
+      String _colon = sliceNotation.getColon();
+      boolean _tripleNotEquals_6 = (_colon != null);
+      if (_tripleNotEquals_6) {
+        stringToReturn = stringToReturn.concat(sliceNotation.getColon());
+      }
+      ENumber _stop_1 = sliceNotation.getStop();
+      boolean _tripleNotEquals_7 = (_stop_1 != null);
+      if (_tripleNotEquals_7) {
+        stringToReturn = stringToReturn.concat(this.compileNumber(sliceNotation.getStop()));
       }
     }
     return stringToReturn;

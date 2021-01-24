@@ -466,6 +466,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createESquareBracketElementAdapter();
       }
       @Override
+      public Adapter caseESliceNotation(ESliceNotation object)
+      {
+        return createESliceNotationAdapter();
+      }
+      @Override
       public Adapter caseEDictionary(EDictionary object)
       {
         return createEDictionaryAdapter();
@@ -1753,6 +1758,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createESquareBracketElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation <em>ESlice Notation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation
+   * @generated
+   */
+  public Adapter createESliceNotationAdapter()
   {
     return null;
   }

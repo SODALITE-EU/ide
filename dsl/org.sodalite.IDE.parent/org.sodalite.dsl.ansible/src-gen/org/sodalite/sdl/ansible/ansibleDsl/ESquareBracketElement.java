@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation <em>Slice notation</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}</li>
@@ -47,6 +48,28 @@ public interface ESquareBracketElement extends EObject
    * @generated
    */
   void setIndex(ENumber value);
+
+  /**
+   * Returns the value of the '<em><b>Slice notation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Slice notation</em>' containment reference.
+   * @see #setSlice_notation(ESliceNotation)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Slice_notation()
+   * @model containment="true"
+   * @generated
+   */
+  ESliceNotation getSlice_notation();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation <em>Slice notation</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Slice notation</em>' containment reference.
+   * @see #getSlice_notation()
+   * @generated
+   */
+  void setSlice_notation(ESliceNotation value);
 
   /**
    * Returns the value of the '<em><b>Field</b></em>' attribute.

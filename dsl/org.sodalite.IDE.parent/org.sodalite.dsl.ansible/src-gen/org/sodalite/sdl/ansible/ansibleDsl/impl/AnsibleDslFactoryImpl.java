@@ -143,6 +143,7 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ESPECIAL_VARIABLE: return createESpecialVariable();
       case AnsibleDslPackage.ETAIL_ELEMENT: return createETailElement();
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT: return createESquareBracketElement();
+      case AnsibleDslPackage.ESLICE_NOTATION: return createESliceNotation();
       case AnsibleDslPackage.EDICTIONARY: return createEDictionary();
       case AnsibleDslPackage.EDICTIONARY_IN_LINE: return createEDictionaryInLine();
       case AnsibleDslPackage.EDICTIONARY_INDENTED: return createEDictionaryIndented();
@@ -1102,6 +1103,18 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
   {
     ESquareBracketElementImpl eSquareBracketElement = new ESquareBracketElementImpl();
     return eSquareBracketElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ESliceNotation createESliceNotation()
+  {
+    ESliceNotationImpl eSliceNotation = new ESliceNotationImpl();
+    return eSliceNotation;
   }
 
   /**

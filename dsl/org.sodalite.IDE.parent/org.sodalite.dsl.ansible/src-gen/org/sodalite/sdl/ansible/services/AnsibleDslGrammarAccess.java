@@ -5138,27 +5138,30 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Assignment cIndexAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
 		private final RuleCall cIndexENumberParserRuleCall_1_0_0 = (RuleCall)cIndexAssignment_1_0.eContents().get(0);
-		private final Assignment cFieldAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cFieldSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cFieldAssignment_1_1.eContents().get(0);
-		private final Assignment cVariable_referenceAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cVariable_referenceEVariableReferenceParserRuleCall_1_2_0 = (RuleCall)cVariable_referenceAssignment_1_2.eContents().get(0);
-		private final Assignment cVariable_or_functionAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
-		private final RuleCall cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0 = (RuleCall)cVariable_or_functionAssignment_1_3.eContents().get(0);
+		private final Assignment cSlice_notationAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cSlice_notationESliceNotationParserRuleCall_1_1_0 = (RuleCall)cSlice_notationAssignment_1_1.eContents().get(0);
+		private final Assignment cFieldAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cFieldSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cFieldAssignment_1_2.eContents().get(0);
+		private final Assignment cVariable_referenceAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cVariable_referenceEVariableReferenceParserRuleCall_1_3_0 = (RuleCall)cVariable_referenceAssignment_1_3.eContents().get(0);
+		private final Assignment cVariable_or_functionAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
+		private final RuleCall cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0 = (RuleCall)cVariable_or_functionAssignment_1_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ESquareBracketElement:
-		//	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+		//	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
 		//	variable_or_function=EFunctionCallOrVariable) ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+		//'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
 		//variable_or_function=EFunctionCallOrVariable) ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//(index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
+		//(index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
+		//variable_or_function=EFunctionCallOrVariable)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//index=ENumber
@@ -5167,26 +5170,116 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//ENumber
 		public RuleCall getIndexENumberParserRuleCall_1_0_0() { return cIndexENumberParserRuleCall_1_0_0; }
 		
+		//slice_notation=ESliceNotation
+		public Assignment getSlice_notationAssignment_1_1() { return cSlice_notationAssignment_1_1; }
+		
+		//ESliceNotation
+		public RuleCall getSlice_notationESliceNotationParserRuleCall_1_1_0() { return cSlice_notationESliceNotationParserRuleCall_1_1_0; }
+		
 		//field=STRING
-		public Assignment getFieldAssignment_1_1() { return cFieldAssignment_1_1; }
+		public Assignment getFieldAssignment_1_2() { return cFieldAssignment_1_2; }
 		
 		//STRING
-		public RuleCall getFieldSTRINGTerminalRuleCall_1_1_0() { return cFieldSTRINGTerminalRuleCall_1_1_0; }
+		public RuleCall getFieldSTRINGTerminalRuleCall_1_2_0() { return cFieldSTRINGTerminalRuleCall_1_2_0; }
 		
 		//variable_reference=EVariableReference
-		public Assignment getVariable_referenceAssignment_1_2() { return cVariable_referenceAssignment_1_2; }
+		public Assignment getVariable_referenceAssignment_1_3() { return cVariable_referenceAssignment_1_3; }
 		
 		//EVariableReference
-		public RuleCall getVariable_referenceEVariableReferenceParserRuleCall_1_2_0() { return cVariable_referenceEVariableReferenceParserRuleCall_1_2_0; }
+		public RuleCall getVariable_referenceEVariableReferenceParserRuleCall_1_3_0() { return cVariable_referenceEVariableReferenceParserRuleCall_1_3_0; }
 		
 		//variable_or_function=EFunctionCallOrVariable
-		public Assignment getVariable_or_functionAssignment_1_3() { return cVariable_or_functionAssignment_1_3; }
+		public Assignment getVariable_or_functionAssignment_1_4() { return cVariable_or_functionAssignment_1_4; }
 		
 		//EFunctionCallOrVariable
-		public RuleCall getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0() { return cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_3_0; }
+		public RuleCall getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0() { return cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+	}
+	public class ESliceNotationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.ESliceNotation");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cStartAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cStartENumberParserRuleCall_0_0_0 = (RuleCall)cStartAssignment_0_0.eContents().get(0);
+		private final Assignment cColonAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final Keyword cColonColonKeyword_0_1_0 = (Keyword)cColonAssignment_0_1.eContents().get(0);
+		private final Assignment cStopAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cStopENumberParserRuleCall_0_2_0 = (RuleCall)cStopAssignment_0_2.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cStartAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cStartENumberParserRuleCall_1_0_0 = (RuleCall)cStartAssignment_1_0.eContents().get(0);
+		private final Assignment cFirst_colonAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cFirst_colonColonKeyword_1_1_0 = (Keyword)cFirst_colonAssignment_1_1.eContents().get(0);
+		private final Assignment cStepAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cStepENumberParserRuleCall_1_2_0 = (RuleCall)cStepAssignment_1_2.eContents().get(0);
+		private final Assignment cSecond_colonAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
+		private final Keyword cSecond_colonColonKeyword_1_3_0 = (Keyword)cSecond_colonAssignment_1_3.eContents().get(0);
+		private final Assignment cStopAssignment_1_4 = (Assignment)cGroup_1.eContents().get(4);
+		private final RuleCall cStopENumberParserRuleCall_1_4_0 = (RuleCall)cStopAssignment_1_4.eContents().get(0);
+		
+		////https://stackoverflow.com/questions/509211/understanding-slice-notation
+		//ESliceNotation:
+		//	start=ENumber? colon=':' stop=ENumber? | start=ENumber? first_colon=':' step=ENumber? second_colon=':' stop=ENumber?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//start=ENumber? colon=':' stop=ENumber? | start=ENumber? first_colon=':' step=ENumber? second_colon=':' stop=ENumber?
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//start=ENumber? colon=':' stop=ENumber?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//start=ENumber?
+		public Assignment getStartAssignment_0_0() { return cStartAssignment_0_0; }
+		
+		//ENumber
+		public RuleCall getStartENumberParserRuleCall_0_0_0() { return cStartENumberParserRuleCall_0_0_0; }
+		
+		//colon=':'
+		public Assignment getColonAssignment_0_1() { return cColonAssignment_0_1; }
+		
+		//':'
+		public Keyword getColonColonKeyword_0_1_0() { return cColonColonKeyword_0_1_0; }
+		
+		//stop=ENumber?
+		public Assignment getStopAssignment_0_2() { return cStopAssignment_0_2; }
+		
+		//ENumber
+		public RuleCall getStopENumberParserRuleCall_0_2_0() { return cStopENumberParserRuleCall_0_2_0; }
+		
+		//start=ENumber? first_colon=':' step=ENumber? second_colon=':' stop=ENumber?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//start=ENumber?
+		public Assignment getStartAssignment_1_0() { return cStartAssignment_1_0; }
+		
+		//ENumber
+		public RuleCall getStartENumberParserRuleCall_1_0_0() { return cStartENumberParserRuleCall_1_0_0; }
+		
+		//first_colon=':'
+		public Assignment getFirst_colonAssignment_1_1() { return cFirst_colonAssignment_1_1; }
+		
+		//':'
+		public Keyword getFirst_colonColonKeyword_1_1_0() { return cFirst_colonColonKeyword_1_1_0; }
+		
+		//step=ENumber?
+		public Assignment getStepAssignment_1_2() { return cStepAssignment_1_2; }
+		
+		//ENumber
+		public RuleCall getStepENumberParserRuleCall_1_2_0() { return cStepENumberParserRuleCall_1_2_0; }
+		
+		//second_colon=':'
+		public Assignment getSecond_colonAssignment_1_3() { return cSecond_colonAssignment_1_3; }
+		
+		//':'
+		public Keyword getSecond_colonColonKeyword_1_3_0() { return cSecond_colonColonKeyword_1_3_0; }
+		
+		//stop=ENumber?
+		public Assignment getStopAssignment_1_4() { return cStopAssignment_1_4; }
+		
+		//ENumber
+		public RuleCall getStopENumberParserRuleCall_1_4_0() { return cStopENumberParserRuleCall_1_4_0; }
 	}
 	public class EDictionaryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EDictionary");
@@ -5920,6 +6013,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ESpecialVariableElements pESpecialVariable;
 	private final ETailElementElements pETailElement;
 	private final ESquareBracketElementElements pESquareBracketElement;
+	private final ESliceNotationElements pESliceNotation;
 	private final EDictionaryElements pEDictionary;
 	private final EDictionaryInLineElements pEDictionaryInLine;
 	private final EDictionaryIndentedElements pEDictionaryIndented;
@@ -6039,6 +6133,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pESpecialVariable = new ESpecialVariableElements();
 		this.pETailElement = new ETailElementElements();
 		this.pESquareBracketElement = new ESquareBracketElementElements();
+		this.pESliceNotation = new ESliceNotationElements();
 		this.pEDictionary = new EDictionaryElements();
 		this.pEDictionaryInLine = new EDictionaryInLineElements();
 		this.pEDictionaryIndented = new EDictionaryIndentedElements();
@@ -6995,7 +7090,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//ESquareBracketElement:
-	//	'[' (index=ENumber | field=STRING | variable_reference=EVariableReference |
+	//	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
 	//	variable_or_function=EFunctionCallOrVariable) ']';
 	public ESquareBracketElementElements getESquareBracketElementAccess() {
 		return pESquareBracketElement;
@@ -7003,6 +7098,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	public ParserRule getESquareBracketElementRule() {
 		return getESquareBracketElementAccess().getRule();
+	}
+	
+	////https://stackoverflow.com/questions/509211/understanding-slice-notation
+	//ESliceNotation:
+	//	start=ENumber? colon=':' stop=ENumber? | start=ENumber? first_colon=':' step=ENumber? second_colon=':' stop=ENumber?;
+	public ESliceNotationElements getESliceNotationAccess() {
+		return pESliceNotation;
+	}
+	
+	public ParserRule getESliceNotationRule() {
+		return getESliceNotationAccess().getRule();
 	}
 	
 	//EDictionary:

@@ -3103,7 +3103,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getECondition()
    * @generated
    */
-  int ECONDITION = 90;
+  int ECONDITION = 91;
 
   /**
    * The number of structural features of the '<em>ECondition</em>' class.
@@ -4250,13 +4250,22 @@ public interface AnsibleDslPackage extends EPackage
   int ESQUARE_BRACKET_ELEMENT__INDEX = 0;
 
   /**
+   * The feature id for the '<em><b>Slice notation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION = 1;
+
+  /**
    * The feature id for the '<em><b>Field</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT__FIELD = 1;
+  int ESQUARE_BRACKET_ELEMENT__FIELD = 2;
 
   /**
    * The feature id for the '<em><b>Variable reference</b></em>' containment reference.
@@ -4265,7 +4274,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = 2;
+  int ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = 3;
 
   /**
    * The feature id for the '<em><b>Variable or function</b></em>' containment reference.
@@ -4274,7 +4283,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = 3;
+  int ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = 4;
 
   /**
    * The number of structural features of the '<em>ESquare Bracket Element</em>' class.
@@ -4283,7 +4292,80 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 4;
+  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl <em>ESlice Notation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESliceNotation()
+   * @generated
+   */
+  int ESLICE_NOTATION = 78;
+
+  /**
+   * The feature id for the '<em><b>Start</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__START = 0;
+
+  /**
+   * The feature id for the '<em><b>Colon</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__COLON = 1;
+
+  /**
+   * The feature id for the '<em><b>Stop</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__STOP = 2;
+
+  /**
+   * The feature id for the '<em><b>First colon</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__FIRST_COLON = 3;
+
+  /**
+   * The feature id for the '<em><b>Step</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__STEP = 4;
+
+  /**
+   * The feature id for the '<em><b>Second colon</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION__SECOND_COLON = 5;
+
+  /**
+   * The number of structural features of the '<em>ESlice Notation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ESLICE_NOTATION_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.
@@ -4293,7 +4375,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionary()
    * @generated
    */
-  int EDICTIONARY = 78;
+  int EDICTIONARY = 79;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4321,7 +4403,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryInLine()
    * @generated
    */
-  int EDICTIONARY_IN_LINE = 79;
+  int EDICTIONARY_IN_LINE = 80;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4349,7 +4431,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryIndented()
    * @generated
    */
-  int EDICTIONARY_INDENTED = 80;
+  int EDICTIONARY_INDENTED = 81;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4377,7 +4459,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPair()
    * @generated
    */
-  int EDICTIONARY_PAIR = 81;
+  int EDICTIONARY_PAIR = 82;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4414,7 +4496,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryJinja()
    * @generated
    */
-  int EDICTIONARY_JINJA = 82;
+  int EDICTIONARY_JINJA = 83;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4442,7 +4524,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPairJinja()
    * @generated
    */
-  int EDICTIONARY_PAIR_JINJA = 83;
+  int EDICTIONARY_PAIR_JINJA = 84;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4479,7 +4561,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEList()
    * @generated
    */
-  int ELIST = 84;
+  int ELIST = 85;
 
   /**
    * The number of structural features of the '<em>EList</em>' class.
@@ -4498,7 +4580,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListInLine()
    * @generated
    */
-  int ELIST_IN_LINE = 85;
+  int ELIST_IN_LINE = 86;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4526,7 +4608,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListIndented()
    * @generated
    */
-  int ELIST_INDENTED = 86;
+  int ELIST_INDENTED = 87;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4554,7 +4636,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEElementOfListIndented()
    * @generated
    */
-  int EELEMENT_OF_LIST_INDENTED = 88;
+  int EELEMENT_OF_LIST_INDENTED = 89;
 
   /**
    * The number of structural features of the '<em>EElement Of List Indented</em>' class.
@@ -4573,7 +4655,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryOfListIndented()
    * @generated
    */
-  int EDICTIONARY_OF_LIST_INDENTED = 87;
+  int EDICTIONARY_OF_LIST_INDENTED = 88;
 
   /**
    * The feature id for the '<em><b>Dictionary pairs</b></em>' containment reference list.
@@ -4601,7 +4683,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListJinja()
    * @generated
    */
-  int ELIST_JINJA = 89;
+  int ELIST_JINJA = 90;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4629,7 +4711,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListOfConditions()
    * @generated
    */
-  int ELIST_OF_CONDITIONS = 91;
+  int ELIST_OF_CONDITIONS = 92;
 
   /**
    * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -4657,7 +4739,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEDictionaryPassed()
    * @generated
    */
-  int EDICTIONARY_PASSED = 92;
+  int EDICTIONARY_PASSED = 93;
 
   /**
    * The number of structural features of the '<em>EDictionary Passed</em>' class.
@@ -4676,7 +4758,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEListPassed()
    * @generated
    */
-  int ELIST_PASSED = 93;
+  int ELIST_PASSED = 94;
 
   /**
    * The number of structural features of the '<em>EList Passed</em>' class.
@@ -4695,7 +4777,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumberPassed()
    * @generated
    */
-  int ENUMBER_PASSED = 94;
+  int ENUMBER_PASSED = 95;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' containment reference.
@@ -4732,7 +4814,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanPassed()
    * @generated
    */
-  int EBOOLEAN_PASSED = 95;
+  int EBOOLEAN_PASSED = 96;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
@@ -4769,7 +4851,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEBooleanAnsible()
    * @generated
    */
-  int EBOOLEAN_ANSIBLE = 96;
+  int EBOOLEAN_ANSIBLE = 97;
 
   /**
    * The feature id for the '<em><b>Boolean ansible</b></em>' attribute.
@@ -4797,7 +4879,7 @@ public interface AnsibleDslPackage extends EPackage
    * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getENumber()
    * @generated
    */
-  int ENUMBER = 97;
+  int ENUMBER = 98;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -7513,6 +7595,17 @@ public interface AnsibleDslPackage extends EPackage
   EReference getESquareBracketElement_Index();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation <em>Slice notation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Slice notation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation()
+   * @see #getESquareBracketElement()
+   * @generated
+   */
+  EReference getESquareBracketElement_Slice_notation();
+
+  /**
    * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7544,6 +7637,82 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getESquareBracketElement_Variable_or_function();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation <em>ESlice Notation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ESlice Notation</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation
+   * @generated
+   */
+  EClass getESliceNotation();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStart <em>Start</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Start</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStart()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EReference getESliceNotation_Start();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getColon <em>Colon</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Colon</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getColon()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EAttribute getESliceNotation_Colon();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStop <em>Stop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Stop</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStop()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EReference getESliceNotation_Stop();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getFirst_colon <em>First colon</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>First colon</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getFirst_colon()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EAttribute getESliceNotation_First_colon();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStep <em>Step</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Step</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getStep()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EReference getESliceNotation_Step();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getSecond_colon <em>Second colon</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Second colon</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation#getSecond_colon()
+   * @see #getESliceNotation()
+   * @generated
+   */
+  EAttribute getESliceNotation_Second_colon();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EDictionary <em>EDictionary</em>}'.
@@ -10128,6 +10297,14 @@ public interface AnsibleDslPackage extends EPackage
     EReference ESQUARE_BRACKET_ELEMENT__INDEX = eINSTANCE.getESquareBracketElement_Index();
 
     /**
+     * The meta object literal for the '<em><b>Slice notation</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION = eINSTANCE.getESquareBracketElement_Slice_notation();
+
+    /**
      * The meta object literal for the '<em><b>Field</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -10150,6 +10327,64 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = eINSTANCE.getESquareBracketElement_Variable_or_function();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl <em>ESlice Notation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getESliceNotation()
+     * @generated
+     */
+    EClass ESLICE_NOTATION = eINSTANCE.getESliceNotation();
+
+    /**
+     * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESLICE_NOTATION__START = eINSTANCE.getESliceNotation_Start();
+
+    /**
+     * The meta object literal for the '<em><b>Colon</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESLICE_NOTATION__COLON = eINSTANCE.getESliceNotation_Colon();
+
+    /**
+     * The meta object literal for the '<em><b>Stop</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESLICE_NOTATION__STOP = eINSTANCE.getESliceNotation_Stop();
+
+    /**
+     * The meta object literal for the '<em><b>First colon</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESLICE_NOTATION__FIRST_COLON = eINSTANCE.getESliceNotation_First_colon();
+
+    /**
+     * The meta object literal for the '<em><b>Step</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ESLICE_NOTATION__STEP = eINSTANCE.getESliceNotation_Step();
+
+    /**
+     * The meta object literal for the '<em><b>Second colon</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ESLICE_NOTATION__SECOND_COLON = eINSTANCE.getESliceNotation_Second_colon();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl <em>EDictionary</em>}' class.

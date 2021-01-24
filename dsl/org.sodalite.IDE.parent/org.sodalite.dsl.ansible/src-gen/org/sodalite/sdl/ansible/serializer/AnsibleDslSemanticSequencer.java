@@ -77,6 +77,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
 import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
+import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
 import org.sodalite.sdl.ansible.ansibleDsl.ESpecialVariable;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
 import org.sodalite.sdl.ansible.ansibleDsl.ETailElement;
@@ -290,6 +291,9 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case AnsibleDslPackage.ESIMPLE_VALUE_WITHOUT_STRING:
 				sequence_ESimpleValueWithoutString(context, (ESimpleValueWithoutString) semanticObject); 
+				return; 
+			case AnsibleDslPackage.ESLICE_NOTATION:
+				sequence_ESliceNotation(context, (ESliceNotation) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ESPECIAL_VARIABLE:
 				sequence_ESpecialVariable(context, (ESpecialVariable) semanticObject); 
@@ -1356,6 +1360,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     ESliceNotation returns ESliceNotation
+	 *
+	 * Constraint:
+	 *     ((start=ENumber? colon=':' stop=ENumber?) | (start=ENumber? first_colon=':' step=ENumber? second_colon=':' stop=ENumber?))
+	 */
+	protected void sequence_ESliceNotation(ISerializationContext context, ESliceNotation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EValuePassedToJinjaExpression returns ESpecialVariable
 	 *     ESpecialVariable returns ESpecialVariable
 	 *
@@ -1378,7 +1394,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESquareBracketElement returns ESquareBracketElement
 	 *
 	 * Constraint:
-	 *     (index=ENumber | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
+	 *     (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
 	 */
 	protected void sequence_ESquareBracketElement(ISerializationContext context, ESquareBracketElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
