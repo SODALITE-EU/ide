@@ -296,6 +296,21 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
+  public void completeEParameter_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createEditableCompletionProposal("Parameter_Name", "Parameter_Name - ID", context, "The identifier of the module parameter.", acceptor);
+  }
+  
+  @Override
+  public void completeEVariableDeclaration_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createEditableCompletionProposal("Variable_Name", "Variable_Name - ID", context, "The identifier of the variable to be declared.", acceptor);
+  }
+  
+  @Override
+  public void completeEDictionaryPair_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.createEditableCompletionProposal("Name", "Name - ID", context, "The identifier of a key of the dictionary.", acceptor);
+  }
+  
+  @Override
   public void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeDeclaredVariableReference(model, context, acceptor, false);
   }

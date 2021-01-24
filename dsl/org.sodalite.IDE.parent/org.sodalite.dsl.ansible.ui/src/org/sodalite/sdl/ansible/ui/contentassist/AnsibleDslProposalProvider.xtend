@@ -264,6 +264,18 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		acceptor.accept(createCompletionProposal("recursive", context))
 	}
 	
+	override void completeEParameter_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal("Parameter_Name", "Parameter_Name - ID", context, "The identifier of the module parameter.", acceptor)
+	}
+	
+	override void completeEVariableDeclaration_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal("Variable_Name", "Variable_Name - ID", context, "The identifier of the variable to be declared.", acceptor)
+	}
+	
+	override void completeEDictionaryPair_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createEditableCompletionProposal("Name", "Name - ID", context, "The identifier of a key of the dictionary.", acceptor)
+	}
+	
 	//suggests variables declared only in this specific play
 	override void completeEVariableDeclarationVariableReference_Variable_declaration_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeDeclaredVariableReference(model, context, acceptor, false)
