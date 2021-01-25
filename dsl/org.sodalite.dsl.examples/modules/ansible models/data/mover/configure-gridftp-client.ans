@@ -40,7 +40,7 @@ plays:
 						module: "copy"
 							parameters:
 								src: "data/"
-								dest: {{ initial_data_path }}
+								dest: {{ initial_data_path }}"/"
 			task_to_execute:
 				task_name: "Adding hostnames"
 				privilege_escalation:

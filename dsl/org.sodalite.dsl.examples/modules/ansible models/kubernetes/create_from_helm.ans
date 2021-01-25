@@ -1,0 +1,65 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/kube/kubernetes/playbooks/create_from_helm.yaml
+playbook_name: "kubernetes/create_from_helm"
+//PROBLEM: the node type sodalite.nodes.Kubernetes.Definition.Helm, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		vars:
+			tmp_helm_repo: {{ '/tmp/helm_repo/' + helm_repo_name }}
+			chart_from_git: {{ helm_repo_url[-4:] == '.git' }}
+			defined_helm_repo: {{ helm_repo_url != '' and helm_repo_name != '' }}
+			actual_helm_chart: {{ tmp_helm_repo + '/' + helm_chart if chart_from_git else helm_chart }}
+		tasks_list:
+			task_to_execute:
+				task_name: "Check if helm is installed"
+				module: "shell"
+					direct_parameter: "command -v helm >/dev/null 2>&1"
+				register: helm_check_output
+				error_handling:
+					ignore_errors: yes
+			
+			task_to_execute:
+				task_name: "Retrieve return code from command -v"
+				module: "set_fact"
+					parameters:
+						helm_exists: {{ registered_variable: helm_check_output.rc == 0 }}
+			
+			task_to_execute:
+				task_name: "Fail if Helm is not installed on target host"
+				module: "fail"
+					parameters:
+						msg: "Helm must be installed"
+				when: not fact_set: helm_exists
+			
+			task_to_execute:
+				task_name: "Git clone repo"
+				module: "ansible.builtin.git"
+					parameters:
+						repo: {{ helm_repo_url }}
+						dest: {{ declared_variable: tmp_helm_repo }}
+				when: declared_variable: chart_from_git
+			
+			task_to_execute:
+				task_name: "Add stable chart repo"
+				module: "community.kubernetes.helm_repository"
+					parameters:
+						name: {{ helm_repo_name }}
+						state: "present"
+						repo_url: {{ helm_repo_url }}
+				when: not declared_variable: chart_from_git and declared_variable: defined_helm_repo
+			
+			task_to_execute:
+				task_name: "Install chart"
+				module: "community.kubernetes.helm"
+					parameters:
+						state: "present"
+						kubeconfig: {{ kubeconfig }}
+						name: {{ helm_name }}
+						namespace: {{ helm_namespace }}
+						chart_ref: {{ declared_variable: actual_helm_chart }}
+						chart_version: {{ helm_chart_version if helm_chart_version is defined and helm_chart_version != 'latest' }}
+						values_files: {{ helm_values_files }}
+						values: {{ helm_values }}

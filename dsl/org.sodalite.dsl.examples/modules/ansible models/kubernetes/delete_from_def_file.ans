@@ -1,0 +1,17 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/kube/kubernetes/playbooks/delete_from_def_file.yaml
+playbook_name: "kubernetes/delete_from_def_file"
+//PROBLEM: the node type sodalite.nodes.Kubernetes.Definition.File, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Delete from Kubernetes definition file"
+				module: "community.kubernetes.k8s"
+					parameters:
+						state: "absent"
+						kubeconfig: {{ kubeconfig }}
+						src: {{ path }}
