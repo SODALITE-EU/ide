@@ -1,0 +1,20 @@
+module: kube
+
+node_types:
+  
+  sodalite.nodes.Kubernetes.Cluster:
+    derived_from: tosca.nodes.Compute
+    capabilities:
+      host:
+        type: tosca.capabilities.Compute
+        valid_source_types: [ kube/sodalite.nodes.Kubernetes.Kind, kube/sodalite.nodes.Kubernetes.Definition ]
+    properties:
+      kubeconfig:
+        type: string
+        default: "~/.kube/config"
+        description: "Path to kubeconfig file at the remote cluster"
+      username:
+        type: string
+        default: "centos"
+        required: false
+        description: "User for remote cluster access"

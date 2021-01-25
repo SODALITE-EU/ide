@@ -1,0 +1,12 @@
+module: kube
+
+data_types:
+
+  sodalite.datatypes.Kubernetes.Kind:
+    derived_from: tosca.datatypes.Root
+
+
+node_types:
+
+  sodalite.nodes.Kubernetes.Definition:
+    derived_from: tosca.nodes.SoftwareComponent

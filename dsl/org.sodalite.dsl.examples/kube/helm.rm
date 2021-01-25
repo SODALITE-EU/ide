@@ -1,0 +1,148 @@
+module: kube
+
+node_types:
+
+  sodalite.nodes.Kubernetes.Definition.Helm:
+    derived_from: kube/sodalite.nodes.Kubernetes.Definition
+    properties:
+      name:
+        type: string
+        description: "Name of a release"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace of a release"
+      chart:
+        type: string
+        description: "Helm chart name in a form of path, e.g. stable/mysql. Direct URL path to the chart is also possible"
+      chart_version:
+        type: string
+        default: "latest"
+        description: "Helm chart version"
+      repo_name:
+        type: string
+        default: ""
+        description: "Name of a Helm charts repository. Empty value means that the repo will not be added and chart relies on the repositories preinstalled on the target host"
+      repo_url:
+        type: string
+        default: ""
+        description: "URL to a Helm charts repository. Path to Git (*.git) is allowed - will clone repo to /tmp/helm_repo/$repo_name. Empty value means that the repo will not be added and chart relies on the repositories preinstalled on the target host"
+      keep_repo:
+        type: boolean
+        default: true
+        description: "Check whether to delete repo when undeploying"
+      values_files:
+        type: list
+        entry_schema: string
+        default: "[]"
+        description: "List of values files for Helm chart. Shall be as a list of artifact paths"
+      values:
+        type: map
+        default: "{}"
+        description: "Values for Helm chart. Overrites values from values_files"
+    requirements:
+      host:
+        node: kube/sodalite.nodes.Kubernetes.Cluster
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              ansible_user:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.username
+              kubeconfig:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.kubeconfig
+              helm_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.name
+              helm_namespace:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.namespace
+              helm_chart:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.chart
+              helm_chart_version:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.chart_version
+              helm_repo_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_name
+              helm_repo_url:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_url
+              helm_values_files:
+                type: list
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.values_files
+              helm_values:
+                type: map
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.values
+            implementation:
+              primary: "/workspace/iac-modules/kubernetes/playbooks/create_from_helm.yaml"
+          delete:
+            inputs:
+              ansible_user:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.username
+              kubeconfig:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.kubeconfig
+              helm_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.name
+              helm_namespace:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.namespace
+              helm_repo_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_name
+              helm_repo_url:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_url
+              helm_keep_repo:
+                type: boolean
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.keep_repo
+            implementation:
+              primary: "/workspace/iac-modules/kubernetes/playbooks/delete_from_helm.yaml"
