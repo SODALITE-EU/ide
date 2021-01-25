@@ -1,0 +1,213 @@
+module: clinical
+
+import: batch
+
+inputs:
+  hlrs-frontend-address:
+    type: string
+  username:
+    type: string
+  ssh-key-location:
+    type: string
+
+node_templates:
+
+  // HLRS testbed
+  hlrs-testbed:
+    type: batch/sodalite.nodes.hpc.WM
+    properties:
+      scheduler: "torque"
+      username: get_input: username
+      ssh-key: get_input: ssh-key-location
+    attributes:
+      pubic_address: get_input: hlrs-frontend-address
+    capabilities:
+      resources:
+        properties:
+          gpus: 5
+          cpus: 200
+          memory: 650687
+      optimisations:
+        properties:
+          target: "hlrs_testbed"
+
+  // HLRS container runtime
+  hlrs-singularity-runtime:
+    type: batch/sodalite.nodes.batch.Container.Runtime
+    properties:
+      runtime: "singularity"
+      images_location: "images"
+      certs_location: "certs"
+      private_registry: "77.231.202.207"
+    requirements:
+      host:
+        node: clinical/hpc-wm-torque
+
+  // APPLICATIONS
+  density-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "density-mapper"
+      app_type: "fortran"
+      container_runtime: "private://cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hpc-wm-torque
+  
+  prob-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    optimization: hlrs.mpi
+    properties:
+      app_tag: "prob-mapper"
+      app_type: "hpc"
+      mpi_ranks: 4
+      container_runtime: "private://moduli:1.0.0" // from private registry
+      executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $PBS_O_WORKDIR/output/iso/L1L2-iso.dens -o $PBS_O_WORKDIR/output/moduli\""
+      build:
+        src: "$HOME/moduli/.git"
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hpc-wm-torque
+  
+  boundary-condition-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "boundary-condition"
+      app_type: "fortran"
+      container_runtime: "private://cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hpc-wm-torque
+
+
+  // JOB EXECUTIONS
+  density-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "density-mapper-job"
+      node_count: 1
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      request_event_notification: "abe"
+      standard_output_file: "density-mapper.out"
+      standard_error_file: "density-mapper.err"
+      combine_stdout_stderr: true
+      email_address: "tokmakov@hlrs.de"
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/density-mapper-app
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+  
+  prob-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "prob-mapper-job"
+      node_count: 2
+      process_count_per_node: 2
+      wall_time_limit: "1:00:00"
+      request_event_notification: "abe"
+      standard_output_file: "prob-mapper.out"
+      standard_error_file: "prob-mapper.err"
+      combine_stdout_stderr: true
+      email_address: "tokmakov@hlrs.de"
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/prob-mapper-app
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+  
+  boundary-condition-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "boundary-condition-job"
+      node_count: 1
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      request_event_notification: "abe"
+      standard_output_file: "boundary-condition.out"
+      standard_error_file: "boundary-condition.err"
+      combine_stdout_stderr: true
+      email_address: "tokmakov@hlrs.de"
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/prob-mapper-app
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+      
+      
+  // WORKFLOW
+  dm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution: 
+        node: clinical/density-mapper-job
+      host:
+        node: clinical/hlrs-testbed
+  
+  dm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/dm-exec
+      host:
+        node: clinical/hlrs-testbed
+  
+  pm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/prob-mapper-job
+      host:
+        node: clinical/hlrs-testbed
+      dependency:
+        node: clinical/dm-result
+  
+  pm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/pm-exec
+      host:
+        node: clinical/hlrs-testbed
+  
+  bc-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/boundary-condition-job
+      host:
+        node: clinical/hlrs-testbed
+      dependency:
+        node: clinical/pm-result
+  
+  bc-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/bc-exec
+      host:
+        node: clinical/hlrs-testbed
+      
+      
+      
+      
+      
