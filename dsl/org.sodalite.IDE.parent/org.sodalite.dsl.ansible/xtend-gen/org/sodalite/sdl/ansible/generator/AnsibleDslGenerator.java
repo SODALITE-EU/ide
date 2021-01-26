@@ -1890,7 +1890,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     String _string = jinja.getString();
     boolean _tripleNotEquals = (_string != null);
     if (_tripleNotEquals) {
-      return this.compileString(jinja.getString());
+      return this.compileStringInPossibleMultiLine(jinja.getString(), isInMultiLine);
     } else {
       if ((jinja instanceof EJinjaExpressionEvaluation)) {
         return this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)jinja), space);
@@ -1916,6 +1916,25 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     return stringToReturn;
+  }
+  
+  public String compileStringInPossibleMultiLine(final String string, final boolean isInMultiLine) {
+    if ((!isInMultiLine)) {
+      return this.compileString(string);
+    } else {
+      String stringToReturn = "";
+      for (int index = 0; (index < string.length()); index++) {
+        {
+          final char character = string.charAt(index);
+          if ((((character != "\"".charAt(0)) && (character != "\\".charAt(0))) || ((character == "\\".charAt(0)) && (index == (string.length() - 1))))) {
+            stringToReturn = stringToReturn.concat(Character.valueOf(character).toString());
+          } else {
+            stringToReturn = stringToReturn.concat("\\").concat(Character.valueOf(character).toString());
+          }
+        }
+      }
+      return stringToReturn;
+    }
   }
   
   public String compileJinjaExpressionEvaluation(final EJinjaExpressionEvaluation jinja, final String space) {

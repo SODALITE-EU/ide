@@ -763,6 +763,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 	}
 
+	//if it's a line of a multiline, then the quotation marks must be absent
 	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja, String space, boolean isInMultiLine){
 		var stringToReturn = ""
 		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
@@ -784,7 +785,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja, String space, boolean isInMultiLine){
 		if (jinja.string !== null){
-			return jinja.string.compileString
+			return compileStringInPossibleMultiLine(jinja.string, isInMultiLine)
 		}
 		else if (jinja instanceof EJinjaExpressionEvaluation){
 			return compileJinjaExpressionEvaluation(jinja, space)
@@ -805,6 +806,25 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			else stringToReturn = stringToReturn.concat("\\").concat(character.toString())
 		}
 		return stringToReturn
+	}
+	
+	//if isInMultiLine is false, compileString can be used
+	//if isInMultiLine is true, the string belongs to a multiline and requires specific conditions for the parsing
+	def compileStringInPossibleMultiLine(String string, boolean isInMultiLine){
+		if (!isInMultiLine) return compileString(string)
+		else {
+			//the string belongs to a multiline
+			var stringToReturn = ""
+			for (var index = 0; index < string.length; index++){
+				val character = string.charAt(index)
+				//first condition: the character is different from both " and \, then it can be simply concatenated to the string to return
+				//second condition: the character is \, but we are at the end of a line of the multiline. In this case the character can also be concatenated to the string to return
+				if ( (character !== '"'.charAt(0) && character !== '\\'.charAt(0) ) || ( character == '\\'.charAt(0) && index == string.length-1) ) stringToReturn = stringToReturn.concat(character.toString())
+				//else, before the character it must be concatenated the escape sign, wich was lost during the parsing
+				else stringToReturn = stringToReturn.concat("\\").concat(character.toString())
+			}
+			return stringToReturn
+		}
 	}
 	
 	def compileJinjaExpressionEvaluation(EJinjaExpressionEvaluation jinja, String space){

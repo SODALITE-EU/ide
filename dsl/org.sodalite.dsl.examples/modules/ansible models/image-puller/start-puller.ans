@@ -86,7 +86,7 @@ plays:
 							direct_parameter: >
 								line_of_string: "singularity pull \\"
 								line_of_string: "  --dir {{ images_location }} \\"
-								line_of_string: "  "{{ operation_input: "output" }}
+								line_of_string: "  "{{ operation_input: "output" }}" \\"
 								line_of_string: "  "{{ declared_variable: image_path }}
 						register: pull_status
 						error_handling:
