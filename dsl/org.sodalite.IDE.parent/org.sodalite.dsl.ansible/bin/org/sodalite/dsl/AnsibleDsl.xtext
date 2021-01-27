@@ -57,7 +57,7 @@ EPlay:
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
-		('tags:' tags=EListPassed)? &
+		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
@@ -103,7 +103,7 @@ EBlock:
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
-		('tags:' tags=EListPassed)? &
+		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
@@ -142,7 +142,7 @@ ETask:
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
-		('tags:' tags=EListPassed)? &
+		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
@@ -176,7 +176,7 @@ EHandler:
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
 		('collections:' collections=EListPassed)? &
-		('tags:' tags=EListPassed)? &
+		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
 			(variable_declarations+=EVariableDeclaration)+
@@ -230,7 +230,7 @@ ERoleInclusion:
 			('module_defaults:' module_defaults=EValuePassed)? &
 			('environment:' environment=EValuePassed)? &
 			('collections:' collections=EListPassed)? &
-			('tags:' tags=EListPassed)? &
+			('tags_attribute:' tags=EListPassed)? &
 			('vars:'
 			BEGIN
 				(variable_declarations+=EVariableDeclaration)+

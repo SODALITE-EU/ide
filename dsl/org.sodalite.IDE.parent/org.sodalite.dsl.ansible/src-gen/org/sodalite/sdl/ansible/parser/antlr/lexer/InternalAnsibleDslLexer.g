@@ -69,6 +69,8 @@ Line_of_string : 'line_of_string:';
 
 Port_attribute : 'port_attribute:';
 
+Tags_attribute : 'tags_attribute:';
+
 When_condition : 'when_condition:';
 
 Become_method : 'become_method:';
@@ -218,8 +220,6 @@ Play : 'play:';
 Poll : 'poll:';
 
 Role : 'role:';
-
-Tags : 'tags:';
 
 Vars : 'vars:';
 

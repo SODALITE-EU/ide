@@ -718,9 +718,9 @@ ruleEPlay returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10);
 					}
-								({true}?=>(otherlv_21=Tags
+								({true}?=>(otherlv_21=Tags_attribute
 								{
-									newLeafNode(otherlv_21, grammarAccess.getEPlayAccess().getTagsKeyword_3_10_0());
+									newLeafNode(otherlv_21, grammarAccess.getEPlayAccess().getTags_attributeKeyword_3_10_0());
 								}
 								(
 									(
@@ -1537,9 +1537,9 @@ ruleEBlock returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9);
 					}
-								({true}?=>(otherlv_18=Tags
+								({true}?=>(otherlv_18=Tags_attribute
 								{
-									newLeafNode(otherlv_18, grammarAccess.getEBlockAccess().getTagsKeyword_2_9_0());
+									newLeafNode(otherlv_18, grammarAccess.getEBlockAccess().getTags_attributeKeyword_2_9_0());
 								}
 								(
 									(
@@ -2198,9 +2198,9 @@ ruleETask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9);
 					}
-								({true}?=>(otherlv_19=Tags
+								({true}?=>(otherlv_19=Tags_attribute
 								{
-									newLeafNode(otherlv_19, grammarAccess.getETaskAccess().getTagsKeyword_3_9_0());
+									newLeafNode(otherlv_19, grammarAccess.getETaskAccess().getTags_attributeKeyword_3_9_0());
 								}
 								(
 									(
@@ -2971,9 +2971,9 @@ ruleEHandler returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9);
 					}
-								({true}?=>(otherlv_19=Tags
+								({true}?=>(otherlv_19=Tags_attribute
 								{
-									newLeafNode(otherlv_19, grammarAccess.getEHandlerAccess().getTagsKeyword_3_9_0());
+									newLeafNode(otherlv_19, grammarAccess.getEHandlerAccess().getTags_attributeKeyword_3_9_0());
 								}
 								(
 									(
@@ -3957,9 +3957,9 @@ ruleERoleInclusion returns [EObject current=null]
 						{
 							getUnorderedGroupHelper().select(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8);
 						}
-									({true}?=>(otherlv_18=Tags
+									({true}?=>(otherlv_18=Tags_attribute
 									{
-										newLeafNode(otherlv_18, grammarAccess.getERoleInclusionAccess().getTagsKeyword_2_2_8_0());
+										newLeafNode(otherlv_18, grammarAccess.getERoleInclusionAccess().getTags_attributeKeyword_2_2_8_0());
 									}
 									(
 										(

@@ -77,7 +77,6 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Play", "'play:'");
 		tokenNameToValue.put("Poll", "'poll:'");
 		tokenNameToValue.put("Role", "'role:'");
-		tokenNameToValue.put("Tags", "'tags:'");
 		tokenNameToValue.put("Vars", "'vars:'");
 		tokenNameToValue.put("When", "'when:'");
 		tokenNameToValue.put("Async", "'async:'");
@@ -154,6 +153,7 @@ import org.sodalite.sdl.ansible.services.AnsibleDslGrammarAccess;
 		tokenNameToValue.put("Gather_timeout", "'gather_timeout:'");
 		tokenNameToValue.put("Line_of_string", "'line_of_string:'");
 		tokenNameToValue.put("Port_attribute", "'port_attribute:'");
+		tokenNameToValue.put("Tags_attribute", "'tags_attribute:'");
 		tokenNameToValue.put("When_condition", "'when_condition:'");
 		tokenNameToValue.put("Connection_info", "'connection_info:'");
 		tokenNameToValue.put("Delay_attribute", "'delay_attribute:'");
@@ -4697,9 +4697,9 @@ rule__EPlay__Group_3_10__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEPlayAccess().getTagsKeyword_3_10_0()); }
-	Tags
-	{ after(grammarAccess.getEPlayAccess().getTagsKeyword_3_10_0()); }
+	{ before(grammarAccess.getEPlayAccess().getTags_attributeKeyword_3_10_0()); }
+	Tags_attribute
+	{ after(grammarAccess.getEPlayAccess().getTags_attributeKeyword_3_10_0()); }
 )
 ;
 finally {
@@ -5920,9 +5920,9 @@ rule__EBlock__Group_2_9__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEBlockAccess().getTagsKeyword_2_9_0()); }
-	Tags
-	{ after(grammarAccess.getEBlockAccess().getTagsKeyword_2_9_0()); }
+	{ before(grammarAccess.getEBlockAccess().getTags_attributeKeyword_2_9_0()); }
+	Tags_attribute
+	{ after(grammarAccess.getEBlockAccess().getTags_attributeKeyword_2_9_0()); }
 )
 ;
 finally {
@@ -6947,9 +6947,9 @@ rule__ETask__Group_3_9__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getETaskAccess().getTagsKeyword_3_9_0()); }
-	Tags
-	{ after(grammarAccess.getETaskAccess().getTagsKeyword_3_9_0()); }
+	{ before(grammarAccess.getETaskAccess().getTags_attributeKeyword_3_9_0()); }
+	Tags_attribute
+	{ after(grammarAccess.getETaskAccess().getTags_attributeKeyword_3_9_0()); }
 )
 ;
 finally {
@@ -7872,9 +7872,9 @@ rule__EHandler__Group_3_9__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEHandlerAccess().getTagsKeyword_3_9_0()); }
-	Tags
-	{ after(grammarAccess.getEHandlerAccess().getTagsKeyword_3_9_0()); }
+	{ before(grammarAccess.getEHandlerAccess().getTags_attributeKeyword_3_9_0()); }
+	Tags_attribute
+	{ after(grammarAccess.getEHandlerAccess().getTags_attributeKeyword_3_9_0()); }
 )
 ;
 finally {
@@ -9270,9 +9270,9 @@ rule__ERoleInclusion__Group_2_2_8__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getERoleInclusionAccess().getTagsKeyword_2_2_8_0()); }
-	Tags
-	{ after(grammarAccess.getERoleInclusionAccess().getTagsKeyword_2_2_8_0()); }
+	{ before(grammarAccess.getERoleInclusionAccess().getTags_attributeKeyword_2_2_8_0()); }
+	Tags_attribute
+	{ after(grammarAccess.getERoleInclusionAccess().getTags_attributeKeyword_2_2_8_0()); }
 )
 ;
 finally {

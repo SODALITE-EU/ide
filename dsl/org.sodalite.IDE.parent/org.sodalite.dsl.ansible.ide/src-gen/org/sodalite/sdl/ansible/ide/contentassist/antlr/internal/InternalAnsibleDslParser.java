@@ -24,58 +24,57 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalAnsibleDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "External_file_inclusion", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Block_to_execute", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Delay_attribute", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Task_to_execute", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Line_of_string", "Port_attribute", "When_condition", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Include", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Role", "Tags", "Vars", "When", "Elif", "Else", "With", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "EqualsSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_BOOLEAN_ONLY_ANSIBLE", "RULE_NULL", "RULE_NONE", "RULE_OCTAL_NUMBER", "RULE_HEXADECIMAL_NUMBER", "RULE_SIMPLE_NUMBER", "RULE_EXPONENTIAL_NUMBER", "RULE_ID", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "External_file_inclusion", "Asynchronous_settings", "Privilege_escalation", "Max_fail_percentage", "Registered_variable", "Ignore_unreachable", "Declared_variable", "Index_or_loop_var", "Play_exe_settings", "Any_errors_fatal", "Block_to_execute", "Direct_parameter", "Roles_inclusions", "Special_variable", "Connection_info", "Delay_attribute", "Import_playbook", "Interface_input", "Module_defaults", "Operation_input", "Task_to_execute", "Validation_mode", "Delegate_facts", "Error_handling", "Facts_settings", "Force_handlers", "Gather_timeout", "Line_of_string", "Port_attribute", "Tags_attribute", "When_condition", "Become_method", "Gather_subset", "Ignore_errors", "Playbook_name", "Always_tasks", "Become_flags", "Changed_when", "Exe_settings", "Gather_facts", "Handler_name", "Loop_control", "Rescue_tasks", "Become_user", "Collections", "Delegate_to", "Environment", "Failed_when", "Remote_user", "Vars_prompt", "Become_exe", "Block_name", "Check_mode", "Connection", "Delegation", "Parameters", "Post_tasks", "Tasks_list", "Vars_files", "Fact_path", "Index_var", "Loop_over", "Node_type", "Operation", "Play_name", "Pre_tasks", "Role_name", "Task_name", "Debugger", "Extended", "Fact_set", "Handlers", "Loop_var", "Register", "Run_once", "Strategy", "Throttle", "Handler", "Include", "Retries", "Used_by", "Action", "Become", "Listen", "Module", "No_log", "Notify", "Serial", "Async", "Endfor", "Hosts", "Label", "Order", "Pause", "Plays", "Tasks", "Topic", "Until", "Args", "Diff", "Endif", "Loop", "Play", "Poll", "Role", "Vars", "When", "Elif", "Else", "With", "And", "For", "Not", "ExclamationMarkEqualsSign", "PercentSignRightCurlyBracket", "LeftParenthesisRightParenthesis", "AsteriskAsterisk", "SolidusSolidus", "LessThanSignEqualsSign", "EqualsSignEqualsSign", "GreaterThanSignEqualsSign", "If", "In", "Is", "Or", "LeftCurlyBracketPercentSign", "LeftCurlyBracketLeftCurlyBracket", "RightCurlyBracketRightCurlyBracket", "PercentSign", "LeftParenthesis", "RightParenthesis", "Asterisk", "PlusSign", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LessThanSign", "EqualsSign", "GreaterThanSign", "LeftSquareBracket", "RightSquareBracket", "LeftCurlyBracket", "VerticalLine", "RightCurlyBracket", "RULE_BOOLEAN", "RULE_BOOLEAN_ONLY_ANSIBLE", "RULE_NULL", "RULE_NONE", "RULE_OCTAL_NUMBER", "RULE_HEXADECIMAL_NUMBER", "RULE_SIMPLE_NUMBER", "RULE_EXPONENTIAL_NUMBER", "RULE_ID", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int Line_of_string=31;
-    public static final int Node_type=65;
-    public static final int Rescue_tasks=45;
+    public static final int Node_type=66;
+    public static final int Rescue_tasks=46;
     public static final int Or=128;
     public static final int Privilege_escalation=6;
-    public static final int Notify=89;
-    public static final int Diff=102;
+    public static final int Notify=90;
+    public static final int Diff=103;
     public static final int Elif=111;
-    public static final int Plays=97;
-    public static final int Extended=72;
+    public static final int Plays=98;
+    public static final int Extended=73;
     public static final int Roles_inclusions=16;
     public static final int LessThanSign=142;
-    public static final int Throttle=79;
-    public static final int Play_name=67;
+    public static final int Throttle=80;
+    public static final int Play_name=68;
     public static final int LeftParenthesis=133;
-    public static final int Loop_control=44;
-    public static final int Remote_user=51;
+    public static final int Loop_control=45;
+    public static final int Remote_user=52;
     public static final int PercentSignRightCurlyBracket=118;
-    public static final int Tags=108;
     public static final int GreaterThanSign=144;
-    public static final int Changed_when=40;
-    public static final int Parameters=58;
+    public static final int Changed_when=41;
+    public static final int Parameters=59;
     public static final int RULE_ID=158;
-    public static final int Exe_settings=41;
-    public static final int Gather_facts=42;
+    public static final int Exe_settings=42;
+    public static final int Gather_facts=43;
     public static final int SolidusSolidus=121;
-    public static final int Become_exe=53;
+    public static final int Become_exe=54;
     public static final int GreaterThanSignEqualsSign=124;
     public static final int EqualsSignEqualsSign=123;
-    public static final int Handler_name=43;
+    public static final int Handler_name=44;
     public static final int VerticalLine=148;
     public static final int PlusSign=136;
     public static final int RULE_INT=161;
     public static final int Max_fail_percentage=7;
     public static final int RULE_ML_COMMENT=163;
     public static final int LeftSquareBracket=145;
-    public static final int Loop_over=64;
-    public static final int Module=87;
+    public static final int Loop_over=65;
+    public static final int Module=88;
     public static final int If=125;
     public static final int Block_to_execute=14;
     public static final int Delay_attribute=19;
-    public static final int Loop_var=75;
-    public static final int Pause=96;
+    public static final int Loop_var=76;
+    public static final int Pause=97;
     public static final int RightCurlyBracketRightCurlyBracket=131;
     public static final int In=126;
     public static final int Asynchronous_settings=5;
-    public static final int Listen=86;
+    public static final int Listen=87;
     public static final int Is=127;
-    public static final int Index_var=63;
-    public static final int Always_tasks=38;
+    public static final int Index_var=64;
+    public static final int Always_tasks=39;
     public static final int Comma=137;
     public static final int LeftParenthesisRightParenthesis=119;
     public static final int HyphenMinus=138;
@@ -84,111 +83,112 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final int LessThanSignEqualsSign=122;
     public static final int Solidus=140;
     public static final int RightCurlyBracket=149;
-    public static final int Fact_set=73;
+    public static final int Fact_set=74;
     public static final int FullStop=139;
     public static final int Connection_info=18;
-    public static final int Block_name=54;
+    public static final int Block_name=55;
     public static final int Vars=109;
-    public static final int Connection=56;
-    public static final int Gather_subset=35;
+    public static final int Connection=57;
+    public static final int Gather_subset=36;
     public static final int Delegate_facts=26;
     public static final int Module_defaults=22;
     public static final int Declared_variable=10;
     public static final int RULE_SIMPLE_NUMBER=156;
     public static final int Any_errors_fatal=13;
-    public static final int Become_method=34;
-    public static final int Handlers=74;
-    public static final int Play=105;
-    public static final int Serial=90;
-    public static final int Check_mode=55;
+    public static final int Become_method=35;
+    public static final int Handlers=75;
+    public static final int Play=106;
+    public static final int Serial=91;
+    public static final int Check_mode=56;
     public static final int When=110;
-    public static final int Register=76;
+    public static final int Register=77;
     public static final int Else=112;
     public static final int Interface_input=21;
     public static final int ExclamationMarkEqualsSign=117;
     public static final int Gather_timeout=30;
-    public static final int Delegate_to=48;
+    public static final int Delegate_to=49;
     public static final int Facts_settings=28;
     public static final int LeftCurlyBracketPercentSign=129;
-    public static final int Hosts=93;
+    public static final int Hosts=94;
     public static final int External_file_inclusion=4;
     public static final int RULE_BEGIN=159;
-    public static final int Failed_when=50;
-    public static final int No_log=88;
+    public static final int Failed_when=51;
+    public static final int No_log=89;
     public static final int Registered_variable=8;
     public static final int Import_playbook=20;
-    public static final int Label=94;
-    public static final int Post_tasks=59;
-    public static final int Include=81;
+    public static final int Label=95;
+    public static final int Post_tasks=60;
+    public static final int Include=82;
     public static final int RULE_BOOLEAN=150;
-    public static final int Fact_path=62;
+    public static final int Fact_path=63;
     public static final int PercentSign=132;
-    public static final int Become_flags=39;
-    public static final int Used_by=83;
-    public static final int Retries=82;
-    public static final int Async=91;
+    public static final int Become_flags=40;
+    public static final int Used_by=84;
+    public static final int Retries=83;
+    public static final int Async=92;
     public static final int Port_attribute=32;
     public static final int Ignore_unreachable=9;
-    public static final int Collections=47;
+    public static final int Collections=48;
     public static final int RightSquareBracket=146;
-    public static final int Order=95;
-    public static final int Playbook_name=37;
-    public static final int Tasks=98;
-    public static final int Run_once=77;
+    public static final int Order=96;
+    public static final int Playbook_name=38;
+    public static final int Tasks=99;
+    public static final int Run_once=78;
     public static final int For=115;
     public static final int RightParenthesis=134;
-    public static final int When_condition=33;
-    public static final int Handler=80;
-    public static final int Role=107;
+    public static final int When_condition=34;
+    public static final int Handler=81;
+    public static final int Role=108;
     public static final int Not=116;
     public static final int RULE_HEXADECIMAL_NUMBER=155;
     public static final int Direct_parameter=15;
     public static final int And=114;
     public static final int AsteriskAsterisk=120;
-    public static final int Environment=49;
-    public static final int Become=85;
+    public static final int Environment=50;
+    public static final int Become=86;
+    public static final int Tags_attribute=33;
     public static final int Special_variable=17;
     public static final int LeftCurlyBracketLeftCurlyBracket=130;
     public static final int RULE_NONE=153;
-    public static final int Debugger=71;
+    public static final int Debugger=72;
     public static final int Error_handling=27;
-    public static final int Action=84;
+    public static final int Action=85;
     public static final int RULE_END=160;
     public static final int RULE_STRING=162;
-    public static final int Operation=66;
+    public static final int Operation=67;
     public static final int RULE_NULL=152;
     public static final int With=113;
     public static final int RULE_SL_COMMENT=164;
-    public static final int Ignore_errors=36;
+    public static final int Ignore_errors=37;
     public static final int EqualsSign=143;
-    public static final int Task_name=70;
-    public static final int Endfor=92;
+    public static final int Task_name=71;
+    public static final int Endfor=93;
     public static final int RULE_BOOLEAN_ONLY_ANSIBLE=151;
     public static final int Play_exe_settings=12;
     public static final int Colon=141;
-    public static final int Tasks_list=60;
-    public static final int Topic=99;
+    public static final int Tasks_list=61;
+    public static final int Topic=100;
     public static final int EOF=-1;
     public static final int Force_handlers=29;
     public static final int Asterisk=135;
-    public static final int Until=100;
-    public static final int Loop=104;
+    public static final int Until=101;
+    public static final int Loop=105;
     public static final int Operation_input=23;
-    public static final int Role_name=69;
-    public static final int Args=101;
+    public static final int Role_name=70;
+    public static final int Args=102;
     public static final int RULE_EXPONENTIAL_NUMBER=157;
     public static final int RULE_WS=165;
-    public static final int Vars_prompt=52;
-    public static final int Endif=103;
+    public static final int Vars_prompt=53;
+    public static final int Endif=104;
     public static final int LeftCurlyBracket=147;
     public static final int Validation_mode=25;
     public static final int RULE_ANY_OTHER=166;
-    public static final int Delegation=57;
-    public static final int Vars_files=61;
-    public static final int Become_user=46;
-    public static final int Pre_tasks=68;
-    public static final int Strategy=78;
-    public static final int Poll=106;
+    public static final int Delegation=58;
+    public static final int Vars_files=62;
+    public static final int Become_user=47;
+    public static final int Pre_tasks=69;
+    public static final int Strategy=79;
+    public static final int Poll=107;
     public static final int RULE_OCTAL_NUMBER=154;
 
     // delegates
@@ -258,7 +258,6 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     		tokenNameToValue.put("Play", "'play:'");
     		tokenNameToValue.put("Poll", "'poll:'");
     		tokenNameToValue.put("Role", "'role:'");
-    		tokenNameToValue.put("Tags", "'tags:'");
     		tokenNameToValue.put("Vars", "'vars:'");
     		tokenNameToValue.put("When", "'when:'");
     		tokenNameToValue.put("Async", "'async:'");
@@ -335,6 +334,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     		tokenNameToValue.put("Gather_timeout", "'gather_timeout:'");
     		tokenNameToValue.put("Line_of_string", "'line_of_string:'");
     		tokenNameToValue.put("Port_attribute", "'port_attribute:'");
+    		tokenNameToValue.put("Tags_attribute", "'tags_attribute:'");
     		tokenNameToValue.put("When_condition", "'when_condition:'");
     		tokenNameToValue.put("Connection_info", "'connection_info:'");
     		tokenNameToValue.put("Delay_attribute", "'delay_attribute:'");
@@ -3179,7 +3179,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                     {
                     int LA1_3 = input.LA(2);
 
-                    if ( (LA1_3==EOF||(LA1_3>=External_file_inclusion && LA1_3<=Privilege_escalation)||LA1_3==Play_exe_settings||(LA1_3>=Direct_parameter && LA1_3<=Roles_inclusions)||LA1_3==Connection_info||LA1_3==Module_defaults||(LA1_3>=Validation_mode && LA1_3<=Port_attribute)||(LA1_3>=Become_method && LA1_3<=Gather_subset)||(LA1_3>=Always_tasks && LA1_3<=Become_flags)||(LA1_3>=Exe_settings && LA1_3<=Environment)||(LA1_3>=Remote_user && LA1_3<=Block_name)||(LA1_3>=Connection && LA1_3<=Index_var)||(LA1_3>=Play_name && LA1_3<=Pre_tasks)||(LA1_3>=Task_name && LA1_3<=Extended)||(LA1_3>=Handlers && LA1_3<=Throttle)||(LA1_3>=Action && LA1_3<=Serial)||(LA1_3>=Hosts && LA1_3<=Pause)||LA1_3==Tasks||LA1_3==Args||LA1_3==Loop||(LA1_3>=Tags && LA1_3<=When)||(LA1_3>=LeftCurlyBracketPercentSign && LA1_3<=LeftCurlyBracketLeftCurlyBracket)||(LA1_3>=Comma && LA1_3<=HyphenMinus)||LA1_3==RightSquareBracket||LA1_3==RightCurlyBracket||LA1_3==RULE_ID||LA1_3==RULE_END||LA1_3==RULE_STRING) ) {
+                    if ( (LA1_3==EOF||(LA1_3>=External_file_inclusion && LA1_3<=Privilege_escalation)||LA1_3==Play_exe_settings||(LA1_3>=Direct_parameter && LA1_3<=Roles_inclusions)||LA1_3==Connection_info||LA1_3==Module_defaults||(LA1_3>=Validation_mode && LA1_3<=Tags_attribute)||(LA1_3>=Become_method && LA1_3<=Gather_subset)||(LA1_3>=Always_tasks && LA1_3<=Become_flags)||(LA1_3>=Exe_settings && LA1_3<=Environment)||(LA1_3>=Remote_user && LA1_3<=Block_name)||(LA1_3>=Connection && LA1_3<=Index_var)||(LA1_3>=Play_name && LA1_3<=Pre_tasks)||(LA1_3>=Task_name && LA1_3<=Extended)||(LA1_3>=Handlers && LA1_3<=Throttle)||(LA1_3>=Action && LA1_3<=Serial)||(LA1_3>=Hosts && LA1_3<=Pause)||LA1_3==Tasks||LA1_3==Args||LA1_3==Loop||(LA1_3>=Vars && LA1_3<=When)||(LA1_3>=LeftCurlyBracketPercentSign && LA1_3<=LeftCurlyBracketLeftCurlyBracket)||(LA1_3>=Comma && LA1_3<=HyphenMinus)||LA1_3==RightSquareBracket||LA1_3==RightCurlyBracket||LA1_3==RULE_ID||LA1_3==RULE_END||LA1_3==RULE_STRING) ) {
                         alt1=1;
                     }
 
@@ -15231,21 +15231,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EPlay__Group_3_10__0__Impl"
-    // InternalAnsibleDslParser.g:4694:1: rule__EPlay__Group_3_10__0__Impl : ( Tags ) ;
+    // InternalAnsibleDslParser.g:4694:1: rule__EPlay__Group_3_10__0__Impl : ( Tags_attribute ) ;
     public final void rule__EPlay__Group_3_10__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:4698:1: ( ( Tags ) )
-            // InternalAnsibleDslParser.g:4699:1: ( Tags )
+            // InternalAnsibleDslParser.g:4698:1: ( ( Tags_attribute ) )
+            // InternalAnsibleDslParser.g:4699:1: ( Tags_attribute )
             {
-            // InternalAnsibleDslParser.g:4699:1: ( Tags )
-            // InternalAnsibleDslParser.g:4700:2: Tags
+            // InternalAnsibleDslParser.g:4699:1: ( Tags_attribute )
+            // InternalAnsibleDslParser.g:4700:2: Tags_attribute
             {
-             before(grammarAccess.getEPlayAccess().getTagsKeyword_3_10_0()); 
-            match(input,Tags,FOLLOW_2); 
-             after(grammarAccess.getEPlayAccess().getTagsKeyword_3_10_0()); 
+             before(grammarAccess.getEPlayAccess().getTags_attributeKeyword_3_10_0()); 
+            match(input,Tags_attribute,FOLLOW_2); 
+             after(grammarAccess.getEPlayAccess().getTags_attributeKeyword_3_10_0()); 
 
             }
 
@@ -18826,21 +18826,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EBlock__Group_2_9__0__Impl"
-    // InternalAnsibleDslParser.g:5917:1: rule__EBlock__Group_2_9__0__Impl : ( Tags ) ;
+    // InternalAnsibleDslParser.g:5917:1: rule__EBlock__Group_2_9__0__Impl : ( Tags_attribute ) ;
     public final void rule__EBlock__Group_2_9__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:5921:1: ( ( Tags ) )
-            // InternalAnsibleDslParser.g:5922:1: ( Tags )
+            // InternalAnsibleDslParser.g:5921:1: ( ( Tags_attribute ) )
+            // InternalAnsibleDslParser.g:5922:1: ( Tags_attribute )
             {
-            // InternalAnsibleDslParser.g:5922:1: ( Tags )
-            // InternalAnsibleDslParser.g:5923:2: Tags
+            // InternalAnsibleDslParser.g:5922:1: ( Tags_attribute )
+            // InternalAnsibleDslParser.g:5923:2: Tags_attribute
             {
-             before(grammarAccess.getEBlockAccess().getTagsKeyword_2_9_0()); 
-            match(input,Tags,FOLLOW_2); 
-             after(grammarAccess.getEBlockAccess().getTagsKeyword_2_9_0()); 
+             before(grammarAccess.getEBlockAccess().getTags_attributeKeyword_2_9_0()); 
+            match(input,Tags_attribute,FOLLOW_2); 
+             after(grammarAccess.getEBlockAccess().getTags_attributeKeyword_2_9_0()); 
 
             }
 
@@ -21838,21 +21838,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ETask__Group_3_9__0__Impl"
-    // InternalAnsibleDslParser.g:6944:1: rule__ETask__Group_3_9__0__Impl : ( Tags ) ;
+    // InternalAnsibleDslParser.g:6944:1: rule__ETask__Group_3_9__0__Impl : ( Tags_attribute ) ;
     public final void rule__ETask__Group_3_9__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:6948:1: ( ( Tags ) )
-            // InternalAnsibleDslParser.g:6949:1: ( Tags )
+            // InternalAnsibleDslParser.g:6948:1: ( ( Tags_attribute ) )
+            // InternalAnsibleDslParser.g:6949:1: ( Tags_attribute )
             {
-            // InternalAnsibleDslParser.g:6949:1: ( Tags )
-            // InternalAnsibleDslParser.g:6950:2: Tags
+            // InternalAnsibleDslParser.g:6949:1: ( Tags_attribute )
+            // InternalAnsibleDslParser.g:6950:2: Tags_attribute
             {
-             before(grammarAccess.getETaskAccess().getTagsKeyword_3_9_0()); 
-            match(input,Tags,FOLLOW_2); 
-             after(grammarAccess.getETaskAccess().getTagsKeyword_3_9_0()); 
+             before(grammarAccess.getETaskAccess().getTags_attributeKeyword_3_9_0()); 
+            match(input,Tags_attribute,FOLLOW_2); 
+             after(grammarAccess.getETaskAccess().getTags_attributeKeyword_3_9_0()); 
 
             }
 
@@ -24529,21 +24529,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EHandler__Group_3_9__0__Impl"
-    // InternalAnsibleDslParser.g:7869:1: rule__EHandler__Group_3_9__0__Impl : ( Tags ) ;
+    // InternalAnsibleDslParser.g:7869:1: rule__EHandler__Group_3_9__0__Impl : ( Tags_attribute ) ;
     public final void rule__EHandler__Group_3_9__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:7873:1: ( ( Tags ) )
-            // InternalAnsibleDslParser.g:7874:1: ( Tags )
+            // InternalAnsibleDslParser.g:7873:1: ( ( Tags_attribute ) )
+            // InternalAnsibleDslParser.g:7874:1: ( Tags_attribute )
             {
-            // InternalAnsibleDslParser.g:7874:1: ( Tags )
-            // InternalAnsibleDslParser.g:7875:2: Tags
+            // InternalAnsibleDslParser.g:7874:1: ( Tags_attribute )
+            // InternalAnsibleDslParser.g:7875:2: Tags_attribute
             {
-             before(grammarAccess.getEHandlerAccess().getTagsKeyword_3_9_0()); 
-            match(input,Tags,FOLLOW_2); 
-             after(grammarAccess.getEHandlerAccess().getTagsKeyword_3_9_0()); 
+             before(grammarAccess.getEHandlerAccess().getTags_attributeKeyword_3_9_0()); 
+            match(input,Tags_attribute,FOLLOW_2); 
+             after(grammarAccess.getEHandlerAccess().getTags_attributeKeyword_3_9_0()); 
 
             }
 
@@ -28652,21 +28652,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__ERoleInclusion__Group_2_2_8__0__Impl"
-    // InternalAnsibleDslParser.g:9267:1: rule__ERoleInclusion__Group_2_2_8__0__Impl : ( Tags ) ;
+    // InternalAnsibleDslParser.g:9267:1: rule__ERoleInclusion__Group_2_2_8__0__Impl : ( Tags_attribute ) ;
     public final void rule__ERoleInclusion__Group_2_2_8__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:9271:1: ( ( Tags ) )
-            // InternalAnsibleDslParser.g:9272:1: ( Tags )
+            // InternalAnsibleDslParser.g:9271:1: ( ( Tags_attribute ) )
+            // InternalAnsibleDslParser.g:9272:1: ( Tags_attribute )
             {
-            // InternalAnsibleDslParser.g:9272:1: ( Tags )
-            // InternalAnsibleDslParser.g:9273:2: Tags
+            // InternalAnsibleDslParser.g:9272:1: ( Tags_attribute )
+            // InternalAnsibleDslParser.g:9273:2: Tags_attribute
             {
-             before(grammarAccess.getERoleInclusionAccess().getTagsKeyword_2_2_8_0()); 
-            match(input,Tags,FOLLOW_2); 
-             after(grammarAccess.getERoleInclusionAccess().getTagsKeyword_2_2_8_0()); 
+             before(grammarAccess.getERoleInclusionAccess().getTags_attributeKeyword_2_2_8_0()); 
+            match(input,Tags_attribute,FOLLOW_2); 
+             after(grammarAccess.getERoleInclusionAccess().getTags_attributeKeyword_2_2_8_0()); 
 
             }
 
@@ -86516,7 +86516,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_4s = "\5\uffff\1\2\1\3\1\4\1\5\1\1";
     static final String dfa_5s = "\12\uffff}>";
     static final String[] dfa_6s = {
-            "\1\7\1\uffff\2\7\11\uffff\1\7\1\uffff\1\7\61\uffff\1\7\103\uffff\1\5\14\uffff\1\1\1\2\1\3\1\4\1\10\3\uffff\1\6",
+            "\1\7\1\uffff\2\7\11\uffff\1\7\1\uffff\1\7\62\uffff\1\7\102\uffff\1\5\14\uffff\1\1\1\2\1\3\1\4\1\10\3\uffff\1\6",
             "\1\5\4\uffff\1\11",
             "\1\5\4\uffff\1\11",
             "\1\5\4\uffff\1\11",
@@ -86604,7 +86604,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_17s = "\1\uffff\30\1\1\2";
     static final String dfa_18s = "\1\0\31\uffff}>";
     static final String[] dfa_19s = {
-            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\21\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\13\1\14\62\uffff\1\31",
+            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\3\uffff\1\13\16\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\14\62\uffff\1\31",
             "",
             "",
             "",
@@ -86686,7 +86686,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA114_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA114_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA114_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA114_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -86733,7 +86733,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_23s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30";
     static final String dfa_24s = "\1\0\30\uffff}>";
     static final String[] dfa_25s = {
-            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\21\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\13\1\14",
+            "\1\23\1\uffff\1\3\5\uffff\1\15\3\uffff\1\25\1\uffff\1\5\3\uffff\1\10\2\uffff\1\4\1\uffff\1\16\1\17\1\22\3\uffff\1\13\16\uffff\1\12\1\uffff\1\11\2\uffff\1\21\6\uffff\1\27\1\26\1\20\5\uffff\1\1\1\24\2\uffff\1\7\2\uffff\1\30\15\uffff\1\6\4\uffff\1\2\16\uffff\1\14",
             "",
             "",
             "",
@@ -86814,7 +86814,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA115_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA115_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA115_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA115_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -86901,7 +86901,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA116_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA116_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA116_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA116_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -86990,7 +86990,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA117_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA117_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA117_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA117_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87079,7 +87079,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA118_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA118_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA118_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA118_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87168,7 +87168,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA119_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA119_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA119_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA119_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87257,7 +87257,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA120_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA120_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA120_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA120_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87346,7 +87346,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA121_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA121_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA121_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA121_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87435,7 +87435,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA122_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA122_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA122_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA122_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87524,7 +87524,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA123_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA123_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA123_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA123_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87613,7 +87613,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA124_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA124_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA124_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA124_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87702,7 +87702,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA125_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA125_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA125_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA125_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87791,7 +87791,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA126_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA126_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA126_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA126_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87880,7 +87880,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA127_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA127_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA127_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA127_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -87969,7 +87969,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA128_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA128_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA128_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA128_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88058,7 +88058,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA129_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA129_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA129_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA129_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88147,7 +88147,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA130_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA130_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA130_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA130_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88236,7 +88236,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA131_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA131_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA131_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA131_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88325,7 +88325,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA132_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA132_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA132_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA132_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88414,7 +88414,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA133_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA133_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA133_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA133_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88503,7 +88503,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA134_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA134_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA134_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA134_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88592,7 +88592,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA135_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA135_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA135_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA135_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88681,7 +88681,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA136_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA136_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA136_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA136_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88770,7 +88770,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA137_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA137_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA137_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA137_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88859,7 +88859,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA138_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
-                        else if ( LA138_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
+                        else if ( LA138_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
                         else if ( LA138_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEPlayAccess().getUnorderedGroup_3(), 11) ) {s = 12;}
 
@@ -88906,7 +88906,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_29s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22";
     static final String dfa_30s = "\1\0\22\uffff}>";
     static final String[] dfa_31s = {
-            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\12\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\12\1\13\1\16",
+            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\5\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\13\1\16",
             "",
             "",
             "",
@@ -88979,7 +88979,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA139_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA139_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA139_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA139_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89014,7 +89014,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_35s = "\1\uffff\22\1\1\2";
     static final String dfa_36s = "\1\0\23\uffff}>";
     static final String[] dfa_37s = {
-            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\12\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\12\1\13\1\16\61\uffff\1\23",
+            "\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\5\uffff\1\22\2\uffff\1\14\3\uffff\1\21\1\uffff\1\11\1\uffff\1\10\4\uffff\1\1\2\uffff\1\15\15\uffff\1\6\20\uffff\1\5\11\uffff\1\20\11\uffff\1\13\1\16\61\uffff\1\23",
             "",
             "",
             "",
@@ -89088,7 +89088,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA140_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA140_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA140_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA140_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89165,7 +89165,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA141_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA141_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA141_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA141_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89242,7 +89242,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA142_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA142_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA142_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA142_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89319,7 +89319,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA143_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA143_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA143_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA143_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89396,7 +89396,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA144_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA144_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA144_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA144_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89473,7 +89473,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA145_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA145_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA145_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA145_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89550,7 +89550,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA146_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA146_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA146_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA146_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89627,7 +89627,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA147_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA147_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA147_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA147_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89704,7 +89704,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA148_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA148_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA148_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA148_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89781,7 +89781,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA149_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA149_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA149_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA149_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89858,7 +89858,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA150_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA150_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA150_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA150_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -89935,7 +89935,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA151_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA151_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA151_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA151_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90012,7 +90012,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA152_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA152_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA152_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA152_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90089,7 +90089,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA153_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA153_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA153_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA153_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90166,7 +90166,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA154_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA154_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA154_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA154_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90243,7 +90243,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA155_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA155_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA155_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA155_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90320,7 +90320,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA156_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 8) ) {s = 9;}
 
-                        else if ( LA156_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
+                        else if ( LA156_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 9) ) {s = 10;}
 
                         else if ( LA156_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEBlockAccess().getUnorderedGroup_2(), 10) ) {s = 11;}
 
@@ -90357,7 +90357,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_41s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26";
     static final String dfa_42s = "\1\0\26\uffff}>";
     static final String[] dfa_43s = {
-            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\10\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\13\1\16",
             "",
             "",
             "",
@@ -90434,7 +90434,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA157_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA157_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA157_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA157_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90477,7 +90477,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_47s = "\1\uffff\26\1\1\2";
     static final String dfa_48s = "\1\0\27\uffff}>";
     static final String[] dfa_49s = {
-            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16\61\uffff\1\27",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\10\uffff\1\14\5\uffff\1\11\1\uffff\1\10\7\uffff\1\15\14\uffff\1\1\1\6\4\uffff\1\26\7\uffff\1\20\2\uffff\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\13\1\16\61\uffff\1\27",
             "",
             "",
             "",
@@ -90555,7 +90555,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA158_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA158_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA158_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA158_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90640,7 +90640,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA159_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA159_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA159_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA159_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90725,7 +90725,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA160_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA160_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA160_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA160_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90810,7 +90810,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA161_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA161_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA161_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA161_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90895,7 +90895,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA162_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA162_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA162_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA162_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -90980,7 +90980,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA163_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA163_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA163_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA163_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91065,7 +91065,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA164_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA164_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA164_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA164_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91150,7 +91150,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA165_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA165_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA165_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA165_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91235,7 +91235,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA166_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA166_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA166_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA166_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91320,7 +91320,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA167_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA167_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA167_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA167_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91405,7 +91405,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA168_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA168_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA168_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA168_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91490,7 +91490,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA169_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA169_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA169_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA169_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91575,7 +91575,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA170_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA170_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA170_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA170_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91660,7 +91660,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA171_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA171_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA171_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA171_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91745,7 +91745,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA172_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA172_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA172_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA172_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91830,7 +91830,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA173_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA173_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA173_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA173_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -91915,7 +91915,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA174_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA174_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA174_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA174_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92000,7 +92000,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA175_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA175_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA175_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA175_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92085,7 +92085,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA176_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA176_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA176_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA176_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92170,7 +92170,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA177_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA177_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA177_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA177_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92255,7 +92255,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA178_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA178_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA178_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA178_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getETaskAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92297,7 +92297,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_50s = "\1\156\27\uffff";
     static final String dfa_51s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27";
     static final String[] dfa_52s = {
-            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\10\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\13\1\16",
             "",
             "",
             "",
@@ -92371,7 +92371,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA179_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA179_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA179_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA179_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92414,7 +92414,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_54s = "\1\u00a0\30\uffff";
     static final String dfa_55s = "\1\uffff\27\1\1\2";
     static final String[] dfa_56s = {
-            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\15\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\12\1\13\1\16\61\uffff\1\30",
+            "\1\21\1\2\13\uffff\1\4\3\uffff\1\7\2\uffff\1\3\1\uffff\1\17\5\uffff\1\12\10\uffff\1\14\1\uffff\1\1\3\uffff\1\11\1\uffff\1\10\7\uffff\1\15\15\uffff\1\6\4\uffff\1\26\7\uffff\1\20\1\uffff\1\27\1\23\1\5\1\24\13\uffff\1\22\2\uffff\1\25\3\uffff\1\13\1\16\61\uffff\1\30",
             "",
             "",
             "",
@@ -92490,7 +92490,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA180_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA180_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA180_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA180_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92577,7 +92577,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA181_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA181_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA181_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA181_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92664,7 +92664,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA182_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA182_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA182_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA182_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92751,7 +92751,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA183_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA183_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA183_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA183_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92838,7 +92838,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA184_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA184_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA184_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA184_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -92925,7 +92925,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA185_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA185_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA185_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA185_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93012,7 +93012,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA186_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA186_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA186_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA186_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93099,7 +93099,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA187_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA187_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA187_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA187_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93186,7 +93186,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA188_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA188_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA188_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA188_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93273,7 +93273,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA189_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA189_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA189_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA189_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93360,7 +93360,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA190_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA190_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA190_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA190_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93447,7 +93447,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA191_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA191_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA191_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA191_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93534,7 +93534,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA192_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA192_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA192_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA192_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93621,7 +93621,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA193_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA193_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA193_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA193_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93708,7 +93708,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA194_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA194_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA194_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA194_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93795,7 +93795,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA195_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA195_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA195_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA195_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93882,7 +93882,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA196_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA196_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA196_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA196_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -93969,7 +93969,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA197_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA197_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA197_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA197_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -94056,7 +94056,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA198_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA198_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA198_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA198_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -94143,7 +94143,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA199_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA199_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA199_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA199_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -94230,7 +94230,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA200_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA200_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA200_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA200_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -94317,7 +94317,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA201_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 8) ) {s = 9;}
 
-                        else if ( LA201_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
+                        else if ( LA201_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 9) ) {s = 10;}
 
                         else if ( LA201_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getEHandlerAccess().getUnorderedGroup_3(), 10) ) {s = 11;}
 
@@ -94364,7 +94364,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_60s = "\1\uffff\16\1\1\2";
     static final String dfa_61s = "\1\0\17\uffff}>";
     static final String[] dfa_62s = {
-            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\15\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\11\1\12\1\15\61\uffff\1\17",
+            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\5\uffff\1\11\10\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\12\1\15\61\uffff\1\17",
             "",
             "",
             "",
@@ -94432,7 +94432,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA205_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA205_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA205_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA205_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94463,7 +94463,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     static final String dfa_66s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16";
     static final String dfa_67s = "\1\0\16\uffff}>";
     static final String[] dfa_68s = {
-            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\15\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\11\1\12\1\15",
+            "\1\1\13\uffff\1\3\3\uffff\1\6\2\uffff\1\2\1\uffff\1\16\5\uffff\1\11\10\uffff\1\13\5\uffff\1\10\1\uffff\1\7\7\uffff\1\14\15\uffff\1\5\20\uffff\1\4\23\uffff\1\12\1\15",
             "",
             "",
             "",
@@ -94530,7 +94530,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA206_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA206_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA206_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA206_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94597,7 +94597,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA207_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA207_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA207_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA207_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94666,7 +94666,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA208_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA208_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA208_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA208_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94735,7 +94735,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA209_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA209_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA209_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA209_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94804,7 +94804,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA210_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA210_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA210_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA210_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94873,7 +94873,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA211_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA211_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA211_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA211_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -94942,7 +94942,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA212_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA212_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA212_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA212_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95011,7 +95011,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA213_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA213_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA213_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA213_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95080,7 +95080,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA214_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA214_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA214_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA214_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95149,7 +95149,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA215_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA215_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA215_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA215_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95218,7 +95218,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA216_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA216_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA216_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA216_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95287,7 +95287,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA217_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA217_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA217_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA217_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95356,7 +95356,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA218_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA218_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA218_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA218_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95425,7 +95425,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                         else if ( LA219_0 == Collections && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 7) ) {s = 8;}
 
-                        else if ( LA219_0 == Tags && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
+                        else if ( LA219_0 == Tags_attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 8) ) {s = 9;}
 
                         else if ( LA219_0 == Vars && getUnorderedGroupHelper().canSelect(grammarAccess.getERoleInclusionAccess().getUnorderedGroup_2_2(), 9) ) {s = 10;}
 
@@ -95457,14 +95457,14 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000400000006L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000440000000L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000200080000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000400100000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000002L,0x0000020000000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x381280003A451050L,0x0000300021000498L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000002L,0x0000040000000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x702500023A451050L,0x0000200042000930L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400110006L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000001C00004L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000004BFDB0006L});
@@ -95473,42 +95473,42 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000040000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000001004000L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000001004002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000002L,0x0000000000010000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0242A2400A440040L,0x0000700401000080L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x00000004FF4A0020L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x020282000A440060L,0x00007120039010C0L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000002L,0x0000000000020000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x048544820A440040L,0x0000600802000100L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000400L,0x00000004FF4A0020L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x040504020A440060L,0x0000624007202180L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000080080004L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000800000000L,0x0000000400000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000001000000000L,0x0000000400000000L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000200L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000200L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x02028A000A440060L,0x0000712003D010C0L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x040514020A440060L,0x0000624007A02180L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0400000000008000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0800000000008000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x020282000A440040L,0x0000700001000080L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000002L,0x0000080000000000L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000100000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x040504020A440040L,0x0000600002000100L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000100000L,0x0000000000040000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0002001000000001L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x8000000000000000L,0x0000000140000900L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0002002000000002L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000000L,0x0000000280001201L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000003D000004L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x000000047F4A0020L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000080000L,0x0000000000040000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0020408400000000L,0x0000000000200000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0080000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0108000100000000L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x000000008400E000L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000000L,0x000000000000A000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000001000002200L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000001000002280L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0004011000002200L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x4000040840000000L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0001000004000000L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000000000000L,0x0000040008000000L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000400L,0x000000047F4A0020L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000080000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0040810800000000L,0x0000000000400000L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0100000000000000L,0x0000008000000000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0210000100000000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x000000010801C000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000000L,0x0000000000014000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000002000002200L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000002000002280L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0008022000002200L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x8000081040000000L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0002000004000000L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000000000000L,0x0000080010000000L});
     public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000080000000L});
     public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000400000006L});
@@ -95529,21 +95529,21 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000020000L});
     public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000800L});
     public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000A20D00L,0x0000000000000200L,0x000000047F4A0000L});
+    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000A20D00L,0x0000000000000400L,0x000000047F4A0000L});
     public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000000000000000L,0x0040000000000000L});
     public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000002L});
     public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000008000000000L,0x0000000000000500L});
+    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0001000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000000000000L,0x4000000000000000L,0x0000000000000200L});
     public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000000000L,0x2040000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0000000010000000L,0x0000000000000500L});
+    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L,0x0000000000000500L});
     public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000020000L});
-    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000A20D00L,0x0000000000000200L,0x000000047F4A2000L});
+    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000A20D00L,0x0000000000000400L,0x000000047F4A2000L});
     public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000040000L});
     public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000003C002000L});
     public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000003C000000L});
@@ -95556,27 +95556,27 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000400L});
     public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000004FFDB0006L});
     public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x00000000000A0000L});
-    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000200L,0x000000047F4E0020L});
-    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x381280003A451052L,0x0000300021000498L});
-    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0242A2400A440042L,0x0000700401000080L});
-    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x020282000A440062L,0x00007120039010C0L});
-    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x02028A000A440062L,0x0000712003D010C0L});
-    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0400000000008002L});
-    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x020282000A440042L,0x0000700001000080L});
-    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x8000000000000002L,0x0000000140000900L});
-    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000080002L,0x0000000000040000L});
-    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0020408400000002L,0x0000000000200000L});
-    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0080000000000002L,0x0000004000000000L});
-    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0108000100000002L});
-    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000002L,0x000000008400E000L});
-    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000002L,0x000000000000A000L});
-    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000001000002202L});
-    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000001000002282L});
-    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0004011000002202L});
-    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x4000040840000002L});
-    public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0001000004000002L});
-    public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000000002L,0x0000040008000000L});
+    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000A20D00L,0x0010000000000400L,0x000000047F4E0020L});
+    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x702500023A451052L,0x0000200042000930L});
+    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x048544820A440042L,0x0000600802000100L});
+    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x040504020A440062L,0x0000624007202180L});
+    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x040514020A440062L,0x0000624007A02180L});
+    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0800000000008002L});
+    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x040504020A440042L,0x0000600002000100L});
+    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000000002L,0x0000000280001201L});
+    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000080002L,0x0000000000080000L});
+    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0040810800000002L,0x0000000000400000L});
+    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0100000000000002L,0x0000008000000000L});
+    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0210000100000002L});
+    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000002L,0x000000010801C000L});
+    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000002L,0x0000000000014000L});
+    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000002000002202L});
+    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000002000002282L});
+    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0008022000002202L});
+    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x8000081040000002L});
+    public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0002000004000002L});
+    public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000000002L,0x0000080010000000L});
 
 }

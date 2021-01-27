@@ -1,0 +1,19 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/modules/util/playbooks/text/extract_json.yaml
+playbook_name: "util/text/extract_json"
+//PROBLEM: the node type sodalite.nodes.Utils.extract.JSON, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			task_to_execute:
+				module: "debug"
+					parameters:
+						msg: {{ input }}
+			
+			task_to_execute:
+				task_name: "Try parsing JSON"
+				module: "set_stats"
+					parameters:
+						data:
+							output: {{ input[key] }}
