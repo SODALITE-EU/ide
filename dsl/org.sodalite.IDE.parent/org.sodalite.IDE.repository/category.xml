@@ -9,10 +9,16 @@
    <feature id="org.sodalite.dsl.RM.feature.source" version="0.0.0">
       <category name="main.source"/>
    </feature>
+   <feature id="org.sodalite.dsl.optimization.feature.source" version="0.0.0">
+      <category name="main.source"/>
+   </feature>
    <feature id="org.sodalite.dsl.RM.feature">
       <category name="main"/>
    </feature>
    <feature id="org.sodalite.dsl.optimization.feature">
+      <category name="main"/>
+   </feature>
+   <feature id="org.sodalite.ide.feature">
       <category name="main"/>
    </feature>
    <category-def name="main" label="SODALITE IDE"/>
