@@ -14,7 +14,7 @@ pipeline {
       steps {
           sh  """ #!/bin/bash
                   cd "dsl/org.sodalite.IDE.parent/"
-                  mvn clean verify
+                  mvn clean verify -Dmaven.test.skip
                   git reset --hard
               """
       }
