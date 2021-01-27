@@ -33,6 +33,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
@@ -169,7 +170,13 @@ public class KBView {
 
 	private void raiseConfigurationIssue(String message) throws Exception {
 		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(parent, "Sodalite Preferences Error",
+						message + " in Sodalite preferences pages");
+			}
+		});
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
