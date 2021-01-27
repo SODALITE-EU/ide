@@ -27,9 +27,9 @@ import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
-import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * The services class used by VSM.
@@ -78,7 +78,7 @@ public class KBReasonerProxy {
 			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
 		}
 
-		BackendLogger.log(MessageFormat.format(
+		SodaliteLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
 				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
 
@@ -102,7 +102,7 @@ public class KBReasonerProxy {
 				types.add(renderType(n));
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting types", e);
+			SodaliteLogger.log("Error getting types", e);
 		}
 
 		return types;
@@ -129,7 +129,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting attributes", e);
+			SodaliteLogger.log("Error getting attributes", e);
 		}
 
 		return result;
@@ -148,7 +148,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting properties", e);
+			SodaliteLogger.log("Error getting properties", e);
 		}
 
 		return result;
@@ -167,7 +167,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting capabilities", e);
+			SodaliteLogger.log("Error getting capabilities", e);
 		}
 
 		return result;
@@ -186,7 +186,7 @@ public class KBReasonerProxy {
 				result.add(label);
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting requirements", e);
+			SodaliteLogger.log("Error getting requirements", e);
 		}
 
 		return result;
@@ -230,7 +230,7 @@ public class KBReasonerProxy {
 				types.add(renderType(dt));
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting data types", e);
+			SodaliteLogger.log("Error getting data types", e);
 		}
 
 		return types;

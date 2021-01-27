@@ -51,6 +51,7 @@ import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EEntity
+import org.sodalite.ide.ui.logger.SodaliteLogger
 
 /**
  * Generates code from your model files on save.
@@ -425,6 +426,12 @@ class AADMGenerator extends AbstractGenerator {
 	def getFilename(URI uri) {
 		var filename = uri.toString
 		filename = filename.replace("platform:/resource", "")
+		SodaliteLogger.log("Debug: filename: " + filename, null);
+		SodaliteLogger.log("Debug: File.separator: " + File.separator, null);
+		SodaliteLogger.log("Debug: filename.indexOf(File.separator, 1): " + filename.indexOf(File.separator, 1), null);
+		SodaliteLogger.log("Debug: filename.substring(
+				filename.indexOf(File.separator, 1) + 1): " + filename.substring(
+				filename.indexOf(File.separator, 1) + 1), null);
 		filename = filename.substring(
 				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
 		return filename 

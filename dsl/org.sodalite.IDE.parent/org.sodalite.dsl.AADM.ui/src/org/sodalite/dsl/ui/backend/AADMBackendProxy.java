@@ -65,6 +65,7 @@ import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -95,7 +96,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			BackendLogger.log("Error generating the AADM model", e);
+			SodaliteLogger.log("Error generating the AADM model", e);
 		}
 	}
 
@@ -174,7 +175,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						String message = "The selected AADM model has been successfully store in the KB with URI:\n"
 								+ saveReport.getURI();
 						MessageDialog.openInformation(parent, "Save AADM", message);
-						BackendLogger.log(message);
+						SodaliteLogger.log(message);
 					}
 				});
 			} catch (NotRolePermissionException ex) {
@@ -191,10 +192,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					public void run() {
 						MessageDialog.openError(parent, "Save AADM",
 								"There were problems to store the AADM into the KB: " + e.getMessage());
-						BackendLogger.log("There were problems to store the AADM into the KB", e);
+						SodaliteLogger.log("There were problems to store the AADM into the KB", e);
 					}
 				});
-				BackendLogger.log("There were problems to store the AADM into the KB", e);
+				SodaliteLogger.log("There were problems to store the AADM into the KB", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -231,7 +232,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 										+ e.getMessage());
 					}
 				});
-				BackendLogger.log(
+				SodaliteLogger.log(
 						"There were problems during the processing of AADM optimization recommendations from the KB",
 						e);
 			}
@@ -298,7 +299,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getToken();
 					String message = "IaC Builder blueprint token: " + iacReport.getToken();
-					BackendLogger.log(message);
+					SodaliteLogger.log(message);
 					subMonitor.worked(3);
 
 					// Ask xOpera to deploy the AADM blueprint
@@ -306,7 +307,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
 					admin_report[1] = depl_report.getSession_token();
 					message = "xOpera session token: " + depl_report.getSession_token();
-					BackendLogger.log(message);
+					SodaliteLogger.log(message);
 					subMonitor.worked(4);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
@@ -327,7 +328,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
 									+ admin_report[0];
 							MessageDialog.openInformation(parent, "Deploy AADM", message);
-							BackendLogger.log(message);
+							SodaliteLogger.log(message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -350,10 +351,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
 									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1];
 							MessageDialog.openError(parent, "Deploy AADM", message);
-							BackendLogger.log(message, e);
+							SodaliteLogger.log(message, e);
 						}
 					});
-					BackendLogger.log("Error deploying model", e);
+					SodaliteLogger.log("Error deploying model", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;

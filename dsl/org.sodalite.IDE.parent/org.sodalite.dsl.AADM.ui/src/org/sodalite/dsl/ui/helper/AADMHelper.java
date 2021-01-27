@@ -38,7 +38,7 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.ui.backend.BackendLogger;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.inject.Injector;
 
@@ -136,7 +136,7 @@ public class AADMHelper {
 				try {
 					page.openEditor(new FileEditorInput(file), desc.getId());
 				} catch (PartInitException e) {
-					BackendLogger.log("Error open model in editor", e);
+					SodaliteLogger.log("Error open model in editor", e);
 				}
 			}
 		});

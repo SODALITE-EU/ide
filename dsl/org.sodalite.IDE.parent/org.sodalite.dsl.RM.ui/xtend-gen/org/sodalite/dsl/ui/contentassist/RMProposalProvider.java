@@ -37,10 +37,10 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.RM_Model;
-import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -115,7 +115,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
         kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
       }
-      BackendLogger.log(
+      SodaliteLogger.log(
         MessageFormat.format(
           "Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}", kbReasonerURI, iacURI, xoperaURI, keycloakURI));
       return kbclient;

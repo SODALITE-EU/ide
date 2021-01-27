@@ -26,11 +26,10 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.swt.widgets.FileDialog
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.sodalite.dsl.rM.EPREFIX_TYPE
-import org.sodalite.dsl.ui.backend.BackendLogger
 import org.eclipse.jface.dialogs.MessageDialog
 import org.eclipse.swt.widgets.Shell
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
-
+import org.sodalite.ide.ui.logger.SodaliteLogger
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -94,7 +93,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);	
 		}
 
-		BackendLogger.log(MessageFormat.format(
+		SodaliteLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
 				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
 

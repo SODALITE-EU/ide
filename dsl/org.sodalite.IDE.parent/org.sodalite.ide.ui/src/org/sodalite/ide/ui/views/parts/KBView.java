@@ -42,7 +42,6 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -212,7 +211,7 @@ public class KBView {
 							viewer.setInput(root);
 							viewer.refresh();
 						} catch (Exception e) {
-							BackendLogger.log("Error", e);
+							SodaliteLogger.log("Error", e);
 						}
 					}
 				};
@@ -264,7 +263,7 @@ public class KBView {
 								}
 							}
 						} catch (Exception ex) {
-							BackendLogger.log("Error", ex);
+							SodaliteLogger.log("Error", ex);
 						}
 					}
 				};
@@ -305,7 +304,7 @@ public class KBView {
 								}
 							}
 						} catch (Exception ex) {
-							BackendLogger.log("Error", ex);
+							SodaliteLogger.log("Error", ex);
 						}
 					}
 				};
@@ -385,7 +384,7 @@ public class KBView {
 					targetFile.delete(false, null);
 					saveContentInFile(filecontent, targetFile);
 				} catch (CoreException e) {
-					BackendLogger.log("Error", e);
+					SodaliteLogger.log("Error", e);
 				}
 
 			}
@@ -398,7 +397,7 @@ public class KBView {
 			InputStream source = new ByteArrayInputStream(bytes);
 			targetFile.create(source, IResource.NONE, null);
 		} catch (CoreException e) {
-			BackendLogger.log("Error", e);
+			SodaliteLogger.log("Error", e);
 		}
 	}
 

@@ -85,6 +85,7 @@ import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -138,7 +139,7 @@ public class RMBackendProxy {
 			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
 		}
 
-		BackendLogger.log(MessageFormat.format(
+		SodaliteLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
 				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
 		return kbclient;
@@ -186,7 +187,7 @@ public class RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			BackendLogger.log("Error generating model", e);
+			SodaliteLogger.log("Error generating model", e);
 		}
 	}
 
@@ -304,7 +305,7 @@ public class RMBackendProxy {
 								"There were problems to store the RM into the KB: " + e.getMessage());
 					}
 				});
-				BackendLogger.log("Error saving model", e);
+				SodaliteLogger.log("Error saving model", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -334,7 +335,7 @@ public class RMBackendProxy {
 				try {
 					page.openEditor(new FileEditorInput(file), desc.getId());
 				} catch (PartInitException e) {
-					BackendLogger.log("Error open model in editor", e);
+					SodaliteLogger.log("Error open model in editor", e);
 				}
 			}
 		});
