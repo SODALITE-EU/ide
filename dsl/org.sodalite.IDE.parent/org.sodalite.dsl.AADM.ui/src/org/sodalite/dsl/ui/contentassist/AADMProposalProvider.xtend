@@ -61,11 +61,7 @@ import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
-import org.eclipse.swt.widgets.MessageBox
-import org.eclipse.jface.dialogs.MessageDialog
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
-import org.eclipse.swt.widgets.Shell
-import org.eclipse.ui.PlatformUI
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
