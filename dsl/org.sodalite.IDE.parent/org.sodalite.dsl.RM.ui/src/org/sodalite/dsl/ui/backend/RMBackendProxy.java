@@ -222,7 +222,6 @@ public class RMBackendProxy {
 			}
 			uri = props.getProperty("URI");
 		}
-
 		return uri;
 	}
 

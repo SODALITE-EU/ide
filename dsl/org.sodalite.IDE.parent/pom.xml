@@ -186,7 +186,7 @@
 										<ignore></ignore>
 									</action>
 								</pluginExecution>
-								<pluginExecution>
+<!-- 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
 											org.codehaus.mojo
@@ -207,7 +207,7 @@
 									<action>
 										<ignore></ignore>
 									</action>
-								</pluginExecution>
+								</pluginExecution> -->
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
