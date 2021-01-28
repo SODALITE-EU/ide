@@ -11,12 +11,12 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.ui.di,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
- org.eclipse.core.runtime;bundle-version="3.18.0",
  org.sodalite.dsl.preferences;bundle-version="1.0.0",
  org.sodalite.dsl.RM.ui,
  org.eclipse.core.resources,
  org.eclipse.equinox.registry,
- org.eclipse.e4.core.di
+ org.eclipse.e4.core.di,
+ org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation;version="1.2.0",
  javax.inject;version="1.0.0",

@@ -26,7 +26,6 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.swt.widgets.FileDialog
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.sodalite.dsl.rM.EPREFIX_TYPE
-import org.sodalite.dsl.ui.backend.BackendLogger
 import org.eclipse.jface.dialogs.MessageDialog
 import org.eclipse.swt.widgets.Shell
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
@@ -39,6 +38,7 @@ import org.eclipse.core.runtime.Path
 import java.util.Map
 import java.util.HashMap
 import org.eclipse.core.runtime.Platform
+import org.sodalite.ide.ui.logger.SodaliteLogger
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -82,25 +82,28 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 
 		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
 
-		val String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-		if (keycloak_user.isEmpty())
-			raiseConfigurationIssue("Keycloak user not set");
+		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
+		if (keycloak_enabled.equalsIgnoreCase("true")) {
+			val String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+			if (keycloak_user.isEmpty())
+				raiseConfigurationIssue("Keycloak user not set");
+	
+			val String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+			if (keycloak_password.isEmpty())
+				raiseConfigurationIssue("Keycloak password not set");
+	
+			val String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+			if (keycloak_client_id.isEmpty())
+				raiseConfigurationIssue("Keycloak client_id not set");
+	
+			val String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+			if (keycloak_client_secret.isEmpty())
+				raiseConfigurationIssue("Keycloak client secret not set");
+	
+			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);	
+		}
 
-		val String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-		if (keycloak_password.isEmpty())
-			raiseConfigurationIssue("Keycloak password not set");
-
-		val String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-		if (keycloak_client_id.isEmpty())
-			raiseConfigurationIssue("Keycloak client_id not set");
-
-		val String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-		if (keycloak_client_secret.isEmpty())
-			raiseConfigurationIssue("Keycloak client secret not set");
-
-		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-
-		BackendLogger.log(MessageFormat.format(
+		SodaliteLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
 				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
 

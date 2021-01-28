@@ -28,7 +28,8 @@ Require-Bundle: org.sodalite.dsl.AADM,
  org.eclipse.sirius.common;bundle-version="6.2.3",
  org.sodalite.dsl.optimization,
  com.google.gson,
- org.sodalite.dsl.AADM.ui
+ org.sodalite.dsl.AADM.ui,
+ org.sodalite.ide.ui;bundle-version="1.0.0"
 Import-Package: org.apache.log4j,
  org.sodalite.dsl.ui.backend
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

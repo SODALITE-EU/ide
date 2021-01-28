@@ -38,7 +38,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetProperty
-import java.io.File
 import org.sodalite.dsl.rM.ESingleValue
 import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EFLOAT
@@ -51,7 +50,6 @@ import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.rM.EPropertyAssignment
-import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.rM.ETriggerDefinition
 import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EEvenFilter
@@ -74,6 +72,7 @@ import org.sodalite.dsl.rM.ELessOrEqual
 import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.aADM.EPolicyDefinition
 
 /**
  * Generates code from your model files on save.
@@ -796,14 +795,14 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def void putParameterNumber (EObject entity, String parameterName, Integer number){
-		if (parameter_numbers.get(entity)==null){
+		if (parameter_numbers.get(entity) === null){
 			parameter_numbers.put(entity, new HashMap<String, Integer>())
 		}
 		parameter_numbers.get(entity).put(parameterName, number)
 	}
 	
 	def Integer getParameterNumber (EObject entity, String parameterName){
-		if (parameter_numbers.get(entity)==null)
+		if (parameter_numbers.get(entity) === null)
 			return null;
 		return parameter_numbers.get(entity).get(parameterName)
 	}
@@ -848,7 +847,7 @@ class AADMGenerator extends AbstractGenerator {
 		var filename = uri.toString
 		filename = filename.replace("platform:/resource", "")
 		filename = filename.substring(
-				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
+				filename.indexOf('/', 1) + 1).replaceFirst('/', ".") + ".ttl";
 		return filename 
 	}
 		

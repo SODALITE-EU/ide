@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.SortedMap;
 
 import org.eclipse.jface.wizard.Wizard;
-import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class DeploymentWizard extends Wizard {
 
@@ -59,7 +59,7 @@ public class DeploymentWizard extends Wizard {
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
-			BackendLogger.log("Error on closing wizard", e);
+			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}
 

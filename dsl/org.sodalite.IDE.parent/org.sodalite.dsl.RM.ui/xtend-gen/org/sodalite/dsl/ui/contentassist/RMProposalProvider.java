@@ -46,10 +46,10 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.ERelationshipType;
 import org.sodalite.dsl.rM.RM_Model;
-import org.sodalite.dsl.ui.backend.BackendLogger;
 import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -101,28 +101,32 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         this.raiseConfigurationIssue("Keycloak URI user not set");
       }
       final KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
-      final String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-      boolean _isEmpty_4 = keycloak_user.isEmpty();
-      if (_isEmpty_4) {
-        this.raiseConfigurationIssue("Keycloak user not set");
+      final String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);
+      boolean _equalsIgnoreCase = keycloak_enabled.equalsIgnoreCase("true");
+      if (_equalsIgnoreCase) {
+        final String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+        boolean _isEmpty_4 = keycloak_user.isEmpty();
+        if (_isEmpty_4) {
+          this.raiseConfigurationIssue("Keycloak user not set");
+        }
+        final String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+        boolean _isEmpty_5 = keycloak_password.isEmpty();
+        if (_isEmpty_5) {
+          this.raiseConfigurationIssue("Keycloak password not set");
+        }
+        final String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+        boolean _isEmpty_6 = keycloak_client_id.isEmpty();
+        if (_isEmpty_6) {
+          this.raiseConfigurationIssue("Keycloak client_id not set");
+        }
+        final String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+        boolean _isEmpty_7 = keycloak_client_secret.isEmpty();
+        if (_isEmpty_7) {
+          this.raiseConfigurationIssue("Keycloak client secret not set");
+        }
+        kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
       }
-      final String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-      boolean _isEmpty_5 = keycloak_password.isEmpty();
-      if (_isEmpty_5) {
-        this.raiseConfigurationIssue("Keycloak password not set");
-      }
-      final String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-      boolean _isEmpty_6 = keycloak_client_id.isEmpty();
-      if (_isEmpty_6) {
-        this.raiseConfigurationIssue("Keycloak client_id not set");
-      }
-      final String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-      boolean _isEmpty_7 = keycloak_client_secret.isEmpty();
-      if (_isEmpty_7) {
-        this.raiseConfigurationIssue("Keycloak client secret not set");
-      }
-      kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-      BackendLogger.log(
+      SodaliteLogger.log(
         MessageFormat.format(
           "Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}", kbReasonerURI, iacURI, xoperaURI, keycloakURI));
       return kbclient;

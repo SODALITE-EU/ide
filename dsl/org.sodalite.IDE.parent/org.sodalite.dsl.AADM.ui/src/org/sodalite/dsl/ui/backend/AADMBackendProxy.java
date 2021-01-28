@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -66,6 +65,7 @@ import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -96,7 +96,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			BackendLogger.log("Error generating the AADM model", e);
+			SodaliteLogger.log("Error generating the AADM model", e);
 		}
 	}
 
@@ -171,31 +171,19 @@ public class AADMBackendProxy extends RMBackendProxy {
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						AADMHelper.pasteInClipboard(saveReport.getURI());
 						String message = "The selected AADM model has been successfully store in the KB with URI:\n"
 								+ saveReport.getURI();
-						MessageDialog.openInformation(parent, "Save AADM", message);
-						BackendLogger.log(message);
+						showInfoDialog(saveReport.getURI(), "Save AADM", message);
+						SodaliteLogger.log(message);
 					}
 				});
 			} catch (NotRolePermissionException ex) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Save AADM",
-								"You have not permissions to save the model in the declared module. \nPlease, contact the AAI SODALITE administrator");
-					}
-				});
+				showErrorDialog(null, "Save AADM", "You have not permissions to save the model in the declared module. "
+						+ "\nPlease, contact the AAI SODALITE administrator");
 			} catch (Exception e) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Save AADM",
-								"There were problems to store the AADM into the KB: " + e.getMessage());
-						BackendLogger.log("There were problems to store the AADM into the KB", e);
-					}
-				});
-				BackendLogger.log("There were problems to store the AADM into the KB", e);
+				showErrorDialog(null, "Save AADM",
+						"There were problems to store the AADM into the KB: " + e.getMessage());
+				SodaliteLogger.log("There were problems to store the AADM into the KB", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -215,24 +203,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 							"AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
 				saveURI(optimizationReport.getURI(), aadmFile, project);
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openInformation(parent, "Get AADM optimization recommendations",
-								"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
-										+ "AADM model have been saved with URI:\n" + optimizationReport.getURI());
-					}
-				});
+				showInfoDialog(null, "Get AADM optimization recommendations",
+						"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
+								+ "AADM model have been saved with URI:\n" + optimizationReport.getURI());
 			} catch (Exception e) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Get AADM optimization recommendations",
-								"There were problems during the processing of AADM optimization recommendations from the KB: "
-										+ e.getMessage());
-					}
-				});
-				BackendLogger.log(
+				showErrorDialog(null, "Get AADM optimization recommendations",
+						"There were problems during the processing of AADM optimization recommendations from the KB: "
+								+ e.getMessage());
+				SodaliteLogger.log(
 						"There were problems during the processing of AADM optimization recommendations from the KB",
 						e);
 			}
@@ -299,7 +277,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getToken();
 					String message = "IaC Builder blueprint token: " + iacReport.getToken();
-					BackendLogger.log(message);
+					SodaliteLogger.log(message);
 					subMonitor.worked(3);
 
 					// Ask xOpera to deploy the AADM blueprint
@@ -307,7 +285,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
 					admin_report[1] = depl_report.getSession_token();
 					message = "xOpera session token: " + depl_report.getSession_token();
-					BackendLogger.log(message);
+					SodaliteLogger.log(message);
 					subMonitor.worked(4);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
@@ -324,37 +302,30 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							AADMHelper.pasteInClipboard(admin_report[0]);
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
 									+ admin_report[0];
-							MessageDialog.openInformation(parent, "Deploy AADM", message);
-							BackendLogger.log(message);
+							showInfoDialog(admin_report[0], "Deploy AADM", message);
+							SodaliteLogger.log(message);
 						}
 					});
 					subMonitor.worked(-1);
 					subMonitor.done();
 				} catch (NotRolePermissionException ex) {
-					Display.getDefault().asyncExec(new Runnable() {
-						@Override
-						public void run() {
-							MessageDialog.openError(parent, "Save AADM",
-									"You have not permissions to save this model. Please, check your permission in the SODALITE AAI");
-						}
-					});
+					showErrorDialog(null, "Save AADM", "You have not permissions to save this model. "
+							+ "\nPlease, check your permission in the SODALITE AAI");
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							AADMHelper.pasteInClipboard(admin_report[0]);
 							String message = "There were problems to deploy the AADM into the infrastructure: "
 									+ e.getMessage()
 									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
 									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1];
-							MessageDialog.openError(parent, "Deploy AADM", message);
-							BackendLogger.log(message, e);
+							showErrorDialog(admin_report[0], "Deploy AADM", message);
+							SodaliteLogger.log(message, e);
 						}
 					});
-					BackendLogger.log("Error deploying model", e);
+					SodaliteLogger.log("Error deploying model", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
@@ -369,7 +340,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		// Check there are not warnings (they do not prevent storage in KB)
 		if (optimizationReport != null && (optimizationReport.hasErrors() || optimizationReport.hasWarnings())) {
 			// Open AADM file if not opened to show the errors and warnings
-			openFileInEditor(aadmFile);
+			AADMHelper.openFileInEditor(aadmFile);
 
 			List<ValidationIssue> issues = readIssuesFromKB(optimizationReport);
 			manageIssues(event, issues);
@@ -440,7 +411,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		Optimization_Model optimizationModel = nodeTemplate.getNode().getOptimization();
 		// Open the optimization model
 		IFile file = getFileFromModel(optimizationModel);
-		openFileInEditor(file);
+		AADMHelper.openFileInEditor(file);
 	}
 
 	private IFile getFileFromModel(Optimization_Model optimizationModel) {

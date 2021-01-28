@@ -64,6 +64,7 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.eclipse.swt.graphics.Image
 
+
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
