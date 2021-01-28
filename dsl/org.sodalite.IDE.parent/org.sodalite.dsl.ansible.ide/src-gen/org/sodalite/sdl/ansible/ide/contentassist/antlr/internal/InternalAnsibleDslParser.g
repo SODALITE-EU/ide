@@ -25883,9 +25883,9 @@ rule__EPlayExeSettings__Serial_listAssignment_2_1_1
 	}
 :
 	(
-		{ before(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEListPassedParserRuleCall_2_1_1_0()); }
-		ruleEListPassed
-		{ after(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEListPassedParserRuleCall_2_1_1_0()); }
+		{ before(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEValuePassedParserRuleCall_2_1_1_0()); }
+		ruleEValuePassed
+		{ after(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEValuePassedParserRuleCall_2_1_1_0()); }
 	)
 ;
 finally {
@@ -26168,9 +26168,9 @@ rule__EFactsSettings__Gather_subsetAssignment_2_1_1
 	}
 :
 	(
-		{ before(grammarAccess.getEFactsSettingsAccess().getGather_subsetEListPassedParserRuleCall_2_1_1_0()); }
-		ruleEListPassed
-		{ after(grammarAccess.getEFactsSettingsAccess().getGather_subsetEListPassedParserRuleCall_2_1_1_0()); }
+		{ before(grammarAccess.getEFactsSettingsAccess().getGather_subsetEValuePassedParserRuleCall_2_1_1_0()); }
+		ruleEValuePassed
+		{ after(grammarAccess.getEFactsSettingsAccess().getGather_subsetEValuePassedParserRuleCall_2_1_1_0()); }
 	)
 ;
 finally {

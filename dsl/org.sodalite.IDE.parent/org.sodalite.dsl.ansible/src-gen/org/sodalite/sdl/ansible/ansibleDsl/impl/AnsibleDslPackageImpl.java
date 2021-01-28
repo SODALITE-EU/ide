@@ -4844,7 +4844,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(ePlayExeSettingsEClass, EPlayExeSettings.class, "EPlayExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPlayExeSettings_Strategy(), this.getEStringPassed(), null, "strategy", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEPlayExeSettings_Serial_list(), this.getEListPassed(), null, "serial_list", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPlayExeSettings_Serial_list(), this.getEValuePassed(), null, "serial_list", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPlayExeSettings_Order(), this.getEStringPassed(), null, "order", null, 0, 1, EPlayExeSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eExecutionExeSettingsEClass, EExecutionExeSettings.class, "EExecutionExeSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4865,7 +4865,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
 
     initEClass(eFactsSettingsEClass, EFactsSettings.class, "EFactsSettings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEFactsSettings_Gather_facts(), this.getEBooleanPassed(), null, "gather_facts", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEFactsSettings_Gather_subset(), this.getEListPassed(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEFactsSettings_Gather_subset(), this.getEValuePassed(), null, "gather_subset", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFactsSettings_Gather_timeout(), this.getENumberPassed(), null, "gather_timeout", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEFactsSettings_Fact_path(), this.getEStringPassed(), null, "fact_path", null, 0, 1, EFactsSettings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

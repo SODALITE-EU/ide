@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings;
-import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected EListPassed gather_subset;
+  protected EValuePassed gather_subset;
 
   /**
    * The cached value of the '{@link #getGather_timeout() <em>Gather timeout</em>}' containment reference.
@@ -154,7 +154,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EListPassed getGather_subset()
+  public EValuePassed getGather_subset()
   {
     return gather_subset;
   }
@@ -164,9 +164,9 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetGather_subset(EListPassed newGather_subset, NotificationChain msgs)
+  public NotificationChain basicSetGather_subset(EValuePassed newGather_subset, NotificationChain msgs)
   {
-    EListPassed oldGather_subset = gather_subset;
+    EValuePassed oldGather_subset = gather_subset;
     gather_subset = newGather_subset;
     if (eNotificationRequired())
     {
@@ -182,7 +182,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setGather_subset(EListPassed newGather_subset)
+  public void setGather_subset(EValuePassed newGather_subset)
   {
     if (newGather_subset != gather_subset)
     {
@@ -356,7 +356,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
         setGather_facts((EBooleanPassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
-        setGather_subset((EListPassed)newValue);
+        setGather_subset((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
         setGather_timeout((ENumberPassed)newValue);
@@ -382,7 +382,7 @@ public class EFactsSettingsImpl extends MinimalEObjectImpl.Container implements 
         setGather_facts((EBooleanPassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_SUBSET:
-        setGather_subset((EListPassed)null);
+        setGather_subset((EValuePassed)null);
         return;
       case AnsibleDslPackage.EFACTS_SETTINGS__GATHER_TIMEOUT:
         setGather_timeout((ENumberPassed)null);

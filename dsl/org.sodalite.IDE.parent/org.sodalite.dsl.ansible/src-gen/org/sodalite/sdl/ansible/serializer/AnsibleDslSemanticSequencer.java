@@ -584,7 +584,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EFactsSettings returns EFactsSettings
 	 *
 	 * Constraint:
-	 *     (gather_facts=EBooleanPassed | gather_subset=EListPassed | gather_timeout=ENumberPassed | fact_path=EStringPassed)+
+	 *     (gather_facts=EBooleanPassed | gather_subset=EValuePassed | gather_timeout=ENumberPassed | fact_path=EStringPassed)+
 	 */
 	protected void sequence_EFactsSettings(ISerializationContext context, EFactsSettings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1157,7 +1157,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EPlayExeSettings returns EPlayExeSettings
 	 *
 	 * Constraint:
-	 *     (strategy=EStringPassed | serial_list=EListPassed | order=EStringPassed | throttle=ENumberPassed | run_once=EBooleanPassed)+
+	 *     (strategy=EStringPassed | serial_list=EValuePassed | order=EStringPassed | throttle=ENumberPassed | run_once=EBooleanPassed)+
 	 */
 	protected void sequence_EPlayExeSettings(ISerializationContext context, EPlayExeSettings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

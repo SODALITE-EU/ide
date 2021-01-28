@@ -344,7 +344,7 @@ EPlayExeSettings:
 	BEGIN
 	(
 		('strategy:' strategy=EStringPassed)? &
-		('serial:' serial_list=EListPassed)? &
+		('serial:' serial_list=EValuePassed)? &
 		('order:' order=EStringPassed)? &
 		('throttle:' throttle=ENumberPassed)? &
 		('run_once:' run_once=EBooleanPassed)?
@@ -407,7 +407,7 @@ EFactsSettings:
 	BEGIN
 	(
 		('gather_facts:' gather_facts=EBooleanPassed)? &
-		('gather_subset:' gather_subset=EListPassed)? &
+		('gather_subset:' gather_subset=EValuePassed)? &
 		('gather_timeout:'gather_timeout=ENumberPassed)? &
 		('fact_path:' fact_path=EStringPassed)?
 	)

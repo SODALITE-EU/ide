@@ -53,12 +53,12 @@ public interface EFactsSettings extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Gather subset</em>' containment reference.
-   * @see #setGather_subset(EListPassed)
+   * @see #setGather_subset(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEFactsSettings_Gather_subset()
    * @model containment="true"
    * @generated
    */
-  EListPassed getGather_subset();
+  EValuePassed getGather_subset();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EFactsSettings#getGather_subset <em>Gather subset</em>}' containment reference.
@@ -68,7 +68,7 @@ public interface EFactsSettings extends EObject
    * @see #getGather_subset()
    * @generated
    */
-  void setGather_subset(EListPassed value);
+  void setGather_subset(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Gather timeout</b></em>' containment reference.

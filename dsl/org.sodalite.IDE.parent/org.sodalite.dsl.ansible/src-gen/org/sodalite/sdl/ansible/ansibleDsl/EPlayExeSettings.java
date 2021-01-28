@@ -51,12 +51,12 @@ public interface EPlayExeSettings extends EExeSettings
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Serial list</em>' containment reference.
-   * @see #setSerial_list(EListPassed)
+   * @see #setSerial_list(EValuePassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEPlayExeSettings_Serial_list()
    * @model containment="true"
    * @generated
    */
-  EListPassed getSerial_list();
+  EValuePassed getSerial_list();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings#getSerial_list <em>Serial list</em>}' containment reference.
@@ -66,7 +66,7 @@ public interface EPlayExeSettings extends EExeSettings
    * @see #getSerial_list()
    * @generated
    */
-  void setSerial_list(EListPassed value);
+  void setSerial_list(EValuePassed value);
 
   /**
    * Returns the value of the '<em><b>Order</b></em>' containment reference.

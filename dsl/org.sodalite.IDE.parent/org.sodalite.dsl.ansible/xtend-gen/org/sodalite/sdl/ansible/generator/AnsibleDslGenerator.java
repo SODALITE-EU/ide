@@ -690,13 +690,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EListPassed _serial_list = playExeSettings.getSerial_list();
+      EValuePassed _serial_list = playExeSettings.getSerial_list();
       boolean _tripleNotEquals_1 = (_serial_list != null);
       if (_tripleNotEquals_1) {
         _builder.append(space);
         _builder.append("serial: ");
-        Serializable _compileListPassed = this.compileListPassed(playExeSettings.getSerial_list(), space);
-        _builder.append(_compileListPassed);
+        Object _compileValuePassed = this.compileValuePassed(playExeSettings.getSerial_list(), space, false);
+        _builder.append(_compileValuePassed);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -799,13 +799,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EListPassed _gather_subset = factsSettings.getGather_subset();
+      EValuePassed _gather_subset = factsSettings.getGather_subset();
       boolean _tripleNotEquals_1 = (_gather_subset != null);
       if (_tripleNotEquals_1) {
         _builder.append(space);
         _builder.append("gather_subset: ");
-        Serializable _compileListPassed = this.compileListPassed(factsSettings.getGather_subset(), space);
-        _builder.append(_compileListPassed);
+        Object _compileValuePassed = this.compileValuePassed(factsSettings.getGather_subset(), space, false);
+        _builder.append(_compileValuePassed);
         _builder.newLineIfNotEmpty();
       }
     }

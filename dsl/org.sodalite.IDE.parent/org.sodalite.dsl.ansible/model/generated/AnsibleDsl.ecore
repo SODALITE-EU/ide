@@ -208,7 +208,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EPlayExeSettings" eSuperTypes="#//EExeSettings">
     <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//EStringPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serial_list" eType="#//EListPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serial_list" eType="#//EValuePassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="order" eType="#//EStringPassed"
         containment="true"/>
@@ -236,7 +236,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EFactsSettings">
     <eStructuralFeatures xsi:type="ecore:EReference" name="gather_facts" eType="#//EBooleanPassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gather_subset" eType="#//EListPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gather_subset" eType="#//EValuePassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="gather_timeout" eType="#//ENumberPassed"
         containment="true"/>

@@ -2774,7 +2774,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cSerialKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cSerial_listAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cSerial_listEListPassedParserRuleCall_2_1_1_0 = (RuleCall)cSerial_listAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cSerial_listEValuePassedParserRuleCall_2_1_1_0 = (RuleCall)cSerial_listAssignment_2_1_1.eContents().get(0);
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
 		private final Keyword cOrderKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
 		private final Assignment cOrderAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
@@ -2791,11 +2791,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EPlayExeSettings:
 		//	'play_exe_settings:'
-		//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)?
+		//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EValuePassed)? & ('order:' order=EStringPassed)?
 		//	& ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'play_exe_settings:' BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:'
+		//'play_exe_settings:' BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EValuePassed)? & ('order:'
 		//order=EStringPassed)? & ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
@@ -2805,7 +2805,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)? &
+		//(('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EValuePassed)? & ('order:' order=EStringPassed)? &
 		//('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
@@ -2821,17 +2821,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EStringPassed
 		public RuleCall getStrategyEStringPassedParserRuleCall_2_0_1_0() { return cStrategyEStringPassedParserRuleCall_2_0_1_0; }
 		
-		//('serial:' serial_list=EListPassed)?
+		//('serial:' serial_list=EValuePassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//'serial:'
 		public Keyword getSerialKeyword_2_1_0() { return cSerialKeyword_2_1_0; }
 		
-		//serial_list=EListPassed
+		//serial_list=EValuePassed
 		public Assignment getSerial_listAssignment_2_1_1() { return cSerial_listAssignment_2_1_1; }
 		
-		//EListPassed
-		public RuleCall getSerial_listEListPassedParserRuleCall_2_1_1_0() { return cSerial_listEListPassedParserRuleCall_2_1_1_0; }
+		//EValuePassed
+		public RuleCall getSerial_listEValuePassedParserRuleCall_2_1_1_0() { return cSerial_listEValuePassedParserRuleCall_2_1_1_0; }
 		
 		//('order:' order=EStringPassed)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
@@ -3258,7 +3258,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
 		private final Keyword cGather_subsetKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cGather_subsetAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cGather_subsetEListPassedParserRuleCall_2_1_1_0 = (RuleCall)cGather_subsetAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cGather_subsetEValuePassedParserRuleCall_2_1_1_0 = (RuleCall)cGather_subsetAssignment_2_1_1.eContents().get(0);
 		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
 		private final Keyword cGather_timeoutKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
 		private final Assignment cGather_timeoutAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
@@ -3271,11 +3271,11 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//EFactsSettings:
 		//	'facts_settings:'
-		//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? &
+		//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EValuePassed)? &
 		//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'facts_settings:' BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)?
+		//'facts_settings:' BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EValuePassed)?
 		//& ('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END
 		public Group getGroup() { return cGroup; }
 		
@@ -3285,7 +3285,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//(('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? & ('gather_timeout:'
+		//(('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EValuePassed)? & ('gather_timeout:'
 		//gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
@@ -3301,17 +3301,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//EBooleanPassed
 		public RuleCall getGather_factsEBooleanPassedParserRuleCall_2_0_1_0() { return cGather_factsEBooleanPassedParserRuleCall_2_0_1_0; }
 		
-		//('gather_subset:' gather_subset=EListPassed)?
+		//('gather_subset:' gather_subset=EValuePassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//'gather_subset:'
 		public Keyword getGather_subsetKeyword_2_1_0() { return cGather_subsetKeyword_2_1_0; }
 		
-		//gather_subset=EListPassed
+		//gather_subset=EValuePassed
 		public Assignment getGather_subsetAssignment_2_1_1() { return cGather_subsetAssignment_2_1_1; }
 		
-		//EListPassed
-		public RuleCall getGather_subsetEListPassedParserRuleCall_2_1_1_0() { return cGather_subsetEListPassedParserRuleCall_2_1_1_0; }
+		//EValuePassed
+		public RuleCall getGather_subsetEValuePassedParserRuleCall_2_1_1_0() { return cGather_subsetEValuePassedParserRuleCall_2_1_1_0; }
 		
 		//('gather_timeout:' gather_timeout=ENumberPassed)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
@@ -6551,7 +6551,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EPlayExeSettings:
 	//	'play_exe_settings:'
-	//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EListPassed)? & ('order:' order=EStringPassed)?
+	//	BEGIN (('strategy:' strategy=EStringPassed)? & ('serial:' serial_list=EValuePassed)? & ('order:' order=EStringPassed)?
 	//	& ('throttle:' throttle=ENumberPassed)? & ('run_once:' run_once=EBooleanPassed)?) END;
 	public EPlayExeSettingsElements getEPlayExeSettingsAccess() {
 		return pEPlayExeSettings;
@@ -6622,7 +6622,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//EFactsSettings:
 	//	'facts_settings:'
-	//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EListPassed)? &
+	//	BEGIN (('gather_facts:' gather_facts=EBooleanPassed)? & ('gather_subset:' gather_subset=EValuePassed)? &
 	//	('gather_timeout:' gather_timeout=ENumberPassed)? & ('fact_path:' fact_path=EStringPassed)?) END;
 	public EFactsSettingsElements getEFactsSettingsAccess() {
 		return pEFactsSettings;

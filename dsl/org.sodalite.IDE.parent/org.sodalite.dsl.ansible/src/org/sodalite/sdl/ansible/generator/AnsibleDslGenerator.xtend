@@ -290,7 +290,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»strategy: «compileStringPassed(playExeSettings.strategy, space, false)»
 		«ENDIF»
 		«IF playExeSettings.serial_list !== null»
-			«space»serial: «compileListPassed(playExeSettings.serial_list, space)»
+			«space»serial: «compileValuePassed(playExeSettings.serial_list, space, false)»
 		«ENDIF»
 		«IF playExeSettings.order !== null»
 			«space»order: «compileStringPassed(playExeSettings.order, space, false)»
@@ -323,7 +323,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»gather_facts: «compileBooleanPassed(factsSettings.gather_facts, space)»
 		«ENDIF»
 		«IF factsSettings.gather_subset !== null»
-			«space»gather_subset: «compileListPassed(factsSettings.gather_subset, space)»
+			«space»gather_subset: «compileValuePassed(factsSettings.gather_subset, space, false)»
 		«ENDIF»
 		«IF factsSettings.gather_timeout !== null»
 			«space»gather_timeout: «compileNumberPassed(factsSettings.gather_timeout, space)»

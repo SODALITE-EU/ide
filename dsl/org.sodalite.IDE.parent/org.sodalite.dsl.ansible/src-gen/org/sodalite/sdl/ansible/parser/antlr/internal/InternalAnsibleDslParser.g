@@ -5395,9 +5395,9 @@ ruleEPlayExeSettings returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEListPassedParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getEPlayExeSettingsAccess().getSerial_listEValuePassedParserRuleCall_2_1_1_0());
 										}
-										lv_serial_list_6_0=ruleEListPassed
+										lv_serial_list_6_0=ruleEValuePassed
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEPlayExeSettingsRule());
@@ -5406,7 +5406,7 @@ ruleEPlayExeSettings returns [EObject current=null]
 												$current,
 												"serial_list",
 												lv_serial_list_6_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EListPassed");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -6266,9 +6266,9 @@ ruleEFactsSettings returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getGather_subsetEListPassedParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getEFactsSettingsAccess().getGather_subsetEValuePassedParserRuleCall_2_1_1_0());
 										}
-										lv_gather_subset_6_0=ruleEListPassed
+										lv_gather_subset_6_0=ruleEValuePassed
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEFactsSettingsRule());
@@ -6277,7 +6277,7 @@ ruleEFactsSettings returns [EObject current=null]
 												$current,
 												"gather_subset",
 												lv_gather_subset_6_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.EListPassed");
+												"org.sodalite.sdl.ansible.AnsibleDsl.EValuePassed");
 											afterParserOrEnumRuleCall();
 										}
 									)

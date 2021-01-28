@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +51,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    * @ordered
    */
-  protected EListPassed serial_list;
+  protected EValuePassed serial_list;
 
   /**
    * The cached value of the '{@link #getOrder() <em>Order</em>}' containment reference.
@@ -140,7 +140,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public EListPassed getSerial_list()
+  public EValuePassed getSerial_list()
   {
     return serial_list;
   }
@@ -150,9 +150,9 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSerial_list(EListPassed newSerial_list, NotificationChain msgs)
+  public NotificationChain basicSetSerial_list(EValuePassed newSerial_list, NotificationChain msgs)
   {
-    EListPassed oldSerial_list = serial_list;
+    EValuePassed oldSerial_list = serial_list;
     serial_list = newSerial_list;
     if (eNotificationRequired())
     {
@@ -168,7 +168,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
    * @generated
    */
   @Override
-  public void setSerial_list(EListPassed newSerial_list)
+  public void setSerial_list(EValuePassed newSerial_list)
   {
     if (newSerial_list != serial_list)
     {
@@ -288,7 +288,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
         setStrategy((EStringPassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
-        setSerial_list((EListPassed)newValue);
+        setSerial_list((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
         setOrder((EStringPassed)newValue);
@@ -311,7 +311,7 @@ public class EPlayExeSettingsImpl extends EExeSettingsImpl implements EPlayExeSe
         setStrategy((EStringPassed)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__SERIAL_LIST:
-        setSerial_list((EListPassed)null);
+        setSerial_list((EValuePassed)null);
         return;
       case AnsibleDslPackage.EPLAY_EXE_SETTINGS__ORDER:
         setOrder((EStringPassed)null);
