@@ -1,7 +1,5 @@
 package org.sodalite.ide.ui.views.parts;
 
-import java.text.MessageFormat;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,7 +15,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -32,13 +29,11 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.Node;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -80,11 +75,11 @@ public class KBView {
 
 		// RMs
 
-		ModuleData moduleData = getKBReasoner().getModules();
+		ModuleData moduleData = RMBackendProxy.getKBReasoner().getModules();
 		for (String module : moduleData.getElements()) {
 			module = parseModule(module);
 			// RMs
-			ModelData rmModelData = getKBReasoner().getRMsInModule(module);
+			ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 			if (!rmModelData.getElements().isEmpty()) {
 				TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
 				for (Model model : rmModelData.getElements()) {
@@ -93,7 +88,7 @@ public class KBView {
 			}
 
 			// AADMs
-			ModelData aadmModelData = getKBReasoner().getAADMsInModule(module);
+			ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 			if (!aadmModelData.getElements().isEmpty()) {
 				TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
 				for (Model model : aadmModelData.getElements()) {
@@ -112,54 +107,6 @@ public class KBView {
 	private String getLastSegment(String string, String delimiter) {
 		String[] splits = string.split(delimiter);
 		return splits[splits.length - 1];
-	}
-
-	private KBReasonerClient getKBReasoner() throws Exception {
-		// Configure KBReasonerClient endpoint from preference page information
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		if (kbReasonerURI.isEmpty())
-			raiseConfigurationIssue("KB Reasoner URI user not set");
-
-		String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty())
-			raiseConfigurationIssue("IaC URI user not set");
-
-		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
-		if (xoperaURI.isEmpty())
-			raiseConfigurationIssue("xOpera URI user not set");
-
-		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
-		if (keycloakURI.isEmpty())
-			raiseConfigurationIssue("Keycloak URI user not set");
-
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
-
-		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
-			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-			if (keycloak_user.isEmpty())
-				raiseConfigurationIssue("Keycloak user not set");
-
-			String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-			if (keycloak_password.isEmpty())
-				raiseConfigurationIssue("Keycloak password not set");
-
-			String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-			if (keycloak_client_id.isEmpty())
-				raiseConfigurationIssue("Keycloak client_id not set");
-
-			String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-			if (keycloak_client_secret.isEmpty())
-				raiseConfigurationIssue("Keycloak client secret not set");
-
-			kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-		}
-		SodaliteLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
-
-		return kbclient;
 	}
 
 	private void raiseConfigurationIssue(String message) throws Exception {
@@ -234,9 +181,9 @@ public class KBView {
 							String module = node.getModule();
 							ModelData modelData = null;
 							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = getKBReasoner().getRMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = getKBReasoner().getAADMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 							}
 							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
@@ -279,9 +226,9 @@ public class KBView {
 							String module = node.getModule();
 							ModelData modelData = null;
 							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = getKBReasoner().getRMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = getKBReasoner().getAADMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 							}
 							if (modelData != null && !modelData.getElements().isEmpty()) {
 								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
@@ -290,7 +237,7 @@ public class KBView {
 									try {
 										// For each model in module, delete it
 										for (Model model : modelData.getElements()) {
-											getKBReasoner().deleteModel(model.getUri().toString());
+											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString());
 										}
 
 										// Refresh KB View
@@ -352,7 +299,7 @@ public class KBView {
 								"Do you want to delete model " + node.getModel().getName());
 						if (confirmed) {
 							try {
-								getKBReasoner().deleteModel(node.getModel().getUri().toString());
+								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString());
 								// Refresh KB View
 								tn.getParent().removeChild(tn);
 								viewer.refresh();

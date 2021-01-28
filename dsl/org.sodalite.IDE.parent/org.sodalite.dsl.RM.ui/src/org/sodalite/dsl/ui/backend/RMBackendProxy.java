@@ -98,7 +98,7 @@ public class RMBackendProxy {
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-	protected KBReasonerClient getKBReasoner() throws Exception {
+	public static KBReasonerClient getKBReasoner() throws Exception {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
@@ -146,7 +146,7 @@ public class RMBackendProxy {
 		return kbclient;
 	}
 
-	private void raiseConfigurationIssue(String message) throws Exception {
+	private static void raiseConfigurationIssue(String message) throws Exception {
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
