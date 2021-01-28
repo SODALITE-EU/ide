@@ -6703,15 +6703,15 @@ ruleENotifiedTopic returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEJinjaExpressionOrString
-entryRuleEJinjaExpressionOrString returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEJinjaExpressionOrStringRule()); }
-	iv_ruleEJinjaExpressionOrString=ruleEJinjaExpressionOrString
-	{ $current=$iv_ruleEJinjaExpressionOrString.current; }
+// Entry rule entryRuleEJinjaOrString
+entryRuleEJinjaOrString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEJinjaOrStringRule()); }
+	iv_ruleEJinjaOrString=ruleEJinjaOrString
+	{ $current=$iv_ruleEJinjaOrString.current; }
 	EOF;
 
-// Rule EJinjaExpressionOrString
-ruleEJinjaExpressionOrString returns [EObject current=null]
+// Rule EJinjaOrString
+ruleEJinjaOrString returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -6720,7 +6720,7 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEJinjaOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
 		}
 		this_EJinjaExpressionEvaluation_0=ruleEJinjaExpressionEvaluation
 		{
@@ -6729,7 +6729,7 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEJinjaOrStringAccess().getEJinjaStatementParserRuleCall_1());
 		}
 		this_EJinjaStatement_1=ruleEJinjaStatement
 		{
@@ -6741,11 +6741,11 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 			(
 				lv_string_2_0=RULE_STRING
 				{
-					newLeafNode(lv_string_2_0, grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_string_2_0, grammarAccess.getEJinjaOrStringAccess().getStringSTRINGTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getEJinjaExpressionOrStringRule());
+						$current = createModelElement(grammarAccess.getEJinjaOrStringRule());
 					}
 					setWithLastConsumed(
 						$current,
@@ -6758,15 +6758,15 @@ ruleEJinjaExpressionOrString returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleEJinjaExpressionAndString
-entryRuleEJinjaExpressionAndString returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getEJinjaExpressionAndStringRule()); }
-	iv_ruleEJinjaExpressionAndString=ruleEJinjaExpressionAndString
-	{ $current=$iv_ruleEJinjaExpressionAndString.current; }
+// Entry rule entryRuleEJinjaAndString
+entryRuleEJinjaAndString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEJinjaAndStringRule()); }
+	iv_ruleEJinjaAndString=ruleEJinjaAndString
+	{ $current=$iv_ruleEJinjaAndString.current; }
 	EOF;
 
-// Rule EJinjaExpressionAndString
-ruleEJinjaExpressionAndString returns [EObject current=null]
+// Rule EJinjaAndString
+ruleEJinjaAndString returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -6776,18 +6776,18 @@ ruleEJinjaExpressionAndString returns [EObject current=null]
 	(
 		(
 			{
-				newCompositeNode(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0());
+				newCompositeNode(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringEJinjaOrStringParserRuleCall_0());
 			}
-			lv_jinja_expression_and_string_0_0=ruleEJinjaExpressionOrString
+			lv_jinja_expression_and_string_0_0=ruleEJinjaOrString
 			{
 				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getEJinjaExpressionAndStringRule());
+					$current = createModelElementForParent(grammarAccess.getEJinjaAndStringRule());
 				}
 				add(
 					$current,
 					"jinja_expression_and_string",
 					lv_jinja_expression_and_string_0_0,
-					"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionOrString");
+					"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaOrString");
 				afterParserOrEnumRuleCall();
 			}
 		)
@@ -6849,9 +6849,9 @@ ruleEMultiLineExpression returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaAndStringParserRuleCall_2_1_0());
 					}
-					lv_expressions_3_0=ruleEJinjaExpressionAndString
+					lv_expressions_3_0=ruleEJinjaAndString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEMultiLineExpressionRule());
@@ -6860,7 +6860,7 @@ ruleEMultiLineExpression returns [EObject current=null]
 							$current,
 							"expressions",
 							lv_expressions_3_0,
-							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaAndString");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -6890,11 +6890,11 @@ ruleEStringPassed returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getEStringPassedAccess().getEJinjaExpressionAndStringParserRuleCall_0());
+			newCompositeNode(grammarAccess.getEStringPassedAccess().getEJinjaAndStringParserRuleCall_0());
 		}
-		this_EJinjaExpressionAndString_0=ruleEJinjaExpressionAndString
+		this_EJinjaAndString_0=ruleEJinjaAndString
 		{
-			$current = $this_EJinjaExpressionAndString_0.current;
+			$current = $this_EJinjaAndString_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |

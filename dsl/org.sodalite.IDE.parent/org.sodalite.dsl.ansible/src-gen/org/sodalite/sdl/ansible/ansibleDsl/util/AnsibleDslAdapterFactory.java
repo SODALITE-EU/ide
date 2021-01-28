@@ -261,14 +261,14 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createENotifiedTopicAdapter();
       }
       @Override
-      public Adapter caseEJinjaExpressionOrString(EJinjaExpressionOrString object)
+      public Adapter caseEJinjaOrString(EJinjaOrString object)
       {
-        return createEJinjaExpressionOrStringAdapter();
+        return createEJinjaOrStringAdapter();
       }
       @Override
-      public Adapter caseEJinjaExpressionAndString(EJinjaExpressionAndString object)
+      public Adapter caseEJinjaAndString(EJinjaAndString object)
       {
-        return createEJinjaExpressionAndStringAdapter();
+        return createEJinjaAndStringAdapter();
       }
       @Override
       public Adapter caseEMultiLineExpression(EMultiLineExpression object)
@@ -1148,31 +1148,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString <em>EJinja Expression Or String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString <em>EJinja Or String</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString
    * @generated
    */
-  public Adapter createEJinjaExpressionOrStringAdapter()
+  public Adapter createEJinjaOrStringAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString <em>EJinja Expression And String</em>}'.
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString <em>EJinja And String</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString
    * @generated
    */
-  public Adapter createEJinjaExpressionAndStringAdapter()
+  public Adapter createEJinjaAndStringAdapter()
   {
     return null;
   }

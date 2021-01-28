@@ -21,7 +21,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EJinjaStatement extends EJinjaExpressionOrString
+public interface EJinjaStatement extends EJinjaOrString
 {
   /**
    * Returns the value of the '<em><b>Else block sign</b></em>' attribute.

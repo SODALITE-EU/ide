@@ -7,21 +7,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EJinja Expression Or String</b></em>'.
+ * A representation of the model object '<em><b>EJinja Or String</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString <em>String</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString#getString <em>String</em>}</li>
  * </ul>
  *
- * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaExpressionOrString()
+ * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaOrString()
  * @model
  * @generated
  */
-public interface EJinjaExpressionOrString extends EObject
+public interface EJinjaOrString extends EObject
 {
   /**
    * Returns the value of the '<em><b>String</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface EJinjaExpressionOrString extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>String</em>' attribute.
    * @see #setString(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaExpressionOrString_String()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEJinjaOrString_String()
    * @model
    * @generated
    */
   String getString();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString <em>String</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString#getString <em>String</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>String</em>' attribute.
@@ -45,4 +45,4 @@ public interface EJinjaExpressionOrString extends EObject
    */
   void setString(String value);
 
-} // EJinjaExpressionOrString
+} // EJinjaOrString

@@ -34,12 +34,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference
@@ -85,6 +83,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumber
 import org.sodalite.sdl.ansible.ansibleDsl.EExternalFileInclusion
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString
 
 /**
  * Generates code from your model files on save.
@@ -755,8 +755,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 
 	def compileStringPassed(EStringPassed stringPassed, String space, boolean isInMultiLine){
-		if (stringPassed instanceof EJinjaExpressionAndString){
-			return compileJinjaExpressionAndString(stringPassed, space, isInMultiLine)
+		if (stringPassed instanceof EJinjaAndString){
+			return compileJinjaAndString(stringPassed, space, isInMultiLine)
 		}
 		else if (stringPassed instanceof EMultiLineExpression){
 			return compileMultiLineExpression(stringPassed, space)
@@ -764,11 +764,11 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 
 	//if it's a line of a multiline, then the quotation marks must be absent
-	def compileJinjaExpressionAndString(EJinjaExpressionAndString jinja, String space, boolean isInMultiLine){
+	def compileJinjaAndString(EJinjaAndString jinja, String space, boolean isInMultiLine){
 		var stringToReturn = ""
 		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
 		for (jinjaOr : jinja.jinja_expression_and_string){
-			stringToReturn = stringToReturn.concat(compileJinjaExpressionOrString(jinjaOr, space, isInMultiLine).toString())
+			stringToReturn = stringToReturn.concat(compileJinjaOrString(jinjaOr, space, isInMultiLine).toString())
 		}
 		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
 		return stringToReturn
@@ -778,12 +778,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		var stringToReturn = ""
 		if (multiLineExpression.new_line_command !== null) stringToReturn = stringToReturn.concat(multiLineExpression.new_line_command)
 		for (jinjaAndString : multiLineExpression.expressions){
-			stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(compileJinjaExpressionAndString(jinjaAndString, space, true).toString())
+			stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(compileJinjaAndString(jinjaAndString, space, true).toString())
 		}
 		return stringToReturn
 	}
 	
-	def compileJinjaExpressionOrString(EJinjaExpressionOrString jinja, String space, boolean isInMultiLine){
+	def compileJinjaOrString(EJinjaOrString jinja, String space, boolean isInMultiLine){
 		if (jinja.string !== null){
 			return compileStringInPossibleMultiLine(jinja.string, isInMultiLine)
 		}
@@ -942,7 +942,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileLoopList(EValuePassed loopList, String space){
-		if (loopList instanceof EJinjaExpressionAndString || loopList instanceof EList) return compileValuePassed(loopList, space, false)
+		if (loopList instanceof EJinjaAndString || loopList instanceof EList) return compileValuePassed(loopList, space, false)
 		else return "[".concat(compileValuePassed(loopList, space, false).toString()).concat("]")
 	}
 	

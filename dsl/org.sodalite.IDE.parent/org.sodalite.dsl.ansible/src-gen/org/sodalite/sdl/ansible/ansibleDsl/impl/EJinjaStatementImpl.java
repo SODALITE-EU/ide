@@ -29,7 +29,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  *
  * @generated
  */
-public class EJinjaStatementImpl extends EJinjaExpressionOrStringImpl implements EJinjaStatement
+public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaStatement
 {
   /**
    * The default value of the '{@link #getElse_block_sign() <em>Else block sign</em>}' attribute.

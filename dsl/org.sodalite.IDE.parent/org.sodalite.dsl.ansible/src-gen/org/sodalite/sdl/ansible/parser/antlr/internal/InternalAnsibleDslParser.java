@@ -17039,25 +17039,25 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleENotifiedTopic"
 
 
-    // $ANTLR start "entryRuleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:6707:1: entryRuleEJinjaExpressionOrString returns [EObject current=null] : iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF ;
-    public final EObject entryRuleEJinjaExpressionOrString() throws RecognitionException {
+    // $ANTLR start "entryRuleEJinjaOrString"
+    // InternalAnsibleDslParser.g:6707:1: entryRuleEJinjaOrString returns [EObject current=null] : iv_ruleEJinjaOrString= ruleEJinjaOrString EOF ;
+    public final EObject entryRuleEJinjaOrString() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEJinjaExpressionOrString = null;
+        EObject iv_ruleEJinjaOrString = null;
 
 
         try {
-            // InternalAnsibleDslParser.g:6707:65: (iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF )
-            // InternalAnsibleDslParser.g:6708:2: iv_ruleEJinjaExpressionOrString= ruleEJinjaExpressionOrString EOF
+            // InternalAnsibleDslParser.g:6707:55: (iv_ruleEJinjaOrString= ruleEJinjaOrString EOF )
+            // InternalAnsibleDslParser.g:6708:2: iv_ruleEJinjaOrString= ruleEJinjaOrString EOF
             {
-             newCompositeNode(grammarAccess.getEJinjaExpressionOrStringRule()); 
+             newCompositeNode(grammarAccess.getEJinjaOrStringRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleEJinjaExpressionOrString=ruleEJinjaExpressionOrString();
+            iv_ruleEJinjaOrString=ruleEJinjaOrString();
 
             state._fsp--;
 
-             current =iv_ruleEJinjaExpressionOrString; 
+             current =iv_ruleEJinjaOrString; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -17072,12 +17072,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleEJinjaExpressionOrString"
+    // $ANTLR end "entryRuleEJinjaOrString"
 
 
-    // $ANTLR start "ruleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:6714:1: ruleEJinjaExpressionOrString returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) ;
-    public final EObject ruleEJinjaExpressionOrString() throws RecognitionException {
+    // $ANTLR start "ruleEJinjaOrString"
+    // InternalAnsibleDslParser.g:6714:1: ruleEJinjaOrString returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_string_2_0= RULE_STRING ) ) ) ;
+    public final EObject ruleEJinjaOrString() throws RecognitionException {
         EObject current = null;
 
         Token lv_string_2_0=null;
@@ -17123,7 +17123,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     // InternalAnsibleDslParser.g:6722:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
-                    			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
+                    			newCompositeNode(grammarAccess.getEJinjaOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
                     		
                     pushFollow(FOLLOW_2);
                     this_EJinjaExpressionEvaluation_0=ruleEJinjaExpressionEvaluation();
@@ -17141,7 +17141,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     // InternalAnsibleDslParser.g:6731:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
-                    			newCompositeNode(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getEJinjaOrStringAccess().getEJinjaStatementParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
                     this_EJinjaStatement_1=ruleEJinjaStatement();
@@ -17166,11 +17166,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     {
                     lv_string_2_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
-                    					newLeafNode(lv_string_2_0, grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0());
+                    					newLeafNode(lv_string_2_0, grammarAccess.getEJinjaOrStringAccess().getStringSTRINGTerminalRuleCall_2_0());
                     				
 
                     					if (current==null) {
-                    						current = createModelElement(grammarAccess.getEJinjaExpressionOrStringRule());
+                    						current = createModelElement(grammarAccess.getEJinjaOrStringRule());
                     					}
                     					setWithLastConsumed(
                     						current,
@@ -17206,28 +17206,28 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleEJinjaExpressionOrString"
+    // $ANTLR end "ruleEJinjaOrString"
 
 
-    // $ANTLR start "entryRuleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:6762:1: entryRuleEJinjaExpressionAndString returns [EObject current=null] : iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF ;
-    public final EObject entryRuleEJinjaExpressionAndString() throws RecognitionException {
+    // $ANTLR start "entryRuleEJinjaAndString"
+    // InternalAnsibleDslParser.g:6762:1: entryRuleEJinjaAndString returns [EObject current=null] : iv_ruleEJinjaAndString= ruleEJinjaAndString EOF ;
+    public final EObject entryRuleEJinjaAndString() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEJinjaExpressionAndString = null;
+        EObject iv_ruleEJinjaAndString = null;
 
 
         try {
-            // InternalAnsibleDslParser.g:6762:66: (iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF )
-            // InternalAnsibleDslParser.g:6763:2: iv_ruleEJinjaExpressionAndString= ruleEJinjaExpressionAndString EOF
+            // InternalAnsibleDslParser.g:6762:56: (iv_ruleEJinjaAndString= ruleEJinjaAndString EOF )
+            // InternalAnsibleDslParser.g:6763:2: iv_ruleEJinjaAndString= ruleEJinjaAndString EOF
             {
-             newCompositeNode(grammarAccess.getEJinjaExpressionAndStringRule()); 
+             newCompositeNode(grammarAccess.getEJinjaAndStringRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleEJinjaExpressionAndString=ruleEJinjaExpressionAndString();
+            iv_ruleEJinjaAndString=ruleEJinjaAndString();
 
             state._fsp--;
 
-             current =iv_ruleEJinjaExpressionAndString; 
+             current =iv_ruleEJinjaAndString; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -17242,12 +17242,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleEJinjaExpressionAndString"
+    // $ANTLR end "entryRuleEJinjaAndString"
 
 
-    // $ANTLR start "ruleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:6769:1: ruleEJinjaExpressionAndString returns [EObject current=null] : ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ ;
-    public final EObject ruleEJinjaExpressionAndString() throws RecognitionException {
+    // $ANTLR start "ruleEJinjaAndString"
+    // InternalAnsibleDslParser.g:6769:1: ruleEJinjaAndString returns [EObject current=null] : ( (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString ) )+ ;
+    public final EObject ruleEJinjaAndString() throws RecognitionException {
         EObject current = null;
 
         EObject lv_jinja_expression_and_string_0_0 = null;
@@ -17257,10 +17257,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6775:2: ( ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+ )
-            // InternalAnsibleDslParser.g:6776:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
+            // InternalAnsibleDslParser.g:6775:2: ( ( (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString ) )+ )
+            // InternalAnsibleDslParser.g:6776:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString ) )+
             {
-            // InternalAnsibleDslParser.g:6776:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString ) )+
+            // InternalAnsibleDslParser.g:6776:2: ( (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString ) )+
             int cnt49=0;
             loop49:
             do {
@@ -17323,28 +17323,28 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt49) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6777:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
+            	    // InternalAnsibleDslParser.g:6777:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString )
             	    {
-            	    // InternalAnsibleDslParser.g:6777:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString )
-            	    // InternalAnsibleDslParser.g:6778:4: lv_jinja_expression_and_string_0_0= ruleEJinjaExpressionOrString
+            	    // InternalAnsibleDslParser.g:6777:3: (lv_jinja_expression_and_string_0_0= ruleEJinjaOrString )
+            	    // InternalAnsibleDslParser.g:6778:4: lv_jinja_expression_and_string_0_0= ruleEJinjaOrString
             	    {
 
-            	    				newCompositeNode(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0());
+            	    				newCompositeNode(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringEJinjaOrStringParserRuleCall_0());
             	    			
             	    pushFollow(FOLLOW_61);
-            	    lv_jinja_expression_and_string_0_0=ruleEJinjaExpressionOrString();
+            	    lv_jinja_expression_and_string_0_0=ruleEJinjaOrString();
 
             	    state._fsp--;
 
 
             	    				if (current==null) {
-            	    					current = createModelElementForParent(grammarAccess.getEJinjaExpressionAndStringRule());
+            	    					current = createModelElementForParent(grammarAccess.getEJinjaAndStringRule());
             	    				}
             	    				add(
             	    					current,
             	    					"jinja_expression_and_string",
             	    					lv_jinja_expression_and_string_0_0,
-            	    					"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionOrString");
+            	    					"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaOrString");
             	    				afterParserOrEnumRuleCall();
             	    			
 
@@ -17379,7 +17379,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleEJinjaExpressionAndString"
+    // $ANTLR end "ruleEJinjaAndString"
 
 
     // $ANTLR start "entryRuleEMultiLineExpression"
@@ -17419,7 +17419,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMultiLineExpression"
-    // InternalAnsibleDslParser.g:6805:1: ruleEMultiLineExpression returns [EObject current=null] : ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+ this_END_4= RULE_END ) ;
+    // InternalAnsibleDslParser.g:6805:1: ruleEMultiLineExpression returns [EObject current=null] : ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+ this_END_4= RULE_END ) ;
     public final EObject ruleEMultiLineExpression() throws RecognitionException {
         EObject current = null;
 
@@ -17435,11 +17435,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6811:2: ( ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+ this_END_4= RULE_END ) )
-            // InternalAnsibleDslParser.g:6812:2: ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+ this_END_4= RULE_END )
+            // InternalAnsibleDslParser.g:6811:2: ( ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+ this_END_4= RULE_END ) )
+            // InternalAnsibleDslParser.g:6812:2: ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+ this_END_4= RULE_END )
             {
-            // InternalAnsibleDslParser.g:6812:2: ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+ this_END_4= RULE_END )
-            // InternalAnsibleDslParser.g:6813:3: ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+ this_END_4= RULE_END
+            // InternalAnsibleDslParser.g:6812:2: ( ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+ this_END_4= RULE_END )
+            // InternalAnsibleDslParser.g:6813:3: ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) ) this_BEGIN_1= RULE_BEGIN (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+ this_END_4= RULE_END
             {
             // InternalAnsibleDslParser.g:6813:3: ( ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) ) )
             // InternalAnsibleDslParser.g:6814:4: ( (lv_new_line_command_0_1= GreaterThanSign | lv_new_line_command_0_2= VerticalLine ) )
@@ -17509,7 +17509,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getEMultiLineExpressionAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalAnsibleDslParser.g:6844:3: (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) ) )+
+            // InternalAnsibleDslParser.g:6844:3: (otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) ) )+
             int cnt51=0;
             loop51:
             do {
@@ -17523,23 +17523,23 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt51) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:6845:4: otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) )
+            	    // InternalAnsibleDslParser.g:6845:4: otherlv_2= Line_of_string ( (lv_expressions_3_0= ruleEJinjaAndString ) )
             	    {
             	    otherlv_2=(Token)match(input,Line_of_string,FOLLOW_63); 
 
             	    				newLeafNode(otherlv_2, grammarAccess.getEMultiLineExpressionAccess().getLine_of_stringKeyword_2_0());
             	    			
-            	    // InternalAnsibleDslParser.g:6849:4: ( (lv_expressions_3_0= ruleEJinjaExpressionAndString ) )
-            	    // InternalAnsibleDslParser.g:6850:5: (lv_expressions_3_0= ruleEJinjaExpressionAndString )
+            	    // InternalAnsibleDslParser.g:6849:4: ( (lv_expressions_3_0= ruleEJinjaAndString ) )
+            	    // InternalAnsibleDslParser.g:6850:5: (lv_expressions_3_0= ruleEJinjaAndString )
             	    {
-            	    // InternalAnsibleDslParser.g:6850:5: (lv_expressions_3_0= ruleEJinjaExpressionAndString )
-            	    // InternalAnsibleDslParser.g:6851:6: lv_expressions_3_0= ruleEJinjaExpressionAndString
+            	    // InternalAnsibleDslParser.g:6850:5: (lv_expressions_3_0= ruleEJinjaAndString )
+            	    // InternalAnsibleDslParser.g:6851:6: lv_expressions_3_0= ruleEJinjaAndString
             	    {
 
-            	    						newCompositeNode(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0());
+            	    						newCompositeNode(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaAndStringParserRuleCall_2_1_0());
             	    					
             	    pushFollow(FOLLOW_64);
-            	    lv_expressions_3_0=ruleEJinjaExpressionAndString();
+            	    lv_expressions_3_0=ruleEJinjaAndString();
 
             	    state._fsp--;
 
@@ -17551,7 +17551,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             	    							current,
             	    							"expressions",
             	    							lv_expressions_3_0,
-            	    							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+            	    							"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaAndString");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -17636,11 +17636,11 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEStringPassed"
-    // InternalAnsibleDslParser.g:6884:1: ruleEStringPassed returns [EObject current=null] : (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression ) ;
+    // InternalAnsibleDslParser.g:6884:1: ruleEStringPassed returns [EObject current=null] : (this_EJinjaAndString_0= ruleEJinjaAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression ) ;
     public final EObject ruleEStringPassed() throws RecognitionException {
         EObject current = null;
 
-        EObject this_EJinjaExpressionAndString_0 = null;
+        EObject this_EJinjaAndString_0 = null;
 
         EObject this_EMultiLineExpression_1 = null;
 
@@ -17649,10 +17649,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:6890:2: ( (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression ) )
-            // InternalAnsibleDslParser.g:6891:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression )
+            // InternalAnsibleDslParser.g:6890:2: ( (this_EJinjaAndString_0= ruleEJinjaAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression ) )
+            // InternalAnsibleDslParser.g:6891:2: (this_EJinjaAndString_0= ruleEJinjaAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression )
             {
-            // InternalAnsibleDslParser.g:6891:2: (this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression )
+            // InternalAnsibleDslParser.g:6891:2: (this_EJinjaAndString_0= ruleEJinjaAndString | this_EMultiLineExpression_1= ruleEMultiLineExpression )
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -17670,18 +17670,18 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt52) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:6892:3: this_EJinjaExpressionAndString_0= ruleEJinjaExpressionAndString
+                    // InternalAnsibleDslParser.g:6892:3: this_EJinjaAndString_0= ruleEJinjaAndString
                     {
 
-                    			newCompositeNode(grammarAccess.getEStringPassedAccess().getEJinjaExpressionAndStringParserRuleCall_0());
+                    			newCompositeNode(grammarAccess.getEStringPassedAccess().getEJinjaAndStringParserRuleCall_0());
                     		
                     pushFollow(FOLLOW_2);
-                    this_EJinjaExpressionAndString_0=ruleEJinjaExpressionAndString();
+                    this_EJinjaAndString_0=ruleEJinjaAndString();
 
                     state._fsp--;
 
 
-                    			current = this_EJinjaExpressionAndString_0;
+                    			current = this_EJinjaAndString_0;
                     			afterParserOrEnumRuleCall();
                     		
 

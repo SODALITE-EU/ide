@@ -446,23 +446,23 @@ ENotifiedTopic:
 	'topic:' name=STRING
 ;
 
-EJinjaExpressionOrString:
+EJinjaOrString:
 	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING
 ;
 
-EJinjaExpressionAndString:
-	(jinja_expression_and_string+=EJinjaExpressionOrString)+
+EJinjaAndString:
+	(jinja_expression_and_string+=EJinjaOrString)+
 ;
 
 EMultiLineExpression:
 	new_line_command=('>' | '|')
 	BEGIN
-		('line_of_string:' expressions+=EJinjaExpressionAndString)+
+		('line_of_string:' expressions+=EJinjaAndString)+
 	END
 ;
 
 EStringPassed:
-	EJinjaExpressionAndString | EMultiLineExpression
+	EJinjaAndString | EMultiLineExpression
 ;
 
 EValuePassed:

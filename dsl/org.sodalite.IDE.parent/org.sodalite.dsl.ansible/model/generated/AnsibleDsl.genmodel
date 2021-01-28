@@ -176,11 +176,11 @@
     <genClasses ecoreClass="AnsibleDsl.ecore#//ENotifiedTopic">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ENotifiedTopic/name"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionOrString">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaExpressionOrString/string"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaOrString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EJinjaOrString/string"/>
     </genClasses>
-    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaExpressionAndString">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaExpressionAndString/jinja_expression_and_string"/>
+    <genClasses ecoreClass="AnsibleDsl.ecore#//EJinjaAndString">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EJinjaAndString/jinja_expression_and_string"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EMultiLineExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EMultiLineExpression/new_line_command"/>

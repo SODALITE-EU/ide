@@ -2991,20 +2991,20 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "ruleENotifiedTopic"
 
 
-    // $ANTLR start "entryRuleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:1051:1: entryRuleEJinjaExpressionOrString : ruleEJinjaExpressionOrString EOF ;
-    public final void entryRuleEJinjaExpressionOrString() throws RecognitionException {
+    // $ANTLR start "entryRuleEJinjaOrString"
+    // InternalAnsibleDslParser.g:1051:1: entryRuleEJinjaOrString : ruleEJinjaOrString EOF ;
+    public final void entryRuleEJinjaOrString() throws RecognitionException {
         try {
-            // InternalAnsibleDslParser.g:1052:1: ( ruleEJinjaExpressionOrString EOF )
-            // InternalAnsibleDslParser.g:1053:1: ruleEJinjaExpressionOrString EOF
+            // InternalAnsibleDslParser.g:1052:1: ( ruleEJinjaOrString EOF )
+            // InternalAnsibleDslParser.g:1053:1: ruleEJinjaOrString EOF
             {
-             before(grammarAccess.getEJinjaExpressionOrStringRule()); 
+             before(grammarAccess.getEJinjaOrStringRule()); 
             pushFollow(FOLLOW_1);
-            ruleEJinjaExpressionOrString();
+            ruleEJinjaOrString();
 
             state._fsp--;
 
-             after(grammarAccess.getEJinjaExpressionOrStringRule()); 
+             after(grammarAccess.getEJinjaOrStringRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -3018,35 +3018,35 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "entryRuleEJinjaExpressionOrString"
+    // $ANTLR end "entryRuleEJinjaOrString"
 
 
-    // $ANTLR start "ruleEJinjaExpressionOrString"
-    // InternalAnsibleDslParser.g:1060:1: ruleEJinjaExpressionOrString : ( ( rule__EJinjaExpressionOrString__Alternatives ) ) ;
-    public final void ruleEJinjaExpressionOrString() throws RecognitionException {
+    // $ANTLR start "ruleEJinjaOrString"
+    // InternalAnsibleDslParser.g:1060:1: ruleEJinjaOrString : ( ( rule__EJinjaOrString__Alternatives ) ) ;
+    public final void ruleEJinjaOrString() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:1064:2: ( ( ( rule__EJinjaExpressionOrString__Alternatives ) ) )
-            // InternalAnsibleDslParser.g:1065:2: ( ( rule__EJinjaExpressionOrString__Alternatives ) )
+            // InternalAnsibleDslParser.g:1064:2: ( ( ( rule__EJinjaOrString__Alternatives ) ) )
+            // InternalAnsibleDslParser.g:1065:2: ( ( rule__EJinjaOrString__Alternatives ) )
             {
-            // InternalAnsibleDslParser.g:1065:2: ( ( rule__EJinjaExpressionOrString__Alternatives ) )
-            // InternalAnsibleDslParser.g:1066:3: ( rule__EJinjaExpressionOrString__Alternatives )
+            // InternalAnsibleDslParser.g:1065:2: ( ( rule__EJinjaOrString__Alternatives ) )
+            // InternalAnsibleDslParser.g:1066:3: ( rule__EJinjaOrString__Alternatives )
             {
-             before(grammarAccess.getEJinjaExpressionOrStringAccess().getAlternatives()); 
-            // InternalAnsibleDslParser.g:1067:3: ( rule__EJinjaExpressionOrString__Alternatives )
-            // InternalAnsibleDslParser.g:1067:4: rule__EJinjaExpressionOrString__Alternatives
+             before(grammarAccess.getEJinjaOrStringAccess().getAlternatives()); 
+            // InternalAnsibleDslParser.g:1067:3: ( rule__EJinjaOrString__Alternatives )
+            // InternalAnsibleDslParser.g:1067:4: rule__EJinjaOrString__Alternatives
             {
             pushFollow(FOLLOW_2);
-            rule__EJinjaExpressionOrString__Alternatives();
+            rule__EJinjaOrString__Alternatives();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEJinjaExpressionOrStringAccess().getAlternatives()); 
+             after(grammarAccess.getEJinjaOrStringAccess().getAlternatives()); 
 
             }
 
@@ -3065,23 +3065,23 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "ruleEJinjaExpressionOrString"
+    // $ANTLR end "ruleEJinjaOrString"
 
 
-    // $ANTLR start "entryRuleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:1076:1: entryRuleEJinjaExpressionAndString : ruleEJinjaExpressionAndString EOF ;
-    public final void entryRuleEJinjaExpressionAndString() throws RecognitionException {
+    // $ANTLR start "entryRuleEJinjaAndString"
+    // InternalAnsibleDslParser.g:1076:1: entryRuleEJinjaAndString : ruleEJinjaAndString EOF ;
+    public final void entryRuleEJinjaAndString() throws RecognitionException {
         try {
-            // InternalAnsibleDslParser.g:1077:1: ( ruleEJinjaExpressionAndString EOF )
-            // InternalAnsibleDslParser.g:1078:1: ruleEJinjaExpressionAndString EOF
+            // InternalAnsibleDslParser.g:1077:1: ( ruleEJinjaAndString EOF )
+            // InternalAnsibleDslParser.g:1078:1: ruleEJinjaAndString EOF
             {
-             before(grammarAccess.getEJinjaExpressionAndStringRule()); 
+             before(grammarAccess.getEJinjaAndStringRule()); 
             pushFollow(FOLLOW_1);
-            ruleEJinjaExpressionAndString();
+            ruleEJinjaAndString();
 
             state._fsp--;
 
-             after(grammarAccess.getEJinjaExpressionAndStringRule()); 
+             after(grammarAccess.getEJinjaAndStringRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -3095,46 +3095,46 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "entryRuleEJinjaExpressionAndString"
+    // $ANTLR end "entryRuleEJinjaAndString"
 
 
-    // $ANTLR start "ruleEJinjaExpressionAndString"
-    // InternalAnsibleDslParser.g:1085:1: ruleEJinjaExpressionAndString : ( ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* ) ) ;
-    public final void ruleEJinjaExpressionAndString() throws RecognitionException {
+    // $ANTLR start "ruleEJinjaAndString"
+    // InternalAnsibleDslParser.g:1085:1: ruleEJinjaAndString : ( ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* ) ) ;
+    public final void ruleEJinjaAndString() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:1089:2: ( ( ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* ) ) )
-            // InternalAnsibleDslParser.g:1090:2: ( ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* ) )
+            // InternalAnsibleDslParser.g:1089:2: ( ( ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* ) ) )
+            // InternalAnsibleDslParser.g:1090:2: ( ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* ) )
             {
-            // InternalAnsibleDslParser.g:1090:2: ( ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* ) )
-            // InternalAnsibleDslParser.g:1091:3: ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* )
+            // InternalAnsibleDslParser.g:1090:2: ( ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* ) )
+            // InternalAnsibleDslParser.g:1091:3: ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) ) ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* )
             {
-            // InternalAnsibleDslParser.g:1091:3: ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment ) )
-            // InternalAnsibleDslParser.g:1092:4: ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )
+            // InternalAnsibleDslParser.g:1091:3: ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment ) )
+            // InternalAnsibleDslParser.g:1092:4: ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )
             {
-             before(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringAssignment()); 
-            // InternalAnsibleDslParser.g:1093:4: ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )
-            // InternalAnsibleDslParser.g:1093:5: rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment
+             before(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringAssignment()); 
+            // InternalAnsibleDslParser.g:1093:4: ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )
+            // InternalAnsibleDslParser.g:1093:5: rule__EJinjaAndString__Jinja_expression_and_stringAssignment
             {
             pushFollow(FOLLOW_3);
-            rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment();
+            rule__EJinjaAndString__Jinja_expression_and_stringAssignment();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringAssignment()); 
+             after(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringAssignment()); 
 
             }
 
-            // InternalAnsibleDslParser.g:1096:3: ( ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )* )
-            // InternalAnsibleDslParser.g:1097:4: ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )*
+            // InternalAnsibleDslParser.g:1096:3: ( ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )* )
+            // InternalAnsibleDslParser.g:1097:4: ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )*
             {
-             before(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringAssignment()); 
-            // InternalAnsibleDslParser.g:1098:4: ( rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment )*
+             before(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringAssignment()); 
+            // InternalAnsibleDslParser.g:1098:4: ( rule__EJinjaAndString__Jinja_expression_and_stringAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -3196,10 +3196,10 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalAnsibleDslParser.g:1098:5: rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment
+            	    // InternalAnsibleDslParser.g:1098:5: rule__EJinjaAndString__Jinja_expression_and_stringAssignment
             	    {
             	    pushFollow(FOLLOW_3);
-            	    rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment();
+            	    rule__EJinjaAndString__Jinja_expression_and_stringAssignment();
 
             	    state._fsp--;
 
@@ -3212,7 +3212,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                 }
             } while (true);
 
-             after(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringAssignment()); 
+             after(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringAssignment()); 
 
             }
 
@@ -3234,7 +3234,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "ruleEJinjaExpressionAndString"
+    // $ANTLR end "ruleEJinjaAndString"
 
 
     // $ANTLR start "entryRuleEMultiLineExpression"
@@ -8443,14 +8443,14 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__ENotifiable__Alternatives"
 
 
-    // $ANTLR start "rule__EJinjaExpressionOrString__Alternatives"
-    // InternalAnsibleDslParser.g:2752:1: rule__EJinjaExpressionOrString__Alternatives : ( ( ruleEJinjaExpressionEvaluation ) | ( ruleEJinjaStatement ) | ( ( rule__EJinjaExpressionOrString__StringAssignment_2 ) ) );
-    public final void rule__EJinjaExpressionOrString__Alternatives() throws RecognitionException {
+    // $ANTLR start "rule__EJinjaOrString__Alternatives"
+    // InternalAnsibleDslParser.g:2752:1: rule__EJinjaOrString__Alternatives : ( ( ruleEJinjaExpressionEvaluation ) | ( ruleEJinjaStatement ) | ( ( rule__EJinjaOrString__StringAssignment_2 ) ) );
+    public final void rule__EJinjaOrString__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:2756:1: ( ( ruleEJinjaExpressionEvaluation ) | ( ruleEJinjaStatement ) | ( ( rule__EJinjaExpressionOrString__StringAssignment_2 ) ) )
+            // InternalAnsibleDslParser.g:2756:1: ( ( ruleEJinjaExpressionEvaluation ) | ( ruleEJinjaStatement ) | ( ( rule__EJinjaOrString__StringAssignment_2 ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
@@ -8482,13 +8482,13 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                     // InternalAnsibleDslParser.g:2757:2: ( ruleEJinjaExpressionEvaluation )
                     // InternalAnsibleDslParser.g:2758:3: ruleEJinjaExpressionEvaluation
                     {
-                     before(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0()); 
+                     before(grammarAccess.getEJinjaOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
                     ruleEJinjaExpressionEvaluation();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0()); 
+                     after(grammarAccess.getEJinjaOrStringAccess().getEJinjaExpressionEvaluationParserRuleCall_0()); 
 
                     }
 
@@ -8501,13 +8501,13 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                     // InternalAnsibleDslParser.g:2763:2: ( ruleEJinjaStatement )
                     // InternalAnsibleDslParser.g:2764:3: ruleEJinjaStatement
                     {
-                     before(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1()); 
+                     before(grammarAccess.getEJinjaOrStringAccess().getEJinjaStatementParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
                     ruleEJinjaStatement();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEJinjaExpressionOrStringAccess().getEJinjaStatementParserRuleCall_1()); 
+                     after(grammarAccess.getEJinjaOrStringAccess().getEJinjaStatementParserRuleCall_1()); 
 
                     }
 
@@ -8515,24 +8515,24 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:2769:2: ( ( rule__EJinjaExpressionOrString__StringAssignment_2 ) )
+                    // InternalAnsibleDslParser.g:2769:2: ( ( rule__EJinjaOrString__StringAssignment_2 ) )
                     {
-                    // InternalAnsibleDslParser.g:2769:2: ( ( rule__EJinjaExpressionOrString__StringAssignment_2 ) )
-                    // InternalAnsibleDslParser.g:2770:3: ( rule__EJinjaExpressionOrString__StringAssignment_2 )
+                    // InternalAnsibleDslParser.g:2769:2: ( ( rule__EJinjaOrString__StringAssignment_2 ) )
+                    // InternalAnsibleDslParser.g:2770:3: ( rule__EJinjaOrString__StringAssignment_2 )
                     {
-                     before(grammarAccess.getEJinjaExpressionOrStringAccess().getStringAssignment_2()); 
-                    // InternalAnsibleDslParser.g:2771:3: ( rule__EJinjaExpressionOrString__StringAssignment_2 )
-                    // InternalAnsibleDslParser.g:2771:4: rule__EJinjaExpressionOrString__StringAssignment_2
+                     before(grammarAccess.getEJinjaOrStringAccess().getStringAssignment_2()); 
+                    // InternalAnsibleDslParser.g:2771:3: ( rule__EJinjaOrString__StringAssignment_2 )
+                    // InternalAnsibleDslParser.g:2771:4: rule__EJinjaOrString__StringAssignment_2
                     {
                     pushFollow(FOLLOW_2);
-                    rule__EJinjaExpressionOrString__StringAssignment_2();
+                    rule__EJinjaOrString__StringAssignment_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getEJinjaExpressionOrStringAccess().getStringAssignment_2()); 
+                     after(grammarAccess.getEJinjaOrStringAccess().getStringAssignment_2()); 
 
                     }
 
@@ -8553,7 +8553,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EJinjaExpressionOrString__Alternatives"
+    // $ANTLR end "rule__EJinjaOrString__Alternatives"
 
 
     // $ANTLR start "rule__EMultiLineExpression__New_line_commandAlternatives_0_0"
@@ -8628,13 +8628,13 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EStringPassed__Alternatives"
-    // InternalAnsibleDslParser.g:2800:1: rule__EStringPassed__Alternatives : ( ( ruleEJinjaExpressionAndString ) | ( ruleEMultiLineExpression ) );
+    // InternalAnsibleDslParser.g:2800:1: rule__EStringPassed__Alternatives : ( ( ruleEJinjaAndString ) | ( ruleEMultiLineExpression ) );
     public final void rule__EStringPassed__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:2804:1: ( ( ruleEJinjaExpressionAndString ) | ( ruleEMultiLineExpression ) )
+            // InternalAnsibleDslParser.g:2804:1: ( ( ruleEJinjaAndString ) | ( ruleEMultiLineExpression ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -8652,18 +8652,18 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             }
             switch (alt11) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:2805:2: ( ruleEJinjaExpressionAndString )
+                    // InternalAnsibleDslParser.g:2805:2: ( ruleEJinjaAndString )
                     {
-                    // InternalAnsibleDslParser.g:2805:2: ( ruleEJinjaExpressionAndString )
-                    // InternalAnsibleDslParser.g:2806:3: ruleEJinjaExpressionAndString
+                    // InternalAnsibleDslParser.g:2805:2: ( ruleEJinjaAndString )
+                    // InternalAnsibleDslParser.g:2806:3: ruleEJinjaAndString
                     {
-                     before(grammarAccess.getEStringPassedAccess().getEJinjaExpressionAndStringParserRuleCall_0()); 
+                     before(grammarAccess.getEStringPassedAccess().getEJinjaAndStringParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
-                    ruleEJinjaExpressionAndString();
+                    ruleEJinjaAndString();
 
                     state._fsp--;
 
-                     after(grammarAccess.getEStringPassedAccess().getEJinjaExpressionAndStringParserRuleCall_0()); 
+                     after(grammarAccess.getEStringPassedAccess().getEJinjaAndStringParserRuleCall_0()); 
 
                     }
 
@@ -81532,9 +81532,9 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
     // $ANTLR end "rule__ENotifiedTopic__NameAssignment_1"
 
 
-    // $ANTLR start "rule__EJinjaExpressionOrString__StringAssignment_2"
-    // InternalAnsibleDslParser.g:26304:1: rule__EJinjaExpressionOrString__StringAssignment_2 : ( RULE_STRING ) ;
-    public final void rule__EJinjaExpressionOrString__StringAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__EJinjaOrString__StringAssignment_2"
+    // InternalAnsibleDslParser.g:26304:1: rule__EJinjaOrString__StringAssignment_2 : ( RULE_STRING ) ;
+    public final void rule__EJinjaOrString__StringAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -81545,9 +81545,9 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
             // InternalAnsibleDslParser.g:26309:2: ( RULE_STRING )
             // InternalAnsibleDslParser.g:26310:3: RULE_STRING
             {
-             before(grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getEJinjaOrStringAccess().getStringSTRINGTerminalRuleCall_2_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0()); 
+             after(grammarAccess.getEJinjaOrStringAccess().getStringSTRINGTerminalRuleCall_2_0()); 
 
             }
 
@@ -81566,29 +81566,29 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EJinjaExpressionOrString__StringAssignment_2"
+    // $ANTLR end "rule__EJinjaOrString__StringAssignment_2"
 
 
-    // $ANTLR start "rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment"
-    // InternalAnsibleDslParser.g:26319:1: rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment : ( ruleEJinjaExpressionOrString ) ;
-    public final void rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment() throws RecognitionException {
+    // $ANTLR start "rule__EJinjaAndString__Jinja_expression_and_stringAssignment"
+    // InternalAnsibleDslParser.g:26319:1: rule__EJinjaAndString__Jinja_expression_and_stringAssignment : ( ruleEJinjaOrString ) ;
+    public final void rule__EJinjaAndString__Jinja_expression_and_stringAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:26323:1: ( ( ruleEJinjaExpressionOrString ) )
-            // InternalAnsibleDslParser.g:26324:2: ( ruleEJinjaExpressionOrString )
+            // InternalAnsibleDslParser.g:26323:1: ( ( ruleEJinjaOrString ) )
+            // InternalAnsibleDslParser.g:26324:2: ( ruleEJinjaOrString )
             {
-            // InternalAnsibleDslParser.g:26324:2: ( ruleEJinjaExpressionOrString )
-            // InternalAnsibleDslParser.g:26325:3: ruleEJinjaExpressionOrString
+            // InternalAnsibleDslParser.g:26324:2: ( ruleEJinjaOrString )
+            // InternalAnsibleDslParser.g:26325:3: ruleEJinjaOrString
             {
-             before(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0()); 
+             before(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringEJinjaOrStringParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
-            ruleEJinjaExpressionOrString();
+            ruleEJinjaOrString();
 
             state._fsp--;
 
-             after(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0()); 
+             after(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringEJinjaOrStringParserRuleCall_0()); 
 
             }
 
@@ -81607,7 +81607,7 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
         }
         return ;
     }
-    // $ANTLR end "rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment"
+    // $ANTLR end "rule__EJinjaAndString__Jinja_expression_and_stringAssignment"
 
 
     // $ANTLR start "rule__EMultiLineExpression__New_line_commandAssignment_0"
@@ -81658,25 +81658,25 @@ public class InternalAnsibleDslParser extends AbstractInternalContentAssistParse
 
 
     // $ANTLR start "rule__EMultiLineExpression__ExpressionsAssignment_2_1"
-    // InternalAnsibleDslParser.g:26349:1: rule__EMultiLineExpression__ExpressionsAssignment_2_1 : ( ruleEJinjaExpressionAndString ) ;
+    // InternalAnsibleDslParser.g:26349:1: rule__EMultiLineExpression__ExpressionsAssignment_2_1 : ( ruleEJinjaAndString ) ;
     public final void rule__EMultiLineExpression__ExpressionsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAnsibleDslParser.g:26353:1: ( ( ruleEJinjaExpressionAndString ) )
-            // InternalAnsibleDslParser.g:26354:2: ( ruleEJinjaExpressionAndString )
+            // InternalAnsibleDslParser.g:26353:1: ( ( ruleEJinjaAndString ) )
+            // InternalAnsibleDslParser.g:26354:2: ( ruleEJinjaAndString )
             {
-            // InternalAnsibleDslParser.g:26354:2: ( ruleEJinjaExpressionAndString )
-            // InternalAnsibleDslParser.g:26355:3: ruleEJinjaExpressionAndString
+            // InternalAnsibleDslParser.g:26354:2: ( ruleEJinjaAndString )
+            // InternalAnsibleDslParser.g:26355:3: ruleEJinjaAndString
             {
-             before(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0()); 
+             before(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaAndStringParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
-            ruleEJinjaExpressionAndString();
+            ruleEJinjaAndString();
 
             state._fsp--;
 
-             after(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0()); 
+             after(grammarAccess.getEMultiLineExpressionAccess().getExpressionsEJinjaAndStringParserRuleCall_2_1_0()); 
 
             }
 

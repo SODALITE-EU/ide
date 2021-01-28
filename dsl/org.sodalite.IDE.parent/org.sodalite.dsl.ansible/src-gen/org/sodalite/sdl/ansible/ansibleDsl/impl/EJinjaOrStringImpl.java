@@ -11,22 +11,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EJinja Expression Or String</b></em>'.
+ * An implementation of the model object '<em><b>EJinja Or String</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionOrStringImpl#getString <em>String</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringImpl#getString <em>String</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container implements EJinjaExpressionOrString
+public class EJinjaOrStringImpl extends MinimalEObjectImpl.Container implements EJinjaOrString
 {
   /**
    * The default value of the '{@link #getString() <em>String</em>}' attribute.
@@ -53,7 +53,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EJinjaExpressionOrStringImpl()
+  protected EJinjaOrStringImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EJINJA_EXPRESSION_OR_STRING;
+    return AnsibleDslPackage.Literals.EJINJA_OR_STRING;
   }
 
   /**
@@ -91,7 +91,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
     String oldString = string;
     string = newString;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING__STRING, oldString, string));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_OR_STRING__STRING, oldString, string));
   }
 
   /**
@@ -104,7 +104,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING__STRING:
+      case AnsibleDslPackage.EJINJA_OR_STRING__STRING:
         return getString();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING__STRING:
+      case AnsibleDslPackage.EJINJA_OR_STRING__STRING:
         setString((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING__STRING:
+      case AnsibleDslPackage.EJINJA_OR_STRING__STRING:
         setString(STRING_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING__STRING:
+      case AnsibleDslPackage.EJINJA_OR_STRING__STRING:
         return STRING_EDEFAULT == null ? string != null : !STRING_EDEFAULT.equals(string);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class EJinjaExpressionOrStringImpl extends MinimalEObjectImpl.Container i
     return result.toString();
   }
 
-} //EJinjaExpressionOrStringImpl
+} //EJinjaOrStringImpl

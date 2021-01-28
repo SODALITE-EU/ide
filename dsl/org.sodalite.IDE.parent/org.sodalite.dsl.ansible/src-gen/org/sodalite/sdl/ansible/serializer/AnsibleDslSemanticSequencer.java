@@ -45,10 +45,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
 import org.sodalite.sdl.ansible.ansibleDsl.EListJinja;
@@ -196,8 +196,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EIS_EXPRESSION:
 				sequence_EIsExpression(context, (EIsExpression) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING:
-				sequence_EJinjaExpressionAndString(context, (EJinjaExpressionAndString) semanticObject); 
+			case AnsibleDslPackage.EJINJA_AND_STRING:
+				sequence_EJinjaAndString(context, (EJinjaAndString) semanticObject); 
 				return; 
 			case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION:
 				sequence_EJinjaExpressionEvaluation(context, (EJinjaExpressionEvaluation) semanticObject); 
@@ -205,8 +205,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case AnsibleDslPackage.EJINJA_EXPRESSION_EVALUATION_WITHOUT_BRACKETS:
 				sequence_EJinjaExpressionEvaluationWithoutBrackets(context, (EJinjaExpressionEvaluationWithoutBrackets) semanticObject); 
 				return; 
-			case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING:
-				sequence_EJinjaExpressionOrString(context, (EJinjaExpressionOrString) semanticObject); 
+			case AnsibleDslPackage.EJINJA_OR_STRING:
+				sequence_EJinjaOrString(context, (EJinjaOrString) semanticObject); 
 				return; 
 			case AnsibleDslPackage.ELIST_IN_LINE:
 				sequence_EListInLine(context, (EListInLine) semanticObject); 
@@ -605,7 +605,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionOrString returns EForStatement
+	 *     EJinjaOrString returns EForStatement
 	 *     EJinjaStatement returns EForStatement
 	 *     EForStatement returns EForStatement
 	 *
@@ -707,7 +707,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionOrString returns EIfStatement
+	 *     EJinjaOrString returns EIfStatement
 	 *     EJinjaStatement returns EIfStatement
 	 *     EIfStatement returns EIfStatement
 	 *
@@ -818,15 +818,15 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionAndString returns EJinjaExpressionAndString
-	 *     EStringPassed returns EJinjaExpressionAndString
-	 *     EValuePassed returns EJinjaExpressionAndString
-	 *     EElementOfListIndented returns EJinjaExpressionAndString
+	 *     EJinjaAndString returns EJinjaAndString
+	 *     EStringPassed returns EJinjaAndString
+	 *     EValuePassed returns EJinjaAndString
+	 *     EElementOfListIndented returns EJinjaAndString
 	 *
 	 * Constraint:
-	 *     jinja_expression_and_string+=EJinjaExpressionOrString+
+	 *     jinja_expression_and_string+=EJinjaOrString+
 	 */
-	protected void sequence_EJinjaExpressionAndString(ISerializationContext context, EJinjaExpressionAndString semanticObject) {
+	protected void sequence_EJinjaAndString(ISerializationContext context, EJinjaAndString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -846,7 +846,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionOrString returns EJinjaExpressionEvaluation
+	 *     EJinjaOrString returns EJinjaExpressionEvaluation
 	 *     EJinjaExpressionEvaluation returns EJinjaExpressionEvaluation
 	 *     EDictionaryPassed returns EJinjaExpressionEvaluation
 	 *     EListPassed returns EJinjaExpressionEvaluation
@@ -869,18 +869,18 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     EJinjaExpressionOrString returns EJinjaExpressionOrString
+	 *     EJinjaOrString returns EJinjaOrString
 	 *
 	 * Constraint:
 	 *     string=STRING
 	 */
-	protected void sequence_EJinjaExpressionOrString(ISerializationContext context, EJinjaExpressionOrString semanticObject) {
+	protected void sequence_EJinjaOrString(ISerializationContext context, EJinjaOrString semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EJINJA_EXPRESSION_OR_STRING__STRING) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EJINJA_EXPRESSION_OR_STRING__STRING));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EJINJA_OR_STRING__STRING) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EJINJA_OR_STRING__STRING));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEJinjaExpressionOrStringAccess().getStringSTRINGTerminalRuleCall_2_0(), semanticObject.getString());
+		feeder.accept(grammarAccess.getEJinjaOrStringAccess().getStringSTRINGTerminalRuleCall_2_0(), semanticObject.getString());
 		feeder.finish();
 	}
 	
@@ -994,7 +994,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EElementOfListIndented returns EMultiLineExpression
 	 *
 	 * Constraint:
-	 *     ((new_line_command='>' | new_line_command='|') expressions+=EJinjaExpressionAndString+)
+	 *     ((new_line_command='>' | new_line_command='|') expressions+=EJinjaAndString+)
 	 */
 	protected void sequence_EMultiLineExpression(ISerializationContext context, EMultiLineExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

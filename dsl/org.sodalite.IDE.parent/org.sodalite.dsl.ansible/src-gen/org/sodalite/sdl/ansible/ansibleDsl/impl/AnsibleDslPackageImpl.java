@@ -55,10 +55,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EList;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
@@ -386,14 +386,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eJinjaExpressionOrStringEClass = null;
+  private EClass eJinjaOrStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eJinjaExpressionAndStringEClass = null;
+  private EClass eJinjaAndStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2416,9 +2416,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEJinjaExpressionOrString()
+  public EClass getEJinjaOrString()
   {
-    return eJinjaExpressionOrStringEClass;
+    return eJinjaOrStringEClass;
   }
 
   /**
@@ -2427,9 +2427,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EAttribute getEJinjaExpressionOrString_String()
+  public EAttribute getEJinjaOrString_String()
   {
-    return (EAttribute)eJinjaExpressionOrStringEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eJinjaOrStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2438,9 +2438,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EClass getEJinjaExpressionAndString()
+  public EClass getEJinjaAndString()
   {
-    return eJinjaExpressionAndStringEClass;
+    return eJinjaAndStringEClass;
   }
 
   /**
@@ -2449,9 +2449,9 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEJinjaExpressionAndString_Jinja_expression_and_string()
+  public EReference getEJinjaAndString_Jinja_expression_and_string()
   {
-    return (EReference)eJinjaExpressionAndStringEClass.getEStructuralFeatures().get(0);
+    return (EReference)eJinjaAndStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -4388,11 +4388,11 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eNotifiedTopicEClass = createEClass(ENOTIFIED_TOPIC);
     createEAttribute(eNotifiedTopicEClass, ENOTIFIED_TOPIC__NAME);
 
-    eJinjaExpressionOrStringEClass = createEClass(EJINJA_EXPRESSION_OR_STRING);
-    createEAttribute(eJinjaExpressionOrStringEClass, EJINJA_EXPRESSION_OR_STRING__STRING);
+    eJinjaOrStringEClass = createEClass(EJINJA_OR_STRING);
+    createEAttribute(eJinjaOrStringEClass, EJINJA_OR_STRING__STRING);
 
-    eJinjaExpressionAndStringEClass = createEClass(EJINJA_EXPRESSION_AND_STRING);
-    createEReference(eJinjaExpressionAndStringEClass, EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING);
+    eJinjaAndStringEClass = createEClass(EJINJA_AND_STRING);
+    createEReference(eJinjaAndStringEClass, EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING);
 
     eMultiLineExpressionEClass = createEClass(EMULTI_LINE_EXPRESSION);
     createEAttribute(eMultiLineExpressionEClass, EMULTI_LINE_EXPRESSION__NEW_LINE_COMMAND);
@@ -4664,7 +4664,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eTaskHandlerErrorHandlingEClass.getESuperTypes().add(this.getEErrorHandling());
     eNotifiedHandlerEClass.getESuperTypes().add(this.getENotifiable());
     eNotifiedTopicEClass.getESuperTypes().add(this.getENotifiable());
-    eJinjaExpressionAndStringEClass.getESuperTypes().add(this.getEStringPassed());
+    eJinjaAndStringEClass.getESuperTypes().add(this.getEStringPassed());
     eMultiLineExpressionEClass.getESuperTypes().add(this.getEStringPassed());
     eStringPassedEClass.getESuperTypes().add(this.getEValuePassed());
     eStringPassedEClass.getESuperTypes().add(this.getEElementOfListIndented());
@@ -4675,14 +4675,14 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEValueWithoutString());
     eSimpleValueWithoutStringEClass.getESuperTypes().add(this.getEElementOfListIndented());
     eSimpleValueJinjaEClass.getESuperTypes().add(this.getEValueJinja());
-    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
+    eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEJinjaOrString());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEDictionaryPassed());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEListPassed());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getENumberPassed());
     eJinjaExpressionEvaluationEClass.getESuperTypes().add(this.getEBooleanPassed());
     eJinjaExpressionEvaluationWithoutBracketsEClass.getESuperTypes().add(this.getECondition());
     eFunctionCallOrVariableEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
-    eJinjaStatementEClass.getESuperTypes().add(this.getEJinjaExpressionOrString());
+    eJinjaStatementEClass.getESuperTypes().add(this.getEJinjaOrString());
     eIfStatementEClass.getESuperTypes().add(this.getEJinjaStatement());
     eForStatementEClass.getESuperTypes().add(this.getEJinjaStatement());
     eVariableDeclarationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());
@@ -4885,15 +4885,15 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEClass(eNotifiedTopicEClass, ENotifiedTopic.class, "ENotifiedTopic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getENotifiedTopic_Name(), ecorePackage.getEString(), "name", null, 0, 1, ENotifiedTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eJinjaExpressionOrStringEClass, EJinjaExpressionOrString.class, "EJinjaExpressionOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEJinjaExpressionOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EJinjaExpressionOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eJinjaOrStringEClass, EJinjaOrString.class, "EJinjaOrString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEJinjaOrString_String(), ecorePackage.getEString(), "string", null, 0, 1, EJinjaOrString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eJinjaExpressionAndStringEClass, EJinjaExpressionAndString.class, "EJinjaExpressionAndString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEJinjaExpressionAndString_Jinja_expression_and_string(), this.getEJinjaExpressionOrString(), null, "jinja_expression_and_string", null, 0, -1, EJinjaExpressionAndString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eJinjaAndStringEClass, EJinjaAndString.class, "EJinjaAndString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEJinjaAndString_Jinja_expression_and_string(), this.getEJinjaOrString(), null, "jinja_expression_and_string", null, 0, -1, EJinjaAndString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eMultiLineExpressionEClass, EMultiLineExpression.class, "EMultiLineExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEMultiLineExpression_New_line_command(), ecorePackage.getEString(), "new_line_command", null, 0, 1, EMultiLineExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEMultiLineExpression_Expressions(), this.getEJinjaExpressionAndString(), null, "expressions", null, 0, -1, EMultiLineExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEMultiLineExpression_Expressions(), this.getEJinjaAndString(), null, "expressions", null, 0, -1, EMultiLineExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eStringPassedEClass, EStringPassed.class, "EStringPassed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

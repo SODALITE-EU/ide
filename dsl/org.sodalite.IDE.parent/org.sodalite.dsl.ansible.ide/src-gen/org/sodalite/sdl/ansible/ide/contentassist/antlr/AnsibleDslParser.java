@@ -42,7 +42,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEExeSettingsAccess().getAlternatives(), "rule__EExeSettings__Alternatives");
 			builder.put(grammarAccess.getEErrorHandlingAccess().getAlternatives(), "rule__EErrorHandling__Alternatives");
 			builder.put(grammarAccess.getENotifiableAccess().getAlternatives(), "rule__ENotifiable__Alternatives");
-			builder.put(grammarAccess.getEJinjaExpressionOrStringAccess().getAlternatives(), "rule__EJinjaExpressionOrString__Alternatives");
+			builder.put(grammarAccess.getEJinjaOrStringAccess().getAlternatives(), "rule__EJinjaOrString__Alternatives");
 			builder.put(grammarAccess.getEMultiLineExpressionAccess().getNew_line_commandAlternatives_0_0(), "rule__EMultiLineExpression__New_line_commandAlternatives_0_0");
 			builder.put(grammarAccess.getEStringPassedAccess().getAlternatives(), "rule__EStringPassed__Alternatives");
 			builder.put(grammarAccess.getEValuePassedAccess().getAlternatives(), "rule__EValuePassed__Alternatives");
@@ -458,8 +458,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEAsynchronousSettingsAccess().getPollAssignment_2_1_1(), "rule__EAsynchronousSettings__PollAssignment_2_1_1");
 			builder.put(grammarAccess.getENotifiedHandlerAccess().getNameAssignment(), "rule__ENotifiedHandler__NameAssignment");
 			builder.put(grammarAccess.getENotifiedTopicAccess().getNameAssignment_1(), "rule__ENotifiedTopic__NameAssignment_1");
-			builder.put(grammarAccess.getEJinjaExpressionOrStringAccess().getStringAssignment_2(), "rule__EJinjaExpressionOrString__StringAssignment_2");
-			builder.put(grammarAccess.getEJinjaExpressionAndStringAccess().getJinja_expression_and_stringAssignment(), "rule__EJinjaExpressionAndString__Jinja_expression_and_stringAssignment");
+			builder.put(grammarAccess.getEJinjaOrStringAccess().getStringAssignment_2(), "rule__EJinjaOrString__StringAssignment_2");
+			builder.put(grammarAccess.getEJinjaAndStringAccess().getJinja_expression_and_stringAssignment(), "rule__EJinjaAndString__Jinja_expression_and_stringAssignment");
 			builder.put(grammarAccess.getEMultiLineExpressionAccess().getNew_line_commandAssignment_0(), "rule__EMultiLineExpression__New_line_commandAssignment_0");
 			builder.put(grammarAccess.getEMultiLineExpressionAccess().getExpressionsAssignment_2_1(), "rule__EMultiLineExpression__ExpressionsAssignment_2_1");
 			builder.put(grammarAccess.getESimpleValueWithoutStringAccess().getSimple_value_booleanAssignment_0(), "rule__ESimpleValueWithoutString__Simple_value_booleanAssignment_0");

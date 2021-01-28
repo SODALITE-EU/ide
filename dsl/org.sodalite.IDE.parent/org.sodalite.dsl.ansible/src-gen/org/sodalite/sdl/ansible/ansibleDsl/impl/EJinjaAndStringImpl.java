@@ -16,23 +16,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EJinja Expression And String</b></em>'.
+ * An implementation of the model object '<em><b>EJinja And String</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionAndStringImpl#getJinja_expression_and_string <em>Jinja expression and string</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl#getJinja_expression_and_string <em>Jinja expression and string</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements EJinjaExpressionAndString
+public class EJinjaAndStringImpl extends EStringPassedImpl implements EJinjaAndString
 {
   /**
    * The cached value of the '{@link #getJinja_expression_and_string() <em>Jinja expression and string</em>}' containment reference list.
@@ -42,14 +42,14 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
    * @generated
    * @ordered
    */
-  protected EList<EJinjaExpressionOrString> jinja_expression_and_string;
+  protected EList<EJinjaOrString> jinja_expression_and_string;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EJinjaExpressionAndStringImpl()
+  protected EJinjaAndStringImpl()
   {
     super();
   }
@@ -62,7 +62,7 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   @Override
   protected EClass eStaticClass()
   {
-    return AnsibleDslPackage.Literals.EJINJA_EXPRESSION_AND_STRING;
+    return AnsibleDslPackage.Literals.EJINJA_AND_STRING;
   }
 
   /**
@@ -71,11 +71,11 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
    * @generated
    */
   @Override
-  public EList<EJinjaExpressionOrString> getJinja_expression_and_string()
+  public EList<EJinjaOrString> getJinja_expression_and_string()
   {
     if (jinja_expression_and_string == null)
     {
-      jinja_expression_and_string = new EObjectContainmentEList<EJinjaExpressionOrString>(EJinjaExpressionOrString.class, this, AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING);
+      jinja_expression_and_string = new EObjectContainmentEList<EJinjaOrString>(EJinjaOrString.class, this, AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING);
     }
     return jinja_expression_and_string;
   }
@@ -90,7 +90,7 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING:
         return ((InternalEList<?>)getJinja_expression_and_string()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -106,7 +106,7 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING:
         return getJinja_expression_and_string();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -123,9 +123,9 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING:
         getJinja_expression_and_string().clear();
-        getJinja_expression_and_string().addAll((Collection<? extends EJinjaExpressionOrString>)newValue);
+        getJinja_expression_and_string().addAll((Collection<? extends EJinjaOrString>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,7 +141,7 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING:
         getJinja_expression_and_string().clear();
         return;
     }
@@ -158,10 +158,10 @@ public class EJinjaExpressionAndStringImpl extends EStringPassedImpl implements 
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING:
         return jinja_expression_and_string != null && !jinja_expression_and_string.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EJinjaExpressionAndStringImpl
+} //EJinjaAndStringImpl

@@ -357,22 +357,22 @@ public interface AnsibleDslFactory extends EFactory
   ENotifiedTopic createENotifiedTopic();
 
   /**
-   * Returns a new object of class '<em>EJinja Expression Or String</em>'.
+   * Returns a new object of class '<em>EJinja Or String</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EJinja Expression Or String</em>'.
+   * @return a new object of class '<em>EJinja Or String</em>'.
    * @generated
    */
-  EJinjaExpressionOrString createEJinjaExpressionOrString();
+  EJinjaOrString createEJinjaOrString();
 
   /**
-   * Returns a new object of class '<em>EJinja Expression And String</em>'.
+   * Returns a new object of class '<em>EJinja And String</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>EJinja Expression And String</em>'.
+   * @return a new object of class '<em>EJinja And String</em>'.
    * @generated
    */
-  EJinjaExpressionAndString createEJinjaExpressionAndString();
+  EJinjaAndString createEJinjaAndString();
 
   /**
    * Returns a new object of class '<em>EMulti Line Expression</em>'.

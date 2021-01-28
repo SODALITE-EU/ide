@@ -102,8 +102,8 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
       case AnsibleDslPackage.ENOTIFIABLE: return createENotifiable();
       case AnsibleDslPackage.ENOTIFIED_HANDLER: return createENotifiedHandler();
       case AnsibleDslPackage.ENOTIFIED_TOPIC: return createENotifiedTopic();
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING: return createEJinjaExpressionOrString();
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING: return createEJinjaExpressionAndString();
+      case AnsibleDslPackage.EJINJA_OR_STRING: return createEJinjaOrString();
+      case AnsibleDslPackage.EJINJA_AND_STRING: return createEJinjaAndString();
       case AnsibleDslPackage.EMULTI_LINE_EXPRESSION: return createEMultiLineExpression();
       case AnsibleDslPackage.ESTRING_PASSED: return createEStringPassed();
       case AnsibleDslPackage.EVALUE_PASSED: return createEValuePassed();
@@ -619,10 +619,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EJinjaExpressionOrString createEJinjaExpressionOrString()
+  public EJinjaOrString createEJinjaOrString()
   {
-    EJinjaExpressionOrStringImpl eJinjaExpressionOrString = new EJinjaExpressionOrStringImpl();
-    return eJinjaExpressionOrString;
+    EJinjaOrStringImpl eJinjaOrString = new EJinjaOrStringImpl();
+    return eJinjaOrString;
   }
 
   /**
@@ -631,10 +631,10 @@ public class AnsibleDslFactoryImpl extends EFactoryImpl implements AnsibleDslFac
    * @generated
    */
   @Override
-  public EJinjaExpressionAndString createEJinjaExpressionAndString()
+  public EJinjaAndString createEJinjaAndString()
   {
-    EJinjaExpressionAndStringImpl eJinjaExpressionAndString = new EJinjaExpressionAndStringImpl();
-    return eJinjaExpressionAndString;
+    EJinjaAndStringImpl eJinjaAndString = new EJinjaAndStringImpl();
+    return eJinjaAndString;
   }
 
   /**

@@ -54,10 +54,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EListInLine;
 import org.sodalite.sdl.ansible.ansibleDsl.EListIndented;
@@ -1847,8 +1847,8 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileStringPassed(final EStringPassed stringPassed, final String space, final boolean isInMultiLine) {
-    if ((stringPassed instanceof EJinjaExpressionAndString)) {
-      return this.compileJinjaExpressionAndString(((EJinjaExpressionAndString)stringPassed), space, isInMultiLine);
+    if ((stringPassed instanceof EJinjaAndString)) {
+      return this.compileJinjaAndString(((EJinjaAndString)stringPassed), space, isInMultiLine);
     } else {
       if ((stringPassed instanceof EMultiLineExpression)) {
         return this.compileMultiLineExpression(((EMultiLineExpression)stringPassed), space);
@@ -1857,14 +1857,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return null;
   }
   
-  public String compileJinjaExpressionAndString(final EJinjaExpressionAndString jinja, final String space, final boolean isInMultiLine) {
+  public String compileJinjaAndString(final EJinjaAndString jinja, final String space, final boolean isInMultiLine) {
     String stringToReturn = "";
     if ((!isInMultiLine)) {
       stringToReturn = stringToReturn.concat("\"");
     }
-    EList<EJinjaExpressionOrString> _jinja_expression_and_string = jinja.getJinja_expression_and_string();
-    for (final EJinjaExpressionOrString jinjaOr : _jinja_expression_and_string) {
-      stringToReturn = stringToReturn.concat(this.compileJinjaExpressionOrString(jinjaOr, space, isInMultiLine).toString());
+    EList<EJinjaOrString> _jinja_expression_and_string = jinja.getJinja_expression_and_string();
+    for (final EJinjaOrString jinjaOr : _jinja_expression_and_string) {
+      stringToReturn = stringToReturn.concat(this.compileJinjaOrString(jinjaOr, space, isInMultiLine).toString());
     }
     if ((!isInMultiLine)) {
       stringToReturn = stringToReturn.concat("\"");
@@ -1879,14 +1879,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     if (_tripleNotEquals) {
       stringToReturn = stringToReturn.concat(multiLineExpression.getNew_line_command());
     }
-    EList<EJinjaExpressionAndString> _expressions = multiLineExpression.getExpressions();
-    for (final EJinjaExpressionAndString jinjaAndString : _expressions) {
-      stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(this.compileJinjaExpressionAndString(jinjaAndString, space, true).toString());
+    EList<EJinjaAndString> _expressions = multiLineExpression.getExpressions();
+    for (final EJinjaAndString jinjaAndString : _expressions) {
+      stringToReturn = stringToReturn.concat("\n").concat(space.concat("  ")).concat(this.compileJinjaAndString(jinjaAndString, space, true).toString());
     }
     return stringToReturn;
   }
   
-  public String compileJinjaExpressionOrString(final EJinjaExpressionOrString jinja, final String space, final boolean isInMultiLine) {
+  public String compileJinjaOrString(final EJinjaOrString jinja, final String space, final boolean isInMultiLine) {
     String _string = jinja.getString();
     boolean _tripleNotEquals = (_string != null);
     if (_tripleNotEquals) {
@@ -2097,7 +2097,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public Object compileLoopList(final EValuePassed loopList, final String space) {
-    if (((loopList instanceof EJinjaExpressionAndString) || (loopList instanceof org.sodalite.sdl.ansible.ansibleDsl.EList))) {
+    if (((loopList instanceof EJinjaAndString) || (loopList instanceof org.sodalite.sdl.ansible.ansibleDsl.EList))) {
       return this.compileValuePassed(loopList, space, false);
     } else {
       return "[".concat(this.compileValuePassed(loopList, space, false).toString()).concat("]");

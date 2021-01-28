@@ -3522,15 +3522,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 	}
-	public class EJinjaExpressionOrStringElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionOrString");
+	public class EJinjaOrStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaOrString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEJinjaExpressionEvaluationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEJinjaStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final Assignment cStringAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final RuleCall cStringSTRINGTerminalRuleCall_2_0 = (RuleCall)cStringAssignment_2.eContents().get(0);
 		
-		//EJinjaExpressionOrString:
+		//EJinjaOrString:
 		//	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3549,20 +3549,20 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//STRING
 		public RuleCall getStringSTRINGTerminalRuleCall_2_0() { return cStringSTRINGTerminalRuleCall_2_0; }
 	}
-	public class EJinjaExpressionAndStringElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionAndString");
+	public class EJinjaAndStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EJinjaAndString");
 		private final Assignment cJinja_expression_and_stringAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0 = (RuleCall)cJinja_expression_and_stringAssignment.eContents().get(0);
+		private final RuleCall cJinja_expression_and_stringEJinjaOrStringParserRuleCall_0 = (RuleCall)cJinja_expression_and_stringAssignment.eContents().get(0);
 		
-		//EJinjaExpressionAndString:
-		//	jinja_expression_and_string+=EJinjaExpressionOrString+;
+		//EJinjaAndString:
+		//	jinja_expression_and_string+=EJinjaOrString+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//jinja_expression_and_string+=EJinjaExpressionOrString+
+		//jinja_expression_and_string+=EJinjaOrString+
 		public Assignment getJinja_expression_and_stringAssignment() { return cJinja_expression_and_stringAssignment; }
 		
-		//EJinjaExpressionOrString
-		public RuleCall getJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0() { return cJinja_expression_and_stringEJinjaExpressionOrStringParserRuleCall_0; }
+		//EJinjaOrString
+		public RuleCall getJinja_expression_and_stringEJinjaOrStringParserRuleCall_0() { return cJinja_expression_and_stringEJinjaOrStringParserRuleCall_0; }
 	}
 	public class EMultiLineExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EMultiLineExpression");
@@ -3575,15 +3575,15 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLine_of_stringKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cExpressionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0 = (RuleCall)cExpressionsAssignment_2_1.eContents().get(0);
+		private final RuleCall cExpressionsEJinjaAndStringParserRuleCall_2_1_0 = (RuleCall)cExpressionsAssignment_2_1.eContents().get(0);
 		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EMultiLineExpression:
-		//	new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaExpressionAndString)+
+		//	new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaAndString)+
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaExpressionAndString)+ END
+		//new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaAndString)+ END
 		public Group getGroup() { return cGroup; }
 		
 		//new_line_command=('>' | '|')
@@ -3601,17 +3601,17 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//('line_of_string:' expressions+=EJinjaExpressionAndString)+
+		//('line_of_string:' expressions+=EJinjaAndString)+
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'line_of_string:'
 		public Keyword getLine_of_stringKeyword_2_0() { return cLine_of_stringKeyword_2_0; }
 		
-		//expressions+=EJinjaExpressionAndString
+		//expressions+=EJinjaAndString
 		public Assignment getExpressionsAssignment_2_1() { return cExpressionsAssignment_2_1; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0() { return cExpressionsEJinjaExpressionAndStringParserRuleCall_2_1_0; }
+		//EJinjaAndString
+		public RuleCall getExpressionsEJinjaAndStringParserRuleCall_2_1_0() { return cExpressionsEJinjaAndStringParserRuleCall_2_1_0; }
 		
 		//END
 		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
@@ -3619,18 +3619,18 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	public class EStringPassedElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EStringPassed");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEJinjaExpressionAndStringParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEJinjaAndStringParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEMultiLineExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EStringPassed:
-		//	EJinjaExpressionAndString | EMultiLineExpression;
+		//	EJinjaAndString | EMultiLineExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EJinjaExpressionAndString | EMultiLineExpression
+		//EJinjaAndString | EMultiLineExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//EJinjaExpressionAndString
-		public RuleCall getEJinjaExpressionAndStringParserRuleCall_0() { return cEJinjaExpressionAndStringParserRuleCall_0; }
+		//EJinjaAndString
+		public RuleCall getEJinjaAndStringParserRuleCall_0() { return cEJinjaAndStringParserRuleCall_0; }
 		
 		//EMultiLineExpression
 		public RuleCall getEMultiLineExpressionParserRuleCall_1() { return cEMultiLineExpressionParserRuleCall_1; }
@@ -5977,8 +5977,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	private final ENotifiableElements pENotifiable;
 	private final ENotifiedHandlerElements pENotifiedHandler;
 	private final ENotifiedTopicElements pENotifiedTopic;
-	private final EJinjaExpressionOrStringElements pEJinjaExpressionOrString;
-	private final EJinjaExpressionAndStringElements pEJinjaExpressionAndString;
+	private final EJinjaOrStringElements pEJinjaOrString;
+	private final EJinjaAndStringElements pEJinjaAndString;
 	private final EMultiLineExpressionElements pEMultiLineExpression;
 	private final EStringPassedElements pEStringPassed;
 	private final EValuePassedElements pEValuePassed;
@@ -6097,8 +6097,8 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		this.pENotifiable = new ENotifiableElements();
 		this.pENotifiedHandler = new ENotifiedHandlerElements();
 		this.pENotifiedTopic = new ENotifiedTopicElements();
-		this.pEJinjaExpressionOrString = new EJinjaExpressionOrStringElements();
-		this.pEJinjaExpressionAndString = new EJinjaExpressionAndStringElements();
+		this.pEJinjaOrString = new EJinjaOrStringElements();
+		this.pEJinjaAndString = new EJinjaAndStringElements();
 		this.pEMultiLineExpression = new EMultiLineExpressionElements();
 		this.pEStringPassed = new EStringPassedElements();
 		this.pEValuePassed = new EValuePassedElements();
@@ -6684,28 +6684,28 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		return getENotifiedTopicAccess().getRule();
 	}
 	
-	//EJinjaExpressionOrString:
+	//EJinjaOrString:
 	//	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING;
-	public EJinjaExpressionOrStringElements getEJinjaExpressionOrStringAccess() {
-		return pEJinjaExpressionOrString;
+	public EJinjaOrStringElements getEJinjaOrStringAccess() {
+		return pEJinjaOrString;
 	}
 	
-	public ParserRule getEJinjaExpressionOrStringRule() {
-		return getEJinjaExpressionOrStringAccess().getRule();
+	public ParserRule getEJinjaOrStringRule() {
+		return getEJinjaOrStringAccess().getRule();
 	}
 	
-	//EJinjaExpressionAndString:
-	//	jinja_expression_and_string+=EJinjaExpressionOrString+;
-	public EJinjaExpressionAndStringElements getEJinjaExpressionAndStringAccess() {
-		return pEJinjaExpressionAndString;
+	//EJinjaAndString:
+	//	jinja_expression_and_string+=EJinjaOrString+;
+	public EJinjaAndStringElements getEJinjaAndStringAccess() {
+		return pEJinjaAndString;
 	}
 	
-	public ParserRule getEJinjaExpressionAndStringRule() {
-		return getEJinjaExpressionAndStringAccess().getRule();
+	public ParserRule getEJinjaAndStringRule() {
+		return getEJinjaAndStringAccess().getRule();
 	}
 	
 	//EMultiLineExpression:
-	//	new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaExpressionAndString)+
+	//	new_line_command=('>' | '|') BEGIN ('line_of_string:' expressions+=EJinjaAndString)+
 	//	END;
 	public EMultiLineExpressionElements getEMultiLineExpressionAccess() {
 		return pEMultiLineExpression;
@@ -6716,7 +6716,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EStringPassed:
-	//	EJinjaExpressionAndString | EMultiLineExpression;
+	//	EJinjaAndString | EMultiLineExpression;
 	public EStringPassedElements getEStringPassedAccess() {
 		return pEStringPassed;
 	}

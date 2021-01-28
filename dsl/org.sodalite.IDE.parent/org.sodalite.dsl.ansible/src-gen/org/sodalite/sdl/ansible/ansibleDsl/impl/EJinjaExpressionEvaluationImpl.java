@@ -38,7 +38,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
  *
  * @generated
  */
-public class EJinjaExpressionEvaluationImpl extends EJinjaExpressionOrStringImpl implements EJinjaExpressionEvaluation
+public class EJinjaExpressionEvaluationImpl extends EJinjaOrStringImpl implements EJinjaExpressionEvaluation
 {
   /**
    * The cached value of the '{@link #getNumber_passed() <em>Number passed</em>}' containment reference.

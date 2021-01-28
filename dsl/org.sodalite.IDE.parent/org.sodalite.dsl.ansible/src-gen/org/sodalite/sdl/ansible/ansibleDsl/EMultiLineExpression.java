@@ -48,7 +48,7 @@ public interface EMultiLineExpression extends EStringPassed
 
   /**
    * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString}.
+   * The list contents are of type {@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expressions</em>' containment reference list.
@@ -56,6 +56,6 @@ public interface EMultiLineExpression extends EStringPassed
    * @model containment="true"
    * @generated
    */
-  EList<EJinjaExpressionAndString> getExpressions();
+  EList<EJinjaAndString> getExpressions();
 
 } // EMultiLineExpression

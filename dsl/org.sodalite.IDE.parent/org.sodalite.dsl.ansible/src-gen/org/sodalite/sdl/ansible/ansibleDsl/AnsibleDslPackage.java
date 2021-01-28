@@ -2705,14 +2705,14 @@ public interface AnsibleDslPackage extends EPackage
   int ENOTIFIED_TOPIC_FEATURE_COUNT = ENOTIFIABLE_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionOrStringImpl <em>EJinja Expression Or String</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringImpl <em>EJinja Or String</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionOrStringImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionOrString()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaOrString()
    * @generated
    */
-  int EJINJA_EXPRESSION_OR_STRING = 37;
+  int EJINJA_OR_STRING = 37;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -2721,16 +2721,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_OR_STRING__STRING = 0;
+  int EJINJA_OR_STRING__STRING = 0;
 
   /**
-   * The number of structural features of the '<em>EJinja Expression Or String</em>' class.
+   * The number of structural features of the '<em>EJinja Or String</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT = 1;
+  int EJINJA_OR_STRING_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EValuePassedImpl <em>EValue Passed</em>}' class.
@@ -2771,14 +2771,14 @@ public interface AnsibleDslPackage extends EPackage
   int ESTRING_PASSED_FEATURE_COUNT = EVALUE_PASSED_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionAndStringImpl <em>EJinja Expression And String</em>}' class.
+   * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl <em>EJinja And String</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionAndStringImpl
-   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionAndString()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl
+   * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaAndString()
    * @generated
    */
-  int EJINJA_EXPRESSION_AND_STRING = 38;
+  int EJINJA_AND_STRING = 38;
 
   /**
    * The feature id for the '<em><b>Jinja expression and string</b></em>' containment reference list.
@@ -2787,16 +2787,16 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING = ESTRING_PASSED_FEATURE_COUNT + 0;
+  int EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING = ESTRING_PASSED_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>EJinja Expression And String</em>' class.
+   * The number of structural features of the '<em>EJinja And String</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_AND_STRING_FEATURE_COUNT = ESTRING_PASSED_FEATURE_COUNT + 1;
+  int EJINJA_AND_STRING_FEATURE_COUNT = ESTRING_PASSED_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EMultiLineExpressionImpl <em>EMulti Line Expression</em>}' class.
@@ -3039,7 +3039,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__STRING = EJINJA_EXPRESSION_OR_STRING__STRING;
+  int EJINJA_EXPRESSION_EVALUATION__STRING = EJINJA_OR_STRING__STRING;
 
   /**
    * The feature id for the '<em><b>Number passed</b></em>' containment reference.
@@ -3048,7 +3048,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 0;
+  int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED = EJINJA_OR_STRING_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Number passed null</b></em>' attribute.
@@ -3057,7 +3057,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 1;
+  int EJINJA_EXPRESSION_EVALUATION__NUMBER_PASSED_NULL = EJINJA_OR_STRING_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
@@ -3066,7 +3066,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 2;
+  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED = EJINJA_OR_STRING_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Boolean passed null</b></em>' attribute.
@@ -3075,7 +3075,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 3;
+  int EJINJA_EXPRESSION_EVALUATION__BOOLEAN_PASSED_NULL = EJINJA_OR_STRING_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Jinja expression</b></em>' containment reference.
@@ -3084,7 +3084,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 4;
+  int EJINJA_EXPRESSION_EVALUATION__JINJA_EXPRESSION = EJINJA_OR_STRING_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>EJinja Expression Evaluation</em>' class.
@@ -3093,7 +3093,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 5;
+  int EJINJA_EXPRESSION_EVALUATION_FEATURE_COUNT = EJINJA_OR_STRING_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EConditionImpl <em>ECondition</em>}' class.
@@ -3610,7 +3610,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT__STRING = EJINJA_EXPRESSION_OR_STRING__STRING;
+  int EJINJA_STATEMENT__STRING = EJINJA_OR_STRING__STRING;
 
   /**
    * The feature id for the '<em><b>Else block sign</b></em>' attribute.
@@ -3619,7 +3619,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 0;
+  int EJINJA_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_OR_STRING_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Else body</b></em>' containment reference.
@@ -3628,7 +3628,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT__ELSE_BODY = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 1;
+  int EJINJA_STATEMENT__ELSE_BODY = EJINJA_OR_STRING_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>EJinja Statement</em>' class.
@@ -3637,7 +3637,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT_FEATURE_COUNT = EJINJA_EXPRESSION_OR_STRING_FEATURE_COUNT + 2;
+  int EJINJA_STATEMENT_FEATURE_COUNT = EJINJA_OR_STRING_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl <em>EIf Statement</em>}' class.
@@ -6393,46 +6393,46 @@ public interface AnsibleDslPackage extends EPackage
   EAttribute getENotifiedTopic_Name();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString <em>EJinja Expression Or String</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString <em>EJinja Or String</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EJinja Expression Or String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString
+   * @return the meta object for class '<em>EJinja Or String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString
    * @generated
    */
-  EClass getEJinjaExpressionOrString();
+  EClass getEJinjaOrString();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString <em>String</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString#getString <em>String</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionOrString#getString()
-   * @see #getEJinjaExpressionOrString()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString#getString()
+   * @see #getEJinjaOrString()
    * @generated
    */
-  EAttribute getEJinjaExpressionOrString_String();
+  EAttribute getEJinjaOrString_String();
 
   /**
-   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString <em>EJinja Expression And String</em>}'.
+   * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString <em>EJinja And String</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EJinja Expression And String</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString
+   * @return the meta object for class '<em>EJinja And String</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString
    * @generated
    */
-  EClass getEJinjaExpressionAndString();
+  EClass getEJinjaAndString();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString#getJinja_expression_and_string <em>Jinja expression and string</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString#getJinja_expression_and_string <em>Jinja expression and string</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Jinja expression and string</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString#getJinja_expression_and_string()
-   * @see #getEJinjaExpressionAndString()
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString#getJinja_expression_and_string()
+   * @see #getEJinjaAndString()
    * @generated
    */
-  EReference getEJinjaExpressionAndString_Jinja_expression_and_string();
+  EReference getEJinjaAndString_Jinja_expression_and_string();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression <em>EMulti Line Expression</em>}'.
@@ -9311,14 +9311,14 @@ public interface AnsibleDslPackage extends EPackage
     EAttribute ENOTIFIED_TOPIC__NAME = eINSTANCE.getENotifiedTopic_Name();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionOrStringImpl <em>EJinja Expression Or String</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringImpl <em>EJinja Or String</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionOrStringImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionOrString()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaOrString()
      * @generated
      */
-    EClass EJINJA_EXPRESSION_OR_STRING = eINSTANCE.getEJinjaExpressionOrString();
+    EClass EJINJA_OR_STRING = eINSTANCE.getEJinjaOrString();
 
     /**
      * The meta object literal for the '<em><b>String</b></em>' attribute feature.
@@ -9326,17 +9326,17 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EJINJA_EXPRESSION_OR_STRING__STRING = eINSTANCE.getEJinjaExpressionOrString_String();
+    EAttribute EJINJA_OR_STRING__STRING = eINSTANCE.getEJinjaOrString_String();
 
     /**
-     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionAndStringImpl <em>EJinja Expression And String</em>}' class.
+     * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl <em>EJinja And String</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaExpressionAndStringImpl
-     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaExpressionAndString()
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl
+     * @see org.sodalite.sdl.ansible.ansibleDsl.impl.AnsibleDslPackageImpl#getEJinjaAndString()
      * @generated
      */
-    EClass EJINJA_EXPRESSION_AND_STRING = eINSTANCE.getEJinjaExpressionAndString();
+    EClass EJINJA_AND_STRING = eINSTANCE.getEJinjaAndString();
 
     /**
      * The meta object literal for the '<em><b>Jinja expression and string</b></em>' containment reference list feature.
@@ -9344,7 +9344,7 @@ public interface AnsibleDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EJINJA_EXPRESSION_AND_STRING__JINJA_EXPRESSION_AND_STRING = eINSTANCE.getEJinjaExpressionAndString_Jinja_expression_and_string();
+    EReference EJINJA_AND_STRING__JINJA_EXPRESSION_AND_STRING = eINSTANCE.getEJinjaAndString_Jinja_expression_and_string();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EMultiLineExpressionImpl <em>EMulti Line Expression</em>}' class.

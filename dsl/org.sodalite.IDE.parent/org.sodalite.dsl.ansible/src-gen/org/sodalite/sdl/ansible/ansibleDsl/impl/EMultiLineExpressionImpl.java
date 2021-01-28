@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
 
 /**
@@ -66,7 +66,7 @@ public class EMultiLineExpressionImpl extends EStringPassedImpl implements EMult
    * @generated
    * @ordered
    */
-  protected EList<EJinjaExpressionAndString> expressions;
+  protected EList<EJinjaAndString> expressions;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,11 +120,11 @@ public class EMultiLineExpressionImpl extends EStringPassedImpl implements EMult
    * @generated
    */
   @Override
-  public EList<EJinjaExpressionAndString> getExpressions()
+  public EList<EJinjaAndString> getExpressions()
   {
     if (expressions == null)
     {
-      expressions = new EObjectContainmentEList<EJinjaExpressionAndString>(EJinjaExpressionAndString.class, this, AnsibleDslPackage.EMULTI_LINE_EXPRESSION__EXPRESSIONS);
+      expressions = new EObjectContainmentEList<EJinjaAndString>(EJinjaAndString.class, this, AnsibleDslPackage.EMULTI_LINE_EXPRESSION__EXPRESSIONS);
     }
     return expressions;
   }
@@ -179,7 +179,7 @@ public class EMultiLineExpressionImpl extends EStringPassedImpl implements EMult
         return;
       case AnsibleDslPackage.EMULTI_LINE_EXPRESSION__EXPRESSIONS:
         getExpressions().clear();
-        getExpressions().addAll((Collection<? extends EJinjaExpressionAndString>)newValue);
+        getExpressions().addAll((Collection<? extends EJinjaAndString>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

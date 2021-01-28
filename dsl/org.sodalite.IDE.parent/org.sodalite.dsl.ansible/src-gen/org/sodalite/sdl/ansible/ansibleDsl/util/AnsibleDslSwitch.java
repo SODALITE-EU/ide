@@ -359,20 +359,20 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EJINJA_EXPRESSION_OR_STRING:
+      case AnsibleDslPackage.EJINJA_OR_STRING:
       {
-        EJinjaExpressionOrString eJinjaExpressionOrString = (EJinjaExpressionOrString)theEObject;
-        T result = caseEJinjaExpressionOrString(eJinjaExpressionOrString);
+        EJinjaOrString eJinjaOrString = (EJinjaOrString)theEObject;
+        T result = caseEJinjaOrString(eJinjaOrString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AnsibleDslPackage.EJINJA_EXPRESSION_AND_STRING:
+      case AnsibleDslPackage.EJINJA_AND_STRING:
       {
-        EJinjaExpressionAndString eJinjaExpressionAndString = (EJinjaExpressionAndString)theEObject;
-        T result = caseEJinjaExpressionAndString(eJinjaExpressionAndString);
-        if (result == null) result = caseEStringPassed(eJinjaExpressionAndString);
-        if (result == null) result = caseEValuePassed(eJinjaExpressionAndString);
-        if (result == null) result = caseEElementOfListIndented(eJinjaExpressionAndString);
+        EJinjaAndString eJinjaAndString = (EJinjaAndString)theEObject;
+        T result = caseEJinjaAndString(eJinjaAndString);
+        if (result == null) result = caseEStringPassed(eJinjaAndString);
+        if (result == null) result = caseEValuePassed(eJinjaAndString);
+        if (result == null) result = caseEElementOfListIndented(eJinjaAndString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -466,7 +466,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EJinjaExpressionEvaluation eJinjaExpressionEvaluation = (EJinjaExpressionEvaluation)theEObject;
         T result = caseEJinjaExpressionEvaluation(eJinjaExpressionEvaluation);
-        if (result == null) result = caseEJinjaExpressionOrString(eJinjaExpressionEvaluation);
+        if (result == null) result = caseEJinjaOrString(eJinjaExpressionEvaluation);
         if (result == null) result = caseEDictionaryPassed(eJinjaExpressionEvaluation);
         if (result == null) result = caseEListPassed(eJinjaExpressionEvaluation);
         if (result == null) result = caseENumberPassed(eJinjaExpressionEvaluation);
@@ -557,7 +557,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
       {
         EJinjaStatement eJinjaStatement = (EJinjaStatement)theEObject;
         T result = caseEJinjaStatement(eJinjaStatement);
-        if (result == null) result = caseEJinjaExpressionOrString(eJinjaStatement);
+        if (result == null) result = caseEJinjaOrString(eJinjaStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -566,7 +566,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EIfStatement eIfStatement = (EIfStatement)theEObject;
         T result = caseEIfStatement(eIfStatement);
         if (result == null) result = caseEJinjaStatement(eIfStatement);
-        if (result == null) result = caseEJinjaExpressionOrString(eIfStatement);
+        if (result == null) result = caseEJinjaOrString(eIfStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -582,7 +582,7 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EForStatement eForStatement = (EForStatement)theEObject;
         T result = caseEForStatement(eForStatement);
         if (result == null) result = caseEJinjaStatement(eForStatement);
-        if (result == null) result = caseEJinjaExpressionOrString(eForStatement);
+        if (result == null) result = caseEJinjaOrString(eForStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1475,33 +1475,33 @@ public class AnsibleDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EJinja Expression Or String</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EJinja Or String</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EJinja Expression Or String</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EJinja Or String</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEJinjaExpressionOrString(EJinjaExpressionOrString object)
+  public T caseEJinjaOrString(EJinjaOrString object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EJinja Expression And String</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>EJinja And String</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EJinja Expression And String</em>'.
+   * @return the result of interpreting the object as an instance of '<em>EJinja And String</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEJinjaExpressionAndString(EJinjaExpressionAndString object)
+  public T caseEJinjaAndString(EJinjaAndString object)
   {
     return null;
   }
