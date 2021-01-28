@@ -408,7 +408,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qnode;
             final String displayText = qnode;
             final String additionalProposalInfo = node.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/type.png");
+            String _module_1 = node.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
@@ -511,7 +517,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                 _xifexpression_2 = "";
               }
               additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-              this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+              final Image image = this.getImage("icons/attribute.png");
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
@@ -602,7 +609,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   _xifexpression_2 = "";
                 }
                 additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+                final Image image = this.getImage("icons/property.png");
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -686,7 +694,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_4 = ("\nValid source types:" + _valid_source_types_1);
                   additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+                final Image image = this.getImage("icons/capability.png");
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -782,7 +791,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_8 = (_plus_7 + "]");
                   additionalProposalInfo = (_additionalProposalInfo_2 + _plus_8);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+                final Image image = this.getImage("icons/requirement.png");
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -867,7 +877,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               System.out.println(("Valid requirement node: " + qnode));
               displayText = qnode;
               proposalText = qnode;
-              this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+              final Image image = this.getImage("icons/resource2.png");
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
@@ -965,11 +976,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qtype;
             final String displayText = qtype;
             final String additionalProposalInfo = type.getDescription();
-            Image image = this.getImage("icons/type.png");
+            Image image = this.getImage("icons/data_type.png");
             String _module_1 = type.getModule();
             boolean _tripleNotEquals_1 = (_module_1 != null);
             if (_tripleNotEquals_1) {
-              image = this.getImage("icons/primitive_type.png");
+              image = this.getImage("icons/primitive_data_type.png");
             }
             this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }

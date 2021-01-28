@@ -308,7 +308,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = node.description
-				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
+				var Image image = getImage("icons/type.png")
+				if (node.module !== null) 
+					image = getImage("icons/primitive_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
 	
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
@@ -376,7 +379,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = attribute_label
 						additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
 						additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
-						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+						val Image image = getImage("icons/attribute.png")
+						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 			}
 	
@@ -421,7 +425,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = property_label
 						additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
 						additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
-						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+						val Image image = getImage("icons/property.png")
+						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					 }
 				}
 			}
@@ -466,8 +471,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						if (capability.getType !== null)
 							additionalProposalInfo += "\nType: " + capability.getType.getLabel
 						if (capability.getValid_source_types !== null)
-							additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types 
-						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+							additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types
+						val Image image = getImage("icons/capability.png")
+						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 				}
 			}
@@ -514,7 +520,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 							additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
 						if (requirement.getOccurrences !== null)
 							additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
-						createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+						val Image image = getImage("icons/requirement.png")
+						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 				}
 			}
@@ -558,7 +565,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					System.out.println ("Valid requirement node: " + qnode)
 				 	displayText = qnode
 					proposalText = qnode
-					createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+					val Image image = getImage("icons/resource2.png")
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
 			}
 			
@@ -598,9 +606,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val proposalText = qtype
 				val displayText = qtype
 				val additionalProposalInfo = type.description
-				var Image image = getImage("icons/type.png")
+				var Image image = getImage("icons/data_type.png")
 				if (type.module !== null) 
-					image = getImage("icons/primitive_type.png")
+					image = getImage("icons/primitive_data_type.png")
 				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
 	
