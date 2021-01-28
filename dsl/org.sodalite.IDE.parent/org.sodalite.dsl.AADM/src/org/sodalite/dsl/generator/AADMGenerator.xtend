@@ -39,7 +39,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetProperty
-import java.io.File
 import org.sodalite.dsl.rM.ESingleValue
 import org.sodalite.dsl.rM.EBOOLEAN
 import org.sodalite.dsl.rM.EFLOAT
@@ -51,7 +50,6 @@ import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EEntity
-import org.sodalite.ide.ui.logger.SodaliteLogger
 
 /**
  * Generates code from your model files on save.
@@ -375,14 +373,14 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def void putParameterNumber (EObject entity, String parameterName, Integer number){
-		if (parameter_numbers.get(entity)==null){
+		if (parameter_numbers.get(entity) === null){
 			parameter_numbers.put(entity, new HashMap<String, Integer>())
 		}
 		parameter_numbers.get(entity).put(parameterName, number)
 	}
 	
 	def Integer getParameterNumber (EObject entity, String parameterName){
-		if (parameter_numbers.get(entity)==null)
+		if (parameter_numbers.get(entity) === null)
 			return null;
 		return parameter_numbers.get(entity).get(parameterName)
 	}
@@ -426,14 +424,8 @@ class AADMGenerator extends AbstractGenerator {
 	def getFilename(URI uri) {
 		var filename = uri.toString
 		filename = filename.replace("platform:/resource", "")
-		SodaliteLogger.log("Debug: filename: " + filename, null);
-		SodaliteLogger.log("Debug: File.separator: " + File.separator, null);
-		SodaliteLogger.log("Debug: filename.indexOf(File.separator, 1): " + filename.indexOf(File.separator, 1), null);
-		SodaliteLogger.log("Debug: filename.substring(
-				filename.indexOf(File.separator, 1) + 1): " + filename.substring(
-				filename.indexOf(File.separator, 1) + 1), null);
 		filename = filename.substring(
-				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
+				filename.indexOf('/', 1) + 1).replaceFirst('/', ".") + ".ttl";
 		return filename 
 	}
 		
