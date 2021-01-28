@@ -1,7 +1,5 @@
 package org.sodalite.ide.ui.views.parts;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.text.MessageFormat;
 
 import javax.annotation.PostConstruct;
@@ -9,12 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -43,6 +36,7 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -246,7 +240,7 @@ public class KBView {
 							}
 							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
-								IContainer root = getWorkspaceRoot();
+								IContainer root = RMHelper.getWorkspaceRoot();
 								String msg = "Select a workspace folder where to upload the models of the selected module";
 								ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
 								int return_code = dialog.open();
@@ -263,7 +257,7 @@ public class KBView {
 									}
 									// For each model in module, copy it into the target module folder
 									for (Model model : modelData.getElements()) {
-										saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
+										RMHelper.saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
 									}
 									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
 											+ " successfully copied into " + targetFolder.getName() + " folder");
@@ -327,7 +321,7 @@ public class KBView {
 					public void run() {
 						System.out.println("Retrieve model invoked");
 						// Show Dialog to select workspace folder where to copy the model
-						IContainer root = getWorkspaceRoot();
+						IContainer root = RMHelper.getWorkspaceRoot();
 						String msg = "Select a workspace folder where to upload the selected model";
 						ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
 						int return_code = dialog.open();
@@ -338,7 +332,8 @@ public class KBView {
 								return;
 							IPath path = (IPath) result[0];
 							IFolder targetFolder = root.getFolder(path);
-							saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(), targetFolder);
+							RMHelper.saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(),
+									targetFolder);
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
 									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
@@ -376,42 +371,6 @@ public class KBView {
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);
-	}
-
-	private void saveFileInFolder(String filename, String filecontent, IFolder targetFolder) {
-		IFile targetFile = targetFolder.getFile(filename);
-		if (!targetFile.exists()) {
-			saveContentInFile(filecontent, targetFile);
-		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				try {
-					targetFile.delete(false, null);
-					saveContentInFile(filecontent, targetFile);
-				} catch (CoreException e) {
-					SodaliteLogger.log("Error", e);
-				}
-
-			}
-		}
-	}
-
-	private void saveContentInFile(String content, IFile targetFile) {
-		try {
-			byte[] bytes = content.getBytes();
-			InputStream source = new ByteArrayInputStream(bytes);
-			targetFile.create(source, IResource.NONE, null);
-		} catch (CoreException e) {
-			SodaliteLogger.log("Error", e);
-		}
-	}
-
-	private IContainer getWorkspaceRoot() {
-		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IContainer root = workspaceRoot.getContainerForLocation(workspaceRoot.getLocation());
-		return root;
 	}
 
 //	@Focus
