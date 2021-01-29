@@ -16,6 +16,7 @@ import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.dsl.ui.wizards.DeploymentWizard;
 import org.sodalite.dsl.ui.wizards.DeploymentWizardDialog;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADMDeployHandler implements IHandler {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -53,7 +54,7 @@ public class AADMDeployHandler implements IHandler {
 				}
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			SodaliteLogger.log("Error", ex);
 			MessageDialog.openError(parent, "Save AADM Error",
 					"There were an error reported by the KB:\n" + ex.getMessage());
 		}
