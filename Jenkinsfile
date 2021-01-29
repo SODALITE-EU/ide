@@ -31,8 +31,7 @@ pipeline {
                     """
             }
         }
-    }
-   /*	  
+    }  
     stage ('Publish update site') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -40,7 +39,7 @@ pipeline {
     	  sh('scripts/publish_site.sh ${GIT_USERNAME} ${GIT_PASSWORD}')
 	}
       }
-    }*/
+    }
   }
   post {
       failure {
