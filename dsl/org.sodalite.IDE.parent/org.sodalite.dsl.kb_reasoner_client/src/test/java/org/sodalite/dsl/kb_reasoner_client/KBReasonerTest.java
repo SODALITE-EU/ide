@@ -125,6 +125,15 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetPolicyTypes() throws Exception {
+		List<String> modules = Arrays.asList("radon");
+		ReasonerData<Type> policyTypes = kbclient.getPolicyTypes(modules);
+		assertFalse(policyTypes.getElements().isEmpty());
+		policyTypes.getElements().stream().forEach(type -> System.out
+				.println("Policy type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
 	void testGetModules() throws Exception {
 		ModuleData modules = kbclient.getModules();
 		assertFalse(modules.getElements().isEmpty());

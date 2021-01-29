@@ -63,7 +63,7 @@ import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.eclipse.swt.graphics.Image
-
+import org.sodalite.dsl.aADM.impl.EPolicyDefinitionBodyImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -131,19 +131,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
-	def getEntity (GetPropertyBodyImpl body){
-		val EEntityReference eEntityReference = body.entity
-		var ENodeTemplate node = null
-		if (eEntityReference instanceof EEntity){
-			val EEntity eEntity = eEntityReference as EEntity
-			if (eEntity.entity.equals('SELF')){
-				node = getNodeTemplate(body) as ENodeTemplate
-			}
-		} else {
-			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
-		}
-	}
-	
 	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::property property")
 		val String module = getModule(model)
@@ -181,94 +168,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
-	override def getLastSegment(String string, String delimiter) {
-		var newString = string
-		if (string.endsWith(delimiter))
-			newString = string.substring(0, string.length - delimiter.length)
-		return newString.substring(newString.lastIndexOf(delimiter) + 1)
-	}
-		
-	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
-		var ENodeTemplate node = null
-		if (template.node.requirements === null)
-			return node
-		for (req: template.node.requirements.requirements){
-			if (req.name.equals(requirement)){
-				val AADM_Model model = findModel(template) as AADM_Model
-				var module1 = model.module
-				if (module1 === null)
-					module1 = ""
-				var module2 = req.node.module
-				if (module2 === null)
-					module2 = ""
-				if (module1.equals(module2)){
-					node = findNode(model, req.node.id)						
-				}else{
-					//TODO Find node in KB
-				} 
-			}
-		}
-		return node
-	}
-	
-	def findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
-		var ECapabilityAssignment capability = null
-		if (template.node.capabilities === null)
-			return capability
-		for (cap: template.node.capabilities.capabilities){
-			if (cap.name.equals(capabilityName))
-				capability = cap
-		}
-		return capability
-	}
-		
-	def findNode(AADM_Model model, String nodeName) {
-		for (node: model.nodeTemplates.nodeTemplates){
-			if (node.name.equals(nodeName))
-				return node
-		}
-		return null
-	}
-
-	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
-		if (proposal instanceof ConfigurableCompletionProposal) {
-			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
-			configurable.setAdditionalProposalInfo(info);
-		}
-	}
-
-	def String getAdditionalProposalInfo(Keyword keyword) {
-		if (keyword instanceof KeywordImpl) {
-			val keywordImpl = keyword as KeywordImpl
-			val rule = findParserRule (keywordImpl)
-			
-			//ENodeTemplate
-			if (rule.name == "ENodeTemplate" && keyword.value == "type:")
-				return "The required name of the Node Type the Node Template is based upon"
-			else if (rule.name == "ENodeTemplate" && keyword.value == "attributes:")
-				return "An optional list of attribute value assignments for the Node Template."
-			else if (rule.name == "ENodeTemplate" && keyword.value == "properties:")
-				return "An optional list of property value assignments for the Node Template."
-			else if (rule.name == "ENodeTemplate" && keyword.value == "requirements:")
-				return "An optional sequenced list of requirement assignments for the Node Template."
-			
-			//ERequirementAssignment
-			else if (rule.name == "ERequirementAssignment" && keyword.value == "node:")
-				return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime."
-				
-			else
-				return ""
-		}
-	}
-
-	def ParserRule findParserRule (EObject obj){
-		if (obj === null)
-			return null
-		else if (obj instanceof ParserRule)
-			return obj as ParserRule
-		else
-			return findParserRule (obj.eContainer) 
-	}
 
 	// this override filters the assignments for which to create content assist proposals
 	override void completeAssignment(Assignment assignment, ContentAssistContext contentAssistContext,
@@ -319,20 +218,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
-	}
-		
-	override def getModule(EObject object) {
-		val AADM_Model model = findModel(object) as AADM_Model
-		return model.module
-	}
-		
-	override def getImportedModules(EObject object) {
-		val List<String> modules = new ArrayList()
-		val AADM_Model model = findModel(object) as AADM_Model
-		for (import: model.imports)
-			modules.add(import)
-		
-		return modules
 	}
 	
 //	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -412,6 +297,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				type = (model.eContainer as ENodeTemplateBodyImpl).type
 			else if (model instanceof ENodeTemplateImpl)
 				type = (model as ENodeTemplateImpl).node.type
+			else if (model instanceof EPolicyDefinitionBodyImpl)
+				type = (model as EPolicyDefinitionBodyImpl).type
 				
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
@@ -622,7 +509,82 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 		
-//	def existsInAadm(String nodeUri, String aadmUri) {
+
+	// Keywords
+	override void complete_AADM_Model(EObject model, RuleCall ruleCall, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		val String proposalText = "node_templates:"
+		val String displayText = "node_templates:"
+		val String additionalProposalInfo = "A list of node template definitions for the Topology Template"
+
+		createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	}
+
+	// Other stuff
+	// This override avoid the default content assist proposal for terminals such as ID
+	override void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		return
+	}
+
+	override protected def void createNonEditableCompletionProposal(String proposalText, String displayText, Image image, 
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+			configurable.setAutoInsertable(false);
+		}
+		acceptor.accept(proposal)
+	}
+
+	override protected def void createEditableCompletionProposal(String proposalText, String displayText, Image image,
+		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
+		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setSelectionStart(configurable.getReplacementOffset());
+			configurable.setSelectionLength(proposalText.length());
+			configurable.setAutoInsertable(false);
+			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+		}
+		acceptor.accept(proposal)
+	}
+	
+	override void completeEPolicyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for NodeTemplate::type property")
+		try {
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			importedModules.add(module)
+			
+			val ReasonerData<Type> policies = getKBReasoner().getPolicyTypes(importedModules)
+			System.out.println ("Nodes retrieved from KB:")
+			for (policy: policies.elements){
+				System.out.println ("\tNode: " + policy.label)
+				val qpolicy = policy.module !== null ?getLastSegment(policy.module, '/') + '/' + policy.label:policy.label
+				val proposalText = qpolicy
+				val displayText = qpolicy
+				val additionalProposalInfo = policy.description
+				var Image image = getImage("icons/policy_type.png")
+				if (policy.module !== null) 
+					image = getImage("icons/primitive_policy_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
+	}
+	
+	
+	// Functions
+	
+	//	def existsInAadm(String nodeUri, String aadmUri) {
 //		return nodeUri.substring(0, nodeUri.lastIndexOf('/')).equals(
 //			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
 //		)
@@ -700,6 +662,20 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		else
 			return findModel(object.eContainer)
 	}
+	
+	override def getModule(EObject object) {
+		val AADM_Model model = findModel(object) as AADM_Model
+		return model.module
+	}
+		
+	override def getImportedModules(EObject object) {
+		val List<String> modules = new ArrayList()
+		val AADM_Model model = findModel(object) as AADM_Model
+		for (import: model.imports)
+			modules.add(import)
+		
+		return modules
+	}
 
 	def getNodeTemplate(EObject object) {
 		if (object.eContainer == null)
@@ -709,47 +685,108 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		else
 			return getNodeTemplate(object.eContainer)
 	}
-
-	// Keywords
-	override void complete_AADM_Model(EObject model, RuleCall ruleCall, ContentAssistContext context,
-		ICompletionProposalAcceptor acceptor) {
-		val String proposalText = "node_templates:"
-		val String displayText = "node_templates:"
-		val String additionalProposalInfo = "A list of node template definitions for the Topology Template"
-
-		createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	
+	def getEntity (GetPropertyBodyImpl body){
+		val EEntityReference eEntityReference = body.entity
+		var ENodeTemplate node = null
+		if (eEntityReference instanceof EEntity){
+			val EEntity eEntity = eEntityReference as EEntity
+			if (eEntity.entity.equals('SELF')){
+				node = getNodeTemplate(body) as ENodeTemplate
+			}
+		} else {
+			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+		}
+	}
+	
+	override def getLastSegment(String string, String delimiter) {
+		var newString = string
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length - delimiter.length)
+		return newString.substring(newString.lastIndexOf(delimiter) + 1)
+	}
+		
+	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
+		var ENodeTemplate node = null
+		if (template.node.requirements === null)
+			return node
+		for (req: template.node.requirements.requirements){
+			if (req.name.equals(requirement)){
+				val AADM_Model model = findModel(template) as AADM_Model
+				var module1 = model.module
+				if (module1 === null)
+					module1 = ""
+				var module2 = req.node.module
+				if (module2 === null)
+					module2 = ""
+				if (module1.equals(module2)){
+					node = findNode(model, req.node.id)						
+				}else{
+					//TODO Find node in KB
+				} 
+			}
+		}
+		return node
+	}
+	
+	def findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
+		var ECapabilityAssignment capability = null
+		if (template.node.capabilities === null)
+			return capability
+		for (cap: template.node.capabilities.capabilities){
+			if (cap.name.equals(capabilityName))
+				capability = cap
+		}
+		return capability
+	}
+		
+	def findNode(AADM_Model model, String nodeName) {
+		for (node: model.nodeTemplates.nodeTemplates){
+			if (node.name.equals(nodeName))
+				return node
+		}
+		return null
 	}
 
-	// Other stuff
-	// This override avoid the default content assist proposal for terminals such as ID
-	override void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
-		ICompletionProposalAcceptor acceptor) {
-		return
-	}
-
-	override protected def void createNonEditableCompletionProposal(String proposalText, String displayText, Image image, 
-		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
+	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
-			configurable.setAdditionalProposalInfo(additionalProposalInfo);
-			configurable.setAutoInsertable(false);
+			configurable.setAdditionalProposalInfo(info);
 		}
-		acceptor.accept(proposal)
 	}
 
-	override protected def void createEditableCompletionProposal(String proposalText, String displayText, Image image,
-		ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, image, context);
-		if (proposal instanceof ConfigurableCompletionProposal) {
-			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
-			configurable.setSelectionStart(configurable.getReplacementOffset());
-			configurable.setSelectionLength(proposalText.length());
-			configurable.setAutoInsertable(false);
-			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
-			configurable.setAdditionalProposalInfo(additionalProposalInfo);
+	def String getAdditionalProposalInfo(Keyword keyword) {
+		if (keyword instanceof KeywordImpl) {
+			val keywordImpl = keyword as KeywordImpl
+			val rule = findParserRule (keywordImpl)
+			
+			//ENodeTemplate
+			if (rule.name == "ENodeTemplate" && keyword.value == "type:")
+				return "The required name of the Node Type the Node Template is based upon"
+			else if (rule.name == "ENodeTemplate" && keyword.value == "attributes:")
+				return "An optional list of attribute value assignments for the Node Template."
+			else if (rule.name == "ENodeTemplate" && keyword.value == "properties:")
+				return "An optional list of property value assignments for the Node Template."
+			else if (rule.name == "ENodeTemplate" && keyword.value == "requirements:")
+				return "An optional sequenced list of requirement assignments for the Node Template."
+			
+			//ERequirementAssignment
+			else if (rule.name == "ERequirementAssignment" && keyword.value == "node:")
+				return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime."
+				
+			else
+				return ""
 		}
-		acceptor.accept(proposal)
 	}
+
+	def ParserRule findParserRule (EObject obj){
+		if (obj === null)
+			return null
+		else if (obj instanceof ParserRule)
+			return obj as ParserRule
+		else
+			return findParserRule (obj.eContainer) 
+	}
+	
 
 }

@@ -45,6 +45,8 @@ public interface KBReasoner {
 
 	TypeData getInterfaceTypes(List<String> modules) throws Exception;
 
+	TypeData getPolicyTypes(List<String> modules) throws Exception;
+
 	ModuleData getModules() throws Exception;
 
 	AttributeDefinitionData getTypeAttributes(String resourceId) throws Exception;
