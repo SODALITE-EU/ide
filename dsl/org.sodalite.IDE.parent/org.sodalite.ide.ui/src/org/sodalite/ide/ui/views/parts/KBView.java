@@ -247,7 +247,7 @@ public class KBView {
 										MessageDialog.openInformation(shell, "Delete model",
 												"Models in module " + module + " successfully deleted");
 									} catch (Exception e) {
-										e.printStackTrace();
+										SodaliteLogger.log("Error", e);
 									}
 								}
 							}
@@ -307,7 +307,7 @@ public class KBView {
 								MessageDialog.openInformation(shell, "Delete model",
 										"Model " + node.getModel().getName() + " successfully deleted");
 							} catch (Exception e) {
-								e.printStackTrace();
+								SodaliteLogger.log("Error", e);
 							}
 						}
 					}
