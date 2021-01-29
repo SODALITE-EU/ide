@@ -294,11 +294,14 @@ EWithLookup:
 ;
 
 EUntil:
-	'until:' until=EJinjaExpressionEvaluationWithoutBrackets
+	'until:'
+	BEGIN
 	(
+		('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)? &
 		('retries:' retries=ENumberPassed)? &
 		('delay_attribute:' delay=ENumberPassed)? //number of seconds
 	)
+	END
 ;
 
 EPrivilegeEscalation:

@@ -130,8 +130,8 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     "\t  \t  for specifying additional properties of the loop.\n") + 
     "\t- with: the \'with_<lookup>\' keyword for doing loops in Ansible.\n") + 
     "\t- until: when the operations are repeated until a condition is met.\n") + 
-    "\t  \t  This attribute allows to specify the end condition to meet.\n") + 
-    "\t  \t  Two additional attributes that can be set in this case are:\n") + 
+    "\t  \t  The attributes that can be set in this case are:\n") + 
+    "\t   \t  \t - until_condition   -> the end condition to meet.\n") + 
     "\t   \t  \t - retries   -> int\n") + 
     "\t   \t   \t - delay_attribute (\"delay\" in classic Ansible)  -> int\n");
   

@@ -4739,25 +4739,10 @@ ruleEUntil returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getEUntilAccess().getUntilKeyword_0());
 		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEUntilAccess().getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0());
-				}
-				lv_until_1_0=ruleEJinjaExpressionEvaluationWithoutBrackets
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEUntilRule());
-					}
-					set(
-						$current,
-						"until",
-						lv_until_1_0,
-						"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
+		this_BEGIN_1=RULE_BEGIN
+		{
+			newLeafNode(this_BEGIN_1, grammarAccess.getEUntilAccess().getBEGINTerminalRuleCall_1());
+		}
 		(
 			(
 				{ 
@@ -4770,25 +4755,25 @@ ruleEUntil returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 0);
 					}
-								({true}?=>(otherlv_3=Retries
+								({true}?=>(otherlv_3=Until_condition
 								{
-									newLeafNode(otherlv_3, grammarAccess.getEUntilAccess().getRetriesKeyword_2_0_0());
+									newLeafNode(otherlv_3, grammarAccess.getEUntilAccess().getUntil_conditionKeyword_2_0_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEUntilAccess().getRetriesENumberPassedParserRuleCall_2_0_1_0());
+											newCompositeNode(grammarAccess.getEUntilAccess().getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0());
 										}
-										lv_retries_4_0=ruleENumberPassed
+										lv_until_4_0=ruleEJinjaExpressionEvaluationWithoutBrackets
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEUntilRule());
 											}
 											set(
 												$current,
-												"retries",
-												lv_retries_4_0,
-												"org.sodalite.sdl.ansible.AnsibleDsl.ENumberPassed");
+												"until",
+												lv_until_4_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.EJinjaExpressionEvaluationWithoutBrackets");
 											afterParserOrEnumRuleCall();
 										}
 									)
@@ -4804,16 +4789,50 @@ ruleEUntil returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 1);
 					}
-								({true}?=>(otherlv_5=Delay_attribute
+								({true}?=>(otherlv_5=Retries
 								{
-									newLeafNode(otherlv_5, grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_1_0());
+									newLeafNode(otherlv_5, grammarAccess.getEUntilAccess().getRetriesKeyword_2_1_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEUntilAccess().getDelayENumberPassedParserRuleCall_2_1_1_0());
+											newCompositeNode(grammarAccess.getEUntilAccess().getRetriesENumberPassedParserRuleCall_2_1_1_0());
 										}
-										lv_delay_6_0=ruleENumberPassed
+										lv_retries_6_0=ruleENumberPassed
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEUntilRule());
+											}
+											set(
+												$current,
+												"retries",
+												lv_retries_6_0,
+												"org.sodalite.sdl.ansible.AnsibleDsl.ENumberPassed");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+								))
+					{ 
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEUntilAccess().getUnorderedGroup_2());
+					}
+				)
+			)|
+			(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 2)}?=>(
+					{
+						getUnorderedGroupHelper().select(grammarAccess.getEUntilAccess().getUnorderedGroup_2(), 2);
+					}
+								({true}?=>(otherlv_7=Delay_attribute
+								{
+									newLeafNode(otherlv_7, grammarAccess.getEUntilAccess().getDelay_attributeKeyword_2_2_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEUntilAccess().getDelayENumberPassedParserRuleCall_2_2_1_0());
+										}
+										lv_delay_8_0=ruleENumberPassed
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEUntilRule());
@@ -4821,7 +4840,7 @@ ruleEUntil returns [EObject current=null]
 											set(
 												$current,
 												"delay",
-												lv_delay_6_0,
+												lv_delay_8_0,
 												"org.sodalite.sdl.ansible.AnsibleDsl.ENumberPassed");
 											afterParserOrEnumRuleCall();
 										}
@@ -4840,6 +4859,10 @@ ruleEUntil returns [EObject current=null]
 				  getUnorderedGroupHelper().leave(grammarAccess.getEUntilAccess().getUnorderedGroup_2());
 				}
 		)
+		this_END_9=RULE_END
+		{
+			newLeafNode(this_END_9, grammarAccess.getEUntilAccess().getENDTerminalRuleCall_3());
+		}
 	)
 ;
 

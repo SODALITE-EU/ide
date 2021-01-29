@@ -39,6 +39,11 @@ plays:
 								dest:             {{ dest | default(omit, true) }}
 								timeout:          {{ timeout | default(omit, true) }}
 						register: request_result
+						loop:
+							until:
+								until_condition: "((request_result.status|string) in (status_code|string)) or not wait_for_code"
+								retries: {{ max_retries }}
+								delay_attribute: {{ retry_delay }}
 					
 					task_to_execute:
 						task_name: "Save returned content and response code"

@@ -1498,7 +1498,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EUntil returns EUntil
 	 *
 	 * Constraint:
-	 *     (until=EJinjaExpressionEvaluationWithoutBrackets (retries=ENumberPassed | delay=ENumberPassed)*)
+	 *     (until=EJinjaExpressionEvaluationWithoutBrackets | retries=ENumberPassed | delay=ENumberPassed)+
 	 */
 	protected void sequence_EUntil(ISerializationContext context, EUntil semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

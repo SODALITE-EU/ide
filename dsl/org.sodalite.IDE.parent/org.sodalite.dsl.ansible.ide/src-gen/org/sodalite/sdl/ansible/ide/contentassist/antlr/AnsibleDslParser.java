@@ -176,6 +176,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEUntilAccess().getGroup(), "rule__EUntil__Group__0");
 			builder.put(grammarAccess.getEUntilAccess().getGroup_2_0(), "rule__EUntil__Group_2_0__0");
 			builder.put(grammarAccess.getEUntilAccess().getGroup_2_1(), "rule__EUntil__Group_2_1__0");
+			builder.put(grammarAccess.getEUntilAccess().getGroup_2_2(), "rule__EUntil__Group_2_2__0");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getGroup(), "rule__EPrivilegeEscalation__Group__0");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getGroup_2_0(), "rule__EPrivilegeEscalation__Group_2_0__0");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getGroup_2_1(), "rule__EPrivilegeEscalation__Group_2_1__0");
@@ -416,9 +417,9 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getELoopControlAccess().getExtendedAssignment_2_4_1(), "rule__ELoopControl__ExtendedAssignment_2_4_1");
 			builder.put(grammarAccess.getEWithLookupAccess().getLookupAssignment_1(), "rule__EWithLookup__LookupAssignment_1");
 			builder.put(grammarAccess.getEWithLookupAccess().getWith_listAssignment_3(), "rule__EWithLookup__With_listAssignment_3");
-			builder.put(grammarAccess.getEUntilAccess().getUntilAssignment_1(), "rule__EUntil__UntilAssignment_1");
-			builder.put(grammarAccess.getEUntilAccess().getRetriesAssignment_2_0_1(), "rule__EUntil__RetriesAssignment_2_0_1");
-			builder.put(grammarAccess.getEUntilAccess().getDelayAssignment_2_1_1(), "rule__EUntil__DelayAssignment_2_1_1");
+			builder.put(grammarAccess.getEUntilAccess().getUntilAssignment_2_0_1(), "rule__EUntil__UntilAssignment_2_0_1");
+			builder.put(grammarAccess.getEUntilAccess().getRetriesAssignment_2_1_1(), "rule__EUntil__RetriesAssignment_2_1_1");
+			builder.put(grammarAccess.getEUntilAccess().getDelayAssignment_2_2_1(), "rule__EUntil__DelayAssignment_2_2_1");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getBecomeAssignment_2_0_1(), "rule__EPrivilegeEscalation__BecomeAssignment_2_0_1");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getBecome_exeAssignment_2_1_1(), "rule__EPrivilegeEscalation__Become_exeAssignment_2_1_1");
 			builder.put(grammarAccess.getEPrivilegeEscalationAccess().getBecome_flagsAssignment_2_2_1(), "rule__EPrivilegeEscalation__Become_flagsAssignment_2_2_1");

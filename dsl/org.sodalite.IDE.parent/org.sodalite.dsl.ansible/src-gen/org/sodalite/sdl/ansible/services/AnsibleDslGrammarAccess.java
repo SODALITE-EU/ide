@@ -2429,65 +2429,83 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EUntil");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cUntilKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cUntilAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0 = (RuleCall)cUntilAssignment_1.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
-		private final Keyword cRetriesKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final Assignment cRetriesAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cRetriesENumberPassedParserRuleCall_2_0_1_0 = (RuleCall)cRetriesAssignment_2_0_1.eContents().get(0);
+		private final Keyword cUntil_conditionKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cUntilAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0 = (RuleCall)cUntilAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cDelay_attributeKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cDelayAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cDelayENumberPassedParserRuleCall_2_1_1_0 = (RuleCall)cDelayAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRetriesKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cRetriesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cRetriesENumberPassedParserRuleCall_2_1_1_0 = (RuleCall)cRetriesAssignment_2_1_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
+		private final Keyword cDelay_attributeKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cDelayAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cDelayENumberPassedParserRuleCall_2_2_1_0 = (RuleCall)cDelayAssignment_2_2_1.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//EUntil:
-		//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
-		//	delay=ENumberPassed)? //number of seconds
-		//);
+		//	'until:'
+		//	BEGIN (('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)? & ('retries:' retries=ENumberPassed)? &
+		//	('delay_attribute:' delay=ENumberPassed)? //number of seconds
+		//) END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
-		//delay=ENumberPassed)? //number of seconds
-		//)
+		//'until:' BEGIN (('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)? & ('retries:'
+		//retries=ENumberPassed)? & ('delay_attribute:' delay=ENumberPassed)? //number of seconds
+		//) END
 		public Group getGroup() { return cGroup; }
 		
 		//'until:'
 		public Keyword getUntilKeyword_0() { return cUntilKeyword_0; }
 		
-		//until=EJinjaExpressionEvaluationWithoutBrackets
-		public Assignment getUntilAssignment_1() { return cUntilAssignment_1; }
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1() { return cBEGINTerminalRuleCall_1; }
 		
-		//EJinjaExpressionEvaluationWithoutBrackets
-		public RuleCall getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0() { return cUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0; }
-		
-		//(('retries:' retries=ENumberPassed)? & ('delay_attribute:' delay=ENumberPassed)? //number of seconds
+		//(('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)? & ('retries:' retries=ENumberPassed)? &
+		//('delay_attribute:' delay=ENumberPassed)? //number of seconds
 		//)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
-		//('retries:' retries=ENumberPassed)?
+		//('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
-		//'retries:'
-		public Keyword getRetriesKeyword_2_0_0() { return cRetriesKeyword_2_0_0; }
+		//'until_condition:'
+		public Keyword getUntil_conditionKeyword_2_0_0() { return cUntil_conditionKeyword_2_0_0; }
 		
-		//retries=ENumberPassed
-		public Assignment getRetriesAssignment_2_0_1() { return cRetriesAssignment_2_0_1; }
+		//until=EJinjaExpressionEvaluationWithoutBrackets
+		public Assignment getUntilAssignment_2_0_1() { return cUntilAssignment_2_0_1; }
 		
-		//ENumberPassed
-		public RuleCall getRetriesENumberPassedParserRuleCall_2_0_1_0() { return cRetriesENumberPassedParserRuleCall_2_0_1_0; }
+		//EJinjaExpressionEvaluationWithoutBrackets
+		public RuleCall getUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0() { return cUntilEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_2_0_1_0; }
 		
-		//('delay_attribute:' delay=ENumberPassed)?
+		//('retries:' retries=ENumberPassed)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
-		//'delay_attribute:'
-		public Keyword getDelay_attributeKeyword_2_1_0() { return cDelay_attributeKeyword_2_1_0; }
+		//'retries:'
+		public Keyword getRetriesKeyword_2_1_0() { return cRetriesKeyword_2_1_0; }
 		
-		//delay=ENumberPassed
-		public Assignment getDelayAssignment_2_1_1() { return cDelayAssignment_2_1_1; }
+		//retries=ENumberPassed
+		public Assignment getRetriesAssignment_2_1_1() { return cRetriesAssignment_2_1_1; }
 		
 		//ENumberPassed
-		public RuleCall getDelayENumberPassedParserRuleCall_2_1_1_0() { return cDelayENumberPassedParserRuleCall_2_1_1_0; }
+		public RuleCall getRetriesENumberPassedParserRuleCall_2_1_1_0() { return cRetriesENumberPassedParserRuleCall_2_1_1_0; }
+		
+		//('delay_attribute:' delay=ENumberPassed)?
+		public Group getGroup_2_2() { return cGroup_2_2; }
+		
+		//'delay_attribute:'
+		public Keyword getDelay_attributeKeyword_2_2_0() { return cDelay_attributeKeyword_2_2_0; }
+		
+		//delay=ENumberPassed
+		public Assignment getDelayAssignment_2_2_1() { return cDelayAssignment_2_2_1; }
+		
+		//ENumberPassed
+		public RuleCall getDelayENumberPassedParserRuleCall_2_2_1_0() { return cDelayENumberPassedParserRuleCall_2_2_1_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_3() { return cENDTerminalRuleCall_3; }
 	}
 	public class EPrivilegeEscalationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.sdl.ansible.AnsibleDsl.EPrivilegeEscalation");
@@ -6492,9 +6510,10 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//EUntil:
-	//	'until:' until=EJinjaExpressionEvaluationWithoutBrackets (('retries:' retries=ENumberPassed)? & ('delay_attribute:'
-	//	delay=ENumberPassed)? //number of seconds
-	//);
+	//	'until:'
+	//	BEGIN (('until_condition:' until=EJinjaExpressionEvaluationWithoutBrackets)? & ('retries:' retries=ENumberPassed)? &
+	//	('delay_attribute:' delay=ENumberPassed)? //number of seconds
+	//) END;
 	public EUntilElements getEUntilAccess() {
 		return pEUntil;
 	}

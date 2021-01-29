@@ -53,6 +53,8 @@ Operation_input : 'operation_input:';
 
 Task_to_execute : 'task_to_execute:';
 
+Until_condition : 'until_condition:';
+
 Validation_mode : 'validation_mode:';
 
 Delegate_facts : 'delegate_facts:';

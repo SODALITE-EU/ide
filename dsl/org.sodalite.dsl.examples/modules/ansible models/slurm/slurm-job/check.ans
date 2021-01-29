@@ -48,9 +48,10 @@ plays:
 					direct_parameter: "scontrol show job -dd "{{ job_id }}" | grep -o 'JobState=[A-Z]*'"
 				register: job_monitor
 				loop:
-					until: "job_monitor.stdout == 'JobState=COMPLETED'"
-					delay_attribute: {{ declared_variable: monitor_delay_step }}
-					retries: {{ declared_variable: monitor_retries }}
+					until:
+						until_condition: "job_monitor.stdout == 'JobState=COMPLETED'"
+						delay_attribute: {{ declared_variable: monitor_delay_step }}
+						retries: {{ declared_variable: monitor_retries }}
 				asynchronous_settings:
 					async: {{ declared_variable: walltime_sec | int }}
 					poll: {{ declared_variable: monitor_delay_step }}
@@ -62,8 +63,9 @@ plays:
 						jid: {{ registered_variable: job_monitor.ansible_job_id }}
 				register: job_result
 				loop:
-					until: registered_variable: job_result.finished
-					retries: {{ declared_variable: monitor_retries }}
+					until:
+						until_condition: registered_variable: job_result.finished
+						retries: {{ declared_variable: monitor_retries }}
 			
 			task_to_execute:
 				task_name: "set state deleted after job is completed"
