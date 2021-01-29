@@ -792,10 +792,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   protected void createEntityProposals(final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createNonEditableCompletionProposal("SELF", "SELF", null, context, this.SELF_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("SOURCE", "SOURCE", null, context, this.SOURCE_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("TARGET", "TARGET", null, context, this.TARGET_DESCRIPTION, acceptor);
-    this.createNonEditableCompletionProposal("HOST", "HOST", null, context, this.HOST_DESCRIPTION, acceptor);
+    final Image image = this.getImage("icons/resource2.png");
+    this.createNonEditableCompletionProposal("SELF", "SELF", image, context, this.SELF_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("SOURCE", "SOURCE", image, context, this.SOURCE_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("TARGET", "TARGET", image, context, this.TARGET_DESCRIPTION, acceptor);
+    this.createNonEditableCompletionProposal("HOST", "HOST", image, context, this.HOST_DESCRIPTION, acceptor);
   }
   
   protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {

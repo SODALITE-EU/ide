@@ -110,24 +110,24 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		//Get entity in this GetProperty body. If null, return
 		val node = getEntity(model as GetPropertyBodyImpl)
 		
-		if (node === null)
+		if (node === null){
 			return
+		}
 		
-		var List<String> proposals = new ArrayList<String>()
 		//Find requirements and capability assignments defined within the entity
-		if (node.node.requirements !== null)
+		if (node.node.requirements !== null){
+			val Image image = getImage("icons/requirement.png")
 			for (req: node.node.requirements.requirements){
-				proposals.add (module + '/' + node.name + '.' + req.name)
+				val String proposal = module + '/' + node.name + '.' + req.name
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
-		
-		if (node.node.capabilities !== null)
+		}
+		if (node.node.capabilities !== null){
+			val Image image = getImage("icons/capability.png")
 			for (cap: node.node.capabilities.capabilities){
-				proposals.add (module + '/' + node.name + '.' + cap.name)
+				val String proposal = module + '/' + node.name + '.' + cap.name
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
-		
-		//Create proposals for each req or cap.
-		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
 		}
 	}
 	
@@ -175,8 +175,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 		
 		//Create proposals for each found property. Prefix property with req|cap name when applies
+		val Image image = getImage("icons/property.png")
 		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 		}
 	}
 	
@@ -372,6 +373,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(resourceId)
 				if (attributes !== null){}
 					System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
+					val Image image = getImage("icons/attribute.png")
 					for (attribute: attributes.elements){
 						System.out.println ("\tAttribute: " + attribute.uri)
 						var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
@@ -379,7 +381,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = attribute_label
 						additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
 						additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
-						val Image image = getImage("icons/attribute.png")
 						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 			}
@@ -418,6 +419,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(resourceId)
 				if (properties !== null){
 					System.out.println ("Properties retrieved from KB for resource: " + resourceId)
+					val Image image = getImage("icons/property.png")
 					for (property: properties.elements){
 					 	System.out.println ("\tProperty: " + property.uri)
 					 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
@@ -425,7 +427,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						displayText = property_label
 						additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
 						additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
-						val Image image = getImage("icons/property.png")
 						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					 }
 				}
@@ -462,6 +463,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(resourceId)
 				if (capabilities !== null){
 					System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
+					val Image image = getImage("icons/capability.png")
 					for (capability: capabilities.elements){
 						System.out.println ("\nCapability: " + capability.uri)
 					 	var property_label = capability.uri.toString.substring(capability.uri.toString.lastIndexOf('/') + 1, capability.uri.toString.length)
@@ -472,7 +474,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 							additionalProposalInfo += "\nType: " + capability.getType.getLabel
 						if (capability.getValid_source_types !== null)
 							additionalProposalInfo += "\nValid source types:" + capability.getValid_source_types
-						val Image image = getImage("icons/capability.png")
 						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 				}
@@ -508,6 +509,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(resourceId)
 				if (requirements !== null){
 					System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
+					val Image image = getImage("icons/requirement.png")
 					for (requirement: requirements.elements){
 						System.out.println ("\tRequirement: " + requirement.uri)
 					 	var property_label = requirement.uri.toString.substring(requirement.uri.toString.lastIndexOf('/') + 1, requirement.uri.toString.length)
@@ -519,8 +521,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 						if (requirement.getNode !== null)
 							additionalProposalInfo += "\nNode: " + requirement.getNode.getLabel
 						if (requirement.getOccurrences !== null)
-							additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"
-						val Image image = getImage("icons/requirement.png")
+							additionalProposalInfo += "\nOccurrences: [" + requirement.getOccurrences.min + ", " + requirement.getOccurrences.max + "]"	
 						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 					}
 				}
@@ -559,13 +560,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
 			if (!vrnd.elements.empty){
 				System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
+				val Image image = getImage("icons/resource2.png")
 				for (ValidRequirementNode vrn: vrnd.elements){
 					val qtype = vrn.type.module !== null ?getLastSegment(vrn.type.module, '/') + '/' + vrn.type.label:vrn.type.label
 					val qnode = vrn.module !== null ?getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
 					System.out.println ("Valid requirement node: " + qnode)
 				 	displayText = qnode
 					proposalText = qnode
-					val Image image = getImage("icons/resource2.png")
+					
 					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
 			}
@@ -577,12 +579,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
 			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
 			for (ENodeTemplate node: localnodes){
-				System.out.println ("Valid requirement local node: " + node.name)
-			 	val qnode = module != null? module + '/' + node.name: node.name
-			 	val qtype = node.node.type.module != null? node.node.type.module + '/' + node.node.type.type: node.node.type.type
-				proposalText = qnode
-				displayText = qnode
-				createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+				if (node !== null){
+					System.out.println ("Valid requirement local node: " + node.name)
+				 	val qnode = module !== null? module + '/' + node.name: node.name
+					proposalText = qnode
+					displayText = qnode
+					createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+				}
 			}
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog

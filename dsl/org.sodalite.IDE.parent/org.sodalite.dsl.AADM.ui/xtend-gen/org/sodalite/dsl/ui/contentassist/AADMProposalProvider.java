@@ -130,35 +130,37 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     if ((node == null)) {
       return;
     }
-    List<String> proposals = new ArrayList<String>();
     ERequirementAssignments _requirements = node.getNode().getRequirements();
     boolean _tripleNotEquals = (_requirements != null);
     if (_tripleNotEquals) {
+      final Image image = this.getImage("icons/requirement.png");
       EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
       for (final ERequirementAssignment req : _requirements_1) {
-        String _name = node.getName();
-        String _plus = ((module + "/") + _name);
-        String _plus_1 = (_plus + ".");
-        String _name_1 = req.getName();
-        String _plus_2 = (_plus_1 + _name_1);
-        proposals.add(_plus_2);
+        {
+          String _name = node.getName();
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
+          String _name_1 = req.getName();
+          final String proposal = (_plus_1 + _name_1);
+          this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+        }
       }
     }
     ECapabilityAssignments _capabilities = node.getNode().getCapabilities();
     boolean _tripleNotEquals_1 = (_capabilities != null);
     if (_tripleNotEquals_1) {
+      final Image image_1 = this.getImage("icons/capability.png");
       EList<ECapabilityAssignment> _capabilities_1 = node.getNode().getCapabilities().getCapabilities();
       for (final ECapabilityAssignment cap : _capabilities_1) {
-        String _name_2 = node.getName();
-        String _plus_3 = ((module + "/") + _name_2);
-        String _plus_4 = (_plus_3 + ".");
-        String _name_3 = cap.getName();
-        String _plus_5 = (_plus_4 + _name_3);
-        proposals.add(_plus_5);
+        {
+          String _name = node.getName();
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
+          String _name_1 = cap.getName();
+          final String proposal = (_plus_1 + _name_1);
+          this.createEditableCompletionProposal(proposal, proposal, image_1, context, null, acceptor);
+        }
       }
-    }
-    for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
     }
   }
   
@@ -228,8 +230,9 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposals.add(prop_2.getName());
       }
     }
+    final Image image = this.getImage("icons/property.png");
     for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, null, context, null, acceptor);
+      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
     }
   }
   
@@ -484,6 +487,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           if ((attributes != null)) {
           }
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
+          final Image image = this.getImage("icons/attribute.png");
           List<AttributeDefinition> _elements = attributes.getElements();
           for (final AttributeDefinition attribute : _elements) {
             {
@@ -517,7 +521,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                 _xifexpression_2 = "";
               }
               additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-              final Image image = this.getImage("icons/attribute.png");
               this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
@@ -576,6 +579,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<PropertyDefinition> properties = this.getKBReasoner().getTypeProperties(resourceId);
           if ((properties != null)) {
             System.out.println(("Properties retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/property.png");
             List<PropertyDefinition> _elements = properties.getElements();
             for (final PropertyDefinition property : _elements) {
               {
@@ -609,7 +613,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   _xifexpression_2 = "";
                 }
                 additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-                final Image image = this.getImage("icons/property.png");
                 this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
@@ -665,6 +668,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<CapabilityDefinition> capabilities = this.getKBReasoner().getTypeCapabilities(resourceId);
           if ((capabilities != null)) {
             System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/capability.png");
             List<CapabilityDefinition> _elements = capabilities.getElements();
             for (final CapabilityDefinition capability : _elements) {
               {
@@ -694,7 +698,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_4 = ("\nValid source types:" + _valid_source_types_1);
                   additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
                 }
-                final Image image = this.getImage("icons/capability.png");
                 this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
@@ -750,6 +753,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<RequirementDefinition> requirements = this.getKBReasoner().getTypeRequirements(resourceId);
           if ((requirements != null)) {
             System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/requirement.png");
             List<RequirementDefinition> _elements = requirements.getElements();
             for (final RequirementDefinition requirement : _elements) {
               {
@@ -791,7 +795,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_8 = (_plus_7 + "]");
                   additionalProposalInfo = (_additionalProposalInfo_2 + _plus_8);
                 }
-                final Image image = this.getImage("icons/requirement.png");
                 this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
@@ -847,6 +850,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         boolean _not = (!_isEmpty);
         if (_not) {
           System.out.println(("Valid requirement nodes retrieved from KB for requirement: " + requirementId));
+          final Image image = this.getImage("icons/resource2.png");
           List<ValidRequirementNode> _elements = vrnd.getElements();
           for (final ValidRequirementNode vrn : _elements) {
             {
@@ -877,7 +881,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               System.out.println(("Valid requirement node: " + qnode));
               displayText = qnode;
               proposalText = qnode;
-              final Image image = this.getImage("icons/resource2.png");
               this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
@@ -901,31 +904,18 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final String qsuperType = _xifexpression_1;
         final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
         for (final ENodeTemplate node : localnodes) {
-          {
+          if ((node != null)) {
             String _name = node.getName();
             String _plus_1 = ("Valid requirement local node: " + _name);
             System.out.println(_plus_1);
             String _xifexpression_2 = null;
-            boolean _notEquals = (!Objects.equal(module, null));
-            if (_notEquals) {
+            if ((module != null)) {
               String _name_1 = node.getName();
               _xifexpression_2 = ((module + "/") + _name_1);
             } else {
               _xifexpression_2 = node.getName();
             }
             final String qnode = _xifexpression_2;
-            String _xifexpression_3 = null;
-            String _module_3 = node.getNode().getType().getModule();
-            boolean _notEquals_1 = (!Objects.equal(_module_3, null));
-            if (_notEquals_1) {
-              String _module_4 = node.getNode().getType().getModule();
-              String _plus_2 = (_module_4 + "/");
-              String _type_1 = node.getNode().getType().getType();
-              _xifexpression_3 = (_plus_2 + _type_1);
-            } else {
-              _xifexpression_3 = node.getNode().getType().getType();
-            }
-            final String qtype = _xifexpression_3;
             proposalText = qnode;
             displayText = qnode;
             this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);

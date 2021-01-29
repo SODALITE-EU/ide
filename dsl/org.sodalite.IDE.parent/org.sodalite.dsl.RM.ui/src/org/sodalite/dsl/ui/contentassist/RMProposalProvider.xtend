@@ -605,10 +605,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		createNonEditableCompletionProposal ("SELF", "SELF", null, context, SELF_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("SOURCE", "SOURCE", null, context, SOURCE_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("TARGET", "TARGET", null, context, TARGET_DESCRIPTION, acceptor);
-		createNonEditableCompletionProposal ("HOST", "HOST", null, context, HOST_DESCRIPTION, acceptor);
+		val Image image = getImage("icons/resource2.png")
+		createNonEditableCompletionProposal ("SELF", "SELF", image, context, SELF_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("SOURCE", "SOURCE", image, context, SOURCE_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("TARGET", "TARGET", image, context, TARGET_DESCRIPTION, acceptor);
+		createNonEditableCompletionProposal ("HOST", "HOST", image, context, HOST_DESCRIPTION, acceptor);
 	}
 
 	protected def void createNonEditableCompletionProposal(String proposalText, String displayText, Image image,
