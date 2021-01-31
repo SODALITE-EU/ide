@@ -321,7 +321,7 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void completeEIndexOrLoopVariable_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEIndexOrLoopVariableReference_Index_or_loop_variable_reference(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeIndexOrLoopVariableReference(model, context, acceptor, false);
   }
   

@@ -27,6 +27,7 @@ import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
 import org.eclipse.jface.viewers.StyledString
+import org.eclipse.xtext.CrossReference
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -286,8 +287,8 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		completeRegisteredVariableReference(model, context, acceptor, false)
 	}
 	
-	//suggest index or loop variables defined only in this specific play
-	override void completeEIndexOrLoopVariable_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	//suggest index or loop variables defined only in this specific play	
+	override void completeEIndexOrLoopVariableReference_Index_or_loop_variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeIndexOrLoopVariableReference(model, context, acceptor, false)
 	}
 	

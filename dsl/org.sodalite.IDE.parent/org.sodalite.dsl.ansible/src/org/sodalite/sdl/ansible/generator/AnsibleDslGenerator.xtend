@@ -197,15 +197,15 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«IF !isFirstElementOfPlay»
 				«IF externalFileInclusion.import_playbook !== null»
 					«space»import_playbook: «externalFileInclusion.import_playbook»
-				«ENDIF»
 				«ELSEIF externalFileInclusion.include !== null»
 					«space»include: «externalFileInclusion.include»
+				«ENDIF»
 			«ELSEIF isFirstElementOfPlay»
 				«IF externalFileInclusion.import_playbook !== null»
 					- import_playbook: «externalFileInclusion.import_playbook»
-				«ENDIF»
 				«ELSEIF externalFileInclusion.include !== null»
-					- include: «externalFileInclusion.include»			
+					- include: «externalFileInclusion.include»
+				«ENDIF»
 			«ENDIF»		
 			«IF externalFileInclusion.when_expression !== null»
 				«space»when: «compileCondition(externalFileInclusion.when_expression, space)»
@@ -417,7 +417,10 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			if (taskHandler.name !== null) return compileStringPassed(taskHandler.name, space, false)
 			else return null
 		} 
-		else if (taskHandler instanceof EHandler) return "\"".concat(taskHandler.name.compileString).concat("\"")
+		else if (taskHandler instanceof EHandler){
+			if (taskHandler.name !== null) return "\"".concat(taskHandler.name.compileString).concat("\"")
+			else return null
+		}
 	}
 	
 	//if the task/handler has a name, indent it correctly. the name of the module used is the first thing to show
@@ -931,7 +934,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 		else if (variableReference instanceof EIndexOrLoopVariableReference){
 			var indexOrLoopVariableString = ""
-			indexOrLoopVariableString = indexOrLoopVariableString.concat(variableReference.name.name)
+			indexOrLoopVariableString = indexOrLoopVariableString.concat(variableReference.index_or_loop_variable_reference.name)
 			return indexOrLoopVariableString
 		}
 		else if (variableReference instanceof ESetFactVariableReference){

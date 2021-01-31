@@ -192,7 +192,7 @@ EHandler:
 		('notify:' (notifiables+=ENotifiable) (',' notifiables+=ENotifiable)*)? &
 		(loop=ELoop)? &
 		(register=ERegisterVariable)? &
-		('listen:' (listen_to+=[ENotifiedTopic|STRING])+)?
+		('listen:' (listen_to+=[ENotifiedTopic|STRING]) (',' listen_to+=[ENotifiedTopic|STRING])*)?
 	)
 	END
 ;
@@ -587,7 +587,7 @@ EIndexOrLoopVariable:
 ;
 
 EIndexOrLoopVariableReference:
-	'index_or_loop_var:' name=[EIndexOrLoopVariable|ID]
+	'index_or_loop_var:' index_or_loop_variable_reference=[EIndexOrLoopVariable|ID]
 ;
 
 ERegisterVariable:

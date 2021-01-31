@@ -3420,7 +3420,26 @@ ruleEHandler returns [EObject current=null]
 											newLeafNode(otherlv_43, grammarAccess.getEHandlerAccess().getListen_toENotifiedTopicCrossReference_3_22_1_0());
 										}
 									)
-								)+
+								)
+								(
+									otherlv_44=Comma
+									{
+										newLeafNode(otherlv_44, grammarAccess.getEHandlerAccess().getCommaKeyword_3_22_2_0());
+									}
+									(
+										(
+											{
+												if ($current==null) {
+													$current = createModelElement(grammarAccess.getEHandlerRule());
+												}
+											}
+											otherlv_45=RULE_STRING
+											{
+												newLeafNode(otherlv_45, grammarAccess.getEHandlerAccess().getListen_toENotifiedTopicCrossReference_3_22_2_1_0());
+											}
+										)
+									)
+								)*
 								))
 					{ 
 						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEHandlerAccess().getUnorderedGroup_3());
@@ -3435,9 +3454,9 @@ ruleEHandler returns [EObject current=null]
 				  getUnorderedGroupHelper().leave(grammarAccess.getEHandlerAccess().getUnorderedGroup_3());
 				}
 		)
-		this_END_44=RULE_END
+		this_END_46=RULE_END
 		{
-			newLeafNode(this_END_44, grammarAccess.getEHandlerAccess().getENDTerminalRuleCall_4());
+			newLeafNode(this_END_46, grammarAccess.getEHandlerAccess().getENDTerminalRuleCall_4());
 		}
 	)
 ;
@@ -9235,7 +9254,7 @@ ruleEIndexOrLoopVariableReference returns [EObject current=null]
 				}
 				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_1, grammarAccess.getEIndexOrLoopVariableReferenceAccess().getNameEIndexOrLoopVariableCrossReference_1_0());
+					newLeafNode(otherlv_1, grammarAccess.getEIndexOrLoopVariableReferenceAccess().getIndex_or_loop_variable_referenceEIndexOrLoopVariableCrossReference_1_0());
 				}
 			)
 		)

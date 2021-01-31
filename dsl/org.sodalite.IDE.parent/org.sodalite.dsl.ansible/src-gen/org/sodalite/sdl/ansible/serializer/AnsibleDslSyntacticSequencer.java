@@ -28,7 +28,6 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_EBlock___ENDTerminalRuleCall_2_16_3_Rescue_tasksKeyword_2_16_0_BEGINTerminalRuleCall_2_16_1__q;
 	protected AbstractElementAlias match_EBlock___ENDTerminalRuleCall_2_17_3_Always_tasksKeyword_2_17_0_BEGINTerminalRuleCall_2_17_1__q;
 	protected AbstractElementAlias match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__;
-	protected AbstractElementAlias match_EHandler_ListenKeyword_3_22_0_q;
 	protected AbstractElementAlias match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q;
 	protected AbstractElementAlias match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q;
 	protected AbstractElementAlias match_EModuleCall___ENDTerminalRuleCall_2_1_1_3_ParametersKeyword_2_1_1_0_BEGINTerminalRuleCall_2_1_1_1__q;
@@ -49,7 +48,6 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_EBlock___ENDTerminalRuleCall_2_16_3_Rescue_tasksKeyword_2_16_0_BEGINTerminalRuleCall_2_16_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getENDTerminalRuleCall_2_16_3()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getRescue_tasksKeyword_2_16_0()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getBEGINTerminalRuleCall_2_16_1()));
 		match_EBlock___ENDTerminalRuleCall_2_17_3_Always_tasksKeyword_2_17_0_BEGINTerminalRuleCall_2_17_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEBlockAccess().getENDTerminalRuleCall_2_17_3()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getAlways_tasksKeyword_2_17_0()), new TokenAlias(false, false, grammarAccess.getEBlockAccess().getBEGINTerminalRuleCall_2_17_1()));
 		match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getExe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getBEGINTerminalRuleCall_1()), new TokenAlias(false, false, grammarAccess.getEExecutionExeSettingsAccess().getENDTerminalRuleCall_3())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getPlay_exe_settingsKeyword_0()), new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getBEGINTerminalRuleCall_1()), new TokenAlias(false, false, grammarAccess.getEPlayExeSettingsAccess().getENDTerminalRuleCall_3())));
-		match_EHandler_ListenKeyword_3_22_0_q = new TokenAlias(false, true, grammarAccess.getEHandlerAccess().getListenKeyword_3_22_0());
 		match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getENDTerminalRuleCall_3_10_3()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getVarsKeyword_3_10_0()), new TokenAlias(false, false, grammarAccess.getEHandlerAccess().getBEGINTerminalRuleCall_3_10_1()));
 		match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getBEGINTerminalRuleCall_2_0()), new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getENDTerminalRuleCall_2_2()));
 		match_EModuleCall___ENDTerminalRuleCall_2_1_1_3_ParametersKeyword_2_1_1_0_BEGINTerminalRuleCall_2_1_1_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getENDTerminalRuleCall_2_1_1_3()), new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getParametersKeyword_2_1_1_0()), new TokenAlias(false, false, grammarAccess.getEModuleCallAccess().getBEGINTerminalRuleCall_2_1_1_1()));
@@ -101,8 +99,6 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_EBlock___ENDTerminalRuleCall_2_17_3_Always_tasksKeyword_2_17_0_BEGINTerminalRuleCall_2_17_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__.equals(syntax))
 				emit_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EHandler_ListenKeyword_3_22_0_q.equals(syntax))
-				emit_EHandler_ListenKeyword_3_22_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q.equals(syntax))
 				emit_EHandler___ENDTerminalRuleCall_3_10_3_VarsKeyword_3_10_0_BEGINTerminalRuleCall_3_10_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_EModuleCall___BEGINTerminalRuleCall_2_0_ENDTerminalRuleCall_2_2__q.equals(syntax))
@@ -190,17 +186,6 @@ public class AnsibleDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_EExecutionExeSettings_EPlayExeSettings___Exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3___or___Play_exe_settingsKeyword_0_BEGINTerminalRuleCall_1_ENDTerminalRuleCall_3__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     'listen:'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     listen_to+=[ENotifiedTopic|STRING] (ambiguity) listen_to+=[ENotifiedTopic|STRING]
-	 */
-	protected void emit_EHandler_ListenKeyword_3_22_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

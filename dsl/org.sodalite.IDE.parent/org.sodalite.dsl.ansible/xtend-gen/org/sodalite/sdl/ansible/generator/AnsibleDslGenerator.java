@@ -377,38 +377,37 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                 String _import_playbook_1 = externalFileInclusion.getImport_playbook();
                 _builder.append(_import_playbook_1);
                 _builder.newLineIfNotEmpty();
+              } else {
+                String _include = externalFileInclusion.getInclude();
+                boolean _tripleNotEquals_1 = (_include != null);
+                if (_tripleNotEquals_1) {
+                  _builder.append(space);
+                  _builder.append("include: ");
+                  String _include_1 = externalFileInclusion.getInclude();
+                  _builder.append(_include_1);
+                  _builder.newLineIfNotEmpty();
+                }
               }
             }
           } else {
-            String _include = externalFileInclusion.getInclude();
-            boolean _tripleNotEquals_1 = (_include != null);
-            if (_tripleNotEquals_1) {
-              _builder.append(space);
-              _builder.append("include: ");
-              String _include_1 = externalFileInclusion.getInclude();
-              _builder.append(_include_1);
-              _builder.newLineIfNotEmpty();
-            } else {
-              if (isFirstElementOfPlay) {
-                {
-                  String _import_playbook_2 = externalFileInclusion.getImport_playbook();
-                  boolean _tripleNotEquals_2 = (_import_playbook_2 != null);
-                  if (_tripleNotEquals_2) {
-                    _builder.append("- import_playbook: ");
-                    String _import_playbook_3 = externalFileInclusion.getImport_playbook();
-                    _builder.append(_import_playbook_3);
+            if (isFirstElementOfPlay) {
+              {
+                String _import_playbook_2 = externalFileInclusion.getImport_playbook();
+                boolean _tripleNotEquals_2 = (_import_playbook_2 != null);
+                if (_tripleNotEquals_2) {
+                  _builder.append("- import_playbook: ");
+                  String _import_playbook_3 = externalFileInclusion.getImport_playbook();
+                  _builder.append(_import_playbook_3);
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  String _include_2 = externalFileInclusion.getInclude();
+                  boolean _tripleNotEquals_3 = (_include_2 != null);
+                  if (_tripleNotEquals_3) {
+                    _builder.append("- include: ");
+                    String _include_3 = externalFileInclusion.getInclude();
+                    _builder.append(_include_3);
                     _builder.newLineIfNotEmpty();
                   }
-                }
-              } else {
-                String _include_2 = externalFileInclusion.getInclude();
-                boolean _tripleNotEquals_3 = (_include_2 != null);
-                if (_tripleNotEquals_3) {
-                  _builder.append("- include: ");
-                  String _include_3 = externalFileInclusion.getInclude();
-                  _builder.append(_include_3);
-                  _builder.append("\t\t\t");
-                  _builder.newLineIfNotEmpty();
                 }
               }
             }
@@ -1067,7 +1066,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     } else {
       if ((taskHandler instanceof EHandler)) {
-        return "\"".concat(this.compileString(((EHandler)taskHandler).getName())).concat("\"");
+        String _name_1 = ((EHandler)taskHandler).getName();
+        boolean _tripleNotEquals_1 = (_name_1 != null);
+        if (_tripleNotEquals_1) {
+          return "\"".concat(this.compileString(((EHandler)taskHandler).getName())).concat("\"");
+        } else {
+          return null;
+        }
       }
     }
     return null;
@@ -2080,7 +2085,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
           } else {
             if ((variableReference instanceof EIndexOrLoopVariableReference)) {
               String indexOrLoopVariableString = "";
-              indexOrLoopVariableString = indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)variableReference).getName().getName());
+              indexOrLoopVariableString = indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)variableReference).getIndex_or_loop_variable_reference().getName());
               return indexOrLoopVariableString;
             } else {
               if ((variableReference instanceof ESetFactVariableReference)) {

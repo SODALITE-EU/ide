@@ -3472,7 +3472,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
    * @generated
    */
   @Override
-  public EReference getEIndexOrLoopVariableReference_Name()
+  public EReference getEIndexOrLoopVariableReference_Index_or_loop_variable_reference()
   {
     return (EReference)eIndexOrLoopVariableReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -4516,7 +4516,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     createEAttribute(eIndexOrLoopVariableEClass, EINDEX_OR_LOOP_VARIABLE__NAME);
 
     eIndexOrLoopVariableReferenceEClass = createEClass(EINDEX_OR_LOOP_VARIABLE_REFERENCE);
-    createEReference(eIndexOrLoopVariableReferenceEClass, EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME);
+    createEReference(eIndexOrLoopVariableReferenceEClass, EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE);
 
     eRegisterVariableEClass = createEClass(EREGISTER_VARIABLE);
     createEAttribute(eRegisterVariableEClass, EREGISTER_VARIABLE__NAME);
@@ -5013,7 +5013,7 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     initEAttribute(getEIndexOrLoopVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, EIndexOrLoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIndexOrLoopVariableReferenceEClass, EIndexOrLoopVariableReference.class, "EIndexOrLoopVariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEIndexOrLoopVariableReference_Name(), this.getEIndexOrLoopVariable(), null, "name", null, 0, 1, EIndexOrLoopVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEIndexOrLoopVariableReference_Index_or_loop_variable_reference(), this.getEIndexOrLoopVariable(), null, "index_or_loop_variable_reference", null, 0, 1, EIndexOrLoopVariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRegisterVariableEClass, ERegisterVariable.class, "ERegisterVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getERegisterVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ERegisterVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

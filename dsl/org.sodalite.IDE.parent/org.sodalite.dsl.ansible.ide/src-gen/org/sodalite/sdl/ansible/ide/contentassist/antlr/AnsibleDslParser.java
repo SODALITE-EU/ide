@@ -143,6 +143,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_19(), "rule__EHandler__Group_3_19__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_19_2(), "rule__EHandler__Group_3_19_2__0");
 			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_22(), "rule__EHandler__Group_3_22__0");
+			builder.put(grammarAccess.getEHandlerAccess().getGroup_3_22_2(), "rule__EHandler__Group_3_22_2__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup(), "rule__EModuleCall__Group__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2(), "rule__EModuleCall__Group_2__0");
 			builder.put(grammarAccess.getEModuleCallAccess().getGroup_2_1_0(), "rule__EModuleCall__Group_2_1_0__0");
@@ -384,6 +385,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEHandlerAccess().getLoopAssignment_3_20(), "rule__EHandler__LoopAssignment_3_20");
 			builder.put(grammarAccess.getEHandlerAccess().getRegisterAssignment_3_21(), "rule__EHandler__RegisterAssignment_3_21");
 			builder.put(grammarAccess.getEHandlerAccess().getListen_toAssignment_3_22_1(), "rule__EHandler__Listen_toAssignment_3_22_1");
+			builder.put(grammarAccess.getEHandlerAccess().getListen_toAssignment_3_22_2_1(), "rule__EHandler__Listen_toAssignment_3_22_2_1");
 			builder.put(grammarAccess.getEModuleCallAccess().getNameAssignment_1(), "rule__EModuleCall__NameAssignment_1");
 			builder.put(grammarAccess.getEModuleCallAccess().getDirect_parameterAssignment_2_1_0_1(), "rule__EModuleCall__Direct_parameterAssignment_2_1_0_1");
 			builder.put(grammarAccess.getEModuleCallAccess().getParametersAssignment_2_1_1_2(), "rule__EModuleCall__ParametersAssignment_2_1_1_2");
@@ -529,7 +531,7 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getNameAssignment_0(), "rule__EVariableDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getEVariableDeclarationAccess().getValue_passedAssignment_2(), "rule__EVariableDeclaration__Value_passedAssignment_2");
 			builder.put(grammarAccess.getEIndexOrLoopVariableAccess().getNameAssignment(), "rule__EIndexOrLoopVariable__NameAssignment");
-			builder.put(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getNameAssignment_1(), "rule__EIndexOrLoopVariableReference__NameAssignment_1");
+			builder.put(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getIndex_or_loop_variable_referenceAssignment_1(), "rule__EIndexOrLoopVariableReference__Index_or_loop_variable_referenceAssignment_1");
 			builder.put(grammarAccess.getERegisterVariableAccess().getNameAssignment_1(), "rule__ERegisterVariable__NameAssignment_1");
 			builder.put(grammarAccess.getEInputOperationVariableReferenceAccess().getNameAssignment_1(), "rule__EInputOperationVariableReference__NameAssignment_1");
 			builder.put(grammarAccess.getEInputInterfaceVariableReferenceAccess().getNameAssignment_1(), "rule__EInputInterfaceVariableReference__NameAssignment_1");

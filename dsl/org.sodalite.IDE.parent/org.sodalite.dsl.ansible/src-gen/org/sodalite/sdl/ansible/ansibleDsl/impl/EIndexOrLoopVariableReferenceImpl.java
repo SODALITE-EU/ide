@@ -22,7 +22,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableReferenceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableReferenceImpl#getIndex_or_loop_variable_reference <em>Index or loop variable reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -30,14 +30,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
 public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl implements EIndexOrLoopVariableReference
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' reference.
+   * The cached value of the '{@link #getIndex_or_loop_variable_reference() <em>Index or loop variable reference</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIndex_or_loop_variable_reference()
    * @generated
    * @ordered
    */
-  protected EIndexOrLoopVariable name;
+  protected EIndexOrLoopVariable index_or_loop_variable_reference;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,19 +66,19 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
    * @generated
    */
   @Override
-  public EIndexOrLoopVariable getName()
+  public EIndexOrLoopVariable getIndex_or_loop_variable_reference()
   {
-    if (name != null && name.eIsProxy())
+    if (index_or_loop_variable_reference != null && index_or_loop_variable_reference.eIsProxy())
     {
-      InternalEObject oldName = (InternalEObject)name;
-      name = (EIndexOrLoopVariable)eResolveProxy(oldName);
-      if (name != oldName)
+      InternalEObject oldIndex_or_loop_variable_reference = (InternalEObject)index_or_loop_variable_reference;
+      index_or_loop_variable_reference = (EIndexOrLoopVariable)eResolveProxy(oldIndex_or_loop_variable_reference);
+      if (index_or_loop_variable_reference != oldIndex_or_loop_variable_reference)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME, oldName, name));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE, oldIndex_or_loop_variable_reference, index_or_loop_variable_reference));
       }
     }
-    return name;
+    return index_or_loop_variable_reference;
   }
 
   /**
@@ -86,9 +86,9 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
    * <!-- end-user-doc -->
    * @generated
    */
-  public EIndexOrLoopVariable basicGetName()
+  public EIndexOrLoopVariable basicGetIndex_or_loop_variable_reference()
   {
-    return name;
+    return index_or_loop_variable_reference;
   }
 
   /**
@@ -97,12 +97,12 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
    * @generated
    */
   @Override
-  public void setName(EIndexOrLoopVariable newName)
+  public void setIndex_or_loop_variable_reference(EIndexOrLoopVariable newIndex_or_loop_variable_reference)
   {
-    EIndexOrLoopVariable oldName = name;
-    name = newName;
+    EIndexOrLoopVariable oldIndex_or_loop_variable_reference = index_or_loop_variable_reference;
+    index_or_loop_variable_reference = newIndex_or_loop_variable_reference;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE, oldIndex_or_loop_variable_reference, index_or_loop_variable_reference));
   }
 
   /**
@@ -115,9 +115,9 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME:
-        if (resolve) return getName();
-        return basicGetName();
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE:
+        if (resolve) return getIndex_or_loop_variable_reference();
+        return basicGetIndex_or_loop_variable_reference();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +132,8 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME:
-        setName((EIndexOrLoopVariable)newValue);
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE:
+        setIndex_or_loop_variable_reference((EIndexOrLoopVariable)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +149,8 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME:
-        setName((EIndexOrLoopVariable)null);
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE:
+        setIndex_or_loop_variable_reference((EIndexOrLoopVariable)null);
         return;
     }
     super.eUnset(featureID);
@@ -166,8 +166,8 @@ public class EIndexOrLoopVariableReferenceImpl extends EVariableReferenceImpl im
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME:
-        return name != null;
+      case AnsibleDslPackage.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE:
+        return index_or_loop_variable_reference != null;
     }
     return super.eIsSet(featureID);
   }

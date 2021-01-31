@@ -13,7 +13,7 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getIndex_or_loop_variable_reference <em>Index or loop variable reference</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIndexOrLoopVariableReference()
@@ -23,25 +23,25 @@ package org.sodalite.sdl.ansible.ansibleDsl;
 public interface EIndexOrLoopVariableReference extends EVariableReference
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' reference.
+   * Returns the value of the '<em><b>Index or loop variable reference</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' reference.
-   * @see #setName(EIndexOrLoopVariable)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIndexOrLoopVariableReference_Name()
+   * @return the value of the '<em>Index or loop variable reference</em>' reference.
+   * @see #setIndex_or_loop_variable_reference(EIndexOrLoopVariable)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEIndexOrLoopVariableReference_Index_or_loop_variable_reference()
    * @model
    * @generated
    */
-  EIndexOrLoopVariable getName();
+  EIndexOrLoopVariable getIndex_or_loop_variable_reference();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getName <em>Name</em>}' reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getIndex_or_loop_variable_reference <em>Index or loop variable reference</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' reference.
-   * @see #getName()
+   * @param value the new value of the '<em>Index or loop variable reference</em>' reference.
+   * @see #getIndex_or_loop_variable_reference()
    * @generated
    */
-  void setName(EIndexOrLoopVariable value);
+  void setIndex_or_loop_variable_reference(EIndexOrLoopVariable value);
 
 } // EIndexOrLoopVariableReference

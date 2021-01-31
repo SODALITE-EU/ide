@@ -297,7 +297,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//EIndexOrLoopVariable/name"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//EIndexOrLoopVariableReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIndexOrLoopVariableReference/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AnsibleDsl.ecore#//EIndexOrLoopVariableReference/index_or_loop_variable_reference"/>
     </genClasses>
     <genClasses ecoreClass="AnsibleDsl.ecore#//ERegisterVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AnsibleDsl.ecore#//ERegisterVariable/name"/>

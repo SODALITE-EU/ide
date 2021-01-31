@@ -4036,13 +4036,13 @@ public interface AnsibleDslPackage extends EPackage
   int EINDEX_OR_LOOP_VARIABLE_REFERENCE = 69;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' reference.
+   * The feature id for the '<em><b>Index or loop variable reference</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
+  int EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE = EVARIABLE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>EIndex Or Loop Variable Reference</em>' class.
@@ -7416,15 +7416,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getEIndexOrLoopVariableReference();
 
   /**
-   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getName <em>Name</em>}'.
+   * Returns the meta object for the reference '{@link org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getIndex_or_loop_variable_reference <em>Index or loop variable reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Name</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getName()
+   * @return the meta object for the reference '<em>Index or loop variable reference</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference#getIndex_or_loop_variable_reference()
    * @see #getEIndexOrLoopVariableReference()
    * @generated
    */
-  EReference getEIndexOrLoopVariableReference_Name();
+  EReference getEIndexOrLoopVariableReference_Index_or_loop_variable_reference();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable <em>ERegister Variable</em>}'.
@@ -10145,12 +10145,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass EINDEX_OR_LOOP_VARIABLE_REFERENCE = eINSTANCE.getEIndexOrLoopVariableReference();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Index or loop variable reference</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME = eINSTANCE.getEIndexOrLoopVariableReference_Name();
+    EReference EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE = eINSTANCE.getEIndexOrLoopVariableReference_Index_or_loop_variable_reference();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl <em>ERegister Variable</em>}' class.

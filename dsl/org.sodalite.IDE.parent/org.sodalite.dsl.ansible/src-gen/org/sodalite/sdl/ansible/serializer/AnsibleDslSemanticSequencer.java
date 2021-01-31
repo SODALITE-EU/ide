@@ -682,10 +682,10 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             args=EDictionaryPassed | 
 	 *             module=EModuleCall | 
 	 *             loop=ELoop | 
-	 *             register=ERegisterVariable | 
-	 *             listen_to+=[ENotifiedTopic|STRING]
+	 *             register=ERegisterVariable
 	 *         )? 
-	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)?
+	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)? 
+	 *         (listen_to+=[ENotifiedTopic|STRING] listen_to+=[ENotifiedTopic|STRING]*)?
 	 *     )+
 	 */
 	protected void sequence_EHandler(ISerializationContext context, EHandler semanticObject) {
@@ -733,15 +733,15 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EVariableReference returns EIndexOrLoopVariableReference
 	 *
 	 * Constraint:
-	 *     name=[EIndexOrLoopVariable|ID]
+	 *     index_or_loop_variable_reference=[EIndexOrLoopVariable|ID]
 	 */
 	protected void sequence_EIndexOrLoopVariableReference(ISerializationContext context, EIndexOrLoopVariableReference semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME));
+			if (transientValues.isValueTransient(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getNameEIndexOrLoopVariableIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__NAME, false));
+		feeder.accept(grammarAccess.getEIndexOrLoopVariableReferenceAccess().getIndex_or_loop_variable_referenceEIndexOrLoopVariableIDTerminalRuleCall_1_0_1(), semanticObject.eGet(AnsibleDslPackage.Literals.EINDEX_OR_LOOP_VARIABLE_REFERENCE__INDEX_OR_LOOP_VARIABLE_REFERENCE, false));
 		feeder.finish();
 	}
 	

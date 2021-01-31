@@ -427,7 +427,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EIndexOrLoopVariableReference" eSuperTypes="#//EVariableReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EIndexOrLoopVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index_or_loop_variable_reference"
+        eType="#//EIndexOrLoopVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERegisterVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
