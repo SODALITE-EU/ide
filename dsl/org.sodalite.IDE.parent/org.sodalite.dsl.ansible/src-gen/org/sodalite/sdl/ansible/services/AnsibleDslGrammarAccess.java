@@ -5180,63 +5180,36 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cIndexAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cIndexENumberParserRuleCall_1_0_0 = (RuleCall)cIndexAssignment_1_0.eContents().get(0);
+		private final Assignment cExpressionAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cExpressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0_0 = (RuleCall)cExpressionAssignment_1_0.eContents().get(0);
 		private final Assignment cSlice_notationAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
 		private final RuleCall cSlice_notationESliceNotationParserRuleCall_1_1_0 = (RuleCall)cSlice_notationAssignment_1_1.eContents().get(0);
-		private final Assignment cFieldAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cFieldSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cFieldAssignment_1_2.eContents().get(0);
-		private final Assignment cVariable_referenceAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
-		private final RuleCall cVariable_referenceEVariableReferenceParserRuleCall_1_3_0 = (RuleCall)cVariable_referenceAssignment_1_3.eContents().get(0);
-		private final Assignment cVariable_or_functionAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
-		private final RuleCall cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0 = (RuleCall)cVariable_or_functionAssignment_1_4.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ESquareBracketElement:
-		//	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
-		//	variable_or_function=EFunctionCallOrVariable) ']';
+		//	'[' (expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation) ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
-		//variable_or_function=EFunctionCallOrVariable) ']'
+		//'[' (expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation) ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//(index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
-		//variable_or_function=EFunctionCallOrVariable)
+		//(expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//index=ENumber
-		public Assignment getIndexAssignment_1_0() { return cIndexAssignment_1_0; }
+		//expression=EJinjaExpressionEvaluationWithoutBrackets
+		public Assignment getExpressionAssignment_1_0() { return cExpressionAssignment_1_0; }
 		
-		//ENumber
-		public RuleCall getIndexENumberParserRuleCall_1_0_0() { return cIndexENumberParserRuleCall_1_0_0; }
+		//EJinjaExpressionEvaluationWithoutBrackets
+		public RuleCall getExpressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0_0() { return cExpressionEJinjaExpressionEvaluationWithoutBracketsParserRuleCall_1_0_0; }
 		
 		//slice_notation=ESliceNotation
 		public Assignment getSlice_notationAssignment_1_1() { return cSlice_notationAssignment_1_1; }
 		
 		//ESliceNotation
 		public RuleCall getSlice_notationESliceNotationParserRuleCall_1_1_0() { return cSlice_notationESliceNotationParserRuleCall_1_1_0; }
-		
-		//field=STRING
-		public Assignment getFieldAssignment_1_2() { return cFieldAssignment_1_2; }
-		
-		//STRING
-		public RuleCall getFieldSTRINGTerminalRuleCall_1_2_0() { return cFieldSTRINGTerminalRuleCall_1_2_0; }
-		
-		//variable_reference=EVariableReference
-		public Assignment getVariable_referenceAssignment_1_3() { return cVariable_referenceAssignment_1_3; }
-		
-		//EVariableReference
-		public RuleCall getVariable_referenceEVariableReferenceParserRuleCall_1_3_0() { return cVariable_referenceEVariableReferenceParserRuleCall_1_3_0; }
-		
-		//variable_or_function=EFunctionCallOrVariable
-		public Assignment getVariable_or_functionAssignment_1_4() { return cVariable_or_functionAssignment_1_4; }
-		
-		//EFunctionCallOrVariable
-		public RuleCall getVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0() { return cVariable_or_functionEFunctionCallOrVariableParserRuleCall_1_4_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
@@ -7137,8 +7110,7 @@ public class AnsibleDslGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//ESquareBracketElement:
-	//	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference |
-	//	variable_or_function=EFunctionCallOrVariable) ']';
+	//	'[' (expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation) ']';
 	public ESquareBracketElementElements getESquareBracketElementAccess() {
 		return pESquareBracketElement;
 	}

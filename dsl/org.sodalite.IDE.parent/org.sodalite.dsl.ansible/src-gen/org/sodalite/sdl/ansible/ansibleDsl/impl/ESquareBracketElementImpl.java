@@ -13,11 +13,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
-import org.sodalite.sdl.ansible.ansibleDsl.EFunctionCallOrVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluationWithoutBrackets;
 import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
 import org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement;
-import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,11 +25,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getSlice_notation <em>Slice notation</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getField <em>Field</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getVariable_reference <em>Variable reference</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESquareBracketElementImpl#getVariable_or_function <em>Variable or function</em>}</li>
  * </ul>
  *
  * @generated
@@ -39,14 +34,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container implements ESquareBracketElement
 {
   /**
-   * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
+   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIndex()
+   * @see #getExpression()
    * @generated
    * @ordered
    */
-  protected ENumber index;
+  protected EJinjaExpressionEvaluationWithoutBrackets expression;
 
   /**
    * The cached value of the '{@link #getSlice_notation() <em>Slice notation</em>}' containment reference.
@@ -57,46 +52,6 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @ordered
    */
   protected ESliceNotation slice_notation;
-
-  /**
-   * The default value of the '{@link #getField() <em>Field</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getField()
-   * @generated
-   * @ordered
-   */
-  protected static final String FIELD_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getField() <em>Field</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getField()
-   * @generated
-   * @ordered
-   */
-  protected String field = FIELD_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getVariable_reference() <em>Variable reference</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVariable_reference()
-   * @generated
-   * @ordered
-   */
-  protected EVariableReference variable_reference;
-
-  /**
-   * The cached value of the '{@link #getVariable_or_function() <em>Variable or function</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVariable_or_function()
-   * @generated
-   * @ordered
-   */
-  protected EFunctionCallOrVariable variable_or_function;
 
   /**
    * <!-- begin-user-doc -->
@@ -125,9 +80,9 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public ENumber getIndex()
+  public EJinjaExpressionEvaluationWithoutBrackets getExpression()
   {
-    return index;
+    return expression;
   }
 
   /**
@@ -135,13 +90,13 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetIndex(ENumber newIndex, NotificationChain msgs)
+  public NotificationChain basicSetExpression(EJinjaExpressionEvaluationWithoutBrackets newExpression, NotificationChain msgs)
   {
-    ENumber oldIndex = index;
-    index = newIndex;
+    EJinjaExpressionEvaluationWithoutBrackets oldExpression = expression;
+    expression = newExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, oldIndex, newIndex);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION, oldExpression, newExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -153,20 +108,20 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public void setIndex(ENumber newIndex)
+  public void setExpression(EJinjaExpressionEvaluationWithoutBrackets newExpression)
   {
-    if (newIndex != index)
+    if (newExpression != expression)
     {
       NotificationChain msgs = null;
-      if (index != null)
-        msgs = ((InternalEObject)index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, null, msgs);
-      if (newIndex != null)
-        msgs = ((InternalEObject)newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, null, msgs);
-      msgs = basicSetIndex(newIndex, msgs);
+      if (expression != null)
+        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION, null, msgs);
+      if (newExpression != null)
+        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION, null, msgs);
+      msgs = basicSetExpression(newExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX, newIndex, newIndex));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION, newExpression, newExpression));
   }
 
   /**
@@ -225,143 +180,14 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
    * @generated
    */
   @Override
-  public String getField()
-  {
-    return field;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setField(String newField)
-  {
-    String oldField = field;
-    field = newField;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD, oldField, field));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EVariableReference getVariable_reference()
-  {
-    return variable_reference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetVariable_reference(EVariableReference newVariable_reference, NotificationChain msgs)
-  {
-    EVariableReference oldVariable_reference = variable_reference;
-    variable_reference = newVariable_reference;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE, oldVariable_reference, newVariable_reference);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setVariable_reference(EVariableReference newVariable_reference)
-  {
-    if (newVariable_reference != variable_reference)
-    {
-      NotificationChain msgs = null;
-      if (variable_reference != null)
-        msgs = ((InternalEObject)variable_reference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE, null, msgs);
-      if (newVariable_reference != null)
-        msgs = ((InternalEObject)newVariable_reference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE, null, msgs);
-      msgs = basicSetVariable_reference(newVariable_reference, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE, newVariable_reference, newVariable_reference));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EFunctionCallOrVariable getVariable_or_function()
-  {
-    return variable_or_function;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetVariable_or_function(EFunctionCallOrVariable newVariable_or_function, NotificationChain msgs)
-  {
-    EFunctionCallOrVariable oldVariable_or_function = variable_or_function;
-    variable_or_function = newVariable_or_function;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION, oldVariable_or_function, newVariable_or_function);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setVariable_or_function(EFunctionCallOrVariable newVariable_or_function)
-  {
-    if (newVariable_or_function != variable_or_function)
-    {
-      NotificationChain msgs = null;
-      if (variable_or_function != null)
-        msgs = ((InternalEObject)variable_or_function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION, null, msgs);
-      if (newVariable_or_function != null)
-        msgs = ((InternalEObject)newVariable_or_function).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION, null, msgs);
-      msgs = basicSetVariable_or_function(newVariable_or_function, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION, newVariable_or_function, newVariable_or_function));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        return basicSetIndex(null, msgs);
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION:
+        return basicSetExpression(null, msgs);
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
         return basicSetSlice_notation(null, msgs);
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
-        return basicSetVariable_reference(null, msgs);
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
-        return basicSetVariable_or_function(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -376,16 +202,10 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        return getIndex();
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION:
+        return getExpression();
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
         return getSlice_notation();
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
-        return getField();
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
-        return getVariable_reference();
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
-        return getVariable_or_function();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -400,20 +220,11 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        setIndex((ENumber)newValue);
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION:
+        setExpression((EJinjaExpressionEvaluationWithoutBrackets)newValue);
         return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
         setSlice_notation((ESliceNotation)newValue);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
-        setField((String)newValue);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
-        setVariable_reference((EVariableReference)newValue);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
-        setVariable_or_function((EFunctionCallOrVariable)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -429,20 +240,11 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        setIndex((ENumber)null);
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION:
+        setExpression((EJinjaExpressionEvaluationWithoutBrackets)null);
         return;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
         setSlice_notation((ESliceNotation)null);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
-        setField(FIELD_EDEFAULT);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
-        setVariable_reference((EVariableReference)null);
-        return;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
-        setVariable_or_function((EFunctionCallOrVariable)null);
         return;
     }
     super.eUnset(featureID);
@@ -458,35 +260,12 @@ public class ESquareBracketElementImpl extends MinimalEObjectImpl.Container impl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__INDEX:
-        return index != null;
+      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__EXPRESSION:
+        return expression != null;
       case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION:
         return slice_notation != null;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__FIELD:
-        return FIELD_EDEFAULT == null ? field != null : !FIELD_EDEFAULT.equals(field);
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE:
-        return variable_reference != null;
-      case AnsibleDslPackage.ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION:
-        return variable_or_function != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (field: ");
-    result.append(field);
-    result.append(')');
-    return result.toString();
   }
 
 } //ESquareBracketElementImpl

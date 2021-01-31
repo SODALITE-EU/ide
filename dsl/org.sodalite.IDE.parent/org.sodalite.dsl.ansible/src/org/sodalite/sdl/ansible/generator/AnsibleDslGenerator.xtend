@@ -583,10 +583,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	
 	def compileSquareBracketElement(ESquareBracketElement squareBracketElement){
 		var stringToReturn = ""
-		if (squareBracketElement.index !== null) stringToReturn = stringToReturn.concat("[").concat(squareBracketElement.index.compileNumber).concat("]")
-		else if (squareBracketElement.field !== null) stringToReturn = stringToReturn.concat("['").concat(squareBracketElement.field).concat("']")
-		else if (squareBracketElement.variable_reference !== null) stringToReturn = stringToReturn.concat("[").concat(compileVariableReference(squareBracketElement.variable_reference)).concat("]")
-		else if (squareBracketElement.variable_or_function !== null) stringToReturn = stringToReturn.concat("[").concat(compileFunctionCall(squareBracketElement.variable_or_function, "", false)).concat("]")
+		if (squareBracketElement.expression !== null) stringToReturn = stringToReturn.concat("[").concat(compileJinjaExpressionEvaluationWithoutBrackets(squareBracketElement.expression, "", false).toString()).concat("]")
 		else if (squareBracketElement.slice_notation !== null) stringToReturn = stringToReturn.concat("[").concat(compileSliceNotation(squareBracketElement.slice_notation)).concat("]")
 		return stringToReturn
 	}

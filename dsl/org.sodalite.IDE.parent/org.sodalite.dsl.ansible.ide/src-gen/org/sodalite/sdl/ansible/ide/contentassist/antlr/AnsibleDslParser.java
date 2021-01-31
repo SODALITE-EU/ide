@@ -539,11 +539,8 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getESpecialVariableAccess().getNameAssignment_2(), "rule__ESpecialVariable__NameAssignment_2");
 			builder.put(grammarAccess.getETailElementAccess().getFunction_callAssignment_0(), "rule__ETailElement__Function_callAssignment_0");
 			builder.put(grammarAccess.getETailElementAccess().getSquare_bracket_elementsAssignment_1(), "rule__ETailElement__Square_bracket_elementsAssignment_1");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getIndexAssignment_1_0(), "rule__ESquareBracketElement__IndexAssignment_1_0");
+			builder.put(grammarAccess.getESquareBracketElementAccess().getExpressionAssignment_1_0(), "rule__ESquareBracketElement__ExpressionAssignment_1_0");
 			builder.put(grammarAccess.getESquareBracketElementAccess().getSlice_notationAssignment_1_1(), "rule__ESquareBracketElement__Slice_notationAssignment_1_1");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getFieldAssignment_1_2(), "rule__ESquareBracketElement__FieldAssignment_1_2");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_referenceAssignment_1_3(), "rule__ESquareBracketElement__Variable_referenceAssignment_1_3");
-			builder.put(grammarAccess.getESquareBracketElementAccess().getVariable_or_functionAssignment_1_4(), "rule__ESquareBracketElement__Variable_or_functionAssignment_1_4");
 			builder.put(grammarAccess.getESliceNotationAccess().getStartAssignment_0_0(), "rule__ESliceNotation__StartAssignment_0_0");
 			builder.put(grammarAccess.getESliceNotationAccess().getColonAssignment_0_1(), "rule__ESliceNotation__ColonAssignment_0_1");
 			builder.put(grammarAccess.getESliceNotationAccess().getStopAssignment_0_2(), "rule__ESliceNotation__StopAssignment_0_2");

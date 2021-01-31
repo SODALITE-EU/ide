@@ -453,14 +453,9 @@
         upperBound="-1" eType="#//ESquareBracketElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESquareBracketElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//ENumber"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="slice_notation" eType="#//ESliceNotation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="field" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_reference" eType="#//EVariableReference"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_or_function" eType="#//EFunctionCallOrVariable"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESliceNotation">

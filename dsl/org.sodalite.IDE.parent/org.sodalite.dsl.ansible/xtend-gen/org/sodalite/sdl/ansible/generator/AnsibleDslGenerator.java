@@ -1572,33 +1572,15 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   
   public String compileSquareBracketElement(final ESquareBracketElement squareBracketElement) {
     String stringToReturn = "";
-    ENumber _index = squareBracketElement.getIndex();
-    boolean _tripleNotEquals = (_index != null);
+    EJinjaExpressionEvaluationWithoutBrackets _expression = squareBracketElement.getExpression();
+    boolean _tripleNotEquals = (_expression != null);
     if (_tripleNotEquals) {
-      stringToReturn = stringToReturn.concat("[").concat(this.compileNumber(squareBracketElement.getIndex())).concat("]");
+      stringToReturn = stringToReturn.concat("[").concat(this.compileJinjaExpressionEvaluationWithoutBrackets(squareBracketElement.getExpression(), "", false).toString()).concat("]");
     } else {
-      String _field = squareBracketElement.getField();
-      boolean _tripleNotEquals_1 = (_field != null);
+      ESliceNotation _slice_notation = squareBracketElement.getSlice_notation();
+      boolean _tripleNotEquals_1 = (_slice_notation != null);
       if (_tripleNotEquals_1) {
-        stringToReturn = stringToReturn.concat("[\'").concat(squareBracketElement.getField()).concat("\']");
-      } else {
-        EVariableReference _variable_reference = squareBracketElement.getVariable_reference();
-        boolean _tripleNotEquals_2 = (_variable_reference != null);
-        if (_tripleNotEquals_2) {
-          stringToReturn = stringToReturn.concat("[").concat(this.compileVariableReference(squareBracketElement.getVariable_reference())).concat("]");
-        } else {
-          EFunctionCallOrVariable _variable_or_function = squareBracketElement.getVariable_or_function();
-          boolean _tripleNotEquals_3 = (_variable_or_function != null);
-          if (_tripleNotEquals_3) {
-            stringToReturn = stringToReturn.concat("[").concat(this.compileFunctionCall(squareBracketElement.getVariable_or_function(), "", false)).concat("]");
-          } else {
-            ESliceNotation _slice_notation = squareBracketElement.getSlice_notation();
-            boolean _tripleNotEquals_4 = (_slice_notation != null);
-            if (_tripleNotEquals_4) {
-              stringToReturn = stringToReturn.concat("[").concat(this.compileSliceNotation(squareBracketElement.getSlice_notation())).concat("]");
-            }
-          }
-        }
+        stringToReturn = stringToReturn.concat("[").concat(this.compileSliceNotation(squareBracketElement.getSlice_notation())).concat("]");
       }
     }
     return stringToReturn;

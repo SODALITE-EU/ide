@@ -4241,13 +4241,13 @@ public interface AnsibleDslPackage extends EPackage
   int ESQUARE_BRACKET_ELEMENT = 77;
 
   /**
-   * The feature id for the '<em><b>Index</b></em>' containment reference.
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT__INDEX = 0;
+  int ESQUARE_BRACKET_ELEMENT__EXPRESSION = 0;
 
   /**
    * The feature id for the '<em><b>Slice notation</b></em>' containment reference.
@@ -4259,40 +4259,13 @@ public interface AnsibleDslPackage extends EPackage
   int ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION = 1;
 
   /**
-   * The feature id for the '<em><b>Field</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESQUARE_BRACKET_ELEMENT__FIELD = 2;
-
-  /**
-   * The feature id for the '<em><b>Variable reference</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = 3;
-
-  /**
-   * The feature id for the '<em><b>Variable or function</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = 4;
-
-  /**
    * The number of structural features of the '<em>ESquare Bracket Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 5;
+  int ESQUARE_BRACKET_ELEMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl <em>ESlice Notation</em>}' class.
@@ -7584,15 +7557,15 @@ public interface AnsibleDslPackage extends EPackage
   EClass getESquareBracketElement();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Index</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex()
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getExpression()
    * @see #getESquareBracketElement()
    * @generated
    */
-  EReference getESquareBracketElement_Index();
+  EReference getESquareBracketElement_Expression();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation <em>Slice notation</em>}'.
@@ -7604,39 +7577,6 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    */
   EReference getESquareBracketElement_Slice_notation();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Field</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField()
-   * @see #getESquareBracketElement()
-   * @generated
-   */
-  EAttribute getESquareBracketElement_Field();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Variable reference</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference()
-   * @see #getESquareBracketElement()
-   * @generated
-   */
-  EReference getESquareBracketElement_Variable_reference();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Variable or function</em>'.
-   * @see org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function()
-   * @see #getESquareBracketElement()
-   * @generated
-   */
-  EReference getESquareBracketElement_Variable_or_function();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation <em>ESlice Notation</em>}'.
@@ -10289,12 +10229,12 @@ public interface AnsibleDslPackage extends EPackage
     EClass ESQUARE_BRACKET_ELEMENT = eINSTANCE.getESquareBracketElement();
 
     /**
-     * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ESQUARE_BRACKET_ELEMENT__INDEX = eINSTANCE.getESquareBracketElement_Index();
+    EReference ESQUARE_BRACKET_ELEMENT__EXPRESSION = eINSTANCE.getESquareBracketElement_Expression();
 
     /**
      * The meta object literal for the '<em><b>Slice notation</b></em>' containment reference feature.
@@ -10303,30 +10243,6 @@ public interface AnsibleDslPackage extends EPackage
      * @generated
      */
     EReference ESQUARE_BRACKET_ELEMENT__SLICE_NOTATION = eINSTANCE.getESquareBracketElement_Slice_notation();
-
-    /**
-     * The meta object literal for the '<em><b>Field</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ESQUARE_BRACKET_ELEMENT__FIELD = eINSTANCE.getESquareBracketElement_Field();
-
-    /**
-     * The meta object literal for the '<em><b>Variable reference</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ESQUARE_BRACKET_ELEMENT__VARIABLE_REFERENCE = eINSTANCE.getESquareBracketElement_Variable_reference();
-
-    /**
-     * The meta object literal for the '<em><b>Variable or function</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ESQUARE_BRACKET_ELEMENT__VARIABLE_OR_FUNCTION = eINSTANCE.getESquareBracketElement_Variable_or_function();
 
     /**
      * The meta object literal for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.ESliceNotationImpl <em>ESlice Notation</em>}' class.

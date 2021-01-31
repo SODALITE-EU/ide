@@ -757,19 +757,10 @@ public abstract class AbstractAnsibleDslProposalProvider extends TerminalsPropos
 	public void completeETailElement_Square_bracket_elements(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeESquareBracketElement_Index(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeESquareBracketElement_Expression(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeESquareBracketElement_Slice_notation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
-	}
-	public void completeESquareBracketElement_Field(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
-	}
-	public void completeESquareBracketElement_Variable_reference(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
-	}
-	public void completeESquareBracketElement_Variable_or_function(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeESliceNotation_Start(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

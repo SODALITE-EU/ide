@@ -14,11 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getSlice_notation <em>Slice notation</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}</li>
  * </ul>
  *
  * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement()
@@ -28,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ESquareBracketElement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Index</b></em>' containment reference.
+   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Index</em>' containment reference.
-   * @see #setIndex(ENumber)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Index()
+   * @return the value of the '<em>Expression</em>' containment reference.
+   * @see #setExpression(EJinjaExpressionEvaluationWithoutBrackets)
+   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Expression()
    * @model containment="true"
    * @generated
    */
-  ENumber getIndex();
+  EJinjaExpressionEvaluationWithoutBrackets getExpression();
 
   /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getIndex <em>Index</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getExpression <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Index</em>' containment reference.
-   * @see #getIndex()
+   * @param value the new value of the '<em>Expression</em>' containment reference.
+   * @see #getExpression()
    * @generated
    */
-  void setIndex(ENumber value);
+  void setExpression(EJinjaExpressionEvaluationWithoutBrackets value);
 
   /**
    * Returns the value of the '<em><b>Slice notation</b></em>' containment reference.
@@ -70,71 +67,5 @@ public interface ESquareBracketElement extends EObject
    * @generated
    */
   void setSlice_notation(ESliceNotation value);
-
-  /**
-   * Returns the value of the '<em><b>Field</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Field</em>' attribute.
-   * @see #setField(String)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Field()
-   * @model
-   * @generated
-   */
-  String getField();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getField <em>Field</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Field</em>' attribute.
-   * @see #getField()
-   * @generated
-   */
-  void setField(String value);
-
-  /**
-   * Returns the value of the '<em><b>Variable reference</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable reference</em>' containment reference.
-   * @see #setVariable_reference(EVariableReference)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Variable_reference()
-   * @model containment="true"
-   * @generated
-   */
-  EVariableReference getVariable_reference();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_reference <em>Variable reference</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable reference</em>' containment reference.
-   * @see #getVariable_reference()
-   * @generated
-   */
-  void setVariable_reference(EVariableReference value);
-
-  /**
-   * Returns the value of the '<em><b>Variable or function</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable or function</em>' containment reference.
-   * @see #setVariable_or_function(EFunctionCallOrVariable)
-   * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getESquareBracketElement_Variable_or_function()
-   * @model containment="true"
-   * @generated
-   */
-  EFunctionCallOrVariable getVariable_or_function();
-
-  /**
-   * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ESquareBracketElement#getVariable_or_function <em>Variable or function</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable or function</em>' containment reference.
-   * @see #getVariable_or_function()
-   * @generated
-   */
-  void setVariable_or_function(EFunctionCallOrVariable value);
 
 } // ESquareBracketElement

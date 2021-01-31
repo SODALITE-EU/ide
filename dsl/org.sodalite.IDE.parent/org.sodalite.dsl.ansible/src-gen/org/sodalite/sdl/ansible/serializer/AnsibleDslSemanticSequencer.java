@@ -684,8 +684,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             loop=ELoop | 
 	 *             register=ERegisterVariable
 	 *         )? 
-	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)? 
-	 *         (listen_to+=[ENotifiedTopic|STRING] listen_to+=[ENotifiedTopic|STRING]*)?
+	 *         (listen_to+=[ENotifiedTopic|STRING] listen_to+=[ENotifiedTopic|STRING]*)? 
+	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)?
 	 *     )+
 	 */
 	protected void sequence_EHandler(ISerializationContext context, EHandler semanticObject) {
@@ -1394,7 +1394,7 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     ESquareBracketElement returns ESquareBracketElement
 	 *
 	 * Constraint:
-	 *     (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable)
+	 *     (expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation)
 	 */
 	protected void sequence_ESquareBracketElement(ISerializationContext context, ESquareBracketElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

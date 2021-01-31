@@ -620,7 +620,7 @@ ETailElement:
 ;
 
 ESquareBracketElement:
-	'[' (index=ENumber | slice_notation=ESliceNotation | field=STRING | variable_reference=EVariableReference | variable_or_function=EFunctionCallOrVariable) ']'
+	'[' (expression=EJinjaExpressionEvaluationWithoutBrackets | slice_notation=ESliceNotation) ']'
 ;
 
 //https://stackoverflow.com/questions/509211/understanding-slice-notation
