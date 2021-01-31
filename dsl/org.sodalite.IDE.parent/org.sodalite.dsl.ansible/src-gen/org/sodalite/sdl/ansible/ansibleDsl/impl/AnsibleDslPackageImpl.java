@@ -4647,6 +4647,10 @@ public class AnsibleDslPackageImpl extends EPackageImpl implements AnsibleDslPac
     eJinjaExpressionEvaluationWithoutBracketsEClass.getESuperTypes().add(this.getECondition());
     eFunctionCallOrVariableEClass.getESuperTypes().add(this.getEValuePassedToJinjaExpression());
     eJinjaStatementEClass.getESuperTypes().add(this.getEJinjaOrString());
+    eJinjaStatementEClass.getESuperTypes().add(this.getEDictionaryPassed());
+    eJinjaStatementEClass.getESuperTypes().add(this.getEListPassed());
+    eJinjaStatementEClass.getESuperTypes().add(this.getENumberPassed());
+    eJinjaStatementEClass.getESuperTypes().add(this.getEBooleanPassed());
     eIfStatementEClass.getESuperTypes().add(this.getEJinjaStatement());
     eForStatementEClass.getESuperTypes().add(this.getEJinjaStatement());
     eVariableDeclarationVariableReferenceEClass.getESuperTypes().add(this.getEVariableReference());

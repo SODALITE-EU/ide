@@ -693,19 +693,19 @@ EListOfConditions:
 ;
 
 EDictionaryPassed:
-	EJinjaExpressionEvaluation | EDictionary
+	EJinjaExpressionEvaluation | EJinjaStatement | EDictionary
 ;
 
 EListPassed:
-	EJinjaExpressionEvaluation | EList
+	EJinjaExpressionEvaluation | EJinjaStatement | EList
 ;
 
 ENumberPassed:
-	EJinjaExpressionEvaluation | number_passed=ENumber | number_passed_null=NULL
+	EJinjaExpressionEvaluation | EJinjaStatement | number_passed=ENumber | number_passed_null=NULL
 ;
 
 EBooleanPassed:
-	EJinjaExpressionEvaluation | boolean_passed=EBooleanAnsible | boolean_passed_null=NULL
+	EJinjaExpressionEvaluation | EJinjaStatement | boolean_passed=EBooleanAnsible | boolean_passed_null=NULL
 ;
 
 EBooleanAnsible:

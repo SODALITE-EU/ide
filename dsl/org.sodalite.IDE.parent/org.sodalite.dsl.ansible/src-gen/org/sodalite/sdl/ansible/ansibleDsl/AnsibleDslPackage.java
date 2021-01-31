@@ -3613,13 +3613,49 @@ public interface AnsibleDslPackage extends EPackage
   int EJINJA_STATEMENT__STRING = EJINJA_OR_STRING__STRING;
 
   /**
+   * The feature id for the '<em><b>Number passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__NUMBER_PASSED = EJINJA_OR_STRING_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__NUMBER_PASSED_NULL = EJINJA_OR_STRING_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__BOOLEAN_PASSED = EJINJA_OR_STRING_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EJINJA_STATEMENT__BOOLEAN_PASSED_NULL = EJINJA_OR_STRING_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Else block sign</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_OR_STRING_FEATURE_COUNT + 0;
+  int EJINJA_STATEMENT__ELSE_BLOCK_SIGN = EJINJA_OR_STRING_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Else body</b></em>' containment reference.
@@ -3628,7 +3664,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT__ELSE_BODY = EJINJA_OR_STRING_FEATURE_COUNT + 1;
+  int EJINJA_STATEMENT__ELSE_BODY = EJINJA_OR_STRING_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>EJinja Statement</em>' class.
@@ -3637,7 +3673,7 @@ public interface AnsibleDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EJINJA_STATEMENT_FEATURE_COUNT = EJINJA_OR_STRING_FEATURE_COUNT + 2;
+  int EJINJA_STATEMENT_FEATURE_COUNT = EJINJA_OR_STRING_FEATURE_COUNT + 6;
 
   /**
    * The meta object id for the '{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EIfStatementImpl <em>EIf Statement</em>}' class.
@@ -3657,6 +3693,42 @@ public interface AnsibleDslPackage extends EPackage
    * @ordered
    */
   int EIF_STATEMENT__STRING = EJINJA_STATEMENT__STRING;
+
+  /**
+   * The feature id for the '<em><b>Number passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__NUMBER_PASSED = EJINJA_STATEMENT__NUMBER_PASSED;
+
+  /**
+   * The feature id for the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__NUMBER_PASSED_NULL = EJINJA_STATEMENT__NUMBER_PASSED_NULL;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__BOOLEAN_PASSED = EJINJA_STATEMENT__BOOLEAN_PASSED;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EIF_STATEMENT__BOOLEAN_PASSED_NULL = EJINJA_STATEMENT__BOOLEAN_PASSED_NULL;
 
   /**
    * The feature id for the '<em><b>Else block sign</b></em>' attribute.
@@ -3794,6 +3866,42 @@ public interface AnsibleDslPackage extends EPackage
    * @ordered
    */
   int EFOR_STATEMENT__STRING = EJINJA_STATEMENT__STRING;
+
+  /**
+   * The feature id for the '<em><b>Number passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__NUMBER_PASSED = EJINJA_STATEMENT__NUMBER_PASSED;
+
+  /**
+   * The feature id for the '<em><b>Number passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__NUMBER_PASSED_NULL = EJINJA_STATEMENT__NUMBER_PASSED_NULL;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__BOOLEAN_PASSED = EJINJA_STATEMENT__BOOLEAN_PASSED;
+
+  /**
+   * The feature id for the '<em><b>Boolean passed null</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EFOR_STATEMENT__BOOLEAN_PASSED_NULL = EJINJA_STATEMENT__BOOLEAN_PASSED_NULL;
 
   /**
    * The feature id for the '<em><b>Else block sign</b></em>' attribute.

@@ -3599,9 +3599,15 @@ rule__EDictionaryPassed__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_1()); }
+		{ before(grammarAccess.getEDictionaryPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+		ruleEJinjaStatement
+		{ after(grammarAccess.getEDictionaryPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_2()); }
 		ruleEDictionary
-		{ after(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_1()); }
+		{ after(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_2()); }
 	)
 ;
 finally {
@@ -3620,9 +3626,15 @@ rule__EListPassed__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEListPassedAccess().getEListParserRuleCall_1()); }
+		{ before(grammarAccess.getEListPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+		ruleEJinjaStatement
+		{ after(grammarAccess.getEListPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getEListPassedAccess().getEListParserRuleCall_2()); }
 		ruleEList
-		{ after(grammarAccess.getEListPassedAccess().getEListParserRuleCall_1()); }
+		{ after(grammarAccess.getEListPassedAccess().getEListParserRuleCall_2()); }
 	)
 ;
 finally {
@@ -3641,15 +3653,21 @@ rule__ENumberPassed__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_1()); }
-		(rule__ENumberPassed__Number_passedAssignment_1)
-		{ after(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_1()); }
+		{ before(grammarAccess.getENumberPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+		ruleEJinjaStatement
+		{ after(grammarAccess.getENumberPassedAccess().getEJinjaStatementParserRuleCall_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_2()); }
-		(rule__ENumberPassed__Number_passed_nullAssignment_2)
-		{ after(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_2()); }
+		{ before(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_2()); }
+		(rule__ENumberPassed__Number_passedAssignment_2)
+		{ after(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_3()); }
+		(rule__ENumberPassed__Number_passed_nullAssignment_3)
+		{ after(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_3()); }
 	)
 ;
 finally {
@@ -3668,15 +3686,21 @@ rule__EBooleanPassed__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_1()); }
-		(rule__EBooleanPassed__Boolean_passedAssignment_1)
-		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_1()); }
+		{ before(grammarAccess.getEBooleanPassedAccess().getEJinjaStatementParserRuleCall_1()); }
+		ruleEJinjaStatement
+		{ after(grammarAccess.getEBooleanPassedAccess().getEJinjaStatementParserRuleCall_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_2()); }
-		(rule__EBooleanPassed__Boolean_passed_nullAssignment_2)
-		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_2()); }
+		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_2()); }
+		(rule__EBooleanPassed__Boolean_passedAssignment_2)
+		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_3()); }
+		(rule__EBooleanPassed__Boolean_passed_nullAssignment_3)
+		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_3()); }
 	)
 ;
 finally {
@@ -28123,60 +28147,60 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ENumberPassed__Number_passedAssignment_1
+rule__ENumberPassed__Number_passedAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_1_0()); }
+		{ before(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_2_0()); }
 		ruleENumber
-		{ after(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_1_0()); }
+		{ after(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ENumberPassed__Number_passed_nullAssignment_2
+rule__ENumberPassed__Number_passed_nullAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_3_0()); }
 		RULE_NULL
-		{ after(grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_2_0()); }
+		{ after(grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_3_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EBooleanPassed__Boolean_passedAssignment_1
+rule__EBooleanPassed__Boolean_passedAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_1_0()); }
+		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_2_0()); }
 		ruleEBooleanAnsible
-		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_1_0()); }
+		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EBooleanPassed__Boolean_passed_nullAssignment_2
+rule__EBooleanPassed__Boolean_passed_nullAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_3_0()); }
 		RULE_NULL
-		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_2_0()); }
+		{ after(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_3_0()); }
 	)
 ;
 finally {

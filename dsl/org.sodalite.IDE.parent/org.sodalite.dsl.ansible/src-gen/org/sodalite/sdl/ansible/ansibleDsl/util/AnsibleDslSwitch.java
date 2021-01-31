@@ -558,6 +558,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         EJinjaStatement eJinjaStatement = (EJinjaStatement)theEObject;
         T result = caseEJinjaStatement(eJinjaStatement);
         if (result == null) result = caseEJinjaOrString(eJinjaStatement);
+        if (result == null) result = caseEDictionaryPassed(eJinjaStatement);
+        if (result == null) result = caseEListPassed(eJinjaStatement);
+        if (result == null) result = caseENumberPassed(eJinjaStatement);
+        if (result == null) result = caseEBooleanPassed(eJinjaStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -567,6 +571,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         T result = caseEIfStatement(eIfStatement);
         if (result == null) result = caseEJinjaStatement(eIfStatement);
         if (result == null) result = caseEJinjaOrString(eIfStatement);
+        if (result == null) result = caseEDictionaryPassed(eIfStatement);
+        if (result == null) result = caseEListPassed(eIfStatement);
+        if (result == null) result = caseENumberPassed(eIfStatement);
+        if (result == null) result = caseEBooleanPassed(eIfStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -583,6 +591,10 @@ public class AnsibleDslSwitch<T> extends Switch<T>
         T result = caseEForStatement(eForStatement);
         if (result == null) result = caseEJinjaStatement(eForStatement);
         if (result == null) result = caseEJinjaOrString(eForStatement);
+        if (result == null) result = caseEDictionaryPassed(eForStatement);
+        if (result == null) result = caseEListPassed(eForStatement);
+        if (result == null) result = caseENumberPassed(eForStatement);
+        if (result == null) result = caseEBooleanPassed(eForStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

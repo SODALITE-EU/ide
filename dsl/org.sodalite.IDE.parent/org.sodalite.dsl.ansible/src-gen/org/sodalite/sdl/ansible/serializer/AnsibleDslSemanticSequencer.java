@@ -608,6 +608,10 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EJinjaOrString returns EForStatement
 	 *     EJinjaStatement returns EForStatement
 	 *     EForStatement returns EForStatement
+	 *     EDictionaryPassed returns EForStatement
+	 *     EListPassed returns EForStatement
+	 *     ENumberPassed returns EForStatement
+	 *     EBooleanPassed returns EForStatement
 	 *
 	 * Constraint:
 	 *     (
@@ -684,8 +688,8 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *             loop=ELoop | 
 	 *             register=ERegisterVariable
 	 *         )? 
-	 *         (listen_to+=[ENotifiedTopic|STRING] listen_to+=[ENotifiedTopic|STRING]*)? 
-	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)?
+	 *         (notifiables+=ENotifiable notifiables+=ENotifiable*)? 
+	 *         (listen_to+=[ENotifiedTopic|STRING] listen_to+=[ENotifiedTopic|STRING]*)?
 	 *     )+
 	 */
 	protected void sequence_EHandler(ISerializationContext context, EHandler semanticObject) {
@@ -710,6 +714,10 @@ public class AnsibleDslSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     EJinjaOrString returns EIfStatement
 	 *     EJinjaStatement returns EIfStatement
 	 *     EIfStatement returns EIfStatement
+	 *     EDictionaryPassed returns EIfStatement
+	 *     EListPassed returns EIfStatement
+	 *     ENumberPassed returns EIfStatement
+	 *     EBooleanPassed returns EIfStatement
 	 *
 	 * Constraint:
 	 *     (

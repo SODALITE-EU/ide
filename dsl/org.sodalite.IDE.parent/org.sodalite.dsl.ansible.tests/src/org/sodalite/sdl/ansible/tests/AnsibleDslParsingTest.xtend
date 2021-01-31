@@ -881,7 +881,7 @@ class AnsibleDslParsingTest {
 			playbook_name: "name"
 			plays:
 				play:
-					play_name: "name"
+					play_name: "name1"
 					hosts: "all"
 					collections: {{ variable_list }}
 					error_handling:
@@ -891,10 +891,22 @@ class AnsibleDslParsingTest {
 						gather_timeout: null
 					tasks_list:
 						task_to_execute:
+							error_handling:
+								any_errors_fatal: {% if var == 5 %} {{ variable_boolean }} {% endif %}
 							module: "module"
 							args: {{ variable_dictionary }}
+				play:
+					play_name: "name2"
+					hosts: "all"
+					collections: {% if var == 5 %} {{ variable_list }} {% endif %}
+					error_handling:
+						max_fail_percentage: {% if var == 5 %} {{ variable_number }} {% endif %}
+					tasks_list:
+						task_to_execute:
+							module: "module"
+							args: {% if var == 5 %} {{ variable_dictionary }} {% endif %}
 		'''.assertCompilesTo('''
-			- name: "name"
+			- name: "name1"
 			  hosts: "all"
 			  collections: "{{ variable_list }}"
 			  max_fail_percentage: "{{ variable_number }}"
@@ -904,7 +916,18 @@ class AnsibleDslParsingTest {
 			  tasks:
 			
 			    - module:
+			      any_errors_fatal: "{% if var == 5 %}"{{ variable_boolean }}"{% endif %}"
 			      args: "{{ variable_dictionary }}"
+			
+			- name: "name2"
+			  hosts: "all"
+			  collections: "{% if var == 5 %}"{{ variable_list }}"{% endif %}"
+			  max_fail_percentage: "{% if var == 5 %}"{{ variable_number }}"{% endif %}"
+			
+			  tasks:
+			
+			    - module:
+			      args: "{% if var == 5 %}"{{ variable_dictionary }}"{% endif %}"
 			
 		''')
 	}

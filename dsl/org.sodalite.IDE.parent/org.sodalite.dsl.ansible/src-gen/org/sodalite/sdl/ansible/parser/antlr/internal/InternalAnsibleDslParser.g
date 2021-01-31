@@ -10663,11 +10663,20 @@ ruleEDictionaryPassed returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEJinjaStatementParserRuleCall_1());
 		}
-		this_EDictionary_1=ruleEDictionary
+		this_EJinjaStatement_1=ruleEJinjaStatement
 		{
-			$current = $this_EDictionary_1.current;
+			$current = $this_EJinjaStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_2());
+		}
+		this_EDictionary_2=ruleEDictionary
+		{
+			$current = $this_EDictionary_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -10699,11 +10708,20 @@ ruleEListPassed returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getEListPassedAccess().getEListParserRuleCall_1());
+			newCompositeNode(grammarAccess.getEListPassedAccess().getEJinjaStatementParserRuleCall_1());
 		}
-		this_EList_1=ruleEList
+		this_EJinjaStatement_1=ruleEJinjaStatement
 		{
-			$current = $this_EList_1.current;
+			$current = $this_EJinjaStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getEListPassedAccess().getEListParserRuleCall_2());
+		}
+		this_EList_2=ruleEList
+		{
+			$current = $this_EList_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -10734,12 +10752,21 @@ ruleENumberPassed returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
+		{
+			newCompositeNode(grammarAccess.getENumberPassedAccess().getEJinjaStatementParserRuleCall_1());
+		}
+		this_EJinjaStatement_1=ruleEJinjaStatement
+		{
+			$current = $this_EJinjaStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_2_0());
 				}
-				lv_number_passed_1_0=ruleENumber
+				lv_number_passed_2_0=ruleENumber
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getENumberPassedRule());
@@ -10747,7 +10774,7 @@ ruleENumberPassed returns [EObject current=null]
 					set(
 						$current,
 						"number_passed",
-						lv_number_passed_1_0,
+						lv_number_passed_2_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
 					afterParserOrEnumRuleCall();
 				}
@@ -10756,9 +10783,9 @@ ruleENumberPassed returns [EObject current=null]
 		    |
 		(
 			(
-				lv_number_passed_null_2_0=RULE_NULL
+				lv_number_passed_null_3_0=RULE_NULL
 				{
-					newLeafNode(lv_number_passed_null_2_0, grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_2_0());
+					newLeafNode(lv_number_passed_null_3_0, grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -10767,7 +10794,7 @@ ruleENumberPassed returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"number_passed_null",
-						lv_number_passed_null_2_0,
+						lv_number_passed_null_3_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
 				}
 			)
@@ -10800,12 +10827,21 @@ ruleEBooleanPassed returns [EObject current=null]
 			afterParserOrEnumRuleCall();
 		}
 		    |
+		{
+			newCompositeNode(grammarAccess.getEBooleanPassedAccess().getEJinjaStatementParserRuleCall_1());
+		}
+		this_EJinjaStatement_1=ruleEJinjaStatement
+		{
+			$current = $this_EJinjaStatement_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_2_0());
 				}
-				lv_boolean_passed_1_0=ruleEBooleanAnsible
+				lv_boolean_passed_2_0=ruleEBooleanAnsible
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEBooleanPassedRule());
@@ -10813,7 +10849,7 @@ ruleEBooleanPassed returns [EObject current=null]
 					set(
 						$current,
 						"boolean_passed",
-						lv_boolean_passed_1_0,
+						lv_boolean_passed_2_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.EBooleanAnsible");
 					afterParserOrEnumRuleCall();
 				}
@@ -10822,9 +10858,9 @@ ruleEBooleanPassed returns [EObject current=null]
 		    |
 		(
 			(
-				lv_boolean_passed_null_2_0=RULE_NULL
+				lv_boolean_passed_null_3_0=RULE_NULL
 				{
-					newLeafNode(lv_boolean_passed_null_2_0, grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_2_0());
+					newLeafNode(lv_boolean_passed_null_3_0, grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -10833,7 +10869,7 @@ ruleEBooleanPassed returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"boolean_passed_null",
-						lv_boolean_passed_null_2_0,
+						lv_boolean_passed_null_3_0,
 						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
 				}
 			)

@@ -567,10 +567,10 @@ public class AnsibleDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEListJinjaAccess().getElementsAssignment_2_0(), "rule__EListJinja__ElementsAssignment_2_0");
 			builder.put(grammarAccess.getEListJinjaAccess().getElementsAssignment_2_1_1(), "rule__EListJinja__ElementsAssignment_2_1_1");
 			builder.put(grammarAccess.getEListOfConditionsAccess().getConditionsAssignment_1_1(), "rule__EListOfConditions__ConditionsAssignment_1_1");
-			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_1(), "rule__ENumberPassed__Number_passedAssignment_1");
-			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_2(), "rule__ENumberPassed__Number_passed_nullAssignment_2");
-			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_1(), "rule__EBooleanPassed__Boolean_passedAssignment_1");
-			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_2(), "rule__EBooleanPassed__Boolean_passed_nullAssignment_2");
+			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passedAssignment_2(), "rule__ENumberPassed__Number_passedAssignment_2");
+			builder.put(grammarAccess.getENumberPassedAccess().getNumber_passed_nullAssignment_3(), "rule__ENumberPassed__Number_passed_nullAssignment_3");
+			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passedAssignment_2(), "rule__EBooleanPassed__Boolean_passedAssignment_2");
+			builder.put(grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullAssignment_3(), "rule__EBooleanPassed__Boolean_passed_nullAssignment_3");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_0(), "rule__EBooleanAnsible__Boolean_ansibleAssignment_0");
 			builder.put(grammarAccess.getEBooleanAnsibleAccess().getBoolean_ansibleAssignment_1(), "rule__EBooleanAnsible__Boolean_ansibleAssignment_1");
 			builder.put(grammarAccess.getENumberAccess().getNumberAssignment_0(), "rule__ENumber__NumberAssignment_0");

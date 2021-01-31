@@ -27955,38 +27955,50 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDictionaryPassed"
-    // InternalAnsibleDslParser.g:10648:1: ruleEDictionaryPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) ;
+    // InternalAnsibleDslParser.g:10648:1: ruleEDictionaryPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EDictionary_2= ruleEDictionary ) ;
     public final EObject ruleEDictionaryPassed() throws RecognitionException {
         EObject current = null;
 
         EObject this_EJinjaExpressionEvaluation_0 = null;
 
-        EObject this_EDictionary_1 = null;
+        EObject this_EJinjaStatement_1 = null;
+
+        EObject this_EDictionary_2 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10654:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary ) )
-            // InternalAnsibleDslParser.g:10655:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
+            // InternalAnsibleDslParser.g:10654:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EDictionary_2= ruleEDictionary ) )
+            // InternalAnsibleDslParser.g:10655:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EDictionary_2= ruleEDictionary )
             {
-            // InternalAnsibleDslParser.g:10655:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EDictionary_1= ruleEDictionary )
-            int alt125=2;
-            int LA125_0 = input.LA(1);
-
-            if ( (LA125_0==LeftCurlyBracketLeftCurlyBracket) ) {
+            // InternalAnsibleDslParser.g:10655:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EDictionary_2= ruleEDictionary )
+            int alt125=3;
+            switch ( input.LA(1) ) {
+            case LeftCurlyBracketLeftCurlyBracket:
+                {
                 alt125=1;
-            }
-            else if ( (LA125_0==LeftCurlyBracket||LA125_0==RULE_BEGIN) ) {
+                }
+                break;
+            case LeftCurlyBracketPercentSign:
+                {
                 alt125=2;
-            }
-            else {
+                }
+                break;
+            case LeftCurlyBracket:
+            case RULE_BEGIN:
+                {
+                alt125=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 125, 0, input);
 
                 throw nvae;
             }
+
             switch (alt125) {
                 case 1 :
                     // InternalAnsibleDslParser.g:10656:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
@@ -28007,18 +28019,36 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10665:3: this_EDictionary_1= ruleEDictionary
+                    // InternalAnsibleDslParser.g:10665:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
-                    			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEJinjaStatementParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_EDictionary_1=ruleEDictionary();
+                    this_EJinjaStatement_1=ruleEJinjaStatement();
 
                     state._fsp--;
 
 
-                    			current = this_EDictionary_1;
+                    			current = this_EJinjaStatement_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAnsibleDslParser.g:10674:3: this_EDictionary_2= ruleEDictionary
+                    {
+
+                    			newCompositeNode(grammarAccess.getEDictionaryPassedAccess().getEDictionaryParserRuleCall_2());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EDictionary_2=ruleEDictionary();
+
+                    state._fsp--;
+
+
+                    			current = this_EDictionary_2;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -28047,7 +28077,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEListPassed"
-    // InternalAnsibleDslParser.g:10677:1: entryRuleEListPassed returns [EObject current=null] : iv_ruleEListPassed= ruleEListPassed EOF ;
+    // InternalAnsibleDslParser.g:10686:1: entryRuleEListPassed returns [EObject current=null] : iv_ruleEListPassed= ruleEListPassed EOF ;
     public final EObject entryRuleEListPassed() throws RecognitionException {
         EObject current = null;
 
@@ -28055,8 +28085,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:10677:52: (iv_ruleEListPassed= ruleEListPassed EOF )
-            // InternalAnsibleDslParser.g:10678:2: iv_ruleEListPassed= ruleEListPassed EOF
+            // InternalAnsibleDslParser.g:10686:52: (iv_ruleEListPassed= ruleEListPassed EOF )
+            // InternalAnsibleDslParser.g:10687:2: iv_ruleEListPassed= ruleEListPassed EOF
             {
              newCompositeNode(grammarAccess.getEListPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -28083,41 +28113,53 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEListPassed"
-    // InternalAnsibleDslParser.g:10684:1: ruleEListPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) ;
+    // InternalAnsibleDslParser.g:10693:1: ruleEListPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EList_2= ruleEList ) ;
     public final EObject ruleEListPassed() throws RecognitionException {
         EObject current = null;
 
         EObject this_EJinjaExpressionEvaluation_0 = null;
 
-        EObject this_EList_1 = null;
+        EObject this_EJinjaStatement_1 = null;
+
+        EObject this_EList_2 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10690:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList ) )
-            // InternalAnsibleDslParser.g:10691:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
+            // InternalAnsibleDslParser.g:10699:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EList_2= ruleEList ) )
+            // InternalAnsibleDslParser.g:10700:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EList_2= ruleEList )
             {
-            // InternalAnsibleDslParser.g:10691:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EList_1= ruleEList )
-            int alt126=2;
-            int LA126_0 = input.LA(1);
-
-            if ( (LA126_0==LeftCurlyBracketLeftCurlyBracket) ) {
+            // InternalAnsibleDslParser.g:10700:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | this_EList_2= ruleEList )
+            int alt126=3;
+            switch ( input.LA(1) ) {
+            case LeftCurlyBracketLeftCurlyBracket:
+                {
                 alt126=1;
-            }
-            else if ( (LA126_0==LeftSquareBracket||LA126_0==RULE_BEGIN) ) {
+                }
+                break;
+            case LeftCurlyBracketPercentSign:
+                {
                 alt126=2;
-            }
-            else {
+                }
+                break;
+            case LeftSquareBracket:
+            case RULE_BEGIN:
+                {
+                alt126=3;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 126, 0, input);
 
                 throw nvae;
             }
+
             switch (alt126) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:10692:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:10701:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEListPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -28135,18 +28177,36 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10701:3: this_EList_1= ruleEList
+                    // InternalAnsibleDslParser.g:10710:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
-                    			newCompositeNode(grammarAccess.getEListPassedAccess().getEListParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getEListPassedAccess().getEJinjaStatementParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_EList_1=ruleEList();
+                    this_EJinjaStatement_1=ruleEJinjaStatement();
 
                     state._fsp--;
 
 
-                    			current = this_EList_1;
+                    			current = this_EJinjaStatement_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAnsibleDslParser.g:10719:3: this_EList_2= ruleEList
+                    {
+
+                    			newCompositeNode(grammarAccess.getEListPassedAccess().getEListParserRuleCall_2());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EList_2=ruleEList();
+
+                    state._fsp--;
+
+
+                    			current = this_EList_2;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -28175,7 +28235,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENumberPassed"
-    // InternalAnsibleDslParser.g:10713:1: entryRuleENumberPassed returns [EObject current=null] : iv_ruleENumberPassed= ruleENumberPassed EOF ;
+    // InternalAnsibleDslParser.g:10731:1: entryRuleENumberPassed returns [EObject current=null] : iv_ruleENumberPassed= ruleENumberPassed EOF ;
     public final EObject entryRuleENumberPassed() throws RecognitionException {
         EObject current = null;
 
@@ -28183,8 +28243,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:10713:54: (iv_ruleENumberPassed= ruleENumberPassed EOF )
-            // InternalAnsibleDslParser.g:10714:2: iv_ruleENumberPassed= ruleENumberPassed EOF
+            // InternalAnsibleDslParser.g:10731:54: (iv_ruleENumberPassed= ruleENumberPassed EOF )
+            // InternalAnsibleDslParser.g:10732:2: iv_ruleENumberPassed= ruleENumberPassed EOF
             {
              newCompositeNode(grammarAccess.getENumberPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -28211,29 +28271,36 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENumberPassed"
-    // InternalAnsibleDslParser.g:10720:1: ruleENumberPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= ruleENumber ) ) | ( (lv_number_passed_null_2_0= RULE_NULL ) ) ) ;
+    // InternalAnsibleDslParser.g:10738:1: ruleENumberPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_number_passed_2_0= ruleENumber ) ) | ( (lv_number_passed_null_3_0= RULE_NULL ) ) ) ;
     public final EObject ruleENumberPassed() throws RecognitionException {
         EObject current = null;
 
-        Token lv_number_passed_null_2_0=null;
+        Token lv_number_passed_null_3_0=null;
         EObject this_EJinjaExpressionEvaluation_0 = null;
 
-        EObject lv_number_passed_1_0 = null;
+        EObject this_EJinjaStatement_1 = null;
+
+        EObject lv_number_passed_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10726:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= ruleENumber ) ) | ( (lv_number_passed_null_2_0= RULE_NULL ) ) ) )
-            // InternalAnsibleDslParser.g:10727:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= ruleENumber ) ) | ( (lv_number_passed_null_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:10744:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_number_passed_2_0= ruleENumber ) ) | ( (lv_number_passed_null_3_0= RULE_NULL ) ) ) )
+            // InternalAnsibleDslParser.g:10745:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_number_passed_2_0= ruleENumber ) ) | ( (lv_number_passed_null_3_0= RULE_NULL ) ) )
             {
-            // InternalAnsibleDslParser.g:10727:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_number_passed_1_0= ruleENumber ) ) | ( (lv_number_passed_null_2_0= RULE_NULL ) ) )
-            int alt127=3;
+            // InternalAnsibleDslParser.g:10745:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_number_passed_2_0= ruleENumber ) ) | ( (lv_number_passed_null_3_0= RULE_NULL ) ) )
+            int alt127=4;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
                 {
                 alt127=1;
+                }
+                break;
+            case LeftCurlyBracketPercentSign:
+                {
+                alt127=2;
                 }
                 break;
             case RULE_OCTAL_NUMBER:
@@ -28241,12 +28308,12 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             case RULE_SIMPLE_NUMBER:
             case RULE_EXPONENTIAL_NUMBER:
                 {
-                alt127=2;
+                alt127=3;
                 }
                 break;
             case RULE_NULL:
                 {
-                alt127=3;
+                alt127=4;
                 }
                 break;
             default:
@@ -28258,7 +28325,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt127) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:10728:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:10746:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getENumberPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -28276,19 +28343,37 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10737:3: ( (lv_number_passed_1_0= ruleENumber ) )
-                    {
-                    // InternalAnsibleDslParser.g:10737:3: ( (lv_number_passed_1_0= ruleENumber ) )
-                    // InternalAnsibleDslParser.g:10738:4: (lv_number_passed_1_0= ruleENumber )
-                    {
-                    // InternalAnsibleDslParser.g:10738:4: (lv_number_passed_1_0= ruleENumber )
-                    // InternalAnsibleDslParser.g:10739:5: lv_number_passed_1_0= ruleENumber
+                    // InternalAnsibleDslParser.g:10755:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
-                    					newCompositeNode(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_1_0());
+                    			newCompositeNode(grammarAccess.getENumberPassedAccess().getEJinjaStatementParserRuleCall_1());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EJinjaStatement_1=ruleEJinjaStatement();
+
+                    state._fsp--;
+
+
+                    			current = this_EJinjaStatement_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAnsibleDslParser.g:10764:3: ( (lv_number_passed_2_0= ruleENumber ) )
+                    {
+                    // InternalAnsibleDslParser.g:10764:3: ( (lv_number_passed_2_0= ruleENumber ) )
+                    // InternalAnsibleDslParser.g:10765:4: (lv_number_passed_2_0= ruleENumber )
+                    {
+                    // InternalAnsibleDslParser.g:10765:4: (lv_number_passed_2_0= ruleENumber )
+                    // InternalAnsibleDslParser.g:10766:5: lv_number_passed_2_0= ruleENumber
+                    {
+
+                    					newCompositeNode(grammarAccess.getENumberPassedAccess().getNumber_passedENumberParserRuleCall_2_0());
                     				
                     pushFollow(FOLLOW_2);
-                    lv_number_passed_1_0=ruleENumber();
+                    lv_number_passed_2_0=ruleENumber();
 
                     state._fsp--;
 
@@ -28299,7 +28384,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     					set(
                     						current,
                     						"number_passed",
-                    						lv_number_passed_1_0,
+                    						lv_number_passed_2_0,
                     						"org.sodalite.sdl.ansible.AnsibleDsl.ENumber");
                     					afterParserOrEnumRuleCall();
                     				
@@ -28312,18 +28397,18 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 3 :
-                    // InternalAnsibleDslParser.g:10757:3: ( (lv_number_passed_null_2_0= RULE_NULL ) )
+                case 4 :
+                    // InternalAnsibleDslParser.g:10784:3: ( (lv_number_passed_null_3_0= RULE_NULL ) )
                     {
-                    // InternalAnsibleDslParser.g:10757:3: ( (lv_number_passed_null_2_0= RULE_NULL ) )
-                    // InternalAnsibleDslParser.g:10758:4: (lv_number_passed_null_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:10784:3: ( (lv_number_passed_null_3_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:10785:4: (lv_number_passed_null_3_0= RULE_NULL )
                     {
-                    // InternalAnsibleDslParser.g:10758:4: (lv_number_passed_null_2_0= RULE_NULL )
-                    // InternalAnsibleDslParser.g:10759:5: lv_number_passed_null_2_0= RULE_NULL
+                    // InternalAnsibleDslParser.g:10785:4: (lv_number_passed_null_3_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:10786:5: lv_number_passed_null_3_0= RULE_NULL
                     {
-                    lv_number_passed_null_2_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
+                    lv_number_passed_null_3_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
 
-                    					newLeafNode(lv_number_passed_null_2_0, grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_2_0());
+                    					newLeafNode(lv_number_passed_null_3_0, grammarAccess.getENumberPassedAccess().getNumber_passed_nullNULLTerminalRuleCall_3_0());
                     				
 
                     					if (current==null) {
@@ -28332,7 +28417,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     					setWithLastConsumed(
                     						current,
                     						"number_passed_null",
-                    						lv_number_passed_null_2_0,
+                    						lv_number_passed_null_3_0,
                     						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
                     				
 
@@ -28367,7 +28452,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBooleanPassed"
-    // InternalAnsibleDslParser.g:10779:1: entryRuleEBooleanPassed returns [EObject current=null] : iv_ruleEBooleanPassed= ruleEBooleanPassed EOF ;
+    // InternalAnsibleDslParser.g:10806:1: entryRuleEBooleanPassed returns [EObject current=null] : iv_ruleEBooleanPassed= ruleEBooleanPassed EOF ;
     public final EObject entryRuleEBooleanPassed() throws RecognitionException {
         EObject current = null;
 
@@ -28375,8 +28460,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:10779:55: (iv_ruleEBooleanPassed= ruleEBooleanPassed EOF )
-            // InternalAnsibleDslParser.g:10780:2: iv_ruleEBooleanPassed= ruleEBooleanPassed EOF
+            // InternalAnsibleDslParser.g:10806:55: (iv_ruleEBooleanPassed= ruleEBooleanPassed EOF )
+            // InternalAnsibleDslParser.g:10807:2: iv_ruleEBooleanPassed= ruleEBooleanPassed EOF
             {
              newCompositeNode(grammarAccess.getEBooleanPassedRule()); 
             pushFollow(FOLLOW_1);
@@ -28403,40 +28488,47 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBooleanPassed"
-    // InternalAnsibleDslParser.g:10786:1: ruleEBooleanPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_2_0= RULE_NULL ) ) ) ;
+    // InternalAnsibleDslParser.g:10813:1: ruleEBooleanPassed returns [EObject current=null] : (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_3_0= RULE_NULL ) ) ) ;
     public final EObject ruleEBooleanPassed() throws RecognitionException {
         EObject current = null;
 
-        Token lv_boolean_passed_null_2_0=null;
+        Token lv_boolean_passed_null_3_0=null;
         EObject this_EJinjaExpressionEvaluation_0 = null;
 
-        EObject lv_boolean_passed_1_0 = null;
+        EObject this_EJinjaStatement_1 = null;
+
+        EObject lv_boolean_passed_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10792:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_2_0= RULE_NULL ) ) ) )
-            // InternalAnsibleDslParser.g:10793:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_2_0= RULE_NULL ) ) )
+            // InternalAnsibleDslParser.g:10819:2: ( (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_3_0= RULE_NULL ) ) ) )
+            // InternalAnsibleDslParser.g:10820:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_3_0= RULE_NULL ) ) )
             {
-            // InternalAnsibleDslParser.g:10793:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_2_0= RULE_NULL ) ) )
-            int alt128=3;
+            // InternalAnsibleDslParser.g:10820:2: (this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation | this_EJinjaStatement_1= ruleEJinjaStatement | ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) ) | ( (lv_boolean_passed_null_3_0= RULE_NULL ) ) )
+            int alt128=4;
             switch ( input.LA(1) ) {
             case LeftCurlyBracketLeftCurlyBracket:
                 {
                 alt128=1;
                 }
                 break;
-            case RULE_BOOLEAN:
-            case RULE_BOOLEAN_ONLY_ANSIBLE:
+            case LeftCurlyBracketPercentSign:
                 {
                 alt128=2;
                 }
                 break;
-            case RULE_NULL:
+            case RULE_BOOLEAN:
+            case RULE_BOOLEAN_ONLY_ANSIBLE:
                 {
                 alt128=3;
+                }
+                break;
+            case RULE_NULL:
+                {
+                alt128=4;
                 }
                 break;
             default:
@@ -28448,7 +28540,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt128) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:10794:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
+                    // InternalAnsibleDslParser.g:10821:3: this_EJinjaExpressionEvaluation_0= ruleEJinjaExpressionEvaluation
                     {
 
                     			newCompositeNode(grammarAccess.getEBooleanPassedAccess().getEJinjaExpressionEvaluationParserRuleCall_0());
@@ -28466,19 +28558,37 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10803:3: ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) )
-                    {
-                    // InternalAnsibleDslParser.g:10803:3: ( (lv_boolean_passed_1_0= ruleEBooleanAnsible ) )
-                    // InternalAnsibleDslParser.g:10804:4: (lv_boolean_passed_1_0= ruleEBooleanAnsible )
-                    {
-                    // InternalAnsibleDslParser.g:10804:4: (lv_boolean_passed_1_0= ruleEBooleanAnsible )
-                    // InternalAnsibleDslParser.g:10805:5: lv_boolean_passed_1_0= ruleEBooleanAnsible
+                    // InternalAnsibleDslParser.g:10830:3: this_EJinjaStatement_1= ruleEJinjaStatement
                     {
 
-                    					newCompositeNode(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_1_0());
+                    			newCompositeNode(grammarAccess.getEBooleanPassedAccess().getEJinjaStatementParserRuleCall_1());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EJinjaStatement_1=ruleEJinjaStatement();
+
+                    state._fsp--;
+
+
+                    			current = this_EJinjaStatement_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAnsibleDslParser.g:10839:3: ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) )
+                    {
+                    // InternalAnsibleDslParser.g:10839:3: ( (lv_boolean_passed_2_0= ruleEBooleanAnsible ) )
+                    // InternalAnsibleDslParser.g:10840:4: (lv_boolean_passed_2_0= ruleEBooleanAnsible )
+                    {
+                    // InternalAnsibleDslParser.g:10840:4: (lv_boolean_passed_2_0= ruleEBooleanAnsible )
+                    // InternalAnsibleDslParser.g:10841:5: lv_boolean_passed_2_0= ruleEBooleanAnsible
+                    {
+
+                    					newCompositeNode(grammarAccess.getEBooleanPassedAccess().getBoolean_passedEBooleanAnsibleParserRuleCall_2_0());
                     				
                     pushFollow(FOLLOW_2);
-                    lv_boolean_passed_1_0=ruleEBooleanAnsible();
+                    lv_boolean_passed_2_0=ruleEBooleanAnsible();
 
                     state._fsp--;
 
@@ -28489,7 +28599,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     					set(
                     						current,
                     						"boolean_passed",
-                    						lv_boolean_passed_1_0,
+                    						lv_boolean_passed_2_0,
                     						"org.sodalite.sdl.ansible.AnsibleDsl.EBooleanAnsible");
                     					afterParserOrEnumRuleCall();
                     				
@@ -28502,18 +28612,18 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 3 :
-                    // InternalAnsibleDslParser.g:10823:3: ( (lv_boolean_passed_null_2_0= RULE_NULL ) )
+                case 4 :
+                    // InternalAnsibleDslParser.g:10859:3: ( (lv_boolean_passed_null_3_0= RULE_NULL ) )
                     {
-                    // InternalAnsibleDslParser.g:10823:3: ( (lv_boolean_passed_null_2_0= RULE_NULL ) )
-                    // InternalAnsibleDslParser.g:10824:4: (lv_boolean_passed_null_2_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:10859:3: ( (lv_boolean_passed_null_3_0= RULE_NULL ) )
+                    // InternalAnsibleDslParser.g:10860:4: (lv_boolean_passed_null_3_0= RULE_NULL )
                     {
-                    // InternalAnsibleDslParser.g:10824:4: (lv_boolean_passed_null_2_0= RULE_NULL )
-                    // InternalAnsibleDslParser.g:10825:5: lv_boolean_passed_null_2_0= RULE_NULL
+                    // InternalAnsibleDslParser.g:10860:4: (lv_boolean_passed_null_3_0= RULE_NULL )
+                    // InternalAnsibleDslParser.g:10861:5: lv_boolean_passed_null_3_0= RULE_NULL
                     {
-                    lv_boolean_passed_null_2_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
+                    lv_boolean_passed_null_3_0=(Token)match(input,RULE_NULL,FOLLOW_2); 
 
-                    					newLeafNode(lv_boolean_passed_null_2_0, grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_2_0());
+                    					newLeafNode(lv_boolean_passed_null_3_0, grammarAccess.getEBooleanPassedAccess().getBoolean_passed_nullNULLTerminalRuleCall_3_0());
                     				
 
                     					if (current==null) {
@@ -28522,7 +28632,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     					setWithLastConsumed(
                     						current,
                     						"boolean_passed_null",
-                    						lv_boolean_passed_null_2_0,
+                    						lv_boolean_passed_null_3_0,
                     						"org.sodalite.sdl.ansible.AnsibleDsl.NULL");
                     				
 
@@ -28557,7 +28667,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBooleanAnsible"
-    // InternalAnsibleDslParser.g:10845:1: entryRuleEBooleanAnsible returns [EObject current=null] : iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF ;
+    // InternalAnsibleDslParser.g:10881:1: entryRuleEBooleanAnsible returns [EObject current=null] : iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF ;
     public final EObject entryRuleEBooleanAnsible() throws RecognitionException {
         EObject current = null;
 
@@ -28565,8 +28675,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:10845:56: (iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF )
-            // InternalAnsibleDslParser.g:10846:2: iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF
+            // InternalAnsibleDslParser.g:10881:56: (iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF )
+            // InternalAnsibleDslParser.g:10882:2: iv_ruleEBooleanAnsible= ruleEBooleanAnsible EOF
             {
              newCompositeNode(grammarAccess.getEBooleanAnsibleRule()); 
             pushFollow(FOLLOW_1);
@@ -28593,7 +28703,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBooleanAnsible"
-    // InternalAnsibleDslParser.g:10852:1: ruleEBooleanAnsible returns [EObject current=null] : ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) ) ;
+    // InternalAnsibleDslParser.g:10888:1: ruleEBooleanAnsible returns [EObject current=null] : ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) ) ;
     public final EObject ruleEBooleanAnsible() throws RecognitionException {
         EObject current = null;
 
@@ -28604,10 +28714,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10858:2: ( ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) ) )
-            // InternalAnsibleDslParser.g:10859:2: ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) )
+            // InternalAnsibleDslParser.g:10894:2: ( ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) ) )
+            // InternalAnsibleDslParser.g:10895:2: ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) )
             {
-            // InternalAnsibleDslParser.g:10859:2: ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) )
+            // InternalAnsibleDslParser.g:10895:2: ( ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) ) | ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) ) )
             int alt129=2;
             int LA129_0 = input.LA(1);
 
@@ -28625,13 +28735,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt129) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:10860:3: ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:10896:3: ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) )
                     {
-                    // InternalAnsibleDslParser.g:10860:3: ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) )
-                    // InternalAnsibleDslParser.g:10861:4: (lv_boolean_ansible_0_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:10896:3: ( (lv_boolean_ansible_0_0= RULE_BOOLEAN ) )
+                    // InternalAnsibleDslParser.g:10897:4: (lv_boolean_ansible_0_0= RULE_BOOLEAN )
                     {
-                    // InternalAnsibleDslParser.g:10861:4: (lv_boolean_ansible_0_0= RULE_BOOLEAN )
-                    // InternalAnsibleDslParser.g:10862:5: lv_boolean_ansible_0_0= RULE_BOOLEAN
+                    // InternalAnsibleDslParser.g:10897:4: (lv_boolean_ansible_0_0= RULE_BOOLEAN )
+                    // InternalAnsibleDslParser.g:10898:5: lv_boolean_ansible_0_0= RULE_BOOLEAN
                     {
                     lv_boolean_ansible_0_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_2); 
 
@@ -28657,13 +28767,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10879:3: ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) )
+                    // InternalAnsibleDslParser.g:10915:3: ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) )
                     {
-                    // InternalAnsibleDslParser.g:10879:3: ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) )
-                    // InternalAnsibleDslParser.g:10880:4: (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE )
+                    // InternalAnsibleDslParser.g:10915:3: ( (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE ) )
+                    // InternalAnsibleDslParser.g:10916:4: (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE )
                     {
-                    // InternalAnsibleDslParser.g:10880:4: (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE )
-                    // InternalAnsibleDslParser.g:10881:5: lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE
+                    // InternalAnsibleDslParser.g:10916:4: (lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE )
+                    // InternalAnsibleDslParser.g:10917:5: lv_boolean_ansible_1_0= RULE_BOOLEAN_ONLY_ANSIBLE
                     {
                     lv_boolean_ansible_1_0=(Token)match(input,RULE_BOOLEAN_ONLY_ANSIBLE,FOLLOW_2); 
 
@@ -28711,7 +28821,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENumber"
-    // InternalAnsibleDslParser.g:10901:1: entryRuleENumber returns [EObject current=null] : iv_ruleENumber= ruleENumber EOF ;
+    // InternalAnsibleDslParser.g:10937:1: entryRuleENumber returns [EObject current=null] : iv_ruleENumber= ruleENumber EOF ;
     public final EObject entryRuleENumber() throws RecognitionException {
         EObject current = null;
 
@@ -28719,8 +28829,8 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAnsibleDslParser.g:10901:48: (iv_ruleENumber= ruleENumber EOF )
-            // InternalAnsibleDslParser.g:10902:2: iv_ruleENumber= ruleENumber EOF
+            // InternalAnsibleDslParser.g:10937:48: (iv_ruleENumber= ruleENumber EOF )
+            // InternalAnsibleDslParser.g:10938:2: iv_ruleENumber= ruleENumber EOF
             {
              newCompositeNode(grammarAccess.getENumberRule()); 
             pushFollow(FOLLOW_1);
@@ -28747,7 +28857,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENumber"
-    // InternalAnsibleDslParser.g:10908:1: ruleENumber returns [EObject current=null] : ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) ) ;
+    // InternalAnsibleDslParser.g:10944:1: ruleENumber returns [EObject current=null] : ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) ) ;
     public final EObject ruleENumber() throws RecognitionException {
         EObject current = null;
 
@@ -28760,10 +28870,10 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalAnsibleDslParser.g:10914:2: ( ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) ) )
-            // InternalAnsibleDslParser.g:10915:2: ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) )
+            // InternalAnsibleDslParser.g:10950:2: ( ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) ) )
+            // InternalAnsibleDslParser.g:10951:2: ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) )
             {
-            // InternalAnsibleDslParser.g:10915:2: ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) )
+            // InternalAnsibleDslParser.g:10951:2: ( ( (lv_number_0_0= RULE_OCTAL_NUMBER ) ) | ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) ) | ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) ) | ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) ) )
             int alt130=4;
             switch ( input.LA(1) ) {
             case RULE_OCTAL_NUMBER:
@@ -28795,13 +28905,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
 
             switch (alt130) {
                 case 1 :
-                    // InternalAnsibleDslParser.g:10916:3: ( (lv_number_0_0= RULE_OCTAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10952:3: ( (lv_number_0_0= RULE_OCTAL_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:10916:3: ( (lv_number_0_0= RULE_OCTAL_NUMBER ) )
-                    // InternalAnsibleDslParser.g:10917:4: (lv_number_0_0= RULE_OCTAL_NUMBER )
+                    // InternalAnsibleDslParser.g:10952:3: ( (lv_number_0_0= RULE_OCTAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10953:4: (lv_number_0_0= RULE_OCTAL_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:10917:4: (lv_number_0_0= RULE_OCTAL_NUMBER )
-                    // InternalAnsibleDslParser.g:10918:5: lv_number_0_0= RULE_OCTAL_NUMBER
+                    // InternalAnsibleDslParser.g:10953:4: (lv_number_0_0= RULE_OCTAL_NUMBER )
+                    // InternalAnsibleDslParser.g:10954:5: lv_number_0_0= RULE_OCTAL_NUMBER
                     {
                     lv_number_0_0=(Token)match(input,RULE_OCTAL_NUMBER,FOLLOW_2); 
 
@@ -28827,13 +28937,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAnsibleDslParser.g:10935:3: ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10971:3: ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:10935:3: ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) )
-                    // InternalAnsibleDslParser.g:10936:4: (lv_number_1_0= RULE_HEXADECIMAL_NUMBER )
+                    // InternalAnsibleDslParser.g:10971:3: ( (lv_number_1_0= RULE_HEXADECIMAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10972:4: (lv_number_1_0= RULE_HEXADECIMAL_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:10936:4: (lv_number_1_0= RULE_HEXADECIMAL_NUMBER )
-                    // InternalAnsibleDslParser.g:10937:5: lv_number_1_0= RULE_HEXADECIMAL_NUMBER
+                    // InternalAnsibleDslParser.g:10972:4: (lv_number_1_0= RULE_HEXADECIMAL_NUMBER )
+                    // InternalAnsibleDslParser.g:10973:5: lv_number_1_0= RULE_HEXADECIMAL_NUMBER
                     {
                     lv_number_1_0=(Token)match(input,RULE_HEXADECIMAL_NUMBER,FOLLOW_2); 
 
@@ -28859,13 +28969,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAnsibleDslParser.g:10954:3: ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10990:3: ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:10954:3: ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) )
-                    // InternalAnsibleDslParser.g:10955:4: (lv_number_2_0= RULE_SIMPLE_NUMBER )
+                    // InternalAnsibleDslParser.g:10990:3: ( (lv_number_2_0= RULE_SIMPLE_NUMBER ) )
+                    // InternalAnsibleDslParser.g:10991:4: (lv_number_2_0= RULE_SIMPLE_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:10955:4: (lv_number_2_0= RULE_SIMPLE_NUMBER )
-                    // InternalAnsibleDslParser.g:10956:5: lv_number_2_0= RULE_SIMPLE_NUMBER
+                    // InternalAnsibleDslParser.g:10991:4: (lv_number_2_0= RULE_SIMPLE_NUMBER )
+                    // InternalAnsibleDslParser.g:10992:5: lv_number_2_0= RULE_SIMPLE_NUMBER
                     {
                     lv_number_2_0=(Token)match(input,RULE_SIMPLE_NUMBER,FOLLOW_2); 
 
@@ -28891,13 +29001,13 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAnsibleDslParser.g:10973:3: ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:11009:3: ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) )
                     {
-                    // InternalAnsibleDslParser.g:10973:3: ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) )
-                    // InternalAnsibleDslParser.g:10974:4: (lv_number_3_0= RULE_EXPONENTIAL_NUMBER )
+                    // InternalAnsibleDslParser.g:11009:3: ( (lv_number_3_0= RULE_EXPONENTIAL_NUMBER ) )
+                    // InternalAnsibleDslParser.g:11010:4: (lv_number_3_0= RULE_EXPONENTIAL_NUMBER )
                     {
-                    // InternalAnsibleDslParser.g:10974:4: (lv_number_3_0= RULE_EXPONENTIAL_NUMBER )
-                    // InternalAnsibleDslParser.g:10975:5: lv_number_3_0= RULE_EXPONENTIAL_NUMBER
+                    // InternalAnsibleDslParser.g:11010:4: (lv_number_3_0= RULE_EXPONENTIAL_NUMBER )
+                    // InternalAnsibleDslParser.g:11011:5: lv_number_3_0= RULE_EXPONENTIAL_NUMBER
                     {
                     lv_number_3_0=(Token)match(input,RULE_EXPONENTIAL_NUMBER,FOLLOW_2); 
 
@@ -29601,9 +29711,9 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000200000000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0xE04A000474451050L,0x0000400084001260L,0x0000000200000000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000080022000CL});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000003800008L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000000380000CL});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000097FB6000CL});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000100140008L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000010014000CL});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000080000000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000280000000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000001004000L});
@@ -29615,7 +29725,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000A20D00L,0x0020000000000800L,0x00000009FE940040L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x080A080414440060L,0x0000C4800E404300L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x080A080414440060L,0x0000C4800E404300L,0x0000000200000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000100100008L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000010010000CL});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L,0x0000000800000000L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x080A080414440060L,0x0000C4800E404300L,0x0000000200000400L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x080A280414440060L,0x0000C4800F404300L});
@@ -29633,7 +29743,7 @@ public class InternalAnsibleDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000000L,0x0004004000000004L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000400000000002L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000000500002402L,0x0000000200000000L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000007A000008L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x000000007A00000CL});
     public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000002080000L,0x0000000000100000L,0x0000000200000000L});
     public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000A20D00L,0x0020000000000800L,0x00000008FE940040L});
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0081021000000000L,0x0000000000800000L,0x0000000200000000L});

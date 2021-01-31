@@ -554,22 +554,26 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	def compileDictionaryPassed(EDictionaryPassed dictionaryPassed, String space){
 		if (dictionaryPassed instanceof EDictionary) return compileDictionary(dictionaryPassed, space)
 		else if (dictionaryPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(dictionaryPassed, space)).concat("\"")
+		else if (dictionaryPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(dictionaryPassed, space, false)).concat("\"")
 	}
 	
 	def compileListPassed(EListPassed listPassed, String space){
 		if (listPassed instanceof EList) return compileList(listPassed, space)
 		else if (listPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(listPassed, space)).concat("\"")
+		else if (listPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(listPassed, space, false)).concat("\"")
 	}
 	
 	def compileNumberPassed(ENumberPassed numberPassed, String space){
 		if (numberPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(numberPassed, space)).concat("\"")
 		else if (numberPassed.number_passed !== null) return numberPassed.number_passed.compileNumber
 		else if (numberPassed.number_passed_null !== null) return numberPassed.number_passed_null
+		else if (numberPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(numberPassed, space, false)).concat("\"")
 	}
 	
 	def compileBooleanPassed(EBooleanPassed booleanPassed, String space){
 		if (booleanPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(booleanPassed, space)).concat("\"")
 		else if (booleanPassed.boolean_passed !== null) return compileBooleanAnsible(booleanPassed.boolean_passed)
+		else if (booleanPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(booleanPassed, space, false)).concat("\"")
 	}
 	
 	def compileTailElement(ETailElement tailElement, String space, boolean isCondition){

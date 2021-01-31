@@ -1508,6 +1508,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     } else {
       if ((dictionaryPassed instanceof EJinjaExpressionEvaluation)) {
         return "\"".concat(this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)dictionaryPassed), space)).concat("\"");
+      } else {
+        if ((dictionaryPassed instanceof EJinjaStatement)) {
+          return "\"".concat(this.compileJinjaStatement(((EJinjaStatement)dictionaryPassed), space, false)).concat("\"");
+        }
       }
     }
     return null;
@@ -1519,6 +1523,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     } else {
       if ((listPassed instanceof EJinjaExpressionEvaluation)) {
         return "\"".concat(this.compileJinjaExpressionEvaluation(((EJinjaExpressionEvaluation)listPassed), space)).concat("\"");
+      } else {
+        if ((listPassed instanceof EJinjaStatement)) {
+          return "\"".concat(this.compileJinjaStatement(((EJinjaStatement)listPassed), space, false)).concat("\"");
+        }
       }
     }
     return null;
@@ -1537,6 +1545,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
         boolean _tripleNotEquals_1 = (_number_passed_null != null);
         if (_tripleNotEquals_1) {
           return numberPassed.getNumber_passed_null();
+        } else {
+          if ((numberPassed instanceof EJinjaStatement)) {
+            return "\"".concat(this.compileJinjaStatement(((EJinjaStatement)numberPassed), space, false)).concat("\"");
+          }
         }
       }
     }
@@ -1551,6 +1563,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       boolean _tripleNotEquals = (_boolean_passed != null);
       if (_tripleNotEquals) {
         return this.compileBooleanAnsible(booleanPassed.getBoolean_passed());
+      } else {
+        if ((booleanPassed instanceof EJinjaStatement)) {
+          return "\"".concat(this.compileJinjaStatement(((EJinjaStatement)booleanPassed), space, false)).concat("\"");
+        }
       }
     }
     return null;
