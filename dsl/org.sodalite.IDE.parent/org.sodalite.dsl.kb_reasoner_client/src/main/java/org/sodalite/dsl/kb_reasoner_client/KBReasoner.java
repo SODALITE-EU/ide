@@ -30,6 +30,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
@@ -46,6 +47,8 @@ public interface KBReasoner {
 	TypeData getInterfaceTypes(List<String> modules) throws Exception;
 
 	TypeData getPolicyTypes(List<String> modules) throws Exception;
+
+	TemplateData getTemplates(List<String> modules) throws Exception;
 
 	ModuleData getModules() throws Exception;
 

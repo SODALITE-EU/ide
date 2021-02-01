@@ -39,6 +39,12 @@ import java.util.Map
 import java.util.HashMap
 import org.eclipse.core.runtime.Platform
 import org.sodalite.ide.ui.logger.SodaliteLogger
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -122,14 +128,6 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		_completeKeyword(keyword, contentAssistContext, acceptor);
 	}
-
-	def void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
-		ICompletionProposalAcceptor acceptor) {
-		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
-			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
-		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
-		acceptor.accept(proposal);
-	}
 	
 	override void completeRM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for imports")
@@ -147,23 +145,6 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 
 		super.completeRM_Model_Imports(model, assignment, context, acceptor)
-	}
-	
-	
-	def getImage(String path){
-		if (!images.containsKey(path)){
-			val Bundle bundle = Platform.getBundle("org.sodalite.ide.ui");
-			val URL fullPathString = FileLocator.find(bundle, new Path(path), null)
-			val ImageDescriptor imageDesc = ImageDescriptor.createFromURL(fullPathString)
-			val Image image = imageDesc.createImage()
-			if (image !== null)
-				images.put(path, image)
-		}
-		return images.get(path)
-	}
-	
-	def extractModule(String module) {
-		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
 	}
 	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
@@ -256,10 +237,6 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
-	}
-	
-	def getLastSegment(String string, String delimiter) {
-		return string.split(delimiter).last
 	}
 	
 	override void completeERelationshipTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -405,29 +382,6 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		//TODO implement body
 
-	}
-	
-	def getModule(EObject object) {
-		val RM_Model model = findModel(object) as RM_Model
-		return model.module
-	}
-	
-	def getImportedModules(EObject object) {
-		val List<String> modules = new ArrayList()
-		val RM_Model model = findModel(object) as RM_Model
-		for (import: model.imports)
-			modules.add(import)
-		
-		return modules
-	}
-	
-	def findModel(EObject object) {
-		if (object.eContainer == null)
-			return null
-		else if (object.eContainer instanceof RM_Model)
-			return object.eContainer
-		else
-			return findModel(object.eContainer)
 	}
 	
 	override void completeEDataType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -589,6 +543,158 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = selectFile ("Select implementation dependency file")
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
+	}
+	
+	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			val List<String> importedModules = processListModules(model)
+			val ReasonerData<Type> types = getKBReasoner().getNodeTypes(importedModules)
+			val TemplateData templates = getKBReasoner().getTemplates(importedModules)		
+			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
+			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}	
+	}
+	
+	override void completeEEvenFilter_Requirement(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val EEvenFilter filter = model as EEvenFilter
+		if (filter.node !== null){
+			var String qnode = getNodeName (filter.node)
+			val RequirementDefinitionData reqs = getKBReasoner().getTypeRequirements(qnode)
+			createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
+		}
+	}
+	
+	override void completeEEvenFilter_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+	}
+	
+	override void completeECallOperationActivityDefinition_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+	}
+	
+	
+	def String getNodeName (EPREFIX_REF nodeRef){
+		var String qnode = null
+		if (nodeRef instanceof EPREFIX_TYPE){
+			val EPREFIX_TYPE node = nodeRef as EPREFIX_TYPE
+			qnode = node.module !== null? node.module + '/' + node.type: node.type
+		}else if (nodeRef instanceof EPREFIX_ID){
+			val EPREFIX_ID node = nodeRef as EPREFIX_ID
+			qnode = node.module !== null? node.module + '/' + node.id: node.id
+		}
+		return qnode
+	}
+	
+	
+	def void createProposalsForTypeList(ReasonerData<Type> types, String defaultImage, String primitiveImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (type: types.elements){
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val proposalText = qtype
+			val displayText = qtype
+			val additionalProposalInfo = type.description
+			var Image image = getImage(defaultImage)
+			if (type.module !== null) 
+				image = getImage(primitiveImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+		}
+	}
+	
+	def void createProposalsForTemplateList(TemplateData templates, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (template: templates.elements){
+			val qtype = template.module !== null ?getLastSegment(template.module, '/') + '/' + template.label:template.label
+			val proposalText = qtype
+			val displayText = qtype
+			var Image image = getImage(defaultImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
+		}
+	}
+	
+	def void createProposalsForRequirementsList(RequirementDefinitionData reqs, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (req: reqs.elements){
+			createProposalForRequirement (req, defaultImage, context, acceptor)
+		}
+	}
+	
+	def createProposalForRequirement(RequirementDefinition req, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var property_label = req.uri.toString.substring(req.uri.toString.lastIndexOf('/') + 1, req.uri.toString.length)
+		var proposalText = property_label
+		var displayText = property_label
+		var additionalProposalInfo = ""
+		if (req.getCapability !== null)
+			additionalProposalInfo += "\nCapability: " + req.getCapability.getLabel
+		if (req.getNode !== null)
+			additionalProposalInfo += "\nNode: " + req.getNode.getLabel
+		if (req.getOccurrences !== null)
+			additionalProposalInfo += "\nOccurrences: [" + req.getOccurrences.min + ", " + req.getOccurrences.max + "]"	
+		var Image image = getImage(defaultImage)
+		createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
+	}
+	
+	def List<String> processListModules(EObject model){
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(model)
+		val String module = getModule(model)
+		//Add current module to imported ones for searching in the KB
+		if (module !== null)
+			importedModules.add(module)
+		return importedModules
+	}
+	
+	def void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+		ICompletionProposalAcceptor acceptor) {
+		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
+			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
+		acceptor.accept(proposal);
+	}
+	
+	def getImage(String path){
+		if (!images.containsKey(path)){
+			val Bundle bundle = Platform.getBundle("org.sodalite.ide.ui");
+			val URL fullPathString = FileLocator.find(bundle, new Path(path), null)
+			val ImageDescriptor imageDesc = ImageDescriptor.createFromURL(fullPathString)
+			val Image image = imageDesc.createImage()
+			if (image !== null)
+				images.put(path, image)
+		}
+		return images.get(path)
+	}
+	
+	def extractModule(String module) {
+		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
+	}
+	
+	def getLastSegment(String string, String delimiter) {
+		return string.split(delimiter).last
+	}
+	
+	def getModule(EObject object) {
+		val RM_Model model = findModel(object) as RM_Model
+		return model.module
+	}
+	
+	def getImportedModules(EObject object) {
+		val List<String> modules = new ArrayList()
+		val RM_Model model = findModel(object) as RM_Model
+		for (import: model.imports)
+			modules.add(import)
+		
+		return modules
+	}
+	
+	def findModel(EObject object) {
+		if (object.eContainer == null)
+			return null
+		else if (object.eContainer instanceof RM_Model)
+			return object.eContainer
+		else
+			return findModel(object.eContainer)
 	}
 	
 	protected def String selectFile (String dialogText){

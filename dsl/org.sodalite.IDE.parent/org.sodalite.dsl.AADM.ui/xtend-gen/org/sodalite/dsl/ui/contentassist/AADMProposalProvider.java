@@ -74,6 +74,9 @@ import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
@@ -771,6 +774,14 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    super.completeEEvenFilter_Node(model, assignment, context, acceptor);
+    final List<ENodeTemplate> localTemplates = this.findLocalNodes(model);
+    final String module = this.getModule(model);
+    this.createProposalsForLocalTemplateList(localTemplates, module, "icons/resource2.png", context, acceptor);
+  }
+  
+  @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EDataType::supertype property");
@@ -915,6 +926,76 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  @Override
+  public void completeEEvenFilter_Requirement(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EEvenFilter filter = ((EEvenFilter) model);
+    EPREFIX_REF _node = filter.getNode();
+    boolean _tripleNotEquals = (_node != null);
+    if (_tripleNotEquals) {
+      String qnode = this.getNodeName(filter.getNode());
+      final ENodeTemplate node = this.findNodeInModel(model, qnode);
+      if ((node != null)) {
+        final String module = this.getModule(model);
+        this.createProposalsForRequirementsList(node.getNode().getRequirements().getRequirements(), module, "icons/requirement.png", context, acceptor);
+      } else {
+        super.completeEEvenFilter_Requirement(model, assignment, context, acceptor);
+      }
+    }
+  }
+  
+  public void createProposalsForRequirementsList(final List<ERequirementAssignment> reqs, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ERequirementAssignment req : reqs) {
+      this.createProposalForRequirement(req, module, defaultImage, context, acceptor);
+    }
+  }
+  
+  public void createProposalForRequirement(final ERequirementAssignment req, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EObject _eContainer = req.eContainer().eContainer().eContainer();
+    String _name = ((ENodeTemplate) _eContainer).getName();
+    String _plus = (_name + ".");
+    String _name_1 = req.getName();
+    final String qreq = (_plus + _name_1);
+    String _xifexpression = null;
+    if ((module != null)) {
+      _xifexpression = ((module + "/") + qreq);
+    } else {
+      _xifexpression = qreq;
+    }
+    String property_label = _xifexpression;
+    String proposalText = property_label;
+    String displayText = property_label;
+    String additionalProposalInfo = "";
+    EPREFIX_ID _node = req.getNode();
+    boolean _tripleNotEquals = (_node != null);
+    if (_tripleNotEquals) {
+      String _additionalProposalInfo = additionalProposalInfo;
+      EPREFIX_ID _node_1 = req.getNode();
+      String _plus_1 = ("\nNode: " + _node_1);
+      additionalProposalInfo = (_additionalProposalInfo + _plus_1);
+    }
+    Image image = this.getImage(defaultImage);
+    this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+  }
+  
+  public void createProposalsForLocalTemplateList(final List<ENodeTemplate> templates, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ENodeTemplate node : templates) {
+      {
+        String _xifexpression = null;
+        if ((module != null)) {
+          String _name = node.getName();
+          _xifexpression = ((module + "/") + _name);
+        } else {
+          _xifexpression = node.getName();
+        }
+        final String qnode = _xifexpression;
+        final String proposalText = qnode;
+        final String displayText = qnode;
+        Image image = this.getImage(defaultImage);
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+      }
+    }
+  }
+  
   public String getAADMURI(final AADM_Model model) {
     try {
       final String filepath = model.eResource().getURI().toString().substring("platform:/resource".length());
@@ -1030,6 +1111,45 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public List<ENodeTemplate> findLocalNodes(final EObject object) {
+    ArrayList<ENodeTemplate> _xblockexpression = null;
+    {
+      Object _findModel = this.findModel(object);
+      final AADM_Model model = ((AADM_Model) _findModel);
+      ArrayList<ENodeTemplate> _xifexpression = null;
+      if ((model != null)) {
+        return model.getNodeTemplates().getNodeTemplates();
+      } else {
+        _xifexpression = new ArrayList<ENodeTemplate>();
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public ENodeTemplate findNodeInModel(final EObject object, final String nodeName) {
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    final String module = this.getModule(object);
+    final String targetModule = nodeName.substring(0, nodeName.indexOf("/"));
+    int _lastIndexOf = nodeName.lastIndexOf("/");
+    int _plus = (_lastIndexOf + 1);
+    final String targetNode = nodeName.substring(_plus);
+    boolean _equals = module.equals(targetModule);
+    boolean _not = (!_equals);
+    if (_not) {
+      return null;
+    }
+    EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
+    for (final ENodeTemplate node : _nodeTemplates) {
+      boolean _equals_1 = node.getName().equals(targetNode);
+      if (_equals_1) {
+        return node;
+      }
+    }
+    return null;
   }
   
   @Override

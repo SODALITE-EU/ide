@@ -59,6 +59,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.StringData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeKind;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -197,6 +198,31 @@ public class KBReasonerClient implements KBReasoner {
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypes(modules, kind);
+			else
+				throw ex;
+		}
+	}
+
+	public TemplateData getTemplates(List<String> modules) throws Exception {
+		Assert.notNull(modules, "Pass a not null modules");
+		String url = kbReasonerUri + "templates";
+		for (String module : modules)
+			url += ";imports=" + module;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
+		try {
+			TemplateData data = getJSONObjectForType(TemplateData.class, new URI(url), HttpStatus.OK);
+			if (data == null) {
+				data = new TemplateData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getTemplates(modules);
 			else
 				throw ex;
 		}

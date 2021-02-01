@@ -42,6 +42,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -62,12 +63,15 @@ class KBReasonerTest {
 
 	private String aadmURI = null;
 
+	private boolean AIM_Enabled = false;
+
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
 		Properties credentials = readCredentials();
-		kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
-				client_secret);
+		if (AIM_Enabled)
+			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
+					client_secret);
 	}
 
 	private Properties readCredentials() throws IOException {
@@ -131,6 +135,15 @@ class KBReasonerTest {
 		assertFalse(policyTypes.getElements().isEmpty());
 		policyTypes.getElements().stream().forEach(type -> System.out
 				.println("Policy type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetTemplates() throws Exception {
+		List<String> modules = Arrays.asList("snow");
+		TemplateData templates = kbclient.getTemplates(modules);
+		assertFalse(templates.getElements().isEmpty());
+		templates.getElements().stream().forEach(template -> System.out.println(
+				"Template: " + (template.getModule() != null ? template.getModule() : "") + template.getLabel()));
 	}
 
 	@Test

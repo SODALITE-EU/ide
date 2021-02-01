@@ -64,6 +64,10 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.eclipse.swt.graphics.Image
 import org.sodalite.dsl.aADM.impl.EPolicyDefinitionBodyImpl
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData
+import org.sodalite.dsl.aADM.ERequirementAssignment
+import org.sodalite.dsl.aADM.ENodeTemplateBody
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -479,6 +483,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
+	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeEEvenFilter_Node(model, assignment, context, acceptor)
+		//Provide suggestions for local templates
+		val List<ENodeTemplate> localTemplates = findLocalNodes(model);	
+		val String module = getModule(model)
+		createProposalsForLocalTemplateList(localTemplates, module, "icons/resource2.png",  context, acceptor);
+	}
+	
 	override void completeEDataTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EDataType::supertype property")
 		try{
@@ -581,6 +593,20 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
+	override void completeEEvenFilter_Requirement(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val EEvenFilter filter = model as EEvenFilter
+		if (filter.node !== null){
+			var String qnode = getNodeName (filter.node)
+			val ENodeTemplate node = findNodeInModel(model, qnode)
+			if (node !== null){
+				val String module = getModule(model)
+				createProposalsForRequirementsList(node.node.requirements.requirements, module, "icons/requirement.png", context, acceptor);
+			}else{
+				super.completeEEvenFilter_Requirement(model, assignment, context, acceptor)
+			}
+		}
+	}
+	
 	
 	// Functions
 	
@@ -589,6 +615,37 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 //			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
 //		)
 //	}
+
+	def void createProposalsForRequirementsList(List<ERequirementAssignment> reqs, String module, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (req: reqs){
+			createProposalForRequirement (req, module, defaultImage, context, acceptor)
+		}
+	}
+	
+	def createProposalForRequirement(ERequirementAssignment req, String module, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val qreq = (req.eContainer.eContainer.eContainer as ENodeTemplate).name + '.' + req.name
+		var property_label = (module !== null)? module + "/" + qreq: qreq
+		var proposalText = property_label
+		var displayText = property_label
+		var additionalProposalInfo = ""
+		if (req.getNode !== null)
+			additionalProposalInfo += "\nNode: " + req.node
+		var Image image = getImage(defaultImage)
+		createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
+	}
+
+	def void createProposalsForLocalTemplateList(List<ENodeTemplate> templates, String module, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (ENodeTemplate node: templates){
+			val qnode = module !== null? module + '/' + node.name: node.name
+			val proposalText = qnode
+			val displayText = qnode
+			var Image image = getImage(defaultImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
+		}
+	}
 		
 	def getAADMURI(AADM_Model model) {
 		//val String filename = model.eResource.URI.lastSegment
@@ -653,6 +710,30 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 		return nodes
 	}
+	
+	def List<ENodeTemplate> findLocalNodes(EObject object){
+		val AADM_Model model = findModel(object) as AADM_Model
+		if (model !== null)
+			return model.nodeTemplates.nodeTemplates
+		else
+			new ArrayList<ENodeTemplate>()
+	}
+	
+	def ENodeTemplate findNodeInModel(EObject object, String nodeName){
+		val AADM_Model model = findModel(object) as AADM_Model
+		val String module = getModule(object)
+		val String targetModule = nodeName.substring(0, nodeName.indexOf("/"))
+		val String targetNode = nodeName.substring(nodeName.lastIndexOf("/") + 1)
+		if (!module.equals(targetModule)){
+			return null
+		}
+		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+			if (node.name.equals(targetNode)){
+				return node
+			}
+		}
+		return null
+	}
 		
 	override def findModel(EObject object) {
 		if (object.eContainer == null)
@@ -663,7 +744,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			return findModel(object.eContainer)
 	}
 	
-	override def getModule(EObject object) {
+	override def String getModule(EObject object) {
 		val AADM_Model model = findModel(object) as AADM_Model
 		return model.module
 	}
