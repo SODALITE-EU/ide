@@ -1,0 +1,62 @@
+@startuml
+object Playbook {
+ name : String
+ ? used_by : UsedByBody
+}
+
+object UsedByBody {
+ node_type : RM_NodeType
+ operation : RM_OperationDefinition
+}
+
+object Play {
+ ? play_name : StringPassed
+ ? hosts : StringPassed
+ ? play_exe_settings : PlayExeSettings
+ ? error_handling : PlayErrorHandling
+ ? facts_settings : FactsSettings
+ ? vars_files : ListPassed
+ ? vars_prompt : ListPassed
+ ? force_handlers : BooleanPassed
+ ? external_file_inclusion : ExternalFileInclusion
+}
+
+Playbook "[1]" --> "[1..*]" Play : has_plays
+
+object BlockTask
+
+object RoleInclusion {
+ role_name: StringPassed
+ ? error_handling : BlockAndRoleErrorHandling
+}
+
+Play "[1]" --> "[0..*]" BlockTask : has_pre_tasks
+Play "[1]" --> "[0..*]" BlockTask : has_tasks
+Play "[1]" --> "[0..*]" BlockTask : has_post_tasks
+Play "[1]" --> "[0..*]" RoleInclusion : has_role_inclusions
+
+object Handler {
+ ? handler_name: String
+}
+
+Play "[1]" --> "[0..*]" Handler : has_handlers
+
+object NotifiedTopic {
+  name : String
+}
+
+Handler "[0..*]" --> "[0..*]" NotifiedTopic : listen_to
+
+object Block {
+ ? block_name : StringPassed
+ ? error_handling : BlockAndRoleErrorHandling
+}
+
+object Task {
+ ? task_name: StringPassed
+}
+
+Block "[0..1]" --> "[1..*]" Task : has_tasks
+Block "[0..1]" --> "[0..*]" Task : has_rescue_tasks
+Block "[0..1]" --> "[0..*]" Task : has_always_tasks
+@enduml

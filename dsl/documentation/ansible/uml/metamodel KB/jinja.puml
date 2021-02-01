@@ -1,0 +1,99 @@
+@startuml
+object JinjaExpressionEvaluation {
+ jinja_expression : JinjaExpressionEvaluationWithoutBrackets
+}
+
+object JinjaExpressionEvaluationWithoutBrackets {
+ expression_to_evaluate : FilteredExpression
+}
+
+object IfBlock {
+ if_condition : FilteredExpression
+ else_expression : FilteredExpression
+}
+
+JinjaExpressionEvaluationWithoutBrackets "[1]" --> "[0..*]" IfBlock
+
+object FilteredExpression {
+ to_filter : OrExpression
+ ? filter : FilteredExpression
+}
+
+object FunctionCallOrVariable {
+ name : String
+ ? empty_brackets : String
+}
+
+object FunctionInput {
+ ? parameter_name : String
+ value : JinjaExpressionEvaluationWithoutBrackets
+}
+
+FunctionCallOrVariable "[1]" --> "[0..*]" FunctionInput : has_parameters
+
+object OrExpression {
+ left_or : AndExpression
+ ? right_or : OrExpression
+}
+object AndExpression {
+ left_and : TruthExpression
+ ? right_and : AndExpression
+}
+object TruthExpression {
+ left_value : Operation
+ ? equality_sign : String
+ ? right_value : TruthExpression
+}
+object Operation {
+ left_operand : IsExpression
+ ? operator : String
+ ? right_operand : Operation
+}
+object IsExpression {
+ parenthesised_expression : ParenthesisedExpression
+ ? not : String
+ ? not_in : String
+ ? status : IsExpression
+ ? container_expression : IsExpression
+}
+object ParenthesisedExpression {
+ ? basic_value : ValuePassedToJinjaExpression
+ ? parenthesised_term : JinjaExpressionEvaluationWithoutBrackets
+ ? index : Number
+}
+
+object SquareBracketElement {
+ ? expression : JinjaExpressionEvaluationWithoutBrackets
+ ? slice_notation : SliceNotation
+}
+
+object TailElement {
+  function_call : FunctionCallOrVariable
+}
+
+ParenthesisedExpression "[0..1]" -> "[0..*]" SquareBracketElement : has_square_bracket_elements
+ParenthesisedExpression "[1]"-> "[0..*]" TailElement : has_tail
+
+TailElement "[0..1]" --> "[0..*]" SquareBracketElement : has_square_bracket_elements
+
+object SliceNotation {
+  ? start : Number
+  ? colon : String
+  ? stop : Number
+  ? first_colon : String
+  ? step : Number
+  ? second_colon : String
+}
+
+object ValuePassedToJinjaExpression
+object ValueJinja
+object SpecialVariable {
+  name : String
+}
+object VariableReference
+
+ValuePassedToJinjaExpression <|-- ValueJinja
+ValuePassedToJinjaExpression <|-- SpecialVariable
+ValuePassedToJinjaExpression <|-- VariableReference
+ValuePassedToJinjaExpression <|-- FunctionCallOrVariable
+@enduml

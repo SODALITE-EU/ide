@@ -1,0 +1,31 @@
+@startuml
+object Loop
+
+object LoopOverList {
+ loop_list : ValuePassed
+ ? loop_control : LoopControl
+}
+
+object Until {
+ ? until_condition : JinjaExpressionEvaluationWithoutBrackets
+ ? retries : NumberPassed
+ ? delay : NumberPassed
+}
+
+object WithLookUp {
+ lookup : String
+ with_list : ValuePassed
+}
+
+Loop <|-- LoopOverList
+Loop <|-- Until
+Loop <|-- WithLookUp
+
+object LoopControl {
+ ? label : ValuePassed
+ ? pause : NumberPassed
+ ? index_var : IndexOrLoopVariable
+ ? loop_var : IndexOrLoopVariable
+ ? extended : BooleanPassed
+}
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+object ValuePassed
+
+object Dictionary
+
+object DictionaryPair {
+  name : String
+  value : ValuePassed
+}
+
+Dictionary "[0..1]" --> "[0..*]" DictionaryPair : has_dictionary_pairs
+
+object DictionaryJinja
+
+object DictionaryPairJinja {
+  name : String
+  value : JinjaExpressionEvaluationWithoutBrackets
+}
+
+DictionaryJinja "[1]" --> "[0..*]" DictionaryPairJinja : has_dictionary_pairs
+
+object List
+
+List "[0..1]" --> "[0..*]" ValuePassed : has_elements
+
+object ListJinja
+object JinjaExpressionEvaluationWithoutBrackets
+
+ListJinja "[0..1]" --> "[0..*]" JinjaExpressionEvaluationWithoutBrackets : has_elements
+
+@enduml
