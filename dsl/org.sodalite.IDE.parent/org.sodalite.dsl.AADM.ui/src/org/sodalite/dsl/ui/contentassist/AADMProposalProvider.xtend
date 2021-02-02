@@ -112,7 +112,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
 		val String module = getModule(model)
 		//Get entity in this GetProperty body. If null, return
-		val node = getEntity(model as GetPropertyBodyImpl)
+		val node = getEntityNode(model as GetPropertyBodyImpl)
 		
 		if (node === null){
 			return
@@ -140,7 +140,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val String module = getModule(model)
 		//Get entity in this GetProperty body. If null, return
 		val body = model as GetPropertyBodyImpl
-		val node = getEntity(body)
+		val node = getEntityNode(body)
 		
 		if (node === null)
 			return
@@ -759,7 +759,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	}
 
 	def getNodeTemplate(EObject object) {
-		if (object.eContainer == null)
+		if (object.eContainer === null)
 			return null
 		else if (object.eContainer instanceof ENodeTemplate)
 			return object.eContainer
@@ -767,7 +767,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			return getNodeTemplate(object.eContainer)
 	}
 	
-	def getEntity (GetPropertyBodyImpl body){
+	def getEntityNode (GetPropertyBodyImpl body){
 		val EEntityReference eEntityReference = body.entity
 		var ENodeTemplate node = null
 		if (eEntityReference instanceof EEntity){
@@ -778,13 +778,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		} else {
 			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
 		}
-	}
-	
-	override def getLastSegment(String string, String delimiter) {
-		var newString = string
-		if (string.endsWith(delimiter))
-			newString = string.substring(0, string.length - delimiter.length)
-		return newString.substring(newString.lastIndexOf(delimiter) + 1)
+		return node
 	}
 		
 	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {

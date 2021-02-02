@@ -130,7 +130,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     final String module = this.getModule(model);
-    final ENodeTemplate node = this.getEntity(((GetPropertyBodyImpl) model));
+    final ENodeTemplate node = this.getEntityNode(((GetPropertyBodyImpl) model));
     if ((node == null)) {
       return;
     }
@@ -173,7 +173,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     final String module = this.getModule(model);
     final GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
-    final ENodeTemplate node = this.getEntity(body);
+    final ENodeTemplate node = this.getEntityNode(body);
     if ((node == null)) {
       return;
     }
@@ -1189,8 +1189,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   public Object getNodeTemplate(final EObject object) {
     EObject _eContainer = object.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
+    boolean _tripleEquals = (_eContainer == null);
+    if (_tripleEquals) {
       return null;
     } else {
       EObject _eContainer_1 = object.eContainer();
@@ -1202,46 +1202,19 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  public ENodeTemplate getEntity(final GetPropertyBodyImpl body) {
-    ENodeTemplate _xblockexpression = null;
-    {
-      final EEntityReference eEntityReference = body.getEntity();
-      ENodeTemplate node = null;
-      ENodeTemplate _xifexpression = null;
-      if ((eEntityReference instanceof EEntity)) {
-        ENodeTemplate _xblockexpression_1 = null;
-        {
-          final EEntity eEntity = ((EEntity) eEntityReference);
-          ENodeTemplate _xifexpression_1 = null;
-          boolean _equals = eEntity.getEntity().equals("SELF");
-          if (_equals) {
-            Object _nodeTemplate = this.getNodeTemplate(body);
-            _xifexpression_1 = node = ((ENodeTemplate) _nodeTemplate);
-          }
-          _xblockexpression_1 = _xifexpression_1;
-        }
-        _xifexpression = _xblockexpression_1;
-      } else {
-        _xifexpression = null;
+  public ENodeTemplate getEntityNode(final GetPropertyBodyImpl body) {
+    final EEntityReference eEntityReference = body.getEntity();
+    ENodeTemplate node = null;
+    if ((eEntityReference instanceof EEntity)) {
+      final EEntity eEntity = ((EEntity) eEntityReference);
+      boolean _equals = eEntity.getEntity().equals("SELF");
+      if (_equals) {
+        Object _nodeTemplate = this.getNodeTemplate(body);
+        node = ((ENodeTemplate) _nodeTemplate);
       }
-      _xblockexpression = _xifexpression;
+    } else {
     }
-    return _xblockexpression;
-  }
-  
-  @Override
-  public String getLastSegment(final String string, final String delimiter) {
-    String newString = string;
-    boolean _endsWith = string.endsWith(delimiter);
-    if (_endsWith) {
-      int _length = string.length();
-      int _length_1 = delimiter.length();
-      int _minus = (_length - _length_1);
-      newString = string.substring(0, _minus);
-    }
-    int _lastIndexOf = newString.lastIndexOf(delimiter);
-    int _plus = (_lastIndexOf + 1);
-    return newString.substring(_plus);
+    return node;
   }
   
   public ENodeTemplate findRequirementNodeInTemplate(final String requirement, final ENodeTemplate template) {
