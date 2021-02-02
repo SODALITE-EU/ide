@@ -45,7 +45,6 @@ import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
-import org.sodalite.dsl.rM.EInterfaceDefinitionBody
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
@@ -55,13 +54,13 @@ import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl
 import org.sodalite.dsl.rM.EFunction
 import org.sodalite.dsl.rM.GetProperty
 import org.sodalite.dsl.rM.GetAttribute
-import java.util.Arrays
-import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData
-import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData
 import org.sodalite.dsl.rM.GetAttributeBody
 import org.sodalite.dsl.rM.GetPropertyBody
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
+import org.sodalite.dsl.rM.EPropertyDefinition
+import org.sodalite.dsl.rM.EAttributeDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -226,7 +225,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = getImportedModules(model)
 			val String module = getModule(model)
 			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			if (module !== null)
+				importedModules.add(module)
 			
 			val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
@@ -400,152 +400,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeGetAttributeBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetAttributeBody::req_cap property")
-		val String module = getModule(model)
-		//Get entity in this GetProperty body. If null, return
-		val ENodeType node = getEntityType(model.eContainer as EFunction)
-		
-		if (node === null){
-			return
-		}
-		
-		//Find requirements and capability assignments defined within the entity
-		val GetAttributeBody body = model as GetAttributeBody
-		val EEntityReference entityRef = body.entity
-		if (entityRef instanceof EEntity){
-			val EEntity entity  = entityRef as EEntity
-			if (entity.entity.equalsIgnoreCase("SELF")){
-				suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
-			}
-		}
+		completeGetAttributeOrPropertyFunction_Req_cap( model,  assignment,  context,  acceptor)
 	}
 	
 	override void completeGetAttributeBody_Attribute(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetAttributeBody::attribute property")
-		val String module = getModule(model)
-		//Get entity in this GetAttribute body. If null, return
-		val body = model as GetAttributeBodyImpl
-		val node = getEntityType(body.eContainer as EFunction)
-		
-		if (node === null)
-			return
-			
-		var List<String> proposals = new ArrayList<String>()
-		// Get the attributes defined within the selected node requirements or capabilities
-		if (body.req_cap !== null){
-			val req_cap_name = getLastSegment(body.req_cap.type, '.')
-			val ENodeType req_node = findRequirementNodeInLocalType(req_cap_name, node)
-			if (req_node !== null)
-				for (prop:req_node.node.properties.properties){
-					val proposal = module!==null? 
-						module + '/' + req_node.name + "." + prop.name: 
-						req_node.name + "." + prop.name
-					proposals.add(proposal)
-				}
-			else {
-				// Find requirement node properties in KB
-				val String resourceId = findRequirementNodeInKBType(req_cap_name, node)
-				if (resourceId !== null){
-					proposeAttributesForEntity (resourceId, proposals)
-				}
-			}
-			val ECapabilityDefinition cap = findCapabilityInLocalType(req_cap_name, node)
-			if (cap !== null)
-				for (prop:cap.capability.properties.properties){
-					val proposal = module!==null? 
-						module + '/' + req_node.name + "." + prop.name: 
-						req_node.name + "." + prop.name
-					proposals.add(proposal)	
-				}
-			else{
-				// TODO Find capability node properties in KB
-			}
-		}else{
-			//Get the properties defined within the entity
-			for (prop:node.node.properties.properties){
-				proposals.add(module + '/' + node.name + "." + prop.name)
-			}	
-		}
-		
-		//Create proposals for each found property. Prefix property with req|cap name when applies
-		val Image image = getImage("icons/property.png")
-		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
-		}
+		completeGetAttributeOrPropertyFunction_AttributeOrProperty( model, assignment, context, acceptor)
 	}
 	
 	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::property property")
-		val String module = getModule(model)
-		//Get entity in this GetProperty body. If null, return
-		val body = model as GetPropertyBodyImpl
-		val node = getEntityType(body.eContainer as EFunction)
-		
-		if (node === null)
-			return
-			
-		var List<String> proposals = new ArrayList<String>()
-		// Get the properties defined within the selected node requirements or capabilities
-		if (body.req_cap !== null){
-			val req_cap_name = getLastSegment(body.req_cap.type, '.')
-			val ENodeType req_node = findRequirementNodeInLocalType(req_cap_name, node)
-			if (req_node !== null)
-				for (prop:req_node.node.properties.properties){
-					val proposal = module!==null? 
-						module + '/' + req_node.name + "." + prop.name: 
-						req_node.name + "." + prop.name
-					proposals.add(proposal)
-				}
-			else {
-				//Find requirement node properties in KB
-				val String resourceId = findRequirementNodeInKBType(req_cap_name, node)
-				if (resourceId !== null){
-					proposePropertiesForEntity (resourceId, proposals)
-				}
-			}
-			val ECapabilityDefinition cap = findCapabilityInLocalType(req_cap_name, node)
-			if (cap !== null)
-				for (prop:cap.capability.properties.properties){
-					val proposal = module!==null? 
-						module + '/' + req_node.name + "." + prop.name: 
-						req_node.name + "." + prop.name
-					proposals.add(proposal)
-				}
-			else {
-				// TODO Find capability node properties in KB
-			}
-		}else{
-			//Get the properties defined within the entity
-			for (prop:node.node.properties.properties){
-				proposals.add(module + '/' + node.name + "." + prop.name)
-			}	
-		}
-		
-		//Create proposals for each found property. Prefix property with req|cap name when applies
-		val Image image = getImage("icons/property.png")
-		for (proposal: proposals){
-			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
-		}
+		completeGetAttributeOrPropertyFunction_AttributeOrProperty( model, assignment, context, acceptor)
 	}
 	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
-		val String module = getModule(model)
-		//Get entity in this GetProperty body. If null, return
-		val ENodeType node = getEntityType(model.eContainer as EFunction)
-		
-		if (node === null){
-			return
-		}
-		
-		//Find requirements and capability assignments defined within the entity
-		val GetPropertyBody body = model as GetPropertyBody
-		val EEntityReference entityRef = body.entity
-		if (entityRef instanceof EEntity){
-			val EEntity entity  = entityRef as EEntity
-			if (entity.entity.equalsIgnoreCase("SELF")){
-				suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
-			}
-		}
+		completeGetAttributeOrPropertyFunction_Req_cap( model,  assignment,  context,  acceptor)
 	}
 	
 	override void completeEInterfaceDefinitionBody_Operations(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -997,17 +867,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		return node
 	}
 	
-	def findRequirementNodeInKBType(String requirement, ENodeType nodeType) {
-		val RM_Model model = findModel(nodeType) as RM_Model
-		if (nodeType.node.requirements === null)
-			return null
-		for (req: nodeType.node.requirements.requirements){
-			val node = req.requirement.node.module !== null?
-				req.requirement.node.module + '/' + req.requirement.node.type:
-				req.requirement.node.type
-			return node						
-		}
-	}
+//	def findRequirementNodeInKBType(String requirement, ENodeType nodeType) {
+//		val RM_Model model = findModel(nodeType) as RM_Model
+//		if (nodeType.node.requirements === null)
+//			return null
+//		for (req: nodeType.node.requirements.requirements){
+//			val node = req.requirement.node.module !== null?
+//				req.requirement.node.module + '/' + req.requirement.node.type:
+//				req.requirement.node.type
+//			return node						
+//		}
+//	}
 
 	
 	def findCapabilityInLocalType(String capabilityName, ENodeType nodeType) {
@@ -1061,6 +931,148 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			for (cap: node.node.capabilities.capabilities){
 				val String proposal = module + '/' + node.name + '.' + cap.name
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+			}
+		}
+		
+		//Find requirements and capability assignments defined within the entity superClass
+		//If superClass defined in local model
+		var ENodeType superNode = null
+		if (module.equals(node.node.superType.module)){
+			val RM_Model model = findModel(node as EObject) as RM_Model
+			superNode = findNodeType(model, node.node.superType.type)
+			if (superNode !== null)
+				suggestRequirementsOrCapabilitiesInNode(module, superNode, context, acceptor)
+		}
+		//If superClass defined in KB
+		if (superNode === null){
+			val superType = node.node.superType.module !== null?
+				node.node.superType.module + '/' + node.node.superType.type:
+				node.node.superType.type
+			val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(superType)
+			var Image image = getImage("icons/requirement.png")
+			for (req: reqData.elements){
+				val String proposal = superType + '.' + getLastSegment(req.uri.toString, '/')
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+			}
+			
+			val CapabilityDefinitionData capData = KBReasoner.getTypeCapabilities(superType)
+			image = getImage("icons/capability.png")
+			for (cap: capData.elements){
+				val String proposal = superType + '.' + getLastSegment(cap.uri.toString, '/')
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+			}
+		}
+	}
+	
+	def proposeProperties (List<EPropertyDefinition> properties, List<String> proposals, String nodeName,  String module){
+		for (prop:properties){
+			val proposal = module!==null? 
+				module + '/' + nodeName + "." + prop.name: 
+				nodeName + "." + prop.name
+			proposals.add(proposal)
+		}
+	}
+	
+	def proposeAttributes (List<EAttributeDefinition> attributes, List<String> proposals, String nodeName,  String module){
+		for (prop:attributes){
+			val proposal = module!==null? 
+				module + '/' + nodeName + "." + prop.name: 
+				nodeName + "." + prop.name
+			proposals.add(proposal)
+		}
+	}
+
+	def completeGetAttributeOrPropertyFunction_AttributeOrProperty(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val String module = getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		var ENodeType node = null
+		var EPREFIX_TYPE req_cap = null
+		if (model instanceof GetPropertyBodyImpl){
+			var body = model as GetPropertyBodyImpl
+			node = getEntityType(body.eContainer as EFunction)
+			req_cap = body.req_cap
+			
+		}else if (model instanceof GetAttributeBodyImpl){
+			var body = model as GetAttributeBodyImpl
+			node = getEntityType(body.eContainer as EFunction)
+			req_cap = body.req_cap
+		}
+		
+		if (node === null)
+			return
+			
+		var List<String> proposals = new ArrayList<String>()
+		// Get the properties defined within the selected node requirements or capabilities
+		if (req_cap !== null){
+			val req_cap_name = getLastSegment(req_cap.type, '.')
+			val ENodeType req_node = findRequirementNodeInLocalType(req_cap_name, node)
+			if (req_node !== null)
+				if (model instanceof GetPropertyBodyImpl)
+					proposeProperties (req_node.node.properties.properties, proposals, req_node.name, module)
+				else if (model instanceof GetAttributeBodyImpl)
+					proposeAttributes (req_node.node.attributes.attributes, proposals, req_node.name, module)
+			else {
+				//Find requirement node properties in KB
+				val String resourceId = node.node.superType.module !== null?
+					node.node.superType.module + '/' + node.node.superType.type:
+					node.node.superType.type
+				if (resourceId !== null){
+					if (model instanceof GetPropertyBodyImpl)
+						proposePropertiesForEntity (resourceId, proposals)
+					else if (model instanceof GetAttributeBodyImpl)
+						proposeAttributesForEntity (resourceId, proposals)
+				}
+			}
+			val ECapabilityDefinition cap_node = findCapabilityInLocalType(req_cap_name, node)
+			if (cap_node !== null){
+				if (model instanceof GetPropertyBodyImpl)
+					proposeProperties (cap_node.capability.properties.properties, proposals, cap_node.name, module)
+				else if (model instanceof GetAttributeBodyImpl)
+					proposeAttributes (cap_node.capability.attributes.attributes, proposals, cap_node.name, module)
+			} else {
+				// TODO Find capability node properties in KB
+			}
+		}else{
+			//Get the properties defined within the entity
+			if (model instanceof GetPropertyBodyImpl)
+				for (prop:node.node.properties.properties){
+					proposals.add(module + '/' + node.name + "." + prop.name)
+				}
+			else if (model instanceof GetAttributeBodyImpl)
+				for (attr:node.node.attributes.attributes){
+					proposals.add(module + '/' + node.name + "." + attr.name)
+				}
+		}
+		
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		val Image image = getImage("icons/property.png")
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
+	}
+	
+	def completeGetAttributeOrPropertyFunction_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val String module = getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		val ENodeType node = getEntityType(model.eContainer as EFunction)
+		
+		if (node === null){
+			return
+		}
+		
+		//Find requirements and capability assignments defined within the entity
+		var EEntityReference entityRef = null
+		if (model instanceof GetPropertyBodyImpl){
+			val GetPropertyBody body = model as GetPropertyBody
+			entityRef = body.entity
+		}else if (model instanceof GetAttributeBodyImpl){
+			val GetAttributeBody body = model as GetAttributeBody
+			entityRef = body.entity
+		}
+		if (entityRef!== null && entityRef instanceof EEntity){
+			val EEntity entity  = entityRef as EEntity
+			if (entity.entity.equalsIgnoreCase("SELF")){
+				suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
 			}
 		}
 	}

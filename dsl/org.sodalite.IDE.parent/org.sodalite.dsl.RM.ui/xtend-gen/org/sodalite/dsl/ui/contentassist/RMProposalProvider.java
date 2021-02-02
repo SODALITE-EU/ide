@@ -36,6 +36,8 @@ import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
@@ -46,6 +48,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 import org.sodalite.dsl.kb_reasoner_client.types.Template;
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityType;
@@ -289,7 +292,9 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
-        importedModules.add(module);
+        if ((module != null)) {
+          importedModules.add(module);
+        }
         final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = nodes.getElements();
@@ -577,209 +582,25 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   @Override
   public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::req_cap property");
-    final String module = this.getModule(model);
-    EObject _eContainer = model.eContainer();
-    final ENodeType node = this.getEntityType(((EFunction) _eContainer));
-    if ((node == null)) {
-      return;
-    }
-    final GetAttributeBody body = ((GetAttributeBody) model);
-    final EEntityReference entityRef = body.getEntity();
-    if ((entityRef instanceof EEntity)) {
-      final EEntity entity = ((EEntity) entityRef);
-      boolean _equalsIgnoreCase = entity.getEntity().equalsIgnoreCase("SELF");
-      if (_equalsIgnoreCase) {
-        this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
-      }
-    }
+    this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
   @Override
   public void completeGetAttributeBody_Attribute(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::attribute property");
-    final String module = this.getModule(model);
-    final GetAttributeBodyImpl body = ((GetAttributeBodyImpl) model);
-    EObject _eContainer = body.eContainer();
-    final ENodeType node = this.getEntityType(((EFunction) _eContainer));
-    if ((node == null)) {
-      return;
-    }
-    List<String> proposals = new ArrayList<String>();
-    EPREFIX_TYPE _req_cap = body.getReq_cap();
-    boolean _tripleNotEquals = (_req_cap != null);
-    if (_tripleNotEquals) {
-      final String req_cap_name = this.getLastSegment(body.getReq_cap().getType(), ".");
-      final ENodeType req_node = this.findRequirementNodeInLocalType(req_cap_name, node);
-      if ((req_node != null)) {
-        EList<EPropertyDefinition> _properties = req_node.getNode().getProperties().getProperties();
-        for (final EPropertyDefinition prop : _properties) {
-          {
-            String _xifexpression = null;
-            if ((module != null)) {
-              String _name = req_node.getName();
-              String _plus = ((module + "/") + _name);
-              String _plus_1 = (_plus + ".");
-              String _name_1 = prop.getName();
-              _xifexpression = (_plus_1 + _name_1);
-            } else {
-              String _name_2 = req_node.getName();
-              String _plus_2 = (_name_2 + ".");
-              String _name_3 = prop.getName();
-              _xifexpression = (_plus_2 + _name_3);
-            }
-            final String proposal = _xifexpression;
-            proposals.add(proposal);
-          }
-        }
-      } else {
-        final String resourceId = this.findRequirementNodeInKBType(req_cap_name, node);
-        if ((resourceId != null)) {
-          this.proposeAttributesForEntity(resourceId, proposals);
-        }
-      }
-      final ECapabilityDefinition cap = this.findCapabilityInLocalType(req_cap_name, node);
-      if ((cap != null)) {
-        EList<EPropertyDefinition> _properties_1 = cap.getCapability().getProperties().getProperties();
-        for (final EPropertyDefinition prop_1 : _properties_1) {
-          {
-            String _xifexpression = null;
-            if ((module != null)) {
-              String _name = req_node.getName();
-              String _plus = ((module + "/") + _name);
-              String _plus_1 = (_plus + ".");
-              String _name_1 = prop_1.getName();
-              _xifexpression = (_plus_1 + _name_1);
-            } else {
-              String _name_2 = req_node.getName();
-              String _plus_2 = (_name_2 + ".");
-              String _name_3 = prop_1.getName();
-              _xifexpression = (_plus_2 + _name_3);
-            }
-            final String proposal = _xifexpression;
-            proposals.add(proposal);
-          }
-        }
-      } else {
-      }
-    } else {
-      EList<EPropertyDefinition> _properties_2 = node.getNode().getProperties().getProperties();
-      for (final EPropertyDefinition prop_2 : _properties_2) {
-        String _name = node.getName();
-        String _plus = ((module + "/") + _name);
-        String _plus_1 = (_plus + ".");
-        String _name_1 = prop_2.getName();
-        String _plus_2 = (_plus_1 + _name_1);
-        proposals.add(_plus_2);
-      }
-    }
-    final Image image = this.getImage("icons/property.png");
-    for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
-    }
+    this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
   @Override
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
-    final String module = this.getModule(model);
-    final GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
-    EObject _eContainer = body.eContainer();
-    final ENodeType node = this.getEntityType(((EFunction) _eContainer));
-    if ((node == null)) {
-      return;
-    }
-    List<String> proposals = new ArrayList<String>();
-    EPREFIX_TYPE _req_cap = body.getReq_cap();
-    boolean _tripleNotEquals = (_req_cap != null);
-    if (_tripleNotEquals) {
-      final String req_cap_name = this.getLastSegment(body.getReq_cap().getType(), ".");
-      final ENodeType req_node = this.findRequirementNodeInLocalType(req_cap_name, node);
-      if ((req_node != null)) {
-        EList<EPropertyDefinition> _properties = req_node.getNode().getProperties().getProperties();
-        for (final EPropertyDefinition prop : _properties) {
-          {
-            String _xifexpression = null;
-            if ((module != null)) {
-              String _name = req_node.getName();
-              String _plus = ((module + "/") + _name);
-              String _plus_1 = (_plus + ".");
-              String _name_1 = prop.getName();
-              _xifexpression = (_plus_1 + _name_1);
-            } else {
-              String _name_2 = req_node.getName();
-              String _plus_2 = (_name_2 + ".");
-              String _name_3 = prop.getName();
-              _xifexpression = (_plus_2 + _name_3);
-            }
-            final String proposal = _xifexpression;
-            proposals.add(proposal);
-          }
-        }
-      } else {
-        final String resourceId = this.findRequirementNodeInKBType(req_cap_name, node);
-        if ((resourceId != null)) {
-          this.proposePropertiesForEntity(resourceId, proposals);
-        }
-      }
-      final ECapabilityDefinition cap = this.findCapabilityInLocalType(req_cap_name, node);
-      if ((cap != null)) {
-        EList<EPropertyDefinition> _properties_1 = cap.getCapability().getProperties().getProperties();
-        for (final EPropertyDefinition prop_1 : _properties_1) {
-          {
-            String _xifexpression = null;
-            if ((module != null)) {
-              String _name = req_node.getName();
-              String _plus = ((module + "/") + _name);
-              String _plus_1 = (_plus + ".");
-              String _name_1 = prop_1.getName();
-              _xifexpression = (_plus_1 + _name_1);
-            } else {
-              String _name_2 = req_node.getName();
-              String _plus_2 = (_name_2 + ".");
-              String _name_3 = prop_1.getName();
-              _xifexpression = (_plus_2 + _name_3);
-            }
-            final String proposal = _xifexpression;
-            proposals.add(proposal);
-          }
-        }
-      } else {
-      }
-    } else {
-      EList<EPropertyDefinition> _properties_2 = node.getNode().getProperties().getProperties();
-      for (final EPropertyDefinition prop_2 : _properties_2) {
-        String _name = node.getName();
-        String _plus = ((module + "/") + _name);
-        String _plus_1 = (_plus + ".");
-        String _name_1 = prop_2.getName();
-        String _plus_2 = (_plus_1 + _name_1);
-        proposals.add(_plus_2);
-      }
-    }
-    final Image image = this.getImage("icons/property.png");
-    for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
-    }
+    this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
   @Override
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
-    final String module = this.getModule(model);
-    EObject _eContainer = model.eContainer();
-    final ENodeType node = this.getEntityType(((EFunction) _eContainer));
-    if ((node == null)) {
-      return;
-    }
-    final GetPropertyBody body = ((GetPropertyBody) model);
-    final EEntityReference entityRef = body.getEntity();
-    if ((entityRef instanceof EEntity)) {
-      final EEntity entity = ((EEntity) entityRef);
-      boolean _equalsIgnoreCase = entity.getEntity().equalsIgnoreCase("SELF");
-      if (_equalsIgnoreCase) {
-        this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
-      }
-    }
+    this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
   @Override
@@ -1341,35 +1162,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     return node;
   }
   
-  public String findRequirementNodeInKBType(final String requirement, final ENodeType nodeType) {
-    Object _findModel = this.findModel(nodeType);
-    final RM_Model model = ((RM_Model) _findModel);
-    ERequirements _requirements = nodeType.getNode().getRequirements();
-    boolean _tripleEquals = (_requirements == null);
-    if (_tripleEquals) {
-      return null;
-    }
-    EList<ERequirementDefinition> _requirements_1 = nodeType.getNode().getRequirements().getRequirements();
-    for (final ERequirementDefinition req : _requirements_1) {
-      {
-        String _xifexpression = null;
-        String _module = req.getRequirement().getNode().getModule();
-        boolean _tripleNotEquals = (_module != null);
-        if (_tripleNotEquals) {
-          String _module_1 = req.getRequirement().getNode().getModule();
-          String _plus = (_module_1 + "/");
-          String _type = req.getRequirement().getNode().getType();
-          _xifexpression = (_plus + _type);
-        } else {
-          _xifexpression = req.getRequirement().getNode().getType();
-        }
-        final String node = _xifexpression;
-        return node;
-      }
-    }
-    return null;
-  }
-  
   public ECapabilityDefinition findCapabilityInLocalType(final String capabilityName, final ENodeType nodeType) {
     ECapabilityDefinition capability = null;
     ECapabilities _capabilities = nodeType.getNode().getCapabilities();
@@ -1431,36 +1223,241 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   public void suggestRequirementsOrCapabilitiesInNode(final String module, final ENodeType node, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    ERequirements _requirements = node.getNode().getRequirements();
-    boolean _tripleNotEquals = (_requirements != null);
-    if (_tripleNotEquals) {
-      final Image image = this.getImage("icons/requirement.png");
-      EList<ERequirementDefinition> _requirements_1 = node.getNode().getRequirements().getRequirements();
-      for (final ERequirementDefinition req : _requirements_1) {
-        {
+    try {
+      ERequirements _requirements = node.getNode().getRequirements();
+      boolean _tripleNotEquals = (_requirements != null);
+      if (_tripleNotEquals) {
+        final Image image = this.getImage("icons/requirement.png");
+        EList<ERequirementDefinition> _requirements_1 = node.getNode().getRequirements().getRequirements();
+        for (final ERequirementDefinition req : _requirements_1) {
+          {
+            String _name = node.getName();
+            String _plus = ((module + "/") + _name);
+            String _plus_1 = (_plus + ".");
+            String _name_1 = req.getName();
+            final String proposal = (_plus_1 + _name_1);
+            this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          }
+        }
+      }
+      ECapabilities _capabilities = node.getNode().getCapabilities();
+      boolean _tripleNotEquals_1 = (_capabilities != null);
+      if (_tripleNotEquals_1) {
+        final Image image_1 = this.getImage("icons/capability.png");
+        EList<ECapabilityDefinition> _capabilities_1 = node.getNode().getCapabilities().getCapabilities();
+        for (final ECapabilityDefinition cap : _capabilities_1) {
+          {
+            String _name = node.getName();
+            String _plus = ((module + "/") + _name);
+            String _plus_1 = (_plus + ".");
+            String _name_1 = cap.getName();
+            final String proposal = (_plus_1 + _name_1);
+            this.createEditableCompletionProposal(proposal, proposal, image_1, context, null, acceptor);
+          }
+        }
+      }
+      ENodeType superNode = null;
+      boolean _equals = module.equals(node.getNode().getSuperType().getModule());
+      if (_equals) {
+        Object _findModel = this.findModel(((EObject) node));
+        final RM_Model model = ((RM_Model) _findModel);
+        superNode = this.findNodeType(model, node.getNode().getSuperType().getType());
+        if ((superNode != null)) {
+          this.suggestRequirementsOrCapabilitiesInNode(module, superNode, context, acceptor);
+        }
+      }
+      if ((superNode == null)) {
+        String _xifexpression = null;
+        String _module = node.getNode().getSuperType().getModule();
+        boolean _tripleNotEquals_2 = (_module != null);
+        if (_tripleNotEquals_2) {
+          String _module_1 = node.getNode().getSuperType().getModule();
+          String _plus = (_module_1 + "/");
+          String _type = node.getNode().getSuperType().getType();
+          _xifexpression = (_plus + _type);
+        } else {
+          _xifexpression = node.getNode().getSuperType().getType();
+        }
+        final String superType = _xifexpression;
+        final RequirementDefinitionData reqData = this.getKBReasoner().getTypeRequirements(superType);
+        Image image_2 = this.getImage("icons/requirement.png");
+        List<RequirementDefinition> _elements = reqData.getElements();
+        for (final RequirementDefinition req_1 : _elements) {
+          {
+            String _lastSegment = this.getLastSegment(req_1.getUri().toString(), "/");
+            final String proposal = ((superType + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image_2, context, null, acceptor);
+          }
+        }
+        final CapabilityDefinitionData capData = this.getKBReasoner().getTypeCapabilities(superType);
+        image_2 = this.getImage("icons/capability.png");
+        List<CapabilityDefinition> _elements_1 = capData.getElements();
+        for (final CapabilityDefinition cap_1 : _elements_1) {
+          {
+            String _lastSegment = this.getLastSegment(cap_1.getUri().toString(), "/");
+            final String proposal = ((superType + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image_2, context, null, acceptor);
+          }
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void proposeProperties(final List<EPropertyDefinition> properties, final List<String> proposals, final String nodeName, final String module) {
+    for (final EPropertyDefinition prop : properties) {
+      {
+        String _xifexpression = null;
+        if ((module != null)) {
+          String _name = prop.getName();
+          _xifexpression = ((((module + "/") + nodeName) + ".") + _name);
+        } else {
+          String _name_1 = prop.getName();
+          _xifexpression = ((nodeName + ".") + _name_1);
+        }
+        final String proposal = _xifexpression;
+        proposals.add(proposal);
+      }
+    }
+  }
+  
+  public void proposeAttributes(final List<EAttributeDefinition> attributes, final List<String> proposals, final String nodeName, final String module) {
+    for (final EAttributeDefinition prop : attributes) {
+      {
+        String _xifexpression = null;
+        if ((module != null)) {
+          String _name = prop.getName();
+          _xifexpression = ((((module + "/") + nodeName) + ".") + _name);
+        } else {
+          String _name_1 = prop.getName();
+          _xifexpression = ((nodeName + ".") + _name_1);
+        }
+        final String proposal = _xifexpression;
+        proposals.add(proposal);
+      }
+    }
+  }
+  
+  public void completeGetAttributeOrPropertyFunction_AttributeOrProperty(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String module = this.getModule(model);
+    ENodeType node = null;
+    EPREFIX_TYPE req_cap = null;
+    if ((model instanceof GetPropertyBodyImpl)) {
+      GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
+      EObject _eContainer = body.eContainer();
+      node = this.getEntityType(((EFunction) _eContainer));
+      req_cap = body.getReq_cap();
+    } else {
+      if ((model instanceof GetAttributeBodyImpl)) {
+        GetAttributeBodyImpl body_1 = ((GetAttributeBodyImpl) model);
+        EObject _eContainer_1 = body_1.eContainer();
+        node = this.getEntityType(((EFunction) _eContainer_1));
+        req_cap = body_1.getReq_cap();
+      }
+    }
+    if ((node == null)) {
+      return;
+    }
+    List<String> proposals = new ArrayList<String>();
+    if ((req_cap != null)) {
+      final String req_cap_name = this.getLastSegment(req_cap.getType(), ".");
+      final ENodeType req_node = this.findRequirementNodeInLocalType(req_cap_name, node);
+      if ((req_node != null)) {
+        if ((model instanceof GetPropertyBodyImpl)) {
+          this.proposeProperties(req_node.getNode().getProperties().getProperties(), proposals, req_node.getName(), module);
+        } else {
+          if ((model instanceof GetAttributeBodyImpl)) {
+            this.proposeAttributes(req_node.getNode().getAttributes().getAttributes(), proposals, req_node.getName(), module);
+          } else {
+            String _xifexpression = null;
+            String _module = node.getNode().getSuperType().getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _module_1 = node.getNode().getSuperType().getModule();
+              String _plus = (_module_1 + "/");
+              String _type = node.getNode().getSuperType().getType();
+              _xifexpression = (_plus + _type);
+            } else {
+              _xifexpression = node.getNode().getSuperType().getType();
+            }
+            final String resourceId = _xifexpression;
+            if ((resourceId != null)) {
+              if ((model instanceof GetPropertyBodyImpl)) {
+                this.proposePropertiesForEntity(resourceId, proposals);
+              } else {
+                if ((model instanceof GetAttributeBodyImpl)) {
+                  this.proposeAttributesForEntity(resourceId, proposals);
+                }
+              }
+            }
+          }
+        }
+      }
+      final ECapabilityDefinition cap_node = this.findCapabilityInLocalType(req_cap_name, node);
+      if ((cap_node != null)) {
+        if ((model instanceof GetPropertyBodyImpl)) {
+          this.proposeProperties(cap_node.getCapability().getProperties().getProperties(), proposals, cap_node.getName(), module);
+        } else {
+          if ((model instanceof GetAttributeBodyImpl)) {
+            this.proposeAttributes(cap_node.getCapability().getAttributes().getAttributes(), proposals, cap_node.getName(), module);
+          }
+        }
+      } else {
+      }
+    } else {
+      if ((model instanceof GetPropertyBodyImpl)) {
+        EList<EPropertyDefinition> _properties = node.getNode().getProperties().getProperties();
+        for (final EPropertyDefinition prop : _properties) {
           String _name = node.getName();
-          String _plus = ((module + "/") + _name);
-          String _plus_1 = (_plus + ".");
-          String _name_1 = req.getName();
-          final String proposal = (_plus_1 + _name_1);
-          this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          String _plus_1 = ((module + "/") + _name);
+          String _plus_2 = (_plus_1 + ".");
+          String _name_1 = prop.getName();
+          String _plus_3 = (_plus_2 + _name_1);
+          proposals.add(_plus_3);
+        }
+      } else {
+        if ((model instanceof GetAttributeBodyImpl)) {
+          EList<EAttributeDefinition> _attributes = node.getNode().getAttributes().getAttributes();
+          for (final EAttributeDefinition attr : _attributes) {
+            String _name_2 = node.getName();
+            String _plus_4 = ((module + "/") + _name_2);
+            String _plus_5 = (_plus_4 + ".");
+            String _name_3 = attr.getName();
+            String _plus_6 = (_plus_5 + _name_3);
+            proposals.add(_plus_6);
+          }
         }
       }
     }
-    ECapabilities _capabilities = node.getNode().getCapabilities();
-    boolean _tripleNotEquals_1 = (_capabilities != null);
-    if (_tripleNotEquals_1) {
-      final Image image_1 = this.getImage("icons/capability.png");
-      EList<ECapabilityDefinition> _capabilities_1 = node.getNode().getCapabilities().getCapabilities();
-      for (final ECapabilityDefinition cap : _capabilities_1) {
-        {
-          String _name = node.getName();
-          String _plus = ((module + "/") + _name);
-          String _plus_1 = (_plus + ".");
-          String _name_1 = cap.getName();
-          final String proposal = (_plus_1 + _name_1);
-          this.createEditableCompletionProposal(proposal, proposal, image_1, context, null, acceptor);
-        }
+    final Image image = this.getImage("icons/property.png");
+    for (final String proposal : proposals) {
+      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+    }
+  }
+  
+  public void completeGetAttributeOrPropertyFunction_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String module = this.getModule(model);
+    EObject _eContainer = model.eContainer();
+    final ENodeType node = this.getEntityType(((EFunction) _eContainer));
+    if ((node == null)) {
+      return;
+    }
+    EEntityReference entityRef = null;
+    if ((model instanceof GetPropertyBodyImpl)) {
+      final GetPropertyBody body = ((GetPropertyBody) model);
+      entityRef = body.getEntity();
+    } else {
+      if ((model instanceof GetAttributeBodyImpl)) {
+        final GetAttributeBody body_1 = ((GetAttributeBody) model);
+        entityRef = body_1.getEntity();
+      }
+    }
+    if (((entityRef != null) && (entityRef instanceof EEntity))) {
+      final EEntity entity = ((EEntity) entityRef);
+      boolean _equalsIgnoreCase = entity.getEntity().equalsIgnoreCase("SELF");
+      if (_equalsIgnoreCase) {
+        this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
       }
     }
   }
