@@ -808,16 +808,24 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def compile (ERequirementAssignment r) '''
-	«requirement_numbers.put(r, requirement_counter)»
-	:Requirement_«requirement_counter++»
-	  rdf:type exchange:Requirement ;
-	  exchange:name "«r.name»" ;
+	«putParameterNumber(r, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;
 	  «IF r.node.module !== null»
 	  exchange:value '«r.node.module»/«r.node.id»' ;  
 	  «ELSE»
 	  exchange:value '«r.node.id»' ;  
 	  «ENDIF»  
+	  .
+	
+	«requirement_numbers.put(r, requirement_counter)»
+	:Requirement_«requirement_counter++»
+	  rdf:type exchange:Requirement ;
+	  exchange:name "«r.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "node")» ;
 	.
+	
 	'''
 	
 	def compile (ECapabilityAssignment c) '''

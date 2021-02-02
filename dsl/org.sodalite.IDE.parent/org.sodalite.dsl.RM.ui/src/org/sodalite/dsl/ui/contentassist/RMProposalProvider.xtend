@@ -61,6 +61,7 @@ import org.sodalite.dsl.rM.GetPropertyBody
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
 import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.rM.EAttributeDefinition
+import org.sodalite.dsl.rM.ERequirementDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -981,8 +982,19 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			proposals.add(proposal)
 		}
 	}
+	
+	def getRequirementByNameInLocalNode (ENodeType node, String req_name){
+		if (node.node.requirements !== null){
+			for (ERequirementDefinition req: node.node.requirements.requirements){
+				if (req.name.equals(req_name))
+					return req		
+			}
+		}
+		return null
+	}
 
 	def completeGetAttributeOrPropertyFunction_AttributeOrProperty(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		//TODO This method only supports SELF Entity. Refactor it for future support of other ENTITIES
 		val String module = getModule(model)
 		//Get entity in this GetProperty body. If null, return
 		var ENodeType node = null
@@ -991,7 +1003,6 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			var body = model as GetPropertyBodyImpl
 			node = getEntityType(body.eContainer as EFunction)
 			req_cap = body.req_cap
-			
 		}else if (model instanceof GetAttributeBodyImpl){
 			var body = model as GetAttributeBodyImpl
 			node = getEntityType(body.eContainer as EFunction)
@@ -1006,23 +1017,37 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		if (req_cap !== null){
 			val req_cap_name = getLastSegment(req_cap.type, '.')
 			val ENodeType req_node = findRequirementNodeInLocalType(req_cap_name, node)
-			if (req_node !== null)
+			if (req_node !== null){ //Requirement node defined in local RM
 				if (model instanceof GetPropertyBodyImpl)
 					proposeProperties (req_node.node.properties.properties, proposals, req_node.name, module)
 				else if (model instanceof GetAttributeBodyImpl)
 					proposeAttributes (req_node.node.attributes.attributes, proposals, req_node.name, module)
-			else {
+			} else {
 				//Find requirement node properties in KB
-				val String resourceId = node.node.superType.module !== null?
-					node.node.superType.module + '/' + node.node.superType.type:
-					node.node.superType.type
+				var String resourceId = null
+				val ERequirementDefinition req = getRequirementByNameInLocalNode(node, req_cap_name)
+				if (req !== null){ //Requirement defined in local RM, pointing to KB node type
+				 	val req_node_ref = req.requirement.node
+				 	if (req_node_ref !== null){
+						resourceId = req_node_ref.module !== null?
+							req_node_ref.module + '/' + req_node_ref.type:
+							req_node_ref.type
+					}
+				} else {
+					// Find requirement in KB
+					val String type = req_cap.type.substring(0, 
+						req_cap.type.lastIndexOf('.')
+					)
+					resourceId = getRequirementByNameInKB(type, req_cap_name)
+				}
 				if (resourceId !== null){
 					if (model instanceof GetPropertyBodyImpl)
 						proposePropertiesForEntity (resourceId, proposals)
 					else if (model instanceof GetAttributeBodyImpl)
 						proposeAttributesForEntity (resourceId, proposals)
-				}
+					}
 			}
+
 			val ECapabilityDefinition cap_node = findCapabilityInLocalType(req_cap_name, node)
 			if (cap_node !== null){
 				if (model instanceof GetPropertyBodyImpl)
@@ -1049,6 +1074,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		for (proposal: proposals){
 			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 		}
+	}
+	
+	def getRequirementByNameInKB(String type, String reqName){
+		val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(type)
+		for (req: reqData.elements){
+			val name = req.uri.toString.substring(req.uri.toString.lastIndexOf('/') + 1)
+			if (name.equals(reqName))
+				return req.node.module !== null?
+					req.node.module + '/' + req.node.label:req.node.label
+		}
+		return null
 	}
 	
 	def completeGetAttributeOrPropertyFunction_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

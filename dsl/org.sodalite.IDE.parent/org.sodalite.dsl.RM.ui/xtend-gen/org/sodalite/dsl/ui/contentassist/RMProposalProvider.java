@@ -1339,6 +1339,21 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
+  public ERequirementDefinition getRequirementByNameInLocalNode(final ENodeType node, final String req_name) {
+    ERequirements _requirements = node.getNode().getRequirements();
+    boolean _tripleNotEquals = (_requirements != null);
+    if (_tripleNotEquals) {
+      EList<ERequirementDefinition> _requirements_1 = node.getNode().getRequirements().getRequirements();
+      for (final ERequirementDefinition req : _requirements_1) {
+        boolean _equals = req.getName().equals(req_name);
+        if (_equals) {
+          return req;
+        }
+      }
+    }
+    return null;
+  }
+  
   public void completeGetAttributeOrPropertyFunction_AttributeOrProperty(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String module = this.getModule(model);
     ENodeType node = null;
@@ -1369,27 +1384,38 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         } else {
           if ((model instanceof GetAttributeBodyImpl)) {
             this.proposeAttributes(req_node.getNode().getAttributes().getAttributes(), proposals, req_node.getName(), module);
-          } else {
+          }
+        }
+      } else {
+        String resourceId = null;
+        final ERequirementDefinition req = this.getRequirementByNameInLocalNode(node, req_cap_name);
+        if ((req != null)) {
+          final EPREFIX_TYPE req_node_ref = req.getRequirement().getNode();
+          if ((req_node_ref != null)) {
             String _xifexpression = null;
-            String _module = node.getNode().getSuperType().getModule();
+            String _module = req_node_ref.getModule();
             boolean _tripleNotEquals = (_module != null);
             if (_tripleNotEquals) {
-              String _module_1 = node.getNode().getSuperType().getModule();
+              String _module_1 = req_node_ref.getModule();
               String _plus = (_module_1 + "/");
-              String _type = node.getNode().getSuperType().getType();
+              String _type = req_node_ref.getType();
               _xifexpression = (_plus + _type);
             } else {
-              _xifexpression = node.getNode().getSuperType().getType();
+              _xifexpression = req_node_ref.getType();
             }
-            final String resourceId = _xifexpression;
-            if ((resourceId != null)) {
-              if ((model instanceof GetPropertyBodyImpl)) {
-                this.proposePropertiesForEntity(resourceId, proposals);
-              } else {
-                if ((model instanceof GetAttributeBodyImpl)) {
-                  this.proposeAttributesForEntity(resourceId, proposals);
-                }
-              }
+            resourceId = _xifexpression;
+          }
+        } else {
+          final String type = req_cap.getType().substring(0, 
+            req_cap.getType().lastIndexOf("."));
+          resourceId = this.getRequirementByNameInKB(type, req_cap_name);
+        }
+        if ((resourceId != null)) {
+          if ((model instanceof GetPropertyBodyImpl)) {
+            this.proposePropertiesForEntity(resourceId, proposals);
+          } else {
+            if ((model instanceof GetAttributeBodyImpl)) {
+              this.proposeAttributesForEntity(resourceId, proposals);
             }
           }
         }
@@ -1433,6 +1459,39 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final Image image = this.getImage("icons/property.png");
     for (final String proposal : proposals) {
       this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+    }
+  }
+  
+  public String getRequirementByNameInKB(final String type, final String reqName) {
+    try {
+      final RequirementDefinitionData reqData = this.getKBReasoner().getTypeRequirements(type);
+      List<RequirementDefinition> _elements = reqData.getElements();
+      for (final RequirementDefinition req : _elements) {
+        {
+          String _string = req.getUri().toString();
+          int _lastIndexOf = req.getUri().toString().lastIndexOf("/");
+          int _plus = (_lastIndexOf + 1);
+          final String name = _string.substring(_plus);
+          boolean _equals = name.equals(reqName);
+          if (_equals) {
+            String _xifexpression = null;
+            String _module = req.getNode().getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _module_1 = req.getNode().getModule();
+              String _plus_1 = (_module_1 + "/");
+              String _label = req.getNode().getLabel();
+              _xifexpression = (_plus_1 + _label);
+            } else {
+              _xifexpression = req.getNode().getLabel();
+            }
+            return _xifexpression;
+          }
+        }
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
