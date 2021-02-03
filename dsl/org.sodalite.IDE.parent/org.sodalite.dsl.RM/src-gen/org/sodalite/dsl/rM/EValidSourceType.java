@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EValidSourceType#getSourceTypes <em>Source Types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EValidSourceType#getSourceType <em>Source Type</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEValidSourceType()
@@ -37,17 +36,5 @@ public interface EValidSourceType extends EObject
    * @generated
    */
   EList<EPREFIX_TYPE> getSourceTypes();
-
-  /**
-   * Returns the value of the '<em><b>Source Type</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.EPREFIX_TYPE}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Source Type</em>' containment reference list.
-   * @see org.sodalite.dsl.rM.RMPackage#getEValidSourceType_SourceType()
-   * @model containment="true"
-   * @generated
-   */
-  EList<EPREFIX_TYPE> getSourceType();
 
 } // EValidSourceType

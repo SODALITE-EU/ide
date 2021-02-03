@@ -49221,26 +49221,26 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__Group_1__1__Impl"
-    // InternalRMParser.g:15689:1: rule__EValidSourceType__Group_1__1__Impl : ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) ) ;
+    // InternalRMParser.g:15689:1: rule__EValidSourceType__Group_1__1__Impl : ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) ) ;
     public final void rule__EValidSourceType__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:15693:1: ( ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) ) )
-            // InternalRMParser.g:15694:1: ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) )
+            // InternalRMParser.g:15693:1: ( ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) ) )
+            // InternalRMParser.g:15694:1: ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) )
             {
-            // InternalRMParser.g:15694:1: ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) )
-            // InternalRMParser.g:15695:2: ( rule__EValidSourceType__SourceTypeAssignment_1_1 )
+            // InternalRMParser.g:15694:1: ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) )
+            // InternalRMParser.g:15695:2: ( rule__EValidSourceType__SourceTypesAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); 
+               before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); 
             }
-            // InternalRMParser.g:15696:2: ( rule__EValidSourceType__SourceTypeAssignment_1_1 )
-            // InternalRMParser.g:15696:3: rule__EValidSourceType__SourceTypeAssignment_1_1
+            // InternalRMParser.g:15696:2: ( rule__EValidSourceType__SourceTypesAssignment_1_1 )
+            // InternalRMParser.g:15696:3: rule__EValidSourceType__SourceTypesAssignment_1_1
             {
             pushFollow(FOLLOW_2);
-            rule__EValidSourceType__SourceTypeAssignment_1_1();
+            rule__EValidSourceType__SourceTypesAssignment_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -49248,7 +49248,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); 
+               after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); 
             }
 
             }
@@ -74295,9 +74295,9 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EValidSourceType__SourceTypesAssignment_0"
 
 
-    // $ANTLR start "rule__EValidSourceType__SourceTypeAssignment_1_1"
-    // InternalRMParser.g:23166:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
-    public final void rule__EValidSourceType__SourceTypeAssignment_1_1() throws RecognitionException {
+    // $ANTLR start "rule__EValidSourceType__SourceTypesAssignment_1_1"
+    // InternalRMParser.g:23166:1: rule__EValidSourceType__SourceTypesAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
+    public final void rule__EValidSourceType__SourceTypesAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -74309,7 +74309,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:23172:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); 
+               before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleEPREFIX_TYPE();
@@ -74317,7 +74317,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); 
+               after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); 
             }
 
             }
@@ -74337,7 +74337,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EValidSourceType__SourceTypeAssignment_1_1"
+    // $ANTLR end "rule__EValidSourceType__SourceTypesAssignment_1_1"
 
 
     // $ANTLR start "rule__ERequirements__RequirementsAssignment_1"

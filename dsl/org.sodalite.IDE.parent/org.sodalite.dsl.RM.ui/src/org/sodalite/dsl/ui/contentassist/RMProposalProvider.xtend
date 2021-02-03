@@ -559,6 +559,15 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
+	override void completeECapabilityDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEValidSourceType_SourceTypes(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	
 	override void completeERequirementDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ERequirementDefinition::name property")
 		val String proposalText = "requirement_name"

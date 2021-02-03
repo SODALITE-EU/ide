@@ -507,7 +507,7 @@ ECapabilityDefinitionBody:
 	('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 
 EValidSourceType:
-	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
+	sourceTypes+=EPREFIX_TYPE (',' sourceTypes+=EPREFIX_TYPE)*;
 
 ERequirements:
 	{ERequirements} (requirements+=ERequirementDefinition)*;

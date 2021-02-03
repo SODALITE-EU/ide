@@ -15692,9 +15692,9 @@ rule__EValidSourceType__Group_1__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); }
-	(rule__EValidSourceType__SourceTypeAssignment_1_1)
-	{ after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); }
+	{ before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); }
+	(rule__EValidSourceType__SourceTypesAssignment_1_1)
+	{ after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); }
 )
 ;
 finally {
@@ -23163,15 +23163,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EValidSourceType__SourceTypeAssignment_1_1
+rule__EValidSourceType__SourceTypesAssignment_1_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); }
+		{ before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); }
 		ruleEPREFIX_TYPE
-		{ after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); }
+		{ after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); }
 	)
 ;
 finally {

@@ -53293,31 +53293,31 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EValidSourceType__Group_1__1__Impl"
-    // InternalAADMParser.g:18007:1: rule__EValidSourceType__Group_1__1__Impl : ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) ) ;
+    // InternalAADMParser.g:18007:1: rule__EValidSourceType__Group_1__1__Impl : ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) ) ;
     public final void rule__EValidSourceType__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:18011:1: ( ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) ) )
-            // InternalAADMParser.g:18012:1: ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) )
+            // InternalAADMParser.g:18011:1: ( ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) ) )
+            // InternalAADMParser.g:18012:1: ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) )
             {
-            // InternalAADMParser.g:18012:1: ( ( rule__EValidSourceType__SourceTypeAssignment_1_1 ) )
-            // InternalAADMParser.g:18013:2: ( rule__EValidSourceType__SourceTypeAssignment_1_1 )
+            // InternalAADMParser.g:18012:1: ( ( rule__EValidSourceType__SourceTypesAssignment_1_1 ) )
+            // InternalAADMParser.g:18013:2: ( rule__EValidSourceType__SourceTypesAssignment_1_1 )
             {
-             before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); 
-            // InternalAADMParser.g:18014:2: ( rule__EValidSourceType__SourceTypeAssignment_1_1 )
-            // InternalAADMParser.g:18014:3: rule__EValidSourceType__SourceTypeAssignment_1_1
+             before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); 
+            // InternalAADMParser.g:18014:2: ( rule__EValidSourceType__SourceTypesAssignment_1_1 )
+            // InternalAADMParser.g:18014:3: rule__EValidSourceType__SourceTypesAssignment_1_1
             {
             pushFollow(FOLLOW_2);
-            rule__EValidSourceType__SourceTypeAssignment_1_1();
+            rule__EValidSourceType__SourceTypesAssignment_1_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeAssignment_1_1()); 
+             after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesAssignment_1_1()); 
 
             }
 
@@ -78865,9 +78865,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EValidSourceType__SourceTypesAssignment_0"
 
 
-    // $ANTLR start "rule__EValidSourceType__SourceTypeAssignment_1_1"
-    // InternalAADMParser.g:25981:1: rule__EValidSourceType__SourceTypeAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
-    public final void rule__EValidSourceType__SourceTypeAssignment_1_1() throws RecognitionException {
+    // $ANTLR start "rule__EValidSourceType__SourceTypesAssignment_1_1"
+    // InternalAADMParser.g:25981:1: rule__EValidSourceType__SourceTypesAssignment_1_1 : ( ruleEPREFIX_TYPE ) ;
+    public final void rule__EValidSourceType__SourceTypesAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -78878,13 +78878,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:25986:2: ( ruleEPREFIX_TYPE )
             // InternalAADMParser.g:25987:3: ruleEPREFIX_TYPE
             {
-             before(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); 
+             before(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEPREFIX_TYPE();
 
             state._fsp--;
 
-             after(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0()); 
+             after(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0()); 
 
             }
 
@@ -78903,7 +78903,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EValidSourceType__SourceTypeAssignment_1_1"
+    // $ANTLR end "rule__EValidSourceType__SourceTypesAssignment_1_1"
 
 
     // $ANTLR start "rule__ERequirements__RequirementsAssignment_1"

@@ -3941,14 +3941,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cSourceTypesEPREFIX_TYPEParserRuleCall_0_0 = (RuleCall)cSourceTypesAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cSourceTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0 = (RuleCall)cSourceTypeAssignment_1_1.eContents().get(0);
+		private final Assignment cSourceTypesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0 = (RuleCall)cSourceTypesAssignment_1_1.eContents().get(0);
 		
 		//EValidSourceType:
-		//	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
+		//	sourceTypes+=EPREFIX_TYPE (',' sourceTypes+=EPREFIX_TYPE)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*
+		//sourceTypes+=EPREFIX_TYPE (',' sourceTypes+=EPREFIX_TYPE)*
 		public Group getGroup() { return cGroup; }
 		
 		//sourceTypes+=EPREFIX_TYPE
@@ -3957,17 +3957,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EPREFIX_TYPE
 		public RuleCall getSourceTypesEPREFIX_TYPEParserRuleCall_0_0() { return cSourceTypesEPREFIX_TYPEParserRuleCall_0_0; }
 		
-		//(',' sourceType+=EPREFIX_TYPE)*
+		//(',' sourceTypes+=EPREFIX_TYPE)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//','
 		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 		
-		//sourceType+=EPREFIX_TYPE
-		public Assignment getSourceTypeAssignment_1_1() { return cSourceTypeAssignment_1_1; }
+		//sourceTypes+=EPREFIX_TYPE
+		public Assignment getSourceTypesAssignment_1_1() { return cSourceTypesAssignment_1_1; }
 		
 		//EPREFIX_TYPE
-		public RuleCall getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0() { return cSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0; }
+		public RuleCall getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0() { return cSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0; }
 	}
 	public class ERequirementsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ERequirements");
@@ -6077,7 +6077,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EValidSourceType:
-	//	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
+	//	sourceTypes+=EPREFIX_TYPE (',' sourceTypes+=EPREFIX_TYPE)*;
 	public EValidSourceTypeElements getEValidSourceTypeAccess() {
 		return pEValidSourceType;
 	}

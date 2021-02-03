@@ -2941,22 +2941,13 @@ public interface RMPackage extends EPackage
   int EVALID_SOURCE_TYPE__SOURCE_TYPES = 0;
 
   /**
-   * The feature id for the '<em><b>Source Type</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVALID_SOURCE_TYPE__SOURCE_TYPE = 1;
-
-  /**
    * The number of structural features of the '<em>EValid Source Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVALID_SOURCE_TYPE_FEATURE_COUNT = 2;
+  int EVALID_SOURCE_TYPE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ERequirementsImpl <em>ERequirements</em>}' class.
@@ -6366,17 +6357,6 @@ public interface RMPackage extends EPackage
   EReference getEValidSourceType_SourceTypes();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EValidSourceType#getSourceType <em>Source Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Source Type</em>'.
-   * @see org.sodalite.dsl.rM.EValidSourceType#getSourceType()
-   * @see #getEValidSourceType()
-   * @generated
-   */
-  EReference getEValidSourceType_SourceType();
-
-  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ERequirements <em>ERequirements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -9098,14 +9078,6 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EReference EVALID_SOURCE_TYPE__SOURCE_TYPES = eINSTANCE.getEValidSourceType_SourceTypes();
-
-    /**
-     * The meta object literal for the '<em><b>Source Type</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EVALID_SOURCE_TYPE__SOURCE_TYPE = eINSTANCE.getEValidSourceType_SourceType();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ERequirementsImpl <em>ERequirements</em>}' class.

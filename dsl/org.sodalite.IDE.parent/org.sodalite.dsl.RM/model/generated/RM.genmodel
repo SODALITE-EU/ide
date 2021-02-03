@@ -310,7 +310,6 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidSourceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceType"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirements">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirements/requirements"/>

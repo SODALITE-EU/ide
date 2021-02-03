@@ -3513,17 +3513,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEValidSourceType_SourceType()
-  {
-    return (EReference)eValidSourceTypeEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getERequirements()
   {
     return eRequirementsEClass;
@@ -4561,7 +4550,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eValidSourceTypeEClass = createEClass(EVALID_SOURCE_TYPE);
     createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPES);
-    createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPE);
 
     eRequirementsEClass = createEClass(EREQUIREMENTS);
     createEReference(eRequirementsEClass, EREQUIREMENTS__REQUIREMENTS);
@@ -5039,7 +5027,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eValidSourceTypeEClass, EValidSourceType.class, "EValidSourceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEValidSourceType_SourceTypes(), this.getEPREFIX_TYPE(), null, "sourceTypes", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEValidSourceType_SourceType(), this.getEPREFIX_TYPE(), null, "sourceType", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRequirementsEClass, ERequirements.class, "ERequirements", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERequirements_Requirements(), this.getERequirementDefinition(), null, "requirements", null, 0, -1, ERequirements.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

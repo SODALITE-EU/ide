@@ -718,6 +718,16 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
+  public void completeECapabilityDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeEValidSourceType_SourceTypes(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  @Override
   public void completeERequirementDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ERequirementDefinition::name property");
     final String proposalText = "requirement_name";

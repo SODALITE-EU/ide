@@ -17884,25 +17884,25 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValidSourceType"
-    // InternalRMParser.g:7046:1: ruleEValidSourceType returns [EObject current=null] : ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* ) ;
+    // InternalRMParser.g:7046:1: ruleEValidSourceType returns [EObject current=null] : ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* ) ;
     public final EObject ruleEValidSourceType() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         EObject lv_sourceTypes_0_0 = null;
 
-        EObject lv_sourceType_2_0 = null;
+        EObject lv_sourceTypes_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRMParser.g:7052:2: ( ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* ) )
-            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* )
+            // InternalRMParser.g:7052:2: ( ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* ) )
+            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* )
             {
-            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* )
-            // InternalRMParser.g:7054:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )*
+            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* )
+            // InternalRMParser.g:7054:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )*
             {
             // InternalRMParser.g:7054:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) )
             // InternalRMParser.g:7055:4: (lv_sourceTypes_0_0= ruleEPREFIX_TYPE )
@@ -17935,7 +17935,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:7073:3: (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )*
+            // InternalRMParser.g:7073:3: (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )*
             loop55:
             do {
                 int alt55=2;
@@ -17948,23 +17948,23 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
                 switch (alt55) {
             	case 1 :
-            	    // InternalRMParser.g:7074:4: otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7074:4: otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Comma,FOLLOW_6); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getEValidSourceTypeAccess().getCommaKeyword_1_0());
             	    			
-            	    // InternalRMParser.g:7078:4: ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:7079:5: (lv_sourceType_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7078:4: ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7079:5: (lv_sourceTypes_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:7079:5: (lv_sourceType_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:7080:6: lv_sourceType_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:7079:5: (lv_sourceTypes_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7080:6: lv_sourceTypes_2_0= ruleEPREFIX_TYPE
             	    {
 
-            	    						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0());
+            	    						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0());
             	    					
             	    pushFollow(FOLLOW_45);
-            	    lv_sourceType_2_0=ruleEPREFIX_TYPE();
+            	    lv_sourceTypes_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
 
@@ -17974,8 +17974,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"sourceType",
-            	    							lv_sourceType_2_0,
+            	    							"sourceTypes",
+            	    							lv_sourceTypes_2_0,
             	    							"org.sodalite.dsl.RM.EPREFIX_TYPE");
             	    						afterParserOrEnumRuleCall();
             	    					

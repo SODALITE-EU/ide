@@ -7078,17 +7078,17 @@ ruleEValidSourceType returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0());
 					}
-					lv_sourceType_2_0=ruleEPREFIX_TYPE
+					lv_sourceTypes_2_0=ruleEPREFIX_TYPE
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getEValidSourceTypeRule());
 						}
 						add(
 							$current,
-							"sourceType",
-							lv_sourceType_2_0,
+							"sourceTypes",
+							lv_sourceTypes_2_0,
 							"org.sodalite.dsl.RM.EPREFIX_TYPE");
 						afterParserOrEnumRuleCall();
 					}

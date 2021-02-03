@@ -1804,7 +1804,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EValidSourceType returns EValidSourceType
 	 *
 	 * Constraint:
-	 *     (sourceTypes+=EPREFIX_TYPE sourceType+=EPREFIX_TYPE*)
+	 *     (sourceTypes+=EPREFIX_TYPE sourceTypes+=EPREFIX_TYPE*)
 	 */
 	protected void sequence_EValidSourceType(ISerializationContext context, EValidSourceType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
