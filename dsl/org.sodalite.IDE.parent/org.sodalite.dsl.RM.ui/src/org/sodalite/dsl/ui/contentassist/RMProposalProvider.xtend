@@ -62,6 +62,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
 import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.rM.EAttributeDefinition
 import org.sodalite.dsl.rM.ERequirementDefinition
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -868,18 +869,16 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		return node
 	}
 	
-//	def findRequirementNodeInKBType(String requirement, ENodeType nodeType) {
-//		val RM_Model model = findModel(nodeType) as RM_Model
-//		if (nodeType.node.requirements === null)
-//			return null
-//		for (req: nodeType.node.requirements.requirements){
-//			val node = req.requirement.node.module !== null?
-//				req.requirement.node.module + '/' + req.requirement.node.type:
-//				req.requirement.node.type
-//			return node						
-//		}
-//	}
-
+	def findRequirementInLocalType(String requirement, ENodeType nodeType) {
+		if (nodeType.node.requirements!==null){
+			for (req: nodeType.node.requirements.requirements){
+				if (req.name.equals(requirement)){
+					return req
+				}
+			}
+		}
+		return null
+	}
 	
 	def findCapabilityInLocalType(String capabilityName, ENodeType nodeType) {
 		var ECapabilityDefinition capability = null
@@ -900,7 +899,16 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		return null
 	}
 	
-	def proposeAttributesForEntity(String resourceId, List<String> proposals){
+	def proposeAttributesForEntity(RM_Model model, String resourceId, List<String> proposals){
+		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
+		if (resourceId.startsWith("local:")){
+			proposeAttributesForEntityInLocal (model, nodeRef, proposals)
+		}else if (resourceId.startsWith("kb:")){
+			proposeAttributesForEntityInKB (nodeRef, proposals)
+		}
+	}
+	
+	def proposeAttributesForEntityInKB(String resourceId, List<String> proposals){
 		val AttributeDefinitionData attributeData = getKBReasoner().getTypeAttributes(resourceId)
 		for (attr:attributeData.elements){
 			//FIXME get the type that defines the attribute instead of the resourceId
@@ -909,14 +917,40 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 	}
 	
-	def proposePropertiesForEntity(String resourceId, List<String> proposals){
+	def proposeAttributesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
+		val ENodeType node = findNodeType(model, resourceId)
+		for (attr:node.node.attributes.attributes){
+			val proposal = attr.module !== null? attr.module + "/" + attr.name: attr.name
+			proposals.add(proposal)
+		}
+	}
+	
+	def proposePropertiesForEntity(RM_Model model, String resourceId, List<String> proposals){
+		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
+		if (resourceId.startsWith("local:")){
+			proposePropertiesForEntityInLocal (model, nodeRef, proposals)
+		}else if (resourceId.startsWith("kb:")){
+			proposePropertiesForEntityInKB (nodeRef, proposals)
+		}
+	}
+	
+	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
 		val PropertyDefinitionData propertyData = getKBReasoner().getTypeProperties(resourceId)
 		for (prop:propertyData.elements){
 			//FIXME get the type that defines the property instead of the resourceId
 			val proposal = resourceId + '.' + getLastSegment(prop.uri.toString, '/')
 			proposals.add(proposal)
 		}
+	}	
+	
+	def proposePropertiesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
+		val ENodeType node = findNodeType(model, resourceId)
+		for (prop:node.node.properties.properties){
+			val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
+			proposals.add(proposal)
+		}
 	}
+	
 	
 	def suggestRequirementsOrCapabilitiesInNode(String module, ENodeType node, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		//Find requirements and capability assignments defined within the entity
@@ -992,10 +1026,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 		return null
 	}
-
+	
 	def completeGetAttributeOrPropertyFunction_AttributeOrProperty(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
-		//TODO This method only supports SELF Entity. Refactor it for future support of other ENTITIES
+		//TODO This method only supports SELF Entity. 
+		// Refactor it for future support of other ENTITIES
+		// Check getEntityType method
+		var List<String> proposals = new ArrayList<String>()
 		val String module = getModule(model)
+		val RM_Model rm_model = findModel(model) as RM_Model
 		//Get entity in this GetProperty body. If null, return
 		var ENodeType node = null
 		var EPREFIX_TYPE req_cap = null
@@ -1008,56 +1046,19 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			node = getEntityType(body.eContainer as EFunction)
 			req_cap = body.req_cap
 		}
-		
-		if (node === null)
-			return
-			
-		var List<String> proposals = new ArrayList<String>()
-		// Get the properties defined within the selected node requirements or capabilities
+//		if (node === null)
+//			return
 		if (req_cap !== null){
 			val req_cap_name = getLastSegment(req_cap.type, '.')
-			val ENodeType req_node = findRequirementNodeInLocalType(req_cap_name, node)
-			if (req_node !== null){ //Requirement node defined in local RM
+			val String targetNodeRef = findRequirementTargetNode(node, req_cap_name)
+			if (targetNodeRef !== null){
+				// Find properties/attributes in target node, create suggestions
 				if (model instanceof GetPropertyBodyImpl)
-					proposeProperties (req_node.node.properties.properties, proposals, req_node.name, module)
+					proposePropertiesForEntity (rm_model, targetNodeRef, proposals)
 				else if (model instanceof GetAttributeBodyImpl)
-					proposeAttributes (req_node.node.attributes.attributes, proposals, req_node.name, module)
-			} else {
-				//Find requirement node properties in KB
-				var String resourceId = null
-				val ERequirementDefinition req = getRequirementByNameInLocalNode(node, req_cap_name)
-				if (req !== null){ //Requirement defined in local RM, pointing to KB node type
-				 	val req_node_ref = req.requirement.node
-				 	if (req_node_ref !== null){
-						resourceId = req_node_ref.module !== null?
-							req_node_ref.module + '/' + req_node_ref.type:
-							req_node_ref.type
-					}
-				} else {
-					// Find requirement in KB
-					val String type = req_cap.type.substring(0, 
-						req_cap.type.lastIndexOf('.')
-					)
-					resourceId = getRequirementByNameInKB(type, req_cap_name)
-				}
-				if (resourceId !== null){
-					if (model instanceof GetPropertyBodyImpl)
-						proposePropertiesForEntity (resourceId, proposals)
-					else if (model instanceof GetAttributeBodyImpl)
-						proposeAttributesForEntity (resourceId, proposals)
-					}
+					proposeAttributesForEntity (rm_model, targetNodeRef, proposals)
 			}
-
-			val ECapabilityDefinition cap_node = findCapabilityInLocalType(req_cap_name, node)
-			if (cap_node !== null){
-				if (model instanceof GetPropertyBodyImpl)
-					proposeProperties (cap_node.capability.properties.properties, proposals, cap_node.name, module)
-				else if (model instanceof GetAttributeBodyImpl)
-					proposeAttributes (cap_node.capability.attributes.attributes, proposals, cap_node.name, module)
-			} else {
-				// TODO Find capability node properties in KB
-			}
-		}else{
+		} else {
 			//Get the properties defined within the entity
 			if (model instanceof GetPropertyBodyImpl)
 				for (prop:node.node.properties.properties){
@@ -1070,19 +1071,75 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 		
 		//Create proposals for each found property. Prefix property with req|cap name when applies
-		val Image image = getImage("icons/property.png")
+		var Image image = null
+		if (model instanceof GetPropertyBodyImpl)
+			image = getImage("icons/property.png")
+		else if (model instanceof GetAttributeBodyImpl)
+			image = getImage("icons/attribute.png")
 		for (proposal: proposals){
 			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 		}
 	}
 	
-	def getRequirementByNameInKB(String type, String reqName){
+	def String findRequirementTargetNode (ENodeType node, String req_name){
+		// Find requirement in local node
+		var String nodeRef = null
+		val RM_Model model = findModel(node) as RM_Model
+		val ERequirementDefinition req = findRequirementInLocalType(req_name, node)
+		if (req !== null){
+			val EPREFIX_TYPE req_node = req.requirement.node
+			if (req_node !== null){
+				// Find requirement target node in local model, or
+				if (model.module.equals(req_node.module)){
+					val ENodeType target_node = findNodeType(model, req_node.type)
+					nodeRef = "local:" + getReference (target_node)
+				}else{
+					// Find requirement target node in KB
+					nodeRef = "kb:" + findNodeByNameInKB(req_node)
+				}
+			}
+		}else{
+			// Find requirement in KB for node superclass, find node in KB
+			nodeRef = "kb:" + findRequirementNodeByNameInKB(getReference(node.node.superType), req_name)
+		}
+		return nodeRef
+	}
+	
+	def getReference (ENodeType node){
+		node.module !== null?node.module + '/' + node.name:node.name
+	}
+	
+	def getReference (EPREFIX_TYPE node){
+		node.module !== null?node.module + '/' + node.type:node.type
+	}
+	
+	def findRequirementNodeByNameInKB(String type, String reqName){
 		val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(type)
 		for (req: reqData.elements){
 			val name = req.uri.toString.substring(req.uri.toString.lastIndexOf('/') + 1)
 			if (name.equals(reqName))
 				return req.node.module !== null?
 					req.node.module + '/' + req.node.label:req.node.label
+		}
+		return null
+	}
+	
+	def findNodeByNameInKB(EPREFIX_TYPE node){
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(node)
+		val String module = getModule(node)
+
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		val TypeData typeData = KBReasoner.getNodeTypes(importedModules)
+		for (type: typeData.elements){
+			val name = type.uri.toString.substring(type.uri.toString.lastIndexOf('/') + 1)
+			if (name.equals(node.type)){
+				val String type_module = 
+					type.module.substring (type.module.lastIndexOf("/", type.module.length - 2) + 1, type.module.length - 1)
+				return type_module !== null?
+					type_module + '/' + type.label:type.label	
+			}
 		}
 		return null
 	}
@@ -1105,12 +1162,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val GetAttributeBody body = model as GetAttributeBody
 			entityRef = body.entity
 		}
-		if (entityRef!== null && entityRef instanceof EEntity){
-			val EEntity entity  = entityRef as EEntity
-			if (entity.entity.equalsIgnoreCase("SELF")){
-				suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
-			}
-		}
+		
+		suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
 	}
 	
 	static enum Boolean{

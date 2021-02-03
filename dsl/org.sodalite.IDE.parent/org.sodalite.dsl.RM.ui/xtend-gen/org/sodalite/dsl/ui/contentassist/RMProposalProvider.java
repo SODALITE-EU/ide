@@ -48,6 +48,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
 import org.sodalite.dsl.kb_reasoner_client.types.Template;
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
@@ -1162,6 +1163,21 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     return node;
   }
   
+  public ERequirementDefinition findRequirementInLocalType(final String requirement, final ENodeType nodeType) {
+    ERequirements _requirements = nodeType.getNode().getRequirements();
+    boolean _tripleNotEquals = (_requirements != null);
+    if (_tripleNotEquals) {
+      EList<ERequirementDefinition> _requirements_1 = nodeType.getNode().getRequirements().getRequirements();
+      for (final ERequirementDefinition req : _requirements_1) {
+        boolean _equals = req.getName().equals(requirement);
+        if (_equals) {
+          return req;
+        }
+      }
+    }
+    return null;
+  }
+  
   public ECapabilityDefinition findCapabilityInLocalType(final String capabilityName, final ENodeType nodeType) {
     ECapabilityDefinition capability = null;
     ECapabilities _capabilities = nodeType.getNode().getCapabilities();
@@ -1190,7 +1206,22 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     return null;
   }
   
-  public void proposeAttributesForEntity(final String resourceId, final List<String> proposals) {
+  public void proposeAttributesForEntity(final RM_Model model, final String resourceId, final List<String> proposals) {
+    int _indexOf = resourceId.indexOf(":");
+    int _plus = (_indexOf + 1);
+    final String nodeRef = resourceId.substring(_plus);
+    boolean _startsWith = resourceId.startsWith("local:");
+    if (_startsWith) {
+      this.proposeAttributesForEntityInLocal(model, nodeRef, proposals);
+    } else {
+      boolean _startsWith_1 = resourceId.startsWith("kb:");
+      if (_startsWith_1) {
+        this.proposeAttributesForEntityInKB(nodeRef, proposals);
+      }
+    }
+  }
+  
+  public void proposeAttributesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       final AttributeDefinitionData attributeData = this.getKBReasoner().getTypeAttributes(resourceId);
       List<AttributeDefinition> _elements = attributeData.getElements();
@@ -1206,7 +1237,44 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  public void proposePropertiesForEntity(final String resourceId, final List<String> proposals) {
+  public void proposeAttributesForEntityInLocal(final RM_Model model, final String resourceId, final List<String> proposals) {
+    final ENodeType node = this.findNodeType(model, resourceId);
+    EList<EAttributeDefinition> _attributes = node.getNode().getAttributes().getAttributes();
+    for (final EAttributeDefinition attr : _attributes) {
+      {
+        String _xifexpression = null;
+        String _module = this.getModule(attr);
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = this.getModule(attr);
+          String _plus = (_module_1 + "/");
+          String _name = attr.getName();
+          _xifexpression = (_plus + _name);
+        } else {
+          _xifexpression = attr.getName();
+        }
+        final String proposal = _xifexpression;
+        proposals.add(proposal);
+      }
+    }
+  }
+  
+  public void proposePropertiesForEntity(final RM_Model model, final String resourceId, final List<String> proposals) {
+    int _indexOf = resourceId.indexOf(":");
+    int _plus = (_indexOf + 1);
+    final String nodeRef = resourceId.substring(_plus);
+    boolean _startsWith = resourceId.startsWith("local:");
+    if (_startsWith) {
+      this.proposePropertiesForEntityInLocal(model, nodeRef, proposals);
+    } else {
+      boolean _startsWith_1 = resourceId.startsWith("kb:");
+      if (_startsWith_1) {
+        this.proposePropertiesForEntityInKB(nodeRef, proposals);
+      }
+    }
+  }
+  
+  public void proposePropertiesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       final PropertyDefinitionData propertyData = this.getKBReasoner().getTypeProperties(resourceId);
       List<PropertyDefinition> _elements = propertyData.getElements();
@@ -1219,6 +1287,28 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void proposePropertiesForEntityInLocal(final RM_Model model, final String resourceId, final List<String> proposals) {
+    final ENodeType node = this.findNodeType(model, resourceId);
+    EList<EPropertyDefinition> _properties = node.getNode().getProperties().getProperties();
+    for (final EPropertyDefinition prop : _properties) {
+      {
+        String _xifexpression = null;
+        String _module = this.getModule(prop);
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = this.getModule(prop);
+          String _plus = (_module_1 + "/");
+          String _name = prop.getName();
+          _xifexpression = (_plus + _name);
+        } else {
+          _xifexpression = prop.getName();
+        }
+        final String proposal = _xifexpression;
+        proposals.add(proposal);
+      }
     }
   }
   
@@ -1355,7 +1445,10 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   public void completeGetAttributeOrPropertyFunction_AttributeOrProperty(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    List<String> proposals = new ArrayList<String>();
     final String module = this.getModule(model);
+    Object _findModel = this.findModel(model);
+    final RM_Model rm_model = ((RM_Model) _findModel);
     ENodeType node = null;
     EPREFIX_TYPE req_cap = null;
     if ((model instanceof GetPropertyBodyImpl)) {
@@ -1371,98 +1464,115 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         req_cap = body_1.getReq_cap();
       }
     }
-    if ((node == null)) {
-      return;
-    }
-    List<String> proposals = new ArrayList<String>();
     if ((req_cap != null)) {
       final String req_cap_name = this.getLastSegment(req_cap.getType(), ".");
-      final ENodeType req_node = this.findRequirementNodeInLocalType(req_cap_name, node);
-      if ((req_node != null)) {
+      final String targetNodeRef = this.findRequirementTargetNode(node, req_cap_name);
+      if ((targetNodeRef != null)) {
         if ((model instanceof GetPropertyBodyImpl)) {
-          this.proposeProperties(req_node.getNode().getProperties().getProperties(), proposals, req_node.getName(), module);
+          this.proposePropertiesForEntity(rm_model, targetNodeRef, proposals);
         } else {
           if ((model instanceof GetAttributeBodyImpl)) {
-            this.proposeAttributes(req_node.getNode().getAttributes().getAttributes(), proposals, req_node.getName(), module);
+            this.proposeAttributesForEntity(rm_model, targetNodeRef, proposals);
           }
         }
-      } else {
-        String resourceId = null;
-        final ERequirementDefinition req = this.getRequirementByNameInLocalNode(node, req_cap_name);
-        if ((req != null)) {
-          final EPREFIX_TYPE req_node_ref = req.getRequirement().getNode();
-          if ((req_node_ref != null)) {
-            String _xifexpression = null;
-            String _module = req_node_ref.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _module_1 = req_node_ref.getModule();
-              String _plus = (_module_1 + "/");
-              String _type = req_node_ref.getType();
-              _xifexpression = (_plus + _type);
-            } else {
-              _xifexpression = req_node_ref.getType();
-            }
-            resourceId = _xifexpression;
-          }
-        } else {
-          final String type = req_cap.getType().substring(0, 
-            req_cap.getType().lastIndexOf("."));
-          resourceId = this.getRequirementByNameInKB(type, req_cap_name);
-        }
-        if ((resourceId != null)) {
-          if ((model instanceof GetPropertyBodyImpl)) {
-            this.proposePropertiesForEntity(resourceId, proposals);
-          } else {
-            if ((model instanceof GetAttributeBodyImpl)) {
-              this.proposeAttributesForEntity(resourceId, proposals);
-            }
-          }
-        }
-      }
-      final ECapabilityDefinition cap_node = this.findCapabilityInLocalType(req_cap_name, node);
-      if ((cap_node != null)) {
-        if ((model instanceof GetPropertyBodyImpl)) {
-          this.proposeProperties(cap_node.getCapability().getProperties().getProperties(), proposals, cap_node.getName(), module);
-        } else {
-          if ((model instanceof GetAttributeBodyImpl)) {
-            this.proposeAttributes(cap_node.getCapability().getAttributes().getAttributes(), proposals, cap_node.getName(), module);
-          }
-        }
-      } else {
       }
     } else {
       if ((model instanceof GetPropertyBodyImpl)) {
         EList<EPropertyDefinition> _properties = node.getNode().getProperties().getProperties();
         for (final EPropertyDefinition prop : _properties) {
           String _name = node.getName();
-          String _plus_1 = ((module + "/") + _name);
-          String _plus_2 = (_plus_1 + ".");
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
           String _name_1 = prop.getName();
-          String _plus_3 = (_plus_2 + _name_1);
-          proposals.add(_plus_3);
+          String _plus_2 = (_plus_1 + _name_1);
+          proposals.add(_plus_2);
         }
       } else {
         if ((model instanceof GetAttributeBodyImpl)) {
           EList<EAttributeDefinition> _attributes = node.getNode().getAttributes().getAttributes();
           for (final EAttributeDefinition attr : _attributes) {
             String _name_2 = node.getName();
-            String _plus_4 = ((module + "/") + _name_2);
-            String _plus_5 = (_plus_4 + ".");
+            String _plus_3 = ((module + "/") + _name_2);
+            String _plus_4 = (_plus_3 + ".");
             String _name_3 = attr.getName();
-            String _plus_6 = (_plus_5 + _name_3);
-            proposals.add(_plus_6);
+            String _plus_5 = (_plus_4 + _name_3);
+            proposals.add(_plus_5);
           }
         }
       }
     }
-    final Image image = this.getImage("icons/property.png");
+    Image image = null;
+    if ((model instanceof GetPropertyBodyImpl)) {
+      image = this.getImage("icons/property.png");
+    } else {
+      if ((model instanceof GetAttributeBodyImpl)) {
+        image = this.getImage("icons/attribute.png");
+      }
+    }
     for (final String proposal : proposals) {
       this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
     }
   }
   
-  public String getRequirementByNameInKB(final String type, final String reqName) {
+  public String findRequirementTargetNode(final ENodeType node, final String req_name) {
+    String nodeRef = null;
+    Object _findModel = this.findModel(node);
+    final RM_Model model = ((RM_Model) _findModel);
+    final ERequirementDefinition req = this.findRequirementInLocalType(req_name, node);
+    if ((req != null)) {
+      final EPREFIX_TYPE req_node = req.getRequirement().getNode();
+      if ((req_node != null)) {
+        boolean _equals = model.getModule().equals(req_node.getModule());
+        if (_equals) {
+          final ENodeType target_node = this.findNodeType(model, req_node.getType());
+          String _reference = this.getReference(target_node);
+          String _plus = ("local:" + _reference);
+          nodeRef = _plus;
+        } else {
+          String _findNodeByNameInKB = this.findNodeByNameInKB(req_node);
+          String _plus_1 = ("kb:" + _findNodeByNameInKB);
+          nodeRef = _plus_1;
+        }
+      }
+    } else {
+      String _findRequirementNodeByNameInKB = this.findRequirementNodeByNameInKB(this.getReference(node.getNode().getSuperType()), req_name);
+      String _plus_2 = ("kb:" + _findRequirementNodeByNameInKB);
+      nodeRef = _plus_2;
+    }
+    return nodeRef;
+  }
+  
+  public String getReference(final ENodeType node) {
+    String _xifexpression = null;
+    String _module = this.getModule(node);
+    boolean _tripleNotEquals = (_module != null);
+    if (_tripleNotEquals) {
+      String _module_1 = this.getModule(node);
+      String _plus = (_module_1 + "/");
+      String _name = node.getName();
+      _xifexpression = (_plus + _name);
+    } else {
+      _xifexpression = node.getName();
+    }
+    return _xifexpression;
+  }
+  
+  public String getReference(final EPREFIX_TYPE node) {
+    String _xifexpression = null;
+    String _module = node.getModule();
+    boolean _tripleNotEquals = (_module != null);
+    if (_tripleNotEquals) {
+      String _module_1 = node.getModule();
+      String _plus = (_module_1 + "/");
+      String _type = node.getType();
+      _xifexpression = (_plus + _type);
+    } else {
+      _xifexpression = node.getType();
+    }
+    return _xifexpression;
+  }
+  
+  public String findRequirementNodeByNameInKB(final String type, final String reqName) {
     try {
       final RequirementDefinitionData reqData = this.getKBReasoner().getTypeRequirements(type);
       List<RequirementDefinition> _elements = reqData.getElements();
@@ -1495,6 +1605,47 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
+  public String findNodeByNameInKB(final EPREFIX_TYPE node) {
+    try {
+      final List<String> importedModules = this.getImportedModules(node);
+      final String module = this.getModule(node);
+      importedModules.add(module);
+      final TypeData typeData = this.getKBReasoner().getNodeTypes(importedModules);
+      List<Type> _elements = typeData.getElements();
+      for (final Type type : _elements) {
+        {
+          String _string = type.getUri().toString();
+          int _lastIndexOf = type.getUri().toString().lastIndexOf("/");
+          int _plus = (_lastIndexOf + 1);
+          final String name = _string.substring(_plus);
+          boolean _equals = name.equals(node.getType());
+          if (_equals) {
+            String _module = type.getModule();
+            String _module_1 = type.getModule();
+            int _length = type.getModule().length();
+            int _minus = (_length - 2);
+            int _lastIndexOf_1 = _module_1.lastIndexOf("/", _minus);
+            int _plus_1 = (_lastIndexOf_1 + 1);
+            int _length_1 = type.getModule().length();
+            int _minus_1 = (_length_1 - 1);
+            final String type_module = _module.substring(_plus_1, _minus_1);
+            String _xifexpression = null;
+            if ((type_module != null)) {
+              String _label = type.getLabel();
+              _xifexpression = ((type_module + "/") + _label);
+            } else {
+              _xifexpression = type.getLabel();
+            }
+            return _xifexpression;
+          }
+        }
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void completeGetAttributeOrPropertyFunction_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String module = this.getModule(model);
     EObject _eContainer = model.eContainer();
@@ -1512,12 +1663,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         entityRef = body_1.getEntity();
       }
     }
-    if (((entityRef != null) && (entityRef instanceof EEntity))) {
-      final EEntity entity = ((EEntity) entityRef);
-      boolean _equalsIgnoreCase = entity.getEntity().equalsIgnoreCase("SELF");
-      if (_equalsIgnoreCase) {
-        this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
-      }
-    }
+    this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
   }
 }
