@@ -1227,8 +1227,15 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       List<AttributeDefinition> _elements = attributeData.getElements();
       for (final AttributeDefinition attr : _elements) {
         {
+          final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
+          String attr_owner = resourceId;
+          String _definedIn = attr.getDefinedIn();
+          boolean _tripleNotEquals = (_definedIn != null);
+          if (_tripleNotEquals) {
+            attr_owner = attr.getDefinedIn().substring(prefix.length());
+          }
           String _lastSegment = this.getLastSegment(attr.getUri().toString(), "/");
-          final String proposal = ((resourceId + ".") + _lastSegment);
+          final String proposal = ((attr_owner + ".") + _lastSegment);
           proposals.add(proposal);
         }
       }
@@ -1280,8 +1287,15 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       List<PropertyDefinition> _elements = propertyData.getElements();
       for (final PropertyDefinition prop : _elements) {
         {
+          final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
+          String prop_owner = resourceId;
+          String _definedIn = prop.getDefinedIn();
+          boolean _tripleNotEquals = (_definedIn != null);
+          if (_tripleNotEquals) {
+            prop_owner = prop.getDefinedIn().substring(prefix.length());
+          }
           String _lastSegment = this.getLastSegment(prop.getUri().toString(), "/");
-          final String proposal = ((resourceId + ".") + _lastSegment);
+          final String proposal = ((prop_owner + ".") + _lastSegment);
           proposals.add(proposal);
         }
       }
@@ -1464,6 +1478,9 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         req_cap = body_1.getReq_cap();
       }
     }
+    if ((node == null)) {
+      return;
+    }
     if ((req_cap != null)) {
       final String req_cap_name = this.getLastSegment(req_cap.getType(), ".");
       final String targetNodeRef = this.findRequirementTargetNode(node, req_cap_name);
@@ -1525,10 +1542,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         boolean _equals = model.getModule().equals(req_node.getModule());
         if (_equals) {
           final ENodeType target_node = this.findNodeType(model, req_node.getType());
-          String _reference = this.getReference(target_node);
-          String _plus = ("local:" + _reference);
-          nodeRef = _plus;
-        } else {
+          if ((target_node != null)) {
+            String _reference = this.getReference(target_node);
+            String _plus = ("local:" + _reference);
+            nodeRef = _plus;
+          }
+        }
+        if ((nodeRef == null)) {
           String _findNodeByNameInKB = this.findNodeByNameInKB(req_node);
           String _plus_1 = ("kb:" + _findNodeByNameInKB);
           nodeRef = _plus_1;
@@ -1620,15 +1640,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           final String name = _string.substring(_plus);
           boolean _equals = name.equals(node.getType());
           if (_equals) {
+            String type_module = null;
             String _module = type.getModule();
-            String _module_1 = type.getModule();
-            int _length = type.getModule().length();
-            int _minus = (_length - 2);
-            int _lastIndexOf_1 = _module_1.lastIndexOf("/", _minus);
-            int _plus_1 = (_lastIndexOf_1 + 1);
-            int _length_1 = type.getModule().length();
-            int _minus_1 = (_length_1 - 1);
-            final String type_module = _module.substring(_plus_1, _minus_1);
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _module_1 = type.getModule();
+              String _module_2 = type.getModule();
+              int _length = type.getModule().length();
+              int _minus = (_length - 2);
+              int _lastIndexOf_1 = _module_2.lastIndexOf("/", _minus);
+              int _plus_1 = (_lastIndexOf_1 + 1);
+              int _length_1 = type.getModule().length();
+              int _minus_1 = (_length_1 - 1);
+              type_module = _module_1.substring(_plus_1, _minus_1);
+            }
             String _xifexpression = null;
             if ((type_module != null)) {
               String _label = type.getLabel();
