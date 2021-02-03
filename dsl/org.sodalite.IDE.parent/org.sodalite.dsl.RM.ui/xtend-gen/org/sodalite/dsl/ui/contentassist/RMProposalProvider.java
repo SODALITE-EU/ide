@@ -39,6 +39,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -59,6 +61,7 @@ import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EFunction;
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPREFIX_ID;
@@ -606,7 +609,56 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   @Override
   public void completeEInterfaceDefinitionBody_Operations(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    super.completeEInterfaceDefinitionBody_Operations(model, assignment, context, acceptor);
+    try {
+      try {
+        final EInterfaceDefinitionBody interface_ = ((EInterfaceDefinitionBody) model);
+        final EPREFIX_TYPE type = interface_.getType();
+        String _xifexpression = null;
+        String _module = type.getModule();
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = type.getModule();
+          _xifexpression = (_module_1 + "/");
+        } else {
+          _xifexpression = "";
+        }
+        String _type = type.getType();
+        String interfaceId = (_xifexpression + _type);
+        if ((interfaceId != null)) {
+          final OperationDefinitionData operations = this.getKBReasoner().getOperationsInInterface(interfaceId);
+          if ((operations != null)) {
+            final Image image = this.getImage("icons/operation.png");
+            List<OperationDefinition> _elements = operations.getElements();
+            for (final OperationDefinition oper : _elements) {
+              {
+                final String operation_label = this.getLastSegment(oper.getUri().toString(), "/");
+                final String proposalText = operation_label;
+                final String displayText = operation_label;
+                String _xifexpression_1 = null;
+                String _description = oper.getDescription();
+                boolean _tripleNotEquals_1 = (_description != null);
+                if (_tripleNotEquals_1) {
+                  String _description_1 = oper.getDescription();
+                  _xifexpression_1 = ("\nDescription: " + _description_1);
+                } else {
+                  _xifexpression_1 = "";
+                }
+                final String additionalProposalInfo = _xifexpression_1;
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+              }
+            }
+          }
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          this.showReadPermissionErrorDialog();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override

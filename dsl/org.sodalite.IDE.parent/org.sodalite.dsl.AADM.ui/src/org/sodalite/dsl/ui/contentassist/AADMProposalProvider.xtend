@@ -224,23 +224,6 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
-//	override void completeAADM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-//		System.out.println("Invoking content assist for imports")
-//		
-//		val ReasonerData<String> modules = getKBReasoner().modules
-//		
-//		System.out.println ("Modules retrieved from KB:")
-//		for (module: modules.elements){
-//			System.out.println ("\tModule: " + module)
-//			val proposalText = extractModule(module)
-//			val displayText = proposalText
-//			val additionalProposalInfo = null
-//			createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);	
-//		}
-//
-//		super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
-//	}
-	
 	override void completeEAttributeAssignment_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EAttributeAssignment::name property")
 		try {
@@ -605,6 +588,21 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				super.completeEEvenFilter_Requirement(model, assignment, context, acceptor)
 			}
 		}
+	}
+	
+	override void completeEEvenFilter_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//TODO
+		//If requirement not set
+		// Find capabilities defined in filter node (if node is template in its type)
+		// A) Node lives in RM 
+		// B) Node lives in KB
+		
+		
+		//If requirement set
+		// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
+		// IF req node is template, gets it type
+		// A) Node lives in RM
+		// B) Node lives in KB
 	}
 	
 	

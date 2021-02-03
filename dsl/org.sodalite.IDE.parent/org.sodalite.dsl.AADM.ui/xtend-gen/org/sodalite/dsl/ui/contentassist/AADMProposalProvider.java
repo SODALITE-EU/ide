@@ -943,6 +943,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  @Override
+  public void completeEEvenFilter_Capability(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  }
+  
   public void createProposalsForRequirementsList(final List<ERequirementAssignment> reqs, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     for (final ERequirementAssignment req : reqs) {
       this.createProposalForRequirement(req, module, defaultImage, context, acceptor);

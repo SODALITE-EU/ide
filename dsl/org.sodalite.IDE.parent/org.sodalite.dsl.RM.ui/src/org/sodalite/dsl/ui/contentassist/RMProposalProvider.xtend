@@ -63,6 +63,8 @@ import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.rM.EAttributeDefinition
 import org.sodalite.dsl.rM.ERequirementDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -421,33 +423,27 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeEInterfaceDefinitionBody_Operations(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO implement body
-		super.completeEInterfaceDefinitionBody_Operations (model, assignment, context, acceptor)
-//		try{
-//			val EInterfaceDefinitionBody interface = model as EInterfaceDefinitionBody
-//			val type = interface.type
-//			var interfaceId = (type.module !== null? type.module + '/':'') + type.type
-//			
-//			if (interfaceId !== null){
-//				val ReasonerData<OperationDefinition> properties = getKBReasoner().getInteraceOperations(resourceId)
-//				if (properties !== null){
-//					System.out.println ("Properties retrieved from KB for resource: " + resourceId)
-//					val Image image = getImage("icons/property.png")
-//					for (property: properties.elements){
-//					 	System.out.println ("\tProperty: " + property.uri)
-//					 	var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
-//						proposalText = property_label
-//						displayText = property_label
-//						additionalProposalInfo = (property.getType.getLabel!==null?"Type: " + property.getType.getLabel:"") 
-//						additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
-//						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-//					 }
-//				}
-//			}
-//		}catch(NotRolePermissionException ex){
-//			showReadPermissionErrorDialog
-//		}
-		
+		try{
+			val EInterfaceDefinitionBody interface = model as EInterfaceDefinitionBody
+			val type = interface.type
+			var interfaceId = (type.module !== null? type.module + '/':'') + type.type
+			
+			if (interfaceId !== null){
+				val OperationDefinitionData operations = getKBReasoner().getOperationsInInterface(interfaceId)
+				if (operations !== null){
+					val Image image = getImage("icons/operation.png")
+					for (oper: operations.elements){
+					 	val operation_label = getLastSegment(oper.uri.toString, '/')
+						val proposalText = operation_label
+						val displayText = operation_label
+						val additionalProposalInfo = oper.getDescription!==null?"\nDescription: " + oper.getDescription:""
+						createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+					 }
+				}
+			}
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
 	}
 	
 	override void completeEDataType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -643,6 +639,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeEEvenFilter_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		//TODO
+		//If requirement not set
+		// Find capabilities defined in filter node (if node is template in its type)
+		// A) Node lives in RM 
+		// B) Node lives in KB
+		
+		
+		//If requirement set
+		// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
+		// IF req node is template, gets it type
+		// A) Node lives in RM
+		// B) Node lives in KB
 	}
 	
 	override void completeECallOperationActivityDefinition_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
