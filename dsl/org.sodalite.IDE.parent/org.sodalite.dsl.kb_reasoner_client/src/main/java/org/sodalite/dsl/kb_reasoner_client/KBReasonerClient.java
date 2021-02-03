@@ -54,6 +54,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
@@ -872,6 +873,87 @@ public class KBReasonerClient implements KBReasoner {
 	@Override
 	public ModelData getRMsInModule(String module) throws Exception {
 		return getModelsInModule("RM", module);
+	}
+
+	@Override
+	public CapabilityDefinitionData getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(String nodeType,
+			String requirementName) throws Exception {
+		Assert.notNull(nodeType, "Pass a not null nodeType");
+		Assert.notNull(requirementName, "Pass a not null requirementName");
+		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeType + "&requirement="
+				+ requirementName + "&template=false";
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			CapabilityDefinitionData data = getJSONObjectForType(CapabilityDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new CapabilityDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType, requirementName);
+			else
+				throw ex;
+		}
+	}
+
+	@Override
+	public CapabilityAssignmentData getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(String nodeTemplate,
+			String requirementName) throws Exception {
+		Assert.notNull(nodeTemplate, "Pass a not null nodeTemplate");
+		Assert.notNull(requirementName, "Pass a not null requirementName");
+		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeTemplate + "&requirement="
+				+ requirementName + "&template=true";
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			CapabilityAssignmentData data = getJSONObjectForType(CapabilityAssignmentData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new CapabilityAssignmentData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeTemplate, requirementName);
+			else
+				throw ex;
+		}
+	}
+
+	@Override
+	public OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception {
+		Assert.notNull(interfaceType, "Pass a not null interfaceType");
+		String url = kbReasonerUri + "operations?resource=" + interfaceType;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			OperationDefinitionData data = getJSONObjectForType(OperationDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new OperationDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getOperationsInInterface(interfaceType);
+			else
+				throw ex;
+		}
 	}
 
 	private ModelData getModelsInModule(String type, String module) throws Exception {
