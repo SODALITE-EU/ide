@@ -882,6 +882,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void completeECallOperationActivityDefinition_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
   }
   
+  @Override
+  public void completeETriggerDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String proposalText = "trigger_name";
+    final String displayText = "trigger_name";
+    final String additionalProposalInfo = "The required name for trigger definition";
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+  }
+  
   public String getNodeName(final EPREFIX_REF nodeRef) {
     String qnode = null;
     if ((nodeRef instanceof EPREFIX_TYPE)) {

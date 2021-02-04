@@ -1018,6 +1018,50 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  @Override
+  public void completeETarget_Target(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = this.processListModules(model);
+        final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
+        this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+        final List<ENodeTemplate> localNodes = this.findLocalNodes(model);
+        this.createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          this.showReadPermissionErrorDialog();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void createProposalsForTemplateList(final List<ENodeTemplate> templates, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ENodeTemplate template : templates) {
+      {
+        String _xifexpression = null;
+        String _module = this.getModule(template);
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = this.getModule(template);
+          String _plus = (_module_1 + "/");
+          String _name = template.getName();
+          _xifexpression = (_plus + _name);
+        } else {
+          _xifexpression = template.getName();
+        }
+        final String qtype = _xifexpression;
+        final String proposalText = qtype;
+        final String displayText = qtype;
+        Image image = this.getImage(defaultImage);
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+      }
+    }
+  }
+  
   public ENodeTemplate findRequirementNodeInLocalModel(final EObject object, final EPREFIX_REF reqRef) {
     final String nodeName = this.getNodeFromRequirementRef(reqRef);
     final String req_name = this.getRequirementNameFromRequirementRef(reqRef);

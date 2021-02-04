@@ -656,6 +656,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		//TODO
 	}
 	
+	override void completeETriggerDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val String proposalText = "trigger_name"
+		val String displayText = "trigger_name"
+		val String additionalProposalInfo = "The required name for trigger definition"
+
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	}
+	
 	def String getNodeName (EPREFIX_REF nodeRef){
 		var String qnode = null
 		if (nodeRef instanceof EPREFIX_TYPE){

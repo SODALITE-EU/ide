@@ -69,7 +69,6 @@ import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
 import org.sodalite.dsl.rM.EPREFIX_REF
-import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment
 
@@ -664,6 +663,19 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
+	override void completeETarget_Target(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Find local and KB node templates
+			val List<String> importedModules = processListModules(model)
+			val TemplateData templates = getKBReasoner().getTemplates(importedModules)		
+			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+			val List<ENodeTemplate> localNodes = findLocalNodes(model)
+			createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
+	}
+	
 	// Functions
 	
 	//	def existsInAadm(String nodeUri, String aadmUri) {
@@ -671,6 +683,17 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 //			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
 //		)
 //	}
+
+	def void createProposalsForTemplateList(List<ENodeTemplate> templates, String defaultImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (template: templates){
+			val qtype = template.module !== null ?template.module + '/' + template.name:template.name
+			val proposalText = qtype
+			val displayText = qtype
+			var Image image = getImage(defaultImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
+		}
+	}
 
 	def findRequirementNodeInLocalModel(EObject object, EPREFIX_REF reqRef) {
 		val nodeName = getNodeFromRequirementRef (reqRef)
