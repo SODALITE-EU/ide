@@ -1138,6 +1138,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		node.module !== null?node.module + '/' + node.type:node.type
 	}
 	
+	def getReference (EPREFIX_REF node){
+		if (node instanceof EPREFIX_TYPE){
+			node.module !== null?node.module + '/' + node.type:node.type
+		} else if (node instanceof EPREFIX_ID){
+			node.module !== null?node.module + '/' + node.id:node.id
+		}
+	}
+	
 	def findRequirementNodeByNameInKB(String type, String reqName){
 		val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(type)
 		for (req: reqData.elements){
@@ -1191,6 +1199,45 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 		
 		suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
+	}
+	
+	def findCapabilitiesInNodeType (String nodeRef){
+		val CapabilityDefinitionData capabilities = KBReasoner.getTypeCapabilities(nodeRef)
+		return capabilities.elements
+	}
+	
+	def getRequirementNameFromRequirementRef (EPREFIX_REF reqRef){
+		var String reqName = null
+		if (reqRef instanceof EPREFIX_TYPE){
+			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
+			reqName = getLastSegment(req.type, '.')
+		}else if (reqRef instanceof EPREFIX_ID){
+			val EPREFIX_ID req = reqRef as EPREFIX_ID
+			reqName = getLastSegment(req.id, '.')
+		}
+		return reqName
+	}
+	
+	def getNodeFromRequirementRef (EPREFIX_REF reqRef){
+		var String nodeRef = null
+		if (reqRef instanceof EPREFIX_TYPE){
+			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
+			val nodeName = req.type.substring (0, req.type.lastIndexOf('.'))
+			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
+		}else if (reqRef instanceof EPREFIX_ID){
+			val EPREFIX_ID req = reqRef as EPREFIX_ID
+			val nodeName = req.id.substring (0, req.id.lastIndexOf('.'))
+			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
+		}
+		return nodeRef
+	}
+	
+	def getId(EPREFIX_REF ref) {
+		if (ref instanceof EPREFIX_TYPE){
+			(ref as EPREFIX_TYPE).type
+		}else if (ref instanceof EPREFIX_ID){
+			(ref as EPREFIX_ID).id
+		}
 	}
 	
 	static enum Boolean{

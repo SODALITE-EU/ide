@@ -65,9 +65,13 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.eclipse.swt.graphics.Image
 import org.sodalite.dsl.aADM.impl.EPolicyDefinitionBodyImpl
 import org.sodalite.dsl.rM.EEvenFilter
-import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData
 import org.sodalite.dsl.aADM.ERequirementAssignment
-import org.sodalite.dsl.aADM.ENodeTemplateBody
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -590,21 +594,75 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 	
-	override void completeEEvenFilter_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
-		//If requirement not set
-		// Find capabilities defined in filter node (if node is template in its type)
-		// A) Node lives in RM 
-		// B) Node lives in KB
+	override void completeEEvenFilter_Capability(EObject object, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		val EEvenFilter filter = object as EEvenFilter
+		val module = getModule(object)
+		val AADM_Model model = findModel(object) as AADM_Model
+		var List<CapabilityDefinition> capabilityDefinitions = null
+		var List<CapabilityAssignment> capabilityAssignments = null
+		var String cap_assign_type = null
+		var String cap_def_type = null
+		if (filter.requirement === null){ //If requirement not set
+			// Find capabilities defined in filter node template type
+			val node_module = filter.node.module
+			var String filter_node_type = null
+			if (node_module.equals(module)){
+				val node_id = getId (filter.node)
+				val ENodeTemplate filter_node = findNode(model, node_id)
+				if (filter_node !== null){
+					// A) Node lives in RM
+					filter_node_type = getReference(filter_node.node.type)
+				} 
+			}
+			
+			if (filter_node_type === null) {
+				// B) Node lives in KB
+				filter_node_type = findNodeTemplateInKB(object, getReference(filter.node))
+			}
+			if (filter_node_type !== null){
+				// Find capabilities defined in filter node template type
+				capabilityDefinitions = findCapabilitiesInNodeType (filter_node_type)
+				cap_def_type = filter_node_type // FIXME take defining type from capability
+			}
+			
+		}else{ //If requirement set
+			// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
+			
+			// Find requirement node in local model from requirement ref
+			val ENodeTemplate req_node = findRequirementNodeInLocalModel (object, filter.requirement)
+			if (req_node !== null){ // A) Node lives in RM
+				// Find capabilities defined in req node type
+				val node_type = getReference(req_node.node.type)
+				val CapabilityDefinitionData capabilityData = KBReasoner.getTypeCapabilities(node_type)
+				capabilityDefinitions = capabilityData.elements
+				cap_def_type = node_type // FIXME take defining type from capability
+			} else { // B) Node lives in KB
+				val nodeName = getNodeFromRequirementRef (filter.requirement)
+				val req_name = getRequirementNameFromRequirementRef(filter.requirement)
+				val CapabilityAssignmentData capabilityData = 
+					KBReasoner.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name)
+				capabilityAssignments = capabilityData.elements
+				cap_assign_type = nodeName // FIXME take defining type from capability
+			}
+		}
+		val Image image = getImage("icons/capability.png")
+		if (capabilityAssignments!==null){
+			// Prepare suggestions for capabilities
+			for (cap: capabilityAssignments){
+				val String proposal = cap_assign_type + '.' + getLastSegment(cap.uri.toString, '/')
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+			}
+		}
 		
-		
-		//If requirement set
-		// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
-		// IF req node is template, gets it type
-		// A) Node lives in RM
-		// B) Node lives in KB
+		if (capabilityDefinitions!== null){
+			// Prepare suggestions for capabilities
+			// Prepare suggestions for capabilities
+			for (cap: capabilityDefinitions){
+				val String proposal = cap_def_type + '.' + getLastSegment(cap.uri.toString, '/')
+				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+			}
+		}
 	}
-	
 	
 	// Functions
 	
@@ -613,6 +671,37 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 //			aadmUri.substring(0, aadmUri.lastIndexOf('/'))
 //		)
 //	}
+
+	def findRequirementNodeInLocalModel(EObject object, EPREFIX_REF reqRef) {
+		val nodeName = getNodeFromRequirementRef (reqRef)
+		val req_name = getRequirementNameFromRequirementRef(reqRef)
+		//Find node in local model
+		val ENodeTemplate nodeTemplate = findNodeInModel (object, nodeName)
+		if (nodeTemplate !== null){
+			//Get requirement, if found, get node
+			return findRequirementNodeInTemplate(req_name, nodeTemplate)
+		}
+		return null
+	}
+
+	def findNodeTemplateInKB(EObject object, String nodeRef){
+		//Get modules from model
+		val List<String> importedModules = getImportedModules(object)
+		val String module = getModule(object)
+		//Add current module to imported ones for searching in the KB
+		importedModules.add(module)
+		
+		val TemplateData templates = KBReasoner.getTemplates(importedModules)
+		for (nodeTemplate:templates.elements){
+			val nodeTemplateRef = nodeTemplate.module !== null?
+				nodeTemplate.module + '/' + nodeTemplate.label:
+				nodeTemplate.label
+			if (nodeTemplateRef.equals(nodeRef)){
+				return nodeTemplateRef
+			}
+		}
+		return null
+	}
 
 	def void createProposalsForRequirementsList(List<ERequirementAssignment> reqs, String module, String defaultImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){

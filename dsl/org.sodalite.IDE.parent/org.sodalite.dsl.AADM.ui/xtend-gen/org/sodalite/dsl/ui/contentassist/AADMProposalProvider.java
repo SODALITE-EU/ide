@@ -62,12 +62,17 @@ import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
+import org.sodalite.dsl.kb_reasoner_client.types.Template;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
@@ -944,7 +949,116 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
-  public void completeEEvenFilter_Capability(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeEEvenFilter_Capability(final EObject object, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      final EEvenFilter filter = ((EEvenFilter) object);
+      final String module = this.getModule(object);
+      Object _findModel = this.findModel(object);
+      final AADM_Model model = ((AADM_Model) _findModel);
+      List<CapabilityDefinition> capabilityDefinitions = null;
+      List<CapabilityAssignment> capabilityAssignments = null;
+      String cap_assign_type = null;
+      String cap_def_type = null;
+      EPREFIX_REF _requirement = filter.getRequirement();
+      boolean _tripleEquals = (_requirement == null);
+      if (_tripleEquals) {
+        final String node_module = this.getModule(filter.getNode());
+        String filter_node_type = null;
+        boolean _equals = node_module.equals(module);
+        if (_equals) {
+          final String node_id = this.getId(filter.getNode());
+          final ENodeTemplate filter_node = this.findNode(model, node_id);
+          if ((filter_node != null)) {
+            filter_node_type = this.getReference(filter_node.getNode().getType());
+          }
+        }
+        if ((filter_node_type == null)) {
+          filter_node_type = this.findNodeTemplateInKB(object, this.getReference(filter.getNode()));
+        }
+        if ((filter_node_type != null)) {
+          capabilityDefinitions = this.findCapabilitiesInNodeType(filter_node_type);
+          cap_def_type = filter_node_type;
+        }
+      } else {
+        final ENodeTemplate req_node = this.findRequirementNodeInLocalModel(object, filter.getRequirement());
+        if ((req_node != null)) {
+          final String node_type = this.getReference(req_node.getNode().getType());
+          final CapabilityDefinitionData capabilityData = this.getKBReasoner().getTypeCapabilities(node_type);
+          capabilityDefinitions = capabilityData.getElements();
+          cap_def_type = node_type;
+        } else {
+          final String nodeName = this.getNodeFromRequirementRef(filter.getRequirement());
+          final String req_name = this.getRequirementNameFromRequirementRef(filter.getRequirement());
+          final CapabilityAssignmentData capabilityData_1 = this.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
+          capabilityAssignments = capabilityData_1.getElements();
+          cap_assign_type = nodeName;
+        }
+      }
+      final Image image = this.getImage("icons/capability.png");
+      if ((capabilityAssignments != null)) {
+        for (final CapabilityAssignment cap : capabilityAssignments) {
+          {
+            String _lastSegment = this.getLastSegment(cap.getUri().toString(), "/");
+            final String proposal = ((cap_assign_type + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          }
+        }
+      }
+      if ((capabilityDefinitions != null)) {
+        for (final CapabilityDefinition cap_1 : capabilityDefinitions) {
+          {
+            String _lastSegment = this.getLastSegment(cap_1.getUri().toString(), "/");
+            final String proposal = ((cap_def_type + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          }
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public ENodeTemplate findRequirementNodeInLocalModel(final EObject object, final EPREFIX_REF reqRef) {
+    final String nodeName = this.getNodeFromRequirementRef(reqRef);
+    final String req_name = this.getRequirementNameFromRequirementRef(reqRef);
+    final ENodeTemplate nodeTemplate = this.findNodeInModel(object, nodeName);
+    if ((nodeTemplate != null)) {
+      return this.findRequirementNodeInTemplate(req_name, nodeTemplate);
+    }
+    return null;
+  }
+  
+  public String findNodeTemplateInKB(final EObject object, final String nodeRef) {
+    try {
+      final List<String> importedModules = this.getImportedModules(object);
+      final String module = this.getModule(object);
+      importedModules.add(module);
+      final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
+      List<Template> _elements = templates.getElements();
+      for (final Template nodeTemplate : _elements) {
+        {
+          String _xifexpression = null;
+          String _module = nodeTemplate.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = nodeTemplate.getModule();
+            String _plus = (_module_1 + "/");
+            String _label = nodeTemplate.getLabel();
+            _xifexpression = (_plus + _label);
+          } else {
+            _xifexpression = nodeTemplate.getLabel();
+          }
+          final String nodeTemplateRef = _xifexpression;
+          boolean _equals = nodeTemplateRef.equals(nodeRef);
+          if (_equals) {
+            return nodeTemplateRef;
+          }
+        }
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public void createProposalsForRequirementsList(final List<ERequirementAssignment> reqs, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {

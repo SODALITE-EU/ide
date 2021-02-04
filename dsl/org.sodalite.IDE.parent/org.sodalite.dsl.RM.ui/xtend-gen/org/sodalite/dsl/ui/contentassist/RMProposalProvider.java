@@ -1654,6 +1654,42 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     return _xifexpression;
   }
   
+  public String getReference(final EPREFIX_REF node) {
+    String _xifexpression = null;
+    if ((node instanceof EPREFIX_TYPE)) {
+      String _xifexpression_1 = null;
+      String _module = ((EPREFIX_TYPE)node).getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = ((EPREFIX_TYPE)node).getModule();
+        String _plus = (_module_1 + "/");
+        String _type = ((EPREFIX_TYPE)node).getType();
+        _xifexpression_1 = (_plus + _type);
+      } else {
+        _xifexpression_1 = ((EPREFIX_TYPE)node).getType();
+      }
+      _xifexpression = _xifexpression_1;
+    } else {
+      String _xifexpression_2 = null;
+      if ((node instanceof EPREFIX_ID)) {
+        String _xifexpression_3 = null;
+        String _module_2 = ((EPREFIX_ID)node).getModule();
+        boolean _tripleNotEquals_1 = (_module_2 != null);
+        if (_tripleNotEquals_1) {
+          String _module_3 = ((EPREFIX_ID)node).getModule();
+          String _plus_1 = (_module_3 + "/");
+          String _id = ((EPREFIX_ID)node).getId();
+          _xifexpression_3 = (_plus_1 + _id);
+        } else {
+          _xifexpression_3 = ((EPREFIX_ID)node).getId();
+        }
+        _xifexpression_2 = _xifexpression_3;
+      }
+      _xifexpression = _xifexpression_2;
+    }
+    return _xifexpression;
+  }
+  
   public String findRequirementNodeByNameInKB(final String type, final String reqName) {
     try {
       final RequirementDefinitionData reqData = this.getKBReasoner().getTypeRequirements(type);
@@ -1751,5 +1787,78 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       }
     }
     this.suggestRequirementsOrCapabilitiesInNode(module, node, context, acceptor);
+  }
+  
+  public List<CapabilityDefinition> findCapabilitiesInNodeType(final String nodeRef) {
+    try {
+      final CapabilityDefinitionData capabilities = this.getKBReasoner().getTypeCapabilities(nodeRef);
+      return capabilities.getElements();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public String getRequirementNameFromRequirementRef(final EPREFIX_REF reqRef) {
+    String reqName = null;
+    if ((reqRef instanceof EPREFIX_TYPE)) {
+      final EPREFIX_TYPE req = ((EPREFIX_TYPE) reqRef);
+      reqName = this.getLastSegment(req.getType(), ".");
+    } else {
+      if ((reqRef instanceof EPREFIX_ID)) {
+        final EPREFIX_ID req_1 = ((EPREFIX_ID) reqRef);
+        reqName = this.getLastSegment(req_1.getId(), ".");
+      }
+    }
+    return reqName;
+  }
+  
+  public String getNodeFromRequirementRef(final EPREFIX_REF reqRef) {
+    String nodeRef = null;
+    if ((reqRef instanceof EPREFIX_TYPE)) {
+      final EPREFIX_TYPE req = ((EPREFIX_TYPE) reqRef);
+      final String nodeName = req.getType().substring(0, req.getType().lastIndexOf("."));
+      String _xifexpression = null;
+      String _module = req.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = req.getModule();
+        String _plus = (_module_1 + "/");
+        _xifexpression = (_plus + nodeName);
+      } else {
+        _xifexpression = nodeName;
+      }
+      nodeRef = _xifexpression;
+    } else {
+      if ((reqRef instanceof EPREFIX_ID)) {
+        final EPREFIX_ID req_1 = ((EPREFIX_ID) reqRef);
+        final String nodeName_1 = req_1.getId().substring(0, req_1.getId().lastIndexOf("."));
+        String _xifexpression_1 = null;
+        String _module_2 = req_1.getModule();
+        boolean _tripleNotEquals_1 = (_module_2 != null);
+        if (_tripleNotEquals_1) {
+          String _module_3 = req_1.getModule();
+          String _plus_1 = (_module_3 + "/");
+          _xifexpression_1 = (_plus_1 + nodeName_1);
+        } else {
+          _xifexpression_1 = nodeName_1;
+        }
+        nodeRef = _xifexpression_1;
+      }
+    }
+    return nodeRef;
+  }
+  
+  public String getId(final EPREFIX_REF ref) {
+    String _xifexpression = null;
+    if ((ref instanceof EPREFIX_TYPE)) {
+      _xifexpression = ((EPREFIX_TYPE) ref).getType();
+    } else {
+      String _xifexpression_1 = null;
+      if ((ref instanceof EPREFIX_ID)) {
+        _xifexpression_1 = ((EPREFIX_ID) ref).getId();
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
 }
