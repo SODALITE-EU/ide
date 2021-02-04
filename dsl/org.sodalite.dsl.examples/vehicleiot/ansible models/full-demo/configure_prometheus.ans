@@ -1,0 +1,30 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml
+playbook_name: "vehicleiot-uc/full-demo/configure_prometheus"
+used_by:
+	node_type: "sodalite.nodes.PrometheusConfiguration"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		facts_settings:
+			gather_facts: yes
+		vars:
+			project_home: {{ lookup('env', 'HOME') }}
+			project_root: {{ declared_variable: project_home }}"/.knowgo"
+		tasks_list:
+			task_to_execute:
+				task_name: "Ensuring Prometheus Configuration directory exists in "{{ declared_variable: project_root }}"/conf/prometheus"
+				module: "file"
+					parameters:
+						path: {{ declared_variable: project_root }}"/conf/prometheus"
+						state: "directory"
+			
+			task_to_execute:
+				task_name: "Generating Prometheus Configuration"
+				module: "template"
+					parameters:
+						src: "prometheus.yml.tmpl"
+						dest: {{ declared_variable: project_root }}"/conf/prometheus/prometheus.yml"

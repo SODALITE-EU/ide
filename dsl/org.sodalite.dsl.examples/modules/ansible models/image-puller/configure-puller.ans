@@ -1,0 +1,95 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/image-puller/playbooks/configure-puller.yml
+playbook_name: "hpc/image-puller/configure-puller"
+used_by:
+	node_type: "sodalite.image_puller.singularity"
+	operation: "configure"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for remote_host,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: {{ operation_input: "remote_host_public_address" }}
+						groups: {{ operation_input: "remote_host_public_address" }}
+						ansible_host: {{ operation_input: "remote_host_public_address" }}
+						ansible_user: {{ operation_input: "remote_host_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "remote_host_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+				when: operation_input: "remote_host_public_address" != "localhost"
+	play:
+		hosts: {{ operation_input: "remote_host_public_address" }}
+		facts_settings:
+			gather_facts: yes
+		environment:
+			PATH: {{ ansible_env.PATH }}":/usr/sbin"
+		tasks_list:
+			task_to_execute:
+				task_name: "Create images dir"
+				module: "file"
+					parameters:
+						dest: {{ operation_input: "images_location" }}
+						state: "directory"
+			
+			block_to_execute:
+				block_name: "When private repository, configure puller"
+				tasks:
+					task_to_execute:
+						task_name: "Check private registry and output"
+						module: "fail"
+							parameters:
+								msg: "For private registry the output should be specified"
+						when: operation_input: "output" is not defined
+					
+					task_to_execute:
+						task_name: "Create certs dir"
+						module: "file"
+							parameters:
+								dest: {{ operation_input: "certs_location" }}
+								state: "directory"
+					
+					task_to_execute:
+						task_name: "Register certificates existence"
+						module: "stat"
+							parameters:
+								path: {{ operation_input: "certs_location" }}"/"{{ item }}
+						register: stat_results
+						loop:
+							with items:
+								- "ca.crt"
+								- "client.cert"
+								- "client.key"
+					
+					task_to_execute:
+						task_name: "Check certificates existence"
+						module: "fail"
+							parameters:
+								msg: {{ item.item }}
+						loop:
+							with items: {{ registered_variable: stat_results.results }}
+						when: item.stat.exists == False
+						
+					task_to_execute:
+						task_name: "Check puller image existence"
+						module: "stat"
+							parameters:
+								path: {{ operation_input: "puller_image" }}
+						register: image_status
+						
+					task_to_execute:
+						task_name: "Download puller"
+						module: "shell"
+							direct_parameter: "singularity pull "{{ operation_input: "puller_image" }}" docker://"{{ operation_input: "puller_image_remote" }}
+						when: registered_variable: image_status.stat.exists == false
+				
+				when: operation_input: "registry" == 'private'

@@ -1,0 +1,217 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/openstack/playbooks/egi_refresh_token.yml
+playbook_name: "openstack/egi_refresh_token"
+used_by:
+	//PROBLEM: we have 2 node types with the same name (in openstack_security_rule.rm and snow.rm), it scopes to the snow.rm one arbitrary
+	//but here we would like to scope instead the one in openstack_security_rule.rm
+	node_type: "sodalite.nodes.OpenStack.SecurityRules"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		vars:
+			//Some Global Vars
+			CHECKIN_CLIENT_ID: {{ env.checkin_env.CHECKIN_CLIENT_ID }}
+			CHECKIN_CLIENT_SECRET: {{ env.checkin_env.CHECKIN_CLIENT_SECRET }}
+			CHECKIN_REFRESH_TOKEN: {{ env.checkin_env.CHECKIN_REFRESH_TOKEN }}
+			EGI_SITE: {{ env.checkin_env.EGI_SITE }}
+			CHECKIN_OIDC_URL: "https://aai.egi.eu/oidc"
+			GOCDB_PUBLICURL: "https://goc.egi.eu/gocdbpi/public/"
+			//TODO: protocal can be also "oidc", make fallback to it
+			PROTOCOL: "openid"
+			auth_path: {{ '/v3/OS-FEDERATION/identity_providers/egi.eu/protocols/' + declared_variable: PROTOCOL + '/auth' }}
+			project_path: "/v3/auth/projects"
+			token_path: "/v3/auth/tokens"
+		tasks_list:
+			//Getting access token from CHECKIN
+			task_to_execute:
+				task_name:	"Discover OIDC"
+				module: "uri"
+					parameters:
+						url: {{ declared_variable: CHECKIN_OIDC_URL }}"/.well-known/openid-configuration"
+						method: "GET"
+				register: oidc_discovery
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						OIDC_ENDPOINT: {{ registered_variable: oidc_discovery.json.token_endpoint }}
+			
+			task_to_execute:
+				module: "debug"
+					parameters:
+						msg: {{ fact_set: OIDC_ENDPOINT }}
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						refresh_token_request:
+							client_id: {{ declared_variable: CHECKIN_CLIENT_ID }}
+							client_secret: {{ declared_variable: CHECKIN_CLIENT_SECRET }}
+							grant_type: "refresh_token"
+							refresh_token: {{ declared_variable: CHECKIN_REFRESH_TOKEN }}
+							scope: "openid email profile"
+							
+			task_to_execute:
+				task_name: "Refresh token"
+				module: "uri"
+					parameters:
+						url: {{ fact_set: OIDC_ENDPOINT }}
+						method: "POST"
+						body_format: "form-urlencoded"
+						body: {{ fact_set: refresh_token_request }}
+				register: refresh_token
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						access_token: {{ registered_variable: refresh_token.json.access_token }}
+						
+			task_to_execute:
+				module: "debug"
+					parameters:
+						msg: {{ fact_set: access_token }}
+			
+			//Getting Site Information
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						site_info_request:
+							method: "get_service_endpoint"
+							service_type: "org.openstack.nova"
+							monitored: "Y"
+							sitename: {{ declared_variable: EGI_SITE }}
+							
+			task_to_execute:
+				task_name: "Get site"
+				module: "uri"
+					parameters:
+						url:{{ declared_variable: GOCDB_PUBLICURL }}"?"{{ fact_set: site_info_request | urlencode }}
+						method: "GET"
+						return_content: yes
+				register: site_xml
+				
+			//TODO: Check the PRODUCTION state
+			
+			//regex version to obtain URL
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						site_endpoint: {{ ( registered_variable: site_xml.content | regex_search('<URL>(.+)</URL>', '\\1') | first ).rstrip('/') }}
+			
+			task_to_execute:
+				module: "debug"
+					parameters:
+						msg: {{ fact_set: site_endpoint }}
+						
+			//Getting unscoped token, project id and env for openstack
+			block_to_execute:
+				vars:
+					site_ep_basename: {{ fact_set: site_endpoint | basename }}
+					site_ep_dirname: {{ fact_set: site_endpoint | dirname }}
+					site_endpoint_prefix: {{ ( declared_variable: site_ep_dirname + '%s') if ('v3' in declared_variable: site_ep_basename or 'v2.0' in declared_variable: site_ep_basename) else (fact_set: site_endpoint + '%s') }}
+					site_auth_endpoint: {{ declared_variable: site_endpoint_prefix | format(declared_variable: auth_path) }}
+					site_project_endpoint: {{ declared_variable: site_endpoint_prefix | format(declared_variable: project_path) }}
+					site_token_endpoint: {{ declared_variable: site_endpoint_prefix | format(declared_variable: token_path) }}
+				tasks:
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ declared_variable: site_auth_endpoint}}" "{{ declared_variable: site_project_endpoint }}
+					
+					task_to_execute:
+						task_name: "Get unscoped token"
+						module: "uri"
+							parameters:
+								url: {{ declared_variable: site_auth_endpoint }}
+								method: "POST"
+								status_code: 201
+								headers:
+									Authorization: "Bearer "{{ fact_set: access_token }}
+						register: site_auth_token_response
+						
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								unscoped_token: {{ registered_variable: site_auth_token_response.x_subject_token }}
+								
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ fact_set: unscoped_token }}
+					
+					task_to_execute:
+						task_name: "Get project id"
+						module: "uri"
+							parameters:
+								url: {{ declared_variable: site_project_endpoint }}
+								method: "GET"
+								headers:
+									X-Auth-Token: {{ fact_set: unscoped_token }}
+						register: site_project_response
+						
+					task_to_execute:
+						module: "set_fact"
+							//TODO: can be several projects
+							//TODO: check other parameters, e.g. enabled
+							parameters:
+								project_id: {{ registered_variable: site_project_response.json.projects[0].id }}
+					
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ fact_set: project_id }}
+					
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								scoped_token_request:
+									auth:
+										identity:
+											methods: ["token"]
+											token:
+												id: {{ fact_set: unscoped_token }}
+										scope:
+											project:
+												id: {{ fact_set: project_id }}
+												
+					task_to_execute:
+						task_name: "Get scoped token"
+						module: "uri"
+							parameters:
+								url: {{ declared_variable: site_token_endpoint }}
+								method: "POST"
+								body: {{ fact_set: scoped_token_request }}
+								body_format: "json"
+								status_code: 201
+						register: scoped_token_response
+						
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								scoped_token: {{ registered_variable: scoped_token_response.x_subject_token }}
+								
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ fact_set: scoped_token }}
+								
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								os_env:
+									OS_AUTH_URL: {{ fact_set: site_endpoint }}
+									OS_AUTH_TYPE: "v3oidcaccesstoken"
+									OS_IDENTITY_PROVIDER: "egi.eu"
+									OS_PROTOCOL: {{ declared_variable: PROTOCOL }}
+									OS_ACCESS_TOKEN: {{ fact_set: access_token }}
+									OS_PROJECT_ID: {{ fact_set: project_id }}
+									OS_USER_DOMAIN_NAME: ""
+									OS_REGION_NAME: ""
+									OS_PROJECT_NAME: ""
+					
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ fact_set: os_env }}

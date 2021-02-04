@@ -1,0 +1,88 @@
+@startuml
+object Base {
+ ? privilege_escalation : PrivilegeEscalation
+ ? validation_mode : ValidationMode
+ ? connection : Connection
+ ? no_log : BooleanPassed
+ ? debugger : StringPassed
+ ? module_defaults : ValuePassed
+ ? environment : ValuePassed
+ ? collections : ListPassed
+ ? tags : ListPassed
+}
+
+object VariableDeclaration {
+ value_passed : ValuePassed
+}
+
+Base "[1]" -> "[0..*]" VariableDeclaration : has_variable_declarations
+
+object Play {
+ ? play_name : StringPassed
+ ? hosts : StringPassed
+ ? play_exe_settings : PlayExeSettings
+ ? error_handling : PlayErrorHandling
+ ? facts_settings : FactsSettings
+ ? vars_files : ListPassed
+ ? vars_prompt : ListPassed
+ ? force_handlers : BooleanPassed
+ ? external_file_inclusion : ExternalFileInclusion
+}
+
+object Execution {
+ ? exe_settings : ExecutionExeSettings
+ ? delegation : Delegation
+ ? when_expression : Condition
+}
+
+object Block {
+ ? block_name : StringPassed
+ ? error_handling : BlockAndRoleErrorHandling
+}
+
+object TaskHandler {
+ ? error_handling : TaskHandlerErrorHandling
+ ? action : StringPassed
+ ? asynchronous_settings : AsynchronousSettings
+ ? args : DictionaryPassed
+ module : ModuleCall
+ ? loop : Loop
+ ? register : RegisterVariable
+}
+
+object Notifiable
+
+Notifiable "[0..*]" <- "[1]" TaskHandler : has_notifiables
+
+object Task {
+ ? task_name: StringPassed
+}
+
+object Handler {
+ ? handler_name: String
+}
+
+object NotifiedTopic {
+  name : String
+}
+
+Handler "[1]" --> "[0..*]" NotifiedTopic : listen_to
+
+object RoleInclusion {
+ role_name: StringPassed
+ ? error_handling : BlockAndRoleErrorHandling
+}
+
+object BlockTask
+
+BlockTask <|-- Block
+BlockTask <|-- Task
+
+Base <|-- Play
+Base <|-- Execution
+Execution <|-- Block
+Execution <|-- TaskHandler
+Execution <|-- RoleInclusion
+TaskHandler <|-- Task
+TaskHandler <|-- Handler
+@enduml

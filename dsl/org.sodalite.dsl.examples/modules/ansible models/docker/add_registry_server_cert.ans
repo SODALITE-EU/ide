@@ -1,0 +1,171 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/add_registry_server_cert.yml
+playbook_name: "docker/add_registry_server_cert"
+used_by:
+	//cert_ipv4_address, domain_name, cert_files_prefix, cert_path are missing in the rm
+	node_type: "sodalite.nodes.RegistryCertificate"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "cryptography"
+		pre_tasks:
+			task_to_execute:
+				task_name: "Set vars for Cent OS backward compatibility"
+				module: "set_fact"
+					parameters:
+						pip_package: "python-pip"
+				when: ansible_distribution == "CentOS"
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						alt_name: "IP:"{{ cert_ipv4_address | default(operation_input: "public_ipv4_address", true) }}
+						common_name: {{ domain_name | default(operation_input: "public_ipv4_address", true) }}
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						cert_filename: {{ cert_files_prefix | default(fact_set: common_name, true) }}
+			
+			block_to_execute:
+				block_name: "Create fresh certs dir"
+				tasks:
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: {{ cert_path }}
+								state: "absent"
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: {{ cert_path }}
+								state: "directory"
+			
+			block_to_execute:
+				block_name: "Copy root CA files"
+				tasks:
+					task_to_execute:
+						module: "copy"
+							parameters:
+								src: "ca.crt"
+								dest: {{ cert_path }}"/ca.crt"
+					task_to_execute:
+						module: "copy"
+							parameters:
+								src: "ca.key"
+								dest: {{ cert_path }}"/ca.key"
+			
+			block_to_execute:
+				block_name: "Install root CA"
+				tasks:
+					task_to_execute:
+						module: "command"
+							direct_parameter: "cp "{{ cert_path }}"/ca.crt /etc/pki/ca-trust/source/anchors/ca.crt"
+					task_to_execute:
+						module: "command"
+							direct_parameter: "update-ca-trust"
+				when: ansible_distribution == "CentOS"
+			
+			block_to_execute:
+				block_name: "Install root CA"
+				tasks:
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: "/usr/local/share/ca-certificates/opera"
+								state: "directory"
+					task_to_execute:
+						module: "command"
+							direct_parameter: "cp "{{ cert_path }}"/ca.crt /usr/local/share/ca-certificates/opera/ca.crt"
+					task_to_execute:
+						module: "command"
+							direct_parameter: "update-ca-certificates"
+				when: ansible_distribution == "Ubuntu"
+			
+			block_to_execute:
+				block_name: "Generate certificates and clean up"
+				tasks:
+					task_to_execute:
+						module: "openssl_privatekey"
+							parameters:
+								path: {{ cert_path }}"/"{{ fact_set: cert_filename }}".key"
+								size: 4096
+					task_to_execute:
+						module: "openssl_csr"
+							parameters:
+								path: {{ cert_path }}"/"{{ fact_set: cert_filename}}".csr"
+								privatekey_path: {{ cert_path }}"/"{{ fact_set: cert_filename}}".key"
+								country_name: {{ operation_input: "country_name" }}
+								organization_name: {{ operation_input: "organization_name" }}
+								email_address:  {{ operation_input: "email_address" }}
+								common_name: {{ fact_set: common_name }}
+								subject_alt_name: {{ fact_set: alt_name }}
+					task_to_execute:
+						module: "openssl_certificate"
+							parameters:
+								path: {{ cert_path }}"/"{{ fact_set: cert_filename}}".crt"
+								csr_path: {{ cert_path }}"/"{{ fact_set: cert_filename}}".csr"
+								ownca_path: {{ cert_path }}"/ca.crt"
+								ownca_privatekey_path: {{ cert_path }}"/ca.key"
+								provider: "ownca"
+					task_to_execute:
+						module: "file"
+							parameters:
+								state: "absent"
+								path: {{ cert_path }}"/"{{ fact_set: cert_filename }}".csr"
+					task_to_execute:
+						module: "file"
+							parameters:
+								state: "absent"
+								path: {{ cert_path }}"/ca.key"
+				
+			task_to_execute:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							cert_files_prefix: {{ fact_set: cert_filename }}
+			
+		roles_inclusions:
+			role: 
+				role_name: "geerlingguy.pip"
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+							
+			
+			
+			
+			
+			
+			
+			

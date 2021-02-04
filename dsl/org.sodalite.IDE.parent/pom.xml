@@ -42,6 +42,10 @@
 		<module>org.sodalite.dsl.preferences</module>
 		<module>org.sodalite.ide.ui</module>
 		<module>org.sodalite.ide.feature</module>
+		<module>org.sodalite.dsl.ansible</module>
+		<module>org.sodalite.dsl.ansible.ide</module>
+		<module>org.sodalite.dsl.ansible.ui</module>
+		<module>org.sodalite.dsl.ansible.feature</module>
 	</modules>
 	<build>
 		<plugins>

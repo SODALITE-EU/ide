@@ -1,0 +1,54 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/misc/ssh/playbooks/delete.yml
+playbook_name: "misc/ssh/delete"
+//PROBLEM: the node type sodalite.nodes.ConfigureKeys, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		tasks_list:
+			task_to_execute:
+				task_name: "Find OpenStack keys"
+				module: "find"
+					parameters:
+						paths: "/root/.ssh/"
+						patterns: "*xOpera*"
+				register: files_to_delete
+				
+			task_to_execute:
+				task_name: "Find public keys"
+				module: "find"
+					parameters:
+						paths: "/root/.ssh/"
+						patterns: "*xOpera*.pubk"
+				register: files_public
+			
+			task_to_execute:
+				task_name: "Read keys"
+				module: "slurp"
+					parameters:
+						src: {{ item.path }}
+				register: keys
+				loop:
+					with items: {{ registered_variable: files_public.files }}
+			
+			task_to_execute:
+				task_name: "Remove from authorized keys"
+				module: "authorized_key"
+					parameters:
+						user: {{ ansible_user }}
+						state: "absent"
+						key: {{ item.content | b64decode }}
+				loop:
+					with items: {{ registered_variable: keys['results'] }}
+			
+			task_to_execute:
+				task_name: "Delete OpenStack keys"
+				module: "file"
+					parameters:
+						path: {{ item.path }}
+						state: "absent"
+				loop:
+					with items: {{ registered_variable: files_to_delete.files }}

@@ -1,0 +1,20 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/playbooks/start-gridftp-transfer.yml
+//here, for the moment, we don't connect this ansible model with data_mover.rm, since the RM defined there is not compliant with https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/main.yml
+playbook_name: "hpc/data/mover/start-gridftp-transfer"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Transfer data"
+				module: "shell"
+					direct_parameter: >
+						line_of_string: "globus-url-copy"
+						line_of_string: "-vb -r -cd"
+						line_of_string: {% if parallel_streams is defined and parallel_streams > 1 %}" -p "{{ parallel_streams }}{% endif %}
+						line_of_string: {{ src_protocol }}"://"{{ src_address if src_address != "localhost" }}{% if src_port is defined and src_port != None %}":"{{ src_port }}{% endif %}"/"{{ src_path }}
+						line_of_string: {{ dst_protocol }}"://"{{ dst_address if dst_address != "localhost" }}{% if dst_port is defined and dst_port != None %}":"{{ dst_port }}{% endif %}"/"{{ dst_path }}
+				environment:
+					X509_CERT_DIR: {{ cert_path }}"/"{{ certdir }}

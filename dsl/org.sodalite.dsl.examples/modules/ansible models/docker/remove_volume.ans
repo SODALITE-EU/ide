@@ -1,0 +1,17 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/remove_volume.yml
+playbook_name: "docker/remove_volume"
+used_by:
+	node_type: "sodalite.nodes.DockerVolume"
+	operation: "delete"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become: yes
+		tasks_list:
+			task_to_execute:
+				task_name: "remove docker volume"
+				module: "docker_volume"
+					parameters:
+						name: {{ operation_input: "volume_name" }}
+						state: "absent"

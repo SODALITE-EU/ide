@@ -1,0 +1,25 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/remove_cert.yml
+playbook_name: "docker/remove_cert"
+used_by:
+	node_type: "sodalite.nodes.RegistryCertificate"
+	operation: "delete"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "cryptography"
+				state: "absent"
+		tasks_list:
+			task_to_execute:
+				task_name: "Delete the path to registry communication keys"
+				module: "file"
+					parameters:
+						path: "/etc/docker/certs.d/"{{ operation_input: "registry_ip" }}
+						state: "absent"
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.pip"

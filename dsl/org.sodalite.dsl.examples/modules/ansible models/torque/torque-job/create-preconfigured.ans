@@ -1,0 +1,57 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/torque/torque-job/playbooks/configure.yml
+playbook_name: "hpc/torque/torque-job/create-preconfigured"
+used_by:
+	node_type: "sodalite.nodes.hpc.job.torque.preconfigured"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for wm,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "wm"
+						groups: "wm"
+						ansible_host: {{ operation_input: "wm_public_address" }}
+						ansible_user: {{ operation_input: "wm_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "wm_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		hosts: "wm"
+		facts_settings:
+			gather_facts: yes
+		vars:
+			job_workspace_path: {{ (( operation_input: "job_workspace" != None ) | ternary(operation_input: "job_workspace", ansible_env.HOME)) | replace("~", ansible_env.HOME) }}
+		tasks_list:
+			task_to_execute:
+				task_name: "Create workspace dir"
+				module: "file"
+					parameters:
+						dest: {{ declared_variable: job_workspace_path }}
+						state: "directory"
+				
+			task_to_execute:
+				task_name: "Create job script"
+				module: "template"
+					parameters:
+						src: "preconfigured-job.pbs.j2"
+						dest: {{ declared_variable: job_workspace_path }}"/"{{ operation_input: "job_name" }}".pbs"
+			
+			task_to_execute:
+				task_name: "Create audit script"
+				module: "template"
+					parameters:
+						src: "audit.sh.j2"
+						dest: {{ declared_variable: job_workspace_path }}"/audit.sh"
+						mode: 0500
+				when: operation_input: "job_enable_audit"

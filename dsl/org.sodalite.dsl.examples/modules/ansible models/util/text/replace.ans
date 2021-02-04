@@ -1,0 +1,14 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/modules/util/playbooks/text/replace.yaml
+playbook_name: "util/text/replace"
+//PROBLEM: the node type sodalite.nodes.Utils.replace, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			task_to_execute:
+				task_name: "Evaluate the expression"
+				module: "set_stats"
+					parameters:
+						data:
+							output: {{ input | replace(to_replace, replacement) }}

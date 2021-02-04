@@ -1,0 +1,115 @@
+@startuml
+object PrivilegeEscalation {
+ ? become : BooleanPassed
+ ? become_exe : StringPassed
+ ? become_flags : StringPassed
+ ? become_method : StringPassed
+ ? become_user : StringPassed
+}
+
+object ValidationMode {
+ ? check_mode : BooleanPassed
+ ? diff : BooleanPassed
+}
+
+object Connection {
+ ? connection : StringPassed
+ ? port : NumberPassed
+ ? remote_user : StringPassed
+}
+
+object AsynchronousSettings {
+ ? async : NumberPassed
+ ? poll : NumberPassed
+}
+
+object FactsSettings {
+  ? gather_facts : BooleanPassed
+  ? gather_subset : ValuePassed
+  ? gather_timeout : NumberPassed
+  ? fact_path : StringPassed
+}
+
+object Delegation {
+  ? delegate_to : StringPassed
+  ? delegate_facts : BooleanPassed
+}
+
+object Notifiable
+
+object NotifiedHandler {
+ name : Handler
+}
+
+object NotifiedTopic {
+ name : String
+}
+
+Notifiable <|-- NotifiedHandler
+Notifiable <|-- NotifiedTopic
+
+object ModuleCall {
+ name : String
+ ? direct_parameter : ValuePassed
+}
+
+object Parameter {
+ name : String
+ value_passed : ValuePassed
+}
+
+ModuleCall "[0..*]" --> "[0..*]" Parameter : has_parameters
+
+object ExeSettings {
+  ? throttle : NumberPassed
+  ? run_once : BooleanPassed
+}
+
+object PlayExeSettings {
+  ? strategy : StringPassed
+  ? serial_list : ValuePassed
+  ? order : StringPassed
+}
+
+object ExecutionExeSettings
+
+ExeSettings <|-- PlayExeSettings
+ExeSettings <|-- ExecutionExeSettings
+
+object ErrorHandling {
+  ? any_errors_fatal : BooleanPassed
+  ? ignore_errors : BooleanPassed
+  ? ignore_unreachable : BooleanPassed
+}
+
+object BlockAndRoleErrorHandling
+
+object PlayErrorHandling {
+  ? max_fail_percentage : NumberPassed
+}
+
+object TaskHandlerErrorHandling {
+  ? changed_when : Condition
+  ? failed_when : Condition
+}
+
+ErrorHandling <|-- BlockAndRoleErrorHandling
+ErrorHandling <|-- PlayErrorHandling
+ErrorHandling <|-- TaskHandlerErrorHandling
+
+object ExternalFileInclusion {
+  ? import_playbook : String
+  ? include : String
+  ? when_expression : Condition
+}
+
+object Condition
+object JinjaExpressionEvaluationWithoutBrackets
+object ListOfConditions
+
+Condition <|-- JinjaExpressionEvaluationWithoutBrackets
+Condition <|-- ListOfConditions
+
+ListOfConditions "[0..1]" -->  "[1..*]" JinjaExpressionEvaluationWithoutBrackets
+
+@enduml

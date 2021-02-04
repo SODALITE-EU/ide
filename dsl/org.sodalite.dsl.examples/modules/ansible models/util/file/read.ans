@@ -1,0 +1,20 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/modules/util/playbooks/file/read.yaml
+playbook_name: "util/file/read"
+//PROBLEM: the node sodalite.nodes.Utils.read.File, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			task_to_execute:
+				task_name: "Read the file"
+				module: "shell"
+					direct_parameter: "cat "{{ path }}
+				register: file_contents
+			
+			task_to_execute:
+				task_name: "Return file contents"
+				module: "set_stats"
+					parameters:
+						data:
+							output: {{ registered_variable: file_contents.stdout | string }}

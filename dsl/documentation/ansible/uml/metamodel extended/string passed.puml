@@ -1,0 +1,56 @@
+@startuml
+object StringPassed
+object JinjaOrString
+object String
+object JinjaExpressionEvaluation
+object JinjaStatement
+object JinjaAndString
+
+JinjaOrString <|-- String
+JinjaOrString <|-- JinjaExpressionEvaluation
+JinjaOrString <|-- JinjaStatement
+
+object JinjaStatement {
+  ? else_block_sign : String
+  ? else_body : ValuePassed
+}
+object IfStatement {
+  ? if_block_sign : String
+  if_condition : FilteredExpression
+  if_body : ValuePassed
+  ? endif_block_sign : String
+}
+
+object ElifBlock {
+  elif_block_sign : String
+  elif_condition : FilteredExpression
+  elif_body : ValuePassed
+}
+
+IfStatement "[0..1]" --> "[0..*]" ElifBlock : has_elif_blocks
+
+object ForStatement {
+  ? for_block_sign : String
+  list : FilteredExpression
+  ? condition : FilteredExpression
+  ? recursive : String
+  for_body : ValuePassed
+  ? endfor_block_sign : String
+}
+
+ForStatement "[0..1]" --> "[1..*]" String : has_identifiers
+
+JinjaStatement <|-- IfStatement
+JinjaStatement <|-- ForStatement
+
+JinjaAndString "[1]" --> "[1..*]" JinjaOrString : has_jinja_expression_and_string
+
+object MultiLineExpression {
+  new_line_command : String
+}
+
+MultiLineExpression "[0..1]" --> "[1..*]" JinjaAndString : has_expressions
+
+StringPassed <|-- JinjaAndString
+StringPassed <|-- MultiLineExpression
+@enduml

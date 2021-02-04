@@ -1,0 +1,110 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/add_container.yml
+playbook_name: "docker/add_container"
+used_by:
+	node_type: "sodalite.nodes.DockerizedComponent"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			project_home: {{ lookup('env', 'HOME') }}
+			image_path: {{ operation_input: "image_name" }}
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						image_path: {{ operation_input: "registry_url" }}"/"{{ operation_input: "image_name" }}
+				when: operation_input: "registry_url" is defined
+			task_to_execute:
+				task_name: "Launch "{{ operation_input: "alias" }}" container and connect to network"
+				module: "docker_container"
+					parameters:
+      					name: {{ operation_input: "alias" }}
+      					hostname: {{ hostname | default(omit) }} // hostname input is missing in the RM file
+      					image: {{ declared_variable: image_path }}
+      					restart_policy: {{ operation_input: "restart_policy" | default(omit) }}
+      					detach: {{ detach | default(omit) }} // detach input is missing in the RM file
+      					pull: true
+      					auto_remove: no
+      					command: {{ operation_input: "command" }}
+      					volumes: {{ operation_input: "volumes" }}
+      					env: {{ operation_input: "env" }}
+      					env_file: {{ env_file }} // env_file input is missing in the RM file
+      					capabilities: {{ capabilities }} // capabilities input is missing in the RM file
+      					ports: {{ operation_input: "ports" }}
+      					exposed_ports: {{ operation_input: "exposed_ports" }}
+      					ca_cert: {{ ca_cert }} // ca_cert input is missing in the RM file
+      					client_cert: {{ client_cert }} // client_cert input is missing in the RM file
+      					client_key: {{ client_key }} // client_key input is missing in the RM file
+      					etc_hosts: {{ etc_hosts }} // etc_hosts input is missing in the RM file
+      					labels: {{ labels }} // labels input is missing in the RM file
+					    networks:
+					    	- name: {{ docker_network_name }} // docker_network_name is missing in the RM file
+					    	aliases:
+					    		- {{ operation_input: "alias" }}
+				notify: "{{ alias }} sleep"
+				when: docker_network_name != None
+			task_to_execute:
+				task_name: "Launch "{{ operation_input: "alias" }}" container"
+				module: "docker_container"
+					parameters:
+						name: {{ operation_input: "alias" }}
+						hostname: {{ hostname | default(omit) }} // hostname input is missing in the RM file
+						image: {{ declared_variable: image_path }}
+						restart_policy: {{ operation_input: "restart_policy" | default(omit) }}
+						detach: {{ detach | default(omit) }} // detach input is missing in the RM file
+						pull: true
+						auto_remove: no
+						command: {{ operation_input: "command" }}
+						volumes: {{ operation_input: "volumes" }}
+						env: {{ operation_input: "env" }}
+						env_file: {{ env_file }} // env_file input is missing in the RM file
+						capabilities: {{ capabilities }} // capabilities input is missing in the RM file
+						ports: {{ operation_input: "ports" }}
+						exposed_ports: {{ operation_input: "exposed_ports" }}
+						ca_cert: {{ ca_cert }}
+						client_cert: {{ client_cert}}
+						client_key: {{ client_key }}
+						etc_hosts: {{ etc_hosts }}
+						labels: {{ labels }}
+				notify: "{{ alias }} sleep"
+				when: docker_network_name == None
+			task_to_execute:
+				module: "shell"
+					direct_parameter: "docker inspect --format '{''{ .NetworkSettings.IPAddress }''}' "{{ operation_input: "alias" }}
+				register: result
+				when: docker_network_name != None
+			task_to_execute:
+				task_name: "Extract ip address"
+				module: "set_stats"
+					parameters:
+						data:
+							ip_address: {{ registered_variable: result.stdout }}
+				when: docker_network_name != None
+		handlers:
+			handler:
+				handler_name: "{{ alias }} sleep" //the name of the handler can only be a string, otherwise the scoping of the notify doesn't work
+				module: "command"
+					direct_parameter: "sleep "{{ operation_input: "sleep" }}
+				when:
+					when_condition: operation_input: "sleep" > 0
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+					    		
+     

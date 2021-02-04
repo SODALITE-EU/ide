@@ -1,0 +1,207 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/openstack/playbooks/vm_create.yml
+playbook_name: "openstack/vm_create"
+used_by:
+	//PROBLEM: we have 2 node types with the same name (in openstack_vm.rm and snow.rm), it scopes to the snow.rm one arbitrary
+	//but here we would like to scope instead the one in openstack_vm.rm
+	node_type: "sodalite.nodes.OpenStack.VM"
+	operation: "create"
+plays:
+	play:
+		play_name: "Refresh token and update env"
+		external_file_inclusion:
+			import_playbook: "egi_refresh_token.yml"
+			when: env.checkin_env is defined
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		vars:
+			exporter_meta:
+				prometheus_io_scrape: "true"
+				prometheus_io_port: "9100"
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						os_env: {{ env.os_env }}
+				when: env.os_env is defined
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						additional_ssh_args: {{ '-o ' +
+						ssh_config.keys() |
+						zip(ssh_config.values()) |
+						map('join', '=') |
+						join(' -o ') }}
+				when: ssh_config is defined and ssh_config | length > 0
+			task_to_execute:
+				task_name: "Create VM"
+				module: "os_server"
+					parameters:
+						state: "present"
+						name: {{ vm_name }}
+						image: {{ image }}
+						key_name: {{ key_name }}
+						flavor: {{ flavor }}
+						network: {{ network }}
+						security_groups: {{ security_groups }}
+						timeout: {{ timeout }}
+						floating_ip_pools: {{ floating_ip_pools }}
+						meta: {{ declared_variable: exporter_meta if (include_exporter is defined and include_exporter == True) else {} }}
+						userdata: {{ userdata }}
+				register: server_info
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}
+			task_to_execute:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							private_address: {{ registered_variable: server_info.server.private_v4 }}
+							public_address: {{ registered_variable: server_info.server.public_v4 }}
+							id: {{ registered_variable: server_info.server.id }}
+			task_to_execute:
+				task_name: "Create temporary invetory for ssh wait"
+				module: "add_host"
+					parameters:
+						name: "server"
+						groups: "vms"
+						ansible_host: {{ registered_variable: server_info.server.public_v4 }}
+						ansible_user: {{ ansible_user }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+							line_of_string: {{ fact_set: additional_ssh_args | default("") }}
+					
+	play:
+		hosts: "vms"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Wait for ssh to wake up"
+				module: "wait_for_connection"
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}
+			task_to_execute:
+				task_name: "Check that the node_exporter.service exists"
+				module: "stat"
+					parameters:
+						path: "/etc/systemd/system/node_exporter.service"
+				register: stat_result
+			task_to_execute:
+				task_name: "Add the user \"node_exporter\""
+				privilege_escalation:
+					become: yes
+				module: "user"
+					parameters:
+						name: "node_exporter"
+						shell: "/bin/bash"
+						create_home: no
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Download Node exporter"
+				privilege_escalation:
+					become: yes
+				module: "get_url"
+					parameters:
+						url: "https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz"
+						dest: "/tmp"
+						checksum: "sha256:3369b76cd2b0ba678b6d618deab320e565c3d93ccb5c2a0d5db51a53857768ae"
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Extract Node exporter"
+				privilege_escalation:
+					become: yes
+				module: "unarchive"
+					parameters:
+						src: "/tmp/node_exporter-1.0.1.linux-amd64.tar.gz"
+						dest: "/tmp"
+						remote_src: true
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Copy executable"
+				privilege_escalation:
+					become: yes
+				module: "copy"
+					parameters:
+						src: "/tmp/node_exporter-1.0.1.linux-amd64/node_exporter"
+						dest: "/usr/local/bin"
+						remote_src: true
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Give the user \"node_exporter\" permission to that binary"
+				privilege_escalation:
+					become: yes
+				module: "file"
+					parameters:
+						path: "/usr/local/bin/node_exporter"
+						owner: "node_exporter"
+						group: "node_exporter"
+						mode: "0755"
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Delete compressed download"
+				privilege_escalation:
+					become: yes
+				module: "file"
+					parameters:
+						path: "/tmp/node_exporter-1.0.1.linux-amd64.tar.gz"
+						state: "absent"
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Delete folder"
+				privilege_escalation:
+					become: yes
+				module: "file"
+					parameters:
+						path: "/tmp/node_exporter-1.0.1.linux-amd64/"
+						state: "absent"
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Create Node exporter Service File"
+				privilege_escalation:
+					become: yes
+				module: "file"
+					parameters:
+						path: "/etc/systemd/system/node_exporter.service"
+						state: "touch"
+				when: not registered_variable: stat_result.stat.exists
+			task_to_execute:
+				task_name: "Edit Node exporter Service File"
+				privilege_escalation:
+					become: yes
+				module: "blockinfile"
+					parameters:
+						path: "/etc/systemd/system/node_exporter.service"
+						marker: "# {mark} SODALITE - ANSIBLE MANAGED BLOCK"
+						block: |
+							line_of_string: "[Unit]"
+							line_of_string: "Description=Node Exporter"
+							line_of_string: "Wants=network-online.target"
+							line_of_string: "After=network-online.target"
+							line_of_string: ""
+							line_of_string: "[Service]"
+							line_of_string: "User=node_exporter"
+							line_of_string: "Group=node_exporter"
+							line_of_string: "Type=simple"
+							line_of_string: "ExecStart=/usr/local/bin/node_exporter"
+							line_of_string: ""
+							line_of_string: "[Install]"
+							line_of_string: "WantedBy=multi-user.target"
+			task_to_execute:
+				task_name: "systemd reload"
+				privilege_escalation:
+					become: yes
+				module: "systemd"
+					parameters:
+						daemon_reload: yes
+			task_to_execute:
+				task_name: "Start Node exporter service"
+				privilege_escalation:
+					become: yes
+				module: "service"
+					parameters:
+						name: "node_exporter"
+						enabled: yes
+						state: "started"

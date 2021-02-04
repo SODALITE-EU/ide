@@ -1,0 +1,53 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/slurm/slurm-job/playbooks/create.yml
+playbook_name: "hpc/slurm/slurm-job/create"
+//PROBLEM: the node type sodalite.nodes.hpc.job.slurm.configuration, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for wm,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "wm"
+						groups: "wm"
+						ansible_host: {{ wm_public_address }}
+						ansible_user: {{ wm_username }}
+						ansible_ssh_private_key_file: {{ wm_keypath }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		hosts: "wm"
+		facts_settings:
+			gather_facts: yes
+		vars:
+			job_workspace_path: {{ (job_workspace != None) | ternary(job_workspace, ansible_env.HOME) }}
+		tasks_list:
+			task_to_execute:
+				task_name: "Validate workspace"
+				module: "stat"
+					parameters:
+						path: {{ declared_variable: job_workspace_path }}
+				register: ws
+			
+			task_to_execute:
+				module: "fail"
+					parameters:
+						msg: "Incorrect workspace"
+				when: registered_variable: ws.stat.exists == false
+				
+			task_to_execute:
+				task_name: "Create job script"
+				module: "template"
+					parameters:
+						src: "job.slurm.j2"
+						dest: {{ declared_variable: job_workspace_path }}"/"{{ job_name }}".slurm"

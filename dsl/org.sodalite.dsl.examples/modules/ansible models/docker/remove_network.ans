@@ -1,0 +1,20 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/remove_network.yml
+playbook_name: "docker/remove_network"
+used_by:
+	node_type: "sodalite.nodes.DockerNetwork"
+	operation: "delete"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		privilege_escalation:
+			become: yes
+		tasks_list:
+			//network name is obtained from *.deploy file upon undeployment
+			task_to_execute:
+				task_name: "Remove a network"
+				module: "docker_network"
+					parameters:
+						name: {{ operation_input: "docker_network_name" }}
+						state: "absent"

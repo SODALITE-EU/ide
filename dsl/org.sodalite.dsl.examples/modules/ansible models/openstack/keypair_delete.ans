@@ -1,0 +1,30 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/openstack/playbooks/keypair_delete.yml
+playbook_name: "openstack/keypair_delete"
+//PROBLEM: the node type  sodalite.nodes.OpenStack.Keypair, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		play_name: "Refresh token and update env"
+		external_file_inclusion:
+			import_playbook: "egi_refresh_token.yml"
+			when: env.checkin_env is defined
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						os_env: {{ env.os_env }}
+				when: env.os_env is defined
+				
+			task_to_execute:
+				task_name: "Delete keypair"
+				module: "os_keypair"
+					parameters:
+						name: {{ name }}
+						state: "absent"
+				error_handling:
+					ignore_errors: True
+				environment: {{ fact_set: os_env if fact_set: os_env is defined }}

@@ -1,0 +1,20 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/vehicleiot-uc/region-router-demo/playbooks/software/consul_register_add.yml
+playbook_name: "vehicleiot-uc/region-router-demo/software/consul_register_add"
+//PROBLEM: the node sodalite.nodes.software.Register2consul, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		tasks_list:
+			task_to_execute:
+				task_name: "Register a service to consul"
+				module: "consul"
+					parameters:
+						service_id: {{ service_id }}
+						service_name: {{ service_name }}
+						service_address: {{ service_address }}
+						service_port: {{ service_port }}
+						tags: {{ tags }}

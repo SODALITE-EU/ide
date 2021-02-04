@@ -1,0 +1,73 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/torque/torque-job/playbooks/dummy-relation-interface.yml
+playbook_name: "hpc/torque/torque-job/start"
+used_by:
+	node_type: "sodalite.nodes.hpc.job.torque"
+	operation: "start"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for wm,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "wm"
+						groups: "wm"
+						ansible_host: {{ operation_input: "wm_public_address" }}
+						ansible_user: {{ operation_input: "wm_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "wm_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		//should be ansible module for Torque to handle jobs and their states
+		hosts: "wm"
+		facts_settings:
+			gather_facts: yes
+		vars:
+			job_workspace_path: {{ (( operation_input: "job_workspace" != None ) | ternary(operation_input: "job_workspace", ansible_env.HOME)) | replace("~", ansible_env.HOME) }}
+		tasks_list:
+			task_to_execute:
+				task_name: "Submit the job"
+				module: "shell"
+					direct_parameter: "qsub -V "{{ operation_input: "job_name" }}".pbs"
+				args:
+					chdir: {{ declared_variable: job_workspace_path }}
+				register: job
+				environment: {{ operation_input: "job_env" if operation_input: "job_env" is defined }}
+			
+			task_to_execute:
+				task_name: "Saving job_id"
+				module: "set_fact"
+					parameters:
+						job_id: {{ registered_variable: job.stdout }}
+			
+			task_to_execute:
+				task_name: "Obtain walltime"
+				module: "shell"
+					direct_parameter: "qstat -f "{{ fact_set: job_id }}" | grep 'Resource_List.walltime' | egrep -o '[^ ]+$'"
+				register: walltime_result
+				
+			task_to_execute:
+				task_name: "Obtain job name"
+				module: "shell"
+					direct_parameter: "qstat -f "{{ fact_set: job_id }}" | grep 'Job_Name' | egrep -o '[^ ]+$'"
+				register: job_name_result
+			
+			task_to_execute:
+				task_name: "Set attribute"
+				module: "set_stats"
+					parameters:
+						data:
+							job_id: {{ fact_set: job_id }}
+							job_name: {{ registered_variable: job_name_result.stdout }}
+							job_walltime: {{ registered_variable: walltime_result.stdout }}
+							job_workspace: {{ declared_variable: job_workspace_path }}
+							job_enable_audit: {{ operation_input: "job_enable_audit" }}

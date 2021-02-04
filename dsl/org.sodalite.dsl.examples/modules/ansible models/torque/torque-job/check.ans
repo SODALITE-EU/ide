@@ -1,0 +1,121 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/torque/torque-job/playbooks/check.yml
+playbook_name: "hpc/torque/torque-job/check"
+used_by:
+	node_type: "sodalite.nodes.hpc.job.torque.result"
+	operation: "start"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for wm,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "wm"
+						groups: "wm"
+						ansible_host: {{ operation_input: "wm_public_address" }}
+						ansible_user: {{ operation_input: "wm_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "wm_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		hosts: "wm"
+		facts_settings:
+			gather_facts: yes
+		vars:
+			epoch: "00:00:00"
+			walltime: {{ operation_input: "job_walltime" }}
+			walltime_sec: {{ (declared_variable: walltime | to_datetime('%H:%M:%S')).strftime('%s') | int - (declared_variable: epoch | to_datetime('%H:%M:%S')).strftime('%s') | int }}
+			//overall monitoring delay: consists of 2 delay steps due to poll of async and delay of until loop
+			monitor_period: {{ operation_input: "job_monitor_period" }}
+			//each step is half of overall delay
+			monitor_delay_step: {{ (declared_variable: monitor_period / 2) | round | int }}
+			//additional retries for long job completion
+			monitor_retries_headroom: {{ operation_input: "job_monitor_retries_headroom" }}
+			monitor_retries: {{ (declared_variable: walltime_sec | int / declared_variable: monitor_period) | round | int + declared_variable: monitor_retries_headroom }}
+			job_workspace_path: {{ (( operation_input: "job_workspace" != None ) | ternary(operation_input: "job_workspace", ansible_env.HOME)) | replace("~", ansible_env.HOME) }}
+		tasks_list:
+			task_to_execute:
+				task_name: "Run continuously qstat to monitor the status of the job"
+				module: "shell"
+					direct_parameter: "qstat -f "{{ operation_input: "job_id" }}" | grep 'job_state' | grep -o '.$'"
+				register: job_monitor
+				loop:
+					until:
+						until_condition: "job_monitor.stdout == 'C'"
+						delay_attribute: {{ declared_variable: monitor_delay_step }}
+						retries: {{ declared_variable: monitor_retries }}
+				asynchronous_settings:
+					async: {{ declared_variable: walltime_sec | int }}
+					poll: {{ declared_variable: monitor_delay_step }}
+					
+			task_to_execute:
+				task_name: "Wait the status monitoring to finish"
+				module: "async_status"
+					parameters:
+						jid: {{ registered_variable: job_monitor.ansible_job_id }}
+				register: job_result
+				loop:
+					until:
+						until_condition: registered_variable: job_result.finished
+						retries: {{ declared_variable: monitor_retries }}
+					
+			task_to_execute:
+				task_name: "set state deleted after job is completed"
+				module: "set_stats"
+					parameters:
+						data:
+							state: "deleted"
+							
+			task_to_execute:
+				task_name: "Check the exit status"
+				module: "shell"
+					direct_parameter: "qstat -f "{{ operation_input: "job_id" }}" | grep 'exit_status' | egrep -o '[^ ]+$'"
+				register: job_exit_status
+				
+			//Do some failure mitigation actions here
+			task_to_execute:
+				task_name: "React to the error"
+				module: "shell"
+					direct_parameter: "echo \"Here should be failure management\""
+				when: "job_exit_status.stdout != '0'"
+				
+			task_to_execute:
+				module: "fail"
+					parameters:
+						msg: "Job stopped with non-zero exit "{{ registered_variable: job_exit_status.stdout }}
+				when: "job_exit_status.stdout != '0'"
+			
+			//audit.yml is not copied to /tmp by xOpera, therefore the location should be hardcoded
+				
+			block_to_execute:
+				block_name: "Audit the job"
+				tasks:
+					task_to_execute:
+						task_name: "Register audit statistics"
+						module: "slurp"
+							parameters:
+								src: {{ declared_variable: job_workspace_path }}"/"{{ operation_input: "job_name" }}"."{{ operation_input: "job_id" }}".stat"
+						register: audit
+					
+					task_to_execute:
+						module: "debug"
+							parameters:
+								msg: {{ registered_variable: audit['content'] | b64decode | from_yaml }}
+					
+					task_to_execute:
+						task_name: "save audit attribute"
+						module: "set_stats"
+							parameters:
+								data:
+									audit: {{ registered_variable: audit['content'] | b64decode | from_yaml }}
+				
+				when: operation_input: "job_enable_audit"

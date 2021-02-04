@@ -1,0 +1,62 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/misc/ssh/playbooks/create.yml
+playbook_name: "misc/ssh/create"
+//PROBLEM: the node type sodalite.nodes.ConfigureKeys, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: "cryptography"
+				- name: "pyOpenSSL"
+		tasks_list:
+			block_to_execute:
+				block_name: "Generate OpenStack key"
+				tasks:
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								key_name: {{ public_ipv4_address | replace('.','-') }}"-xOpera"
+								ssh_path: "/root/.ssh/"
+					
+					task_to_execute:
+						module: "file"
+							parameters:
+								path: {{ fact_set: ssh_path }}
+								state: "directory"
+					
+					task_to_execute:
+						module: "openssl_privatekey"
+							parameters:
+								path: {{ fact_set: ssh_path }}{{ fact_set: key_name }}
+								size: 4096
+					
+					task_to_execute:
+						module: "openssl_publickey"
+							parameters:
+								path: {{ fact_set: ssh_path }}{{ fact_set: key_name }}".pubk"
+								format: "OpenSSH"
+								privatekey_path: {{ fact_set: ssh_path }}{{ fact_set: key_name }}
+					
+					task_to_execute:
+						module: "slurp"
+							parameters:
+								src: {{ fact_set: ssh_path }}{{ fact_set: key_name }}".pubk"
+						register: key
+						
+					task_to_execute:
+						module: "authorized_key"
+							parameters:
+								user: {{ ansible_user }}
+								state: "present"
+								key: {{ registered_variable: key.content | b64decode }}
+		
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.repo-epel"
+				when: ansible_distribution == "CentOS"
+			role:
+				role_name: "geerlingguy.pip"
