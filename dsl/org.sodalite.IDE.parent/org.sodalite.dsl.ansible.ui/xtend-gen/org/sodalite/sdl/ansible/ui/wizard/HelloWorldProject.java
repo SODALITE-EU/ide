@@ -66,7 +66,9 @@ public final class HelloWorldProject extends AbstractProjectTemplate {
       List<String> _folders = it.getFolders();
       _folders.add("src");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("src/�path�/Model.ans");
+      _builder.append("src/");
+      _builder.append(this.path);
+      _builder.append("/Model.ans");
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("/*");
       _builder_1.newLine();

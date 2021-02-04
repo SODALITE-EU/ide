@@ -13,7 +13,7 @@ import org.sodalite.sdl.ansible.ui.AbstractAnsibleDslUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class AnsibleDslUiModule extends AbstractAnsibleDslUiModule {
-  public AnsibleDslUiModule(final AbstractUIPlugin arg0) {
-    super(arg0);
+  public AnsibleDslUiModule(final AbstractUIPlugin plugin) {
+    super(plugin);
   }
 }
