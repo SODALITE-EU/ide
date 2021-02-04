@@ -267,14 +267,26 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             String _type = ePrefixType.getType();
             String _plus = ("\tLocal node: " + _type);
             System.out.println(_plus);
-            String _type_1 = ePrefixType.getType();
-            final String proposalText = ((module + "/") + _type_1);
-            String _type_2 = ePrefixType.getType();
-            final String displayText = ((module + "/") + _type_2);
-            final String additionalProposalInfo = dataType.getData().getDescription();
-            Image image = this.getImage("icons/type.png");
+            String _xifexpression = null;
             if ((module != null)) {
-              image = this.getImage("icons/primitive_type.png");
+              String _type_1 = ePrefixType.getType();
+              _xifexpression = ((module + "/") + _type_1);
+            } else {
+              _xifexpression = ePrefixType.getType();
+            }
+            final String proposalText = _xifexpression;
+            String _xifexpression_1 = null;
+            if ((module != null)) {
+              String _type_2 = ePrefixType.getType();
+              _xifexpression_1 = ((module + "/") + _type_2);
+            } else {
+              _xifexpression_1 = ePrefixType.getType();
+            }
+            final String displayText = _xifexpression_1;
+            final String additionalProposalInfo = dataType.getData().getDescription();
+            Image image = this.getImage("icons/data_type.png");
+            if ((module != null)) {
+              image = this.getImage("icons/primitive_data_type.png");
             }
             this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }

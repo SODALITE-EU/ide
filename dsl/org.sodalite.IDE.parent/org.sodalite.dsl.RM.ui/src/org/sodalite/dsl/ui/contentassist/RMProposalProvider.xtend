@@ -209,12 +209,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			for (dataType: rootModel.dataTypes.dataTypes){
 				val EPREFIX_TYPE ePrefixType = dataType.name as EPREFIX_TYPE
 				System.out.println ("\tLocal node: " + ePrefixType.type)
-				val proposalText = module + "/" + ePrefixType.type 
-				val displayText = module + "/" + ePrefixType.type 
+				val proposalText = module !== null ?module + "/" + ePrefixType.type: ePrefixType.type
+				val displayText = module !== null ?module + "/" + ePrefixType.type: ePrefixType.type
 				val additionalProposalInfo = dataType.data.description
-				var Image image = getImage("icons/type.png")
+				var Image image = getImage("icons/data_type.png")
 				if (module !== null) 
-					image = getImage("icons/primitive_type.png")
+					image = getImage("icons/primitive_data_type.png")
 				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}		
 	

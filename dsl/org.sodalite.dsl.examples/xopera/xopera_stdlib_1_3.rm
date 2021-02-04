@@ -37,10 +37,10 @@ data_types:
 	tosca.datatypes.TimeInterval:
 		derived_from: tosca.datatypes.Root
 		properties:
-			start_time:
+			start-time:
 				type: timestamp
 			
-			end_time:
+			end-time:
 				type: timestamp
 			
 		
