@@ -65,6 +65,8 @@ import org.sodalite.dsl.rM.ERequirementDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
+import org.sodalite.dsl.rM.EPolicyType
+import org.eclipse.emf.common.util.EList
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -262,6 +264,88 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}
+	}
+	
+	override void completeEInterfaceTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for Interface Type::superType property")
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			if (module !== null)
+				importedModules.add(module)
+			
+			val ReasonerData<Type> types = getKBReasoner().getInterfaceTypes(importedModules)
+			System.out.println ("Types retrieved from KB:")
+			for (type: types.elements){
+				System.out.println ("\tInterface: " + type.label)
+				val qnode = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val proposalText = qnode
+				val displayText = qnode
+				val additionalProposalInfo = type.description
+				var Image image = getImage("icons/interface.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other interface types defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (interfaceType: rootModel.interfaceTypes.interfaceTypes){
+				System.out.println ("\tLocal interface: " + interfaceType.name)
+				val proposalText = module + "/" + interfaceType.name 
+				val displayText = module + "/" + interfaceType.name 
+				val additionalProposalInfo = interfaceType.interface.description
+				var Image image = getImage("icons/interface.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
+	
+	}
+	
+	override void completeEPolicyTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for Policy Type::superType property")
+		try{
+			//Get modules from model
+			val List<String> importedModules = getImportedModules(model)
+			val String module = getModule(model)
+			//Add current module to imported ones for searching in the KB
+			if (module !== null)
+				importedModules.add(module)
+			
+			val ReasonerData<Type> types = getKBReasoner().getPolicyTypes(importedModules)
+			System.out.println ("Policies retrieved from KB:")
+			for (type: types.elements){
+				System.out.println ("\tPolicy: " + type.label)
+				val qnode = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val proposalText = qnode
+				val displayText = qnode
+				val additionalProposalInfo = type.description
+				var Image image = getImage("icons/policy_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other interface types defined locally in the model
+			val rootModel = findModel(model) as RM_Model
+			
+			for (policyType: rootModel.policyTypes.policyTypes){
+				System.out.println ("\tLocal policy: " + policyType.name)
+				val proposalText = module + "/" + policyType.name 
+				val displayText = module + "/" + policyType.name 
+				val additionalProposalInfo = policyType.policy.description
+				var Image image = getImage("icons/policy_type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
+	
 	}
 	
 	override void completeERelationshipTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -621,8 +705,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = processListModules(model)
 			val ReasonerData<Type> types = getKBReasoner().getNodeTypes(importedModules)
 			val TemplateData templates = getKBReasoner().getTemplates(importedModules)		
-			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
-			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor)
+			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
 		}	
@@ -633,23 +717,23 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		if (filter.node !== null){
 			var String qnode = getNodeName (filter.node)
 			val RequirementDefinitionData reqs = getKBReasoner().getTypeRequirements(qnode)
-			createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
+			createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
 		}
 	}
 	
-	override void completeEEvenFilter_Capability(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
-		//If requirement not set
-		// Find capabilities defined in filter node (if node is template in its type)
-		// A) Node lives in RM 
-		// B) Node lives in KB
-		
-		
-		//If requirement set
-		// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
-		// IF req node is template, gets it type
-		// A) Node lives in RM
-		// B) Node lives in KB
+	override void completeETargetType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Find local and KB node types
+			val List<String> importedModules = processListModules(model)
+			val TypeData typeData = getKBReasoner().getNodeTypes(importedModules)
+			val type_image = "icons/type.png";	
+			val primitive_type_image = "icons/primitive_type.png";
+			createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor)
+			val List<ENodeType> localTypes = (findModel(model) as RM_Model).nodeTypes.nodeTypes
+			createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
 	}
 	
 	override void completeECallOperationActivityDefinition_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -684,6 +768,34 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val proposalText = qtype
 			val displayText = qtype
 			val additionalProposalInfo = type.description
+			var Image image = getImage(defaultImage)
+			if (type.module !== null) 
+				image = getImage(primitiveImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+		}
+	}
+	
+	def void createProposalsForTypeList(TypeData types, String defaultImage, String primitiveImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (type: types.elements){
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val proposalText = qtype
+			val displayText = qtype
+			val additionalProposalInfo = type.description
+			var Image image = getImage(defaultImage)
+			if (type.module !== null) 
+				image = getImage(primitiveImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+		}
+	}
+	
+	def void createProposalsForTypeList(List<ENodeType> types, String defaultImage, String primitiveImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (type: types){
+			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.name:type.name
+			val proposalText = qtype
+			val displayText = qtype
+			val additionalProposalInfo = type.node.description
 			var Image image = getImage(defaultImage)
 			if (type.module !== null) 
 				image = getImage(primitiveImage)
@@ -851,11 +963,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		if (eEntityReference === null)
 			return null
 			
-		var ENodeType node = null
+		var EObject node = null
 		if (eEntityReference instanceof EEntity){
 			val EEntity eEntity = eEntityReference as EEntity
 			if (eEntity.entity.equals('SELF')){
-				node = getNodeType(function) as ENodeType
+				node = getType(function) as EObject
 			}
 		} else {
 			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
@@ -870,6 +982,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			return object.eContainer
 		else
 			return getNodeType(object.eContainer)
+	}
+	
+	def getType(EObject object) {
+		if (object.eContainer === null)
+			return null
+		else if (object.eContainer instanceof ENodeType)
+			return object.eContainer
+		else if (object.eContainer instanceof EPolicyType)
+			return object.eContainer
+		else
+			return getType(object.eContainer)
 	}
 	
 	def findRequirementNodeInLocalType(String requirement, ENodeType nodeType) {
@@ -1065,7 +1188,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String module = getModule(model)
 		val RM_Model rm_model = findModel(model) as RM_Model
 		//Get entity in this GetProperty body. If null, return
-		var ENodeType node = null
+		var EObject node = null
 		var EPREFIX_TYPE req_cap = null
 		if (model instanceof GetPropertyBodyImpl){
 			var body = model as GetPropertyBodyImpl
@@ -1079,9 +1202,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		if (node === null){
 			return
 		}
-		if (req_cap !== null){ //TODO support the case a capability is given
+		if (node instanceof ENodeType && req_cap !== null){ //TODO support the case a capability is given
 			val req_cap_name = getLastSegment(req_cap.type, '.')
-			val String targetNodeRef = findRequirementTargetNode(node, req_cap_name)
+			val nodeType = (node as ENodeType)
+			val String targetNodeRef = findRequirementTargetNode(nodeType, req_cap_name)
 			if (targetNodeRef !== null){
 				// Find properties/attributes in target node, create suggestions
 				if (model instanceof GetPropertyBodyImpl)
@@ -1091,13 +1215,28 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 		} else {
 			//Get the properties defined within the entity
+			var List<EPropertyDefinition> properties = null
+			var List<EAttributeDefinition> attributes = null
+			var String node_name = null
+			if (node instanceof ENodeType){
+				val nodeType = (node as ENodeType)
+				if (nodeType.node.properties!==null)
+					properties = nodeType.node.properties.properties
+				if (nodeType.node.attributes!==null)
+					attributes = nodeType.node.attributes.attributes
+				node_name = nodeType.name
+			} else if (node instanceof EPolicyType){
+				val policyType = (node as EPolicyType)
+				properties = policyType.policy.properties.properties
+				node_name = policyType.name
+			}
 			if (model instanceof GetPropertyBodyImpl)
-				for (prop:node.node.properties.properties){
-					proposals.add(module + '/' + node.name + "." + prop.name)
+				for (prop:properties){
+					proposals.add(module + '/' + node_name + "." + prop.name)
 				}
 			else if (model instanceof GetAttributeBodyImpl)
-				for (attr:node.node.attributes.attributes){
-					proposals.add(module + '/' + node.name + "." + attr.name)
+				for (attr:attributes){
+					proposals.add(module + '/' + node_name + "." + attr.name)
 				}
 		}
 		
@@ -1190,7 +1329,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def completeGetAttributeOrPropertyFunction_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val String module = getModule(model)
 		//Get entity in this GetProperty body. If null, return
-		val ENodeType node = getEntityType(model.eContainer as EFunction)
+		val ENodeType node = getEntityType(model.eContainer as EFunction) as ENodeType
 		
 		if (node === null){
 			return
