@@ -11,11 +11,8 @@
 package org.sodalite.dsl.kb_reasoner_client.json;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Map.Entry;
 
-import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinition;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,13 +23,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class TypeJsonDeserializer extends JsonDeserializer<SuperType> {
+public class OperationDefinitionJsonDeserializer extends JsonDeserializer<OperationDefinition> {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	protected JavaType nodeType;
-	protected SuperType type;
 
 	@Override
-	public SuperType deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+	public OperationDefinition deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
 		JsonNode node = mapper.readTree(jsonParser);
 
@@ -40,25 +36,13 @@ public class TypeJsonDeserializer extends JsonDeserializer<SuperType> {
 			return null;
 
 		ObjectNode objectNode = (ObjectNode) node;
-		SuperType type = null;
-		try {
-			type = new SuperType();
-			if (objectNode.fields().hasNext()) {
-				Entry<String, JsonNode> entry = objectNode.fields().next();
-				if (entry.getKey() != null) {
-					type.setUri(new URI(entry.getKey()));
-				}
-				if (entry.getValue() != null && entry.getValue().get("label") != null) {
-					type.setLabel(entry.getValue().get("label").asText());
-				}
-				if (entry.getValue() != null && entry.getValue().get("namespace") != null)
-					type.setModule(entry.getValue().get("namespace").asText());
-			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+		OperationDefinition operation = new OperationDefinition();
+
+		if (objectNode.get("description") != null) {
+			String description = objectNode.get("description").asText();
+			operation.setDescription(description);
 		}
 
-		return type;
+		return operation;
 	}
-
 }

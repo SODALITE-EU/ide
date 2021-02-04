@@ -17,7 +17,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.emf.common.util.URI
 import org.sodalite.dsl.aADM.ENodeTemplate
-import org.sodalite.dsl.aADM.EPropertyAssignment
 import java.util.HashMap
 import java.util.Map
 import org.sodalite.dsl.aADM.ERequirementAssignment
@@ -50,6 +49,30 @@ import org.sodalite.dsl.rM.EPRIMITIVE_TYPE
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EEntity
+import org.sodalite.dsl.rM.EPropertyAssignment
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.EExtendedTriggerCondition
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.EActivityDefinition
+import org.sodalite.dsl.rM.EConditionClauseDefinition
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+import org.sodalite.dsl.rM.EAssertionDefinition
+import org.sodalite.dsl.rM.EConstraint
+import org.sodalite.dsl.rM.EValid_Values
+import org.sodalite.dsl.rM.EMinLength
+import org.sodalite.dsl.rM.EGreaterThan
+import org.sodalite.dsl.rM.EEqual
+import org.sodalite.dsl.rM.EGreaterOrEqual
+import org.sodalite.dsl.rM.ELessThan
+import org.sodalite.dsl.rM.ELessOrEqual
+import org.sodalite.dsl.rM.ELength
+import org.sodalite.dsl.rM.EMaxLength
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.aADM.EPolicyDefinition
 
 /**
  * Generates code from your model files on save.
@@ -57,32 +80,38 @@ import org.sodalite.dsl.rM.EEntity
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class AADMGenerator extends AbstractGenerator {
-	var int template_counter = 1
+	var int node_template_counter = 1
+	var int policy_template_counter = 1
 	var int input_counter = 1
 	var int property_counter = 1
 	var int attribute_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int parameter_counter = 1
+	var int trigger_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<EAttributeAssignment, Integer> attribute_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
 	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
+	var Map<ETriggerDefinition, Integer> trigger_numbers
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		template_counter = 1
+		node_template_counter = 1
+		policy_template_counter = 1
 		input_counter = 1
 		property_counter = 1
 		attribute_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
 		parameter_counter = 1
+		trigger_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		attribute_numbers = new HashMap<EAttributeAssignment, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
 		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
+		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileAADM (resource))
@@ -126,6 +155,10 @@ class AADMGenerator extends AbstractGenerator {
 	«p.compile»
 	«ENDFOR»
 	
+	«FOR t:r.allContents.toIterable.filter(ETriggerDefinition)»
+	«t.compile»
+	«ENDFOR»
+	
 	«FOR a:r.allContents.toIterable.filter(EAttributeAssignment)»
 	«a.compile»
 	«ENDFOR»
@@ -139,6 +172,10 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 
 	«FOR f:r.allContents.toIterable.filter(ENodeTemplate)»
+	«f.compile»
+	«ENDFOR»
+	
+	«FOR f:r.allContents.toIterable.filter(EPolicyDefinition)»
 	«f.compile»
 	«ENDFOR»
 
@@ -240,7 +277,7 @@ class AADMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(ENodeTemplate n) '''
-	:Template_«template_counter++»
+	:Template_«node_template_counter++»
 	  rdf:type exchange:Template ;
 	  «IF n.node.description !== null»
 	  exchange:description '«processDescription(n.node.description)»' ;
@@ -278,6 +315,50 @@ class AADMGenerator extends AbstractGenerator {
 	.  
 	'''
 	
+	def compile(EPolicyDefinition p) '''
+	
+	«IF p.policy.targets !== null»
+	«putParameterNumber(p, "targets", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  «FOR target:(p.policy.targets.target)»
+	  «IF target.module !== null»
+	  exchange:listValue '«target.module»/«target.id»' ; 
+	  «ELSE»
+	  exchange:listValue "«target.id»" ; 
+	  «ENDIF»
+	  «ENDFOR»
+	.
+	«ENDIF»	
+	
+	:PolicyTemplate_«policy_template_counter++»
+	  rdf:type exchange:Template ;
+	  exchange:name "«p.name»" ;
+	  «IF p.policy.description !== null»
+	  exchange:description '«processDescription(p.policy.description)»' ;
+	  «ENDIF»
+	  «IF p.policy.type.module !== null»
+	  exchange:type '«p.policy.type.module»/«p.policy.type.type»' ;  
+	  «ELSE»
+	  exchange:type '«p.policy.type.type»' ;  
+	  «ENDIF»
+	  «IF p.policy.properties !== null»
+	  «FOR prop:p.policy.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(prop)» ;
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF p.policy.targets !== null»
+	  exchange:targets :Parameter_«getParameterNumber(p, "targets")» ;
+	  «ENDIF»
+	  «IF p.policy.triggers !== null»
+	  «FOR t:p.policy.triggers.triggers»
+	  exchange:triggers :Trigger_«trigger_numbers.get(t)» ; 
+  	  «ENDFOR»
+  	  «ENDIF»
+	.  
+	'''	
+	
+	
 	def compile (EPropertyAssignment p) '''
 	«property_numbers.put(p, property_counter)»
 	:Property_«property_counter++»
@@ -301,6 +382,347 @@ class AADMGenerator extends AbstractGenerator {
 	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
 	.
+	'''
+	
+	def compile (ETriggerDefinition t) '''
+	«putParameterNumber(t, "event", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "event" ;
+	  exchange:value '«t.trigger.event»' ;
+	.
+	  «IF t.trigger.target_filter !== null»
+	«t.trigger.target_filter.compile("target_filter")»
+	  «ENDIF»
+	  «IF t.trigger.condition !== null»
+	«t.trigger.condition.compile("condition")»  
+	  «ENDIF»
+	
+	«FOR action: t.trigger.action.list»
+	«action.compile("action")»
+	«ENDFOR»
+	
+	«trigger_numbers.put(t, trigger_counter)»
+	:Trigger_«trigger_counter++»
+	  rdf:type exchange:Trigger ;
+	  exchange:name "«t.name»" ;
+	  «IF t.trigger.description !== null»
+	  exchange:description '«processDescription(t.trigger.description)»' ;
+	«ENDIF»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t, "event")» ;
+	  «IF t.trigger.target_filter !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.target_filter, "name")» ;
+	  «ENDIF»
+	  «IF t.trigger.condition !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")» ;
+	  «ENDIF»
+	  «FOR action: t.trigger.action.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(action, "name")» ;
+	  «ENDFOR»
+	  .
+	'''	
+	
+	def compile (EExtendedTriggerCondition etc, String name)'''
+	
+	  «IF etc.constraint !== null»
+	«etc.constraint.compile()»
+	  «ENDIF»
+	
+	  «IF etc.constraint !== null»
+	  «putParameterNumber(etc, "constraint", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "constraint" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc.constraint, "name")» ;
+	  .
+	  «ENDIF»
+	  «putParameterNumber(etc, "period", parameter_counter)»
+	  «IF etc.period !== null»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "period" ;
+	  exchange:value '«etc.period»' ;
+	  .
+	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  «putParameterNumber(etc, "evaluations", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "evaluations" ;
+	  exchange:value «etc.evaluations.value» ;
+	  .
+	  «ENDIF»
+	  «IF etc.method !== null»
+	  «putParameterNumber(etc, "method", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "method" ;
+	  exchange:value '«etc.method»' ;
+	  .
+	  «ENDIF»
+	
+	«putParameterNumber(etc, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF etc.constraint !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "constraint")» ;
+  	  «ENDIF»
+	  «IF etc.period !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "period")» ;
+  	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "evaluations")» ;
+  	  «ENDIF»
+	  «IF etc.method !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "method")» ;
+  	  «ENDIF»
+	.
+	'''
+	
+	def compile(EEvenFilter ef, String name) '''
+	«putParameterNumber(ef, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;  
+	  exchange:value '«trim(ef.node.compile())»' ;
+	.
+	
+	«putParameterNumber(ef, "requirement", parameter_counter)»
+	«IF ef.requirement !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "requirement" ;  
+	  exchange:value '«trim(ef.requirement.compile())»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "capability", parameter_counter)»
+	«IF ef.capability !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "capability" ;  
+	  exchange:value '«trim(ef.capability.compile())»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "node")» ;
+	  «IF ef.requirement !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "requirement")» ;
+	  «ENDIF»
+	  «IF ef.capability !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "capability")» ;
+	  «ENDIF»	  
+	.
+	'''
+	
+	def compile(EActivityDefinition ad, String name) '''
+	
+	«IF ad instanceof ECallOperationActivityDefinition»
+	«(ad as ECallOperationActivityDefinition).compile()»
+	«ENDIF»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "call_operation")» ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile(ECallOperationActivityDefinition ad) '''
+	«putParameterNumber(ad, "operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operation" ;
+	  exchange:value '«trim(ad.operation.name.compile())»' ;
+	.
+	
+	«putParameterNumber(ad, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «IF ad.operation.inputs !== null»
+	  «FOR i:ad.operation.inputs.properties»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
+	  «ENDFOR»
+	  «ENDIF»
+	.
+	
+	«putParameterNumber(ad, "call_operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "call_operation" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "operation")» ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "inputs")» ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile(EConditionClauseDefinition ccd) '''
+	«IF ccd instanceof EConditionClauseDefinitionNOT»
+	«(ccd as EConditionClauseDefinitionNOT).not.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAND»
+	«(ccd as EConditionClauseDefinitionAND).and.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionOR»
+	«(ccd as EConditionClauseDefinitionOR).or.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAssert»
+	«FOR assertion:ccd.assertions»
+	«assertion.compile()»
+	«ENDFOR»
+	«ENDIF»
+	
+	«IF getName(ccd) !== null»
+	«putParameterNumber(ccd, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«getName(ccd)»" ;
+	  «IF getChild(ccd) instanceof EConditionClauseDefinitionAssert»
+	  «FOR assertion:(getChild(ccd) as EConditionClauseDefinitionAssert).assertions»
+	  exchange:hasParameter :Parameter_«getParameterNumber(assertion, "name")» ;
+	  «ENDFOR»
+	  «ELSE»
+	  exchange:hasParameter :Parameter_«getParameterNumber(getChild(ccd), "name")» ;
+	  «ENDIF»
+	.
+	«ENDIF»
+	'''
+	
+	def getName (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return "not"
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return "and"
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return "or"
+		else
+			return null
+	}
+	
+	def getChild (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return (ccd as EConditionClauseDefinitionNOT).not
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return (ccd as EConditionClauseDefinitionAND).and
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return (ccd as EConditionClauseDefinitionOR).or
+		else
+			return null
+	}
+	
+	def compile(EAssertionDefinition ad) '''
+	«FOR constraint:ad.constraints.list»
+	  «constraint.compile()»
+	«ENDFOR»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«ad.attribute_name»" ;
+	  «FOR constraint:ad.constraints.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(constraint, "name")» ;
+	  «ENDFOR»
+	.
+	'''
+	
+	def compile (EConstraint c) '''
+	«IF c instanceof EValid_Values»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "valid_values" ;
+	  «FOR v:(c.^val.list)»
+	  exchange:listValue "«trim(v.compile)»" ;
+	  «ENDFOR»
+	.		
+	«ENDIF»
+	«IF c instanceof EMinLength»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "min_length" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EGreaterThan»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "greater_than" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "equal" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EGreaterOrEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "greater_or_equal" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELessThan»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "less_than" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELessOrEqual»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "less_or_equal" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof ELength»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "length" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	«IF c instanceof EMaxLength»
+	«putParameterNumber(c, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "max_length" ;
+	  exchange:value "«trim(c.^val.compile)»" ;
+	.		
+	«ENDIF»
+	'''
+	
+	def compile (EPREFIX_REF r) '''
+	«IF r instanceof EPREFIX_TYPE»
+	  «(r as EPREFIX_TYPE).compile»  
+	«ELSEIF r instanceof EPREFIX_ID»
+	  «(r as EPREFIX_ID).compile»
+	«ENDIF»
+	'''
+	
+	def compile (EPREFIX_ID t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.id»  
+	«ELSE»
+	  «t.id»
+	«ENDIF»
 	'''
 	
 	def compile (ESingleValue v) '''
@@ -386,16 +808,24 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def compile (ERequirementAssignment r) '''
-	«requirement_numbers.put(r, requirement_counter)»
-	:Requirement_«requirement_counter++»
-	  rdf:type exchange:Requirement ;
-	  exchange:name "«r.name»" ;
+	«putParameterNumber(r, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;
 	  «IF r.node.module !== null»
 	  exchange:value '«r.node.module»/«r.node.id»' ;  
 	  «ELSE»
 	  exchange:value '«r.node.id»' ;  
 	  «ENDIF»  
+	  .
+	
+	«requirement_numbers.put(r, requirement_counter)»
+	:Requirement_«requirement_counter++»
+	  rdf:type exchange:Requirement ;
+	  exchange:name "«r.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "node")» ;
 	.
+	
 	'''
 	
 	def compile (ECapabilityAssignment c) '''

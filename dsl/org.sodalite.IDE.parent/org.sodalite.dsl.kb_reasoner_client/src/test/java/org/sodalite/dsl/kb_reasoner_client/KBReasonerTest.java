@@ -28,6 +28,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
@@ -37,11 +38,13 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -62,12 +65,15 @@ class KBReasonerTest {
 
 	private String aadmURI = null;
 
+	private boolean AIM_Enabled = false;
+
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
 		Properties credentials = readCredentials();
-		kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
-				client_secret);
+		if (AIM_Enabled)
+			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
+					client_secret);
 	}
 
 	private Properties readCredentials() throws IOException {
@@ -125,6 +131,24 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetPolicyTypes() throws Exception {
+		List<String> modules = Arrays.asList("radon");
+		ReasonerData<Type> policyTypes = kbclient.getPolicyTypes(modules);
+		assertFalse(policyTypes.getElements().isEmpty());
+		policyTypes.getElements().stream().forEach(type -> System.out
+				.println("Policy type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetTemplates() throws Exception {
+		List<String> modules = Arrays.asList("snow");
+		TemplateData templates = kbclient.getTemplates(modules);
+		assertFalse(templates.getElements().isEmpty());
+		templates.getElements().stream().forEach(template -> System.out.println(
+				"Template: " + (template.getModule() != null ? template.getModule() : "") + template.getLabel()));
+	}
+
+	@Test
 	void testGetModules() throws Exception {
 		ModuleData modules = kbclient.getModules();
 		assertFalse(modules.getElements().isEmpty());
@@ -148,6 +172,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetTypeInterfaces() throws Exception {
+		String resourceId = "tosca.nodes.SoftwareComponent";
 		InterfaceDefinitionData interfaces = kbclient.getTypeInterfaces(resourceId);
 		assertFalse(interfaces.getElements().isEmpty());
 		System.out.println("Interfaces for resource: " + resourceId);
@@ -156,7 +181,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetTypeCapabilities() throws Exception {
-		String resourceId = "openstack/sodalite.nodes.OpenStack.VM";
+		String resourceId = "tosca.nodes.SoftwareComponent";
 		CapabilityDefinitionData capabilities = kbclient.getTypeCapabilities(resourceId);
 		assertFalse(capabilities.getElements().isEmpty());
 		System.out.println("Capabilities for resource: " + resourceId);
@@ -165,7 +190,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetTypeRequirements() throws Exception {
-		String resourceId = "openstack/sodalite.nodes.OpenStack.VM";
+		String resourceId = "tosca.nodes.SoftwareComponent";
 		RequirementDefinitionData requirements = kbclient.getTypeRequirements(resourceId);
 		assertFalse(requirements.getElements().isEmpty());
 		System.out.println("Requirements for resource: " + resourceId);
@@ -363,5 +388,30 @@ class KBReasonerTest {
 		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
 		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
 		assertNotNull(status);
+	}
+
+	@Test
+	void testGetCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement() throws Exception {
+		String nodeTemplate = "radon/openstack_vm";
+		String requirementName = "host";
+		CapabilityAssignmentData capabilities = kbclient
+				.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeTemplate, requirementName);
+		assertNotNull(capabilities);
+	}
+
+	@Test
+	void testGetCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement() throws Exception {
+		String nodeType = "docker/sodalite.nodes.DockerizedComponent";
+		String requirementName = "network";
+		CapabilityDefinitionData capabilities = kbclient
+				.getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType, requirementName);
+		assertNotNull(capabilities);
+	}
+
+	@Test
+	void testGetOperationsInInterface() throws Exception {
+		String _interface = "tosca.interfaces.node.lifecycle.Standard";
+		OperationDefinitionData operations = kbclient.getOperationsInInterface(_interface);
+		assertNotNull(operations);
 	}
 }

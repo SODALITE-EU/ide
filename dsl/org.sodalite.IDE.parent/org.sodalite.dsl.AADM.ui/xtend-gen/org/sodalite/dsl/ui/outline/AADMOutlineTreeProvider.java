@@ -9,11 +9,11 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESTRING;
 
 /**

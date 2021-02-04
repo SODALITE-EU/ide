@@ -21,7 +21,7 @@ package org.sodalite.dsl.rM;
  * @model
  * @generated
  */
-public interface EPREFIX_ID extends EEntityReference
+public interface EPREFIX_ID extends EEntityReference, EPREFIX_REF
 {
   /**
    * Returns the value of the '<em><b>Module</b></em>' attribute.

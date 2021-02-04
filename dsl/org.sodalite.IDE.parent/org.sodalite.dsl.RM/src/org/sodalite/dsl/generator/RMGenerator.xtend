@@ -40,7 +40,6 @@ import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.ECapabilityType
 import org.sodalite.dsl.rM.ERelationshipType
-import org.sodalite.dsl.rM.ECapabilityTypeRef
 import java.io.File
 import org.sodalite.dsl.rM.ESingleValue
 import org.sodalite.dsl.rM.EAlphaNumericValue
@@ -53,6 +52,25 @@ import org.sodalite.dsl.rM.EDataTypeName
 import org.sodalite.dsl.rM.EEntityReference
 import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.rM.EPolicyType
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.EConditionClauseDefinition
+import org.sodalite.dsl.rM.EActivityDefinition
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.EPropertyAssignment
+import org.sodalite.dsl.rM.ELIST
+import org.sodalite.dsl.rM.EMAP
+import org.sodalite.dsl.rM.GetInput
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+import org.sodalite.dsl.rM.EAssertionDefinition
+import org.sodalite.dsl.rM.ETargetType
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.EExtendedTriggerCondition
+import org.sodalite.dsl.rM.EInterfaceType
 
 /**
  * Generates code from your model files on save.
@@ -70,12 +88,16 @@ class RMGenerator extends AbstractGenerator {
 	var int relationship_counter = 1
 	var int parameter_counter = 1
 	var int interface_counter = 1
+	var int interface_type_counter = 1
+	var int policy_counter = 1
+	var int trigger_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
 	var Map<Object, Map<String,Integer>> parameter_numbers
+	var Map<ETriggerDefinition, Integer> trigger_numbers
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		data_type_counter = 1
@@ -88,12 +110,16 @@ class RMGenerator extends AbstractGenerator {
 		relationship_counter = 1
 		parameter_counter = 1
 		interface_counter = 1
+		interface_type_counter = 1
+		policy_counter = 1
+		trigger_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
 		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
 		interface_numbers = new HashMap<EInterfaceDefinition, Integer>()
+		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileRM (resource))
@@ -125,7 +151,7 @@ class RMGenerator extends AbstractGenerator {
 	«FOR c:r.allContents.toIterable.filter(EConstraint)»
 	«c.compile»
 	«ENDFOR»
-		
+	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 	«p.compile»
 	«ENDFOR»
@@ -144,6 +170,14 @@ class RMGenerator extends AbstractGenerator {
 
  	«FOR p:r.allContents.toIterable.filter(EPropertyDefinition)»
 	«p.compile»
+	«ENDFOR»
+	
+ 	«FOR p:r.allContents.toIterable.filter(EPropertyAssignment)»
+	«p.compile»
+	«ENDFOR»
+	
+	«FOR t:r.allContents.toIterable.filter(ETriggerDefinition)»
+	«t.compile»
 	«ENDFOR»
 	
  	«FOR p:r.allContents.toIterable.filter(EAttributeDefinition)»
@@ -176,6 +210,14 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR rt:r.allContents.toIterable.filter(ERelationshipType)»
 	«rt.compile»
+	«ENDFOR»
+	
+	«FOR p:r.allContents.toIterable.filter(EPolicyType)»
+	«p.compile»
+	«ENDFOR»
+	
+	«FOR i:r.allContents.toIterable.filter(EInterfaceType)»
+	«i.compile»
 	«ENDFOR»
 	'''
 	
@@ -365,6 +407,17 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF i.interface.inputs !== null»
+	«putParameterNumber(i, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
 	«IF i.interface.operations !== null»
 	«putParameterNumber(i, "operations", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -383,6 +436,9 @@ class RMGenerator extends AbstractGenerator {
 	  «IF i.interface.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "type")» ;
 	  «ENDIF»
+	  «IF i.interface.inputs !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «ENDIF»
 	  «IF i.interface.operations !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
 	  «ENDIF»
@@ -394,6 +450,9 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(o, "inputs", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
+	  «IF o.operation.description !== null»
+	  exchange:description '«processDescription(o.operation.description)»' ;
+	  «ENDIF»
 	  exchange:name "inputs" ;
 	  «FOR in:(o.operation.inputs.inputs)»
 	  exchange:hasParameter :Parameter_«getParameterNumber(in, "name")» ;
@@ -508,46 +567,215 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EParameterDefinition p) '''
+	«IF p.parameter.type !== null»
+	«putParameterNumber(p, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(p.parameter.type.compile)»' ;  
+	.
+	«ENDIF»
+	
 	«IF p.parameter.value !== null»
 	«putParameterNumber(p, "value", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "value" ;  
+	  exchange:name "value" ;
+	  «IF p.parameter.value instanceof EFunction»
+	  «IF p.parameter.value instanceof GetInput»
+	  exchange:value "{ get_input: «(p.parameter.value as GetInput).input.name» }" ;
+	  «ELSEIF p.parameter.value instanceof GetProperty || p.parameter.value instanceof GetAttribute»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
+	  «ENDIF»
+	  «ELSEIF p.parameter.value instanceof ESingleValue»
+	  exchange:value "«trim((p.parameter.value as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
 	.
-	«ENDIF»		
+	«ENDIF»
 	
 	«IF p.parameter.^default !== null»
 	«putParameterNumber(p, "default", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "default" ;  
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ; 
+	  exchange:name "value" ;
+	  «IF p.parameter.^default instanceof EFunction»
+	  «IF p.parameter.^default instanceof GetInput»
+	  exchange:value "{ get_input: «(p.parameter.^default as GetInput).input.name» }" ;
+	  «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
+	  «ENDIF»
+	  «ELSEIF p.parameter.^default instanceof ESingleValue»
+	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
 	.
-	«ENDIF»	
+	«ENDIF»
 	
 	«putParameterNumber(p, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "«p.name»" ;
 	  «IF p.parameter.type !== null»
-	  exchange:value '«p.parameter.type»' ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ; 
 	  «ENDIF»
 	  «IF p.parameter.value !== null»
-	  «IF p.parameter.value instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "value")» ;
-	  «ELSEIF p.parameter.value instanceof ESingleValue»
-	  exchange:value '«trim((p.parameter.value as ESingleValue).compile.toString)»' ;	  
-	  «ENDIF»
 	  «ENDIF»
 	  «IF p.parameter.^default !== null»
-	  «IF p.parameter.^default instanceof EFunction»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
-	  «ELSEIF p.parameter.^default instanceof ESingleValue»
-	  exchange:value '«trim((p.parameter.^default as ESingleValue).compile.toString)»' ;	  
-	  «ENDIF»	  
 	  «ENDIF»  
 	.	
+	'''
+	
+	def compile(EConditionClauseDefinition ccd) '''
+	«IF ccd instanceof EConditionClauseDefinitionNOT»
+	«(ccd as EConditionClauseDefinitionNOT).not.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAND»
+	«(ccd as EConditionClauseDefinitionAND).and.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionOR»
+	«(ccd as EConditionClauseDefinitionOR).or.compile()»
+	«ELSEIF ccd instanceof EConditionClauseDefinitionAssert»
+	«FOR assertion:ccd.assertions»
+	«assertion.compile()»
+	«ENDFOR»
+	«ENDIF»
+	
+	«IF getName(ccd) !== null»
+	«putParameterNumber(ccd, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«getName(ccd)»" ;
+	  «IF getChild(ccd) instanceof EConditionClauseDefinitionAssert»
+	  «FOR assertion:(getChild(ccd) as EConditionClauseDefinitionAssert).assertions»
+	  exchange:hasParameter :Parameter_«getParameterNumber(assertion, "name")» ;
+	  «ENDFOR»
+	  «ELSE»
+	  exchange:hasParameter :Parameter_«getParameterNumber(getChild(ccd), "name")» ;
+	  «ENDIF»
+	.
+	«ENDIF»
+	'''
+	
+	def getName (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return "not"
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return "and"
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return "or"
+		else
+			return null
+	}
+	
+	def getChild (EConditionClauseDefinition ccd){
+		if (ccd instanceof EConditionClauseDefinitionNOT)
+			return (ccd as EConditionClauseDefinitionNOT).not
+		else if (ccd instanceof EConditionClauseDefinitionAND)
+			return (ccd as EConditionClauseDefinitionAND).and
+		else if (ccd instanceof EConditionClauseDefinitionOR)
+			return (ccd as EConditionClauseDefinitionOR).or
+		else
+			return null
+	}
+	
+	def compile(EAssertionDefinition ad) '''
+	«FOR constraint:ad.constraints.list»
+	  «constraint.compile()»
+	«ENDFOR»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«ad.attribute_name»" ;
+	  «FOR constraint:ad.constraints.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(constraint, "name")» ;
+	  «ENDFOR»
+	.
+	'''
+	
+	def compile(EActivityDefinition ad, String name) '''
+	
+	«IF ad instanceof ECallOperationActivityDefinition»
+	«(ad as ECallOperationActivityDefinition).compile()»
+	«ENDIF»
+	
+	«putParameterNumber(ad, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "call_operation")» ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile(ECallOperationActivityDefinition ad) '''
+	«putParameterNumber(ad, "operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operation" ;
+	  exchange:value '«trim(ad.operation.name.compile())»' ;
+	.
+	
+	«putParameterNumber(ad, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «IF ad.operation.inputs !== null»
+	  «FOR i:ad.operation.inputs.properties»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
+	  «ENDFOR»
+	  «ENDIF»
+	.
+	
+	«putParameterNumber(ad, "call_operation", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "call_operation" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "operation")» ;
+	  «IF ad instanceof ECallOperationActivityDefinition»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ad, "inputs")» ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile(EEvenFilter ef, String name) '''
+	«putParameterNumber(ef, "node", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "node" ;  
+	  exchange:value '«trim(ef.node.compile())»' ;
+	.
+	
+	«putParameterNumber(ef, "requirement", parameter_counter)»
+	«IF ef.requirement !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "requirement" ;  
+	  exchange:value '«trim(ef.requirement.compile())»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "capability", parameter_counter)»
+	«IF ef.capability !== null»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "capability" ;  
+	  exchange:value '«trim(ef.capability.compile())»' ;
+	.
+	«ENDIF»
+	
+	«putParameterNumber(ef, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "node")» ;
+	  «IF ef.requirement !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "requirement")» ;
+	  «ENDIF»
+	  «IF ef.capability !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(ef, "capability")» ;
+	  «ENDIF»	  
+	.
 	'''
 
 	def compile(GetProperty p) '''
@@ -679,7 +907,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_target_types" ;
-	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ECapabilityTypeRef>)»
+	  «FOR entry:(r.relationship.valid_target_types.targetTypes as EObjectContainmentEList<ETargetType>)»
 	  «IF entry.name.module !== null»
 	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
 	  «ELSE»
@@ -777,6 +1005,93 @@ class RMGenerator extends AbstractGenerator {
 	.  
 	'''
 	
+	def compile (EPolicyType p) '''
+	
+	«IF p.policy.targets !== null»
+	«putParameterNumber(p, "targets", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  «FOR entry:(p.policy.targets.targetTypes as EObjectContainmentEList<ETargetType>)»
+	  «IF entry.name.module !== null»
+	  exchange:listValue '«entry.name.module»/«entry.name.type»' ; 
+	  «ELSE»
+	  exchange:listValue "«entry.name.type»" ; 
+	  «ENDIF»
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	:PolicyType_«policy_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«p.name»" ;
+	  «IF p.policy.description !== null»
+	  exchange:description '«processDescription(p.policy.description)»' ;
+	  «ENDIF»
+	  «IF p.policy.superType.module !== null»
+	  exchange:derivesFrom '«p.policy.superType.module»/«p.policy.superType.type»' ;
+	  «ELSE»
+	  exchange:derivesFrom '«p.policy.superType.type»' ;
+	  «ENDIF»
+	  «IF p.policy.properties !== null»
+	  «FOR prop:p.policy.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(prop)» ;
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF p.policy.targets !== null»
+	  exchange:targets :Parameter_«getParameterNumber(p, "targets")» ;
+	  «ENDIF»
+	  «IF p.policy.triggers !== null»
+	  «FOR t:p.policy.triggers.triggers»
+	  exchange:triggers :Trigger_«trigger_numbers.get(t)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	.
+  	'''
+  	
+	def compile (EInterfaceType i) '''
+	
+	«IF i.interface.inputs !== null»
+	«putParameterNumber(i, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
+	«IF i.interface.operations !== null»
+	«putParameterNumber(i, "operations", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operations" ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
+	  «ENDFOR»	  
+	.
+	«ENDIF»	
+	
+	:InterfaceType_«interface_type_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«i.name»" ;
+	  «IF i.interface.description !== null»
+	  exchange:description '«processDescription(i.interface.description)»' ;
+	  «ENDIF»
+	  «IF i.interface.superType.module !== null»
+	  exchange:derivesFrom '«i.interface.superType.module»/«i.interface.superType.type»' ;
+	  «ELSE»
+	  exchange:derivesFrom '«i.interface.superType.type»' ;
+	  «ENDIF»
+	  «IF i.interface.inputs !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «ENDIF»
+	  «IF i.interface.operations !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
+	  «ENDIF»
+	.
+  	'''
+	
 	def compile (EPropertyDefinition p) '''
 	«IF p.property.type !== null»
 	«putParameterNumber(p, "type", parameter_counter)»
@@ -801,9 +1116,13 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF p.property.^default !== null»
 	  «IF p.property.^default instanceof EFunction»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p, "default")» ;
-	  «ELSE»
-	  exchange:value '«trim((p.property.^default as ESingleValue).compile.toString)»' ;
+	  «IF p.property.^default instanceof GetInput»
+	  exchange:value "{ get_input: «(p.property.^default as GetInput).input.name» }" ;
+	   «ELSEIF p.property.^default instanceof GetProperty || p.property.^default instanceof GetAttribute»
+	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
+	   «ENDIF»
+	  «ELSEIF p.property.^default instanceof ESingleValue»
+	  exchange:value "«trim((p.property.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
 	  «ENDIF» 
 	.
@@ -872,6 +1191,128 @@ class RMGenerator extends AbstractGenerator {
 	.
 	'''
 	
+	def compile (EPropertyAssignment p) '''
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«p.name»" ;
+	  «IF p.value instanceof ELIST»
+	  		«FOR entry:(p.value as ELIST).list»
+	  		exchange:listValue "«trim(entry.compile().toString)»" ;
+	  		«ENDFOR»
+	  «ELSEIF p.value instanceof EMAP»
+	    «FOR entry:(p.value as EMAP).map»
+	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
+	    «ENDFOR»	  
+	  «ELSEIF p.value instanceof EFunction»
+	  	«IF p.value instanceof GetInput»
+	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
+	  	«ELSEIF p.value instanceof GetProperty || p.value instanceof GetAttribute»
+	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
+	  	«ENDIF»
+	  «ELSEIF p.value instanceof ESingleValue»
+	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
+	  «ENDIF»
+	.
+	'''
+	
+	def compile (ETriggerDefinition t) '''
+	«putParameterNumber(t, "event", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "event" ;
+	  exchange:value '«t.trigger.event»' ;
+	.
+	  «IF t.trigger.target_filter !== null»
+	«t.trigger.target_filter.compile("target_filter")»
+	  «ENDIF»
+	  
+	  «IF t.trigger.condition !== null»
+	«t.trigger.condition.compile("condition")»  
+	  «ENDIF»
+	
+	«FOR action: t.trigger.action.list»
+	«action.compile("action")»
+	«ENDFOR»
+	
+	«trigger_numbers.put(t, trigger_counter)»
+	:Trigger_«trigger_counter++»
+	  rdf:type exchange:Trigger ;
+	  exchange:name "«t.name»" ;
+	  «IF t.trigger.description !== null»
+	  exchange:description '«processDescription(t.trigger.description)»' ;
+	«ENDIF»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t, "event")» ;
+	  «IF t.trigger.target_filter !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.target_filter, "name")» ;
+	  «ENDIF»
+	  «IF t.trigger.condition !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(t.trigger.condition, "name")» ;
+	  «ENDIF»
+	  «FOR action: t.trigger.action.list»
+	  exchange:hasParameter :Parameter_«getParameterNumber(action, "name")» ;
+	  «ENDFOR»
+	  .
+	'''
+	
+	def compile (EExtendedTriggerCondition etc, String name)'''
+	
+	  «IF etc.constraint !== null»
+	«etc.constraint.compile()»
+	  «ENDIF»
+	
+	  «IF etc.constraint !== null»
+	  «putParameterNumber(etc, "constraint", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "constraint" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc.constraint, "name")» ;
+	  .
+	  «ENDIF»
+	  «putParameterNumber(etc, "period", parameter_counter)»
+	  «IF etc.period !== null»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "period" ;
+	  exchange:value «etc.period» ;
+	  .
+	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  «putParameterNumber(etc, "evaluations", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "evaluations" ;
+	  exchange:value «etc.evaluations.value» ;
+	  .
+	  «ENDIF»
+	  «IF etc.method !== null»
+	  «putParameterNumber(etc, "method", parameter_counter)»
+	  :Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "method" ;
+	  exchange:value «etc.method» ;
+	  .
+	  «ENDIF»
+	
+	«putParameterNumber(etc, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "«name»" ;
+	  «IF etc.constraint !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "constraint")» ;
+  	  «ENDIF»
+	  «IF etc.period !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "period")» ;
+  	  «ENDIF»
+	  «IF etc.evaluations !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "evaluations")» ;
+  	  «ENDIF»
+	  «IF etc.method !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(etc, "method")» ;
+  	  «ENDIF»
+	.
+	'''
+	
 	def compile (EAttributeDefinition a) '''
 	«IF a.attribute.type !== null»
 	«putParameterNumber(a, "type", parameter_counter)»
@@ -889,10 +1330,14 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF a.attribute.^default !== null»
 	  «IF a.attribute.^default instanceof EFunction»
-	  exchange:hasParameter :Parameter_«getParameterNumber(a, "default")» ;
-	  «ELSE»
-	  exchange:value '«trim((a.attribute.^default as ESingleValue).compile.toString)»' ;
-	  «ENDIF»	  
+	  	«IF a.attribute.^default instanceof GetInput»
+	  	exchange:value "{ get_input: «(a.attribute.^default as GetInput).input.name» }" ;
+	  	«ELSEIF a.attribute.^default instanceof GetProperty || a.attribute.^default instanceof GetAttribute»
+	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
+	  	«ENDIF»
+	  «ELSEIF a.attribute.^default instanceof ESingleValue»
+	  	exchange:value "«trim((a.attribute.^default as ESingleValue).compile().toString)»" ;
+	  «ENDIF»  
 	  «ENDIF» 
 	.
 	«ENDIF»
@@ -975,6 +1420,14 @@ class RMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compile (EPREFIX_REF r) '''
+	«IF r instanceof EPREFIX_TYPE»
+	  «(r as EPREFIX_TYPE).compile»  
+	«ELSEIF r instanceof EPREFIX_ID»
+	  «(r as EPREFIX_ID).compile»
+	«ENDIF»
+	'''
+	
 	def compile (EEntityReference t) '''
 	«IF t instanceof EPREFIX_TYPE»
 	  «(t as EPREFIX_TYPE).compile»
@@ -994,6 +1447,14 @@ class RMGenerator extends AbstractGenerator {
 	  «t.module»/«t.type»  
 	«ELSE»
 	  «t.type»
+	«ENDIF»
+	'''
+	
+	def compile (EPREFIX_ID t) '''
+	«IF t.module !== null»
+	  «t.module»/«t.id»  
+	«ELSE»
+	  «t.id»
 	«ENDIF»
 	'''
 	

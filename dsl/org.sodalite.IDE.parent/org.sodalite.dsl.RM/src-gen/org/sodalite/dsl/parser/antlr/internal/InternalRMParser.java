@@ -21,82 +21,101 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalRMParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Relationship_types", "Valid_source_types", "Valid_target_types", "Capability_types", "Greater_or_equal", "Interface_types", "Artifact_types", "Implementation", "Get_attribute", "Less_or_equal", "Relative_path", "Capabilities", "Dependencies", "Derived_from", "Entry_schema", "Get_property", "Greater_than", "Policy_types", "Relationship", "Requirements", "Valid_values", "Constraints", "Description", "Occurrences", "Attributes", "Capability", "Data_types", "Interfaces", "Max_length", "Min_length", "Node_types", "Operations", "Properties", "Attribute", "Get_input", "Less_than", "Mime_type", "File_ext", "In_range", "Property", "Required", "Default", "Primary", "Req_cap", "Entity", "Import", "Inputs", "Length", "Module", "Status", "Equal", "Value", "Node", "Type", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LeftSquareBracket", "RightSquareBracket", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_BOOLEAN", "RULE_ENTITY", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Relationship_types", "Valid_source_types", "Valid_target_types", "Capability_types", "Greater_or_equal", "Interface_types", "Artifact_types", "Call_operation", "Implementation", "Get_attribute", "Less_or_equal", "Relative_path", "Target_filter", "Capabilities", "Dependencies", "Derived_from", "Entry_schema", "Get_property", "Greater_than", "Policy_types", "Relationship", "Requirements", "Valid_values", "Constraints", "Description", "Evaluations", "Occurrences", "Requirement", "Attributes", "Capability", "Constraint", "Data_types", "Interfaces", "Max_length", "Min_length", "Node_types", "Operations", "Properties", "Start_time", "Attribute", "Condition", "Get_input", "Less_than", "Mime_type", "Operation", "End_time", "File_ext", "In_range", "Property", "Required", "Schedule", "Triggers", "Default", "Primary", "Req_cap", "Targets", "Action", "Entity", "Import", "Inputs", "Length", "Method", "Module", "Period", "Status", "Equal", "Event", "Value", "Node", "Type", "And", "Not", "Or", "Comma", "HyphenMinus", "FullStop", "Solidus", "Colon", "LeftSquareBracket", "RightSquareBracket", "RULE_ID", "RULE_QUALIFIED_NAME", "RULE_BOOLEAN", "RULE_ENTITY", "RULE_BEGIN", "RULE_END", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int Entity=48;
-    public static final int Import=49;
-    public static final int RULE_BEGIN=69;
-    public static final int Mime_type=40;
-    public static final int Node=56;
-    public static final int Entry_schema=18;
-    public static final int Attributes=28;
-    public static final int Occurrences=27;
-    public static final int RULE_BOOLEAN=67;
-    public static final int Requirements=23;
+    public static final int Entity=61;
+    public static final int Import=62;
+    public static final int Or=76;
+    public static final int Node=72;
     public static final int Valid_source_types=5;
-    public static final int Node_types=34;
-    public static final int Policy_types=21;
-    public static final int Equal=54;
-    public static final int Primary=46;
-    public static final int Dependencies=16;
-    public static final int Operations=35;
-    public static final int RightSquareBracket=64;
-    public static final int Valid_target_types=6;
-    public static final int Status=53;
-    public static final int RULE_QUALIFIED_NAME=66;
-    public static final int Capability=29;
-    public static final int RULE_ID=65;
-    public static final int Less_than=39;
-    public static final int Data_types=30;
-    public static final int Artifact_types=10;
+    public static final int Policy_types=23;
+    public static final int Equal=69;
+    public static final int Operations=40;
+    public static final int Status=68;
+    public static final int RULE_QUALIFIED_NAME=85;
+    public static final int Capability=33;
+    public static final int RULE_ID=84;
+    public static final int Less_than=46;
+    public static final int Evaluations=29;
+    public static final int Method=65;
     public static final int Interface_types=9;
-    public static final int Greater_or_equal=8;
-    public static final int Constraints=25;
-    public static final int RULE_INT=71;
-    public static final int Value=55;
-    public static final int RULE_ML_COMMENT=73;
-    public static final int LeftSquareBracket=63;
-    public static final int Less_or_equal=13;
-    public static final int Relative_path=14;
-    public static final int Module=52;
-    public static final int Greater_than=20;
-    public static final int Get_input=38;
-    public static final int RULE_ENTITY=68;
-    public static final int RULE_END=70;
-    public static final int Description=26;
-    public static final int Get_attribute=12;
-    public static final int Attribute=37;
-    public static final int Get_property=19;
-    public static final int Valid_values=24;
-    public static final int RULE_STRING=72;
-    public static final int Properties=36;
-    public static final int Implementation=11;
-    public static final int RULE_SL_COMMENT=74;
-    public static final int Max_length=32;
-    public static final int Comma=58;
-    public static final int HyphenMinus=59;
-    public static final int Required=44;
-    public static final int Capability_types=7;
-    public static final int Solidus=61;
-    public static final int Colon=62;
-    public static final int EOF=-1;
-    public static final int Property=43;
-    public static final int Inputs=50;
+    public static final int Requirement=31;
+    public static final int RULE_INT=90;
+    public static final int RULE_ML_COMMENT=92;
+    public static final int LeftSquareBracket=82;
+    public static final int Relative_path=15;
+    public static final int Module=66;
+    public static final int Greater_than=22;
+    public static final int Description=28;
+    public static final int Attribute=43;
+    public static final int Get_property=21;
+    public static final int Valid_values=26;
+    public static final int Implementation=12;
+    public static final int Max_length=37;
+    public static final int Comma=77;
+    public static final int HyphenMinus=78;
+    public static final int Solidus=80;
+    public static final int Property=52;
     public static final int Relationship_types=4;
-    public static final int FullStop=60;
-    public static final int RULE_WS=75;
-    public static final int RULE_ANY_OTHER=76;
-    public static final int Req_cap=47;
-    public static final int Default=45;
-    public static final int Interfaces=31;
-    public static final int In_range=42;
-    public static final int Type=57;
-    public static final int Derived_from=17;
-    public static final int Length=51;
-    public static final int Capabilities=15;
-    public static final int Relationship=22;
-    public static final int File_ext=41;
-    public static final int Min_length=33;
+    public static final int FullStop=79;
+    public static final int End_time=49;
+    public static final int Targets=59;
+    public static final int Default=56;
+    public static final int In_range=51;
+    public static final int Type=73;
+    public static final int Derived_from=19;
+    public static final int Length=64;
+    public static final int Relationship=24;
+    public static final int Event=70;
+    public static final int RULE_BEGIN=88;
+    public static final int Constraint=34;
+    public static final int Mime_type=47;
+    public static final int Entry_schema=20;
+    public static final int Attributes=32;
+    public static final int Occurrences=30;
+    public static final int RULE_BOOLEAN=86;
+    public static final int Requirements=25;
+    public static final int Node_types=39;
+    public static final int Primary=57;
+    public static final int Dependencies=18;
+    public static final int Call_operation=11;
+    public static final int RightSquareBracket=83;
+    public static final int Valid_target_types=6;
+    public static final int Start_time=42;
+    public static final int Data_types=35;
+    public static final int Artifact_types=10;
+    public static final int Period=67;
+    public static final int Triggers=55;
+    public static final int Greater_or_equal=8;
+    public static final int Not=75;
+    public static final int Constraints=27;
+    public static final int And=74;
+    public static final int Value=71;
+    public static final int Less_or_equal=14;
+    public static final int Get_input=45;
+    public static final int RULE_ENTITY=87;
+    public static final int Action=60;
+    public static final int RULE_END=89;
+    public static final int Get_attribute=13;
+    public static final int RULE_STRING=91;
+    public static final int Operation=48;
+    public static final int Properties=41;
+    public static final int RULE_SL_COMMENT=93;
+    public static final int Required=53;
+    public static final int Capability_types=7;
+    public static final int Colon=81;
+    public static final int EOF=-1;
+    public static final int Inputs=63;
+    public static final int Condition=44;
+    public static final int RULE_WS=94;
+    public static final int RULE_ANY_OTHER=95;
+    public static final int Req_cap=58;
+    public static final int Interfaces=36;
+    public static final int Target_filter=16;
+    public static final int Capabilities=17;
+    public static final int Schedule=54;
+    public static final int File_ext=50;
+    public static final int Min_length=38;
 
     // delegates
     // delegators
@@ -1874,11 +1893,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             if ( (LA5_0==RULE_ID) ) {
                 int LA5_1 = input.LA(2);
 
-                if ( (LA5_1==Solidus) ) {
-                    alt5=1;
-                }
-                else if ( (LA5_1==EOF||(LA5_1>=Derived_from && LA5_1<=Entry_schema)||(LA5_1>=Constraints && LA5_1<=Description)||LA5_1==Properties||(LA5_1>=Required && LA5_1<=Default)||LA5_1==Status||LA5_1==Value||LA5_1==Type||LA5_1==Colon||LA5_1==RULE_END) ) {
+                if ( (LA5_1==EOF||(LA5_1>=Derived_from && LA5_1<=Entry_schema)||(LA5_1>=Constraints && LA5_1<=Description)||LA5_1==Properties||LA5_1==Required||LA5_1==Default||LA5_1==Status||LA5_1==Value||LA5_1==Type||LA5_1==Colon||LA5_1==RULE_END) ) {
                     alt5=2;
+                }
+                else if ( (LA5_1==Solidus) ) {
+                    alt5=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4559,25 +4578,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPolicyTypeBody"
-    // InternalRMParser.g:1805:1: ruleEPolicyTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) ) ;
+    // InternalRMParser.g:1805:1: ruleEPolicyTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )? (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )? (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )? ) ;
     public final EObject ruleEPolicyTypeBody() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_2=null;
         Token otherlv_4=null;
         Token lv_description_5_0=null;
+        Token otherlv_6=null;
+        Token this_BEGIN_7=null;
+        Token this_END_9=null;
+        Token otherlv_10=null;
+        Token otherlv_11=null;
+        Token otherlv_13=null;
+        Token otherlv_14=null;
+        Token this_BEGIN_15=null;
+        Token this_END_17=null;
         EObject lv_superType_3_0 = null;
+
+        EObject lv_properties_8_0 = null;
+
+        EObject lv_targets_12_0 = null;
+
+        EObject lv_triggers_16_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRMParser.g:1811:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) ) )
-            // InternalRMParser.g:1812:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:1811:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )? (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )? (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )? ) )
+            // InternalRMParser.g:1812:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )? (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )? (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )? )
             {
-            // InternalRMParser.g:1812:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) )
-            // InternalRMParser.g:1813:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) )
+            // InternalRMParser.g:1812:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )? (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )? (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )? )
+            // InternalRMParser.g:1813:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )? (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )? (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )?
             {
             // InternalRMParser.g:1813:3: ()
             // InternalRMParser.g:1814:4: 
@@ -4784,6 +4818,186 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
+            // InternalRMParser.g:1901:3: (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
+
+            if ( (LA15_0==Properties) ) {
+                alt15=1;
+            }
+            switch (alt15) {
+                case 1 :
+                    // InternalRMParser.g:1902:4: otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END
+                    {
+                    otherlv_6=(Token)match(input,Properties,FOLLOW_5); 
+
+                    				newLeafNode(otherlv_6, grammarAccess.getEPolicyTypeBodyAccess().getPropertiesKeyword_2_0());
+                    			
+                    this_BEGIN_7=(Token)match(input,RULE_BEGIN,FOLLOW_15); 
+
+                    				newLeafNode(this_BEGIN_7, grammarAccess.getEPolicyTypeBodyAccess().getBEGINTerminalRuleCall_2_1());
+                    			
+                    // InternalRMParser.g:1910:4: ( (lv_properties_8_0= ruleEProperties ) )
+                    // InternalRMParser.g:1911:5: (lv_properties_8_0= ruleEProperties )
+                    {
+                    // InternalRMParser.g:1911:5: (lv_properties_8_0= ruleEProperties )
+                    // InternalRMParser.g:1912:6: lv_properties_8_0= ruleEProperties
+                    {
+
+                    						newCompositeNode(grammarAccess.getEPolicyTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_2_2_0());
+                    					
+                    pushFollow(FOLLOW_7);
+                    lv_properties_8_0=ruleEProperties();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
+                    						}
+                    						set(
+                    							current,
+                    							"properties",
+                    							lv_properties_8_0,
+                    							"org.sodalite.dsl.RM.EProperties");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    this_END_9=(Token)match(input,RULE_END,FOLLOW_26); 
+
+                    				newLeafNode(this_END_9, grammarAccess.getEPolicyTypeBodyAccess().getENDTerminalRuleCall_2_3());
+                    			
+
+                    }
+                    break;
+
+            }
+
+            // InternalRMParser.g:1934:3: (otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket )?
+            int alt16=2;
+            int LA16_0 = input.LA(1);
+
+            if ( (LA16_0==Targets) ) {
+                alt16=1;
+            }
+            switch (alt16) {
+                case 1 :
+                    // InternalRMParser.g:1935:4: otherlv_10= Targets otherlv_11= LeftSquareBracket ( (lv_targets_12_0= ruleEValidTargetTypes ) ) otherlv_13= RightSquareBracket
+                    {
+                    otherlv_10=(Token)match(input,Targets,FOLLOW_27); 
+
+                    				newLeafNode(otherlv_10, grammarAccess.getEPolicyTypeBodyAccess().getTargetsKeyword_3_0());
+                    			
+                    otherlv_11=(Token)match(input,LeftSquareBracket,FOLLOW_6); 
+
+                    				newLeafNode(otherlv_11, grammarAccess.getEPolicyTypeBodyAccess().getLeftSquareBracketKeyword_3_1());
+                    			
+                    // InternalRMParser.g:1943:4: ( (lv_targets_12_0= ruleEValidTargetTypes ) )
+                    // InternalRMParser.g:1944:5: (lv_targets_12_0= ruleEValidTargetTypes )
+                    {
+                    // InternalRMParser.g:1944:5: (lv_targets_12_0= ruleEValidTargetTypes )
+                    // InternalRMParser.g:1945:6: lv_targets_12_0= ruleEValidTargetTypes
+                    {
+
+                    						newCompositeNode(grammarAccess.getEPolicyTypeBodyAccess().getTargetsEValidTargetTypesParserRuleCall_3_2_0());
+                    					
+                    pushFollow(FOLLOW_28);
+                    lv_targets_12_0=ruleEValidTargetTypes();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
+                    						}
+                    						set(
+                    							current,
+                    							"targets",
+                    							lv_targets_12_0,
+                    							"org.sodalite.dsl.RM.EValidTargetTypes");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    otherlv_13=(Token)match(input,RightSquareBracket,FOLLOW_29); 
+
+                    				newLeafNode(otherlv_13, grammarAccess.getEPolicyTypeBodyAccess().getRightSquareBracketKeyword_3_3());
+                    			
+
+                    }
+                    break;
+
+            }
+
+            // InternalRMParser.g:1967:3: (otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
+
+            if ( (LA17_0==Triggers) ) {
+                alt17=1;
+            }
+            switch (alt17) {
+                case 1 :
+                    // InternalRMParser.g:1968:4: otherlv_14= Triggers this_BEGIN_15= RULE_BEGIN ( (lv_triggers_16_0= ruleETriggers ) ) this_END_17= RULE_END
+                    {
+                    otherlv_14=(Token)match(input,Triggers,FOLLOW_5); 
+
+                    				newLeafNode(otherlv_14, grammarAccess.getEPolicyTypeBodyAccess().getTriggersKeyword_4_0());
+                    			
+                    this_BEGIN_15=(Token)match(input,RULE_BEGIN,FOLLOW_30); 
+
+                    				newLeafNode(this_BEGIN_15, grammarAccess.getEPolicyTypeBodyAccess().getBEGINTerminalRuleCall_4_1());
+                    			
+                    // InternalRMParser.g:1976:4: ( (lv_triggers_16_0= ruleETriggers ) )
+                    // InternalRMParser.g:1977:5: (lv_triggers_16_0= ruleETriggers )
+                    {
+                    // InternalRMParser.g:1977:5: (lv_triggers_16_0= ruleETriggers )
+                    // InternalRMParser.g:1978:6: lv_triggers_16_0= ruleETriggers
+                    {
+
+                    						newCompositeNode(grammarAccess.getEPolicyTypeBodyAccess().getTriggersETriggersParserRuleCall_4_2_0());
+                    					
+                    pushFollow(FOLLOW_7);
+                    lv_triggers_16_0=ruleETriggers();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getEPolicyTypeBodyRule());
+                    						}
+                    						set(
+                    							current,
+                    							"triggers",
+                    							lv_triggers_16_0,
+                    							"org.sodalite.dsl.RM.ETriggers");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    this_END_17=(Token)match(input,RULE_END,FOLLOW_2); 
+
+                    				newLeafNode(this_END_17, grammarAccess.getEPolicyTypeBodyAccess().getENDTerminalRuleCall_4_3());
+                    			
+
+                    }
+                    break;
+
+            }
+
 
             }
 
@@ -4806,8 +5020,3795 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEPolicyTypeBody"
 
 
+    // $ANTLR start "entryRuleETriggers"
+    // InternalRMParser.g:2004:1: entryRuleETriggers returns [EObject current=null] : iv_ruleETriggers= ruleETriggers EOF ;
+    public final EObject entryRuleETriggers() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleETriggers = null;
+
+
+        try {
+            // InternalRMParser.g:2004:50: (iv_ruleETriggers= ruleETriggers EOF )
+            // InternalRMParser.g:2005:2: iv_ruleETriggers= ruleETriggers EOF
+            {
+             newCompositeNode(grammarAccess.getETriggersRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleETriggers=ruleETriggers();
+
+            state._fsp--;
+
+             current =iv_ruleETriggers; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleETriggers"
+
+
+    // $ANTLR start "ruleETriggers"
+    // InternalRMParser.g:2011:1: ruleETriggers returns [EObject current=null] : ( () ( (lv_triggers_1_0= ruleETriggerDefinition ) )* ) ;
+    public final EObject ruleETriggers() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_triggers_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2017:2: ( ( () ( (lv_triggers_1_0= ruleETriggerDefinition ) )* ) )
+            // InternalRMParser.g:2018:2: ( () ( (lv_triggers_1_0= ruleETriggerDefinition ) )* )
+            {
+            // InternalRMParser.g:2018:2: ( () ( (lv_triggers_1_0= ruleETriggerDefinition ) )* )
+            // InternalRMParser.g:2019:3: () ( (lv_triggers_1_0= ruleETriggerDefinition ) )*
+            {
+            // InternalRMParser.g:2019:3: ()
+            // InternalRMParser.g:2020:4: 
+            {
+
+            				current = forceCreateModelElement(
+            					grammarAccess.getETriggersAccess().getETriggersAction_0(),
+            					current);
+            			
+
+            }
+
+            // InternalRMParser.g:2026:3: ( (lv_triggers_1_0= ruleETriggerDefinition ) )*
+            loop18:
+            do {
+                int alt18=2;
+                int LA18_0 = input.LA(1);
+
+                if ( (LA18_0==RULE_QUALIFIED_NAME) ) {
+                    alt18=1;
+                }
+
+
+                switch (alt18) {
+            	case 1 :
+            	    // InternalRMParser.g:2027:4: (lv_triggers_1_0= ruleETriggerDefinition )
+            	    {
+            	    // InternalRMParser.g:2027:4: (lv_triggers_1_0= ruleETriggerDefinition )
+            	    // InternalRMParser.g:2028:5: lv_triggers_1_0= ruleETriggerDefinition
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getETriggersAccess().getTriggersETriggerDefinitionParserRuleCall_1_0());
+            	    				
+            	    pushFollow(FOLLOW_16);
+            	    lv_triggers_1_0=ruleETriggerDefinition();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getETriggersRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"triggers",
+            	    						lv_triggers_1_0,
+            	    						"org.sodalite.dsl.RM.ETriggerDefinition");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop18;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleETriggers"
+
+
+    // $ANTLR start "entryRuleETriggerDefinition"
+    // InternalRMParser.g:2049:1: entryRuleETriggerDefinition returns [EObject current=null] : iv_ruleETriggerDefinition= ruleETriggerDefinition EOF ;
+    public final EObject entryRuleETriggerDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleETriggerDefinition = null;
+
+
+        try {
+            // InternalRMParser.g:2049:59: (iv_ruleETriggerDefinition= ruleETriggerDefinition EOF )
+            // InternalRMParser.g:2050:2: iv_ruleETriggerDefinition= ruleETriggerDefinition EOF
+            {
+             newCompositeNode(grammarAccess.getETriggerDefinitionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleETriggerDefinition=ruleETriggerDefinition();
+
+            state._fsp--;
+
+             current =iv_ruleETriggerDefinition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleETriggerDefinition"
+
+
+    // $ANTLR start "ruleETriggerDefinition"
+    // InternalRMParser.g:2056:1: ruleETriggerDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) ) this_END_4= RULE_END ) ;
+    public final EObject ruleETriggerDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name_0_0=null;
+        Token otherlv_1=null;
+        Token this_BEGIN_2=null;
+        Token this_END_4=null;
+        EObject lv_trigger_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2062:2: ( ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:2063:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) ) this_END_4= RULE_END )
+            {
+            // InternalRMParser.g:2063:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:2064:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) ) this_END_4= RULE_END
+            {
+            // InternalRMParser.g:2064:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:2065:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            {
+            // InternalRMParser.g:2065:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:2066:5: lv_name_0_0= RULE_QUALIFIED_NAME
+            {
+            lv_name_0_0=(Token)match(input,RULE_QUALIFIED_NAME,FOLLOW_10); 
+
+            					newLeafNode(lv_name_0_0, grammarAccess.getETriggerDefinitionAccess().getNameQUALIFIED_NAMETerminalRuleCall_0_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getETriggerDefinitionRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.sodalite.dsl.RM.QUALIFIED_NAME");
+            				
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,Colon,FOLLOW_5); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getETriggerDefinitionAccess().getColonKeyword_1());
+            		
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_31); 
+
+            			newLeafNode(this_BEGIN_2, grammarAccess.getETriggerDefinitionAccess().getBEGINTerminalRuleCall_2());
+            		
+            // InternalRMParser.g:2090:3: ( (lv_trigger_3_0= ruleETriggerDefinitionBody ) )
+            // InternalRMParser.g:2091:4: (lv_trigger_3_0= ruleETriggerDefinitionBody )
+            {
+            // InternalRMParser.g:2091:4: (lv_trigger_3_0= ruleETriggerDefinitionBody )
+            // InternalRMParser.g:2092:5: lv_trigger_3_0= ruleETriggerDefinitionBody
+            {
+
+            					newCompositeNode(grammarAccess.getETriggerDefinitionAccess().getTriggerETriggerDefinitionBodyParserRuleCall_3_0());
+            				
+            pushFollow(FOLLOW_7);
+            lv_trigger_3_0=ruleETriggerDefinitionBody();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getETriggerDefinitionRule());
+            					}
+            					set(
+            						current,
+            						"trigger",
+            						lv_trigger_3_0,
+            						"org.sodalite.dsl.RM.ETriggerDefinitionBody");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_END_4=(Token)match(input,RULE_END,FOLLOW_2); 
+
+            			newLeafNode(this_END_4, grammarAccess.getETriggerDefinitionAccess().getENDTerminalRuleCall_4());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleETriggerDefinition"
+
+
+    // $ANTLR start "entryRuleETriggerDefinitionBody"
+    // InternalRMParser.g:2117:1: entryRuleETriggerDefinitionBody returns [EObject current=null] : iv_ruleETriggerDefinitionBody= ruleETriggerDefinitionBody EOF ;
+    public final EObject entryRuleETriggerDefinitionBody() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleETriggerDefinitionBody = null;
+
+
+        try {
+            // InternalRMParser.g:2117:63: (iv_ruleETriggerDefinitionBody= ruleETriggerDefinitionBody EOF )
+            // InternalRMParser.g:2118:2: iv_ruleETriggerDefinitionBody= ruleETriggerDefinitionBody EOF
+            {
+             newCompositeNode(grammarAccess.getETriggerDefinitionBodyRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleETriggerDefinitionBody=ruleETriggerDefinitionBody();
+
+            state._fsp--;
+
+             current =iv_ruleETriggerDefinitionBody; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleETriggerDefinitionBody"
+
+
+    // $ANTLR start "ruleETriggerDefinitionBody"
+    // InternalRMParser.g:2124:1: ruleETriggerDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) ) ) ;
+    public final EObject ruleETriggerDefinitionBody() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token lv_description_2_0=null;
+        Token otherlv_3=null;
+        Token lv_event_4_0=null;
+        Token otherlv_5=null;
+        Token this_BEGIN_6=null;
+        Token this_END_8=null;
+        Token otherlv_9=null;
+        Token this_BEGIN_10=null;
+        Token this_END_12=null;
+        Token otherlv_13=null;
+        Token this_BEGIN_14=null;
+        Token this_END_16=null;
+        Token otherlv_17=null;
+        Token this_BEGIN_18=null;
+        Token this_END_20=null;
+        EObject lv_schedule_7_0 = null;
+
+        EObject lv_target_filter_11_0 = null;
+
+        EObject lv_condition_15_0 = null;
+
+        EObject lv_action_19_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2130:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:2131:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) ) )
+            {
+            // InternalRMParser.g:2131:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:2132:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) )
+            {
+            // InternalRMParser.g:2132:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:2133:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?)
+            {
+             
+            			  getUnorderedGroupHelper().enter(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            			
+            // InternalRMParser.g:2136:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:2137:5: ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+ {...}?
+            {
+            // InternalRMParser.g:2137:5: ( ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) ) )+
+            int cnt19=0;
+            loop19:
+            do {
+                int alt19=7;
+                int LA19_0 = input.LA(1);
+
+                if ( LA19_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt19=1;
+                }
+                else if ( LA19_0 == Event && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt19=2;
+                }
+                else if ( LA19_0 == Schedule && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt19=3;
+                }
+                else if ( LA19_0 == Target_filter && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+                    alt19=4;
+                }
+                else if ( LA19_0 == Condition && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
+                    alt19=5;
+                }
+                else if ( LA19_0 == Action && getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
+                    alt19=6;
+                }
+
+
+                switch (alt19) {
+            	case 1 :
+            	    // InternalRMParser.g:2138:3: ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2138:3: ({...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:2139:4: {...}? => ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 0)");
+            	    }
+            	    // InternalRMParser.g:2139:116: ( ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:2140:5: ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 0);
+            	    				
+            	    // InternalRMParser.g:2143:8: ({...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:2143:9: {...}? => (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2143:18: (otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:2143:19: otherlv_1= Description ( (lv_description_2_0= RULE_STRING ) )
+            	    {
+            	    otherlv_1=(Token)match(input,Description,FOLLOW_13); 
+
+            	    								newLeafNode(otherlv_1, grammarAccess.getETriggerDefinitionBodyAccess().getDescriptionKeyword_0_0());
+            	    							
+            	    // InternalRMParser.g:2147:8: ( (lv_description_2_0= RULE_STRING ) )
+            	    // InternalRMParser.g:2148:9: (lv_description_2_0= RULE_STRING )
+            	    {
+            	    // InternalRMParser.g:2148:9: (lv_description_2_0= RULE_STRING )
+            	    // InternalRMParser.g:2149:10: lv_description_2_0= RULE_STRING
+            	    {
+            	    lv_description_2_0=(Token)match(input,RULE_STRING,FOLLOW_32); 
+
+            	    										newLeafNode(lv_description_2_0, grammarAccess.getETriggerDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_0_1_0());
+            	    									
+
+            	    										if (current==null) {
+            	    											current = createModelElement(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										setWithLastConsumed(
+            	    											current,
+            	    											"description",
+            	    											lv_description_2_0,
+            	    											"org.eclipse.xtext.common.Terminals.STRING");
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // InternalRMParser.g:2171:3: ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2171:3: ({...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:2172:4: {...}? => ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 1)");
+            	    }
+            	    // InternalRMParser.g:2172:116: ( ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:2173:5: ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 1);
+            	    				
+            	    // InternalRMParser.g:2176:8: ({...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:2176:9: {...}? => (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2176:18: (otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:2176:19: otherlv_3= Event ( (lv_event_4_0= RULE_STRING ) )
+            	    {
+            	    otherlv_3=(Token)match(input,Event,FOLLOW_13); 
+
+            	    								newLeafNode(otherlv_3, grammarAccess.getETriggerDefinitionBodyAccess().getEventKeyword_1_0());
+            	    							
+            	    // InternalRMParser.g:2180:8: ( (lv_event_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:2181:9: (lv_event_4_0= RULE_STRING )
+            	    {
+            	    // InternalRMParser.g:2181:9: (lv_event_4_0= RULE_STRING )
+            	    // InternalRMParser.g:2182:10: lv_event_4_0= RULE_STRING
+            	    {
+            	    lv_event_4_0=(Token)match(input,RULE_STRING,FOLLOW_32); 
+
+            	    										newLeafNode(lv_event_4_0, grammarAccess.getETriggerDefinitionBodyAccess().getEventSTRINGTerminalRuleCall_1_1_0());
+            	    									
+
+            	    										if (current==null) {
+            	    											current = createModelElement(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										setWithLastConsumed(
+            	    											current,
+            	    											"event",
+            	    											lv_event_4_0,
+            	    											"org.eclipse.xtext.common.Terminals.STRING");
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 3 :
+            	    // InternalRMParser.g:2204:3: ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2204:3: ({...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) ) )
+            	    // InternalRMParser.g:2205:4: {...}? => ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 2)");
+            	    }
+            	    // InternalRMParser.g:2205:116: ( ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) ) )
+            	    // InternalRMParser.g:2206:5: ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 2);
+            	    				
+            	    // InternalRMParser.g:2209:8: ({...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END ) )
+            	    // InternalRMParser.g:2209:9: {...}? => (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2209:18: (otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END )
+            	    // InternalRMParser.g:2209:19: otherlv_5= Schedule this_BEGIN_6= RULE_BEGIN ( (lv_schedule_7_0= ruleETimeInterval ) ) this_END_8= RULE_END
+            	    {
+            	    otherlv_5=(Token)match(input,Schedule,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_5, grammarAccess.getETriggerDefinitionBodyAccess().getScheduleKeyword_2_0());
+            	    							
+            	    this_BEGIN_6=(Token)match(input,RULE_BEGIN,FOLLOW_33); 
+
+            	    								newLeafNode(this_BEGIN_6, grammarAccess.getETriggerDefinitionBodyAccess().getBEGINTerminalRuleCall_2_1());
+            	    							
+            	    // InternalRMParser.g:2217:8: ( (lv_schedule_7_0= ruleETimeInterval ) )
+            	    // InternalRMParser.g:2218:9: (lv_schedule_7_0= ruleETimeInterval )
+            	    {
+            	    // InternalRMParser.g:2218:9: (lv_schedule_7_0= ruleETimeInterval )
+            	    // InternalRMParser.g:2219:10: lv_schedule_7_0= ruleETimeInterval
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getScheduleETimeIntervalParserRuleCall_2_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_schedule_7_0=ruleETimeInterval();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"schedule",
+            	    											lv_schedule_7_0,
+            	    											"org.sodalite.dsl.RM.ETimeInterval");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_8=(Token)match(input,RULE_END,FOLLOW_32); 
+
+            	    								newLeafNode(this_END_8, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_2_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 4 :
+            	    // InternalRMParser.g:2246:3: ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2246:3: ({...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) ) )
+            	    // InternalRMParser.g:2247:4: {...}? => ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 3)");
+            	    }
+            	    // InternalRMParser.g:2247:116: ( ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) ) )
+            	    // InternalRMParser.g:2248:5: ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 3);
+            	    				
+            	    // InternalRMParser.g:2251:8: ({...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END ) )
+            	    // InternalRMParser.g:2251:9: {...}? => (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2251:18: (otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END )
+            	    // InternalRMParser.g:2251:19: otherlv_9= Target_filter this_BEGIN_10= RULE_BEGIN ( (lv_target_filter_11_0= ruleEEvenFilter ) ) this_END_12= RULE_END
+            	    {
+            	    otherlv_9=(Token)match(input,Target_filter,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_9, grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterKeyword_3_0());
+            	    							
+            	    this_BEGIN_10=(Token)match(input,RULE_BEGIN,FOLLOW_34); 
+
+            	    								newLeafNode(this_BEGIN_10, grammarAccess.getETriggerDefinitionBodyAccess().getBEGINTerminalRuleCall_3_1());
+            	    							
+            	    // InternalRMParser.g:2259:8: ( (lv_target_filter_11_0= ruleEEvenFilter ) )
+            	    // InternalRMParser.g:2260:9: (lv_target_filter_11_0= ruleEEvenFilter )
+            	    {
+            	    // InternalRMParser.g:2260:9: (lv_target_filter_11_0= ruleEEvenFilter )
+            	    // InternalRMParser.g:2261:10: lv_target_filter_11_0= ruleEEvenFilter
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getTarget_filterEEvenFilterParserRuleCall_3_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_target_filter_11_0=ruleEEvenFilter();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"target_filter",
+            	    											lv_target_filter_11_0,
+            	    											"org.sodalite.dsl.RM.EEvenFilter");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_12=(Token)match(input,RULE_END,FOLLOW_32); 
+
+            	    								newLeafNode(this_END_12, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_3_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 5 :
+            	    // InternalRMParser.g:2288:3: ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2288:3: ({...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) ) )
+            	    // InternalRMParser.g:2289:4: {...}? => ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 4)");
+            	    }
+            	    // InternalRMParser.g:2289:116: ( ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) ) )
+            	    // InternalRMParser.g:2290:5: ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 4);
+            	    				
+            	    // InternalRMParser.g:2293:8: ({...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END ) )
+            	    // InternalRMParser.g:2293:9: {...}? => (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2293:18: (otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END )
+            	    // InternalRMParser.g:2293:19: otherlv_13= Condition this_BEGIN_14= RULE_BEGIN ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) ) this_END_16= RULE_END
+            	    {
+            	    otherlv_13=(Token)match(input,Condition,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_13, grammarAccess.getETriggerDefinitionBodyAccess().getConditionKeyword_4_0());
+            	    							
+            	    this_BEGIN_14=(Token)match(input,RULE_BEGIN,FOLLOW_35); 
+
+            	    								newLeafNode(this_BEGIN_14, grammarAccess.getETriggerDefinitionBodyAccess().getBEGINTerminalRuleCall_4_1());
+            	    							
+            	    // InternalRMParser.g:2301:8: ( (lv_condition_15_0= ruleEExtendedTriggerCondition ) )
+            	    // InternalRMParser.g:2302:9: (lv_condition_15_0= ruleEExtendedTriggerCondition )
+            	    {
+            	    // InternalRMParser.g:2302:9: (lv_condition_15_0= ruleEExtendedTriggerCondition )
+            	    // InternalRMParser.g:2303:10: lv_condition_15_0= ruleEExtendedTriggerCondition
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getConditionEExtendedTriggerConditionParserRuleCall_4_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_condition_15_0=ruleEExtendedTriggerCondition();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"condition",
+            	    											lv_condition_15_0,
+            	    											"org.sodalite.dsl.RM.EExtendedTriggerCondition");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_16=(Token)match(input,RULE_END,FOLLOW_32); 
+
+            	    								newLeafNode(this_END_16, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_4_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 6 :
+            	    // InternalRMParser.g:2330:3: ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2330:3: ({...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) ) )
+            	    // InternalRMParser.g:2331:4: {...}? => ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5)");
+            	    }
+            	    // InternalRMParser.g:2331:116: ( ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) ) )
+            	    // InternalRMParser.g:2332:5: ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup(), 5);
+            	    				
+            	    // InternalRMParser.g:2335:8: ({...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END ) )
+            	    // InternalRMParser.g:2335:9: {...}? => (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:2335:18: (otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END )
+            	    // InternalRMParser.g:2335:19: otherlv_17= Action this_BEGIN_18= RULE_BEGIN ( (lv_action_19_0= ruleEActivityDefinitions ) ) this_END_20= RULE_END
+            	    {
+            	    otherlv_17=(Token)match(input,Action,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_17, grammarAccess.getETriggerDefinitionBodyAccess().getActionKeyword_5_0());
+            	    							
+            	    this_BEGIN_18=(Token)match(input,RULE_BEGIN,FOLLOW_36); 
+
+            	    								newLeafNode(this_BEGIN_18, grammarAccess.getETriggerDefinitionBodyAccess().getBEGINTerminalRuleCall_5_1());
+            	    							
+            	    // InternalRMParser.g:2343:8: ( (lv_action_19_0= ruleEActivityDefinitions ) )
+            	    // InternalRMParser.g:2344:9: (lv_action_19_0= ruleEActivityDefinitions )
+            	    {
+            	    // InternalRMParser.g:2344:9: (lv_action_19_0= ruleEActivityDefinitions )
+            	    // InternalRMParser.g:2345:10: lv_action_19_0= ruleEActivityDefinitions
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getETriggerDefinitionBodyAccess().getActionEActivityDefinitionsParserRuleCall_5_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_action_19_0=ruleEActivityDefinitions();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getETriggerDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"action",
+            	    											lv_action_19_0,
+            	    											"org.sodalite.dsl.RM.EActivityDefinitions");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_20=(Token)match(input,RULE_END,FOLLOW_32); 
+
+            	    								newLeafNode(this_END_20, grammarAccess.getETriggerDefinitionBodyAccess().getENDTerminalRuleCall_5_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt19 >= 1 ) break loop19;
+                        EarlyExitException eee =
+                            new EarlyExitException(19, input);
+                        throw eee;
+                }
+                cnt19++;
+            } while (true);
+
+            if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup()) ) {
+                throw new FailedPredicateException(input, "ruleETriggerDefinitionBody", "getUnorderedGroupHelper().canLeave(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup())");
+            }
+
+            }
+
+
+            }
+
+             
+            			  getUnorderedGroupHelper().leave(grammarAccess.getETriggerDefinitionBodyAccess().getUnorderedGroup());
+            			
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleETriggerDefinitionBody"
+
+
+    // $ANTLR start "entryRuleEActivityDefinitions"
+    // InternalRMParser.g:2383:1: entryRuleEActivityDefinitions returns [EObject current=null] : iv_ruleEActivityDefinitions= ruleEActivityDefinitions EOF ;
+    public final EObject entryRuleEActivityDefinitions() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEActivityDefinitions = null;
+
+
+        try {
+            // InternalRMParser.g:2383:61: (iv_ruleEActivityDefinitions= ruleEActivityDefinitions EOF )
+            // InternalRMParser.g:2384:2: iv_ruleEActivityDefinitions= ruleEActivityDefinitions EOF
+            {
+             newCompositeNode(grammarAccess.getEActivityDefinitionsRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEActivityDefinitions=ruleEActivityDefinitions();
+
+            state._fsp--;
+
+             current =iv_ruleEActivityDefinitions; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEActivityDefinitions"
+
+
+    // $ANTLR start "ruleEActivityDefinitions"
+    // InternalRMParser.g:2390:1: ruleEActivityDefinitions returns [EObject current=null] : ( () ( (lv_list_1_0= ruleEActivityDefinition ) )* ) ;
+    public final EObject ruleEActivityDefinitions() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_list_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2396:2: ( ( () ( (lv_list_1_0= ruleEActivityDefinition ) )* ) )
+            // InternalRMParser.g:2397:2: ( () ( (lv_list_1_0= ruleEActivityDefinition ) )* )
+            {
+            // InternalRMParser.g:2397:2: ( () ( (lv_list_1_0= ruleEActivityDefinition ) )* )
+            // InternalRMParser.g:2398:3: () ( (lv_list_1_0= ruleEActivityDefinition ) )*
+            {
+            // InternalRMParser.g:2398:3: ()
+            // InternalRMParser.g:2399:4: 
+            {
+
+            				current = forceCreateModelElement(
+            					grammarAccess.getEActivityDefinitionsAccess().getEActivityDefinitionsAction_0(),
+            					current);
+            			
+
+            }
+
+            // InternalRMParser.g:2405:3: ( (lv_list_1_0= ruleEActivityDefinition ) )*
+            loop20:
+            do {
+                int alt20=2;
+                int LA20_0 = input.LA(1);
+
+                if ( (LA20_0==Call_operation) ) {
+                    alt20=1;
+                }
+
+
+                switch (alt20) {
+            	case 1 :
+            	    // InternalRMParser.g:2406:4: (lv_list_1_0= ruleEActivityDefinition )
+            	    {
+            	    // InternalRMParser.g:2406:4: (lv_list_1_0= ruleEActivityDefinition )
+            	    // InternalRMParser.g:2407:5: lv_list_1_0= ruleEActivityDefinition
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getEActivityDefinitionsAccess().getListEActivityDefinitionParserRuleCall_1_0());
+            	    				
+            	    pushFollow(FOLLOW_37);
+            	    lv_list_1_0=ruleEActivityDefinition();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getEActivityDefinitionsRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"list",
+            	    						lv_list_1_0,
+            	    						"org.sodalite.dsl.RM.EActivityDefinition");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop20;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEActivityDefinitions"
+
+
+    // $ANTLR start "entryRuleEExtendedTriggerCondition"
+    // InternalRMParser.g:2428:1: entryRuleEExtendedTriggerCondition returns [EObject current=null] : iv_ruleEExtendedTriggerCondition= ruleEExtendedTriggerCondition EOF ;
+    public final EObject entryRuleEExtendedTriggerCondition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEExtendedTriggerCondition = null;
+
+
+        try {
+            // InternalRMParser.g:2428:66: (iv_ruleEExtendedTriggerCondition= ruleEExtendedTriggerCondition EOF )
+            // InternalRMParser.g:2429:2: iv_ruleEExtendedTriggerCondition= ruleEExtendedTriggerCondition EOF
+            {
+             newCompositeNode(grammarAccess.getEExtendedTriggerConditionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEExtendedTriggerCondition=ruleEExtendedTriggerCondition();
+
+            state._fsp--;
+
+             current =iv_ruleEExtendedTriggerCondition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEExtendedTriggerCondition"
+
+
+    // $ANTLR start "ruleEExtendedTriggerCondition"
+    // InternalRMParser.g:2435:1: ruleEExtendedTriggerCondition returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) ;
+    public final EObject ruleEExtendedTriggerCondition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token this_BEGIN_2=null;
+        Token this_END_4=null;
+        Token otherlv_5=null;
+        Token lv_period_6_0=null;
+        Token otherlv_7=null;
+        Token otherlv_9=null;
+        Token lv_method_10_0=null;
+        EObject lv_constraint_3_0 = null;
+
+        EObject lv_evaluations_8_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2441:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:2442:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) ) )
+            {
+            // InternalRMParser.g:2442:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) ) )
+            // InternalRMParser.g:2443:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) )
+            {
+            // InternalRMParser.g:2443:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* ) )
+            // InternalRMParser.g:2444:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* )
+            {
+             
+            			  getUnorderedGroupHelper().enter(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            			
+            // InternalRMParser.g:2447:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )* )
+            // InternalRMParser.g:2448:5: ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )*
+            {
+            // InternalRMParser.g:2448:5: ( ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) ) )*
+            loop21:
+            do {
+                int alt21=5;
+                int LA21_0 = input.LA(1);
+
+                if ( LA21_0 == Constraint && getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0) ) {
+                    alt21=1;
+                }
+                else if ( LA21_0 == Period && getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1) ) {
+                    alt21=2;
+                }
+                else if ( LA21_0 == Evaluations && getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2) ) {
+                    alt21=3;
+                }
+                else if ( LA21_0 == Method && getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3) ) {
+                    alt21=4;
+                }
+
+
+                switch (alt21) {
+            	case 1 :
+            	    // InternalRMParser.g:2449:3: ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2449:3: ({...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) ) )
+            	    // InternalRMParser.g:2450:4: {...}? => ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0)");
+            	    }
+            	    // InternalRMParser.g:2450:119: ( ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) ) )
+            	    // InternalRMParser.g:2451:5: ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 0);
+            	    				
+            	    // InternalRMParser.g:2454:8: ({...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END ) )
+            	    // InternalRMParser.g:2454:9: {...}? => (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "true");
+            	    }
+            	    // InternalRMParser.g:2454:18: (otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END )
+            	    // InternalRMParser.g:2454:19: otherlv_1= Constraint this_BEGIN_2= RULE_BEGIN ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) ) this_END_4= RULE_END
+            	    {
+            	    otherlv_1=(Token)match(input,Constraint,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_1, grammarAccess.getEExtendedTriggerConditionAccess().getConstraintKeyword_0_0());
+            	    							
+            	    this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_38); 
+
+            	    								newLeafNode(this_BEGIN_2, grammarAccess.getEExtendedTriggerConditionAccess().getBEGINTerminalRuleCall_0_1());
+            	    							
+            	    // InternalRMParser.g:2462:8: ( (lv_constraint_3_0= ruleEConditionClauseDefinition ) )
+            	    // InternalRMParser.g:2463:9: (lv_constraint_3_0= ruleEConditionClauseDefinition )
+            	    {
+            	    // InternalRMParser.g:2463:9: (lv_constraint_3_0= ruleEConditionClauseDefinition )
+            	    // InternalRMParser.g:2464:10: lv_constraint_3_0= ruleEConditionClauseDefinition
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getEExtendedTriggerConditionAccess().getConstraintEConditionClauseDefinitionParserRuleCall_0_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_constraint_3_0=ruleEConditionClauseDefinition();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getEExtendedTriggerConditionRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"constraint",
+            	    											lv_constraint_3_0,
+            	    											"org.sodalite.dsl.RM.EConditionClauseDefinition");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_4=(Token)match(input,RULE_END,FOLLOW_39); 
+
+            	    								newLeafNode(this_END_4, grammarAccess.getEExtendedTriggerConditionAccess().getENDTerminalRuleCall_0_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // InternalRMParser.g:2491:3: ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2491:3: ({...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:2492:4: {...}? => ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1)");
+            	    }
+            	    // InternalRMParser.g:2492:119: ( ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:2493:5: ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 1);
+            	    				
+            	    // InternalRMParser.g:2496:8: ({...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:2496:9: {...}? => (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "true");
+            	    }
+            	    // InternalRMParser.g:2496:18: (otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:2496:19: otherlv_5= Period ( (lv_period_6_0= RULE_STRING ) )
+            	    {
+            	    otherlv_5=(Token)match(input,Period,FOLLOW_13); 
+
+            	    								newLeafNode(otherlv_5, grammarAccess.getEExtendedTriggerConditionAccess().getPeriodKeyword_1_0());
+            	    							
+            	    // InternalRMParser.g:2500:8: ( (lv_period_6_0= RULE_STRING ) )
+            	    // InternalRMParser.g:2501:9: (lv_period_6_0= RULE_STRING )
+            	    {
+            	    // InternalRMParser.g:2501:9: (lv_period_6_0= RULE_STRING )
+            	    // InternalRMParser.g:2502:10: lv_period_6_0= RULE_STRING
+            	    {
+            	    lv_period_6_0=(Token)match(input,RULE_STRING,FOLLOW_39); 
+
+            	    										newLeafNode(lv_period_6_0, grammarAccess.getEExtendedTriggerConditionAccess().getPeriodSTRINGTerminalRuleCall_1_1_0());
+            	    									
+
+            	    										if (current==null) {
+            	    											current = createModelElement(grammarAccess.getEExtendedTriggerConditionRule());
+            	    										}
+            	    										setWithLastConsumed(
+            	    											current,
+            	    											"period",
+            	    											lv_period_6_0,
+            	    											"org.eclipse.xtext.common.Terminals.STRING");
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 3 :
+            	    // InternalRMParser.g:2524:3: ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2524:3: ({...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) ) )
+            	    // InternalRMParser.g:2525:4: {...}? => ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2)");
+            	    }
+            	    // InternalRMParser.g:2525:119: ( ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) ) )
+            	    // InternalRMParser.g:2526:5: ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 2);
+            	    				
+            	    // InternalRMParser.g:2529:8: ({...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) ) )
+            	    // InternalRMParser.g:2529:9: {...}? => (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "true");
+            	    }
+            	    // InternalRMParser.g:2529:18: (otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) ) )
+            	    // InternalRMParser.g:2529:19: otherlv_7= Evaluations ( (lv_evaluations_8_0= ruleESIGNEDINT ) )
+            	    {
+            	    otherlv_7=(Token)match(input,Evaluations,FOLLOW_40); 
+
+            	    								newLeafNode(otherlv_7, grammarAccess.getEExtendedTriggerConditionAccess().getEvaluationsKeyword_2_0());
+            	    							
+            	    // InternalRMParser.g:2533:8: ( (lv_evaluations_8_0= ruleESIGNEDINT ) )
+            	    // InternalRMParser.g:2534:9: (lv_evaluations_8_0= ruleESIGNEDINT )
+            	    {
+            	    // InternalRMParser.g:2534:9: (lv_evaluations_8_0= ruleESIGNEDINT )
+            	    // InternalRMParser.g:2535:10: lv_evaluations_8_0= ruleESIGNEDINT
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getEExtendedTriggerConditionAccess().getEvaluationsESIGNEDINTParserRuleCall_2_1_0());
+            	    									
+            	    pushFollow(FOLLOW_39);
+            	    lv_evaluations_8_0=ruleESIGNEDINT();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getEExtendedTriggerConditionRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"evaluations",
+            	    											lv_evaluations_8_0,
+            	    											"org.sodalite.dsl.RM.ESIGNEDINT");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 4 :
+            	    // InternalRMParser.g:2558:3: ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2558:3: ({...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:2559:4: {...}? => ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "getUnorderedGroupHelper().canSelect(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3)");
+            	    }
+            	    // InternalRMParser.g:2559:119: ( ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:2560:5: ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup(), 3);
+            	    				
+            	    // InternalRMParser.g:2563:8: ({...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:2563:9: {...}? => (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEExtendedTriggerCondition", "true");
+            	    }
+            	    // InternalRMParser.g:2563:18: (otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:2563:19: otherlv_9= Method ( (lv_method_10_0= RULE_STRING ) )
+            	    {
+            	    otherlv_9=(Token)match(input,Method,FOLLOW_13); 
+
+            	    								newLeafNode(otherlv_9, grammarAccess.getEExtendedTriggerConditionAccess().getMethodKeyword_3_0());
+            	    							
+            	    // InternalRMParser.g:2567:8: ( (lv_method_10_0= RULE_STRING ) )
+            	    // InternalRMParser.g:2568:9: (lv_method_10_0= RULE_STRING )
+            	    {
+            	    // InternalRMParser.g:2568:9: (lv_method_10_0= RULE_STRING )
+            	    // InternalRMParser.g:2569:10: lv_method_10_0= RULE_STRING
+            	    {
+            	    lv_method_10_0=(Token)match(input,RULE_STRING,FOLLOW_39); 
+
+            	    										newLeafNode(lv_method_10_0, grammarAccess.getEExtendedTriggerConditionAccess().getMethodSTRINGTerminalRuleCall_3_1_0());
+            	    									
+
+            	    										if (current==null) {
+            	    											current = createModelElement(grammarAccess.getEExtendedTriggerConditionRule());
+            	    										}
+            	    										setWithLastConsumed(
+            	    											current,
+            	    											"method",
+            	    											lv_method_10_0,
+            	    											"org.eclipse.xtext.common.Terminals.STRING");
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop21;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+             
+            			  getUnorderedGroupHelper().leave(grammarAccess.getEExtendedTriggerConditionAccess().getUnorderedGroup());
+            			
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEExtendedTriggerCondition"
+
+
+    // $ANTLR start "entryRuleETimeInterval"
+    // InternalRMParser.g:2601:1: entryRuleETimeInterval returns [EObject current=null] : iv_ruleETimeInterval= ruleETimeInterval EOF ;
+    public final EObject entryRuleETimeInterval() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleETimeInterval = null;
+
+
+        try {
+            // InternalRMParser.g:2601:54: (iv_ruleETimeInterval= ruleETimeInterval EOF )
+            // InternalRMParser.g:2602:2: iv_ruleETimeInterval= ruleETimeInterval EOF
+            {
+             newCompositeNode(grammarAccess.getETimeIntervalRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleETimeInterval=ruleETimeInterval();
+
+            state._fsp--;
+
+             current =iv_ruleETimeInterval; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleETimeInterval"
+
+
+    // $ANTLR start "ruleETimeInterval"
+    // InternalRMParser.g:2608:1: ruleETimeInterval returns [EObject current=null] : ( (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) ) (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) ) ) ;
+    public final EObject ruleETimeInterval() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_start_time_1_0=null;
+        Token otherlv_2=null;
+        Token lv_end_time_3_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2614:2: ( ( (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) ) (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) ) ) )
+            // InternalRMParser.g:2615:2: ( (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) ) (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) ) )
+            {
+            // InternalRMParser.g:2615:2: ( (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) ) (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) ) )
+            // InternalRMParser.g:2616:3: (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) ) (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) )
+            {
+            // InternalRMParser.g:2616:3: (otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) ) )
+            // InternalRMParser.g:2617:4: otherlv_0= Start_time ( (lv_start_time_1_0= RULE_STRING ) )
+            {
+            otherlv_0=(Token)match(input,Start_time,FOLLOW_13); 
+
+            				newLeafNode(otherlv_0, grammarAccess.getETimeIntervalAccess().getStart_timeKeyword_0_0());
+            			
+            // InternalRMParser.g:2621:4: ( (lv_start_time_1_0= RULE_STRING ) )
+            // InternalRMParser.g:2622:5: (lv_start_time_1_0= RULE_STRING )
+            {
+            // InternalRMParser.g:2622:5: (lv_start_time_1_0= RULE_STRING )
+            // InternalRMParser.g:2623:6: lv_start_time_1_0= RULE_STRING
+            {
+            lv_start_time_1_0=(Token)match(input,RULE_STRING,FOLLOW_41); 
+
+            						newLeafNode(lv_start_time_1_0, grammarAccess.getETimeIntervalAccess().getStart_timeSTRINGTerminalRuleCall_0_1_0());
+            					
+
+            						if (current==null) {
+            							current = createModelElement(grammarAccess.getETimeIntervalRule());
+            						}
+            						setWithLastConsumed(
+            							current,
+            							"start_time",
+            							lv_start_time_1_0,
+            							"org.eclipse.xtext.common.Terminals.STRING");
+            					
+
+            }
+
+
+            }
+
+
+            }
+
+            // InternalRMParser.g:2640:3: (otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) ) )
+            // InternalRMParser.g:2641:4: otherlv_2= End_time ( (lv_end_time_3_0= RULE_STRING ) )
+            {
+            otherlv_2=(Token)match(input,End_time,FOLLOW_13); 
+
+            				newLeafNode(otherlv_2, grammarAccess.getETimeIntervalAccess().getEnd_timeKeyword_1_0());
+            			
+            // InternalRMParser.g:2645:4: ( (lv_end_time_3_0= RULE_STRING ) )
+            // InternalRMParser.g:2646:5: (lv_end_time_3_0= RULE_STRING )
+            {
+            // InternalRMParser.g:2646:5: (lv_end_time_3_0= RULE_STRING )
+            // InternalRMParser.g:2647:6: lv_end_time_3_0= RULE_STRING
+            {
+            lv_end_time_3_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
+
+            						newLeafNode(lv_end_time_3_0, grammarAccess.getETimeIntervalAccess().getEnd_timeSTRINGTerminalRuleCall_1_1_0());
+            					
+
+            						if (current==null) {
+            							current = createModelElement(grammarAccess.getETimeIntervalRule());
+            						}
+            						setWithLastConsumed(
+            							current,
+            							"end_time",
+            							lv_end_time_3_0,
+            							"org.eclipse.xtext.common.Terminals.STRING");
+            					
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleETimeInterval"
+
+
+    // $ANTLR start "entryRuleEEvenFilter"
+    // InternalRMParser.g:2668:1: entryRuleEEvenFilter returns [EObject current=null] : iv_ruleEEvenFilter= ruleEEvenFilter EOF ;
+    public final EObject entryRuleEEvenFilter() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEEvenFilter = null;
+
+
+        try {
+            // InternalRMParser.g:2668:52: (iv_ruleEEvenFilter= ruleEEvenFilter EOF )
+            // InternalRMParser.g:2669:2: iv_ruleEEvenFilter= ruleEEvenFilter EOF
+            {
+             newCompositeNode(grammarAccess.getEEvenFilterRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEEvenFilter=ruleEEvenFilter();
+
+            state._fsp--;
+
+             current =iv_ruleEEvenFilter; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEEvenFilter"
+
+
+    // $ANTLR start "ruleEEvenFilter"
+    // InternalRMParser.g:2675:1: ruleEEvenFilter returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) ) ) ;
+    public final EObject ruleEEvenFilter() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        Token otherlv_5=null;
+        EObject lv_node_2_0 = null;
+
+        EObject lv_requirement_4_0 = null;
+
+        EObject lv_capability_6_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2681:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:2682:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) ) )
+            {
+            // InternalRMParser.g:2682:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:2683:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) )
+            {
+            // InternalRMParser.g:2683:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:2684:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?)
+            {
+             
+            			  getUnorderedGroupHelper().enter(grammarAccess.getEEvenFilterAccess().getUnorderedGroup());
+            			
+            // InternalRMParser.g:2687:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:2688:5: ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+ {...}?
+            {
+            // InternalRMParser.g:2688:5: ( ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) ) )+
+            int cnt22=0;
+            loop22:
+            do {
+                int alt22=4;
+                int LA22_0 = input.LA(1);
+
+                if ( LA22_0 == Node && getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 0) ) {
+                    alt22=1;
+                }
+                else if ( LA22_0 == Requirement && getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 1) ) {
+                    alt22=2;
+                }
+                else if ( LA22_0 == Capability && getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 2) ) {
+                    alt22=3;
+                }
+
+
+                switch (alt22) {
+            	case 1 :
+            	    // InternalRMParser.g:2689:3: ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2689:3: ({...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    // InternalRMParser.g:2690:4: {...}? => ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 0) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 0)");
+            	    }
+            	    // InternalRMParser.g:2690:105: ( ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) ) )
+            	    // InternalRMParser.g:2691:5: ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 0);
+            	    				
+            	    // InternalRMParser.g:2694:8: ({...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) ) )
+            	    // InternalRMParser.g:2694:9: {...}? => (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "true");
+            	    }
+            	    // InternalRMParser.g:2694:18: (otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) ) )
+            	    // InternalRMParser.g:2694:19: otherlv_1= Node ( (lv_node_2_0= ruleEPREFIX_REF ) )
+            	    {
+            	    otherlv_1=(Token)match(input,Node,FOLLOW_6); 
+
+            	    								newLeafNode(otherlv_1, grammarAccess.getEEvenFilterAccess().getNodeKeyword_0_0());
+            	    							
+            	    // InternalRMParser.g:2698:8: ( (lv_node_2_0= ruleEPREFIX_REF ) )
+            	    // InternalRMParser.g:2699:9: (lv_node_2_0= ruleEPREFIX_REF )
+            	    {
+            	    // InternalRMParser.g:2699:9: (lv_node_2_0= ruleEPREFIX_REF )
+            	    // InternalRMParser.g:2700:10: lv_node_2_0= ruleEPREFIX_REF
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getEEvenFilterAccess().getNodeEPREFIX_REFParserRuleCall_0_1_0());
+            	    									
+            	    pushFollow(FOLLOW_42);
+            	    lv_node_2_0=ruleEPREFIX_REF();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"node",
+            	    											lv_node_2_0,
+            	    											"org.sodalite.dsl.RM.EPREFIX_REF");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEEvenFilterAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // InternalRMParser.g:2723:3: ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2723:3: ({...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    // InternalRMParser.g:2724:4: {...}? => ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 1) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 1)");
+            	    }
+            	    // InternalRMParser.g:2724:105: ( ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) ) )
+            	    // InternalRMParser.g:2725:5: ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 1);
+            	    				
+            	    // InternalRMParser.g:2728:8: ({...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) ) )
+            	    // InternalRMParser.g:2728:9: {...}? => (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "true");
+            	    }
+            	    // InternalRMParser.g:2728:18: (otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) ) )
+            	    // InternalRMParser.g:2728:19: otherlv_3= Requirement ( (lv_requirement_4_0= ruleEPREFIX_REF ) )
+            	    {
+            	    otherlv_3=(Token)match(input,Requirement,FOLLOW_6); 
+
+            	    								newLeafNode(otherlv_3, grammarAccess.getEEvenFilterAccess().getRequirementKeyword_1_0());
+            	    							
+            	    // InternalRMParser.g:2732:8: ( (lv_requirement_4_0= ruleEPREFIX_REF ) )
+            	    // InternalRMParser.g:2733:9: (lv_requirement_4_0= ruleEPREFIX_REF )
+            	    {
+            	    // InternalRMParser.g:2733:9: (lv_requirement_4_0= ruleEPREFIX_REF )
+            	    // InternalRMParser.g:2734:10: lv_requirement_4_0= ruleEPREFIX_REF
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getEEvenFilterAccess().getRequirementEPREFIX_REFParserRuleCall_1_1_0());
+            	    									
+            	    pushFollow(FOLLOW_42);
+            	    lv_requirement_4_0=ruleEPREFIX_REF();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"requirement",
+            	    											lv_requirement_4_0,
+            	    											"org.sodalite.dsl.RM.EPREFIX_REF");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEEvenFilterAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 3 :
+            	    // InternalRMParser.g:2757:3: ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:2757:3: ({...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) ) )
+            	    // InternalRMParser.g:2758:4: {...}? => ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 2) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "getUnorderedGroupHelper().canSelect(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 2)");
+            	    }
+            	    // InternalRMParser.g:2758:105: ( ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) ) )
+            	    // InternalRMParser.g:2759:5: ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getEEvenFilterAccess().getUnorderedGroup(), 2);
+            	    				
+            	    // InternalRMParser.g:2762:8: ({...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) ) )
+            	    // InternalRMParser.g:2762:9: {...}? => (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleEEvenFilter", "true");
+            	    }
+            	    // InternalRMParser.g:2762:18: (otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) ) )
+            	    // InternalRMParser.g:2762:19: otherlv_5= Capability ( (lv_capability_6_0= ruleEPREFIX_REF ) )
+            	    {
+            	    otherlv_5=(Token)match(input,Capability,FOLLOW_6); 
+
+            	    								newLeafNode(otherlv_5, grammarAccess.getEEvenFilterAccess().getCapabilityKeyword_2_0());
+            	    							
+            	    // InternalRMParser.g:2766:8: ( (lv_capability_6_0= ruleEPREFIX_REF ) )
+            	    // InternalRMParser.g:2767:9: (lv_capability_6_0= ruleEPREFIX_REF )
+            	    {
+            	    // InternalRMParser.g:2767:9: (lv_capability_6_0= ruleEPREFIX_REF )
+            	    // InternalRMParser.g:2768:10: lv_capability_6_0= ruleEPREFIX_REF
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getEEvenFilterAccess().getCapabilityEPREFIX_REFParserRuleCall_2_1_0());
+            	    									
+            	    pushFollow(FOLLOW_42);
+            	    lv_capability_6_0=ruleEPREFIX_REF();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getEEvenFilterRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"capability",
+            	    											lv_capability_6_0,
+            	    											"org.sodalite.dsl.RM.EPREFIX_REF");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEEvenFilterAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt22 >= 1 ) break loop22;
+                        EarlyExitException eee =
+                            new EarlyExitException(22, input);
+                        throw eee;
+                }
+                cnt22++;
+            } while (true);
+
+            if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getEEvenFilterAccess().getUnorderedGroup()) ) {
+                throw new FailedPredicateException(input, "ruleEEvenFilter", "getUnorderedGroupHelper().canLeave(grammarAccess.getEEvenFilterAccess().getUnorderedGroup())");
+            }
+
+            }
+
+
+            }
+
+             
+            			  getUnorderedGroupHelper().leave(grammarAccess.getEEvenFilterAccess().getUnorderedGroup());
+            			
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEEvenFilter"
+
+
+    // $ANTLR start "entryRuleEConditionClauseDefinition"
+    // InternalRMParser.g:2802:1: entryRuleEConditionClauseDefinition returns [EObject current=null] : iv_ruleEConditionClauseDefinition= ruleEConditionClauseDefinition EOF ;
+    public final EObject entryRuleEConditionClauseDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConditionClauseDefinition = null;
+
+
+        try {
+            // InternalRMParser.g:2802:67: (iv_ruleEConditionClauseDefinition= ruleEConditionClauseDefinition EOF )
+            // InternalRMParser.g:2803:2: iv_ruleEConditionClauseDefinition= ruleEConditionClauseDefinition EOF
+            {
+             newCompositeNode(grammarAccess.getEConditionClauseDefinitionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConditionClauseDefinition=ruleEConditionClauseDefinition();
+
+            state._fsp--;
+
+             current =iv_ruleEConditionClauseDefinition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConditionClauseDefinition"
+
+
+    // $ANTLR start "ruleEConditionClauseDefinition"
+    // InternalRMParser.g:2809:1: ruleEConditionClauseDefinition returns [EObject current=null] : (this_EConditionClauseDefinitionAND_0= ruleEConditionClauseDefinitionAND | this_EConditionClauseDefinitionOR_1= ruleEConditionClauseDefinitionOR | this_EConditionClauseDefinitionNOT_2= ruleEConditionClauseDefinitionNOT | this_EConditionClauseDefinitionAssert_3= ruleEConditionClauseDefinitionAssert ) ;
+    public final EObject ruleEConditionClauseDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_EConditionClauseDefinitionAND_0 = null;
+
+        EObject this_EConditionClauseDefinitionOR_1 = null;
+
+        EObject this_EConditionClauseDefinitionNOT_2 = null;
+
+        EObject this_EConditionClauseDefinitionAssert_3 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2815:2: ( (this_EConditionClauseDefinitionAND_0= ruleEConditionClauseDefinitionAND | this_EConditionClauseDefinitionOR_1= ruleEConditionClauseDefinitionOR | this_EConditionClauseDefinitionNOT_2= ruleEConditionClauseDefinitionNOT | this_EConditionClauseDefinitionAssert_3= ruleEConditionClauseDefinitionAssert ) )
+            // InternalRMParser.g:2816:2: (this_EConditionClauseDefinitionAND_0= ruleEConditionClauseDefinitionAND | this_EConditionClauseDefinitionOR_1= ruleEConditionClauseDefinitionOR | this_EConditionClauseDefinitionNOT_2= ruleEConditionClauseDefinitionNOT | this_EConditionClauseDefinitionAssert_3= ruleEConditionClauseDefinitionAssert )
+            {
+            // InternalRMParser.g:2816:2: (this_EConditionClauseDefinitionAND_0= ruleEConditionClauseDefinitionAND | this_EConditionClauseDefinitionOR_1= ruleEConditionClauseDefinitionOR | this_EConditionClauseDefinitionNOT_2= ruleEConditionClauseDefinitionNOT | this_EConditionClauseDefinitionAssert_3= ruleEConditionClauseDefinitionAssert )
+            int alt23=4;
+            switch ( input.LA(1) ) {
+            case And:
+                {
+                alt23=1;
+                }
+                break;
+            case Or:
+                {
+                alt23=2;
+                }
+                break;
+            case Not:
+                {
+                alt23=3;
+                }
+                break;
+            case EOF:
+            case RULE_ID:
+            case RULE_END:
+                {
+                alt23=4;
+                }
+                break;
+            default:
+                NoViableAltException nvae =
+                    new NoViableAltException("", 23, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt23) {
+                case 1 :
+                    // InternalRMParser.g:2817:3: this_EConditionClauseDefinitionAND_0= ruleEConditionClauseDefinitionAND
+                    {
+
+                    			newCompositeNode(grammarAccess.getEConditionClauseDefinitionAccess().getEConditionClauseDefinitionANDParserRuleCall_0());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EConditionClauseDefinitionAND_0=ruleEConditionClauseDefinitionAND();
+
+                    state._fsp--;
+
+
+                    			current = this_EConditionClauseDefinitionAND_0;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 2 :
+                    // InternalRMParser.g:2826:3: this_EConditionClauseDefinitionOR_1= ruleEConditionClauseDefinitionOR
+                    {
+
+                    			newCompositeNode(grammarAccess.getEConditionClauseDefinitionAccess().getEConditionClauseDefinitionORParserRuleCall_1());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EConditionClauseDefinitionOR_1=ruleEConditionClauseDefinitionOR();
+
+                    state._fsp--;
+
+
+                    			current = this_EConditionClauseDefinitionOR_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalRMParser.g:2835:3: this_EConditionClauseDefinitionNOT_2= ruleEConditionClauseDefinitionNOT
+                    {
+
+                    			newCompositeNode(grammarAccess.getEConditionClauseDefinitionAccess().getEConditionClauseDefinitionNOTParserRuleCall_2());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EConditionClauseDefinitionNOT_2=ruleEConditionClauseDefinitionNOT();
+
+                    state._fsp--;
+
+
+                    			current = this_EConditionClauseDefinitionNOT_2;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 4 :
+                    // InternalRMParser.g:2844:3: this_EConditionClauseDefinitionAssert_3= ruleEConditionClauseDefinitionAssert
+                    {
+
+                    			newCompositeNode(grammarAccess.getEConditionClauseDefinitionAccess().getEConditionClauseDefinitionAssertParserRuleCall_3());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EConditionClauseDefinitionAssert_3=ruleEConditionClauseDefinitionAssert();
+
+                    state._fsp--;
+
+
+                    			current = this_EConditionClauseDefinitionAssert_3;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConditionClauseDefinition"
+
+
+    // $ANTLR start "entryRuleEConditionClauseDefinitionAND"
+    // InternalRMParser.g:2856:1: entryRuleEConditionClauseDefinitionAND returns [EObject current=null] : iv_ruleEConditionClauseDefinitionAND= ruleEConditionClauseDefinitionAND EOF ;
+    public final EObject entryRuleEConditionClauseDefinitionAND() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConditionClauseDefinitionAND = null;
+
+
+        try {
+            // InternalRMParser.g:2856:70: (iv_ruleEConditionClauseDefinitionAND= ruleEConditionClauseDefinitionAND EOF )
+            // InternalRMParser.g:2857:2: iv_ruleEConditionClauseDefinitionAND= ruleEConditionClauseDefinitionAND EOF
+            {
+             newCompositeNode(grammarAccess.getEConditionClauseDefinitionANDRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConditionClauseDefinitionAND=ruleEConditionClauseDefinitionAND();
+
+            state._fsp--;
+
+             current =iv_ruleEConditionClauseDefinitionAND; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConditionClauseDefinitionAND"
+
+
+    // $ANTLR start "ruleEConditionClauseDefinitionAND"
+    // InternalRMParser.g:2863:1: ruleEConditionClauseDefinitionAND returns [EObject current=null] : (otherlv_0= And this_BEGIN_1= RULE_BEGIN ( (lv_and_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) ;
+    public final EObject ruleEConditionClauseDefinitionAND() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token this_BEGIN_1=null;
+        Token this_END_3=null;
+        EObject lv_and_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2869:2: ( (otherlv_0= And this_BEGIN_1= RULE_BEGIN ( (lv_and_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:2870:2: (otherlv_0= And this_BEGIN_1= RULE_BEGIN ( (lv_and_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            {
+            // InternalRMParser.g:2870:2: (otherlv_0= And this_BEGIN_1= RULE_BEGIN ( (lv_and_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:2871:3: otherlv_0= And this_BEGIN_1= RULE_BEGIN ( (lv_and_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END
+            {
+            otherlv_0=(Token)match(input,And,FOLLOW_5); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getEConditionClauseDefinitionANDAccess().getAndKeyword_0());
+            		
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_38); 
+
+            			newLeafNode(this_BEGIN_1, grammarAccess.getEConditionClauseDefinitionANDAccess().getBEGINTerminalRuleCall_1());
+            		
+            // InternalRMParser.g:2879:3: ( (lv_and_2_0= ruleEConditionClauseDefinition ) )
+            // InternalRMParser.g:2880:4: (lv_and_2_0= ruleEConditionClauseDefinition )
+            {
+            // InternalRMParser.g:2880:4: (lv_and_2_0= ruleEConditionClauseDefinition )
+            // InternalRMParser.g:2881:5: lv_and_2_0= ruleEConditionClauseDefinition
+            {
+
+            					newCompositeNode(grammarAccess.getEConditionClauseDefinitionANDAccess().getAndEConditionClauseDefinitionParserRuleCall_2_0());
+            				
+            pushFollow(FOLLOW_7);
+            lv_and_2_0=ruleEConditionClauseDefinition();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEConditionClauseDefinitionANDRule());
+            					}
+            					set(
+            						current,
+            						"and",
+            						lv_and_2_0,
+            						"org.sodalite.dsl.RM.EConditionClauseDefinition");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_END_3=(Token)match(input,RULE_END,FOLLOW_2); 
+
+            			newLeafNode(this_END_3, grammarAccess.getEConditionClauseDefinitionANDAccess().getENDTerminalRuleCall_3());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConditionClauseDefinitionAND"
+
+
+    // $ANTLR start "entryRuleEConditionClauseDefinitionOR"
+    // InternalRMParser.g:2906:1: entryRuleEConditionClauseDefinitionOR returns [EObject current=null] : iv_ruleEConditionClauseDefinitionOR= ruleEConditionClauseDefinitionOR EOF ;
+    public final EObject entryRuleEConditionClauseDefinitionOR() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConditionClauseDefinitionOR = null;
+
+
+        try {
+            // InternalRMParser.g:2906:69: (iv_ruleEConditionClauseDefinitionOR= ruleEConditionClauseDefinitionOR EOF )
+            // InternalRMParser.g:2907:2: iv_ruleEConditionClauseDefinitionOR= ruleEConditionClauseDefinitionOR EOF
+            {
+             newCompositeNode(grammarAccess.getEConditionClauseDefinitionORRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConditionClauseDefinitionOR=ruleEConditionClauseDefinitionOR();
+
+            state._fsp--;
+
+             current =iv_ruleEConditionClauseDefinitionOR; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConditionClauseDefinitionOR"
+
+
+    // $ANTLR start "ruleEConditionClauseDefinitionOR"
+    // InternalRMParser.g:2913:1: ruleEConditionClauseDefinitionOR returns [EObject current=null] : (otherlv_0= Or this_BEGIN_1= RULE_BEGIN ( (lv_or_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) ;
+    public final EObject ruleEConditionClauseDefinitionOR() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token this_BEGIN_1=null;
+        Token this_END_3=null;
+        EObject lv_or_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2919:2: ( (otherlv_0= Or this_BEGIN_1= RULE_BEGIN ( (lv_or_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:2920:2: (otherlv_0= Or this_BEGIN_1= RULE_BEGIN ( (lv_or_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            {
+            // InternalRMParser.g:2920:2: (otherlv_0= Or this_BEGIN_1= RULE_BEGIN ( (lv_or_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:2921:3: otherlv_0= Or this_BEGIN_1= RULE_BEGIN ( (lv_or_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END
+            {
+            otherlv_0=(Token)match(input,Or,FOLLOW_5); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getEConditionClauseDefinitionORAccess().getOrKeyword_0());
+            		
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_38); 
+
+            			newLeafNode(this_BEGIN_1, grammarAccess.getEConditionClauseDefinitionORAccess().getBEGINTerminalRuleCall_1());
+            		
+            // InternalRMParser.g:2929:3: ( (lv_or_2_0= ruleEConditionClauseDefinition ) )
+            // InternalRMParser.g:2930:4: (lv_or_2_0= ruleEConditionClauseDefinition )
+            {
+            // InternalRMParser.g:2930:4: (lv_or_2_0= ruleEConditionClauseDefinition )
+            // InternalRMParser.g:2931:5: lv_or_2_0= ruleEConditionClauseDefinition
+            {
+
+            					newCompositeNode(grammarAccess.getEConditionClauseDefinitionORAccess().getOrEConditionClauseDefinitionParserRuleCall_2_0());
+            				
+            pushFollow(FOLLOW_7);
+            lv_or_2_0=ruleEConditionClauseDefinition();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEConditionClauseDefinitionORRule());
+            					}
+            					set(
+            						current,
+            						"or",
+            						lv_or_2_0,
+            						"org.sodalite.dsl.RM.EConditionClauseDefinition");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_END_3=(Token)match(input,RULE_END,FOLLOW_2); 
+
+            			newLeafNode(this_END_3, grammarAccess.getEConditionClauseDefinitionORAccess().getENDTerminalRuleCall_3());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConditionClauseDefinitionOR"
+
+
+    // $ANTLR start "entryRuleEConditionClauseDefinitionNOT"
+    // InternalRMParser.g:2956:1: entryRuleEConditionClauseDefinitionNOT returns [EObject current=null] : iv_ruleEConditionClauseDefinitionNOT= ruleEConditionClauseDefinitionNOT EOF ;
+    public final EObject entryRuleEConditionClauseDefinitionNOT() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConditionClauseDefinitionNOT = null;
+
+
+        try {
+            // InternalRMParser.g:2956:70: (iv_ruleEConditionClauseDefinitionNOT= ruleEConditionClauseDefinitionNOT EOF )
+            // InternalRMParser.g:2957:2: iv_ruleEConditionClauseDefinitionNOT= ruleEConditionClauseDefinitionNOT EOF
+            {
+             newCompositeNode(grammarAccess.getEConditionClauseDefinitionNOTRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConditionClauseDefinitionNOT=ruleEConditionClauseDefinitionNOT();
+
+            state._fsp--;
+
+             current =iv_ruleEConditionClauseDefinitionNOT; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConditionClauseDefinitionNOT"
+
+
+    // $ANTLR start "ruleEConditionClauseDefinitionNOT"
+    // InternalRMParser.g:2963:1: ruleEConditionClauseDefinitionNOT returns [EObject current=null] : (otherlv_0= Not this_BEGIN_1= RULE_BEGIN ( (lv_not_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) ;
+    public final EObject ruleEConditionClauseDefinitionNOT() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token this_BEGIN_1=null;
+        Token this_END_3=null;
+        EObject lv_not_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:2969:2: ( (otherlv_0= Not this_BEGIN_1= RULE_BEGIN ( (lv_not_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:2970:2: (otherlv_0= Not this_BEGIN_1= RULE_BEGIN ( (lv_not_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            {
+            // InternalRMParser.g:2970:2: (otherlv_0= Not this_BEGIN_1= RULE_BEGIN ( (lv_not_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:2971:3: otherlv_0= Not this_BEGIN_1= RULE_BEGIN ( (lv_not_2_0= ruleEConditionClauseDefinition ) ) this_END_3= RULE_END
+            {
+            otherlv_0=(Token)match(input,Not,FOLLOW_5); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getEConditionClauseDefinitionNOTAccess().getNotKeyword_0());
+            		
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_38); 
+
+            			newLeafNode(this_BEGIN_1, grammarAccess.getEConditionClauseDefinitionNOTAccess().getBEGINTerminalRuleCall_1());
+            		
+            // InternalRMParser.g:2979:3: ( (lv_not_2_0= ruleEConditionClauseDefinition ) )
+            // InternalRMParser.g:2980:4: (lv_not_2_0= ruleEConditionClauseDefinition )
+            {
+            // InternalRMParser.g:2980:4: (lv_not_2_0= ruleEConditionClauseDefinition )
+            // InternalRMParser.g:2981:5: lv_not_2_0= ruleEConditionClauseDefinition
+            {
+
+            					newCompositeNode(grammarAccess.getEConditionClauseDefinitionNOTAccess().getNotEConditionClauseDefinitionParserRuleCall_2_0());
+            				
+            pushFollow(FOLLOW_7);
+            lv_not_2_0=ruleEConditionClauseDefinition();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEConditionClauseDefinitionNOTRule());
+            					}
+            					set(
+            						current,
+            						"not",
+            						lv_not_2_0,
+            						"org.sodalite.dsl.RM.EConditionClauseDefinition");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_END_3=(Token)match(input,RULE_END,FOLLOW_2); 
+
+            			newLeafNode(this_END_3, grammarAccess.getEConditionClauseDefinitionNOTAccess().getENDTerminalRuleCall_3());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConditionClauseDefinitionNOT"
+
+
+    // $ANTLR start "entryRuleEConditionClauseDefinitionAssert"
+    // InternalRMParser.g:3006:1: entryRuleEConditionClauseDefinitionAssert returns [EObject current=null] : iv_ruleEConditionClauseDefinitionAssert= ruleEConditionClauseDefinitionAssert EOF ;
+    public final EObject entryRuleEConditionClauseDefinitionAssert() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConditionClauseDefinitionAssert = null;
+
+
+        try {
+            // InternalRMParser.g:3006:73: (iv_ruleEConditionClauseDefinitionAssert= ruleEConditionClauseDefinitionAssert EOF )
+            // InternalRMParser.g:3007:2: iv_ruleEConditionClauseDefinitionAssert= ruleEConditionClauseDefinitionAssert EOF
+            {
+             newCompositeNode(grammarAccess.getEConditionClauseDefinitionAssertRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConditionClauseDefinitionAssert=ruleEConditionClauseDefinitionAssert();
+
+            state._fsp--;
+
+             current =iv_ruleEConditionClauseDefinitionAssert; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConditionClauseDefinitionAssert"
+
+
+    // $ANTLR start "ruleEConditionClauseDefinitionAssert"
+    // InternalRMParser.g:3013:1: ruleEConditionClauseDefinitionAssert returns [EObject current=null] : ( () ( (lv_assertions_1_0= ruleEAssertionDefinition ) )* ) ;
+    public final EObject ruleEConditionClauseDefinitionAssert() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_assertions_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3019:2: ( ( () ( (lv_assertions_1_0= ruleEAssertionDefinition ) )* ) )
+            // InternalRMParser.g:3020:2: ( () ( (lv_assertions_1_0= ruleEAssertionDefinition ) )* )
+            {
+            // InternalRMParser.g:3020:2: ( () ( (lv_assertions_1_0= ruleEAssertionDefinition ) )* )
+            // InternalRMParser.g:3021:3: () ( (lv_assertions_1_0= ruleEAssertionDefinition ) )*
+            {
+            // InternalRMParser.g:3021:3: ()
+            // InternalRMParser.g:3022:4: 
+            {
+
+            				current = forceCreateModelElement(
+            					grammarAccess.getEConditionClauseDefinitionAssertAccess().getEConditionClauseDefinitionAssertAction_0(),
+            					current);
+            			
+
+            }
+
+            // InternalRMParser.g:3028:3: ( (lv_assertions_1_0= ruleEAssertionDefinition ) )*
+            loop24:
+            do {
+                int alt24=2;
+                int LA24_0 = input.LA(1);
+
+                if ( (LA24_0==RULE_ID) ) {
+                    alt24=1;
+                }
+
+
+                switch (alt24) {
+            	case 1 :
+            	    // InternalRMParser.g:3029:4: (lv_assertions_1_0= ruleEAssertionDefinition )
+            	    {
+            	    // InternalRMParser.g:3029:4: (lv_assertions_1_0= ruleEAssertionDefinition )
+            	    // InternalRMParser.g:3030:5: lv_assertions_1_0= ruleEAssertionDefinition
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getEConditionClauseDefinitionAssertAccess().getAssertionsEAssertionDefinitionParserRuleCall_1_0());
+            	    				
+            	    pushFollow(FOLLOW_43);
+            	    lv_assertions_1_0=ruleEAssertionDefinition();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getEConditionClauseDefinitionAssertRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"assertions",
+            	    						lv_assertions_1_0,
+            	    						"org.sodalite.dsl.RM.EAssertionDefinition");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop24;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConditionClauseDefinitionAssert"
+
+
+    // $ANTLR start "entryRuleEAssertionDefinition"
+    // InternalRMParser.g:3051:1: entryRuleEAssertionDefinition returns [EObject current=null] : iv_ruleEAssertionDefinition= ruleEAssertionDefinition EOF ;
+    public final EObject entryRuleEAssertionDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEAssertionDefinition = null;
+
+
+        try {
+            // InternalRMParser.g:3051:61: (iv_ruleEAssertionDefinition= ruleEAssertionDefinition EOF )
+            // InternalRMParser.g:3052:2: iv_ruleEAssertionDefinition= ruleEAssertionDefinition EOF
+            {
+             newCompositeNode(grammarAccess.getEAssertionDefinitionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEAssertionDefinition=ruleEAssertionDefinition();
+
+            state._fsp--;
+
+             current =iv_ruleEAssertionDefinition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEAssertionDefinition"
+
+
+    // $ANTLR start "ruleEAssertionDefinition"
+    // InternalRMParser.g:3058:1: ruleEAssertionDefinition returns [EObject current=null] : ( ( (lv_attribute_name_0_0= RULE_ID ) ) otherlv_1= Colon otherlv_2= LeftSquareBracket ( (lv_constraints_3_0= ruleEConstraintList ) ) otherlv_4= RightSquareBracket ) ;
+    public final EObject ruleEAssertionDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_attribute_name_0_0=null;
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_constraints_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3064:2: ( ( ( (lv_attribute_name_0_0= RULE_ID ) ) otherlv_1= Colon otherlv_2= LeftSquareBracket ( (lv_constraints_3_0= ruleEConstraintList ) ) otherlv_4= RightSquareBracket ) )
+            // InternalRMParser.g:3065:2: ( ( (lv_attribute_name_0_0= RULE_ID ) ) otherlv_1= Colon otherlv_2= LeftSquareBracket ( (lv_constraints_3_0= ruleEConstraintList ) ) otherlv_4= RightSquareBracket )
+            {
+            // InternalRMParser.g:3065:2: ( ( (lv_attribute_name_0_0= RULE_ID ) ) otherlv_1= Colon otherlv_2= LeftSquareBracket ( (lv_constraints_3_0= ruleEConstraintList ) ) otherlv_4= RightSquareBracket )
+            // InternalRMParser.g:3066:3: ( (lv_attribute_name_0_0= RULE_ID ) ) otherlv_1= Colon otherlv_2= LeftSquareBracket ( (lv_constraints_3_0= ruleEConstraintList ) ) otherlv_4= RightSquareBracket
+            {
+            // InternalRMParser.g:3066:3: ( (lv_attribute_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:3067:4: (lv_attribute_name_0_0= RULE_ID )
+            {
+            // InternalRMParser.g:3067:4: (lv_attribute_name_0_0= RULE_ID )
+            // InternalRMParser.g:3068:5: lv_attribute_name_0_0= RULE_ID
+            {
+            lv_attribute_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
+
+            					newLeafNode(lv_attribute_name_0_0, grammarAccess.getEAssertionDefinitionAccess().getAttribute_nameIDTerminalRuleCall_0_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEAssertionDefinitionRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"attribute_name",
+            						lv_attribute_name_0_0,
+            						"org.sodalite.dsl.RM.ID");
+            				
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,Colon,FOLLOW_27); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getEAssertionDefinitionAccess().getColonKeyword_1());
+            		
+            otherlv_2=(Token)match(input,LeftSquareBracket,FOLLOW_44); 
+
+            			newLeafNode(otherlv_2, grammarAccess.getEAssertionDefinitionAccess().getLeftSquareBracketKeyword_2());
+            		
+            // InternalRMParser.g:3092:3: ( (lv_constraints_3_0= ruleEConstraintList ) )
+            // InternalRMParser.g:3093:4: (lv_constraints_3_0= ruleEConstraintList )
+            {
+            // InternalRMParser.g:3093:4: (lv_constraints_3_0= ruleEConstraintList )
+            // InternalRMParser.g:3094:5: lv_constraints_3_0= ruleEConstraintList
+            {
+
+            					newCompositeNode(grammarAccess.getEAssertionDefinitionAccess().getConstraintsEConstraintListParserRuleCall_3_0());
+            				
+            pushFollow(FOLLOW_28);
+            lv_constraints_3_0=ruleEConstraintList();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEAssertionDefinitionRule());
+            					}
+            					set(
+            						current,
+            						"constraints",
+            						lv_constraints_3_0,
+            						"org.sodalite.dsl.RM.EConstraintList");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            otherlv_4=(Token)match(input,RightSquareBracket,FOLLOW_2); 
+
+            			newLeafNode(otherlv_4, grammarAccess.getEAssertionDefinitionAccess().getRightSquareBracketKeyword_4());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEAssertionDefinition"
+
+
+    // $ANTLR start "entryRuleEConstraintList"
+    // InternalRMParser.g:3119:1: entryRuleEConstraintList returns [EObject current=null] : iv_ruleEConstraintList= ruleEConstraintList EOF ;
+    public final EObject entryRuleEConstraintList() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEConstraintList = null;
+
+
+        try {
+            // InternalRMParser.g:3119:56: (iv_ruleEConstraintList= ruleEConstraintList EOF )
+            // InternalRMParser.g:3120:2: iv_ruleEConstraintList= ruleEConstraintList EOF
+            {
+             newCompositeNode(grammarAccess.getEConstraintListRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEConstraintList=ruleEConstraintList();
+
+            state._fsp--;
+
+             current =iv_ruleEConstraintList; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEConstraintList"
+
+
+    // $ANTLR start "ruleEConstraintList"
+    // InternalRMParser.g:3126:1: ruleEConstraintList returns [EObject current=null] : ( ( (lv_list_0_0= ruleEConstraint ) ) (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )* ) ;
+    public final EObject ruleEConstraintList() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        EObject lv_list_0_0 = null;
+
+        EObject lv_list_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3132:2: ( ( ( (lv_list_0_0= ruleEConstraint ) ) (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )* ) )
+            // InternalRMParser.g:3133:2: ( ( (lv_list_0_0= ruleEConstraint ) ) (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )* )
+            {
+            // InternalRMParser.g:3133:2: ( ( (lv_list_0_0= ruleEConstraint ) ) (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )* )
+            // InternalRMParser.g:3134:3: ( (lv_list_0_0= ruleEConstraint ) ) (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )*
+            {
+            // InternalRMParser.g:3134:3: ( (lv_list_0_0= ruleEConstraint ) )
+            // InternalRMParser.g:3135:4: (lv_list_0_0= ruleEConstraint )
+            {
+            // InternalRMParser.g:3135:4: (lv_list_0_0= ruleEConstraint )
+            // InternalRMParser.g:3136:5: lv_list_0_0= ruleEConstraint
+            {
+
+            					newCompositeNode(grammarAccess.getEConstraintListAccess().getListEConstraintParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_45);
+            lv_list_0_0=ruleEConstraint();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEConstraintListRule());
+            					}
+            					add(
+            						current,
+            						"list",
+            						lv_list_0_0,
+            						"org.sodalite.dsl.RM.EConstraint");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            // InternalRMParser.g:3153:3: (otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) ) )*
+            loop25:
+            do {
+                int alt25=2;
+                int LA25_0 = input.LA(1);
+
+                if ( (LA25_0==Comma) ) {
+                    alt25=1;
+                }
+
+
+                switch (alt25) {
+            	case 1 :
+            	    // InternalRMParser.g:3154:4: otherlv_1= Comma ( (lv_list_2_0= ruleEConstraint ) )
+            	    {
+            	    otherlv_1=(Token)match(input,Comma,FOLLOW_44); 
+
+            	    				newLeafNode(otherlv_1, grammarAccess.getEConstraintListAccess().getCommaKeyword_1_0());
+            	    			
+            	    // InternalRMParser.g:3158:4: ( (lv_list_2_0= ruleEConstraint ) )
+            	    // InternalRMParser.g:3159:5: (lv_list_2_0= ruleEConstraint )
+            	    {
+            	    // InternalRMParser.g:3159:5: (lv_list_2_0= ruleEConstraint )
+            	    // InternalRMParser.g:3160:6: lv_list_2_0= ruleEConstraint
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getEConstraintListAccess().getListEConstraintParserRuleCall_1_1_0());
+            	    					
+            	    pushFollow(FOLLOW_45);
+            	    lv_list_2_0=ruleEConstraint();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getEConstraintListRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"list",
+            	    							lv_list_2_0,
+            	    							"org.sodalite.dsl.RM.EConstraint");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop25;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEConstraintList"
+
+
+    // $ANTLR start "entryRuleEActivityDefinition"
+    // InternalRMParser.g:3182:1: entryRuleEActivityDefinition returns [EObject current=null] : iv_ruleEActivityDefinition= ruleEActivityDefinition EOF ;
+    public final EObject entryRuleEActivityDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEActivityDefinition = null;
+
+
+        try {
+            // InternalRMParser.g:3182:60: (iv_ruleEActivityDefinition= ruleEActivityDefinition EOF )
+            // InternalRMParser.g:3183:2: iv_ruleEActivityDefinition= ruleEActivityDefinition EOF
+            {
+             newCompositeNode(grammarAccess.getEActivityDefinitionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEActivityDefinition=ruleEActivityDefinition();
+
+            state._fsp--;
+
+             current =iv_ruleEActivityDefinition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEActivityDefinition"
+
+
+    // $ANTLR start "ruleEActivityDefinition"
+    // InternalRMParser.g:3189:1: ruleEActivityDefinition returns [EObject current=null] : this_ECallOperationActivityDefinition_0= ruleECallOperationActivityDefinition ;
+    public final EObject ruleEActivityDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_ECallOperationActivityDefinition_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3195:2: (this_ECallOperationActivityDefinition_0= ruleECallOperationActivityDefinition )
+            // InternalRMParser.g:3196:2: this_ECallOperationActivityDefinition_0= ruleECallOperationActivityDefinition
+            {
+
+            		newCompositeNode(grammarAccess.getEActivityDefinitionAccess().getECallOperationActivityDefinitionParserRuleCall());
+            	
+            pushFollow(FOLLOW_2);
+            this_ECallOperationActivityDefinition_0=ruleECallOperationActivityDefinition();
+
+            state._fsp--;
+
+
+            		current = this_ECallOperationActivityDefinition_0;
+            		afterParserOrEnumRuleCall();
+            	
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEActivityDefinition"
+
+
+    // $ANTLR start "entryRuleECallOperationActivityDefinition"
+    // InternalRMParser.g:3207:1: entryRuleECallOperationActivityDefinition returns [EObject current=null] : iv_ruleECallOperationActivityDefinition= ruleECallOperationActivityDefinition EOF ;
+    public final EObject entryRuleECallOperationActivityDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleECallOperationActivityDefinition = null;
+
+
+        try {
+            // InternalRMParser.g:3207:73: (iv_ruleECallOperationActivityDefinition= ruleECallOperationActivityDefinition EOF )
+            // InternalRMParser.g:3208:2: iv_ruleECallOperationActivityDefinition= ruleECallOperationActivityDefinition EOF
+            {
+             newCompositeNode(grammarAccess.getECallOperationActivityDefinitionRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleECallOperationActivityDefinition=ruleECallOperationActivityDefinition();
+
+            state._fsp--;
+
+             current =iv_ruleECallOperationActivityDefinition; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleECallOperationActivityDefinition"
+
+
+    // $ANTLR start "ruleECallOperationActivityDefinition"
+    // InternalRMParser.g:3214:1: ruleECallOperationActivityDefinition returns [EObject current=null] : (otherlv_0= Call_operation this_BEGIN_1= RULE_BEGIN ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) ) this_END_3= RULE_END ) ;
+    public final EObject ruleECallOperationActivityDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token this_BEGIN_1=null;
+        Token this_END_3=null;
+        EObject lv_operation_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3220:2: ( (otherlv_0= Call_operation this_BEGIN_1= RULE_BEGIN ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:3221:2: (otherlv_0= Call_operation this_BEGIN_1= RULE_BEGIN ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) ) this_END_3= RULE_END )
+            {
+            // InternalRMParser.g:3221:2: (otherlv_0= Call_operation this_BEGIN_1= RULE_BEGIN ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:3222:3: otherlv_0= Call_operation this_BEGIN_1= RULE_BEGIN ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) ) this_END_3= RULE_END
+            {
+            otherlv_0=(Token)match(input,Call_operation,FOLLOW_5); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getECallOperationActivityDefinitionAccess().getCall_operationKeyword_0());
+            		
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_46); 
+
+            			newLeafNode(this_BEGIN_1, grammarAccess.getECallOperationActivityDefinitionAccess().getBEGINTerminalRuleCall_1());
+            		
+            // InternalRMParser.g:3230:3: ( (lv_operation_2_0= ruleECallOperationActivityDefinitionBody ) )
+            // InternalRMParser.g:3231:4: (lv_operation_2_0= ruleECallOperationActivityDefinitionBody )
+            {
+            // InternalRMParser.g:3231:4: (lv_operation_2_0= ruleECallOperationActivityDefinitionBody )
+            // InternalRMParser.g:3232:5: lv_operation_2_0= ruleECallOperationActivityDefinitionBody
+            {
+
+            					newCompositeNode(grammarAccess.getECallOperationActivityDefinitionAccess().getOperationECallOperationActivityDefinitionBodyParserRuleCall_2_0());
+            				
+            pushFollow(FOLLOW_7);
+            lv_operation_2_0=ruleECallOperationActivityDefinitionBody();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getECallOperationActivityDefinitionRule());
+            					}
+            					set(
+            						current,
+            						"operation",
+            						lv_operation_2_0,
+            						"org.sodalite.dsl.RM.ECallOperationActivityDefinitionBody");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_END_3=(Token)match(input,RULE_END,FOLLOW_2); 
+
+            			newLeafNode(this_END_3, grammarAccess.getECallOperationActivityDefinitionAccess().getENDTerminalRuleCall_3());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleECallOperationActivityDefinition"
+
+
+    // $ANTLR start "entryRuleECallOperationActivityDefinitionBody"
+    // InternalRMParser.g:3257:1: entryRuleECallOperationActivityDefinitionBody returns [EObject current=null] : iv_ruleECallOperationActivityDefinitionBody= ruleECallOperationActivityDefinitionBody EOF ;
+    public final EObject entryRuleECallOperationActivityDefinitionBody() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleECallOperationActivityDefinitionBody = null;
+
+
+        try {
+            // InternalRMParser.g:3257:77: (iv_ruleECallOperationActivityDefinitionBody= ruleECallOperationActivityDefinitionBody EOF )
+            // InternalRMParser.g:3258:2: iv_ruleECallOperationActivityDefinitionBody= ruleECallOperationActivityDefinitionBody EOF
+            {
+             newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleECallOperationActivityDefinitionBody=ruleECallOperationActivityDefinitionBody();
+
+            state._fsp--;
+
+             current =iv_ruleECallOperationActivityDefinitionBody; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleECallOperationActivityDefinitionBody"
+
+
+    // $ANTLR start "ruleECallOperationActivityDefinitionBody"
+    // InternalRMParser.g:3264:1: ruleECallOperationActivityDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) ;
+    public final EObject ruleECallOperationActivityDefinitionBody() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        Token this_BEGIN_4=null;
+        Token this_END_6=null;
+        EObject lv_name_2_0 = null;
+
+        EObject lv_inputs_5_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3270:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
+            {
+            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
+            {
+            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:3273:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
+            {
+             
+            			  getUnorderedGroupHelper().enter(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup());
+            			
+            // InternalRMParser.g:3276:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?
+            {
+            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+
+            int cnt26=0;
+            loop26:
+            do {
+                int alt26=3;
+                int LA26_0 = input.LA(1);
+
+                if ( LA26_0 == Operation && getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt26=1;
+                }
+                else if ( LA26_0 == Inputs && getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt26=2;
+                }
+
+
+                switch (alt26) {
+            	case 1 :
+            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    {
+            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:3279:4: {...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+            	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0)");
+            	    }
+            	    // InternalRMParser.g:3279:130: ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:3280:5: ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0);
+            	    				
+            	    // InternalRMParser.g:3283:8: ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:3283:9: {...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:3283:18: (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:3283:19: otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) )
+            	    {
+            	    otherlv_1=(Token)match(input,Operation,FOLLOW_6); 
+
+            	    								newLeafNode(otherlv_1, grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationKeyword_0_0());
+            	    							
+            	    // InternalRMParser.g:3287:8: ( (lv_name_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:3288:9: (lv_name_2_0= ruleEPREFIX_TYPE )
+            	    {
+            	    // InternalRMParser.g:3288:9: (lv_name_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:3289:10: lv_name_2_0= ruleEPREFIX_TYPE
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0());
+            	    									
+            	    pushFollow(FOLLOW_47);
+            	    lv_name_2_0=ruleEPREFIX_TYPE();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getECallOperationActivityDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"name",
+            	    											lv_name_2_0,
+            	    											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // InternalRMParser.g:3312:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) )
+            	    {
+            	    // InternalRMParser.g:3312:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3313:4: {...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) )
+            	    {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+            	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 1)");
+            	    }
+            	    // InternalRMParser.g:3313:130: ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) )
+            	    // InternalRMParser.g:3314:5: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) )
+            	    {
+
+            	    					getUnorderedGroupHelper().select(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 1);
+            	    				
+            	    // InternalRMParser.g:3317:8: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) )
+            	    // InternalRMParser.g:3317:9: {...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END )
+            	    {
+            	    if ( !((true)) ) {
+            	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "true");
+            	    }
+            	    // InternalRMParser.g:3317:18: (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END )
+            	    // InternalRMParser.g:3317:19: otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END
+            	    {
+            	    otherlv_3=(Token)match(input,Inputs,FOLLOW_5); 
+
+            	    								newLeafNode(otherlv_3, grammarAccess.getECallOperationActivityDefinitionBodyAccess().getInputsKeyword_1_0());
+            	    							
+            	    this_BEGIN_4=(Token)match(input,RULE_BEGIN,FOLLOW_15); 
+
+            	    								newLeafNode(this_BEGIN_4, grammarAccess.getECallOperationActivityDefinitionBodyAccess().getBEGINTerminalRuleCall_1_1());
+            	    							
+            	    // InternalRMParser.g:3325:8: ( (lv_inputs_5_0= ruleEPropertyAssignments ) )
+            	    // InternalRMParser.g:3326:9: (lv_inputs_5_0= ruleEPropertyAssignments )
+            	    {
+            	    // InternalRMParser.g:3326:9: (lv_inputs_5_0= ruleEPropertyAssignments )
+            	    // InternalRMParser.g:3327:10: lv_inputs_5_0= ruleEPropertyAssignments
+            	    {
+
+            	    										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getInputsEPropertyAssignmentsParserRuleCall_1_2_0());
+            	    									
+            	    pushFollow(FOLLOW_7);
+            	    lv_inputs_5_0=ruleEPropertyAssignments();
+
+            	    state._fsp--;
+
+
+            	    										if (current==null) {
+            	    											current = createModelElementForParent(grammarAccess.getECallOperationActivityDefinitionBodyRule());
+            	    										}
+            	    										set(
+            	    											current,
+            	    											"inputs",
+            	    											lv_inputs_5_0,
+            	    											"org.sodalite.dsl.RM.EPropertyAssignments");
+            	    										afterParserOrEnumRuleCall();
+            	    									
+
+            	    }
+
+
+            	    }
+
+            	    this_END_6=(Token)match(input,RULE_END,FOLLOW_47); 
+
+            	    								newLeafNode(this_END_6, grammarAccess.getECallOperationActivityDefinitionBodyAccess().getENDTerminalRuleCall_1_3());
+            	    							
+
+            	    }
+
+
+            	    }
+
+            	     
+            	    					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup());
+            	    				
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt26 >= 1 ) break loop26;
+                        EarlyExitException eee =
+                            new EarlyExitException(26, input);
+                        throw eee;
+                }
+                cnt26++;
+            } while (true);
+
+            if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup()) ) {
+                throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "getUnorderedGroupHelper().canLeave(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup())");
+            }
+
+            }
+
+
+            }
+
+             
+            			  getUnorderedGroupHelper().leave(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup());
+            			
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleECallOperationActivityDefinitionBody"
+
+
+    // $ANTLR start "entryRuleEPropertyAssignments"
+    // InternalRMParser.g:3365:1: entryRuleEPropertyAssignments returns [EObject current=null] : iv_ruleEPropertyAssignments= ruleEPropertyAssignments EOF ;
+    public final EObject entryRuleEPropertyAssignments() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEPropertyAssignments = null;
+
+
+        try {
+            // InternalRMParser.g:3365:61: (iv_ruleEPropertyAssignments= ruleEPropertyAssignments EOF )
+            // InternalRMParser.g:3366:2: iv_ruleEPropertyAssignments= ruleEPropertyAssignments EOF
+            {
+             newCompositeNode(grammarAccess.getEPropertyAssignmentsRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEPropertyAssignments=ruleEPropertyAssignments();
+
+            state._fsp--;
+
+             current =iv_ruleEPropertyAssignments; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEPropertyAssignments"
+
+
+    // $ANTLR start "ruleEPropertyAssignments"
+    // InternalRMParser.g:3372:1: ruleEPropertyAssignments returns [EObject current=null] : ( () ( (lv_properties_1_0= ruleEPropertyAssignment ) )* ) ;
+    public final EObject ruleEPropertyAssignments() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_properties_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3378:2: ( ( () ( (lv_properties_1_0= ruleEPropertyAssignment ) )* ) )
+            // InternalRMParser.g:3379:2: ( () ( (lv_properties_1_0= ruleEPropertyAssignment ) )* )
+            {
+            // InternalRMParser.g:3379:2: ( () ( (lv_properties_1_0= ruleEPropertyAssignment ) )* )
+            // InternalRMParser.g:3380:3: () ( (lv_properties_1_0= ruleEPropertyAssignment ) )*
+            {
+            // InternalRMParser.g:3380:3: ()
+            // InternalRMParser.g:3381:4: 
+            {
+
+            				current = forceCreateModelElement(
+            					grammarAccess.getEPropertyAssignmentsAccess().getEPropertyAssignmentsAction_0(),
+            					current);
+            			
+
+            }
+
+            // InternalRMParser.g:3387:3: ( (lv_properties_1_0= ruleEPropertyAssignment ) )*
+            loop27:
+            do {
+                int alt27=2;
+                int LA27_0 = input.LA(1);
+
+                if ( (LA27_0==RULE_ID) ) {
+                    alt27=1;
+                }
+
+
+                switch (alt27) {
+            	case 1 :
+            	    // InternalRMParser.g:3388:4: (lv_properties_1_0= ruleEPropertyAssignment )
+            	    {
+            	    // InternalRMParser.g:3388:4: (lv_properties_1_0= ruleEPropertyAssignment )
+            	    // InternalRMParser.g:3389:5: lv_properties_1_0= ruleEPropertyAssignment
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getEPropertyAssignmentsAccess().getPropertiesEPropertyAssignmentParserRuleCall_1_0());
+            	    				
+            	    pushFollow(FOLLOW_43);
+            	    lv_properties_1_0=ruleEPropertyAssignment();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getEPropertyAssignmentsRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"properties",
+            	    						lv_properties_1_0,
+            	    						"org.sodalite.dsl.RM.EPropertyAssignment");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop27;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEPropertyAssignments"
+
+
+    // $ANTLR start "entryRuleEPropertyAssignment"
+    // InternalRMParser.g:3410:1: entryRuleEPropertyAssignment returns [EObject current=null] : iv_ruleEPropertyAssignment= ruleEPropertyAssignment EOF ;
+    public final EObject entryRuleEPropertyAssignment() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEPropertyAssignment = null;
+
+
+        try {
+            // InternalRMParser.g:3410:60: (iv_ruleEPropertyAssignment= ruleEPropertyAssignment EOF )
+            // InternalRMParser.g:3411:2: iv_ruleEPropertyAssignment= ruleEPropertyAssignment EOF
+            {
+             newCompositeNode(grammarAccess.getEPropertyAssignmentRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEPropertyAssignment=ruleEPropertyAssignment();
+
+            state._fsp--;
+
+             current =iv_ruleEPropertyAssignment; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEPropertyAssignment"
+
+
+    // $ANTLR start "ruleEPropertyAssignment"
+    // InternalRMParser.g:3417:1: ruleEPropertyAssignment returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) ;
+    public final EObject ruleEPropertyAssignment() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name_0_0=null;
+        Token otherlv_1=null;
+        EObject lv_value_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:3423:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) )
+            // InternalRMParser.g:3424:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
+            {
+            // InternalRMParser.g:3424:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
+            // InternalRMParser.g:3425:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) )
+            {
+            // InternalRMParser.g:3425:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:3426:4: (lv_name_0_0= RULE_ID )
+            {
+            // InternalRMParser.g:3426:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:3427:5: lv_name_0_0= RULE_ID
+            {
+            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
+
+            					newLeafNode(lv_name_0_0, grammarAccess.getEPropertyAssignmentAccess().getNameIDTerminalRuleCall_0_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEPropertyAssignmentRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.sodalite.dsl.RM.ID");
+            				
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,Colon,FOLLOW_48); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getEPropertyAssignmentAccess().getColonKeyword_1());
+            		
+            // InternalRMParser.g:3447:3: ( (lv_value_2_0= ruleEAssignmentValue ) )
+            // InternalRMParser.g:3448:4: (lv_value_2_0= ruleEAssignmentValue )
+            {
+            // InternalRMParser.g:3448:4: (lv_value_2_0= ruleEAssignmentValue )
+            // InternalRMParser.g:3449:5: lv_value_2_0= ruleEAssignmentValue
+            {
+
+            					newCompositeNode(grammarAccess.getEPropertyAssignmentAccess().getValueEAssignmentValueParserRuleCall_2_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_value_2_0=ruleEAssignmentValue();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEPropertyAssignmentRule());
+            					}
+            					set(
+            						current,
+            						"value",
+            						lv_value_2_0,
+            						"org.sodalite.dsl.RM.EAssignmentValue");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEPropertyAssignment"
+
+
     // $ANTLR start "entryRuleENodeTypes"
-    // InternalRMParser.g:1905:1: entryRuleENodeTypes returns [EObject current=null] : iv_ruleENodeTypes= ruleENodeTypes EOF ;
+    // InternalRMParser.g:3470:1: entryRuleENodeTypes returns [EObject current=null] : iv_ruleENodeTypes= ruleENodeTypes EOF ;
     public final EObject entryRuleENodeTypes() throws RecognitionException {
         EObject current = null;
 
@@ -4815,8 +8816,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:1905:51: (iv_ruleENodeTypes= ruleENodeTypes EOF )
-            // InternalRMParser.g:1906:2: iv_ruleENodeTypes= ruleENodeTypes EOF
+            // InternalRMParser.g:3470:51: (iv_ruleENodeTypes= ruleENodeTypes EOF )
+            // InternalRMParser.g:3471:2: iv_ruleENodeTypes= ruleENodeTypes EOF
             {
              newCompositeNode(grammarAccess.getENodeTypesRule()); 
             pushFollow(FOLLOW_1);
@@ -4843,7 +8844,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENodeTypes"
-    // InternalRMParser.g:1912:1: ruleENodeTypes returns [EObject current=null] : ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ ) ;
+    // InternalRMParser.g:3477:1: ruleENodeTypes returns [EObject current=null] : ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ ) ;
     public final EObject ruleENodeTypes() throws RecognitionException {
         EObject current = null;
 
@@ -4854,14 +8855,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:1918:2: ( ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ ) )
-            // InternalRMParser.g:1919:2: ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ )
+            // InternalRMParser.g:3483:2: ( ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ ) )
+            // InternalRMParser.g:3484:2: ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ )
             {
-            // InternalRMParser.g:1919:2: ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ )
-            // InternalRMParser.g:1920:3: () ( (lv_nodeTypes_1_0= ruleENodeType ) )+
+            // InternalRMParser.g:3484:2: ( () ( (lv_nodeTypes_1_0= ruleENodeType ) )+ )
+            // InternalRMParser.g:3485:3: () ( (lv_nodeTypes_1_0= ruleENodeType ) )+
             {
-            // InternalRMParser.g:1920:3: ()
-            // InternalRMParser.g:1921:4: 
+            // InternalRMParser.g:3485:3: ()
+            // InternalRMParser.g:3486:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4871,24 +8872,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:1927:3: ( (lv_nodeTypes_1_0= ruleENodeType ) )+
-            int cnt15=0;
-            loop15:
+            // InternalRMParser.g:3492:3: ( (lv_nodeTypes_1_0= ruleENodeType ) )+
+            int cnt28=0;
+            loop28:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( (LA15_0==RULE_QUALIFIED_NAME) ) {
-                    alt15=1;
+                if ( (LA28_0==RULE_QUALIFIED_NAME) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt28) {
             	case 1 :
-            	    // InternalRMParser.g:1928:4: (lv_nodeTypes_1_0= ruleENodeType )
+            	    // InternalRMParser.g:3493:4: (lv_nodeTypes_1_0= ruleENodeType )
             	    {
-            	    // InternalRMParser.g:1928:4: (lv_nodeTypes_1_0= ruleENodeType )
-            	    // InternalRMParser.g:1929:5: lv_nodeTypes_1_0= ruleENodeType
+            	    // InternalRMParser.g:3493:4: (lv_nodeTypes_1_0= ruleENodeType )
+            	    // InternalRMParser.g:3494:5: lv_nodeTypes_1_0= ruleENodeType
             	    {
 
             	    					newCompositeNode(grammarAccess.getENodeTypesAccess().getNodeTypesENodeTypeParserRuleCall_1_0());
@@ -4917,12 +8918,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt15 >= 1 ) break loop15;
+            	    if ( cnt28 >= 1 ) break loop28;
                         EarlyExitException eee =
-                            new EarlyExitException(15, input);
+                            new EarlyExitException(28, input);
                         throw eee;
                 }
-                cnt15++;
+                cnt28++;
             } while (true);
 
 
@@ -4948,7 +8949,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENodeType"
-    // InternalRMParser.g:1950:1: entryRuleENodeType returns [EObject current=null] : iv_ruleENodeType= ruleENodeType EOF ;
+    // InternalRMParser.g:3515:1: entryRuleENodeType returns [EObject current=null] : iv_ruleENodeType= ruleENodeType EOF ;
     public final EObject entryRuleENodeType() throws RecognitionException {
         EObject current = null;
 
@@ -4956,8 +8957,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:1950:50: (iv_ruleENodeType= ruleENodeType EOF )
-            // InternalRMParser.g:1951:2: iv_ruleENodeType= ruleENodeType EOF
+            // InternalRMParser.g:3515:50: (iv_ruleENodeType= ruleENodeType EOF )
+            // InternalRMParser.g:3516:2: iv_ruleENodeType= ruleENodeType EOF
             {
              newCompositeNode(grammarAccess.getENodeTypeRule()); 
             pushFollow(FOLLOW_1);
@@ -4984,7 +8985,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENodeType"
-    // InternalRMParser.g:1957:1: ruleENodeType returns [EObject current=null] : ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:3522:1: ruleENodeType returns [EObject current=null] : ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleENodeType() throws RecognitionException {
         EObject current = null;
 
@@ -4999,17 +9000,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:1963:2: ( ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:1964:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:3528:2: ( ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:3529:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:1964:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:1965:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:3529:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:3530:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_node_3_0= ruleENodeTypeBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:1965:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:1966:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:3530:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:3531:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
             {
-            // InternalRMParser.g:1966:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:1967:5: lv_name_0_0= RULE_QUALIFIED_NAME
+            // InternalRMParser.g:3531:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:3532:5: lv_name_0_0= RULE_QUALIFIED_NAME
             {
             lv_name_0_0=(Token)match(input,RULE_QUALIFIED_NAME,FOLLOW_10); 
 
@@ -5035,15 +9036,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getENodeTypeAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_26); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_49); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getENodeTypeAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:1991:3: ( (lv_node_3_0= ruleENodeTypeBody ) )
-            // InternalRMParser.g:1992:4: (lv_node_3_0= ruleENodeTypeBody )
+            // InternalRMParser.g:3556:3: ( (lv_node_3_0= ruleENodeTypeBody ) )
+            // InternalRMParser.g:3557:4: (lv_node_3_0= ruleENodeTypeBody )
             {
-            // InternalRMParser.g:1992:4: (lv_node_3_0= ruleENodeTypeBody )
-            // InternalRMParser.g:1993:5: lv_node_3_0= ruleENodeTypeBody
+            // InternalRMParser.g:3557:4: (lv_node_3_0= ruleENodeTypeBody )
+            // InternalRMParser.g:3558:5: lv_node_3_0= ruleENodeTypeBody
             {
 
             					newCompositeNode(grammarAccess.getENodeTypeAccess().getNodeENodeTypeBodyParserRuleCall_3_0());
@@ -5097,7 +9098,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleENodeTypeBody"
-    // InternalRMParser.g:2018:1: entryRuleENodeTypeBody returns [EObject current=null] : iv_ruleENodeTypeBody= ruleENodeTypeBody EOF ;
+    // InternalRMParser.g:3583:1: entryRuleENodeTypeBody returns [EObject current=null] : iv_ruleENodeTypeBody= ruleENodeTypeBody EOF ;
     public final EObject entryRuleENodeTypeBody() throws RecognitionException {
         EObject current = null;
 
@@ -5105,8 +9106,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2018:54: (iv_ruleENodeTypeBody= ruleENodeTypeBody EOF )
-            // InternalRMParser.g:2019:2: iv_ruleENodeTypeBody= ruleENodeTypeBody EOF
+            // InternalRMParser.g:3583:54: (iv_ruleENodeTypeBody= ruleENodeTypeBody EOF )
+            // InternalRMParser.g:3584:2: iv_ruleENodeTypeBody= ruleENodeTypeBody EOF
             {
              newCompositeNode(grammarAccess.getENodeTypeBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -5133,7 +9134,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleENodeTypeBody"
-    // InternalRMParser.g:2025:1: ruleENodeTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) ) ;
+    // InternalRMParser.g:3590:1: ruleENodeTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleENodeTypeBody() throws RecognitionException {
         EObject current = null;
 
@@ -5172,14 +9173,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2031:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) ) )
-            // InternalRMParser.g:2032:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:3596:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) ) )
+            // InternalRMParser.g:3597:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) )
             {
-            // InternalRMParser.g:2032:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) )
-            // InternalRMParser.g:2033:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) )
+            // InternalRMParser.g:3597:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:3598:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) )
             {
-            // InternalRMParser.g:2033:3: ()
-            // InternalRMParser.g:2034:4: 
+            // InternalRMParser.g:3598:3: ()
+            // InternalRMParser.g:3599:4: 
             {
 
             				current = forceCreateModelElement(
@@ -5189,86 +9190,86 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:2040:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) )
-            // InternalRMParser.g:2041:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) )
+            // InternalRMParser.g:3605:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) ) )
+            // InternalRMParser.g:3606:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) )
             {
-            // InternalRMParser.g:2041:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) )
-            // InternalRMParser.g:2042:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* )
+            // InternalRMParser.g:3606:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* ) )
+            // InternalRMParser.g:3607:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1());
             				
-            // InternalRMParser.g:2045:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* )
-            // InternalRMParser.g:2046:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )*
+            // InternalRMParser.g:3610:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )* )
+            // InternalRMParser.g:3611:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )*
             {
-            // InternalRMParser.g:2046:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )*
-            loop16:
+            // InternalRMParser.g:3611:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) ) )*
+            loop29:
             do {
-                int alt16=8;
-                int LA16_0 = input.LA(1);
+                int alt29=8;
+                int LA29_0 = input.LA(1);
 
-                if ( LA16_0 == Derived_from && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
-                    alt16=1;
+                if ( LA29_0 == Derived_from && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
+                    alt29=1;
                 }
-                else if ( LA16_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
-                    alt16=2;
+                else if ( LA29_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
+                    alt29=2;
                 }
-                else if ( LA16_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
-                    alt16=3;
+                else if ( LA29_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
+                    alt29=3;
                 }
-                else if ( LA16_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
-                    alt16=4;
+                else if ( LA29_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
+                    alt29=4;
                 }
-                else if ( LA16_0 == Interfaces && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
-                    alt16=5;
+                else if ( LA29_0 == Interfaces && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
+                    alt29=5;
                 }
-                else if ( LA16_0 == Capabilities && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
-                    alt16=6;
+                else if ( LA29_0 == Capabilities && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
+                    alt29=6;
                 }
-                else if ( LA16_0 == Requirements && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 6) ) {
-                    alt16=7;
+                else if ( LA29_0 == Requirements && getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 6) ) {
+                    alt29=7;
                 }
 
 
-                switch (alt16) {
+                switch (alt29) {
             	case 1 :
-            	    // InternalRMParser.g:2047:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:3612:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2047:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:2048:5: {...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:3612:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:3613:5: {...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalRMParser.g:2048:110: ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:2049:6: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:3613:110: ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:3614:6: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 0);
             	    					
-            	    // InternalRMParser.g:2052:9: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:2052:10: {...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:3617:9: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:3617:10: {...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2052:19: (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:2052:20: otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:3617:19: (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:3617:20: otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_2=(Token)match(input,Derived_from,FOLLOW_6); 
 
             	    									newLeafNode(otherlv_2, grammarAccess.getENodeTypeBodyAccess().getDerived_fromKeyword_1_0_0());
             	    								
-            	    // InternalRMParser.g:2056:9: ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:2057:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:3621:9: ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:3622:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:2057:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:2058:11: lv_superType_3_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:3622:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:3623:11: lv_superType_3_0= ruleEPREFIX_TYPE
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0());
             	    										
-            	    pushFollow(FOLLOW_27);
+            	    pushFollow(FOLLOW_50);
             	    lv_superType_3_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -5309,40 +9310,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:2081:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:3646:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2081:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:2082:5: {...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:3646:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:3647:5: {...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalRMParser.g:2082:110: ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:2083:6: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:3647:110: ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:3648:6: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 1);
             	    					
-            	    // InternalRMParser.g:2086:9: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:2086:10: {...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:3651:9: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:3651:10: {...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2086:19: (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:2086:20: otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) )
+            	    // InternalRMParser.g:3651:19: (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:3651:20: otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) )
             	    {
             	    otherlv_4=(Token)match(input,Description,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_4, grammarAccess.getENodeTypeBodyAccess().getDescriptionKeyword_1_1_0());
             	    								
-            	    // InternalRMParser.g:2090:9: ( (lv_description_5_0= RULE_STRING ) )
-            	    // InternalRMParser.g:2091:10: (lv_description_5_0= RULE_STRING )
+            	    // InternalRMParser.g:3655:9: ( (lv_description_5_0= RULE_STRING ) )
+            	    // InternalRMParser.g:3656:10: (lv_description_5_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:2091:10: (lv_description_5_0= RULE_STRING )
-            	    // InternalRMParser.g:2092:11: lv_description_5_0= RULE_STRING
+            	    // InternalRMParser.g:3656:10: (lv_description_5_0= RULE_STRING )
+            	    // InternalRMParser.g:3657:11: lv_description_5_0= RULE_STRING
             	    {
-            	    lv_description_5_0=(Token)match(input,RULE_STRING,FOLLOW_27); 
+            	    lv_description_5_0=(Token)match(input,RULE_STRING,FOLLOW_50); 
 
             	    											newLeafNode(lv_description_5_0, grammarAccess.getENodeTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0());
             	    										
@@ -5381,28 +9382,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:2114:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3679:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2114:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2115:5: {...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
+            	    // InternalRMParser.g:3679:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3680:5: {...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 2)");
             	    }
-            	    // InternalRMParser.g:2115:110: ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
-            	    // InternalRMParser.g:2116:6: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
+            	    // InternalRMParser.g:3680:110: ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
+            	    // InternalRMParser.g:3681:6: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 2);
             	    					
-            	    // InternalRMParser.g:2119:9: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
-            	    // InternalRMParser.g:2119:10: {...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
+            	    // InternalRMParser.g:3684:9: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
+            	    // InternalRMParser.g:3684:10: {...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2119:19: (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
-            	    // InternalRMParser.g:2119:20: otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END
+            	    // InternalRMParser.g:3684:19: (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
+            	    // InternalRMParser.g:3684:20: otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END
             	    {
             	    otherlv_6=(Token)match(input,Properties,FOLLOW_5); 
 
@@ -5412,11 +9413,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_7, grammarAccess.getENodeTypeBodyAccess().getBEGINTerminalRuleCall_1_2_1());
             	    								
-            	    // InternalRMParser.g:2127:9: ( (lv_properties_8_0= ruleEProperties ) )
-            	    // InternalRMParser.g:2128:10: (lv_properties_8_0= ruleEProperties )
+            	    // InternalRMParser.g:3692:9: ( (lv_properties_8_0= ruleEProperties ) )
+            	    // InternalRMParser.g:3693:10: (lv_properties_8_0= ruleEProperties )
             	    {
-            	    // InternalRMParser.g:2128:10: (lv_properties_8_0= ruleEProperties )
-            	    // InternalRMParser.g:2129:11: lv_properties_8_0= ruleEProperties
+            	    // InternalRMParser.g:3693:10: (lv_properties_8_0= ruleEProperties )
+            	    // InternalRMParser.g:3694:11: lv_properties_8_0= ruleEProperties
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_2_2_0());
@@ -5443,7 +9444,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_9=(Token)match(input,RULE_END,FOLLOW_27); 
+            	    this_END_9=(Token)match(input,RULE_END,FOLLOW_50); 
 
             	    									newLeafNode(this_END_9, grammarAccess.getENodeTypeBodyAccess().getENDTerminalRuleCall_1_2_3());
             	    								
@@ -5466,28 +9467,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:2156:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3721:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2156:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2157:5: {...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
+            	    // InternalRMParser.g:3721:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3722:5: {...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 3)");
             	    }
-            	    // InternalRMParser.g:2157:110: ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
-            	    // InternalRMParser.g:2158:6: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
+            	    // InternalRMParser.g:3722:110: ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
+            	    // InternalRMParser.g:3723:6: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 3);
             	    					
-            	    // InternalRMParser.g:2161:9: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
-            	    // InternalRMParser.g:2161:10: {...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
+            	    // InternalRMParser.g:3726:9: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
+            	    // InternalRMParser.g:3726:10: {...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2161:19: (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
-            	    // InternalRMParser.g:2161:20: otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END
+            	    // InternalRMParser.g:3726:19: (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
+            	    // InternalRMParser.g:3726:20: otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_attributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END
             	    {
             	    otherlv_10=(Token)match(input,Attributes,FOLLOW_5); 
 
@@ -5497,11 +9498,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_11, grammarAccess.getENodeTypeBodyAccess().getBEGINTerminalRuleCall_1_3_1());
             	    								
-            	    // InternalRMParser.g:2169:9: ( (lv_attributes_12_0= ruleEAttributes ) )
-            	    // InternalRMParser.g:2170:10: (lv_attributes_12_0= ruleEAttributes )
+            	    // InternalRMParser.g:3734:9: ( (lv_attributes_12_0= ruleEAttributes ) )
+            	    // InternalRMParser.g:3735:10: (lv_attributes_12_0= ruleEAttributes )
             	    {
-            	    // InternalRMParser.g:2170:10: (lv_attributes_12_0= ruleEAttributes )
-            	    // InternalRMParser.g:2171:11: lv_attributes_12_0= ruleEAttributes
+            	    // InternalRMParser.g:3735:10: (lv_attributes_12_0= ruleEAttributes )
+            	    // InternalRMParser.g:3736:11: lv_attributes_12_0= ruleEAttributes
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getAttributesEAttributesParserRuleCall_1_3_2_0());
@@ -5528,7 +9529,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_13=(Token)match(input,RULE_END,FOLLOW_27); 
+            	    this_END_13=(Token)match(input,RULE_END,FOLLOW_50); 
 
             	    									newLeafNode(this_END_13, grammarAccess.getENodeTypeBodyAccess().getENDTerminalRuleCall_1_3_3());
             	    								
@@ -5551,28 +9552,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalRMParser.g:2198:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3763:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2198:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2199:5: {...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
+            	    // InternalRMParser.g:3763:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3764:5: {...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 4)");
             	    }
-            	    // InternalRMParser.g:2199:110: ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
-            	    // InternalRMParser.g:2200:6: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
+            	    // InternalRMParser.g:3764:110: ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
+            	    // InternalRMParser.g:3765:6: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 4);
             	    					
-            	    // InternalRMParser.g:2203:9: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
-            	    // InternalRMParser.g:2203:10: {...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
+            	    // InternalRMParser.g:3768:9: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
+            	    // InternalRMParser.g:3768:10: {...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2203:19: (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
-            	    // InternalRMParser.g:2203:20: otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END
+            	    // InternalRMParser.g:3768:19: (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
+            	    // InternalRMParser.g:3768:20: otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END
             	    {
             	    otherlv_14=(Token)match(input,Interfaces,FOLLOW_5); 
 
@@ -5582,11 +9583,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_15, grammarAccess.getENodeTypeBodyAccess().getBEGINTerminalRuleCall_1_4_1());
             	    								
-            	    // InternalRMParser.g:2211:9: ( (lv_interfaces_16_0= ruleEInterfaces ) )
-            	    // InternalRMParser.g:2212:10: (lv_interfaces_16_0= ruleEInterfaces )
+            	    // InternalRMParser.g:3776:9: ( (lv_interfaces_16_0= ruleEInterfaces ) )
+            	    // InternalRMParser.g:3777:10: (lv_interfaces_16_0= ruleEInterfaces )
             	    {
-            	    // InternalRMParser.g:2212:10: (lv_interfaces_16_0= ruleEInterfaces )
-            	    // InternalRMParser.g:2213:11: lv_interfaces_16_0= ruleEInterfaces
+            	    // InternalRMParser.g:3777:10: (lv_interfaces_16_0= ruleEInterfaces )
+            	    // InternalRMParser.g:3778:11: lv_interfaces_16_0= ruleEInterfaces
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getInterfacesEInterfacesParserRuleCall_1_4_2_0());
@@ -5613,7 +9614,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_17=(Token)match(input,RULE_END,FOLLOW_27); 
+            	    this_END_17=(Token)match(input,RULE_END,FOLLOW_50); 
 
             	    									newLeafNode(this_END_17, grammarAccess.getENodeTypeBodyAccess().getENDTerminalRuleCall_1_4_3());
             	    								
@@ -5636,28 +9637,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // InternalRMParser.g:2240:4: ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3805:4: ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2240:4: ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2241:5: {...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) )
+            	    // InternalRMParser.g:3805:4: ({...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3806:5: {...}? => ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 5)");
             	    }
-            	    // InternalRMParser.g:2241:110: ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) )
-            	    // InternalRMParser.g:2242:6: ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) )
+            	    // InternalRMParser.g:3806:110: ( ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) ) )
+            	    // InternalRMParser.g:3807:6: ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 5);
             	    					
-            	    // InternalRMParser.g:2245:9: ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) )
-            	    // InternalRMParser.g:2245:10: {...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END )
+            	    // InternalRMParser.g:3810:9: ({...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END ) )
+            	    // InternalRMParser.g:3810:10: {...}? => (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2245:19: (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END )
-            	    // InternalRMParser.g:2245:20: otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END
+            	    // InternalRMParser.g:3810:19: (otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END )
+            	    // InternalRMParser.g:3810:20: otherlv_18= Capabilities this_BEGIN_19= RULE_BEGIN ( (lv_capabilities_20_0= ruleECapabilities ) ) this_END_21= RULE_END
             	    {
             	    otherlv_18=(Token)match(input,Capabilities,FOLLOW_5); 
 
@@ -5667,11 +9668,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_19, grammarAccess.getENodeTypeBodyAccess().getBEGINTerminalRuleCall_1_5_1());
             	    								
-            	    // InternalRMParser.g:2253:9: ( (lv_capabilities_20_0= ruleECapabilities ) )
-            	    // InternalRMParser.g:2254:10: (lv_capabilities_20_0= ruleECapabilities )
+            	    // InternalRMParser.g:3818:9: ( (lv_capabilities_20_0= ruleECapabilities ) )
+            	    // InternalRMParser.g:3819:10: (lv_capabilities_20_0= ruleECapabilities )
             	    {
-            	    // InternalRMParser.g:2254:10: (lv_capabilities_20_0= ruleECapabilities )
-            	    // InternalRMParser.g:2255:11: lv_capabilities_20_0= ruleECapabilities
+            	    // InternalRMParser.g:3819:10: (lv_capabilities_20_0= ruleECapabilities )
+            	    // InternalRMParser.g:3820:11: lv_capabilities_20_0= ruleECapabilities
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getCapabilitiesECapabilitiesParserRuleCall_1_5_2_0());
@@ -5698,7 +9699,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_21=(Token)match(input,RULE_END,FOLLOW_27); 
+            	    this_END_21=(Token)match(input,RULE_END,FOLLOW_50); 
 
             	    									newLeafNode(this_END_21, grammarAccess.getENodeTypeBodyAccess().getENDTerminalRuleCall_1_5_3());
             	    								
@@ -5721,28 +9722,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // InternalRMParser.g:2282:4: ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3847:4: ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2282:4: ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2283:5: {...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) )
+            	    // InternalRMParser.g:3847:4: ({...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) ) )
+            	    // InternalRMParser.g:3848:5: {...}? => ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 6) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 6)");
             	    }
-            	    // InternalRMParser.g:2283:110: ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) )
-            	    // InternalRMParser.g:2284:6: ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) )
+            	    // InternalRMParser.g:3848:110: ( ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) ) )
+            	    // InternalRMParser.g:3849:6: ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getENodeTypeBodyAccess().getUnorderedGroup_1(), 6);
             	    					
-            	    // InternalRMParser.g:2287:9: ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) )
-            	    // InternalRMParser.g:2287:10: {...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END )
+            	    // InternalRMParser.g:3852:9: ({...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END ) )
+            	    // InternalRMParser.g:3852:10: {...}? => (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleENodeTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2287:19: (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END )
-            	    // InternalRMParser.g:2287:20: otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END
+            	    // InternalRMParser.g:3852:19: (otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END )
+            	    // InternalRMParser.g:3852:20: otherlv_22= Requirements this_BEGIN_23= RULE_BEGIN ( (lv_requirements_24_0= ruleERequirements ) ) this_END_25= RULE_END
             	    {
             	    otherlv_22=(Token)match(input,Requirements,FOLLOW_5); 
 
@@ -5752,11 +9753,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_23, grammarAccess.getENodeTypeBodyAccess().getBEGINTerminalRuleCall_1_6_1());
             	    								
-            	    // InternalRMParser.g:2295:9: ( (lv_requirements_24_0= ruleERequirements ) )
-            	    // InternalRMParser.g:2296:10: (lv_requirements_24_0= ruleERequirements )
+            	    // InternalRMParser.g:3860:9: ( (lv_requirements_24_0= ruleERequirements ) )
+            	    // InternalRMParser.g:3861:10: (lv_requirements_24_0= ruleERequirements )
             	    {
-            	    // InternalRMParser.g:2296:10: (lv_requirements_24_0= ruleERequirements )
-            	    // InternalRMParser.g:2297:11: lv_requirements_24_0= ruleERequirements
+            	    // InternalRMParser.g:3861:10: (lv_requirements_24_0= ruleERequirements )
+            	    // InternalRMParser.g:3862:11: lv_requirements_24_0= ruleERequirements
             	    {
 
             	    											newCompositeNode(grammarAccess.getENodeTypeBodyAccess().getRequirementsERequirementsParserRuleCall_1_6_2_0());
@@ -5783,7 +9784,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_25=(Token)match(input,RULE_END,FOLLOW_27); 
+            	    this_END_25=(Token)match(input,RULE_END,FOLLOW_50); 
 
             	    									newLeafNode(this_END_25, grammarAccess.getENodeTypeBodyAccess().getENDTerminalRuleCall_1_6_3());
             	    								
@@ -5807,7 +9808,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop16;
+            	    break loop29;
                 }
             } while (true);
 
@@ -5846,7 +9847,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERelationshipTypes"
-    // InternalRMParser.g:2335:1: entryRuleERelationshipTypes returns [EObject current=null] : iv_ruleERelationshipTypes= ruleERelationshipTypes EOF ;
+    // InternalRMParser.g:3900:1: entryRuleERelationshipTypes returns [EObject current=null] : iv_ruleERelationshipTypes= ruleERelationshipTypes EOF ;
     public final EObject entryRuleERelationshipTypes() throws RecognitionException {
         EObject current = null;
 
@@ -5854,8 +9855,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2335:59: (iv_ruleERelationshipTypes= ruleERelationshipTypes EOF )
-            // InternalRMParser.g:2336:2: iv_ruleERelationshipTypes= ruleERelationshipTypes EOF
+            // InternalRMParser.g:3900:59: (iv_ruleERelationshipTypes= ruleERelationshipTypes EOF )
+            // InternalRMParser.g:3901:2: iv_ruleERelationshipTypes= ruleERelationshipTypes EOF
             {
              newCompositeNode(grammarAccess.getERelationshipTypesRule()); 
             pushFollow(FOLLOW_1);
@@ -5882,7 +9883,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERelationshipTypes"
-    // InternalRMParser.g:2342:1: ruleERelationshipTypes returns [EObject current=null] : ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ ) ;
+    // InternalRMParser.g:3907:1: ruleERelationshipTypes returns [EObject current=null] : ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ ) ;
     public final EObject ruleERelationshipTypes() throws RecognitionException {
         EObject current = null;
 
@@ -5893,14 +9894,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2348:2: ( ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ ) )
-            // InternalRMParser.g:2349:2: ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ )
+            // InternalRMParser.g:3913:2: ( ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ ) )
+            // InternalRMParser.g:3914:2: ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ )
             {
-            // InternalRMParser.g:2349:2: ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ )
-            // InternalRMParser.g:2350:3: () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+
+            // InternalRMParser.g:3914:2: ( () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+ )
+            // InternalRMParser.g:3915:3: () ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+
             {
-            // InternalRMParser.g:2350:3: ()
-            // InternalRMParser.g:2351:4: 
+            // InternalRMParser.g:3915:3: ()
+            // InternalRMParser.g:3916:4: 
             {
 
             				current = forceCreateModelElement(
@@ -5910,24 +9911,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:2357:3: ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+
-            int cnt17=0;
-            loop17:
+            // InternalRMParser.g:3922:3: ( (lv_relationshipTypes_1_0= ruleERelationshipType ) )+
+            int cnt30=0;
+            loop30:
             do {
-                int alt17=2;
-                int LA17_0 = input.LA(1);
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-                if ( (LA17_0==RULE_QUALIFIED_NAME) ) {
-                    alt17=1;
+                if ( (LA30_0==RULE_QUALIFIED_NAME) ) {
+                    alt30=1;
                 }
 
 
-                switch (alt17) {
+                switch (alt30) {
             	case 1 :
-            	    // InternalRMParser.g:2358:4: (lv_relationshipTypes_1_0= ruleERelationshipType )
+            	    // InternalRMParser.g:3923:4: (lv_relationshipTypes_1_0= ruleERelationshipType )
             	    {
-            	    // InternalRMParser.g:2358:4: (lv_relationshipTypes_1_0= ruleERelationshipType )
-            	    // InternalRMParser.g:2359:5: lv_relationshipTypes_1_0= ruleERelationshipType
+            	    // InternalRMParser.g:3923:4: (lv_relationshipTypes_1_0= ruleERelationshipType )
+            	    // InternalRMParser.g:3924:5: lv_relationshipTypes_1_0= ruleERelationshipType
             	    {
 
             	    					newCompositeNode(grammarAccess.getERelationshipTypesAccess().getRelationshipTypesERelationshipTypeParserRuleCall_1_0());
@@ -5956,12 +9957,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt17 >= 1 ) break loop17;
+            	    if ( cnt30 >= 1 ) break loop30;
                         EarlyExitException eee =
-                            new EarlyExitException(17, input);
+                            new EarlyExitException(30, input);
                         throw eee;
                 }
-                cnt17++;
+                cnt30++;
             } while (true);
 
 
@@ -5987,7 +9988,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERelationshipType"
-    // InternalRMParser.g:2380:1: entryRuleERelationshipType returns [EObject current=null] : iv_ruleERelationshipType= ruleERelationshipType EOF ;
+    // InternalRMParser.g:3945:1: entryRuleERelationshipType returns [EObject current=null] : iv_ruleERelationshipType= ruleERelationshipType EOF ;
     public final EObject entryRuleERelationshipType() throws RecognitionException {
         EObject current = null;
 
@@ -5995,8 +9996,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2380:58: (iv_ruleERelationshipType= ruleERelationshipType EOF )
-            // InternalRMParser.g:2381:2: iv_ruleERelationshipType= ruleERelationshipType EOF
+            // InternalRMParser.g:3945:58: (iv_ruleERelationshipType= ruleERelationshipType EOF )
+            // InternalRMParser.g:3946:2: iv_ruleERelationshipType= ruleERelationshipType EOF
             {
              newCompositeNode(grammarAccess.getERelationshipTypeRule()); 
             pushFollow(FOLLOW_1);
@@ -6023,7 +10024,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERelationshipType"
-    // InternalRMParser.g:2387:1: ruleERelationshipType returns [EObject current=null] : ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:3952:1: ruleERelationshipType returns [EObject current=null] : ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleERelationshipType() throws RecognitionException {
         EObject current = null;
 
@@ -6038,17 +10039,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2393:2: ( ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:2394:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:3958:2: ( ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:3959:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:2394:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:2395:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:3959:2: ( ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:3960:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_relationship_3_0= ruleERelationshipTypeBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:2395:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:2396:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:3960:3: ( (lv_name_0_0= RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:3961:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
             {
-            // InternalRMParser.g:2396:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:2397:5: lv_name_0_0= RULE_QUALIFIED_NAME
+            // InternalRMParser.g:3961:4: (lv_name_0_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:3962:5: lv_name_0_0= RULE_QUALIFIED_NAME
             {
             lv_name_0_0=(Token)match(input,RULE_QUALIFIED_NAME,FOLLOW_10); 
 
@@ -6074,15 +10075,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getERelationshipTypeAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_28); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_51); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getERelationshipTypeAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:2421:3: ( (lv_relationship_3_0= ruleERelationshipTypeBody ) )
-            // InternalRMParser.g:2422:4: (lv_relationship_3_0= ruleERelationshipTypeBody )
+            // InternalRMParser.g:3986:3: ( (lv_relationship_3_0= ruleERelationshipTypeBody ) )
+            // InternalRMParser.g:3987:4: (lv_relationship_3_0= ruleERelationshipTypeBody )
             {
-            // InternalRMParser.g:2422:4: (lv_relationship_3_0= ruleERelationshipTypeBody )
-            // InternalRMParser.g:2423:5: lv_relationship_3_0= ruleERelationshipTypeBody
+            // InternalRMParser.g:3987:4: (lv_relationship_3_0= ruleERelationshipTypeBody )
+            // InternalRMParser.g:3988:5: lv_relationship_3_0= ruleERelationshipTypeBody
             {
 
             					newCompositeNode(grammarAccess.getERelationshipTypeAccess().getRelationshipERelationshipTypeBodyParserRuleCall_3_0());
@@ -6136,7 +10137,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERelationshipTypeBody"
-    // InternalRMParser.g:2448:1: entryRuleERelationshipTypeBody returns [EObject current=null] : iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF ;
+    // InternalRMParser.g:4013:1: entryRuleERelationshipTypeBody returns [EObject current=null] : iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF ;
     public final EObject entryRuleERelationshipTypeBody() throws RecognitionException {
         EObject current = null;
 
@@ -6144,8 +10145,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2448:62: (iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF )
-            // InternalRMParser.g:2449:2: iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF
+            // InternalRMParser.g:4013:62: (iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF )
+            // InternalRMParser.g:4014:2: iv_ruleERelationshipTypeBody= ruleERelationshipTypeBody EOF
             {
              newCompositeNode(grammarAccess.getERelationshipTypeBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -6172,7 +10173,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERelationshipTypeBody"
-    // InternalRMParser.g:2455:1: ruleERelationshipTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) ) ;
+    // InternalRMParser.g:4020:1: ruleERelationshipTypeBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleERelationshipTypeBody() throws RecognitionException {
         EObject current = null;
 
@@ -6206,14 +10207,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2461:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) ) )
-            // InternalRMParser.g:2462:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:4026:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) ) )
+            // InternalRMParser.g:4027:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) )
             {
-            // InternalRMParser.g:2462:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) )
-            // InternalRMParser.g:2463:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) )
+            // InternalRMParser.g:4027:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:4028:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) )
             {
-            // InternalRMParser.g:2463:3: ()
-            // InternalRMParser.g:2464:4: 
+            // InternalRMParser.g:4028:3: ()
+            // InternalRMParser.g:4029:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6223,83 +10224,83 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:2470:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) )
-            // InternalRMParser.g:2471:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) )
+            // InternalRMParser.g:4035:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) ) )
+            // InternalRMParser.g:4036:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) )
             {
-            // InternalRMParser.g:2471:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) )
-            // InternalRMParser.g:2472:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* )
+            // InternalRMParser.g:4036:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* ) )
+            // InternalRMParser.g:4037:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1());
             				
-            // InternalRMParser.g:2475:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* )
-            // InternalRMParser.g:2476:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )*
+            // InternalRMParser.g:4040:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )* )
+            // InternalRMParser.g:4041:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )*
             {
-            // InternalRMParser.g:2476:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )*
-            loop18:
+            // InternalRMParser.g:4041:6: ( ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) ) )*
+            loop31:
             do {
-                int alt18=7;
-                int LA18_0 = input.LA(1);
+                int alt31=7;
+                int LA31_0 = input.LA(1);
 
-                if ( LA18_0 == Derived_from && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
-                    alt18=1;
+                if ( LA31_0 == Derived_from && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
+                    alt31=1;
                 }
-                else if ( LA18_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
-                    alt18=2;
+                else if ( LA31_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
+                    alt31=2;
                 }
-                else if ( LA18_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
-                    alt18=3;
+                else if ( LA31_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
+                    alt31=3;
                 }
-                else if ( LA18_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
-                    alt18=4;
+                else if ( LA31_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
+                    alt31=4;
                 }
-                else if ( LA18_0 == Interfaces && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
-                    alt18=5;
+                else if ( LA31_0 == Interfaces && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
+                    alt31=5;
                 }
-                else if ( LA18_0 == Valid_target_types && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
-                    alt18=6;
+                else if ( LA31_0 == Valid_target_types && getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
+                    alt31=6;
                 }
 
 
-                switch (alt18) {
+                switch (alt31) {
             	case 1 :
-            	    // InternalRMParser.g:2477:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:4042:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2477:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:2478:5: {...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:4042:4: ({...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:4043:5: {...}? => ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalRMParser.g:2478:118: ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:2479:6: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:4043:118: ( ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:4044:6: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 0);
             	    					
-            	    // InternalRMParser.g:2482:9: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:2482:10: {...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:4047:9: ({...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:4047:10: {...}? => (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2482:19: (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:2482:20: otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:4047:19: (otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:4047:20: otherlv_2= Derived_from ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_2=(Token)match(input,Derived_from,FOLLOW_6); 
 
             	    									newLeafNode(otherlv_2, grammarAccess.getERelationshipTypeBodyAccess().getDerived_fromKeyword_1_0_0());
             	    								
-            	    // InternalRMParser.g:2486:9: ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:2487:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:4051:9: ( (lv_superType_3_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:4052:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:2487:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:2488:11: lv_superType_3_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:4052:10: (lv_superType_3_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:4053:11: lv_superType_3_0= ruleEPREFIX_TYPE
             	    {
 
             	    											newCompositeNode(grammarAccess.getERelationshipTypeBodyAccess().getSuperTypeEPREFIX_TYPEParserRuleCall_1_0_1_0());
             	    										
-            	    pushFollow(FOLLOW_29);
+            	    pushFollow(FOLLOW_52);
             	    lv_superType_3_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -6340,40 +10341,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:2511:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4076:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2511:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:2512:5: {...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4076:4: ({...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4077:5: {...}? => ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalRMParser.g:2512:118: ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:2513:6: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4077:118: ( ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4078:6: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 1);
             	    					
-            	    // InternalRMParser.g:2516:9: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:2516:10: {...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4081:9: ({...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4081:10: {...}? => (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2516:19: (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:2516:20: otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4081:19: (otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4081:20: otherlv_4= Description ( (lv_description_5_0= RULE_STRING ) )
             	    {
             	    otherlv_4=(Token)match(input,Description,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_4, grammarAccess.getERelationshipTypeBodyAccess().getDescriptionKeyword_1_1_0());
             	    								
-            	    // InternalRMParser.g:2520:9: ( (lv_description_5_0= RULE_STRING ) )
-            	    // InternalRMParser.g:2521:10: (lv_description_5_0= RULE_STRING )
+            	    // InternalRMParser.g:4085:9: ( (lv_description_5_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4086:10: (lv_description_5_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:2521:10: (lv_description_5_0= RULE_STRING )
-            	    // InternalRMParser.g:2522:11: lv_description_5_0= RULE_STRING
+            	    // InternalRMParser.g:4086:10: (lv_description_5_0= RULE_STRING )
+            	    // InternalRMParser.g:4087:11: lv_description_5_0= RULE_STRING
             	    {
-            	    lv_description_5_0=(Token)match(input,RULE_STRING,FOLLOW_29); 
+            	    lv_description_5_0=(Token)match(input,RULE_STRING,FOLLOW_52); 
 
             	    											newLeafNode(lv_description_5_0, grammarAccess.getERelationshipTypeBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0());
             	    										
@@ -6412,28 +10413,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:2544:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4109:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2544:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2545:5: {...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
+            	    // InternalRMParser.g:4109:4: ({...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4110:5: {...}? => ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 2)");
             	    }
-            	    // InternalRMParser.g:2545:118: ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
-            	    // InternalRMParser.g:2546:6: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
+            	    // InternalRMParser.g:4110:118: ( ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) ) )
+            	    // InternalRMParser.g:4111:6: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 2);
             	    					
-            	    // InternalRMParser.g:2549:9: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
-            	    // InternalRMParser.g:2549:10: {...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
+            	    // InternalRMParser.g:4114:9: ({...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END ) )
+            	    // InternalRMParser.g:4114:10: {...}? => (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2549:19: (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
-            	    // InternalRMParser.g:2549:20: otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END
+            	    // InternalRMParser.g:4114:19: (otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END )
+            	    // InternalRMParser.g:4114:20: otherlv_6= Properties this_BEGIN_7= RULE_BEGIN ( (lv_properties_8_0= ruleEProperties ) ) this_END_9= RULE_END
             	    {
             	    otherlv_6=(Token)match(input,Properties,FOLLOW_5); 
 
@@ -6443,11 +10444,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_7, grammarAccess.getERelationshipTypeBodyAccess().getBEGINTerminalRuleCall_1_2_1());
             	    								
-            	    // InternalRMParser.g:2557:9: ( (lv_properties_8_0= ruleEProperties ) )
-            	    // InternalRMParser.g:2558:10: (lv_properties_8_0= ruleEProperties )
+            	    // InternalRMParser.g:4122:9: ( (lv_properties_8_0= ruleEProperties ) )
+            	    // InternalRMParser.g:4123:10: (lv_properties_8_0= ruleEProperties )
             	    {
-            	    // InternalRMParser.g:2558:10: (lv_properties_8_0= ruleEProperties )
-            	    // InternalRMParser.g:2559:11: lv_properties_8_0= ruleEProperties
+            	    // InternalRMParser.g:4123:10: (lv_properties_8_0= ruleEProperties )
+            	    // InternalRMParser.g:4124:11: lv_properties_8_0= ruleEProperties
             	    {
 
             	    											newCompositeNode(grammarAccess.getERelationshipTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_2_2_0());
@@ -6474,7 +10475,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_9=(Token)match(input,RULE_END,FOLLOW_29); 
+            	    this_END_9=(Token)match(input,RULE_END,FOLLOW_52); 
 
             	    									newLeafNode(this_END_9, grammarAccess.getERelationshipTypeBodyAccess().getENDTerminalRuleCall_1_2_3());
             	    								
@@ -6497,28 +10498,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:2586:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4151:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2586:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2587:5: {...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
+            	    // InternalRMParser.g:4151:4: ({...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4152:5: {...}? => ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 3)");
             	    }
-            	    // InternalRMParser.g:2587:118: ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
-            	    // InternalRMParser.g:2588:6: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
+            	    // InternalRMParser.g:4152:118: ( ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) ) )
+            	    // InternalRMParser.g:4153:6: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 3);
             	    					
-            	    // InternalRMParser.g:2591:9: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
-            	    // InternalRMParser.g:2591:10: {...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
+            	    // InternalRMParser.g:4156:9: ({...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END ) )
+            	    // InternalRMParser.g:4156:10: {...}? => (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2591:19: (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
-            	    // InternalRMParser.g:2591:20: otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END
+            	    // InternalRMParser.g:4156:19: (otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END )
+            	    // InternalRMParser.g:4156:20: otherlv_10= Attributes this_BEGIN_11= RULE_BEGIN ( (lv_atributes_12_0= ruleEAttributes ) ) this_END_13= RULE_END
             	    {
             	    otherlv_10=(Token)match(input,Attributes,FOLLOW_5); 
 
@@ -6528,11 +10529,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_11, grammarAccess.getERelationshipTypeBodyAccess().getBEGINTerminalRuleCall_1_3_1());
             	    								
-            	    // InternalRMParser.g:2599:9: ( (lv_atributes_12_0= ruleEAttributes ) )
-            	    // InternalRMParser.g:2600:10: (lv_atributes_12_0= ruleEAttributes )
+            	    // InternalRMParser.g:4164:9: ( (lv_atributes_12_0= ruleEAttributes ) )
+            	    // InternalRMParser.g:4165:10: (lv_atributes_12_0= ruleEAttributes )
             	    {
-            	    // InternalRMParser.g:2600:10: (lv_atributes_12_0= ruleEAttributes )
-            	    // InternalRMParser.g:2601:11: lv_atributes_12_0= ruleEAttributes
+            	    // InternalRMParser.g:4165:10: (lv_atributes_12_0= ruleEAttributes )
+            	    // InternalRMParser.g:4166:11: lv_atributes_12_0= ruleEAttributes
             	    {
 
             	    											newCompositeNode(grammarAccess.getERelationshipTypeBodyAccess().getAtributesEAttributesParserRuleCall_1_3_2_0());
@@ -6559,7 +10560,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_13=(Token)match(input,RULE_END,FOLLOW_29); 
+            	    this_END_13=(Token)match(input,RULE_END,FOLLOW_52); 
 
             	    									newLeafNode(this_END_13, grammarAccess.getERelationshipTypeBodyAccess().getENDTerminalRuleCall_1_3_3());
             	    								
@@ -6582,28 +10583,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalRMParser.g:2628:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4193:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:2628:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
-            	    // InternalRMParser.g:2629:5: {...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
+            	    // InternalRMParser.g:4193:4: ({...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4194:5: {...}? => ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 4)");
             	    }
-            	    // InternalRMParser.g:2629:118: ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
-            	    // InternalRMParser.g:2630:6: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
+            	    // InternalRMParser.g:4194:118: ( ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) ) )
+            	    // InternalRMParser.g:4195:6: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 4);
             	    					
-            	    // InternalRMParser.g:2633:9: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
-            	    // InternalRMParser.g:2633:10: {...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
+            	    // InternalRMParser.g:4198:9: ({...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END ) )
+            	    // InternalRMParser.g:4198:10: {...}? => (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2633:19: (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
-            	    // InternalRMParser.g:2633:20: otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END
+            	    // InternalRMParser.g:4198:19: (otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END )
+            	    // InternalRMParser.g:4198:20: otherlv_14= Interfaces this_BEGIN_15= RULE_BEGIN ( (lv_interfaces_16_0= ruleEInterfaces ) ) this_END_17= RULE_END
             	    {
             	    otherlv_14=(Token)match(input,Interfaces,FOLLOW_5); 
 
@@ -6613,11 +10614,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_15, grammarAccess.getERelationshipTypeBodyAccess().getBEGINTerminalRuleCall_1_4_1());
             	    								
-            	    // InternalRMParser.g:2641:9: ( (lv_interfaces_16_0= ruleEInterfaces ) )
-            	    // InternalRMParser.g:2642:10: (lv_interfaces_16_0= ruleEInterfaces )
+            	    // InternalRMParser.g:4206:9: ( (lv_interfaces_16_0= ruleEInterfaces ) )
+            	    // InternalRMParser.g:4207:10: (lv_interfaces_16_0= ruleEInterfaces )
             	    {
-            	    // InternalRMParser.g:2642:10: (lv_interfaces_16_0= ruleEInterfaces )
-            	    // InternalRMParser.g:2643:11: lv_interfaces_16_0= ruleEInterfaces
+            	    // InternalRMParser.g:4207:10: (lv_interfaces_16_0= ruleEInterfaces )
+            	    // InternalRMParser.g:4208:11: lv_interfaces_16_0= ruleEInterfaces
             	    {
 
             	    											newCompositeNode(grammarAccess.getERelationshipTypeBodyAccess().getInterfacesEInterfacesParserRuleCall_1_4_2_0());
@@ -6644,7 +10645,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_17=(Token)match(input,RULE_END,FOLLOW_29); 
+            	    this_END_17=(Token)match(input,RULE_END,FOLLOW_52); 
 
             	    									newLeafNode(this_END_17, grammarAccess.getERelationshipTypeBodyAccess().getENDTerminalRuleCall_1_4_3());
             	    								
@@ -6667,30 +10668,30 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // InternalRMParser.g:2670:4: ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:4235:4: ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) )
             	    {
-            	    // InternalRMParser.g:2670:4: ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) )
-            	    // InternalRMParser.g:2671:5: {...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:4235:4: ({...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:4236:5: {...}? => ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 5) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 5)");
             	    }
-            	    // InternalRMParser.g:2671:118: ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) )
-            	    // InternalRMParser.g:2672:6: ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) )
+            	    // InternalRMParser.g:4236:118: ( ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:4237:6: ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getERelationshipTypeBodyAccess().getUnorderedGroup_1(), 5);
             	    					
-            	    // InternalRMParser.g:2675:9: ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) )
-            	    // InternalRMParser.g:2675:10: {...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket )
+            	    // InternalRMParser.g:4240:9: ({...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket ) )
+            	    // InternalRMParser.g:4240:10: {...}? => (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERelationshipTypeBody", "true");
             	    }
-            	    // InternalRMParser.g:2675:19: (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket )
-            	    // InternalRMParser.g:2675:20: otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket
+            	    // InternalRMParser.g:4240:19: (otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket )
+            	    // InternalRMParser.g:4240:20: otherlv_18= Valid_target_types otherlv_19= LeftSquareBracket ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) ) otherlv_21= RightSquareBracket
             	    {
-            	    otherlv_18=(Token)match(input,Valid_target_types,FOLLOW_30); 
+            	    otherlv_18=(Token)match(input,Valid_target_types,FOLLOW_27); 
 
             	    									newLeafNode(otherlv_18, grammarAccess.getERelationshipTypeBodyAccess().getValid_target_typesKeyword_1_5_0());
             	    								
@@ -6698,16 +10699,16 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(otherlv_19, grammarAccess.getERelationshipTypeBodyAccess().getLeftSquareBracketKeyword_1_5_1());
             	    								
-            	    // InternalRMParser.g:2683:9: ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) )
-            	    // InternalRMParser.g:2684:10: (lv_valid_target_types_20_0= ruleEValidTargetTypes )
+            	    // InternalRMParser.g:4248:9: ( (lv_valid_target_types_20_0= ruleEValidTargetTypes ) )
+            	    // InternalRMParser.g:4249:10: (lv_valid_target_types_20_0= ruleEValidTargetTypes )
             	    {
-            	    // InternalRMParser.g:2684:10: (lv_valid_target_types_20_0= ruleEValidTargetTypes )
-            	    // InternalRMParser.g:2685:11: lv_valid_target_types_20_0= ruleEValidTargetTypes
+            	    // InternalRMParser.g:4249:10: (lv_valid_target_types_20_0= ruleEValidTargetTypes )
+            	    // InternalRMParser.g:4250:11: lv_valid_target_types_20_0= ruleEValidTargetTypes
             	    {
 
             	    											newCompositeNode(grammarAccess.getERelationshipTypeBodyAccess().getValid_target_typesEValidTargetTypesParserRuleCall_1_5_2_0());
             	    										
-            	    pushFollow(FOLLOW_31);
+            	    pushFollow(FOLLOW_28);
             	    lv_valid_target_types_20_0=ruleEValidTargetTypes();
 
             	    state._fsp--;
@@ -6729,7 +10730,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_21=(Token)match(input,RightSquareBracket,FOLLOW_29); 
+            	    otherlv_21=(Token)match(input,RightSquareBracket,FOLLOW_52); 
 
             	    									newLeafNode(otherlv_21, grammarAccess.getERelationshipTypeBodyAccess().getRightSquareBracketKeyword_1_5_3());
             	    								
@@ -6753,7 +10754,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop18;
+            	    break loop31;
                 }
             } while (true);
 
@@ -6792,7 +10793,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValidTargetTypes"
-    // InternalRMParser.g:2723:1: entryRuleEValidTargetTypes returns [EObject current=null] : iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF ;
+    // InternalRMParser.g:4288:1: entryRuleEValidTargetTypes returns [EObject current=null] : iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF ;
     public final EObject entryRuleEValidTargetTypes() throws RecognitionException {
         EObject current = null;
 
@@ -6800,8 +10801,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2723:58: (iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF )
-            // InternalRMParser.g:2724:2: iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF
+            // InternalRMParser.g:4288:58: (iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF )
+            // InternalRMParser.g:4289:2: iv_ruleEValidTargetTypes= ruleEValidTargetTypes EOF
             {
              newCompositeNode(grammarAccess.getEValidTargetTypesRule()); 
             pushFollow(FOLLOW_1);
@@ -6828,37 +10829,37 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValidTargetTypes"
-    // InternalRMParser.g:2730:1: ruleEValidTargetTypes returns [EObject current=null] : ( ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )* ) ;
+    // InternalRMParser.g:4295:1: ruleEValidTargetTypes returns [EObject current=null] : ( ( (lv_targetTypes_0_0= ruleETargetType ) ) (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )* ) ;
     public final EObject ruleEValidTargetTypes() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         EObject lv_targetTypes_0_0 = null;
 
-        EObject lv_sourceType_2_0 = null;
+        EObject lv_targetTypes_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRMParser.g:2736:2: ( ( ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )* ) )
-            // InternalRMParser.g:2737:2: ( ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )* )
+            // InternalRMParser.g:4301:2: ( ( ( (lv_targetTypes_0_0= ruleETargetType ) ) (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )* ) )
+            // InternalRMParser.g:4302:2: ( ( (lv_targetTypes_0_0= ruleETargetType ) ) (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )* )
             {
-            // InternalRMParser.g:2737:2: ( ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )* )
-            // InternalRMParser.g:2738:3: ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )*
+            // InternalRMParser.g:4302:2: ( ( (lv_targetTypes_0_0= ruleETargetType ) ) (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )* )
+            // InternalRMParser.g:4303:3: ( (lv_targetTypes_0_0= ruleETargetType ) ) (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )*
             {
-            // InternalRMParser.g:2738:3: ( (lv_targetTypes_0_0= ruleECapabilityTypeRef ) )
-            // InternalRMParser.g:2739:4: (lv_targetTypes_0_0= ruleECapabilityTypeRef )
+            // InternalRMParser.g:4303:3: ( (lv_targetTypes_0_0= ruleETargetType ) )
+            // InternalRMParser.g:4304:4: (lv_targetTypes_0_0= ruleETargetType )
             {
-            // InternalRMParser.g:2739:4: (lv_targetTypes_0_0= ruleECapabilityTypeRef )
-            // InternalRMParser.g:2740:5: lv_targetTypes_0_0= ruleECapabilityTypeRef
+            // InternalRMParser.g:4304:4: (lv_targetTypes_0_0= ruleETargetType )
+            // InternalRMParser.g:4305:5: lv_targetTypes_0_0= ruleETargetType
             {
 
-            					newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesECapabilityTypeRefParserRuleCall_0_0());
+            					newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesETargetTypeParserRuleCall_0_0());
             				
-            pushFollow(FOLLOW_32);
-            lv_targetTypes_0_0=ruleECapabilityTypeRef();
+            pushFollow(FOLLOW_45);
+            lv_targetTypes_0_0=ruleETargetType();
 
             state._fsp--;
 
@@ -6870,7 +10871,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             						current,
             						"targetTypes",
             						lv_targetTypes_0_0,
-            						"org.sodalite.dsl.RM.ECapabilityTypeRef");
+            						"org.sodalite.dsl.RM.ETargetType");
             					afterParserOrEnumRuleCall();
             				
 
@@ -6879,36 +10880,36 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:2757:3: (otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) ) )*
-            loop19:
+            // InternalRMParser.g:4322:3: (otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) ) )*
+            loop32:
             do {
-                int alt19=2;
-                int LA19_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( (LA19_0==Comma) ) {
-                    alt19=1;
+                if ( (LA32_0==Comma) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt19) {
+                switch (alt32) {
             	case 1 :
-            	    // InternalRMParser.g:2758:4: otherlv_1= Comma ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) )
+            	    // InternalRMParser.g:4323:4: otherlv_1= Comma ( (lv_targetTypes_2_0= ruleETargetType ) )
             	    {
             	    otherlv_1=(Token)match(input,Comma,FOLLOW_6); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getEValidTargetTypesAccess().getCommaKeyword_1_0());
             	    			
-            	    // InternalRMParser.g:2762:4: ( (lv_sourceType_2_0= ruleECapabilityTypeRef ) )
-            	    // InternalRMParser.g:2763:5: (lv_sourceType_2_0= ruleECapabilityTypeRef )
+            	    // InternalRMParser.g:4327:4: ( (lv_targetTypes_2_0= ruleETargetType ) )
+            	    // InternalRMParser.g:4328:5: (lv_targetTypes_2_0= ruleETargetType )
             	    {
-            	    // InternalRMParser.g:2763:5: (lv_sourceType_2_0= ruleECapabilityTypeRef )
-            	    // InternalRMParser.g:2764:6: lv_sourceType_2_0= ruleECapabilityTypeRef
+            	    // InternalRMParser.g:4328:5: (lv_targetTypes_2_0= ruleETargetType )
+            	    // InternalRMParser.g:4329:6: lv_targetTypes_2_0= ruleETargetType
             	    {
 
-            	    						newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getSourceTypeECapabilityTypeRefParserRuleCall_1_1_0());
+            	    						newCompositeNode(grammarAccess.getEValidTargetTypesAccess().getTargetTypesETargetTypeParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_32);
-            	    lv_sourceType_2_0=ruleECapabilityTypeRef();
+            	    pushFollow(FOLLOW_45);
+            	    lv_targetTypes_2_0=ruleETargetType();
 
             	    state._fsp--;
 
@@ -6918,9 +10919,9 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"sourceType",
-            	    							lv_sourceType_2_0,
-            	    							"org.sodalite.dsl.RM.ECapabilityTypeRef");
+            	    							"targetTypes",
+            	    							lv_targetTypes_2_0,
+            	    							"org.sodalite.dsl.RM.ETargetType");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -6934,7 +10935,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop19;
+            	    break loop32;
                 }
             } while (true);
 
@@ -6960,25 +10961,25 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEValidTargetTypes"
 
 
-    // $ANTLR start "entryRuleECapabilityTypeRef"
-    // InternalRMParser.g:2786:1: entryRuleECapabilityTypeRef returns [EObject current=null] : iv_ruleECapabilityTypeRef= ruleECapabilityTypeRef EOF ;
-    public final EObject entryRuleECapabilityTypeRef() throws RecognitionException {
+    // $ANTLR start "entryRuleETargetType"
+    // InternalRMParser.g:4351:1: entryRuleETargetType returns [EObject current=null] : iv_ruleETargetType= ruleETargetType EOF ;
+    public final EObject entryRuleETargetType() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleECapabilityTypeRef = null;
+        EObject iv_ruleETargetType = null;
 
 
         try {
-            // InternalRMParser.g:2786:59: (iv_ruleECapabilityTypeRef= ruleECapabilityTypeRef EOF )
-            // InternalRMParser.g:2787:2: iv_ruleECapabilityTypeRef= ruleECapabilityTypeRef EOF
+            // InternalRMParser.g:4351:52: (iv_ruleETargetType= ruleETargetType EOF )
+            // InternalRMParser.g:4352:2: iv_ruleETargetType= ruleETargetType EOF
             {
-             newCompositeNode(grammarAccess.getECapabilityTypeRefRule()); 
+             newCompositeNode(grammarAccess.getETargetTypeRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleECapabilityTypeRef=ruleECapabilityTypeRef();
+            iv_ruleETargetType=ruleETargetType();
 
             state._fsp--;
 
-             current =iv_ruleECapabilityTypeRef; 
+             current =iv_ruleETargetType; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -6993,12 +10994,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleECapabilityTypeRef"
+    // $ANTLR end "entryRuleETargetType"
 
 
-    // $ANTLR start "ruleECapabilityTypeRef"
-    // InternalRMParser.g:2793:1: ruleECapabilityTypeRef returns [EObject current=null] : ( (lv_name_0_0= ruleEPREFIX_TYPE ) ) ;
-    public final EObject ruleECapabilityTypeRef() throws RecognitionException {
+    // $ANTLR start "ruleETargetType"
+    // InternalRMParser.g:4358:1: ruleETargetType returns [EObject current=null] : ( (lv_name_0_0= ruleEPREFIX_TYPE ) ) ;
+    public final EObject ruleETargetType() throws RecognitionException {
         EObject current = null;
 
         EObject lv_name_0_0 = null;
@@ -7008,17 +11009,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2799:2: ( ( (lv_name_0_0= ruleEPREFIX_TYPE ) ) )
-            // InternalRMParser.g:2800:2: ( (lv_name_0_0= ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:4364:2: ( ( (lv_name_0_0= ruleEPREFIX_TYPE ) ) )
+            // InternalRMParser.g:4365:2: ( (lv_name_0_0= ruleEPREFIX_TYPE ) )
             {
-            // InternalRMParser.g:2800:2: ( (lv_name_0_0= ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:2801:3: (lv_name_0_0= ruleEPREFIX_TYPE )
+            // InternalRMParser.g:4365:2: ( (lv_name_0_0= ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:4366:3: (lv_name_0_0= ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:2801:3: (lv_name_0_0= ruleEPREFIX_TYPE )
-            // InternalRMParser.g:2802:4: lv_name_0_0= ruleEPREFIX_TYPE
+            // InternalRMParser.g:4366:3: (lv_name_0_0= ruleEPREFIX_TYPE )
+            // InternalRMParser.g:4367:4: lv_name_0_0= ruleEPREFIX_TYPE
             {
 
-            				newCompositeNode(grammarAccess.getECapabilityTypeRefAccess().getNameEPREFIX_TYPEParserRuleCall_0());
+            				newCompositeNode(grammarAccess.getETargetTypeAccess().getNameEPREFIX_TYPEParserRuleCall_0());
             			
             pushFollow(FOLLOW_2);
             lv_name_0_0=ruleEPREFIX_TYPE();
@@ -7027,7 +11028,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
             				if (current==null) {
-            					current = createModelElementForParent(grammarAccess.getECapabilityTypeRefRule());
+            					current = createModelElementForParent(grammarAccess.getETargetTypeRule());
             				}
             				set(
             					current,
@@ -7058,11 +11059,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleECapabilityTypeRef"
+    // $ANTLR end "ruleETargetType"
 
 
     // $ANTLR start "entryRuleEProperties"
-    // InternalRMParser.g:2822:1: entryRuleEProperties returns [EObject current=null] : iv_ruleEProperties= ruleEProperties EOF ;
+    // InternalRMParser.g:4387:1: entryRuleEProperties returns [EObject current=null] : iv_ruleEProperties= ruleEProperties EOF ;
     public final EObject entryRuleEProperties() throws RecognitionException {
         EObject current = null;
 
@@ -7070,8 +11071,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2822:52: (iv_ruleEProperties= ruleEProperties EOF )
-            // InternalRMParser.g:2823:2: iv_ruleEProperties= ruleEProperties EOF
+            // InternalRMParser.g:4387:52: (iv_ruleEProperties= ruleEProperties EOF )
+            // InternalRMParser.g:4388:2: iv_ruleEProperties= ruleEProperties EOF
             {
              newCompositeNode(grammarAccess.getEPropertiesRule()); 
             pushFollow(FOLLOW_1);
@@ -7098,7 +11099,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEProperties"
-    // InternalRMParser.g:2829:1: ruleEProperties returns [EObject current=null] : ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* ) ;
+    // InternalRMParser.g:4394:1: ruleEProperties returns [EObject current=null] : ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* ) ;
     public final EObject ruleEProperties() throws RecognitionException {
         EObject current = null;
 
@@ -7109,14 +11110,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2835:2: ( ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* ) )
-            // InternalRMParser.g:2836:2: ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* )
+            // InternalRMParser.g:4400:2: ( ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* ) )
+            // InternalRMParser.g:4401:2: ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* )
             {
-            // InternalRMParser.g:2836:2: ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* )
-            // InternalRMParser.g:2837:3: () ( (lv_properties_1_0= ruleEPropertyDefinition ) )*
+            // InternalRMParser.g:4401:2: ( () ( (lv_properties_1_0= ruleEPropertyDefinition ) )* )
+            // InternalRMParser.g:4402:3: () ( (lv_properties_1_0= ruleEPropertyDefinition ) )*
             {
-            // InternalRMParser.g:2837:3: ()
-            // InternalRMParser.g:2838:4: 
+            // InternalRMParser.g:4402:3: ()
+            // InternalRMParser.g:4403:4: 
             {
 
             				current = forceCreateModelElement(
@@ -7126,28 +11127,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:2844:3: ( (lv_properties_1_0= ruleEPropertyDefinition ) )*
-            loop20:
+            // InternalRMParser.g:4409:3: ( (lv_properties_1_0= ruleEPropertyDefinition ) )*
+            loop33:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( (LA20_0==RULE_ID) ) {
-                    alt20=1;
+                if ( (LA33_0==RULE_ID) ) {
+                    alt33=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt33) {
             	case 1 :
-            	    // InternalRMParser.g:2845:4: (lv_properties_1_0= ruleEPropertyDefinition )
+            	    // InternalRMParser.g:4410:4: (lv_properties_1_0= ruleEPropertyDefinition )
             	    {
-            	    // InternalRMParser.g:2845:4: (lv_properties_1_0= ruleEPropertyDefinition )
-            	    // InternalRMParser.g:2846:5: lv_properties_1_0= ruleEPropertyDefinition
+            	    // InternalRMParser.g:4410:4: (lv_properties_1_0= ruleEPropertyDefinition )
+            	    // InternalRMParser.g:4411:5: lv_properties_1_0= ruleEPropertyDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getEPropertiesAccess().getPropertiesEPropertyDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_properties_1_0=ruleEPropertyDefinition();
 
             	    state._fsp--;
@@ -7171,7 +11172,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop33;
                 }
             } while (true);
 
@@ -7198,7 +11199,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPropertyDefinition"
-    // InternalRMParser.g:2867:1: entryRuleEPropertyDefinition returns [EObject current=null] : iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF ;
+    // InternalRMParser.g:4432:1: entryRuleEPropertyDefinition returns [EObject current=null] : iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF ;
     public final EObject entryRuleEPropertyDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -7206,8 +11207,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2867:60: (iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF )
-            // InternalRMParser.g:2868:2: iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF
+            // InternalRMParser.g:4432:60: (iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF )
+            // InternalRMParser.g:4433:2: iv_ruleEPropertyDefinition= ruleEPropertyDefinition EOF
             {
              newCompositeNode(grammarAccess.getEPropertyDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -7234,7 +11235,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPropertyDefinition"
-    // InternalRMParser.g:2874:1: ruleEPropertyDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:4439:1: ruleEPropertyDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleEPropertyDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -7249,17 +11250,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2880:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:2881:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:4445:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:4446:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:2881:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:2882:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:4446:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:4447:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_property_3_0= ruleEPropertyDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:2882:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:2883:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:4447:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:4448:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:2883:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:2884:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:4448:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:4449:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -7285,15 +11286,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEPropertyDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_34); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_53); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getEPropertyDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:2908:3: ( (lv_property_3_0= ruleEPropertyDefinitionBody ) )
-            // InternalRMParser.g:2909:4: (lv_property_3_0= ruleEPropertyDefinitionBody )
+            // InternalRMParser.g:4473:3: ( (lv_property_3_0= ruleEPropertyDefinitionBody ) )
+            // InternalRMParser.g:4474:4: (lv_property_3_0= ruleEPropertyDefinitionBody )
             {
-            // InternalRMParser.g:2909:4: (lv_property_3_0= ruleEPropertyDefinitionBody )
-            // InternalRMParser.g:2910:5: lv_property_3_0= ruleEPropertyDefinitionBody
+            // InternalRMParser.g:4474:4: (lv_property_3_0= ruleEPropertyDefinitionBody )
+            // InternalRMParser.g:4475:5: lv_property_3_0= ruleEPropertyDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getEPropertyDefinitionAccess().getPropertyEPropertyDefinitionBodyParserRuleCall_3_0());
@@ -7347,7 +11348,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPropertyDefinitionBody"
-    // InternalRMParser.g:2935:1: entryRuleEPropertyDefinitionBody returns [EObject current=null] : iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF ;
+    // InternalRMParser.g:4500:1: entryRuleEPropertyDefinitionBody returns [EObject current=null] : iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF ;
     public final EObject entryRuleEPropertyDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -7355,8 +11356,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:2935:64: (iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF )
-            // InternalRMParser.g:2936:2: iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF
+            // InternalRMParser.g:4500:64: (iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF )
+            // InternalRMParser.g:4501:2: iv_ruleEPropertyDefinitionBody= ruleEPropertyDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getEPropertyDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -7383,7 +11384,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPropertyDefinitionBody"
-    // InternalRMParser.g:2942:1: ruleEPropertyDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:4507:1: ruleEPropertyDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleEPropertyDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -7412,90 +11413,90 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:2948:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:2949:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:4513:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:4514:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:2949:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:2950:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:4514:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:4515:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:2950:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:2951:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:4515:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:4516:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:2954:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:2955:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?
+            // InternalRMParser.g:4519:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:4520:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:2955:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+
-            int cnt21=0;
-            loop21:
+            // InternalRMParser.g:4520:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) ) )+
+            int cnt34=0;
+            loop34:
             do {
-                int alt21=8;
-                int LA21_0 = input.LA(1);
+                int alt34=8;
+                int LA34_0 = input.LA(1);
 
-                if ( LA21_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt21=1;
+                if ( LA34_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt34=1;
                 }
-                else if ( LA21_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt21=2;
+                else if ( LA34_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt34=2;
                 }
-                else if ( LA21_0 == Required && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt21=3;
+                else if ( LA34_0 == Required && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt34=3;
                 }
-                else if ( LA21_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
-                    alt21=4;
+                else if ( LA34_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+                    alt34=4;
                 }
-                else if ( LA21_0 == Status && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
-                    alt21=5;
+                else if ( LA34_0 == Status && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
+                    alt34=5;
                 }
-                else if ( LA21_0 == Constraints && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
-                    alt21=6;
+                else if ( LA34_0 == Constraints && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
+                    alt34=6;
                 }
-                else if ( LA21_0 == Entry_schema && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 6) ) {
-                    alt21=7;
+                else if ( LA34_0 == Entry_schema && getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 6) ) {
+                    alt34=7;
                 }
 
 
-                switch (alt21) {
+                switch (alt34) {
             	case 1 :
-            	    // InternalRMParser.g:2956:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4521:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2956:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
-            	    // InternalRMParser.g:2957:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4521:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4522:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:2957:117: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
-            	    // InternalRMParser.g:2958:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4522:117: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4523:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:2961:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
-            	    // InternalRMParser.g:2961:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4526:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4526:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:2961:18: (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
-            	    // InternalRMParser.g:2961:19: otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4526:18: (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4526:19: otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) )
             	    {
             	    otherlv_1=(Token)match(input,Type,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getEPropertyDefinitionBodyAccess().getTypeKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:2965:8: ( (lv_type_2_0= ruleEDataTypeName ) )
-            	    // InternalRMParser.g:2966:9: (lv_type_2_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4530:8: ( (lv_type_2_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4531:9: (lv_type_2_0= ruleEDataTypeName )
             	    {
-            	    // InternalRMParser.g:2966:9: (lv_type_2_0= ruleEDataTypeName )
-            	    // InternalRMParser.g:2967:10: lv_type_2_0= ruleEDataTypeName
+            	    // InternalRMParser.g:4531:9: (lv_type_2_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4532:10: lv_type_2_0= ruleEDataTypeName
             	    {
 
             	    										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getTypeEDataTypeNameParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_54);
             	    lv_type_2_0=ruleEDataTypeName();
 
             	    state._fsp--;
@@ -7536,40 +11537,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:2990:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4555:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:2990:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:2991:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4555:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4556:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:2991:117: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:2992:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4556:117: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4557:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:2995:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:2995:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4560:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4560:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:2995:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:2995:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4560:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4560:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
             	    {
             	    otherlv_3=(Token)match(input,Description,FOLLOW_13); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getEPropertyDefinitionBodyAccess().getDescriptionKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:2999:8: ( (lv_description_4_0= RULE_STRING ) )
-            	    // InternalRMParser.g:3000:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:4564:8: ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4565:9: (lv_description_4_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:3000:9: (lv_description_4_0= RULE_STRING )
-            	    // InternalRMParser.g:3001:10: lv_description_4_0= RULE_STRING
+            	    // InternalRMParser.g:4565:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:4566:10: lv_description_4_0= RULE_STRING
             	    {
-            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_35); 
+            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_54); 
 
             	    										newLeafNode(lv_description_4_0, grammarAccess.getEPropertyDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0());
             	    									
@@ -7608,40 +11609,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:3023:3: ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) )
+            	    // InternalRMParser.g:4588:3: ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3023:3: ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) )
-            	    // InternalRMParser.g:3024:4: {...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) )
+            	    // InternalRMParser.g:4588:3: ({...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) ) )
+            	    // InternalRMParser.g:4589:4: {...}? => ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:3024:117: ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) )
-            	    // InternalRMParser.g:3025:5: ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) )
+            	    // InternalRMParser.g:4589:117: ( ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) ) )
+            	    // InternalRMParser.g:4590:5: ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:3028:8: ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) )
-            	    // InternalRMParser.g:3028:9: {...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) )
+            	    // InternalRMParser.g:4593:8: ({...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) ) )
+            	    // InternalRMParser.g:4593:9: {...}? => (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3028:18: (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) )
-            	    // InternalRMParser.g:3028:19: otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) )
+            	    // InternalRMParser.g:4593:18: (otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) ) )
+            	    // InternalRMParser.g:4593:19: otherlv_5= Required ( (lv_required_6_0= RULE_BOOLEAN ) )
             	    {
-            	    otherlv_5=(Token)match(input,Required,FOLLOW_36); 
+            	    otherlv_5=(Token)match(input,Required,FOLLOW_55); 
 
             	    								newLeafNode(otherlv_5, grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredKeyword_2_0());
             	    							
-            	    // InternalRMParser.g:3032:8: ( (lv_required_6_0= RULE_BOOLEAN ) )
-            	    // InternalRMParser.g:3033:9: (lv_required_6_0= RULE_BOOLEAN )
+            	    // InternalRMParser.g:4597:8: ( (lv_required_6_0= RULE_BOOLEAN ) )
+            	    // InternalRMParser.g:4598:9: (lv_required_6_0= RULE_BOOLEAN )
             	    {
-            	    // InternalRMParser.g:3033:9: (lv_required_6_0= RULE_BOOLEAN )
-            	    // InternalRMParser.g:3034:10: lv_required_6_0= RULE_BOOLEAN
+            	    // InternalRMParser.g:4598:9: (lv_required_6_0= RULE_BOOLEAN )
+            	    // InternalRMParser.g:4599:10: lv_required_6_0= RULE_BOOLEAN
             	    {
-            	    lv_required_6_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_35); 
+            	    lv_required_6_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_54); 
 
             	    										newLeafNode(lv_required_6_0, grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0());
             	    									
@@ -7680,43 +11681,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:3056:3: ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:4621:3: ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3056:3: ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) )
-            	    // InternalRMParser.g:3057:4: {...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:4621:3: ({...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:4622:4: {...}? => ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 3)");
             	    }
-            	    // InternalRMParser.g:3057:117: ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) )
-            	    // InternalRMParser.g:3058:5: ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:4622:117: ( ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:4623:5: ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 3);
             	    				
-            	    // InternalRMParser.g:3061:8: ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) )
-            	    // InternalRMParser.g:3061:9: {...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:4626:8: ({...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:4626:9: {...}? => (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3061:18: (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) )
-            	    // InternalRMParser.g:3061:19: otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:4626:18: (otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:4626:19: otherlv_7= Default ( (lv_default_8_0= ruleEValueExpression ) )
             	    {
-            	    otherlv_7=(Token)match(input,Default,FOLLOW_37); 
+            	    otherlv_7=(Token)match(input,Default,FOLLOW_48); 
 
             	    								newLeafNode(otherlv_7, grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultKeyword_3_0());
             	    							
-            	    // InternalRMParser.g:3065:8: ( (lv_default_8_0= ruleEValueExpression ) )
-            	    // InternalRMParser.g:3066:9: (lv_default_8_0= ruleEValueExpression )
+            	    // InternalRMParser.g:4630:8: ( (lv_default_8_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:4631:9: (lv_default_8_0= ruleEValueExpression )
             	    {
-            	    // InternalRMParser.g:3066:9: (lv_default_8_0= ruleEValueExpression )
-            	    // InternalRMParser.g:3067:10: lv_default_8_0= ruleEValueExpression
+            	    // InternalRMParser.g:4631:9: (lv_default_8_0= ruleEValueExpression )
+            	    // InternalRMParser.g:4632:10: lv_default_8_0= ruleEValueExpression
             	    {
 
             	    										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0());
             	    									
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_54);
             	    lv_default_8_0=ruleEValueExpression();
 
             	    state._fsp--;
@@ -7757,40 +11758,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalRMParser.g:3090:3: ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4655:3: ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3090:3: ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:3091:4: {...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4655:3: ({...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4656:4: {...}? => ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 4)");
             	    }
-            	    // InternalRMParser.g:3091:117: ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:3092:5: ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4656:117: ( ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4657:5: ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 4);
             	    				
-            	    // InternalRMParser.g:3095:8: ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:3095:9: {...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4660:8: ({...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4660:9: {...}? => (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3095:18: (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:3095:19: otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4660:18: (otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4660:19: otherlv_9= Status ( (lv_status_10_0= RULE_STRING ) )
             	    {
             	    otherlv_9=(Token)match(input,Status,FOLLOW_13); 
 
             	    								newLeafNode(otherlv_9, grammarAccess.getEPropertyDefinitionBodyAccess().getStatusKeyword_4_0());
             	    							
-            	    // InternalRMParser.g:3099:8: ( (lv_status_10_0= RULE_STRING ) )
-            	    // InternalRMParser.g:3100:9: (lv_status_10_0= RULE_STRING )
+            	    // InternalRMParser.g:4664:8: ( (lv_status_10_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4665:9: (lv_status_10_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:3100:9: (lv_status_10_0= RULE_STRING )
-            	    // InternalRMParser.g:3101:10: lv_status_10_0= RULE_STRING
+            	    // InternalRMParser.g:4665:9: (lv_status_10_0= RULE_STRING )
+            	    // InternalRMParser.g:4666:10: lv_status_10_0= RULE_STRING
             	    {
-            	    lv_status_10_0=(Token)match(input,RULE_STRING,FOLLOW_35); 
+            	    lv_status_10_0=(Token)match(input,RULE_STRING,FOLLOW_54); 
 
             	    										newLeafNode(lv_status_10_0, grammarAccess.getEPropertyDefinitionBodyAccess().getStatusSTRINGTerminalRuleCall_4_1_0());
             	    									
@@ -7829,28 +11830,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // InternalRMParser.g:3123:3: ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4688:3: ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:3123:3: ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) )
-            	    // InternalRMParser.g:3124:4: {...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) )
+            	    // InternalRMParser.g:4688:3: ({...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) ) )
+            	    // InternalRMParser.g:4689:4: {...}? => ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 5)");
             	    }
-            	    // InternalRMParser.g:3124:117: ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) )
-            	    // InternalRMParser.g:3125:5: ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) )
+            	    // InternalRMParser.g:4689:117: ( ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) ) )
+            	    // InternalRMParser.g:4690:5: ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 5);
             	    				
-            	    // InternalRMParser.g:3128:8: ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) )
-            	    // InternalRMParser.g:3128:9: {...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END )
+            	    // InternalRMParser.g:4693:8: ({...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END ) )
+            	    // InternalRMParser.g:4693:9: {...}? => (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3128:18: (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END )
-            	    // InternalRMParser.g:3128:19: otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END
+            	    // InternalRMParser.g:4693:18: (otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END )
+            	    // InternalRMParser.g:4693:19: otherlv_11= Constraints this_BEGIN_12= RULE_BEGIN ( (lv_constraints_13_0= ruleEConstraints ) ) this_END_14= RULE_END
             	    {
             	    otherlv_11=(Token)match(input,Constraints,FOLLOW_5); 
 
@@ -7860,11 +11861,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    								newLeafNode(this_BEGIN_12, grammarAccess.getEPropertyDefinitionBodyAccess().getBEGINTerminalRuleCall_5_1());
             	    							
-            	    // InternalRMParser.g:3136:8: ( (lv_constraints_13_0= ruleEConstraints ) )
-            	    // InternalRMParser.g:3137:9: (lv_constraints_13_0= ruleEConstraints )
+            	    // InternalRMParser.g:4701:8: ( (lv_constraints_13_0= ruleEConstraints ) )
+            	    // InternalRMParser.g:4702:9: (lv_constraints_13_0= ruleEConstraints )
             	    {
-            	    // InternalRMParser.g:3137:9: (lv_constraints_13_0= ruleEConstraints )
-            	    // InternalRMParser.g:3138:10: lv_constraints_13_0= ruleEConstraints
+            	    // InternalRMParser.g:4702:9: (lv_constraints_13_0= ruleEConstraints )
+            	    // InternalRMParser.g:4703:10: lv_constraints_13_0= ruleEConstraints
             	    {
 
             	    										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getConstraintsEConstraintsParserRuleCall_5_2_0());
@@ -7891,7 +11892,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_14=(Token)match(input,RULE_END,FOLLOW_35); 
+            	    this_END_14=(Token)match(input,RULE_END,FOLLOW_54); 
 
             	    								newLeafNode(this_END_14, grammarAccess.getEPropertyDefinitionBodyAccess().getENDTerminalRuleCall_5_3());
             	    							
@@ -7914,43 +11915,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // InternalRMParser.g:3165:3: ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4730:3: ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3165:3: ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) )
-            	    // InternalRMParser.g:3166:4: {...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4730:3: ({...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4731:4: {...}? => ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 6) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 6)");
             	    }
-            	    // InternalRMParser.g:3166:117: ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) )
-            	    // InternalRMParser.g:3167:5: ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4731:117: ( ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4732:5: ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup(), 6);
             	    				
-            	    // InternalRMParser.g:3170:8: ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) )
-            	    // InternalRMParser.g:3170:9: {...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4735:8: ({...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4735:9: {...}? => (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEPropertyDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3170:18: (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) )
-            	    // InternalRMParser.g:3170:19: otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4735:18: (otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4735:19: otherlv_15= Entry_schema ( (lv_entry_schema_16_0= ruleEDataTypeName ) )
             	    {
             	    otherlv_15=(Token)match(input,Entry_schema,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_15, grammarAccess.getEPropertyDefinitionBodyAccess().getEntry_schemaKeyword_6_0());
             	    							
-            	    // InternalRMParser.g:3174:8: ( (lv_entry_schema_16_0= ruleEDataTypeName ) )
-            	    // InternalRMParser.g:3175:9: (lv_entry_schema_16_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4739:8: ( (lv_entry_schema_16_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4740:9: (lv_entry_schema_16_0= ruleEDataTypeName )
             	    {
-            	    // InternalRMParser.g:3175:9: (lv_entry_schema_16_0= ruleEDataTypeName )
-            	    // InternalRMParser.g:3176:10: lv_entry_schema_16_0= ruleEDataTypeName
+            	    // InternalRMParser.g:4740:9: (lv_entry_schema_16_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4741:10: lv_entry_schema_16_0= ruleEDataTypeName
             	    {
 
             	    										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getEntry_schemaEDataTypeNameParserRuleCall_6_1_0());
             	    									
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_54);
             	    lv_entry_schema_16_0=ruleEDataTypeName();
 
             	    state._fsp--;
@@ -7992,12 +11993,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt21 >= 1 ) break loop21;
+            	    if ( cnt34 >= 1 ) break loop34;
                         EarlyExitException eee =
-                            new EarlyExitException(21, input);
+                            new EarlyExitException(34, input);
                         throw eee;
                 }
-                cnt21++;
+                cnt34++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getEPropertyDefinitionBodyAccess().getUnorderedGroup()) ) {
@@ -8035,7 +12036,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAttributes"
-    // InternalRMParser.g:3210:1: entryRuleEAttributes returns [EObject current=null] : iv_ruleEAttributes= ruleEAttributes EOF ;
+    // InternalRMParser.g:4775:1: entryRuleEAttributes returns [EObject current=null] : iv_ruleEAttributes= ruleEAttributes EOF ;
     public final EObject entryRuleEAttributes() throws RecognitionException {
         EObject current = null;
 
@@ -8043,8 +12044,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3210:52: (iv_ruleEAttributes= ruleEAttributes EOF )
-            // InternalRMParser.g:3211:2: iv_ruleEAttributes= ruleEAttributes EOF
+            // InternalRMParser.g:4775:52: (iv_ruleEAttributes= ruleEAttributes EOF )
+            // InternalRMParser.g:4776:2: iv_ruleEAttributes= ruleEAttributes EOF
             {
              newCompositeNode(grammarAccess.getEAttributesRule()); 
             pushFollow(FOLLOW_1);
@@ -8071,7 +12072,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAttributes"
-    // InternalRMParser.g:3217:1: ruleEAttributes returns [EObject current=null] : ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* ) ;
+    // InternalRMParser.g:4782:1: ruleEAttributes returns [EObject current=null] : ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* ) ;
     public final EObject ruleEAttributes() throws RecognitionException {
         EObject current = null;
 
@@ -8082,14 +12083,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3223:2: ( ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* ) )
-            // InternalRMParser.g:3224:2: ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* )
+            // InternalRMParser.g:4788:2: ( ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* ) )
+            // InternalRMParser.g:4789:2: ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* )
             {
-            // InternalRMParser.g:3224:2: ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* )
-            // InternalRMParser.g:3225:3: () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )*
+            // InternalRMParser.g:4789:2: ( () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )* )
+            // InternalRMParser.g:4790:3: () ( (lv_attributes_1_0= ruleEAttributeDefinition ) )*
             {
-            // InternalRMParser.g:3225:3: ()
-            // InternalRMParser.g:3226:4: 
+            // InternalRMParser.g:4790:3: ()
+            // InternalRMParser.g:4791:4: 
             {
 
             				current = forceCreateModelElement(
@@ -8099,28 +12100,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:3232:3: ( (lv_attributes_1_0= ruleEAttributeDefinition ) )*
-            loop22:
+            // InternalRMParser.g:4797:3: ( (lv_attributes_1_0= ruleEAttributeDefinition ) )*
+            loop35:
             do {
-                int alt22=2;
-                int LA22_0 = input.LA(1);
+                int alt35=2;
+                int LA35_0 = input.LA(1);
 
-                if ( (LA22_0==RULE_ID) ) {
-                    alt22=1;
+                if ( (LA35_0==RULE_ID) ) {
+                    alt35=1;
                 }
 
 
-                switch (alt22) {
+                switch (alt35) {
             	case 1 :
-            	    // InternalRMParser.g:3233:4: (lv_attributes_1_0= ruleEAttributeDefinition )
+            	    // InternalRMParser.g:4798:4: (lv_attributes_1_0= ruleEAttributeDefinition )
             	    {
-            	    // InternalRMParser.g:3233:4: (lv_attributes_1_0= ruleEAttributeDefinition )
-            	    // InternalRMParser.g:3234:5: lv_attributes_1_0= ruleEAttributeDefinition
+            	    // InternalRMParser.g:4798:4: (lv_attributes_1_0= ruleEAttributeDefinition )
+            	    // InternalRMParser.g:4799:5: lv_attributes_1_0= ruleEAttributeDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getEAttributesAccess().getAttributesEAttributeDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_attributes_1_0=ruleEAttributeDefinition();
 
             	    state._fsp--;
@@ -8144,7 +12145,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop35;
                 }
             } while (true);
 
@@ -8171,7 +12172,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAttributeDefinition"
-    // InternalRMParser.g:3255:1: entryRuleEAttributeDefinition returns [EObject current=null] : iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF ;
+    // InternalRMParser.g:4820:1: entryRuleEAttributeDefinition returns [EObject current=null] : iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF ;
     public final EObject entryRuleEAttributeDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -8179,8 +12180,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3255:61: (iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF )
-            // InternalRMParser.g:3256:2: iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF
+            // InternalRMParser.g:4820:61: (iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF )
+            // InternalRMParser.g:4821:2: iv_ruleEAttributeDefinition= ruleEAttributeDefinition EOF
             {
              newCompositeNode(grammarAccess.getEAttributeDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -8207,7 +12208,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAttributeDefinition"
-    // InternalRMParser.g:3262:1: ruleEAttributeDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:4827:1: ruleEAttributeDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleEAttributeDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -8222,17 +12223,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3268:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:3269:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:4833:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:4834:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:3269:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:3270:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:4834:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:4835:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:3270:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:3271:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:4835:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:4836:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:3271:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:3272:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:4836:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:4837:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -8258,15 +12259,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEAttributeDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_38); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_56); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getEAttributeDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:3296:3: ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) )
-            // InternalRMParser.g:3297:4: (lv_attribute_3_0= ruleEAttributeDefinitionBody )
+            // InternalRMParser.g:4861:3: ( (lv_attribute_3_0= ruleEAttributeDefinitionBody ) )
+            // InternalRMParser.g:4862:4: (lv_attribute_3_0= ruleEAttributeDefinitionBody )
             {
-            // InternalRMParser.g:3297:4: (lv_attribute_3_0= ruleEAttributeDefinitionBody )
-            // InternalRMParser.g:3298:5: lv_attribute_3_0= ruleEAttributeDefinitionBody
+            // InternalRMParser.g:4862:4: (lv_attribute_3_0= ruleEAttributeDefinitionBody )
+            // InternalRMParser.g:4863:5: lv_attribute_3_0= ruleEAttributeDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getEAttributeDefinitionAccess().getAttributeEAttributeDefinitionBodyParserRuleCall_3_0());
@@ -8320,7 +12321,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAttributeDefinitionBody"
-    // InternalRMParser.g:3323:1: entryRuleEAttributeDefinitionBody returns [EObject current=null] : iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF ;
+    // InternalRMParser.g:4888:1: entryRuleEAttributeDefinitionBody returns [EObject current=null] : iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF ;
     public final EObject entryRuleEAttributeDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -8328,8 +12329,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3323:65: (iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF )
-            // InternalRMParser.g:3324:2: iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF
+            // InternalRMParser.g:4888:65: (iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF )
+            // InternalRMParser.g:4889:2: iv_ruleEAttributeDefinitionBody= ruleEAttributeDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getEAttributeDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -8356,7 +12357,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAttributeDefinitionBody"
-    // InternalRMParser.g:3330:1: ruleEAttributeDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:4895:1: ruleEAttributeDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleEAttributeDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -8378,84 +12379,84 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3336:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:3337:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:4901:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:4902:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:3337:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:3338:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:4902:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:4903:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:3338:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:3339:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:4903:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:4904:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:3342:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:3343:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?
+            // InternalRMParser.g:4907:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:4908:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:3343:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+
-            int cnt23=0;
-            loop23:
+            // InternalRMParser.g:4908:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) ) )+
+            int cnt36=0;
+            loop36:
             do {
-                int alt23=6;
-                int LA23_0 = input.LA(1);
+                int alt36=6;
+                int LA36_0 = input.LA(1);
 
-                if ( LA23_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt23=1;
+                if ( LA36_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt36=1;
                 }
-                else if ( LA23_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt23=2;
+                else if ( LA36_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt36=2;
                 }
-                else if ( LA23_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt23=3;
+                else if ( LA36_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt36=3;
                 }
-                else if ( LA23_0 == Status && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
-                    alt23=4;
+                else if ( LA36_0 == Status && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+                    alt36=4;
                 }
-                else if ( LA23_0 == Entry_schema && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
-                    alt23=5;
+                else if ( LA36_0 == Entry_schema && getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
+                    alt36=5;
                 }
 
 
-                switch (alt23) {
+                switch (alt36) {
             	case 1 :
-            	    // InternalRMParser.g:3344:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4909:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3344:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
-            	    // InternalRMParser.g:3345:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4909:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:4910:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:3345:118: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
-            	    // InternalRMParser.g:3346:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4910:118: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:4911:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:3349:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
-            	    // InternalRMParser.g:3349:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4914:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:4914:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3349:18: (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
-            	    // InternalRMParser.g:3349:19: otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4914:18: (otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:4914:19: otherlv_1= Type ( (lv_type_2_0= ruleEDataTypeName ) )
             	    {
             	    otherlv_1=(Token)match(input,Type,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getEAttributeDefinitionBodyAccess().getTypeKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:3353:8: ( (lv_type_2_0= ruleEDataTypeName ) )
-            	    // InternalRMParser.g:3354:9: (lv_type_2_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4918:8: ( (lv_type_2_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:4919:9: (lv_type_2_0= ruleEDataTypeName )
             	    {
-            	    // InternalRMParser.g:3354:9: (lv_type_2_0= ruleEDataTypeName )
-            	    // InternalRMParser.g:3355:10: lv_type_2_0= ruleEDataTypeName
+            	    // InternalRMParser.g:4919:9: (lv_type_2_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:4920:10: lv_type_2_0= ruleEDataTypeName
             	    {
 
             	    										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getTypeEDataTypeNameParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_39);
+            	    pushFollow(FOLLOW_57);
             	    lv_type_2_0=ruleEDataTypeName();
 
             	    state._fsp--;
@@ -8496,40 +12497,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:3378:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4943:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3378:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:3379:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4943:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:4944:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:3379:118: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:3380:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4944:118: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:4945:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:3383:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:3383:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4948:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:4948:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3383:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:3383:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4948:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:4948:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
             	    {
             	    otherlv_3=(Token)match(input,Description,FOLLOW_13); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getEAttributeDefinitionBodyAccess().getDescriptionKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:3387:8: ( (lv_description_4_0= RULE_STRING ) )
-            	    // InternalRMParser.g:3388:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:4952:8: ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:4953:9: (lv_description_4_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:3388:9: (lv_description_4_0= RULE_STRING )
-            	    // InternalRMParser.g:3389:10: lv_description_4_0= RULE_STRING
+            	    // InternalRMParser.g:4953:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:4954:10: lv_description_4_0= RULE_STRING
             	    {
-            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_39); 
+            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_57); 
 
             	    										newLeafNode(lv_description_4_0, grammarAccess.getEAttributeDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0());
             	    									
@@ -8568,43 +12569,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:3411:3: ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:4976:3: ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3411:3: ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) )
-            	    // InternalRMParser.g:3412:4: {...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:4976:3: ({...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:4977:4: {...}? => ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:3412:118: ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) )
-            	    // InternalRMParser.g:3413:5: ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:4977:118: ( ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:4978:5: ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:3416:8: ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) )
-            	    // InternalRMParser.g:3416:9: {...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:4981:8: ({...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:4981:9: {...}? => (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3416:18: (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) )
-            	    // InternalRMParser.g:3416:19: otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:4981:18: (otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:4981:19: otherlv_5= Default ( (lv_default_6_0= ruleEValueExpression ) )
             	    {
-            	    otherlv_5=(Token)match(input,Default,FOLLOW_37); 
+            	    otherlv_5=(Token)match(input,Default,FOLLOW_48); 
 
             	    								newLeafNode(otherlv_5, grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultKeyword_2_0());
             	    							
-            	    // InternalRMParser.g:3420:8: ( (lv_default_6_0= ruleEValueExpression ) )
-            	    // InternalRMParser.g:3421:9: (lv_default_6_0= ruleEValueExpression )
+            	    // InternalRMParser.g:4985:8: ( (lv_default_6_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:4986:9: (lv_default_6_0= ruleEValueExpression )
             	    {
-            	    // InternalRMParser.g:3421:9: (lv_default_6_0= ruleEValueExpression )
-            	    // InternalRMParser.g:3422:10: lv_default_6_0= ruleEValueExpression
+            	    // InternalRMParser.g:4986:9: (lv_default_6_0= ruleEValueExpression )
+            	    // InternalRMParser.g:4987:10: lv_default_6_0= ruleEValueExpression
             	    {
 
             	    										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0());
             	    									
-            	    pushFollow(FOLLOW_39);
+            	    pushFollow(FOLLOW_57);
             	    lv_default_6_0=ruleEValueExpression();
 
             	    state._fsp--;
@@ -8645,40 +12646,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:3445:3: ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:5010:3: ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3445:3: ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:3446:4: {...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:5010:3: ({...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:5011:4: {...}? => ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3)");
             	    }
-            	    // InternalRMParser.g:3446:118: ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:3447:5: ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:5011:118: ( ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:5012:5: ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 3);
             	    				
-            	    // InternalRMParser.g:3450:8: ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:3450:9: {...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:5015:8: ({...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:5015:9: {...}? => (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3450:18: (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:3450:19: otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5015:18: (otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:5015:19: otherlv_7= Status ( (lv_status_8_0= RULE_STRING ) )
             	    {
             	    otherlv_7=(Token)match(input,Status,FOLLOW_13); 
 
             	    								newLeafNode(otherlv_7, grammarAccess.getEAttributeDefinitionBodyAccess().getStatusKeyword_3_0());
             	    							
-            	    // InternalRMParser.g:3454:8: ( (lv_status_8_0= RULE_STRING ) )
-            	    // InternalRMParser.g:3455:9: (lv_status_8_0= RULE_STRING )
+            	    // InternalRMParser.g:5019:8: ( (lv_status_8_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5020:9: (lv_status_8_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:3455:9: (lv_status_8_0= RULE_STRING )
-            	    // InternalRMParser.g:3456:10: lv_status_8_0= RULE_STRING
+            	    // InternalRMParser.g:5020:9: (lv_status_8_0= RULE_STRING )
+            	    // InternalRMParser.g:5021:10: lv_status_8_0= RULE_STRING
             	    {
-            	    lv_status_8_0=(Token)match(input,RULE_STRING,FOLLOW_39); 
+            	    lv_status_8_0=(Token)match(input,RULE_STRING,FOLLOW_57); 
 
             	    										newLeafNode(lv_status_8_0, grammarAccess.getEAttributeDefinitionBodyAccess().getStatusSTRINGTerminalRuleCall_3_1_0());
             	    									
@@ -8717,43 +12718,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalRMParser.g:3478:3: ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:5043:3: ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3478:3: ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) )
-            	    // InternalRMParser.g:3479:4: {...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:5043:3: ({...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:5044:4: {...}? => ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4)");
             	    }
-            	    // InternalRMParser.g:3479:118: ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) )
-            	    // InternalRMParser.g:3480:5: ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:5044:118: ( ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:5045:5: ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup(), 4);
             	    				
-            	    // InternalRMParser.g:3483:8: ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) )
-            	    // InternalRMParser.g:3483:9: {...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:5048:8: ({...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:5048:9: {...}? => (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEAttributeDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3483:18: (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) )
-            	    // InternalRMParser.g:3483:19: otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:5048:18: (otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:5048:19: otherlv_9= Entry_schema ( (lv_entry_schema_10_0= ruleEDataTypeName ) )
             	    {
             	    otherlv_9=(Token)match(input,Entry_schema,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_9, grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaKeyword_4_0());
             	    							
-            	    // InternalRMParser.g:3487:8: ( (lv_entry_schema_10_0= ruleEDataTypeName ) )
-            	    // InternalRMParser.g:3488:9: (lv_entry_schema_10_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:5052:8: ( (lv_entry_schema_10_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:5053:9: (lv_entry_schema_10_0= ruleEDataTypeName )
             	    {
-            	    // InternalRMParser.g:3488:9: (lv_entry_schema_10_0= ruleEDataTypeName )
-            	    // InternalRMParser.g:3489:10: lv_entry_schema_10_0= ruleEDataTypeName
+            	    // InternalRMParser.g:5053:9: (lv_entry_schema_10_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:5054:10: lv_entry_schema_10_0= ruleEDataTypeName
             	    {
 
             	    										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getEntry_schemaEDataTypeNameParserRuleCall_4_1_0());
             	    									
-            	    pushFollow(FOLLOW_39);
+            	    pushFollow(FOLLOW_57);
             	    lv_entry_schema_10_0=ruleEDataTypeName();
 
             	    state._fsp--;
@@ -8795,12 +12796,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt23 >= 1 ) break loop23;
+            	    if ( cnt36 >= 1 ) break loop36;
                         EarlyExitException eee =
-                            new EarlyExitException(23, input);
+                            new EarlyExitException(36, input);
                         throw eee;
                 }
-                cnt23++;
+                cnt36++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getEAttributeDefinitionBodyAccess().getUnorderedGroup()) ) {
@@ -8838,7 +12839,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInterfaces"
-    // InternalRMParser.g:3523:1: entryRuleEInterfaces returns [EObject current=null] : iv_ruleEInterfaces= ruleEInterfaces EOF ;
+    // InternalRMParser.g:5088:1: entryRuleEInterfaces returns [EObject current=null] : iv_ruleEInterfaces= ruleEInterfaces EOF ;
     public final EObject entryRuleEInterfaces() throws RecognitionException {
         EObject current = null;
 
@@ -8846,8 +12847,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3523:52: (iv_ruleEInterfaces= ruleEInterfaces EOF )
-            // InternalRMParser.g:3524:2: iv_ruleEInterfaces= ruleEInterfaces EOF
+            // InternalRMParser.g:5088:52: (iv_ruleEInterfaces= ruleEInterfaces EOF )
+            // InternalRMParser.g:5089:2: iv_ruleEInterfaces= ruleEInterfaces EOF
             {
              newCompositeNode(grammarAccess.getEInterfacesRule()); 
             pushFollow(FOLLOW_1);
@@ -8874,7 +12875,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInterfaces"
-    // InternalRMParser.g:3530:1: ruleEInterfaces returns [EObject current=null] : ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* ) ;
+    // InternalRMParser.g:5095:1: ruleEInterfaces returns [EObject current=null] : ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* ) ;
     public final EObject ruleEInterfaces() throws RecognitionException {
         EObject current = null;
 
@@ -8885,14 +12886,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3536:2: ( ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* ) )
-            // InternalRMParser.g:3537:2: ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* )
+            // InternalRMParser.g:5101:2: ( ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* ) )
+            // InternalRMParser.g:5102:2: ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* )
             {
-            // InternalRMParser.g:3537:2: ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* )
-            // InternalRMParser.g:3538:3: () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )*
+            // InternalRMParser.g:5102:2: ( () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )* )
+            // InternalRMParser.g:5103:3: () ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )*
             {
-            // InternalRMParser.g:3538:3: ()
-            // InternalRMParser.g:3539:4: 
+            // InternalRMParser.g:5103:3: ()
+            // InternalRMParser.g:5104:4: 
             {
 
             				current = forceCreateModelElement(
@@ -8902,28 +12903,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:3545:3: ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )*
-            loop24:
+            // InternalRMParser.g:5110:3: ( (lv_interfaces_1_0= ruleEInterfaceDefinition ) )*
+            loop37:
             do {
-                int alt24=2;
-                int LA24_0 = input.LA(1);
+                int alt37=2;
+                int LA37_0 = input.LA(1);
 
-                if ( (LA24_0==RULE_ID) ) {
-                    alt24=1;
+                if ( (LA37_0==RULE_ID) ) {
+                    alt37=1;
                 }
 
 
-                switch (alt24) {
+                switch (alt37) {
             	case 1 :
-            	    // InternalRMParser.g:3546:4: (lv_interfaces_1_0= ruleEInterfaceDefinition )
+            	    // InternalRMParser.g:5111:4: (lv_interfaces_1_0= ruleEInterfaceDefinition )
             	    {
-            	    // InternalRMParser.g:3546:4: (lv_interfaces_1_0= ruleEInterfaceDefinition )
-            	    // InternalRMParser.g:3547:5: lv_interfaces_1_0= ruleEInterfaceDefinition
+            	    // InternalRMParser.g:5111:4: (lv_interfaces_1_0= ruleEInterfaceDefinition )
+            	    // InternalRMParser.g:5112:5: lv_interfaces_1_0= ruleEInterfaceDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getEInterfacesAccess().getInterfacesEInterfaceDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_interfaces_1_0=ruleEInterfaceDefinition();
 
             	    state._fsp--;
@@ -8947,7 +12948,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop24;
+            	    break loop37;
                 }
             } while (true);
 
@@ -8974,7 +12975,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInterfaceDefinition"
-    // InternalRMParser.g:3568:1: entryRuleEInterfaceDefinition returns [EObject current=null] : iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF ;
+    // InternalRMParser.g:5133:1: entryRuleEInterfaceDefinition returns [EObject current=null] : iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF ;
     public final EObject entryRuleEInterfaceDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -8982,8 +12983,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3568:61: (iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF )
-            // InternalRMParser.g:3569:2: iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF
+            // InternalRMParser.g:5133:61: (iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF )
+            // InternalRMParser.g:5134:2: iv_ruleEInterfaceDefinition= ruleEInterfaceDefinition EOF
             {
              newCompositeNode(grammarAccess.getEInterfaceDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -9010,7 +13011,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInterfaceDefinition"
-    // InternalRMParser.g:3575:1: ruleEInterfaceDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:5140:1: ruleEInterfaceDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleEInterfaceDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -9025,17 +13026,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3581:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:3582:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5146:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:5147:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:3582:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:3583:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:5147:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5148:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:3583:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:3584:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5148:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:5149:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:3584:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:3585:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:5149:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5150:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -9061,15 +13062,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEInterfaceDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_40); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_58); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getEInterfaceDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:3609:3: ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) )
-            // InternalRMParser.g:3610:4: (lv_interface_3_0= ruleEInterfaceDefinitionBody )
+            // InternalRMParser.g:5174:3: ( (lv_interface_3_0= ruleEInterfaceDefinitionBody ) )
+            // InternalRMParser.g:5175:4: (lv_interface_3_0= ruleEInterfaceDefinitionBody )
             {
-            // InternalRMParser.g:3610:4: (lv_interface_3_0= ruleEInterfaceDefinitionBody )
-            // InternalRMParser.g:3611:5: lv_interface_3_0= ruleEInterfaceDefinitionBody
+            // InternalRMParser.g:5175:4: (lv_interface_3_0= ruleEInterfaceDefinitionBody )
+            // InternalRMParser.g:5176:5: lv_interface_3_0= ruleEInterfaceDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getEInterfaceDefinitionAccess().getInterfaceEInterfaceDefinitionBodyParserRuleCall_3_0());
@@ -9123,7 +13124,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInterfaceDefinitionBody"
-    // InternalRMParser.g:3636:1: entryRuleEInterfaceDefinitionBody returns [EObject current=null] : iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF ;
+    // InternalRMParser.g:5201:1: entryRuleEInterfaceDefinitionBody returns [EObject current=null] : iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF ;
     public final EObject entryRuleEInterfaceDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -9131,8 +13132,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3636:65: (iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF )
-            // InternalRMParser.g:3637:2: iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF
+            // InternalRMParser.g:5201:65: (iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF )
+            // InternalRMParser.g:5202:2: iv_ruleEInterfaceDefinitionBody= ruleEInterfaceDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getEInterfaceDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -9159,7 +13160,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInterfaceDefinitionBody"
-    // InternalRMParser.g:3643:1: ruleEInterfaceDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:5208:1: ruleEInterfaceDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleEInterfaceDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -9181,78 +13182,78 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3649:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:3650:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:5214:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:5215:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:3650:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:3651:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:5215:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:5216:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:3651:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:3652:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:5216:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:5217:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:3655:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:3656:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?
+            // InternalRMParser.g:5220:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:5221:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:3656:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+
-            int cnt25=0;
-            loop25:
+            // InternalRMParser.g:5221:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) ) )+
+            int cnt38=0;
+            loop38:
             do {
-                int alt25=4;
-                int LA25_0 = input.LA(1);
+                int alt38=4;
+                int LA38_0 = input.LA(1);
 
-                if ( LA25_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt25=1;
+                if ( LA38_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt38=1;
                 }
-                else if ( LA25_0 == Inputs && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt25=2;
+                else if ( LA38_0 == Inputs && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt38=2;
                 }
-                else if ( LA25_0 == Operations && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt25=3;
+                else if ( LA38_0 == Operations && getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt38=3;
                 }
 
 
-                switch (alt25) {
+                switch (alt38) {
             	case 1 :
-            	    // InternalRMParser.g:3657:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:5222:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3657:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:3658:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:5222:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:5223:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:3658:118: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:3659:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:5223:118: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:5224:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:3662:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:3662:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:5227:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:5227:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3662:18: (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:3662:19: otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:5227:18: (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:5227:19: otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Type,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getEInterfaceDefinitionBodyAccess().getTypeKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:3666:8: ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:3667:9: (lv_type_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:5231:8: ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:5232:9: (lv_type_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:3667:9: (lv_type_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:3668:10: lv_type_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:5232:9: (lv_type_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:5233:10: lv_type_2_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getEInterfaceDefinitionBodyAccess().getTypeEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_41);
+            	    pushFollow(FOLLOW_59);
             	    lv_type_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -9293,28 +13294,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:3691:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5256:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:3691:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) )
-            	    // InternalRMParser.g:3692:4: {...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) )
+            	    // InternalRMParser.g:5256:3: ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5257:4: {...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:3692:118: ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) )
-            	    // InternalRMParser.g:3693:5: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) )
+            	    // InternalRMParser.g:5257:118: ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) ) )
+            	    // InternalRMParser.g:5258:5: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:3696:8: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) )
-            	    // InternalRMParser.g:3696:9: {...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END )
+            	    // InternalRMParser.g:5261:8: ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END ) )
+            	    // InternalRMParser.g:5261:9: {...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3696:18: (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END )
-            	    // InternalRMParser.g:3696:19: otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END
+            	    // InternalRMParser.g:5261:18: (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END )
+            	    // InternalRMParser.g:5261:19: otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEProperties ) ) this_END_6= RULE_END
             	    {
             	    otherlv_3=(Token)match(input,Inputs,FOLLOW_5); 
 
@@ -9324,11 +13325,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    								newLeafNode(this_BEGIN_4, grammarAccess.getEInterfaceDefinitionBodyAccess().getBEGINTerminalRuleCall_1_1());
             	    							
-            	    // InternalRMParser.g:3704:8: ( (lv_inputs_5_0= ruleEProperties ) )
-            	    // InternalRMParser.g:3705:9: (lv_inputs_5_0= ruleEProperties )
+            	    // InternalRMParser.g:5269:8: ( (lv_inputs_5_0= ruleEProperties ) )
+            	    // InternalRMParser.g:5270:9: (lv_inputs_5_0= ruleEProperties )
             	    {
-            	    // InternalRMParser.g:3705:9: (lv_inputs_5_0= ruleEProperties )
-            	    // InternalRMParser.g:3706:10: lv_inputs_5_0= ruleEProperties
+            	    // InternalRMParser.g:5270:9: (lv_inputs_5_0= ruleEProperties )
+            	    // InternalRMParser.g:5271:10: lv_inputs_5_0= ruleEProperties
             	    {
 
             	    										newCompositeNode(grammarAccess.getEInterfaceDefinitionBodyAccess().getInputsEPropertiesParserRuleCall_1_2_0());
@@ -9355,7 +13356,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_6=(Token)match(input,RULE_END,FOLLOW_41); 
+            	    this_END_6=(Token)match(input,RULE_END,FOLLOW_59); 
 
             	    								newLeafNode(this_END_6, grammarAccess.getEInterfaceDefinitionBodyAccess().getENDTerminalRuleCall_1_3());
             	    							
@@ -9378,28 +13379,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:3733:3: ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5298:3: ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:3733:3: ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) )
-            	    // InternalRMParser.g:3734:4: {...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) )
+            	    // InternalRMParser.g:5298:3: ({...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5299:4: {...}? => ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:3734:118: ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) )
-            	    // InternalRMParser.g:3735:5: ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) )
+            	    // InternalRMParser.g:5299:118: ( ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) ) )
+            	    // InternalRMParser.g:5300:5: ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:3738:8: ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) )
-            	    // InternalRMParser.g:3738:9: {...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END )
+            	    // InternalRMParser.g:5303:8: ({...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END ) )
+            	    // InternalRMParser.g:5303:9: {...}? => (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEInterfaceDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3738:18: (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END )
-            	    // InternalRMParser.g:3738:19: otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END
+            	    // InternalRMParser.g:5303:18: (otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END )
+            	    // InternalRMParser.g:5303:19: otherlv_7= Operations this_BEGIN_8= RULE_BEGIN ( (lv_operations_9_0= ruleEOperations ) ) this_END_10= RULE_END
             	    {
             	    otherlv_7=(Token)match(input,Operations,FOLLOW_5); 
 
@@ -9409,11 +13410,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    								newLeafNode(this_BEGIN_8, grammarAccess.getEInterfaceDefinitionBodyAccess().getBEGINTerminalRuleCall_2_1());
             	    							
-            	    // InternalRMParser.g:3746:8: ( (lv_operations_9_0= ruleEOperations ) )
-            	    // InternalRMParser.g:3747:9: (lv_operations_9_0= ruleEOperations )
+            	    // InternalRMParser.g:5311:8: ( (lv_operations_9_0= ruleEOperations ) )
+            	    // InternalRMParser.g:5312:9: (lv_operations_9_0= ruleEOperations )
             	    {
-            	    // InternalRMParser.g:3747:9: (lv_operations_9_0= ruleEOperations )
-            	    // InternalRMParser.g:3748:10: lv_operations_9_0= ruleEOperations
+            	    // InternalRMParser.g:5312:9: (lv_operations_9_0= ruleEOperations )
+            	    // InternalRMParser.g:5313:10: lv_operations_9_0= ruleEOperations
             	    {
 
             	    										newCompositeNode(grammarAccess.getEInterfaceDefinitionBodyAccess().getOperationsEOperationsParserRuleCall_2_2_0());
@@ -9440,7 +13441,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_10=(Token)match(input,RULE_END,FOLLOW_41); 
+            	    this_END_10=(Token)match(input,RULE_END,FOLLOW_59); 
 
             	    								newLeafNode(this_END_10, grammarAccess.getEInterfaceDefinitionBodyAccess().getENDTerminalRuleCall_2_3());
             	    							
@@ -9464,12 +13465,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt25 >= 1 ) break loop25;
+            	    if ( cnt38 >= 1 ) break loop38;
                         EarlyExitException eee =
-                            new EarlyExitException(25, input);
+                            new EarlyExitException(38, input);
                         throw eee;
                 }
-                cnt25++;
+                cnt38++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getEInterfaceDefinitionBodyAccess().getUnorderedGroup()) ) {
@@ -9507,7 +13508,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOperations"
-    // InternalRMParser.g:3786:1: entryRuleEOperations returns [EObject current=null] : iv_ruleEOperations= ruleEOperations EOF ;
+    // InternalRMParser.g:5351:1: entryRuleEOperations returns [EObject current=null] : iv_ruleEOperations= ruleEOperations EOF ;
     public final EObject entryRuleEOperations() throws RecognitionException {
         EObject current = null;
 
@@ -9515,8 +13516,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3786:52: (iv_ruleEOperations= ruleEOperations EOF )
-            // InternalRMParser.g:3787:2: iv_ruleEOperations= ruleEOperations EOF
+            // InternalRMParser.g:5351:52: (iv_ruleEOperations= ruleEOperations EOF )
+            // InternalRMParser.g:5352:2: iv_ruleEOperations= ruleEOperations EOF
             {
              newCompositeNode(grammarAccess.getEOperationsRule()); 
             pushFollow(FOLLOW_1);
@@ -9543,7 +13544,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOperations"
-    // InternalRMParser.g:3793:1: ruleEOperations returns [EObject current=null] : ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* ) ;
+    // InternalRMParser.g:5358:1: ruleEOperations returns [EObject current=null] : ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* ) ;
     public final EObject ruleEOperations() throws RecognitionException {
         EObject current = null;
 
@@ -9554,14 +13555,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3799:2: ( ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* ) )
-            // InternalRMParser.g:3800:2: ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* )
+            // InternalRMParser.g:5364:2: ( ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* ) )
+            // InternalRMParser.g:5365:2: ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* )
             {
-            // InternalRMParser.g:3800:2: ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* )
-            // InternalRMParser.g:3801:3: () ( (lv_operations_1_0= ruleEOperationDefinition ) )*
+            // InternalRMParser.g:5365:2: ( () ( (lv_operations_1_0= ruleEOperationDefinition ) )* )
+            // InternalRMParser.g:5366:3: () ( (lv_operations_1_0= ruleEOperationDefinition ) )*
             {
-            // InternalRMParser.g:3801:3: ()
-            // InternalRMParser.g:3802:4: 
+            // InternalRMParser.g:5366:3: ()
+            // InternalRMParser.g:5367:4: 
             {
 
             				current = forceCreateModelElement(
@@ -9571,28 +13572,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:3808:3: ( (lv_operations_1_0= ruleEOperationDefinition ) )*
-            loop26:
+            // InternalRMParser.g:5373:3: ( (lv_operations_1_0= ruleEOperationDefinition ) )*
+            loop39:
             do {
-                int alt26=2;
-                int LA26_0 = input.LA(1);
+                int alt39=2;
+                int LA39_0 = input.LA(1);
 
-                if ( (LA26_0==RULE_ID) ) {
-                    alt26=1;
+                if ( (LA39_0==RULE_ID) ) {
+                    alt39=1;
                 }
 
 
-                switch (alt26) {
+                switch (alt39) {
             	case 1 :
-            	    // InternalRMParser.g:3809:4: (lv_operations_1_0= ruleEOperationDefinition )
+            	    // InternalRMParser.g:5374:4: (lv_operations_1_0= ruleEOperationDefinition )
             	    {
-            	    // InternalRMParser.g:3809:4: (lv_operations_1_0= ruleEOperationDefinition )
-            	    // InternalRMParser.g:3810:5: lv_operations_1_0= ruleEOperationDefinition
+            	    // InternalRMParser.g:5374:4: (lv_operations_1_0= ruleEOperationDefinition )
+            	    // InternalRMParser.g:5375:5: lv_operations_1_0= ruleEOperationDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getEOperationsAccess().getOperationsEOperationDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_operations_1_0=ruleEOperationDefinition();
 
             	    state._fsp--;
@@ -9616,7 +13617,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop26;
+            	    break loop39;
                 }
             } while (true);
 
@@ -9643,7 +13644,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOperationDefinition"
-    // InternalRMParser.g:3831:1: entryRuleEOperationDefinition returns [EObject current=null] : iv_ruleEOperationDefinition= ruleEOperationDefinition EOF ;
+    // InternalRMParser.g:5396:1: entryRuleEOperationDefinition returns [EObject current=null] : iv_ruleEOperationDefinition= ruleEOperationDefinition EOF ;
     public final EObject entryRuleEOperationDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -9651,8 +13652,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3831:61: (iv_ruleEOperationDefinition= ruleEOperationDefinition EOF )
-            // InternalRMParser.g:3832:2: iv_ruleEOperationDefinition= ruleEOperationDefinition EOF
+            // InternalRMParser.g:5396:61: (iv_ruleEOperationDefinition= ruleEOperationDefinition EOF )
+            // InternalRMParser.g:5397:2: iv_ruleEOperationDefinition= ruleEOperationDefinition EOF
             {
              newCompositeNode(grammarAccess.getEOperationDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -9679,7 +13680,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOperationDefinition"
-    // InternalRMParser.g:3838:1: ruleEOperationDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:5403:1: ruleEOperationDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleEOperationDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -9694,17 +13695,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3844:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:3845:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5409:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:5410:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:3845:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:3846:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:5410:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5411:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_operation_3_0= ruleEOperationDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:3846:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:3847:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5411:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:5412:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:3847:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:3848:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:5412:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5413:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -9730,15 +13731,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEOperationDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_42); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_60); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getEOperationDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:3872:3: ( (lv_operation_3_0= ruleEOperationDefinitionBody ) )
-            // InternalRMParser.g:3873:4: (lv_operation_3_0= ruleEOperationDefinitionBody )
+            // InternalRMParser.g:5437:3: ( (lv_operation_3_0= ruleEOperationDefinitionBody ) )
+            // InternalRMParser.g:5438:4: (lv_operation_3_0= ruleEOperationDefinitionBody )
             {
-            // InternalRMParser.g:3873:4: (lv_operation_3_0= ruleEOperationDefinitionBody )
-            // InternalRMParser.g:3874:5: lv_operation_3_0= ruleEOperationDefinitionBody
+            // InternalRMParser.g:5438:4: (lv_operation_3_0= ruleEOperationDefinitionBody )
+            // InternalRMParser.g:5439:5: lv_operation_3_0= ruleEOperationDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getEOperationDefinitionAccess().getOperationEOperationDefinitionBodyParserRuleCall_3_0());
@@ -9792,7 +13793,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEOperationDefinitionBody"
-    // InternalRMParser.g:3899:1: entryRuleEOperationDefinitionBody returns [EObject current=null] : iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF ;
+    // InternalRMParser.g:5464:1: entryRuleEOperationDefinitionBody returns [EObject current=null] : iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF ;
     public final EObject entryRuleEOperationDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -9800,8 +13801,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:3899:65: (iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF )
-            // InternalRMParser.g:3900:2: iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF
+            // InternalRMParser.g:5464:65: (iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF )
+            // InternalRMParser.g:5465:2: iv_ruleEOperationDefinitionBody= ruleEOperationDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getEOperationDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -9828,7 +13829,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEOperationDefinitionBody"
-    // InternalRMParser.g:3906:1: ruleEOperationDefinitionBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) ) ;
+    // InternalRMParser.g:5471:1: ruleEOperationDefinitionBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleEOperationDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -9849,14 +13850,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3912:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) ) )
-            // InternalRMParser.g:3913:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:5477:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) ) )
+            // InternalRMParser.g:5478:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) )
             {
-            // InternalRMParser.g:3913:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) )
-            // InternalRMParser.g:3914:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) )
+            // InternalRMParser.g:5478:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:5479:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) )
             {
-            // InternalRMParser.g:3914:3: ()
-            // InternalRMParser.g:3915:4: 
+            // InternalRMParser.g:5479:3: ()
+            // InternalRMParser.g:5480:4: 
             {
 
             				current = forceCreateModelElement(
@@ -9866,71 +13867,71 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:3921:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) )
-            // InternalRMParser.g:3922:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) )
+            // InternalRMParser.g:5486:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) ) )
+            // InternalRMParser.g:5487:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) )
             {
-            // InternalRMParser.g:3922:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) )
-            // InternalRMParser.g:3923:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* )
+            // InternalRMParser.g:5487:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* ) )
+            // InternalRMParser.g:5488:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1());
             				
-            // InternalRMParser.g:3926:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* )
-            // InternalRMParser.g:3927:6: ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )*
+            // InternalRMParser.g:5491:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )* )
+            // InternalRMParser.g:5492:6: ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )*
             {
-            // InternalRMParser.g:3927:6: ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )*
-            loop27:
+            // InternalRMParser.g:5492:6: ( ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) ) )*
+            loop40:
             do {
-                int alt27=4;
-                int LA27_0 = input.LA(1);
+                int alt40=4;
+                int LA40_0 = input.LA(1);
 
-                if ( LA27_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
-                    alt27=1;
+                if ( LA40_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
+                    alt40=1;
                 }
-                else if ( LA27_0 == Inputs && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
-                    alt27=2;
+                else if ( LA40_0 == Inputs && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
+                    alt40=2;
                 }
-                else if ( LA27_0 == Implementation && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
-                    alt27=3;
+                else if ( LA40_0 == Implementation && getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
+                    alt40=3;
                 }
 
 
-                switch (alt27) {
+                switch (alt40) {
             	case 1 :
-            	    // InternalRMParser.g:3928:4: ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:5493:4: ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3928:4: ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:3929:5: {...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:5493:4: ({...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:5494:5: {...}? => ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalRMParser.g:3929:121: ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:3930:6: ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:5494:121: ( ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:5495:6: ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 0);
             	    					
-            	    // InternalRMParser.g:3933:9: ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:3933:10: {...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:5498:9: ({...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:5498:10: {...}? => (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3933:19: (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:3933:20: otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5498:19: (otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:5498:20: otherlv_2= Description ( (lv_description_3_0= RULE_STRING ) )
             	    {
             	    otherlv_2=(Token)match(input,Description,FOLLOW_13); 
 
             	    									newLeafNode(otherlv_2, grammarAccess.getEOperationDefinitionBodyAccess().getDescriptionKeyword_1_0_0());
             	    								
-            	    // InternalRMParser.g:3937:9: ( (lv_description_3_0= RULE_STRING ) )
-            	    // InternalRMParser.g:3938:10: (lv_description_3_0= RULE_STRING )
+            	    // InternalRMParser.g:5502:9: ( (lv_description_3_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5503:10: (lv_description_3_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:3938:10: (lv_description_3_0= RULE_STRING )
-            	    // InternalRMParser.g:3939:11: lv_description_3_0= RULE_STRING
+            	    // InternalRMParser.g:5503:10: (lv_description_3_0= RULE_STRING )
+            	    // InternalRMParser.g:5504:11: lv_description_3_0= RULE_STRING
             	    {
-            	    lv_description_3_0=(Token)match(input,RULE_STRING,FOLLOW_43); 
+            	    lv_description_3_0=(Token)match(input,RULE_STRING,FOLLOW_61); 
 
             	    											newLeafNode(lv_description_3_0, grammarAccess.getEOperationDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_0_1_0());
             	    										
@@ -9969,28 +13970,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:3961:4: ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5526:4: ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:3961:4: ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) )
-            	    // InternalRMParser.g:3962:5: {...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) )
+            	    // InternalRMParser.g:5526:4: ({...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5527:5: {...}? => ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalRMParser.g:3962:121: ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) )
-            	    // InternalRMParser.g:3963:6: ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) )
+            	    // InternalRMParser.g:5527:121: ( ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) ) )
+            	    // InternalRMParser.g:5528:6: ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 1);
             	    					
-            	    // InternalRMParser.g:3966:9: ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) )
-            	    // InternalRMParser.g:3966:10: {...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END )
+            	    // InternalRMParser.g:5531:9: ({...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END ) )
+            	    // InternalRMParser.g:5531:10: {...}? => (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3966:19: (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END )
-            	    // InternalRMParser.g:3966:20: otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END
+            	    // InternalRMParser.g:5531:19: (otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END )
+            	    // InternalRMParser.g:5531:20: otherlv_4= Inputs this_BEGIN_5= RULE_BEGIN ( (lv_inputs_6_0= ruleEInputs ) ) this_END_7= RULE_END
             	    {
             	    otherlv_4=(Token)match(input,Inputs,FOLLOW_5); 
 
@@ -10000,11 +14001,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    									newLeafNode(this_BEGIN_5, grammarAccess.getEOperationDefinitionBodyAccess().getBEGINTerminalRuleCall_1_1_1());
             	    								
-            	    // InternalRMParser.g:3974:9: ( (lv_inputs_6_0= ruleEInputs ) )
-            	    // InternalRMParser.g:3975:10: (lv_inputs_6_0= ruleEInputs )
+            	    // InternalRMParser.g:5539:9: ( (lv_inputs_6_0= ruleEInputs ) )
+            	    // InternalRMParser.g:5540:10: (lv_inputs_6_0= ruleEInputs )
             	    {
-            	    // InternalRMParser.g:3975:10: (lv_inputs_6_0= ruleEInputs )
-            	    // InternalRMParser.g:3976:11: lv_inputs_6_0= ruleEInputs
+            	    // InternalRMParser.g:5540:10: (lv_inputs_6_0= ruleEInputs )
+            	    // InternalRMParser.g:5541:11: lv_inputs_6_0= ruleEInputs
             	    {
 
             	    											newCompositeNode(grammarAccess.getEOperationDefinitionBodyAccess().getInputsEInputsParserRuleCall_1_1_2_0());
@@ -10031,7 +14032,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_7=(Token)match(input,RULE_END,FOLLOW_43); 
+            	    this_END_7=(Token)match(input,RULE_END,FOLLOW_61); 
 
             	    									newLeafNode(this_END_7, grammarAccess.getEOperationDefinitionBodyAccess().getENDTerminalRuleCall_1_1_3());
             	    								
@@ -10054,42 +14055,42 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:4003:4: ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5568:4: ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:4003:4: ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) )
-            	    // InternalRMParser.g:4004:5: {...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) )
+            	    // InternalRMParser.g:5568:4: ({...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) ) )
+            	    // InternalRMParser.g:5569:5: {...}? => ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 2)");
             	    }
-            	    // InternalRMParser.g:4004:121: ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) )
-            	    // InternalRMParser.g:4005:6: ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) )
+            	    // InternalRMParser.g:5569:121: ( ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) ) )
+            	    // InternalRMParser.g:5570:6: ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEOperationDefinitionBodyAccess().getUnorderedGroup_1(), 2);
             	    					
-            	    // InternalRMParser.g:4008:9: ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) )
-            	    // InternalRMParser.g:4008:10: {...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END )
+            	    // InternalRMParser.g:5573:9: ({...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END ) )
+            	    // InternalRMParser.g:5573:10: {...}? => (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEOperationDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:4008:19: (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END )
-            	    // InternalRMParser.g:4008:20: otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END
+            	    // InternalRMParser.g:5573:19: (otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END )
+            	    // InternalRMParser.g:5573:20: otherlv_8= Implementation this_BEGIN_9= RULE_BEGIN ( (lv_implementation_10_0= ruleEImplementation ) ) this_END_11= RULE_END
             	    {
             	    otherlv_8=(Token)match(input,Implementation,FOLLOW_5); 
 
             	    									newLeafNode(otherlv_8, grammarAccess.getEOperationDefinitionBodyAccess().getImplementationKeyword_1_2_0());
             	    								
-            	    this_BEGIN_9=(Token)match(input,RULE_BEGIN,FOLLOW_44); 
+            	    this_BEGIN_9=(Token)match(input,RULE_BEGIN,FOLLOW_62); 
 
             	    									newLeafNode(this_BEGIN_9, grammarAccess.getEOperationDefinitionBodyAccess().getBEGINTerminalRuleCall_1_2_1());
             	    								
-            	    // InternalRMParser.g:4016:9: ( (lv_implementation_10_0= ruleEImplementation ) )
-            	    // InternalRMParser.g:4017:10: (lv_implementation_10_0= ruleEImplementation )
+            	    // InternalRMParser.g:5581:9: ( (lv_implementation_10_0= ruleEImplementation ) )
+            	    // InternalRMParser.g:5582:10: (lv_implementation_10_0= ruleEImplementation )
             	    {
-            	    // InternalRMParser.g:4017:10: (lv_implementation_10_0= ruleEImplementation )
-            	    // InternalRMParser.g:4018:11: lv_implementation_10_0= ruleEImplementation
+            	    // InternalRMParser.g:5582:10: (lv_implementation_10_0= ruleEImplementation )
+            	    // InternalRMParser.g:5583:11: lv_implementation_10_0= ruleEImplementation
             	    {
 
             	    											newCompositeNode(grammarAccess.getEOperationDefinitionBodyAccess().getImplementationEImplementationParserRuleCall_1_2_2_0());
@@ -10116,7 +14117,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_11=(Token)match(input,RULE_END,FOLLOW_43); 
+            	    this_END_11=(Token)match(input,RULE_END,FOLLOW_61); 
 
             	    									newLeafNode(this_END_11, grammarAccess.getEOperationDefinitionBodyAccess().getENDTerminalRuleCall_1_2_3());
             	    								
@@ -10140,7 +14141,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop27;
+            	    break loop40;
                 }
             } while (true);
 
@@ -10179,7 +14180,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEImplementation"
-    // InternalRMParser.g:4056:1: entryRuleEImplementation returns [EObject current=null] : iv_ruleEImplementation= ruleEImplementation EOF ;
+    // InternalRMParser.g:5621:1: entryRuleEImplementation returns [EObject current=null] : iv_ruleEImplementation= ruleEImplementation EOF ;
     public final EObject entryRuleEImplementation() throws RecognitionException {
         EObject current = null;
 
@@ -10187,8 +14188,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4056:56: (iv_ruleEImplementation= ruleEImplementation EOF )
-            // InternalRMParser.g:4057:2: iv_ruleEImplementation= ruleEImplementation EOF
+            // InternalRMParser.g:5621:56: (iv_ruleEImplementation= ruleEImplementation EOF )
+            // InternalRMParser.g:5622:2: iv_ruleEImplementation= ruleEImplementation EOF
             {
              newCompositeNode(grammarAccess.getEImplementationRule()); 
             pushFollow(FOLLOW_1);
@@ -10215,7 +14216,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEImplementation"
-    // InternalRMParser.g:4063:1: ruleEImplementation returns [EObject current=null] : ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? ) ;
+    // InternalRMParser.g:5628:1: ruleEImplementation returns [EObject current=null] : ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? ) ;
     public final EObject ruleEImplementation() throws RecognitionException {
         EObject current = null;
 
@@ -10228,22 +14229,22 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4069:2: ( ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? ) )
-            // InternalRMParser.g:4070:2: ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? )
+            // InternalRMParser.g:5634:2: ( ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? ) )
+            // InternalRMParser.g:5635:2: ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? )
             {
-            // InternalRMParser.g:4070:2: ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? )
-            // InternalRMParser.g:4071:3: ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )?
+            // InternalRMParser.g:5635:2: ( ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )? )
+            // InternalRMParser.g:5636:3: ( (lv_primary_0_0= ruleEPrimary ) ) ( (lv_dependencies_1_0= ruleEDependencies ) )?
             {
-            // InternalRMParser.g:4071:3: ( (lv_primary_0_0= ruleEPrimary ) )
-            // InternalRMParser.g:4072:4: (lv_primary_0_0= ruleEPrimary )
+            // InternalRMParser.g:5636:3: ( (lv_primary_0_0= ruleEPrimary ) )
+            // InternalRMParser.g:5637:4: (lv_primary_0_0= ruleEPrimary )
             {
-            // InternalRMParser.g:4072:4: (lv_primary_0_0= ruleEPrimary )
-            // InternalRMParser.g:4073:5: lv_primary_0_0= ruleEPrimary
+            // InternalRMParser.g:5637:4: (lv_primary_0_0= ruleEPrimary )
+            // InternalRMParser.g:5638:5: lv_primary_0_0= ruleEPrimary
             {
 
             					newCompositeNode(grammarAccess.getEImplementationAccess().getPrimaryEPrimaryParserRuleCall_0_0());
             				
-            pushFollow(FOLLOW_45);
+            pushFollow(FOLLOW_63);
             lv_primary_0_0=ruleEPrimary();
 
             state._fsp--;
@@ -10265,19 +14266,19 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:4090:3: ( (lv_dependencies_1_0= ruleEDependencies ) )?
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            // InternalRMParser.g:5655:3: ( (lv_dependencies_1_0= ruleEDependencies ) )?
+            int alt41=2;
+            int LA41_0 = input.LA(1);
 
-            if ( (LA28_0==Dependencies) ) {
-                alt28=1;
+            if ( (LA41_0==Dependencies) ) {
+                alt41=1;
             }
-            switch (alt28) {
+            switch (alt41) {
                 case 1 :
-                    // InternalRMParser.g:4091:4: (lv_dependencies_1_0= ruleEDependencies )
+                    // InternalRMParser.g:5656:4: (lv_dependencies_1_0= ruleEDependencies )
                     {
-                    // InternalRMParser.g:4091:4: (lv_dependencies_1_0= ruleEDependencies )
-                    // InternalRMParser.g:4092:5: lv_dependencies_1_0= ruleEDependencies
+                    // InternalRMParser.g:5656:4: (lv_dependencies_1_0= ruleEDependencies )
+                    // InternalRMParser.g:5657:5: lv_dependencies_1_0= ruleEDependencies
                     {
 
                     					newCompositeNode(grammarAccess.getEImplementationAccess().getDependenciesEDependenciesParserRuleCall_1_0());
@@ -10330,7 +14331,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPrimary"
-    // InternalRMParser.g:4113:1: entryRuleEPrimary returns [EObject current=null] : iv_ruleEPrimary= ruleEPrimary EOF ;
+    // InternalRMParser.g:5678:1: entryRuleEPrimary returns [EObject current=null] : iv_ruleEPrimary= ruleEPrimary EOF ;
     public final EObject entryRuleEPrimary() throws RecognitionException {
         EObject current = null;
 
@@ -10338,8 +14339,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4113:49: (iv_ruleEPrimary= ruleEPrimary EOF )
-            // InternalRMParser.g:4114:2: iv_ruleEPrimary= ruleEPrimary EOF
+            // InternalRMParser.g:5678:49: (iv_ruleEPrimary= ruleEPrimary EOF )
+            // InternalRMParser.g:5679:2: iv_ruleEPrimary= ruleEPrimary EOF
             {
              newCompositeNode(grammarAccess.getEPrimaryRule()); 
             pushFollow(FOLLOW_1);
@@ -10366,7 +14367,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPrimary"
-    // InternalRMParser.g:4120:1: ruleEPrimary returns [EObject current=null] : ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? ) ;
+    // InternalRMParser.g:5685:1: ruleEPrimary returns [EObject current=null] : ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? ) ;
     public final EObject ruleEPrimary() throws RecognitionException {
         EObject current = null;
 
@@ -10381,26 +14382,26 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4126:2: ( ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? ) )
-            // InternalRMParser.g:4127:2: ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? )
+            // InternalRMParser.g:5691:2: ( ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? ) )
+            // InternalRMParser.g:5692:2: ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? )
             {
-            // InternalRMParser.g:4127:2: ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? )
-            // InternalRMParser.g:4128:3: (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )?
+            // InternalRMParser.g:5692:2: ( (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )? )
+            // InternalRMParser.g:5693:3: (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) ) (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )?
             {
-            // InternalRMParser.g:4128:3: (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) )
-            // InternalRMParser.g:4129:4: otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) )
+            // InternalRMParser.g:5693:3: (otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) ) )
+            // InternalRMParser.g:5694:4: otherlv_0= Primary ( (lv_file_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,Primary,FOLLOW_13); 
 
             				newLeafNode(otherlv_0, grammarAccess.getEPrimaryAccess().getPrimaryKeyword_0_0());
             			
-            // InternalRMParser.g:4133:4: ( (lv_file_1_0= RULE_STRING ) )
-            // InternalRMParser.g:4134:5: (lv_file_1_0= RULE_STRING )
+            // InternalRMParser.g:5698:4: ( (lv_file_1_0= RULE_STRING ) )
+            // InternalRMParser.g:5699:5: (lv_file_1_0= RULE_STRING )
             {
-            // InternalRMParser.g:4134:5: (lv_file_1_0= RULE_STRING )
-            // InternalRMParser.g:4135:6: lv_file_1_0= RULE_STRING
+            // InternalRMParser.g:5699:5: (lv_file_1_0= RULE_STRING )
+            // InternalRMParser.g:5700:6: lv_file_1_0= RULE_STRING
             {
-            lv_file_1_0=(Token)match(input,RULE_STRING,FOLLOW_46); 
+            lv_file_1_0=(Token)match(input,RULE_STRING,FOLLOW_64); 
 
             						newLeafNode(lv_file_1_0, grammarAccess.getEPrimaryAccess().getFileSTRINGTerminalRuleCall_0_1_0());
             					
@@ -10423,18 +14424,18 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:4152:3: (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )?
-            int alt29=2;
-            int LA29_0 = input.LA(1);
+            // InternalRMParser.g:5717:3: (this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END )?
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA29_0==RULE_BEGIN) ) {
-                alt29=1;
+            if ( (LA42_0==RULE_BEGIN) ) {
+                alt42=1;
             }
-            switch (alt29) {
+            switch (alt42) {
                 case 1 :
-                    // InternalRMParser.g:4153:4: this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END
+                    // InternalRMParser.g:5718:4: this_BEGIN_2= RULE_BEGIN otherlv_3= Relative_path ( (lv_relative_path_4_0= RULE_STRING ) ) this_END_5= RULE_END
                     {
-                    this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_47); 
+                    this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_65); 
 
                     				newLeafNode(this_BEGIN_2, grammarAccess.getEPrimaryAccess().getBEGINTerminalRuleCall_1_0());
                     			
@@ -10442,11 +14443,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_3, grammarAccess.getEPrimaryAccess().getRelative_pathKeyword_1_1());
                     			
-                    // InternalRMParser.g:4161:4: ( (lv_relative_path_4_0= RULE_STRING ) )
-                    // InternalRMParser.g:4162:5: (lv_relative_path_4_0= RULE_STRING )
+                    // InternalRMParser.g:5726:4: ( (lv_relative_path_4_0= RULE_STRING ) )
+                    // InternalRMParser.g:5727:5: (lv_relative_path_4_0= RULE_STRING )
                     {
-                    // InternalRMParser.g:4162:5: (lv_relative_path_4_0= RULE_STRING )
-                    // InternalRMParser.g:4163:6: lv_relative_path_4_0= RULE_STRING
+                    // InternalRMParser.g:5727:5: (lv_relative_path_4_0= RULE_STRING )
+                    // InternalRMParser.g:5728:6: lv_relative_path_4_0= RULE_STRING
                     {
                     lv_relative_path_4_0=(Token)match(input,RULE_STRING,FOLLOW_7); 
 
@@ -10501,7 +14502,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDependencies"
-    // InternalRMParser.g:4188:1: entryRuleEDependencies returns [EObject current=null] : iv_ruleEDependencies= ruleEDependencies EOF ;
+    // InternalRMParser.g:5753:1: entryRuleEDependencies returns [EObject current=null] : iv_ruleEDependencies= ruleEDependencies EOF ;
     public final EObject entryRuleEDependencies() throws RecognitionException {
         EObject current = null;
 
@@ -10509,8 +14510,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4188:54: (iv_ruleEDependencies= ruleEDependencies EOF )
-            // InternalRMParser.g:4189:2: iv_ruleEDependencies= ruleEDependencies EOF
+            // InternalRMParser.g:5753:54: (iv_ruleEDependencies= ruleEDependencies EOF )
+            // InternalRMParser.g:5754:2: iv_ruleEDependencies= ruleEDependencies EOF
             {
              newCompositeNode(grammarAccess.getEDependenciesRule()); 
             pushFollow(FOLLOW_1);
@@ -10537,7 +14538,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDependencies"
-    // InternalRMParser.g:4195:1: ruleEDependencies returns [EObject current=null] : (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? ) ;
+    // InternalRMParser.g:5760:1: ruleEDependencies returns [EObject current=null] : (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? ) ;
     public final EObject ruleEDependencies() throws RecognitionException {
         EObject current = null;
 
@@ -10555,38 +14556,38 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4201:2: ( (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? ) )
-            // InternalRMParser.g:4202:2: (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? )
+            // InternalRMParser.g:5766:2: ( (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? ) )
+            // InternalRMParser.g:5767:2: (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? )
             {
-            // InternalRMParser.g:4202:2: (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? )
-            // InternalRMParser.g:4203:3: otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )?
+            // InternalRMParser.g:5767:2: (otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )? )
+            // InternalRMParser.g:5768:3: otherlv_0= Dependencies otherlv_1= LeftSquareBracket ( (lv_files_2_0= ruleEDependencyFiles ) )? otherlv_3= RightSquareBracket (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )?
             {
-            otherlv_0=(Token)match(input,Dependencies,FOLLOW_30); 
+            otherlv_0=(Token)match(input,Dependencies,FOLLOW_27); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEDependenciesAccess().getDependenciesKeyword_0());
             		
-            otherlv_1=(Token)match(input,LeftSquareBracket,FOLLOW_48); 
+            otherlv_1=(Token)match(input,LeftSquareBracket,FOLLOW_66); 
 
             			newLeafNode(otherlv_1, grammarAccess.getEDependenciesAccess().getLeftSquareBracketKeyword_1());
             		
-            // InternalRMParser.g:4211:3: ( (lv_files_2_0= ruleEDependencyFiles ) )?
-            int alt30=2;
-            int LA30_0 = input.LA(1);
+            // InternalRMParser.g:5776:3: ( (lv_files_2_0= ruleEDependencyFiles ) )?
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA30_0==RULE_STRING) ) {
-                alt30=1;
+            if ( (LA43_0==RULE_STRING) ) {
+                alt43=1;
             }
-            switch (alt30) {
+            switch (alt43) {
                 case 1 :
-                    // InternalRMParser.g:4212:4: (lv_files_2_0= ruleEDependencyFiles )
+                    // InternalRMParser.g:5777:4: (lv_files_2_0= ruleEDependencyFiles )
                     {
-                    // InternalRMParser.g:4212:4: (lv_files_2_0= ruleEDependencyFiles )
-                    // InternalRMParser.g:4213:5: lv_files_2_0= ruleEDependencyFiles
+                    // InternalRMParser.g:5777:4: (lv_files_2_0= ruleEDependencyFiles )
+                    // InternalRMParser.g:5778:5: lv_files_2_0= ruleEDependencyFiles
                     {
 
                     					newCompositeNode(grammarAccess.getEDependenciesAccess().getFilesEDependencyFilesParserRuleCall_2_0());
                     				
-                    pushFollow(FOLLOW_31);
+                    pushFollow(FOLLOW_28);
                     lv_files_2_0=ruleEDependencyFiles();
 
                     state._fsp--;
@@ -10611,22 +14612,22 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,RightSquareBracket,FOLLOW_46); 
+            otherlv_3=(Token)match(input,RightSquareBracket,FOLLOW_64); 
 
             			newLeafNode(otherlv_3, grammarAccess.getEDependenciesAccess().getRightSquareBracketKeyword_3());
             		
-            // InternalRMParser.g:4234:3: (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )?
-            int alt31=2;
-            int LA31_0 = input.LA(1);
+            // InternalRMParser.g:5799:3: (this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            if ( (LA31_0==RULE_BEGIN) ) {
-                alt31=1;
+            if ( (LA44_0==RULE_BEGIN) ) {
+                alt44=1;
             }
-            switch (alt31) {
+            switch (alt44) {
                 case 1 :
-                    // InternalRMParser.g:4235:4: this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END
+                    // InternalRMParser.g:5800:4: this_BEGIN_4= RULE_BEGIN otherlv_5= Relative_path ( (lv_relative_path_6_0= RULE_STRING ) ) this_END_7= RULE_END
                     {
-                    this_BEGIN_4=(Token)match(input,RULE_BEGIN,FOLLOW_47); 
+                    this_BEGIN_4=(Token)match(input,RULE_BEGIN,FOLLOW_65); 
 
                     				newLeafNode(this_BEGIN_4, grammarAccess.getEDependenciesAccess().getBEGINTerminalRuleCall_4_0());
                     			
@@ -10634,11 +14635,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_5, grammarAccess.getEDependenciesAccess().getRelative_pathKeyword_4_1());
                     			
-                    // InternalRMParser.g:4243:4: ( (lv_relative_path_6_0= RULE_STRING ) )
-                    // InternalRMParser.g:4244:5: (lv_relative_path_6_0= RULE_STRING )
+                    // InternalRMParser.g:5808:4: ( (lv_relative_path_6_0= RULE_STRING ) )
+                    // InternalRMParser.g:5809:5: (lv_relative_path_6_0= RULE_STRING )
                     {
-                    // InternalRMParser.g:4244:5: (lv_relative_path_6_0= RULE_STRING )
-                    // InternalRMParser.g:4245:6: lv_relative_path_6_0= RULE_STRING
+                    // InternalRMParser.g:5809:5: (lv_relative_path_6_0= RULE_STRING )
+                    // InternalRMParser.g:5810:6: lv_relative_path_6_0= RULE_STRING
                     {
                     lv_relative_path_6_0=(Token)match(input,RULE_STRING,FOLLOW_7); 
 
@@ -10693,7 +14694,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEDependencyFiles"
-    // InternalRMParser.g:4270:1: entryRuleEDependencyFiles returns [EObject current=null] : iv_ruleEDependencyFiles= ruleEDependencyFiles EOF ;
+    // InternalRMParser.g:5835:1: entryRuleEDependencyFiles returns [EObject current=null] : iv_ruleEDependencyFiles= ruleEDependencyFiles EOF ;
     public final EObject entryRuleEDependencyFiles() throws RecognitionException {
         EObject current = null;
 
@@ -10701,8 +14702,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4270:57: (iv_ruleEDependencyFiles= ruleEDependencyFiles EOF )
-            // InternalRMParser.g:4271:2: iv_ruleEDependencyFiles= ruleEDependencyFiles EOF
+            // InternalRMParser.g:5835:57: (iv_ruleEDependencyFiles= ruleEDependencyFiles EOF )
+            // InternalRMParser.g:5836:2: iv_ruleEDependencyFiles= ruleEDependencyFiles EOF
             {
              newCompositeNode(grammarAccess.getEDependencyFilesRule()); 
             pushFollow(FOLLOW_1);
@@ -10729,7 +14730,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEDependencyFiles"
-    // InternalRMParser.g:4277:1: ruleEDependencyFiles returns [EObject current=null] : ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* ) ;
+    // InternalRMParser.g:5842:1: ruleEDependencyFiles returns [EObject current=null] : ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* ) ;
     public final EObject ruleEDependencyFiles() throws RecognitionException {
         EObject current = null;
 
@@ -10741,19 +14742,19 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4283:2: ( ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* ) )
-            // InternalRMParser.g:4284:2: ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* )
+            // InternalRMParser.g:5848:2: ( ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* ) )
+            // InternalRMParser.g:5849:2: ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* )
             {
-            // InternalRMParser.g:4284:2: ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* )
-            // InternalRMParser.g:4285:3: ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )*
+            // InternalRMParser.g:5849:2: ( ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )* )
+            // InternalRMParser.g:5850:3: ( (lv_files_0_0= RULE_STRING ) ) (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )*
             {
-            // InternalRMParser.g:4285:3: ( (lv_files_0_0= RULE_STRING ) )
-            // InternalRMParser.g:4286:4: (lv_files_0_0= RULE_STRING )
+            // InternalRMParser.g:5850:3: ( (lv_files_0_0= RULE_STRING ) )
+            // InternalRMParser.g:5851:4: (lv_files_0_0= RULE_STRING )
             {
-            // InternalRMParser.g:4286:4: (lv_files_0_0= RULE_STRING )
-            // InternalRMParser.g:4287:5: lv_files_0_0= RULE_STRING
+            // InternalRMParser.g:5851:4: (lv_files_0_0= RULE_STRING )
+            // InternalRMParser.g:5852:5: lv_files_0_0= RULE_STRING
             {
-            lv_files_0_0=(Token)match(input,RULE_STRING,FOLLOW_32); 
+            lv_files_0_0=(Token)match(input,RULE_STRING,FOLLOW_45); 
 
             					newLeafNode(lv_files_0_0, grammarAccess.getEDependencyFilesAccess().getFilesSTRINGTerminalRuleCall_0_0());
             				
@@ -10773,32 +14774,32 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:4303:3: (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )*
-            loop32:
+            // InternalRMParser.g:5868:3: (otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) ) )*
+            loop45:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt45=2;
+                int LA45_0 = input.LA(1);
 
-                if ( (LA32_0==Comma) ) {
-                    alt32=1;
+                if ( (LA45_0==Comma) ) {
+                    alt45=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt45) {
             	case 1 :
-            	    // InternalRMParser.g:4304:4: otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5869:4: otherlv_1= Comma ( (lv_files_2_0= RULE_STRING ) )
             	    {
             	    otherlv_1=(Token)match(input,Comma,FOLLOW_13); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getEDependencyFilesAccess().getCommaKeyword_1_0());
             	    			
-            	    // InternalRMParser.g:4308:4: ( (lv_files_2_0= RULE_STRING ) )
-            	    // InternalRMParser.g:4309:5: (lv_files_2_0= RULE_STRING )
+            	    // InternalRMParser.g:5873:4: ( (lv_files_2_0= RULE_STRING ) )
+            	    // InternalRMParser.g:5874:5: (lv_files_2_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:4309:5: (lv_files_2_0= RULE_STRING )
-            	    // InternalRMParser.g:4310:6: lv_files_2_0= RULE_STRING
+            	    // InternalRMParser.g:5874:5: (lv_files_2_0= RULE_STRING )
+            	    // InternalRMParser.g:5875:6: lv_files_2_0= RULE_STRING
             	    {
-            	    lv_files_2_0=(Token)match(input,RULE_STRING,FOLLOW_32); 
+            	    lv_files_2_0=(Token)match(input,RULE_STRING,FOLLOW_45); 
 
             	    						newLeafNode(lv_files_2_0, grammarAccess.getEDependencyFilesAccess().getFilesSTRINGTerminalRuleCall_1_1_0());
             	    					
@@ -10823,7 +14824,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop32;
+            	    break loop45;
                 }
             } while (true);
 
@@ -10850,7 +14851,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInputs"
-    // InternalRMParser.g:4331:1: entryRuleEInputs returns [EObject current=null] : iv_ruleEInputs= ruleEInputs EOF ;
+    // InternalRMParser.g:5896:1: entryRuleEInputs returns [EObject current=null] : iv_ruleEInputs= ruleEInputs EOF ;
     public final EObject entryRuleEInputs() throws RecognitionException {
         EObject current = null;
 
@@ -10858,8 +14859,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4331:48: (iv_ruleEInputs= ruleEInputs EOF )
-            // InternalRMParser.g:4332:2: iv_ruleEInputs= ruleEInputs EOF
+            // InternalRMParser.g:5896:48: (iv_ruleEInputs= ruleEInputs EOF )
+            // InternalRMParser.g:5897:2: iv_ruleEInputs= ruleEInputs EOF
             {
              newCompositeNode(grammarAccess.getEInputsRule()); 
             pushFollow(FOLLOW_1);
@@ -10886,7 +14887,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInputs"
-    // InternalRMParser.g:4338:1: ruleEInputs returns [EObject current=null] : ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) ;
+    // InternalRMParser.g:5903:1: ruleEInputs returns [EObject current=null] : ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) ;
     public final EObject ruleEInputs() throws RecognitionException {
         EObject current = null;
 
@@ -10897,14 +14898,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4344:2: ( ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) )
-            // InternalRMParser.g:4345:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
+            // InternalRMParser.g:5909:2: ( ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) )
+            // InternalRMParser.g:5910:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
             {
-            // InternalRMParser.g:4345:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
-            // InternalRMParser.g:4346:3: () ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
+            // InternalRMParser.g:5910:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
+            // InternalRMParser.g:5911:3: () ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
             {
-            // InternalRMParser.g:4346:3: ()
-            // InternalRMParser.g:4347:4: 
+            // InternalRMParser.g:5911:3: ()
+            // InternalRMParser.g:5912:4: 
             {
 
             				current = forceCreateModelElement(
@@ -10914,28 +14915,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:4353:3: ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
-            loop33:
+            // InternalRMParser.g:5918:3: ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
+            loop46:
             do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+                int alt46=2;
+                int LA46_0 = input.LA(1);
 
-                if ( (LA33_0==RULE_ID) ) {
-                    alt33=1;
+                if ( (LA46_0==RULE_ID) ) {
+                    alt46=1;
                 }
 
 
-                switch (alt33) {
+                switch (alt46) {
             	case 1 :
-            	    // InternalRMParser.g:4354:4: (lv_inputs_1_0= ruleEParameterDefinition )
+            	    // InternalRMParser.g:5919:4: (lv_inputs_1_0= ruleEParameterDefinition )
             	    {
-            	    // InternalRMParser.g:4354:4: (lv_inputs_1_0= ruleEParameterDefinition )
-            	    // InternalRMParser.g:4355:5: lv_inputs_1_0= ruleEParameterDefinition
+            	    // InternalRMParser.g:5919:4: (lv_inputs_1_0= ruleEParameterDefinition )
+            	    // InternalRMParser.g:5920:5: lv_inputs_1_0= ruleEParameterDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_inputs_1_0=ruleEParameterDefinition();
 
             	    state._fsp--;
@@ -10959,7 +14960,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop33;
+            	    break loop46;
                 }
             } while (true);
 
@@ -10986,7 +14987,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEParameterDefinition"
-    // InternalRMParser.g:4376:1: entryRuleEParameterDefinition returns [EObject current=null] : iv_ruleEParameterDefinition= ruleEParameterDefinition EOF ;
+    // InternalRMParser.g:5941:1: entryRuleEParameterDefinition returns [EObject current=null] : iv_ruleEParameterDefinition= ruleEParameterDefinition EOF ;
     public final EObject entryRuleEParameterDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -10994,8 +14995,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4376:61: (iv_ruleEParameterDefinition= ruleEParameterDefinition EOF )
-            // InternalRMParser.g:4377:2: iv_ruleEParameterDefinition= ruleEParameterDefinition EOF
+            // InternalRMParser.g:5941:61: (iv_ruleEParameterDefinition= ruleEParameterDefinition EOF )
+            // InternalRMParser.g:5942:2: iv_ruleEParameterDefinition= ruleEParameterDefinition EOF
             {
              newCompositeNode(grammarAccess.getEParameterDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -11022,7 +15023,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEParameterDefinition"
-    // InternalRMParser.g:4383:1: ruleEParameterDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:5948:1: ruleEParameterDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleEParameterDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -11037,17 +15038,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4389:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:4390:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5954:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:5955:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:4390:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:4391:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:5955:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:5956:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:4391:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:4392:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5956:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:5957:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:4392:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:4393:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:5957:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:5958:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -11073,15 +15074,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getEParameterDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_49); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_67); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getEParameterDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:4417:3: ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) )
-            // InternalRMParser.g:4418:4: (lv_parameter_3_0= ruleEParameterDefinitionBody )
+            // InternalRMParser.g:5982:3: ( (lv_parameter_3_0= ruleEParameterDefinitionBody ) )
+            // InternalRMParser.g:5983:4: (lv_parameter_3_0= ruleEParameterDefinitionBody )
             {
-            // InternalRMParser.g:4418:4: (lv_parameter_3_0= ruleEParameterDefinitionBody )
-            // InternalRMParser.g:4419:5: lv_parameter_3_0= ruleEParameterDefinitionBody
+            // InternalRMParser.g:5983:4: (lv_parameter_3_0= ruleEParameterDefinitionBody )
+            // InternalRMParser.g:5984:5: lv_parameter_3_0= ruleEParameterDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getEParameterDefinitionAccess().getParameterEParameterDefinitionBodyParserRuleCall_3_0());
@@ -11135,7 +15136,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEParameterDefinitionBody"
-    // InternalRMParser.g:4444:1: entryRuleEParameterDefinitionBody returns [EObject current=null] : iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF ;
+    // InternalRMParser.g:6009:1: entryRuleEParameterDefinitionBody returns [EObject current=null] : iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF ;
     public final EObject entryRuleEParameterDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -11143,8 +15144,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4444:65: (iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF )
-            // InternalRMParser.g:4445:2: iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF
+            // InternalRMParser.g:6009:65: (iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF )
+            // InternalRMParser.g:6010:2: iv_ruleEParameterDefinitionBody= ruleEParameterDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getEParameterDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -11171,7 +15172,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEParameterDefinitionBody"
-    // InternalRMParser.g:4451:1: ruleEParameterDefinitionBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) ) ;
+    // InternalRMParser.g:6016:1: ruleEParameterDefinitionBody returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleEParameterDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -11189,14 +15190,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4457:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) ) )
-            // InternalRMParser.g:4458:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:6022:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) ) )
+            // InternalRMParser.g:6023:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) )
             {
-            // InternalRMParser.g:4458:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) )
-            // InternalRMParser.g:4459:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) )
+            // InternalRMParser.g:6023:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) ) )
+            // InternalRMParser.g:6024:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) )
             {
-            // InternalRMParser.g:4459:3: ()
-            // InternalRMParser.g:4460:4: 
+            // InternalRMParser.g:6024:3: ()
+            // InternalRMParser.g:6025:4: 
             {
 
             				current = forceCreateModelElement(
@@ -11206,74 +15207,74 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:4466:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) )
-            // InternalRMParser.g:4467:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) )
+            // InternalRMParser.g:6031:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) ) )
+            // InternalRMParser.g:6032:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) )
             {
-            // InternalRMParser.g:4467:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) )
-            // InternalRMParser.g:4468:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* )
+            // InternalRMParser.g:6032:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* ) )
+            // InternalRMParser.g:6033:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* )
             {
              
             				  getUnorderedGroupHelper().enter(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1());
             				
-            // InternalRMParser.g:4471:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* )
-            // InternalRMParser.g:4472:6: ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )*
+            // InternalRMParser.g:6036:5: ( ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )* )
+            // InternalRMParser.g:6037:6: ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )*
             {
-            // InternalRMParser.g:4472:6: ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )*
-            loop34:
+            // InternalRMParser.g:6037:6: ( ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) ) )*
+            loop47:
             do {
-                int alt34=4;
-                int LA34_0 = input.LA(1);
+                int alt47=4;
+                int LA47_0 = input.LA(1);
 
-                if ( LA34_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
-                    alt34=1;
+                if ( LA47_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
+                    alt47=1;
                 }
-                else if ( LA34_0 == Value && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
-                    alt34=2;
+                else if ( LA47_0 == Value && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
+                    alt47=2;
                 }
-                else if ( LA34_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
-                    alt34=3;
+                else if ( LA47_0 == Default && getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
+                    alt47=3;
                 }
 
 
-                switch (alt34) {
+                switch (alt47) {
             	case 1 :
-            	    // InternalRMParser.g:4473:4: ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:6038:4: ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4473:4: ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) )
-            	    // InternalRMParser.g:4474:5: {...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:6038:4: ({...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) ) )
+            	    // InternalRMParser.g:6039:5: {...}? => ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalRMParser.g:4474:121: ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) )
-            	    // InternalRMParser.g:4475:6: ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:6039:121: ( ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) ) )
+            	    // InternalRMParser.g:6040:6: ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 0);
             	    					
-            	    // InternalRMParser.g:4478:9: ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) )
-            	    // InternalRMParser.g:4478:10: {...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:6043:9: ({...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) ) )
+            	    // InternalRMParser.g:6043:10: {...}? => (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:4478:19: (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) )
-            	    // InternalRMParser.g:4478:20: otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:6043:19: (otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) ) )
+            	    // InternalRMParser.g:6043:20: otherlv_2= Type ( (lv_type_3_0= ruleEDataTypeName ) )
             	    {
             	    otherlv_2=(Token)match(input,Type,FOLLOW_6); 
 
             	    									newLeafNode(otherlv_2, grammarAccess.getEParameterDefinitionBodyAccess().getTypeKeyword_1_0_0());
             	    								
-            	    // InternalRMParser.g:4482:9: ( (lv_type_3_0= ruleEDataTypeName ) )
-            	    // InternalRMParser.g:4483:10: (lv_type_3_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:6047:9: ( (lv_type_3_0= ruleEDataTypeName ) )
+            	    // InternalRMParser.g:6048:10: (lv_type_3_0= ruleEDataTypeName )
             	    {
-            	    // InternalRMParser.g:4483:10: (lv_type_3_0= ruleEDataTypeName )
-            	    // InternalRMParser.g:4484:11: lv_type_3_0= ruleEDataTypeName
+            	    // InternalRMParser.g:6048:10: (lv_type_3_0= ruleEDataTypeName )
+            	    // InternalRMParser.g:6049:11: lv_type_3_0= ruleEDataTypeName
             	    {
 
             	    											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getTypeEDataTypeNameParserRuleCall_1_0_1_0());
             	    										
-            	    pushFollow(FOLLOW_50);
+            	    pushFollow(FOLLOW_68);
             	    lv_type_3_0=ruleEDataTypeName();
 
             	    state._fsp--;
@@ -11314,43 +15315,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:4507:4: ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:6072:4: ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4507:4: ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) )
-            	    // InternalRMParser.g:4508:5: {...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:6072:4: ({...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:6073:5: {...}? => ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalRMParser.g:4508:121: ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) )
-            	    // InternalRMParser.g:4509:6: ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:6073:121: ( ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:6074:6: ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1);
             	    					
-            	    // InternalRMParser.g:4512:9: ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) )
-            	    // InternalRMParser.g:4512:10: {...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:6077:9: ({...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:6077:10: {...}? => (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:4512:19: (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) )
-            	    // InternalRMParser.g:4512:20: otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:6077:19: (otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:6077:20: otherlv_4= Value ( (lv_value_5_0= ruleEValueExpression ) )
             	    {
-            	    otherlv_4=(Token)match(input,Value,FOLLOW_37); 
+            	    otherlv_4=(Token)match(input,Value,FOLLOW_48); 
 
             	    									newLeafNode(otherlv_4, grammarAccess.getEParameterDefinitionBodyAccess().getValueKeyword_1_1_0());
             	    								
-            	    // InternalRMParser.g:4516:9: ( (lv_value_5_0= ruleEValueExpression ) )
-            	    // InternalRMParser.g:4517:10: (lv_value_5_0= ruleEValueExpression )
+            	    // InternalRMParser.g:6081:9: ( (lv_value_5_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:6082:10: (lv_value_5_0= ruleEValueExpression )
             	    {
-            	    // InternalRMParser.g:4517:10: (lv_value_5_0= ruleEValueExpression )
-            	    // InternalRMParser.g:4518:11: lv_value_5_0= ruleEValueExpression
+            	    // InternalRMParser.g:6082:10: (lv_value_5_0= ruleEValueExpression )
+            	    // InternalRMParser.g:6083:11: lv_value_5_0= ruleEValueExpression
             	    {
 
             	    											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getValueEValueExpressionParserRuleCall_1_1_1_0());
             	    										
-            	    pushFollow(FOLLOW_50);
+            	    pushFollow(FOLLOW_68);
             	    lv_value_5_0=ruleEValueExpression();
 
             	    state._fsp--;
@@ -11391,43 +15392,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:4541:4: ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:6106:4: ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4541:4: ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) )
-            	    // InternalRMParser.g:4542:5: {...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:6106:4: ({...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) ) )
+            	    // InternalRMParser.g:6107:5: {...}? => ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2)");
             	    }
-            	    // InternalRMParser.g:4542:121: ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) )
-            	    // InternalRMParser.g:4543:6: ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:6107:121: ( ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) ) )
+            	    // InternalRMParser.g:6108:6: ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) )
             	    {
 
             	    						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2);
             	    					
-            	    // InternalRMParser.g:4546:9: ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) )
-            	    // InternalRMParser.g:4546:10: {...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:6111:9: ({...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) ) )
+            	    // InternalRMParser.g:6111:10: {...}? => (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleEParameterDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:4546:19: (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) )
-            	    // InternalRMParser.g:4546:20: otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:6111:19: (otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) ) )
+            	    // InternalRMParser.g:6111:20: otherlv_6= Default ( (lv_default_7_0= ruleEValueExpression ) )
             	    {
-            	    otherlv_6=(Token)match(input,Default,FOLLOW_37); 
+            	    otherlv_6=(Token)match(input,Default,FOLLOW_48); 
 
             	    									newLeafNode(otherlv_6, grammarAccess.getEParameterDefinitionBodyAccess().getDefaultKeyword_1_2_0());
             	    								
-            	    // InternalRMParser.g:4550:9: ( (lv_default_7_0= ruleEValueExpression ) )
-            	    // InternalRMParser.g:4551:10: (lv_default_7_0= ruleEValueExpression )
+            	    // InternalRMParser.g:6115:9: ( (lv_default_7_0= ruleEValueExpression ) )
+            	    // InternalRMParser.g:6116:10: (lv_default_7_0= ruleEValueExpression )
             	    {
-            	    // InternalRMParser.g:4551:10: (lv_default_7_0= ruleEValueExpression )
-            	    // InternalRMParser.g:4552:11: lv_default_7_0= ruleEValueExpression
+            	    // InternalRMParser.g:6116:10: (lv_default_7_0= ruleEValueExpression )
+            	    // InternalRMParser.g:6117:11: lv_default_7_0= ruleEValueExpression
             	    {
 
             	    											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_1_2_1_0());
             	    										
-            	    pushFollow(FOLLOW_50);
+            	    pushFollow(FOLLOW_68);
             	    lv_default_7_0=ruleEValueExpression();
 
             	    state._fsp--;
@@ -11469,7 +15470,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop34;
+            	    break loop47;
                 }
             } while (true);
 
@@ -11508,7 +15509,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValueExpression"
-    // InternalRMParser.g:4586:1: entryRuleEValueExpression returns [EObject current=null] : iv_ruleEValueExpression= ruleEValueExpression EOF ;
+    // InternalRMParser.g:6151:1: entryRuleEValueExpression returns [EObject current=null] : iv_ruleEValueExpression= ruleEValueExpression EOF ;
     public final EObject entryRuleEValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11516,8 +15517,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4586:57: (iv_ruleEValueExpression= ruleEValueExpression EOF )
-            // InternalRMParser.g:4587:2: iv_ruleEValueExpression= ruleEValueExpression EOF
+            // InternalRMParser.g:6151:57: (iv_ruleEValueExpression= ruleEValueExpression EOF )
+            // InternalRMParser.g:6152:2: iv_ruleEValueExpression= ruleEValueExpression EOF
             {
              newCompositeNode(grammarAccess.getEValueExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -11544,7 +15545,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValueExpression"
-    // InternalRMParser.g:4593:1: ruleEValueExpression returns [EObject current=null] : (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction ) ;
+    // InternalRMParser.g:6158:1: ruleEValueExpression returns [EObject current=null] : (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction ) ;
     public final EObject ruleEValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11557,28 +15558,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4599:2: ( (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction ) )
-            // InternalRMParser.g:4600:2: (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction )
+            // InternalRMParser.g:6164:2: ( (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction ) )
+            // InternalRMParser.g:6165:2: (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction )
             {
-            // InternalRMParser.g:4600:2: (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction )
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            // InternalRMParser.g:6165:2: (this_ESingleValue_0= ruleESingleValue | this_EFunction_1= ruleEFunction )
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( ((LA35_0>=HyphenMinus && LA35_0<=FullStop)||LA35_0==RULE_BOOLEAN||(LA35_0>=RULE_INT && LA35_0<=RULE_STRING)) ) {
-                alt35=1;
+            if ( ((LA48_0>=HyphenMinus && LA48_0<=FullStop)||LA48_0==RULE_BOOLEAN||(LA48_0>=RULE_INT && LA48_0<=RULE_STRING)) ) {
+                alt48=1;
             }
-            else if ( (LA35_0==Get_attribute||LA35_0==Get_property||LA35_0==Get_input) ) {
-                alt35=2;
+            else if ( (LA48_0==Get_attribute||LA48_0==Get_property||LA48_0==Get_input) ) {
+                alt48=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 35, 0, input);
+                    new NoViableAltException("", 48, 0, input);
 
                 throw nvae;
             }
-            switch (alt35) {
+            switch (alt48) {
                 case 1 :
-                    // InternalRMParser.g:4601:3: this_ESingleValue_0= ruleESingleValue
+                    // InternalRMParser.g:6166:3: this_ESingleValue_0= ruleESingleValue
                     {
 
                     			newCompositeNode(grammarAccess.getEValueExpressionAccess().getESingleValueParserRuleCall_0());
@@ -11596,7 +15597,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:4610:3: this_EFunction_1= ruleEFunction
+                    // InternalRMParser.g:6175:3: this_EFunction_1= ruleEFunction
                     {
 
                     			newCompositeNode(grammarAccess.getEValueExpressionAccess().getEFunctionParserRuleCall_1());
@@ -11636,7 +15637,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEFunction"
-    // InternalRMParser.g:4622:1: entryRuleEFunction returns [EObject current=null] : iv_ruleEFunction= ruleEFunction EOF ;
+    // InternalRMParser.g:6187:1: entryRuleEFunction returns [EObject current=null] : iv_ruleEFunction= ruleEFunction EOF ;
     public final EObject entryRuleEFunction() throws RecognitionException {
         EObject current = null;
 
@@ -11644,8 +15645,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4622:50: (iv_ruleEFunction= ruleEFunction EOF )
-            // InternalRMParser.g:4623:2: iv_ruleEFunction= ruleEFunction EOF
+            // InternalRMParser.g:6187:50: (iv_ruleEFunction= ruleEFunction EOF )
+            // InternalRMParser.g:6188:2: iv_ruleEFunction= ruleEFunction EOF
             {
              newCompositeNode(grammarAccess.getEFunctionRule()); 
             pushFollow(FOLLOW_1);
@@ -11672,7 +15673,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEFunction"
-    // InternalRMParser.g:4629:1: ruleEFunction returns [EObject current=null] : (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput ) ;
+    // InternalRMParser.g:6194:1: ruleEFunction returns [EObject current=null] : (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput ) ;
     public final EObject ruleEFunction() throws RecognitionException {
         EObject current = null;
 
@@ -11687,37 +15688,37 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4635:2: ( (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput ) )
-            // InternalRMParser.g:4636:2: (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput )
+            // InternalRMParser.g:6200:2: ( (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput ) )
+            // InternalRMParser.g:6201:2: (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput )
             {
-            // InternalRMParser.g:4636:2: (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput )
-            int alt36=3;
+            // InternalRMParser.g:6201:2: (this_GetProperty_0= ruleGetProperty | this_GetAttribute_1= ruleGetAttribute | this_GetInput_2= ruleGetInput )
+            int alt49=3;
             switch ( input.LA(1) ) {
             case Get_property:
                 {
-                alt36=1;
+                alt49=1;
                 }
                 break;
             case Get_attribute:
                 {
-                alt36=2;
+                alt49=2;
                 }
                 break;
             case Get_input:
                 {
-                alt36=3;
+                alt49=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+                    new NoViableAltException("", 49, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt36) {
+            switch (alt49) {
                 case 1 :
-                    // InternalRMParser.g:4637:3: this_GetProperty_0= ruleGetProperty
+                    // InternalRMParser.g:6202:3: this_GetProperty_0= ruleGetProperty
                     {
 
                     			newCompositeNode(grammarAccess.getEFunctionAccess().getGetPropertyParserRuleCall_0());
@@ -11735,7 +15736,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:4646:3: this_GetAttribute_1= ruleGetAttribute
+                    // InternalRMParser.g:6211:3: this_GetAttribute_1= ruleGetAttribute
                     {
 
                     			newCompositeNode(grammarAccess.getEFunctionAccess().getGetAttributeParserRuleCall_1());
@@ -11753,7 +15754,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:4655:3: this_GetInput_2= ruleGetInput
+                    // InternalRMParser.g:6220:3: this_GetInput_2= ruleGetInput
                     {
 
                     			newCompositeNode(grammarAccess.getEFunctionAccess().getGetInputParserRuleCall_2());
@@ -11793,7 +15794,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetInput"
-    // InternalRMParser.g:4667:1: entryRuleGetInput returns [EObject current=null] : iv_ruleGetInput= ruleGetInput EOF ;
+    // InternalRMParser.g:6232:1: entryRuleGetInput returns [EObject current=null] : iv_ruleGetInput= ruleGetInput EOF ;
     public final EObject entryRuleGetInput() throws RecognitionException {
         EObject current = null;
 
@@ -11801,8 +15802,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4667:49: (iv_ruleGetInput= ruleGetInput EOF )
-            // InternalRMParser.g:4668:2: iv_ruleGetInput= ruleGetInput EOF
+            // InternalRMParser.g:6232:49: (iv_ruleGetInput= ruleGetInput EOF )
+            // InternalRMParser.g:6233:2: iv_ruleGetInput= ruleGetInput EOF
             {
              newCompositeNode(grammarAccess.getGetInputRule()); 
             pushFollow(FOLLOW_1);
@@ -11829,7 +15830,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetInput"
-    // InternalRMParser.g:4674:1: ruleGetInput returns [EObject current=null] : (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalRMParser.g:6239:1: ruleGetInput returns [EObject current=null] : (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleGetInput() throws RecognitionException {
         EObject current = null;
 
@@ -11840,21 +15841,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4680:2: ( (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalRMParser.g:4681:2: (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) )
+            // InternalRMParser.g:6245:2: ( (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalRMParser.g:6246:2: (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalRMParser.g:4681:2: (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) )
-            // InternalRMParser.g:4682:3: otherlv_0= Get_input ( (otherlv_1= RULE_ID ) )
+            // InternalRMParser.g:6246:2: (otherlv_0= Get_input ( (otherlv_1= RULE_ID ) ) )
+            // InternalRMParser.g:6247:3: otherlv_0= Get_input ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,Get_input,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGetInputAccess().getGet_inputKeyword_0());
             		
-            // InternalRMParser.g:4686:3: ( (otherlv_1= RULE_ID ) )
-            // InternalRMParser.g:4687:4: (otherlv_1= RULE_ID )
+            // InternalRMParser.g:6251:3: ( (otherlv_1= RULE_ID ) )
+            // InternalRMParser.g:6252:4: (otherlv_1= RULE_ID )
             {
-            // InternalRMParser.g:4687:4: (otherlv_1= RULE_ID )
-            // InternalRMParser.g:4688:5: otherlv_1= RULE_ID
+            // InternalRMParser.g:6252:4: (otherlv_1= RULE_ID )
+            // InternalRMParser.g:6253:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -11894,7 +15895,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetAttribute"
-    // InternalRMParser.g:4703:1: entryRuleGetAttribute returns [EObject current=null] : iv_ruleGetAttribute= ruleGetAttribute EOF ;
+    // InternalRMParser.g:6268:1: entryRuleGetAttribute returns [EObject current=null] : iv_ruleGetAttribute= ruleGetAttribute EOF ;
     public final EObject entryRuleGetAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -11902,8 +15903,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4703:53: (iv_ruleGetAttribute= ruleGetAttribute EOF )
-            // InternalRMParser.g:4704:2: iv_ruleGetAttribute= ruleGetAttribute EOF
+            // InternalRMParser.g:6268:53: (iv_ruleGetAttribute= ruleGetAttribute EOF )
+            // InternalRMParser.g:6269:2: iv_ruleGetAttribute= ruleGetAttribute EOF
             {
              newCompositeNode(grammarAccess.getGetAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -11930,7 +15931,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetAttribute"
-    // InternalRMParser.g:4710:1: ruleGetAttribute returns [EObject current=null] : (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END ) ;
+    // InternalRMParser.g:6275:1: ruleGetAttribute returns [EObject current=null] : (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END ) ;
     public final EObject ruleGetAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -11944,25 +15945,25 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4716:2: ( (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END ) )
-            // InternalRMParser.g:4717:2: (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:6281:2: ( (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:6282:2: (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END )
             {
-            // InternalRMParser.g:4717:2: (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END )
-            // InternalRMParser.g:4718:3: otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END
+            // InternalRMParser.g:6282:2: (otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:6283:3: otherlv_0= Get_attribute this_BEGIN_1= RULE_BEGIN ( (lv_attribute_2_0= ruleGetAttributeBody ) ) this_END_3= RULE_END
             {
             otherlv_0=(Token)match(input,Get_attribute,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGetAttributeAccess().getGet_attributeKeyword_0());
             		
-            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_51); 
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_69); 
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getGetAttributeAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalRMParser.g:4726:3: ( (lv_attribute_2_0= ruleGetAttributeBody ) )
-            // InternalRMParser.g:4727:4: (lv_attribute_2_0= ruleGetAttributeBody )
+            // InternalRMParser.g:6291:3: ( (lv_attribute_2_0= ruleGetAttributeBody ) )
+            // InternalRMParser.g:6292:4: (lv_attribute_2_0= ruleGetAttributeBody )
             {
-            // InternalRMParser.g:4727:4: (lv_attribute_2_0= ruleGetAttributeBody )
-            // InternalRMParser.g:4728:5: lv_attribute_2_0= ruleGetAttributeBody
+            // InternalRMParser.g:6292:4: (lv_attribute_2_0= ruleGetAttributeBody )
+            // InternalRMParser.g:6293:5: lv_attribute_2_0= ruleGetAttributeBody
             {
 
             					newCompositeNode(grammarAccess.getGetAttributeAccess().getAttributeGetAttributeBodyParserRuleCall_2_0());
@@ -12016,7 +16017,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetAttributeBody"
-    // InternalRMParser.g:4753:1: entryRuleGetAttributeBody returns [EObject current=null] : iv_ruleGetAttributeBody= ruleGetAttributeBody EOF ;
+    // InternalRMParser.g:6318:1: entryRuleGetAttributeBody returns [EObject current=null] : iv_ruleGetAttributeBody= ruleGetAttributeBody EOF ;
     public final EObject entryRuleGetAttributeBody() throws RecognitionException {
         EObject current = null;
 
@@ -12024,8 +16025,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4753:57: (iv_ruleGetAttributeBody= ruleGetAttributeBody EOF )
-            // InternalRMParser.g:4754:2: iv_ruleGetAttributeBody= ruleGetAttributeBody EOF
+            // InternalRMParser.g:6318:57: (iv_ruleGetAttributeBody= ruleGetAttributeBody EOF )
+            // InternalRMParser.g:6319:2: iv_ruleGetAttributeBody= ruleGetAttributeBody EOF
             {
              newCompositeNode(grammarAccess.getGetAttributeBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -12052,7 +16053,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetAttributeBody"
-    // InternalRMParser.g:4760:1: ruleGetAttributeBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:6325:1: ruleGetAttributeBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleGetAttributeBody() throws RecognitionException {
         EObject current = null;
 
@@ -12070,78 +16071,78 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4766:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:4767:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6331:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:6332:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:4767:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:4768:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6332:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6333:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:4768:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:4769:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6333:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6334:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:4772:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:4773:5: ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?
+            // InternalRMParser.g:6337:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6338:5: ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:4773:5: ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+
-            int cnt37=0;
-            loop37:
+            // InternalRMParser.g:6338:5: ( ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+
+            int cnt50=0;
+            loop50:
             do {
-                int alt37=4;
-                int LA37_0 = input.LA(1);
+                int alt50=4;
+                int LA50_0 = input.LA(1);
 
-                if ( LA37_0 == Attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt37=1;
+                if ( LA50_0 == Attribute && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt50=1;
                 }
-                else if ( LA37_0 == Entity && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt37=2;
+                else if ( LA50_0 == Entity && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt50=2;
                 }
-                else if ( LA37_0 == Req_cap && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt37=3;
+                else if ( LA50_0 == Req_cap && getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt50=3;
                 }
 
 
-                switch (alt37) {
+                switch (alt50) {
             	case 1 :
-            	    // InternalRMParser.g:4774:3: ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6339:3: ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4774:3: ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:4775:4: {...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6339:3: ({...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6340:4: {...}? => ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:4775:110: ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:4776:5: ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6340:110: ( ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6341:5: ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:4779:8: ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:4779:9: {...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6344:8: ({...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6344:9: {...}? => (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "true");
             	    }
-            	    // InternalRMParser.g:4779:18: (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:4779:19: otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6344:18: (otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6344:19: otherlv_1= Attribute ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Attribute,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getGetAttributeBodyAccess().getAttributeKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:4783:8: ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:4784:9: (lv_attribute_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6348:8: ( (lv_attribute_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6349:9: (lv_attribute_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:4784:9: (lv_attribute_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:4785:10: lv_attribute_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:6349:9: (lv_attribute_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6350:10: lv_attribute_2_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_52);
+            	    pushFollow(FOLLOW_70);
             	    lv_attribute_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -12182,43 +16183,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:4808:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
+            	    // InternalRMParser.g:6373:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4808:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
-            	    // InternalRMParser.g:4809:4: {...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
+            	    // InternalRMParser.g:6373:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
+            	    // InternalRMParser.g:6374:4: {...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:4809:110: ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
-            	    // InternalRMParser.g:4810:5: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
+            	    // InternalRMParser.g:6374:110: ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
+            	    // InternalRMParser.g:6375:5: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:4813:8: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
-            	    // InternalRMParser.g:4813:9: {...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
+            	    // InternalRMParser.g:6378:8: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
+            	    // InternalRMParser.g:6378:9: {...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "true");
             	    }
-            	    // InternalRMParser.g:4813:18: (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
-            	    // InternalRMParser.g:4813:19: otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) )
+            	    // InternalRMParser.g:6378:18: (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
+            	    // InternalRMParser.g:6378:19: otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) )
             	    {
-            	    otherlv_3=(Token)match(input,Entity,FOLLOW_53); 
+            	    otherlv_3=(Token)match(input,Entity,FOLLOW_71); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getGetAttributeBodyAccess().getEntityKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:4817:8: ( (lv_entity_4_0= ruleEEntityReference ) )
-            	    // InternalRMParser.g:4818:9: (lv_entity_4_0= ruleEEntityReference )
+            	    // InternalRMParser.g:6382:8: ( (lv_entity_4_0= ruleEEntityReference ) )
+            	    // InternalRMParser.g:6383:9: (lv_entity_4_0= ruleEEntityReference )
             	    {
-            	    // InternalRMParser.g:4818:9: (lv_entity_4_0= ruleEEntityReference )
-            	    // InternalRMParser.g:4819:10: lv_entity_4_0= ruleEEntityReference
+            	    // InternalRMParser.g:6383:9: (lv_entity_4_0= ruleEEntityReference )
+            	    // InternalRMParser.g:6384:10: lv_entity_4_0= ruleEEntityReference
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getEntityEEntityReferenceParserRuleCall_1_1_0());
             	    									
-            	    pushFollow(FOLLOW_52);
+            	    pushFollow(FOLLOW_70);
             	    lv_entity_4_0=ruleEEntityReference();
 
             	    state._fsp--;
@@ -12259,43 +16260,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:4842:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6407:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4842:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:4843:4: {...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6407:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6408:4: {...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:4843:110: ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:4844:5: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6408:110: ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6409:5: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:4847:8: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:4847:9: {...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6412:8: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6412:9: {...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetAttributeBody", "true");
             	    }
-            	    // InternalRMParser.g:4847:18: (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:4847:19: otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6412:18: (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6412:19: otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_5=(Token)match(input,Req_cap,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_5, grammarAccess.getGetAttributeBodyAccess().getReq_capKeyword_2_0());
             	    							
-            	    // InternalRMParser.g:4851:8: ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:4852:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6416:8: ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6417:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:4852:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:4853:10: lv_req_cap_6_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:6417:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6418:10: lv_req_cap_6_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0());
             	    									
-            	    pushFollow(FOLLOW_52);
+            	    pushFollow(FOLLOW_70);
             	    lv_req_cap_6_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -12337,12 +16338,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt37 >= 1 ) break loop37;
+            	    if ( cnt50 >= 1 ) break loop50;
                         EarlyExitException eee =
-                            new EarlyExitException(37, input);
+                            new EarlyExitException(50, input);
                         throw eee;
                 }
-                cnt37++;
+                cnt50++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup()) ) {
@@ -12380,7 +16381,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetProperty"
-    // InternalRMParser.g:4887:1: entryRuleGetProperty returns [EObject current=null] : iv_ruleGetProperty= ruleGetProperty EOF ;
+    // InternalRMParser.g:6452:1: entryRuleGetProperty returns [EObject current=null] : iv_ruleGetProperty= ruleGetProperty EOF ;
     public final EObject entryRuleGetProperty() throws RecognitionException {
         EObject current = null;
 
@@ -12388,8 +16389,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4887:52: (iv_ruleGetProperty= ruleGetProperty EOF )
-            // InternalRMParser.g:4888:2: iv_ruleGetProperty= ruleGetProperty EOF
+            // InternalRMParser.g:6452:52: (iv_ruleGetProperty= ruleGetProperty EOF )
+            // InternalRMParser.g:6453:2: iv_ruleGetProperty= ruleGetProperty EOF
             {
              newCompositeNode(grammarAccess.getGetPropertyRule()); 
             pushFollow(FOLLOW_1);
@@ -12416,7 +16417,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetProperty"
-    // InternalRMParser.g:4894:1: ruleGetProperty returns [EObject current=null] : (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END ) ;
+    // InternalRMParser.g:6459:1: ruleGetProperty returns [EObject current=null] : (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END ) ;
     public final EObject ruleGetProperty() throws RecognitionException {
         EObject current = null;
 
@@ -12430,25 +16431,25 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4900:2: ( (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END ) )
-            // InternalRMParser.g:4901:2: (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:6465:2: ( (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END ) )
+            // InternalRMParser.g:6466:2: (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END )
             {
-            // InternalRMParser.g:4901:2: (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END )
-            // InternalRMParser.g:4902:3: otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END
+            // InternalRMParser.g:6466:2: (otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END )
+            // InternalRMParser.g:6467:3: otherlv_0= Get_property this_BEGIN_1= RULE_BEGIN ( (lv_property_2_0= ruleGetPropertyBody ) ) this_END_3= RULE_END
             {
             otherlv_0=(Token)match(input,Get_property,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGetPropertyAccess().getGet_propertyKeyword_0());
             		
-            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_54); 
+            this_BEGIN_1=(Token)match(input,RULE_BEGIN,FOLLOW_72); 
 
             			newLeafNode(this_BEGIN_1, grammarAccess.getGetPropertyAccess().getBEGINTerminalRuleCall_1());
             		
-            // InternalRMParser.g:4910:3: ( (lv_property_2_0= ruleGetPropertyBody ) )
-            // InternalRMParser.g:4911:4: (lv_property_2_0= ruleGetPropertyBody )
+            // InternalRMParser.g:6475:3: ( (lv_property_2_0= ruleGetPropertyBody ) )
+            // InternalRMParser.g:6476:4: (lv_property_2_0= ruleGetPropertyBody )
             {
-            // InternalRMParser.g:4911:4: (lv_property_2_0= ruleGetPropertyBody )
-            // InternalRMParser.g:4912:5: lv_property_2_0= ruleGetPropertyBody
+            // InternalRMParser.g:6476:4: (lv_property_2_0= ruleGetPropertyBody )
+            // InternalRMParser.g:6477:5: lv_property_2_0= ruleGetPropertyBody
             {
 
             					newCompositeNode(grammarAccess.getGetPropertyAccess().getPropertyGetPropertyBodyParserRuleCall_2_0());
@@ -12502,7 +16503,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGetPropertyBody"
-    // InternalRMParser.g:4937:1: entryRuleGetPropertyBody returns [EObject current=null] : iv_ruleGetPropertyBody= ruleGetPropertyBody EOF ;
+    // InternalRMParser.g:6502:1: entryRuleGetPropertyBody returns [EObject current=null] : iv_ruleGetPropertyBody= ruleGetPropertyBody EOF ;
     public final EObject entryRuleGetPropertyBody() throws RecognitionException {
         EObject current = null;
 
@@ -12510,8 +16511,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:4937:56: (iv_ruleGetPropertyBody= ruleGetPropertyBody EOF )
-            // InternalRMParser.g:4938:2: iv_ruleGetPropertyBody= ruleGetPropertyBody EOF
+            // InternalRMParser.g:6502:56: (iv_ruleGetPropertyBody= ruleGetPropertyBody EOF )
+            // InternalRMParser.g:6503:2: iv_ruleGetPropertyBody= ruleGetPropertyBody EOF
             {
              newCompositeNode(grammarAccess.getGetPropertyBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -12538,7 +16539,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGetPropertyBody"
-    // InternalRMParser.g:4944:1: ruleGetPropertyBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:6509:1: ruleGetPropertyBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleGetPropertyBody() throws RecognitionException {
         EObject current = null;
 
@@ -12556,78 +16557,78 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:4950:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:4951:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6515:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:6516:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:4951:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:4952:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6516:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6517:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:4952:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:4953:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6517:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6518:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:4956:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:4957:5: ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?
+            // InternalRMParser.g:6521:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6522:5: ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:4957:5: ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+
-            int cnt38=0;
-            loop38:
+            // InternalRMParser.g:6522:5: ( ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) )+
+            int cnt51=0;
+            loop51:
             do {
-                int alt38=4;
-                int LA38_0 = input.LA(1);
+                int alt51=4;
+                int LA51_0 = input.LA(1);
 
-                if ( LA38_0 == Property && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt38=1;
+                if ( LA51_0 == Property && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt51=1;
                 }
-                else if ( LA38_0 == Entity && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt38=2;
+                else if ( LA51_0 == Entity && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt51=2;
                 }
-                else if ( LA38_0 == Req_cap && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt38=3;
+                else if ( LA51_0 == Req_cap && getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt51=3;
                 }
 
 
-                switch (alt38) {
+                switch (alt51) {
             	case 1 :
-            	    // InternalRMParser.g:4958:3: ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6523:3: ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4958:3: ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:4959:4: {...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6523:3: ({...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6524:4: {...}? => ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:4959:109: ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:4960:5: ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6524:109: ( ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6525:5: ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:4963:8: ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:4963:9: {...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6528:8: ({...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6528:9: {...}? => (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "true");
             	    }
-            	    // InternalRMParser.g:4963:18: (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:4963:19: otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6528:18: (otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6528:19: otherlv_1= Property ( (lv_property_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Property,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getGetPropertyBodyAccess().getPropertyKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:4967:8: ( (lv_property_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:4968:9: (lv_property_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6532:8: ( (lv_property_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6533:9: (lv_property_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:4968:9: (lv_property_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:4969:10: lv_property_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:6533:9: (lv_property_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6534:10: lv_property_2_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_55);
+            	    pushFollow(FOLLOW_73);
             	    lv_property_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -12668,43 +16669,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:4992:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
+            	    // InternalRMParser.g:6557:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:4992:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
-            	    // InternalRMParser.g:4993:4: {...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
+            	    // InternalRMParser.g:6557:3: ({...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) ) )
+            	    // InternalRMParser.g:6558:4: {...}? => ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:4993:109: ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
-            	    // InternalRMParser.g:4994:5: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
+            	    // InternalRMParser.g:6558:109: ( ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) ) )
+            	    // InternalRMParser.g:6559:5: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:4997:8: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
-            	    // InternalRMParser.g:4997:9: {...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
+            	    // InternalRMParser.g:6562:8: ({...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) ) )
+            	    // InternalRMParser.g:6562:9: {...}? => (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "true");
             	    }
-            	    // InternalRMParser.g:4997:18: (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
-            	    // InternalRMParser.g:4997:19: otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) )
+            	    // InternalRMParser.g:6562:18: (otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) ) )
+            	    // InternalRMParser.g:6562:19: otherlv_3= Entity ( (lv_entity_4_0= ruleEEntityReference ) )
             	    {
-            	    otherlv_3=(Token)match(input,Entity,FOLLOW_53); 
+            	    otherlv_3=(Token)match(input,Entity,FOLLOW_71); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getGetPropertyBodyAccess().getEntityKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:5001:8: ( (lv_entity_4_0= ruleEEntityReference ) )
-            	    // InternalRMParser.g:5002:9: (lv_entity_4_0= ruleEEntityReference )
+            	    // InternalRMParser.g:6566:8: ( (lv_entity_4_0= ruleEEntityReference ) )
+            	    // InternalRMParser.g:6567:9: (lv_entity_4_0= ruleEEntityReference )
             	    {
-            	    // InternalRMParser.g:5002:9: (lv_entity_4_0= ruleEEntityReference )
-            	    // InternalRMParser.g:5003:10: lv_entity_4_0= ruleEEntityReference
+            	    // InternalRMParser.g:6567:9: (lv_entity_4_0= ruleEEntityReference )
+            	    // InternalRMParser.g:6568:10: lv_entity_4_0= ruleEEntityReference
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getEntityEEntityReferenceParserRuleCall_1_1_0());
             	    									
-            	    pushFollow(FOLLOW_55);
+            	    pushFollow(FOLLOW_73);
             	    lv_entity_4_0=ruleEEntityReference();
 
             	    state._fsp--;
@@ -12745,43 +16746,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:5026:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6591:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5026:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:5027:4: {...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6591:3: ({...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6592:4: {...}? => ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:5027:109: ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:5028:5: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6592:109: ( ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6593:5: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:5031:8: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:5031:9: {...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6596:8: ({...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6596:9: {...}? => (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleGetPropertyBody", "true");
             	    }
-            	    // InternalRMParser.g:5031:18: (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:5031:19: otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6596:18: (otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6596:19: otherlv_5= Req_cap ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_5=(Token)match(input,Req_cap,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_5, grammarAccess.getGetPropertyBodyAccess().getReq_capKeyword_2_0());
             	    							
-            	    // InternalRMParser.g:5035:8: ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5036:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6600:8: ( (lv_req_cap_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6601:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5036:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5037:10: lv_req_cap_6_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:6601:9: (lv_req_cap_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6602:10: lv_req_cap_6_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0());
             	    									
-            	    pushFollow(FOLLOW_55);
+            	    pushFollow(FOLLOW_73);
             	    lv_req_cap_6_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -12823,12 +16824,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt38 >= 1 ) break loop38;
+            	    if ( cnt51 >= 1 ) break loop51;
                         EarlyExitException eee =
-                            new EarlyExitException(38, input);
+                            new EarlyExitException(51, input);
                         throw eee;
                 }
-                cnt38++;
+                cnt51++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup()) ) {
@@ -12866,7 +16867,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleECapabilities"
-    // InternalRMParser.g:5071:1: entryRuleECapabilities returns [EObject current=null] : iv_ruleECapabilities= ruleECapabilities EOF ;
+    // InternalRMParser.g:6636:1: entryRuleECapabilities returns [EObject current=null] : iv_ruleECapabilities= ruleECapabilities EOF ;
     public final EObject entryRuleECapabilities() throws RecognitionException {
         EObject current = null;
 
@@ -12874,8 +16875,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5071:54: (iv_ruleECapabilities= ruleECapabilities EOF )
-            // InternalRMParser.g:5072:2: iv_ruleECapabilities= ruleECapabilities EOF
+            // InternalRMParser.g:6636:54: (iv_ruleECapabilities= ruleECapabilities EOF )
+            // InternalRMParser.g:6637:2: iv_ruleECapabilities= ruleECapabilities EOF
             {
              newCompositeNode(grammarAccess.getECapabilitiesRule()); 
             pushFollow(FOLLOW_1);
@@ -12902,7 +16903,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleECapabilities"
-    // InternalRMParser.g:5078:1: ruleECapabilities returns [EObject current=null] : ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* ) ;
+    // InternalRMParser.g:6643:1: ruleECapabilities returns [EObject current=null] : ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* ) ;
     public final EObject ruleECapabilities() throws RecognitionException {
         EObject current = null;
 
@@ -12913,14 +16914,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5084:2: ( ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* ) )
-            // InternalRMParser.g:5085:2: ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* )
+            // InternalRMParser.g:6649:2: ( ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* ) )
+            // InternalRMParser.g:6650:2: ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* )
             {
-            // InternalRMParser.g:5085:2: ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* )
-            // InternalRMParser.g:5086:3: () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )*
+            // InternalRMParser.g:6650:2: ( () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )* )
+            // InternalRMParser.g:6651:3: () ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )*
             {
-            // InternalRMParser.g:5086:3: ()
-            // InternalRMParser.g:5087:4: 
+            // InternalRMParser.g:6651:3: ()
+            // InternalRMParser.g:6652:4: 
             {
 
             				current = forceCreateModelElement(
@@ -12930,28 +16931,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:5093:3: ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )*
-            loop39:
+            // InternalRMParser.g:6658:3: ( (lv_capabilities_1_0= ruleECapabilityDefinition ) )*
+            loop52:
             do {
-                int alt39=2;
-                int LA39_0 = input.LA(1);
+                int alt52=2;
+                int LA52_0 = input.LA(1);
 
-                if ( (LA39_0==RULE_ID) ) {
-                    alt39=1;
+                if ( (LA52_0==RULE_ID) ) {
+                    alt52=1;
                 }
 
 
-                switch (alt39) {
+                switch (alt52) {
             	case 1 :
-            	    // InternalRMParser.g:5094:4: (lv_capabilities_1_0= ruleECapabilityDefinition )
+            	    // InternalRMParser.g:6659:4: (lv_capabilities_1_0= ruleECapabilityDefinition )
             	    {
-            	    // InternalRMParser.g:5094:4: (lv_capabilities_1_0= ruleECapabilityDefinition )
-            	    // InternalRMParser.g:5095:5: lv_capabilities_1_0= ruleECapabilityDefinition
+            	    // InternalRMParser.g:6659:4: (lv_capabilities_1_0= ruleECapabilityDefinition )
+            	    // InternalRMParser.g:6660:5: lv_capabilities_1_0= ruleECapabilityDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getECapabilitiesAccess().getCapabilitiesECapabilityDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_capabilities_1_0=ruleECapabilityDefinition();
 
             	    state._fsp--;
@@ -12975,7 +16976,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop39;
+            	    break loop52;
                 }
             } while (true);
 
@@ -13002,7 +17003,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleECapabilityDefinition"
-    // InternalRMParser.g:5116:1: entryRuleECapabilityDefinition returns [EObject current=null] : iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF ;
+    // InternalRMParser.g:6681:1: entryRuleECapabilityDefinition returns [EObject current=null] : iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF ;
     public final EObject entryRuleECapabilityDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -13010,8 +17011,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5116:62: (iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF )
-            // InternalRMParser.g:5117:2: iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF
+            // InternalRMParser.g:6681:62: (iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF )
+            // InternalRMParser.g:6682:2: iv_ruleECapabilityDefinition= ruleECapabilityDefinition EOF
             {
              newCompositeNode(grammarAccess.getECapabilityDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -13038,7 +17039,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleECapabilityDefinition"
-    // InternalRMParser.g:5123:1: ruleECapabilityDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:6688:1: ruleECapabilityDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleECapabilityDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -13053,17 +17054,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5129:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:5130:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:6694:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:6695:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:5130:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:5131:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:6695:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:6696:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:5131:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:5132:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:6696:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:6697:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:5132:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:5133:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:6697:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:6698:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -13089,15 +17090,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getECapabilityDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_56); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_74); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getECapabilityDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:5157:3: ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) )
-            // InternalRMParser.g:5158:4: (lv_capability_3_0= ruleECapabilityDefinitionBody )
+            // InternalRMParser.g:6722:3: ( (lv_capability_3_0= ruleECapabilityDefinitionBody ) )
+            // InternalRMParser.g:6723:4: (lv_capability_3_0= ruleECapabilityDefinitionBody )
             {
-            // InternalRMParser.g:5158:4: (lv_capability_3_0= ruleECapabilityDefinitionBody )
-            // InternalRMParser.g:5159:5: lv_capability_3_0= ruleECapabilityDefinitionBody
+            // InternalRMParser.g:6723:4: (lv_capability_3_0= ruleECapabilityDefinitionBody )
+            // InternalRMParser.g:6724:5: lv_capability_3_0= ruleECapabilityDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getECapabilityDefinitionAccess().getCapabilityECapabilityDefinitionBodyParserRuleCall_3_0());
@@ -13151,7 +17152,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleECapabilityDefinitionBody"
-    // InternalRMParser.g:5184:1: entryRuleECapabilityDefinitionBody returns [EObject current=null] : iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF ;
+    // InternalRMParser.g:6749:1: entryRuleECapabilityDefinitionBody returns [EObject current=null] : iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF ;
     public final EObject entryRuleECapabilityDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -13159,8 +17160,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5184:66: (iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF )
-            // InternalRMParser.g:5185:2: iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF
+            // InternalRMParser.g:6749:66: (iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF )
+            // InternalRMParser.g:6750:2: iv_ruleECapabilityDefinitionBody= ruleECapabilityDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getECapabilityDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -13187,7 +17188,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleECapabilityDefinitionBody"
-    // InternalRMParser.g:5191:1: ruleECapabilityDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:6756:1: ruleECapabilityDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleECapabilityDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -13224,87 +17225,87 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5197:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:5198:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6762:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:6763:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:5198:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:5199:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6763:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:6764:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:5199:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:5200:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6764:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:6765:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:5203:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:5204:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?
+            // InternalRMParser.g:6768:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:6769:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:5204:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+
-            int cnt41=0;
-            loop41:
+            // InternalRMParser.g:6769:5: ( ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) ) )+
+            int cnt54=0;
+            loop54:
             do {
-                int alt41=7;
-                int LA41_0 = input.LA(1);
+                int alt54=7;
+                int LA54_0 = input.LA(1);
 
-                if ( LA41_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt41=1;
+                if ( LA54_0 == Type && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt54=1;
                 }
-                else if ( LA41_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt41=2;
+                else if ( LA54_0 == Description && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt54=2;
                 }
-                else if ( LA41_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt41=3;
+                else if ( LA54_0 == Properties && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt54=3;
                 }
-                else if ( LA41_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
-                    alt41=4;
+                else if ( LA54_0 == Attributes && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+                    alt54=4;
                 }
-                else if ( LA41_0 == Valid_source_types && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
-                    alt41=5;
+                else if ( LA54_0 == Valid_source_types && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
+                    alt54=5;
                 }
-                else if ( LA41_0 == Occurrences && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
-                    alt41=6;
+                else if ( LA54_0 == Occurrences && getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
+                    alt54=6;
                 }
 
 
-                switch (alt41) {
+                switch (alt54) {
             	case 1 :
-            	    // InternalRMParser.g:5205:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6770:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5205:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:5206:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6770:3: ({...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:6771:4: {...}? => ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:5206:119: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:5207:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6771:119: ( ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:6772:5: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:5210:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:5210:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6775:8: ({...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:6775:9: {...}? => (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5210:18: (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:5210:19: otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6775:18: (otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:6775:19: otherlv_1= Type ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Type,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getECapabilityDefinitionBodyAccess().getTypeKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:5214:8: ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5215:9: (lv_type_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6779:8: ( (lv_type_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:6780:9: (lv_type_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5215:9: (lv_type_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5216:10: lv_type_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:6780:9: (lv_type_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:6781:10: lv_type_2_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getTypeEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_57);
+            	    pushFollow(FOLLOW_75);
             	    lv_type_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -13345,40 +17346,40 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:5239:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:6804:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5239:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
-            	    // InternalRMParser.g:5240:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:6804:3: ({...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) ) )
+            	    // InternalRMParser.g:6805:4: {...}? => ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:5240:119: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
-            	    // InternalRMParser.g:5241:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:6805:119: ( ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) ) )
+            	    // InternalRMParser.g:6806:5: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:5244:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
-            	    // InternalRMParser.g:5244:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:6809:8: ({...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) ) )
+            	    // InternalRMParser.g:6809:9: {...}? => (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5244:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
-            	    // InternalRMParser.g:5244:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:6809:18: (otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) ) )
+            	    // InternalRMParser.g:6809:19: otherlv_3= Description ( (lv_description_4_0= RULE_STRING ) )
             	    {
             	    otherlv_3=(Token)match(input,Description,FOLLOW_13); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getECapabilityDefinitionBodyAccess().getDescriptionKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:5248:8: ( (lv_description_4_0= RULE_STRING ) )
-            	    // InternalRMParser.g:5249:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:6813:8: ( (lv_description_4_0= RULE_STRING ) )
+            	    // InternalRMParser.g:6814:9: (lv_description_4_0= RULE_STRING )
             	    {
-            	    // InternalRMParser.g:5249:9: (lv_description_4_0= RULE_STRING )
-            	    // InternalRMParser.g:5250:10: lv_description_4_0= RULE_STRING
+            	    // InternalRMParser.g:6814:9: (lv_description_4_0= RULE_STRING )
+            	    // InternalRMParser.g:6815:10: lv_description_4_0= RULE_STRING
             	    {
-            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_57); 
+            	    lv_description_4_0=(Token)match(input,RULE_STRING,FOLLOW_75); 
 
             	    										newLeafNode(lv_description_4_0, grammarAccess.getECapabilityDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_0());
             	    									
@@ -13417,28 +17418,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:5272:3: ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) )
+            	    // InternalRMParser.g:6837:3: ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:5272:3: ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) )
-            	    // InternalRMParser.g:5273:4: {...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) )
+            	    // InternalRMParser.g:6837:3: ({...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) ) )
+            	    // InternalRMParser.g:6838:4: {...}? => ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:5273:119: ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) )
-            	    // InternalRMParser.g:5274:5: ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) )
+            	    // InternalRMParser.g:6838:119: ( ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) ) )
+            	    // InternalRMParser.g:6839:5: ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:5277:8: ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) )
-            	    // InternalRMParser.g:5277:9: {...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END )
+            	    // InternalRMParser.g:6842:8: ({...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END ) )
+            	    // InternalRMParser.g:6842:9: {...}? => (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5277:18: (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END )
-            	    // InternalRMParser.g:5277:19: otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END
+            	    // InternalRMParser.g:6842:18: (otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END )
+            	    // InternalRMParser.g:6842:19: otherlv_5= Properties this_BEGIN_6= RULE_BEGIN ( (lv_properties_7_0= ruleEProperties ) ) this_END_8= RULE_END
             	    {
             	    otherlv_5=(Token)match(input,Properties,FOLLOW_5); 
 
@@ -13448,11 +17449,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    								newLeafNode(this_BEGIN_6, grammarAccess.getECapabilityDefinitionBodyAccess().getBEGINTerminalRuleCall_2_1());
             	    							
-            	    // InternalRMParser.g:5285:8: ( (lv_properties_7_0= ruleEProperties ) )
-            	    // InternalRMParser.g:5286:9: (lv_properties_7_0= ruleEProperties )
+            	    // InternalRMParser.g:6850:8: ( (lv_properties_7_0= ruleEProperties ) )
+            	    // InternalRMParser.g:6851:9: (lv_properties_7_0= ruleEProperties )
             	    {
-            	    // InternalRMParser.g:5286:9: (lv_properties_7_0= ruleEProperties )
-            	    // InternalRMParser.g:5287:10: lv_properties_7_0= ruleEProperties
+            	    // InternalRMParser.g:6851:9: (lv_properties_7_0= ruleEProperties )
+            	    // InternalRMParser.g:6852:10: lv_properties_7_0= ruleEProperties
             	    {
 
             	    										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getPropertiesEPropertiesParserRuleCall_2_2_0());
@@ -13479,7 +17480,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_8=(Token)match(input,RULE_END,FOLLOW_57); 
+            	    this_END_8=(Token)match(input,RULE_END,FOLLOW_75); 
 
             	    								newLeafNode(this_END_8, grammarAccess.getECapabilityDefinitionBodyAccess().getENDTerminalRuleCall_2_3());
             	    							
@@ -13502,28 +17503,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:5314:3: ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) )
+            	    // InternalRMParser.g:6879:3: ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) )
             	    {
-            	    // InternalRMParser.g:5314:3: ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) )
-            	    // InternalRMParser.g:5315:4: {...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) )
+            	    // InternalRMParser.g:6879:3: ({...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) ) )
+            	    // InternalRMParser.g:6880:4: {...}? => ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 3)");
             	    }
-            	    // InternalRMParser.g:5315:119: ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) )
-            	    // InternalRMParser.g:5316:5: ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) )
+            	    // InternalRMParser.g:6880:119: ( ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) ) )
+            	    // InternalRMParser.g:6881:5: ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 3);
             	    				
-            	    // InternalRMParser.g:5319:8: ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) )
-            	    // InternalRMParser.g:5319:9: {...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END )
+            	    // InternalRMParser.g:6884:8: ({...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END ) )
+            	    // InternalRMParser.g:6884:9: {...}? => (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5319:18: (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END )
-            	    // InternalRMParser.g:5319:19: otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END
+            	    // InternalRMParser.g:6884:18: (otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END )
+            	    // InternalRMParser.g:6884:19: otherlv_9= Attributes this_BEGIN_10= RULE_BEGIN ( (lv_attributes_11_0= ruleEAttributes ) ) this_END_12= RULE_END
             	    {
             	    otherlv_9=(Token)match(input,Attributes,FOLLOW_5); 
 
@@ -13533,11 +17534,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    								newLeafNode(this_BEGIN_10, grammarAccess.getECapabilityDefinitionBodyAccess().getBEGINTerminalRuleCall_3_1());
             	    							
-            	    // InternalRMParser.g:5327:8: ( (lv_attributes_11_0= ruleEAttributes ) )
-            	    // InternalRMParser.g:5328:9: (lv_attributes_11_0= ruleEAttributes )
+            	    // InternalRMParser.g:6892:8: ( (lv_attributes_11_0= ruleEAttributes ) )
+            	    // InternalRMParser.g:6893:9: (lv_attributes_11_0= ruleEAttributes )
             	    {
-            	    // InternalRMParser.g:5328:9: (lv_attributes_11_0= ruleEAttributes )
-            	    // InternalRMParser.g:5329:10: lv_attributes_11_0= ruleEAttributes
+            	    // InternalRMParser.g:6893:9: (lv_attributes_11_0= ruleEAttributes )
+            	    // InternalRMParser.g:6894:10: lv_attributes_11_0= ruleEAttributes
             	    {
 
             	    										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getAttributesEAttributesParserRuleCall_3_2_0());
@@ -13564,7 +17565,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    this_END_12=(Token)match(input,RULE_END,FOLLOW_57); 
+            	    this_END_12=(Token)match(input,RULE_END,FOLLOW_75); 
 
             	    								newLeafNode(this_END_12, grammarAccess.getECapabilityDefinitionBodyAccess().getENDTerminalRuleCall_3_3());
             	    							
@@ -13587,55 +17588,55 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // InternalRMParser.g:5356:3: ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:6921:3: ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) )
             	    {
-            	    // InternalRMParser.g:5356:3: ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) )
-            	    // InternalRMParser.g:5357:4: {...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:6921:3: ({...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:6922:4: {...}? => ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 4)");
             	    }
-            	    // InternalRMParser.g:5357:119: ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) )
-            	    // InternalRMParser.g:5358:5: ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) )
+            	    // InternalRMParser.g:6922:119: ( ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:6923:5: ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 4);
             	    				
-            	    // InternalRMParser.g:5361:8: ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) )
-            	    // InternalRMParser.g:5361:9: {...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket )
+            	    // InternalRMParser.g:6926:8: ({...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket ) )
+            	    // InternalRMParser.g:6926:9: {...}? => (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5361:18: (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket )
-            	    // InternalRMParser.g:5361:19: otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket
+            	    // InternalRMParser.g:6926:18: (otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket )
+            	    // InternalRMParser.g:6926:19: otherlv_13= Valid_source_types otherlv_14= LeftSquareBracket ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )? otherlv_16= RightSquareBracket
             	    {
-            	    otherlv_13=(Token)match(input,Valid_source_types,FOLLOW_30); 
+            	    otherlv_13=(Token)match(input,Valid_source_types,FOLLOW_27); 
 
             	    								newLeafNode(otherlv_13, grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesKeyword_4_0());
             	    							
-            	    otherlv_14=(Token)match(input,LeftSquareBracket,FOLLOW_58); 
+            	    otherlv_14=(Token)match(input,LeftSquareBracket,FOLLOW_76); 
 
             	    								newLeafNode(otherlv_14, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_4_1());
             	    							
-            	    // InternalRMParser.g:5369:8: ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )?
-            	    int alt40=2;
-            	    int LA40_0 = input.LA(1);
+            	    // InternalRMParser.g:6934:8: ( (lv_valid_source_types_15_0= ruleEValidSourceType ) )?
+            	    int alt53=2;
+            	    int LA53_0 = input.LA(1);
 
-            	    if ( ((LA40_0>=RULE_ID && LA40_0<=RULE_QUALIFIED_NAME)) ) {
-            	        alt40=1;
+            	    if ( ((LA53_0>=RULE_ID && LA53_0<=RULE_QUALIFIED_NAME)) ) {
+            	        alt53=1;
             	    }
-            	    switch (alt40) {
+            	    switch (alt53) {
             	        case 1 :
-            	            // InternalRMParser.g:5370:9: (lv_valid_source_types_15_0= ruleEValidSourceType )
+            	            // InternalRMParser.g:6935:9: (lv_valid_source_types_15_0= ruleEValidSourceType )
             	            {
-            	            // InternalRMParser.g:5370:9: (lv_valid_source_types_15_0= ruleEValidSourceType )
-            	            // InternalRMParser.g:5371:10: lv_valid_source_types_15_0= ruleEValidSourceType
+            	            // InternalRMParser.g:6935:9: (lv_valid_source_types_15_0= ruleEValidSourceType )
+            	            // InternalRMParser.g:6936:10: lv_valid_source_types_15_0= ruleEValidSourceType
             	            {
 
             	            										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getValid_source_typesEValidSourceTypeParserRuleCall_4_2_0());
             	            									
-            	            pushFollow(FOLLOW_31);
+            	            pushFollow(FOLLOW_28);
             	            lv_valid_source_types_15_0=ruleEValidSourceType();
 
             	            state._fsp--;
@@ -13660,7 +17661,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_16=(Token)match(input,RightSquareBracket,FOLLOW_57); 
+            	    otherlv_16=(Token)match(input,RightSquareBracket,FOLLOW_75); 
 
             	    								newLeafNode(otherlv_16, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_4_3());
             	    							
@@ -13683,47 +17684,47 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // InternalRMParser.g:5398:3: ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:6963:3: ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) )
             	    {
-            	    // InternalRMParser.g:5398:3: ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) )
-            	    // InternalRMParser.g:5399:4: {...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:6963:3: ({...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:6964:4: {...}? => ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 5) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 5)");
             	    }
-            	    // InternalRMParser.g:5399:119: ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) )
-            	    // InternalRMParser.g:5400:5: ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) )
+            	    // InternalRMParser.g:6964:119: ( ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:6965:5: ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), 5);
             	    				
-            	    // InternalRMParser.g:5403:8: ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) )
-            	    // InternalRMParser.g:5403:9: {...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket )
+            	    // InternalRMParser.g:6968:8: ({...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket ) )
+            	    // InternalRMParser.g:6968:9: {...}? => (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECapabilityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5403:18: (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket )
-            	    // InternalRMParser.g:5403:19: otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket
+            	    // InternalRMParser.g:6968:18: (otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket )
+            	    // InternalRMParser.g:6968:19: otherlv_17= Occurrences otherlv_18= LeftSquareBracket ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) ) otherlv_20= Comma ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) ) otherlv_22= RightSquareBracket
             	    {
-            	    otherlv_17=(Token)match(input,Occurrences,FOLLOW_30); 
+            	    otherlv_17=(Token)match(input,Occurrences,FOLLOW_27); 
 
             	    								newLeafNode(otherlv_17, grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrencesKeyword_5_0());
             	    							
-            	    otherlv_18=(Token)match(input,LeftSquareBracket,FOLLOW_59); 
+            	    otherlv_18=(Token)match(input,LeftSquareBracket,FOLLOW_77); 
 
             	    								newLeafNode(otherlv_18, grammarAccess.getECapabilityDefinitionBodyAccess().getLeftSquareBracketKeyword_5_1());
             	    							
-            	    // InternalRMParser.g:5411:8: ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) )
-            	    // InternalRMParser.g:5412:9: (lv_occurrences_start_19_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:6976:8: ( (lv_occurrences_start_19_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:6977:9: (lv_occurrences_start_19_0= ruleEAlphaNumericValue )
             	    {
-            	    // InternalRMParser.g:5412:9: (lv_occurrences_start_19_0= ruleEAlphaNumericValue )
-            	    // InternalRMParser.g:5413:10: lv_occurrences_start_19_0= ruleEAlphaNumericValue
+            	    // InternalRMParser.g:6977:9: (lv_occurrences_start_19_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:6978:10: lv_occurrences_start_19_0= ruleEAlphaNumericValue
             	    {
 
             	    										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_startEAlphaNumericValueParserRuleCall_5_2_0());
             	    									
-            	    pushFollow(FOLLOW_60);
+            	    pushFollow(FOLLOW_78);
             	    lv_occurrences_start_19_0=ruleEAlphaNumericValue();
 
             	    state._fsp--;
@@ -13745,20 +17746,20 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_20=(Token)match(input,Comma,FOLLOW_59); 
+            	    otherlv_20=(Token)match(input,Comma,FOLLOW_77); 
 
             	    								newLeafNode(otherlv_20, grammarAccess.getECapabilityDefinitionBodyAccess().getCommaKeyword_5_3());
             	    							
-            	    // InternalRMParser.g:5434:8: ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) )
-            	    // InternalRMParser.g:5435:9: (lv_occurrences_end_21_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:6999:8: ( (lv_occurrences_end_21_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:7000:9: (lv_occurrences_end_21_0= ruleEAlphaNumericValue )
             	    {
-            	    // InternalRMParser.g:5435:9: (lv_occurrences_end_21_0= ruleEAlphaNumericValue )
-            	    // InternalRMParser.g:5436:10: lv_occurrences_end_21_0= ruleEAlphaNumericValue
+            	    // InternalRMParser.g:7000:9: (lv_occurrences_end_21_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7001:10: lv_occurrences_end_21_0= ruleEAlphaNumericValue
             	    {
 
             	    										newCompositeNode(grammarAccess.getECapabilityDefinitionBodyAccess().getOccurrences_endEAlphaNumericValueParserRuleCall_5_4_0());
             	    									
-            	    pushFollow(FOLLOW_31);
+            	    pushFollow(FOLLOW_28);
             	    lv_occurrences_end_21_0=ruleEAlphaNumericValue();
 
             	    state._fsp--;
@@ -13780,7 +17781,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_22=(Token)match(input,RightSquareBracket,FOLLOW_57); 
+            	    otherlv_22=(Token)match(input,RightSquareBracket,FOLLOW_75); 
 
             	    								newLeafNode(otherlv_22, grammarAccess.getECapabilityDefinitionBodyAccess().getRightSquareBracketKeyword_5_5());
             	    							
@@ -13804,12 +17805,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt41 >= 1 ) break loop41;
+            	    if ( cnt54 >= 1 ) break loop54;
                         EarlyExitException eee =
-                            new EarlyExitException(41, input);
+                            new EarlyExitException(54, input);
                         throw eee;
                 }
-                cnt41++;
+                cnt54++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup()) ) {
@@ -13847,7 +17848,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValidSourceType"
-    // InternalRMParser.g:5474:1: entryRuleEValidSourceType returns [EObject current=null] : iv_ruleEValidSourceType= ruleEValidSourceType EOF ;
+    // InternalRMParser.g:7039:1: entryRuleEValidSourceType returns [EObject current=null] : iv_ruleEValidSourceType= ruleEValidSourceType EOF ;
     public final EObject entryRuleEValidSourceType() throws RecognitionException {
         EObject current = null;
 
@@ -13855,8 +17856,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5474:57: (iv_ruleEValidSourceType= ruleEValidSourceType EOF )
-            // InternalRMParser.g:5475:2: iv_ruleEValidSourceType= ruleEValidSourceType EOF
+            // InternalRMParser.g:7039:57: (iv_ruleEValidSourceType= ruleEValidSourceType EOF )
+            // InternalRMParser.g:7040:2: iv_ruleEValidSourceType= ruleEValidSourceType EOF
             {
              newCompositeNode(grammarAccess.getEValidSourceTypeRule()); 
             pushFollow(FOLLOW_1);
@@ -13883,36 +17884,36 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValidSourceType"
-    // InternalRMParser.g:5481:1: ruleEValidSourceType returns [EObject current=null] : ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* ) ;
+    // InternalRMParser.g:7046:1: ruleEValidSourceType returns [EObject current=null] : ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* ) ;
     public final EObject ruleEValidSourceType() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         EObject lv_sourceTypes_0_0 = null;
 
-        EObject lv_sourceType_2_0 = null;
+        EObject lv_sourceTypes_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRMParser.g:5487:2: ( ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* ) )
-            // InternalRMParser.g:5488:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* )
+            // InternalRMParser.g:7052:2: ( ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* ) )
+            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* )
             {
-            // InternalRMParser.g:5488:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )* )
-            // InternalRMParser.g:5489:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )*
+            // InternalRMParser.g:7053:2: ( ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )* )
+            // InternalRMParser.g:7054:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) ) (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )*
             {
-            // InternalRMParser.g:5489:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) )
-            // InternalRMParser.g:5490:4: (lv_sourceTypes_0_0= ruleEPREFIX_TYPE )
+            // InternalRMParser.g:7054:3: ( (lv_sourceTypes_0_0= ruleEPREFIX_TYPE ) )
+            // InternalRMParser.g:7055:4: (lv_sourceTypes_0_0= ruleEPREFIX_TYPE )
             {
-            // InternalRMParser.g:5490:4: (lv_sourceTypes_0_0= ruleEPREFIX_TYPE )
-            // InternalRMParser.g:5491:5: lv_sourceTypes_0_0= ruleEPREFIX_TYPE
+            // InternalRMParser.g:7055:4: (lv_sourceTypes_0_0= ruleEPREFIX_TYPE )
+            // InternalRMParser.g:7056:5: lv_sourceTypes_0_0= ruleEPREFIX_TYPE
             {
 
             					newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_0_0());
             				
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_45);
             lv_sourceTypes_0_0=ruleEPREFIX_TYPE();
 
             state._fsp--;
@@ -13934,36 +17935,36 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:5508:3: (otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) ) )*
-            loop42:
+            // InternalRMParser.g:7073:3: (otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) ) )*
+            loop55:
             do {
-                int alt42=2;
-                int LA42_0 = input.LA(1);
+                int alt55=2;
+                int LA55_0 = input.LA(1);
 
-                if ( (LA42_0==Comma) ) {
-                    alt42=1;
+                if ( (LA55_0==Comma) ) {
+                    alt55=1;
                 }
 
 
-                switch (alt42) {
+                switch (alt55) {
             	case 1 :
-            	    // InternalRMParser.g:5509:4: otherlv_1= Comma ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7074:4: otherlv_1= Comma ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Comma,FOLLOW_6); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getEValidSourceTypeAccess().getCommaKeyword_1_0());
             	    			
-            	    // InternalRMParser.g:5513:4: ( (lv_sourceType_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5514:5: (lv_sourceType_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7078:4: ( (lv_sourceTypes_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7079:5: (lv_sourceTypes_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5514:5: (lv_sourceType_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5515:6: lv_sourceType_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:7079:5: (lv_sourceTypes_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7080:6: lv_sourceTypes_2_0= ruleEPREFIX_TYPE
             	    {
 
-            	    						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypeEPREFIX_TYPEParserRuleCall_1_1_0());
+            	    						newCompositeNode(grammarAccess.getEValidSourceTypeAccess().getSourceTypesEPREFIX_TYPEParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_32);
-            	    lv_sourceType_2_0=ruleEPREFIX_TYPE();
+            	    pushFollow(FOLLOW_45);
+            	    lv_sourceTypes_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
 
@@ -13973,8 +17974,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    						}
             	    						add(
             	    							current,
-            	    							"sourceType",
-            	    							lv_sourceType_2_0,
+            	    							"sourceTypes",
+            	    							lv_sourceTypes_2_0,
             	    							"org.sodalite.dsl.RM.EPREFIX_TYPE");
             	    						afterParserOrEnumRuleCall();
             	    					
@@ -13989,7 +17990,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop42;
+            	    break loop55;
                 }
             } while (true);
 
@@ -14016,7 +18017,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERequirements"
-    // InternalRMParser.g:5537:1: entryRuleERequirements returns [EObject current=null] : iv_ruleERequirements= ruleERequirements EOF ;
+    // InternalRMParser.g:7102:1: entryRuleERequirements returns [EObject current=null] : iv_ruleERequirements= ruleERequirements EOF ;
     public final EObject entryRuleERequirements() throws RecognitionException {
         EObject current = null;
 
@@ -14024,8 +18025,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5537:54: (iv_ruleERequirements= ruleERequirements EOF )
-            // InternalRMParser.g:5538:2: iv_ruleERequirements= ruleERequirements EOF
+            // InternalRMParser.g:7102:54: (iv_ruleERequirements= ruleERequirements EOF )
+            // InternalRMParser.g:7103:2: iv_ruleERequirements= ruleERequirements EOF
             {
              newCompositeNode(grammarAccess.getERequirementsRule()); 
             pushFollow(FOLLOW_1);
@@ -14052,7 +18053,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERequirements"
-    // InternalRMParser.g:5544:1: ruleERequirements returns [EObject current=null] : ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* ) ;
+    // InternalRMParser.g:7109:1: ruleERequirements returns [EObject current=null] : ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* ) ;
     public final EObject ruleERequirements() throws RecognitionException {
         EObject current = null;
 
@@ -14063,14 +18064,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5550:2: ( ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* ) )
-            // InternalRMParser.g:5551:2: ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* )
+            // InternalRMParser.g:7115:2: ( ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* ) )
+            // InternalRMParser.g:7116:2: ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* )
             {
-            // InternalRMParser.g:5551:2: ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* )
-            // InternalRMParser.g:5552:3: () ( (lv_requirements_1_0= ruleERequirementDefinition ) )*
+            // InternalRMParser.g:7116:2: ( () ( (lv_requirements_1_0= ruleERequirementDefinition ) )* )
+            // InternalRMParser.g:7117:3: () ( (lv_requirements_1_0= ruleERequirementDefinition ) )*
             {
-            // InternalRMParser.g:5552:3: ()
-            // InternalRMParser.g:5553:4: 
+            // InternalRMParser.g:7117:3: ()
+            // InternalRMParser.g:7118:4: 
             {
 
             				current = forceCreateModelElement(
@@ -14080,28 +18081,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:5559:3: ( (lv_requirements_1_0= ruleERequirementDefinition ) )*
-            loop43:
+            // InternalRMParser.g:7124:3: ( (lv_requirements_1_0= ruleERequirementDefinition ) )*
+            loop56:
             do {
-                int alt43=2;
-                int LA43_0 = input.LA(1);
+                int alt56=2;
+                int LA56_0 = input.LA(1);
 
-                if ( (LA43_0==RULE_ID) ) {
-                    alt43=1;
+                if ( (LA56_0==RULE_ID) ) {
+                    alt56=1;
                 }
 
 
-                switch (alt43) {
+                switch (alt56) {
             	case 1 :
-            	    // InternalRMParser.g:5560:4: (lv_requirements_1_0= ruleERequirementDefinition )
+            	    // InternalRMParser.g:7125:4: (lv_requirements_1_0= ruleERequirementDefinition )
             	    {
-            	    // InternalRMParser.g:5560:4: (lv_requirements_1_0= ruleERequirementDefinition )
-            	    // InternalRMParser.g:5561:5: lv_requirements_1_0= ruleERequirementDefinition
+            	    // InternalRMParser.g:7125:4: (lv_requirements_1_0= ruleERequirementDefinition )
+            	    // InternalRMParser.g:7126:5: lv_requirements_1_0= ruleERequirementDefinition
             	    {
 
             	    					newCompositeNode(grammarAccess.getERequirementsAccess().getRequirementsERequirementDefinitionParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_43);
             	    lv_requirements_1_0=ruleERequirementDefinition();
 
             	    state._fsp--;
@@ -14125,7 +18126,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop43;
+            	    break loop56;
                 }
             } while (true);
 
@@ -14152,7 +18153,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERequirementDefinition"
-    // InternalRMParser.g:5582:1: entryRuleERequirementDefinition returns [EObject current=null] : iv_ruleERequirementDefinition= ruleERequirementDefinition EOF ;
+    // InternalRMParser.g:7147:1: entryRuleERequirementDefinition returns [EObject current=null] : iv_ruleERequirementDefinition= ruleERequirementDefinition EOF ;
     public final EObject entryRuleERequirementDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -14160,8 +18161,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5582:63: (iv_ruleERequirementDefinition= ruleERequirementDefinition EOF )
-            // InternalRMParser.g:5583:2: iv_ruleERequirementDefinition= ruleERequirementDefinition EOF
+            // InternalRMParser.g:7147:63: (iv_ruleERequirementDefinition= ruleERequirementDefinition EOF )
+            // InternalRMParser.g:7148:2: iv_ruleERequirementDefinition= ruleERequirementDefinition EOF
             {
              newCompositeNode(grammarAccess.getERequirementDefinitionRule()); 
             pushFollow(FOLLOW_1);
@@ -14188,7 +18189,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERequirementDefinition"
-    // InternalRMParser.g:5589:1: ruleERequirementDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END ) ;
+    // InternalRMParser.g:7154:1: ruleERequirementDefinition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END ) ;
     public final EObject ruleERequirementDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -14203,17 +18204,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5595:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END ) )
-            // InternalRMParser.g:5596:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:7160:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END ) )
+            // InternalRMParser.g:7161:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END )
             {
-            // InternalRMParser.g:5596:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END )
-            // InternalRMParser.g:5597:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END
+            // InternalRMParser.g:7161:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END )
+            // InternalRMParser.g:7162:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= Colon this_BEGIN_2= RULE_BEGIN ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) ) this_END_4= RULE_END
             {
-            // InternalRMParser.g:5597:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRMParser.g:5598:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:7162:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRMParser.g:7163:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalRMParser.g:5598:4: (lv_name_0_0= RULE_ID )
-            // InternalRMParser.g:5599:5: lv_name_0_0= RULE_ID
+            // InternalRMParser.g:7163:4: (lv_name_0_0= RULE_ID )
+            // InternalRMParser.g:7164:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -14239,15 +18240,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getERequirementDefinitionAccess().getColonKeyword_1());
             		
-            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_61); 
+            this_BEGIN_2=(Token)match(input,RULE_BEGIN,FOLLOW_79); 
 
             			newLeafNode(this_BEGIN_2, grammarAccess.getERequirementDefinitionAccess().getBEGINTerminalRuleCall_2());
             		
-            // InternalRMParser.g:5623:3: ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) )
-            // InternalRMParser.g:5624:4: (lv_requirement_3_0= ruleERequirementDefinitionBody )
+            // InternalRMParser.g:7188:3: ( (lv_requirement_3_0= ruleERequirementDefinitionBody ) )
+            // InternalRMParser.g:7189:4: (lv_requirement_3_0= ruleERequirementDefinitionBody )
             {
-            // InternalRMParser.g:5624:4: (lv_requirement_3_0= ruleERequirementDefinitionBody )
-            // InternalRMParser.g:5625:5: lv_requirement_3_0= ruleERequirementDefinitionBody
+            // InternalRMParser.g:7189:4: (lv_requirement_3_0= ruleERequirementDefinitionBody )
+            // InternalRMParser.g:7190:5: lv_requirement_3_0= ruleERequirementDefinitionBody
             {
 
             					newCompositeNode(grammarAccess.getERequirementDefinitionAccess().getRequirementERequirementDefinitionBodyParserRuleCall_3_0());
@@ -14301,7 +18302,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleERequirementDefinitionBody"
-    // InternalRMParser.g:5650:1: entryRuleERequirementDefinitionBody returns [EObject current=null] : iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF ;
+    // InternalRMParser.g:7215:1: entryRuleERequirementDefinitionBody returns [EObject current=null] : iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF ;
     public final EObject entryRuleERequirementDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -14309,8 +18310,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5650:67: (iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF )
-            // InternalRMParser.g:5651:2: iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF
+            // InternalRMParser.g:7215:67: (iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF )
+            // InternalRMParser.g:7216:2: iv_ruleERequirementDefinitionBody= ruleERequirementDefinitionBody EOF
             {
              newCompositeNode(grammarAccess.getERequirementDefinitionBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -14337,7 +18338,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleERequirementDefinitionBody"
-    // InternalRMParser.g:5657:1: ruleERequirementDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:7222:1: ruleERequirementDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleERequirementDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -14363,81 +18364,81 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5663:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:5664:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:7228:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:7229:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:5664:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:5665:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:7229:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:7230:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:5665:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:5666:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:7230:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:7231:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:5669:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:5670:5: ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?
+            // InternalRMParser.g:7234:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:7235:5: ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:5670:5: ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+
-            int cnt44=0;
-            loop44:
+            // InternalRMParser.g:7235:5: ( ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) ) )+
+            int cnt57=0;
+            loop57:
             do {
-                int alt44=5;
-                int LA44_0 = input.LA(1);
+                int alt57=5;
+                int LA57_0 = input.LA(1);
 
-                if ( LA44_0 == Capability && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
-                    alt44=1;
+                if ( LA57_0 == Capability && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
+                    alt57=1;
                 }
-                else if ( LA44_0 == Node && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
-                    alt44=2;
+                else if ( LA57_0 == Node && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
+                    alt57=2;
                 }
-                else if ( LA44_0 == Relationship && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
-                    alt44=3;
+                else if ( LA57_0 == Relationship && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
+                    alt57=3;
                 }
-                else if ( LA44_0 == Occurrences && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
-                    alt44=4;
+                else if ( LA57_0 == Occurrences && getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
+                    alt57=4;
                 }
 
 
-                switch (alt44) {
+                switch (alt57) {
             	case 1 :
-            	    // InternalRMParser.g:5671:3: ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7236:3: ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5671:3: ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:5672:4: {...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7236:3: ({...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7237:4: {...}? => ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:5672:120: ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:5673:5: ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7237:120: ( ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7238:5: ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:5676:8: ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:5676:9: {...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7241:8: ({...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7241:9: {...}? => (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5676:18: (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:5676:19: otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7241:18: (otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7241:19: otherlv_1= Capability ( (lv_capability_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Capability,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:5680:8: ( (lv_capability_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5681:9: (lv_capability_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7245:8: ( (lv_capability_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7246:9: (lv_capability_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5681:9: (lv_capability_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5682:10: lv_capability_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:7246:9: (lv_capability_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7247:10: lv_capability_2_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getCapabilityEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
-            	    pushFollow(FOLLOW_62);
+            	    pushFollow(FOLLOW_80);
             	    lv_capability_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -14478,43 +18479,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalRMParser.g:5705:3: ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7270:3: ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5705:3: ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:5706:4: {...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7270:3: ({...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7271:4: {...}? => ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 1)");
             	    }
-            	    // InternalRMParser.g:5706:120: ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:5707:5: ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7271:120: ( ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7272:5: ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 1);
             	    				
-            	    // InternalRMParser.g:5710:8: ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:5710:9: {...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7275:8: ({...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7275:9: {...}? => (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5710:18: (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:5710:19: otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7275:18: (otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7275:19: otherlv_3= Node ( (lv_node_4_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_3=(Token)match(input,Node,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_3, grammarAccess.getERequirementDefinitionBodyAccess().getNodeKeyword_1_0());
             	    							
-            	    // InternalRMParser.g:5714:8: ( (lv_node_4_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5715:9: (lv_node_4_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7279:8: ( (lv_node_4_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7280:9: (lv_node_4_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5715:9: (lv_node_4_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5716:10: lv_node_4_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:7280:9: (lv_node_4_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7281:10: lv_node_4_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getNodeEPREFIX_TYPEParserRuleCall_1_1_0());
             	    									
-            	    pushFollow(FOLLOW_62);
+            	    pushFollow(FOLLOW_80);
             	    lv_node_4_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -14555,43 +18556,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalRMParser.g:5739:3: ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7304:3: ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:5739:3: ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:5740:4: {...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7304:3: ({...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:7305:4: {...}? => ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 2)");
             	    }
-            	    // InternalRMParser.g:5740:120: ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:5741:5: ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7305:120: ( ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:7306:5: ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 2);
             	    				
-            	    // InternalRMParser.g:5744:8: ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:5744:9: {...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7309:8: ({...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:7309:9: {...}? => (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5744:18: (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:5744:19: otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7309:18: (otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:7309:19: otherlv_5= Relationship ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_5=(Token)match(input,Relationship,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_5, grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipKeyword_2_0());
             	    							
-            	    // InternalRMParser.g:5748:8: ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:5749:9: (lv_relationship_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7313:8: ( (lv_relationship_6_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:7314:9: (lv_relationship_6_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:5749:9: (lv_relationship_6_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:5750:10: lv_relationship_6_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:7314:9: (lv_relationship_6_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:7315:10: lv_relationship_6_0= ruleEPREFIX_TYPE
             	    {
 
             	    										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipEPREFIX_TYPEParserRuleCall_2_1_0());
             	    									
-            	    pushFollow(FOLLOW_62);
+            	    pushFollow(FOLLOW_80);
             	    lv_relationship_6_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
@@ -14632,47 +18633,47 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalRMParser.g:5773:3: ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:7338:3: ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) )
             	    {
-            	    // InternalRMParser.g:5773:3: ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) )
-            	    // InternalRMParser.g:5774:4: {...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:7338:3: ({...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) ) )
+            	    // InternalRMParser.g:7339:4: {...}? => ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 3)");
             	    }
-            	    // InternalRMParser.g:5774:120: ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) )
-            	    // InternalRMParser.g:5775:5: ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) )
+            	    // InternalRMParser.g:7339:120: ( ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) ) )
+            	    // InternalRMParser.g:7340:5: ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), 3);
             	    				
-            	    // InternalRMParser.g:5778:8: ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) )
-            	    // InternalRMParser.g:5778:9: {...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket )
+            	    // InternalRMParser.g:7343:8: ({...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket ) )
+            	    // InternalRMParser.g:7343:9: {...}? => (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleERequirementDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:5778:18: (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket )
-            	    // InternalRMParser.g:5778:19: otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket
+            	    // InternalRMParser.g:7343:18: (otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket )
+            	    // InternalRMParser.g:7343:19: otherlv_7= Occurrences otherlv_8= LeftSquareBracket ( (lv_start_9_0= ruleEAlphaNumericValue ) ) otherlv_10= Comma ( (lv_end_11_0= ruleEAlphaNumericValue ) ) otherlv_12= RightSquareBracket
             	    {
-            	    otherlv_7=(Token)match(input,Occurrences,FOLLOW_30); 
+            	    otherlv_7=(Token)match(input,Occurrences,FOLLOW_27); 
 
             	    								newLeafNode(otherlv_7, grammarAccess.getERequirementDefinitionBodyAccess().getOccurrencesKeyword_3_0());
             	    							
-            	    otherlv_8=(Token)match(input,LeftSquareBracket,FOLLOW_59); 
+            	    otherlv_8=(Token)match(input,LeftSquareBracket,FOLLOW_77); 
 
             	    								newLeafNode(otherlv_8, grammarAccess.getERequirementDefinitionBodyAccess().getLeftSquareBracketKeyword_3_1());
             	    							
-            	    // InternalRMParser.g:5786:8: ( (lv_start_9_0= ruleEAlphaNumericValue ) )
-            	    // InternalRMParser.g:5787:9: (lv_start_9_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7351:8: ( (lv_start_9_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:7352:9: (lv_start_9_0= ruleEAlphaNumericValue )
             	    {
-            	    // InternalRMParser.g:5787:9: (lv_start_9_0= ruleEAlphaNumericValue )
-            	    // InternalRMParser.g:5788:10: lv_start_9_0= ruleEAlphaNumericValue
+            	    // InternalRMParser.g:7352:9: (lv_start_9_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7353:10: lv_start_9_0= ruleEAlphaNumericValue
             	    {
 
             	    										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getStartEAlphaNumericValueParserRuleCall_3_2_0());
             	    									
-            	    pushFollow(FOLLOW_60);
+            	    pushFollow(FOLLOW_78);
             	    lv_start_9_0=ruleEAlphaNumericValue();
 
             	    state._fsp--;
@@ -14694,20 +18695,20 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_10=(Token)match(input,Comma,FOLLOW_59); 
+            	    otherlv_10=(Token)match(input,Comma,FOLLOW_77); 
 
             	    								newLeafNode(otherlv_10, grammarAccess.getERequirementDefinitionBodyAccess().getCommaKeyword_3_3());
             	    							
-            	    // InternalRMParser.g:5809:8: ( (lv_end_11_0= ruleEAlphaNumericValue ) )
-            	    // InternalRMParser.g:5810:9: (lv_end_11_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7374:8: ( (lv_end_11_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:7375:9: (lv_end_11_0= ruleEAlphaNumericValue )
             	    {
-            	    // InternalRMParser.g:5810:9: (lv_end_11_0= ruleEAlphaNumericValue )
-            	    // InternalRMParser.g:5811:10: lv_end_11_0= ruleEAlphaNumericValue
+            	    // InternalRMParser.g:7375:9: (lv_end_11_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7376:10: lv_end_11_0= ruleEAlphaNumericValue
             	    {
 
             	    										newCompositeNode(grammarAccess.getERequirementDefinitionBodyAccess().getEndEAlphaNumericValueParserRuleCall_3_4_0());
             	    									
-            	    pushFollow(FOLLOW_31);
+            	    pushFollow(FOLLOW_28);
             	    lv_end_11_0=ruleEAlphaNumericValue();
 
             	    state._fsp--;
@@ -14729,7 +18730,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_12=(Token)match(input,RightSquareBracket,FOLLOW_62); 
+            	    otherlv_12=(Token)match(input,RightSquareBracket,FOLLOW_80); 
 
             	    								newLeafNode(otherlv_12, grammarAccess.getERequirementDefinitionBodyAccess().getRightSquareBracketKeyword_3_5());
             	    							
@@ -14753,12 +18754,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt44 >= 1 ) break loop44;
+            	    if ( cnt57 >= 1 ) break loop57;
                         EarlyExitException eee =
-                            new EarlyExitException(44, input);
+                            new EarlyExitException(57, input);
                         throw eee;
                 }
-                cnt44++;
+                cnt57++;
             } while (true);
 
             if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup()) ) {
@@ -14796,7 +18797,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEConstraints"
-    // InternalRMParser.g:5849:1: entryRuleEConstraints returns [EObject current=null] : iv_ruleEConstraints= ruleEConstraints EOF ;
+    // InternalRMParser.g:7414:1: entryRuleEConstraints returns [EObject current=null] : iv_ruleEConstraints= ruleEConstraints EOF ;
     public final EObject entryRuleEConstraints() throws RecognitionException {
         EObject current = null;
 
@@ -14804,8 +18805,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5849:53: (iv_ruleEConstraints= ruleEConstraints EOF )
-            // InternalRMParser.g:5850:2: iv_ruleEConstraints= ruleEConstraints EOF
+            // InternalRMParser.g:7414:53: (iv_ruleEConstraints= ruleEConstraints EOF )
+            // InternalRMParser.g:7415:2: iv_ruleEConstraints= ruleEConstraints EOF
             {
              newCompositeNode(grammarAccess.getEConstraintsRule()); 
             pushFollow(FOLLOW_1);
@@ -14832,7 +18833,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEConstraints"
-    // InternalRMParser.g:5856:1: ruleEConstraints returns [EObject current=null] : ( () ( (lv_constraints_1_0= ruleEConstraint ) )* ) ;
+    // InternalRMParser.g:7421:1: ruleEConstraints returns [EObject current=null] : ( () ( (lv_constraints_1_0= ruleEConstraint ) )* ) ;
     public final EObject ruleEConstraints() throws RecognitionException {
         EObject current = null;
 
@@ -14843,14 +18844,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5862:2: ( ( () ( (lv_constraints_1_0= ruleEConstraint ) )* ) )
-            // InternalRMParser.g:5863:2: ( () ( (lv_constraints_1_0= ruleEConstraint ) )* )
+            // InternalRMParser.g:7427:2: ( ( () ( (lv_constraints_1_0= ruleEConstraint ) )* ) )
+            // InternalRMParser.g:7428:2: ( () ( (lv_constraints_1_0= ruleEConstraint ) )* )
             {
-            // InternalRMParser.g:5863:2: ( () ( (lv_constraints_1_0= ruleEConstraint ) )* )
-            // InternalRMParser.g:5864:3: () ( (lv_constraints_1_0= ruleEConstraint ) )*
+            // InternalRMParser.g:7428:2: ( () ( (lv_constraints_1_0= ruleEConstraint ) )* )
+            // InternalRMParser.g:7429:3: () ( (lv_constraints_1_0= ruleEConstraint ) )*
             {
-            // InternalRMParser.g:5864:3: ()
-            // InternalRMParser.g:5865:4: 
+            // InternalRMParser.g:7429:3: ()
+            // InternalRMParser.g:7430:4: 
             {
 
             				current = forceCreateModelElement(
@@ -14860,28 +18861,28 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:5871:3: ( (lv_constraints_1_0= ruleEConstraint ) )*
-            loop45:
+            // InternalRMParser.g:7436:3: ( (lv_constraints_1_0= ruleEConstraint ) )*
+            loop58:
             do {
-                int alt45=2;
-                int LA45_0 = input.LA(1);
+                int alt58=2;
+                int LA58_0 = input.LA(1);
 
-                if ( (LA45_0==Greater_or_equal||LA45_0==Less_or_equal||LA45_0==Greater_than||LA45_0==Valid_values||(LA45_0>=Max_length && LA45_0<=Min_length)||LA45_0==Less_than||LA45_0==In_range||LA45_0==Length||LA45_0==Equal) ) {
-                    alt45=1;
+                if ( (LA58_0==Greater_or_equal||LA58_0==Less_or_equal||LA58_0==Greater_than||LA58_0==Valid_values||(LA58_0>=Max_length && LA58_0<=Min_length)||LA58_0==Less_than||LA58_0==In_range||LA58_0==Length||LA58_0==Equal) ) {
+                    alt58=1;
                 }
 
 
-                switch (alt45) {
+                switch (alt58) {
             	case 1 :
-            	    // InternalRMParser.g:5872:4: (lv_constraints_1_0= ruleEConstraint )
+            	    // InternalRMParser.g:7437:4: (lv_constraints_1_0= ruleEConstraint )
             	    {
-            	    // InternalRMParser.g:5872:4: (lv_constraints_1_0= ruleEConstraint )
-            	    // InternalRMParser.g:5873:5: lv_constraints_1_0= ruleEConstraint
+            	    // InternalRMParser.g:7437:4: (lv_constraints_1_0= ruleEConstraint )
+            	    // InternalRMParser.g:7438:5: lv_constraints_1_0= ruleEConstraint
             	    {
 
             	    					newCompositeNode(grammarAccess.getEConstraintsAccess().getConstraintsEConstraintParserRuleCall_1_0());
             	    				
-            	    pushFollow(FOLLOW_63);
+            	    pushFollow(FOLLOW_81);
             	    lv_constraints_1_0=ruleEConstraint();
 
             	    state._fsp--;
@@ -14905,7 +18906,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop45;
+            	    break loop58;
                 }
             } while (true);
 
@@ -14932,7 +18933,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEConstraint"
-    // InternalRMParser.g:5894:1: entryRuleEConstraint returns [EObject current=null] : iv_ruleEConstraint= ruleEConstraint EOF ;
+    // InternalRMParser.g:7459:1: entryRuleEConstraint returns [EObject current=null] : iv_ruleEConstraint= ruleEConstraint EOF ;
     public final EObject entryRuleEConstraint() throws RecognitionException {
         EObject current = null;
 
@@ -14940,8 +18941,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:5894:52: (iv_ruleEConstraint= ruleEConstraint EOF )
-            // InternalRMParser.g:5895:2: iv_ruleEConstraint= ruleEConstraint EOF
+            // InternalRMParser.g:7459:52: (iv_ruleEConstraint= ruleEConstraint EOF )
+            // InternalRMParser.g:7460:2: iv_ruleEConstraint= ruleEConstraint EOF
             {
              newCompositeNode(grammarAccess.getEConstraintRule()); 
             pushFollow(FOLLOW_1);
@@ -14968,7 +18969,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEConstraint"
-    // InternalRMParser.g:5901:1: ruleEConstraint returns [EObject current=null] : (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength ) ;
+    // InternalRMParser.g:7466:1: ruleEConstraint returns [EObject current=null] : (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength ) ;
     public final EObject ruleEConstraint() throws RecognitionException {
         EObject current = null;
 
@@ -14997,72 +18998,72 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:5907:2: ( (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength ) )
-            // InternalRMParser.g:5908:2: (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength )
+            // InternalRMParser.g:7472:2: ( (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength ) )
+            // InternalRMParser.g:7473:2: (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength )
             {
-            // InternalRMParser.g:5908:2: (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength )
-            int alt46=10;
+            // InternalRMParser.g:7473:2: (this_EEqual_0= ruleEEqual | this_EGreaterThan_1= ruleEGreaterThan | this_EGreaterOrEqual_2= ruleEGreaterOrEqual | this_ELessThan_3= ruleELessThan | this_ELessOrEqual_4= ruleELessOrEqual | this_EInRange_5= ruleEInRange | this_EValid_Values_6= ruleEValid_Values | this_ELength_7= ruleELength | this_EMinLength_8= ruleEMinLength | this_EMaxLength_9= ruleEMaxLength )
+            int alt59=10;
             switch ( input.LA(1) ) {
             case Equal:
                 {
-                alt46=1;
+                alt59=1;
                 }
                 break;
             case Greater_than:
                 {
-                alt46=2;
+                alt59=2;
                 }
                 break;
             case Greater_or_equal:
                 {
-                alt46=3;
+                alt59=3;
                 }
                 break;
             case Less_than:
                 {
-                alt46=4;
+                alt59=4;
                 }
                 break;
             case Less_or_equal:
                 {
-                alt46=5;
+                alt59=5;
                 }
                 break;
             case In_range:
                 {
-                alt46=6;
+                alt59=6;
                 }
                 break;
             case Valid_values:
                 {
-                alt46=7;
+                alt59=7;
                 }
                 break;
             case Length:
                 {
-                alt46=8;
+                alt59=8;
                 }
                 break;
             case Min_length:
                 {
-                alt46=9;
+                alt59=9;
                 }
                 break;
             case Max_length:
                 {
-                alt46=10;
+                alt59=10;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 46, 0, input);
+                    new NoViableAltException("", 59, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt46) {
+            switch (alt59) {
                 case 1 :
-                    // InternalRMParser.g:5909:3: this_EEqual_0= ruleEEqual
+                    // InternalRMParser.g:7474:3: this_EEqual_0= ruleEEqual
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEEqualParserRuleCall_0());
@@ -15080,7 +19081,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:5918:3: this_EGreaterThan_1= ruleEGreaterThan
+                    // InternalRMParser.g:7483:3: this_EGreaterThan_1= ruleEGreaterThan
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEGreaterThanParserRuleCall_1());
@@ -15098,7 +19099,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:5927:3: this_EGreaterOrEqual_2= ruleEGreaterOrEqual
+                    // InternalRMParser.g:7492:3: this_EGreaterOrEqual_2= ruleEGreaterOrEqual
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEGreaterOrEqualParserRuleCall_2());
@@ -15116,7 +19117,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalRMParser.g:5936:3: this_ELessThan_3= ruleELessThan
+                    // InternalRMParser.g:7501:3: this_ELessThan_3= ruleELessThan
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getELessThanParserRuleCall_3());
@@ -15134,7 +19135,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalRMParser.g:5945:3: this_ELessOrEqual_4= ruleELessOrEqual
+                    // InternalRMParser.g:7510:3: this_ELessOrEqual_4= ruleELessOrEqual
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getELessOrEqualParserRuleCall_4());
@@ -15152,7 +19153,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalRMParser.g:5954:3: this_EInRange_5= ruleEInRange
+                    // InternalRMParser.g:7519:3: this_EInRange_5= ruleEInRange
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEInRangeParserRuleCall_5());
@@ -15170,7 +19171,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // InternalRMParser.g:5963:3: this_EValid_Values_6= ruleEValid_Values
+                    // InternalRMParser.g:7528:3: this_EValid_Values_6= ruleEValid_Values
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEValid_ValuesParserRuleCall_6());
@@ -15188,7 +19189,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // InternalRMParser.g:5972:3: this_ELength_7= ruleELength
+                    // InternalRMParser.g:7537:3: this_ELength_7= ruleELength
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getELengthParserRuleCall_7());
@@ -15206,7 +19207,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // InternalRMParser.g:5981:3: this_EMinLength_8= ruleEMinLength
+                    // InternalRMParser.g:7546:3: this_EMinLength_8= ruleEMinLength
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEMinLengthParserRuleCall_8());
@@ -15224,7 +19225,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // InternalRMParser.g:5990:3: this_EMaxLength_9= ruleEMaxLength
+                    // InternalRMParser.g:7555:3: this_EMaxLength_9= ruleEMaxLength
                     {
 
                     			newCompositeNode(grammarAccess.getEConstraintAccess().getEMaxLengthParserRuleCall_9());
@@ -15264,7 +19265,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEMaxLength"
-    // InternalRMParser.g:6002:1: entryRuleEMaxLength returns [EObject current=null] : iv_ruleEMaxLength= ruleEMaxLength EOF ;
+    // InternalRMParser.g:7567:1: entryRuleEMaxLength returns [EObject current=null] : iv_ruleEMaxLength= ruleEMaxLength EOF ;
     public final EObject entryRuleEMaxLength() throws RecognitionException {
         EObject current = null;
 
@@ -15272,8 +19273,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6002:51: (iv_ruleEMaxLength= ruleEMaxLength EOF )
-            // InternalRMParser.g:6003:2: iv_ruleEMaxLength= ruleEMaxLength EOF
+            // InternalRMParser.g:7567:51: (iv_ruleEMaxLength= ruleEMaxLength EOF )
+            // InternalRMParser.g:7568:2: iv_ruleEMaxLength= ruleEMaxLength EOF
             {
              newCompositeNode(grammarAccess.getEMaxLengthRule()); 
             pushFollow(FOLLOW_1);
@@ -15300,7 +19301,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMaxLength"
-    // InternalRMParser.g:6009:1: ruleEMaxLength returns [EObject current=null] : (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7574:1: ruleEMaxLength returns [EObject current=null] : (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleEMaxLength() throws RecognitionException {
         EObject current = null;
 
@@ -15312,21 +19313,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6015:2: ( (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6016:2: (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7580:2: ( (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7581:2: (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6016:2: (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6017:3: otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7581:2: (otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7582:3: otherlv_0= Max_length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Max_length,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Max_length,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEMaxLengthAccess().getMax_lengthKeyword_0());
             		
-            // InternalRMParser.g:6021:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6022:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7586:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7587:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6022:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6023:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7587:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7588:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEMaxLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -15376,7 +19377,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEMinLength"
-    // InternalRMParser.g:6044:1: entryRuleEMinLength returns [EObject current=null] : iv_ruleEMinLength= ruleEMinLength EOF ;
+    // InternalRMParser.g:7609:1: entryRuleEMinLength returns [EObject current=null] : iv_ruleEMinLength= ruleEMinLength EOF ;
     public final EObject entryRuleEMinLength() throws RecognitionException {
         EObject current = null;
 
@@ -15384,8 +19385,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6044:51: (iv_ruleEMinLength= ruleEMinLength EOF )
-            // InternalRMParser.g:6045:2: iv_ruleEMinLength= ruleEMinLength EOF
+            // InternalRMParser.g:7609:51: (iv_ruleEMinLength= ruleEMinLength EOF )
+            // InternalRMParser.g:7610:2: iv_ruleEMinLength= ruleEMinLength EOF
             {
              newCompositeNode(grammarAccess.getEMinLengthRule()); 
             pushFollow(FOLLOW_1);
@@ -15412,7 +19413,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMinLength"
-    // InternalRMParser.g:6051:1: ruleEMinLength returns [EObject current=null] : (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7616:1: ruleEMinLength returns [EObject current=null] : (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleEMinLength() throws RecognitionException {
         EObject current = null;
 
@@ -15424,21 +19425,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6057:2: ( (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6058:2: (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7622:2: ( (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7623:2: (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6058:2: (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6059:3: otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7623:2: (otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7624:3: otherlv_0= Min_length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Min_length,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Min_length,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEMinLengthAccess().getMin_lengthKeyword_0());
             		
-            // InternalRMParser.g:6063:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6064:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7628:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7629:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6064:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6065:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7629:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7630:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEMinLengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -15488,7 +19489,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELength"
-    // InternalRMParser.g:6086:1: entryRuleELength returns [EObject current=null] : iv_ruleELength= ruleELength EOF ;
+    // InternalRMParser.g:7651:1: entryRuleELength returns [EObject current=null] : iv_ruleELength= ruleELength EOF ;
     public final EObject entryRuleELength() throws RecognitionException {
         EObject current = null;
 
@@ -15496,8 +19497,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6086:48: (iv_ruleELength= ruleELength EOF )
-            // InternalRMParser.g:6087:2: iv_ruleELength= ruleELength EOF
+            // InternalRMParser.g:7651:48: (iv_ruleELength= ruleELength EOF )
+            // InternalRMParser.g:7652:2: iv_ruleELength= ruleELength EOF
             {
              newCompositeNode(grammarAccess.getELengthRule()); 
             pushFollow(FOLLOW_1);
@@ -15524,7 +19525,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELength"
-    // InternalRMParser.g:6093:1: ruleELength returns [EObject current=null] : (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7658:1: ruleELength returns [EObject current=null] : (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleELength() throws RecognitionException {
         EObject current = null;
 
@@ -15536,21 +19537,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6099:2: ( (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6100:2: (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7664:2: ( (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7665:2: (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6100:2: (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6101:3: otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7665:2: (otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7666:3: otherlv_0= Length ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Length,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Length,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getELengthAccess().getLengthKeyword_0());
             		
-            // InternalRMParser.g:6105:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6106:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7670:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7671:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6106:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6107:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7671:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7672:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getELengthAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -15600,7 +19601,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEValid_Values"
-    // InternalRMParser.g:6128:1: entryRuleEValid_Values returns [EObject current=null] : iv_ruleEValid_Values= ruleEValid_Values EOF ;
+    // InternalRMParser.g:7693:1: entryRuleEValid_Values returns [EObject current=null] : iv_ruleEValid_Values= ruleEValid_Values EOF ;
     public final EObject entryRuleEValid_Values() throws RecognitionException {
         EObject current = null;
 
@@ -15608,8 +19609,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6128:54: (iv_ruleEValid_Values= ruleEValid_Values EOF )
-            // InternalRMParser.g:6129:2: iv_ruleEValid_Values= ruleEValid_Values EOF
+            // InternalRMParser.g:7693:54: (iv_ruleEValid_Values= ruleEValid_Values EOF )
+            // InternalRMParser.g:7694:2: iv_ruleEValid_Values= ruleEValid_Values EOF
             {
              newCompositeNode(grammarAccess.getEValid_ValuesRule()); 
             pushFollow(FOLLOW_1);
@@ -15636,7 +19637,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEValid_Values"
-    // InternalRMParser.g:6135:1: ruleEValid_Values returns [EObject current=null] : (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) ) ;
+    // InternalRMParser.g:7700:1: ruleEValid_Values returns [EObject current=null] : (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) ) ;
     public final EObject ruleEValid_Values() throws RecognitionException {
         EObject current = null;
 
@@ -15648,21 +19649,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6141:2: ( (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) ) )
-            // InternalRMParser.g:6142:2: (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) )
+            // InternalRMParser.g:7706:2: ( (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) ) )
+            // InternalRMParser.g:7707:2: (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) )
             {
-            // InternalRMParser.g:6142:2: (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) )
-            // InternalRMParser.g:6143:3: otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) )
+            // InternalRMParser.g:7707:2: (otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) ) )
+            // InternalRMParser.g:7708:3: otherlv_0= Valid_values ( (lv_val_1_0= ruleELIST ) )
             {
-            otherlv_0=(Token)match(input,Valid_values,FOLLOW_30); 
+            otherlv_0=(Token)match(input,Valid_values,FOLLOW_27); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEValid_ValuesAccess().getValid_valuesKeyword_0());
             		
-            // InternalRMParser.g:6147:3: ( (lv_val_1_0= ruleELIST ) )
-            // InternalRMParser.g:6148:4: (lv_val_1_0= ruleELIST )
+            // InternalRMParser.g:7712:3: ( (lv_val_1_0= ruleELIST ) )
+            // InternalRMParser.g:7713:4: (lv_val_1_0= ruleELIST )
             {
-            // InternalRMParser.g:6148:4: (lv_val_1_0= ruleELIST )
-            // InternalRMParser.g:6149:5: lv_val_1_0= ruleELIST
+            // InternalRMParser.g:7713:4: (lv_val_1_0= ruleELIST )
+            // InternalRMParser.g:7714:5: lv_val_1_0= ruleELIST
             {
 
             					newCompositeNode(grammarAccess.getEValid_ValuesAccess().getValELISTParserRuleCall_1_0());
@@ -15712,7 +19713,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELIST"
-    // InternalRMParser.g:6170:1: entryRuleELIST returns [EObject current=null] : iv_ruleELIST= ruleELIST EOF ;
+    // InternalRMParser.g:7735:1: entryRuleELIST returns [EObject current=null] : iv_ruleELIST= ruleELIST EOF ;
     public final EObject entryRuleELIST() throws RecognitionException {
         EObject current = null;
 
@@ -15720,8 +19721,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6170:46: (iv_ruleELIST= ruleELIST EOF )
-            // InternalRMParser.g:6171:2: iv_ruleELIST= ruleELIST EOF
+            // InternalRMParser.g:7735:46: (iv_ruleELIST= ruleELIST EOF )
+            // InternalRMParser.g:7736:2: iv_ruleELIST= ruleELIST EOF
             {
              newCompositeNode(grammarAccess.getELISTRule()); 
             pushFollow(FOLLOW_1);
@@ -15748,7 +19749,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELIST"
-    // InternalRMParser.g:6177:1: ruleELIST returns [EObject current=null] : (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket ) ;
+    // InternalRMParser.g:7742:1: ruleELIST returns [EObject current=null] : (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket ) ;
     public final EObject ruleELIST() throws RecognitionException {
         EObject current = null;
 
@@ -15764,26 +19765,26 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6183:2: ( (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket ) )
-            // InternalRMParser.g:6184:2: (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket )
+            // InternalRMParser.g:7748:2: ( (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket ) )
+            // InternalRMParser.g:7749:2: (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket )
             {
-            // InternalRMParser.g:6184:2: (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket )
-            // InternalRMParser.g:6185:3: otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket
+            // InternalRMParser.g:7749:2: (otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket )
+            // InternalRMParser.g:7750:3: otherlv_0= LeftSquareBracket ( (lv_list_1_0= ruleEAlphaNumericValue ) ) (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )* otherlv_4= RightSquareBracket
             {
-            otherlv_0=(Token)match(input,LeftSquareBracket,FOLLOW_59); 
+            otherlv_0=(Token)match(input,LeftSquareBracket,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_0());
             		
-            // InternalRMParser.g:6189:3: ( (lv_list_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6190:4: (lv_list_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7754:3: ( (lv_list_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7755:4: (lv_list_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6190:4: (lv_list_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6191:5: lv_list_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7755:4: (lv_list_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7756:5: lv_list_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0());
             				
-            pushFollow(FOLLOW_64);
+            pushFollow(FOLLOW_82);
             lv_list_1_0=ruleEAlphaNumericValue();
 
             state._fsp--;
@@ -15805,35 +19806,35 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:6208:3: (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )*
-            loop47:
+            // InternalRMParser.g:7773:3: (otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) ) )*
+            loop60:
             do {
-                int alt47=2;
-                int LA47_0 = input.LA(1);
+                int alt60=2;
+                int LA60_0 = input.LA(1);
 
-                if ( (LA47_0==Comma) ) {
-                    alt47=1;
+                if ( (LA60_0==Comma) ) {
+                    alt60=1;
                 }
 
 
-                switch (alt47) {
+                switch (alt60) {
             	case 1 :
-            	    // InternalRMParser.g:6209:4: otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:7774:4: otherlv_2= Comma ( (lv_list_3_0= ruleEAlphaNumericValue ) )
             	    {
-            	    otherlv_2=(Token)match(input,Comma,FOLLOW_59); 
+            	    otherlv_2=(Token)match(input,Comma,FOLLOW_77); 
 
             	    				newLeafNode(otherlv_2, grammarAccess.getELISTAccess().getCommaKeyword_2_0());
             	    			
-            	    // InternalRMParser.g:6213:4: ( (lv_list_3_0= ruleEAlphaNumericValue ) )
-            	    // InternalRMParser.g:6214:5: (lv_list_3_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7778:4: ( (lv_list_3_0= ruleEAlphaNumericValue ) )
+            	    // InternalRMParser.g:7779:5: (lv_list_3_0= ruleEAlphaNumericValue )
             	    {
-            	    // InternalRMParser.g:6214:5: (lv_list_3_0= ruleEAlphaNumericValue )
-            	    // InternalRMParser.g:6215:6: lv_list_3_0= ruleEAlphaNumericValue
+            	    // InternalRMParser.g:7779:5: (lv_list_3_0= ruleEAlphaNumericValue )
+            	    // InternalRMParser.g:7780:6: lv_list_3_0= ruleEAlphaNumericValue
             	    {
 
             	    						newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0());
             	    					
-            	    pushFollow(FOLLOW_64);
+            	    pushFollow(FOLLOW_82);
             	    lv_list_3_0=ruleEAlphaNumericValue();
 
             	    state._fsp--;
@@ -15860,7 +19861,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop47;
+            	    break loop60;
                 }
             } while (true);
 
@@ -15891,7 +19892,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEInRange"
-    // InternalRMParser.g:6241:1: entryRuleEInRange returns [EObject current=null] : iv_ruleEInRange= ruleEInRange EOF ;
+    // InternalRMParser.g:7806:1: entryRuleEInRange returns [EObject current=null] : iv_ruleEInRange= ruleEInRange EOF ;
     public final EObject entryRuleEInRange() throws RecognitionException {
         EObject current = null;
 
@@ -15899,8 +19900,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6241:49: (iv_ruleEInRange= ruleEInRange EOF )
-            // InternalRMParser.g:6242:2: iv_ruleEInRange= ruleEInRange EOF
+            // InternalRMParser.g:7806:49: (iv_ruleEInRange= ruleEInRange EOF )
+            // InternalRMParser.g:7807:2: iv_ruleEInRange= ruleEInRange EOF
             {
              newCompositeNode(grammarAccess.getEInRangeRule()); 
             pushFollow(FOLLOW_1);
@@ -15927,7 +19928,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInRange"
-    // InternalRMParser.g:6248:1: ruleEInRange returns [EObject current=null] : (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket ) ;
+    // InternalRMParser.g:7813:1: ruleEInRange returns [EObject current=null] : (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket ) ;
     public final EObject ruleEInRange() throws RecognitionException {
         EObject current = null;
 
@@ -15944,30 +19945,30 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6254:2: ( (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket ) )
-            // InternalRMParser.g:6255:2: (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket )
+            // InternalRMParser.g:7819:2: ( (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket ) )
+            // InternalRMParser.g:7820:2: (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket )
             {
-            // InternalRMParser.g:6255:2: (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket )
-            // InternalRMParser.g:6256:3: otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket
+            // InternalRMParser.g:7820:2: (otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket )
+            // InternalRMParser.g:7821:3: otherlv_0= In_range otherlv_1= LeftSquareBracket ( (lv_start_2_0= ruleEAlphaNumericValue ) ) otherlv_3= Comma ( (lv_end_4_0= ruleEAlphaNumericValue ) ) otherlv_5= RightSquareBracket
             {
-            otherlv_0=(Token)match(input,In_range,FOLLOW_30); 
+            otherlv_0=(Token)match(input,In_range,FOLLOW_27); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEInRangeAccess().getIn_rangeKeyword_0());
             		
-            otherlv_1=(Token)match(input,LeftSquareBracket,FOLLOW_59); 
+            otherlv_1=(Token)match(input,LeftSquareBracket,FOLLOW_77); 
 
             			newLeafNode(otherlv_1, grammarAccess.getEInRangeAccess().getLeftSquareBracketKeyword_1());
             		
-            // InternalRMParser.g:6264:3: ( (lv_start_2_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6265:4: (lv_start_2_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7829:3: ( (lv_start_2_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7830:4: (lv_start_2_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6265:4: (lv_start_2_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6266:5: lv_start_2_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7830:4: (lv_start_2_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7831:5: lv_start_2_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEInRangeAccess().getStartEAlphaNumericValueParserRuleCall_2_0());
             				
-            pushFollow(FOLLOW_60);
+            pushFollow(FOLLOW_78);
             lv_start_2_0=ruleEAlphaNumericValue();
 
             state._fsp--;
@@ -15989,20 +19990,20 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,Comma,FOLLOW_59); 
+            otherlv_3=(Token)match(input,Comma,FOLLOW_77); 
 
             			newLeafNode(otherlv_3, grammarAccess.getEInRangeAccess().getCommaKeyword_3());
             		
-            // InternalRMParser.g:6287:3: ( (lv_end_4_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6288:4: (lv_end_4_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7852:3: ( (lv_end_4_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7853:4: (lv_end_4_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6288:4: (lv_end_4_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6289:5: lv_end_4_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7853:4: (lv_end_4_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7854:5: lv_end_4_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEInRangeAccess().getEndEAlphaNumericValueParserRuleCall_4_0());
             				
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_28);
             lv_end_4_0=ruleEAlphaNumericValue();
 
             state._fsp--;
@@ -16051,7 +20052,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELessOrEqual"
-    // InternalRMParser.g:6314:1: entryRuleELessOrEqual returns [EObject current=null] : iv_ruleELessOrEqual= ruleELessOrEqual EOF ;
+    // InternalRMParser.g:7879:1: entryRuleELessOrEqual returns [EObject current=null] : iv_ruleELessOrEqual= ruleELessOrEqual EOF ;
     public final EObject entryRuleELessOrEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16059,8 +20060,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6314:53: (iv_ruleELessOrEqual= ruleELessOrEqual EOF )
-            // InternalRMParser.g:6315:2: iv_ruleELessOrEqual= ruleELessOrEqual EOF
+            // InternalRMParser.g:7879:53: (iv_ruleELessOrEqual= ruleELessOrEqual EOF )
+            // InternalRMParser.g:7880:2: iv_ruleELessOrEqual= ruleELessOrEqual EOF
             {
              newCompositeNode(grammarAccess.getELessOrEqualRule()); 
             pushFollow(FOLLOW_1);
@@ -16087,7 +20088,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELessOrEqual"
-    // InternalRMParser.g:6321:1: ruleELessOrEqual returns [EObject current=null] : (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7886:1: ruleELessOrEqual returns [EObject current=null] : (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleELessOrEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16099,21 +20100,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6327:2: ( (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6328:2: (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7892:2: ( (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7893:2: (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6328:2: (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6329:3: otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7893:2: (otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7894:3: otherlv_0= Less_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Less_or_equal,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Less_or_equal,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getELessOrEqualAccess().getLess_or_equalKeyword_0());
             		
-            // InternalRMParser.g:6333:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6334:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7898:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7899:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6334:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6335:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7899:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7900:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getELessOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -16163,7 +20164,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleELessThan"
-    // InternalRMParser.g:6356:1: entryRuleELessThan returns [EObject current=null] : iv_ruleELessThan= ruleELessThan EOF ;
+    // InternalRMParser.g:7921:1: entryRuleELessThan returns [EObject current=null] : iv_ruleELessThan= ruleELessThan EOF ;
     public final EObject entryRuleELessThan() throws RecognitionException {
         EObject current = null;
 
@@ -16171,8 +20172,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6356:50: (iv_ruleELessThan= ruleELessThan EOF )
-            // InternalRMParser.g:6357:2: iv_ruleELessThan= ruleELessThan EOF
+            // InternalRMParser.g:7921:50: (iv_ruleELessThan= ruleELessThan EOF )
+            // InternalRMParser.g:7922:2: iv_ruleELessThan= ruleELessThan EOF
             {
              newCompositeNode(grammarAccess.getELessThanRule()); 
             pushFollow(FOLLOW_1);
@@ -16199,7 +20200,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleELessThan"
-    // InternalRMParser.g:6363:1: ruleELessThan returns [EObject current=null] : (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7928:1: ruleELessThan returns [EObject current=null] : (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleELessThan() throws RecognitionException {
         EObject current = null;
 
@@ -16211,21 +20212,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6369:2: ( (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6370:2: (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7934:2: ( (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7935:2: (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6370:2: (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6371:3: otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7935:2: (otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7936:3: otherlv_0= Less_than ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Less_than,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Less_than,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getELessThanAccess().getLess_thanKeyword_0());
             		
-            // InternalRMParser.g:6375:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6376:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7940:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7941:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6376:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6377:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7941:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7942:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getELessThanAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -16275,7 +20276,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEGreaterOrEqual"
-    // InternalRMParser.g:6398:1: entryRuleEGreaterOrEqual returns [EObject current=null] : iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF ;
+    // InternalRMParser.g:7963:1: entryRuleEGreaterOrEqual returns [EObject current=null] : iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF ;
     public final EObject entryRuleEGreaterOrEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16283,8 +20284,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6398:56: (iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF )
-            // InternalRMParser.g:6399:2: iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF
+            // InternalRMParser.g:7963:56: (iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF )
+            // InternalRMParser.g:7964:2: iv_ruleEGreaterOrEqual= ruleEGreaterOrEqual EOF
             {
              newCompositeNode(grammarAccess.getEGreaterOrEqualRule()); 
             pushFollow(FOLLOW_1);
@@ -16311,7 +20312,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEGreaterOrEqual"
-    // InternalRMParser.g:6405:1: ruleEGreaterOrEqual returns [EObject current=null] : (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:7970:1: ruleEGreaterOrEqual returns [EObject current=null] : (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleEGreaterOrEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16323,21 +20324,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6411:2: ( (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6412:2: (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7976:2: ( (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:7977:2: (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6412:2: (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6413:3: otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7977:2: (otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:7978:3: otherlv_0= Greater_or_equal ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Greater_or_equal,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Greater_or_equal,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEGreaterOrEqualAccess().getGreater_or_equalKeyword_0());
             		
-            // InternalRMParser.g:6417:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6418:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7982:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:7983:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6418:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6419:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:7983:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:7984:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEGreaterOrEqualAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -16387,7 +20388,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEGreaterThan"
-    // InternalRMParser.g:6440:1: entryRuleEGreaterThan returns [EObject current=null] : iv_ruleEGreaterThan= ruleEGreaterThan EOF ;
+    // InternalRMParser.g:8005:1: entryRuleEGreaterThan returns [EObject current=null] : iv_ruleEGreaterThan= ruleEGreaterThan EOF ;
     public final EObject entryRuleEGreaterThan() throws RecognitionException {
         EObject current = null;
 
@@ -16395,8 +20396,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6440:53: (iv_ruleEGreaterThan= ruleEGreaterThan EOF )
-            // InternalRMParser.g:6441:2: iv_ruleEGreaterThan= ruleEGreaterThan EOF
+            // InternalRMParser.g:8005:53: (iv_ruleEGreaterThan= ruleEGreaterThan EOF )
+            // InternalRMParser.g:8006:2: iv_ruleEGreaterThan= ruleEGreaterThan EOF
             {
              newCompositeNode(grammarAccess.getEGreaterThanRule()); 
             pushFollow(FOLLOW_1);
@@ -16423,7 +20424,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEGreaterThan"
-    // InternalRMParser.g:6447:1: ruleEGreaterThan returns [EObject current=null] : (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
+    // InternalRMParser.g:8012:1: ruleEGreaterThan returns [EObject current=null] : (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) ;
     public final EObject ruleEGreaterThan() throws RecognitionException {
         EObject current = null;
 
@@ -16435,21 +20436,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6453:2: ( (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
-            // InternalRMParser.g:6454:2: (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:8018:2: ( (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) ) )
+            // InternalRMParser.g:8019:2: (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
             {
-            // InternalRMParser.g:6454:2: (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
-            // InternalRMParser.g:6455:3: otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:8019:2: (otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) ) )
+            // InternalRMParser.g:8020:3: otherlv_0= Greater_than ( (lv_val_1_0= ruleEAlphaNumericValue ) )
             {
-            otherlv_0=(Token)match(input,Greater_than,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Greater_than,FOLLOW_77); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEGreaterThanAccess().getGreater_thanKeyword_0());
             		
-            // InternalRMParser.g:6459:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
-            // InternalRMParser.g:6460:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:8024:3: ( (lv_val_1_0= ruleEAlphaNumericValue ) )
+            // InternalRMParser.g:8025:4: (lv_val_1_0= ruleEAlphaNumericValue )
             {
-            // InternalRMParser.g:6460:4: (lv_val_1_0= ruleEAlphaNumericValue )
-            // InternalRMParser.g:6461:5: lv_val_1_0= ruleEAlphaNumericValue
+            // InternalRMParser.g:8025:4: (lv_val_1_0= ruleEAlphaNumericValue )
+            // InternalRMParser.g:8026:5: lv_val_1_0= ruleEAlphaNumericValue
             {
 
             					newCompositeNode(grammarAccess.getEGreaterThanAccess().getValEAlphaNumericValueParserRuleCall_1_0());
@@ -16499,7 +20500,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEqual"
-    // InternalRMParser.g:6482:1: entryRuleEEqual returns [EObject current=null] : iv_ruleEEqual= ruleEEqual EOF ;
+    // InternalRMParser.g:8047:1: entryRuleEEqual returns [EObject current=null] : iv_ruleEEqual= ruleEEqual EOF ;
     public final EObject entryRuleEEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16507,8 +20508,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6482:47: (iv_ruleEEqual= ruleEEqual EOF )
-            // InternalRMParser.g:6483:2: iv_ruleEEqual= ruleEEqual EOF
+            // InternalRMParser.g:8047:47: (iv_ruleEEqual= ruleEEqual EOF )
+            // InternalRMParser.g:8048:2: iv_ruleEEqual= ruleEEqual EOF
             {
              newCompositeNode(grammarAccess.getEEqualRule()); 
             pushFollow(FOLLOW_1);
@@ -16535,7 +20536,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEqual"
-    // InternalRMParser.g:6489:1: ruleEEqual returns [EObject current=null] : (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) ) ;
+    // InternalRMParser.g:8054:1: ruleEEqual returns [EObject current=null] : (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) ) ;
     public final EObject ruleEEqual() throws RecognitionException {
         EObject current = null;
 
@@ -16547,21 +20548,21 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6495:2: ( (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) ) )
-            // InternalRMParser.g:6496:2: (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) )
+            // InternalRMParser.g:8060:2: ( (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) ) )
+            // InternalRMParser.g:8061:2: (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) )
             {
-            // InternalRMParser.g:6496:2: (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) )
-            // InternalRMParser.g:6497:3: otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) )
+            // InternalRMParser.g:8061:2: (otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) ) )
+            // InternalRMParser.g:8062:3: otherlv_0= Equal ( (lv_val_1_0= ruleESingleValue ) )
             {
-            otherlv_0=(Token)match(input,Equal,FOLLOW_59); 
+            otherlv_0=(Token)match(input,Equal,FOLLOW_83); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEEqualAccess().getEqualKeyword_0());
             		
-            // InternalRMParser.g:6501:3: ( (lv_val_1_0= ruleESingleValue ) )
-            // InternalRMParser.g:6502:4: (lv_val_1_0= ruleESingleValue )
+            // InternalRMParser.g:8066:3: ( (lv_val_1_0= ruleESingleValue ) )
+            // InternalRMParser.g:8067:4: (lv_val_1_0= ruleESingleValue )
             {
-            // InternalRMParser.g:6502:4: (lv_val_1_0= ruleESingleValue )
-            // InternalRMParser.g:6503:5: lv_val_1_0= ruleESingleValue
+            // InternalRMParser.g:8067:4: (lv_val_1_0= ruleESingleValue )
+            // InternalRMParser.g:8068:5: lv_val_1_0= ruleESingleValue
             {
 
             					newCompositeNode(grammarAccess.getEEqualAccess().getValESingleValueParserRuleCall_1_0());
@@ -16611,7 +20612,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAssignmentValue"
-    // InternalRMParser.g:6524:1: entryRuleEAssignmentValue returns [EObject current=null] : iv_ruleEAssignmentValue= ruleEAssignmentValue EOF ;
+    // InternalRMParser.g:8089:1: entryRuleEAssignmentValue returns [EObject current=null] : iv_ruleEAssignmentValue= ruleEAssignmentValue EOF ;
     public final EObject entryRuleEAssignmentValue() throws RecognitionException {
         EObject current = null;
 
@@ -16619,8 +20620,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6524:57: (iv_ruleEAssignmentValue= ruleEAssignmentValue EOF )
-            // InternalRMParser.g:6525:2: iv_ruleEAssignmentValue= ruleEAssignmentValue EOF
+            // InternalRMParser.g:8089:57: (iv_ruleEAssignmentValue= ruleEAssignmentValue EOF )
+            // InternalRMParser.g:8090:2: iv_ruleEAssignmentValue= ruleEAssignmentValue EOF
             {
              newCompositeNode(grammarAccess.getEAssignmentValueRule()); 
             pushFollow(FOLLOW_1);
@@ -16647,7 +20648,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAssignmentValue"
-    // InternalRMParser.g:6531:1: ruleEAssignmentValue returns [EObject current=null] : (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) ;
+    // InternalRMParser.g:8096:1: ruleEAssignmentValue returns [EObject current=null] : (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) ;
     public final EObject ruleEAssignmentValue() throws RecognitionException {
         EObject current = null;
 
@@ -16664,11 +20665,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6537:2: ( (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) )
-            // InternalRMParser.g:6538:2: (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction )
+            // InternalRMParser.g:8102:2: ( (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction ) )
+            // InternalRMParser.g:8103:2: (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction )
             {
-            // InternalRMParser.g:6538:2: (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction )
-            int alt48=4;
+            // InternalRMParser.g:8103:2: (this_ESingleValue_0= ruleESingleValue | this_ELIST_1= ruleELIST | this_EMAP_2= ruleEMAP | this_EFunction_3= ruleEFunction )
+            int alt61=4;
             switch ( input.LA(1) ) {
             case HyphenMinus:
             case FullStop:
@@ -16676,36 +20677,36 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             case RULE_INT:
             case RULE_STRING:
                 {
-                alt48=1;
+                alt61=1;
                 }
                 break;
             case LeftSquareBracket:
                 {
-                alt48=2;
+                alt61=2;
                 }
                 break;
             case RULE_BEGIN:
                 {
-                alt48=3;
+                alt61=3;
                 }
                 break;
             case Get_attribute:
             case Get_property:
             case Get_input:
                 {
-                alt48=4;
+                alt61=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 48, 0, input);
+                    new NoViableAltException("", 61, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt48) {
+            switch (alt61) {
                 case 1 :
-                    // InternalRMParser.g:6539:3: this_ESingleValue_0= ruleESingleValue
+                    // InternalRMParser.g:8104:3: this_ESingleValue_0= ruleESingleValue
                     {
 
                     			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getESingleValueParserRuleCall_0());
@@ -16723,7 +20724,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:6548:3: this_ELIST_1= ruleELIST
+                    // InternalRMParser.g:8113:3: this_ELIST_1= ruleELIST
                     {
 
                     			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getELISTParserRuleCall_1());
@@ -16741,7 +20742,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:6557:3: this_EMAP_2= ruleEMAP
+                    // InternalRMParser.g:8122:3: this_EMAP_2= ruleEMAP
                     {
 
                     			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEMAPParserRuleCall_2());
@@ -16759,7 +20760,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalRMParser.g:6566:3: this_EFunction_3= ruleEFunction
+                    // InternalRMParser.g:8131:3: this_EFunction_3= ruleEFunction
                     {
 
                     			newCompositeNode(grammarAccess.getEAssignmentValueAccess().getEFunctionParserRuleCall_3());
@@ -16799,7 +20800,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESingleValue"
-    // InternalRMParser.g:6578:1: entryRuleESingleValue returns [EObject current=null] : iv_ruleESingleValue= ruleESingleValue EOF ;
+    // InternalRMParser.g:8143:1: entryRuleESingleValue returns [EObject current=null] : iv_ruleESingleValue= ruleESingleValue EOF ;
     public final EObject entryRuleESingleValue() throws RecognitionException {
         EObject current = null;
 
@@ -16807,8 +20808,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6578:53: (iv_ruleESingleValue= ruleESingleValue EOF )
-            // InternalRMParser.g:6579:2: iv_ruleESingleValue= ruleESingleValue EOF
+            // InternalRMParser.g:8143:53: (iv_ruleESingleValue= ruleESingleValue EOF )
+            // InternalRMParser.g:8144:2: iv_ruleESingleValue= ruleESingleValue EOF
             {
              newCompositeNode(grammarAccess.getESingleValueRule()); 
             pushFollow(FOLLOW_1);
@@ -16835,7 +20836,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESingleValue"
-    // InternalRMParser.g:6585:1: ruleESingleValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT ) ;
+    // InternalRMParser.g:8150:1: ruleESingleValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT ) ;
     public final EObject ruleESingleValue() throws RecognitionException {
         EObject current = null;
 
@@ -16852,35 +20853,35 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6591:2: ( (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT ) )
-            // InternalRMParser.g:6592:2: (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT )
+            // InternalRMParser.g:8156:2: ( (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT ) )
+            // InternalRMParser.g:8157:2: (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT )
             {
-            // InternalRMParser.g:6592:2: (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT )
-            int alt49=4;
+            // InternalRMParser.g:8157:2: (this_ESTRING_0= ruleESTRING | this_EBOOLEAN_1= ruleEBOOLEAN | this_EFLOAT_2= ruleEFLOAT | this_ESIGNEDINT_3= ruleESIGNEDINT )
+            int alt62=4;
             switch ( input.LA(1) ) {
             case RULE_STRING:
                 {
-                alt49=1;
+                alt62=1;
                 }
                 break;
             case RULE_BOOLEAN:
                 {
-                alt49=2;
+                alt62=2;
                 }
                 break;
             case RULE_INT:
                 {
-                int LA49_3 = input.LA(2);
+                int LA62_3 = input.LA(2);
 
-                if ( (LA49_3==FullStop) ) {
-                    alt49=3;
+                if ( (LA62_3==FullStop) ) {
+                    alt62=3;
                 }
-                else if ( (LA49_3==EOF||LA49_3==Greater_or_equal||LA49_3==Less_or_equal||LA49_3==Entry_schema||LA49_3==Greater_than||(LA49_3>=Valid_values && LA49_3<=Description)||(LA49_3>=Max_length && LA49_3<=Min_length)||LA49_3==Less_than||LA49_3==In_range||(LA49_3>=Required && LA49_3<=Default)||LA49_3==Length||(LA49_3>=Status && LA49_3<=Value)||LA49_3==Type||LA49_3==RULE_ID||LA49_3==RULE_END) ) {
-                    alt49=4;
+                else if ( (LA62_3==EOF||LA62_3==Greater_or_equal||LA62_3==Less_or_equal||LA62_3==Entry_schema||LA62_3==Greater_than||(LA62_3>=Valid_values && LA62_3<=Description)||(LA62_3>=Max_length && LA62_3<=Min_length)||LA62_3==Less_than||LA62_3==In_range||LA62_3==Required||LA62_3==Default||LA62_3==Length||(LA62_3>=Status && LA62_3<=Equal)||LA62_3==Value||LA62_3==Type||LA62_3==Comma||(LA62_3>=RightSquareBracket && LA62_3<=RULE_ID)||LA62_3==RULE_END) ) {
+                    alt62=4;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 49, 3, input);
+                        new NoViableAltException("", 62, 3, input);
 
                     throw nvae;
                 }
@@ -16888,24 +20889,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                 break;
             case FullStop:
                 {
-                alt49=3;
+                alt62=3;
                 }
                 break;
             case HyphenMinus:
                 {
-                alt49=4;
+                alt62=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 49, 0, input);
+                    new NoViableAltException("", 62, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt49) {
+            switch (alt62) {
                 case 1 :
-                    // InternalRMParser.g:6593:3: this_ESTRING_0= ruleESTRING
+                    // InternalRMParser.g:8158:3: this_ESTRING_0= ruleESTRING
                     {
 
                     			newCompositeNode(grammarAccess.getESingleValueAccess().getESTRINGParserRuleCall_0());
@@ -16923,7 +20924,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:6602:3: this_EBOOLEAN_1= ruleEBOOLEAN
+                    // InternalRMParser.g:8167:3: this_EBOOLEAN_1= ruleEBOOLEAN
                     {
 
                     			newCompositeNode(grammarAccess.getESingleValueAccess().getEBOOLEANParserRuleCall_1());
@@ -16941,7 +20942,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:6611:3: this_EFLOAT_2= ruleEFLOAT
+                    // InternalRMParser.g:8176:3: this_EFLOAT_2= ruleEFLOAT
                     {
 
                     			newCompositeNode(grammarAccess.getESingleValueAccess().getEFLOATParserRuleCall_2());
@@ -16959,7 +20960,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalRMParser.g:6620:3: this_ESIGNEDINT_3= ruleESIGNEDINT
+                    // InternalRMParser.g:8185:3: this_ESIGNEDINT_3= ruleESIGNEDINT
                     {
 
                     			newCompositeNode(grammarAccess.getESingleValueAccess().getESIGNEDINTParserRuleCall_3());
@@ -16999,7 +21000,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEAlphaNumericValue"
-    // InternalRMParser.g:6632:1: entryRuleEAlphaNumericValue returns [EObject current=null] : iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF ;
+    // InternalRMParser.g:8197:1: entryRuleEAlphaNumericValue returns [EObject current=null] : iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF ;
     public final EObject entryRuleEAlphaNumericValue() throws RecognitionException {
         EObject current = null;
 
@@ -17007,8 +21008,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6632:59: (iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF )
-            // InternalRMParser.g:6633:2: iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF
+            // InternalRMParser.g:8197:59: (iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF )
+            // InternalRMParser.g:8198:2: iv_ruleEAlphaNumericValue= ruleEAlphaNumericValue EOF
             {
              newCompositeNode(grammarAccess.getEAlphaNumericValueRule()); 
             pushFollow(FOLLOW_1);
@@ -17035,7 +21036,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEAlphaNumericValue"
-    // InternalRMParser.g:6639:1: ruleEAlphaNumericValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT ) ;
+    // InternalRMParser.g:8204:1: ruleEAlphaNumericValue returns [EObject current=null] : (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT ) ;
     public final EObject ruleEAlphaNumericValue() throws RecognitionException {
         EObject current = null;
 
@@ -17050,30 +21051,30 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6645:2: ( (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT ) )
-            // InternalRMParser.g:6646:2: (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT )
+            // InternalRMParser.g:8210:2: ( (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT ) )
+            // InternalRMParser.g:8211:2: (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT )
             {
-            // InternalRMParser.g:6646:2: (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT )
-            int alt50=3;
+            // InternalRMParser.g:8211:2: (this_ESTRING_0= ruleESTRING | this_EFLOAT_1= ruleEFLOAT | this_ESIGNEDINT_2= ruleESIGNEDINT )
+            int alt63=3;
             switch ( input.LA(1) ) {
             case RULE_STRING:
                 {
-                alt50=1;
+                alt63=1;
                 }
                 break;
             case RULE_INT:
                 {
-                int LA50_2 = input.LA(2);
+                int LA63_2 = input.LA(2);
 
-                if ( (LA50_2==FullStop) ) {
-                    alt50=2;
+                if ( (LA63_2==EOF||LA63_2==Greater_or_equal||LA63_2==Less_or_equal||LA63_2==Greater_than||LA63_2==Valid_values||(LA63_2>=Max_length && LA63_2<=Min_length)||LA63_2==Less_than||LA63_2==In_range||LA63_2==Length||LA63_2==Equal||LA63_2==Comma||LA63_2==RightSquareBracket||LA63_2==RULE_END) ) {
+                    alt63=3;
                 }
-                else if ( (LA50_2==EOF||LA50_2==Greater_or_equal||LA50_2==Less_or_equal||LA50_2==Greater_than||LA50_2==Valid_values||(LA50_2>=Max_length && LA50_2<=Min_length)||LA50_2==Less_than||LA50_2==In_range||LA50_2==Length||LA50_2==Equal||LA50_2==Comma||LA50_2==RightSquareBracket||LA50_2==RULE_END) ) {
-                    alt50=3;
+                else if ( (LA63_2==FullStop) ) {
+                    alt63=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 50, 2, input);
+                        new NoViableAltException("", 63, 2, input);
 
                     throw nvae;
                 }
@@ -17081,24 +21082,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                 break;
             case FullStop:
                 {
-                alt50=2;
+                alt63=2;
                 }
                 break;
             case HyphenMinus:
                 {
-                alt50=3;
+                alt63=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 50, 0, input);
+                    new NoViableAltException("", 63, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt50) {
+            switch (alt63) {
                 case 1 :
-                    // InternalRMParser.g:6647:3: this_ESTRING_0= ruleESTRING
+                    // InternalRMParser.g:8212:3: this_ESTRING_0= ruleESTRING
                     {
 
                     			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESTRINGParserRuleCall_0());
@@ -17116,7 +21117,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:6656:3: this_EFLOAT_1= ruleEFLOAT
+                    // InternalRMParser.g:8221:3: this_EFLOAT_1= ruleEFLOAT
                     {
 
                     			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getEFLOATParserRuleCall_1());
@@ -17134,7 +21135,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:6665:3: this_ESIGNEDINT_2= ruleESIGNEDINT
+                    // InternalRMParser.g:8230:3: this_ESIGNEDINT_2= ruleESIGNEDINT
                     {
 
                     			newCompositeNode(grammarAccess.getEAlphaNumericValueAccess().getESIGNEDINTParserRuleCall_2());
@@ -17174,7 +21175,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESTRING"
-    // InternalRMParser.g:6677:1: entryRuleESTRING returns [EObject current=null] : iv_ruleESTRING= ruleESTRING EOF ;
+    // InternalRMParser.g:8242:1: entryRuleESTRING returns [EObject current=null] : iv_ruleESTRING= ruleESTRING EOF ;
     public final EObject entryRuleESTRING() throws RecognitionException {
         EObject current = null;
 
@@ -17182,8 +21183,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6677:48: (iv_ruleESTRING= ruleESTRING EOF )
-            // InternalRMParser.g:6678:2: iv_ruleESTRING= ruleESTRING EOF
+            // InternalRMParser.g:8242:48: (iv_ruleESTRING= ruleESTRING EOF )
+            // InternalRMParser.g:8243:2: iv_ruleESTRING= ruleESTRING EOF
             {
              newCompositeNode(grammarAccess.getESTRINGRule()); 
             pushFollow(FOLLOW_1);
@@ -17210,7 +21211,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESTRING"
-    // InternalRMParser.g:6684:1: ruleESTRING returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalRMParser.g:8249:1: ruleESTRING returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleESTRING() throws RecognitionException {
         EObject current = null;
 
@@ -17220,14 +21221,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6690:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalRMParser.g:6691:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalRMParser.g:8255:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalRMParser.g:8256:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalRMParser.g:6691:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalRMParser.g:6692:3: (lv_value_0_0= RULE_STRING )
+            // InternalRMParser.g:8256:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalRMParser.g:8257:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalRMParser.g:6692:3: (lv_value_0_0= RULE_STRING )
-            // InternalRMParser.g:6693:4: lv_value_0_0= RULE_STRING
+            // InternalRMParser.g:8257:3: (lv_value_0_0= RULE_STRING )
+            // InternalRMParser.g:8258:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -17269,7 +21270,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBOOLEAN"
-    // InternalRMParser.g:6712:1: entryRuleEBOOLEAN returns [EObject current=null] : iv_ruleEBOOLEAN= ruleEBOOLEAN EOF ;
+    // InternalRMParser.g:8277:1: entryRuleEBOOLEAN returns [EObject current=null] : iv_ruleEBOOLEAN= ruleEBOOLEAN EOF ;
     public final EObject entryRuleEBOOLEAN() throws RecognitionException {
         EObject current = null;
 
@@ -17277,8 +21278,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6712:49: (iv_ruleEBOOLEAN= ruleEBOOLEAN EOF )
-            // InternalRMParser.g:6713:2: iv_ruleEBOOLEAN= ruleEBOOLEAN EOF
+            // InternalRMParser.g:8277:49: (iv_ruleEBOOLEAN= ruleEBOOLEAN EOF )
+            // InternalRMParser.g:8278:2: iv_ruleEBOOLEAN= ruleEBOOLEAN EOF
             {
              newCompositeNode(grammarAccess.getEBOOLEANRule()); 
             pushFollow(FOLLOW_1);
@@ -17305,7 +21306,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBOOLEAN"
-    // InternalRMParser.g:6719:1: ruleEBOOLEAN returns [EObject current=null] : ( (lv_value_0_0= RULE_BOOLEAN ) ) ;
+    // InternalRMParser.g:8284:1: ruleEBOOLEAN returns [EObject current=null] : ( (lv_value_0_0= RULE_BOOLEAN ) ) ;
     public final EObject ruleEBOOLEAN() throws RecognitionException {
         EObject current = null;
 
@@ -17315,14 +21316,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6725:2: ( ( (lv_value_0_0= RULE_BOOLEAN ) ) )
-            // InternalRMParser.g:6726:2: ( (lv_value_0_0= RULE_BOOLEAN ) )
+            // InternalRMParser.g:8290:2: ( ( (lv_value_0_0= RULE_BOOLEAN ) ) )
+            // InternalRMParser.g:8291:2: ( (lv_value_0_0= RULE_BOOLEAN ) )
             {
-            // InternalRMParser.g:6726:2: ( (lv_value_0_0= RULE_BOOLEAN ) )
-            // InternalRMParser.g:6727:3: (lv_value_0_0= RULE_BOOLEAN )
+            // InternalRMParser.g:8291:2: ( (lv_value_0_0= RULE_BOOLEAN ) )
+            // InternalRMParser.g:8292:3: (lv_value_0_0= RULE_BOOLEAN )
             {
-            // InternalRMParser.g:6727:3: (lv_value_0_0= RULE_BOOLEAN )
-            // InternalRMParser.g:6728:4: lv_value_0_0= RULE_BOOLEAN
+            // InternalRMParser.g:8292:3: (lv_value_0_0= RULE_BOOLEAN )
+            // InternalRMParser.g:8293:4: lv_value_0_0= RULE_BOOLEAN
             {
             lv_value_0_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_2); 
 
@@ -17364,7 +21365,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEFLOAT"
-    // InternalRMParser.g:6747:1: entryRuleEFLOAT returns [EObject current=null] : iv_ruleEFLOAT= ruleEFLOAT EOF ;
+    // InternalRMParser.g:8312:1: entryRuleEFLOAT returns [EObject current=null] : iv_ruleEFLOAT= ruleEFLOAT EOF ;
     public final EObject entryRuleEFLOAT() throws RecognitionException {
         EObject current = null;
 
@@ -17372,8 +21373,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6747:47: (iv_ruleEFLOAT= ruleEFLOAT EOF )
-            // InternalRMParser.g:6748:2: iv_ruleEFLOAT= ruleEFLOAT EOF
+            // InternalRMParser.g:8312:47: (iv_ruleEFLOAT= ruleEFLOAT EOF )
+            // InternalRMParser.g:8313:2: iv_ruleEFLOAT= ruleEFLOAT EOF
             {
              newCompositeNode(grammarAccess.getEFLOATRule()); 
             pushFollow(FOLLOW_1);
@@ -17400,7 +21401,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEFLOAT"
-    // InternalRMParser.g:6754:1: ruleEFLOAT returns [EObject current=null] : ( (lv_value_0_0= ruleFLOAT ) ) ;
+    // InternalRMParser.g:8319:1: ruleEFLOAT returns [EObject current=null] : ( (lv_value_0_0= ruleFLOAT ) ) ;
     public final EObject ruleEFLOAT() throws RecognitionException {
         EObject current = null;
 
@@ -17411,14 +21412,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6760:2: ( ( (lv_value_0_0= ruleFLOAT ) ) )
-            // InternalRMParser.g:6761:2: ( (lv_value_0_0= ruleFLOAT ) )
+            // InternalRMParser.g:8325:2: ( ( (lv_value_0_0= ruleFLOAT ) ) )
+            // InternalRMParser.g:8326:2: ( (lv_value_0_0= ruleFLOAT ) )
             {
-            // InternalRMParser.g:6761:2: ( (lv_value_0_0= ruleFLOAT ) )
-            // InternalRMParser.g:6762:3: (lv_value_0_0= ruleFLOAT )
+            // InternalRMParser.g:8326:2: ( (lv_value_0_0= ruleFLOAT ) )
+            // InternalRMParser.g:8327:3: (lv_value_0_0= ruleFLOAT )
             {
-            // InternalRMParser.g:6762:3: (lv_value_0_0= ruleFLOAT )
-            // InternalRMParser.g:6763:4: lv_value_0_0= ruleFLOAT
+            // InternalRMParser.g:8327:3: (lv_value_0_0= ruleFLOAT )
+            // InternalRMParser.g:8328:4: lv_value_0_0= ruleFLOAT
             {
 
             				newCompositeNode(grammarAccess.getEFLOATAccess().getValueFLOATParserRuleCall_0());
@@ -17465,7 +21466,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleESIGNEDINT"
-    // InternalRMParser.g:6783:1: entryRuleESIGNEDINT returns [EObject current=null] : iv_ruleESIGNEDINT= ruleESIGNEDINT EOF ;
+    // InternalRMParser.g:8348:1: entryRuleESIGNEDINT returns [EObject current=null] : iv_ruleESIGNEDINT= ruleESIGNEDINT EOF ;
     public final EObject entryRuleESIGNEDINT() throws RecognitionException {
         EObject current = null;
 
@@ -17473,8 +21474,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6783:51: (iv_ruleESIGNEDINT= ruleESIGNEDINT EOF )
-            // InternalRMParser.g:6784:2: iv_ruleESIGNEDINT= ruleESIGNEDINT EOF
+            // InternalRMParser.g:8348:51: (iv_ruleESIGNEDINT= ruleESIGNEDINT EOF )
+            // InternalRMParser.g:8349:2: iv_ruleESIGNEDINT= ruleESIGNEDINT EOF
             {
              newCompositeNode(grammarAccess.getESIGNEDINTRule()); 
             pushFollow(FOLLOW_1);
@@ -17501,7 +21502,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleESIGNEDINT"
-    // InternalRMParser.g:6790:1: ruleESIGNEDINT returns [EObject current=null] : ( (lv_value_0_0= ruleSIGNEDINT ) ) ;
+    // InternalRMParser.g:8355:1: ruleESIGNEDINT returns [EObject current=null] : ( (lv_value_0_0= ruleSIGNEDINT ) ) ;
     public final EObject ruleESIGNEDINT() throws RecognitionException {
         EObject current = null;
 
@@ -17512,14 +21513,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6796:2: ( ( (lv_value_0_0= ruleSIGNEDINT ) ) )
-            // InternalRMParser.g:6797:2: ( (lv_value_0_0= ruleSIGNEDINT ) )
+            // InternalRMParser.g:8361:2: ( ( (lv_value_0_0= ruleSIGNEDINT ) ) )
+            // InternalRMParser.g:8362:2: ( (lv_value_0_0= ruleSIGNEDINT ) )
             {
-            // InternalRMParser.g:6797:2: ( (lv_value_0_0= ruleSIGNEDINT ) )
-            // InternalRMParser.g:6798:3: (lv_value_0_0= ruleSIGNEDINT )
+            // InternalRMParser.g:8362:2: ( (lv_value_0_0= ruleSIGNEDINT ) )
+            // InternalRMParser.g:8363:3: (lv_value_0_0= ruleSIGNEDINT )
             {
-            // InternalRMParser.g:6798:3: (lv_value_0_0= ruleSIGNEDINT )
-            // InternalRMParser.g:6799:4: lv_value_0_0= ruleSIGNEDINT
+            // InternalRMParser.g:8363:3: (lv_value_0_0= ruleSIGNEDINT )
+            // InternalRMParser.g:8364:4: lv_value_0_0= ruleSIGNEDINT
             {
 
             				newCompositeNode(grammarAccess.getESIGNEDINTAccess().getValueSIGNEDINTParserRuleCall_0());
@@ -17566,7 +21567,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEMAP"
-    // InternalRMParser.g:6819:1: entryRuleEMAP returns [EObject current=null] : iv_ruleEMAP= ruleEMAP EOF ;
+    // InternalRMParser.g:8384:1: entryRuleEMAP returns [EObject current=null] : iv_ruleEMAP= ruleEMAP EOF ;
     public final EObject entryRuleEMAP() throws RecognitionException {
         EObject current = null;
 
@@ -17574,8 +21575,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6819:45: (iv_ruleEMAP= ruleEMAP EOF )
-            // InternalRMParser.g:6820:2: iv_ruleEMAP= ruleEMAP EOF
+            // InternalRMParser.g:8384:45: (iv_ruleEMAP= ruleEMAP EOF )
+            // InternalRMParser.g:8385:2: iv_ruleEMAP= ruleEMAP EOF
             {
              newCompositeNode(grammarAccess.getEMAPRule()); 
             pushFollow(FOLLOW_1);
@@ -17602,7 +21603,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMAP"
-    // InternalRMParser.g:6826:1: ruleEMAP returns [EObject current=null] : (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END ) ;
+    // InternalRMParser.g:8391:1: ruleEMAP returns [EObject current=null] : (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END ) ;
     public final EObject ruleEMAP() throws RecognitionException {
         EObject current = null;
 
@@ -17615,34 +21616,34 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6832:2: ( (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END ) )
-            // InternalRMParser.g:6833:2: (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END )
+            // InternalRMParser.g:8397:2: ( (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END ) )
+            // InternalRMParser.g:8398:2: (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END )
             {
-            // InternalRMParser.g:6833:2: (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END )
-            // InternalRMParser.g:6834:3: this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END
+            // InternalRMParser.g:8398:2: (this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END )
+            // InternalRMParser.g:8399:3: this_BEGIN_0= RULE_BEGIN ( (lv_map_1_0= ruleEMapEntry ) )+ this_END_2= RULE_END
             {
             this_BEGIN_0=(Token)match(input,RULE_BEGIN,FOLLOW_3); 
 
             			newLeafNode(this_BEGIN_0, grammarAccess.getEMAPAccess().getBEGINTerminalRuleCall_0());
             		
-            // InternalRMParser.g:6838:3: ( (lv_map_1_0= ruleEMapEntry ) )+
-            int cnt51=0;
-            loop51:
+            // InternalRMParser.g:8403:3: ( (lv_map_1_0= ruleEMapEntry ) )+
+            int cnt64=0;
+            loop64:
             do {
-                int alt51=2;
-                int LA51_0 = input.LA(1);
+                int alt64=2;
+                int LA64_0 = input.LA(1);
 
-                if ( (LA51_0==RULE_ID) ) {
-                    alt51=1;
+                if ( (LA64_0==RULE_ID) ) {
+                    alt64=1;
                 }
 
 
-                switch (alt51) {
+                switch (alt64) {
             	case 1 :
-            	    // InternalRMParser.g:6839:4: (lv_map_1_0= ruleEMapEntry )
+            	    // InternalRMParser.g:8404:4: (lv_map_1_0= ruleEMapEntry )
             	    {
-            	    // InternalRMParser.g:6839:4: (lv_map_1_0= ruleEMapEntry )
-            	    // InternalRMParser.g:6840:5: lv_map_1_0= ruleEMapEntry
+            	    // InternalRMParser.g:8404:4: (lv_map_1_0= ruleEMapEntry )
+            	    // InternalRMParser.g:8405:5: lv_map_1_0= ruleEMapEntry
             	    {
 
             	    					newCompositeNode(grammarAccess.getEMAPAccess().getMapEMapEntryParserRuleCall_1_0());
@@ -17671,12 +21672,12 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt51 >= 1 ) break loop51;
+            	    if ( cnt64 >= 1 ) break loop64;
                         EarlyExitException eee =
-                            new EarlyExitException(51, input);
+                            new EarlyExitException(64, input);
                         throw eee;
                 }
-                cnt51++;
+                cnt64++;
             } while (true);
 
             this_END_2=(Token)match(input,RULE_END,FOLLOW_2); 
@@ -17706,7 +21707,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEMapEntry"
-    // InternalRMParser.g:6865:1: entryRuleEMapEntry returns [EObject current=null] : iv_ruleEMapEntry= ruleEMapEntry EOF ;
+    // InternalRMParser.g:8430:1: entryRuleEMapEntry returns [EObject current=null] : iv_ruleEMapEntry= ruleEMapEntry EOF ;
     public final EObject entryRuleEMapEntry() throws RecognitionException {
         EObject current = null;
 
@@ -17714,8 +21715,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6865:50: (iv_ruleEMapEntry= ruleEMapEntry EOF )
-            // InternalRMParser.g:6866:2: iv_ruleEMapEntry= ruleEMapEntry EOF
+            // InternalRMParser.g:8430:50: (iv_ruleEMapEntry= ruleEMapEntry EOF )
+            // InternalRMParser.g:8431:2: iv_ruleEMapEntry= ruleEMapEntry EOF
             {
              newCompositeNode(grammarAccess.getEMapEntryRule()); 
             pushFollow(FOLLOW_1);
@@ -17742,7 +21743,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEMapEntry"
-    // InternalRMParser.g:6872:1: ruleEMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) ;
+    // InternalRMParser.g:8437:1: ruleEMapEntry returns [EObject current=null] : ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) ;
     public final EObject ruleEMapEntry() throws RecognitionException {
         EObject current = null;
 
@@ -17755,17 +21756,17 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6878:2: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) )
-            // InternalRMParser.g:6879:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
+            // InternalRMParser.g:8443:2: ( ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) ) )
+            // InternalRMParser.g:8444:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
             {
-            // InternalRMParser.g:6879:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
-            // InternalRMParser.g:6880:3: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) )
+            // InternalRMParser.g:8444:2: ( ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) ) )
+            // InternalRMParser.g:8445:3: ( (lv_key_0_0= RULE_ID ) ) otherlv_1= Colon ( (lv_value_2_0= ruleEAssignmentValue ) )
             {
-            // InternalRMParser.g:6880:3: ( (lv_key_0_0= RULE_ID ) )
-            // InternalRMParser.g:6881:4: (lv_key_0_0= RULE_ID )
+            // InternalRMParser.g:8445:3: ( (lv_key_0_0= RULE_ID ) )
+            // InternalRMParser.g:8446:4: (lv_key_0_0= RULE_ID )
             {
-            // InternalRMParser.g:6881:4: (lv_key_0_0= RULE_ID )
-            // InternalRMParser.g:6882:5: lv_key_0_0= RULE_ID
+            // InternalRMParser.g:8446:4: (lv_key_0_0= RULE_ID )
+            // InternalRMParser.g:8447:5: lv_key_0_0= RULE_ID
             {
             lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_10); 
 
@@ -17787,15 +21788,15 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,Colon,FOLLOW_65); 
+            otherlv_1=(Token)match(input,Colon,FOLLOW_48); 
 
             			newLeafNode(otherlv_1, grammarAccess.getEMapEntryAccess().getColonKeyword_1());
             		
-            // InternalRMParser.g:6902:3: ( (lv_value_2_0= ruleEAssignmentValue ) )
-            // InternalRMParser.g:6903:4: (lv_value_2_0= ruleEAssignmentValue )
+            // InternalRMParser.g:8467:3: ( (lv_value_2_0= ruleEAssignmentValue ) )
+            // InternalRMParser.g:8468:4: (lv_value_2_0= ruleEAssignmentValue )
             {
-            // InternalRMParser.g:6903:4: (lv_value_2_0= ruleEAssignmentValue )
-            // InternalRMParser.g:6904:5: lv_value_2_0= ruleEAssignmentValue
+            // InternalRMParser.g:8468:4: (lv_value_2_0= ruleEAssignmentValue )
+            // InternalRMParser.g:8469:5: lv_value_2_0= ruleEAssignmentValue
             {
 
             					newCompositeNode(grammarAccess.getEMapEntryAccess().getValueEAssignmentValueParserRuleCall_2_0());
@@ -17845,7 +21846,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEntityReference"
-    // InternalRMParser.g:6925:1: entryRuleEEntityReference returns [EObject current=null] : iv_ruleEEntityReference= ruleEEntityReference EOF ;
+    // InternalRMParser.g:8490:1: entryRuleEEntityReference returns [EObject current=null] : iv_ruleEEntityReference= ruleEEntityReference EOF ;
     public final EObject entryRuleEEntityReference() throws RecognitionException {
         EObject current = null;
 
@@ -17853,8 +21854,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6925:57: (iv_ruleEEntityReference= ruleEEntityReference EOF )
-            // InternalRMParser.g:6926:2: iv_ruleEEntityReference= ruleEEntityReference EOF
+            // InternalRMParser.g:8490:57: (iv_ruleEEntityReference= ruleEEntityReference EOF )
+            // InternalRMParser.g:8491:2: iv_ruleEEntityReference= ruleEEntityReference EOF
             {
              newCompositeNode(grammarAccess.getEEntityReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -17881,7 +21882,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEntityReference"
-    // InternalRMParser.g:6932:1: ruleEEntityReference returns [EObject current=null] : (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID ) ;
+    // InternalRMParser.g:8497:1: ruleEEntityReference returns [EObject current=null] : (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID ) ;
     public final EObject ruleEEntityReference() throws RecognitionException {
         EObject current = null;
 
@@ -17896,43 +21897,43 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6938:2: ( (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID ) )
-            // InternalRMParser.g:6939:2: (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID )
+            // InternalRMParser.g:8503:2: ( (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID ) )
+            // InternalRMParser.g:8504:2: (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID )
             {
-            // InternalRMParser.g:6939:2: (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID )
-            int alt52=3;
+            // InternalRMParser.g:8504:2: (this_EEntity_0= ruleEEntity | this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE | this_EPREFIX_ID_2= ruleEPREFIX_ID )
+            int alt65=3;
             switch ( input.LA(1) ) {
             case RULE_ENTITY:
                 {
-                alt52=1;
+                alt65=1;
                 }
                 break;
             case RULE_ID:
                 {
-                int LA52_2 = input.LA(2);
+                int LA65_2 = input.LA(2);
 
-                if ( (LA52_2==EOF||LA52_2==Attribute||LA52_2==Property||(LA52_2>=Req_cap && LA52_2<=Entity)||LA52_2==RULE_END) ) {
-                    alt52=3;
-                }
-                else if ( (LA52_2==Solidus) ) {
-                    int LA52_5 = input.LA(3);
+                if ( (LA65_2==Solidus) ) {
+                    int LA65_4 = input.LA(3);
 
-                    if ( (LA52_5==RULE_QUALIFIED_NAME) ) {
-                        alt52=2;
+                    if ( (LA65_4==RULE_ID) ) {
+                        alt65=3;
                     }
-                    else if ( (LA52_5==RULE_ID) ) {
-                        alt52=3;
+                    else if ( (LA65_4==RULE_QUALIFIED_NAME) ) {
+                        alt65=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 52, 5, input);
+                            new NoViableAltException("", 65, 4, input);
 
                         throw nvae;
                     }
                 }
+                else if ( (LA65_2==EOF||LA65_2==Attribute||LA65_2==Property||LA65_2==Req_cap||LA65_2==Entity||LA65_2==RULE_END) ) {
+                    alt65=3;
+                }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 52, 2, input);
+                        new NoViableAltException("", 65, 2, input);
 
                     throw nvae;
                 }
@@ -17940,19 +21941,19 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_QUALIFIED_NAME:
                 {
-                alt52=2;
+                alt65=2;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 52, 0, input);
+                    new NoViableAltException("", 65, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt52) {
+            switch (alt65) {
                 case 1 :
-                    // InternalRMParser.g:6940:3: this_EEntity_0= ruleEEntity
+                    // InternalRMParser.g:8505:3: this_EEntity_0= ruleEEntity
                     {
 
                     			newCompositeNode(grammarAccess.getEEntityReferenceAccess().getEEntityParserRuleCall_0());
@@ -17970,7 +21971,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRMParser.g:6949:3: this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE
+                    // InternalRMParser.g:8514:3: this_EPREFIX_TYPE_1= ruleEPREFIX_TYPE
                     {
 
                     			newCompositeNode(grammarAccess.getEEntityReferenceAccess().getEPREFIX_TYPEParserRuleCall_1());
@@ -17988,7 +21989,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRMParser.g:6958:3: this_EPREFIX_ID_2= ruleEPREFIX_ID
+                    // InternalRMParser.g:8523:3: this_EPREFIX_ID_2= ruleEPREFIX_ID
                     {
 
                     			newCompositeNode(grammarAccess.getEEntityReferenceAccess().getEPREFIX_IDParserRuleCall_2());
@@ -18027,8 +22028,162 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleEEntityReference"
 
 
+    // $ANTLR start "entryRuleEPREFIX_REF"
+    // InternalRMParser.g:8535:1: entryRuleEPREFIX_REF returns [EObject current=null] : iv_ruleEPREFIX_REF= ruleEPREFIX_REF EOF ;
+    public final EObject entryRuleEPREFIX_REF() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleEPREFIX_REF = null;
+
+
+        try {
+            // InternalRMParser.g:8535:52: (iv_ruleEPREFIX_REF= ruleEPREFIX_REF EOF )
+            // InternalRMParser.g:8536:2: iv_ruleEPREFIX_REF= ruleEPREFIX_REF EOF
+            {
+             newCompositeNode(grammarAccess.getEPREFIX_REFRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleEPREFIX_REF=ruleEPREFIX_REF();
+
+            state._fsp--;
+
+             current =iv_ruleEPREFIX_REF; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleEPREFIX_REF"
+
+
+    // $ANTLR start "ruleEPREFIX_REF"
+    // InternalRMParser.g:8542:1: ruleEPREFIX_REF returns [EObject current=null] : (this_EPREFIX_TYPE_0= ruleEPREFIX_TYPE | this_EPREFIX_ID_1= ruleEPREFIX_ID ) ;
+    public final EObject ruleEPREFIX_REF() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_EPREFIX_TYPE_0 = null;
+
+        EObject this_EPREFIX_ID_1 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRMParser.g:8548:2: ( (this_EPREFIX_TYPE_0= ruleEPREFIX_TYPE | this_EPREFIX_ID_1= ruleEPREFIX_ID ) )
+            // InternalRMParser.g:8549:2: (this_EPREFIX_TYPE_0= ruleEPREFIX_TYPE | this_EPREFIX_ID_1= ruleEPREFIX_ID )
+            {
+            // InternalRMParser.g:8549:2: (this_EPREFIX_TYPE_0= ruleEPREFIX_TYPE | this_EPREFIX_ID_1= ruleEPREFIX_ID )
+            int alt66=2;
+            int LA66_0 = input.LA(1);
+
+            if ( (LA66_0==RULE_ID) ) {
+                int LA66_1 = input.LA(2);
+
+                if ( (LA66_1==EOF||LA66_1==Requirement||LA66_1==Capability||LA66_1==Node||LA66_1==RULE_END) ) {
+                    alt66=2;
+                }
+                else if ( (LA66_1==Solidus) ) {
+                    int LA66_4 = input.LA(3);
+
+                    if ( (LA66_4==RULE_ID) ) {
+                        alt66=2;
+                    }
+                    else if ( (LA66_4==RULE_QUALIFIED_NAME) ) {
+                        alt66=1;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 66, 4, input);
+
+                        throw nvae;
+                    }
+                }
+                else {
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 66, 1, input);
+
+                    throw nvae;
+                }
+            }
+            else if ( (LA66_0==RULE_QUALIFIED_NAME) ) {
+                alt66=1;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 66, 0, input);
+
+                throw nvae;
+            }
+            switch (alt66) {
+                case 1 :
+                    // InternalRMParser.g:8550:3: this_EPREFIX_TYPE_0= ruleEPREFIX_TYPE
+                    {
+
+                    			newCompositeNode(grammarAccess.getEPREFIX_REFAccess().getEPREFIX_TYPEParserRuleCall_0());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EPREFIX_TYPE_0=ruleEPREFIX_TYPE();
+
+                    state._fsp--;
+
+
+                    			current = this_EPREFIX_TYPE_0;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 2 :
+                    // InternalRMParser.g:8559:3: this_EPREFIX_ID_1= ruleEPREFIX_ID
+                    {
+
+                    			newCompositeNode(grammarAccess.getEPREFIX_REFAccess().getEPREFIX_IDParserRuleCall_1());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_EPREFIX_ID_1=ruleEPREFIX_ID();
+
+                    state._fsp--;
+
+
+                    			current = this_EPREFIX_ID_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleEPREFIX_REF"
+
+
     // $ANTLR start "entryRuleEPREFIX_TYPE"
-    // InternalRMParser.g:6970:1: entryRuleEPREFIX_TYPE returns [EObject current=null] : iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF ;
+    // InternalRMParser.g:8571:1: entryRuleEPREFIX_TYPE returns [EObject current=null] : iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF ;
     public final EObject entryRuleEPREFIX_TYPE() throws RecognitionException {
         EObject current = null;
 
@@ -18036,8 +22191,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:6970:53: (iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF )
-            // InternalRMParser.g:6971:2: iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF
+            // InternalRMParser.g:8571:53: (iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF )
+            // InternalRMParser.g:8572:2: iv_ruleEPREFIX_TYPE= ruleEPREFIX_TYPE EOF
             {
              newCompositeNode(grammarAccess.getEPREFIX_TYPERule()); 
             pushFollow(FOLLOW_1);
@@ -18064,7 +22219,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPREFIX_TYPE"
-    // InternalRMParser.g:6977:1: ruleEPREFIX_TYPE returns [EObject current=null] : ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) ) ;
+    // InternalRMParser.g:8578:1: ruleEPREFIX_TYPE returns [EObject current=null] : ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) ) ;
     public final EObject ruleEPREFIX_TYPE() throws RecognitionException {
         EObject current = null;
 
@@ -18076,30 +22231,30 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:6983:2: ( ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) ) )
-            // InternalRMParser.g:6984:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) )
+            // InternalRMParser.g:8584:2: ( ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) ) )
+            // InternalRMParser.g:8585:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) )
             {
-            // InternalRMParser.g:6984:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) )
-            // InternalRMParser.g:6985:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:8585:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) ) )
+            // InternalRMParser.g:8586:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_type_2_0= RULE_QUALIFIED_NAME ) )
             {
-            // InternalRMParser.g:6985:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            // InternalRMParser.g:8586:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )?
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA53_0==RULE_ID) ) {
-                alt53=1;
+            if ( (LA67_0==RULE_ID) ) {
+                alt67=1;
             }
-            switch (alt53) {
+            switch (alt67) {
                 case 1 :
-                    // InternalRMParser.g:6986:4: ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus
+                    // InternalRMParser.g:8587:4: ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus
                     {
-                    // InternalRMParser.g:6986:4: ( (lv_module_0_0= RULE_ID ) )
-                    // InternalRMParser.g:6987:5: (lv_module_0_0= RULE_ID )
+                    // InternalRMParser.g:8587:4: ( (lv_module_0_0= RULE_ID ) )
+                    // InternalRMParser.g:8588:5: (lv_module_0_0= RULE_ID )
                     {
-                    // InternalRMParser.g:6987:5: (lv_module_0_0= RULE_ID )
-                    // InternalRMParser.g:6988:6: lv_module_0_0= RULE_ID
+                    // InternalRMParser.g:8588:5: (lv_module_0_0= RULE_ID )
+                    // InternalRMParser.g:8589:6: lv_module_0_0= RULE_ID
                     {
-                    lv_module_0_0=(Token)match(input,RULE_ID,FOLLOW_66); 
+                    lv_module_0_0=(Token)match(input,RULE_ID,FOLLOW_84); 
 
                     						newLeafNode(lv_module_0_0, grammarAccess.getEPREFIX_TYPEAccess().getModuleIDTerminalRuleCall_0_0_0());
                     					
@@ -18129,11 +22284,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:7009:3: ( (lv_type_2_0= RULE_QUALIFIED_NAME ) )
-            // InternalRMParser.g:7010:4: (lv_type_2_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:8610:3: ( (lv_type_2_0= RULE_QUALIFIED_NAME ) )
+            // InternalRMParser.g:8611:4: (lv_type_2_0= RULE_QUALIFIED_NAME )
             {
-            // InternalRMParser.g:7010:4: (lv_type_2_0= RULE_QUALIFIED_NAME )
-            // InternalRMParser.g:7011:5: lv_type_2_0= RULE_QUALIFIED_NAME
+            // InternalRMParser.g:8611:4: (lv_type_2_0= RULE_QUALIFIED_NAME )
+            // InternalRMParser.g:8612:5: lv_type_2_0= RULE_QUALIFIED_NAME
             {
             lv_type_2_0=(Token)match(input,RULE_QUALIFIED_NAME,FOLLOW_2); 
 
@@ -18178,7 +22333,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPREFIX_ID"
-    // InternalRMParser.g:7031:1: entryRuleEPREFIX_ID returns [EObject current=null] : iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF ;
+    // InternalRMParser.g:8632:1: entryRuleEPREFIX_ID returns [EObject current=null] : iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF ;
     public final EObject entryRuleEPREFIX_ID() throws RecognitionException {
         EObject current = null;
 
@@ -18186,8 +22341,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:7031:51: (iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF )
-            // InternalRMParser.g:7032:2: iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF
+            // InternalRMParser.g:8632:51: (iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF )
+            // InternalRMParser.g:8633:2: iv_ruleEPREFIX_ID= ruleEPREFIX_ID EOF
             {
              newCompositeNode(grammarAccess.getEPREFIX_IDRule()); 
             pushFollow(FOLLOW_1);
@@ -18214,7 +22369,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPREFIX_ID"
-    // InternalRMParser.g:7038:1: ruleEPREFIX_ID returns [EObject current=null] : ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) ) ;
+    // InternalRMParser.g:8639:1: ruleEPREFIX_ID returns [EObject current=null] : ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) ) ;
     public final EObject ruleEPREFIX_ID() throws RecognitionException {
         EObject current = null;
 
@@ -18226,34 +22381,34 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:7044:2: ( ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) ) )
-            // InternalRMParser.g:7045:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) )
+            // InternalRMParser.g:8645:2: ( ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) ) )
+            // InternalRMParser.g:8646:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) )
             {
-            // InternalRMParser.g:7045:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) )
-            // InternalRMParser.g:7046:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) )
+            // InternalRMParser.g:8646:2: ( ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) ) )
+            // InternalRMParser.g:8647:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )? ( (lv_id_2_0= RULE_ID ) )
             {
-            // InternalRMParser.g:7046:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            // InternalRMParser.g:8647:3: ( ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus )?
+            int alt68=2;
+            int LA68_0 = input.LA(1);
 
-            if ( (LA54_0==RULE_ID) ) {
-                int LA54_1 = input.LA(2);
+            if ( (LA68_0==RULE_ID) ) {
+                int LA68_1 = input.LA(2);
 
-                if ( (LA54_1==Solidus) ) {
-                    alt54=1;
+                if ( (LA68_1==Solidus) ) {
+                    alt68=1;
                 }
             }
-            switch (alt54) {
+            switch (alt68) {
                 case 1 :
-                    // InternalRMParser.g:7047:4: ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus
+                    // InternalRMParser.g:8648:4: ( (lv_module_0_0= RULE_ID ) ) otherlv_1= Solidus
                     {
-                    // InternalRMParser.g:7047:4: ( (lv_module_0_0= RULE_ID ) )
-                    // InternalRMParser.g:7048:5: (lv_module_0_0= RULE_ID )
+                    // InternalRMParser.g:8648:4: ( (lv_module_0_0= RULE_ID ) )
+                    // InternalRMParser.g:8649:5: (lv_module_0_0= RULE_ID )
                     {
-                    // InternalRMParser.g:7048:5: (lv_module_0_0= RULE_ID )
-                    // InternalRMParser.g:7049:6: lv_module_0_0= RULE_ID
+                    // InternalRMParser.g:8649:5: (lv_module_0_0= RULE_ID )
+                    // InternalRMParser.g:8650:6: lv_module_0_0= RULE_ID
                     {
-                    lv_module_0_0=(Token)match(input,RULE_ID,FOLLOW_66); 
+                    lv_module_0_0=(Token)match(input,RULE_ID,FOLLOW_84); 
 
                     						newLeafNode(lv_module_0_0, grammarAccess.getEPREFIX_IDAccess().getModuleIDTerminalRuleCall_0_0_0());
                     					
@@ -18283,11 +22438,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:7070:3: ( (lv_id_2_0= RULE_ID ) )
-            // InternalRMParser.g:7071:4: (lv_id_2_0= RULE_ID )
+            // InternalRMParser.g:8671:3: ( (lv_id_2_0= RULE_ID ) )
+            // InternalRMParser.g:8672:4: (lv_id_2_0= RULE_ID )
             {
-            // InternalRMParser.g:7071:4: (lv_id_2_0= RULE_ID )
-            // InternalRMParser.g:7072:5: lv_id_2_0= RULE_ID
+            // InternalRMParser.g:8672:4: (lv_id_2_0= RULE_ID )
+            // InternalRMParser.g:8673:5: lv_id_2_0= RULE_ID
             {
             lv_id_2_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -18332,7 +22487,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEPRIMITIVE_TYPE"
-    // InternalRMParser.g:7092:1: entryRuleEPRIMITIVE_TYPE returns [EObject current=null] : iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF ;
+    // InternalRMParser.g:8693:1: entryRuleEPRIMITIVE_TYPE returns [EObject current=null] : iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF ;
     public final EObject entryRuleEPRIMITIVE_TYPE() throws RecognitionException {
         EObject current = null;
 
@@ -18340,8 +22495,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:7092:56: (iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF )
-            // InternalRMParser.g:7093:2: iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF
+            // InternalRMParser.g:8693:56: (iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF )
+            // InternalRMParser.g:8694:2: iv_ruleEPRIMITIVE_TYPE= ruleEPRIMITIVE_TYPE EOF
             {
              newCompositeNode(grammarAccess.getEPRIMITIVE_TYPERule()); 
             pushFollow(FOLLOW_1);
@@ -18368,7 +22523,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEPRIMITIVE_TYPE"
-    // InternalRMParser.g:7099:1: ruleEPRIMITIVE_TYPE returns [EObject current=null] : ( (lv_type_0_0= RULE_ID ) ) ;
+    // InternalRMParser.g:8700:1: ruleEPRIMITIVE_TYPE returns [EObject current=null] : ( (lv_type_0_0= RULE_ID ) ) ;
     public final EObject ruleEPRIMITIVE_TYPE() throws RecognitionException {
         EObject current = null;
 
@@ -18378,14 +22533,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:7105:2: ( ( (lv_type_0_0= RULE_ID ) ) )
-            // InternalRMParser.g:7106:2: ( (lv_type_0_0= RULE_ID ) )
+            // InternalRMParser.g:8706:2: ( ( (lv_type_0_0= RULE_ID ) ) )
+            // InternalRMParser.g:8707:2: ( (lv_type_0_0= RULE_ID ) )
             {
-            // InternalRMParser.g:7106:2: ( (lv_type_0_0= RULE_ID ) )
-            // InternalRMParser.g:7107:3: (lv_type_0_0= RULE_ID )
+            // InternalRMParser.g:8707:2: ( (lv_type_0_0= RULE_ID ) )
+            // InternalRMParser.g:8708:3: (lv_type_0_0= RULE_ID )
             {
-            // InternalRMParser.g:7107:3: (lv_type_0_0= RULE_ID )
-            // InternalRMParser.g:7108:4: lv_type_0_0= RULE_ID
+            // InternalRMParser.g:8708:3: (lv_type_0_0= RULE_ID )
+            // InternalRMParser.g:8709:4: lv_type_0_0= RULE_ID
             {
             lv_type_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -18427,7 +22582,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEEntity"
-    // InternalRMParser.g:7127:1: entryRuleEEntity returns [EObject current=null] : iv_ruleEEntity= ruleEEntity EOF ;
+    // InternalRMParser.g:8728:1: entryRuleEEntity returns [EObject current=null] : iv_ruleEEntity= ruleEEntity EOF ;
     public final EObject entryRuleEEntity() throws RecognitionException {
         EObject current = null;
 
@@ -18435,8 +22590,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:7127:48: (iv_ruleEEntity= ruleEEntity EOF )
-            // InternalRMParser.g:7128:2: iv_ruleEEntity= ruleEEntity EOF
+            // InternalRMParser.g:8728:48: (iv_ruleEEntity= ruleEEntity EOF )
+            // InternalRMParser.g:8729:2: iv_ruleEEntity= ruleEEntity EOF
             {
              newCompositeNode(grammarAccess.getEEntityRule()); 
             pushFollow(FOLLOW_1);
@@ -18463,7 +22618,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEEntity"
-    // InternalRMParser.g:7134:1: ruleEEntity returns [EObject current=null] : ( (lv_entity_0_0= RULE_ENTITY ) ) ;
+    // InternalRMParser.g:8735:1: ruleEEntity returns [EObject current=null] : ( (lv_entity_0_0= RULE_ENTITY ) ) ;
     public final EObject ruleEEntity() throws RecognitionException {
         EObject current = null;
 
@@ -18473,14 +22628,14 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:7140:2: ( ( (lv_entity_0_0= RULE_ENTITY ) ) )
-            // InternalRMParser.g:7141:2: ( (lv_entity_0_0= RULE_ENTITY ) )
+            // InternalRMParser.g:8741:2: ( ( (lv_entity_0_0= RULE_ENTITY ) ) )
+            // InternalRMParser.g:8742:2: ( (lv_entity_0_0= RULE_ENTITY ) )
             {
-            // InternalRMParser.g:7141:2: ( (lv_entity_0_0= RULE_ENTITY ) )
-            // InternalRMParser.g:7142:3: (lv_entity_0_0= RULE_ENTITY )
+            // InternalRMParser.g:8742:2: ( (lv_entity_0_0= RULE_ENTITY ) )
+            // InternalRMParser.g:8743:3: (lv_entity_0_0= RULE_ENTITY )
             {
-            // InternalRMParser.g:7142:3: (lv_entity_0_0= RULE_ENTITY )
-            // InternalRMParser.g:7143:4: lv_entity_0_0= RULE_ENTITY
+            // InternalRMParser.g:8743:3: (lv_entity_0_0= RULE_ENTITY )
+            // InternalRMParser.g:8744:4: lv_entity_0_0= RULE_ENTITY
             {
             lv_entity_0_0=(Token)match(input,RULE_ENTITY,FOLLOW_2); 
 
@@ -18522,7 +22677,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSIGNEDINT"
-    // InternalRMParser.g:7162:1: entryRuleSIGNEDINT returns [String current=null] : iv_ruleSIGNEDINT= ruleSIGNEDINT EOF ;
+    // InternalRMParser.g:8763:1: entryRuleSIGNEDINT returns [String current=null] : iv_ruleSIGNEDINT= ruleSIGNEDINT EOF ;
     public final String entryRuleSIGNEDINT() throws RecognitionException {
         String current = null;
 
@@ -18530,8 +22685,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:7162:49: (iv_ruleSIGNEDINT= ruleSIGNEDINT EOF )
-            // InternalRMParser.g:7163:2: iv_ruleSIGNEDINT= ruleSIGNEDINT EOF
+            // InternalRMParser.g:8763:49: (iv_ruleSIGNEDINT= ruleSIGNEDINT EOF )
+            // InternalRMParser.g:8764:2: iv_ruleSIGNEDINT= ruleSIGNEDINT EOF
             {
              newCompositeNode(grammarAccess.getSIGNEDINTRule()); 
             pushFollow(FOLLOW_1);
@@ -18558,7 +22713,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSIGNEDINT"
-    // InternalRMParser.g:7169:1: ruleSIGNEDINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= HyphenMinus )? this_INT_1= RULE_INT ) ;
+    // InternalRMParser.g:8770:1: ruleSIGNEDINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= HyphenMinus )? this_INT_1= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleSIGNEDINT() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -18569,24 +22724,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:7175:2: ( ( (kw= HyphenMinus )? this_INT_1= RULE_INT ) )
-            // InternalRMParser.g:7176:2: ( (kw= HyphenMinus )? this_INT_1= RULE_INT )
+            // InternalRMParser.g:8776:2: ( ( (kw= HyphenMinus )? this_INT_1= RULE_INT ) )
+            // InternalRMParser.g:8777:2: ( (kw= HyphenMinus )? this_INT_1= RULE_INT )
             {
-            // InternalRMParser.g:7176:2: ( (kw= HyphenMinus )? this_INT_1= RULE_INT )
-            // InternalRMParser.g:7177:3: (kw= HyphenMinus )? this_INT_1= RULE_INT
+            // InternalRMParser.g:8777:2: ( (kw= HyphenMinus )? this_INT_1= RULE_INT )
+            // InternalRMParser.g:8778:3: (kw= HyphenMinus )? this_INT_1= RULE_INT
             {
-            // InternalRMParser.g:7177:3: (kw= HyphenMinus )?
-            int alt55=2;
-            int LA55_0 = input.LA(1);
+            // InternalRMParser.g:8778:3: (kw= HyphenMinus )?
+            int alt69=2;
+            int LA69_0 = input.LA(1);
 
-            if ( (LA55_0==HyphenMinus) ) {
-                alt55=1;
+            if ( (LA69_0==HyphenMinus) ) {
+                alt69=1;
             }
-            switch (alt55) {
+            switch (alt69) {
                 case 1 :
-                    // InternalRMParser.g:7178:4: kw= HyphenMinus
+                    // InternalRMParser.g:8779:4: kw= HyphenMinus
                     {
-                    kw=(Token)match(input,HyphenMinus,FOLLOW_67); 
+                    kw=(Token)match(input,HyphenMinus,FOLLOW_85); 
 
                     				current.merge(kw);
                     				newLeafNode(kw, grammarAccess.getSIGNEDINTAccess().getHyphenMinusKeyword_0());
@@ -18627,7 +22782,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFLOAT"
-    // InternalRMParser.g:7195:1: entryRuleFLOAT returns [String current=null] : iv_ruleFLOAT= ruleFLOAT EOF ;
+    // InternalRMParser.g:8796:1: entryRuleFLOAT returns [String current=null] : iv_ruleFLOAT= ruleFLOAT EOF ;
     public final String entryRuleFLOAT() throws RecognitionException {
         String current = null;
 
@@ -18635,8 +22790,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRMParser.g:7195:45: (iv_ruleFLOAT= ruleFLOAT EOF )
-            // InternalRMParser.g:7196:2: iv_ruleFLOAT= ruleFLOAT EOF
+            // InternalRMParser.g:8796:45: (iv_ruleFLOAT= ruleFLOAT EOF )
+            // InternalRMParser.g:8797:2: iv_ruleFLOAT= ruleFLOAT EOF
             {
              newCompositeNode(grammarAccess.getFLOATRule()); 
             pushFollow(FOLLOW_1);
@@ -18663,7 +22818,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFLOAT"
-    // InternalRMParser.g:7202:1: ruleFLOAT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT ) ;
+    // InternalRMParser.g:8803:1: ruleFLOAT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleFLOAT() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -18675,24 +22830,24 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:7208:2: ( ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT ) )
-            // InternalRMParser.g:7209:2: ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT )
+            // InternalRMParser.g:8809:2: ( ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT ) )
+            // InternalRMParser.g:8810:2: ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT )
             {
-            // InternalRMParser.g:7209:2: ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT )
-            // InternalRMParser.g:7210:3: (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT
+            // InternalRMParser.g:8810:2: ( (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT )
+            // InternalRMParser.g:8811:3: (this_INT_0= RULE_INT )? kw= FullStop this_INT_2= RULE_INT
             {
-            // InternalRMParser.g:7210:3: (this_INT_0= RULE_INT )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            // InternalRMParser.g:8811:3: (this_INT_0= RULE_INT )?
+            int alt70=2;
+            int LA70_0 = input.LA(1);
 
-            if ( (LA56_0==RULE_INT) ) {
-                alt56=1;
+            if ( (LA70_0==RULE_INT) ) {
+                alt70=1;
             }
-            switch (alt56) {
+            switch (alt70) {
                 case 1 :
-                    // InternalRMParser.g:7211:4: this_INT_0= RULE_INT
+                    // InternalRMParser.g:8812:4: this_INT_0= RULE_INT
                     {
-                    this_INT_0=(Token)match(input,RULE_INT,FOLLOW_68); 
+                    this_INT_0=(Token)match(input,RULE_INT,FOLLOW_86); 
 
                     				current.merge(this_INT_0);
                     			
@@ -18705,7 +22860,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            kw=(Token)match(input,FullStop,FOLLOW_67); 
+            kw=(Token)match(input,FullStop,FOLLOW_85); 
 
             			current.merge(kw);
             			newLeafNode(kw, grammarAccess.getFLOATAccess().getFullStopKeyword_1());
@@ -18745,11 +22900,11 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
     static final String dfa_1s = "\13\uffff";
     static final String dfa_2s = "\1\1\12\uffff";
     static final String dfa_3s = "\1\4\12\uffff";
-    static final String dfa_4s = "\1\64\12\uffff";
+    static final String dfa_4s = "\1\102\12\uffff";
     static final String dfa_5s = "\1\uffff\1\12\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11";
     static final String dfa_6s = "\1\0\12\uffff}>";
     static final String[] dfa_7s = {
-            "\1\10\2\uffff\1\6\1\uffff\1\7\1\5\12\uffff\1\12\10\uffff\1\4\3\uffff\1\11\16\uffff\1\3\2\uffff\1\2",
+            "\1\10\2\uffff\1\6\1\uffff\1\7\1\5\14\uffff\1\12\13\uffff\1\4\3\uffff\1\11\26\uffff\1\3\3\uffff\1\2",
             "",
             "",
             "",
@@ -18832,71 +22987,89 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0012000440200692L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000006L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000001006020000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000001006020002L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0048048301102100L,0x0000000000000040L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000042L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000030004020000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000030004020002L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000020000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000001014020000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000001014020002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0004000804020000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0004000804020002L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000004020000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000004020002L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000001094828000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000001094828002L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000001094020040L,0x0000000000000040L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000001094020042L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x8000000000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0400000000000002L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000002L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0220300006040000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0220300006040002L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x1800004000081000L,0x0000000000000188L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0220200004040000L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0220200004040002L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0204000800000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0204000800000002L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0004000004000800L,0x0000000000000040L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0004000004000802L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000101L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0280200000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0280200000000002L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0001802000000000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0001802000000002L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000016L});
-    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0001880000000000L});
-    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0001880000000002L});
-    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x020000101C000020L});
-    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x020000101C000022L});
-    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000007L});
-    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x1800000000000000L,0x0000000000000188L});
-    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0400000000000000L});
-    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0100000028400000L});
-    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0100000028400002L});
-    public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0048048301102102L});
-    public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0400000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x9800004000081000L,0x00000000000001A8L});
-    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x2000000000000000L});
-    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x1000000000000000L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000000L,0x0000000000100000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x4000008800800692L,0x0000000000000004L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000000L,0x0000000000300000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000002L,0x0000000000300000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000000000L,0x0000000000020000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000020018080000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000020018080002L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0008406004404100L,0x0000000002000021L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000000L,0x0000000002100000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000002L,0x0000000000200000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0004800010080000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0004800010080002L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0004000000000000L,0x0000000008000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000020110080000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000020110080002L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x8000010010080000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x8000010010080002L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0880020010080000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0880020010080002L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0880000000000002L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000000L,0x0000000000080000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0080000000000002L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000000L,0x0000000002200000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x1040100010010000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x1040100010010002L,0x0000000000000040L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000280000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000420000000L,0x000000000200000AL});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000800L,0x0000000002000000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000101C00L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000420000002L,0x000000000000000AL});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000000004004000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000280000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000002L,0x0000000000100000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0008406004404100L,0x0000000000000021L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x8001000000000000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x8001000000000002L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000200000202000L,0x000000000D44C000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x00000211120A0000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x00000211120A0002L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000021110080040L,0x0000000002000000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000021110080042L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0120000018100000L,0x0000000000000210L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0120000018100002L,0x0000000000000210L});
+    public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000000000000L,0x0000000000400000L});
+    public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0100000010100000L,0x0000000000000210L});
+    public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0100000010100002L,0x0000000000000210L});
+    public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x8000010000000000L,0x0000000000000200L});
+    public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x8000010000000002L,0x0000000000000200L});
+    public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x8000000010001000L,0x0000000002000000L});
+    public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x8000000010001002L});
+    public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0000000000000002L,0x0000000001000000L});
+    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000000000000L,0x0000000008080000L});
+    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0100000000000000L,0x0000000002000280L});
+    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0100000000000002L,0x0000000000000280L});
+    public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x2400080000000000L});
+    public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x2400080000000002L});
+    public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000000000000000L,0x0000000000B00000L});
+    public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x2410000000000000L});
+    public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x2410000000000002L});
+    public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0000020150000020L,0x0000000000000200L});
+    public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0000020150000022L,0x0000000000000200L});
+    public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000000000000000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x000000000C00C000L});
+    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000241000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000000241000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0008406004404102L,0x0000000000000021L});
+    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000000L,0x0000000000082000L});
+    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x000000000C40C000L});
+    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000000000L,0x0000000004000000L});
+    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0000000000008000L});
 
 }

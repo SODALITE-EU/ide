@@ -192,6 +192,144 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.ETRIGGERS:
+      {
+        ETriggers eTriggers = (ETriggers)theEObject;
+        T result = caseETriggers(eTriggers);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ETRIGGER_DEFINITION:
+      {
+        ETriggerDefinition eTriggerDefinition = (ETriggerDefinition)theEObject;
+        T result = caseETriggerDefinition(eTriggerDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ETRIGGER_DEFINITION_BODY:
+      {
+        ETriggerDefinitionBody eTriggerDefinitionBody = (ETriggerDefinitionBody)theEObject;
+        T result = caseETriggerDefinitionBody(eTriggerDefinitionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EACTIVITY_DEFINITIONS:
+      {
+        EActivityDefinitions eActivityDefinitions = (EActivityDefinitions)theEObject;
+        T result = caseEActivityDefinitions(eActivityDefinitions);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EEXTENDED_TRIGGER_CONDITION:
+      {
+        EExtendedTriggerCondition eExtendedTriggerCondition = (EExtendedTriggerCondition)theEObject;
+        T result = caseEExtendedTriggerCondition(eExtendedTriggerCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ETIME_INTERVAL:
+      {
+        ETimeInterval eTimeInterval = (ETimeInterval)theEObject;
+        T result = caseETimeInterval(eTimeInterval);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EEVEN_FILTER:
+      {
+        EEvenFilter eEvenFilter = (EEvenFilter)theEObject;
+        T result = caseEEvenFilter(eEvenFilter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION:
+      {
+        EConditionClauseDefinition eConditionClauseDefinition = (EConditionClauseDefinition)theEObject;
+        T result = caseEConditionClauseDefinition(eConditionClauseDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_AND:
+      {
+        EConditionClauseDefinitionAND eConditionClauseDefinitionAND = (EConditionClauseDefinitionAND)theEObject;
+        T result = caseEConditionClauseDefinitionAND(eConditionClauseDefinitionAND);
+        if (result == null) result = caseEConditionClauseDefinition(eConditionClauseDefinitionAND);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_OR:
+      {
+        EConditionClauseDefinitionOR eConditionClauseDefinitionOR = (EConditionClauseDefinitionOR)theEObject;
+        T result = caseEConditionClauseDefinitionOR(eConditionClauseDefinitionOR);
+        if (result == null) result = caseEConditionClauseDefinition(eConditionClauseDefinitionOR);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT:
+      {
+        EConditionClauseDefinitionNOT eConditionClauseDefinitionNOT = (EConditionClauseDefinitionNOT)theEObject;
+        T result = caseEConditionClauseDefinitionNOT(eConditionClauseDefinitionNOT);
+        if (result == null) result = caseEConditionClauseDefinition(eConditionClauseDefinitionNOT);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_ASSERT:
+      {
+        EConditionClauseDefinitionAssert eConditionClauseDefinitionAssert = (EConditionClauseDefinitionAssert)theEObject;
+        T result = caseEConditionClauseDefinitionAssert(eConditionClauseDefinitionAssert);
+        if (result == null) result = caseEConditionClauseDefinition(eConditionClauseDefinitionAssert);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EASSERTION_DEFINITION:
+      {
+        EAssertionDefinition eAssertionDefinition = (EAssertionDefinition)theEObject;
+        T result = caseEAssertionDefinition(eAssertionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECONSTRAINT_LIST:
+      {
+        EConstraintList eConstraintList = (EConstraintList)theEObject;
+        T result = caseEConstraintList(eConstraintList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EACTIVITY_DEFINITION:
+      {
+        EActivityDefinition eActivityDefinition = (EActivityDefinition)theEObject;
+        T result = caseEActivityDefinition(eActivityDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION:
+      {
+        ECallOperationActivityDefinition eCallOperationActivityDefinition = (ECallOperationActivityDefinition)theEObject;
+        T result = caseECallOperationActivityDefinition(eCallOperationActivityDefinition);
+        if (result == null) result = caseEActivityDefinition(eCallOperationActivityDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY:
+      {
+        ECallOperationActivityDefinitionBody eCallOperationActivityDefinitionBody = (ECallOperationActivityDefinitionBody)theEObject;
+        T result = caseECallOperationActivityDefinitionBody(eCallOperationActivityDefinitionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPROPERTY_ASSIGNMENTS:
+      {
+        EPropertyAssignments ePropertyAssignments = (EPropertyAssignments)theEObject;
+        T result = caseEPropertyAssignments(ePropertyAssignments);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EPROPERTY_ASSIGNMENT:
+      {
+        EPropertyAssignment ePropertyAssignment = (EPropertyAssignment)theEObject;
+        T result = caseEPropertyAssignment(ePropertyAssignment);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.ENODE_TYPES:
       {
         ENodeTypes eNodeTypes = (ENodeTypes)theEObject;
@@ -241,10 +379,10 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RMPackage.ECAPABILITY_TYPE_REF:
+      case RMPackage.ETARGET_TYPE:
       {
-        ECapabilityTypeRef eCapabilityTypeRef = (ECapabilityTypeRef)theEObject;
-        T result = caseECapabilityTypeRef(eCapabilityTypeRef);
+        ETargetType eTargetType = (ETargetType)theEObject;
+        T result = caseETargetType(eTargetType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -689,12 +827,20 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EPREFIX_REF:
+      {
+        EPREFIX_REF eprefiX_REF = (EPREFIX_REF)theEObject;
+        T result = caseEPREFIX_REF(eprefiX_REF);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EPREFIX_TYPE:
       {
         EPREFIX_TYPE eprefiX_TYPE = (EPREFIX_TYPE)theEObject;
         T result = caseEPREFIX_TYPE(eprefiX_TYPE);
         if (result == null) result = caseEDataTypeName(eprefiX_TYPE);
         if (result == null) result = caseEEntityReference(eprefiX_TYPE);
+        if (result == null) result = caseEPREFIX_REF(eprefiX_TYPE);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -703,6 +849,7 @@ public class RMSwitch<T> extends Switch<T>
         EPREFIX_ID eprefiX_ID = (EPREFIX_ID)theEObject;
         T result = caseEPREFIX_ID(eprefiX_ID);
         if (result == null) result = caseEEntityReference(eprefiX_ID);
+        if (result == null) result = caseEPREFIX_REF(eprefiX_ID);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -999,6 +1146,310 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ETriggers</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETriggers</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETriggers(ETriggers object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ETrigger Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETrigger Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETriggerDefinition(ETriggerDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ETrigger Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETrigger Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETriggerDefinitionBody(ETriggerDefinitionBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EActivity Definitions</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EActivity Definitions</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEActivityDefinitions(EActivityDefinitions object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EExtended Trigger Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EExtended Trigger Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEExtendedTriggerCondition(EExtendedTriggerCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ETime Interval</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ETime Interval</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseETimeInterval(ETimeInterval object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EEven Filter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EEven Filter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEEvenFilter(EEvenFilter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition Clause Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition Clause Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConditionClauseDefinition(EConditionClauseDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition Clause Definition AND</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition Clause Definition AND</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConditionClauseDefinitionAND(EConditionClauseDefinitionAND object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition Clause Definition OR</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition Clause Definition OR</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConditionClauseDefinitionOR(EConditionClauseDefinitionOR object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition Clause Definition NOT</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition Clause Definition NOT</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConditionClauseDefinitionNOT(EConditionClauseDefinitionNOT object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECondition Clause Definition Assert</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECondition Clause Definition Assert</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConditionClauseDefinitionAssert(EConditionClauseDefinitionAssert object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EAssertion Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EAssertion Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEAssertionDefinition(EAssertionDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EConstraint List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EConstraint List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEConstraintList(EConstraintList object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EActivity Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EActivity Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEActivityDefinition(EActivityDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECall Operation Activity Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECall Operation Activity Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseECallOperationActivityDefinition(ECallOperationActivityDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ECall Operation Activity Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ECall Operation Activity Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseECallOperationActivityDefinitionBody(ECallOperationActivityDefinitionBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EProperty Assignments</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EProperty Assignments</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPropertyAssignments(EPropertyAssignments object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EProperty Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EProperty Assignment</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPropertyAssignment(EPropertyAssignment object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ENode Types</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1111,17 +1562,17 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>ECapability Type Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>ETarget Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>ECapability Type Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>ETarget Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseECapabilityTypeRef(ECapabilityTypeRef object)
+  public T caseETargetType(ETargetType object)
   {
     return null;
   }
@@ -2034,6 +2485,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEEntityReference(EEntityReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EPREFIX REF</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EPREFIX REF</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEPREFIX_REF(EPREFIX_REF object)
   {
     return null;
   }

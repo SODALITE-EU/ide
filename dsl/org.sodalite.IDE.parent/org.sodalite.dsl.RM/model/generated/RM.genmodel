@@ -82,6 +82,77 @@
     <genClasses ecoreClass="RM.ecore#//EPolicyTypeBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPolicyTypeBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/targets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPolicyTypeBody/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ETriggers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggers/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ETriggerDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ETriggerDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggerDefinition/trigger"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ETriggerDefinitionBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ETriggerDefinitionBody/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ETriggerDefinitionBody/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggerDefinitionBody/schedule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggerDefinitionBody/target_filter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggerDefinitionBody/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETriggerDefinitionBody/action"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EActivityDefinitions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EActivityDefinitions/list"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EExtendedTriggerCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EExtendedTriggerCondition/constraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EExtendedTriggerCondition/period"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EExtendedTriggerCondition/evaluations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EExtendedTriggerCondition/method"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ETimeInterval">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ETimeInterval/start_time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//ETimeInterval/end_time"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EEvenFilter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/requirement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EEvenFilter/capability"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinition"/>
+    <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinitionAND">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConditionClauseDefinitionAND/and"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinitionOR">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConditionClauseDefinitionOR/or"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinitionNOT">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConditionClauseDefinitionNOT/not"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EConditionClauseDefinitionAssert">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConditionClauseDefinitionAssert/assertions"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EAssertionDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EAssertionDefinition/attribute_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EAssertionDefinition/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EConstraintList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EConstraintList/list"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EActivityDefinition"/>
+    <genClasses ecoreClass="RM.ecore#//ECallOperationActivityDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinition/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//ECallOperationActivityDefinitionBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinitionBody/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinitionBody/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPropertyAssignments">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyAssignments/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EPropertyAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyAssignment/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyAssignment/value"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ENodeTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypes/nodeTypes"/>
@@ -116,10 +187,9 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidTargetTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidTargetTypes/targetTypes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidTargetTypes/sourceType"/>
     </genClasses>
-    <genClasses ecoreClass="RM.ecore#//ECapabilityTypeRef">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypeRef/name"/>
+    <genClasses ecoreClass="RM.ecore#//ETargetType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ETargetType/name"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EProperties/properties"/>
@@ -240,7 +310,6 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EValidSourceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceTypes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EValidSourceType/sourceType"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERequirements">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirements/requirements"/>
@@ -319,6 +388,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EMapEntry/value"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EEntityReference"/>
+    <genClasses ecoreClass="RM.ecore#//EPREFIX_REF"/>
     <genClasses ecoreClass="RM.ecore#//EPREFIX_TYPE">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_TYPE/module"/>
     </genClasses>

@@ -26,7 +26,12 @@ AADM_Model:
 	('node_templates:'
 		BEGIN
 		nodeTemplates=ENodeTemplates
-		END)?;
+		END)?
+	('policies:'
+		BEGIN
+		policies=EPolicies
+		END)?
+;
 
 
 ENodeTemplates:
@@ -45,7 +50,7 @@ ENodeTemplateBody:
 	('optimization:' optimization=[opt::Optimization_Model|QUALIFIED_NAME])? &
 	('properties:'
 	BEGIN
-		properties=EPropertyAssigments
+		properties=EPropertyAssignments
 	END)? &
 	('attributes:'
 	BEGIN
@@ -78,7 +83,7 @@ ECapabilityAssignment:
 	BEGIN
 		('properties:'
 		BEGIN
-			properties=EPropertyAssigments
+			properties=EPropertyAssignments
 		END)? 
 	END;
 
@@ -88,11 +93,35 @@ EAttributeAssigments:
 EAttributeAssignment:
 	name = ID ':' value=EAssignmentValue;
 
-EPropertyAssigments:
-	{EPropertyAssigments} (properties+=EPropertyAssignment)*;
+EPolicies:
+	{EPolicies} (policies+=EPolicyDefinition)+;
+	
+EPolicyDefinition:
+	name = ID ':'
+	BEGIN
+		policy=EPolicyDefinitionBody
+	END
+;
 
-EPropertyAssignment:
-	name = ID ':' value=EAssignmentValue;
+EPolicyDefinitionBody:
+	('type:' type=EPREFIX_TYPE) &
+	('description:' description=STRING)? &
+	('properties:'
+	BEGIN
+		properties=EPropertyAssignments
+	END)? &
+	('targets:' '[' targets=ETarget ']')? &
+	('triggers:'
+	BEGIN
+		triggers=ETriggerDefinitions
+	END)?
+;
+
+ETriggerDefinitions:
+	{ETriggerDefinitions} (triggers+=ETriggerDefinition)+;
+	
 	
 
+ETarget:
+	target+=EPREFIX_ID (',' target+=EPREFIX_ID)*;
 

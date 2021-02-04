@@ -25,6 +25,8 @@ Interface_types : 'interface_types:';
 
 Artifact_types : 'artifact_types:';
 
+Call_operation : 'call_operation:';
+
 Implementation : 'implementation:';
 
 Get_attribute : 'get_attribute:';
@@ -32,6 +34,8 @@ Get_attribute : 'get_attribute:';
 Less_or_equal : 'less_or_equal:';
 
 Relative_path : 'relative_path:';
+
+Target_filter : 'target_filter:';
 
 Capabilities : 'capabilities:';
 
@@ -57,11 +61,17 @@ Constraints : 'constraints:';
 
 Description : 'description:';
 
+Evaluations : 'evaluations:';
+
 Occurrences : 'occurrences:';
+
+Requirement : 'requirement:';
 
 Attributes : 'attributes:';
 
 Capability : 'capability:';
+
+Constraint : 'constraint:';
 
 Data_types : 'data_types:';
 
@@ -77,13 +87,21 @@ Operations : 'operations:';
 
 Properties : 'properties:';
 
+Start_time : 'start_time:';
+
 Attribute : 'attribute:';
+
+Condition : 'condition:';
 
 Get_input : 'get_input:';
 
 Less_than : 'less_than:';
 
 Mime_type : 'mime_type:';
+
+Operation : 'operation:';
+
+End_time : 'end_time:';
 
 File_ext : 'file_ext:';
 
@@ -93,11 +111,19 @@ Property : 'property:';
 
 Required : 'required:';
 
+Schedule : 'schedule:';
+
+Triggers : 'triggers:';
+
 Default : 'default:';
 
 Primary : 'primary:';
 
 Req_cap : 'req_cap:';
+
+Targets : 'targets:';
+
+Action : 'action:';
 
 Entity : 'entity:';
 
@@ -107,17 +133,29 @@ Inputs : 'inputs:';
 
 Length : 'length:';
 
+Method : 'method:';
+
 Module : 'module:';
+
+Period : 'period:';
 
 Status : 'status:';
 
 Equal : 'equal:';
+
+Event : 'event:';
 
 Value : 'value:';
 
 Node : 'node:';
 
 Type : 'type:';
+
+And : 'and:';
+
+Not : 'not:';
+
+Or : 'or:';
 
 Comma : ',';
 

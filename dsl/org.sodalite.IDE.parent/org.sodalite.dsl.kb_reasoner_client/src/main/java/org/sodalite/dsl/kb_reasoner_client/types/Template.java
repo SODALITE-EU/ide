@@ -8,13 +8,29 @@
  * Contributors:
  *     Jesús Gorroñogoitia - Design and implementation
  *******************************************************************************/
-package org.sodalite.dsl.kb_reasoner_client.json;
+package org.sodalite.dsl.kb_reasoner_client.types;
 
-import org.sodalite.dsl.kb_reasoner_client.types.Type;
-import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class NodeDataJsonDeserializer extends ReasonerDataJsonDeserializer<Type> {    
-	public NodeDataJsonDeserializer() {
-		super(new TypeData(), Type.class);
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Template extends KBEntity {
+	String label;
+	SuperType type;
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public SuperType getType() {
+		return type;
+	}
+
+	// @JsonDeserialize(using = TypeJsonDeserializer.class)
+	public void setType(SuperType type) {
+		this.type = type;
 	}
 }

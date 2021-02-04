@@ -10,43 +10,42 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.sodalite.dsl.rM.ECapabilityTypeRef;
-import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ECapability Type Ref</b></em>'.
+ * An implementation of the model object '<em><b>ECondition Clause Definition NOT</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECapabilityTypeRefImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EConditionClauseDefinitionNOTImpl#getNot <em>Not</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container implements ECapabilityTypeRef
+public class EConditionClauseDefinitionNOTImpl extends EConditionClauseDefinitionImpl implements EConditionClauseDefinitionNOT
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+   * The cached value of the '{@link #getNot() <em>Not</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getNot()
    * @generated
    * @ordered
    */
-  protected EPREFIX_TYPE name;
+  protected EConditionClauseDefinition not;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ECapabilityTypeRefImpl()
+  protected EConditionClauseDefinitionNOTImpl()
   {
     super();
   }
@@ -59,7 +58,7 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.ECAPABILITY_TYPE_REF;
+    return RMPackage.Literals.ECONDITION_CLAUSE_DEFINITION_NOT;
   }
 
   /**
@@ -68,9 +67,9 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public EPREFIX_TYPE getName()
+  public EConditionClauseDefinition getNot()
   {
-    return name;
+    return not;
   }
 
   /**
@@ -78,13 +77,13 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EPREFIX_TYPE newName, NotificationChain msgs)
+  public NotificationChain basicSetNot(EConditionClauseDefinition newNot, NotificationChain msgs)
   {
-    EPREFIX_TYPE oldName = name;
-    name = newName;
+    EConditionClauseDefinition oldNot = not;
+    not = newNot;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_TYPE_REF__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT, oldNot, newNot);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -96,20 +95,20 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public void setName(EPREFIX_TYPE newName)
+  public void setNot(EConditionClauseDefinition newNot)
   {
-    if (newName != name)
+    if (newNot != not)
     {
       NotificationChain msgs = null;
-      if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_TYPE_REF__NAME, null, msgs);
-      if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_TYPE_REF__NAME, null, msgs);
-      msgs = basicSetName(newName, msgs);
+      if (not != null)
+        msgs = ((InternalEObject)not).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT, null, msgs);
+      if (newNot != null)
+        msgs = ((InternalEObject)newNot).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT, null, msgs);
+      msgs = basicSetNot(newNot, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_TYPE_REF__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT, newNot, newNot));
   }
 
   /**
@@ -122,8 +121,8 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
-        return basicSetName(null, msgs);
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT:
+        return basicSetNot(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,8 +137,8 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
-        return getName();
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT:
+        return getNot();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -154,8 +153,8 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
-        setName((EPREFIX_TYPE)newValue);
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT:
+        setNot((EConditionClauseDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,8 +170,8 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
-        setName((EPREFIX_TYPE)null);
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT:
+        setNot((EConditionClauseDefinition)null);
         return;
     }
     super.eUnset(featureID);
@@ -188,10 +187,10 @@ public class ECapabilityTypeRefImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case RMPackage.ECAPABILITY_TYPE_REF__NAME:
-        return name != null;
+      case RMPackage.ECONDITION_CLAUSE_DEFINITION_NOT__NOT:
+        return not != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ECapabilityTypeRefImpl
+} //EConditionClauseDefinitionNOTImpl

@@ -11,6 +11,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//AADM_Model/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/nodeTemplates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/policies"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ENodeTemplates">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplates/nodeTemplates"/>
@@ -49,12 +50,25 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EAttributeAssignment/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EAttributeAssignment/value"/>
     </genClasses>
-    <genClasses ecoreClass="AADM.ecore#//EPropertyAssigments">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPropertyAssigments/properties"/>
+    <genClasses ecoreClass="AADM.ecore#//EPolicies">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicies/policies"/>
     </genClasses>
-    <genClasses ecoreClass="AADM.ecore#//EPropertyAssignment">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EPropertyAssignment/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPropertyAssignment/value"/>
+    <genClasses ecoreClass="AADM.ecore#//EPolicyDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EPolicyDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinition/policy"/>
+    </genClasses>
+    <genClasses ecoreClass="AADM.ecore#//EPolicyDefinitionBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EPolicyDefinitionBody/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinitionBody/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinitionBody/targets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EPolicyDefinitionBody/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="AADM.ecore#//ETriggerDefinitions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ETriggerDefinitions/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="AADM.ecore#//ETarget">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ETarget/target"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

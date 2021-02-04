@@ -35,6 +35,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -50,31 +51,40 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.EPropertyAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
-import org.sodalite.dsl.aADM.impl.EPropertyAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.EPolicyDefinitionBodyImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Occurrences;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.SuperType;
+import org.sodalite.dsl.kb_reasoner_client.types.Template;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
 
@@ -111,6 +121,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    super.completeRM_Model_Imports(model, assignment, context, acceptor);
+  }
+  
+  @Override
   public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     this.createEntityProposals(context, acceptor);
@@ -120,67 +135,42 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     final String module = this.getModule(model);
-    final ENodeTemplate node = this.getEntity(((GetPropertyBodyImpl) model));
+    final ENodeTemplate node = this.getEntityNode(((GetPropertyBodyImpl) model));
     if ((node == null)) {
       return;
     }
-    List<String> proposals = new ArrayList<String>();
     ERequirementAssignments _requirements = node.getNode().getRequirements();
     boolean _tripleNotEquals = (_requirements != null);
     if (_tripleNotEquals) {
+      final Image image = this.getImage("icons/requirement.png");
       EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
       for (final ERequirementAssignment req : _requirements_1) {
-        String _name = node.getName();
-        String _plus = ((module + "/") + _name);
-        String _plus_1 = (_plus + ".");
-        String _name_1 = req.getName();
-        String _plus_2 = (_plus_1 + _name_1);
-        proposals.add(_plus_2);
+        {
+          String _name = node.getName();
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
+          String _name_1 = req.getName();
+          final String proposal = (_plus_1 + _name_1);
+          this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+        }
       }
     }
     ECapabilityAssignments _capabilities = node.getNode().getCapabilities();
     boolean _tripleNotEquals_1 = (_capabilities != null);
     if (_tripleNotEquals_1) {
+      final Image image_1 = this.getImage("icons/capability.png");
       EList<ECapabilityAssignment> _capabilities_1 = node.getNode().getCapabilities().getCapabilities();
       for (final ECapabilityAssignment cap : _capabilities_1) {
-        String _name_2 = node.getName();
-        String _plus_3 = ((module + "/") + _name_2);
-        String _plus_4 = (_plus_3 + ".");
-        String _name_3 = cap.getName();
-        String _plus_5 = (_plus_4 + _name_3);
-        proposals.add(_plus_5);
-      }
-    }
-    for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
-    }
-  }
-  
-  public ENodeTemplate getEntity(final GetPropertyBodyImpl body) {
-    ENodeTemplate _xblockexpression = null;
-    {
-      final EEntityReference eEntityReference = body.getEntity();
-      ENodeTemplate node = null;
-      ENodeTemplate _xifexpression = null;
-      if ((eEntityReference instanceof EEntity)) {
-        ENodeTemplate _xblockexpression_1 = null;
         {
-          final EEntity eEntity = ((EEntity) eEntityReference);
-          ENodeTemplate _xifexpression_1 = null;
-          boolean _equals = eEntity.getEntity().equals("SELF");
-          if (_equals) {
-            Object _nodeTemplate = this.getNodeTemplate(body);
-            _xifexpression_1 = node = ((ENodeTemplate) _nodeTemplate);
-          }
-          _xblockexpression_1 = _xifexpression_1;
+          String _name = node.getName();
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
+          String _name_1 = cap.getName();
+          final String proposal = (_plus_1 + _name_1);
+          this.createEditableCompletionProposal(proposal, proposal, image_1, context, null, acceptor);
         }
-        _xifexpression = _xblockexpression_1;
-      } else {
-        _xifexpression = null;
       }
-      _xblockexpression = _xifexpression;
     }
-    return _xblockexpression;
   }
   
   @Override
@@ -188,7 +178,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     final String module = this.getModule(model);
     final GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
-    final ENodeTemplate node = this.getEntity(body);
+    final ENodeTemplate node = this.getEntityNode(body);
     if ((node == null)) {
       return;
     }
@@ -222,130 +212,9 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposals.add(prop_2.getName());
       }
     }
+    final Image image = this.getImage("icons/property.png");
     for (final String proposal : proposals) {
-      this.createEditableCompletionProposal(proposal, proposal, context, null, acceptor);
-    }
-  }
-  
-  @Override
-  public String getLastSegment(final String string, final String delimiter) {
-    String newString = string;
-    boolean _endsWith = string.endsWith(delimiter);
-    if (_endsWith) {
-      int _length = string.length();
-      int _length_1 = delimiter.length();
-      int _minus = (_length - _length_1);
-      newString = string.substring(0, _minus);
-    }
-    int _lastIndexOf = newString.lastIndexOf(delimiter);
-    int _plus = (_lastIndexOf + 1);
-    return newString.substring(_plus);
-  }
-  
-  public ENodeTemplate findRequirementNodeInTemplate(final String requirement, final ENodeTemplate template) {
-    ENodeTemplate node = null;
-    ERequirementAssignments _requirements = template.getNode().getRequirements();
-    boolean _tripleEquals = (_requirements == null);
-    if (_tripleEquals) {
-      return node;
-    }
-    EList<ERequirementAssignment> _requirements_1 = template.getNode().getRequirements().getRequirements();
-    for (final ERequirementAssignment req : _requirements_1) {
-      boolean _equals = req.getName().equals(requirement);
-      if (_equals) {
-        Object _findModel = this.findModel(template);
-        final AADM_Model model = ((AADM_Model) _findModel);
-        String module1 = model.getModule();
-        if ((module1 == null)) {
-          module1 = "";
-        }
-        String module2 = req.getNode().getModule();
-        if ((module2 == null)) {
-          module2 = "";
-        }
-        boolean _equals_1 = module1.equals(module2);
-        if (_equals_1) {
-          node = this.findNode(model, req.getNode().getId());
-        } else {
-        }
-      }
-    }
-    return node;
-  }
-  
-  public ECapabilityAssignment findCapabilityInTemplate(final String capabilityName, final ENodeTemplate template) {
-    ECapabilityAssignment capability = null;
-    ECapabilityAssignments _capabilities = template.getNode().getCapabilities();
-    boolean _tripleEquals = (_capabilities == null);
-    if (_tripleEquals) {
-      return capability;
-    }
-    EList<ECapabilityAssignment> _capabilities_1 = template.getNode().getCapabilities().getCapabilities();
-    for (final ECapabilityAssignment cap : _capabilities_1) {
-      boolean _equals = cap.getName().equals(capabilityName);
-      if (_equals) {
-        capability = cap;
-      }
-    }
-    return capability;
-  }
-  
-  public ENodeTemplate findNode(final AADM_Model model, final String nodeName) {
-    EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
-    for (final ENodeTemplate node : _nodeTemplates) {
-      boolean _equals = node.getName().equals(nodeName);
-      if (_equals) {
-        return node;
-      }
-    }
-    return null;
-  }
-  
-  public void setAdditionalProposalInfo(final ICompletionProposal proposal, final String info) {
-    if ((proposal instanceof ConfigurableCompletionProposal)) {
-      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
-      configurable.setAdditionalProposalInfo(info);
-    }
-  }
-  
-  public String getAdditionalProposalInfo(final Keyword keyword) {
-    if ((keyword instanceof KeywordImpl)) {
-      final KeywordImpl keywordImpl = ((KeywordImpl) keyword);
-      final ParserRule rule = this.findParserRule(keywordImpl);
-      if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
-        return "The required name of the Node Type the Node Template is based upon";
-      } else {
-        if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
-          return "An optional list of attribute value assignments for the Node Template.";
-        } else {
-          if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
-            return "An optional list of property value assignments for the Node Template.";
-          } else {
-            if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
-              return "An optional sequenced list of requirement assignments for the Node Template.";
-            } else {
-              if ((Objects.equal(rule.getName(), "ERequirementAssignment") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
-                return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime.";
-              } else {
-                return "";
-              }
-            }
-          }
-        }
-      }
-    }
-    return null;
-  }
-  
-  public ParserRule findParserRule(final EObject obj) {
-    if ((obj == null)) {
-      return null;
-    } else {
-      if ((obj instanceof ParserRule)) {
-        return ((ParserRule) obj);
-      } else {
-        return this.findParserRule(obj.eContainer());
-      }
+      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
     }
   }
   
@@ -368,7 +237,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     final String proposalText = "node_template_id";
     final String displayText = "node_template_id";
     final String additionalProposalInfo = "The required id of the node template";
-    this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
   @Override
@@ -402,7 +271,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qnode;
             final String displayText = qnode;
             final String additionalProposalInfo = node.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/type.png");
+            String _module_1 = node.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
         super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
@@ -413,47 +288,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Override
-  public String getModule(final EObject object) {
-    Object _findModel = this.findModel(object);
-    final AADM_Model model = ((AADM_Model) _findModel);
-    return model.getModule();
-  }
-  
-  @Override
-  public List<String> getImportedModules(final EObject object) {
-    final List<String> modules = new ArrayList<String>();
-    Object _findModel = this.findModel(object);
-    final AADM_Model model = ((AADM_Model) _findModel);
-    EList<String> _imports = model.getImports();
-    for (final String import_ : _imports) {
-      modules.add(import_);
-    }
-    return modules;
-  }
-  
-  @Override
-  public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    try {
-      System.out.println("Invoking content assist for imports");
-      final ReasonerData<String> modules = this.getKBReasoner().getModules();
-      System.out.println("Modules retrieved from KB:");
-      List<String> _elements = modules.getElements();
-      for (final String module : _elements) {
-        {
-          System.out.println(("\tModule: " + module));
-          final String proposalText = this.extractModule(module);
-          final String displayText = proposalText;
-          final Object additionalProposalInfo = null;
-          this.createNonEditableCompletionProposal(proposalText, displayText, context, ((String)additionalProposalInfo), acceptor);
-        }
-      }
-      super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -494,6 +328,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           if ((attributes != null)) {
           }
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
+          final Image image = this.getImage("icons/attribute.png");
           List<AttributeDefinition> _elements = attributes.getElements();
           for (final AttributeDefinition attribute : _elements) {
             {
@@ -527,14 +362,14 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                 _xifexpression_2 = "";
               }
               additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-              this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
         proposalText = "attribute_name";
         displayText = "attribute_name";
         additionalProposalInfo = "represents the name of an attribute that would be used to select an attribute\ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship\nTemplate, etc.) which is declared (or reflected from a Property definition) in its declared type \n(e.g., a Node Type, Node Template, Capability Type, etc.). ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -560,12 +395,16 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((model instanceof ENodeTemplateBodyImpl)) {
           type = ((ENodeTemplateBodyImpl) model).getType();
         } else {
-          if ((model instanceof EPropertyAssigmentsImpl)) {
-            EObject _eContainer = ((EPropertyAssigmentsImpl)model).eContainer();
+          if ((model instanceof EPropertyAssignmentsImpl)) {
+            EObject _eContainer = ((EPropertyAssignmentsImpl)model).eContainer();
             type = ((ENodeTemplateBodyImpl) _eContainer).getType();
           } else {
             if ((model instanceof ENodeTemplateImpl)) {
               type = ((ENodeTemplateImpl) model).getNode().getType();
+            } else {
+              if ((model instanceof EPolicyDefinitionBodyImpl)) {
+                type = ((EPolicyDefinitionBodyImpl) model).getType();
+              }
             }
           }
         }
@@ -585,6 +424,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<PropertyDefinition> properties = this.getKBReasoner().getTypeProperties(resourceId);
           if ((properties != null)) {
             System.out.println(("Properties retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/property.png");
             List<PropertyDefinition> _elements = properties.getElements();
             for (final PropertyDefinition property : _elements) {
               {
@@ -618,7 +458,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   _xifexpression_2 = "";
                 }
                 additionalProposalInfo = (_additionalProposalInfo + _xifexpression_2);
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -626,7 +466,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "property_name";
         displayText = "property_name";
         additionalProposalInfo = "represents the name of a property that would be used to select a property \ndefinition with the same name within on a TOSCA entity (e.g., Node Template, Relationship \nTemplate, etc.,) which is declared in its declared type (e.g., a Node Type, Node Template, \nCapability Type, etc.). ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -673,6 +513,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<CapabilityDefinition> capabilities = this.getKBReasoner().getTypeCapabilities(resourceId);
           if ((capabilities != null)) {
             System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/capability.png");
             List<CapabilityDefinition> _elements = capabilities.getElements();
             for (final CapabilityDefinition capability : _elements) {
               {
@@ -702,7 +543,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_4 = ("\nValid source types:" + _valid_source_types_1);
                   additionalProposalInfo = (_additionalProposalInfo_1 + _plus_4);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -710,7 +551,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "capability_name";
         displayText = "capability_name";
         additionalProposalInfo = "represents the symbolic name of a capability assignment ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -757,6 +598,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           final ReasonerData<RequirementDefinition> requirements = this.getKBReasoner().getTypeRequirements(resourceId);
           if ((requirements != null)) {
             System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
+            final Image image = this.getImage("icons/requirement.png");
             List<RequirementDefinition> _elements = requirements.getElements();
             for (final RequirementDefinition requirement : _elements) {
               {
@@ -798,7 +640,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                   String _plus_8 = (_plus_7 + "]");
                   additionalProposalInfo = (_additionalProposalInfo_2 + _plus_8);
                 }
-                this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
             }
           }
@@ -806,7 +648,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         proposalText = "requirement_name";
         displayText = "requirement_name";
         additionalProposalInfo = "represents the symbolic name of a requirement assignment ";
-        this.createEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+        this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -853,6 +695,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         boolean _not = (!_isEmpty);
         if (_not) {
           System.out.println(("Valid requirement nodes retrieved from KB for requirement: " + requirementId));
+          final Image image = this.getImage("icons/resource2.png");
           List<ValidRequirementNode> _elements = vrnd.getElements();
           for (final ValidRequirementNode vrn : _elements) {
             {
@@ -883,7 +726,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               System.out.println(("Valid requirement node: " + qnode));
               displayText = qnode;
               proposalText = qnode;
-              this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
@@ -906,34 +749,21 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final String qsuperType = _xifexpression_1;
         final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
         for (final ENodeTemplate node : localnodes) {
-          {
+          if ((node != null)) {
             String _name = node.getName();
             String _plus_1 = ("Valid requirement local node: " + _name);
             System.out.println(_plus_1);
             String _xifexpression_2 = null;
-            boolean _notEquals = (!Objects.equal(module, null));
-            if (_notEquals) {
+            if ((module != null)) {
               String _name_1 = node.getName();
               _xifexpression_2 = ((module + "/") + _name_1);
             } else {
               _xifexpression_2 = node.getName();
             }
             final String qnode = _xifexpression_2;
-            String _xifexpression_3 = null;
-            String _module_3 = node.getNode().getType().getModule();
-            boolean _notEquals_1 = (!Objects.equal(_module_3, null));
-            if (_notEquals_1) {
-              String _module_4 = node.getNode().getType().getModule();
-              String _plus_2 = (_module_4 + "/");
-              String _type_1 = node.getNode().getType().getType();
-              _xifexpression_3 = (_plus_2 + _type_1);
-            } else {
-              _xifexpression_3 = node.getNode().getType().getType();
-            }
-            final String qtype = _xifexpression_3;
             proposalText = qnode;
             displayText = qnode;
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
           }
         }
       } catch (final Throwable _t) {
@@ -949,13 +779,23 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    super.completeEEvenFilter_Node(model, assignment, context, acceptor);
+    final List<ENodeTemplate> localTemplates = this.findLocalNodes(model);
+    final String module = this.getModule(model);
+    this.createProposalsForLocalTemplateList(localTemplates, module, "icons/resource2.png", context, acceptor);
+  }
+  
+  @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EDataType::supertype property");
       try {
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
-        importedModules.add(module);
+        if ((module != null)) {
+          importedModules.add(module);
+        }
         final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
@@ -979,10 +819,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String proposalText = qtype;
             final String displayText = qtype;
             final String additionalProposalInfo = type.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+            Image image = this.getImage("icons/data_type.png");
+            String _module_1 = type.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_data_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
         }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
       } catch (final Throwable _t) {
         if (_t instanceof NotRolePermissionException) {
           this.showReadPermissionErrorDialog();
@@ -992,6 +837,324 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void complete_AADM_Model(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final String proposalText = "node_templates:";
+    final String displayText = "node_templates:";
+    final String additionalProposalInfo = "A list of node template definitions for the Topology Template";
+    this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
+  public void complete_ID(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    return;
+  }
+  
+  @Override
+  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+      configurable.setAutoInsertable(false);
+    }
+    acceptor.accept(proposal);
+  }
+  
+  @Override
+  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
+    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setSelectionStart(configurable.getReplacementOffset());
+      configurable.setSelectionLength(proposalText.length());
+      configurable.setAutoInsertable(false);
+      configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+    }
+    acceptor.accept(proposal);
+  }
+  
+  @Override
+  public void completeEPolicyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      System.out.println("Invoking content assist for NodeTemplate::type property");
+      try {
+        final List<String> importedModules = this.getImportedModules(model);
+        final String module = this.getModule(model);
+        importedModules.add(module);
+        final ReasonerData<Type> policies = this.getKBReasoner().getPolicyTypes(importedModules);
+        System.out.println("Nodes retrieved from KB:");
+        List<Type> _elements = policies.getElements();
+        for (final Type policy : _elements) {
+          {
+            String _label = policy.getLabel();
+            String _plus = ("\tNode: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = policy.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = this.getLastSegment(policy.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = policy.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = policy.getLabel();
+            }
+            final String qpolicy = _xifexpression;
+            final String proposalText = qpolicy;
+            final String displayText = qpolicy;
+            final String additionalProposalInfo = policy.getDescription();
+            Image image = this.getImage("icons/policy_type.png");
+            String _module_1 = policy.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_policy_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        super.completeENodeTemplateBody_Type(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          this.showReadPermissionErrorDialog();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeEEvenFilter_Requirement(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    final EEvenFilter filter = ((EEvenFilter) model);
+    EPREFIX_REF _node = filter.getNode();
+    boolean _tripleNotEquals = (_node != null);
+    if (_tripleNotEquals) {
+      String qnode = this.getNodeName(filter.getNode());
+      final ENodeTemplate node = this.findNodeInModel(model, qnode);
+      if ((node != null)) {
+        final String module = this.getModule(model);
+        this.createProposalsForRequirementsList(node.getNode().getRequirements().getRequirements(), module, "icons/requirement.png", context, acceptor);
+      } else {
+        super.completeEEvenFilter_Requirement(model, assignment, context, acceptor);
+      }
+    }
+  }
+  
+  @Override
+  public void completeEEvenFilter_Capability(final EObject object, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      final EEvenFilter filter = ((EEvenFilter) object);
+      final String module = this.getModule(object);
+      Object _findModel = this.findModel(object);
+      final AADM_Model model = ((AADM_Model) _findModel);
+      List<CapabilityDefinition> capabilityDefinitions = null;
+      List<CapabilityAssignment> capabilityAssignments = null;
+      String cap_assign_type = null;
+      String cap_def_type = null;
+      EPREFIX_REF _requirement = filter.getRequirement();
+      boolean _tripleEquals = (_requirement == null);
+      if (_tripleEquals) {
+        final String node_module = this.getModule(filter.getNode());
+        String filter_node_type = null;
+        boolean _equals = node_module.equals(module);
+        if (_equals) {
+          final String node_id = this.getId(filter.getNode());
+          final ENodeTemplate filter_node = this.findNode(model, node_id);
+          if ((filter_node != null)) {
+            filter_node_type = this.getReference(filter_node.getNode().getType());
+          }
+        }
+        if ((filter_node_type == null)) {
+          filter_node_type = this.findNodeTemplateInKB(object, this.getReference(filter.getNode()));
+        }
+        if ((filter_node_type != null)) {
+          capabilityDefinitions = this.findCapabilitiesInNodeType(filter_node_type);
+          cap_def_type = filter_node_type;
+        }
+      } else {
+        final ENodeTemplate req_node = this.findRequirementNodeInLocalModel(object, filter.getRequirement());
+        if ((req_node != null)) {
+          final String node_type = this.getReference(req_node.getNode().getType());
+          final CapabilityDefinitionData capabilityData = this.getKBReasoner().getTypeCapabilities(node_type);
+          capabilityDefinitions = capabilityData.getElements();
+          cap_def_type = node_type;
+        } else {
+          final String nodeName = this.getNodeFromRequirementRef(filter.getRequirement());
+          final String req_name = this.getRequirementNameFromRequirementRef(filter.getRequirement());
+          final CapabilityAssignmentData capabilityData_1 = this.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
+          capabilityAssignments = capabilityData_1.getElements();
+          cap_assign_type = nodeName;
+        }
+      }
+      final Image image = this.getImage("icons/capability.png");
+      if ((capabilityAssignments != null)) {
+        for (final CapabilityAssignment cap : capabilityAssignments) {
+          {
+            String _lastSegment = this.getLastSegment(cap.getUri().toString(), "/");
+            final String proposal = ((cap_assign_type + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          }
+        }
+      }
+      if ((capabilityDefinitions != null)) {
+        for (final CapabilityDefinition cap_1 : capabilityDefinitions) {
+          {
+            String _lastSegment = this.getLastSegment(cap_1.getUri().toString(), "/");
+            final String proposal = ((cap_def_type + ".") + _lastSegment);
+            this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+          }
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeETarget_Target(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = this.processListModules(model);
+        final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
+        this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+        final List<ENodeTemplate> localNodes = this.findLocalNodes(model);
+        this.createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          this.showReadPermissionErrorDialog();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void createProposalsForTemplateList(final List<ENodeTemplate> templates, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ENodeTemplate template : templates) {
+      {
+        String _xifexpression = null;
+        String _module = this.getModule(template);
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = this.getModule(template);
+          String _plus = (_module_1 + "/");
+          String _name = template.getName();
+          _xifexpression = (_plus + _name);
+        } else {
+          _xifexpression = template.getName();
+        }
+        final String qtype = _xifexpression;
+        final String proposalText = qtype;
+        final String displayText = qtype;
+        Image image = this.getImage(defaultImage);
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+      }
+    }
+  }
+  
+  public ENodeTemplate findRequirementNodeInLocalModel(final EObject object, final EPREFIX_REF reqRef) {
+    final String nodeName = this.getNodeFromRequirementRef(reqRef);
+    final String req_name = this.getRequirementNameFromRequirementRef(reqRef);
+    final ENodeTemplate nodeTemplate = this.findNodeInModel(object, nodeName);
+    if ((nodeTemplate != null)) {
+      return this.findRequirementNodeInTemplate(req_name, nodeTemplate);
+    }
+    return null;
+  }
+  
+  public String findNodeTemplateInKB(final EObject object, final String nodeRef) {
+    try {
+      final List<String> importedModules = this.getImportedModules(object);
+      final String module = this.getModule(object);
+      importedModules.add(module);
+      final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
+      List<Template> _elements = templates.getElements();
+      for (final Template nodeTemplate : _elements) {
+        {
+          String _xifexpression = null;
+          String _module = nodeTemplate.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = nodeTemplate.getModule();
+            String _plus = (_module_1 + "/");
+            String _label = nodeTemplate.getLabel();
+            _xifexpression = (_plus + _label);
+          } else {
+            _xifexpression = nodeTemplate.getLabel();
+          }
+          final String nodeTemplateRef = _xifexpression;
+          boolean _equals = nodeTemplateRef.equals(nodeRef);
+          if (_equals) {
+            return nodeTemplateRef;
+          }
+        }
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void createProposalsForRequirementsList(final List<ERequirementAssignment> reqs, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ERequirementAssignment req : reqs) {
+      this.createProposalForRequirement(req, module, defaultImage, context, acceptor);
+    }
+  }
+  
+  public void createProposalForRequirement(final ERequirementAssignment req, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EObject _eContainer = req.eContainer().eContainer().eContainer();
+    String _name = ((ENodeTemplate) _eContainer).getName();
+    String _plus = (_name + ".");
+    String _name_1 = req.getName();
+    final String qreq = (_plus + _name_1);
+    String _xifexpression = null;
+    if ((module != null)) {
+      _xifexpression = ((module + "/") + qreq);
+    } else {
+      _xifexpression = qreq;
+    }
+    String property_label = _xifexpression;
+    String proposalText = property_label;
+    String displayText = property_label;
+    String additionalProposalInfo = "";
+    EPREFIX_ID _node = req.getNode();
+    boolean _tripleNotEquals = (_node != null);
+    if (_tripleNotEquals) {
+      String _additionalProposalInfo = additionalProposalInfo;
+      EPREFIX_ID _node_1 = req.getNode();
+      String _plus_1 = ("\nNode: " + _node_1);
+      additionalProposalInfo = (_additionalProposalInfo + _plus_1);
+    }
+    Image image = this.getImage(defaultImage);
+    this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+  }
+  
+  public void createProposalsForLocalTemplateList(final List<ENodeTemplate> templates, final String module, final String defaultImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final ENodeTemplate node : templates) {
+      {
+        String _xifexpression = null;
+        if ((module != null)) {
+          String _name = node.getName();
+          _xifexpression = ((module + "/") + _name);
+        } else {
+          _xifexpression = node.getName();
+        }
+        final String qnode = _xifexpression;
+        final String proposalText = qnode;
+        final String displayText = qnode;
+        Image image = this.getImage(defaultImage);
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);
+      }
     }
   }
   
@@ -1112,6 +1275,45 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  public List<ENodeTemplate> findLocalNodes(final EObject object) {
+    ArrayList<ENodeTemplate> _xblockexpression = null;
+    {
+      Object _findModel = this.findModel(object);
+      final AADM_Model model = ((AADM_Model) _findModel);
+      ArrayList<ENodeTemplate> _xifexpression = null;
+      if ((model != null)) {
+        return model.getNodeTemplates().getNodeTemplates();
+      } else {
+        _xifexpression = new ArrayList<ENodeTemplate>();
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public ENodeTemplate findNodeInModel(final EObject object, final String nodeName) {
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    final String module = this.getModule(object);
+    final String targetModule = nodeName.substring(0, nodeName.indexOf("/"));
+    int _lastIndexOf = nodeName.lastIndexOf("/");
+    int _plus = (_lastIndexOf + 1);
+    final String targetNode = nodeName.substring(_plus);
+    boolean _equals = module.equals(targetModule);
+    boolean _not = (!_equals);
+    if (_not) {
+      return null;
+    }
+    EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
+    for (final ENodeTemplate node : _nodeTemplates) {
+      boolean _equals_1 = node.getName().equals(targetNode);
+      if (_equals_1) {
+        return node;
+      }
+    }
+    return null;
+  }
+  
   @Override
   public Object findModel(final EObject object) {
     EObject _eContainer = object.eContainer();
@@ -1128,10 +1330,29 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
+  @Override
+  public String getModule(final EObject object) {
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    return model.getModule();
+  }
+  
+  @Override
+  public List<String> getImportedModules(final EObject object) {
+    final List<String> modules = new ArrayList<String>();
+    Object _findModel = this.findModel(object);
+    final AADM_Model model = ((AADM_Model) _findModel);
+    EList<String> _imports = model.getImports();
+    for (final String import_ : _imports) {
+      modules.add(import_);
+    }
+    return modules;
+  }
+  
   public Object getNodeTemplate(final EObject object) {
     EObject _eContainer = object.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
+    boolean _tripleEquals = (_eContainer == null);
+    if (_tripleEquals) {
       return null;
     } else {
       EObject _eContainer_1 = object.eContainer();
@@ -1143,41 +1364,125 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
-  public void complete_AADM_Model(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final String proposalText = "node_templates:";
-    final String displayText = "node_templates:";
-    final String additionalProposalInfo = "A list of node template definitions for the Topology Template";
-    this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+  public ENodeTemplate getEntityNode(final GetPropertyBodyImpl body) {
+    final EEntityReference eEntityReference = body.getEntity();
+    ENodeTemplate node = null;
+    if ((eEntityReference instanceof EEntity)) {
+      final EEntity eEntity = ((EEntity) eEntityReference);
+      boolean _equals = eEntity.getEntity().equals("SELF");
+      if (_equals) {
+        Object _nodeTemplate = this.getNodeTemplate(body);
+        node = ((ENodeTemplate) _nodeTemplate);
+      }
+    } else {
+    }
+    return node;
   }
   
-  @Override
-  public void complete_ID(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    return;
+  public ENodeTemplate findRequirementNodeInTemplate(final String requirement, final ENodeTemplate template) {
+    ENodeTemplate node = null;
+    ERequirementAssignments _requirements = template.getNode().getRequirements();
+    boolean _tripleEquals = (_requirements == null);
+    if (_tripleEquals) {
+      return node;
+    }
+    EList<ERequirementAssignment> _requirements_1 = template.getNode().getRequirements().getRequirements();
+    for (final ERequirementAssignment req : _requirements_1) {
+      boolean _equals = req.getName().equals(requirement);
+      if (_equals) {
+        Object _findModel = this.findModel(template);
+        final AADM_Model model = ((AADM_Model) _findModel);
+        String module1 = model.getModule();
+        if ((module1 == null)) {
+          module1 = "";
+        }
+        String module2 = req.getNode().getModule();
+        if ((module2 == null)) {
+          module2 = "";
+        }
+        boolean _equals_1 = module1.equals(module2);
+        if (_equals_1) {
+          node = this.findNode(model, req.getNode().getId());
+        } else {
+        }
+      }
+    }
+    return node;
   }
   
-  @Override
-  protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+  public ECapabilityAssignment findCapabilityInTemplate(final String capabilityName, final ENodeTemplate template) {
+    ECapabilityAssignment capability = null;
+    ECapabilityAssignments _capabilities = template.getNode().getCapabilities();
+    boolean _tripleEquals = (_capabilities == null);
+    if (_tripleEquals) {
+      return capability;
+    }
+    EList<ECapabilityAssignment> _capabilities_1 = template.getNode().getCapabilities().getCapabilities();
+    for (final ECapabilityAssignment cap : _capabilities_1) {
+      boolean _equals = cap.getName().equals(capabilityName);
+      if (_equals) {
+        capability = cap;
+      }
+    }
+    return capability;
+  }
+  
+  public ENodeTemplate findNode(final AADM_Model model, final String nodeName) {
+    EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
+    for (final ENodeTemplate node : _nodeTemplates) {
+      boolean _equals = node.getName().equals(nodeName);
+      if (_equals) {
+        return node;
+      }
+    }
+    return null;
+  }
+  
+  public void setAdditionalProposalInfo(final ICompletionProposal proposal, final String info) {
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
-      configurable.setAdditionalProposalInfo(additionalProposalInfo);
-      configurable.setAutoInsertable(false);
+      configurable.setAdditionalProposalInfo(info);
     }
-    acceptor.accept(proposal);
   }
   
-  @Override
-  protected void createEditableCompletionProposal(final String proposalText, final String displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
-    if ((proposal instanceof ConfigurableCompletionProposal)) {
-      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
-      configurable.setSelectionStart(configurable.getReplacementOffset());
-      configurable.setSelectionLength(proposalText.length());
-      configurable.setAutoInsertable(false);
-      configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
-      configurable.setAdditionalProposalInfo(additionalProposalInfo);
+  public String getAdditionalProposalInfo(final Keyword keyword) {
+    if ((keyword instanceof KeywordImpl)) {
+      final KeywordImpl keywordImpl = ((KeywordImpl) keyword);
+      final ParserRule rule = this.findParserRule(keywordImpl);
+      if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+        return "The required name of the Node Type the Node Template is based upon";
+      } else {
+        if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+          return "An optional list of attribute value assignments for the Node Template.";
+        } else {
+          if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+            return "An optional list of property value assignments for the Node Template.";
+          } else {
+            if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
+              return "An optional sequenced list of requirement assignments for the Node Template.";
+            } else {
+              if ((Objects.equal(rule.getName(), "ERequirementAssignment") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime.";
+              } else {
+                return "";
+              }
+            }
+          }
+        }
+      }
     }
-    acceptor.accept(proposal);
+    return null;
+  }
+  
+  public ParserRule findParserRule(final EObject obj) {
+    if ((obj == null)) {
+      return null;
+    } else {
+      if ((obj instanceof ParserRule)) {
+        return ((ParserRule) obj);
+      } else {
+        return this.findParserRule(obj.eContainer());
+      }
+    }
   }
 }

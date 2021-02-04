@@ -17,19 +17,31 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = AttributeDefinitionJsonDeserializer.class)
-public class AttributeDefinition extends KBEntity{
+public class AttributeDefinition extends KBEntity {
 	String description;
-	SuperType type; 
-	
+	String definedIn;
+	SuperType type;
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getDefinedIn() {
+		return definedIn;
+	}
+
+	public void setDefinedIn(String definedIn) {
+		this.definedIn = definedIn;
+	}
+
 	public SuperType getType() {
 		return type;
 	}
+
 	public void setType(SuperType type) {
 		this.type = type;
 	}

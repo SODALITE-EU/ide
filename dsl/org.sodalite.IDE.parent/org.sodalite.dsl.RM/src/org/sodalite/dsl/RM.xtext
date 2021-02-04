@@ -137,7 +137,139 @@ EPolicyType:
 
 EPolicyTypeBody:
 	{EPolicyTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
-	('description:' description=STRING)?);
+	('description:' description=STRING)?)
+	('properties:'
+	BEGIN
+	properties=EProperties
+	END)?
+	('targets:' '[' targets=EValidTargetTypes ']')?
+	('triggers:'
+	BEGIN
+	triggers=ETriggers
+	END)?
+;
+
+ETriggers:
+	{ETriggers} (triggers+=ETriggerDefinition)*;
+	
+ETriggerDefinition:
+	name=QUALIFIED_NAME ':' 
+	BEGIN
+	trigger=ETriggerDefinitionBody
+	END;
+
+ETriggerDefinitionBody:
+	('description:' description=STRING)? &
+	('event:' event=STRING) &
+	('schedule:' 
+		BEGIN
+		schedule=ETimeInterval
+		END
+	)? &
+	('target_filter:'
+		BEGIN 
+		target_filter=EEvenFilter
+		END
+	)? &
+	('condition:'
+		BEGIN
+		condition=EExtendedTriggerCondition
+		END
+	)? &
+	('action:'
+		BEGIN
+		action=EActivityDefinitions
+		END
+	)
+;
+
+EActivityDefinitions:
+	{EActivityDefinitions} (list += EActivityDefinition)*
+;
+
+EExtendedTriggerCondition:
+	('constraint:'
+		BEGIN
+		constraint=EConditionClauseDefinition
+		END
+	)? &
+	('period:' period=STRING)? &
+	('evaluations:' evaluations=ESIGNEDINT)? &
+	('method:' method=STRING)?
+;
+
+ETimeInterval:
+	('start_time:' start_time=STRING)
+	('end_time:' end_time=STRING)
+;
+
+EEvenFilter:
+	('node:' node=EPREFIX_REF) &
+	('requirement:' requirement=EPREFIX_REF)? &
+	('capability:' capability=EPREFIX_REF)?
+;
+
+EConditionClauseDefinition:
+	EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT | EConditionClauseDefinitionAssert
+;
+
+EConditionClauseDefinitionAND:
+	'and:'
+	BEGIN
+	and = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionOR:
+	'or:'
+	BEGIN
+	or = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionNOT:
+	'not:'
+	BEGIN
+	not = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionAssert:
+	{EConditionClauseDefinitionAssert} (assertions += EAssertionDefinition)*
+;
+
+EAssertionDefinition:
+	attribute_name = ID ':' '[' constraints=EConstraintList ']' 
+;
+
+EConstraintList:
+	list+=EConstraint (',' list+=EConstraint)*;
+
+EActivityDefinition:
+	ECallOperationActivityDefinition
+;
+
+ECallOperationActivityDefinition:
+	'call_operation:' 
+	BEGIN
+	operation=ECallOperationActivityDefinitionBody
+	END
+;	
+
+ECallOperationActivityDefinitionBody:
+	('operation:' name=EPREFIX_TYPE) &
+	('inputs:'
+		BEGIN 
+		inputs=EPropertyAssignments
+		END
+	)? 
+;
+
+EPropertyAssignments:
+	{EPropertyAssignments} (properties+=EPropertyAssignment)*;
+
+EPropertyAssignment:
+	name = ID ':' value=EAssignmentValue;
 
 ENodeTypes:
 	{ENodeTypes} (nodeTypes+=ENodeType)+;
@@ -199,9 +331,9 @@ ERelationshipTypeBody:
 	('valid_target_types:' '[' valid_target_types=EValidTargetTypes "]")?);
 
 EValidTargetTypes:
-	targetTypes+=ECapabilityTypeRef (',' sourceType+=ECapabilityTypeRef)*;
+	targetTypes+=ETargetType (',' targetTypes+=ETargetType)*;
 
-ECapabilityTypeRef:
+ETargetType:
 	name=EPREFIX_TYPE;
 
 EProperties:
@@ -375,7 +507,7 @@ ECapabilityDefinitionBody:
 	('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 
 EValidSourceType:
-	sourceTypes+=EPREFIX_TYPE (',' sourceType+=EPREFIX_TYPE)*;
+	sourceTypes+=EPREFIX_TYPE (',' sourceTypes+=EPREFIX_TYPE)*;
 
 ERequirements:
 	{ERequirements} (requirements+=ERequirementDefinition)*;
@@ -476,6 +608,10 @@ EMapEntry:
 
 EEntityReference:
 	EEntity | EPREFIX_TYPE | EPREFIX_ID
+;
+
+EPREFIX_REF:
+	EPREFIX_TYPE | EPREFIX_ID
 ;
 
 EPREFIX_TYPE:
