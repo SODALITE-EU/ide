@@ -411,28 +411,6 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF i.interface.inputs !== null»
-	«putParameterNumber(i, "inputs", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "inputs" ;
-	  «FOR prop:(i.interface.inputs.properties)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
-	  «ENDFOR»	  
-	.
-	«ENDIF»	
-	
-	«IF i.interface.operations !== null»
-	«putParameterNumber(i, "operations", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "operations" ;
-	  «FOR op:(i.interface.operations.operations)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
-	  «ENDFOR»	  
-	.
-	«ENDIF»	
-	
 	«interface_numbers.put(i, interface_counter)»
 	:Interface_«interface_counter++»
 	  rdf:type exchange:Interface ;
@@ -441,10 +419,14 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "type")» ;
 	  «ENDIF»
 	  «IF i.interface.inputs !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«property_numbers.get(prop)» ;
+	  «ENDFOR»
 	  «ENDIF»
 	  «IF i.interface.operations !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
+	  «ENDFOR»
 	  «ENDIF»
 	.
 	'''
@@ -544,9 +526,15 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»		
 	
+	«IF o.eContainer.eContainer.eContainer instanceof EInterfaceDefinition»
+	«putParameterNumber(o, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	«ELSEIF o.eContainer.eContainer.eContainer instanceof EInterfaceType»
 	«operation_numbers.put(o, operation_counter)»
 	:Operation_«operation_counter++»
 	  rdf:type exchange:Operation ;
+	«ENDIF»
 	  exchange:name "«o.name»" ;
 	  «IF o.operation.description !== null»
 	  exchange:description '«processDescription(o.operation.description)»' ;
