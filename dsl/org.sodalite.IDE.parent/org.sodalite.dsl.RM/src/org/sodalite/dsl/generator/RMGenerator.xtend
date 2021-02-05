@@ -420,7 +420,7 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  «IF i.interface.inputs !== null»
 	  «FOR prop:(i.interface.inputs.properties)»
-	  exchange:hasParameter :Parameter_«property_numbers.get(prop)» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
 	  «ENDFOR»
 	  «ENDIF»
 	  «IF i.interface.operations !== null»
@@ -1129,10 +1129,15 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	
+	«IF p.eContainer.eContainer.eContainer instanceof EInterfaceDefinition»
+	«putParameterNumber(p, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	«ELSE»
 	«property_numbers.put(p, property_counter)»
 	:Property_«property_counter++»
 	  rdf:type exchange:Property ;
+	«ENDIF»
 	  exchange:name "«p.name»" ;
 	  «IF p.property.description !== null»
 	  exchange:description '«processDescription(p.property.description)»' ;

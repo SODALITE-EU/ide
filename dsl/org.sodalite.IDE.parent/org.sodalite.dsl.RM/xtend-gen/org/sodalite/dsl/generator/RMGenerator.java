@@ -1009,8 +1009,8 @@ public class RMGenerator extends AbstractGenerator {
           for(final EPropertyDefinition prop : _properties) {
             _builder.append("  ");
             _builder.append("exchange:hasParameter :Parameter_");
-            Integer _get = this.property_numbers.get(prop);
-            _builder.append(_get, "  ");
+            Integer _parameterNumber_1 = this.getParameterNumber(prop, "name");
+            _builder.append(_parameterNumber_1, "  ");
             _builder.append(" ;");
             _builder.newLineIfNotEmpty();
           }
@@ -1026,8 +1026,8 @@ public class RMGenerator extends AbstractGenerator {
           for(final EOperationDefinition op : _operations_1) {
             _builder.append("  ");
             _builder.append("exchange:hasParameter :Parameter_");
-            Integer _parameterNumber_1 = this.getParameterNumber(op, "name");
-            _builder.append(_parameterNumber_1, "  ");
+            Integer _parameterNumber_2 = this.getParameterNumber(op, "name");
+            _builder.append(_parameterNumber_2, "  ");
             _builder.append(" ;");
             _builder.newLineIfNotEmpty();
           }
@@ -3228,17 +3228,31 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
-    _builder.newLine();
-    Integer _put = this.property_numbers.put(p, Integer.valueOf(this.property_counter));
-    _builder.append(_put);
-    _builder.newLineIfNotEmpty();
-    _builder.append(":Property_");
-    int _plusPlus_7 = this.property_counter++;
-    _builder.append(_plusPlus_7);
-    _builder.newLineIfNotEmpty();
-    _builder.append("  ");
-    _builder.append("rdf:type exchange:Property ;");
-    _builder.newLine();
+    {
+      EObject _eContainer = p.eContainer().eContainer().eContainer();
+      if ((_eContainer instanceof EInterfaceDefinition)) {
+        this.putParameterNumber(p, "name", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_7 = this.parameter_counter++;
+        _builder.append(_plusPlus_7);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+      } else {
+        Integer _put = this.property_numbers.put(p, Integer.valueOf(this.property_counter));
+        _builder.append(_put);
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Property_");
+        int _plusPlus_8 = this.property_counter++;
+        _builder.append(_plusPlus_8);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Property ;");
+        _builder.newLine();
+      }
+    }
     _builder.append("  ");
     _builder.append("exchange:name \"");
     String _name_1 = p.getName();
