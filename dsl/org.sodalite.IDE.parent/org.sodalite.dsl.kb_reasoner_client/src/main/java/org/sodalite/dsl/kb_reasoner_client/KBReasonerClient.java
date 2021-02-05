@@ -112,7 +112,8 @@ public class KBReasonerClient implements KBReasoner {
 		this.keycloakUri = keycloakUri;
 	}
 
-	public void setUserAccount(String user, String password, String client_id, String client_secret) throws Exception {
+	public String setUserAccount(String user, String password, String client_id, String client_secret)
+			throws Exception {
 		this.keycloak_user = user;
 		this.keycloak_password = password;
 		this.keycloak_client_id = client_id;
@@ -120,6 +121,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.aai_token = getSecurityToken();
 		Assert.notNull(aai_token, "Error retrieving a valid security token");
 		this.IAM_enabled = true;
+		return this.aai_token;
 	}
 
 	private RestTemplate getSslRestTemplate()

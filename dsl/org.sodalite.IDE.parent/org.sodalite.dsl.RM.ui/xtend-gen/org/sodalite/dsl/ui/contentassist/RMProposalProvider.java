@@ -159,7 +159,12 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         if (_isEmpty_7) {
           this.raiseConfigurationIssue("Keycloak client secret not set");
         }
-        kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+        final String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+        if ((token == null)) {
+          this.raiseConfigurationIssue("Security token could not be obtained. Check your IAM configuration in preferences");
+        } else {
+          SodaliteLogger.log(("Security token: " + token));
+        }
       }
       SodaliteLogger.log(
         MessageFormat.format(

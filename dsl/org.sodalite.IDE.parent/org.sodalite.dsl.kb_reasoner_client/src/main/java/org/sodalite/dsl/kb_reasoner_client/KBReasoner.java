@@ -108,7 +108,7 @@ public interface KBReasoner {
 
 	void deleteModel(String modelId) throws Exception;
 
-	void setUserAccount(String user, String password, String client_id, String user_secret) throws Exception;
+	String setUserAccount(String user, String password, String client_id, String user_secret) throws Exception;
 
 	CapabilityDefinitionData getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(String nodeType,
 			String requirementName) throws Exception;
