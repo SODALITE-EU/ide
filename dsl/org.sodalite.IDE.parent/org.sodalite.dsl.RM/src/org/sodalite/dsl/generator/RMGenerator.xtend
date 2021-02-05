@@ -91,6 +91,7 @@ class RMGenerator extends AbstractGenerator {
 	var int interface_type_counter = 1
 	var int policy_counter = 1
 	var int trigger_counter = 1
+	var int operation_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
@@ -98,6 +99,7 @@ class RMGenerator extends AbstractGenerator {
 	var Map<EInterfaceDefinition, Integer> interface_numbers
 	var Map<Object, Map<String,Integer>> parameter_numbers
 	var Map<ETriggerDefinition, Integer> trigger_numbers
+	var Map<EOperationDefinition, Integer> operation_numbers
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		data_type_counter = 1
@@ -113,6 +115,7 @@ class RMGenerator extends AbstractGenerator {
 		interface_type_counter = 1
 		policy_counter = 1
 		trigger_counter = 1
+		operation_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
@@ -120,6 +123,7 @@ class RMGenerator extends AbstractGenerator {
 		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
 		interface_numbers = new HashMap<EInterfaceDefinition, Integer>()
 		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
+		operation_numbers = new HashMap<EOperationDefinition, Integer>()
 		
 		val filename = getFilename(resource.URI)
 		fsa.generateFile(filename,  compileRM (resource))
@@ -446,20 +450,7 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EOperationDefinition o) '''
-	«IF o.operation.inputs !== null»
-	«putParameterNumber(o, "inputs", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  «IF o.operation.description !== null»
-	  exchange:description '«processDescription(o.operation.description)»' ;
-	  «ENDIF»
-	  exchange:name "inputs" ;
-	  «FOR in:(o.operation.inputs.inputs)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(in, "name")» ;
-	  «ENDFOR»	  
-	.
-	«ENDIF»		
-	
+
 	«IF o.operation.implementation !== null»
 	«putParameterNumber(o, "primary.path", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -553,16 +544,21 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»		
 	
-	«putParameterNumber(o, "name", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
+	«operation_numbers.put(o, operation_counter)»
+	:Operation_«operation_counter++»
+	  rdf:type exchange:Operation ;
 	  exchange:name "«o.name»" ;
-	  «IF o.operation.inputs !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(o, "inputs")» ;
+	  «IF o.operation.description !== null»
+	  exchange:description '«processDescription(o.operation.description)»' ;
 	  «ENDIF»
+	  «IF o.operation.inputs !== null»
+	  «FOR i:o.operation.inputs.inputs»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
+  	  «ENDFOR»
+  	  «ENDIF»
 	  «IF o.operation.implementation !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "implementation")» ;
-	  «ENDIF»  
+	  «ENDIF»
 	.
 	'''
 	
@@ -1049,29 +1045,6 @@ class RMGenerator extends AbstractGenerator {
   	'''
   	
 	def compile (EInterfaceType i) '''
-	
-	«IF i.interface.inputs !== null»
-	«putParameterNumber(i, "inputs", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "inputs" ;
-	  «FOR prop:(i.interface.inputs.properties)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
-	  «ENDFOR»	  
-	.
-	«ENDIF»	
-	
-	«IF i.interface.operations !== null»
-	«putParameterNumber(i, "operations", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "operations" ;
-	  «FOR op:(i.interface.operations.operations)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
-	  «ENDFOR»	  
-	.
-	«ENDIF»	
-	
 	:InterfaceType_«interface_type_counter++»
 	  rdf:type exchange:Type ;
 	  exchange:name "«i.name»" ;
@@ -1084,10 +1057,14 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:derivesFrom '«i.interface.superType.type»' ;
 	  «ENDIF»
 	  «IF i.interface.inputs !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:inputs :Property_«property_numbers.get(prop)» ;
+	  «ENDFOR»
 	  «ENDIF»
 	  «IF i.interface.operations !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:operations :Operation_«operation_numbers.get(op)» ;
+	  «ENDFOR»
 	  «ENDIF»
 	.
   	'''
