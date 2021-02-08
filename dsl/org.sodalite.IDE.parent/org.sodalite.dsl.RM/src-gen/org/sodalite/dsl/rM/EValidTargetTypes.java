@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EValidTargetTypes#getTargetTypes <em>Target Types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EValidTargetTypes#getSourceType <em>Source Type</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEValidTargetTypes()
@@ -28,7 +27,7 @@ public interface EValidTargetTypes extends EObject
 {
   /**
    * Returns the value of the '<em><b>Target Types</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.ECapabilityTypeRef}.
+   * The list contents are of type {@link org.sodalite.dsl.rM.ETargetType}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Target Types</em>' containment reference list.
@@ -36,18 +35,6 @@ public interface EValidTargetTypes extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ECapabilityTypeRef> getTargetTypes();
-
-  /**
-   * Returns the value of the '<em><b>Source Type</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.ECapabilityTypeRef}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Source Type</em>' containment reference list.
-   * @see org.sodalite.dsl.rM.RMPackage#getEValidTargetTypes_SourceType()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ECapabilityTypeRef> getSourceType();
+  EList<ETargetType> getTargetTypes();
 
 } // EValidTargetTypes

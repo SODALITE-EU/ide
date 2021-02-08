@@ -18,7 +18,7 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
-import org.sodalite.dsl.ui.backend.BackendLogger;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADM_Helper {
 
@@ -50,7 +50,7 @@ public class AADM_Helper {
 					return c.getType().getLabel();
 			}
 		} catch (Exception e) {
-			BackendLogger.log("Error getting type capabilities", e);
+			SodaliteLogger.log("Error getting type capabilities", e);
 		}
 
 		return result;

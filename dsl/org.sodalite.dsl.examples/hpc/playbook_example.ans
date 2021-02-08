@@ -1,0 +1,80 @@
+playbook_name:"example"
+used_by:
+	node_type: "my.nodes.hpc.job.torque"
+	operation: "create"
+plays:
+	play:
+		play_name:'play 1'
+		hosts: "all"
+		privilege_escalation:
+			become:False
+			become_user:"Become_user"
+			become_method:"Become_method"
+		play_exe_settings:
+			run_once: True
+			strategy: "strategy"
+		tags: ["tag1", "tag2"]
+		vars:
+			var1: 5
+			var2: 'this is var2'
+			var3: {aaa: "string1", bbb: "string2", ccc: {innerkey1: "stringggg", innerkey2: "sttrrrriiingg"} }
+			var4: ["element1", "element2"]
+			exporter_meta: "meta"
+			include_exporter: "include"
+		roles_inclusions:
+			role:
+				role_name: "role1"
+				delegation:
+					delegate_to: "delegate_to"
+		tasks_list:
+			block_to_execute:
+				vars:
+					varrrr1: 55
+				block_name: "this is a block"
+				when: declared_variable: var3.ccc.innerkey2 == "string"
+				error_handling:
+					any_errors_fatal: True
+					ignore_errors: False
+				tasks:
+					task_to_execute:
+						task_name:"this is a task"
+						delegation:
+							delegate_to:"ao"
+						when: declared_variable:var4[0] | map("aaa") is not defined
+						module: "this_is_a_module"
+							parameters:
+								parameter1: {{ declared_variable: var1 }}
+								parameter2: "path/"{{declared_variable: var2}}"/path"
+						register: registered_output
+						notify: "this is a handler", topic: "this is a notified topic"
+					task_to_execute:
+						task_name: "Create temporary inventory for wm, since opera requires internal envars to access the target. Need more examples to access static nodes without specifying them in the inventory file"					
+						module: "add_host"
+							parameters:
+								name: "wm"
+								groups: "wm"
+								ansible_host: {{ interface_input: "job_ppn" }}
+								ansible_user: {{ interface_input: "wm_username" }}
+								ansible_ssh_private_key_file: {{ interface_input: "wm_keypath" }}
+								ansible_ssh_common_args: "-o IdentitiesOnly=yes -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+		handlers:
+			handler:
+				handler_name: "this is a handler"
+				delegation:
+					delegate_to: "delegate_to"
+				module: "shell"
+					direct_parameter: "shell command"
+				loop:
+					until: registered_variable: registered_output > 10
+					delay: {{ declared_variable: var1 }}
+					retries: 7
+				listen: "this is a notified topic"
+								
+								
+								
+								
+								
+								
+								
+								
+								

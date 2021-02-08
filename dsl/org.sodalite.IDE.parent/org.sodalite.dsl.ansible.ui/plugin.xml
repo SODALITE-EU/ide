@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="ans"
+			id="org.sodalite.sdl.ansible.AnsibleDsl"
+			name="AnsibleDsl Editor">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="org.sodalite.sdl.ansible.AnsibleDsl.validate">
+			<activeWhen>
+				<reference
+					definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.sodalite.sdl.ansible.AnsibleDsl"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="org.sodalite.sdl.ansible.AnsibleDsl.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="org.sodalite.sdl.ansible.AnsibleDsl"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl"
+			name="AnsibleDsl">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.templates"
+			name="Templates">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl"
+			name="AnsibleDsl">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"
+			label="AnsibleDsl"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Trigger expensive validation"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.validate"
+			name="Validate">
+		</command>
+		<!-- copy qualified name -->
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command
+				commandId="org.sodalite.sdl.ansible.AnsibleDsl.validate"
+				style="push"
+				tooltip="Trigger expensive validation">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="ans"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.contenttype"
+			name="AnsibleDsl File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="ans">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="ans">
+		</resourceServiceProvider>
+	</extension>
+	<!-- marker definitions for org.sodalite.sdl.ansible.AnsibleDsl -->
+	<extension
+			id="ansibledsl.check.fast"
+			name="AnsibleDsl Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="ansibledsl.check.normal"
+			name="AnsibleDsl Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="ansibledsl.check.expensive"
+			name="AnsibleDsl Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="ans"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="org.sodalite.sdl.ansible.AnsibleDsl.OpenGeneratedCode"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+			<activeWhen>
+				<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened" />
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- quickfix marker resolution generator for org.sodalite.sdl.ansible.AnsibleDsl -->
+	<extension
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.sodalite.dsl.ansible.ui.ansibledsl.check.fast">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.sodalite.dsl.ansible.ui.ansibledsl.check.normal">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.sodalite.dsl.ansible.ui.ansibledsl.check.expensive">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+	</extension>
+	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.sodalite.sdl.ansible.AnsibleDsl.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.sodalite.sdl.ansible.AnsibleDsl"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="org.sodalite.sdl.ansible.AnsibleDsl.refactoring"
+			name="Refactoring">
+			<keywordReference id="org.sodalite.sdl.ansible.ui.keyword_AnsibleDsl"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="org.sodalite.sdl.ansible.AnsibleDsl.compare.contentViewers"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="ans">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.sodalite.sdl.ansible.AnsibleDsl.contenttype"
+			contentViewerId="org.sodalite.sdl.ansible.AnsibleDsl.compare.contentViewers" />
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="org.sodalite.sdl.ansible.AnsibleDsl.compare.contentMergeViewers"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="ans" label="AnsibleDsl Compare">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.sodalite.sdl.ansible.AnsibleDsl.contenttype"
+			contentMergeViewerId="org.sodalite.sdl.ansible.AnsibleDsl.compare.contentMergeViewers" />
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="org.sodalite.sdl.ansible.AnsibleDsl.editors.documentProviders"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="ans">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="ans"
+			type="text">
+		</fileTypes>
+	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.sodalite.sdl.ansible.ui.category" name="AnsibleDsl">
+		</category>
+		<wizard
+			category="org.sodalite.sdl.ansible.ui.category"
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"
+			name="AnsibleDsl Project"
+			icon="icons/new_AnsibleDsl_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.sodalite.sdl.ansible.ui.AnsibleDslExecutableExtensionFactory:org.sodalite.sdl.ansible.ui.wizard.AnsibleDslProjectTemplateProvider"
+			grammarName="org.sodalite.sdl.ansible.AnsibleDsl">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.sodalite.sdl.ansible.ui.wizard.AnsibleDslNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
+</plugin>

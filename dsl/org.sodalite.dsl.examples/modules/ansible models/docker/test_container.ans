@@ -1,0 +1,18 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/test_container.yml
+playbook_name: "docker/test_container"
+used_by:
+	node_type: "sodalite.nodes.TestComponent"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "wait for "{{ operation_input: "component_name" }}" to come up"
+				module: "wait_for"
+					parameters:
+						port: {{ operation_input: "test_port" }}
+						delay: {{ operation_input: "test_delay" }}
+				

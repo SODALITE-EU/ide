@@ -30,7 +30,6 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EValidSourceTypeImpl#getSourceTypes <em>Source Types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EValidSourceTypeImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,16 +45,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected EList<EPREFIX_TYPE> sourceTypes;
-
-  /**
-   * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSourceType()
-   * @generated
-   * @ordered
-   */
-  protected EList<EPREFIX_TYPE> sourceType;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,29 +88,12 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<EPREFIX_TYPE> getSourceType()
-  {
-    if (sourceType == null)
-    {
-      sourceType = new EObjectContainmentEList<EPREFIX_TYPE>(EPREFIX_TYPE.class, this, RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE);
-    }
-    return sourceType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES:
         return ((InternalEList<?>)getSourceTypes()).basicRemove(otherEnd, msgs);
-      case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
-        return ((InternalEList<?>)getSourceType()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,8 +110,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
     {
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES:
         return getSourceTypes();
-      case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
-        return getSourceType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -159,10 +129,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
         getSourceTypes().clear();
         getSourceTypes().addAll((Collection<? extends EPREFIX_TYPE>)newValue);
         return;
-      case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
-        getSourceType().clear();
-        getSourceType().addAll((Collection<? extends EPREFIX_TYPE>)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -180,9 +146,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES:
         getSourceTypes().clear();
         return;
-      case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
-        getSourceType().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -199,8 +162,6 @@ public class EValidSourceTypeImpl extends MinimalEObjectImpl.Container implement
     {
       case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPES:
         return sourceTypes != null && !sourceTypes.isEmpty();
-      case RMPackage.EVALID_SOURCE_TYPE__SOURCE_TYPE:
-        return sourceType != null && !sourceType.isEmpty();
     }
     return super.eIsSet(featureID);
   }

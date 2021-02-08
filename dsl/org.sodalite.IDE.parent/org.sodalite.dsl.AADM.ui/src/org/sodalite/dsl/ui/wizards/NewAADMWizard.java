@@ -53,7 +53,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
-import org.sodalite.dsl.ui.backend.BackendLogger;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class NewAADMWizard extends BasicNewResourceWizard {
 	private WizardNewFileCreationPage mainPage;
@@ -185,7 +185,7 @@ public class NewAADMWizard extends BasicNewResourceWizard {
 				}
 			});
 		} catch (Exception ex) {
-			BackendLogger.log("Error", ex);
+			SodaliteLogger.log("Error", ex);
 		}
 
 		return finished;

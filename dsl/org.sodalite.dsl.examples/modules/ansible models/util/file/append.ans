@@ -1,0 +1,22 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/modules/util/playbooks/file/append.yaml
+playbook_name: "util/file/append"
+//PROBLEM: the node type sodalite.nodes.Utils.append.File, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			task_to_execute:
+				task_name: "line insert"
+				module: "lineinfile"
+					parameters:
+						path: {{ path }}
+						line: {{ bof }}
+						insertbefore: "BOF"
+			
+			task_to_execute:
+				task_name: "Insert a line at the end of a file."
+				module: "lineinfile"
+					parameters:
+						path: {{ path }}
+						line: {{ eof }}

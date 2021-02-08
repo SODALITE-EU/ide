@@ -1,0 +1,61 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/command/time.yaml
+playbook_name: "tests/command/time"
+//PROBLEM: the node type sodalite.nodes.Tests.Command.Time, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: yes
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Execute command (linux)"
+						module: "shell"
+							parameters:
+								chdir: {{ dir | default(omit, true) }}
+								executable: {{ executable | default(omit, true) }}
+								cmd: {{ command }}
+						register: command_output
+						when: host_os == 'linux'
+					
+					task_to_execute:
+						task_name: "Execute command (windows)"
+						module: "win_shell"
+							direct_parameter: {{ command }}
+						args:
+							chdir: {{ dir | default(omit, true) }}
+							executable: {{ executable | default(omit, true) }}
+						register: co
+						when: host_os == 'windows'
+					
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								command_output: {{ registered_variable: co }}
+						when: registered_variable: command_output is undefined
+					
+					task_to_execute:
+						task_name: "Convert time to decimal seconds"
+						module: "set_fact"
+							parameters:
+								calculated_time: {{ ((fact_set: command_output.delta + '').split(':')[0] | int)*60*60 + ((fact_set: command_output.delta + '').split(':')[1] | int)*60 + ((fact_set: command_output.delta + '').split(':')[2] | float)}}
+								number_time: {{ time | float }}
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ fact_set: calculated_time }}
+									status: {{ (comparator == 'eq' and fact_set: calculated_time == fact_set: number_time) or (comparator == 'lt' and fact_set: calculated_time < fact_set: number_time) or (comparator == 'le' and fact_set: calculated_time <= fact_set: number_time) or (comparator == 'gt' and fact_set: calculated_time > fact_set: number_time) or (comparator == 'ge' and fact_set: calculated_time >= fact_set: number_time) }}
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the command execution fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

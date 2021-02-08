@@ -1,5 +1,8 @@
 package org.sodalite.dsl.ui.backend;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,12 +43,9 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -82,9 +82,11 @@ import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -96,7 +98,7 @@ public class RMBackendProxy {
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-	protected KBReasonerClient getKBReasoner() throws Exception {
+	public static KBReasonerClient getKBReasoner() throws Exception {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
@@ -118,32 +120,40 @@ public class RMBackendProxy {
 
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
 
-		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-		if (keycloak_user.isEmpty())
-			raiseConfigurationIssue("Keycloak user not set");
+		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
+			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+			if (keycloak_user.isEmpty())
+				raiseConfigurationIssue("Keycloak user not set");
 
-		String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-		if (keycloak_password.isEmpty())
-			raiseConfigurationIssue("Keycloak password not set");
+			String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
+			if (keycloak_password.isEmpty())
+				raiseConfigurationIssue("Keycloak password not set");
 
-		String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-		if (keycloak_client_id.isEmpty())
-			raiseConfigurationIssue("Keycloak client_id not set");
+			String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
+			if (keycloak_client_id.isEmpty())
+				raiseConfigurationIssue("Keycloak client_id not set");
 
-		String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-		if (keycloak_client_secret.isEmpty())
-			raiseConfigurationIssue("Keycloak client secret not set");
+			String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
+			if (keycloak_client_secret.isEmpty())
+				raiseConfigurationIssue("Keycloak client secret not set");
 
-		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
+			String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id,
+					keycloak_client_secret);
 
-		BackendLogger.log(MessageFormat.format(
+			if (token == null)
+				raiseConfigurationIssue(
+						"Security token could not be obtained. Check your IAM configuration in preferences");
+			else
+				SodaliteLogger.log("Security token: " + token);
+		}
+
+		SodaliteLogger.log(MessageFormat.format(
 				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
 				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
 		return kbclient;
 	}
 
-	private void raiseConfigurationIssue(String message) throws Exception {
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+	private static void raiseConfigurationIssue(String message) throws Exception {
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
@@ -184,7 +194,7 @@ public class RMBackendProxy {
 				}
 			});
 		} catch (IOException e) {
-			BackendLogger.log("Error generating model", e);
+			SodaliteLogger.log("Error generating model", e);
 		}
 	}
 
@@ -220,7 +230,6 @@ public class RMBackendProxy {
 			}
 			uri = props.getProperty("URI");
 		}
-
 		return uri;
 	}
 
@@ -278,31 +287,16 @@ public class RMBackendProxy {
 				}
 				saveURI(saveReport.getURI(), rmFile, project);
 
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openInformation(parent, "Save RM",
-								"The selected RM model has been successfully store in the KB with URI:\n"
-										+ saveReport.getURI());
-					}
-				});
+				showInfoDialog(null, "Save RM",
+						"The selected RM model has been successfully store in the KB with URI:\n"
+								+ saveReport.getURI());
+
 			} catch (NotRolePermissionException ex) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Save RM",
-								"You have not permissions to save the model in the declared module. \nPlease, contact the AAI SODALITE administrator");
-					}
-				});
+				showErrorDialog(null, "Save RM", "You have not permissions to save the model in the declared module. "
+						+ "\nPlease, contact the AAI SODALITE administrator");
 			} catch (Exception e) {
-				Display.getDefault().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						MessageDialog.openError(parent, "Save RM",
-								"There were problems to store the RM into the KB: " + e.getMessage());
-					}
-				});
-				BackendLogger.log("Error saving model", e);
+				showErrorDialog(null, "Save RM", "There were problems to store the RM into the KB: " + e.getMessage());
+				SodaliteLogger.log("Error saving model", e);
 			}
 		});
 		job.setPriority(Job.SHORT);
@@ -314,7 +308,7 @@ public class RMBackendProxy {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
 			// Open RM file if not opened to show the errors and warnings
-			openFileInEditor(modelFile);
+			RMHelper.openFileInEditor(modelFile);
 			List<ValidationIssue> issues = readIssuesFromKB(saveReport);
 			manageIssues(event, issues);
 			if (saveReport.hasErrors()) {
@@ -323,23 +317,7 @@ public class RMBackendProxy {
 		}
 	}
 
-	protected void openFileInEditor(IFile file) throws PartInitException {
-		Display.getDefault().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
-				try {
-					page.openEditor(new FileEditorInput(file), desc.getId());
-				} catch (PartInitException e) {
-					BackendLogger.log("Error open model in editor", e);
-				}
-			}
-		});
-	}
-
 	protected List<ValidationIssue> readIssuesFromKB(KBSaveReportData saveReport) {
-		// TODO Read issues from KB recommendations
 		List<ValidationIssue> issues = new ArrayList<>();
 
 		if (saveReport.hasErrors()) {
@@ -535,13 +513,41 @@ public class RMBackendProxy {
 		}
 	}
 
+	protected void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
+		if (info != null)
+			RMBackendProxy.pasteInClipboard(info);
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(parent, dialogTitle, dialogMessage);
+			}
+		});
+	}
+
+	protected void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
+		if (info != null)
+			RMBackendProxy.pasteInClipboard(info);
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(parent, dialogTitle, dialogMessage);
+			}
+		});
+	}
+
+	public static void pasteInClipboard(String value) {
+		StringSelection stringSelection = new StringSelection(value);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, null);
+	}
+
 	private String getRMModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
 		RM_Model model = readRM(rmFile, event);
 		return model.getModule();
 	}
 
 	private RM_Model readRM(IFile rmFile, ExecutionEvent event) throws PartInitException {
-		openFileInEditor(rmFile);
+		RMHelper.openFileInEditor(rmFile);
 		RM_Model model = null;
 		Injector injector = RMActivator.getInstance().getInjector(RMActivator.ORG_SODALITE_DSL_RM);
 		XtextResourceSet resourceSet = (XtextResourceSet) injector.getInstance(XtextResourceSetProvider.class)

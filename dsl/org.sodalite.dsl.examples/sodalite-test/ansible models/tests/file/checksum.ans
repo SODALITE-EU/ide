@@ -1,0 +1,37 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/file/checksum.yaml
+playbook_name: "tests/file/checksum"
+//PROBLEM: the node type sodalite.nodes.Tests.File.Checksum, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Check the file's stats"
+						module: "stat"
+							parameters:
+								path: {{ file_location }}
+								follow: {{ follow }}
+								get_checksum: yes
+								checksum_algorithm: {{ checksum_algorithm }}
+						register: file_stats
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_stats.stat.checksum }}
+									status: {{ registered_variable: file_stats.stat.checksum == checksum }}
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the request fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

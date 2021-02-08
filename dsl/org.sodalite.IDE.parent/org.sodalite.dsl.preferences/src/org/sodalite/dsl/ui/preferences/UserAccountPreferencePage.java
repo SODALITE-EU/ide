@@ -1,5 +1,6 @@
 package org.sodalite.dsl.ui.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
@@ -28,6 +29,7 @@ public class UserAccountPreferencePage extends FieldEditorPreferencePage impleme
 	 * knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
+		addField(new BooleanFieldEditor(PreferenceConstants.KEYCLOAK_ENABLED, "Enable IAM", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.KEYCLOAK_URI, "Keycloak URI:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.KEYCLOAK_USER, "User:", getFieldEditorParent()));
 		StringFieldEditor passwordField = new StringFieldEditor(PreferenceConstants.KEYCLOAK_PASSWORD, "Password:",

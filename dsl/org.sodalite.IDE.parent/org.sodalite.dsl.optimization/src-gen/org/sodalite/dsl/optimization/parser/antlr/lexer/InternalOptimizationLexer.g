@@ -107,6 +107,8 @@ Layers : 'layers:';
 
 Openacc : 'openacc';
 
+Openmpi : 'openmpi';
+
 Pytorch : 'pytorch';
 
 Restart : 'restart';
@@ -129,8 +131,6 @@ Opencl : 'opencl';
 
 Openmp : 'openmp';
 
-Opnmpi : 'opnmpi';
-
 Simple : 'simple';
 
 Tuner : 'tuner:';
@@ -151,6 +151,8 @@ Large : 'large';
 
 Mnist : 'mnist';
 
+Mpich : 'mpich';
+
 Mxnet : 'mxnet';
 
 Power : 'power';
@@ -168,6 +170,8 @@ Cray : 'cray';
 Etl : 'etl:';
 
 Fpga : 'fpga';
+
+None : 'none';
 
 Xla : 'xla:';
 

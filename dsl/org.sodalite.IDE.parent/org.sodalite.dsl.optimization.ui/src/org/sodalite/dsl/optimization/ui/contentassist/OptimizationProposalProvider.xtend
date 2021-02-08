@@ -219,6 +219,7 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 		createNonEditableCompletionProposal ("nvidia", "nvidia", context, "", acceptor);
 		createNonEditableCompletionProposal ("amd", "amd", context, "", acceptor);
 		createNonEditableCompletionProposal ("fpga", "fpga", context, "", acceptor);
+		createNonEditableCompletionProposal ("none", "none", context, "", acceptor);
 	}
 	
 	override void completeEAutotuning_Tuner(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -270,7 +271,8 @@ class OptimizationProposalProvider extends AbstractOptimizationProposalProvider 
 	
 	override void completeEMPI_Library(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal ("mvapch", "mvapch", context, "", acceptor);
-		createNonEditableCompletionProposal ("opnmpi", "opnmpi", context, "", acceptor);
+		createNonEditableCompletionProposal ("openmpi", "openmpi", context, "", acceptor);
+		createNonEditableCompletionProposal ("mpich", "mpich", context, "", acceptor);
 	}
 	
 	override void completeEMPI_Message_size(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

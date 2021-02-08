@@ -1,0 +1,99 @@
+@startuml
+object VariableReference
+
+object VariableDeclarationVariableReference {
+  variable_declaration_variable_reference : VariableDeclaration
+}
+object RegisterVariableReference {
+  register_variable_reference : RegisterVariable
+}
+object InputOperationVariableReference {
+  name : RM_ParameterDefinition
+}
+object InputInterfaceVariableReference {
+  name : RM_PropertyDefinition
+}
+object IndexOrLoopVariableReference {
+  index_or_loop_variable_reference : IndexOrLoopVariable
+}
+object SetFactVariableReference {
+  name : Parameter
+}
+
+
+VariableReference <|-- VariableDeclarationVariableReference
+VariableReference <|-- RegisterVariableReference
+VariableReference <|-- InputOperationVariableReference
+VariableReference <|-- InputInterfaceVariableReference
+VariableReference <|-- IndexOrLoopVariableReference
+VariableReference <|-- SetFactVariableReference
+
+object VariableDeclaration {
+  name : String
+  value_passed : ValuePassed
+}
+
+object RegisterVariable {
+  name : String
+}
+
+object SpecialVariable {
+  name : String
+}
+
+object IndexOrLoopVariable{
+  name : String
+}
+
+object String
+
+object ValueJinja
+object ValuePassed
+
+object Dictionary
+object List
+object SimpleValueWithoutString
+object Boolean
+object BooleanAnsible
+object Null
+object Number
+object None
+
+object ComposedValue
+
+ComposedValue <|-- Dictionary
+ComposedValue <|-- List
+
+object ComposedValueJinja
+object DictionaryJinja
+object ListJinja
+
+ComposedValueJinja <|-- DictionaryJinja
+ComposedValueJinja <|-- ListJinja
+
+object SimpleValueJinja
+
+ValueJinja <|-- ComposedValueJinja
+ValueJinja <|-- SimpleValueJinja
+
+SimpleValueJinja <|-- String
+SimpleValueJinja <|-- Boolean
+SimpleValueJinja <|-- Null
+SimpleValueJinja <|-- Number
+SimpleValueJinja <|-- None
+
+object ValueWithoutString
+
+ValueWithoutString <|-- ComposedValue
+ValueWithoutString <|-- SimpleValueWithoutString
+
+SimpleValueWithoutString <|-- BooleanAnsible
+SimpleValueWithoutString <|-- Null
+SimpleValueWithoutString <|-- Number
+SimpleValueWithoutString <|-- None
+
+object StringPassed
+
+ValuePassed <|-- StringPassed
+ValuePassed <|-- ValueWithoutString
+@enduml

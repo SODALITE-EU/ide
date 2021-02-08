@@ -1,0 +1,102 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/image-puller/playbooks/start-puller.yml
+playbook_name: "hpc/image-puller/start-puller"
+used_by:
+	node_type: "sodalite.image_puller.singularity"
+	operation: "start"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for remote_host,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: {{ operation_input: "remote_host_public_address" }}
+						groups: {{ operation_input: "remote_host_public_address" }}
+						ansible_host: {{ operation_input: "remote_host_public_address" }}
+						ansible_user: {{ operation_input: "remote_host_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "remote_host_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+				when: operation_input: "remote_host_public_address" != "localhost"
+				
+	play:
+		hosts: {{ operation_input: "remote_host_public_address" }}
+		facts_settings:
+			gather_facts: yes
+		environment:
+			PATH: {{ ansible_env.PATH }}":/usr/sbin"
+		tasks_list:
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						output_exists: {{ operation_input: "output" is defined and operation_input: "output" | length > 0 }}
+			
+			task_to_execute:
+				task_name: "Check image existence"
+				module: "stat"
+					parameters:
+						path: {{ operation_input: "images_location" }}"/"{{ operation_input: "output" }}
+				register: image_status
+				when: fact_set: output_exists
+			
+			task_to_execute:
+				module: "set_fact"
+					parameters:
+						image_exists: {{ fact_set: output_exists and  registered_variable: image_status.stat.exists == true }}
+			
+			block_to_execute:
+				block_name: "When private repository, download using puller"
+				tasks:
+					task_to_execute:
+						task_name: "Download tar image"
+						module: "shell"
+							direct_parameter: >
+								line_of_string: "singularity run \\"
+								line_of_string: "  -B {{ certs_location }}:/certs \\"
+								line_of_string: "  -B {{ images_location }}:/images \\"
+								line_of_string: "  "{{ operation_input: "puller_image" }}" "{{ operation_input: "output" }}" "{{ operation_input: "image" }}
+					
+					task_to_execute:
+						task_name: "Convert tar to sif"
+						module: "shell"
+							direct_parameter: >
+								line_of_string: "singularity build \\"
+								line_of_string: "  "{{ operation_input: "images_location" }}"/"{{ operation_input: "output" }}" \\"
+								line_of_string: "  docker-archive://"{{ operation_input: "images_location" }}"/"{{ operation_input: "output" }}".tar.gz"
+				
+				when: fact_set: image_exists == false and registry == 'private'
+			
+			block_to_execute:
+				block_name: "Otherwise, download normally"
+				tasks:
+					task_to_execute:
+						task_name: "Pulling image"
+						vars:
+							image_path: {{ operation_input: "image" if operation_input: "image" is search('(docker|library|shub)://') else operation_input: "registry" + '://' + operation_input: "image" }}
+						module: "shell"
+							direct_parameter: >
+								line_of_string: "singularity pull \\"
+								line_of_string: "  --dir {{ images_location }} \\"
+								line_of_string: "  "{{ operation_input: "output" }}" \\"
+								line_of_string: "  "{{ declared_variable: image_path }}
+						register: pull_status
+						error_handling:
+							ignore_errors: yes
+					
+					//ignoring only "Image file already exists" error
+					task_to_execute:
+						module: "fail"
+							parameters:
+								msg: "Error occurred while pulling"
+						when: "pull_status.rc != 0 and 'Image file already exists' not in pull_status.stderr"
+				
+				when: fact_set: image_exists == false and operation_input: "registry" != 'private'

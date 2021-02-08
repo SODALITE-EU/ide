@@ -1,0 +1,40 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/playbooks/create-text-file.yml
+playbook_name: "hpc/data/mover/create-text-file"
+used_by:
+	node_type: "sodalite.data.textFile"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for remote_host,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: {{ operation_input: "remote_host_public_address" }}
+						groups: {{ operation_input: "remote_host_public_address" }}
+						ansible_host: {{ operation_input: "remote_host_public_address" }}
+						ansible_user: {{ operation_input: "remote_host_username" }}
+						ansible_ssh_private_key_file: {{ operation_input: "remote_host_keypath" }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+				when: operation_input: "remote_host_public_address" != "localhost"
+	play:
+		hosts: {{ operation_input: "remote_host_public_address" }}
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Ansible create file with content example"
+				module: "copy"
+					parameters:
+						dest: {{ operation_input: "location" }}
+						content: {{ operation_input: "content" }}

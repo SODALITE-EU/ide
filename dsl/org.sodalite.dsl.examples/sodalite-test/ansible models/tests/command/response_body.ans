@@ -1,0 +1,65 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/command/response_body.yaml
+playbook_name: "tests/command/response_body"
+//PROBLEM: the node type sodalite.nodes.Tests.Text.Command, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: yes
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Execute command (linux)"
+						module: "shell"
+							parameters:
+								chdir: {{ dir | default(omit, true) }}
+								executable: {{ executable | default(omit, true) }}
+								cmd: {{ command }}
+						register: command_output
+						when: host_os == 'linux'
+					
+					task_to_execute:
+						task_name: "Execute command (windows)"
+						module: "win_shell"
+							direct_parameter: {{ command }}
+						args:
+							chdir: {{ dir | default(omit, true) }}
+							executable: {{ executable | default(omit, true) }}
+						register: co
+						when: host_os == 'windows'
+					
+					task_to_execute:
+						module: "set_fact"
+							parameters:
+								command_output: {{ registered_variable: co }}
+						when: registered_variable: command_output is undefined
+					
+					task_to_execute:
+						task_name: "Evaluate the expression for stdout"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ fact_set: command_output.stdout }}
+									status: {{ (not regex and fact_set: command_output.stdout == comparable_string) or (regex and fact_set: command_output.stdout is regex(comparable_string)) }}
+						when: compare_to == 'stdout'
+					
+					task_to_execute:
+						task_name: "Evaluate the expression for stderr"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ fact_set: command_output.stderr }}
+									status: {{ (not regex and fact_set: command_output.stderr == comparable_string) or (regex and fact_set: command_output.stderr is regex(comparable_string)) }}
+						when: compare_to == 'stderr'
+					
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the command execution fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

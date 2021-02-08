@@ -26,39 +26,41 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 public class PropertyDefinitionJsonDeserializer extends JsonDeserializer<PropertyDefinition> {
-    private static final ObjectMapper mapper = new ObjectMapper();
-    protected JavaType nodeType;
+	private static final ObjectMapper mapper = new ObjectMapper();
+	protected JavaType nodeType;
 
 	@Override
 	public PropertyDefinition deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
 			throws IOException, JsonProcessingException {
-        JsonNode node = mapper.readTree(jsonParser);
-    	
-    	if (! (node instanceof ObjectNode))
-    		return null;
-    	
-        ObjectNode objectNode = (ObjectNode) node;
-        PropertyDefinition property = new PropertyDefinition();
-		if (objectNode.get("description")!=null)
+		JsonNode node = mapper.readTree(jsonParser);
+
+		if (!(node instanceof ObjectNode))
+			return null;
+
+		ObjectNode objectNode = (ObjectNode) node;
+		PropertyDefinition property = new PropertyDefinition();
+		if (objectNode.get("description") != null)
 			property.setDescription(objectNode.get("description").asText());
+		if (objectNode.get("definedIn") != null)
+			property.setDefinedIn(objectNode.get("definedIn").asText());
 		JavaType javaType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");
-			if (spec.get("type")!=null) {
+			if (spec.get("type") != null) {
 				SuperType type = null;
-				if (!spec.get("type").isContainerNode()){ //single type
+				if (!spec.get("type").isContainerNode()) { // single type
 					type = new SuperType();
 					type.setLabel(spec.get("type").asText());
-				}else {
+				} else {
 					type = mapper.readerFor(javaType).readValue(spec.get("type"));
 				}
 				property.setType(type);
 			}
-			if (spec.get("required")!=null)
+			if (spec.get("required") != null)
 				property.setRequired(spec.get("required").asBoolean());
 		}
-        
-        return property;
+
+		return property;
 	}
 
 }

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.sodalite.dsl.rM.ECapabilityTypeRef;
+import org.sodalite.dsl.rM.ETargetType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.RMPackage;
 
@@ -30,7 +30,6 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EValidTargetTypesImpl#getTargetTypes <em>Target Types</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EValidTargetTypesImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,17 +44,7 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected EList<ECapabilityTypeRef> targetTypes;
-
-  /**
-   * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSourceType()
-   * @generated
-   * @ordered
-   */
-  protected EList<ECapabilityTypeRef> sourceType;
+  protected EList<ETargetType> targetTypes;
 
   /**
    * <!-- begin-user-doc -->
@@ -84,28 +73,13 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public EList<ECapabilityTypeRef> getTargetTypes()
+  public EList<ETargetType> getTargetTypes()
   {
     if (targetTypes == null)
     {
-      targetTypes = new EObjectContainmentEList<ECapabilityTypeRef>(ECapabilityTypeRef.class, this, RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES);
+      targetTypes = new EObjectContainmentEList<ETargetType>(ETargetType.class, this, RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES);
     }
     return targetTypes;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<ECapabilityTypeRef> getSourceType()
-  {
-    if (sourceType == null)
-    {
-      sourceType = new EObjectContainmentEList<ECapabilityTypeRef>(ECapabilityTypeRef.class, this, RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE);
-    }
-    return sourceType;
   }
 
   /**
@@ -120,8 +94,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
     {
       case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
         return ((InternalEList<?>)getTargetTypes()).basicRemove(otherEnd, msgs);
-      case RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE:
-        return ((InternalEList<?>)getSourceType()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,8 +110,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
     {
       case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
         return getTargetTypes();
-      case RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE:
-        return getSourceType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -157,11 +127,7 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
     {
       case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
         getTargetTypes().clear();
-        getTargetTypes().addAll((Collection<? extends ECapabilityTypeRef>)newValue);
-        return;
-      case RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE:
-        getSourceType().clear();
-        getSourceType().addAll((Collection<? extends ECapabilityTypeRef>)newValue);
+        getTargetTypes().addAll((Collection<? extends ETargetType>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -180,9 +146,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
       case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
         getTargetTypes().clear();
         return;
-      case RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE:
-        getSourceType().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -199,8 +162,6 @@ public class EValidTargetTypesImpl extends MinimalEObjectImpl.Container implemen
     {
       case RMPackage.EVALID_TARGET_TYPES__TARGET_TYPES:
         return targetTypes != null && !targetTypes.isEmpty();
-      case RMPackage.EVALID_TARGET_TYPES__SOURCE_TYPE:
-        return sourceType != null && !sourceType.isEmpty();
     }
     return super.eIsSet(featureID);
   }

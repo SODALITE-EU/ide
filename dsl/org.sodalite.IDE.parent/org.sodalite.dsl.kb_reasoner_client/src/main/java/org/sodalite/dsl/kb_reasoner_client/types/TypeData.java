@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.sodalite.dsl.kb_reasoner_client.types;
 
-import org.sodalite.dsl.kb_reasoner_client.json.NodeDataJsonDeserializer;
+import org.sodalite.dsl.kb_reasoner_client.json.TypeDataJsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(using = NodeDataJsonDeserializer.class)
+@JsonDeserialize(using = TypeDataJsonDeserializer.class)
 public class TypeData extends ReasonerData<Type>{
 	
 }

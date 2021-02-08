@@ -41,6 +41,8 @@ public class AttributeDefinitionJsonDeserializer extends JsonDeserializer<Attrib
 		AttributeDefinition attribute = new AttributeDefinition();
 		if (objectNode.get("description") != null)
 			attribute.setDescription(objectNode.get("description").asText());
+		if (objectNode.get("definedIn") != null)
+			attribute.setDefinedIn(objectNode.get("definedIn").asText());
 		JavaType javaType = TypeFactory.defaultInstance().constructType(SuperType.class);
 		if (objectNode.get("specification") != null) {
 			JsonNode spec = objectNode.get("specification");

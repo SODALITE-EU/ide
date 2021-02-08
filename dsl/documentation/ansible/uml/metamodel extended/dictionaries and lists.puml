@@ -1,0 +1,56 @@
+@startuml
+object ValuePassed
+
+object Dictionary
+object DictionaryInLine
+object DictionaryIndented
+
+Dictionary <|-- DictionaryInLine
+Dictionary <|-- DictionaryIndented
+
+object DictionaryPair {
+  name : String
+  value : ValuePassed
+}
+
+Dictionary "[0..1]" --> "[0..*]" DictionaryPair : has_dictionary_pairs
+
+object DictionaryJinja
+
+object DictionaryPairJinja {
+  name : String
+  value : JinjaExpressionEvaluationWithoutBrackets
+}
+
+DictionaryJinja "[1]" --> "[0..*]" DictionaryPairJinja : has_dictionary_pairs
+
+object List
+object ListInLine
+object ListIndented
+object ElementOfListIndented
+
+ListInLine "[0..1]" --> "[0..*]" ValuePassed : has_elements
+
+ListIndented "[1]" --> "[0..*]" ElementOfListIndented : has_elements
+
+object StringPassed
+object SimpleValueWithoutString
+object DictionaryOfListIndented
+
+DictionaryOfListIndented "[0..1]" --> "[0..*]" DictionaryPair : has_dictionary_pairs
+
+ElementOfListIndented <|-- StringPassed
+ElementOfListIndented <|-- SimpleValueWithoutString
+ElementOfListIndented <|-- DictionaryInLine
+ElementOfListIndented <|-- DictionaryOfListIndented
+ElementOfListIndented <|-- List
+
+List <|-- ListInLine
+List <|-- ListIndented
+
+object ListJinja
+object JinjaExpressionEvaluationWithoutBrackets
+
+ListJinja "[0..1]" --> "[0..*]" JinjaExpressionEvaluationWithoutBrackets : has_elements
+
+@enduml

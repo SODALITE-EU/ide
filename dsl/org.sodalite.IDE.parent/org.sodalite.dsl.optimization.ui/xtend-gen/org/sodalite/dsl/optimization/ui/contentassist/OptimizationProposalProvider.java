@@ -286,6 +286,7 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
     this.createNonEditableCompletionProposal("nvidia", "nvidia", context, "", acceptor);
     this.createNonEditableCompletionProposal("amd", "amd", context, "", acceptor);
     this.createNonEditableCompletionProposal("fpga", "fpga", context, "", acceptor);
+    this.createNonEditableCompletionProposal("none", "none", context, "", acceptor);
   }
   
   @Override
@@ -345,7 +346,8 @@ public class OptimizationProposalProvider extends AbstractOptimizationProposalPr
   @Override
   public void completeEMPI_Library(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createNonEditableCompletionProposal("mvapch", "mvapch", context, "", acceptor);
-    this.createNonEditableCompletionProposal("opnmpi", "opnmpi", context, "", acceptor);
+    this.createNonEditableCompletionProposal("openmpi", "openmpi", context, "", acceptor);
+    this.createNonEditableCompletionProposal("mpich", "mpich", context, "", acceptor);
   }
   
   @Override

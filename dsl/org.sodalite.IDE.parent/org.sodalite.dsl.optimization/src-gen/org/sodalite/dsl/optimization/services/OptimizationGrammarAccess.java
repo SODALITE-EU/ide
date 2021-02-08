@@ -384,12 +384,13 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cNvidiaKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cAmdKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cFpgaKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cNoneKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//EACCType:
-		//	'nvidia' | 'amd' | 'fpga';
+		//	'nvidia' | 'amd' | 'fpga' | 'none';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'nvidia' | 'amd' | 'fpga'
+		//'nvidia' | 'amd' | 'fpga' | 'none'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'nvidia'
@@ -400,6 +401,9 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//'fpga'
 		public Keyword getFpgaKeyword_2() { return cFpgaKeyword_2; }
+		
+		//'none'
+		public Keyword getNoneKeyword_3() { return cNoneKeyword_3; }
 	}
 	public class EAutotuningElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EAutotuning");
@@ -1685,20 +1689,24 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EMPILibrary");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cMvapchKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cOpnmpiKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cOpenmpiKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cMpichKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
 		//EMPILibrary:
-		//	'mvapch' | 'opnmpi';
+		//	'mvapch' | 'openmpi' | 'mpich';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'mvapch' | 'opnmpi'
+		//'mvapch' | 'openmpi' | 'mpich'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'mvapch'
 		public Keyword getMvapchKeyword_0() { return cMvapchKeyword_0; }
 		
-		//'opnmpi'
-		public Keyword getOpnmpiKeyword_1() { return cOpnmpiKeyword_1; }
+		//'openmpi'
+		public Keyword getOpenmpiKeyword_1() { return cOpenmpiKeyword_1; }
+		
+		//'mpich'
+		public Keyword getMpichKeyword_2() { return cMpichKeyword_2; }
 	}
 	public class EMPIMessageSizeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EMPIMessageSize");
@@ -2221,7 +2229,7 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//EACCType:
-	//	'nvidia' | 'amd' | 'fpga';
+	//	'nvidia' | 'amd' | 'fpga' | 'none';
 	public EACCTypeElements getEACCTypeAccess() {
 		return pEACCType;
 	}
@@ -2547,7 +2555,7 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//EMPILibrary:
-	//	'mvapch' | 'opnmpi';
+	//	'mvapch' | 'openmpi' | 'mpich';
 	public EMPILibraryElements getEMPILibraryAccess() {
 		return pEMPILibrary;
 	}

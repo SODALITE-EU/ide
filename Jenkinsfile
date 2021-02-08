@@ -14,7 +14,7 @@ pipeline {
       steps {
           sh  """ #!/bin/bash
                   cd "dsl/org.sodalite.IDE.parent/"
-                  mvn clean verify
+                  mvn clean verify -Dmaven.test.skip
                   git reset --hard
               """
       }
@@ -31,7 +31,7 @@ pipeline {
                     """
             }
         }
-    }
+    }  
     stage ('Publish update site') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'sodalite-jenkins_github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -39,18 +39,6 @@ pipeline {
     	  sh('scripts/publish_site.sh ${GIT_USERNAME} ${GIT_PASSWORD}')
 	}
       }
-    }
-    stage('Build and push IDE image') {
-            when {
-               branch "master"
-            }
-            steps{
-            	withDockerRegistry(credentialsId: 'jenkins-sodalite.docker_token', url: '') {
-            		sh "cd Docker; ./create_sodalite_ide_image.sh"
-                	sh "docker tag sodalite-ide sodaliteh2020/sodalite-ide"
-                	sh "docker push sodaliteh2020/sodalite-ide"
-            }
-        }
     }
   }
   post {

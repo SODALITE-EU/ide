@@ -10,22 +10,32 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.sodalite.dsl.rM.EActivityDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EArtifactType;
 import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.EArtifactTypes;
+import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.EAttributes;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.ECapabilityType;
 import org.sodalite.dsl.rM.ECapabilityTypeBody;
-import org.sodalite.dsl.rM.ECapabilityTypeRef;
 import org.sodalite.dsl.rM.ECapabilityTypes;
+import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR;
 import org.sodalite.dsl.rM.EConstraint;
+import org.sodalite.dsl.rM.EConstraintList;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataType;
 import org.sodalite.dsl.rM.EDataTypeBody;
@@ -36,6 +46,8 @@ import org.sodalite.dsl.rM.EDependencyFiles;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
@@ -67,6 +79,8 @@ import org.sodalite.dsl.rM.EPolicyTypeBody;
 import org.sodalite.dsl.rM.EPolicyTypes;
 import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.EPropertyAssignments;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.ERelationshipType;
@@ -77,6 +91,11 @@ import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.ESingleValue;
+import org.sodalite.dsl.rM.ETargetType;
+import org.sodalite.dsl.rM.ETimeInterval;
+import org.sodalite.dsl.rM.ETriggerDefinition;
+import org.sodalite.dsl.rM.ETriggerDefinitionBody;
+import org.sodalite.dsl.rM.ETriggers;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
@@ -222,6 +241,139 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eTriggersEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eTriggerDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eTriggerDefinitionBodyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eActivityDefinitionsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eExtendedTriggerConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eTimeIntervalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eEvenFilterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionClauseDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionClauseDefinitionANDEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionClauseDefinitionOREClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionClauseDefinitionNOTEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConditionClauseDefinitionAssertEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eAssertionDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eConstraintListEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eActivityDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eCallOperationActivityDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eCallOperationActivityDefinitionBodyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ePropertyAssignmentsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ePropertyAssignmentEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eNodeTypesEClass = null;
 
   /**
@@ -271,7 +423,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eCapabilityTypeRefEClass = null;
+  private EClass eTargetTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -671,6 +823,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eEntityReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eprefiX_REFEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1429,6 +1588,600 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EReference getEPolicyTypeBody_Properties()
+  {
+    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPolicyTypeBody_Targets()
+  {
+    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPolicyTypeBody_Triggers()
+  {
+    return (EReference)ePolicyTypeBodyEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETriggers()
+  {
+    return eTriggersEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggers_Triggers()
+  {
+    return (EReference)eTriggersEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETriggerDefinition()
+  {
+    return eTriggerDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETriggerDefinition_Name()
+  {
+    return (EAttribute)eTriggerDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggerDefinition_Trigger()
+  {
+    return (EReference)eTriggerDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETriggerDefinitionBody()
+  {
+    return eTriggerDefinitionBodyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETriggerDefinitionBody_Description()
+  {
+    return (EAttribute)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETriggerDefinitionBody_Event()
+  {
+    return (EAttribute)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggerDefinitionBody_Schedule()
+  {
+    return (EReference)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggerDefinitionBody_Target_filter()
+  {
+    return (EReference)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggerDefinitionBody_Condition()
+  {
+    return (EReference)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getETriggerDefinitionBody_Action()
+  {
+    return (EReference)eTriggerDefinitionBodyEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEActivityDefinitions()
+  {
+    return eActivityDefinitionsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEActivityDefinitions_List()
+  {
+    return (EReference)eActivityDefinitionsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEExtendedTriggerCondition()
+  {
+    return eExtendedTriggerConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExtendedTriggerCondition_Constraint()
+  {
+    return (EReference)eExtendedTriggerConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEExtendedTriggerCondition_Period()
+  {
+    return (EAttribute)eExtendedTriggerConditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEExtendedTriggerCondition_Evaluations()
+  {
+    return (EReference)eExtendedTriggerConditionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEExtendedTriggerCondition_Method()
+  {
+    return (EAttribute)eExtendedTriggerConditionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getETimeInterval()
+  {
+    return eTimeIntervalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETimeInterval_Start_time()
+  {
+    return (EAttribute)eTimeIntervalEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getETimeInterval_End_time()
+  {
+    return (EAttribute)eTimeIntervalEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEEvenFilter()
+  {
+    return eEvenFilterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEEvenFilter_Node()
+  {
+    return (EReference)eEvenFilterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEEvenFilter_Requirement()
+  {
+    return (EReference)eEvenFilterEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEEvenFilter_Capability()
+  {
+    return (EReference)eEvenFilterEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConditionClauseDefinition()
+  {
+    return eConditionClauseDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConditionClauseDefinitionAND()
+  {
+    return eConditionClauseDefinitionANDEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConditionClauseDefinitionAND_And()
+  {
+    return (EReference)eConditionClauseDefinitionANDEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConditionClauseDefinitionOR()
+  {
+    return eConditionClauseDefinitionOREClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConditionClauseDefinitionOR_Or()
+  {
+    return (EReference)eConditionClauseDefinitionOREClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConditionClauseDefinitionNOT()
+  {
+    return eConditionClauseDefinitionNOTEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConditionClauseDefinitionNOT_Not()
+  {
+    return (EReference)eConditionClauseDefinitionNOTEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConditionClauseDefinitionAssert()
+  {
+    return eConditionClauseDefinitionAssertEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConditionClauseDefinitionAssert_Assertions()
+  {
+    return (EReference)eConditionClauseDefinitionAssertEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEAssertionDefinition()
+  {
+    return eAssertionDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEAssertionDefinition_Attribute_name()
+  {
+    return (EAttribute)eAssertionDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEAssertionDefinition_Constraints()
+  {
+    return (EReference)eAssertionDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEConstraintList()
+  {
+    return eConstraintListEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEConstraintList_List()
+  {
+    return (EReference)eConstraintListEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEActivityDefinition()
+  {
+    return eActivityDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getECallOperationActivityDefinition()
+  {
+    return eCallOperationActivityDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getECallOperationActivityDefinition_Operation()
+  {
+    return (EReference)eCallOperationActivityDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getECallOperationActivityDefinitionBody()
+  {
+    return eCallOperationActivityDefinitionBodyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getECallOperationActivityDefinitionBody_Operation()
+  {
+    return (EReference)eCallOperationActivityDefinitionBodyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getECallOperationActivityDefinitionBody_Inputs()
+  {
+    return (EReference)eCallOperationActivityDefinitionBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPropertyAssignments()
+  {
+    return ePropertyAssignmentsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPropertyAssignments_Properties()
+  {
+    return (EReference)ePropertyAssignmentsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEPropertyAssignment()
+  {
+    return ePropertyAssignmentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEPropertyAssignment_Name()
+  {
+    return (EAttribute)ePropertyAssignmentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEPropertyAssignment_Value()
+  {
+    return (EReference)ePropertyAssignmentEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getENodeTypes()
   {
     return eNodeTypesEClass;
@@ -1726,9 +2479,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEValidTargetTypes_SourceType()
+  public EClass getETargetType()
   {
-    return (EReference)eValidTargetTypesEClass.getEStructuralFeatures().get(1);
+    return eTargetTypeEClass;
   }
 
   /**
@@ -1737,20 +2490,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EClass getECapabilityTypeRef()
+  public EReference getETargetType_Name()
   {
-    return eCapabilityTypeRefEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getECapabilityTypeRef_Name()
-  {
-    return (EReference)eCapabilityTypeRefEClass.getEStructuralFeatures().get(0);
+    return (EReference)eTargetTypeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2771,17 +3513,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEValidSourceType_SourceType()
-  {
-    return (EReference)eValidSourceTypeEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getERequirements()
   {
     return eRequirementsEClass;
@@ -3387,6 +4118,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EClass getEPREFIX_REF()
+  {
+    return eprefiX_REFEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEPREFIX_TYPE()
   {
     return eprefiX_TYPEEClass;
@@ -3576,6 +4318,79 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     ePolicyTypeBodyEClass = createEClass(EPOLICY_TYPE_BODY);
     createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__SUPER_TYPE);
     createEAttribute(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__DESCRIPTION);
+    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__PROPERTIES);
+    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__TARGETS);
+    createEReference(ePolicyTypeBodyEClass, EPOLICY_TYPE_BODY__TRIGGERS);
+
+    eTriggersEClass = createEClass(ETRIGGERS);
+    createEReference(eTriggersEClass, ETRIGGERS__TRIGGERS);
+
+    eTriggerDefinitionEClass = createEClass(ETRIGGER_DEFINITION);
+    createEAttribute(eTriggerDefinitionEClass, ETRIGGER_DEFINITION__NAME);
+    createEReference(eTriggerDefinitionEClass, ETRIGGER_DEFINITION__TRIGGER);
+
+    eTriggerDefinitionBodyEClass = createEClass(ETRIGGER_DEFINITION_BODY);
+    createEAttribute(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__DESCRIPTION);
+    createEAttribute(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__EVENT);
+    createEReference(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__SCHEDULE);
+    createEReference(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__TARGET_FILTER);
+    createEReference(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__CONDITION);
+    createEReference(eTriggerDefinitionBodyEClass, ETRIGGER_DEFINITION_BODY__ACTION);
+
+    eActivityDefinitionsEClass = createEClass(EACTIVITY_DEFINITIONS);
+    createEReference(eActivityDefinitionsEClass, EACTIVITY_DEFINITIONS__LIST);
+
+    eExtendedTriggerConditionEClass = createEClass(EEXTENDED_TRIGGER_CONDITION);
+    createEReference(eExtendedTriggerConditionEClass, EEXTENDED_TRIGGER_CONDITION__CONSTRAINT);
+    createEAttribute(eExtendedTriggerConditionEClass, EEXTENDED_TRIGGER_CONDITION__PERIOD);
+    createEReference(eExtendedTriggerConditionEClass, EEXTENDED_TRIGGER_CONDITION__EVALUATIONS);
+    createEAttribute(eExtendedTriggerConditionEClass, EEXTENDED_TRIGGER_CONDITION__METHOD);
+
+    eTimeIntervalEClass = createEClass(ETIME_INTERVAL);
+    createEAttribute(eTimeIntervalEClass, ETIME_INTERVAL__START_TIME);
+    createEAttribute(eTimeIntervalEClass, ETIME_INTERVAL__END_TIME);
+
+    eEvenFilterEClass = createEClass(EEVEN_FILTER);
+    createEReference(eEvenFilterEClass, EEVEN_FILTER__NODE);
+    createEReference(eEvenFilterEClass, EEVEN_FILTER__REQUIREMENT);
+    createEReference(eEvenFilterEClass, EEVEN_FILTER__CAPABILITY);
+
+    eConditionClauseDefinitionEClass = createEClass(ECONDITION_CLAUSE_DEFINITION);
+
+    eConditionClauseDefinitionANDEClass = createEClass(ECONDITION_CLAUSE_DEFINITION_AND);
+    createEReference(eConditionClauseDefinitionANDEClass, ECONDITION_CLAUSE_DEFINITION_AND__AND);
+
+    eConditionClauseDefinitionOREClass = createEClass(ECONDITION_CLAUSE_DEFINITION_OR);
+    createEReference(eConditionClauseDefinitionOREClass, ECONDITION_CLAUSE_DEFINITION_OR__OR);
+
+    eConditionClauseDefinitionNOTEClass = createEClass(ECONDITION_CLAUSE_DEFINITION_NOT);
+    createEReference(eConditionClauseDefinitionNOTEClass, ECONDITION_CLAUSE_DEFINITION_NOT__NOT);
+
+    eConditionClauseDefinitionAssertEClass = createEClass(ECONDITION_CLAUSE_DEFINITION_ASSERT);
+    createEReference(eConditionClauseDefinitionAssertEClass, ECONDITION_CLAUSE_DEFINITION_ASSERT__ASSERTIONS);
+
+    eAssertionDefinitionEClass = createEClass(EASSERTION_DEFINITION);
+    createEAttribute(eAssertionDefinitionEClass, EASSERTION_DEFINITION__ATTRIBUTE_NAME);
+    createEReference(eAssertionDefinitionEClass, EASSERTION_DEFINITION__CONSTRAINTS);
+
+    eConstraintListEClass = createEClass(ECONSTRAINT_LIST);
+    createEReference(eConstraintListEClass, ECONSTRAINT_LIST__LIST);
+
+    eActivityDefinitionEClass = createEClass(EACTIVITY_DEFINITION);
+
+    eCallOperationActivityDefinitionEClass = createEClass(ECALL_OPERATION_ACTIVITY_DEFINITION);
+    createEReference(eCallOperationActivityDefinitionEClass, ECALL_OPERATION_ACTIVITY_DEFINITION__OPERATION);
+
+    eCallOperationActivityDefinitionBodyEClass = createEClass(ECALL_OPERATION_ACTIVITY_DEFINITION_BODY);
+    createEReference(eCallOperationActivityDefinitionBodyEClass, ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION);
+    createEReference(eCallOperationActivityDefinitionBodyEClass, ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS);
+
+    ePropertyAssignmentsEClass = createEClass(EPROPERTY_ASSIGNMENTS);
+    createEReference(ePropertyAssignmentsEClass, EPROPERTY_ASSIGNMENTS__PROPERTIES);
+
+    ePropertyAssignmentEClass = createEClass(EPROPERTY_ASSIGNMENT);
+    createEAttribute(ePropertyAssignmentEClass, EPROPERTY_ASSIGNMENT__NAME);
+    createEReference(ePropertyAssignmentEClass, EPROPERTY_ASSIGNMENT__VALUE);
 
     eNodeTypesEClass = createEClass(ENODE_TYPES);
     createEReference(eNodeTypesEClass, ENODE_TYPES__NODE_TYPES);
@@ -3610,10 +4425,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eValidTargetTypesEClass = createEClass(EVALID_TARGET_TYPES);
     createEReference(eValidTargetTypesEClass, EVALID_TARGET_TYPES__TARGET_TYPES);
-    createEReference(eValidTargetTypesEClass, EVALID_TARGET_TYPES__SOURCE_TYPE);
 
-    eCapabilityTypeRefEClass = createEClass(ECAPABILITY_TYPE_REF);
-    createEReference(eCapabilityTypeRefEClass, ECAPABILITY_TYPE_REF__NAME);
+    eTargetTypeEClass = createEClass(ETARGET_TYPE);
+    createEReference(eTargetTypeEClass, ETARGET_TYPE__NAME);
 
     ePropertiesEClass = createEClass(EPROPERTIES);
     createEReference(ePropertiesEClass, EPROPERTIES__PROPERTIES);
@@ -3736,7 +4550,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eValidSourceTypeEClass = createEClass(EVALID_SOURCE_TYPE);
     createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPES);
-    createEReference(eValidSourceTypeEClass, EVALID_SOURCE_TYPE__SOURCE_TYPE);
 
     eRequirementsEClass = createEClass(EREQUIREMENTS);
     createEReference(eRequirementsEClass, EREQUIREMENTS__REQUIREMENTS);
@@ -3820,6 +4633,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eEntityReferenceEClass = createEClass(EENTITY_REFERENCE);
 
+    eprefiX_REFEClass = createEClass(EPREFIX_REF);
+
     eprefiX_TYPEEClass = createEClass(EPREFIX_TYPE);
     createEAttribute(eprefiX_TYPEEClass, EPREFIX_TYPE__MODULE);
 
@@ -3862,6 +4677,11 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    eConditionClauseDefinitionANDEClass.getESuperTypes().add(this.getEConditionClauseDefinition());
+    eConditionClauseDefinitionOREClass.getESuperTypes().add(this.getEConditionClauseDefinition());
+    eConditionClauseDefinitionNOTEClass.getESuperTypes().add(this.getEConditionClauseDefinition());
+    eConditionClauseDefinitionAssertEClass.getESuperTypes().add(this.getEConditionClauseDefinition());
+    eCallOperationActivityDefinitionEClass.getESuperTypes().add(this.getEActivityDefinition());
     eFunctionEClass.getESuperTypes().add(this.getEValueExpression());
     eFunctionEClass.getESuperTypes().add(this.getEAssignmentValue());
     getInputEClass.getESuperTypes().add(this.getEFunction());
@@ -3892,7 +4712,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     emapEClass.getESuperTypes().add(this.getEAssignmentValue());
     eprefiX_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
     eprefiX_TYPEEClass.getESuperTypes().add(this.getEEntityReference());
+    eprefiX_TYPEEClass.getESuperTypes().add(this.getEPREFIX_REF());
     eprefiX_IDEClass.getESuperTypes().add(this.getEEntityReference());
+    eprefiX_IDEClass.getESuperTypes().add(this.getEPREFIX_REF());
     eprimitivE_TYPEEClass.getESuperTypes().add(this.getEDataTypeName());
     eEntityEClass.getESuperTypes().add(this.getEEntityReference());
 
@@ -3973,6 +4795,79 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(ePolicyTypeBodyEClass, EPolicyTypeBody.class, "EPolicyTypeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPolicyTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPolicyTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Targets(), this.getEValidTargetTypes(), null, "targets", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPolicyTypeBody_Triggers(), this.getETriggers(), null, "triggers", null, 0, 1, EPolicyTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTriggersEClass, ETriggers.class, "ETriggers", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getETriggers_Triggers(), this.getETriggerDefinition(), null, "triggers", null, 0, -1, ETriggers.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTriggerDefinitionEClass, ETriggerDefinition.class, "ETriggerDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getETriggerDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, ETriggerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETriggerDefinition_Trigger(), this.getETriggerDefinitionBody(), null, "trigger", null, 0, 1, ETriggerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTriggerDefinitionBodyEClass, ETriggerDefinitionBody.class, "ETriggerDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getETriggerDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETriggerDefinitionBody_Event(), ecorePackage.getEString(), "event", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETriggerDefinitionBody_Schedule(), this.getETimeInterval(), null, "schedule", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETriggerDefinitionBody_Target_filter(), this.getEEvenFilter(), null, "target_filter", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETriggerDefinitionBody_Condition(), this.getEExtendedTriggerCondition(), null, "condition", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getETriggerDefinitionBody_Action(), this.getEActivityDefinitions(), null, "action", null, 0, 1, ETriggerDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eActivityDefinitionsEClass, EActivityDefinitions.class, "EActivityDefinitions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEActivityDefinitions_List(), this.getEActivityDefinition(), null, "list", null, 0, -1, EActivityDefinitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eExtendedTriggerConditionEClass, EExtendedTriggerCondition.class, "EExtendedTriggerCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEExtendedTriggerCondition_Constraint(), this.getEConditionClauseDefinition(), null, "constraint", null, 0, 1, EExtendedTriggerCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEExtendedTriggerCondition_Period(), ecorePackage.getEString(), "period", null, 0, 1, EExtendedTriggerCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEExtendedTriggerCondition_Evaluations(), this.getESIGNEDINT(), null, "evaluations", null, 0, 1, EExtendedTriggerCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEExtendedTriggerCondition_Method(), ecorePackage.getEString(), "method", null, 0, 1, EExtendedTriggerCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eTimeIntervalEClass, ETimeInterval.class, "ETimeInterval", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getETimeInterval_Start_time(), ecorePackage.getEString(), "start_time", null, 0, 1, ETimeInterval.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getETimeInterval_End_time(), ecorePackage.getEString(), "end_time", null, 0, 1, ETimeInterval.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eEvenFilterEClass, EEvenFilter.class, "EEvenFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEEvenFilter_Node(), this.getEPREFIX_REF(), null, "node", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEEvenFilter_Requirement(), this.getEPREFIX_REF(), null, "requirement", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEEvenFilter_Capability(), this.getEPREFIX_REF(), null, "capability", null, 0, 1, EEvenFilter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConditionClauseDefinitionEClass, EConditionClauseDefinition.class, "EConditionClauseDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eConditionClauseDefinitionANDEClass, EConditionClauseDefinitionAND.class, "EConditionClauseDefinitionAND", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEConditionClauseDefinitionAND_And(), this.getEConditionClauseDefinition(), null, "and", null, 0, 1, EConditionClauseDefinitionAND.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConditionClauseDefinitionOREClass, EConditionClauseDefinitionOR.class, "EConditionClauseDefinitionOR", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEConditionClauseDefinitionOR_Or(), this.getEConditionClauseDefinition(), null, "or", null, 0, 1, EConditionClauseDefinitionOR.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConditionClauseDefinitionNOTEClass, EConditionClauseDefinitionNOT.class, "EConditionClauseDefinitionNOT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEConditionClauseDefinitionNOT_Not(), this.getEConditionClauseDefinition(), null, "not", null, 0, 1, EConditionClauseDefinitionNOT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConditionClauseDefinitionAssertEClass, EConditionClauseDefinitionAssert.class, "EConditionClauseDefinitionAssert", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEConditionClauseDefinitionAssert_Assertions(), this.getEAssertionDefinition(), null, "assertions", null, 0, -1, EConditionClauseDefinitionAssert.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eAssertionDefinitionEClass, EAssertionDefinition.class, "EAssertionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEAssertionDefinition_Attribute_name(), ecorePackage.getEString(), "attribute_name", null, 0, 1, EAssertionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEAssertionDefinition_Constraints(), this.getEConstraintList(), null, "constraints", null, 0, 1, EAssertionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eConstraintListEClass, EConstraintList.class, "EConstraintList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEConstraintList_List(), this.getEConstraint(), null, "list", null, 0, -1, EConstraintList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eActivityDefinitionEClass, EActivityDefinition.class, "EActivityDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eCallOperationActivityDefinitionEClass, ECallOperationActivityDefinition.class, "ECallOperationActivityDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getECallOperationActivityDefinition_Operation(), this.getECallOperationActivityDefinitionBody(), null, "operation", null, 0, 1, ECallOperationActivityDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eCallOperationActivityDefinitionBodyEClass, ECallOperationActivityDefinitionBody.class, "ECallOperationActivityDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getECallOperationActivityDefinitionBody_Operation(), this.getEPREFIX_TYPE(), null, "operation", null, 0, 1, ECallOperationActivityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECallOperationActivityDefinitionBody_Inputs(), this.getEPropertyAssignments(), null, "inputs", null, 0, 1, ECallOperationActivityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ePropertyAssignmentsEClass, EPropertyAssignments.class, "EPropertyAssignments", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEPropertyAssignments_Properties(), this.getEPropertyAssignment(), null, "properties", null, 0, -1, EPropertyAssignments.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ePropertyAssignmentEClass, EPropertyAssignment.class, "EPropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEPropertyAssignment_Name(), ecorePackage.getEString(), "name", null, 0, 1, EPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPropertyAssignment_Value(), this.getEAssignmentValue(), null, "value", null, 0, 1, EPropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eNodeTypesEClass, ENodeTypes.class, "ENodeTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getENodeTypes_NodeTypes(), this.getENodeType(), null, "nodeTypes", null, 0, -1, ENodeTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4006,11 +4901,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getERelationshipTypeBody_Valid_target_types(), this.getEValidTargetTypes(), null, "valid_target_types", null, 0, 1, ERelationshipTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eValidTargetTypesEClass, EValidTargetTypes.class, "EValidTargetTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEValidTargetTypes_TargetTypes(), this.getECapabilityTypeRef(), null, "targetTypes", null, 0, -1, EValidTargetTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEValidTargetTypes_SourceType(), this.getECapabilityTypeRef(), null, "sourceType", null, 0, -1, EValidTargetTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEValidTargetTypes_TargetTypes(), this.getETargetType(), null, "targetTypes", null, 0, -1, EValidTargetTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(eCapabilityTypeRefEClass, ECapabilityTypeRef.class, "ECapabilityTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECapabilityTypeRef_Name(), this.getEPREFIX_TYPE(), null, "name", null, 0, 1, ECapabilityTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eTargetTypeEClass, ETargetType.class, "ETargetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getETargetType_Name(), this.getEPREFIX_TYPE(), null, "name", null, 0, 1, ETargetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePropertiesEClass, EProperties.class, "EProperties", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEProperties_Properties(), this.getEPropertyDefinition(), null, "properties", null, 0, -1, EProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4133,7 +5027,6 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eValidSourceTypeEClass, EValidSourceType.class, "EValidSourceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEValidSourceType_SourceTypes(), this.getEPREFIX_TYPE(), null, "sourceTypes", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEValidSourceType_SourceType(), this.getEPREFIX_TYPE(), null, "sourceType", null, 0, -1, EValidSourceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eRequirementsEClass, ERequirements.class, "ERequirements", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getERequirements_Requirements(), this.getERequirementDefinition(), null, "requirements", null, 0, -1, ERequirements.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4216,6 +5109,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEMapEntry_Value(), this.getEAssignmentValue(), null, "value", null, 0, 1, EMapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eEntityReferenceEClass, EEntityReference.class, "EEntityReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eprefiX_REFEClass, org.sodalite.dsl.rM.EPREFIX_REF.class, "EPREFIX_REF", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eprefiX_TYPEEClass, org.sodalite.dsl.rM.EPREFIX_TYPE.class, "EPREFIX_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPREFIX_TYPE_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_TYPE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

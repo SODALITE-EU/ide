@@ -1,0 +1,39 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/slurm/slurm-job/playbooks/dummy-relation-interface.yml
+playbook_name: "hpc/slurm/slurm-job/dummy-relation-interface"
+//PROBLEM: the node type sodalite.relationships.jobHostedOn, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: >
+					line_of_string: "Create temporary inventory for wm,"
+					line_of_string: "since opera requires internal envvars to access the target."
+					line_of_string: "Need more examples to access static nodes without specifying them in the inventory file"
+				module: "add_host"
+					parameters:
+						name: "wm"
+						groups: "wm"
+						ansible_python_interpreter: "/usr/bin/python3"
+						ansible_host: {{ wm_public_address }}
+						ansible_user: {{ wm_username }}
+						ansible_ssh_private_key_file: {{ wm_keypath }}
+						ansible_ssh_common_args: >
+							line_of_string: "-o IdentitiesOnly=yes"
+							line_of_string: "-o BatchMode=yes"
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+	play:
+		hosts: "wm"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "set state stopped after 'C' status"
+				module: "set_stats"
+					parameters:
+						data:
+							job_id: {{ job_name }}

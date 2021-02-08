@@ -1,0 +1,29 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/docker/playbooks/login_user.yml
+playbook_name: "docker/login_user"
+used_by:
+	node_type: "sodalite.nodes.DockerRegistry"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		tasks_list:
+			task_to_execute:
+				task_name: "logging out Docker Hub"
+				module: "docker_login"
+					parameters:
+						registry: {{ operation_input: "docker_registry_url" }}
+						state: "absent"
+			
+			task_to_execute:
+				task_name: "logging into Docker Registry"
+				module: "docker_login"
+					parameters:
+						registry: {{ operation_input: "docker_registry_url" }}
+						username: {{ operation_input: "docker_user" }}
+						password: {{ operation_input: "docker_pass" }}
+				when:
+					when_condition: operation_input: "docker_user" != None
+					when_condition: operation_input: "docker_user" != ""

@@ -54,11 +54,13 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.StringData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeKind;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
@@ -100,6 +102,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloak_client_id;
 	private String keycloak_client_secret;
 	private String aai_token;
+	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri)
 			throws Exception {
@@ -109,13 +112,16 @@ public class KBReasonerClient implements KBReasoner {
 		this.keycloakUri = keycloakUri;
 	}
 
-	public void setUserAccount(String user, String password, String client_id, String client_secret) throws Exception {
+	public String setUserAccount(String user, String password, String client_id, String client_secret)
+			throws Exception {
 		this.keycloak_user = user;
 		this.keycloak_password = password;
 		this.keycloak_client_id = client_id;
 		this.keycloak_client_secret = client_secret;
 		this.aai_token = getSecurityToken();
 		Assert.notNull(aai_token, "Error retrieving a valid security token");
+		this.IAM_enabled = true;
+		return this.aai_token;
 	}
 
 	private RestTemplate getSslRestTemplate()
@@ -169,6 +175,10 @@ public class KBReasonerClient implements KBReasoner {
 		return getTypes(modules, TypeKind.INTERFACE_TYPE);
 	}
 
+	public TypeData getPolicyTypes(List<String> modules) throws Exception {
+		return getTypes(modules, TypeKind.POLICY_TYPE);
+	}
+
 	private TypeData getTypes(List<String> modules, TypeKind kind) throws Exception {
 		Assert.notNull(modules, "Pass a not null modules");
 		Assert.notNull(kind, "Pass a not null type kind");
@@ -176,7 +186,8 @@ public class KBReasonerClient implements KBReasoner {
 		for (String module : modules)
 			url += ";imports=" + module;
 		url += ";type=" + kind.getLabel();
-		url += ";token=" + this.aai_token;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
 		try {
 			TypeData data = getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
 			if (data == null) {
@@ -186,7 +197,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypes(modules, kind);
 			else
@@ -194,9 +206,35 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	public TemplateData getTemplates(List<String> modules) throws Exception {
+		Assert.notNull(modules, "Pass a not null modules");
+		String url = kbReasonerUri + "templates";
+		for (String module : modules)
+			url += ";imports=" + module;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
+		try {
+			TemplateData data = getJSONObjectForType(TemplateData.class, new URI(url), HttpStatus.OK);
+			if (data == null) {
+				data = new TemplateData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getTemplates(modules);
+			else
+				throw ex;
+		}
+	}
+
 	public ModuleData getModules() throws Exception {
 		String url = kbReasonerUri + "namespaces";
-		url += "?token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "?token=" + this.aai_token;
 		try {
 			ModuleData data = getJSONObjectForType(ModuleData.class, new URI(url), HttpStatus.OK);
 			if (data == null) {
@@ -206,7 +244,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getModules();
 			else
@@ -219,7 +258,8 @@ public class KBReasonerClient implements KBReasoner {
 	public AttributeDefinitionData getTypeAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "attributes?resource=" + resourceId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			AttributeDefinitionData data = getJSONObjectForType(AttributeDefinitionData.class, new URI(url),
 					HttpStatus.OK);
@@ -230,7 +270,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeAttributes(resourceId);
 			else
@@ -241,7 +282,8 @@ public class KBReasonerClient implements KBReasoner {
 	public CapabilityDefinitionData getTypeCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			CapabilityDefinitionData data = getJSONObjectForType(CapabilityDefinitionData.class, new URI(url),
 					HttpStatus.OK);
@@ -252,7 +294,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeCapabilities(resourceId);
 			else
@@ -263,7 +306,8 @@ public class KBReasonerClient implements KBReasoner {
 	public InterfaceDefinitionData getTypeInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			InterfaceDefinitionData data = getJSONObjectForType(InterfaceDefinitionData.class, new URI(url),
 					HttpStatus.OK);
@@ -274,7 +318,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeInterfaces(resourceId);
 			else
@@ -285,7 +330,8 @@ public class KBReasonerClient implements KBReasoner {
 	public PropertyDefinitionData getTypeProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "properties?resource=" + resourceId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			PropertyDefinitionData data = getJSONObjectForType(PropertyDefinitionData.class, new URI(url),
 					HttpStatus.OK);
@@ -296,7 +342,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeProperties(resourceId);
 			else
@@ -307,7 +354,8 @@ public class KBReasonerClient implements KBReasoner {
 	public RequirementDefinitionData getTypeRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			RequirementDefinitionData data = getJSONObjectForType(RequirementDefinitionData.class, new URI(url),
 					HttpStatus.OK);
@@ -318,7 +366,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeRequirements(resourceId);
 			else
@@ -331,7 +380,8 @@ public class KBReasonerClient implements KBReasoner {
 	public AttributeAssignmentData getTemplateAttributes(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=attr";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			AttributeAssignmentData data = getJSONObjectForType(AttributeAssignmentData.class, new URI(url),
 					HttpStatus.OK);
@@ -342,7 +392,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTemplateAttributes(resourceId);
 			else
@@ -353,7 +404,8 @@ public class KBReasonerClient implements KBReasoner {
 	public CapabilityAssignmentData getTemplateCapabilities(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId + "&template=true";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			CapabilityAssignmentData data = getJSONObjectForType(CapabilityAssignmentData.class, new URI(url),
 					HttpStatus.OK);
@@ -364,7 +416,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTemplateCapabilities(resourceId);
 			else
@@ -375,7 +428,8 @@ public class KBReasonerClient implements KBReasoner {
 	public InterfaceAssignmentData getTemplateInterfaces(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId + "&template=true";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			InterfaceAssignmentData data = getJSONObjectForType(InterfaceAssignmentData.class, new URI(url),
 					HttpStatus.OK);
@@ -386,7 +440,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTemplateInterfaces(resourceId);
 			else
@@ -397,7 +452,8 @@ public class KBReasonerClient implements KBReasoner {
 	public PropertyAssignmentData getTemplateProperties(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=prop";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			PropertyAssignmentData data = getJSONObjectForType(PropertyAssignmentData.class, new URI(url),
 					HttpStatus.OK);
@@ -408,7 +464,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTemplateProperties(resourceId);
 			else
@@ -419,7 +476,8 @@ public class KBReasonerClient implements KBReasoner {
 	public RequirementAssignmentData getTemplateRequirements(String resourceId) throws Exception {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId + "&template=true";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			RequirementAssignmentData data = getJSONObjectForType(RequirementAssignmentData.class, new URI(url),
 					HttpStatus.OK);
@@ -430,7 +488,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTemplateRequirements(resourceId);
 			else
@@ -466,7 +525,8 @@ public class KBReasonerClient implements KBReasoner {
 				+ encodeValue(nodeType);
 		for (String module : modules)
 			url += ";imports=" + module;
-		url += ";token=" + this.aai_token;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
 		try {
 			TypeData data = getJSONObjectForType(TypeData.class, new URI(url), HttpStatus.OK);
 			if (data == null) {
@@ -476,7 +536,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
 			else
@@ -490,13 +551,15 @@ public class KBReasonerClient implements KBReasoner {
 		Assert.notNull(superclass, "Pass a not null superclass");
 		String url = kbReasonerUri + "is-subclass-of;nodeTypes=" + encodeValue(subclass) + ";superNodeType="
 				+ encodeValue(superclass);
-		url += ";token=" + this.aai_token;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
 		try {
 			StringData data = getJSONObjectForType(StringData.class, new URI(url), HttpStatus.OK);
 			return data.getElements().contains(subclass);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return isSubClassOf(subclass, superclass);
 			else
@@ -513,13 +576,15 @@ public class KBReasonerClient implements KBReasoner {
 		for (String subclass : subclasses)
 			url += ";nodeTypes=" + encodeValue(subclass);
 		url += ";superNodeType=" + encodeValue(superclass);
-		url += ";token=" + this.aai_token;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
 		try {
 			StringData data = getJSONObjectForType(StringData.class, new URI(url), HttpStatus.OK);
 			return data.getElements();
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getSubClassesOf(subclasses, superclass);
 			else
@@ -533,8 +598,6 @@ public class KBReasonerClient implements KBReasoner {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
-		String token = getSecurityToken();
-		Assert.notNull(token, "Error retrieving a valid security token");
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -544,7 +607,11 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("name", name);
 		map.add("namespace", namespace);
 		map.add("aadmDSL", aadmDSL);
-		map.add("token", token);
+		if (IAM_enabled) {
+			String token = getSecurityToken();
+			Assert.notNull(token, "Error retrieving a valid security token");
+			map.add("token", token);
+		}
 
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -587,8 +654,6 @@ public class KBReasonerClient implements KBReasoner {
 			throws Exception {
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
-		String token = getSecurityToken();
-		Assert.notNull(token, "Error retrieving a valid security token");
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -597,7 +662,11 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("namespace", namespace);
 		map.add("name", name);
 		map.add("rmDSL", rmDSL);
-		map.add("token", token);
+		if (IAM_enabled) {
+			String token = getSecurityToken();
+			Assert.notNull(token, "Error retrieving a valid security token");
+			map.add("token", token);
+		}
 
 		KBSaveReportData report = new KBSaveReportData();
 		try {
@@ -689,12 +758,14 @@ public class KBReasonerClient implements KBReasoner {
 	public String getAADM(String aadmURI) throws Exception {
 		Assert.notNull(aadmURI, "Pass a not null aadmURI");
 		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmURI;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getAADM(aadmURI);
 			else
@@ -762,12 +833,14 @@ public class KBReasonerClient implements KBReasoner {
 		Assert.notNull(module, "Pass a not null module");
 		String url = kbReasonerUri + "model?resource=" + resource
 				+ "&namespace=https://www.sodalite.eu/ontologies/workspace/1/" + module + "/";
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getModelForResource(resource, module);
 			else
@@ -779,12 +852,14 @@ public class KBReasonerClient implements KBReasoner {
 	public ModelData getModel(String modelId) throws Exception {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "model?uri=" + modelId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getModel(modelId);
 			else
@@ -802,9 +877,118 @@ public class KBReasonerClient implements KBReasoner {
 		return getModelsInModule("RM", module);
 	}
 
+	@Override
+	public CapabilityDefinitionData getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(String nodeType,
+			String requirementName) throws Exception {
+		Assert.notNull(nodeType, "Pass a not null nodeType");
+		Assert.notNull(requirementName, "Pass a not null requirementName");
+		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeType + "&requirement="
+				+ requirementName + "&template=false";
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			CapabilityDefinitionData data = getJSONObjectForType(CapabilityDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new CapabilityDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType, requirementName);
+			else
+				throw ex;
+		}
+	}
+
+	@Override
+	public CapabilityAssignmentData getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(String nodeTemplate,
+			String requirementName) throws Exception {
+		Assert.notNull(nodeTemplate, "Pass a not null nodeTemplate");
+		Assert.notNull(requirementName, "Pass a not null requirementName");
+		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeTemplate + "&requirement="
+				+ requirementName + "&template=true";
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			CapabilityAssignmentData data = getJSONObjectForType(CapabilityAssignmentData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new CapabilityAssignmentData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeTemplate, requirementName);
+			else
+				throw ex;
+		}
+	}
+
+	@Override
+	public OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception {
+		Assert.notNull(interfaceType, "Pass a not null interfaceType");
+		String url = kbReasonerUri + "operations?resource=" + interfaceType;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			OperationDefinitionData data = getJSONObjectForType(OperationDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new OperationDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getOperationsInInterface(interfaceType);
+			else
+				throw ex;
+		}
+	}
+
+	@Override
+	public OperationDefinitionData getOperations(List<String> modules) throws Exception {
+		Assert.notNull(modules, "Pass a not null modules");
+		String url = kbReasonerUri + "operationsFromNamespaces";
+		for (String module : modules)
+			url += ";imports=" + module;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
+		try {
+			OperationDefinitionData data = getJSONObjectForType(OperationDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new OperationDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getOperations(modules);
+			else
+				throw ex;
+		}
+	}
+
 	private ModelData getModelsInModule(String type, String module) throws Exception {
 		String url = kbReasonerUri + "models?type=" + type;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		if (module != null && !module.isEmpty())
 			url += "&namespace=https://www.sodalite.eu/ontologies/workspace/1/" + module + "/";
 		try {
@@ -818,7 +1002,8 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				return getModelsInModule(type, module);
 			else
@@ -830,12 +1015,14 @@ public class KBReasonerClient implements KBReasoner {
 	public void deleteModel(String modelId) throws Exception {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "delete?uri=" + modelId;
-		url += "&token=" + this.aai_token;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
 		try {
 			deleteUriResource(new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			this.aai_token = getSecurityToken();
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
 				deleteModel(modelId);
 			else
@@ -999,7 +1186,8 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-	public <T> List<T> getJSONObjectsListForType(Class<T[]> type, URI uri, HttpStatus expectedStatus) throws Exception {
+	private <T> List<T> getJSONObjectsListForType(Class<T[]> type, URI uri, HttpStatus expectedStatus)
+			throws Exception {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			ResponseEntity<T[]> response = getJSONMessage(uri, type);
@@ -1073,7 +1261,7 @@ public class KBReasonerClient implements KBReasoner {
 		return response.getBody();
 	}
 
-	public <T> T sendMultipartFormDataMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts,
+	private <T> T sendMultipartFormDataMessage(URI uri, Class<T> returnType, MultiValueMap<String, Object> parts,
 			HttpMethod method, HttpStatus expectedStatus) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -1097,7 +1285,7 @@ public class KBReasonerClient implements KBReasoner {
 			return getRestTemplate().exchange(uri, method, requestEntity, clazz);
 	}
 
-	public <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
+	private <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
 		RequestEntity<S> request = RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON).body(object);
 		if (uri.getScheme().equals("https"))
 			return (ResponseEntity<T>) getSslRestTemplate().exchange(request, clazz);
@@ -1113,7 +1301,7 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-	public boolean deleteUriResource(URI uri, HttpStatus expectedStatus) throws Exception {
+	private boolean deleteUriResource(URI uri, HttpStatus expectedStatus) throws Exception {
 		boolean result = false;
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
@@ -1131,7 +1319,7 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-	public ResponseEntity<String> getJsonMessage(URI uri) {
+	private ResponseEntity<String> getJsonMessage(URI uri) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		headers.add("Accept", "*/*");
@@ -1139,7 +1327,7 @@ public class KBReasonerClient implements KBReasoner {
 		return getRestTemplate().exchange(uri, HttpMethod.GET, requestEntity, String.class);
 	}
 
-	public ResponseEntity<String> deleteJsonMessage(URI uri) {
+	private ResponseEntity<String> deleteJsonMessage(URI uri) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
 		headers.add("Accept", "*/*");
@@ -1147,8 +1335,7 @@ public class KBReasonerClient implements KBReasoner {
 		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
 	}
 
-	@Override
-	public String getSecurityToken() throws Exception {
+	private String getSecurityToken() throws Exception {
 		String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token";
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
@@ -1163,8 +1350,7 @@ public class KBReasonerClient implements KBReasoner {
 		return jsonObject.get("access_token").getAsString();
 	}
 
-	@Override
-	public Boolean isValidToken(String token) throws Exception {
+	private Boolean isValidToken(String token) throws Exception {
 		String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token/introspect";
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 

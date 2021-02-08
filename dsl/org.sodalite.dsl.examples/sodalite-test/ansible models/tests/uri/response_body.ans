@@ -1,0 +1,72 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/uri/response_body.yaml
+playbook_name: "tests/uri/response_body"
+//PROBLEM: the node type sodalite.nodes.Tests.Text.URI, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+
+					
+					task_to_execute:
+						task_name: "Execute the URI request"
+						module: "uri"
+							parameters:
+								url:              {{ url | default(omit, true) }}
+								attributes:       {{ attributes | default(omit, true) }}
+								body:             {{ body | default(omit, true) }}
+								body_format:      {{ body_format | default(omit, true) }}
+								method:           {{ method | default(omit, true) }}
+								client_cert:      {{ client_cert | default(omit, true) }}
+								client_key:       {{ client_key | default(omit, true) }}
+								follow_redirects: {{ follow_redirects | default(omit, true) }}
+								force:            {{ force | default(omit, true) }}
+								force_basic_auth: {{ force_basic_auth | default(omit, true) }}
+								group:            {{ group | default(omit, true) }}
+								headers:          {{ headers | default(omit, true) }}
+								http_agent:       {{ http_agent | default(omit, true) }}
+								mode:             {{ mode | default(omit, true) }}
+								owner:            {{ owner | default(omit, true) }}
+								remote_src:       {{ remote_src | default(omit, true) }}
+								removes:          {{ removes | default(omit, true) }}
+								return_content:   yes
+								src:              {{ src | default(omit, true) }}
+								status_code:      {{ status_code | default(omit, true) }}
+								creates:          {{ creates | default(omit, true) }}
+								dest:             {{ dest | default(omit, true) }}
+								timeout:          {{ timeout | default(omit, true) }}
+						loop:
+							until:
+								retries: 8
+								delay_attribute: 5
+						register: request_result
+					
+					task_to_execute:
+						task_name: "Save returned content and response code"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: request_result.content }}
+									response_status: {{ registered_variable: request_result.status }}
+						when: registered_variable: request_result is defined
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									status: {{ (not regex and registered_variable: request_result.content == comparable_string) or (regex and registered_variable: request_result.content is regex(comparable_string)) }}
+						when: registered_variable: request_result is defined
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the request fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}
+						

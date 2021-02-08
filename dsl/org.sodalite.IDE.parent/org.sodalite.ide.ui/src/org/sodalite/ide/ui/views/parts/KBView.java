@@ -1,20 +1,11 @@
 package org.sodalite.ide.ui.views.parts;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.text.MessageFormat;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -24,7 +15,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -33,18 +23,17 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.ui.backend.BackendLogger;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.dsl.ui.backend.RMBackendProxy;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.Node;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -86,11 +75,11 @@ public class KBView {
 
 		// RMs
 
-		ModuleData moduleData = getKBReasoner().getModules();
+		ModuleData moduleData = RMBackendProxy.getKBReasoner().getModules();
 		for (String module : moduleData.getElements()) {
 			module = parseModule(module);
 			// RMs
-			ModelData rmModelData = getKBReasoner().getRMsInModule(module);
+			ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 			if (!rmModelData.getElements().isEmpty()) {
 				TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
 				for (Model model : rmModelData.getElements()) {
@@ -99,7 +88,7 @@ public class KBView {
 			}
 
 			// AADMs
-			ModelData aadmModelData = getKBReasoner().getAADMsInModule(module);
+			ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 			if (!aadmModelData.getElements().isEmpty()) {
 				TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
 				for (Model model : aadmModelData.getElements()) {
@@ -120,56 +109,15 @@ public class KBView {
 		return splits[splits.length - 1];
 	}
 
-	private KBReasonerClient getKBReasoner() throws Exception {
-		// Configure KBReasonerClient endpoint from preference page information
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		if (kbReasonerURI.isEmpty())
-			raiseConfigurationIssue("KB Reasoner URI user not set");
-
-		String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty())
-			raiseConfigurationIssue("IaC URI user not set");
-
-		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
-		if (xoperaURI.isEmpty())
-			raiseConfigurationIssue("xOpera URI user not set");
-
-		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
-		if (keycloakURI.isEmpty())
-			raiseConfigurationIssue("Keycloak URI user not set");
-
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
-
-		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-		if (keycloak_user.isEmpty())
-			raiseConfigurationIssue("Keycloak user not set");
-
-		String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-		if (keycloak_password.isEmpty())
-			raiseConfigurationIssue("Keycloak password not set");
-
-		String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-		if (keycloak_client_id.isEmpty())
-			raiseConfigurationIssue("Keycloak client_id not set");
-
-		String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-		if (keycloak_client_secret.isEmpty())
-			raiseConfigurationIssue("Keycloak client secret not set");
-
-		kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-
-		SodaliteLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
-
-		return kbclient;
-	}
-
 	private void raiseConfigurationIssue(String message) throws Exception {
 		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(parent, "Sodalite Preferences Error",
+						message + " in Sodalite preferences pages");
+			}
+		});
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
@@ -211,7 +159,7 @@ public class KBView {
 							viewer.setInput(root);
 							viewer.refresh();
 						} catch (Exception e) {
-							BackendLogger.log("Error", e);
+							SodaliteLogger.log("Error", e);
 						}
 					}
 				};
@@ -233,13 +181,13 @@ public class KBView {
 							String module = node.getModule();
 							ModelData modelData = null;
 							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = getKBReasoner().getRMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = getKBReasoner().getAADMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 							}
 							if (modelData != null && !modelData.getElements().isEmpty()) {
 								// Prompt user to select the target folder
-								IContainer root = getWorkspaceRoot();
+								IContainer root = RMHelper.getWorkspaceRoot();
 								String msg = "Select a workspace folder where to upload the models of the selected module";
 								ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
 								int return_code = dialog.open();
@@ -256,14 +204,14 @@ public class KBView {
 									}
 									// For each model in module, copy it into the target module folder
 									for (Model model : modelData.getElements()) {
-										saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
+										RMHelper.saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
 									}
 									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
 											+ " successfully copied into " + targetFolder.getName() + " folder");
 								}
 							}
 						} catch (Exception ex) {
-							BackendLogger.log("Error", ex);
+							SodaliteLogger.log("Error", ex);
 						}
 					}
 				};
@@ -278,9 +226,9 @@ public class KBView {
 							String module = node.getModule();
 							ModelData modelData = null;
 							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = getKBReasoner().getRMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = getKBReasoner().getAADMsInModule(module);
+								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 							}
 							if (modelData != null && !modelData.getElements().isEmpty()) {
 								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
@@ -289,7 +237,7 @@ public class KBView {
 									try {
 										// For each model in module, delete it
 										for (Model model : modelData.getElements()) {
-											getKBReasoner().deleteModel(model.getUri().toString());
+											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString());
 										}
 
 										// Refresh KB View
@@ -299,12 +247,12 @@ public class KBView {
 										MessageDialog.openInformation(shell, "Delete model",
 												"Models in module " + module + " successfully deleted");
 									} catch (Exception e) {
-										e.printStackTrace();
+										SodaliteLogger.log("Error", e);
 									}
 								}
 							}
 						} catch (Exception ex) {
-							BackendLogger.log("Error", ex);
+							SodaliteLogger.log("Error", ex);
 						}
 					}
 				};
@@ -320,7 +268,7 @@ public class KBView {
 					public void run() {
 						System.out.println("Retrieve model invoked");
 						// Show Dialog to select workspace folder where to copy the model
-						IContainer root = getWorkspaceRoot();
+						IContainer root = RMHelper.getWorkspaceRoot();
 						String msg = "Select a workspace folder where to upload the selected model";
 						ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
 						int return_code = dialog.open();
@@ -331,7 +279,8 @@ public class KBView {
 								return;
 							IPath path = (IPath) result[0];
 							IFolder targetFolder = root.getFolder(path);
-							saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(), targetFolder);
+							RMHelper.saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(),
+									targetFolder);
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
 									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
@@ -350,7 +299,7 @@ public class KBView {
 								"Do you want to delete model " + node.getModel().getName());
 						if (confirmed) {
 							try {
-								getKBReasoner().deleteModel(node.getModel().getUri().toString());
+								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString());
 								// Refresh KB View
 								tn.getParent().removeChild(tn);
 								viewer.refresh();
@@ -358,7 +307,7 @@ public class KBView {
 								MessageDialog.openInformation(shell, "Delete model",
 										"Model " + node.getModel().getName() + " successfully deleted");
 							} catch (Exception e) {
-								e.printStackTrace();
+								SodaliteLogger.log("Error", e);
 							}
 						}
 					}
@@ -369,42 +318,6 @@ public class KBView {
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);
-	}
-
-	private void saveFileInFolder(String filename, String filecontent, IFolder targetFolder) {
-		IFile targetFile = targetFolder.getFile(filename);
-		if (!targetFile.exists()) {
-			saveContentInFile(filecontent, targetFile);
-		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				try {
-					targetFile.delete(false, null);
-					saveContentInFile(filecontent, targetFile);
-				} catch (CoreException e) {
-					BackendLogger.log("Error", e);
-				}
-
-			}
-		}
-	}
-
-	private void saveContentInFile(String content, IFile targetFile) {
-		try {
-			byte[] bytes = content.getBytes();
-			InputStream source = new ByteArrayInputStream(bytes);
-			targetFile.create(source, IResource.NONE, null);
-		} catch (CoreException e) {
-			BackendLogger.log("Error", e);
-		}
-	}
-
-	private IContainer getWorkspaceRoot() {
-		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IContainer root = workspaceRoot.getContainerForLocation(workspaceRoot.getLocation());
-		return root;
 	}
 
 //	@Focus

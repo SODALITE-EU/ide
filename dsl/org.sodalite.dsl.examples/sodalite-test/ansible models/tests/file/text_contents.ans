@@ -1,0 +1,33 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/tests/file/text_contents.yaml
+playbook_name: "tests/file/text_contents"
+//PROBLEM: the node type sodalite.nodes.Tests.Text.File, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		tasks_list:
+			block_to_execute:
+				block_name: "Execute the tests and catch any errors"
+				tasks:
+					task_to_execute:
+						task_name: "Read the file"
+						module: "shell"
+							direct_parameter: "cat "{{ file_location }}
+						register: file_contents
+					
+					task_to_execute:
+						task_name: "Evaluate the expression"
+						module: "set_stats"
+							parameters:
+								data:
+									checked_against: {{ registered_variable: file_contents.stdout }}
+									status: {{ (not regex and registered_variable: file_contents.stdout == comparable_string) or (regex and registered_variable: file_contents.stdout is regex(comparable_string)) }}
+				
+				rescue_tasks:
+					task_to_execute:
+						task_name: "If the request fails set status to false"
+						module: "set_stats"
+							parameters:
+								data:
+									status: false
+									response_status: {{ ansible_failed_result }}

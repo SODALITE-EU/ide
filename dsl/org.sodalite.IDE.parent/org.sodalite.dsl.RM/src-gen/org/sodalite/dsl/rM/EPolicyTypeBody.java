@@ -16,6 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPolicyTypeBody#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPolicyTypeBody#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPolicyTypeBody#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTriggers <em>Triggers</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody()
@@ -67,5 +70,71 @@ public interface EPolicyTypeBody extends EObject
    * @generated
    */
   void setDescription(String value);
+
+  /**
+   * Returns the value of the '<em><b>Properties</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Properties</em>' containment reference.
+   * @see #setProperties(EProperties)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody_Properties()
+   * @model containment="true"
+   * @generated
+   */
+  EProperties getProperties();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getProperties <em>Properties</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Properties</em>' containment reference.
+   * @see #getProperties()
+   * @generated
+   */
+  void setProperties(EProperties value);
+
+  /**
+   * Returns the value of the '<em><b>Targets</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Targets</em>' containment reference.
+   * @see #setTargets(EValidTargetTypes)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody_Targets()
+   * @model containment="true"
+   * @generated
+   */
+  EValidTargetTypes getTargets();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTargets <em>Targets</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Targets</em>' containment reference.
+   * @see #getTargets()
+   * @generated
+   */
+  void setTargets(EValidTargetTypes value);
+
+  /**
+   * Returns the value of the '<em><b>Triggers</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Triggers</em>' containment reference.
+   * @see #setTriggers(ETriggers)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPolicyTypeBody_Triggers()
+   * @model containment="true"
+   * @generated
+   */
+  ETriggers getTriggers();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPolicyTypeBody#getTriggers <em>Triggers</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Triggers</em>' containment reference.
+   * @see #getTriggers()
+   * @generated
+   */
+  void setTriggers(ETriggers value);
 
 } // EPolicyTypeBody

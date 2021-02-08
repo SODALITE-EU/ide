@@ -1,0 +1,13 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/playbooks/configure-gridftp-proxy.yml
+//here, for the moment, we don't connect this ansible model with data_mover.rm, since the RM defined there is not compliant with https://github.com/SODALITE-EU/iac-modules/blob/master/hpc/data/mover/main.yml
+playbook_name: "hpc/data/mover/configure-gridftp-proxy"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Create proxy"
+				module: "shell"
+				 direct_parameter: "grid-proxy-init -debug -verify -cert "{{ cert_path }}"/"{{ cert }}" -key "{{ cert_path }}"/"{{ key }}" -certdir "{{ cert_path }}"/"{{ certdir }}

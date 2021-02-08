@@ -26,10 +26,12 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 
@@ -44,6 +46,10 @@ public interface KBReasoner {
 	TypeData getRelationshipTypes(List<String> modules) throws Exception;
 
 	TypeData getInterfaceTypes(List<String> modules) throws Exception;
+
+	TypeData getPolicyTypes(List<String> modules) throws Exception;
+
+	TemplateData getTemplates(List<String> modules) throws Exception;
 
 	ModuleData getModules() throws Exception;
 
@@ -102,10 +108,15 @@ public interface KBReasoner {
 
 	void deleteModel(String modelId) throws Exception;
 
-	String getSecurityToken() throws Exception;
+	String setUserAccount(String user, String password, String client_id, String user_secret) throws Exception;
 
-	Boolean isValidToken(String token) throws Exception;
+	CapabilityDefinitionData getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(String nodeType,
+			String requirementName) throws Exception;
 
-	void setUserAccount(String user, String password, String client_id, String user_secret) throws Exception;
+	CapabilityAssignmentData getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(String nodeTemplate,
+			String requirementName) throws Exception;
 
+	OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception;
+
+	OperationDefinitionData getOperations(List<String> modules) throws Exception;
 }

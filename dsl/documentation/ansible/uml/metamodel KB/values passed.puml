@@ -1,0 +1,44 @@
+@startuml
+object JinjaExpressionEvaluation {
+  jinja_expression : JinjaExpressionEvaluationWithoutBrackets
+}
+
+object Dictionary
+object List
+object Number
+object OctalNumber
+object HexadecimalNumber
+object SimpleNumber
+object ExponentialNumber
+object Boolean
+object BooleanOnlyAnsible
+object Null
+
+object DictionaryPassed
+object ListPassed
+object NumberPassed
+object BooleanPassed
+object BooleanAnsible
+
+DictionaryPassed <|-- JinjaExpressionEvaluation
+DictionaryPassed <|-- Dictionary
+ListPassed <|-- JinjaExpressionEvaluation
+ListPassed <|-- List
+
+NumberPassed <|-- JinjaExpressionEvaluation
+NumberPassed <|-- Number
+NumberPassed <|-- Null
+Number <|-- OctalNumber
+Number <|-- HexadecimalNumber
+Number <|-- SimpleNumber
+Number <|-- ExponentialNumber
+
+BooleanPassed <|-- JinjaExpressionEvaluation
+BooleanPassed <|-- BooleanAnsible
+BooleanPassed <|-- Null
+BooleanAnsible <|-- Boolean
+BooleanAnsible <|-- BooleanOnlyAnsible
+
+
+
+@enduml

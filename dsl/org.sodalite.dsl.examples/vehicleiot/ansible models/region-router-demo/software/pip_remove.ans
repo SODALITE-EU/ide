@@ -1,0 +1,18 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-management/blob/master/use-cases/vehicleiot-uc/region-router-demo/playbooks/software/pip_remove.yml
+playbook_name: "vehicleiot-uc/region-router-demo/software/pip_remove"
+//PROBLEM: the node sodalite.nodes.software.PipPackagesSetup, that should use this playbook, is missing in the rm examples
+//therefore the "used_by" attribute won't be used in this model, so there won't be any connection to any TOSCA input
+plays:
+	play:
+		hosts: "all"
+		privilege_escalation:
+			become_user: "root"
+			become: yes
+		vars:
+			pip_install_packages:
+				- name: {{ packages | join(', ') }}
+				state: "absent"
+		
+		roles_inclusions:
+			role:
+				role_name: "geerlingguy.pip"
