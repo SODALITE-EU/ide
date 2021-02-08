@@ -29036,26 +29036,26 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl"
-    // InternalRMParser.g:9087:1: rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl : ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) ) ;
+    // InternalRMParser.g:9087:1: rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl : ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) ) ;
     public final void rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:9091:1: ( ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) ) )
-            // InternalRMParser.g:9092:1: ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) )
+            // InternalRMParser.g:9091:1: ( ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) ) )
+            // InternalRMParser.g:9092:1: ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) )
             {
-            // InternalRMParser.g:9092:1: ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) )
-            // InternalRMParser.g:9093:2: ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 )
+            // InternalRMParser.g:9092:1: ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) )
+            // InternalRMParser.g:9093:2: ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameAssignment_0_1()); 
+               before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationAssignment_0_1()); 
             }
-            // InternalRMParser.g:9094:2: ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 )
-            // InternalRMParser.g:9094:3: rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1
+            // InternalRMParser.g:9094:2: ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 )
+            // InternalRMParser.g:9094:3: rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1
             {
             pushFollow(FOLLOW_2);
-            rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1();
+            rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -29063,7 +29063,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameAssignment_0_1()); 
+               after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationAssignment_0_1()); 
             }
 
             }
@@ -70284,9 +70284,9 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ECallOperationActivityDefinition__OperationAssignment_2"
 
 
-    // $ANTLR start "rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1"
-    // InternalRMParser.g:21797:1: rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
-    public final void rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1() throws RecognitionException {
+    // $ANTLR start "rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1"
+    // InternalRMParser.g:21797:1: rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    public final void rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -70298,7 +70298,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:21803:3: ruleEPREFIX_TYPE
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleEPREFIX_TYPE();
@@ -70306,7 +70306,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0()); 
             }
 
             }
@@ -70326,7 +70326,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1"
+    // $ANTLR end "rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1"
 
 
     // $ANTLR start "rule__ECallOperationActivityDefinitionBody__InputsAssignment_1_2"

@@ -67,6 +67,9 @@ import org.sodalite.dsl.rM.EInterfaceDefinitionBody
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
 import org.sodalite.dsl.rM.EPolicyType
 import org.eclipse.emf.common.util.EList
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.EOperationDefinition
+import org.sodalite.dsl.rM.EInterfaceType
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -742,8 +745,18 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 	}
 	
-	override void completeECallOperationActivityDefinition_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//TODO
+	override void completeECallOperationActivityDefinitionBody_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Find local and KB node types
+			val List<String> importedModules = processListModules(model)
+			val OperationDefinitionData operationsData = getKBReasoner().getOperations(importedModules)
+			val type_image = "icons/operation.png";	
+			createProposalsForOperationData(operationsData, type_image, null, context, acceptor)
+			val List<EOperationDefinition> localOperations = findLocalOperations(model)
+			createProposalsForOperationList(localOperations, type_image, null, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}
 	}
 	
 	override void completeETriggerDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -752,6 +765,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String additionalProposalInfo = "The required name for trigger definition"
 
 		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	}
+	
+	def List<EOperationDefinition> findLocalOperations(EObject object){
+		var List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>()
+		val RM_Model model = (findModel(object) as RM_Model)
+		for (interface: model.interfaceTypes.interfaceTypes){
+			for (op:interface.interface.operations.operations){
+				operations.add(op)
+			}
+		}
+		return operations
 	}
 	
 	def String getNodeName (EPREFIX_REF nodeRef){
@@ -791,6 +815,38 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			var Image image = getImage(defaultImage)
 			if (type.module !== null) 
 				image = getImage(primitiveImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+		}
+	}
+	
+	def void createProposalsForOperationData(OperationDefinitionData operations, String defaultImage, String primitiveImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (operation: operations.elements){
+			val module = getBetweenLast2Delimiters(operation.definedIn, '/')
+			val _interface = getLastSegment(operation.definedIn, '/')
+			val oper_name = getLastSegment(operation.uri.toString, '/')
+			val qOperation = module !== 'tosca'?
+				module + '/' + _interface + '.' + oper_name:_interface + '.' + oper_name
+			val proposalText = qOperation
+			val displayText = qOperation
+			val additionalProposalInfo = operation.description
+			var Image image = getImage(defaultImage)
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+		}
+	}
+	
+	def void createProposalsForOperationList(List<EOperationDefinition> operations, String defaultImage, String primitiveImage,
+		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		for (operation: operations){
+			val _interface = operation.eContainer.eContainer.eContainer as EInterfaceType
+			val module = getModule(operation)
+			val qOperation = module!==null? 
+				module + '/' + _interface.name + '.' + operation.name:
+				_interface.name + '.' + operation.name
+			val proposalText = qOperation
+			val displayText = qOperation
+			val additionalProposalInfo = operation.operation.description
+			var Image image = getImage(defaultImage)
 			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 		}
 	}
@@ -875,6 +931,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def extractModule(String module) {
 		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
+	}
+	
+	def getBetweenLast2Delimiters(String input, String delimiter) {
+		val endIndex = input.lastIndexOf(delimiter)
+		val subInput = input.substring(0, endIndex)
+		val beginIndex = subInput.lastIndexOf(delimiter)
+		return input.subSequence(beginIndex + 1, endIndex)
 	}
 	
 	def getLastSegment(String string, String delimiter) {

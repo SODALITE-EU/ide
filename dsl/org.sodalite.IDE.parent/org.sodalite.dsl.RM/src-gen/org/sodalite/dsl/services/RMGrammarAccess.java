@@ -1852,8 +1852,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cOperationKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cNameEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final Assignment cOperationAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cOperationEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cOperationAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cInputsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cBEGINTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
@@ -1862,26 +1862,26 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		
 		//ECallOperationActivityDefinitionBody:
-		//	'operation:' name=EPREFIX_TYPE & ('inputs:'
+		//	'operation:' operation=EPREFIX_TYPE & ('inputs:'
 		//	BEGIN
 		//	inputs=EPropertyAssignments
 		//	END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'operation:' name=EPREFIX_TYPE & ('inputs:' BEGIN inputs=EPropertyAssignments END)?
+		//'operation:' operation=EPREFIX_TYPE & ('inputs:' BEGIN inputs=EPropertyAssignments END)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'operation:' name=EPREFIX_TYPE
+		//'operation:' operation=EPREFIX_TYPE
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'operation:'
 		public Keyword getOperationKeyword_0_0() { return cOperationKeyword_0_0; }
 		
-		//name=EPREFIX_TYPE
-		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+		//operation=EPREFIX_TYPE
+		public Assignment getOperationAssignment_0_1() { return cOperationAssignment_0_1; }
 		
 		//EPREFIX_TYPE
-		public RuleCall getNameEPREFIX_TYPEParserRuleCall_0_1_0() { return cNameEPREFIX_TYPEParserRuleCall_0_1_0; }
+		public RuleCall getOperationEPREFIX_TYPEParserRuleCall_0_1_0() { return cOperationEPREFIX_TYPEParserRuleCall_0_1_0; }
 		
 		//('inputs:' BEGIN inputs=EPropertyAssignments END)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -5593,7 +5593,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//ECallOperationActivityDefinitionBody:
-	//	'operation:' name=EPREFIX_TYPE & ('inputs:'
+	//	'operation:' operation=EPREFIX_TYPE & ('inputs:'
 	//	BEGIN
 	//	inputs=EPropertyAssignments
 	//	END)?;

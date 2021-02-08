@@ -3287,17 +3287,17 @@ ruleECallOperationActivityDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0());
+										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0());
 									}
-									lv_name_2_0=ruleEPREFIX_TYPE
+									lv_operation_2_0=ruleEPREFIX_TYPE
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getECallOperationActivityDefinitionBodyRule());
 										}
 										set(
 											$current,
-											"name",
-											lv_name_2_0,
+											"operation",
+											lv_operation_2_0,
 											"org.sodalite.dsl.RM.EPREFIX_TYPE");
 										afterParserOrEnumRuleCall();
 									}

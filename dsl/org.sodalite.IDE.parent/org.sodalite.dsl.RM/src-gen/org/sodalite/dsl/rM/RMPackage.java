@@ -1352,13 +1352,13 @@ public interface RMPackage extends EPackage
   int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY = 33;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Operation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME = 0;
+  int ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION = 0;
 
   /**
    * The feature id for the '<em><b>Inputs</b></em>' containment reference.
@@ -4989,15 +4989,15 @@ public interface RMPackage extends EPackage
   EClass getECallOperationActivityDefinitionBody();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getOperation <em>Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName()
+   * @return the meta object for the containment reference '<em>Operation</em>'.
+   * @see org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getOperation()
    * @see #getECallOperationActivityDefinitionBody()
    * @generated
    */
-  EReference getECallOperationActivityDefinitionBody_Name();
+  EReference getECallOperationActivityDefinitionBody_Operation();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getInputs <em>Inputs</em>}'.
@@ -7976,12 +7976,12 @@ public interface RMPackage extends EPackage
     EClass ECALL_OPERATION_ACTIVITY_DEFINITION_BODY = eINSTANCE.getECallOperationActivityDefinitionBody();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Operation</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME = eINSTANCE.getECallOperationActivityDefinitionBody_Name();
+    EReference ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION = eINSTANCE.getECallOperationActivityDefinitionBody_Operation();
 
     /**
      * The meta object literal for the '<em><b>Inputs</b></em>' containment reference feature.

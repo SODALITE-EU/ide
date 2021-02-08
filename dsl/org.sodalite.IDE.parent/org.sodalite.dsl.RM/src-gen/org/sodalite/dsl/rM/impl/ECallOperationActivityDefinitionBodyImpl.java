@@ -25,7 +25,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ECallOperationActivityDefinitionBodyImpl#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
@@ -34,14 +34,14 @@ import org.sodalite.dsl.rM.RMPackage;
 public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl.Container implements ECallOperationActivityDefinitionBody
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+   * The cached value of the '{@link #getOperation() <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getOperation()
    * @generated
    * @ordered
    */
-  protected EPREFIX_TYPE name;
+  protected EPREFIX_TYPE operation;
 
   /**
    * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference.
@@ -80,9 +80,9 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
    * @generated
    */
   @Override
-  public EPREFIX_TYPE getName()
+  public EPREFIX_TYPE getOperation()
   {
-    return name;
+    return operation;
   }
 
   /**
@@ -90,13 +90,13 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(EPREFIX_TYPE newName, NotificationChain msgs)
+  public NotificationChain basicSetOperation(EPREFIX_TYPE newOperation, NotificationChain msgs)
   {
-    EPREFIX_TYPE oldName = name;
-    name = newName;
+    EPREFIX_TYPE oldOperation = operation;
+    operation = newOperation;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION, oldOperation, newOperation);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -108,20 +108,20 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
    * @generated
    */
   @Override
-  public void setName(EPREFIX_TYPE newName)
+  public void setOperation(EPREFIX_TYPE newOperation)
   {
-    if (newName != name)
+    if (newOperation != operation)
     {
       NotificationChain msgs = null;
-      if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME, null, msgs);
-      if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME, null, msgs);
-      msgs = basicSetName(newName, msgs);
+      if (operation != null)
+        msgs = ((InternalEObject)operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION, null, msgs);
+      if (newOperation != null)
+        msgs = ((InternalEObject)newOperation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION, null, msgs);
+      msgs = basicSetOperation(newOperation, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION, newOperation, newOperation));
   }
 
   /**
@@ -184,8 +184,8 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
   {
     switch (featureID)
     {
-      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME:
-        return basicSetName(null, msgs);
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION:
+        return basicSetOperation(null, msgs);
       case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS:
         return basicSetInputs(null, msgs);
     }
@@ -202,8 +202,8 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
   {
     switch (featureID)
     {
-      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME:
-        return getName();
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION:
+        return getOperation();
       case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS:
         return getInputs();
     }
@@ -220,8 +220,8 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
   {
     switch (featureID)
     {
-      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME:
-        setName((EPREFIX_TYPE)newValue);
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION:
+        setOperation((EPREFIX_TYPE)newValue);
         return;
       case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS:
         setInputs((EPropertyAssignments)newValue);
@@ -240,8 +240,8 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
   {
     switch (featureID)
     {
-      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME:
-        setName((EPREFIX_TYPE)null);
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION:
+        setOperation((EPREFIX_TYPE)null);
         return;
       case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS:
         setInputs((EPropertyAssignments)null);
@@ -260,8 +260,8 @@ public class ECallOperationActivityDefinitionBodyImpl extends MinimalEObjectImpl
   {
     switch (featureID)
     {
-      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME:
-        return name != null;
+      case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION:
+        return operation != null;
       case RMPackage.ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS:
         return inputs != null;
     }

@@ -43,6 +43,9 @@ public class OperationDefinitionJsonDeserializer extends JsonDeserializer<Operat
 			operation.setDescription(description);
 		}
 
+		if (objectNode.get("definedIn") != null)
+			operation.setDefinedIn(objectNode.get("definedIn").asText());
+
 		return operation;
 	}
 }

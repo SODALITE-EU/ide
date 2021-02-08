@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
@@ -25,26 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ECallOperationActivityDefinitionBody extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' containment reference.
+   * Returns the value of the '<em><b>Operation</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(EPREFIX_TYPE)
-   * @see org.sodalite.dsl.rM.RMPackage#getECallOperationActivityDefinitionBody_Name()
+   * @return the value of the '<em>Operation</em>' containment reference.
+   * @see #setOperation(EPREFIX_TYPE)
+   * @see org.sodalite.dsl.rM.RMPackage#getECallOperationActivityDefinitionBody_Operation()
    * @model containment="true"
    * @generated
    */
-  EPREFIX_TYPE getName();
+  EPREFIX_TYPE getOperation();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getName <em>Name</em>}' containment reference.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody#getOperation <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' containment reference.
-   * @see #getName()
+   * @param value the new value of the '<em>Operation</em>' containment reference.
+   * @see #getOperation()
    * @generated
    */
-  void setName(EPREFIX_TYPE value);
+  void setOperation(EPREFIX_TYPE value);
 
   /**
    * Returns the value of the '<em><b>Inputs</b></em>' containment reference.

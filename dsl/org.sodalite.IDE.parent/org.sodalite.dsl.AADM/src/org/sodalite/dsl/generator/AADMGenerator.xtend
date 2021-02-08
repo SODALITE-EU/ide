@@ -541,7 +541,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "operation" ;
-	  exchange:value '«trim(ad.operation.name.compile())»' ;
+	  exchange:value '«trim(ad.operation.operation.compile())»' ;
 	.
 	
 	«putParameterNumber(ad, "inputs", parameter_counter)»

@@ -2105,7 +2105,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getECallOperationActivityDefinitionBody_Name()
+  public EReference getECallOperationActivityDefinitionBody_Operation()
   {
     return (EReference)eCallOperationActivityDefinitionBodyEClass.getEStructuralFeatures().get(0);
   }
@@ -4382,7 +4382,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eCallOperationActivityDefinitionEClass, ECALL_OPERATION_ACTIVITY_DEFINITION__OPERATION);
 
     eCallOperationActivityDefinitionBodyEClass = createEClass(ECALL_OPERATION_ACTIVITY_DEFINITION_BODY);
-    createEReference(eCallOperationActivityDefinitionBodyEClass, ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__NAME);
+    createEReference(eCallOperationActivityDefinitionBodyEClass, ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__OPERATION);
     createEReference(eCallOperationActivityDefinitionBodyEClass, ECALL_OPERATION_ACTIVITY_DEFINITION_BODY__INPUTS);
 
     ePropertyAssignmentsEClass = createEClass(EPROPERTY_ASSIGNMENTS);
@@ -4859,7 +4859,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getECallOperationActivityDefinition_Operation(), this.getECallOperationActivityDefinitionBody(), null, "operation", null, 0, 1, ECallOperationActivityDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCallOperationActivityDefinitionBodyEClass, ECallOperationActivityDefinitionBody.class, "ECallOperationActivityDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getECallOperationActivityDefinitionBody_Name(), this.getEPREFIX_TYPE(), null, "name", null, 0, 1, ECallOperationActivityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECallOperationActivityDefinitionBody_Operation(), this.getEPREFIX_TYPE(), null, "operation", null, 0, 1, ECallOperationActivityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECallOperationActivityDefinitionBody_Inputs(), this.getEPropertyAssignments(), null, "inputs", null, 0, 1, ECallOperationActivityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ePropertyAssignmentsEClass, EPropertyAssignments.class, "EPropertyAssignments", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

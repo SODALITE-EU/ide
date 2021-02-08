@@ -1828,7 +1828,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("exchange:value \'");
-    String _trim = this.trim(this.compile(ad.getOperation().getName()));
+    String _trim = this.trim(this.compile(ad.getOperation().getOperation()));
     _builder.append(_trim, "  ");
     _builder.append("\' ;");
     _builder.newLineIfNotEmpty();

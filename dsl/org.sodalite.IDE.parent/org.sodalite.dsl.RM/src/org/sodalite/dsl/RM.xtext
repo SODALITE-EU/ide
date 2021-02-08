@@ -257,7 +257,7 @@ ECallOperationActivityDefinition:
 ;	
 
 ECallOperationActivityDefinitionBody:
-	('operation:' name=EPREFIX_TYPE) &
+	('operation:' operation=EPREFIX_TYPE) &
 	('inputs:'
 		BEGIN 
 		inputs=EPropertyAssignments

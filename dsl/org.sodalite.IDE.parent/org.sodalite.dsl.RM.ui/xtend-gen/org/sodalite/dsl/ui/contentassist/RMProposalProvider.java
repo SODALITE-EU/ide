@@ -65,6 +65,7 @@ import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -1053,7 +1054,25 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   @Override
-  public void completeECallOperationActivityDefinition_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeECallOperationActivityDefinitionBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = this.processListModules(model);
+        final OperationDefinitionData operationsData = this.getKBReasoner().getOperations(importedModules);
+        final String type_image = "icons/operation.png";
+        this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
+        final List<EOperationDefinition> localOperations = this.findLocalOperations(model);
+        this.createProposalsForOperationList(localOperations, type_image, null, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          this.showReadPermissionErrorDialog();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override
@@ -1062,6 +1081,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String displayText = "trigger_name";
     final String additionalProposalInfo = "The required name for trigger definition";
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+  }
+  
+  public List<EOperationDefinition> findLocalOperations(final EObject object) {
+    List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>();
+    Object _findModel = this.findModel(object);
+    final RM_Model model = ((RM_Model) _findModel);
+    EList<EInterfaceType> _interfaceTypes = model.getInterfaceTypes().getInterfaceTypes();
+    for (final EInterfaceType interface_ : _interfaceTypes) {
+      EList<EOperationDefinition> _operations = interface_.getInterface().getOperations().getOperations();
+      for (final EOperationDefinition op : _operations) {
+        operations.add(op);
+      }
+    }
+    return operations;
   }
   
   public String getNodeName(final EPREFIX_REF nodeRef) {
@@ -1155,6 +1188,61 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         if (_tripleNotEquals_1) {
           image = this.getImage(primitiveImage);
         }
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      }
+    }
+  }
+  
+  public void createProposalsForOperationData(final OperationDefinitionData operations, final String defaultImage, final String primitiveImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    List<OperationDefinition> _elements = operations.getElements();
+    for (final OperationDefinition operation : _elements) {
+      {
+        final CharSequence module = this.getBetweenLast2Delimiters(operation.getDefinedIn(), "/");
+        final String _interface = this.getLastSegment(operation.getDefinedIn(), "/");
+        final String oper_name = this.getLastSegment(operation.getUri().toString(), "/");
+        String _xifexpression = null;
+        if ((module != "tosca")) {
+          String _plus = (module + "/");
+          String _plus_1 = (_plus + _interface);
+          String _plus_2 = (_plus_1 + ".");
+          _xifexpression = (_plus_2 + oper_name);
+        } else {
+          _xifexpression = ((_interface + ".") + oper_name);
+        }
+        final String qOperation = _xifexpression;
+        final String proposalText = qOperation;
+        final String displayText = qOperation;
+        final String additionalProposalInfo = operation.getDescription();
+        Image image = this.getImage(defaultImage);
+        this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      }
+    }
+  }
+  
+  public void createProposalsForOperationList(final List<EOperationDefinition> operations, final String defaultImage, final String primitiveImage, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    for (final EOperationDefinition operation : operations) {
+      {
+        EObject _eContainer = operation.eContainer().eContainer().eContainer();
+        final EInterfaceType _interface = ((EInterfaceType) _eContainer);
+        final String module = this.getModule(operation);
+        String _xifexpression = null;
+        if ((module != null)) {
+          String _name = _interface.getName();
+          String _plus = ((module + "/") + _name);
+          String _plus_1 = (_plus + ".");
+          String _name_1 = operation.getName();
+          _xifexpression = (_plus_1 + _name_1);
+        } else {
+          String _name_2 = _interface.getName();
+          String _plus_2 = (_name_2 + ".");
+          String _name_3 = operation.getName();
+          _xifexpression = (_plus_2 + _name_3);
+        }
+        final String qOperation = _xifexpression;
+        final String proposalText = qOperation;
+        final String displayText = qOperation;
+        final String additionalProposalInfo = operation.getOperation().getDescription();
+        Image image = this.getImage(defaultImage);
         this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
       }
     }
@@ -1300,6 +1388,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     int _length_1 = module.length();
     int _minus_1 = (_length_1 - 1);
     return module.substring(_plus, _minus_1);
+  }
+  
+  public CharSequence getBetweenLast2Delimiters(final String input, final String delimiter) {
+    final int endIndex = input.lastIndexOf(delimiter);
+    final String subInput = input.substring(0, endIndex);
+    final int beginIndex = subInput.lastIndexOf(delimiter);
+    return input.subSequence((beginIndex + 1), endIndex);
   }
   
   public String getLastSegment(final String string, final String delimiter) {

@@ -144,7 +144,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinition/operation"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECallOperationActivityDefinitionBody">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinitionBody/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinitionBody/operation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECallOperationActivityDefinitionBody/inputs"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPropertyAssignments">

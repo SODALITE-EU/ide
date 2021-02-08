@@ -958,6 +958,33 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	@Override
+	public OperationDefinitionData getOperations(List<String> modules) throws Exception {
+		Assert.notNull(modules, "Pass a not null modules");
+		String url = kbReasonerUri + "operationsFromNamespaces";
+		for (String module : modules)
+			url += ";imports=" + module;
+		if (IAM_enabled)
+			url += ";token=" + this.aai_token;
+		try {
+			OperationDefinitionData data = getJSONObjectForType(OperationDefinitionData.class, new URI(url),
+					HttpStatus.OK);
+			if (data == null) {
+				data = new OperationDefinitionData();
+				data.setElements(new ArrayList<>());
+			}
+			return data;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getOperations(modules);
+			else
+				throw ex;
+		}
+	}
+
 	private ModelData getModelsInModule(String type, String module) throws Exception {
 		String url = kbReasonerUri + "models?type=" + type;
 		if (IAM_enabled)

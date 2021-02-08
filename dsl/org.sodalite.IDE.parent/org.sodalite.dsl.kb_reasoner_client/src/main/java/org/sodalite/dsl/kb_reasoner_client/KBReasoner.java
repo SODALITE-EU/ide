@@ -117,4 +117,6 @@ public interface KBReasoner {
 			String requirementName) throws Exception;
 
 	OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception;
+
+	OperationDefinitionData getOperations(List<String> modules) throws Exception;
 }

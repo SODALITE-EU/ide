@@ -8278,7 +8278,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleECallOperationActivityDefinitionBody"
-    // InternalRMParser.g:3264:1: ruleECallOperationActivityDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) ;
+    // InternalRMParser.g:3264:1: ruleECallOperationActivityDefinitionBody returns [EObject current=null] : ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) ;
     public final EObject ruleECallOperationActivityDefinitionBody() throws RecognitionException {
         EObject current = null;
 
@@ -8286,7 +8286,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         Token otherlv_3=null;
         Token this_BEGIN_4=null;
         Token this_END_6=null;
-        EObject lv_name_2_0 = null;
+        EObject lv_operation_2_0 = null;
 
         EObject lv_inputs_5_0 = null;
 
@@ -8295,22 +8295,22 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRMParser.g:3270:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) )
-            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:3270:2: ( ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) ) )
+            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
             {
-            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
-            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:3271:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) ) )
+            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
             {
-            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
-            // InternalRMParser.g:3273:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:3272:3: ( ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?) )
+            // InternalRMParser.g:3273:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
             {
              
             			  getUnorderedGroupHelper().enter(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup());
             			
-            // InternalRMParser.g:3276:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
-            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?
+            // InternalRMParser.g:3276:4: ( ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?)
+            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+ {...}?
             {
-            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+
+            // InternalRMParser.g:3277:5: ( ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_3= Inputs this_BEGIN_4= RULE_BEGIN ( (lv_inputs_5_0= ruleEPropertyAssignments ) ) this_END_6= RULE_END ) ) ) ) )+
             int cnt26=0;
             loop26:
             do {
@@ -8327,44 +8327,44 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
                 switch (alt26) {
             	case 1 :
-            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
             	    {
-            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
-            	    // InternalRMParser.g:3279:4: {...}? => ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:3278:3: ({...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) ) )
+            	    // InternalRMParser.g:3279:4: {...}? => ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "getUnorderedGroupHelper().canSelect(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0)");
             	    }
-            	    // InternalRMParser.g:3279:130: ( ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) ) )
-            	    // InternalRMParser.g:3280:5: ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:3279:130: ( ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) ) )
+            	    // InternalRMParser.g:3280:5: ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) )
             	    {
 
             	    					getUnorderedGroupHelper().select(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getUnorderedGroup(), 0);
             	    				
-            	    // InternalRMParser.g:3283:8: ({...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) ) )
-            	    // InternalRMParser.g:3283:9: {...}? => (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:3283:8: ({...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) ) )
+            	    // InternalRMParser.g:3283:9: {...}? => (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleECallOperationActivityDefinitionBody", "true");
             	    }
-            	    // InternalRMParser.g:3283:18: (otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) ) )
-            	    // InternalRMParser.g:3283:19: otherlv_1= Operation ( (lv_name_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:3283:18: (otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) ) )
+            	    // InternalRMParser.g:3283:19: otherlv_1= Operation ( (lv_operation_2_0= ruleEPREFIX_TYPE ) )
             	    {
             	    otherlv_1=(Token)match(input,Operation,FOLLOW_6); 
 
             	    								newLeafNode(otherlv_1, grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationKeyword_0_0());
             	    							
-            	    // InternalRMParser.g:3287:8: ( (lv_name_2_0= ruleEPREFIX_TYPE ) )
-            	    // InternalRMParser.g:3288:9: (lv_name_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:3287:8: ( (lv_operation_2_0= ruleEPREFIX_TYPE ) )
+            	    // InternalRMParser.g:3288:9: (lv_operation_2_0= ruleEPREFIX_TYPE )
             	    {
-            	    // InternalRMParser.g:3288:9: (lv_name_2_0= ruleEPREFIX_TYPE )
-            	    // InternalRMParser.g:3289:10: lv_name_2_0= ruleEPREFIX_TYPE
+            	    // InternalRMParser.g:3288:9: (lv_operation_2_0= ruleEPREFIX_TYPE )
+            	    // InternalRMParser.g:3289:10: lv_operation_2_0= ruleEPREFIX_TYPE
             	    {
 
-            	    										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0());
+            	    										newCompositeNode(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0());
             	    									
             	    pushFollow(FOLLOW_47);
-            	    lv_name_2_0=ruleEPREFIX_TYPE();
+            	    lv_operation_2_0=ruleEPREFIX_TYPE();
 
             	    state._fsp--;
 
@@ -8374,8 +8374,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    										}
             	    										set(
             	    											current,
-            	    											"name",
-            	    											lv_name_2_0,
+            	    											"operation",
+            	    											lv_operation_2_0,
             	    											"org.sodalite.dsl.RM.EPREFIX_TYPE");
             	    										afterParserOrEnumRuleCall();
             	    									

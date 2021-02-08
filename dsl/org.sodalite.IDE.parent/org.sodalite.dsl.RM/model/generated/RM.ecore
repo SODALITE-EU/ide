@@ -191,7 +191,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECallOperationActivityDefinitionBody">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EPREFIX_TYPE"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//EPREFIX_TYPE"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" eType="#//EPropertyAssignments"
         containment="true"/>

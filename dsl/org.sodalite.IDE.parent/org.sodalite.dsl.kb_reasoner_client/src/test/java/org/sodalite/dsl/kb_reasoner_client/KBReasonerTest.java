@@ -414,4 +414,11 @@ class KBReasonerTest {
 		OperationDefinitionData operations = kbclient.getOperationsInInterface(_interface);
 		assertNotNull(operations);
 	}
+
+	@Test
+	void testGetOperations() throws Exception {
+		List<String> modules = Arrays.asList("radon");
+		OperationDefinitionData operations = kbclient.getOperations(modules);
+		assertNotNull(operations);
+	}
 }

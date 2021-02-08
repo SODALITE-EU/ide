@@ -561,7 +561,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ECallOperationActivityDefinitionBody returns ECallOperationActivityDefinitionBody
 	 *
 	 * Constraint:
-	 *     (name=EPREFIX_TYPE | inputs=EPropertyAssignments)+
+	 *     (operation=EPREFIX_TYPE | inputs=EPropertyAssignments)+
 	 */
 	protected void sequence_ECallOperationActivityDefinitionBody(ISerializationContext context, ECallOperationActivityDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -34092,31 +34092,31 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl"
-    // InternalAADMParser.g:11405:1: rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl : ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) ) ;
+    // InternalAADMParser.g:11405:1: rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl : ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) ) ;
     public final void rule__ECallOperationActivityDefinitionBody__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:11409:1: ( ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) ) )
-            // InternalAADMParser.g:11410:1: ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) )
+            // InternalAADMParser.g:11409:1: ( ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) ) )
+            // InternalAADMParser.g:11410:1: ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) )
             {
-            // InternalAADMParser.g:11410:1: ( ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 ) )
-            // InternalAADMParser.g:11411:2: ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 )
+            // InternalAADMParser.g:11410:1: ( ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 ) )
+            // InternalAADMParser.g:11411:2: ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 )
             {
-             before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameAssignment_0_1()); 
-            // InternalAADMParser.g:11412:2: ( rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 )
-            // InternalAADMParser.g:11412:3: rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1
+             before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationAssignment_0_1()); 
+            // InternalAADMParser.g:11412:2: ( rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 )
+            // InternalAADMParser.g:11412:3: rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1
             {
             pushFollow(FOLLOW_2);
-            rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1();
+            rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameAssignment_0_1()); 
+             after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationAssignment_0_1()); 
 
             }
 
@@ -75222,9 +75222,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ECallOperationActivityDefinition__OperationAssignment_2"
 
 
-    // $ANTLR start "rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1"
-    // InternalAADMParser.g:24612:1: rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
-    public final void rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1() throws RecognitionException {
+    // $ANTLR start "rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1"
+    // InternalAADMParser.g:24612:1: rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    public final void rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -75235,13 +75235,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:24617:2: ( ruleEPREFIX_TYPE )
             // InternalAADMParser.g:24618:3: ruleEPREFIX_TYPE
             {
-             before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0()); 
+             before(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEPREFIX_TYPE();
 
             state._fsp--;
 
-             after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getNameEPREFIX_TYPEParserRuleCall_0_1_0()); 
+             after(grammarAccess.getECallOperationActivityDefinitionBodyAccess().getOperationEPREFIX_TYPEParserRuleCall_0_1_0()); 
 
             }
 
@@ -75260,7 +75260,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ECallOperationActivityDefinitionBody__NameAssignment_0_1"
+    // $ANTLR end "rule__ECallOperationActivityDefinitionBody__OperationAssignment_0_1"
 
 
     // $ANTLR start "rule__ECallOperationActivityDefinitionBody__InputsAssignment_1_2"

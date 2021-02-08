@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = OperationDefinitionJsonDeserializer.class)
 public class OperationDefinition extends KBEntity {
 	String description;
+	String definedIn;
 
 	public String getDescription() {
 		return description;
@@ -26,6 +27,14 @@ public class OperationDefinition extends KBEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getDefinedIn() {
+		return definedIn;
+	}
+
+	public void setDefinedIn(String definedIn) {
+		this.definedIn = definedIn;
 	}
 
 }
