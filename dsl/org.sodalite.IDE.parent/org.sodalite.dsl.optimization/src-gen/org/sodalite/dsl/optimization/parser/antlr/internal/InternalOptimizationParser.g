@@ -655,6 +655,12 @@ ruleEACCType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getFpgaKeyword_2());
 		}
+		    |
+		kw=None
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getEACCTypeAccess().getNoneKeyword_3());
+		}
 	)
 ;
 
@@ -3088,10 +3094,16 @@ ruleEMPILibrary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
 			newLeafNode(kw, grammarAccess.getEMPILibraryAccess().getMvapchKeyword_0());
 		}
 		    |
-		kw=Opnmpi
+		kw=Openmpi
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEMPILibraryAccess().getOpnmpiKeyword_1());
+			newLeafNode(kw, grammarAccess.getEMPILibraryAccess().getOpenmpiKeyword_1());
+		}
+		    |
+		kw=Mpich
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getEMPILibraryAccess().getMpichKeyword_2());
 		}
 	)
 ;

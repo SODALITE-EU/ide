@@ -44,6 +44,7 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Cray", "'cray'");
 		tokenNameToValue.put("Etl", "'etl:'");
 		tokenNameToValue.put("Fpga", "'fpga'");
+		tokenNameToValue.put("None", "'none'");
 		tokenNameToValue.put("Xla", "'xla:'");
 		tokenNameToValue.put("Block", "'block'");
 		tokenNameToValue.put("Cifar", "'cifar'");
@@ -53,6 +54,7 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Keras", "'keras'");
 		tokenNameToValue.put("Large", "'large'");
 		tokenNameToValue.put("Mnist", "'mnist'");
+		tokenNameToValue.put("Mpich", "'mpich'");
 		tokenNameToValue.put("Mxnet", "'mxnet'");
 		tokenNameToValue.put("Power", "'power'");
 		tokenNameToValue.put("Size", "'size:'");
@@ -67,12 +69,12 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 		tokenNameToValue.put("Nvidia", "'nvidia'");
 		tokenNameToValue.put("Opencl", "'opencl'");
 		tokenNameToValue.put("Openmp", "'openmp'");
-		tokenNameToValue.put("Opnmpi", "'opnmpi'");
 		tokenNameToValue.put("Simple", "'simple'");
 		tokenNameToValue.put("Tuner", "'tuner:'");
 		tokenNameToValue.put("Config", "'config:'");
 		tokenNameToValue.put("Layers", "'layers:'");
 		tokenNameToValue.put("Openacc", "'openacc'");
+		tokenNameToValue.put("Openmpi", "'openmpi'");
 		tokenNameToValue.put("Pytorch", "'pytorch'");
 		tokenNameToValue.put("Restart", "'restart'");
 		tokenNameToValue.put("Autotune", "'autotune'");
@@ -1382,6 +1384,12 @@ rule__EACCType__Alternatives
 		Fpga
 		{ after(grammarAccess.getEACCTypeAccess().getFpgaKeyword_2()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getEACCTypeAccess().getNoneKeyword_3()); }
+		None
+		{ after(grammarAccess.getEACCTypeAccess().getNoneKeyword_3()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1606,9 +1614,15 @@ rule__EMPILibrary__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getEMPILibraryAccess().getOpnmpiKeyword_1()); }
-		Opnmpi
-		{ after(grammarAccess.getEMPILibraryAccess().getOpnmpiKeyword_1()); }
+		{ before(grammarAccess.getEMPILibraryAccess().getOpenmpiKeyword_1()); }
+		Openmpi
+		{ after(grammarAccess.getEMPILibraryAccess().getOpenmpiKeyword_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getEMPILibraryAccess().getMpichKeyword_2()); }
+		Mpich
+		{ after(grammarAccess.getEMPILibraryAccess().getMpichKeyword_2()); }
 	)
 ;
 finally {

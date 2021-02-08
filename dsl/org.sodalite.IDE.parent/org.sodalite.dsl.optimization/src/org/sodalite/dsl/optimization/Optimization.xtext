@@ -69,7 +69,7 @@ ECPUType:
 	'x86' | 'arm' | 'amd' | 'power' ;
 	
 EACCType:
-	'nvidia' | 'amd' | 'fpga' ;
+	'nvidia' | 'amd' | 'fpga' | 'none';
 
 EAutotuning:
 	('tuner:' tuner=ETuner) &
@@ -258,7 +258,7 @@ EMPI:
 ;
 
 EMPILibrary:
-	'mvapch' | 'opnmpi' ;
+	'mvapch' | 'openmpi' | 'mpich';
 	
 EMPIMessageSize:
 	'small' | 'medium' | 'large';
