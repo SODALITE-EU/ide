@@ -524,7 +524,7 @@ public class RMBackendProxy {
 		});
 	}
 
-	protected void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
+	public void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
 		if (info != null)
 			RMBackendProxy.pasteInClipboard(info);
 		Display.getDefault().asyncExec(new Runnable() {
