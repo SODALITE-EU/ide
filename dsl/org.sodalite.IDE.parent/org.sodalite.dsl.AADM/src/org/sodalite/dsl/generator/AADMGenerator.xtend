@@ -143,6 +143,10 @@ class AADMGenerator extends AbstractGenerator {
 		«p.compile»
 	«ENDFOR»
 	
+	«FOR i:r.allContents.toIterable.filter(GetInput)»
+		«i.compile»
+	«ENDFOR»
+	
 	«FOR p:r.allContents.toIterable.filter(EParameterDefinition)»
 		«p.compileInput»
 	«ENDFOR»
@@ -206,9 +210,9 @@ class AADMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
 	  «IF p.property.req_cap.module !== null»
-	  exchange:listValue '«lastSegment(p.property.req_cap.type, '.')»' ; 
+	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
 	  «ELSE»
-	  exchange:listValue "«p.property.req_cap.type»" ; 
+	  exchange:value "«p.property.req_cap.type»" ; 
 	  «ENDIF» 
 	.
 	«ENDIF»		
@@ -374,7 +378,7 @@ class AADMGenerator extends AbstractGenerator {
 	    «ENDFOR»	  
 	  «ELSEIF p.value instanceof EFunction»
 	  	«IF p.value instanceof GetInput»
-	  	exchange:value "{ get_input: «(p.value as GetInput).input.name» }" ;
+	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ELSEIF p.value instanceof GetProperty»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
 	  	«ENDIF»
@@ -782,15 +786,24 @@ class AADMGenerator extends AbstractGenerator {
 	  		«ENDFOR»
 	  «ELSEIF a.value instanceof EMAP»
 	    «FOR entry:(a.value as EMAP).map»
-	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
+	    exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF a.value instanceof EFunction»
 	  	«IF a.value instanceof GetInput»
-	  	exchange:value "{ get_input: «(a.value as GetInput).input.name» }" ;
+	  	exchange:hasParameter :Parameter_«getParameterNumber(a.value, "name")» ;
 	  	«ENDIF»
 	  «ELSEIF a.value instanceof ESingleValue»
-	  	exchange:value "«trim((a.value as ESingleValue).compile().toString)»" ;
+	  exchange:value "«trim((a.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
+	.
+	'''
+	
+	def compile (GetInput gi)'''
+	«putParameterNumber(gi, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_input" ;
+	  exchange:hasValue "«gi.input.name»";
 	.
 	'''
 	
