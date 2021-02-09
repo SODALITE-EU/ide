@@ -95,6 +95,7 @@ public class KBReasonerClient implements KBReasoner {
 	private RestTemplate sslRestTemplate;
 	private String kbReasonerUri;
 	private String iacUri;
+	private String image_builder_uri;
 	private String xoperaUri;
 	private String keycloakUri;
 	private String keycloak_user;
@@ -104,10 +105,11 @@ public class KBReasonerClient implements KBReasoner {
 	private String aai_token;
 	private Boolean IAM_enabled = false;
 
-	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri)
-			throws Exception {
+	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
+			String keycloakUri) throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
+		this.image_builder_uri = image_builder_uri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
 	}
@@ -778,10 +780,17 @@ public class KBReasonerClient implements KBReasoner {
 			throws Exception {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = iacUri + "parse";
-		// FIXME create Json content
 		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
 		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, new URI(url),
 				HttpStatus.OK);
+	}
+
+	@Override
+	public void buildImage(String image_build_conf) throws Exception {
+		Assert.notNull(image_build_conf, "Pass a not null image_build_conf");
+		String url = image_builder_uri + "build";
+		// FIXME support return type
+		postObjectAndReturnAnotherType(image_build_conf, void.class, new URI(url), HttpStatus.OK);
 	}
 
 	@Override

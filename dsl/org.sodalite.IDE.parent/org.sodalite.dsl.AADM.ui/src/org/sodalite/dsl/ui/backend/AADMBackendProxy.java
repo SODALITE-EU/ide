@@ -64,6 +64,7 @@ import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.ui.helper.AADMHelper;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -271,9 +272,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					subMonitor.worked(2);
 
 					// Ask ImageBuilder to build the images
-					// TODO
 					subMonitor.setTaskName("Building AADM images");
-					String imageBuildConf = readFile(imageBuildConfPath);
+					String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
+					// FIXME support image build
+//					getKBReasoner().buildImage(imageBuildConf);
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");

@@ -9,6 +9,8 @@ public class PreferenceConstants {
 
 	public static final String IaC_URI = "IaCURI";
 
+	public static final String Image_Builder_URI = "ImageBuilderURI";
+
 	public static final String xOPERA_URI = "XOperaURI";
 
 	public static final String KEYCLOAK_URI = "KeyCloakURI";

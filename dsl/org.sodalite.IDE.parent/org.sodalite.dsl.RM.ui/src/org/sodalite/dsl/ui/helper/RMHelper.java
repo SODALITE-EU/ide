@@ -79,6 +79,10 @@ public class RMHelper {
 		return content;
 	}
 
+	public static String readFile(Path path) throws IOException {
+		return new String(Files.readAllBytes(path));
+	}
+
 	public static String convertType(EDataTypeName eDataTypeName) {
 		if (eDataTypeName instanceof EPREFIX_TYPE) {
 			EPREFIX_TYPE ePrefix_Type = (EPREFIX_TYPE) eDataTypeName;

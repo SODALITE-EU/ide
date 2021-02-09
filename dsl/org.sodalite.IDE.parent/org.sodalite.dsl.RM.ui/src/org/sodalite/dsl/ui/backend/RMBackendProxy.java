@@ -110,6 +110,10 @@ public class RMBackendProxy {
 		if (iacURI.isEmpty())
 			raiseConfigurationIssue("IaC URI user not set");
 
+		String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
+		if (image_builder_URI.isEmpty())
+			raiseConfigurationIssue("Image Builder URI user not set");
+
 		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
 		if (xoperaURI.isEmpty())
 			raiseConfigurationIssue("xOpera URI user not set");
@@ -118,7 +122,8 @@ public class RMBackendProxy {
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
 
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
+				keycloakURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

@@ -57,6 +57,7 @@ class KBReasonerTest {
 
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://154.48.185.202:8080/";
+	private final String image_builder__URI = ""; // FIXME set default value
 	private final String xOPERA_URI = "http://154.48.185.209:5001/";
 	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
 
@@ -69,7 +70,7 @@ class KBReasonerTest {
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,

@@ -119,4 +119,6 @@ public interface KBReasoner {
 	OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception;
 
 	OperationDefinitionData getOperations(List<String> modules) throws Exception;
+
+	void buildImage(String image_build_conf) throws Exception;
 }
