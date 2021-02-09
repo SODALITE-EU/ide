@@ -3,6 +3,7 @@ package org.sodalite.dsl.ui.wizards;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
@@ -32,12 +33,17 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private Composite container;
 	private SortedMap<String, InputDef> inputDefs;
 	private Map<String, Text> inputWidgets = new HashMap<>();
+	private Path imageBuildConfPath = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
 		setTitle("AADM Deployment");
 		setDescription("Provide inputs for the AADM");
 		this.inputDefs = inputDefs;
+	}
+
+	public Path getImageBuildConfPath() {
+		return this.imageBuildConfPath;
 	}
 
 	public Map<String, String> getInputs() {
@@ -58,12 +64,50 @@ public class DeploymentWizardMainPage extends WizardPage {
 	public void createControl(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 2;
+		layout.numColumns = 3;
 		container.setLayout(layout);
 
+		// Image Build Configuration
+		Label imageBuildConfLabel = new Label(container, SWT.NONE);
+		imageBuildConfLabel.setText("Select a image build configuration:");
+
+		Text imageBuildConfText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);
+		imageBuildConfText.setLayoutData(imageBuildConfGridData);
+
+		imageBuildConfText.addModifyListener(new ModifyListener() {
+			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+				getWizard().getContainer().updateButtons();
+			};
+		});
+
+		Button buttonSelectImageBuildConfFile = new Button(container, SWT.PUSH);
+		buttonSelectImageBuildConfFile.setText("Select...");
+		buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event event) {
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
+				String fileFilterPath = System.getProperty("user.home");
+				fileDialog.setFilterPath(fileFilterPath);
+				fileDialog.setFilterExtensions(new String[] { "*.json", "*.*" });
+
+				String selectedInputFile = fileDialog.open();
+				if (selectedInputFile != null) {
+					System.out.println("Selected image build conf file: " + selectedInputFile);
+					File file = new File(selectedInputFile);
+					imageBuildConfPath = file.toPath();
+					imageBuildConfText.setText(selectedInputFile);
+				}
+			}
+		});
+
 		// Inputs file
-		Label fileLabel = new Label(container, SWT.NONE);
-		fileLabel.setText("Select an inputs file:");
+		Label inputsFileLabel = new Label(container, SWT.NONE);
+		inputsFileLabel.setText("Select an inputs file:");
+
+		Text inputsFileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		GridData inputsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
+		inputsFileText.setLayoutData(inputsFileGridData);
 
 		Button buttonSelectFile = new Button(container, SWT.PUSH);
 		buttonSelectFile.setText("Select...");
@@ -81,6 +125,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 				String selectedInputFile = fileDialog.open();
 				if (selectedInputFile != null) {
 					System.out.println("Selected inputs file: " + selectedInputFile);
+					inputsFileText.setText(selectedInputFile);
 					File file = new File(selectedInputFile);
 					// Read inputs from file
 					try (Stream<String> lines = Files.lines(file.toPath())) {
@@ -130,7 +175,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 		FontData fontData = inputsLabel.getFont().getFontData()[0];
 		Font font = new Font(container.getDisplay(), new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
 		inputsLabel.setFont(font);
-		data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+		data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
 		inputsLabel.setLayoutData(data);
 
 		for (String input : inputDefs.keySet()) {
@@ -144,12 +189,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 			if (inputType != null && (inputType.contains("map") || inputType.contains("list"))) {
 				int number_lines = 5;
 				text = new Text(container, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
-				GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+				GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 				gridData.heightHint = number_lines * text.getLineHeight();
 				text.setLayoutData(gridData);
 			} else {
 				text = new Text(container, SWT.BORDER | SWT.SINGLE);
-				GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+				GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 				text.setLayoutData(gd);
 			}
 			text.setText("");

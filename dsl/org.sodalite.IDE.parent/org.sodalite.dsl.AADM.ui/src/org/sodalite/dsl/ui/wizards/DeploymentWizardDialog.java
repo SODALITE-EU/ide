@@ -23,9 +23,13 @@ public class DeploymentWizardDialog extends WizardDialog {
 		finishButton.setText("Deploy");
 
 	}
-	
-	public Path getInputsFile (){
+
+	public Path getInputsFile() {
 		return ((DeploymentWizard) this.getWizard()).getInputsFile();
+	}
+
+	public Path getImageBuildConfPath() {
+		return ((DeploymentWizard) this.getWizard()).getImageBuildConfPath();
 	}
 
 }

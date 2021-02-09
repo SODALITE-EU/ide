@@ -800,6 +800,10 @@ public class KBReasonerClient implements KBReasoner {
 
 		HttpHeaders xmlHeaders = new HttpHeaders();
 		xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			xmlHeaders.setBearerAuth(this.aai_token);
+		}
 		HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
 
 		parts.add("inputs_file", fileEntity);
@@ -1153,7 +1157,13 @@ public class KBReasonerClient implements KBReasoner {
 	 * @throws KeyManagementException
 	 */
 	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws Exception {
-		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).accept(MediaType.APPLICATION_JSON).build();
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).headers(headers)
+				.accept(MediaType.APPLICATION_JSON).build();
 		if (uri.getScheme().equals("https"))
 			return getSslRestTemplate().exchange(request, clazz);
 		else
@@ -1286,7 +1296,13 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	private <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
-		RequestEntity<S> request = RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON).body(object);
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+		RequestEntity<S> request = RequestEntity.post(uri).headers(headers).contentType(MediaType.APPLICATION_JSON)
+				.body(object);
 		if (uri.getScheme().equals("https"))
 			return (ResponseEntity<T>) getSslRestTemplate().exchange(request, clazz);
 		else

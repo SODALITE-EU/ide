@@ -16,6 +16,7 @@ public class DeploymentWizard extends Wizard {
 	protected DeploymentWizardMainPage mainPage;
 	private SortedMap<String, InputDef> inputDefs;
 	private Path inputsFile = null;
+	private Path imageBuildConfPath = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -36,9 +37,13 @@ public class DeploymentWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
+		boolean result = true;
+		// Check imageBuildConfPath is set
+		result = mainPage.getImageBuildConfPath() != null;
+
 		// Check all inputs are filled in
 		Map<String, String> inputs = mainPage.getInputs();
-		return inputs.keySet().stream().allMatch(key -> isValidInput(key, inputs.get(key)));
+		return result && inputs.keySet().stream().allMatch(key -> isValidInput(key, inputs.get(key)));
 	}
 
 	private boolean isValidInput(String input, String value) {
@@ -51,6 +56,9 @@ public class DeploymentWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
+		// Get imageBuildConfPath
+		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
+
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
@@ -68,6 +76,10 @@ public class DeploymentWizard extends Wizard {
 
 	public Path getInputsFile() {
 		return this.inputsFile;
+	}
+
+	public Path getImageBuildConfPath() {
+		return this.imageBuildConfPath;
 	}
 
 }

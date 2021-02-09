@@ -8,6 +8,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -39,7 +40,7 @@ public class AADMDeployHandler implements IHandler {
 				// Show DeploymentWizard
 				// Wizard should select the Inputs file or generate them from the form
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
+				IFile aadmFile = AADMHelper.getSelectedFile();
 				// Read input definitions from AADM
 				// Show wizard
 				SortedMap<String, InputDef> inputDefs = AADMHelper.readInputsFromAADM(event);
@@ -48,7 +49,8 @@ public class AADMDeployHandler implements IHandler {
 				if (dialog.OK == dialog.open()) {
 					// Get inputs (file) from Wizard and save them in temporal file
 					Path inputs_yaml_path = dialog.getInputsFile();
-					backendProxy.processDeployAADM(event, inputs_yaml_path);
+					Path imageBuildConfPath = dialog.getImageBuildConfPath();
+					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
 				}
