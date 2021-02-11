@@ -94,7 +94,8 @@ public interface KBReasoner {
 
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception;
 
-	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception;
+	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token, String version_id, int workers)
+			throws Exception;
 
 	DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception;
 

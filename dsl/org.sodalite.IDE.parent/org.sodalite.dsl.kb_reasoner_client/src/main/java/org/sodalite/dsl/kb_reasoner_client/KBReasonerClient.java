@@ -794,10 +794,19 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception {
+	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token, String version_id, int workers)
+			throws Exception {
 		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
 		Assert.notNull(blueprint_token, "Pass a not null blueprint_token");
-		String url = xoperaUri + "deploy/" + blueprint_token;
+		String url = xoperaUri + "/deployment/deploy/" + blueprint_token;
+		boolean parameterAdded = false;
+		if (version_id != null && !version_id.isEmpty()) {
+			url += "?version_id=" + version_id;
+			parameterAdded = true;
+		}
+		if (workers >= 0) {
+			url += (!parameterAdded) ? "?workers=" + workers : "&workers=" + workers;
+		}
 		LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
 		Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
@@ -825,7 +834,7 @@ public class KBReasonerClient implements KBReasoner {
 	public DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception {
 		DeploymentStatus deploymentStatus = DeploymentStatus.FAILED;
 		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = xoperaUri + "info/status?token=" + session_token;
+		String url = xoperaUri + "deployment/" + session_token + "/status";
 		try {
 			HttpStatus status = getStatusOfURI(new URI(url));
 			if (status == HttpStatus.CREATED) {

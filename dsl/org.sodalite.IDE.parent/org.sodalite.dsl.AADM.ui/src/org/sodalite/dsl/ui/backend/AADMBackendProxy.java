@@ -131,8 +131,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
-	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath)
-			throws Exception {
+	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
+			String version_tag, int workers) throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -143,7 +143,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, project, event);
+		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers, project,
+				event);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -222,7 +223,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
-			Path imageBuildConfPath, IProject project, ExecutionEvent event) {
+			Path imageBuildConfPath, String version_tag, int workers, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -293,7 +294,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
-					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
+					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken(),
+							version_tag, workers);
 					admin_report[1] = depl_report.getSession_token();
 					message = "xOpera session token: " + depl_report.getSession_token();
 					SodaliteLogger.log(message);

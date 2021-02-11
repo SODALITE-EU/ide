@@ -32,4 +32,12 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getImageBuildConfPath();
 	}
 
+	public String getVersionTag() {
+		return ((DeploymentWizard) this.getWizard()).getVersionTag();
+	}
+
+	public int getWorkers() {
+		return ((DeploymentWizard) this.getWizard()).getWorkers();
+	}
+
 }

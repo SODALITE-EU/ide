@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
@@ -34,6 +35,8 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private SortedMap<String, InputDef> inputDefs;
 	private Map<String, Text> inputWidgets = new HashMap<>();
 	private Path imageBuildConfPath = null;
+	private Spinner workersSpinner = null;
+	private Text versionTagText = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
@@ -44,6 +47,18 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 	public Path getImageBuildConfPath() {
 		return this.imageBuildConfPath;
+	}
+
+	public String getVersionTag() {
+		return this.versionTagText.getText();
+	}
+
+	public int getWorkers() {
+		try {
+			return Integer.valueOf(this.workersSpinner.getText());
+		} catch (Exception ex) {
+			return 0;
+		}
 	}
 
 	public Map<String, String> getInputs() {
@@ -67,6 +82,24 @@ public class DeploymentWizardMainPage extends WizardPage {
 		layout.numColumns = 3;
 		container.setLayout(layout);
 
+		// Version tag
+		Label versionTagLabel = new Label(container, SWT.NONE);
+		versionTagLabel.setText("Version tag (optional):");
+
+		versionTagText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		GridData versionTagGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		versionTagText.setLayoutData(versionTagGridData);
+
+		// Workers
+		Label workersLabel = new Label(container, SWT.NONE);
+		workersLabel.setText("Number orchestrator workers (optional):");
+
+		workersSpinner = new Spinner(container, SWT.BORDER | SWT.SINGLE);
+		GridData workersGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		workersSpinner.setLayoutData(workersGridData);
+		workersSpinner.setMinimum(0);
+		// workersSpinner.setMaximum(10);
+
 		// Image Build Configuration
 		Label imageBuildConfLabel = new Label(container, SWT.NONE);
 		imageBuildConfLabel.setText("Select a image build configuration (optional):");
@@ -75,11 +108,11 @@ public class DeploymentWizardMainPage extends WizardPage {
 		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);
 		imageBuildConfText.setLayoutData(imageBuildConfGridData);
 
-		imageBuildConfText.addModifyListener(new ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-				getWizard().getContainer().updateButtons();
-			};
-		});
+//		imageBuildConfText.addModifyListener(new ModifyListener() {
+//			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+//				getWizard().getContainer().updateButtons();
+//			};
+//		});
 
 		Button buttonSelectImageBuildConfFile = new Button(container, SWT.PUSH);
 		buttonSelectImageBuildConfFile.setText("Select...");

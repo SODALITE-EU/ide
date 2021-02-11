@@ -17,6 +17,8 @@ public class DeploymentWizard extends Wizard {
 	private SortedMap<String, InputDef> inputDefs;
 	private Path inputsFile = null;
 	private Path imageBuildConfPath = null;
+	private String versionTag = null;
+	private int workers = 0;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -55,6 +57,12 @@ public class DeploymentWizard extends Wizard {
 		// Get imageBuildConfPath
 		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
 
+		// Get versionTag
+		this.versionTag = mainPage.getVersionTag();
+
+		// Get workers
+		this.workers = mainPage.getWorkers();
+
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
@@ -76,6 +84,14 @@ public class DeploymentWizard extends Wizard {
 
 	public Path getImageBuildConfPath() {
 		return this.imageBuildConfPath;
+	}
+
+	public String getVersionTag() {
+		return this.versionTag;
+	}
+
+	public int getWorkers() {
+		return this.workers;
 	}
 
 }

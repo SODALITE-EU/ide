@@ -50,7 +50,10 @@ public class AADMDeployHandler implements IHandler {
 					// Get inputs (file) from Wizard and save them in temporal file
 					Path inputs_yaml_path = dialog.getInputsFile();
 					Path imageBuildConfPath = dialog.getImageBuildConfPath();
-					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath);
+					String version_tag = dialog.getVersionTag();
+					int workers = dialog.getWorkers();
+					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath, version_tag,
+							workers);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
 				}
