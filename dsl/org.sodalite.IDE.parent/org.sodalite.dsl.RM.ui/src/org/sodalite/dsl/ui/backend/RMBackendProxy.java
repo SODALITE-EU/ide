@@ -253,7 +253,7 @@ public class RMBackendProxy {
 		return path;
 	}
 
-	protected void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+	public void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
@@ -308,7 +308,7 @@ public class RMBackendProxy {
 		job.schedule();
 	}
 
-	protected void processValidationIssues(IFile modelFile, KBSaveReportData saveReport, ExecutionEvent event)
+	public void processValidationIssues(IFile modelFile, KBSaveReportData saveReport, ExecutionEvent event)
 			throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
@@ -518,7 +518,7 @@ public class RMBackendProxy {
 		}
 	}
 
-	protected void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
+	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
 		if (info != null)
 			RMBackendProxy.pasteInClipboard(info);
 		Display.getDefault().asyncExec(new Runnable() {

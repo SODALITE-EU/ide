@@ -37,13 +37,9 @@ public class DeploymentWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
-		boolean result = true;
-		// Check imageBuildConfPath is set
-		result = mainPage.getImageBuildConfPath() != null;
-
 		// Check all inputs are filled in
 		Map<String, String> inputs = mainPage.getInputs();
-		return result && inputs.keySet().stream().allMatch(key -> isValidInput(key, inputs.get(key)));
+		return inputs.keySet().stream().allMatch(key -> isValidInput(key, inputs.get(key)));
 	}
 
 	private boolean isValidInput(String input, String value) {

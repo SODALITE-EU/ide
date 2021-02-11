@@ -69,7 +69,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 		// Image Build Configuration
 		Label imageBuildConfLabel = new Label(container, SWT.NONE);
-		imageBuildConfLabel.setText("Select a image build configuration:");
+		imageBuildConfLabel.setText("Select a image build configuration (optional):");
 
 		Text imageBuildConfText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);

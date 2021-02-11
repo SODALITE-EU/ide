@@ -273,9 +273,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Ask ImageBuilder to build the images
 					subMonitor.setTaskName("Building AADM images");
-					String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
-					// FIXME support image build
-//					getKBReasoner().buildImage(imageBuildConf);
+					if (imageBuildConfPath != null) {
+						String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
+						// FIXME support image build
+						// getKBReasoner().buildImage(imageBuildConf);
+					}
+					subMonitor.worked(3);
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
