@@ -1,5 +1,6 @@
 package org.sodalite.dsl.ui.wizards;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,7 +67,7 @@ public class DeploymentWizard extends Wizard {
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
-			this.inputsFile = Files.createTempFile(null, null);
+			this.inputsFile = File.createTempFile("inputs", null, new File(System.getProperty("user.home"))).toPath();
 			StringBuilder content = new StringBuilder();
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
