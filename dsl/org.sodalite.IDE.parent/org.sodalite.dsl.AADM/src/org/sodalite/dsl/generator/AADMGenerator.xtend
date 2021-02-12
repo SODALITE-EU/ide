@@ -803,7 +803,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "get_input" ;
-	  exchange:hasValue "«gi.input.name»";
+	  exchange:value "«gi.input.name»";
 	.
 	'''
 	
