@@ -1,6 +1,7 @@
 package org.sodalite.dsl.ui.backend;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -299,6 +300,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 					admin_report[1] = depl_report.getSession_token();
 					message = "xOpera session token: " + depl_report.getSession_token();
 					SodaliteLogger.log(message);
+					// Remove temporary inputs file
+					Files.delete(inputs_yaml_path);
 					subMonitor.worked(5);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON

@@ -1,6 +1,5 @@
 package org.sodalite.dsl.ui.handlers;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.SortedMap;
 
@@ -54,8 +53,6 @@ public class AADMDeployHandler implements IHandler {
 					int workers = dialog.getWorkers();
 					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath, version_tag,
 							workers);
-					// Remove temporary inputs file
-					Files.delete(inputs_yaml_path);
 				}
 			}
 		} catch (Exception ex) {

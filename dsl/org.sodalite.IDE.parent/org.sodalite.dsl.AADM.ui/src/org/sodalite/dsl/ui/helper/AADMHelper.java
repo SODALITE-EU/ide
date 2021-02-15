@@ -33,11 +33,12 @@ public class AADMHelper extends RMHelper {
 		AADM_Model aadmModel = readAADMModel(aadmFile, event);
 		AADMHelper helper = new AADMHelper();
 
-		for (EParameterDefinition parameter : aadmModel.getInputs().getInputs()) {
-			String type = convertType(parameter.getParameter().getType());
-			InputDef inDef = helper.new InputDef(parameter.getName(), type, parameter.getParameter().getDefault());
-			inputs.put(parameter.getName(), inDef);
-		}
+		if (aadmModel.getInputs() != null)
+			for (EParameterDefinition parameter : aadmModel.getInputs().getInputs()) {
+				String type = convertType(parameter.getParameter().getType());
+				InputDef inDef = helper.new InputDef(parameter.getName(), type, parameter.getParameter().getDefault());
+				inputs.put(parameter.getName(), inDef);
+			}
 
 		return inputs;
 	}
