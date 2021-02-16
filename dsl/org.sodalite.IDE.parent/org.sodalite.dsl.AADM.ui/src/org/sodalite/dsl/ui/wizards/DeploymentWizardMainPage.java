@@ -98,7 +98,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 		GridData workersGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		workersSpinner.setLayoutData(workersGridData);
 		workersSpinner.setMinimum(0);
-		// workersSpinner.setMaximum(10);
+		workersSpinner.setSelection(1);
 
 		// Image Build Configuration
 		Label imageBuildConfLabel = new Label(container, SWT.NONE);
