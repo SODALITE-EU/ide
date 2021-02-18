@@ -48,7 +48,7 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
@@ -297,8 +297,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 					subMonitor.setTaskName("Deploying AADM");
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken(),
 							version_tag, workers);
-					admin_report[1] = depl_report.getSession_token();
-					message = "xOpera session token: " + depl_report.getSession_token();
+					admin_report[1] = depl_report.getDeployment_id();
+					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
@@ -306,13 +306,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
-					DeploymentStatus status = getKBReasoner().getAADMDeploymentStatus(depl_report.getSession_token());
-					while (status == DeploymentStatus.IN_PROGRESS) {
-						status = getKBReasoner().getAADMDeploymentStatus(depl_report.getSession_token());
+					DeploymentStatusReport dsr = getKBReasoner()
+							.getAADMDeploymentStatus(depl_report.getDeployment_id());
+					while (!dsr.getState().equals("success")) {
+						if (dsr.getState().equals("failed"))
+							throw new Exception("Deployment failed as reported by xOpera");
 						TimeUnit.SECONDS.sleep(5);
+						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
-					if (status == DeploymentStatus.FAILED)
-						throw new Exception("Deployment failed as reported by xOpera");
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {

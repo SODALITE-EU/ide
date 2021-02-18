@@ -18,7 +18,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -94,10 +94,10 @@ public interface KBReasoner {
 
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json) throws Exception;
 
-	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token, String version_id, int workers)
+	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
 			throws Exception;
 
-	DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception;
+	DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws Exception;
 
 	ModelData getModelForResource(String resource, String module) throws Exception;
 

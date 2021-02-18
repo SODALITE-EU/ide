@@ -31,7 +31,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
@@ -382,15 +382,15 @@ class KBReasonerTest {
 		String version_id = "snow_deploy";
 		int workers = 5;
 		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers);
-		assertNotNull(report.getSession_token());
+		assertNotNull(report.getDeployment_id());
 	}
 
 	@Test
 	@Ignore
 	void testGetAADMDeploymentStatus() throws Exception {
 		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
-		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
-		assertNotNull(status);
+		DeploymentStatusReport dsr = kbclient.getAADMDeploymentStatus(session_token);
+		assertNotNull(dsr);
 	}
 
 	@Test

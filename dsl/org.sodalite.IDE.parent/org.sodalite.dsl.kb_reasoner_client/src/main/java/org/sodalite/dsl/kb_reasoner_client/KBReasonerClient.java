@@ -40,7 +40,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -794,19 +794,18 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token, String version_id, int workers)
+	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
 			throws Exception {
 		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
-		Assert.notNull(blueprint_token, "Pass a not null blueprint_token");
-		String url = xoperaUri + "/deployment/deploy/" + blueprint_token;
-		boolean parameterAdded = false;
-		if (version_id != null && !version_id.isEmpty()) {
-			url += "?version_id=" + version_id;
-			parameterAdded = true;
-		}
-		if (workers >= 0) {
-			url += (!parameterAdded) ? "?workers=" + workers : "&workers=" + workers;
-		}
+		Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
+		String url = xoperaUri + "/deployment/deploy?blueprint_id=" + blueprint_id;
+
+		if (version_id != null && !version_id.isEmpty())
+			url += "&version_id=" + version_id;
+
+		if (workers >= 0)
+			url += "&workers=" + workers;
+
 		LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
 		Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
@@ -831,19 +830,14 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception {
-		DeploymentStatus deploymentStatus = DeploymentStatus.FAILED;
-		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = xoperaUri + "deployment/" + session_token + "/status";
+	public DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws Exception {
+		DeploymentStatusReport deploymentStatus = null;
+		Assert.notNull(deployment_id, "Pass a not null deployment_id");
+		String url = xoperaUri + "deployment/" + deployment_id + "/status";
 		try {
-			HttpStatus status = getStatusOfURI(new URI(url));
-			if (status == HttpStatus.CREATED) {
-				deploymentStatus = DeploymentStatus.DONE;
-			} else if (status == HttpStatus.ACCEPTED) {
-				deploymentStatus = DeploymentStatus.IN_PROGRESS;
-			}
+			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.ACCEPTED);
 		} catch (Exception e) {
-			// Ignored
+			throw e;
 		}
 
 		return deploymentStatus;
@@ -1233,16 +1227,16 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-	private HttpStatus getStatusOfURI(URI uri) throws Exception {
-		try {
-			Assert.notNull(uri, "Provide a valid uri");
-			return getJSONMessage(uri, String.class).getStatusCode();
-		} catch (Exception e) {
-			log.info("There was a problem getting JSON object(s) in uri: " + uri);
-			log.error(e.getMessage(), e);
-			throw e;
-		}
-	}
+//	private HttpStatus getStatusOfURI(URI uri) throws Exception {
+//		try {
+//			Assert.notNull(uri, "Provide a valid uri");
+//			return getJSONMessage(uri, String.class).getStatusCode();
+//		} catch (Exception e) {
+//			log.info("There was a problem getting JSON object(s) in uri: " + uri);
+//			log.error(e.getMessage(), e);
+//			throw e;
+//		}
+//	}
 
 	private <T, S> S postObjectAndReturnAnotherType(T object, Class<S> returnedType, URI uri, HttpStatus expectedStatus)
 			throws Exception {
@@ -1293,6 +1287,10 @@ public class KBReasonerClient implements KBReasoner {
 			HttpMethod method, HttpStatus expectedStatus) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
 
 		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<MultiValueMap<String, Object>>(parts,
 				headers);
