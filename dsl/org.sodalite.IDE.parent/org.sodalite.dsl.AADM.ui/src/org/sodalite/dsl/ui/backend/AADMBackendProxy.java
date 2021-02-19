@@ -311,17 +311,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 					subMonitor.setTaskName("Generating AADM blueprint");
 					IaCBuilderAADMRegistrationReport iacReport = getKBReasoner()
 							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
-					if (iacReport == null || iacReport.getToken().isEmpty())
+					if (iacReport == null || iacReport.getBlueprint_id().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
-					admin_report[0] = iacReport.getToken();
-					String message = "IaC Builder blueprint token: " + iacReport.getToken();
+					admin_report[0] = iacReport.getBlueprint_id();
+					String message = "IaC Builder blueprint id: " + iacReport.getBlueprint_id();
 					SodaliteLogger.log(message);
 					subMonitor.worked(steps++);
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
-					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken(),
-							version_tag, workers);
+					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path,
+							iacReport.getBlueprint_id(), version_tag, workers);
 					admin_report[1] = depl_report.getDeployment_id();
 					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
