@@ -15,6 +15,8 @@ import java.util.List;
 
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -121,5 +123,7 @@ public interface KBReasoner {
 
 	OperationDefinitionData getOperations(List<String> modules) throws Exception;
 
-	void buildImage(String image_build_conf) throws Exception;
+	BuildImageReport buildImage(String image_build_conf) throws Exception;
+
+	BuildImageStatus checkBuildImageStatus(String session_token) throws Exception;
 }

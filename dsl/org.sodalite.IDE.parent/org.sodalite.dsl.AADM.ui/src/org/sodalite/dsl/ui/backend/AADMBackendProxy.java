@@ -47,6 +47,8 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -148,6 +150,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 				event);
 	}
 
+	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
+		saveImages(imageBuildConfPath, event);
+	}
+
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
@@ -230,7 +236,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
-				SubMonitor subMonitor = SubMonitor.convert(monitor, 6);
+				int steps = 1;
+				int number_steps = 5;
+				if (imageBuildConfPath != null)
+					number_steps = 7;
+
+				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
 
 				try {
@@ -260,7 +271,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
 					saveURI(saveReport.getURI(), aadmfile, project);
-					subMonitor.worked(1);
+					subMonitor.worked(steps++);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
@@ -271,16 +282,30 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Files.write(Paths.get(System.getProperty("user.dir") + "/" + submissionId +
 					// ".json"), aadmJson.getBytes());
 
-					subMonitor.worked(2);
+					subMonitor.worked(steps++);
 
 					// Ask ImageBuilder to build the images
-					subMonitor.setTaskName("Building AADM images");
 					if (imageBuildConfPath != null) {
 						String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
-						// FIXME support image build
-						// getKBReasoner().buildImage(imageBuildConf);
+						// Ask ImageBuilder to build the images
+						subMonitor.setTaskName("Requesting the creation of images");
+
+						BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
+
+						subMonitor.worked(steps++);
+
+						// Ask ImageBuilder status
+						subMonitor.setTaskName("Checking image creation status");
+
+						BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						while (!(biStatus == BuildImageStatus.DONE)) {
+							if (biStatus == BuildImageStatus.FAILED)
+								throw new Exception("Build image failed as reported by Image Builder");
+							TimeUnit.SECONDS.sleep(5);
+							biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						}
+						subMonitor.worked(steps++);
 					}
-					subMonitor.worked(3);
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
@@ -291,7 +316,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					admin_report[0] = iacReport.getToken();
 					String message = "IaC Builder blueprint token: " + iacReport.getToken();
 					SodaliteLogger.log(message);
-					subMonitor.worked(4);
+					subMonitor.worked(steps++);
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
@@ -302,7 +327,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					SodaliteLogger.log(message);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
-					subMonitor.worked(5);
+					subMonitor.worked(steps++);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -343,6 +368,64 @@ public class AADMBackendProxy extends RMBackendProxy {
 						}
 					});
 					SodaliteLogger.log("Error deploying model", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void saveImages(Path imageBuildConfPath, ExecutionEvent event) {
+		Job job = new Job("Save images") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				// TODO Inform about percentage of progress
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+
+				try {
+					// Ask ImageBuilder to build the images
+					subMonitor.setTaskName("Requesting the creation of images");
+
+					String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
+					BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
+
+					subMonitor.worked(1);
+
+					// Ask ImageBuilder status
+					subMonitor.setTaskName("Checking image creation status");
+
+					BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+					while (!(biStatus == BuildImageStatus.DONE)) {
+						if (biStatus == BuildImageStatus.FAILED)
+							throw new Exception("Build image failed as reported by Image Builder");
+						TimeUnit.SECONDS.sleep(5);
+						biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+					}
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "Images have been successfully created";
+							showInfoDialog("", "Save images", message);
+						}
+					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems to save the images: " + e.getMessage()
+									+ "\nPlease contact Sodalite administrator and report her/him above error message";
+							showErrorDialog("", "Save images", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error building images", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;

@@ -14,8 +14,8 @@ import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
-import org.sodalite.dsl.ui.wizards.DeploymentWizard;
-import org.sodalite.dsl.ui.wizards.DeploymentWizardDialog;
+import org.sodalite.dsl.ui.wizards.deployment.DeploymentWizard;
+import org.sodalite.dsl.ui.wizards.deployment.DeploymentWizardDialog;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADMDeployHandler implements IHandler {

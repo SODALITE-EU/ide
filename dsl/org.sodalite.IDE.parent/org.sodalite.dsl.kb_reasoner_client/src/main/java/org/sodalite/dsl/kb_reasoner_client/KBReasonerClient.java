@@ -37,6 +37,8 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -786,11 +788,30 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public void buildImage(String image_build_conf) throws Exception {
+	public BuildImageReport buildImage(String image_build_conf) throws Exception {
 		Assert.notNull(image_build_conf, "Pass a not null image_build_conf");
 		String url = image_builder_uri + "build";
-		// FIXME support return type
-		postObjectAndReturnAnotherType(image_build_conf, void.class, new URI(url), HttpStatus.OK);
+		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, new URI(url),
+				HttpStatus.ACCEPTED);
+	}
+
+	@Override
+	public BuildImageStatus checkBuildImageStatus(String session_token) throws Exception {
+		Assert.notNull(session_token, "Pass a not null session_token");
+		String url = image_builder_uri + "info/status/" + session_token;
+		BuildImageStatus buildStatus = null;
+		try {
+			HttpStatus status = getStatusOfURI(new URI(url));
+			if (status == HttpStatus.CREATED)
+				buildStatus = BuildImageStatus.DONE;
+			else if (status == HttpStatus.ACCEPTED)
+				buildStatus = BuildImageStatus.BUILDING;
+			else if (status == HttpStatus.INTERNAL_SERVER_ERROR)
+				buildStatus = BuildImageStatus.FAILED;
+		} catch (Exception e) {
+			throw e;
+		}
+		return buildStatus;
 	}
 
 	@Override
@@ -1227,16 +1248,14 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-//	private HttpStatus getStatusOfURI(URI uri) throws Exception {
-//		try {
-//			Assert.notNull(uri, "Provide a valid uri");
-//			return getJSONMessage(uri, String.class).getStatusCode();
-//		} catch (Exception e) {
-//			log.info("There was a problem getting JSON object(s) in uri: " + uri);
-//			log.error(e.getMessage(), e);
-//			throw e;
-//		}
-//	}
+	private HttpStatus getStatusOfURI(URI uri) throws Exception {
+		try {
+			Assert.notNull(uri, "Provide a valid uri");
+			return getJSONMessage(uri, String.class).getStatusCode();
+		} catch (HttpClientErrorException e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+	}
 
 	private <T, S> S postObjectAndReturnAnotherType(T object, Class<S> returnedType, URI uri, HttpStatus expectedStatus)
 			throws Exception {

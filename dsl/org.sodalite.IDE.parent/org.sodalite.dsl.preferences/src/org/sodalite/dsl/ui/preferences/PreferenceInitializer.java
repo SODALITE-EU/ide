@@ -90,7 +90,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		try (InputStream input = new FileInputStream(propertiesPath)) {
 			prop.load(input);
 		} catch (IOException ex) {
-			LOGGER.log(new Status(Status.ERROR, BUNDLE.getSymbolicName(),
+			LOGGER.log(new Status(Status.WARNING, BUNDLE.getSymbolicName(),
 					"Could not read configuration for Sodalite backend services", ex));
 		}
 		return prop;
