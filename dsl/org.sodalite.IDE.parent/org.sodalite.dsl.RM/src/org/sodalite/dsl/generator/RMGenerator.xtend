@@ -406,12 +406,35 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EInterfaceDefinition i) '''
+	
 	«IF i.interface.type !== null»
 	«putParameterNumber(i, "type", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
 	  exchange:value '«trim(i.interface.type.compile)»' ;
+	.
+	«ENDIF»
+	
+	«IF i.interface.operations !== null»
+	«putParameterNumber(i, "operations", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "operations" ;
+	  «FOR op:(i.interface.operations.operations)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	«IF i.interface.inputs !== null»
+	«putParameterNumber(i, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR prop:(i.interface.inputs.properties)»
+	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
+	  «ENDFOR»
 	.
 	«ENDIF»
 	
@@ -423,14 +446,10 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "type")» ;
 	  «ENDIF»
 	  «IF i.interface.inputs !== null»
-	  «FOR prop:(i.interface.inputs.properties)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(prop, "name")» ;
-	  «ENDFOR»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "inputs")» ;
 	  «ENDIF»
 	  «IF i.interface.operations !== null»
-	  «FOR op:(i.interface.operations.operations)»
-	  exchange:hasParameter :Parameter_«getParameterNumber(op, "name")» ;
-	  «ENDFOR»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "operations")» ;
 	  «ENDIF»
 	.
 	'''
@@ -530,6 +549,17 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»		
 	
+	«IF o.operation.inputs !== null»
+	«putParameterNumber(o, "inputs", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "inputs" ;
+	  «FOR i:o.operation.inputs.inputs»
+	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
+  	  «ENDFOR»
+	.
+	«ENDIF»
+	
 	«IF o.eContainer.eContainer.eContainer instanceof EInterfaceDefinition»
 	«putParameterNumber(o, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -544,9 +574,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(o.operation.description)»' ;
 	  «ENDIF»
 	  «IF o.operation.inputs !== null»
-	  «FOR i:o.operation.inputs.inputs»
-	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
-  	  «ENDFOR»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "inputs")» ;
   	  «ENDIF»
 	  «IF o.operation.implementation !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "implementation")» ;
@@ -585,7 +613,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(p, "default", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "value" ;
+	  exchange:name "default" ;
 	  «IF p.parameter.^default instanceof EFunction»
 	  «IF p.parameter.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
