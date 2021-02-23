@@ -6,6 +6,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.AADM_Model;
@@ -14,6 +15,7 @@ import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
@@ -32,6 +34,7 @@ import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
@@ -42,6 +45,19 @@ import org.sodalite.dsl.scoping.AADMScopeProvider;
  * The services class used by VSM.
  */
 public class Services {
+
+	public String getTriggerLabel(ETriggerDefinition trigger) {
+		return "trigger: " + trigger.getName();
+	}
+
+	public EList<ETriggerDefinition> getTriggerDefinitions(AADM_Model model) {
+		EList<ETriggerDefinition> result = new BasicEList<>();
+		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+			if (policy.getPolicy().getTriggers() != null)
+				result.addAll(policy.getPolicy().getTriggers().getTriggers());
+		}
+		return result;
+	}
 
 	public String getPropertyLabel(EPropertyAssignment property) {
 		String result = property.getName();
