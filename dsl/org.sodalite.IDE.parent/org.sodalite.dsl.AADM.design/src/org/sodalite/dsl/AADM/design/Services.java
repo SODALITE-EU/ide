@@ -14,6 +14,7 @@ import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAssignmentValue;
@@ -47,6 +48,19 @@ public class Services {
 		return processValue(result, property.getValue());
 	}
 
+	public String getTargetsLabel(EPolicyDefinitionBody policy) {
+		String label = "targets: [";
+		boolean comma = false;
+		if (policy.getTargets() != null) {
+			for (EPREFIX_ID target : policy.getTargets().getTarget()) {
+				label += comma ? ", " + target.getId() : target.getId();
+				comma = true;
+			}
+		}
+		label += "]";
+		return label;
+	}
+
 	private String processValue(String result, EAssignmentValue assignmentValue) {
 		if (assignmentValue instanceof ESTRING) {
 			ESTRING value = (ESTRING) assignmentValue;
@@ -66,6 +80,9 @@ public class Services {
 			result += "]";
 		} else if (assignmentValue instanceof EMAP) {
 			result += ": <Complex Value>";
+		} else if (assignmentValue instanceof ESIGNEDINT) {
+			ESIGNEDINT value = (ESIGNEDINT) assignmentValue;
+			result += ": " + value.getValue();
 		}
 
 		return result;
@@ -94,6 +111,12 @@ public class Services {
 	public String getTypeLabel(ENodeTemplateBody node) {
 		String type = (node.getType().getModule() != null ? node.getType().getModule() + "/" : "")
 				+ node.getType().getType();
+		return type.substring(type.lastIndexOf('.') + 1);
+	}
+
+	public String getPolicyTypeLabel(EPolicyDefinitionBody policy) {
+		String type = (policy.getType().getModule() != null ? policy.getType().getModule() + "/" : "")
+				+ policy.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
 	}
 

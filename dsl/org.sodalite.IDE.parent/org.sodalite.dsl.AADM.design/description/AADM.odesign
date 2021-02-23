@@ -155,11 +155,63 @@
           </style>
         </containerMappings>
         <containerMappings name="Policy Definition" semanticCandidatesExpression="aql:self.policies.policies" domainClass="aADM::EPolicyDefinition" childrenPresentation="VerticalStack">
-          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BType" semanticCandidatesExpression="feature:policy" domainClass="aADM::EPolicyDefinitionBody">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dash" labelSize="12" labelExpression="service:getPolicyTypeLabel" iconPath="/org.sodalite.dsl.AADM.design/icons/policy-type.png" sizeComputationExpression="-1" labelPosition="node" resizeKind="EAST_WEST" width="20" height="3">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <forbiddenSides>WEST</forbiddenSides>
+              <forbiddenSides>SOUTH</forbiddenSides>
+              <forbiddenSides>EAST</forbiddenSides>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </borderedNodeMappings>
+          <subContainerMappings name="Common" preconditionExpression="aql:(self.policy.description->size() > 0) or (self.policy.targets->size() > 0)" semanticCandidatesExpression="aql:self" domainClass="aADM::EPolicyDefinition" childrenPresentation="List">
+            <subNodeMappings name="description" preconditionExpression="aql:self.description.size() > 0" semanticCandidatesExpression="feature:policy" domainClass="aADM::EPolicyDefinitionBody">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'description: ' + self.description" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="targets" preconditionExpression="aql:self.targets.target->notEmpty()" semanticCandidatesExpression="feature:policy" domainClass="aADM::EPolicyDefinitionBody">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getTargetsLabel" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:' '" iconPath="/org.sodalite.dsl.AADM.design/icons/features.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.policy.properties" domainClass="rM::EPropertyAssignments" childrenPresentation="List">
+            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="rM::EPropertyAssignment">
+              <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="Properties" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/policy.png" roundedCorner="true">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+            <labelFormat>bold</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.1"/>
           </style>
         </containerMappings>
       </defaultLayer>
