@@ -48,6 +48,10 @@ public class Services {
 		return processValue(result, property.getValue());
 	}
 
+	public String getTargetLabel(EPREFIX_ID target) {
+		return "target: " + (target.getModule() != null ? target.getModule() + '/' + target.getId() : target.getId());
+	}
+
 	public String getTargetsLabel(EPolicyDefinitionBody policy) {
 		String label = "targets: [";
 		boolean comma = false;
@@ -201,6 +205,10 @@ public class Services {
 	public ENodeTemplate findNode(ERequirementAssignment req) {
 		System.out.println("Invoked findNode with req: " + req);
 		return AADM_Helper.findNode(req, req.getNode().getId());
+	}
+
+	public ENodeTemplate findNode(EPREFIX_ID prefix_id) {
+		return AADM_Helper.findNode(prefix_id, prefix_id.getId());
 	}
 
 	public String renderRequirementNode(ERequirementAssignment req) throws Exception {
