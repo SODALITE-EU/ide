@@ -784,7 +784,7 @@ public class KBReasonerClient implements KBReasoner {
 		String url = iacUri + "parse";
 		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
 		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, new URI(url),
-				HttpStatus.OK);
+				HttpStatus.CREATED);
 	}
 
 	@Override
