@@ -856,7 +856,7 @@ public class KBReasonerClient implements KBReasoner {
 		Assert.notNull(deployment_id, "Pass a not null deployment_id");
 		String url = xoperaUri + "deployment/" + deployment_id + "/status";
 		try {
-			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.ACCEPTED);
+			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.OK);
 		} catch (Exception e) {
 			throw e;
 		}
