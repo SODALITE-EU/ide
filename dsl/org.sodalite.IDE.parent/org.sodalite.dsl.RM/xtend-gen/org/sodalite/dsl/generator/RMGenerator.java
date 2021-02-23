@@ -3277,8 +3277,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        CharSequence _compile = this.compile(p.getProperty().getEntry_schema());
-        _builder.append(_compile, "  ");
+        String _trim_2 = this.trim(this.compile(p.getProperty().getEntry_schema()));
+        _builder.append(_trim_2, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -4004,8 +4004,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        CharSequence _compile = this.compile(a.getAttribute().getEntry_schema());
-        _builder.append(_compile, "  ");
+        String _trim_2 = this.trim(this.compile(a.getAttribute().getEntry_schema()));
+        _builder.append(_trim_2, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
