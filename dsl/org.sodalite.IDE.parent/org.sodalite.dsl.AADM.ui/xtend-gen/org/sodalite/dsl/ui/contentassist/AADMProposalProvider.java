@@ -53,7 +53,7 @@ import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
-import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
@@ -306,8 +306,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((model instanceof ENodeTemplateBodyImpl)) {
           type = ((ENodeTemplateBodyImpl) model).getType();
         } else {
-          if ((model instanceof EAttributeAssigmentsImpl)) {
-            EObject _eContainer = ((EAttributeAssigmentsImpl)model).eContainer();
+          if ((model instanceof EAttributeAssignmentsImpl)) {
+            EObject _eContainer = ((EAttributeAssignmentsImpl)model).eContainer();
             type = ((ENodeTemplateBodyImpl) _eContainer).getType();
           }
         }

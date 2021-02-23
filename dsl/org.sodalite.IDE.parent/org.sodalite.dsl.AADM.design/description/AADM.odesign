@@ -58,8 +58,8 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.node.properties" domainClass="aADM::EPropertyAssigments" childrenPresentation="List">
-            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="aADM::EPropertyAssignment">
+          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.node.properties" domainClass="rM::EPropertyAssignments" childrenPresentation="List">
+            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="rM::EPropertyAssignment">
               <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -75,7 +75,7 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Attributes" preconditionExpression="aql:self.attributes->size() > 0" semanticCandidatesExpression="aql:self.node.atributes" domainClass="aADM::EAttributeAssigments" childrenPresentation="List">
+          <subContainerMappings name="Attributes" preconditionExpression="aql:self.attributes->size() > 0" semanticCandidatesExpression="aql:self.node.atributes" domainClass="aADM::EAttributeAssignments" childrenPresentation="List">
             <subNodeMappings name="Attribute" semanticCandidatesExpression="aql:self.attributes" domainClass="aADM::EAttributeAssignment">
               <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getAttributeLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -94,7 +94,7 @@
           </subContainerMappings>
           <subContainerMappings name="Capabilities" semanticCandidatesExpression="aql:self.node.capabilities" domainClass="aADM::ECapabilityAssignments" childrenPresentation="VerticalStack">
             <subContainerMappings name="Capability" semanticCandidatesExpression="aql:self.capabilities" domainClass="aADM::ECapabilityAssignment" childrenPresentation="List">
-              <subNodeMappings name="Properties" semanticCandidatesExpression="aql:self.properties.properties" domainClass="aADM::EPropertyAssignment">
+              <subNodeMappings name="Properties" semanticCandidatesExpression="aql:self.properties.properties" domainClass="rM::EPropertyAssignment">
                 <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="EAST_WEST">
                   <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                   <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>

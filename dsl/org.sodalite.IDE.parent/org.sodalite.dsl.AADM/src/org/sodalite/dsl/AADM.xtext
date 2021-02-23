@@ -54,7 +54,7 @@ ENodeTemplateBody:
 	END)? &
 	('attributes:'
 	BEGIN
-		atributes=EAttributeAssigments
+		atributes=EAttributeAssignments
 	END)? &
 	('requirements:'
 	BEGIN
@@ -87,8 +87,8 @@ ECapabilityAssignment:
 		END)? 
 	END;
 
-EAttributeAssigments:
-	{EAttributeAssigments} (attributes+=EAttributeAssignment)*;
+EAttributeAssignments:
+	{EAttributeAssignments} (attributes+=EAttributeAssignment)*;
 
 EAttributeAssignment:
 	name = ID ':' value=EAssignmentValue;

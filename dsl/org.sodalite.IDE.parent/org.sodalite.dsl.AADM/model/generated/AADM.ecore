@@ -28,7 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="optimization" eType="ecore:EClass platform:/resource/org.sodalite.dsl.optimization/model/generated/Optimization.ecore#//Optimization_Model"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyAssignments"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="atributes" eType="#//EAttributeAssigments"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributes" eType="#//EAttributeAssignments"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" eType="#//ERequirementAssignments"
         containment="true"/>
@@ -53,7 +53,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyAssignments"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EAttributeAssigments">
+  <eClassifiers xsi:type="ecore:EClass" name="EAttributeAssignments">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//EAttributeAssignment" containment="true"/>
   </eClassifiers>
