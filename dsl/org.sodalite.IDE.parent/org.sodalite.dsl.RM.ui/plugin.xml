@@ -331,11 +331,11 @@
 			name="Quick Outline">
 		</command>
   <category
-        id="org.sodalite.dsl.RM.ui.category"
+        id="org.sodalite.category"
         name="Sodalite">
   </category>
   <command
-        categoryId="org.sodalite.dsl.RM.ui.category"
+        categoryId="org.sodalite.category"
         defaultHandler="org.sodalite.dsl.ui.handlers.RMSaveHandler"
         description="Save the RM into the KB"
         id="org.sodalite.dsl.RM.ui.command.saveRM"
@@ -357,6 +357,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
      <menu
+           id="eu.sodalite.menu.projectexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.RM.ui.command.saveRM"
@@ -387,6 +388,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
      <menu
+           id="eu.sodalite.menu.packageexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.RM.ui.command.saveRM"
@@ -417,6 +419,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.sirius.ui.tools.views.model.explorer#PopupMenu?after=additions">
      <menu
+           id="eu.sodalite.menu.siriusexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.RM.ui.command.saveRM"
