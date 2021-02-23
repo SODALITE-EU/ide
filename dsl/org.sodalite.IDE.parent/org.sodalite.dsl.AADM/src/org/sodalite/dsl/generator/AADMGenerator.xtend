@@ -36,7 +36,6 @@ import java.nio.file.Paths
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IFile
-import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetProperty
 import org.sodalite.dsl.rM.ESingleValue
 import org.sodalite.dsl.rM.EBOOLEAN
@@ -73,6 +72,7 @@ import org.sodalite.dsl.rM.ELength
 import org.sodalite.dsl.rM.EMaxLength
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.aADM.EPolicyDefinition
+import org.sodalite.dsl.aADM.EAttributeAssignment
 
 /**
  * Generates code from your model files on save.

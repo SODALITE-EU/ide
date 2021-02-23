@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.sodalite.dsl.aADM.AADM_Model
 import org.sodalite.dsl.rM.EInputs
 import org.sodalite.dsl.aADM.ENodeTemplates
-import org.sodalite.dsl.aADM.EAttributeAssigments
+import org.sodalite.dsl.aADM.EAttributeAssignments
 import org.sodalite.dsl.aADM.ERequirementAssignments
 import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.rM.EParameterDefinition
@@ -82,11 +82,11 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 		"property.png"
 	}
 	
-	def text (EAttributeAssigments entry){
+	def text (EAttributeAssignments entry){
 		"attributes"
 	}
 	
-	def image (EAttributeAssigments entry){
+	def image (EAttributeAssignments entry){
 		"attributes.png"
 	}
 	

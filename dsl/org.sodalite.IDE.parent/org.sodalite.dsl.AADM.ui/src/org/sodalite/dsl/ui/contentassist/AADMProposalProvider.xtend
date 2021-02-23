@@ -23,7 +23,7 @@ import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
-import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
+import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
@@ -239,7 +239,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			if (model instanceof ENodeTemplateBodyImpl)
 				type = (model as ENodeTemplateBodyImpl).type
 				 
-			else if (model instanceof EAttributeAssigmentsImpl)
+			else if (model instanceof EAttributeAssignmentsImpl)
 				type = (model.eContainer as ENodeTemplateBodyImpl).type
 				
 			resourceId = (type.module !== null? type.module + '/':'') + type.type

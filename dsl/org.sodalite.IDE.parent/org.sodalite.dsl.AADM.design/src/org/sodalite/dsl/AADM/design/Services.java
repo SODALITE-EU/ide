@@ -44,23 +44,27 @@ public class Services {
 
 	public String getPropertyLabel(EPropertyAssignment property) {
 		String result = property.getName();
-		if (property.getValue() instanceof ESTRING) {
-			ESTRING value = (ESTRING) property.getValue();
+		return processValue(result, property.getValue());
+	}
+
+	private String processValue(String result, EAssignmentValue assignmentValue) {
+		if (assignmentValue instanceof ESTRING) {
+			ESTRING value = (ESTRING) assignmentValue;
 			result += ": " + value.getValue();
-		} else if (property.getValue() instanceof GetInput) {
-			GetInput gInput = (GetInput) property.getValue();
+		} else if (assignmentValue instanceof GetInput) {
+			GetInput gInput = (GetInput) assignmentValue;
 			result += ": getInput(" + gInput.getInput().getName() + ")";
-		} else if (property.getValue() instanceof GetProperty) {
-			GetProperty gProperty = (GetProperty) property.getValue();
+		} else if (assignmentValue instanceof GetProperty) {
+			GetProperty gProperty = (GetProperty) assignmentValue;
 			result += ": getProperty(" + gProperty.getProperty().getProperty().getType() + ")";
-		} else if (property.getValue() instanceof ELIST) {
-			ELIST value = (ELIST) property.getValue();
+		} else if (assignmentValue instanceof ELIST) {
+			ELIST value = (ELIST) assignmentValue;
 			EList list = value.getList();
 			result += ": [" + renderValue(list.get(0));
 			for (int i = 1; i < list.size(); i++)
 				result += ", " + renderValue(list.get(i));
 			result += "]";
-		} else if (property.getValue() instanceof EMAP) {
+		} else if (assignmentValue instanceof EMAP) {
 			result += ": <Complex Value>";
 		}
 
@@ -79,7 +83,8 @@ public class Services {
 	}
 
 	public String getAttributeLabel(EAttributeAssignment attribute) {
-		return attribute.getName() + ": " + attribute.getValue();
+		String result = attribute.getName();
+		return processValue(result, attribute.getValue());
 	}
 
 	public String getRequirementLabel(ERequirementAssignment requirement) {

@@ -864,20 +864,20 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleECapabilityAssignment"
 
 
-    // $ANTLR start "entryRuleEAttributeAssigments"
-    // InternalAADMParser.g:338:1: entryRuleEAttributeAssigments : ruleEAttributeAssigments EOF ;
-    public final void entryRuleEAttributeAssigments() throws RecognitionException {
+    // $ANTLR start "entryRuleEAttributeAssignments"
+    // InternalAADMParser.g:338:1: entryRuleEAttributeAssignments : ruleEAttributeAssignments EOF ;
+    public final void entryRuleEAttributeAssignments() throws RecognitionException {
         try {
-            // InternalAADMParser.g:339:1: ( ruleEAttributeAssigments EOF )
-            // InternalAADMParser.g:340:1: ruleEAttributeAssigments EOF
+            // InternalAADMParser.g:339:1: ( ruleEAttributeAssignments EOF )
+            // InternalAADMParser.g:340:1: ruleEAttributeAssignments EOF
             {
-             before(grammarAccess.getEAttributeAssigmentsRule()); 
+             before(grammarAccess.getEAttributeAssignmentsRule()); 
             pushFollow(FOLLOW_1);
-            ruleEAttributeAssigments();
+            ruleEAttributeAssignments();
 
             state._fsp--;
 
-             after(grammarAccess.getEAttributeAssigmentsRule()); 
+             after(grammarAccess.getEAttributeAssignmentsRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -891,35 +891,35 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleEAttributeAssigments"
+    // $ANTLR end "entryRuleEAttributeAssignments"
 
 
-    // $ANTLR start "ruleEAttributeAssigments"
-    // InternalAADMParser.g:347:1: ruleEAttributeAssigments : ( ( rule__EAttributeAssigments__Group__0 ) ) ;
-    public final void ruleEAttributeAssigments() throws RecognitionException {
+    // $ANTLR start "ruleEAttributeAssignments"
+    // InternalAADMParser.g:347:1: ruleEAttributeAssignments : ( ( rule__EAttributeAssignments__Group__0 ) ) ;
+    public final void ruleEAttributeAssignments() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:351:2: ( ( ( rule__EAttributeAssigments__Group__0 ) ) )
-            // InternalAADMParser.g:352:2: ( ( rule__EAttributeAssigments__Group__0 ) )
+            // InternalAADMParser.g:351:2: ( ( ( rule__EAttributeAssignments__Group__0 ) ) )
+            // InternalAADMParser.g:352:2: ( ( rule__EAttributeAssignments__Group__0 ) )
             {
-            // InternalAADMParser.g:352:2: ( ( rule__EAttributeAssigments__Group__0 ) )
-            // InternalAADMParser.g:353:3: ( rule__EAttributeAssigments__Group__0 )
+            // InternalAADMParser.g:352:2: ( ( rule__EAttributeAssignments__Group__0 ) )
+            // InternalAADMParser.g:353:3: ( rule__EAttributeAssignments__Group__0 )
             {
-             before(grammarAccess.getEAttributeAssigmentsAccess().getGroup()); 
-            // InternalAADMParser.g:354:3: ( rule__EAttributeAssigments__Group__0 )
-            // InternalAADMParser.g:354:4: rule__EAttributeAssigments__Group__0
+             before(grammarAccess.getEAttributeAssignmentsAccess().getGroup()); 
+            // InternalAADMParser.g:354:3: ( rule__EAttributeAssignments__Group__0 )
+            // InternalAADMParser.g:354:4: rule__EAttributeAssignments__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__EAttributeAssigments__Group__0();
+            rule__EAttributeAssignments__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEAttributeAssigmentsAccess().getGroup()); 
+             after(grammarAccess.getEAttributeAssignmentsAccess().getGroup()); 
 
             }
 
@@ -938,7 +938,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleEAttributeAssigments"
+    // $ANTLR end "ruleEAttributeAssignments"
 
 
     // $ANTLR start "entryRuleEAttributeAssignment"
@@ -16471,23 +16471,23 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ECapabilityAssignment__Group_3__3__Impl"
 
 
-    // $ANTLR start "rule__EAttributeAssigments__Group__0"
-    // InternalAADMParser.g:5371:1: rule__EAttributeAssigments__Group__0 : rule__EAttributeAssigments__Group__0__Impl rule__EAttributeAssigments__Group__1 ;
-    public final void rule__EAttributeAssigments__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__EAttributeAssignments__Group__0"
+    // InternalAADMParser.g:5371:1: rule__EAttributeAssignments__Group__0 : rule__EAttributeAssignments__Group__0__Impl rule__EAttributeAssignments__Group__1 ;
+    public final void rule__EAttributeAssignments__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:5375:1: ( rule__EAttributeAssigments__Group__0__Impl rule__EAttributeAssigments__Group__1 )
-            // InternalAADMParser.g:5376:2: rule__EAttributeAssigments__Group__0__Impl rule__EAttributeAssigments__Group__1
+            // InternalAADMParser.g:5375:1: ( rule__EAttributeAssignments__Group__0__Impl rule__EAttributeAssignments__Group__1 )
+            // InternalAADMParser.g:5376:2: rule__EAttributeAssignments__Group__0__Impl rule__EAttributeAssignments__Group__1
             {
             pushFollow(FOLLOW_5);
-            rule__EAttributeAssigments__Group__0__Impl();
+            rule__EAttributeAssignments__Group__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__EAttributeAssigments__Group__1();
+            rule__EAttributeAssignments__Group__1();
 
             state._fsp--;
 
@@ -16506,12 +16506,12 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EAttributeAssigments__Group__0"
+    // $ANTLR end "rule__EAttributeAssignments__Group__0"
 
 
-    // $ANTLR start "rule__EAttributeAssigments__Group__0__Impl"
-    // InternalAADMParser.g:5383:1: rule__EAttributeAssigments__Group__0__Impl : ( () ) ;
-    public final void rule__EAttributeAssigments__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EAttributeAssignments__Group__0__Impl"
+    // InternalAADMParser.g:5383:1: rule__EAttributeAssignments__Group__0__Impl : ( () ) ;
+    public final void rule__EAttributeAssignments__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -16522,13 +16522,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:5388:1: ( () )
             // InternalAADMParser.g:5389:2: ()
             {
-             before(grammarAccess.getEAttributeAssigmentsAccess().getEAttributeAssigmentsAction_0()); 
+             before(grammarAccess.getEAttributeAssignmentsAccess().getEAttributeAssignmentsAction_0()); 
             // InternalAADMParser.g:5390:2: ()
             // InternalAADMParser.g:5390:3: 
             {
             }
 
-             after(grammarAccess.getEAttributeAssigmentsAccess().getEAttributeAssigmentsAction_0()); 
+             after(grammarAccess.getEAttributeAssignmentsAccess().getEAttributeAssignmentsAction_0()); 
 
             }
 
@@ -16543,21 +16543,21 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EAttributeAssigments__Group__0__Impl"
+    // $ANTLR end "rule__EAttributeAssignments__Group__0__Impl"
 
 
-    // $ANTLR start "rule__EAttributeAssigments__Group__1"
-    // InternalAADMParser.g:5398:1: rule__EAttributeAssigments__Group__1 : rule__EAttributeAssigments__Group__1__Impl ;
-    public final void rule__EAttributeAssigments__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__EAttributeAssignments__Group__1"
+    // InternalAADMParser.g:5398:1: rule__EAttributeAssignments__Group__1 : rule__EAttributeAssignments__Group__1__Impl ;
+    public final void rule__EAttributeAssignments__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:5402:1: ( rule__EAttributeAssigments__Group__1__Impl )
-            // InternalAADMParser.g:5403:2: rule__EAttributeAssigments__Group__1__Impl
+            // InternalAADMParser.g:5402:1: ( rule__EAttributeAssignments__Group__1__Impl )
+            // InternalAADMParser.g:5403:2: rule__EAttributeAssignments__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__EAttributeAssigments__Group__1__Impl();
+            rule__EAttributeAssignments__Group__1__Impl();
 
             state._fsp--;
 
@@ -16576,24 +16576,24 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EAttributeAssigments__Group__1"
+    // $ANTLR end "rule__EAttributeAssignments__Group__1"
 
 
-    // $ANTLR start "rule__EAttributeAssigments__Group__1__Impl"
-    // InternalAADMParser.g:5409:1: rule__EAttributeAssigments__Group__1__Impl : ( ( rule__EAttributeAssigments__AttributesAssignment_1 )* ) ;
-    public final void rule__EAttributeAssigments__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__EAttributeAssignments__Group__1__Impl"
+    // InternalAADMParser.g:5409:1: rule__EAttributeAssignments__Group__1__Impl : ( ( rule__EAttributeAssignments__AttributesAssignment_1 )* ) ;
+    public final void rule__EAttributeAssignments__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:5413:1: ( ( ( rule__EAttributeAssigments__AttributesAssignment_1 )* ) )
-            // InternalAADMParser.g:5414:1: ( ( rule__EAttributeAssigments__AttributesAssignment_1 )* )
+            // InternalAADMParser.g:5413:1: ( ( ( rule__EAttributeAssignments__AttributesAssignment_1 )* ) )
+            // InternalAADMParser.g:5414:1: ( ( rule__EAttributeAssignments__AttributesAssignment_1 )* )
             {
-            // InternalAADMParser.g:5414:1: ( ( rule__EAttributeAssigments__AttributesAssignment_1 )* )
-            // InternalAADMParser.g:5415:2: ( rule__EAttributeAssigments__AttributesAssignment_1 )*
+            // InternalAADMParser.g:5414:1: ( ( rule__EAttributeAssignments__AttributesAssignment_1 )* )
+            // InternalAADMParser.g:5415:2: ( rule__EAttributeAssignments__AttributesAssignment_1 )*
             {
-             before(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1()); 
-            // InternalAADMParser.g:5416:2: ( rule__EAttributeAssigments__AttributesAssignment_1 )*
+             before(grammarAccess.getEAttributeAssignmentsAccess().getAttributesAssignment_1()); 
+            // InternalAADMParser.g:5416:2: ( rule__EAttributeAssignments__AttributesAssignment_1 )*
             loop20:
             do {
                 int alt20=2;
@@ -16606,10 +16606,10 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalAADMParser.g:5416:3: rule__EAttributeAssigments__AttributesAssignment_1
+            	    // InternalAADMParser.g:5416:3: rule__EAttributeAssignments__AttributesAssignment_1
             	    {
             	    pushFollow(FOLLOW_8);
-            	    rule__EAttributeAssigments__AttributesAssignment_1();
+            	    rule__EAttributeAssignments__AttributesAssignment_1();
 
             	    state._fsp--;
 
@@ -16622,7 +16622,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 }
             } while (true);
 
-             after(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1()); 
+             after(grammarAccess.getEAttributeAssignmentsAccess().getAttributesAssignment_1()); 
 
             }
 
@@ -16641,7 +16641,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EAttributeAssigments__Group__1__Impl"
+    // $ANTLR end "rule__EAttributeAssignments__Group__1__Impl"
 
 
     // $ANTLR start "rule__EAttributeAssignment__Group__0"
@@ -71752,25 +71752,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTemplateBody__AtributesAssignment_4_2"
-    // InternalAADMParser.g:23307:1: rule__ENodeTemplateBody__AtributesAssignment_4_2 : ( ruleEAttributeAssigments ) ;
+    // InternalAADMParser.g:23307:1: rule__ENodeTemplateBody__AtributesAssignment_4_2 : ( ruleEAttributeAssignments ) ;
     public final void rule__ENodeTemplateBody__AtributesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:23311:1: ( ( ruleEAttributeAssigments ) )
-            // InternalAADMParser.g:23312:2: ( ruleEAttributeAssigments )
+            // InternalAADMParser.g:23311:1: ( ( ruleEAttributeAssignments ) )
+            // InternalAADMParser.g:23312:2: ( ruleEAttributeAssignments )
             {
-            // InternalAADMParser.g:23312:2: ( ruleEAttributeAssigments )
-            // InternalAADMParser.g:23313:3: ruleEAttributeAssigments
+            // InternalAADMParser.g:23312:2: ( ruleEAttributeAssignments )
+            // InternalAADMParser.g:23313:3: ruleEAttributeAssignments
             {
-             before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssigmentsParserRuleCall_4_2_0()); 
+             before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
             pushFollow(FOLLOW_2);
-            ruleEAttributeAssigments();
+            ruleEAttributeAssignments();
 
             state._fsp--;
 
-             after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssigmentsParserRuleCall_4_2_0()); 
+             after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
 
             }
 
@@ -72112,9 +72112,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ECapabilityAssignment__PropertiesAssignment_3_2"
 
 
-    // $ANTLR start "rule__EAttributeAssigments__AttributesAssignment_1"
-    // InternalAADMParser.g:23442:1: rule__EAttributeAssigments__AttributesAssignment_1 : ( ruleEAttributeAssignment ) ;
-    public final void rule__EAttributeAssigments__AttributesAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__EAttributeAssignments__AttributesAssignment_1"
+    // InternalAADMParser.g:23442:1: rule__EAttributeAssignments__AttributesAssignment_1 : ( ruleEAttributeAssignment ) ;
+    public final void rule__EAttributeAssignments__AttributesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -72125,13 +72125,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:23447:2: ( ruleEAttributeAssignment )
             // InternalAADMParser.g:23448:3: ruleEAttributeAssignment
             {
-             before(grammarAccess.getEAttributeAssigmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); 
+             before(grammarAccess.getEAttributeAssignmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEAttributeAssignment();
 
             state._fsp--;
 
-             after(grammarAccess.getEAttributeAssigmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); 
+             after(grammarAccess.getEAttributeAssignmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); 
 
             }
 
@@ -72150,7 +72150,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EAttributeAssigments__AttributesAssignment_1"
+    // $ANTLR end "rule__EAttributeAssignments__AttributesAssignment_1"
 
 
     // $ANTLR start "rule__EAttributeAssignment__NameAssignment_0"

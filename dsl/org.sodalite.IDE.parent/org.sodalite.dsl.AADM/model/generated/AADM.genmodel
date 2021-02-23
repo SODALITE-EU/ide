@@ -43,8 +43,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//ECapabilityAssignment/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ECapabilityAssignment/properties"/>
     </genClasses>
-    <genClasses ecoreClass="AADM.ecore#//EAttributeAssigments">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EAttributeAssigments/attributes"/>
+    <genClasses ecoreClass="AADM.ecore#//EAttributeAssignments">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//EAttributeAssignments/attributes"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//EAttributeAssignment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AADM.ecore#//EAttributeAssignment/name"/>

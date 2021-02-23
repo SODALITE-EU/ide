@@ -7,7 +7,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.sodalite.dsl.aADM.AADM_Model;
-import org.sodalite.dsl.aADM.EAttributeAssigments;
+import org.sodalite.dsl.aADM.EAttributeAssignments;
 import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplates;
@@ -99,11 +99,11 @@ public class AADMLabelProvider extends DefaultEObjectLabelProvider {
     return "property.png";
   }
   
-  public String text(final EAttributeAssigments entry) {
+  public String text(final EAttributeAssignments entry) {
     return "attributes";
   }
   
-  public String image(final EAttributeAssigments entry) {
+  public String image(final EAttributeAssignments entry) {
     return "attributes.png";
   }
   
