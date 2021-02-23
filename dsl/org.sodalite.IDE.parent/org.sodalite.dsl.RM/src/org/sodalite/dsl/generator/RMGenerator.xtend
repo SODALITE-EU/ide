@@ -1148,7 +1148,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "type" ;
-	  exchange:value '«p.property.entry_schema.compile»' ;
+	  exchange:value '«trim(p.property.entry_schema.compile)»' ;
 	.
 	
 	«putParameterNumber(p, "entry_schema", parameter_counter)»
@@ -1367,7 +1367,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entry_schema" ;
-	  exchange:value '«a.attribute.entry_schema.compile»' ;
+	  exchange:value '«trim(a.attribute.entry_schema.compile)»' ;
 	.
 	«ENDIF»
 	
