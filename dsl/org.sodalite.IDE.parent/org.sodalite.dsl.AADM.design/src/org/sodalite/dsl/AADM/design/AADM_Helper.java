@@ -105,8 +105,8 @@ public class AADM_Helper {
 		return split[split.length - 1];
 	}
 
-	public static ENodeTemplate findNode(ERequirementAssignment req, String nodeName) {
-		AADM_Model model = findModel(req);
+	public static ENodeTemplate findNode(EObject object, String nodeName) {
+		AADM_Model model = findModel(object);
 		if (model != null) {
 			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
 				if (node.getName().equals(nodeName)) {
@@ -173,6 +173,18 @@ public class AADM_Helper {
 			}
 		}
 		return node;
+	}
+
+	public static ERequirementAssignment findRequirementInTemplate(String requirement, ENodeTemplate template) {
+		ERequirementAssignment result = null;
+		if (template.getNode().getRequirements() == null)
+			return result;
+		for (ERequirementAssignment req : template.getNode().getRequirements().getRequirements()) {
+			if (req.getName().equals(requirement)) {
+				result = req;
+			}
+		}
+		return result;
 	}
 
 	public static ECapabilityAssignment findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
