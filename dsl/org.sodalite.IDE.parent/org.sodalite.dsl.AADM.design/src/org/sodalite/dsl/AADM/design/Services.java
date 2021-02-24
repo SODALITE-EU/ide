@@ -64,6 +64,34 @@ import org.sodalite.dsl.scoping.AADMScopeProvider;
  */
 public class Services {
 
+	public String getNodeLabel(EObject node) {
+		return "node: " + parse(node);
+	}
+
+	public String getNodeBorderedLabel(EObject node) {
+		ENodeTemplate nodeTemplate = findNode((EPREFIX_ID) node);
+		if (nodeTemplate == null)
+			return "node: " + parse(node);
+		else
+			return "";
+	}
+
+	public String getCapabilityLabel(EObject node) {
+		return "cap: " + parse(node);
+	}
+
+	public String getRequirementLabel(EObject node) {
+		return "req: " + parse(node);
+	}
+
+	public String getRequirementBorderedLabel(EObject node) {
+		ERequirementAssignment req = findRequirement((EPREFIX_TYPE) node);
+		if (req == null)
+			return "req: " + parse(node);
+		else
+			return "";
+	}
+
 	public String getActivityLabel(EActivityDefinition activity) {
 		String label = null;
 		if (activity instanceof ECallOperationActivityDefinition) {
@@ -76,6 +104,19 @@ public class Services {
 
 	private String parse(EPREFIX_TYPE type) {
 		return type.getModule() != null ? type.getModule() + "/" + type.getType() : type.getType();
+	}
+
+	private String parse(EPREFIX_ID type) {
+		return type.getModule() != null ? type.getModule() + "/" + type.getId() : type.getId();
+	}
+
+	private String parse(EObject type) {
+		if (type instanceof EPREFIX_TYPE)
+			return parse((EPREFIX_TYPE) type);
+		else if (type instanceof EPREFIX_ID)
+			return parse((EPREFIX_ID) type);
+		else
+			return null;
 	}
 
 	public String getConstraintLabel(EExtendedTriggerCondition condition) {
@@ -188,6 +229,15 @@ public class Services {
 		return processValue(result, property.getValue());
 	}
 
+	public String getTargetBorderedLabel(EPREFIX_ID target) {
+		ENodeTemplate nodeTemplate = findNode(target);
+		if (nodeTemplate == null)
+			return "target: "
+					+ (target.getModule() != null ? target.getModule() + '/' + target.getId() : target.getId());
+		else
+			return "";
+	}
+
 	public String getTargetLabel(EPREFIX_ID target) {
 		return "target: " + (target.getModule() != null ? target.getModule() + '/' + target.getId() : target.getId());
 	}
@@ -248,8 +298,20 @@ public class Services {
 		return processValue(result, attribute.getValue());
 	}
 
-	public String getRequirementLabel(ERequirementAssignment requirement) {
+	public String getRequirementNodeLabel(ERequirementAssignment requirement) {
 		return requirement.getName() + ": [ node: " + requirement.getNode() + "]";
+	}
+
+	public String getRequirementLabel(ERequirementAssignment requirement) {
+		return "req:" + requirement.getName();
+	}
+
+	public String getRequirementBorderedLabel(ERequirementAssignment requirement) {
+		ENodeTemplate nodeTemplate = findNode(requirement.getNode());
+		if (nodeTemplate == null)
+			return "req:" + requirement.getName();
+		else
+			return "";
 	}
 
 	public String getTypeLabel(ENodeTemplateBody node) {
@@ -349,6 +411,34 @@ public class Services {
 
 	public ENodeTemplate findNode(EPREFIX_ID prefix_id) {
 		return AADM_Helper.findNode(prefix_id, prefix_id.getId());
+	}
+
+	public ERequirementAssignment findRequirement(EPREFIX_TYPE prefix_type) {
+		ERequirementAssignment req = null;
+		String module = AADM_Helper.getModule(prefix_type);
+		String req_module = prefix_type.getModule();
+		if ((module == null && req_module == null) || (module != null && (module.equals(req_module)))
+				|| (req_module != null && (req_module.equals(module)))) {
+			String reqName = getLastSegment(prefix_type.getType(), ".");
+			String nodeName = getTrailingSegment(prefix_type.getType(), ".");
+			ENodeTemplate template = AADM_Helper.findNode(prefix_type, nodeName);
+			return AADM_Helper.findRequirementInTemplate(reqName, template);
+		}
+		return req;
+	}
+
+	private String getLastSegment(String string, String delimiter) {
+		String newString = string;
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length() - delimiter.length());
+		return newString.substring(newString.lastIndexOf(delimiter) + 1);
+	}
+
+	private String getTrailingSegment(String string, String delimiter) {
+		String newString = string;
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length() - delimiter.length());
+		return newString.substring(0, newString.lastIndexOf(delimiter));
 	}
 
 	public String renderRequirementNode(ERequirementAssignment req) throws Exception {

@@ -175,6 +175,18 @@ public class AADM_Helper {
 		return node;
 	}
 
+	public static ERequirementAssignment findRequirementInTemplate(String requirement, ENodeTemplate template) {
+		ERequirementAssignment result = null;
+		if (template.getNode().getRequirements() == null)
+			return result;
+		for (ERequirementAssignment req : template.getNode().getRequirements().getRequirements()) {
+			if (req.getName().equals(requirement)) {
+				result = req;
+			}
+		}
+		return result;
+	}
+
 	public static ECapabilityAssignment findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
 		ECapabilityAssignment capability = null;
 		if (template.getNode().getCapabilities() == null)

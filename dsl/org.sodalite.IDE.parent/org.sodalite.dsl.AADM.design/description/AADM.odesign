@@ -8,7 +8,8 @@
         <edgeMappings name="RequirementLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
           <style sizeComputationExpression="2" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12">
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getRequirementLabel()">
+              <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
@@ -16,7 +17,8 @@
         <edgeMappings name="TargetLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@borderedNodeMappings[name='BTargets']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
           <style sizeComputationExpression="2" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12">
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getTargetLabel()">
+              <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
@@ -24,7 +26,26 @@
         <edgeMappings name="TriggerLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@borderedNodeMappings[name='BTriggers']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']" targetFinderExpression="aql:self">
           <style sizeComputationExpression="2" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12">
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getTriggerLabel">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TargetFilterNodeLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']/@borderedNodeMappings[name='TargetFilter']/@borderedNodeMappings[name='node']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getNodeLabel">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TargetFilterRequirementLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']/@borderedNodeMappings[name='TargetFilter']/@borderedNodeMappings[name='requirement']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetFinderExpression="service:findRequirement">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getRequirementLabel">
+              <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
@@ -37,7 +58,7 @@
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="BRequirements" semanticCandidatesExpression="aql:self.node.requirements.requirements" domainClass="aADM::ERequirementAssignment">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:'req: ' + self.name" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/requirement.png">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getRequirementBorderedLabel" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/requirement.png">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
@@ -163,13 +184,13 @@
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BTargets" semanticCandidatesExpression="aql:self.policy.targets.target" domainClass="rM::EPREFIX_ID">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getTargetLabel()" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/target.png">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getTargetBorderedLabel()" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/target.png">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BTriggers" semanticCandidatesExpression="aql:self.policy.triggers.triggers" domainClass="ETriggerDefinition">
-            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getTriggerLabel" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/trigger_big.png">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:''" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/trigger_big.png">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
@@ -201,6 +222,34 @@
           </style>
         </containerMappings>
         <containerMappings name="Trigger Definition" semanticCandidatesExpression="service:getTriggerDefinitions" domainClass="rM::ETriggerDefinition" childrenPresentation="VerticalStack">
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="TargetFilter" semanticCandidatesExpression="aql:self.trigger.target_filter" domainClass="rM::EEvenFilter">
+            <borderedNodeMappings name="node" semanticCandidatesExpression="feature:node" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getNodeBorderedLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/node.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <borderedNodeMappings name="requirement" semanticCandidatesExpression="feature:requirement" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getRequirementBorderedLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/requirement.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <borderedNodeMappings name="capability" semanticCandidatesExpression="feature:capability" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getCapabilityLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/capability.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dash" labelSize="12" showIcon="false" labelExpression="target filter" resizeKind="NSEW" width="3" height="15">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <forbiddenSides>SOUTH</forbiddenSides>
+              <forbiddenSides>NORTH</forbiddenSides>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </borderedNodeMappings>
           <subContainerMappings name="Event section" semanticCandidatesExpression="aql:self" domainClass="rM::ETriggerDefinition" childrenPresentation="List">
             <subNodeMappings name="event" semanticCandidatesExpression="feature:trigger" domainClass="rM::ETriggerDefinitionBody">
               <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.event" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
