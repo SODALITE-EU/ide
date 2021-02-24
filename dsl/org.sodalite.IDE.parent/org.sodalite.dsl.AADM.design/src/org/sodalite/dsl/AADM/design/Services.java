@@ -18,14 +18,30 @@ import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
+import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EBOOLEAN;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR;
+import org.sodalite.dsl.rM.EConstraint;
+import org.sodalite.dsl.rM.EConstraintList;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
+import org.sodalite.dsl.rM.EGreaterOrEqual;
+import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.ELessOrEqual;
+import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -34,7 +50,9 @@ import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.ETriggerDefinition;
+import org.sodalite.dsl.rM.ETriggerDefinitionBody;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
@@ -45,6 +63,112 @@ import org.sodalite.dsl.scoping.AADMScopeProvider;
  * The services class used by VSM.
  */
 public class Services {
+
+	public String getActivityLabel(EActivityDefinition activity) {
+		String label = null;
+		if (activity instanceof ECallOperationActivityDefinition) {
+			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+			label = "call operation: " + parse(callOperationActivity.getOperation().getOperation());
+		}
+
+		return label;
+	}
+
+	private String parse(EPREFIX_TYPE type) {
+		return type.getModule() != null ? type.getModule() + "/" + type.getType() : type.getType();
+	}
+
+	public String getConstraintLabel(EExtendedTriggerCondition condition) {
+		return "constraint: " + parseConditionClause(condition.getConstraint(), null);
+	}
+
+	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {
+		String label = "";
+		if (constraint instanceof EConditionClauseDefinitionNOT) {
+			EConditionClauseDefinitionNOT notConstraint = (EConditionClauseDefinitionNOT) constraint;
+			label = " not (" + parseConditionClause(notConstraint.getNot(), null) + ") ";
+		} else if (constraint instanceof EConditionClauseDefinitionAND) {
+			EConditionClauseDefinitionAND andConstraint = (EConditionClauseDefinitionAND) constraint;
+			if (andConstraint.getAnd() instanceof EConditionClauseDefinitionAssert) {
+				EConditionClauseDefinitionAssert assertConstraints = (EConditionClauseDefinitionAssert) andConstraint
+						.getAnd();
+				label = parseConditionClause(assertConstraints, " and ");
+			} else {
+				label = " and (" + parseConditionClause(andConstraint.getAnd(), null) + ") ";
+			}
+		} else if (constraint instanceof EConditionClauseDefinitionOR) {
+			EConditionClauseDefinitionOR orConstraint = (EConditionClauseDefinitionOR) constraint;
+			if (orConstraint.getOr() instanceof EConditionClauseDefinitionAssert) {
+				EConditionClauseDefinitionAssert assertConstraints = (EConditionClauseDefinitionAssert) orConstraint
+						.getOr();
+				label = parseConditionClause(assertConstraints, " or ");
+			} else {
+				label = " or (" + parseConditionClause(orConstraint.getOr(), null) + ")";
+			}
+		} else if (constraint instanceof EConditionClauseDefinitionAssert) {
+			EConditionClauseDefinitionAssert assertsConstraint = (EConditionClauseDefinitionAssert) constraint;
+			int index = assertsConstraint.getAssertions().size() - 1;
+			for (EAssertionDefinition assertion : assertsConstraint.getAssertions()) {
+				boolean placeDelimiter = delimiter != null & index-- > 0;
+				label += assertion.getAttribute_name() + parseConstraint(assertion.getConstraints())
+						+ (placeDelimiter ? delimiter : "");
+			}
+		} else {
+			label = "";
+		}
+
+		return label;
+	}
+
+	private String parseConstraint(EConstraintList constraints) {
+		String label = "";
+		if (constraints.getList().size() == 1) {
+			EConstraint constraint = constraints.getList().get(0);
+			if (constraint instanceof EEqual)
+				label = " = " + parse(((EEqual) constraint).getVal());
+			else if (constraint instanceof EGreaterThan)
+				label = " > " + parse(((EGreaterThan) constraint).getVal());
+			else if (constraint instanceof EGreaterOrEqual)
+				label = " >= " + parse(((EGreaterOrEqual) constraint).getVal());
+			else if (constraint instanceof ELessThan)
+				label = " < " + parse(((ELessThan) constraint).getVal());
+			else if (constraint instanceof ELessOrEqual)
+				label = " <= " + parse(((ELessOrEqual) constraint).getVal());
+		}
+		return label;
+	}
+
+	private String parse(EAlphaNumericValue val) {
+		String label = null;
+		if (val instanceof ESTRING)
+			label = ((ESTRING) val).getValue();
+		else if (val instanceof EFLOAT)
+			label = Float.toString(((EFLOAT) val).getValue());
+		else if (val instanceof ESIGNEDINT)
+			label = Integer.toString(((ESIGNEDINT) val).getValue());
+		return label;
+	}
+
+	private String parse(ESingleValue val) {
+		String label = null;
+		if (val instanceof ESTRING)
+			label = ((ESTRING) val).getValue();
+		else if (val instanceof EBOOLEAN)
+			label = Boolean.toString(((EBOOLEAN) val).isValue());
+		else if (val instanceof EFLOAT)
+			label = Float.toString(((EFLOAT) val).getValue());
+		else if (val instanceof ESIGNEDINT)
+			label = Integer.toString(((ESIGNEDINT) val).getValue());
+		return label;
+	}
+
+	public String getScheduleStartTime(ETriggerDefinitionBody trigger) {
+		return "start_time: " + trigger.getSchedule().getStart_time();
+	}
+
+	public String getScheduleEndTime(ETriggerDefinitionBody trigger) {
+		return "end_time: " + trigger.getSchedule().getEnd_time();
+	}
 
 	public String getTriggerLabel(ETriggerDefinition trigger) {
 		return "trigger: " + trigger.getName();
