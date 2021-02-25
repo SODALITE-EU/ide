@@ -241,6 +241,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeEPolicyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for NodeTemplate::name property");
+    final String proposalText = "policy_id";
+    final String displayText = "policy_id";
+    final String additionalProposalInfo = "The required id of the policy definition";
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");

@@ -18,6 +18,7 @@ import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAssertionDefinition;
@@ -80,16 +81,20 @@ public class Services {
 		return "cap: " + parse(node);
 	}
 
-	public String getRequirementLabel(EObject node) {
-		return "req: " + parse(node);
-	}
-
-	public String getRequirementBorderedLabel(EObject node) {
-		ERequirementAssignment req = findRequirement((EPREFIX_TYPE) node);
-		if (req == null)
-			return "req: " + parse(node);
-		else
-			return "";
+	public String getRequirementBorderedLabel(EObject object) {
+		String label = "";
+		if (object instanceof EPREFIX_TYPE) {
+			ERequirementAssignment req = findRequirement((EPREFIX_TYPE) object);
+			if (req == null)
+				label = "req: " + parse(object);
+		}
+		if (object instanceof ERequirementAssignment) {
+			ERequirementAssignment requirement = (ERequirementAssignment) object;
+			ENodeTemplate nodeTemplate = findNode(requirement.getNode());
+			if (nodeTemplate == null)
+				label = "req:" + requirement.getName();
+		}
+		return label;
 	}
 
 	public String getActivityLabel(EActivityDefinition activity) {
@@ -302,16 +307,15 @@ public class Services {
 		return requirement.getName() + ": [ node: " + requirement.getNode() + "]";
 	}
 
-	public String getRequirementLabel(ERequirementAssignment requirement) {
-		return "req:" + requirement.getName();
-	}
-
-	public String getRequirementBorderedLabel(ERequirementAssignment requirement) {
-		ENodeTemplate nodeTemplate = findNode(requirement.getNode());
-		if (nodeTemplate == null)
+	public String getRequirementLabel(EObject object) {
+		if (object instanceof ERequirementAssignment) {
+			ERequirementAssignment requirement = (ERequirementAssignment) object;
 			return "req:" + requirement.getName();
-		else
-			return "";
+		} else if (object instanceof EPREFIX_TYPE) {
+			EPREFIX_TYPE prefixType = (EPREFIX_TYPE) object;
+			return "req:" + getLastSegment(prefixType.getType(), ".");
+		} else
+			return null;
 	}
 
 	public String getTypeLabel(ENodeTemplateBody node) {
@@ -339,6 +343,22 @@ public class Services {
 
 	public void addStringToPropertyValueList(EPropertyAssignment prop) {
 		System.out.println("Requested to add string to property list value. Property: " + prop.getName());
+	}
+
+	public void addImport(AADM_Model model, String _import) {
+		model.getImports().add(_import);
+	}
+
+	public void cancelAddImport(AADM_Model model, Integer size) {
+		// Nothing to do
+	}
+
+	public void editImport(AADM_Model model, Integer index, String oldValue, String newValue) {
+		model.getImports().set(index - 1, newValue);
+	}
+
+	public void removeImport(AADM_Model model, Integer index) {
+		model.getImports().remove(index - 1);
 	}
 
 	public void addItemToPropertyValueList(ELIST list, String item) {
@@ -395,6 +415,10 @@ public class Services {
 
 	public Set<String> getOptimizations(ENodeTemplate node) {
 		return AADMScopeProvider.getOptimizationModels();
+	}
+
+	public Optimization_Model findOptimizationModel(String optimizationName) {
+		return AADMScopeProvider.findOptimizationModel(optimizationName);
 	}
 
 	public String getOptimization(ENodeTemplate node) {
@@ -613,6 +637,11 @@ public class Services {
 		String type = parseType(value);
 		node.getNode().getType().setModule(module);
 		node.getNode().getType().setType(type);
+	}
+
+	public void setOptimization(ENodeTemplate node, String optimization) {
+		Optimization_Model optimization_model = findOptimizationModel(optimization);
+		node.getNode().setOptimization(optimization_model);
 	}
 
 	public void setRequirementNode(ERequirementAssignment req, String node) {
