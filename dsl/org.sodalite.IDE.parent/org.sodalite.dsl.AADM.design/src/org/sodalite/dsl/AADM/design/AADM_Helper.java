@@ -9,12 +9,15 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
@@ -28,10 +31,14 @@ public class AADM_Helper {
 			EPREFIX_TYPE type = ((ENodeTemplateBody) container).getType();
 			String resourceId = (type.getModule() != null ? type.getModule() + "/" : "") + type.getType();
 			return resourceId;
-
 		} else if (container instanceof ECapabilityAssignment) {
 			ECapabilityAssignment cap = (ECapabilityAssignment) container;
 			return findCapabilityType(cap, reasoner);
+		} else if (container instanceof EPolicyDefinitionBody) {
+			EPolicyDefinitionBody policy = (EPolicyDefinitionBody) container;
+			EPREFIX_TYPE type = policy.getType();
+			String resourceId = (type.getModule() != null ? type.getModule() + "/" : "") + type.getType();
+			return resourceId;
 		} else
 			return null;
 	}
@@ -204,6 +211,40 @@ public class AADM_Helper {
 				return node;
 		}
 		return null;
+	}
+
+	public static List<String> processListModules(EObject model) {
+		// Get modules from model
+		List<String> importedModules = getImportedModules(model);
+		String module = getModule(model);
+		// Add current module to imported ones for searching in the KB
+		if (module != null)
+			importedModules.add(module);
+		return importedModules;
+	}
+
+	private static List<String> getImportedModules(EObject object) {
+		List<String> modules = new ArrayList();
+		AADM_Model model = (AADM_Model) findModel(object);
+		for (String _import : model.getImports())
+			modules.add(_import);
+
+		return modules;
+	}
+
+	public static String getBetweenLast2Delimiters(String input, String delimiter) {
+		int endIndex = input.lastIndexOf(delimiter);
+		String subInput = input.substring(0, endIndex);
+		int beginIndex = subInput.lastIndexOf(delimiter);
+		return input.subSequence(beginIndex + 1, endIndex).toString();
+	}
+
+	public static String renderEOperationDefinition(EOperationDefinition op) {
+		EInterfaceType _interface = (EInterfaceType) op.eContainer().eContainer().eContainer();
+		String module = getModule(op);
+		String qOperation = module != null ? module + '/' + _interface.getName() + '.' + op.getName()
+				: _interface.getName() + '.' + op.getName();
+		return qOperation;
 	}
 
 }

@@ -15,10 +15,13 @@ import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -27,6 +30,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -45,6 +49,32 @@ public class KBReasonerProxy {
 			}
 		});
 		throw new Exception(message + " in Sodalite preferences pages");
+	}
+
+	public SortedSet<String> getOperations(ETriggerDefinition trigger) {
+		SortedSet<String> operations = new TreeSet<String>();
+		try {
+			List<String> importedModules = AADM_Helper.processListModules(trigger);
+			OperationDefinitionData operationsData = RMBackendProxy.getKBReasoner().getOperations(importedModules);
+
+			for (OperationDefinition op : operationsData.getElements()) {
+				operations.add(renderOperationDefinition(op));
+			}
+
+		} catch (Exception e) {
+			SodaliteLogger.log("Error getting operations", e);
+		}
+
+		return operations;
+	}
+
+	private String renderOperationDefinition(OperationDefinition op) {
+		String module = AADM_Helper.getBetweenLast2Delimiters(op.getDefinedIn(), "/");
+		String _interface = AADM_Helper.getLastSegment(op.getDefinedIn(), "/");
+		String oper_name = AADM_Helper.getLastSegment(op.getUri().toString(), "/");
+		String qOperation = module != "tosca" ? module + '/' + _interface + '.' + oper_name
+				: _interface + '.' + oper_name;
+		return qOperation;
 	}
 
 	public SortedSet<String> getImports(AADM_Model model) {
@@ -75,7 +105,24 @@ public class KBReasonerProxy {
 				types.add(renderType(n));
 			}
 		} catch (Exception e) {
-			SodaliteLogger.log("Error getting types", e);
+			SodaliteLogger.log("Error getting node types", e);
+		}
+
+		return types;
+	}
+
+	public SortedSet<String> getPolicyTypes(EPolicyDefinition policy) {
+		SortedSet<String> types = new TreeSet<String>();
+		try {
+			List<String> modules = new ArrayList<>();
+			modules.add(AADM_Helper.getModule(policy));
+			modules.addAll(AADM_Helper.getImports(policy));
+			ReasonerData<Type> policies = RMBackendProxy.getKBReasoner().getPolicyTypes(modules);
+			for (Type p : policies.getElements()) {
+				types.add(renderType(p));
+			}
+		} catch (Exception e) {
+			SodaliteLogger.log("Error getting policy types", e);
 		}
 
 		return types;

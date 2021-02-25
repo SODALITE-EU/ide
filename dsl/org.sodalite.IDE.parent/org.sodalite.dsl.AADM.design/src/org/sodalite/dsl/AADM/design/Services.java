@@ -25,6 +25,7 @@ import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody;
 import org.sodalite.dsl.rM.EConditionClauseDefinition;
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
@@ -65,6 +66,30 @@ import org.sodalite.dsl.scoping.AADMScopeProvider;
  */
 public class Services {
 
+	public void setConstraint(ETriggerDefinition trigger, String constraint) {
+		// TODO
+	}
+
+	public void setPeriod(ETriggerDefinition trigger, String period) {
+		trigger.getTrigger().getCondition().setPeriod(period);
+	}
+
+	public void setEvaluations(ETriggerDefinition trigger, String evaluations) {
+		trigger.getTrigger().getCondition().getEvaluations().setValue(Integer.parseInt(evaluations));
+	}
+
+	public void setMethod(ETriggerDefinition trigger, String method) {
+		trigger.getTrigger().getCondition().setMethod(method);
+	}
+
+	public void setScheduleStartTime(ETriggerDefinition trigger, String start_time) {
+		trigger.getTrigger().getSchedule().setStart_time(start_time);
+	}
+
+	public void setScheduleEndTime(ETriggerDefinition trigger, String end_time) {
+		trigger.getTrigger().getSchedule().setEnd_time(end_time);
+	}
+
 	public String getNodeLabel(EObject node) {
 		return "node: " + parse(node);
 	}
@@ -97,6 +122,16 @@ public class Services {
 		return label;
 	}
 
+	public String getActivityLabel(ETriggerDefinition trigger, Integer index) {
+		EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index - 1);
+		ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+		return parse(callOperationActivity.getOperation().getOperation());
+	}
+
+	public String getActivityLabel(ETriggerDefinition trigger, ECallOperationActivityDefinition callOperationActivity) {
+		return "call operation: " + parse(callOperationActivity.getOperation().getOperation());
+	}
+
 	public String getActivityLabel(EActivityDefinition activity) {
 		String label = null;
 		if (activity instanceof ECallOperationActivityDefinition) {
@@ -124,8 +159,16 @@ public class Services {
 			return null;
 	}
 
+	public String getConstraintLabel(ETriggerDefinition trigger) {
+		return getConstraintLabel(trigger.getTrigger().getCondition());
+	}
+
 	public String getConstraintLabel(EExtendedTriggerCondition condition) {
 		return "constraint: " + parseConditionClause(condition.getConstraint(), null);
+	}
+
+	public String parseConditionClause(ETriggerDefinition trigger) {
+		return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
 	}
 
 	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {
@@ -341,6 +384,27 @@ public class Services {
 		return size;
 	}
 
+	public void addCallAction(ETriggerDefinition trigger, String operation) {
+		ECallOperationActivityDefinition callOperationActivity = createCallOperationActivityDefinition(operation);
+		trigger.getTrigger().getAction().getList().add(callOperationActivity);
+	}
+
+	public void cancelAddAction(ETriggerDefinition trigger, Integer size) {
+		if (trigger.getTrigger().getAction().getList().size() != size)
+			trigger.getTrigger().getAction().getList().remove(size);
+	}
+
+	public void editCallOperation(ETriggerDefinition trigger, Integer index,
+			ECallOperationActivityDefinition callOperation, String newOperation) {
+		callOperation.getOperation().getOperation().setModule(getTrailingSegment(newOperation, "/"));
+		callOperation.getOperation().getOperation().setType(getLastSegment(newOperation, "/"));
+	}
+
+	public void removeCallOperation(ECallOperationActivityDefinition callOperation) {
+		ETriggerDefinitionBody trigger = (ETriggerDefinitionBody) callOperation.eContainer().eContainer();
+		trigger.getAction().getList().remove(callOperation);
+	}
+
 	public void addStringToPropertyValueList(EPropertyAssignment prop) {
 		System.out.println("Requested to add string to property list value. Property: " + prop.getName());
 	}
@@ -471,6 +535,10 @@ public class Services {
 
 	public String renderNodeType(ENodeTemplate node) throws Exception {
 		return AADM_Helper.renderType(node.getNode().getType());
+	}
+
+	public String renderPolicyType(EPolicyDefinition policy) throws Exception {
+		return AADM_Helper.renderType(policy.getPolicy().getType());
 	}
 
 	public String renderParameterType(EParameterDefinition par) throws Exception {
@@ -632,11 +700,30 @@ public class Services {
 		return nodeRed;
 	}
 
+	private ECallOperationActivityDefinition createCallOperationActivityDefinition(String operation) {
+		ECallOperationActivityDefinition callOperationActivityDefinition = RMFactory.eINSTANCE
+				.createECallOperationActivityDefinition();
+		ECallOperationActivityDefinitionBody body = RMFactory.eINSTANCE.createECallOperationActivityDefinitionBody();
+		EPREFIX_TYPE type = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		type.setModule(getTrailingSegment(operation, "/"));
+		type.setType(getLastSegment(operation, "/"));
+		body.setOperation(type);
+		callOperationActivityDefinition.setOperation(body);
+		return callOperationActivityDefinition;
+	}
+
 	public void setNodeType(ENodeTemplate node, String value) {
 		String module = parseModule(value);
 		String type = parseType(value);
 		node.getNode().getType().setModule(module);
 		node.getNode().getType().setType(type);
+	}
+
+	public void setPolicyType(EPolicyDefinition policy, String newType) {
+		String module = parseModule(newType);
+		String type = parseType(newType);
+		policy.getPolicy().getType().setModule(module);
+		policy.getPolicy().getType().setType(type);
 	}
 
 	public void setOptimization(ENodeTemplate node, String optimization) {
