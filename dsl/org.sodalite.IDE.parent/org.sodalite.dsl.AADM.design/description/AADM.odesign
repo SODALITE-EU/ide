@@ -398,9 +398,9 @@
                     </buttons>
                     <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                     <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                      <controls xsi:type="properties:TextDescription" name="newItem" labelExpression="Item value:">
+                      <controls xsi:type="properties:SelectDescription" name="new import" labelExpression="Item value:" candidatesExpression="service:getImports" candidateDisplayExpression="aql:candidate">
                         <initialOperation>
-                          <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
+                          <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
                             <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addImport(newValue)"/>
                           </firstModelOperations>
                         </initialOperation>

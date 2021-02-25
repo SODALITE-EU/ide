@@ -10,6 +10,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
@@ -17,6 +18,7 @@ import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -43,6 +45,23 @@ public class KBReasonerProxy {
 			}
 		});
 		throw new Exception(message + " in Sodalite preferences pages");
+	}
+
+	public SortedSet<String> getImports(AADM_Model model) {
+		SortedSet<String> imports = new TreeSet<String>();
+		try {
+
+			ModuleData modules = RMBackendProxy.getKBReasoner().getModules();
+			for (String module : modules.getElements()) {
+				String moduleLabel = module.substring(module.lastIndexOf("/", module.length() - 2) + 1,
+						module.length() - 1);
+				imports.add(moduleLabel);
+			}
+		} catch (Exception e) {
+			SodaliteLogger.log("Error getting imports", e);
+		}
+
+		return imports;
 	}
 
 	public SortedSet<String> getTypes(ENodeTemplate node) {
