@@ -754,6 +754,11 @@ public class Services {
 		req.setNode(createNodeRef(node));
 	}
 
+	public void setPolicyTarget(EPREFIX_ID object, String target) {
+		object.setModule(getTrailingSegment(target, "/"));
+		object.setId(getLastSegment(target, "/"));
+	}
+
 	public void setTargetFilterNode(EPREFIX_ID object, String node) {
 		EEvenFilter filter = (EEvenFilter) object.eContainer();
 		EPREFIX_ID prefix = (EPREFIX_ID) filter.getNode();

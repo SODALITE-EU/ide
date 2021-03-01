@@ -377,6 +377,7 @@
       <pages name="TargetFilter Node Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().node" groups="//@extensions.0/@categories.0/@groups.14"/>
       <pages name="TargetFilter Requirement Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().requirement" groups="//@extensions.0/@categories.0/@groups.15"/>
       <pages name="TargetFilter Capability Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().capability" groups="//@extensions.0/@categories.0/@groups.16"/>
+      <pages name="Policy Target Default Page" labelExpression="General" domainClass="rM::EPREFIX_ID" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.17"/>
       <groups name="AADM Model" labelExpression="AADM Model" domainClass="aADM::AADM_Model" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Module" labelExpression="Module" valueExpression="feature:module">
           <initialOperation>
@@ -867,6 +868,13 @@
         <controls xsi:type="properties:SelectDescription" name="Capability" labelExpression="Capability" valueExpression="service:renderCapability" candidatesExpression="service:getCapabilitiesOfNode" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterCapability(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Policy Target" labelExpression="Target" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Target" labelExpression="Target" valueExpression="service:renderNodeTemplate" candidatesExpression="service:getNodeTemplates" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setPolicyTarget(newValue)"/>
           </initialOperation>
         </controls>
       </groups>
