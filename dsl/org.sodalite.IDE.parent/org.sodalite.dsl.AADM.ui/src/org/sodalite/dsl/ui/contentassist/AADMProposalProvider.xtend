@@ -196,6 +196,16 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 
 		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
+	
+	override void completeEPolicyDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for NodeTemplate::name property")
+		val String proposalText = "policy_id"
+		val String displayText = "policy_id"
+		val String additionalProposalInfo = "The required id of the policy definition"
+
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	}
 
 	override void completeENodeTemplateBody_Type(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {

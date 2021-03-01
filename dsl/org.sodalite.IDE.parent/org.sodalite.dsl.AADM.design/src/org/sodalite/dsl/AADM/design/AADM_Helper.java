@@ -9,13 +9,17 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -28,10 +32,14 @@ public class AADM_Helper {
 			EPREFIX_TYPE type = ((ENodeTemplateBody) container).getType();
 			String resourceId = (type.getModule() != null ? type.getModule() + "/" : "") + type.getType();
 			return resourceId;
-
 		} else if (container instanceof ECapabilityAssignment) {
 			ECapabilityAssignment cap = (ECapabilityAssignment) container;
 			return findCapabilityType(cap, reasoner);
+		} else if (container instanceof EPolicyDefinitionBody) {
+			EPolicyDefinitionBody policy = (EPolicyDefinitionBody) container;
+			EPREFIX_TYPE type = policy.getType();
+			String resourceId = (type.getModule() != null ? type.getModule() + "/" : "") + type.getType();
+			return resourceId;
 		} else
 			return null;
 	}
@@ -78,8 +86,22 @@ public class AADM_Helper {
 		return nodes;
 	}
 
+	public static String render(EPREFIX_REF ref) {
+		String result = null;
+		if (ref instanceof EPREFIX_TYPE) {
+			result = renderType((EPREFIX_TYPE) ref);
+		} else if (ref instanceof EPREFIX_ID) {
+			result = renderType((EPREFIX_ID) ref);
+		}
+		return result;
+	}
+
 	public static String renderType(EPREFIX_TYPE type) {
 		return (type.getModule() != null ? renderModule(type.getModule()) + "/" : "") + type.getType();
+	}
+
+	public static String renderType(EPREFIX_ID type) {
+		return (type.getModule() != null ? renderModule(type.getModule()) + "/" : "") + type.getId();
 	}
 
 	public static String renderType(EDataTypeName type) {
@@ -105,6 +127,15 @@ public class AADM_Helper {
 		return split[split.length - 1];
 	}
 
+	public static ENodeTemplate findNode(EObject object, EPREFIX_REF ref) {
+		String nodeName = null;
+		if (ref instanceof EPREFIX_ID)
+			nodeName = ((EPREFIX_ID) ref).getId();
+		else if (ref instanceof EPREFIX_TYPE)
+			nodeName = ((EPREFIX_TYPE) ref).getType();
+		return findNode(object, nodeName);
+	}
+
 	public static ENodeTemplate findNode(EObject object, String nodeName) {
 		AADM_Model model = findModel(object);
 		if (model != null) {
@@ -117,12 +148,30 @@ public class AADM_Helper {
 		return null;
 	}
 
+	public static List<ENodeTemplate> getNodeTemplates(EObject object) {
+		AADM_Model model = findModel(object);
+		if (model != null) {
+			return model.getNodeTemplates().getNodeTemplates();
+		}
+		return null;
+	}
+
 	public static String getModule(EObject obj) {
 		AADM_Model model = findModel(obj);
 		if (model != null)
 			return model.getModule();
 		else
 			return null;
+	}
+
+	public static String getId(EPREFIX_REF ref) {
+		String id = null;
+		if (ref instanceof EPREFIX_TYPE) {
+			id = ((EPREFIX_TYPE) ref).getType();
+		} else if (ref instanceof EPREFIX_ID) {
+			id = ((EPREFIX_ID) ref).getId();
+		}
+		return id;
 	}
 
 	public static List<String> getImports(EObject obj) {
@@ -151,6 +200,46 @@ public class AADM_Helper {
 		if (string.endsWith(delimiter))
 			newString = string.substring(0, string.length() - delimiter.length());
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
+	}
+
+	public static ENodeTemplate findRequirementNodeInLocalModel(EObject object, EPREFIX_REF reqRef) {
+		String nodeRef = AADM_Helper.getNodeFromRequirementRef(reqRef);
+		String nodeName = AADM_Helper.getLastSegment(nodeRef, "/");
+		String req_name = AADM_Helper.getRequirementNameFromRequirementRef(reqRef);
+		// Find node in local model
+
+		ENodeTemplate nodeTemplate = AADM_Helper.findNode(object, nodeName);
+		if (nodeTemplate != null) {
+			// Get requirement, if found, get node
+			return AADM_Helper.findRequirementNodeInTemplate(req_name, nodeTemplate);
+		}
+		return null;
+	}
+
+	public static String getRequirementNameFromRequirementRef(EPREFIX_REF reqRef) {
+		String reqName = null;
+		if (reqRef instanceof EPREFIX_TYPE) {
+			EPREFIX_TYPE req = (EPREFIX_TYPE) reqRef;
+			reqName = AADM_Helper.getLastSegment(req.getType(), ".");
+		} else if (reqRef instanceof EPREFIX_ID) {
+			EPREFIX_ID req = (EPREFIX_ID) reqRef;
+			reqName = AADM_Helper.getLastSegment(req.getId(), ".");
+		}
+		return reqName;
+	}
+
+	public static String getNodeFromRequirementRef(EPREFIX_REF reqRef) {
+		String nodeRef = null;
+		if (reqRef instanceof EPREFIX_TYPE) {
+			EPREFIX_TYPE req = (EPREFIX_TYPE) reqRef;
+			String nodeName = req.getType().substring(0, req.getType().lastIndexOf('.'));
+			nodeRef = req.getModule() != null ? req.getModule() + '/' + nodeName : nodeName;
+		} else if (reqRef instanceof EPREFIX_ID) {
+			EPREFIX_ID req = (EPREFIX_ID) reqRef;
+			String nodeName = req.getId().substring(0, req.getId().lastIndexOf('.'));
+			nodeRef = req.getModule() != null ? req.getModule() + '/' + nodeName : nodeName;
+		}
+		return nodeRef;
 	}
 
 	public static ENodeTemplate findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
@@ -204,6 +293,58 @@ public class AADM_Helper {
 				return node;
 		}
 		return null;
+	}
+
+	public static List<String> processListModules(EObject model) {
+		// Get modules from model
+		List<String> importedModules = getImportedModules(model);
+		String module = getModule(model);
+		// Add current module to imported ones for searching in the KB
+		if (module != null)
+			importedModules.add(module);
+		return importedModules;
+	}
+
+	private static List<String> getImportedModules(EObject object) {
+		List<String> modules = new ArrayList();
+		AADM_Model model = (AADM_Model) findModel(object);
+		for (String _import : model.getImports())
+			modules.add(_import);
+
+		return modules;
+	}
+
+	public static String getBetweenLast2Delimiters(String input, String delimiter) {
+		int endIndex = input.lastIndexOf(delimiter);
+		String subInput = input.substring(0, endIndex);
+		int beginIndex = subInput.lastIndexOf(delimiter);
+		return input.subSequence(beginIndex + 1, endIndex).toString();
+	}
+
+	public static String renderEOperationDefinition(EOperationDefinition op) {
+		EInterfaceType _interface = (EInterfaceType) op.eContainer().eContainer().eContainer();
+		String module = getModule(op);
+		String qOperation = module != null ? module + '/' + _interface.getName() + '.' + op.getName()
+				: _interface.getName() + '.' + op.getName();
+		return qOperation;
+	}
+
+	public static boolean moduleBelongsToModel(EPREFIX_REF ref) {
+		boolean result = false;
+		String modelModule = AADM_Helper.getModule(ref);
+		String refModule = null;
+		if (ref instanceof EPREFIX_TYPE)
+			refModule = ((EPREFIX_TYPE) ref).getModule();
+		else if (ref instanceof EPREFIX_ID)
+			refModule = ((EPREFIX_ID) ref).getModule();
+		if (modelModule == null && refModule == null)
+			result = true;
+		else if (modelModule != null)
+			result = modelModule.equals(refModule);
+		else if (refModule != null)
+			result = refModule.equals(modelModule);
+
+		return result;
 	}
 
 }
