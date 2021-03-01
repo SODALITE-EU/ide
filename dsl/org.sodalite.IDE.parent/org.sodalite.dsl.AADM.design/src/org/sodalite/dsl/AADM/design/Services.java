@@ -18,7 +18,6 @@ import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
-import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
@@ -162,12 +161,16 @@ public class Services {
 			return null;
 	}
 
+	public String getConstraintLabel(ETriggerDefinition trigger) {
+		return getConstraintLabel(trigger.getTrigger().getCondition());
+	}
+
 	public String getConstraintLabel(EExtendedTriggerCondition condition) {
 		return "constraint: " + parseConditionClause(condition.getConstraint(), null);
 	}
 
-	public String parseConditionClause(ETriggerDefinitions t) {
-		return null;
+	public String parseConditionClause(ETriggerDefinition trigger) {
+		return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
 	}
 
 	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {
@@ -661,6 +664,11 @@ public class Services {
 	public void setValue(EPropertyAssignment prop, String value) {
 		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
 		prop.setValue(newValue);
+	}
+
+	public void setValue(EAttributeAssignment attr, String value) {
+		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		attr.setValue(newValue);
 	}
 
 	private EObject createValue(String value) {

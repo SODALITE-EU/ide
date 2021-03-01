@@ -808,9 +808,7 @@
         </controls>
         <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).value">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setValue(newValue)"/>
           </initialOperation>
         </controls>
       </groups>
