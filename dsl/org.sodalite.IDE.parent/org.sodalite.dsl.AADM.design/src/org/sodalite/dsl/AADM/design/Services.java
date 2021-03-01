@@ -656,7 +656,7 @@ public class Services {
 				entity = (ENodeTemplate) AADM_Helper.getNodeTemplate(property);
 			}
 		} else {
-			// TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+			// TODO Support other entities: TARGET, HOST, SOURCE and concrete entity
 		}
 		return entity;
 	}
