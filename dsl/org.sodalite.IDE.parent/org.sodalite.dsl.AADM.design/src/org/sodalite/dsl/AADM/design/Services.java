@@ -37,6 +37,7 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
@@ -46,6 +47,7 @@ import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
@@ -95,7 +97,7 @@ public class Services {
 	}
 
 	public String getNodeBorderedLabel(EObject node) {
-		ENodeTemplate nodeTemplate = findNode((EPREFIX_ID) node);
+		ENodeTemplate nodeTemplate = findNode((EPREFIX_REF) node);
 		if (nodeTemplate == null)
 			return "node: " + parse(node);
 		else
@@ -497,8 +499,13 @@ public class Services {
 		return AADM_Helper.findNode(req, req.getNode().getId());
 	}
 
-	public ENodeTemplate findNode(EPREFIX_ID prefix_id) {
-		return AADM_Helper.findNode(prefix_id, prefix_id.getId());
+	public ENodeTemplate findNode(EPREFIX_REF prefix_ref) {
+		String id = null;
+		if (prefix_ref instanceof EPREFIX_TYPE)
+			id = ((EPREFIX_TYPE) prefix_ref).getType();
+		else if (prefix_ref instanceof EPREFIX_ID)
+			id = ((EPREFIX_ID) prefix_ref).getId();
+		return AADM_Helper.findNode(prefix_ref, id);
 	}
 
 	public ERequirementAssignment findRequirement(EPREFIX_TYPE prefix_type) {
@@ -529,12 +536,24 @@ public class Services {
 		return newString.substring(0, newString.lastIndexOf(delimiter));
 	}
 
+	public String renderRequirement(EPREFIX_TYPE req) throws Exception {
+		return AADM_Helper.renderType(req);
+	}
+
+	public String renderCapability(EPREFIX_TYPE cap) throws Exception {
+		return AADM_Helper.renderType(cap);
+	}
+
 	public String renderRequirementNode(ERequirementAssignment req) throws Exception {
 		return AADM_Helper.renderPrefixId(req.getNode());
 	}
 
 	public String renderNodeType(ENodeTemplate node) throws Exception {
 		return AADM_Helper.renderType(node.getNode().getType());
+	}
+
+	public String renderNodeTemplate(EPREFIX_ID template) throws Exception {
+		return AADM_Helper.renderPrefixId(template);
 	}
 
 	public String renderPolicyType(EPolicyDefinition policy) throws Exception {
@@ -733,6 +752,39 @@ public class Services {
 
 	public void setRequirementNode(ERequirementAssignment req, String node) {
 		req.setNode(createNodeRef(node));
+	}
+
+	public void setTargetFilterNode(EPREFIX_ID object, String node) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_ID prefix = (EPREFIX_ID) filter.getNode();
+		if (node.contains("/")) {
+			prefix.setModule(getTrailingSegment(node, "/"));
+			prefix.setId(getLastSegment(node, "/"));
+		} else {
+			prefix.setId(node);
+		}
+	}
+
+	public void setTargetFilterRequirement(EPREFIX_TYPE object, String req) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_TYPE prefix = (EPREFIX_TYPE) filter.getRequirement();
+		if (req.contains("/")) {
+			prefix.setModule(getTrailingSegment(req, "/"));
+			prefix.setType(getLastSegment(req, "/"));
+		} else {
+			prefix.setType(req);
+		}
+	}
+
+	public void setTargetFilterCapability(EPREFIX_TYPE object, String cap) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_TYPE prefix = (EPREFIX_TYPE) filter.getCapability();
+		if (cap.contains("/")) {
+			prefix.setModule(getTrailingSegment(cap, "/"));
+			prefix.setType(getLastSegment(cap, "/"));
+		} else {
+			prefix.setType(cap);
+		}
 	}
 
 	private String parseModule(String value) {

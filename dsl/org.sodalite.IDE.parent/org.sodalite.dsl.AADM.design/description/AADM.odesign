@@ -374,6 +374,9 @@
       <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.9"/>
       <pages name="Input Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.10"/>
       <pages name="Attribute Default Page" labelExpression="General" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.11"/>
+      <pages name="TargetFilter Node Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().node" groups="//@extensions.0/@categories.0/@groups.14"/>
+      <pages name="TargetFilter Requirement Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().requirement" groups="//@extensions.0/@categories.0/@groups.15"/>
+      <pages name="TargetFilter Capability Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().capability" groups="//@extensions.0/@categories.0/@groups.16"/>
       <groups name="AADM Model" labelExpression="AADM Model" domainClass="aADM::AADM_Model" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Module" labelExpression="Module" valueExpression="feature:module">
           <initialOperation>
@@ -843,6 +846,27 @@
         <controls xsi:type="properties:TextDescription" name="SingleSignedIntValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESIGNEDINT).value">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setValue(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Node" labelExpression="Target filter node" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="service:renderNodeTemplate" candidatesExpression="service:getNodeTemplates" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterNode(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Requirement" labelExpression="Target filter requirement" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Requirement" labelExpression="Requirement" valueExpression="service:renderRequirement" candidatesExpression="service:getRequirementsOfNode" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterRequirement(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Capability" labelExpression="Target filter capability" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Capability" labelExpression="Capability" valueExpression="service:renderCapability" candidatesExpression="service:getCapabilitiesOfNode" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterCapability(newValue)"/>
           </initialOperation>
         </controls>
       </groups>
