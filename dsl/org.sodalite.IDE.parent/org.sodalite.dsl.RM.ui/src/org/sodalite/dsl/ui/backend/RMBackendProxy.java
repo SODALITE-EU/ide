@@ -327,12 +327,9 @@ public class RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -341,8 +338,8 @@ public class RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 

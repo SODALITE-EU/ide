@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
@@ -19,6 +20,8 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.rM.EParameterDefinition;
 
 import com.google.inject.Injector;
@@ -112,6 +115,31 @@ public class AADMHelper extends RMHelper {
 		public Object getDefaultValue() {
 			return defaultValue;
 		}
+	}
+
+	public static EObject findElement(AADM_Model model, String elementName) {
+		// Searching on node templates
+		if (model.getNodeTemplates() != null)
+			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates())
+				if (node.getName().equals(elementName))
+					return node;
+		// Searching on policies
+		if (model.getPolicies() != null)
+			for (EPolicyDefinition policy : model.getPolicies().getPolicies())
+				if (policy.getName().equals(elementName))
+					return policy;
+
+		return null;
+	}
+
+	public static AADM_Model findModel(EObject obj) {
+		EObject container = obj.eContainer();
+		while (container != null) {
+			if (container instanceof AADM_Model)
+				return (AADM_Model) container;
+			container = container.eContainer();
+		}
+		return null;
 	}
 
 }

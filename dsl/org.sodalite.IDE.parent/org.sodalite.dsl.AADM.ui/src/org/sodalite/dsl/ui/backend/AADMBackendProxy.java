@@ -45,6 +45,7 @@ import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
@@ -541,12 +542,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -555,8 +553,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 		return issues;
@@ -603,12 +601,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				String pathType = getPathType(error.getType());
+				String path = error.getEntity_name() != null ? error.getContext() + "/" + error.getEntity_name()
+						: error.getContext();
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						path, pathType, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -617,8 +615,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 
@@ -677,6 +675,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 		}
 	}
 
+	private String getPathType(String type) {
+		if (type.contains("Property"))
+			return "Property";
+		else if (type.contains("Capability"))
+			return "Capability";
+		else if (type.contains("Node"))
+			return "Node_Template";
+		else
+			return null;
+	}
+
 	private String createPath(List<String> entityHierarchy) {
 		StringBuilder sb = new StringBuilder("node_templates");
 		for (String entry : entityHierarchy) {
@@ -691,14 +700,24 @@ public class AADMBackendProxy extends RMBackendProxy {
 	@Override
 	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
-		StringTokenizer st = new StringTokenizer(path, "/");
+
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
 			EObject eobject = resource.getAllContents().next();
 			if (eobject instanceof AADM_Model) {
 				AADM_Model model = (AADM_Model) eobject;
-				result = getAADMIssueFeature(model, path, path_type, st);
+				StringTokenizer st = new StringTokenizer(path, "/");
+				EObject target = AADMHelper.findElement(model, st.nextToken());
+				if (target != null) {
+					if (target instanceof ENodeTemplate)
+						path = "node_templates/" + path;
+					else if (target instanceof EPolicyDefinition)
+						path = "policies/" + path;
+					st = new StringTokenizer(path, "/");
+					result = getAADMIssueFeature(model, path, path_type, st);
+				}
 			} else if (eobject instanceof Optimization_Model) {
+				StringTokenizer st = new StringTokenizer(path, "/");
 				Optimization_Model model = (Optimization_Model) eobject;
 				result = getOptimizationIssueFeature(model, path, path_type);
 			}
@@ -710,41 +729,71 @@ public class AADMBackendProxy extends RMBackendProxy {
 			StringTokenizer st) {
 		ValidationSourceFeature result = null;
 		if (st.hasMoreTokens()) {
-			if ("node_templates".equals(st.nextToken())) {
-				if (st.hasMoreTokens()) { // Node_template
-					String node_name = st.nextToken();
-					for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-						if (node.getName().contentEquals(node_name)) {
-							result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
-							if (st.hasMoreElements()) { // Node_Template children
-								String entity_name = st.nextToken();
-								if ("Property".equals(path_type)) {
-									for (EPropertyAssignment property : node.getNode().getProperties()
-											.getProperties()) {
-										if (property.getName().contentEquals(entity_name)) {
-											result = new ValidationSourceFeature(property,
-													RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
-										}
-									}
-								} else if ("requirements".equals(path_type)) {
-									boolean req_found = false;
-									if (node.getNode().getRequirements() != null) {
-										for (ERequirementAssignment req : node.getNode().getRequirements()
-												.getRequirements()) {
-											// Target requirement found
-											if (req.getName().contentEquals(getRequirement(path))) {
-												req_found = true;
-												result = new ValidationSourceFeature(req,
-														AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
-											}
-										}
-									}
-									if (!req_found)
-										result = new ValidationSourceFeature(node,
-												AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+			String token = st.nextToken();
+			if ("node_templates".equals(token)) {
+				result = getAADMIssueFeatureInNodeTemplate(model, path, path_type, st, result);
+			} else if ("policies".equals(token)) {
+				result = getAADMIssueFeatureInPolicy(model, path, path_type, st, result);
+			}
+		}
+		return result;
+	}
 
+	private ValidationSourceFeature getAADMIssueFeatureInPolicy(AADM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) { // Policy
+			String policy_name = st.nextToken();
+			for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+				if (policy.getName().contentEquals(policy_name)) {
+					result = new ValidationSourceFeature(policy, AADMPackage.Literals.EPOLICY_DEFINITION__NAME);
+					if (st.hasMoreElements()) { // Node_Template children
+						String entity_name = st.nextToken();
+						if ("Property".equals(path_type)) {
+							for (EPropertyAssignment property : policy.getPolicy().getProperties().getProperties()) {
+								if (property.getName().contentEquals(entity_name)) {
+									result = new ValidationSourceFeature(property,
+											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 								}
 							}
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getAADMIssueFeatureInNodeTemplate(AADM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) { // Node_template
+			String node_name = st.nextToken();
+			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
+				if (node.getName().contentEquals(node_name)) {
+					result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+					if (st.hasMoreElements()) { // Node_Template children
+						String entity_name = st.nextToken();
+						if ("Property".equals(path_type)) {
+							for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
+								if (property.getName().contentEquals(entity_name)) {
+									result = new ValidationSourceFeature(property,
+											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+								}
+							}
+						} else if ("requirements".equals(path_type)) {
+							boolean req_found = false;
+							if (node.getNode().getRequirements() != null) {
+								for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {
+									// Target requirement found
+									if (req.getName().contentEquals(getRequirement(path))) {
+										req_found = true;
+										result = new ValidationSourceFeature(req,
+												AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
+									}
+								}
+							}
+							if (!req_found)
+								result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+
 						}
 					}
 				}

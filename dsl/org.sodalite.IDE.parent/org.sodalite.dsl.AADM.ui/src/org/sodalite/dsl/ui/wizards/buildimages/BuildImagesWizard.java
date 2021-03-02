@@ -16,7 +16,7 @@ public class BuildImagesWizard extends Wizard {
 
 	@Override
 	public String getWindowTitle() {
-		return "Save images";
+		return "Build images";
 	}
 
 	@Override
