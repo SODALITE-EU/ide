@@ -37,6 +37,8 @@ class AADMScopeProvider extends AbstractAADMScopeProvider {
             // EcoreUtil2 provides useful functionality to do that
             // For example searching for all elements within the root Object's tree
             var optimizations = scope.allElements
+            optimization_models.clear
+            optimization_models.put(" ", null)
             for (opt: optimizations){
             	var desc = opt as IEObjectDescription
             	var optimization_model = desc.EObjectOrProxy as Optimization_Model

@@ -130,6 +130,15 @@ public class Services {
 		return parse(callOperationActivity.getOperation().getOperation());
 	}
 
+	public String getAddedActivityLabel(ETriggerDefinition trigger, Integer index) {
+		if (index < trigger.getTrigger().getAction().getList().size()) {
+			EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index);
+			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+			return parse(callOperationActivity.getOperation().getOperation());
+		}
+		return null;
+	}
+
 	public String getActivityLabel(ETriggerDefinition trigger, ECallOperationActivityDefinition callOperationActivity) {
 		return "call operation: " + parse(callOperationActivity.getOperation().getOperation());
 	}
