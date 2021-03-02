@@ -13,6 +13,9 @@ import org.sodalite.dsl.rM.EMapEntry
 import org.sodalite.dsl.rM.ESTRING
 import org.sodalite.dsl.aADM.ENodeTemplate
 import org.sodalite.dsl.rM.EPropertyAssignment
+import org.sodalite.dsl.aADM.EAttributeAssignment
+import org.sodalite.dsl.aADM.EPolicyDefinition
+import org.sodalite.dsl.rM.ETriggerDefinition
 
 /**
  * Customization of the default outline structure.
@@ -40,6 +43,13 @@ class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	  		}else{
 	  			super._createChildren(parentNode, modelElement)
 	  		}
+		}else if (modelElement instanceof EAttributeAssignment){
+			val attribute = modelElement as EAttributeAssignment
+			if (attribute.value instanceof ESTRING){
+	  			return //Do not create tree entries for property string values
+	  		}else{
+	  			super._createChildren(parentNode, modelElement)
+	  		}
 		}else if (modelElement instanceof EMAP){
 			val map = modelElement as EMAP
 			for (EMapEntry element : map.map) {
@@ -51,6 +61,11 @@ class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}else if (modelElement instanceof ENodeTemplate){
 			val template = modelElement as ENodeTemplate
 			super._createChildren(parentNode, template.node)
+		}else if (modelElement instanceof EPolicyDefinition){
+			val policy = modelElement as EPolicyDefinition
+			super._createChildren(parentNode, policy.policy)
+		}else if (modelElement instanceof ETriggerDefinition){
+			return
 		}else{
 			super._createChildren(parentNode, modelElement)
 		}
