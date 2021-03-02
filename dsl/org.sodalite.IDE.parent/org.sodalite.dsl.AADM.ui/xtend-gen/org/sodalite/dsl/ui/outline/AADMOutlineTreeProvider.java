@@ -8,13 +8,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.ETriggerDefinition;
 
 /**
  * Customization of the default outline structure.
@@ -51,22 +54,41 @@ public class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
           }
         }
       } else {
-        if ((modelElement instanceof EMAP)) {
-          final EMAP map_1 = ((EMAP) modelElement);
-          EList<EMapEntry> _map_1 = map_1.getMap();
-          for (final EMapEntry element_1 : _map_1) {
-            this.createNode(parentNode, element_1);
+        if ((modelElement instanceof EAttributeAssignment)) {
+          final EAttributeAssignment attribute = ((EAttributeAssignment) modelElement);
+          EAssignmentValue _value_3 = attribute.getValue();
+          if ((_value_3 instanceof ESTRING)) {
+            return;
+          } else {
+            super._createChildren(parentNode, modelElement);
           }
         } else {
-          if ((modelElement instanceof EMapEntry)) {
-            final EMapEntry entry = ((EMapEntry) modelElement);
-            super._createChildren(parentNode, entry.getValue());
+          if ((modelElement instanceof EMAP)) {
+            final EMAP map_1 = ((EMAP) modelElement);
+            EList<EMapEntry> _map_1 = map_1.getMap();
+            for (final EMapEntry element_1 : _map_1) {
+              this.createNode(parentNode, element_1);
+            }
           } else {
-            if ((modelElement instanceof ENodeTemplate)) {
-              final ENodeTemplate template = ((ENodeTemplate) modelElement);
-              super._createChildren(parentNode, template.getNode());
+            if ((modelElement instanceof EMapEntry)) {
+              final EMapEntry entry = ((EMapEntry) modelElement);
+              super._createChildren(parentNode, entry.getValue());
             } else {
-              super._createChildren(parentNode, modelElement);
+              if ((modelElement instanceof ENodeTemplate)) {
+                final ENodeTemplate template = ((ENodeTemplate) modelElement);
+                super._createChildren(parentNode, template.getNode());
+              } else {
+                if ((modelElement instanceof EPolicyDefinition)) {
+                  final EPolicyDefinition policy = ((EPolicyDefinition) modelElement);
+                  super._createChildren(parentNode, policy.getPolicy());
+                } else {
+                  if ((modelElement instanceof ETriggerDefinition)) {
+                    return;
+                  } else {
+                    super._createChildren(parentNode, modelElement);
+                  }
+                }
+              }
             }
           }
         }
