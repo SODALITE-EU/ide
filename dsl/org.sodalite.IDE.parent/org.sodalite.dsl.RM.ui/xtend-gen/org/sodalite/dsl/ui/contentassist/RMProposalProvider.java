@@ -1635,7 +1635,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String nodeRef = resourceId.substring(_plus);
     boolean _startsWith = resourceId.startsWith("local:");
     if (_startsWith) {
-      this.proposeAttributesForEntityInLocal(model, nodeRef, proposals);
+      final String nodeName = this.getLastSegment(nodeRef, "/");
+      this.proposeAttributesForEntityInLocal(model, nodeName, proposals);
     } else {
       boolean _startsWith_1 = resourceId.startsWith("kb:");
       if (_startsWith_1) {
@@ -1669,24 +1670,34 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   public void proposeAttributesForEntityInLocal(final RM_Model model, final String resourceId, final List<String> proposals) {
     final ENodeType node = this.findNodeType(model, resourceId);
-    EList<EAttributeDefinition> _attributes = node.getNode().getAttributes().getAttributes();
-    for (final EAttributeDefinition attr : _attributes) {
-      {
-        String _xifexpression = null;
-        String _module = this.getModule(attr);
-        boolean _tripleNotEquals = (_module != null);
-        if (_tripleNotEquals) {
-          String _module_1 = this.getModule(attr);
-          String _plus = (_module_1 + "/");
-          String _name = attr.getName();
-          _xifexpression = (_plus + _name);
-        } else {
-          _xifexpression = attr.getName();
+    if ((node != null)) {
+      EList<EAttributeDefinition> _attributes = node.getNode().getAttributes().getAttributes();
+      for (final EAttributeDefinition attr : _attributes) {
+        {
+          String _xifexpression = null;
+          String _module = this.getModule(attr);
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = this.getModule(attr);
+            String _plus = (_module_1 + "/");
+            String _name = node.getName();
+            String _plus_1 = (_plus + _name);
+            String _plus_2 = (_plus_1 + ".");
+            String _name_1 = attr.getName();
+            _xifexpression = (_plus_2 + _name_1);
+          } else {
+            String _name_2 = node.getName();
+            String _plus_3 = (_name_2 + ".");
+            String _name_3 = attr.getName();
+            _xifexpression = (_plus_3 + _name_3);
+          }
+          final String proposal = _xifexpression;
+          proposals.add(proposal);
         }
-        final String proposal = _xifexpression;
-        proposals.add(proposal);
       }
     }
+    final String superclass = this.getReference(node.getNode().getSuperType());
+    this.proposeAttributesForEntityInKB(superclass, proposals);
   }
   
   public void proposePropertiesForEntity(final RM_Model model, final String resourceId, final List<String> proposals) {
@@ -1695,7 +1706,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     final String nodeRef = resourceId.substring(_plus);
     boolean _startsWith = resourceId.startsWith("local:");
     if (_startsWith) {
-      this.proposePropertiesForEntityInLocal(model, nodeRef, proposals);
+      final String nodeName = this.getLastSegment(nodeRef, "/");
+      this.proposePropertiesForEntityInLocal(model, nodeName, proposals);
     } else {
       boolean _startsWith_1 = resourceId.startsWith("kb:");
       if (_startsWith_1) {
@@ -1729,22 +1741,24 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   public void proposePropertiesForEntityInLocal(final RM_Model model, final String resourceId, final List<String> proposals) {
     final ENodeType node = this.findNodeType(model, resourceId);
-    EList<EPropertyDefinition> _properties = node.getNode().getProperties().getProperties();
-    for (final EPropertyDefinition prop : _properties) {
-      {
-        String _xifexpression = null;
-        String _module = this.getModule(prop);
-        boolean _tripleNotEquals = (_module != null);
-        if (_tripleNotEquals) {
-          String _module_1 = this.getModule(prop);
-          String _plus = (_module_1 + "/");
-          String _name = prop.getName();
-          _xifexpression = (_plus + _name);
-        } else {
-          _xifexpression = prop.getName();
+    if ((node != null)) {
+      EList<EPropertyDefinition> _properties = node.getNode().getProperties().getProperties();
+      for (final EPropertyDefinition prop : _properties) {
+        {
+          String _xifexpression = null;
+          String _module = this.getModule(prop);
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _module_1 = this.getModule(prop);
+            String _plus = (_module_1 + "/");
+            String _name = prop.getName();
+            _xifexpression = (_plus + _name);
+          } else {
+            _xifexpression = prop.getName();
+          }
+          final String proposal = _xifexpression;
+          proposals.add(proposal);
         }
-        final String proposal = _xifexpression;
-        proposals.add(proposal);
       }
     }
   }

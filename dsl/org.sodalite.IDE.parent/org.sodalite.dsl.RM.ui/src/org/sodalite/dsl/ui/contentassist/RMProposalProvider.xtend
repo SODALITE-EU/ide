@@ -1120,7 +1120,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def proposeAttributesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			proposeAttributesForEntityInLocal (model, nodeRef, proposals)
+			val nodeName = getLastSegment(nodeRef, "/")
+			proposeAttributesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposeAttributesForEntityInKB (nodeRef, proposals)
 		}
@@ -1140,16 +1141,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposeAttributesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
 		val ENodeType node = findNodeType(model, resourceId)
-		for (attr:node.node.attributes.attributes){
-			val proposal = attr.module !== null? attr.module + "/" + attr.name: attr.name
-			proposals.add(proposal)
-		}
+		if (node !== null)
+			for (attr:node.node.attributes.attributes){
+				val proposal = attr.module !== null? 
+					attr.module + "/" + node.name + "." + attr.name: node.name + "." + attr.name
+				proposals.add(proposal)
+			}
+		//Get Attributes for superclass in KB
+		val superclass = getReference(node.node.superType)
+		proposeAttributesForEntityInKB(superclass, proposals)
 	}
 	
 	def proposePropertiesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			proposePropertiesForEntityInLocal (model, nodeRef, proposals)
+			val nodeName = getLastSegment(nodeRef, "/")
+			proposePropertiesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposePropertiesForEntityInKB (nodeRef, proposals)
 		}
@@ -1169,10 +1176,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposePropertiesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
 		val ENodeType node = findNodeType(model, resourceId)
-		for (prop:node.node.properties.properties){
-			val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
-			proposals.add(proposal)
-		}
+		if (node !== null)
+			for (prop:node.node.properties.properties){
+				val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
+				proposals.add(proposal)
+			}
+		//TODO: Get Properties for superclass in KB
+		
 	}
 	
 	

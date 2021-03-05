@@ -465,13 +465,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val Type superType = tovrnd.elements.get(0)
 			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
 			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+			val Image image = getImage("icons/resource2.png")
 			for (ENodeTemplate node: localnodes){
 				if (node !== null){
 					System.out.println ("Valid requirement local node: " + node.name)
 				 	val qnode = module !== null? module + '/' + node.name: node.name
 					proposalText = qnode
 					displayText = qnode
-					createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
 			}
 		}catch(NotRolePermissionException ex){
@@ -818,7 +819,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val AADM_Model model = findModel(reqAssign) as AADM_Model
 		
 		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
+			val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
 			candidateNodes.put(node_id, node)
 		}
 		

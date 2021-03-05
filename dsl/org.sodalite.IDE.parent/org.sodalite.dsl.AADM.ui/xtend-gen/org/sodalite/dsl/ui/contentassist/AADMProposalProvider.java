@@ -757,6 +757,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         final String qsuperType = _xifexpression_1;
         final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
+        final Image image_1 = this.getImage("icons/resource2.png");
         for (final ENodeTemplate node : localnodes) {
           if ((node != null)) {
             String _name = node.getName();
@@ -772,7 +773,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String qnode = _xifexpression_2;
             proposalText = qnode;
             displayText = qnode;
-            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, image_1, context, additionalProposalInfo, acceptor);
           }
         }
       } catch (final Throwable _t) {
@@ -1266,6 +1267,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           if (_tripleNotEquals) {
             String _module_1 = node.getNode().getType().getModule();
             _xifexpression = (_module_1 + "/");
+          } else {
+            _xifexpression = "";
           }
           String _type = node.getNode().getType().getType();
           final String node_id = (_xifexpression + _type);
