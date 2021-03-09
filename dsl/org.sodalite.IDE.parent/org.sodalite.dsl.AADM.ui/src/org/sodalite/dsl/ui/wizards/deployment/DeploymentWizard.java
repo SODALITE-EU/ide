@@ -1,5 +1,6 @@
-package org.sodalite.dsl.ui.wizards;
+package org.sodalite.dsl.ui.wizards.deployment;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +17,9 @@ public class DeploymentWizard extends Wizard {
 	protected DeploymentWizardMainPage mainPage;
 	private SortedMap<String, InputDef> inputDefs;
 	private Path inputsFile = null;
+	private Path imageBuildConfPath = null;
+	private String versionTag = null;
+	private int workers = 0;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -51,10 +55,19 @@ public class DeploymentWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
+		// Get imageBuildConfPath
+		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
+
+		// Get versionTag
+		this.versionTag = mainPage.getVersionTag();
+
+		// Get workers
+		this.workers = mainPage.getWorkers();
+
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
-			this.inputsFile = Files.createTempFile(null, null);
+			this.inputsFile = File.createTempFile("inputs", null, new File(System.getProperty("user.home"))).toPath();
 			StringBuilder content = new StringBuilder();
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
@@ -68,6 +81,18 @@ public class DeploymentWizard extends Wizard {
 
 	public Path getInputsFile() {
 		return this.inputsFile;
+	}
+
+	public Path getImageBuildConfPath() {
+		return this.imageBuildConfPath;
+	}
+
+	public String getVersionTag() {
+		return this.versionTag;
+	}
+
+	public int getWorkers() {
+		return this.workers;
 	}
 
 }

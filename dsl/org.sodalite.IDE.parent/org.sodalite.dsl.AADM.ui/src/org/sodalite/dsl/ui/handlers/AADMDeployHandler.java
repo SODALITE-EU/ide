@@ -1,6 +1,5 @@
 package org.sodalite.dsl.ui.handlers;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.SortedMap;
 
@@ -8,14 +7,15 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
-import org.sodalite.dsl.ui.wizards.DeploymentWizard;
-import org.sodalite.dsl.ui.wizards.DeploymentWizardDialog;
+import org.sodalite.dsl.ui.wizards.deployment.DeploymentWizard;
+import org.sodalite.dsl.ui.wizards.deployment.DeploymentWizardDialog;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADMDeployHandler implements IHandler {
@@ -39,7 +39,7 @@ public class AADMDeployHandler implements IHandler {
 				// Show DeploymentWizard
 				// Wizard should select the Inputs file or generate them from the form
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
+				IFile aadmFile = AADMHelper.getSelectedFile();
 				// Read input definitions from AADM
 				// Show wizard
 				SortedMap<String, InputDef> inputDefs = AADMHelper.readInputsFromAADM(event);
@@ -48,9 +48,11 @@ public class AADMDeployHandler implements IHandler {
 				if (dialog.OK == dialog.open()) {
 					// Get inputs (file) from Wizard and save them in temporal file
 					Path inputs_yaml_path = dialog.getInputsFile();
-					backendProxy.processDeployAADM(event, inputs_yaml_path);
-					// Remove temporary inputs file
-					Files.delete(inputs_yaml_path);
+					Path imageBuildConfPath = dialog.getImageBuildConfPath();
+					String version_tag = dialog.getVersionTag();
+					int workers = dialog.getWorkers();
+					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath, version_tag,
+							workers);
 				}
 			}
 		} catch (Exception ex) {

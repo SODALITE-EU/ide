@@ -65,7 +65,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getECapabilityAssignmentsAccess().getGroup(), "rule__ECapabilityAssignments__Group__0");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getGroup(), "rule__ECapabilityAssignment__Group__0");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getGroup_3(), "rule__ECapabilityAssignment__Group_3__0");
-			builder.put(grammarAccess.getEAttributeAssigmentsAccess().getGroup(), "rule__EAttributeAssigments__Group__0");
+			builder.put(grammarAccess.getEAttributeAssignmentsAccess().getGroup(), "rule__EAttributeAssignments__Group__0");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getGroup(), "rule__EAttributeAssignment__Group__0");
 			builder.put(grammarAccess.getEPoliciesAccess().getGroup(), "rule__EPolicies__Group__0");
 			builder.put(grammarAccess.getEPolicyDefinitionAccess().getGroup(), "rule__EPolicyDefinition__Group__0");
@@ -282,7 +282,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getECapabilityAssignmentsAccess().getCapabilitiesAssignment_1(), "rule__ECapabilityAssignments__CapabilitiesAssignment_1");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getNameAssignment_0(), "rule__ECapabilityAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getECapabilityAssignmentAccess().getPropertiesAssignment_3_2(), "rule__ECapabilityAssignment__PropertiesAssignment_3_2");
-			builder.put(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1(), "rule__EAttributeAssigments__AttributesAssignment_1");
+			builder.put(grammarAccess.getEAttributeAssignmentsAccess().getAttributesAssignment_1(), "rule__EAttributeAssignments__AttributesAssignment_1");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getNameAssignment_0(), "rule__EAttributeAssignment__NameAssignment_0");
 			builder.put(grammarAccess.getEAttributeAssignmentAccess().getValueAssignment_2(), "rule__EAttributeAssignment__ValueAssignment_2");
 			builder.put(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1(), "rule__EPolicies__PoliciesAssignment_1");

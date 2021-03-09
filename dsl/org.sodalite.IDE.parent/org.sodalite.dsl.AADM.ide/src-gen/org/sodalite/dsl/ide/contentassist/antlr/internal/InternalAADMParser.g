@@ -334,25 +334,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleEAttributeAssigments
-entryRuleEAttributeAssigments
+// Entry rule entryRuleEAttributeAssignments
+entryRuleEAttributeAssignments
 :
-{ before(grammarAccess.getEAttributeAssigmentsRule()); }
-	 ruleEAttributeAssigments
-{ after(grammarAccess.getEAttributeAssigmentsRule()); } 
+{ before(grammarAccess.getEAttributeAssignmentsRule()); }
+	 ruleEAttributeAssignments
+{ after(grammarAccess.getEAttributeAssignmentsRule()); } 
 	 EOF 
 ;
 
-// Rule EAttributeAssigments
-ruleEAttributeAssigments 
+// Rule EAttributeAssignments
+ruleEAttributeAssignments 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getEAttributeAssigmentsAccess().getGroup()); }
-		(rule__EAttributeAssigments__Group__0)
-		{ after(grammarAccess.getEAttributeAssigmentsAccess().getGroup()); }
+		{ before(grammarAccess.getEAttributeAssignmentsAccess().getGroup()); }
+		(rule__EAttributeAssignments__Group__0)
+		{ after(grammarAccess.getEAttributeAssignmentsAccess().getGroup()); }
 	)
 ;
 finally {
@@ -5368,53 +5368,53 @@ finally {
 }
 
 
-rule__EAttributeAssigments__Group__0
+rule__EAttributeAssignments__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__EAttributeAssigments__Group__0__Impl
-	rule__EAttributeAssigments__Group__1
+	rule__EAttributeAssignments__Group__0__Impl
+	rule__EAttributeAssignments__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EAttributeAssigments__Group__0__Impl
+rule__EAttributeAssignments__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getEAttributeAssigmentsAccess().getEAttributeAssigmentsAction_0()); }
+	{ before(grammarAccess.getEAttributeAssignmentsAccess().getEAttributeAssignmentsAction_0()); }
 	()
-	{ after(grammarAccess.getEAttributeAssigmentsAccess().getEAttributeAssigmentsAction_0()); }
+	{ after(grammarAccess.getEAttributeAssignmentsAccess().getEAttributeAssignmentsAction_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EAttributeAssigments__Group__1
+rule__EAttributeAssignments__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__EAttributeAssigments__Group__1__Impl
+	rule__EAttributeAssignments__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EAttributeAssigments__Group__1__Impl
+rule__EAttributeAssignments__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1()); }
-	(rule__EAttributeAssigments__AttributesAssignment_1)*
-	{ after(grammarAccess.getEAttributeAssigmentsAccess().getAttributesAssignment_1()); }
+	{ before(grammarAccess.getEAttributeAssignmentsAccess().getAttributesAssignment_1()); }
+	(rule__EAttributeAssignments__AttributesAssignment_1)*
+	{ after(grammarAccess.getEAttributeAssignmentsAccess().getAttributesAssignment_1()); }
 )
 ;
 finally {
@@ -23310,9 +23310,9 @@ rule__ENodeTemplateBody__AtributesAssignment_4_2
 	}
 :
 	(
-		{ before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssigmentsParserRuleCall_4_2_0()); }
-		ruleEAttributeAssigments
-		{ after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssigmentsParserRuleCall_4_2_0()); }
+		{ before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
+		ruleEAttributeAssignments
+		{ after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
 	)
 ;
 finally {
@@ -23439,15 +23439,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__EAttributeAssigments__AttributesAssignment_1
+rule__EAttributeAssignments__AttributesAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getEAttributeAssigmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); }
+		{ before(grammarAccess.getEAttributeAssignmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); }
 		ruleEAttributeAssignment
-		{ after(grammarAccess.getEAttributeAssigmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); }
+		{ after(grammarAccess.getEAttributeAssignmentsAccess().getAttributesEAttributeAssignmentParserRuleCall_1_0()); }
 	)
 ;
 finally {

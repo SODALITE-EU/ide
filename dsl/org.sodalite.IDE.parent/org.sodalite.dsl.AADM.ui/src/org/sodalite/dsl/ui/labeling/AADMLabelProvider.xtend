@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.sodalite.dsl.aADM.AADM_Model
 import org.sodalite.dsl.rM.EInputs
 import org.sodalite.dsl.aADM.ENodeTemplates
-import org.sodalite.dsl.aADM.EAttributeAssigments
+import org.sodalite.dsl.aADM.EAttributeAssignments
 import org.sodalite.dsl.aADM.ERequirementAssignments
 import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.rM.EParameterDefinition
@@ -18,6 +18,15 @@ import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EPropertyAssignments
 import org.sodalite.dsl.rM.EPropertyAssignment
+import org.sodalite.dsl.aADM.EPolicies
+import org.sodalite.dsl.aADM.EPolicyDefinition
+import org.sodalite.dsl.aADM.EAttributeAssignment
+import org.sodalite.dsl.aADM.ENodeTemplateBody
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody
+import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.aADM.ETriggerDefinitions
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.aADM.ETarget
 
 /**
  * Provides labels for EObjects.
@@ -58,12 +67,60 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 		"templates.png"
 	}
 	
+	def text (ETriggerDefinitions entry){
+		"triggers"
+	}
+	
+	def image (ETriggerDefinitions entry){
+		"triggers.png"
+	}
+	
+	def text (ETriggerDefinition entry){
+		entry.name
+	}
+	
+	def image (ETriggerDefinition entry){
+		"trigger.png"
+	}
+	
+	def text (ETarget entry){
+		"targets"
+	}
+	
+	def image (ETarget entry){
+		"targets.png"
+	}
+	
+	def text (EPolicies entry){
+		"policies"
+	}
+	
+	def image (EPolicies entry){
+		"policies.png"
+	}
+	
 	def image (ENodeTemplate entry){
 		"template.png"
 	}
 	
 	def text (ENodeTemplate entry){
-		entry.name + "->" + renderType(entry.node.type)
+		entry.name
+	}
+	
+	def image (EPolicyDefinition entry){
+		"policy.png"
+	}
+	
+	def text (EPolicyDefinition entry){
+		entry.name
+	}
+		
+	def text(EPREFIX_TYPE type) {
+		return type.module !== null? type.module + '/' + type.type: type.type
+	}	
+	
+	def text(EPREFIX_ID id) {
+		return id.module !== null? id.module + '/' + id.id: id.id
 	}
 		
 	def renderType(EPREFIX_TYPE type) {
@@ -82,12 +139,16 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 		"property.png"
 	}
 	
-	def text (EAttributeAssigments entry){
+	def text (EAttributeAssignments entry){
 		"attributes"
 	}
 	
-	def image (EAttributeAssigments entry){
+	def image (EAttributeAssignments entry){
 		"attributes.png"
+	}
+	
+	def image (EAttributeAssignment entry){
+		"attribute.png"
 	}
 	
 	def text (ERequirementAssignments entry){
@@ -108,6 +169,20 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 	
 	def image (ECapabilityAssignments entry){
 		"capabilities.png"
+	}
+	
+	def image (EPREFIX_TYPE entry){
+		if (entry.eContainer instanceof ENodeTemplateBody)
+			"type.png"
+		else if (entry.eContainer instanceof EPolicyDefinitionBody)
+			"type.png"
+	}
+	
+	def image (EPREFIX_ID entry){
+		if (entry.eContainer instanceof ERequirementAssignment)
+			"template.png"
+		else if (entry.eContainer instanceof ETarget)
+			"target.png"
 	}
 
 }

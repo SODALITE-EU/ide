@@ -6,6 +6,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.AADM_Model;
@@ -14,23 +15,48 @@ import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.ENodeTemplates;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.optimization.optimization.Optimization_Model;
+import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
+import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EBOOLEAN;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody;
+import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR;
+import org.sodalite.dsl.rM.EConstraint;
+import org.sodalite.dsl.rM.EConstraintList;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
+import org.sodalite.dsl.rM.EGreaterOrEqual;
+import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.ELessOrEqual;
+import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.ESingleValue;
+import org.sodalite.dsl.rM.ETriggerDefinition;
+import org.sodalite.dsl.rM.ETriggerDefinitionBody;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
@@ -42,26 +68,274 @@ import org.sodalite.dsl.scoping.AADMScopeProvider;
  */
 public class Services {
 
+	public void setConstraint(ETriggerDefinition trigger, String constraint) {
+		// TODO
+	}
+
+	public void setPeriod(ETriggerDefinition trigger, String period) {
+		trigger.getTrigger().getCondition().setPeriod(period);
+	}
+
+	public void setEvaluations(ETriggerDefinition trigger, String evaluations) {
+		trigger.getTrigger().getCondition().getEvaluations().setValue(Integer.parseInt(evaluations));
+	}
+
+	public void setMethod(ETriggerDefinition trigger, String method) {
+		trigger.getTrigger().getCondition().setMethod(method);
+	}
+
+	public void setScheduleStartTime(ETriggerDefinition trigger, String start_time) {
+		trigger.getTrigger().getSchedule().setStart_time(start_time);
+	}
+
+	public void setScheduleEndTime(ETriggerDefinition trigger, String end_time) {
+		trigger.getTrigger().getSchedule().setEnd_time(end_time);
+	}
+
+	public String getNodeLabel(EObject node) {
+		return "node: " + parse(node);
+	}
+
+	public String getNodeBorderedLabel(EObject node) {
+		ENodeTemplate nodeTemplate = findNode((EPREFIX_REF) node);
+		if (nodeTemplate == null)
+			return "node: " + parse(node);
+		else
+			return "";
+	}
+
+	public String getCapabilityLabel(EObject node) {
+		return "cap: " + parse(node);
+	}
+
+	public String getRequirementBorderedLabel(EObject object) {
+		String label = "";
+		if (object instanceof EPREFIX_TYPE) {
+			ERequirementAssignment req = findRequirement((EPREFIX_TYPE) object);
+			if (req == null)
+				label = "req: " + parse(object);
+		}
+		if (object instanceof ERequirementAssignment) {
+			ERequirementAssignment requirement = (ERequirementAssignment) object;
+			ENodeTemplate nodeTemplate = findNode(requirement.getNode());
+			if (nodeTemplate == null)
+				label = "req:" + requirement.getName();
+		}
+		return label;
+	}
+
+	public String getActivityLabel(ETriggerDefinition trigger, Integer index) {
+		EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index - 1);
+		ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+		return parse(callOperationActivity.getOperation().getOperation());
+	}
+
+	public String getAddedActivityLabel(ETriggerDefinition trigger, Integer index) {
+		if (index < trigger.getTrigger().getAction().getList().size()) {
+			EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index);
+			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+			return parse(callOperationActivity.getOperation().getOperation());
+		}
+		return null;
+	}
+
+	public String getActivityLabel(ETriggerDefinition trigger, ECallOperationActivityDefinition callOperationActivity) {
+		return "call operation: " + parse(callOperationActivity.getOperation().getOperation());
+	}
+
+	public String getActivityLabel(EActivityDefinition activity) {
+		String label = null;
+		if (activity instanceof ECallOperationActivityDefinition) {
+			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+			label = "call operation: " + parse(callOperationActivity.getOperation().getOperation());
+		}
+
+		return label;
+	}
+
+	private String parse(EPREFIX_TYPE type) {
+		return type.getModule() != null ? type.getModule() + "/" + type.getType() : type.getType();
+	}
+
+	private String parse(EPREFIX_ID type) {
+		return type.getModule() != null ? type.getModule() + "/" + type.getId() : type.getId();
+	}
+
+	private String parse(EObject type) {
+		if (type instanceof EPREFIX_TYPE)
+			return parse((EPREFIX_TYPE) type);
+		else if (type instanceof EPREFIX_ID)
+			return parse((EPREFIX_ID) type);
+		else
+			return null;
+	}
+
+	public String getConstraintLabel(ETriggerDefinition trigger) {
+		return getConstraintLabel(trigger.getTrigger().getCondition());
+	}
+
+	public String getConstraintLabel(EExtendedTriggerCondition condition) {
+		return "constraint: " + parseConditionClause(condition.getConstraint(), null);
+	}
+
+	public String parseConditionClause(ETriggerDefinition trigger) {
+		return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
+	}
+
+	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {
+		String label = "";
+		if (constraint instanceof EConditionClauseDefinitionNOT) {
+			EConditionClauseDefinitionNOT notConstraint = (EConditionClauseDefinitionNOT) constraint;
+			label = " not (" + parseConditionClause(notConstraint.getNot(), null) + ") ";
+		} else if (constraint instanceof EConditionClauseDefinitionAND) {
+			EConditionClauseDefinitionAND andConstraint = (EConditionClauseDefinitionAND) constraint;
+			if (andConstraint.getAnd() instanceof EConditionClauseDefinitionAssert) {
+				EConditionClauseDefinitionAssert assertConstraints = (EConditionClauseDefinitionAssert) andConstraint
+						.getAnd();
+				label = parseConditionClause(assertConstraints, " and ");
+			} else {
+				label = " and (" + parseConditionClause(andConstraint.getAnd(), null) + ") ";
+			}
+		} else if (constraint instanceof EConditionClauseDefinitionOR) {
+			EConditionClauseDefinitionOR orConstraint = (EConditionClauseDefinitionOR) constraint;
+			if (orConstraint.getOr() instanceof EConditionClauseDefinitionAssert) {
+				EConditionClauseDefinitionAssert assertConstraints = (EConditionClauseDefinitionAssert) orConstraint
+						.getOr();
+				label = parseConditionClause(assertConstraints, " or ");
+			} else {
+				label = " or (" + parseConditionClause(orConstraint.getOr(), null) + ")";
+			}
+		} else if (constraint instanceof EConditionClauseDefinitionAssert) {
+			EConditionClauseDefinitionAssert assertsConstraint = (EConditionClauseDefinitionAssert) constraint;
+			int index = assertsConstraint.getAssertions().size() - 1;
+			for (EAssertionDefinition assertion : assertsConstraint.getAssertions()) {
+				boolean placeDelimiter = delimiter != null & index-- > 0;
+				label += assertion.getAttribute_name() + parseConstraint(assertion.getConstraints())
+						+ (placeDelimiter ? delimiter : "");
+			}
+		} else {
+			label = "";
+		}
+
+		return label;
+	}
+
+	private String parseConstraint(EConstraintList constraints) {
+		String label = "";
+		if (constraints.getList().size() == 1) {
+			EConstraint constraint = constraints.getList().get(0);
+			if (constraint instanceof EEqual)
+				label = " = " + parse(((EEqual) constraint).getVal());
+			else if (constraint instanceof EGreaterThan)
+				label = " > " + parse(((EGreaterThan) constraint).getVal());
+			else if (constraint instanceof EGreaterOrEqual)
+				label = " >= " + parse(((EGreaterOrEqual) constraint).getVal());
+			else if (constraint instanceof ELessThan)
+				label = " < " + parse(((ELessThan) constraint).getVal());
+			else if (constraint instanceof ELessOrEqual)
+				label = " <= " + parse(((ELessOrEqual) constraint).getVal());
+		}
+		return label;
+	}
+
+	private String parse(EAlphaNumericValue val) {
+		String label = null;
+		if (val instanceof ESTRING)
+			label = ((ESTRING) val).getValue();
+		else if (val instanceof EFLOAT)
+			label = Float.toString(((EFLOAT) val).getValue());
+		else if (val instanceof ESIGNEDINT)
+			label = Integer.toString(((ESIGNEDINT) val).getValue());
+		return label;
+	}
+
+	private String parse(ESingleValue val) {
+		String label = null;
+		if (val instanceof ESTRING)
+			label = ((ESTRING) val).getValue();
+		else if (val instanceof EBOOLEAN)
+			label = Boolean.toString(((EBOOLEAN) val).isValue());
+		else if (val instanceof EFLOAT)
+			label = Float.toString(((EFLOAT) val).getValue());
+		else if (val instanceof ESIGNEDINT)
+			label = Integer.toString(((ESIGNEDINT) val).getValue());
+		return label;
+	}
+
+	public String getScheduleStartTime(ETriggerDefinitionBody trigger) {
+		return "start_time: " + trigger.getSchedule().getStart_time();
+	}
+
+	public String getScheduleEndTime(ETriggerDefinitionBody trigger) {
+		return "end_time: " + trigger.getSchedule().getEnd_time();
+	}
+
+	public String getTriggerLabel(ETriggerDefinition trigger) {
+		return "trigger: " + trigger.getName();
+	}
+
+	public EList<ETriggerDefinition> getTriggerDefinitions(AADM_Model model) {
+		EList<ETriggerDefinition> result = new BasicEList<>();
+		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+			if (policy.getPolicy().getTriggers() != null)
+				result.addAll(policy.getPolicy().getTriggers().getTriggers());
+		}
+		return result;
+	}
+
 	public String getPropertyLabel(EPropertyAssignment property) {
 		String result = property.getName();
-		if (property.getValue() instanceof ESTRING) {
-			ESTRING value = (ESTRING) property.getValue();
+		return processValue(result, property.getValue());
+	}
+
+	public String getTargetBorderedLabel(EPREFIX_ID target) {
+		ENodeTemplate nodeTemplate = findNode(target);
+		if (nodeTemplate == null)
+			return "target: "
+					+ (target.getModule() != null ? target.getModule() + '/' + target.getId() : target.getId());
+		else
+			return "";
+	}
+
+	public String getTargetLabel(EPREFIX_ID target) {
+		return "target: " + (target.getModule() != null ? target.getModule() + '/' + target.getId() : target.getId());
+	}
+
+	public String getTargetsLabel(EPolicyDefinitionBody policy) {
+		String label = "targets: [";
+		boolean comma = false;
+		if (policy.getTargets() != null) {
+			for (EPREFIX_ID target : policy.getTargets().getTarget()) {
+				label += comma ? ", " + target.getId() : target.getId();
+				comma = true;
+			}
+		}
+		label += "]";
+		return label;
+	}
+
+	private String processValue(String result, EAssignmentValue assignmentValue) {
+		if (assignmentValue instanceof ESTRING) {
+			ESTRING value = (ESTRING) assignmentValue;
 			result += ": " + value.getValue();
-		} else if (property.getValue() instanceof GetInput) {
-			GetInput gInput = (GetInput) property.getValue();
+		} else if (assignmentValue instanceof GetInput) {
+			GetInput gInput = (GetInput) assignmentValue;
 			result += ": getInput(" + gInput.getInput().getName() + ")";
-		} else if (property.getValue() instanceof GetProperty) {
-			GetProperty gProperty = (GetProperty) property.getValue();
+		} else if (assignmentValue instanceof GetProperty) {
+			GetProperty gProperty = (GetProperty) assignmentValue;
 			result += ": getProperty(" + gProperty.getProperty().getProperty().getType() + ")";
-		} else if (property.getValue() instanceof ELIST) {
-			ELIST value = (ELIST) property.getValue();
+		} else if (assignmentValue instanceof ELIST) {
+			ELIST value = (ELIST) assignmentValue;
 			EList list = value.getList();
 			result += ": [" + renderValue(list.get(0));
 			for (int i = 1; i < list.size(); i++)
 				result += ", " + renderValue(list.get(i));
 			result += "]";
-		} else if (property.getValue() instanceof EMAP) {
+		} else if (assignmentValue instanceof EMAP) {
 			result += ": <Complex Value>";
+		} else if (assignmentValue instanceof ESIGNEDINT) {
+			ESIGNEDINT value = (ESIGNEDINT) assignmentValue;
+			result += ": " + value.getValue();
 		}
 
 		return result;
@@ -79,16 +353,34 @@ public class Services {
 	}
 
 	public String getAttributeLabel(EAttributeAssignment attribute) {
-		return attribute.getName() + ": " + attribute.getValue();
+		String result = attribute.getName();
+		return processValue(result, attribute.getValue());
 	}
 
-	public String getRequirementLabel(ERequirementAssignment requirement) {
+	public String getRequirementNodeLabel(ERequirementAssignment requirement) {
 		return requirement.getName() + ": [ node: " + requirement.getNode() + "]";
+	}
+
+	public String getRequirementLabel(EObject object) {
+		if (object instanceof ERequirementAssignment) {
+			ERequirementAssignment requirement = (ERequirementAssignment) object;
+			return "req:" + requirement.getName();
+		} else if (object instanceof EPREFIX_TYPE) {
+			EPREFIX_TYPE prefixType = (EPREFIX_TYPE) object;
+			return "req:" + getLastSegment(prefixType.getType(), ".");
+		} else
+			return null;
 	}
 
 	public String getTypeLabel(ENodeTemplateBody node) {
 		String type = (node.getType().getModule() != null ? node.getType().getModule() + "/" : "")
 				+ node.getType().getType();
+		return type.substring(type.lastIndexOf('.') + 1);
+	}
+
+	public String getPolicyTypeLabel(EPolicyDefinitionBody policy) {
+		String type = (policy.getType().getModule() != null ? policy.getType().getModule() + "/" : "")
+				+ policy.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
 	}
 
@@ -103,8 +395,45 @@ public class Services {
 		return size;
 	}
 
+	public void addCallAction(ETriggerDefinition trigger, String operation) {
+		ECallOperationActivityDefinition callOperationActivity = createCallOperationActivityDefinition(operation);
+		trigger.getTrigger().getAction().getList().add(callOperationActivity);
+	}
+
+	public void cancelAddAction(ETriggerDefinition trigger, Integer size) {
+		if (trigger.getTrigger().getAction().getList().size() != size)
+			trigger.getTrigger().getAction().getList().remove(size);
+	}
+
+	public void editCallOperation(ETriggerDefinition trigger, Integer index,
+			ECallOperationActivityDefinition callOperation, String newOperation) {
+		callOperation.getOperation().getOperation().setModule(getTrailingSegment(newOperation, "/"));
+		callOperation.getOperation().getOperation().setType(getLastSegment(newOperation, "/"));
+	}
+
+	public void removeCallOperation(ECallOperationActivityDefinition callOperation) {
+		ETriggerDefinitionBody trigger = (ETriggerDefinitionBody) callOperation.eContainer().eContainer();
+		trigger.getAction().getList().remove(callOperation);
+	}
+
 	public void addStringToPropertyValueList(EPropertyAssignment prop) {
 		System.out.println("Requested to add string to property list value. Property: " + prop.getName());
+	}
+
+	public void addImport(AADM_Model model, String _import) {
+		model.getImports().add(_import);
+	}
+
+	public void cancelAddImport(AADM_Model model, Integer size) {
+		// Nothing to do
+	}
+
+	public void editImport(AADM_Model model, Integer index, String oldValue, String newValue) {
+		model.getImports().set(index - 1, newValue);
+	}
+
+	public void removeImport(AADM_Model model, Integer index) {
+		model.getImports().remove(index - 1);
 	}
 
 	public void addItemToPropertyValueList(ELIST list, String item) {
@@ -163,6 +492,10 @@ public class Services {
 		return AADMScopeProvider.getOptimizationModels();
 	}
 
+	public Optimization_Model findOptimizationModel(String optimizationName) {
+		return AADMScopeProvider.findOptimizationModel(optimizationName);
+	}
+
 	public String getOptimization(ENodeTemplate node) {
 		if (node.getNode().getOptimization() != null)
 			return node.getNode().getOptimization().getName();
@@ -175,12 +508,65 @@ public class Services {
 		return AADM_Helper.findNode(req, req.getNode().getId());
 	}
 
+	public ENodeTemplate findNode(EPREFIX_REF prefix_ref) {
+		String id = null;
+		if (prefix_ref instanceof EPREFIX_TYPE)
+			id = ((EPREFIX_TYPE) prefix_ref).getType();
+		else if (prefix_ref instanceof EPREFIX_ID)
+			id = ((EPREFIX_ID) prefix_ref).getId();
+		return AADM_Helper.findNode(prefix_ref, id);
+	}
+
+	public ERequirementAssignment findRequirement(EPREFIX_TYPE prefix_type) {
+		ERequirementAssignment req = null;
+		String module = AADM_Helper.getModule(prefix_type);
+		String req_module = prefix_type.getModule();
+		if ((module == null && req_module == null) || (module != null && (module.equals(req_module)))
+				|| (req_module != null && (req_module.equals(module)))) {
+			String reqName = getLastSegment(prefix_type.getType(), ".");
+			String nodeName = getTrailingSegment(prefix_type.getType(), ".");
+			ENodeTemplate template = AADM_Helper.findNode(prefix_type, nodeName);
+			return AADM_Helper.findRequirementInTemplate(reqName, template);
+		}
+		return req;
+	}
+
+	private String getLastSegment(String string, String delimiter) {
+		String newString = string;
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length() - delimiter.length());
+		return newString.substring(newString.lastIndexOf(delimiter) + 1);
+	}
+
+	private String getTrailingSegment(String string, String delimiter) {
+		String newString = string;
+		if (string.endsWith(delimiter))
+			newString = string.substring(0, string.length() - delimiter.length());
+		return newString.substring(0, newString.lastIndexOf(delimiter));
+	}
+
+	public String renderRequirement(EPREFIX_TYPE req) throws Exception {
+		return AADM_Helper.renderType(req);
+	}
+
+	public String renderCapability(EPREFIX_TYPE cap) throws Exception {
+		return AADM_Helper.renderType(cap);
+	}
+
 	public String renderRequirementNode(ERequirementAssignment req) throws Exception {
 		return AADM_Helper.renderPrefixId(req.getNode());
 	}
 
 	public String renderNodeType(ENodeTemplate node) throws Exception {
 		return AADM_Helper.renderType(node.getNode().getType());
+	}
+
+	public String renderNodeTemplate(EPREFIX_ID template) throws Exception {
+		return AADM_Helper.renderPrefixId(template);
+	}
+
+	public String renderPolicyType(EPolicyDefinition policy) throws Exception {
+		return AADM_Helper.renderType(policy.getPolicy().getType());
 	}
 
 	public String renderParameterType(EParameterDefinition par) throws Exception {
@@ -279,7 +665,7 @@ public class Services {
 				entity = (ENodeTemplate) AADM_Helper.getNodeTemplate(property);
 			}
 		} else {
-			// TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+			// TODO Support other entities: TARGET, HOST, SOURCE and concrete entity
 		}
 		return entity;
 	}
@@ -287,6 +673,11 @@ public class Services {
 	public void setValue(EPropertyAssignment prop, String value) {
 		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
 		prop.setValue(newValue);
+	}
+
+	public void setValue(EAttributeAssignment attr, String value) {
+		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		attr.setValue(newValue);
 	}
 
 	private EObject createValue(String value) {
@@ -342,6 +733,18 @@ public class Services {
 		return nodeRed;
 	}
 
+	private ECallOperationActivityDefinition createCallOperationActivityDefinition(String operation) {
+		ECallOperationActivityDefinition callOperationActivityDefinition = RMFactory.eINSTANCE
+				.createECallOperationActivityDefinition();
+		ECallOperationActivityDefinitionBody body = RMFactory.eINSTANCE.createECallOperationActivityDefinitionBody();
+		EPREFIX_TYPE type = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		type.setModule(getTrailingSegment(operation, "/"));
+		type.setType(getLastSegment(operation, "/"));
+		body.setOperation(type);
+		callOperationActivityDefinition.setOperation(body);
+		return callOperationActivityDefinition;
+	}
+
 	public void setNodeType(ENodeTemplate node, String value) {
 		String module = parseModule(value);
 		String type = parseType(value);
@@ -349,8 +752,58 @@ public class Services {
 		node.getNode().getType().setType(type);
 	}
 
+	public void setPolicyType(EPolicyDefinition policy, String newType) {
+		String module = parseModule(newType);
+		String type = parseType(newType);
+		policy.getPolicy().getType().setModule(module);
+		policy.getPolicy().getType().setType(type);
+	}
+
+	public void setOptimization(ENodeTemplate node, String optimization) {
+		Optimization_Model optimization_model = findOptimizationModel(optimization);
+		node.getNode().setOptimization(optimization_model);
+	}
+
 	public void setRequirementNode(ERequirementAssignment req, String node) {
 		req.setNode(createNodeRef(node));
+	}
+
+	public void setPolicyTarget(EPREFIX_ID object, String target) {
+		object.setModule(getTrailingSegment(target, "/"));
+		object.setId(getLastSegment(target, "/"));
+	}
+
+	public void setTargetFilterNode(EPREFIX_ID object, String node) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_ID prefix = (EPREFIX_ID) filter.getNode();
+		if (node.contains("/")) {
+			prefix.setModule(getTrailingSegment(node, "/"));
+			prefix.setId(getLastSegment(node, "/"));
+		} else {
+			prefix.setId(node);
+		}
+	}
+
+	public void setTargetFilterRequirement(EPREFIX_TYPE object, String req) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_TYPE prefix = (EPREFIX_TYPE) filter.getRequirement();
+		if (req.contains("/")) {
+			prefix.setModule(getTrailingSegment(req, "/"));
+			prefix.setType(getLastSegment(req, "/"));
+		} else {
+			prefix.setType(req);
+		}
+	}
+
+	public void setTargetFilterCapability(EPREFIX_TYPE object, String cap) {
+		EEvenFilter filter = (EEvenFilter) object.eContainer();
+		EPREFIX_TYPE prefix = (EPREFIX_TYPE) filter.getCapability();
+		if (cap.contains("/")) {
+			prefix.setModule(getTrailingSegment(cap, "/"));
+			prefix.setType(getLastSegment(cap, "/"));
+		} else {
+			prefix.setType(cap);
+		}
 	}
 
 	private String parseModule(String value) {

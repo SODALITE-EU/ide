@@ -31,7 +31,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
@@ -57,6 +57,7 @@ class KBReasonerTest {
 
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://154.48.185.202:8080/";
+	private final String image_builder__URI = ""; // FIXME set default value
 	private final String xOPERA_URI = "http://154.48.185.209:5001/";
 	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
 
@@ -69,7 +70,7 @@ class KBReasonerTest {
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, xOPERA_URI, KEYCLOAK_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -370,7 +371,7 @@ class KBReasonerTest {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
 		String aadm_json = new String(Files.readAllBytes(aadm_json_path));
 		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", aadm_json);
-		assertNotNull(report.getToken());
+		assertNotNull(report.getBlueprint_id());
 	}
 
 	@Test
@@ -378,16 +379,18 @@ class KBReasonerTest {
 	void testDeployAADM() throws Exception {
 		Path inputs_json_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String blueprint_token = "070132fd-5e61-4c6c-87f9-74474b891efa";
-		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token);
-		assertNotNull(report.getSession_token());
+		String version_id = "snow_deploy";
+		int workers = 5;
+		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers);
+		assertNotNull(report.getDeployment_id());
 	}
 
 	@Test
 	@Ignore
 	void testGetAADMDeploymentStatus() throws Exception {
 		String session_token = "d892456a-5db1-4656-b896-ed2389c8639f";
-		DeploymentStatus status = kbclient.getAADMDeploymentStatus(session_token);
-		assertNotNull(status);
+		DeploymentStatusReport dsr = kbclient.getAADMDeploymentStatus(session_token);
+		assertNotNull(dsr);
 	}
 
 	@Test

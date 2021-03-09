@@ -323,6 +323,10 @@
         class="org.sodalite.dsl.ui.handlers.AADMOptimizeHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.optimizeAADM">
   </handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.BuildImagesHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.buildImages">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -331,30 +335,33 @@
         id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
         name="Quick Outline">
 		</command>
-  <category
-        id="org.sodalite.dsl.AADM.ui.category"
-        name="Sodalite">
-  </category>
   <command
-        categoryId="org.sodalite.dsl.AADM.ui.category"
+        categoryId="org.sodalite.category"
         defaultHandler="org.sodalite.dsl.ui.handlers.AADMSaveHandler"
         description="Save the AADM into the KB"
         id="org.sodalite.dsl.AADM.ui.command.saveAADM"
         name="saveAADM">
   </command>
   <command
-        categoryId="org.sodalite.dsl.AADM.ui.category"
+        categoryId="org.sodalite.category"
         defaultHandler="org.sodalite.dsl.ui.handlers.AADMDeployHandler"
         description="Deploy the AADM using the Sodalite IoC layer"
         id="org.sodalite.dsl.AADM.ui.command.deployAADM"
         name="deployAADM">
   </command>
   <command
-        categoryId="org.sodalite.dsl.AADM.ui.category"
+        categoryId="org.sodalite.category"
         defaultHandler="org.sodalite.dsl.ui.handlers.AADMOptimizeHandler"
         description="Get optimization recommendations "
         id="org.sodalite.dsl.AADM.ui.command.optimizeAADM"
         name="optimizeAADM">
+  </command>
+  <command
+        categoryId="org.sodalite.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.BuildImagesHandler"
+        description="Build images"
+        id="org.sodalite.dsl.AADM.ui.command.buildImages"
+        name="buildImages">
   </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -372,6 +379,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
      <menu
+           id="eu.sodalite.menu.packageexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
@@ -440,6 +448,13 @@
                  </iterate>
               </with>
            </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.buildImages"
+              id="org.sodalite.dsl.AADM.ui.popup.command.buildImages"
+              label="Build Images"
+              style="push"
+              tooltip="Build container images from a file description">
         </command>
      </menu>
   </menuContribution>
@@ -447,6 +462,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
      <menu
+           id="eu.sodalite.menu.projectexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
@@ -515,6 +531,13 @@
                  </iterate>
               </with>
            </visibleWhen>
+        </command>
+       	<command
+              commandId="org.sodalite.dsl.AADM.ui.command.buildImages"
+              id="org.sodalite.dsl.AADM.ui.popup.command.buildImages"
+              label="Build images"
+              style="push"
+              tooltip="Build container images from a file descriptor">
         </command>
      </menu>
   </menuContribution>
@@ -522,6 +545,7 @@
         allPopups="false"
         locationURI="popup:org.eclipse.sirius.ui.tools.views.model.explorer#PopupMenu?after=additions">
      <menu
+           id="eu.sodalite.menu.siriusexplorer"
            label="Sodalite">
         <command
               commandId="org.sodalite.dsl.AADM.ui.command.saveAADM"
@@ -590,6 +614,13 @@
                  </iterate>
               </with>
            </visibleWhen>
+        </command>
+		<command
+              commandId="org.sodalite.dsl.AADM.ui.command.buildImages"
+              id="org.sodalite.dsl.AADM.ui.popup.command.buildImages"
+              label="Build images"
+              style="push"
+              tooltip="Build container images from a file descriptor">
         </command>
      </menu>
   </menuContribution>
@@ -700,7 +731,7 @@
     </category>
     <wizard
           category="org.sodalite.dsl.newWizard.category"
-          class="org.sodalite.dsl.ui.wizards.NewAADMWizard"
+          class="org.sodalite.dsl.ui.wizards.newaadm.NewAADMWizard"
           id="org.sodalite.dsl.AADM.ui.wizard.newAADM"
           name="Create a new AADM">
     </wizard>

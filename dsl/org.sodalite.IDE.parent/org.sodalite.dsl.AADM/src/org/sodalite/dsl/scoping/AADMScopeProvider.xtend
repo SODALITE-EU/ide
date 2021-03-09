@@ -14,6 +14,9 @@ import java.util.TreeSet
 import org.sodalite.dsl.rM.EPropertyDefinitionBody
 import org.sodalite.dsl.rM.RMPackage
 import org.sodalite.dsl.rM.EParameterDefinitionBody
+import org.sodalite.dsl.optimization.optimization.Optimization_Model
+import java.util.Map
+import java.util.HashMap
 
 /**
  * This class contains custom scoping description.
@@ -22,7 +25,7 @@ import org.sodalite.dsl.rM.EParameterDefinitionBody
  * on how and when to use it.
  */
 class AADMScopeProvider extends AbstractAADMScopeProvider {
-	static var Set<String> optimization_models = new TreeSet()
+	static var Map<String, Optimization_Model> optimization_models = new HashMap()
 	static var Set<String> data_types = new TreeSet()
 	
     override public IScope getScope(EObject context, EReference reference) {
@@ -34,9 +37,12 @@ class AADMScopeProvider extends AbstractAADMScopeProvider {
             // EcoreUtil2 provides useful functionality to do that
             // For example searching for all elements within the root Object's tree
             var optimizations = scope.allElements
+            optimization_models.clear
+            optimization_models.put(" ", null)
             for (opt: optimizations){
             	var desc = opt as IEObjectDescription
-            	optimization_models.add(desc.name.toString)
+            	var optimization_model = desc.EObjectOrProxy as Optimization_Model
+            	optimization_models.put(desc.name.toString, optimization_model)
             }
         }else if (context instanceof EParameterDefinitionBody 
         	&& reference == RMPackage.Literals.EPARAMETER_DEFINITION_BODY__TYPE
@@ -52,7 +58,11 @@ class AADMScopeProvider extends AbstractAADMScopeProvider {
     }
     
     def static Set<String> getOptimizationModels(){
-    	return optimization_models
+    	return optimization_models.keySet
+    }
+    
+    def static Optimization_Model findOptimizationModel(String optimizationName){
+    	return optimization_models.get(optimizationName);
     }
     
     def static Set<String> getDataTypes(){

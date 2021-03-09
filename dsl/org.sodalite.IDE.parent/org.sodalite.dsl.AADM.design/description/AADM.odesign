@@ -5,43 +5,68 @@
       <metamodel href="http://www.sodalite.org/dsl/AADM#/"/>
       <metamodel href="http://www.sodalite.org/dsl/RM#/"/>
       <defaultLayer name="Default">
-        <edgeMappings name="RelationshipLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
-          <style sizeComputationExpression="2">
+        <edgeMappings name="RequirementLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12">
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getRequirementLabel()">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TargetLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@borderedNodeMappings[name='BTargets']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getTargetLabel()">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TriggerLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@borderedNodeMappings[name='BTriggers']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']" targetFinderExpression="aql:self">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getTriggerLabel">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TargetFilterNodeLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']/@borderedNodeMappings[name='TargetFilter']/@borderedNodeMappings[name='node']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" targetFinderExpression="service:findNode()">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getNodeLabel">
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="TargetFilterRequirementLink" sourceMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']/@borderedNodeMappings[name='TargetFilter']/@borderedNodeMappings[name='requirement']" targetMapping="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" targetFinderExpression="service:findRequirement">
+          <style sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="service:getRequirementLabel">
+              <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
         <containerMappings name="NodeTemplate" semanticCandidatesExpression="aql:self.nodeTemplates.nodeTemplates" domainClass="aADM::ENodeTemplate" childrenPresentation="VerticalStack">
           <borderedNodeMappings name="BType" semanticCandidatesExpression="feature:node" domainClass="aADM::ENodeTemplateBody">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dot" labelSize="12" labelExpression="service:getTypeLabel()" iconPath="/org.sodalite.dsl.AADM.design/icons/type.png" sizeComputationExpression="-1" labelPosition="node" resizeKind="EAST_WEST" width="20" height="3">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getTypeLabel()" labelAlignment="RIGHT" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/type.png">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelFormat>italic</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <forbiddenSides>WEST</forbiddenSides>
               <forbiddenSides>SOUTH</forbiddenSides>
               <forbiddenSides>EAST</forbiddenSides>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </borderedNodeMappings>
           <borderedNodeMappings name="BRequirements" semanticCandidatesExpression="aql:self.node.requirements.requirements" domainClass="aADM::ERequirementAssignment">
-            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dash" labelSize="12" labelExpression="aql:'req: ' + self.name" iconPath="/org.sodalite.dsl.AADM.design/icons/requirements.png" labelAlignment="LEFT" sizeComputationExpression="-1" labelPosition="node" resizeKind="NSEW" width="16" height="3">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
-              <labelFormat>italic</labelFormat>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_chocolate']"/>
-              <forbiddenSides>NORTH</forbiddenSides>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getRequirementBorderedLabel" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/requirement.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </borderedNodeMappings>
-          <subContainerMappings name="Common" preconditionExpression="aql:(self.node.description->size() > 0) or (self.node.optimization.name->size() > 0)" semanticCandidatesExpression="aql:self" domainClass="aADM::ENodeTemplate" childrenPresentation="List">
-            <subNodeMappings name="description" preconditionExpression="aql:self.description.size() > 0" semanticCandidatesExpression="feature:node" domainClass="aADM::ENodeTemplateBody">
-              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'description: ' + self.description" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
-                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-              </style>
-            </subNodeMappings>
+          <subContainerMappings name="Common" preconditionExpression="aql:self.node.optimization.name->size() > 0" semanticCandidatesExpression="aql:self" domainClass="aADM::ENodeTemplate" childrenPresentation="List">
             <subNodeMappings name="optimization" preconditionExpression="aql:self.optimization.name->size() > 0" semanticCandidatesExpression="feature:node" domainClass="aADM::ENodeTemplateBody">
               <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'optimization: ' + self.optimization.name" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -58,8 +83,8 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.node.properties" domainClass="aADM::EPropertyAssigments" childrenPresentation="List">
-            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="aADM::EPropertyAssignment">
+          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.node.properties" domainClass="rM::EPropertyAssignments" childrenPresentation="List">
+            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="rM::EPropertyAssignment">
               <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -75,7 +100,7 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Attributes" preconditionExpression="aql:self.attributes->size() > 0" semanticCandidatesExpression="aql:self.node.atributes" domainClass="aADM::EAttributeAssigments" childrenPresentation="List">
+          <subContainerMappings name="Attributes" preconditionExpression="aql:self.attributes->size() > 0" semanticCandidatesExpression="aql:self.node.atributes" domainClass="aADM::EAttributeAssignments" childrenPresentation="List">
             <subNodeMappings name="Attribute" semanticCandidatesExpression="aql:self.attributes" domainClass="aADM::EAttributeAssignment">
               <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getAttributeLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -94,7 +119,7 @@
           </subContainerMappings>
           <subContainerMappings name="Capabilities" semanticCandidatesExpression="aql:self.node.capabilities" domainClass="aADM::ECapabilityAssignments" childrenPresentation="VerticalStack">
             <subContainerMappings name="Capability" semanticCandidatesExpression="aql:self.capabilities" domainClass="aADM::ECapabilityAssignment" childrenPresentation="List">
-              <subNodeMappings name="Properties" semanticCandidatesExpression="aql:self.properties.properties" domainClass="aADM::EPropertyAssignment">
+              <subNodeMappings name="Properties" semanticCandidatesExpression="aql:self.properties.properties" domainClass="rM::EPropertyAssignment">
                 <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="EAST_WEST">
                   <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                   <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -154,6 +179,185 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
           </style>
         </containerMappings>
+        <containerMappings name="Policy Definition" semanticCandidatesExpression="aql:self.policies.policies" domainClass="aADM::EPolicyDefinition" childrenPresentation="VerticalStack">
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BType" semanticCandidatesExpression="feature:policy" domainClass="aADM::EPolicyDefinitionBody">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getPolicyTypeLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/policy-type.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </borderedNodeMappings>
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BTargets" semanticCandidatesExpression="aql:self.policy.targets.target" domainClass="rM::EPREFIX_ID">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getTargetBorderedLabel()" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/target.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </borderedNodeMappings>
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="BTriggers" semanticCandidatesExpression="aql:self.policy.triggers.triggers" domainClass="ETriggerDefinition">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:''" sizeComputationExpression="-1" workspacePath="/org.sodalite.dsl.AADM.design/icons/trigger_big.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </borderedNodeMappings>
+          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.policy.properties" domainClass="rM::EPropertyAssignments" childrenPresentation="List">
+            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="rM::EPropertyAssignment">
+              <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="Properties" iconPath="/org.sodalite.dsl.AADM.design/icons/properties.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/policy.png" roundedCorner="true">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.1"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Trigger Definition" semanticCandidatesExpression="service:getTriggerDefinitions" domainClass="rM::ETriggerDefinition" childrenPresentation="VerticalStack">
+          <borderedNodeMappings xsi:type="description_1:NodeMappingImport" name="TargetFilter" semanticCandidatesExpression="aql:self.trigger.target_filter" domainClass="rM::EEvenFilter">
+            <borderedNodeMappings name="node" semanticCandidatesExpression="feature:node" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getNodeBorderedLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/node.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <borderedNodeMappings name="requirement" semanticCandidatesExpression="feature:requirement" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getRequirementBorderedLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/requirement.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <borderedNodeMappings name="capability" semanticCandidatesExpression="feature:capability" domainClass="rM::EPREFIX_REF">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="service:getCapabilityLabel" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.sodalite.dsl.AADM.design/icons/capability.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </borderedNodeMappings>
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" borderLineStyle="dash" labelSize="12" showIcon="false" labelExpression="target filter" resizeKind="NSEW" width="3" height="15">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <forbiddenSides>SOUTH</forbiddenSides>
+              <forbiddenSides>NORTH</forbiddenSides>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </borderedNodeMappings>
+          <subContainerMappings name="Event section" semanticCandidatesExpression="aql:self" domainClass="rM::ETriggerDefinition" childrenPresentation="List">
+            <subNodeMappings name="event" semanticCandidatesExpression="feature:trigger" domainClass="rM::ETriggerDefinitionBody">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:self.event" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="Event" iconPath="/org.sodalite.dsl.AADM.design/icons/event.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Schedule section" semanticCandidatesExpression="aql:self" domainClass="rM::ETriggerDefinition" childrenPresentation="List">
+            <subNodeMappings name="start_time" semanticCandidatesExpression="feature:trigger" domainClass="rM::ETriggerDefinitionBody">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getScheduleStartTime" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="end_time" semanticCandidatesExpression="feature:trigger" domainClass="rM::ETriggerDefinitionBody">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getScheduleEndTime" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="Schedule" iconPath="/org.sodalite.dsl.AADM.design/icons/schedule.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Condition section" semanticCandidatesExpression="aql:self.trigger" domainClass="rM::ETriggerDefinitionBody" childrenPresentation="List">
+            <subNodeMappings name="constraint" semanticCandidatesExpression="feature:condition" domainClass="rM::EExtendedTriggerCondition">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getConstraintLabel" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="period" semanticCandidatesExpression="feature:condition" domainClass="rM::EExtendedTriggerCondition">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'period: ' + self.period" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="evaluations" semanticCandidatesExpression="feature:condition" domainClass="rM::EExtendedTriggerCondition">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'evaluations: ' + self.evaluations.value" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <subNodeMappings name="method" semanticCandidatesExpression="feature:condition" domainClass="rM::EExtendedTriggerCondition">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'method: ' + self.method" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="Condition" iconPath="/org.sodalite.dsl.AADM.design/icons/condition.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subContainerMappings>
+          <subContainerMappings name="Action section" semanticCandidatesExpression="aql:self.trigger.action" domainClass="rM::EActivityDefinitions" childrenPresentation="List">
+            <subNodeMappings name="activity" semanticCandidatesExpression="aql:self.list" domainClass="rM::EActivityDefinition">
+              <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getActivityLabel" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="0" arcHeight="0" borderSizeComputationExpression="1" labelSize="12" labelExpression="Action" iconPath="/org.sodalite.dsl.AADM.design/icons/action.png" labelAlignment="LEFT">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>bold</labelFormat>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" iconPath="/org.sodalite.dsl.AADM.design/icons/trigger.png" roundedCorner="true">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+            <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.1"/>
+          </style>
+        </containerMappings>
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.sodalite.dsl.AADM.design.Services"/>
@@ -161,13 +365,275 @@
   </ownedViewpoints>
   <extensions xsi:type="properties:ViewExtensionDescription" name="AADM Forms">
     <categories name="Default Category">
-      <pages name="Property Default Page" labelExpression="General" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.2 //@extensions.0/@categories.0/@groups.3 //@extensions.0/@categories.0/@groups.9"/>
-      <pages name="Node Template Default Page" labelExpression="General" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.4"/>
-      <pages name="Capability Default Page" labelExpression="General" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5"/>
-      <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.6"/>
-      <pages name="Input Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.7"/>
-      <pages name="Attribute Default Page" labelExpression="General" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.8"/>
-      <groups name="SingleStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
+      <pages name="AADM Model Default Page" labelExpression="General" domainClass="aADM::AADM_Model" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0"/>
+      <pages name="Node Template Default Page" labelExpression="General" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1"/>
+      <pages name="Policy Definition Default Page" labelExpression="General" domainClass="aADM::EPolicyDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.2"/>
+      <pages name="Trigger Definition Default Page" labelExpression="General" domainClass="rM::ETriggerDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3"/>
+      <pages name="Property Default Page" labelExpression="General" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.4 //@extensions.0/@categories.0/@groups.5 //@extensions.0/@categories.0/@groups.6 //@extensions.0/@categories.0/@groups.7 //@extensions.0/@categories.0/@groups.12 //@extensions.0/@categories.0/@groups.13"/>
+      <pages name="Capability Default Page" labelExpression="General" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.8"/>
+      <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.9"/>
+      <pages name="Input Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.10"/>
+      <pages name="Attribute Default Page" labelExpression="General" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.11"/>
+      <pages name="TargetFilter Node Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().node" groups="//@extensions.0/@categories.0/@groups.14"/>
+      <pages name="TargetFilter Requirement Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().requirement" groups="//@extensions.0/@categories.0/@groups.15"/>
+      <pages name="TargetFilter Capability Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().capability" groups="//@extensions.0/@categories.0/@groups.16"/>
+      <pages name="Policy Target Default Page" labelExpression="General" domainClass="rM::EPREFIX_ID" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.17"/>
+      <groups name="AADM Model" labelExpression="AADM Model" domainClass="aADM::AADM_Model" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Module" labelExpression="Module" valueExpression="feature:module">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="module" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:ListDescription" name="Imports" labelExpression="Imports" valueExpression="aql:self.imports" displayExpression="aql:value">
+          <actions labelExpression="Add import">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:Let" variableName="list_size" valueExpression="aql:self.imports->size()">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add Item">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
+                          <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:cancelAddImport(list_size)"/>
+                        </firstModelOperations>
+                      </initialOperation>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation/>
+                    </buttons>
+                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="new import" labelExpression="Item value:" candidatesExpression="service:getImports" candidateDisplayExpression="aql:candidate">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addImport(newValue)"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
+          <actions labelExpression="Edit selected import">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.imports">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection->size()=1">
+                  <subModelOperations xsi:type="tool:Let" variableName="index" valueExpression="aql:self.imports->indexOf(selection->first())">
+                    <subModelOperations xsi:type="tool:Let" variableName="oldValue" valueExpression="aql:selection->first()">
+                      <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Edit Item">
+                        <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                          <initialOperation/>
+                        </buttons>
+                        <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
+                          <initialOperation/>
+                        </buttons>
+                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0/@controls.1/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                        <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                          <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="aql:oldValue">
+                            <initialOperation>
+                              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
+                                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editImport(index, oldValue, newValue)"/>
+                              </firstModelOperations>
+                            </initialOperation>
+                          </controls>
+                        </groups>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
+          <actions labelExpression="Delete selected imports">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.imports">
+                <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="item">
+                  <subModelOperations xsi:type="tool:Let" variableName="index" valueExpression="aql:self.imports->indexOf(item)">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:removeImport(index)"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
+        </controls>
+      </groups>
+      <groups name="Node Template" labelExpression="Node Template" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderNodeType()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setNodeType(newValue)"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="Description" labelExpression="Description" valueExpression="aql:self.node.description">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
+              <subModelOperations xsi:type="tool:SetValue" featureName="description" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Optimization" labelExpression="Optimization" valueExpression="service:getOptimization" candidatesExpression="service:getOptimizations()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setOptimization(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Policy Definition" labelExpression="Policy Definition" domainClass="aADM::EPolicyDefinition" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderPolicyType()" candidatesExpression="service:getPolicyTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setPolicyType(newValue)"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="Description" labelExpression="Description" valueExpression="aql:self.policy.description">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.policy">
+              <subModelOperations xsi:type="tool:SetValue" featureName="description" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Trigger Definition" labelExpression="Trigger Definition" domainClass="rM::ETriggerDefinition" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="Event" labelExpression="Event" valueExpression="aql:self.trigger.event">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.trigger">
+              <subModelOperations xsi:type="tool:SetValue" featureName="event" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:LabelDescription" name="Schedule Label" labelExpression="Schedule:"/>
+        <controls xsi:type="properties:ContainerDescription" name="Schedule container">
+          <controls xsi:type="properties:TextDescription" name="Start time" labelExpression="Start time:" valueExpression="aql:self.trigger.schedule.start_time">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setScheduleStartTime(newValue)"/>
+            </initialOperation>
+          </controls>
+          <controls xsi:type="properties:TextDescription" name="End time" labelExpression="End time:" valueExpression="aql:self.trigger.schedule.end_time">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setScheduleEndTime(newValue)"/>
+            </initialOperation>
+          </controls>
+        </controls>
+        <controls xsi:type="properties:LabelDescription" name="Condition Label" labelExpression="Condition:"/>
+        <controls xsi:type="properties:ContainerDescription" name="Condition Container">
+          <controls xsi:type="properties:TextDescription" name="Constraint" labelExpression="Constraint:" valueExpression="service:parseConditionClause">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setConstraint(newValue)">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+              </firstModelOperations>
+            </initialOperation>
+          </controls>
+          <controls xsi:type="properties:TextDescription" name="Period" labelExpression="Period:" valueExpression="aql:self.trigger.condition.period">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setPeriod(newValue)"/>
+            </initialOperation>
+          </controls>
+          <controls xsi:type="properties:TextDescription" name="Evaluations" labelExpression="Evaluations:" valueExpression="aql:self.trigger.condition.evaluations.value">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setEvaluations(newValue)"/>
+            </initialOperation>
+          </controls>
+          <controls xsi:type="properties:TextDescription" name="Method" labelExpression="Method:" valueExpression="aql:self.trigger.condition.method">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setMethod(newValue)"/>
+            </initialOperation>
+          </controls>
+        </controls>
+        <controls xsi:type="properties:LabelDescription" name="Action Label" labelExpression="Action:"/>
+        <controls xsi:type="properties:ContainerDescription" name="Action Container">
+          <controls xsi:type="properties:ListDescription" name="actions" labelExpression="Actions" valueExpression="aql:self.trigger.action.list" displayExpression="service:getActivityLabel(value)">
+            <actions labelExpression="Add action">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                  <subModelOperations xsi:type="tool:Let" variableName="list_size" valueExpression="aql:self.trigger.action.list->size()">
+                    <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Add Action">
+                      <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self">
+                            <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:cancelAddAction(list_size)"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </buttons>
+                      <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                        <initialOperation/>
+                      </buttons>
+                      <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.7/@controls.0/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                      <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                        <controls xsi:type="properties:SelectDescription" name="new call operation" labelExpression="Call operation:" valueExpression="service:getAddedActivityLabel(list_size)" candidatesExpression="service:getOperations" candidateDisplayExpression="aql:candidate">
+                          <initialOperation>
+                            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                              <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:addCallAction(newValue)"/>
+                            </firstModelOperations>
+                          </initialOperation>
+                        </controls>
+                      </groups>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </actions>
+            <actions labelExpression="Edit selected action">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.trigger.action.list">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection->size()=1">
+                    <subModelOperations xsi:type="tool:Let" variableName="index" valueExpression="aql:self.trigger.action.list->indexOf(selection->first())">
+                      <subModelOperations xsi:type="tool:Let" variableName="oldValue" valueExpression="aql:selection->first()">
+                        <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Edit Item">
+                          <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                            <initialOperation/>
+                          </buttons>
+                          <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
+                            <initialOperation/>
+                          </buttons>
+                          <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.7/@controls.0/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                          <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                            <controls xsi:type="properties:SelectDescription" name="edit call operation" labelExpression="Call operation:" valueExpression="service:getActivityLabel(index)" candidatesExpression="service:getOperations" candidateDisplayExpression="aql:candidate">
+                              <initialOperation>
+                                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:editCallOperation(index, oldValue, newValue)"/>
+                              </initialOperation>
+                            </controls>
+                          </groups>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </actions>
+            <actions labelExpression="Delete selected actions">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.trigger.action.list">
+                  <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="item">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:removeCallOperation"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </actions>
+          </controls>
+        </controls>
+      </groups>
+      <groups name="SingleStringValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -181,7 +647,7 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="ListStringValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ELIST)">
+      <groups name="ListStringValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ELIST)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -205,7 +671,7 @@
                     <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
                       <initialOperation/>
                     </buttons>
-                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                     <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
                       <controls xsi:type="properties:TextDescription" name="newItem" labelExpression="Item value:">
                         <initialOperation>
@@ -220,7 +686,7 @@
               </firstModelOperations>
             </initialOperation>
           </actions>
-          <actions labelExpression="Edit list item">
+          <actions labelExpression="Edit selected list item">
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ELIST).list">
                 <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection->size()=1">
@@ -233,7 +699,7 @@
                         <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
                           <initialOperation/>
                         </buttons>
-                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.1/@controls.1/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.1/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                         <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
                           <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="service:renderListItem(oldValue)">
                             <initialOperation>
@@ -261,7 +727,7 @@
           </actions>
         </controls>
       </groups>
-      <groups name="GetInputValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetInput)">
+      <groups name="GetInputValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetInput)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -277,7 +743,7 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="ComplexValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::EMAP)">
+      <groups name="ComplexValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::EMAP)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -289,34 +755,6 @@
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::ESTRING)">
               <subModelOperations xsi:type="tool:SetValue" featureName="string" valueExpression="var:newValue"/>
-            </firstModelOperations>
-          </initialOperation>
-        </controls>
-      </groups>
-      <groups name="Node Template" labelExpression="Node Template" domainClass="aADM::ENodeTemplate" semanticCandidateExpression="var:self">
-        <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
-            </firstModelOperations>
-          </initialOperation>
-        </controls>
-        <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderNodeType()" candidatesExpression="service:getTypes()" candidateDisplayExpression="aql:candidate">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setNodeType(newValue)"/>
-          </initialOperation>
-        </controls>
-        <controls xsi:type="properties:TextDescription" name="Description" labelExpression="Description" valueExpression="aql:self.node.description">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
-              <subModelOperations xsi:type="tool:SetValue" featureName="description" valueExpression="var:newValue"/>
-            </firstModelOperations>
-          </initialOperation>
-        </controls>
-        <controls xsi:type="properties:SelectDescription" name="Optimization" labelExpression="Optimization" valueExpression="service:getOptimization" candidatesExpression="service:getOptimizations()" candidateDisplayExpression="aql:candidate">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.node">
-              <subModelOperations xsi:type="tool:SetValue" featureName="optimization" valueExpression="var:newValue"/>
             </firstModelOperations>
           </initialOperation>
         </controls>
@@ -358,7 +796,7 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="SingleStringValueAttribute" labelExpression="Attribute" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self">
+      <groups name="SingleStringValueAttribute" labelExpression="Attribute" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESTRING)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getAttributes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
@@ -366,11 +804,9 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
-        <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="feature:value">
+        <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).value">
           <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
-              <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:newValue"/>
-            </firstModelOperations>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setValue(newValue)"/>
           </initialOperation>
         </controls>
       </groups>
@@ -393,6 +829,48 @@
         <controls xsi:type="properties:SelectDescription" name="Property" labelExpression="Property" valueExpression="service:renderGetPropertyProperty()" candidatesExpression="service:getPropertyProperty()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="SingleSignedIntValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::ESIGNEDINT)">
+        <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="SingleSignedIntValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESIGNEDINT).value">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setValue(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Node" labelExpression="Target filter node" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Node" labelExpression="Node" valueExpression="service:renderNodeTemplate" candidatesExpression="service:getNodeTemplates" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterNode(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Requirement" labelExpression="Target filter requirement" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Requirement" labelExpression="Requirement" valueExpression="service:renderRequirement" candidatesExpression="service:getRequirementsOfNode" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterRequirement(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="TargetFilter Capability" labelExpression="Target filter capability" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Capability" labelExpression="Capability" valueExpression="service:renderCapability" candidatesExpression="service:getCapabilitiesOfNode" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setTargetFilterCapability(newValue)"/>
+          </initialOperation>
+        </controls>
+      </groups>
+      <groups name="Policy Target" labelExpression="Target" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:SelectDescription" name="Target" labelExpression="Target" valueExpression="service:renderNodeTemplate" candidatesExpression="service:getNodeTemplates" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setPolicyTarget(newValue)"/>
           </initialOperation>
         </controls>
       </groups>

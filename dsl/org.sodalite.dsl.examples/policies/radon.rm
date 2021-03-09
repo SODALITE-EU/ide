@@ -2,7 +2,7 @@ module: radon
 
 node_types:
 	radon.nodes.OpenStack.VM:
-		derived_from: tosca.nodes.Compute
+		derived_from: tosca.nodes.SoftwareComponent
 		attributes:
 			available_instances:
 				type: integer

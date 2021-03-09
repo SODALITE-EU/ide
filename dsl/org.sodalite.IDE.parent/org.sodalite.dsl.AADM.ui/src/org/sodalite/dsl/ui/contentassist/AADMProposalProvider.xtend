@@ -23,7 +23,7 @@ import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
-import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl
+import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
@@ -196,6 +196,16 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 
 		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
+	
+	override void completeEPolicyDefinition_Name(EObject model, Assignment assignment, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for NodeTemplate::name property")
+		val String proposalText = "policy_id"
+		val String displayText = "policy_id"
+		val String additionalProposalInfo = "The required id of the policy definition"
+
+		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+	}
 
 	override void completeENodeTemplateBody_Type(EObject model, Assignment assignment, ContentAssistContext context,
 		ICompletionProposalAcceptor acceptor) {
@@ -239,7 +249,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			if (model instanceof ENodeTemplateBodyImpl)
 				type = (model as ENodeTemplateBodyImpl).type
 				 
-			else if (model instanceof EAttributeAssigmentsImpl)
+			else if (model instanceof EAttributeAssignmentsImpl)
 				type = (model.eContainer as ENodeTemplateBodyImpl).type
 				
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
@@ -455,13 +465,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val Type superType = tovrnd.elements.get(0)
 			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
 			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+			val Image image = getImage("icons/resource2.png")
 			for (ENodeTemplate node: localnodes){
 				if (node !== null){
 					System.out.println ("Valid requirement local node: " + node.name)
 				 	val qnode = module !== null? module + '/' + node.name: node.name
 					proposalText = qnode
 					displayText = qnode
-					createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
 			}
 		}catch(NotRolePermissionException ex){
@@ -808,7 +819,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val AADM_Model model = findModel(reqAssign) as AADM_Model
 		
 		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
+			val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
 			candidateNodes.put(node_id, node)
 		}
 		

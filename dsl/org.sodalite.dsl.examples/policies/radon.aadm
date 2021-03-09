@@ -1,27 +1,32 @@
 module: radon
 
-node_templates:
+import: docker
+import: hpc
+
+node_templates:  
 	workstation:
 		type: tosca.nodes.Compute
-		attributes:
-			private_address:  'localhost'
-			public_address: 'localhost'
+		description: "workstation description"
+		attributes:  
+			private_address: "localhost"
+			public_address: "localhost"
 
 	openstack_vm:
 		type: radon/radon.nodes.OpenStack.VM
 		properties:
-			name: 'HostVM'
-			image: 'centos7'
+			name: "HostVM"
+			image: "centos7"
 			flavor: 'm1.xsmall'
 			network: 'provider_64_net'
 			key_name: 'my_key'
 		requirements:
 			host: 
 				node: radon/workstation
-
-policies:
+		
+policies:	
 	scale_down:
 		type: radon/radon.policies.scaling.ScaleDown
+		description: "scale down policy description"
 		properties:
 			cpu_upper_bound: 90
 			adjustment: 1
@@ -34,7 +39,7 @@ policies:
 
 	autoscale:
 		type: radon/radon.policies.scaling.AutoScale
-		properties:
+		properties:  
 			min_size: 3
 			max_size: 7
 		targets: [ radon/openstack_vm]
@@ -43,12 +48,12 @@ policies:
 				description: 'A trigger for autoscaling'
 				event: 'auto_scale_trigger'
 				schedule:
-					start_time: '2020-04-08T21:59:43.10-06:00'
-					end_time: '2022-04-08T21:59:43.10-06:00'
+					start_time: "2020-04-08 21:59:40"
+					end_time: "2022-04-08 21:59:50"
 				target_filter:
 					node: radon/openstack_vm
 					requirement: radon/openstack_vm.host
-					capability: radon/openstack_vm.host
+					capability: tosca.nodes.Compute.host
 				condition:
 					constraint:
 						not:

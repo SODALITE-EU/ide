@@ -1,6 +1,7 @@
 package org.sodalite.dsl.ui.backend;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -44,10 +45,13 @@ import org.sodalite.dsl.AADM.ui.internal.AADMActivator;
 import org.sodalite.dsl.aADM.AADMPackage;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimization;
@@ -64,6 +68,7 @@ import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.ui.helper.AADMHelper;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -130,9 +135,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
 	}
 
-	public void processDeployAADM(ExecutionEvent event, Path inputs_yaml_path) throws Exception {
+	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
+			String version_tag, int workers) throws Exception {
 		// Return selected resource
-		IFile aadmFile = AADMHelper.getSelectedFile();
+		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
 			throw new Exception("Selected AADM could not be found");
 		IProject project = aadmFile.getProject();
@@ -141,7 +147,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, project, event);
+		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers, project,
+				event);
+	}
+
+	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
+		saveImages(imageBuildConfPath, event);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -219,14 +230,19 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path, IProject project,
-			ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
+			Path imageBuildConfPath, String version_tag, int workers, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
-				SubMonitor subMonitor = SubMonitor.convert(monitor, 5);
+				int steps = 1;
+				int number_steps = 5;
+				if (imageBuildConfPath != null)
+					number_steps = 7;
+
+				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
 
 				try {
@@ -256,7 +272,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
 					saveURI(saveReport.getURI(), aadmfile, project);
-					subMonitor.worked(1);
+					subMonitor.worked(steps++);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
@@ -267,36 +283,63 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Files.write(Paths.get(System.getProperty("user.dir") + "/" + submissionId +
 					// ".json"), aadmJson.getBytes());
 
-					subMonitor.worked(2);
+					subMonitor.worked(steps++);
+
+					// Ask ImageBuilder to build the images
+					if (imageBuildConfPath != null) {
+						String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
+						// Ask ImageBuilder to build the images
+						subMonitor.setTaskName("Requesting the creation of images");
+
+						BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
+
+						subMonitor.worked(steps++);
+
+						// Ask ImageBuilder status
+						subMonitor.setTaskName("Checking image creation status");
+
+						BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						while (!(biStatus == BuildImageStatus.DONE)) {
+							if (biStatus == BuildImageStatus.FAILED)
+								throw new Exception("Build image failed as reported by Image Builder");
+							TimeUnit.SECONDS.sleep(5);
+							biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						}
+						subMonitor.worked(steps++);
+					}
 
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
 					IaCBuilderAADMRegistrationReport iacReport = getKBReasoner()
 							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
-					if (iacReport == null || iacReport.getToken().isEmpty())
+					if (iacReport == null || iacReport.getBlueprint_id().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
-					admin_report[0] = iacReport.getToken();
-					String message = "IaC Builder blueprint token: " + iacReport.getToken();
+					admin_report[0] = iacReport.getBlueprint_id();
+					String message = "IaC Builder blueprint id: " + iacReport.getBlueprint_id();
 					SodaliteLogger.log(message);
-					subMonitor.worked(3);
+					subMonitor.worked(steps++);
 
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
-					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path, iacReport.getToken());
-					admin_report[1] = depl_report.getSession_token();
-					message = "xOpera session token: " + depl_report.getSession_token();
+					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path,
+							iacReport.getBlueprint_id(), version_tag, workers);
+					admin_report[1] = depl_report.getDeployment_id();
+					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
-					subMonitor.worked(4);
+					// Remove temporary inputs file
+					Files.delete(inputs_yaml_path);
+					subMonitor.worked(steps++);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
-					DeploymentStatus status = getKBReasoner().getAADMDeploymentStatus(depl_report.getSession_token());
-					while (status == DeploymentStatus.IN_PROGRESS) {
-						status = getKBReasoner().getAADMDeploymentStatus(depl_report.getSession_token());
+					DeploymentStatusReport dsr = getKBReasoner()
+							.getAADMDeploymentStatus(depl_report.getDeployment_id());
+					while (!dsr.getState().equals("success")) {
+						if (dsr.getState().equals("failed"))
+							throw new Exception("Deployment failed as reported by xOpera");
 						TimeUnit.SECONDS.sleep(5);
+						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
-					if (status == DeploymentStatus.FAILED)
-						throw new Exception("Deployment failed as reported by xOpera");
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {
@@ -326,6 +369,64 @@ public class AADMBackendProxy extends RMBackendProxy {
 						}
 					});
 					SodaliteLogger.log("Error deploying model", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void saveImages(Path imageBuildConfPath, ExecutionEvent event) {
+		Job job = new Job("Save images") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				// TODO Inform about percentage of progress
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+
+				try {
+					// Ask ImageBuilder to build the images
+					subMonitor.setTaskName("Requesting the creation of images");
+
+					String imageBuildConf = RMHelper.readFile(imageBuildConfPath);
+					BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
+
+					subMonitor.worked(1);
+
+					// Ask ImageBuilder status
+					subMonitor.setTaskName("Checking image creation status");
+
+					BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+					while (!(biStatus == BuildImageStatus.DONE)) {
+						if (biStatus == BuildImageStatus.FAILED)
+							throw new Exception("Build image failed as reported by Image Builder");
+						TimeUnit.SECONDS.sleep(5);
+						biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+					}
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "Images have been successfully created";
+							showInfoDialog("", "Save images", message);
+						}
+					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems to save the images: " + e.getMessage()
+									+ "\nPlease contact Sodalite administrator and report her/him above error message";
+							showErrorDialog("", "Save images", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error building images", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
@@ -441,12 +542,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -455,8 +553,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 		return issues;
@@ -503,12 +601,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				String pathType = getPathType(error.getType());
+				String path = error.getEntity_name() != null ? error.getContext() + "/" + error.getEntity_name()
+						: error.getContext();
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						path, pathType, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -517,8 +615,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 
@@ -577,6 +675,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 		}
 	}
 
+	private String getPathType(String type) {
+		if (type.contains("Property"))
+			return "Property";
+		else if (type.contains("Capability"))
+			return "Capability";
+		else if (type.contains("Node"))
+			return "Node_Template";
+		else
+			return null;
+	}
+
 	private String createPath(List<String> entityHierarchy) {
 		StringBuilder sb = new StringBuilder("node_templates");
 		for (String entry : entityHierarchy) {
@@ -591,14 +700,24 @@ public class AADMBackendProxy extends RMBackendProxy {
 	@Override
 	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
-		StringTokenizer st = new StringTokenizer(path, "/");
+
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
 			EObject eobject = resource.getAllContents().next();
 			if (eobject instanceof AADM_Model) {
 				AADM_Model model = (AADM_Model) eobject;
-				result = getAADMIssueFeature(model, path, path_type, st);
+				StringTokenizer st = new StringTokenizer(path, "/");
+				EObject target = AADMHelper.findElement(model, st.nextToken());
+				if (target != null) {
+					if (target instanceof ENodeTemplate)
+						path = "node_templates/" + path;
+					else if (target instanceof EPolicyDefinition)
+						path = "policies/" + path;
+					st = new StringTokenizer(path, "/");
+					result = getAADMIssueFeature(model, path, path_type, st);
+				}
 			} else if (eobject instanceof Optimization_Model) {
+				StringTokenizer st = new StringTokenizer(path, "/");
 				Optimization_Model model = (Optimization_Model) eobject;
 				result = getOptimizationIssueFeature(model, path, path_type);
 			}
@@ -610,41 +729,71 @@ public class AADMBackendProxy extends RMBackendProxy {
 			StringTokenizer st) {
 		ValidationSourceFeature result = null;
 		if (st.hasMoreTokens()) {
-			if ("node_templates".equals(st.nextToken())) {
-				if (st.hasMoreTokens()) { // Node_template
-					String node_name = st.nextToken();
-					for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-						if (node.getName().contentEquals(node_name)) {
-							result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
-							if (st.hasMoreElements()) { // Node_Template children
-								String entity_name = st.nextToken();
-								if ("Property".equals(path_type)) {
-									for (EPropertyAssignment property : node.getNode().getProperties()
-											.getProperties()) {
-										if (property.getName().contentEquals(entity_name)) {
-											result = new ValidationSourceFeature(property,
-													RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
-										}
-									}
-								} else if ("requirements".equals(path_type)) {
-									boolean req_found = false;
-									if (node.getNode().getRequirements() != null) {
-										for (ERequirementAssignment req : node.getNode().getRequirements()
-												.getRequirements()) {
-											// Target requirement found
-											if (req.getName().contentEquals(getRequirement(path))) {
-												req_found = true;
-												result = new ValidationSourceFeature(req,
-														AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
-											}
-										}
-									}
-									if (!req_found)
-										result = new ValidationSourceFeature(node,
-												AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+			String token = st.nextToken();
+			if ("node_templates".equals(token)) {
+				result = getAADMIssueFeatureInNodeTemplate(model, path, path_type, st, result);
+			} else if ("policies".equals(token)) {
+				result = getAADMIssueFeatureInPolicy(model, path, path_type, st, result);
+			}
+		}
+		return result;
+	}
 
+	private ValidationSourceFeature getAADMIssueFeatureInPolicy(AADM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) { // Policy
+			String policy_name = st.nextToken();
+			for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+				if (policy.getName().contentEquals(policy_name)) {
+					result = new ValidationSourceFeature(policy, AADMPackage.Literals.EPOLICY_DEFINITION__NAME);
+					if (st.hasMoreElements()) { // Node_Template children
+						String entity_name = st.nextToken();
+						if ("Property".equals(path_type)) {
+							for (EPropertyAssignment property : policy.getPolicy().getProperties().getProperties()) {
+								if (property.getName().contentEquals(entity_name)) {
+									result = new ValidationSourceFeature(property,
+											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
 								}
 							}
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getAADMIssueFeatureInNodeTemplate(AADM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) { // Node_template
+			String node_name = st.nextToken();
+			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
+				if (node.getName().contentEquals(node_name)) {
+					result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+					if (st.hasMoreElements()) { // Node_Template children
+						String entity_name = st.nextToken();
+						if ("Property".equals(path_type)) {
+							for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
+								if (property.getName().contentEquals(entity_name)) {
+									result = new ValidationSourceFeature(property,
+											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+								}
+							}
+						} else if ("requirements".equals(path_type)) {
+							boolean req_found = false;
+							if (node.getNode().getRequirements() != null) {
+								for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {
+									// Target requirement found
+									if (req.getName().contentEquals(getRequirement(path))) {
+										req_found = true;
+										result = new ValidationSourceFeature(req,
+												AADMPackage.Literals.EREQUIREMENT_ASSIGNMENT__NAME);
+									}
+								}
+							}
+							if (!req_found)
+								result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
+
 						}
 					}
 				}

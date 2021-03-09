@@ -39,6 +39,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		String iac_uri = prop.getProperty(PreferenceConstants.IaC_URI);
 		if (iac_uri == null)
 			iac_uri = "http://154.48.185.202:8080/";
+		String image_builder_uri = prop.getProperty(PreferenceConstants.Image_Builder_URI);
+		if (image_builder_uri == null)
+			image_builder_uri = "http://x.x.x.x:8080/"; // FIX provide default value
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
 			// xOpera_uri = "http://154.48.185.209:5000/";
@@ -61,14 +64,17 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			keycloak_enabled = true;
 		}
 
-		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
-				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
-						+ "KB_Reasoner endpoint: {0}, IaC endpoint: {1}, xOpera endpoint: {2}, Keycloak endpoint: {3}",
-						kb_reasoner_uri, iac_uri, xOpera_uri, keycloak_uri)));
+		LOGGER.log(
+				new Status(Status.INFO, BUNDLE.getSymbolicName(),
+						MessageFormat.format("Default Sodalite backend services configuration read from properties: "
+								+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
+								+ " xOpera endpoint: {3}, Keycloak endpoint: {4}", kb_reasoner_uri, iac_uri,
+								image_builder_uri, xOpera_uri, keycloak_uri)));
 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
 		defaults.put(PreferenceConstants.IaC_URI, iac_uri);
+		defaults.put(PreferenceConstants.Image_Builder_URI, image_builder_uri);
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
@@ -84,7 +90,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		try (InputStream input = new FileInputStream(propertiesPath)) {
 			prop.load(input);
 		} catch (IOException ex) {
-			LOGGER.log(new Status(Status.ERROR, BUNDLE.getSymbolicName(),
+			LOGGER.log(new Status(Status.WARNING, BUNDLE.getSymbolicName(),
 					"Could not read configuration for Sodalite backend services", ex));
 		}
 		return prop;

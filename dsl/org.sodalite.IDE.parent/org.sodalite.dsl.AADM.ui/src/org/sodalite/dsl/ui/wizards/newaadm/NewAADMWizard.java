@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.wizards;
+package org.sodalite.dsl.ui.wizards.newaadm;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

@@ -110,6 +110,10 @@ public class RMBackendProxy {
 		if (iacURI.isEmpty())
 			raiseConfigurationIssue("IaC URI user not set");
 
+		String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
+		if (image_builder_URI.isEmpty())
+			raiseConfigurationIssue("Image Builder URI user not set");
+
 		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
 		if (xoperaURI.isEmpty())
 			raiseConfigurationIssue("xOpera URI user not set");
@@ -118,7 +122,8 @@ public class RMBackendProxy {
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
 
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
+				keycloakURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
@@ -248,7 +253,7 @@ public class RMBackendProxy {
 		return path;
 	}
 
-	protected void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+	public void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
@@ -303,7 +308,7 @@ public class RMBackendProxy {
 		job.schedule();
 	}
 
-	protected void processValidationIssues(IFile modelFile, KBSaveReportData saveReport, ExecutionEvent event)
+	public void processValidationIssues(IFile modelFile, KBSaveReportData saveReport, ExecutionEvent event)
 			throws Exception {
 		// TODO Check there are not warnings (they do not prevent storage in KB)
 		if (saveReport != null && (saveReport.hasErrors() || saveReport.hasWarnings() || saveReport.hasSuggestions())) {
@@ -322,12 +327,9 @@ public class RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(
-						new ValidationIssue(
-								error.getType() + "." + error.getDescription() + " error located at: "
-										+ error.getEntity_name(),
-								"node_templates/" + error.getContext(), null, Severity.ERROR, error.getType(),
-								error.getDescription()));
+				issues.add(new ValidationIssue(
+						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
+						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
@@ -336,8 +338,8 @@ public class RMBackendProxy {
 				issues.add(new ValidationIssue(
 						warning.getType() + "." + warning.getDescription() + " warning located at: "
 								+ warning.getEntity_name(),
-						"node_templates/" + warning.getContext() + "/" + warning.getEntity_name(),
-						warning.getElementType(), Severity.WARNING, warning.getType(), warning.getDescription()));
+						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
+						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
 		}
 
@@ -513,7 +515,7 @@ public class RMBackendProxy {
 		}
 	}
 
-	protected void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
+	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
 		if (info != null)
 			RMBackendProxy.pasteInClipboard(info);
 		Display.getDefault().asyncExec(new Runnable() {
@@ -524,7 +526,7 @@ public class RMBackendProxy {
 		});
 	}
 
-	protected void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
+	public void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
 		if (info != null)
 			RMBackendProxy.pasteInClipboard(info);
 		Display.getDefault().asyncExec(new Runnable() {

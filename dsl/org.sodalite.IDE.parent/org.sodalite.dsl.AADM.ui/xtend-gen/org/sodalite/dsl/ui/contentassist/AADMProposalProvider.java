@@ -53,7 +53,7 @@ import org.sodalite.dsl.aADM.ECapabilityAssignments;
 import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
-import org.sodalite.dsl.aADM.impl.EAttributeAssigmentsImpl;
+import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl;
@@ -241,6 +241,15 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   }
   
   @Override
+  public void completeEPolicyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for NodeTemplate::name property");
+    final String proposalText = "policy_id";
+    final String displayText = "policy_id";
+    final String additionalProposalInfo = "The required id of the policy definition";
+    this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+  }
+  
+  @Override
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
@@ -306,8 +315,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((model instanceof ENodeTemplateBodyImpl)) {
           type = ((ENodeTemplateBodyImpl) model).getType();
         } else {
-          if ((model instanceof EAttributeAssigmentsImpl)) {
-            EObject _eContainer = ((EAttributeAssigmentsImpl)model).eContainer();
+          if ((model instanceof EAttributeAssignmentsImpl)) {
+            EObject _eContainer = ((EAttributeAssignmentsImpl)model).eContainer();
             type = ((ENodeTemplateBodyImpl) _eContainer).getType();
           }
         }
@@ -748,6 +757,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         final String qsuperType = _xifexpression_1;
         final List<ENodeTemplate> localnodes = this.findLocalNodesForType(qsuperType, model);
+        final Image image_1 = this.getImage("icons/resource2.png");
         for (final ENodeTemplate node : localnodes) {
           if ((node != null)) {
             String _name = node.getName();
@@ -763,7 +773,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
             final String qnode = _xifexpression_2;
             proposalText = qnode;
             displayText = qnode;
-            this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
+            this.createNonEditableCompletionProposal(proposalText, displayText, image_1, context, additionalProposalInfo, acceptor);
           }
         }
       } catch (final Throwable _t) {
@@ -1257,6 +1267,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           if (_tripleNotEquals) {
             String _module_1 = node.getNode().getType().getModule();
             _xifexpression = (_module_1 + "/");
+          } else {
+            _xifexpression = "";
           }
           String _type = node.getNode().getType().getType();
           final String node_id = (_xifexpression + _type);

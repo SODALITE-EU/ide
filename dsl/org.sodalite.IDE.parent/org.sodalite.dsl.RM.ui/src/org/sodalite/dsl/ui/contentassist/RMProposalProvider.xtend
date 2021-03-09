@@ -66,8 +66,6 @@ import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
 import org.sodalite.dsl.rM.EPolicyType
-import org.eclipse.emf.common.util.EList
-import org.sodalite.dsl.rM.ECallOperationActivityDefinition
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EInterfaceType
 
@@ -102,6 +100,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String iacURI = store.getString(PreferenceConstants.IaC_URI);
 		if (iacURI.isEmpty())
 			raiseConfigurationIssue("IaC URI user not set");
+			
+		val String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
+		if (image_builder_URI.isEmpty())
+			raiseConfigurationIssue("Image Builder URI user not set");
 
 		val String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
 		if (xoperaURI.isEmpty())
@@ -111,7 +113,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
 
-		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, xoperaURI, keycloakURI);
+		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI);
 
 		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
 		if (keycloak_enabled.equalsIgnoreCase("true")) {
@@ -1118,7 +1120,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def proposeAttributesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			proposeAttributesForEntityInLocal (model, nodeRef, proposals)
+			val nodeName = getLastSegment(nodeRef, "/")
+			proposeAttributesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposeAttributesForEntityInKB (nodeRef, proposals)
 		}
@@ -1138,16 +1141,22 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposeAttributesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
 		val ENodeType node = findNodeType(model, resourceId)
-		for (attr:node.node.attributes.attributes){
-			val proposal = attr.module !== null? attr.module + "/" + attr.name: attr.name
-			proposals.add(proposal)
-		}
+		if (node !== null)
+			for (attr:node.node.attributes.attributes){
+				val proposal = attr.module !== null? 
+					attr.module + "/" + node.name + "." + attr.name: node.name + "." + attr.name
+				proposals.add(proposal)
+			}
+		//Get Attributes for superclass in KB
+		val superclass = getReference(node.node.superType)
+		proposeAttributesForEntityInKB(superclass, proposals)
 	}
 	
 	def proposePropertiesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			proposePropertiesForEntityInLocal (model, nodeRef, proposals)
+			val nodeName = getLastSegment(nodeRef, "/")
+			proposePropertiesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposePropertiesForEntityInKB (nodeRef, proposals)
 		}
@@ -1167,10 +1176,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposePropertiesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
 		val ENodeType node = findNodeType(model, resourceId)
-		for (prop:node.node.properties.properties){
-			val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
-			proposals.add(proposal)
-		}
+		if (node !== null)
+			for (prop:node.node.properties.properties){
+				val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
+				proposals.add(proposal)
+			}
+		//TODO: Get Properties for superclass in KB
+		
 	}
 	
 	

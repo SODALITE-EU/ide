@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.wizards;
+package org.sodalite.dsl.ui.wizards.buildimages;
 
 import java.nio.file.Path;
 
@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-public class DeploymentWizardDialog extends WizardDialog {
+public class BuildImagesWizardDialog extends WizardDialog {
 
-	public DeploymentWizardDialog(Shell parentShell, IWizard newWizard) {
+	public BuildImagesWizardDialog(Shell parentShell, IWizard newWizard) {
 		super(parentShell, newWizard);
 	}
 
@@ -20,12 +20,12 @@ public class DeploymentWizardDialog extends WizardDialog {
 		super.createButtonsForButtonBar(parent);
 
 		Button finishButton = getButton(IDialogConstants.FINISH_ID);
-		finishButton.setText("Deploy");
+		finishButton.setText("Build Images");
 
 	}
-	
-	public Path getInputsFile (){
-		return ((DeploymentWizard) this.getWizard()).getInputsFile();
+
+	public Path getImageBuildConfPath() {
+		return ((BuildImagesWizard) this.getWizard()).getImageBuildConfPath();
 	}
 
 }

@@ -37,10 +37,12 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
-import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -95,6 +97,7 @@ public class KBReasonerClient implements KBReasoner {
 	private RestTemplate sslRestTemplate;
 	private String kbReasonerUri;
 	private String iacUri;
+	private String image_builder_uri;
 	private String xoperaUri;
 	private String keycloakUri;
 	private String keycloak_user;
@@ -104,10 +107,11 @@ public class KBReasonerClient implements KBReasoner {
 	private String aai_token;
 	private Boolean IAM_enabled = false;
 
-	public KBReasonerClient(String kbReasonerUri, String iacUri, String xoperaUri, String keycloakUri)
-			throws Exception {
+	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
+			String keycloakUri) throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
+		this.image_builder_uri = image_builder_uri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
 	}
@@ -778,17 +782,51 @@ public class KBReasonerClient implements KBReasoner {
 			throws Exception {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = iacUri + "parse";
-		// FIXME create Json content
 		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
 		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, new URI(url),
-				HttpStatus.OK);
+				HttpStatus.CREATED);
 	}
 
 	@Override
-	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_token) throws Exception {
+	public BuildImageReport buildImage(String image_build_conf) throws Exception {
+		Assert.notNull(image_build_conf, "Pass a not null image_build_conf");
+		String url = image_builder_uri + "build";
+		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, new URI(url),
+				HttpStatus.ACCEPTED);
+	}
+
+	@Override
+	public BuildImageStatus checkBuildImageStatus(String session_token) throws Exception {
+		Assert.notNull(session_token, "Pass a not null session_token");
+		String url = image_builder_uri + "info/status/" + session_token;
+		BuildImageStatus buildStatus = null;
+		try {
+			HttpStatus status = getStatusOfURI(new URI(url));
+			if (status == HttpStatus.CREATED)
+				buildStatus = BuildImageStatus.DONE;
+			else if (status == HttpStatus.ACCEPTED)
+				buildStatus = BuildImageStatus.BUILDING;
+			else if (status == HttpStatus.INTERNAL_SERVER_ERROR)
+				buildStatus = BuildImageStatus.FAILED;
+		} catch (Exception e) {
+			throw e;
+		}
+		return buildStatus;
+	}
+
+	@Override
+	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
+			throws Exception {
 		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
-		Assert.notNull(blueprint_token, "Pass a not null blueprint_token");
-		String url = xoperaUri + "deploy/" + blueprint_token;
+		Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
+		String url = xoperaUri + "/deployment/deploy?blueprint_id=" + blueprint_id;
+
+		if (version_id != null && !version_id.isEmpty())
+			url += "&version_id=" + version_id;
+
+		if (workers >= 0)
+			url += "&workers=" + workers;
+
 		LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
 		Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
@@ -800,6 +838,10 @@ public class KBReasonerClient implements KBReasoner {
 
 		HttpHeaders xmlHeaders = new HttpHeaders();
 		xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			xmlHeaders.setBearerAuth(this.aai_token);
+		}
 		HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
 
 		parts.add("inputs_file", fileEntity);
@@ -809,19 +851,14 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentStatus getAADMDeploymentStatus(String session_token) throws Exception {
-		DeploymentStatus deploymentStatus = DeploymentStatus.FAILED;
-		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = xoperaUri + "info/status?token=" + session_token;
+	public DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws Exception {
+		DeploymentStatusReport deploymentStatus = null;
+		Assert.notNull(deployment_id, "Pass a not null deployment_id");
+		String url = xoperaUri + "deployment/" + deployment_id + "/status";
 		try {
-			HttpStatus status = getStatusOfURI(new URI(url));
-			if (status == HttpStatus.CREATED) {
-				deploymentStatus = DeploymentStatus.DONE;
-			} else if (status == HttpStatus.ACCEPTED) {
-				deploymentStatus = DeploymentStatus.IN_PROGRESS;
-			}
+			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.OK);
 		} catch (Exception e) {
-			// Ignored
+			throw e;
 		}
 
 		return deploymentStatus;
@@ -1153,7 +1190,13 @@ public class KBReasonerClient implements KBReasoner {
 	 * @throws KeyManagementException
 	 */
 	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws Exception {
-		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).accept(MediaType.APPLICATION_JSON).build();
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).headers(headers)
+				.accept(MediaType.APPLICATION_JSON).build();
 		if (uri.getScheme().equals("https"))
 			return getSslRestTemplate().exchange(request, clazz);
 		else
@@ -1209,10 +1252,8 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			return getJSONMessage(uri, String.class).getStatusCode();
-		} catch (Exception e) {
-			log.info("There was a problem getting JSON object(s) in uri: " + uri);
-			log.error(e.getMessage(), e);
-			throw e;
+		} catch (HttpClientErrorException e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 	}
 
@@ -1265,6 +1306,10 @@ public class KBReasonerClient implements KBReasoner {
 			HttpMethod method, HttpStatus expectedStatus) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
 
 		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<MultiValueMap<String, Object>>(parts,
 				headers);
@@ -1286,7 +1331,13 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	private <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
-		RequestEntity<S> request = RequestEntity.post(uri).contentType(MediaType.APPLICATION_JSON).body(object);
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+		RequestEntity<S> request = RequestEntity.post(uri).headers(headers).contentType(MediaType.APPLICATION_JSON)
+				.body(object);
 		if (uri.getScheme().equals("https"))
 			return (ResponseEntity<T>) getSslRestTemplate().exchange(request, clazz);
 		else
