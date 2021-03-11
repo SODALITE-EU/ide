@@ -818,11 +818,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  «IF p.property.req_cap.module !== null»
-	  exchange:value '«p.property.req_cap.module»/«p.property.req_cap.type»' ; 
-	  «ELSE»
-	  exchange:value '«p.property.req_cap.type»' ; 
-	  «ENDIF»
+	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
 	.
 	«ENDIF»		
 	
@@ -866,11 +862,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  «IF a.attribute.req_cap.module !== null»
-	  exchange:value '«a.attribute.req_cap.module»/«a.attribute.req_cap.type»' ; 
-	  «ELSE»
-	  exchange:value '«a.attribute.req_cap.type»' ; 
-	  «ENDIF»
+	  exchange:value '«lastSegment(a.attribute.req_cap.type, '.')»' ; 
 	.
 	«ENDIF»		
 	
