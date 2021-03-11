@@ -345,9 +345,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
+							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with blueprint id: "
 									+ admin_report[0];
-							showInfoDialog(admin_report[0], "Deploy AADM", message);
+							String infoToPaste = "blueprint id: " + admin_report[0];
+							showInfoDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message);
 						}
 					});
@@ -363,8 +364,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 							String message = "There were problems to deploy the AADM into the infrastructure: "
 									+ e.getMessage()
 									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
-									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1];
-							showErrorDialog(admin_report[0], "Deploy AADM", message);
+									+ "blueprint id: " + admin_report[0] + ", deployment id: " + admin_report[1];
+							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment id: "
+									+ admin_report[1];
+							showErrorDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
