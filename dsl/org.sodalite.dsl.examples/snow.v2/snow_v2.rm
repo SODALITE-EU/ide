@@ -21,17 +21,19 @@ node_types:
 					create:
 						inputs:
 							remote_server: 
+								type: string
 								default: get_attribute:
 									attribute: tosca.nodes.Compute.public_address
 									entity: SELF
 									req_cap: snow/sodalite.nodes.ConfigurationDemo.remote_server
 							mysql_db_pass:
+								type: string
 								default: get_property:
 									property: snow/sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]
+							primary: "/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
+							dependencies: ["/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]
 							
         	
 		

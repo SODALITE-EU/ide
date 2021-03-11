@@ -19,28 +19,27 @@ node_types:
 					create:
 						inputs:
 							docker_network_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
 					delete:
 						inputs:
 							docker_network_name:
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"
 
 	sodalite.nodes.DockerHost:  
 		derived_from: tosca.nodes.SoftwareComponent
 		attributes:
 			public_address:
 				description: "Host's IP"
-				type: string
-			username:
-				description: "Host's username"
 				type: string
 		capabilities:  
 			host:  
@@ -53,15 +52,16 @@ node_types:
 					create:  
 						inputs:
 							host_public_address:
+								type: string
 								default: get_attribute:
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.public_address
 									req_cap: docker/sodalites.nodes.DockerHost.host
 						implementation:  
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					delete:  
 						implementation:  
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
 
 	sodalite.nodes.DockerizedComponent:  
 		derived_from: tosca.nodes.SoftwareComponent 
@@ -100,21 +100,6 @@ node_types:
 				required: false 
 				type: map 
 				default: "{}"
-			env_file:
-				description: "Path to file on remote with env vars"
-				required: false
-				type: string    
-				default: ""
-			_capabilities:
-				description: "List of capabilities to add to the container."
-				required: false
-				type: list    
-				default: "[]"
-			labels:
- 				description: "Dictionary of key value pairs."
- 				required: false
- 				type: map
- 				default: "{}"
 			image_name:  
 				description: "The name of the image on the host" 
 				required: true 
@@ -137,37 +122,7 @@ node_types:
 				type: string 
 				required: false  
 				default: ""
-			ca_cert: 
-				description: "Use a CA certificate when performing server verification by providing the path to a CA certificate file."
-				type: string 
-				required: false  
-				default: ""
-			client_cert: 
-				description: "Path to the client's TLS certificate file."
-				type: string 
-				required: false  
-				default: ""
-			client_key: 
-				description: "Path to the client's TLS key file."
-				type: string 
-				required: false  
-				default: ""
-			etc_hosts:
-				description: "Host-to-IP mappings"
-				required: false 
-				type: map 
-				default: "{}"
-				
-		attributes:  
-			ip_address:
-				description: "IP address of dockerized component"
-				type: string
-				
 		requirements:  
-			host:
-				capability: tosca.capabilities.Compute
-				node: docker/sodalite.nodes.DockerHost
-				relationship: tosca.relationships.HostedOn
 			network: 
 				capability: tosca.capabilities.Network
 				node: docker/sodalite.nodes.DockerNetwork    
@@ -185,104 +140,78 @@ node_types:
 					create:  
 						inputs:  
 							env:                  
+								type: map
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerizedComponent.env
-							env_file:                  
-								default: get_property: 
-									entity: SELF
-									property: docker/sodalite.nodes.DockerizedComponent.env_file
 							ports:                
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.ports
-							_capabilities:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent._capabilities
-							labels:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.labels
 							restart_policy:       
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.restart_policy
 							image_name:           
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.image_name
 							alias:                
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.alias
 							exposed_ports:        
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.exposed_ports
 							registry_url:         
+								type: string
 								default: get_property: 
 									entity: SELF
 									req_cap: docker/sodalite.nodes.DockerizedComponent.registry
 									property: sodalite.nodes.DockerRegistry.docker_registry_url
 							volumes:              
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.volumes
 							command:              
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.command
 							docker_network_name:  
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.docker_network_name
-							ca_cert:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.ca_cert
-							client_cert:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.client_cert
-							client_key:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.client_key
-							etc_hosts:                
-								default: get_property: 
-									entity: SELF
-									property: sodalite.nodes.DockerizedComponent.etc_hosts
 							sleep:                
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.sleep
 							public_address: 
+								type: string
 								default: get_attribute: 
 									entity: SELF
-									attribute: docker/sodalite.nodes.DockerHost.public_address
-									req_cap: docker/sodalite.nodes.DockerizedComponent.host
-							ansible_user: 
-								default: get_attribute: 
-									entity: SELF
-									attribute: docker/sodalite.nodes.DockerHost.username
-									req_cap: docker/sodalite.nodes.DockerizedComponent.host
+									attribute: sodalite.nodes.OpenStack.VM.public_address
+									req_cap: docker/sodalite.nodes.DockerHost.host
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
 					delete:  
 						inputs:  
 							alias: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.alias
-							ansible_user: 
-								default: get_attribute: 
-									entity: SELF
-									attribute: docker/sodalite.nodes.DockerHost.public_address
-									req_cap: docker/sodalite.nodes.DockerizedComponent.host
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
-	
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
 	sodalite.nodes.TestComponent:
 		derived_from: tosca.nodes.SoftwareComponent
 		properties:
@@ -301,20 +230,23 @@ node_types:
 					create:
 						inputs:
 							component_name: 
+								type: string
 								default: get_attribute:
 									entity: SELF
-									attribute: nodes.Root.tosca_name
+									attribute: tosca.nodes.Root.tosca_name
 									req_cap: docker/sodalite.nodes.TestComponent.tested_component
 							test_delay: 
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_delay
 							test_port: 
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_port
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
 		requirements:
 			tested_component:
 				node: tosca.nodes.SoftwareComponent  

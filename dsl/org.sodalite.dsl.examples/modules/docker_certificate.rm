@@ -29,39 +29,45 @@ node_types:
 					create: 
 						inputs:
 							registry_ip:              
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerHost.registry_ip
-							country_name:             
+							country_name:
+								type: string             
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.RegistryCertificate.country_name
 							organization_name:        
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.RegistryCertificate.organization_name
 							email_address:            
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.RegistryCertificate.email_address
 							public_ipv4_address:     
+								type: string
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
 						implementation:
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
 								relative_path: "playbooks"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.crt", "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.key"]
+							dependencies: ["/workspace/iac-management/use-cases/modules/docker/artifacts/ca.crt", "/workspace/iac-management/use-cases/modules/docker/artifacts/ca.key"]
 								relative_path: "artifacts"
 					
 					delete:
 						inputs:
 							registry_ip:              
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.RegistryCertificate.registry_ip
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
               
               

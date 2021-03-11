@@ -22,6 +22,7 @@ data_types:
 				type: string
 				
 node_types:
+
 	sodalite.nodes.OpenStack.SecurityRules:  
 		derived_from: tosca.nodes.Root 
 		properties:  
@@ -45,28 +46,32 @@ node_types:
 				operations:
 					create:  
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							ports: 
+								type: map
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.ports
 									
 							group_name:
+								type: string
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name
 							group_description: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_description
 					delete:  
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							group_name: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name
