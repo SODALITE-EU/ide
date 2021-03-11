@@ -30,8 +30,8 @@ node_types:
 									property: snow/sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]
+							primary: "/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
+							dependencies: ["/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]
 							
         	
 		

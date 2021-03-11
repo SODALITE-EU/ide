@@ -111,8 +111,8 @@ node_types:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.userdata
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 					delete:  
 						inputs:  
 							id:                       
@@ -120,6 +120,6 @@ node_types:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
             

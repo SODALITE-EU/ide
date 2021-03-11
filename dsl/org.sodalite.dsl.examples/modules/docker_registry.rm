@@ -34,7 +34,7 @@ node_types:
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_pass
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
 					delete:
 						inputs:
 							docker_registry_url:      
@@ -42,6 +42,6 @@ node_types:
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
               
               
