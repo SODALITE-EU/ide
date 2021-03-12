@@ -223,7 +223,7 @@ EMPICase:
 ;
 
 EHPCConfig:
-	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation += EParallelisation)* //Multiple selections are supported
+	'parallelisation:' parallelisation=EParallelisation
 ;	
 
 EParallelisation:

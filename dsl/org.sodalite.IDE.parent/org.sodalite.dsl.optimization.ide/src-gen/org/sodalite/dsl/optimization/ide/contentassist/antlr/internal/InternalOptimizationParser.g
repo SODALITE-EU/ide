@@ -31,7 +31,6 @@ import org.sodalite.dsl.optimization.services.OptimizationGrammarAccess;
 	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
 	
 	{
-		tokenNameToValue.put("Comma", "','");
 		tokenNameToValue.put("FullStop", "'.'");
 		tokenNameToValue.put("Colon", "':'");
 		tokenNameToValue.put("Amd", "'amd'");
@@ -5262,7 +5261,6 @@ rule__EHPCConfig__Group__1
 	}
 :
 	rule__EHPCConfig__Group__1__Impl
-	rule__EHPCConfig__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -5277,86 +5275,6 @@ rule__EHPCConfig__Group__1__Impl
 	{ before(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1()); }
 	(rule__EHPCConfig__ParallelisationAssignment_1)
 	{ after(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__Group__2
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__EHPCConfig__Group__2__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__Group__2__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getEHPCConfigAccess().getGroup_2()); }
-	(rule__EHPCConfig__Group_2__0)*
-	{ after(grammarAccess.getEHPCConfigAccess().getGroup_2()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__EHPCConfig__Group_2__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__EHPCConfig__Group_2__0__Impl
-	rule__EHPCConfig__Group_2__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__Group_2__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getEHPCConfigAccess().getCommaKeyword_2_0()); }
-	Comma
-	{ after(grammarAccess.getEHPCConfigAccess().getCommaKeyword_2_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__Group_2__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__EHPCConfig__Group_2__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__Group_2__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_2_1()); }
-	(rule__EHPCConfig__ParallelisationAssignment_2_1)
-	{ after(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_2_1()); }
 )
 ;
 finally {
@@ -9066,21 +8984,6 @@ rule__EHPCConfig__ParallelisationAssignment_1
 		{ before(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0()); }
 		ruleEParallelisation
 		{ after(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__EHPCConfig__ParallelisationAssignment_2_1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_2_1_0()); }
-		ruleEParallelisation
-		{ after(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_2_1_0()); }
 	)
 ;
 finally {

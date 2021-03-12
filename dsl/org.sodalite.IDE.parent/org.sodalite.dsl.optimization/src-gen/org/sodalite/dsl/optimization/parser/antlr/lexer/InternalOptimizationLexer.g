@@ -187,8 +187,6 @@ Pgi : 'pgi';
 
 X86 : 'x86';
 
-Comma : ',';
-
 FullStop : '.';
 
 Colon : ':';

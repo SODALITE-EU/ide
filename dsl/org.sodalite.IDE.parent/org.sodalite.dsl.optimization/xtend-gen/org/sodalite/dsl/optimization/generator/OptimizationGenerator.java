@@ -7,7 +7,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -556,31 +555,12 @@ public class OptimizationGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t\t");
-        _builder.append("\"parallelisation\": [ ");
-        this.disableComma();
+        _builder.append("\"parallelisation\": \"");
+        EOptimizationCases _app_optimization_31 = m.getOptimization().getApp_optimization();
+        String _parallelisation = ((EHPCCase) _app_optimization_31).getHpc().getConfig().getParallelisation();
+        _builder.append(_parallelisation, "\t\t\t\t");
+        _builder.append("\"");
         _builder.newLineIfNotEmpty();
-        {
-          EOptimizationCases _app_optimization_31 = m.getOptimization().getApp_optimization();
-          EList<String> _parallelisation = ((EHPCCase) _app_optimization_31).getHpc().getConfig().getParallelisation();
-          for(final String entry : ((EList<String>) _parallelisation)) {
-            _builder.append("\t\t");
-            _builder.append("\t\t\t");
-            {
-              if (this.comma) {
-                _builder.append(",");
-              }
-            }
-            _builder.append("\"");
-            _builder.append(entry, "\t\t\t\t\t");
-            _builder.append("\"");
-            this.enableComma();
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("]");
-        _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("},");
@@ -755,8 +735,8 @@ public class OptimizationGenerator extends AbstractGenerator {
                 _builder.append("\t");
                 _builder.append(",\"version\": \"");
                 EOptimizationCases _app_optimization_46 = m.getOptimization().getApp_optimization();
-                String _library_1 = ((EHPCCase) _app_optimization_46).getHpc().getMpi().getMpi().getLibrary();
-                _builder.append(_library_1, "\t\t\t\t");
+                String _version_7 = ((EHPCCase) _app_optimization_46).getHpc().getMpi().getMpi().getVersion();
+                _builder.append(_version_7, "\t\t\t\t");
                 _builder.append("\"");
                 _builder.newLineIfNotEmpty();
               }
@@ -887,16 +867,16 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.newLineIfNotEmpty();
             {
               EOptimizationCases _app_optimization_61 = m.getOptimization().getApp_optimization();
-              String _version_7 = ((EHPCCase) _app_optimization_61).getHpc().getOpenacc().getOpenacc().getVersion();
-              boolean _tripleNotEquals_17 = (_version_7 != null);
+              String _version_8 = ((EHPCCase) _app_optimization_61).getHpc().getOpenacc().getOpenacc().getVersion();
+              boolean _tripleNotEquals_17 = (_version_8 != null);
               if (_tripleNotEquals_17) {
                 _builder.append("\t\t");
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append(",\"version\": \"");
                 EOptimizationCases _app_optimization_62 = m.getOptimization().getApp_optimization();
-                String _version_8 = ((EHPCCase) _app_optimization_62).getHpc().getOpenacc().getOpenacc().getVersion();
-                _builder.append(_version_8, "\t\t\t\t");
+                String _version_9 = ((EHPCCase) _app_optimization_62).getHpc().getOpenacc().getOpenacc().getVersion();
+                _builder.append(_version_9, "\t\t\t\t");
                 _builder.append("\"");
                 _builder.newLineIfNotEmpty();
               }
@@ -942,8 +922,8 @@ public class OptimizationGenerator extends AbstractGenerator {
             _builder.newLineIfNotEmpty();
             {
               EOptimizationCases _app_optimization_67 = m.getOptimization().getApp_optimization();
-              String _version_9 = ((EHPCCase) _app_optimization_67).getHpc().getOpencl().getOpencl().getVersion();
-              boolean _tripleNotEquals_19 = (_version_9 != null);
+              String _version_10 = ((EHPCCase) _app_optimization_67).getHpc().getOpencl().getOpencl().getVersion();
+              boolean _tripleNotEquals_19 = (_version_10 != null);
               if (_tripleNotEquals_19) {
                 _builder.append("\t\t");
                 _builder.append("\t");
