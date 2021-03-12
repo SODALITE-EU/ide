@@ -1711,7 +1711,7 @@ public class OptimizationPackageImpl extends EPackageImpl implements Optimizatio
     initEReference(getEMPICase_Mpi(), this.getEMPI(), null, "mpi", null, 0, 1, EMPICase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcConfigEClass, EHPCConfig.class, "EHPCConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEHPCConfig_Parallelisation(), ecorePackage.getEString(), "parallelisation", null, 0, -1, EHPCConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEHPCConfig_Parallelisation(), ecorePackage.getEString(), "parallelisation", null, 0, 1, EHPCConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ehpcDataEClass, EHPCData.class, "EHPCData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEHPCData_Location(), ecorePackage.getEString(), "location", null, 0, 1, EHPCData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

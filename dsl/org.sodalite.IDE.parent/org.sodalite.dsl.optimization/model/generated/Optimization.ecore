@@ -116,8 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mpi" eType="#//EMPI" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHPCConfig">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parallelisation" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parallelisation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EHPCData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

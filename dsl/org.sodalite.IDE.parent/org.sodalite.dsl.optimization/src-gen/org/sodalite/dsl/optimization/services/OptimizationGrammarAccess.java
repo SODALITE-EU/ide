@@ -1365,39 +1365,22 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cParallelisationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cParallelisationAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cParallelisationEParallelisationParserRuleCall_1_0 = (RuleCall)cParallelisationAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cParallelisationAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cParallelisationEParallelisationParserRuleCall_2_1_0 = (RuleCall)cParallelisationAssignment_2_1.eContents().get(0);
 		
 		//EHPCConfig:
-		//	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)* //Multiple selections are supported
-		//;
+		//	'parallelisation:' parallelisation=EParallelisation;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)*
+		//'parallelisation:' parallelisation=EParallelisation
 		public Group getGroup() { return cGroup; }
 		
 		//'parallelisation:'
 		public Keyword getParallelisationKeyword_0() { return cParallelisationKeyword_0; }
 		
-		//parallelisation+=EParallelisation
+		//parallelisation=EParallelisation
 		public Assignment getParallelisationAssignment_1() { return cParallelisationAssignment_1; }
 		
 		//EParallelisation
 		public RuleCall getParallelisationEParallelisationParserRuleCall_1_0() { return cParallelisationEParallelisationParserRuleCall_1_0; }
-		
-		//(',' parallelisation+=EParallelisation)*
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-		
-		//parallelisation+=EParallelisation
-		public Assignment getParallelisationAssignment_2_1() { return cParallelisationAssignment_2_1; }
-		
-		//EParallelisation
-		public RuleCall getParallelisationEParallelisationParserRuleCall_2_1_0() { return cParallelisationEParallelisationParserRuleCall_2_1_0; }
 	}
 	public class EParallelisationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.optimization.Optimization.EParallelisation");
@@ -2489,8 +2472,7 @@ public class OptimizationGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//EHPCConfig:
-	//	'parallelisation:' parallelisation+=EParallelisation (',' parallelisation+=EParallelisation)* //Multiple selections are supported
-	//;
+	//	'parallelisation:' parallelisation=EParallelisation;
 	public EHPCConfigElements getEHPCConfigAccess() {
 		return pEHPCConfig;
 	}
