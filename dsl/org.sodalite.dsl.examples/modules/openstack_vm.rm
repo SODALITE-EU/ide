@@ -45,6 +45,11 @@ node_types:
 				type: string
 				default: ""
 				required: false 
+			env:
+				description: "Optional OpenStack environment"
+				type: map
+				required: false
+				default: ''					
 		attributes:  
 			id:  
 				description: "OpenStack id of the VM"
@@ -121,6 +126,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.userdata
+							env:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.env		
+																
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
 							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]

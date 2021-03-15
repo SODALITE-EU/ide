@@ -41,6 +41,9 @@ node_types:
 			public_address:
 				description: "Host's IP"
 				type: string
+			username:
+				description: "OS username"
+				type: string	
 		capabilities:  
 			host:  
 				type: tosca.capabilities.Compute

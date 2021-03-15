@@ -54,6 +54,12 @@ node_types:
 									entity: SELF
 									attribute: tosca.nodes.Compute.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
+							common_name:     
+								type: string
+								default: get_attribute: 
+									entity: SELF
+									attribute: tosca.nodes.Compute.name
+									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation:
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
 								relative_path: "playbooks"

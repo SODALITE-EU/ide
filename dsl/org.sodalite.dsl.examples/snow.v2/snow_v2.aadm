@@ -34,6 +34,10 @@ inputs:
 		default: ""
 	mysql-env:
 		type: map
+	env:
+		type: map	
+	username:
+		type: string				
 		
 node_templates:
 
@@ -53,17 +57,19 @@ node_templates:
 					remote_ip_prefix: "0.0.0.0/0" 
 			group_name:  "snow" 
 			group_description:  "Snow UC security group"
+			env: get_input: env
 	
 	snow-vm:  
 		type: openstack/sodalite.nodes.OpenStack.VM
 		properties:  
 			key_name:  get_input: ssh-key-name 
 			image: get_input: image-name 
-			name:  "snow-vm_am_1"
+			name:  "snow-vm_new_1"
 			network: get_input: openstack-network-name  
 			security_groups:  get_input: security-groups 
 			flavor:  get_input: flavor-name
-			username: "centos"
+			username: get_input: username
+			env: get_input: env
 		requirements:  
 			protected_by: 
 				node: snow/snow-security-rules
@@ -73,11 +79,12 @@ node_templates:
 		properties:  
 			key_name:  get_input: ssh-key-name 
 			image: get_input: image-name 
-			name:  "snow-vm_am_9"
+			name:  "snow-vm_new_2"
 			network: get_input: openstack-network-name  
 			security_groups:  get_input: security-groups 
 			flavor:  get_input: flavor-name
-			username: "centos"
+			username: get_input: username
+			env: get_input: env
 		requirements:  
 			protected_by: 
 				node: snow/snow-security-rules
@@ -402,6 +409,10 @@ node_templates:
 	snow-demo-nginx:   
 		type: docker/sodalite.nodes.DockerizedComponent 
 		properties:  
+			docker_network_name: get_property:
+				entity: SELF
+				req_cap: snow/snow-demo.network
+				property: snow/snow-docker-network.name		
 			volumes:  ["snow_volume_demo_output:/usr/share/nginx/html"]
 			image_name: "nginx:latest"
 			alias: "snow-nginx"
