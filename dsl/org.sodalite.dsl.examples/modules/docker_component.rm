@@ -19,6 +19,7 @@ node_types:
 					create:
 						inputs:
 							docker_network_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
@@ -27,6 +28,7 @@ node_types:
 					delete:
 						inputs:
 							docker_network_name:
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
@@ -53,6 +55,7 @@ node_types:
 					create:  
 						inputs:
 							host_public_address:
+								type: string
 								default: get_attribute:
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.public_address
@@ -185,84 +188,104 @@ node_types:
 					create:  
 						inputs:  
 							env:                  
+								type: map
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerizedComponent.env
-							env_file:                  
+							env_file:     
+								type: string                 
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerizedComponent.env_file
 							ports:                
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.ports
 							_capabilities:                
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent._capabilities
 							labels:                
+								type: map
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.labels
 							restart_policy:       
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.restart_policy
 							image_name:           
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.image_name
 							alias:                
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.alias
 							exposed_ports:        
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.exposed_ports
 							registry_url:         
+								type: string
 								default: get_property: 
 									entity: SELF
 									req_cap: docker/sodalite.nodes.DockerizedComponent.registry
 									property: sodalite.nodes.DockerRegistry.docker_registry_url
 							volumes:              
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.volumes
 							command:              
+								type: list
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.command
 							docker_network_name:  
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.docker_network_name
 							ca_cert:                
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.ca_cert
 							client_cert:                
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.client_cert
 							client_key:                
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.client_key
 							etc_hosts:                
+								type: map
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.etc_hosts
 							sleep:                
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.sleep
 							public_address: 
+								type: string
 								default: get_attribute: 
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.public_address
 									req_cap: docker/sodalite.nodes.DockerizedComponent.host
 							ansible_user: 
+								type: string
 								default: get_attribute: 
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.username
@@ -272,10 +295,12 @@ node_types:
 					delete:  
 						inputs:  
 							alias: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerizedComponent.alias
 							ansible_user: 
+								type: string
 								default: get_attribute: 
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.public_address
@@ -301,15 +326,18 @@ node_types:
 					create:
 						inputs:
 							component_name: 
+								type: string
 								default: get_attribute:
 									entity: SELF
-									attribute: nodes.Root.tosca_name
+									attribute: tosca.nodes.Root.tosca_name
 									req_cap: docker/sodalite.nodes.TestComponent.tested_component
 							test_delay: 
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_delay
 							test_port: 
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_port

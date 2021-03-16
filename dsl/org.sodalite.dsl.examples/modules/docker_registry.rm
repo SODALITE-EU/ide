@@ -22,14 +22,17 @@ node_types:
 					create:
 						inputs:
 							docker_registry_url:      
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url
 							docker_user:              
+								type: string
 								default: get_property:
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_user
 							docker_pass:             
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_pass
@@ -38,6 +41,7 @@ node_types:
 					delete:
 						inputs:
 							docker_registry_url:      
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url

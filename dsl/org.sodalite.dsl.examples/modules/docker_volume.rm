@@ -15,6 +15,7 @@ node_types:
 					create:
 						inputs:
 							volume_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
@@ -23,6 +24,7 @@ node_types:
 					delete:
 						inputs:
 							volume_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
