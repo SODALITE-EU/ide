@@ -146,3 +146,129 @@ node_types:
                   property: kube/sodalite.nodes.Kubernetes.Definition.Helm.keep_repo
             implementation:
               primary: "/workspace/iac-modules/kubernetes/playbooks/delete_from_helm.yaml"
+
+  sodalite.nodes.Kubernetes.Definition.Helm.Node:
+    derived_from: kube/sodalite.nodes.Kubernetes.Definition.Helm
+    requirements:
+      host:
+        node: kube/sodalite.nodes.Kubernetes.Cluster
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+      kube_node:
+        node: kube/sodalite.nodes.Kubernetes.Node
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              ansible_user:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.username
+              kubeconfig:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.host
+                  property: kube/sodalite.nodes.Kubernetes.Cluster.kubeconfig
+              helm_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.name
+              helm_namespace:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.namespace
+              helm_chart:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.chart
+              helm_chart_version:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.chart_version
+              helm_repo_name:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_name
+              helm_repo_url:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.repo_url
+              helm_values_files:
+                type: list
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.values_files
+              helm_values:
+                type: map
+                default: get_property:
+                  entity: SELF
+                  property: kube/sodalite.nodes.Kubernetes.Definition.Helm.values
+              node_hostname:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.name
+              gpu_selector:
+                type: map
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.gpu_selector
+              edgetpu_selector:
+                type: map
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.edgetpu_selector
+              cpus:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.cpus
+              gpus:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.gpus
+              edgetpus:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.edgetpus
+              arm64_cpus:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.arm64_cpus
+              amd64_cpus:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.amd64_cpus
+              ready_status:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
+                  property: kube/sodalite.nodes.Kubernetes.Node.ready_status
+            implementation:
+              primary: "/workspace/iac-modules/kubernetes/playbooks/create_from_helm_with_node_affinity.yaml"

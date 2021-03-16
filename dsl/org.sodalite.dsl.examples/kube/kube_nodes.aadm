@@ -1,0 +1,46 @@
+module: kube
+
+node_templates:
+
+  node-jetson-nano: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "jetson-nano"
+      ready_status: false
+      gpus: 1
+      cpus: 1
+      arm64_cpus: 1
+
+  node-jumping-mole: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "jumping-mole"
+      ready_status: false
+      cpus: 1
+      arm64_cpus: 1
+
+  node-filesrv: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "filesrv"
+      ready_status: true
+      cpus: 1
+      amd64_cpus: 1
+
+  node-sgx-celsius-w550power: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "sgx-celsius-w550power"
+      ready_status: true
+      edgetpus: 1
+      cpus: 1
+      amd64_cpus: 1
+
+  node-xavier-nx: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "xavier-nx"
+      ready_status: true
+      gpus: 1
+      cpus: 1
+      arm64_cpus: 1
