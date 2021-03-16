@@ -937,7 +937,7 @@ public interface OptimizationPackage extends EPackage
   int EHPC_CONFIG = 23;
 
   /**
-   * The feature id for the '<em><b>Parallelisation</b></em>' attribute list.
+   * The feature id for the '<em><b>Parallelisation</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2027,10 +2027,10 @@ public interface OptimizationPackage extends EPackage
   EClass getEHPCConfig();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}'.
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation <em>Parallelisation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Parallelisation</em>'.
+   * @return the meta object for the attribute '<em>Parallelisation</em>'.
    * @see org.sodalite.dsl.optimization.optimization.EHPCConfig#getParallelisation()
    * @see #getEHPCConfig()
    * @generated
@@ -2976,7 +2976,7 @@ public interface OptimizationPackage extends EPackage
     EClass EHPC_CONFIG = eINSTANCE.getEHPCConfig();
 
     /**
-     * The meta object literal for the '<em><b>Parallelisation</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Parallelisation</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

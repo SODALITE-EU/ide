@@ -94,7 +94,6 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOPENMPCaseAccess().getGroup(), "rule__EOPENMPCase__Group__0");
 			builder.put(grammarAccess.getEMPICaseAccess().getGroup(), "rule__EMPICase__Group__0");
 			builder.put(grammarAccess.getEHPCConfigAccess().getGroup(), "rule__EHPCConfig__Group__0");
-			builder.put(grammarAccess.getEHPCConfigAccess().getGroup_2(), "rule__EHPCConfig__Group_2__0");
 			builder.put(grammarAccess.getEHPCDataAccess().getGroup_0(), "rule__EHPCData__Group_0__0");
 			builder.put(grammarAccess.getEHPCDataAccess().getGroup_1(), "rule__EHPCData__Group_1__0");
 			builder.put(grammarAccess.getEHPCDataAccess().getGroup_2(), "rule__EHPCData__Group_2__0");
@@ -166,7 +165,6 @@ public class OptimizationParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEOPENMPCaseAccess().getOpenmpAssignment_2(), "rule__EOPENMPCase__OpenmpAssignment_2");
 			builder.put(grammarAccess.getEMPICaseAccess().getMpiAssignment_2(), "rule__EMPICase__MpiAssignment_2");
 			builder.put(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_1(), "rule__EHPCConfig__ParallelisationAssignment_1");
-			builder.put(grammarAccess.getEHPCConfigAccess().getParallelisationAssignment_2_1(), "rule__EHPCConfig__ParallelisationAssignment_2_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getLocationAssignment_0_1(), "rule__EHPCData__LocationAssignment_0_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getBasedataAssignment_1_1(), "rule__EHPCData__BasedataAssignment_1_1");
 			builder.put(grammarAccess.getEHPCDataAccess().getSizeAssignment_2_1(), "rule__EHPCData__SizeAssignment_2_1");

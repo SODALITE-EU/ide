@@ -130,11 +130,7 @@ class OptimizationGenerator extends AbstractGenerator {
 		«IF m.optimization.app_optimization !== null && m.optimization.app_optimization instanceof EHPCCase»
 		"app_type-hpc": { 
 			"config":{ 
-				"parallelisation": [ «disableComma()»
-					«FOR entry:((m.optimization.app_optimization as EHPCCase).hpc.config.parallelisation as EList<String>)»
-					«IF comma»,«ENDIF»"«entry»"«enableComma()»
-					«ENDFOR»
-				]
+				"parallelisation": "«(m.optimization.app_optimization as EHPCCase).hpc.config.parallelisation»"
 			},
 			"data":{ «disableComma()»
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.data.location !== null»
@@ -160,7 +156,7 @@ class OptimizationGenerator extends AbstractGenerator {
 			,"parallelisation-mpi": {
 				"library": "«(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.library»"
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.version !== null»
-				,"version": "«(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.library»"
+				,"version": "«(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.version»"
 				«ENDIF»
 				«IF (m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.scaling_efficiency !== null»
 				,"scaling_efficiency": «(m.optimization.app_optimization as EHPCCase).hpc.mpi.mpi.scaling_efficiency»

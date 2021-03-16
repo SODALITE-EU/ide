@@ -263,10 +263,16 @@ public class OptimizationSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     EHPCConfig returns EHPCConfig
 	 *
 	 * Constraint:
-	 *     (parallelisation+=EParallelisation parallelisation+=EParallelisation*)
+	 *     parallelisation=EParallelisation
 	 */
 	protected void sequence_EHPCConfig(ISerializationContext context, EHPCConfig semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptimizationPackage.Literals.EHPC_CONFIG__PARALLELISATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_1_0(), semanticObject.getParallelisation());
+		feeder.finish();
 	}
 	
 	
