@@ -21,11 +21,13 @@ node_types:
 					create:
 						inputs:
 							remote_server: 
+								type: string
 								default: get_attribute:
 									attribute: tosca.nodes.Compute.public_address
 									entity: SELF
 									req_cap: snow/sodalite.nodes.ConfigurationDemo.remote_server
 							mysql_db_pass:
+								type: string
 								default: get_property:
 									property: snow/sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
