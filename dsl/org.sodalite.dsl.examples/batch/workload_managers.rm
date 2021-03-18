@@ -32,14 +32,15 @@ node_types:
     properties:
       scheduler:
         type: string
+        default: "batch"
         constraints:
-          valid_values: [ "torque", "slurm" ]
+          valid_values: [ "torque", "slurm", "batch" ]
       username:
         type: string
       ssh-key:
         required: false
         type: string
-        default: "id_rsa"
+        default: ""
     capabilities:
       resources:
         type: batch/sodalite.capabilities.WM.JobResources

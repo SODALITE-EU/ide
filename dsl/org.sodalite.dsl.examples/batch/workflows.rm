@@ -2,18 +2,15 @@ module: batch
 
 node_types:
 
-  // TODO: need basic sodalite.nodes.workflow.Element for BatchExecution
-  //       on any compute node: WM and VM
-
   sodalite.nodes.workflow.Job: 
     derived_from: tosca.nodes.SoftwareComponent
     requirements:
       host:
-        node: batch/sodalite.nodes.hpc.WM
+        node: tosca.nodes.Compute
         capability: tosca.capabilities.Compute
         relationship: tosca.relationships.HostedOn
       execution:
-        node: batch/sodalite.nodes.batch.Container.JobExecution
+        node: batch/sodalite.nodes.batch.Container.BatchExecution
         capability: tosca.capabilities.Node
         relationship: tosca.relationships.DependsOn
     attributes:
@@ -32,12 +29,6 @@ node_types:
                 default: get_property:
                   entity: SELF
                   property: batch/sodalite.nodes.hpc.WM.username
-                  req_cap: batch/sodalite.nodes.workflow.Job.host
-              ansible_ssh_private_key_file: 
-                type: string
-                default: get_property:
-                  entity: SELF
-                  property: batch/sodalite.nodes.hpc.WM.ssh-key
                   req_cap: batch/sodalite.nodes.workflow.Job.host
               scheduler: 
                 type: string
@@ -71,7 +62,7 @@ node_types:
     derived_from: tosca.nodes.SoftwareComponent
     requirements:
       host:
-        node: batch/sodalite.nodes.hpc.WM
+        node: tosca.nodes.Compute
         capability: tosca.capabilities.Compute
         relationship: tosca.relationships.HostedOn
       job:
@@ -96,12 +87,6 @@ node_types:
                 default: get_property:
                   entity: SELF
                   property: batch/sodalite.nodes.hpc.WM.username
-                  req_cap: batch/sodalite.nodes.workflow.Job.host
-              ansible_ssh_private_key_file: 
-                type: string
-                default: get_property:
-                  entity: SELF
-                  property: batch/sodalite.nodes.hpc.WM.ssh-key
                   req_cap: batch/sodalite.nodes.workflow.Job.host
               scheduler: 
                 type: string

@@ -7,8 +7,6 @@ inputs:
     type: string
   username:
     type: string
-  ssh-key-location:
-    type: string
 
 node_templates:
 
@@ -18,9 +16,8 @@ node_templates:
     properties:
       scheduler: "torque"
       username: get_input: username
-      ssh-key: get_input: ssh-key-location
     attributes:
-      pubic_address: get_input: hlrs-frontend-address
+      public_address: get_input: hlrs-frontend-address
     capabilities:
       resources:
         properties:
@@ -41,7 +38,7 @@ node_templates:
       private_registry: "77.231.202.207"
     requirements:
       host:
-        node: clinical/hpc-wm-torque
+        node: clinical/hlrs-testbed
 
   // APPLICATIONS
   density-mapper-app:
@@ -55,7 +52,7 @@ node_templates:
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:
-        node: clinical/hpc-wm-torque
+        node: clinical/hlrs-testbed
   
   prob-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application
@@ -65,7 +62,7 @@ node_templates:
       app_type: "hpc"
       mpi_ranks: 4
       container_runtime: "private://moduli:1.0.0" // from private registry
-      executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $PBS_O_WORKDIR/output/iso/L1L2-iso.dens -o $PBS_O_WORKDIR/output/moduli\""
+      executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
       build:
         src: "$HOME/moduli/.git"
         build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
@@ -73,7 +70,7 @@ node_templates:
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:
-        node: clinical/hpc-wm-torque
+        node: clinical/hlrs-testbed
   
   boundary-condition-app:
     type: batch/sodalite.nodes.batch.Container.Application
@@ -86,7 +83,7 @@ node_templates:
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:
-        node: clinical/hpc-wm-torque
+        node: clinical/hlrs-testbed
 
 
   // JOB EXECUTIONS
