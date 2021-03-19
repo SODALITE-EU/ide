@@ -2,8 +2,6 @@ module: clinical
 
 import: batch
 
-node_templates:
-
   // APPLICATIONS
   density-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application
@@ -32,9 +30,9 @@ node_templates:
         build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
     requirements:
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   boundary-condition-app:
     type: batch/sodalite.nodes.batch.Container.Application
@@ -89,9 +87,9 @@ node_templates:
       application:
         node: clinical/prob-mapper-app
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   boundary-condition-job:
     type: batch/sodalite.nodes.batch.Container.JobExecution
@@ -138,7 +136,7 @@ node_templates:
       execution:
         node: clinical/prob-mapper-job
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
       dependency:
         node: clinical/dm-result
   
@@ -148,7 +146,7 @@ node_templates:
       job:
         node: clinical/pm-exec
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   bc-exec:
     type: batch/sodalite.nodes.workflow.Job
