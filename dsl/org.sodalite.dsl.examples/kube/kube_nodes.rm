@@ -21,16 +21,6 @@ node_types:
         required: false 
         type: map
         default: "{}"
-      gpu_selector:
-        description: 'Selector for GPU node affinity. Format { "key": "label_name", "value": "label_value" }'
-        type: map
-        //default: '{ "key": "accelerators/gpu", "value": "true" }'
-        default: '{}'
-      edgetpu_selector:
-        description: 'Selector for EdgeTPU node affinity. Format { "key": "label_name", "value": "label_value" }'
-        type: map
-        //default: '{ "key": "accelerators/edgetpu", "value": "true" }'
-        default: '{}'
       cpus:  
         required: false 
         type: integer

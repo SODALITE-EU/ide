@@ -16,10 +16,10 @@ capability_types:
     properties:
       gpus:
         type: integer
-        required: true
+        required: false
       cpus:
         type: integer
-        required: true
+        required: false
       memory:
         type: integer
         required: false

@@ -108,7 +108,7 @@ node_templates:
       workspace: "~/workflow-ide"
     requirements:
       application:
-        node: clinical/prob-mapper-app
+        node: clinical/boundary-condition-app
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:

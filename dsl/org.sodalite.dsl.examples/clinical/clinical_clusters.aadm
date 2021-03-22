@@ -63,3 +63,4 @@ node_templates:
     requirements:
       host:
         node: clinical/ec3-slurm-testbed
+        

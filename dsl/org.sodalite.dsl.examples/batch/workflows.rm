@@ -98,12 +98,12 @@ node_types:
                 type: integer
                 default: get_property:
                   entity: SELF
-                  property: batch/sodalite.nodes.workflow.Result.job_monitor_period
+                  property: batch/sodalite.nodes.workflow.Result.monitor_period
               job_monitor_retries_headroom: 
                 type: integer
                 default: get_property:
                   entity: SELF
-                  property: batch/sodalite.nodes.workflow.Result.job_monitor_retries_headroom
+                  property: batch/sodalite.nodes.workflow.Result.monitor_retries_headroom
               job_id: 
                 type: string
                 default: get_attribute:

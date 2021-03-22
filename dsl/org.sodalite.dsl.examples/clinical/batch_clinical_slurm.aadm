@@ -2,6 +2,8 @@ module: clinical
 
 import: batch
 
+node_templates:
+
   // APPLICATIONS
   density-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application

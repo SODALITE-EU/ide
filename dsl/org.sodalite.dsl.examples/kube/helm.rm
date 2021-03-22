@@ -222,18 +222,6 @@ node_types:
                   entity: SELF
                   req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
                   property: kube/sodalite.nodes.Kubernetes.Node.name
-              gpu_selector:
-                type: map
-                default: get_property:
-                  entity: SELF
-                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
-                  property: kube/sodalite.nodes.Kubernetes.Node.gpu_selector
-              edgetpu_selector:
-                type: map
-                default: get_property:
-                  entity: SELF
-                  req_cap: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node.kube_node
-                  property: kube/sodalite.nodes.Kubernetes.Node.edgetpu_selector
               cpus:
                 type: integer
                 default: get_property:
