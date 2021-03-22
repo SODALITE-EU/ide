@@ -16,7 +16,7 @@ import java.util.List;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
-import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -125,5 +125,5 @@ public interface KBReasoner {
 
 	BuildImageReport buildImage(String image_build_conf) throws Exception;
 
-	BuildImageStatus checkBuildImageStatus(String session_token) throws Exception;
+	BuildImageStatusReport checkBuildImageStatus(String innvocation_id) throws Exception;
 }

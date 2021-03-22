@@ -34,18 +34,17 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		Properties prop = readDefaultProperties();
 		String kb_reasoner_uri = prop.getProperty(PreferenceConstants.KB_REASONER_URI);
 		if (kb_reasoner_uri == null)
-			// kb_reasoner_uri = "http://160.40.52.200:8084/reasoner-api/v0.6/";
-			kb_reasoner_uri = "http://35.193.124.143:8080/reasoner-api/v0.6/";
+			// kb_reasoner_uri = "http://160.40.52.200:8084/reasoner-api/v0.6/"; //CERTH
+			kb_reasoner_uri = "http://192.168.2.34:8080/reasoner-api/v0.6/"; // TestBed
 		String iac_uri = prop.getProperty(PreferenceConstants.IaC_URI);
 		if (iac_uri == null)
-			iac_uri = "http://154.48.185.202:8080/";
+			iac_uri = "http://192.168.2.107:8081/";
 		String image_builder_uri = prop.getProperty(PreferenceConstants.Image_Builder_URI);
 		if (image_builder_uri == null)
-			image_builder_uri = "http://x.x.x.x:8080/"; // FIX provide default value
+			image_builder_uri = "http://192.168.2.70:5000/";
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
-			// xOpera_uri = "http://154.48.185.209:5000/";
-			xOpera_uri = "https://154.48.185.209:5001/";
+			xOpera_uri = "http://192.168.2.15:5000/";
 
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
