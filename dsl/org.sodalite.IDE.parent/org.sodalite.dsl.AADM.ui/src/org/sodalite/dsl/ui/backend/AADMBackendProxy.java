@@ -50,6 +50,7 @@ import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -152,7 +153,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
-		saveImages(imageBuildConfPath, event);
+		buildImages(imageBuildConfPath, event);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -298,12 +299,13 @@ public class AADMBackendProxy extends RMBackendProxy {
 						// Ask ImageBuilder status
 						subMonitor.setTaskName("Checking image creation status");
 
-						BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
-						while (!(biStatus == BuildImageStatus.DONE)) {
-							if (biStatus == BuildImageStatus.FAILED)
+						BuildImageStatusReport statusReport = getKBReasoner()
+								.checkBuildImageStatus(biReport.getInvocation_id());
+						while (!(statusReport.getStatus() == BuildImageStatus.DONE)) {
+							if (statusReport.getStatus() == BuildImageStatus.FAILED)
 								throw new Exception("Build image failed as reported by Image Builder");
 							TimeUnit.SECONDS.sleep(5);
-							biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+							statusReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 						}
 						subMonitor.worked(steps++);
 					}
@@ -381,8 +383,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void saveImages(Path imageBuildConfPath, ExecutionEvent event) {
-		Job job = new Job("Save images") {
+	private void buildImages(Path imageBuildConfPath, ExecutionEvent event) {
+		Job job = new Job("Build images") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
@@ -401,12 +403,13 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask ImageBuilder status
 					subMonitor.setTaskName("Checking image creation status");
 
-					BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
-					while (!(biStatus == BuildImageStatus.DONE)) {
-						if (biStatus == BuildImageStatus.FAILED)
+					BuildImageStatusReport bisReport = getKBReasoner()
+							.checkBuildImageStatus(biReport.getInvocation_id());
+					while (!(bisReport.getStatus() == BuildImageStatus.DONE)) {
+						if (bisReport.getStatus() == BuildImageStatus.FAILED)
 							throw new Exception("Build image failed as reported by Image Builder");
 						TimeUnit.SECONDS.sleep(5);
-						biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						bisReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 					}
 
 					// Upon completion, show dialog

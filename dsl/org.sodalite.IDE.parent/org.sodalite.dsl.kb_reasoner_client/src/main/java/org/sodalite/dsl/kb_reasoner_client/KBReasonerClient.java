@@ -39,6 +39,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -790,24 +791,31 @@ public class KBReasonerClient implements KBReasoner {
 	@Override
 	public BuildImageReport buildImage(String image_build_conf) throws Exception {
 		Assert.notNull(image_build_conf, "Pass a not null image_build_conf");
-		String url = image_builder_uri + "build";
+		String url = image_builder_uri + "build/";
 		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, new URI(url),
 				HttpStatus.ACCEPTED);
 	}
 
 	@Override
-	public BuildImageStatus checkBuildImageStatus(String session_token) throws Exception {
-		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = image_builder_uri + "info/status/" + session_token;
-		BuildImageStatus buildStatus = null;
+	public BuildImageStatusReport checkBuildImageStatus(String invocation_id) throws Exception {
+		Assert.notNull(invocation_id, "Pass a not null invocation_id");
+		String url = image_builder_uri + "status/" + invocation_id;
+		BuildImageStatusReport buildStatus = null;
 		try {
-			HttpStatus status = getStatusOfURI(new URI(url));
-			if (status == HttpStatus.CREATED)
-				buildStatus = BuildImageStatus.DONE;
-			else if (status == HttpStatus.ACCEPTED)
-				buildStatus = BuildImageStatus.BUILDING;
+			ResponseEntity<BuildImageStatusReport> response = getJSONMessage(new URI(url),
+					BuildImageStatusReport.class);
+			HttpStatus status = response.getStatusCode();
+			buildStatus = response.getBody();
+			if (status == HttpStatus.OK && buildStatus.getState().equals("in_progress"))
+				buildStatus.setStatus(BuildImageStatus.BUILDING);
+			else if (status == HttpStatus.OK && buildStatus.getState().equals("success"))
+				buildStatus.setStatus(BuildImageStatus.DONE);
+			else if (status == HttpStatus.OK && buildStatus.getState().equals("failed"))
+				buildStatus.setStatus(BuildImageStatus.FAILED);
+			else if (status == HttpStatus.NOT_FOUND)
+				buildStatus.setStatus(BuildImageStatus.NOT_FOUND);
 			else if (status == HttpStatus.INTERNAL_SERVER_ERROR)
-				buildStatus = BuildImageStatus.FAILED;
+				buildStatus.setStatus(BuildImageStatus.FAILED);
 		} catch (Exception e) {
 			throw e;
 		}

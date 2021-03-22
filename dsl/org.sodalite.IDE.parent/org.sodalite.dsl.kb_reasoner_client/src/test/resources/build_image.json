@@ -1,0 +1,6 @@
+{
+"source_type":"dockerfile",
+"source_url":"https://raw.githubusercontent.com/mihaTrajbaric/image-builder-test-files/master/no_context/Dockerfile",
+"target_image_name":"tests/no_context",
+"target_image_tag":"latest"
+}
