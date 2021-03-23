@@ -327,6 +327,10 @@
         class="org.sodalite.dsl.ui.handlers.BuildImagesHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.buildImages">
   </handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.PDSUpdateHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.pdsUpdate">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -362,6 +366,13 @@
         description="Build images"
         id="org.sodalite.dsl.AADM.ui.command.buildImages"
         name="buildImages">
+  </command>
+  <command
+        categoryId="org.sodalite.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.PDSUpdateHandler"
+        description="Platform Discovery Service - update"
+        id="org.sodalite.dsl.AADM.ui.command.pdsUpdate"
+        name="pdsUpdate">
   </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -456,6 +467,13 @@
               style="push"
               tooltip="Build container images from a file description">
         </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.pdsUpdate"
+              id="org.sodalite.dsl.AADM.ui.popup.command.pdsUpdate"
+              label="Platform Discovery Service - update"
+              style="push"
+              tooltip="Request Platform Discovery Service to update">
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -539,6 +557,13 @@
               style="push"
               tooltip="Build container images from a file descriptor">
         </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.pdsUpdate"
+              id="org.sodalite.dsl.AADM.ui.popup.command.pdsUpdate"
+              label="Platform Discovery Service - update"
+              style="push"
+              tooltip="Request Platform Discovery Service to update">
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -621,6 +646,13 @@
               label="Build images"
               style="push"
               tooltip="Build container images from a file descriptor">
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.pdsUpdate"
+              id="org.sodalite.dsl.AADM.ui.popup.command.pdsUpdate"
+              label="Platform Discovery Service - update"
+              style="push"
+              tooltip="Request Platform Discovery Service to update">
         </command>
      </menu>
   </menuContribution>

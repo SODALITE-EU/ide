@@ -141,28 +141,33 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       if (_isEmpty_4) {
         this.raiseConfigurationIssue("Keycloak URI user not set");
       }
-      final KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI);
+      final String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+      boolean _isEmpty_5 = pdsURI.isEmpty();
+      if (_isEmpty_5) {
+        this.raiseConfigurationIssue("PDS URI user not set");
+      }
+      final KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI);
       final String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);
       boolean _equalsIgnoreCase = keycloak_enabled.equalsIgnoreCase("true");
       if (_equalsIgnoreCase) {
         final String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-        boolean _isEmpty_5 = keycloak_user.isEmpty();
-        if (_isEmpty_5) {
+        boolean _isEmpty_6 = keycloak_user.isEmpty();
+        if (_isEmpty_6) {
           this.raiseConfigurationIssue("Keycloak user not set");
         }
         final String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-        boolean _isEmpty_6 = keycloak_password.isEmpty();
-        if (_isEmpty_6) {
+        boolean _isEmpty_7 = keycloak_password.isEmpty();
+        if (_isEmpty_7) {
           this.raiseConfigurationIssue("Keycloak password not set");
         }
         final String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-        boolean _isEmpty_7 = keycloak_client_id.isEmpty();
-        if (_isEmpty_7) {
+        boolean _isEmpty_8 = keycloak_client_id.isEmpty();
+        if (_isEmpty_8) {
           this.raiseConfigurationIssue("Keycloak client_id not set");
         }
         final String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-        boolean _isEmpty_8 = keycloak_client_secret.isEmpty();
-        if (_isEmpty_8) {
+        boolean _isEmpty_9 = keycloak_client_secret.isEmpty();
+        if (_isEmpty_9) {
           this.raiseConfigurationIssue("Keycloak client secret not set");
         }
         final String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);

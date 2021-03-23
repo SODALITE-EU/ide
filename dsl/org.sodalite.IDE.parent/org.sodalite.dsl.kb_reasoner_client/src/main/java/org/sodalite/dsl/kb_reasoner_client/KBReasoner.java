@@ -29,6 +29,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
@@ -126,4 +127,6 @@ public interface KBReasoner {
 	BuildImageReport buildImage(String image_build_conf) throws Exception;
 
 	BuildImageStatusReport checkBuildImageStatus(String innvocation_id) throws Exception;
+
+	PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws Exception;
 }

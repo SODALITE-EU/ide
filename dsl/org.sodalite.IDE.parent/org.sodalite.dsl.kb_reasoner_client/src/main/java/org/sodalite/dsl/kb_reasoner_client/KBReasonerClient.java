@@ -58,6 +58,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
@@ -101,6 +102,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String image_builder_uri;
 	private String xoperaUri;
 	private String keycloakUri;
+	private String pdsUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -109,12 +111,13 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri) throws Exception {
+			String keycloakUri, String pdsUri) throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
+		this.pdsUri = pdsUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -143,7 +146,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(120 * 1000);
+			requestFactory.setReadTimeout(0); // Unlimited
 			sslRestTemplate = new RestTemplate(requestFactory);
 		}
 		return sslRestTemplate;
@@ -153,7 +156,7 @@ public class KBReasonerClient implements KBReasoner {
 		if (restTemplate == null) {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(120 * 1000);
+			requestFactory.setReadTimeout(0); // Unlimited
 
 			restTemplate = new RestTemplate(requestFactory);
 		}
@@ -870,6 +873,26 @@ public class KBReasonerClient implements KBReasoner {
 		}
 
 		return deploymentStatus;
+	}
+
+	@Override
+	public PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws Exception {
+		Assert.notNull(inputs, "Pass a not null inputs");
+		Assert.notNull(namespace, "Pass a not null namespace");
+		Assert.notNull(platformType, "Pass a not null platformType");
+
+		// Build JSON payload
+		Gson gson = new Gson();
+		JsonObject inputsJson = gson.fromJson(inputs, JsonObject.class);
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.add("inputs", inputsJson);
+		jsonObject.addProperty("namespace", namespace);
+		jsonObject.addProperty("platform_type", platformType);
+
+		String payload = jsonObject.toString();
+
+		String url = pdsUri + "update";
+		return postObjectAndReturnAnotherType(payload, PDSUpdateReport.class, new URI(url), HttpStatus.OK);
 	}
 
 	@Override

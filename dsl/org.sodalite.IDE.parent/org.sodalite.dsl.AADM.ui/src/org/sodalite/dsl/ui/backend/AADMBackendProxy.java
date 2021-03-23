@@ -62,6 +62,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.optimization.optimization.EAITraining;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -154,6 +155,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
 		buildImages(imageBuildConfPath, event);
+	}
+
+	public void processPDSUpdate(ExecutionEvent event, Path inputsFilePath, String namespace, String platformType) {
+		pdsUpdate(event, inputsFilePath, namespace, platformType);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -427,6 +432,53 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "There were problems to save the images: " + e.getMessage()
+									+ "\nPlease contact Sodalite administrator and report her/him above error message";
+							showErrorDialog("", "Save images", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error building images", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void pdsUpdate(ExecutionEvent event, Path inputsFilePath, String namespace, String platformType) {
+		Job job = new Job("PDS update") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				// TODO Inform about percentage of progress
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+
+				try {
+					// Ask PDS to update
+					subMonitor.setTaskName("Requesting update to PDS");
+
+					String inputs = RMHelper.readFile(inputsFilePath);
+					PDSUpdateReport report = getKBReasoner().pdsUpdate(inputs, namespace, platformType);
+					subMonitor.worked(1);
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "PDS update have been successfully created with \naadm_uri: "
+									+ report.getAadmuri() + "\nrm_uri: " + report.getRmuri();
+							showInfoDialog("", "Save images", message);
+						}
+					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems in PDS to update: " + e.getMessage()
 									+ "\nPlease contact Sodalite administrator and report her/him above error message";
 							showErrorDialog("", "Save images", message);
 							SodaliteLogger.log(message, e);
@@ -837,4 +889,5 @@ public class AADMBackendProxy extends RMBackendProxy {
 			req = matcher.group(1);
 		return req;
 	}
+
 }
