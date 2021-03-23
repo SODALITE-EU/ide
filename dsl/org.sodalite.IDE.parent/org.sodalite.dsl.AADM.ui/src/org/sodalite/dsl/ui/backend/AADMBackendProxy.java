@@ -153,12 +153,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 				event);
 	}
 
-	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
-		buildImages(imageBuildConfPath, event);
+	public void processSaveImages(Path imageBuildConfPath) throws Exception {
+		buildImages(imageBuildConfPath);
 	}
 
-	public void processPDSUpdate(ExecutionEvent event, Path inputsFilePath, String namespace, String platformType) {
-		pdsUpdate(event, inputsFilePath, namespace, platformType);
+	public void processPDSUpdate(Path inputsFilePath, String namespace, String platformType) {
+		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -388,7 +388,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void buildImages(Path imageBuildConfPath, ExecutionEvent event) {
+	private void buildImages(Path imageBuildConfPath) {
 		Job job = new Job("Build images") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -447,7 +447,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void pdsUpdate(ExecutionEvent event, Path inputsFilePath, String namespace, String platformType) {
+	private void pdsUpdate(Path inputsFilePath, String namespace, String platformType) {
 		Job job = new Job("PDS update") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {

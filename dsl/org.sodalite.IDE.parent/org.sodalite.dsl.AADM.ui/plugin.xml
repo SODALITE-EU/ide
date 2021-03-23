@@ -768,4 +768,12 @@
           name="Create a new AADM">
     </wizard>
  </extension>
+ <extension
+         id="org.sodalite.ide.ui.views.fragment"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            apply="always"
+            uri="menus.e4xmi">
+      </fragment>
+ </extension>
 </plugin>

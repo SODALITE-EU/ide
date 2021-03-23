@@ -1,11 +1,8 @@
-package org.sodalite.dsl.ui.handlers;
+package org.sodalite.dsl.ui.topmenu.handlers;
 
 import java.nio.file.Path;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -14,28 +11,16 @@ import org.sodalite.dsl.ui.wizards.pds.PDSUpdateWizard;
 import org.sodalite.dsl.ui.wizards.pds.PDSUpdateWizardDialog;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
-public class PDSUpdateHandler implements IHandler {
-	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	private AADMBackendProxy backendProxy = new AADMBackendProxy();
+public class PDSUpdateHandler {
 
-	@Override
-	public void addHandlerListener(IHandlerListener handlerListener) {
-
-	}
-
-	@Override
-	public void dispose() {
-
-	}
-
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	@Execute
+	public void execute(Shell shell) {
 		try {
+			AADMBackendProxy backendProxy = new AADMBackendProxy();
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) { // Ask to save model before continue
 				// Show Platform Discovery Service Update Wizard
 				// Wizard should select the images descriptor file
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				// Show wizard
+
 				PDSUpdateWizardDialog dialog = new PDSUpdateWizardDialog(shell, new PDSUpdateWizard());
 
 				if (dialog.OK == dialog.open()) {
@@ -48,25 +33,8 @@ public class PDSUpdateHandler implements IHandler {
 			}
 		} catch (Exception ex) {
 			SodaliteLogger.log("Error", ex);
-			MessageDialog.openError(parent, "PDS Update Error",
+			MessageDialog.openError(shell, "PDS Update Error",
 					"There were an error reported by the Image Builder:\n" + ex.getMessage());
 		}
-		return this;
 	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-
-	@Override
-	public boolean isHandled() {
-		return true;
-	}
-
-	@Override
-	public void removeHandlerListener(IHandlerListener handlerListener) {
-
-	}
-
 }
