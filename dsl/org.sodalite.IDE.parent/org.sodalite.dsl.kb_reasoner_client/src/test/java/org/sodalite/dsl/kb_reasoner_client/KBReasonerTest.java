@@ -42,6 +42,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -63,17 +64,19 @@ class KBReasonerTest {
 	private final String image_builder__URI = "http://192.168.2.70:5000/";
 	private final String xOPERA_URI = "http://192.168.2.15:5000/";
 	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
+	private final String PDS_URI = "http://192.168.2.178:8089/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
 
 	private String aadmURI = null;
 
-	private boolean AIM_Enabled = false;
+	private boolean AIM_Enabled = true;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI,
+				PDS_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -439,5 +442,15 @@ class KBReasonerTest {
 			System.out.println("status: " + status.getStatus() + ", state: " + status.getState());
 			Thread.currentThread().sleep(5000);
 		} while (status != null && status.getStatus().equals(BuildImageStatus.BUILDING));
+	}
+
+	@Test
+	void testPDSUpdate() throws Exception {
+		Path pds_inputs_path = FileSystems.getDefault().getPath("src/test/resources/pds_inputs.json");
+		String pds_inputs = new String(Files.readAllBytes(pds_inputs_path));
+		String namespace = "TestOpenstack";
+		String platform_type = "openstack";
+		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
+		assertNotNull(report);
 	}
 }

@@ -112,8 +112,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
+			
+		val String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+		if (pdsURI.isEmpty())
+			raiseConfigurationIssue("PDS URI user not set");
 
-		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI);
+		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI);
 
 		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
 		if (keycloak_enabled.equalsIgnoreCase("true")) {

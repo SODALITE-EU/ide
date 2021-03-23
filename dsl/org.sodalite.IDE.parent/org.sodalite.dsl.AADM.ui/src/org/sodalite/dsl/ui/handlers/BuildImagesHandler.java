@@ -41,12 +41,12 @@ public class BuildImagesHandler implements IHandler {
 				if (dialog.OK == dialog.open()) {
 					// Get the images descriptor file
 					Path imageBuildConfPath = dialog.getImageBuildConfPath();
-					backendProxy.processSaveImages(event, imageBuildConfPath);
+					backendProxy.processSaveImages(imageBuildConfPath);
 				}
 			}
 		} catch (Exception ex) {
 			SodaliteLogger.log("Error", ex);
-			MessageDialog.openError(parent, "Save Images Error",
+			MessageDialog.openError(parent, "Build Images Error",
 					"There were an error reported by the Image Builder:\n" + ex.getMessage());
 		}
 		return this;
