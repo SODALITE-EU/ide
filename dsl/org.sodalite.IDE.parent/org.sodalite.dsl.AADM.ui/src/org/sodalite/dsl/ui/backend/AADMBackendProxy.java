@@ -153,7 +153,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				event);
 	}
 
-	public void processSaveImages(Path imageBuildConfPath) throws Exception {
+	public void processBuildImages(Path imageBuildConfPath) throws Exception {
 		buildImages(imageBuildConfPath);
 	}
 
@@ -396,7 +396,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-
+				String[] report = new String[1];
+				;
 				try {
 					// Ask ImageBuilder to build the images
 					subMonitor.setTaskName("Requesting the creation of images");
@@ -411,9 +412,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					BuildImageStatusReport bisReport = getKBReasoner()
 							.checkBuildImageStatus(biReport.getInvocation_id());
+					report[0] = biReport.getInvocation_id();
 					while (!(bisReport.getStatus() == BuildImageStatus.DONE)) {
 						if (bisReport.getStatus() == BuildImageStatus.FAILED)
-							throw new Exception("Build image failed as reported by Image Builder");
+							throw new Exception("\nImage Builde response: " + bisReport.getResponse());
 						TimeUnit.SECONDS.sleep(5);
 						bisReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 					}
@@ -432,9 +434,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "There were problems to save the images: " + e.getMessage()
-									+ "\nPlease contact Sodalite administrator and report her/him above error message";
-							showErrorDialog("", "Save images", message);
+							String message = "There were problems to save the images." + e.getMessage()
+									+ "\nPlease contact Sodalite administrator and report her/him above error message"
+									+ "\nInvocation_id: " + report[0];
+							String infoToPaste = "Invocation_id: " + report[0];
+							showErrorDialog(infoToPaste, "Save images", message);
 							SodaliteLogger.log(message, e);
 						}
 					});

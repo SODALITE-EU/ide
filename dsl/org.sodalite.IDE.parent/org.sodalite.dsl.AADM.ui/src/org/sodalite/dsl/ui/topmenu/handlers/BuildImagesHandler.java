@@ -25,7 +25,7 @@ public class BuildImagesHandler {
 				if (dialog.OK == dialog.open()) {
 					// Get the images descriptor file
 					Path imageBuildConfPath = dialog.getImageBuildConfPath();
-					backendProxy.processSaveImages(imageBuildConfPath);
+					backendProxy.processBuildImages(imageBuildConfPath);
 				}
 			}
 		} catch (Exception ex) {
