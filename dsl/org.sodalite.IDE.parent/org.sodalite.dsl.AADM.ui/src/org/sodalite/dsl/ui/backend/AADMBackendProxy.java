@@ -415,7 +415,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					report[0] = biReport.getInvocation_id();
 					while (!(bisReport.getStatus() == BuildImageStatus.DONE)) {
 						if (bisReport.getStatus() == BuildImageStatus.FAILED)
-							throw new Exception("\nImage Builde response: " + bisReport.getResponse());
+							throw new Exception("\nImage Builde failed with response: " + bisReport.getResponse());
 						TimeUnit.SECONDS.sleep(5);
 						bisReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 					}
@@ -434,8 +434,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "There were problems to save the images." + e.getMessage()
-									+ "\nPlease contact Sodalite administrator and report her/him above error message"
+							String message = "Build images did not success"
+									+ "\nPlease contact Sodalite administrator and provide the reference below"
 									+ "\nInvocation_id: " + report[0];
 							String infoToPaste = "Invocation_id: " + report[0];
 							showErrorDialog(infoToPaste, "Save images", message);
