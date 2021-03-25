@@ -4,20 +4,21 @@
 package org.sodalite.dsl.formatting2
 
 import com.google.inject.Inject
-import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.sodalite.dsl.aADM.AADM_Model
 import org.sodalite.dsl.aADM.ENodeTemplates
 import org.sodalite.dsl.services.AADMGrammarAccess
 import org.sodalite.dsl.aADM.ENodeTemplate
 
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.*
+import static org.sodalite.dsl.rM.RMPackage.Literals.*
 import org.sodalite.dsl.aADM.ENodeTemplateBody
-import org.sodalite.dsl.aADM.EPropertyAssigments
-import org.sodalite.dsl.aADM.EPropertyAssignment
-import org.sodalite.dsl.aADM.EAttributeAssigments
+import org.sodalite.dsl.rM.EPropertyAssignment
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.aADM.ERequirementAssignments
 import org.sodalite.dsl.aADM.ERequirementAssignment
+import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.sodalite.dsl.rM.EPropertyAssignments
+import org.sodalite.dsl.aADM.EAttributeAssignments
 
 class AADMFormatter extends RMFormatter {
 	
@@ -66,7 +67,7 @@ class AADMFormatter extends RMFormatter {
 		eNodeTemplateBody.requirements.surround[indent].format
 	}
 	
-	def dispatch void format(EPropertyAssigments ePropertyAssigments, extension IFormattableDocument document){
+	def dispatch void format(EPropertyAssignments ePropertyAssigments, extension IFormattableDocument document){
 		for (property : ePropertyAssigments.properties) {
 			property.format.append[newLine]
 		}
@@ -78,7 +79,7 @@ class AADMFormatter extends RMFormatter {
 		ePropertyAssigment.value.format.append[newLine]
 	}
 	
-	def dispatch void format(EAttributeAssigments eAttributeAssigments, extension IFormattableDocument document){
+	def dispatch void format(EAttributeAssignments eAttributeAssigments, extension IFormattableDocument document){
 		for (attribute : eAttributeAssigments.attributes) {
 			attribute.format.append[newLine]
 		}

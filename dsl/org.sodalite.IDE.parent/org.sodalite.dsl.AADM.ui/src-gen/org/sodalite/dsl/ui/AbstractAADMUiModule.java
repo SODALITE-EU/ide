@@ -72,6 +72,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.sodalite.dsl.ide.contentassist.antlr.AADMParser;
 import org.sodalite.dsl.ide.contentassist.antlr.PartialAADMContentAssistParser;
 import org.sodalite.dsl.ide.contentassist.antlr.lexer.InternalAADMLexer;
@@ -80,6 +81,7 @@ import org.sodalite.dsl.ui.labeling.AADMDescriptionLabelProvider;
 import org.sodalite.dsl.ui.labeling.AADMLabelProvider;
 import org.sodalite.dsl.ui.outline.AADMOutlineTreeProvider;
 import org.sodalite.dsl.ui.quickfix.AADMQuickfixProvider;
+import org.sodalite.dsl.validation.AADMValidatorConfigurationBlock;
 
 /**
  * Manual modifications go to {@link AADMUiModule}.
@@ -140,6 +142,11 @@ public abstract class AbstractAADMUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
 		return IndentationAwareCompletionPrefixProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return AADMValidatorConfigurationBlock.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
