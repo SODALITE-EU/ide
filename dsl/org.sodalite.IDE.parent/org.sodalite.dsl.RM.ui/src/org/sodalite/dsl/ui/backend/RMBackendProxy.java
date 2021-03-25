@@ -369,6 +369,9 @@ public class RMBackendProxy {
 			// Process Issues
 			IProgressMonitor monitor = new NullProgressMonitor();
 			issueProcessor.processIssues(issues, monitor);
+
+			// TODO keep issues attached to the model until they are fixed (they should not
+			// vanish after the model is saved)
 		}
 	}
 

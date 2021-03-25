@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -664,12 +665,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
+				String message = error.getDescription() + ": " + error.getEntity_name();
+				List<String> hierarchyPath = Arrays.asList(error.getContext(), error.getEntity_name());
+				String path = createPath(hierarchyPath);
 				String pathType = getPathType(error.getType());
-				String path = error.getEntity_name() != null ? error.getContext() + "/" + error.getEntity_name()
-						: error.getContext();
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						path, pathType, Severity.ERROR, error.getType(), error.getDescription()));
+				List<String> type = Arrays.asList(error.getType());
+				String code = getCode(type); // Code is used for quick fixes
+				List<String> data = Arrays.asList(error.getEntity_name(), error.getContext());
+				issues.add(new ValidationIssue(message, path, pathType, Severity.ERROR, code, data));
 			}
 		}
 
@@ -690,7 +693,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
 				String path = createPath(suggestion.getHierarchyPath());
 				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode(suggestion.getHierarchyPath());
+				String code = getCode(suggestion.getHierarchyPath()); // Code is used for quick fixes
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -705,6 +708,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String code = "Suggestion";
 		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
+		} else if (hierarchyPath.contains("RequiredProperty")) {
+			code = ValidationIssue.PROPERTY;
 		}
 
 		return code;
@@ -770,17 +775,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 			if (eobject instanceof AADM_Model) {
 				AADM_Model model = (AADM_Model) eobject;
 				StringTokenizer st = new StringTokenizer(path, "/");
-				EObject target = AADMHelper.findElement(model, st.nextToken());
-				if (target != null) {
-					if (target instanceof ENodeTemplate)
-						path = "node_templates/" + path;
-					else if (target instanceof EPolicyDefinition)
-						path = "policies/" + path;
-					st = new StringTokenizer(path, "/");
-					result = getAADMIssueFeature(model, path, path_type, st);
-				}
+				result = getAADMIssueFeature(model, path, path_type, st);
 			} else if (eobject instanceof Optimization_Model) {
-				StringTokenizer st = new StringTokenizer(path, "/");
 				Optimization_Model model = (Optimization_Model) eobject;
 				result = getOptimizationIssueFeature(model, path, path_type);
 			}

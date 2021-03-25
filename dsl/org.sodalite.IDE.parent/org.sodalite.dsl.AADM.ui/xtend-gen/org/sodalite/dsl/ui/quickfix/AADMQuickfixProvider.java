@@ -4,6 +4,7 @@
 package org.sodalite.dsl.ui.quickfix;
 
 import java.text.MessageFormat;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.EList;
@@ -21,6 +22,10 @@ import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl;
 import org.sodalite.dsl.rM.EPREFIX_ID;
+import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.EPropertyAssignments;
+import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.RMFactory;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
 
 /**
@@ -36,11 +41,14 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
     final String data = ((String[]) _data)[0];
     final String targetRequirement = this.getSubstring(data, "requirements\\/(.*?)\\/");
     final String[] matches = this.getSubstring(data, "\\[(.*?)\\]").split(Pattern.quote(","));
+    final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
     for (final String match : matches) {
       {
-        int _lastIndexOf = match.lastIndexOf("/");
+        final String qMatch = match.trim().substring(prefix.length());
+        int _lastIndexOf = qMatch.lastIndexOf("/");
         int _plus = (_lastIndexOf + 1);
-        final String targetNode = match.substring(_plus);
+        final String targetNode = qMatch.substring(_plus);
+        final String targetModule = qMatch.substring(0, qMatch.lastIndexOf("/"));
         final String message = MessageFormat.format("Create requirement \"{0}\" referencing node \"{1}\"", targetRequirement, targetNode);
         final String sub_message = message;
         final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
@@ -65,15 +73,52 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
             req.setName(targetRequirement);
             node.getNode().getRequirements().getRequirements().add(req);
           }
-          EObject _eContainer = nodeTemplate.eContainer();
-          final ENodeTemplatesImpl model = ((ENodeTemplatesImpl) _eContainer);
           System.out.println(("Applying targetNode: " + targetNode));
           EPREFIX_ID _node_1 = req.getNode();
-          _node_1.setId(targetNode);
+          boolean _tripleEquals_1 = (_node_1 == null);
+          if (_tripleEquals_1) {
+            EPREFIX_ID req_node = RMFactory.eINSTANCE.createEPREFIX_ID();
+            req.setNode(req_node);
+          }
+          EPREFIX_ID _node_2 = req.getNode();
+          _node_2.setModule(targetModule);
+          EPREFIX_ID _node_3 = req.getNode();
+          _node_3.setId(targetNode);
         };
         acceptor.accept(issue, message, sub_message, "", _function);
       }
     }
+  }
+  
+  @Fix(ValidationIssue.PROPERTY)
+  public void fixProperty(final Issue issue, final IssueResolutionAcceptor acceptor) {
+    String[] _data = issue.getData();
+    final String data = ((String[]) _data)[0];
+    int _length = data.length();
+    int _minus = (_length - 1);
+    String _substring = data.substring(1, _minus);
+    final StringTokenizer st = new StringTokenizer(_substring, ",");
+    final String propertyName = st.nextToken().trim();
+    final String nodeName = st.nextToken().trim();
+    final String message = MessageFormat.format("Create property \"{0}\" in node \"{1}\"", propertyName, nodeName);
+    final String sub_message = message;
+    final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
+      ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
+      EPropertyAssignments _properties = node.getNode().getProperties();
+      boolean _tripleEquals = (_properties == null);
+      if (_tripleEquals) {
+        final EPropertyAssignments properties = RMFactory.eINSTANCE.createEPropertyAssignments();
+        ENodeTemplateBody _node = node.getNode();
+        _node.setProperties(properties);
+      }
+      EPropertyAssignment property = RMFactory.eINSTANCE.createEPropertyAssignment();
+      property.setName(propertyName);
+      ESTRING value = RMFactory.eINSTANCE.createESTRING();
+      value.setValue("");
+      property.setValue(value);
+      node.getNode().getProperties().getProperties().add(property);
+    };
+    acceptor.accept(issue, message, sub_message, "", _function);
   }
   
   public ENodeTemplate getNode(final ENodeTemplatesImpl templates, final String name) {

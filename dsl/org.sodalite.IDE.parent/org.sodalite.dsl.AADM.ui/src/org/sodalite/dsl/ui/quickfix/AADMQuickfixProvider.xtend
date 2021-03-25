@@ -15,6 +15,8 @@ import java.util.regex.Pattern
 import java.util.regex.Matcher
 import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl
+import org.sodalite.dsl.rM.RMFactory
+import java.util.StringTokenizer
 
 /**
  * Custom quickfixes.
@@ -30,8 +32,11 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 //			val String targetTemplate = getSubstring(data, "\\/(.*?)\\/requirements")
 			
 			val String[] matches = getSubstring(data, "\\[(.*?)\\]").split(Pattern.quote(","))
+			val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 			for (String match: matches) {
-				val targetNode = match.substring(match.lastIndexOf('/') + 1)
+				val qMatch = match.trim.substring(prefix.length)
+				val targetNode = qMatch.substring(qMatch.lastIndexOf('/') + 1)
+				val targetModule = qMatch.substring(0, qMatch.lastIndexOf('/'))
 				val message = MessageFormat.format('Create requirement "{0}" referencing node "{1}"',
 					targetRequirement, targetNode);
 				val sub_message = message
@@ -55,11 +60,46 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 						req.name = targetRequirement
 						node.node.requirements.requirements.add(req)
 					}
-					val ENodeTemplatesImpl model = nodeTemplate.eContainer as ENodeTemplatesImpl
 					System.out.println ("Applying targetNode: " + targetNode)
-					req.node.id = targetNode //FIXME Check creation of node with namespace/id
+					if (req.node === null){
+						var req_node = RMFactory.eINSTANCE.createEPREFIX_ID
+						req.node = req_node
+					}
+					req.node.module = targetModule
+					req.node.id = targetNode 
+					
+					//TODO Invoke automatic formatting
+					//TODO Remove issue from model
 				]
 			}
+	}
+	
+	@Fix(ValidationIssue.PROPERTY)
+	def fixProperty(Issue issue, IssueResolutionAcceptor acceptor) {
+		val String data = (issue.data as String[]).get(0) 
+		val StringTokenizer st = new StringTokenizer(data.substring(1, data.length - 1), ",")
+		val String propertyName = st.nextToken.trim
+		val String nodeName = st.nextToken.trim 
+		val message = MessageFormat.format('Create property "{0}" in node "{1}"',
+					propertyName, nodeName);
+		val sub_message = message
+		acceptor.accept(issue, message, sub_message, '') [ nodeTemplate, context |
+			//Add property to node
+			var node = nodeTemplate as ENodeTemplate
+			if (node.node.properties === null){
+				val properties = RMFactory.eINSTANCE.createEPropertyAssignments
+				node.node.properties = properties
+			}
+			var property = RMFactory.eINSTANCE.createEPropertyAssignment
+			property.name = propertyName
+			var value = RMFactory.eINSTANCE.createESTRING
+			value.value = ""
+			property.value = value
+			node.node.properties.properties.add(property)
+			
+			//TODO Invoke automatic formatting
+			//TODO Remove issue from model
+		]
 	}
 	
 	def getNode(ENodeTemplatesImpl templates, String name){
