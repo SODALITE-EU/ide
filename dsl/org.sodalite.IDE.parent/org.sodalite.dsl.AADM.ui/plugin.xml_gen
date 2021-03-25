@@ -249,15 +249,6 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.sodalite.dsl.AADM"
-			class="org.sodalite.dsl.ui.AADMExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.sodalite.dsl.AADM.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.sodalite.dsl.ui.keyword_AADM"/>
-		</page>
-	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.sodalite.dsl.ui.AADMExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
