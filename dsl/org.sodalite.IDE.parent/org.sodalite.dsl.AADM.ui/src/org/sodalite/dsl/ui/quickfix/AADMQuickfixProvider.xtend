@@ -17,6 +17,8 @@ import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplatesImpl
 import org.sodalite.dsl.rM.RMFactory
 import java.util.StringTokenizer
+import org.eclipse.ui.handlers.IHandlerService
+import org.eclipse.ui.PlatformUI
 
 /**
  * Custom quickfixes.
@@ -68,7 +70,6 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 					req.node.module = targetModule
 					req.node.id = targetNode 
 					
-					//TODO Invoke automatic formatting
 					//TODO Remove issue from model
 				]
 			}
@@ -97,7 +98,6 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 			property.value = value
 			node.node.properties.properties.add(property)
 			
-			//TODO Invoke automatic formatting
 			//TODO Remove issue from model
 		]
 	}
