@@ -94,7 +94,7 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 			var property = RMFactory.eINSTANCE.createEPropertyAssignment
 			property.name = propertyName
 			var value = RMFactory.eINSTANCE.createESTRING
-			value.value = ""
+			value.value = "<set_value>"
 			property.value = value
 			node.node.properties.properties.add(property)
 			

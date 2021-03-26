@@ -40,9 +40,8 @@ inputs:
 		type: string				
 		
 node_templates:
-
-	snow-security-rules:  
-		type: openstack/sodalite.nodes.OpenStack.SecurityRules 
+	snow-security-rules:
+		type: openstack/sodalite.nodes.OpenStack.SecurityRules
 		properties:
 			ports:  
 				component_ports:
@@ -54,169 +53,156 @@ node_templates:
 					port_range_min: 80 
 					port_range_max: 80 
 					protocol: "tcp" 
-					remote_ip_prefix: "0.0.0.0/0" 
-			group_name:  "snow" 
-			group_description:  "Snow UC security group"
+					remote_ip_prefix: "0.0.0.0/0"
+			group_name: "snow"
+			group_description: "Snow UC security group"
 			env: get_input: env
-	
-	snow-vm:  
+	snow-vm:
 		type: openstack/sodalite.nodes.OpenStack.VM
-		properties:  
-			key_name:  get_input: ssh-key-name 
-			image: get_input: image-name 
-			name:  "snow-vm_new_1"
-			network: get_input: openstack-network-name  
-			security_groups:  get_input: security-groups 
-			flavor:  get_input: flavor-name
+		properties:
+			key_name: get_input: ssh-key-name
+			image: get_input: image-name
+			name: "snow-vm_new_1"
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor: get_input: flavor-name
 			username: get_input: username
 			env: get_input: env
-		requirements:  
-			protected_by: 
+		requirements:
+			protected_by:
 				node: snow/snow-security-rules
-			
-	snow-vm-2:  
+	snow-vm-2:
 		type: openstack/sodalite.nodes.OpenStack.VM
-		properties:  
-			key_name:  get_input: ssh-key-name 
-			image: get_input: image-name 
-			name:  "snow-vm_new_2"
-			network: get_input: openstack-network-name  
-			security_groups:  get_input: security-groups 
-			flavor:  get_input: flavor-name
+		properties:
+			key_name: get_input: ssh-key-name
+			image: get_input: image-name
+			name: "snow-vm_new_2"
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor: get_input: flavor-name
 			username: get_input: username
 			env: get_input: env
-		requirements:  
-			protected_by: 
+		requirements:
+			protected_by:
 				node: snow/snow-security-rules
-				
-	snow-docker-host:  
-		type: docker/sodalite.nodes.DockerHost 
-		requirements:  
-			host:  
+	snow-docker-host:
+		type: docker/sodalite.nodes.DockerHost
+		requirements:
+			host:
 				node: snow/snow-vm
-				
 	snow-docker-registry-certificate:
 		type: docker/sodalite.nodes.RegistryCertificate
-		properties:  
-			registry_ip: get_input: docker-registry-url 
-			country_name:  get_input: docker-registry-cert-country-name 
-			organization_name: get_input: docker-registry-cert-organization-name 
-			email_address: get_input: docker-registry-cert-email-address 
-		requirements:
-			host: 
-				node: snow/snow-vm 
-			dependency: 
-				node: snow/snow-docker-host
-		
-	snow-docker-host-2:  
-		type: docker/sodalite.nodes.DockerHost 
-		requirements:  
-			host:  
-				node: snow/snow-vm-2	
-				
-	snow-docker-registry-certificate-2:
-		type: docker/sodalite.nodes.RegistryCertificate
-		properties:  
+		properties:
 			registry_ip: get_input: docker-registry-url
-			country_name:  get_input: docker-registry-cert-country-name
+			country_name: get_input: docker-registry-cert-country-name
 			organization_name: get_input: docker-registry-cert-organization-name
 			email_address: get_input: docker-registry-cert-email-address
 		requirements:
-			host: 
-				node: snow/snow-vm-2 
-			dependency: 
+			host:
+				node: snow/snow-vm
+			dependency:
+				node: snow/snow-docker-host
+	snow-docker-host-2:
+		type: docker/sodalite.nodes.DockerHost
+		requirements:
+			host:
+				node: snow/snow-vm-2
+	snow-docker-registry-certificate-2:
+		type: docker/sodalite.nodes.RegistryCertificate
+		properties:
+			registry_ip: get_input: docker-registry-url
+			country_name: get_input: docker-registry-cert-country-name
+			organization_name: get_input: docker-registry-cert-organization-name
+			email_address: get_input: docker-registry-cert-email-address
+		requirements:
+			host:
+				node: snow/snow-vm-2
+			dependency:
 				node: snow/snow-docker-host-2
-	
 	snow-docker-registry:
 		type: docker/sodalite.nodes.DockerRegistry
-		properties:  
-			docker_registry_url: get_input: docker-registry-url 
+		properties:
+			docker_registry_url: get_input: docker-registry-url
 		requirements:
-			host: 
+			host:
 				node: snow/snow-vm
-			dependency: 
-				node: snow/snow-docker-host 
-			dependency: 
+			dependency:
+				node: snow/snow-docker-host
+			dependency:
 				node: snow/snow-docker-registry-certificate
 			dependency:
 				node: snow/snow-docker-registry-certificate-2
-				
 	snow-docker-network:
 		type: docker/sodalite.nodes.DockerNetwork
-		properties: 
+		properties:
 			name: get_input: docker-network
 		requirements:
-			host: 
-				node: snow/snow-vm    
-			dependency: 
+			host:
+				node: snow/snow-vm
+			dependency:
 				node: snow/snow-docker-host
-				
 	snow-docker-volume-shots:
 		type: docker/sodalite.nodes.DockerVolume
-		properties:  
+		properties:
 			name: "snow_volume_shots"
 		requirements:
-			host: 
+			host:
 				node: snow/snow-vm
 			dependency:
 				node: snow/snow-docker-host
-	
 	snow-docker-volume-masks:
 		type: docker/sodalite.nodes.DockerVolume
-		properties:  
+		properties:
 			name: "snow_volume_masks"
 		requirements:
-			host: 
+			host:
 				node: snow/snow-vm
 			dependency:
 				node: snow/snow-docker-host
-	
 	snow-docker-volume-daily-shots:
 		type: docker/sodalite.nodes.DockerVolume
-		properties:  
+		properties:
 			name: "snow_volume_daily_shots"
 		requirements:
-			host: 
+			host:
 				node: snow/snow-vm
 			dependency:
 				node: snow/snow-docker-host
-				
 	snow-configuration-demo:
-		type: snow/sodalite.nodes.ConfigurationDemo  
-		properties:  
-			mysql_db_pass: get_input: mysql-db-pass    
+		type: snow/sodalite.nodes.ConfigurationDemo
+		properties:
+			mysql_db_pass: get_input: mysql-db-pass
 		requirements:
-			host: 
-				node: snow/snow-vm         
-			remote_server: 
+			host:
+				node: snow/snow-vm
+			remote_server:
 				node: snow/snow-vm-2
-				
-	snow-mysql: 
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
+	snow-mysql:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
 			docker_network_name: get_property:
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-mysql.network
-			image_name:  "snow-mysql:latest" 
+			image_name: "snow-mysql:latest"
 			command: "--default-authentication-plugin=mysql_native_password"
-			ports:  ['3306:3306'] 
-			exposed_ports:  [3306]
+			ports: ['3306:3306']
+			exposed_ports: [3306]
 			alias: "mysql"
 			env: get_input: mysql-env
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
-				node: snow/snow-docker-host 
-			network: 
-				node: snow/snow-docker-network 
-			registry: 
+		requirements:
+			network:
+				node: snow/snow-docker-network
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-webcam-crawler:  
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
-			docker_network_name:  get_property: 
+			host:
+				node: snow/snow-vm
+
+	snow-webcam-crawler:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property: 
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-webcam-crawler.network
@@ -225,28 +211,27 @@ node_templates:
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
 			//"/tmp/masks:/SnowWatch-SODALITE/data/masks", 
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
-			image_name:  "snow-webcam-crawler:latest" 
+			image_name: "snow-webcam-crawler:latest"
 			alias: "snow-webcam-crawler"
 			command: "34,40,50,62,608,666,822,852,943,1307,6666"
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
-				node: snow/snow-docker-host 
-			dependency: 
+		requirements:
+			host:
+				node: snow/snow-docker-host
+			dependency:
 				node: snow/snow-mysql
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-shots
-			dependency: 
+			dependency:
 				node: snow/snow-configuration-demo
-			network: 
-				node: snow/snow-docker-network 
-			registry: 
+			network:
+				node: snow/snow-docker-network
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-weather-condition-filter:  
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
-			docker_network_name:  get_property: 
+	snow-weather-condition-filter:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property: 
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-weather-condition-filter.network
@@ -255,128 +240,122 @@ node_templates:
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
 			//"/tmp/masks: /SnowWatch-SODALITE/data/masks", 
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
-			image_name:  "snow-weather-condition-filter:latest" 
+			image_name: "snow-weather-condition-filter:latest"
 			alias: "snow-weather-condition-filter"
 			restart_policy: "always"
 			command: [
 			"{{ ansible_date_time.date }}", 
-			"34 40 50 62 608 666 822 852 943 1307 6666"]  
+			"34 40 50 62 608 666 822 852 943 1307 6666"]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
+		requirements:
+			host:
 				node: snow/snow-docker-host
-			dependency: 
+			dependency:
 				node: snow/snow-mysql
-			dependency: 
-				 node: snow/snow-docker-volume-shots
-			dependency: 
+			dependency:
+				node: snow/snow-docker-volume-shots
+			dependency:
 				node: snow/snow-docker-volume-masks
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-daily-shots
-			dependency: 
+			dependency:
 				node: snow/snow-configuration-demo
-			network: 
+			network:
 				node: snow/snow-docker-network
-			registry: 
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-daily-median-aggregator: 
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
-			docker_network_name:  get_property:
+	snow-daily-median-aggregator:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-daily-median-aggregator.network
-			volumes:  [
+			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
-			image_name:  "snow-daily-median-aggregator:latest"
+			image_name: "snow-daily-median-aggregator:latest"
 			alias: "snow-daily-median-aggregator"
 			restart_policy: "always"
 			command: [
 			"{{ ansible_date_time.date }}", 
 			"34 40 50 62 608 666 822 852 943 1307 6666"]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
+		requirements:
+			host:
 				node: snow/snow-docker-host
-			dependency: 
+			dependency:
 				node: snow/snow-mysql
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-shots
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-daily-shots
-			dependency: 
-				node: snow/snow-configuration-demo        
-			network: 
+			dependency:
+				node: snow/snow-configuration-demo
+			network:
 				node: snow/snow-docker-network
-			registry: 
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-skyline-extractor:  
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
+	snow-skyline-extractor:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
 			alias: "snow-skyline-extractor"
-			volumes:  ["/tmp/docker:/tmp"] 
-			image_name:  "snow-skyline-extractor:latest"
-			ports:  ['8080:8080'] 
-			exposed_ports:  [8080]
+			volumes: ["/tmp/docker:/tmp"]
+			image_name: "snow-skyline-extractor:latest"
+			ports: ['8080:8080']
+			exposed_ports: [8080]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
-				node: snow/snow-docker-host-2 
-			registry: 
+		requirements:
+			host:
+				node: snow/snow-docker-host-2
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-skyline-alignment:  
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
+	snow-skyline-alignment:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
 			alias: "snow-skyline-alignment"
-			volumes:  ["/tmp/docker:/tmp"] 
-			image_name:  "snow-skyline-alignment:latest"
-			exposed_ports:  [8080] 
-			ports:  ["8081:8080","80:8080"]
+			volumes: ["/tmp/docker:/tmp"]
+			image_name: "snow-skyline-alignment:latest"
+			exposed_ports: [8080]
+			ports: ["8081:8080","80:8080"]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
-				node: snow/snow-docker-host-2 
-			registry: 
+		requirements:
+			host:
+				node: snow/snow-docker-host-2
+			registry:
 				node: snow/snow-docker-registry
-				
 	snow-docker-volume-demo-output:
 		type: docker/sodalite.nodes.DockerVolume
-		properties:  
+		properties:
 			name: "snow_volume_demo_output"
 		requirements:
-			host: 
+			host:
 				node: snow/snow-vm
 			dependency:
 				node: snow/snow-docker-host
-	
-	snow-webcam-mockup:  
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
-			docker_network_name:  get_property:
+	snow-webcam-mockup:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-webcam-mockup.network
-			image_name:  "snow-webcam-mockup:latest"
+			image_name: "snow-webcam-mockup:latest"
 			alias: "snow-webcam-mockup"
-			ports:  ['8080:8080'] 
-			exposed_ports:  [8080]
+			ports: ['8080:8080']
+			exposed_ports: [8080]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
-				node: snow/snow-docker-host 
-			network: 
-				node: snow/snow-docker-network  
-			registry: 
+		requirements:
+			host:
+				node: snow/snow-docker-host
+			network:
+				node: snow/snow-docker-network
+			registry:
 				node: snow/snow-docker-registry
-				
 	snow-demo:
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
 			docker_network_name: get_property:
 				entity: SELF
 				req_cap: snow/snow-demo.network
@@ -385,42 +364,40 @@ node_templates:
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",  
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots", 
 			"snow_volume_demo_output:/SnowWatch-SODALITE/data/output"]
-			image_name:  "snow-demo:latest"
+			image_name: "snow-demo:latest"
 			alias: "snow-demo"
 			restart_policy: "always"
 			command: "{{ ansible_date_time.date }}"
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
+		requirements:
+			host:
 				node: snow/snow-docker-host
-			dependency: 
+			dependency:
 				node: snow/snow-mysql
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-daily-shots
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-demo-output
-			dependency: 
-				node: snow/snow-configuration-demo    
-			network: 
-				node: snow/snow-docker-network 
-			registry: 
+			dependency:
+				node: snow/snow-configuration-demo
+			network:
+				node: snow/snow-docker-network
+			registry:
 				node: snow/snow-docker-registry
-				
-	snow-demo-nginx:   
-		type: docker/sodalite.nodes.DockerizedComponent 
-		properties:  
-			volumes:  ["snow_volume_demo_output:/usr/share/nginx/html"]
+	snow-demo-nginx:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			volumes: ["snow_volume_demo_output:/usr/share/nginx/html"]
 			image_name: "nginx:latest"
 			alias: "snow-nginx"
 			restart_policy: "always"
-			ports: ['80:80'] 
+			ports: ['80:80']
 			exposed_ports: [80]
 			registry_url: get_input: docker-registry-url
-		requirements:  
-			host:  
+		requirements:
+			host:
 				node: snow/snow-docker-host
-			dependency: 
+			dependency:
 				node: snow/snow-docker-volume-demo-output
-			registry: 
+			registry:
 				node: snow/snow-docker-registry
-	
