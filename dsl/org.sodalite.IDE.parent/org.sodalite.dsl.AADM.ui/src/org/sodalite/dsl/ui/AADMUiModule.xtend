@@ -4,10 +4,15 @@
 package org.sodalite.dsl.ui
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class AADMUiModule extends AbstractAADMUiModule {
+	
+	def Class<? extends ITextEditComposer> bindITextEditComposer(){
+		return AADMTextEditComposer
+	}
 }

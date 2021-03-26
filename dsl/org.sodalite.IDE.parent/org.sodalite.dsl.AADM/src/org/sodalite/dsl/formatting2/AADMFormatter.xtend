@@ -20,6 +20,8 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.sodalite.dsl.rM.EPropertyAssignments
 import org.sodalite.dsl.aADM.EAttributeAssignments
 import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EMAP
+import org.sodalite.dsl.rM.EPREFIX_ID
 
 class AADMFormatter extends RMFormatter {
 
@@ -70,14 +72,19 @@ class AADMFormatter extends RMFormatter {
 
 	def dispatch void format(EPropertyAssignments ePropertyAssigments, extension IFormattableDocument document) {
 		for (property : ePropertyAssigments.properties) {
+			if (!document.request.textRegionAccess.toString.contains("node_templates")){ //For local changes caused by quick fixes
+				property.surround[indent].surround[indent]
+			}
 			property.format.append[newLine]
 		}
 	}
 
 	def dispatch void format(EPropertyAssignment ePropertyAssigment, extension IFormattableDocument document) {
-		ePropertyAssigment.regionFor.feature(EPROPERTY_ASSIGNMENT__NAME).append[noSpace]
-		ePropertyAssigment.regionFor.keyword(":").append[oneSpace]
-		ePropertyAssigment.value.format.append[newLine]
+		if (!(ePropertyAssigment.value instanceof EMAP)){
+			ePropertyAssigment.regionFor.feature(EPROPERTY_ASSIGNMENT__NAME).append[noSpace]
+			ePropertyAssigment.regionFor.keyword(":").append[oneSpace]
+			ePropertyAssigment.value.format.append[newLine]
+		}
 	}
 
 	def dispatch void format(EAttributeAssignments eAttributeAssigments, extension IFormattableDocument document) {
@@ -94,6 +101,9 @@ class AADMFormatter extends RMFormatter {
 
 	def dispatch void format(ERequirementAssignments eRequirementAssigments, extension IFormattableDocument document) {
 		for (req : eRequirementAssigments.requirements) {
+			if (!document.request.textRegionAccess.toString.contains("node_templates")){ //For local changes caused by quick fixes
+				req.surround[indent].surround[indent]
+			}
 			req.format.append[newLine]
 		}
 	}
@@ -102,6 +112,11 @@ class AADMFormatter extends RMFormatter {
 		req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NAME).append[noSpace]
 		req.regionFor.keyword(":").append[newLine]
 		req.regionFor.keyword("node:").surround[indent]
+		req.node.format
 	}
 
+	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {
+		prefix.regionFor.feature(EPREFIX_ID__MODULE).append[noSpace]
+		prefix.regionFor.keyword("/").append[noSpace]
+	}
 }

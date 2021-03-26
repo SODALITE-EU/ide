@@ -5,6 +5,8 @@ package org.sodalite.dsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
+import org.sodalite.dsl.ui.AADMTextEditComposer;
 import org.sodalite.dsl.ui.AbstractAADMUiModule;
 
 /**
@@ -13,6 +15,10 @@ import org.sodalite.dsl.ui.AbstractAADMUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class AADMUiModule extends AbstractAADMUiModule {
+  public Class<? extends ITextEditComposer> bindITextEditComposer() {
+    return AADMTextEditComposer.class;
+  }
+  
   public AADMUiModule(final AbstractUIPlugin plugin) {
     super(plugin);
   }

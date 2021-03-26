@@ -114,7 +114,7 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
       EPropertyAssignment property = RMFactory.eINSTANCE.createEPropertyAssignment();
       property.setName(propertyName);
       ESTRING value = RMFactory.eINSTANCE.createESTRING();
-      value.setValue("");
+      value.setValue("<set_value>");
       property.setValue(value);
       node.getNode().getProperties().getProperties().add(property);
     };
