@@ -34,6 +34,7 @@ import org.osgi.framework.Bundle;
 import org.sodalite.dsl.kb_reasoner_client.KBReasoner;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
@@ -217,8 +218,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
       }
       super.completeRM_Model_Imports(model, assignment, context, acceptor);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof SodaliteException) {
+        final SodaliteException ex = (SodaliteException)_t;
+        SodaliteLogger.log(ex.getMessage(), ex);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -233,488 +239,481 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for EDataType::supertype property");
     try {
-      System.out.println("Invoking content assist for EDataType::supertype property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        if ((module != null)) {
-          importedModules.add(module);
-        }
-        final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
-        System.out.println("Data types retrieved from KB:");
-        List<Type> _elements = types.getElements();
-        for (final Type type : _elements) {
-          {
-            String _label = type.getLabel();
-            String _plus = ("\tData type: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = type.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(type.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = type.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = type.getLabel();
-            }
-            final String qtype = _xifexpression;
-            final String proposalText = qtype;
-            final String displayText = qtype;
-            final String additionalProposalInfo = type.getDescription();
-            Image image = this.getImage("icons/data_type.png");
-            String _module_1 = type.getModule();
-            boolean _tripleNotEquals_1 = (_module_1 != null);
-            if (_tripleNotEquals_1) {
-              image = this.getImage("icons/primitive_data_type.png");
-            }
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      if ((module != null)) {
+        importedModules.add(module);
+      }
+      final ReasonerData<Type> types = this.getKBReasoner().getDataTypes(importedModules);
+      System.out.println("Data types retrieved from KB:");
+      List<Type> _elements = types.getElements();
+      for (final Type type : _elements) {
+        {
+          String _label = type.getLabel();
+          String _plus = ("\tData type: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = type.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(type.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = type.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = type.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
-        for (final EDataType dataType : _dataTypes) {
-          {
-            EDataTypeName _name = dataType.getName();
-            final EPREFIX_TYPE ePrefixType = ((EPREFIX_TYPE) _name);
-            String _type = ePrefixType.getType();
-            String _plus = ("\tLocal node: " + _type);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            if ((module != null)) {
-              String _type_1 = ePrefixType.getType();
-              _xifexpression = ((module + "/") + _type_1);
-            } else {
-              _xifexpression = ePrefixType.getType();
-            }
-            final String proposalText = _xifexpression;
-            String _xifexpression_1 = null;
-            if ((module != null)) {
-              String _type_2 = ePrefixType.getType();
-              _xifexpression_1 = ((module + "/") + _type_2);
-            } else {
-              _xifexpression_1 = ePrefixType.getType();
-            }
-            final String displayText = _xifexpression_1;
-            final String additionalProposalInfo = dataType.getData().getDescription();
-            Image image = this.getImage("icons/data_type.png");
-            if ((module != null)) {
-              image = this.getImage("icons/primitive_data_type.png");
-            }
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          final String qtype = _xifexpression;
+          final String proposalText = qtype;
+          final String displayText = qtype;
+          final String additionalProposalInfo = type.getDescription();
+          Image image = this.getImage("icons/data_type.png");
+          String _module_1 = type.getModule();
+          boolean _tripleNotEquals_1 = (_module_1 != null);
+          if (_tripleNotEquals_1) {
+            image = this.getImage("icons/primitive_data_type.png");
           }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
+      for (final EDataType dataType : _dataTypes) {
+        {
+          EDataTypeName _name = dataType.getName();
+          final EPREFIX_TYPE ePrefixType = ((EPREFIX_TYPE) _name);
+          String _type = ePrefixType.getType();
+          String _plus = ("\tLocal node: " + _type);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          if ((module != null)) {
+            String _type_1 = ePrefixType.getType();
+            _xifexpression = ((module + "/") + _type_1);
+          } else {
+            _xifexpression = ePrefixType.getType();
+          }
+          final String proposalText = _xifexpression;
+          String _xifexpression_1 = null;
+          if ((module != null)) {
+            String _type_2 = ePrefixType.getType();
+            _xifexpression_1 = ((module + "/") + _type_2);
+          } else {
+            _xifexpression_1 = ePrefixType.getType();
+          }
+          final String displayText = _xifexpression_1;
+          final String additionalProposalInfo = dataType.getData().getDescription();
+          Image image = this.getImage("icons/data_type.png");
+          if ((module != null)) {
+            image = this.getImage("icons/primitive_data_type.png");
+          }
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeENodeTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for NodeType::superType property");
     try {
-      System.out.println("Invoking content assist for NodeType::superType property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        if ((module != null)) {
-          importedModules.add(module);
-        }
-        final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
-        System.out.println("Nodes retrieved from KB:");
-        List<Type> _elements = nodes.getElements();
-        for (final Type node : _elements) {
-          {
-            String _label = node.getLabel();
-            String _plus = ("\tNode: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = node.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(node.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = node.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = node.getLabel();
-            }
-            final String qnode = _xifexpression;
-            final String proposalText = qnode;
-            final String displayText = qnode;
-            final String additionalProposalInfo = node.getDescription();
-            Image image = this.getImage("icons/type.png");
-            String _module_1 = node.getModule();
-            boolean _tripleNotEquals_1 = (_module_1 != null);
-            if (_tripleNotEquals_1) {
-              image = this.getImage("icons/primitive_type.png");
-            }
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      if ((module != null)) {
+        importedModules.add(module);
+      }
+      final ReasonerData<Type> nodes = this.getKBReasoner().getNodeTypes(importedModules);
+      System.out.println("Nodes retrieved from KB:");
+      List<Type> _elements = nodes.getElements();
+      for (final Type node : _elements) {
+        {
+          String _label = node.getLabel();
+          String _plus = ("\tNode: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = node.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(node.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = node.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = node.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
-        for (final ENodeType nodeType : _nodeTypes) {
-          {
-            String _name = nodeType.getName();
-            String _plus = ("\tLocal node: " + _name);
-            System.out.println(_plus);
-            String _name_1 = nodeType.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = nodeType.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = nodeType.getNode().getDescription();
-            Image image = this.getImage("icons/type.png");
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
+          final String additionalProposalInfo = node.getDescription();
+          Image image = this.getImage("icons/type.png");
+          String _module_1 = node.getModule();
+          boolean _tripleNotEquals_1 = (_module_1 != null);
+          if (_tripleNotEquals_1) {
+            image = this.getImage("icons/primitive_type.png");
           }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
+      for (final ENodeType nodeType : _nodeTypes) {
+        {
+          String _name = nodeType.getName();
+          String _plus = ("\tLocal node: " + _name);
+          System.out.println(_plus);
+          String _name_1 = nodeType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = nodeType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = nodeType.getNode().getDescription();
+          Image image = this.getImage("icons/type.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeEInterfaceTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for Interface Type::superType property");
     try {
-      System.out.println("Invoking content assist for Interface Type::superType property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        if ((module != null)) {
-          importedModules.add(module);
-        }
-        final ReasonerData<Type> types = this.getKBReasoner().getInterfaceTypes(importedModules);
-        System.out.println("Types retrieved from KB:");
-        List<Type> _elements = types.getElements();
-        for (final Type type : _elements) {
-          {
-            String _label = type.getLabel();
-            String _plus = ("\tInterface: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = type.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(type.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = type.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = type.getLabel();
-            }
-            final String qnode = _xifexpression;
-            final String proposalText = qnode;
-            final String displayText = qnode;
-            final String additionalProposalInfo = type.getDescription();
-            Image image = this.getImage("icons/interface.png");
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      if ((module != null)) {
+        importedModules.add(module);
+      }
+      final ReasonerData<Type> types = this.getKBReasoner().getInterfaceTypes(importedModules);
+      System.out.println("Types retrieved from KB:");
+      List<Type> _elements = types.getElements();
+      for (final Type type : _elements) {
+        {
+          String _label = type.getLabel();
+          String _plus = ("\tInterface: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = type.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(type.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = type.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = type.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-        for (final EInterfaceType interfaceType : _interfaceTypes) {
-          {
-            String _name = interfaceType.getName();
-            String _plus = ("\tLocal interface: " + _name);
-            System.out.println(_plus);
-            String _name_1 = interfaceType.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = interfaceType.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = interfaceType.getInterface().getDescription();
-            Image image = this.getImage("icons/interface.png");
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-          }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
+          final String additionalProposalInfo = type.getDescription();
+          Image image = this.getImage("icons/interface.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
+      for (final EInterfaceType interfaceType : _interfaceTypes) {
+        {
+          String _name = interfaceType.getName();
+          String _plus = ("\tLocal interface: " + _name);
+          System.out.println(_plus);
+          String _name_1 = interfaceType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = interfaceType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = interfaceType.getInterface().getDescription();
+          Image image = this.getImage("icons/interface.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeEPolicyTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for Policy Type::superType property");
     try {
-      System.out.println("Invoking content assist for Policy Type::superType property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        if ((module != null)) {
-          importedModules.add(module);
-        }
-        final ReasonerData<Type> types = this.getKBReasoner().getPolicyTypes(importedModules);
-        System.out.println("Policies retrieved from KB:");
-        List<Type> _elements = types.getElements();
-        for (final Type type : _elements) {
-          {
-            String _label = type.getLabel();
-            String _plus = ("\tPolicy: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = type.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(type.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = type.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = type.getLabel();
-            }
-            final String qnode = _xifexpression;
-            final String proposalText = qnode;
-            final String displayText = qnode;
-            final String additionalProposalInfo = type.getDescription();
-            Image image = this.getImage("icons/policy_type.png");
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      if ((module != null)) {
+        importedModules.add(module);
+      }
+      final ReasonerData<Type> types = this.getKBReasoner().getPolicyTypes(importedModules);
+      System.out.println("Policies retrieved from KB:");
+      List<Type> _elements = types.getElements();
+      for (final Type type : _elements) {
+        {
+          String _label = type.getLabel();
+          String _plus = ("\tPolicy: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = type.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(type.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = type.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = type.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EPolicyType> _policyTypes = rootModel.getPolicyTypes().getPolicyTypes();
-        for (final EPolicyType policyType : _policyTypes) {
-          {
-            String _name = policyType.getName();
-            String _plus = ("\tLocal policy: " + _name);
-            System.out.println(_plus);
-            String _name_1 = policyType.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = policyType.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = policyType.getPolicy().getDescription();
-            Image image = this.getImage("icons/policy_type.png");
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-          }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          final String qnode = _xifexpression;
+          final String proposalText = qnode;
+          final String displayText = qnode;
+          final String additionalProposalInfo = type.getDescription();
+          Image image = this.getImage("icons/policy_type.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EPolicyType> _policyTypes = rootModel.getPolicyTypes().getPolicyTypes();
+      for (final EPolicyType policyType : _policyTypes) {
+        {
+          String _name = policyType.getName();
+          String _plus = ("\tLocal policy: " + _name);
+          System.out.println(_plus);
+          String _name_1 = policyType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = policyType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = policyType.getPolicy().getDescription();
+          Image image = this.getImage("icons/policy_type.png");
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeERelationshipTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for RelationshipType::supertype property");
     try {
-      System.out.println("Invoking content assist for RelationshipType::supertype property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        importedModules.add(module);
-        final ReasonerData<Type> relationships = this.getKBReasoner().getRelationshipTypes(importedModules);
-        System.out.println("Relationships retrieved from KB:");
-        final Image image = this.getImage("icons/relationship.png");
-        List<Type> _elements = relationships.getElements();
-        for (final Type relationship : _elements) {
-          {
-            String _label = relationship.getLabel();
-            String _plus = ("\tRelationship: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = relationship.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(relationship.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = relationship.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = relationship.getLabel();
-            }
-            final String qrelationship = _xifexpression;
-            final String proposalText = qrelationship;
-            final String displayText = qrelationship;
-            final String additionalProposalInfo = relationship.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> relationships = this.getKBReasoner().getRelationshipTypes(importedModules);
+      System.out.println("Relationships retrieved from KB:");
+      final Image image = this.getImage("icons/relationship.png");
+      List<Type> _elements = relationships.getElements();
+      for (final Type relationship : _elements) {
+        {
+          String _label = relationship.getLabel();
+          String _plus = ("\tRelationship: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = relationship.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(relationship.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = relationship.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = relationship.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
-        for (final ERelationshipType relationshipType : _relationshipTypes) {
-          {
-            String _name = relationshipType.getName();
-            String _plus = ("\tLocal relationship type: " + _name);
-            System.out.println(_plus);
-            String _name_1 = relationshipType.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = relationshipType.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-          }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          final String qrelationship = _xifexpression;
+          final String proposalText = qrelationship;
+          final String displayText = qrelationship;
+          final String additionalProposalInfo = relationship.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
+      for (final ERelationshipType relationshipType : _relationshipTypes) {
+        {
+          String _name = relationshipType.getName();
+          String _plus = ("\tLocal relationship type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = relationshipType.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = relationshipType.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeECapabilityTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for CapabilityType::supertype property");
     try {
-      System.out.println("Invoking content assist for CapabilityType::supertype property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        importedModules.add(module);
-        final ReasonerData<Type> capabilitiess = this.getKBReasoner().getCapabilityTypes(importedModules);
-        System.out.println("Capabilities retrieved from KB:");
-        final Image image = this.getImage("icons/capability.png");
-        List<Type> _elements = capabilitiess.getElements();
-        for (final Type cap : _elements) {
-          {
-            String _label = cap.getLabel();
-            String _plus = ("\tCapability: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = cap.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(cap.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = cap.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = cap.getLabel();
-            }
-            final String qcap = _xifexpression;
-            final String proposalText = qcap;
-            final String displayText = qcap;
-            final String additionalProposalInfo = cap.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> capabilitiess = this.getKBReasoner().getCapabilityTypes(importedModules);
+      System.out.println("Capabilities retrieved from KB:");
+      final Image image = this.getImage("icons/capability.png");
+      List<Type> _elements = capabilitiess.getElements();
+      for (final Type cap : _elements) {
+        {
+          String _label = cap.getLabel();
+          String _plus = ("\tCapability: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = cap.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(cap.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = cap.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = cap.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
-        for (final ECapabilityType cap_1 : _capabilityTypes) {
-          {
-            String _name = cap_1.getName();
-            String _plus = ("\tLocal capability type: " + _name);
-            System.out.println(_plus);
-            String _name_1 = cap_1.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = cap_1.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = cap_1.getCapability().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-          }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          final String qcap = _xifexpression;
+          final String proposalText = qcap;
+          final String displayText = qcap;
+          final String additionalProposalInfo = cap.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
+      for (final ECapabilityType cap_1 : _capabilityTypes) {
+        {
+          String _name = cap_1.getName();
+          String _plus = ("\tLocal capability type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = cap_1.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = cap_1.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = cap_1.getCapability().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeEInterfaceDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for InterfaceDefinition::type property");
     try {
-      System.out.println("Invoking content assist for InterfaceDefinition::type property");
-      try {
-        final List<String> importedModules = this.getImportedModules(model);
-        final String module = this.getModule(model);
-        importedModules.add(module);
-        final ReasonerData<Type> interfaces = this.getKBReasoner().getInterfaceTypes(importedModules);
-        System.out.println("Interfaces retrieved from KB:");
-        final Image image = this.getImage("icons/interface.png");
-        List<Type> _elements = interfaces.getElements();
-        for (final Type interface_ : _elements) {
-          {
-            String _label = interface_.getLabel();
-            String _plus = ("\tCapability: " + _label);
-            System.out.println(_plus);
-            String _xifexpression = null;
-            String _module = interface_.getModule();
-            boolean _tripleNotEquals = (_module != null);
-            if (_tripleNotEquals) {
-              String _lastSegment = this.getLastSegment(interface_.getModule(), "/");
-              String _plus_1 = (_lastSegment + "/");
-              String _label_1 = interface_.getLabel();
-              _xifexpression = (_plus_1 + _label_1);
-            } else {
-              _xifexpression = interface_.getLabel();
-            }
-            final String qinterface = _xifexpression;
-            final String proposalText = qinterface;
-            final String displayText = qinterface;
-            final String additionalProposalInfo = interface_.getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final List<String> importedModules = this.getImportedModules(model);
+      final String module = this.getModule(model);
+      importedModules.add(module);
+      final ReasonerData<Type> interfaces = this.getKBReasoner().getInterfaceTypes(importedModules);
+      System.out.println("Interfaces retrieved from KB:");
+      final Image image = this.getImage("icons/interface.png");
+      List<Type> _elements = interfaces.getElements();
+      for (final Type interface_ : _elements) {
+        {
+          String _label = interface_.getLabel();
+          String _plus = ("\tCapability: " + _label);
+          System.out.println(_plus);
+          String _xifexpression = null;
+          String _module = interface_.getModule();
+          boolean _tripleNotEquals = (_module != null);
+          if (_tripleNotEquals) {
+            String _lastSegment = this.getLastSegment(interface_.getModule(), "/");
+            String _plus_1 = (_lastSegment + "/");
+            String _label_1 = interface_.getLabel();
+            _xifexpression = (_plus_1 + _label_1);
+          } else {
+            _xifexpression = interface_.getLabel();
           }
-        }
-        Object _findModel = this.findModel(model);
-        final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-        for (final EInterfaceType interface__1 : _interfaceTypes) {
-          {
-            String _name = interface__1.getName();
-            String _plus = ("\tLocal interface type: " + _name);
-            System.out.println(_plus);
-            String _name_1 = interface__1.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = interface__1.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = interface__1.getInterface().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-          }
-        }
-        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          final String qinterface = _xifexpression;
+          final String proposalText = qinterface;
+          final String displayText = qinterface;
+          final String additionalProposalInfo = interface_.getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      Object _findModel = this.findModel(model);
+      final RM_Model rootModel = ((RM_Model) _findModel);
+      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
+      for (final EInterfaceType interface__1 : _interfaceTypes) {
+        {
+          String _name = interface__1.getName();
+          String _plus = ("\tLocal interface type: " + _name);
+          System.out.println(_plus);
+          String _name_1 = interface__1.getName();
+          final String proposalText = ((module + "/") + _name_1);
+          String _name_2 = interface__1.getName();
+          final String displayText = ((module + "/") + _name_2);
+          final String additionalProposalInfo = interface__1.getInterface().getDescription();
+          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+      }
+      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -775,54 +774,53 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   @Override
   public void completeEInterfaceDefinitionBody_Operations(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      try {
-        final EInterfaceDefinitionBody interface_ = ((EInterfaceDefinitionBody) model);
-        final EPREFIX_TYPE type = interface_.getType();
-        String _xifexpression = null;
-        String _module = type.getModule();
-        boolean _tripleNotEquals = (_module != null);
-        if (_tripleNotEquals) {
-          String _module_1 = type.getModule();
-          _xifexpression = (_module_1 + "/");
-        } else {
-          _xifexpression = "";
-        }
-        String _type = type.getType();
-        String interfaceId = (_xifexpression + _type);
-        if ((interfaceId != null)) {
-          final OperationDefinitionData operations = this.getKBReasoner().getOperationsInInterface(interfaceId);
-          if ((operations != null)) {
-            final Image image = this.getImage("icons/operation.png");
-            List<OperationDefinition> _elements = operations.getElements();
-            for (final OperationDefinition oper : _elements) {
-              {
-                final String operation_label = this.getLastSegment(oper.getUri().toString(), "/");
-                final String proposalText = operation_label;
-                final String displayText = operation_label;
-                String _xifexpression_1 = null;
-                String _description = oper.getDescription();
-                boolean _tripleNotEquals_1 = (_description != null);
-                if (_tripleNotEquals_1) {
-                  String _description_1 = oper.getDescription();
-                  _xifexpression_1 = ("\nDescription: " + _description_1);
-                } else {
-                  _xifexpression_1 = "";
-                }
-                final String additionalProposalInfo = _xifexpression_1;
-                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+      final EInterfaceDefinitionBody interface_ = ((EInterfaceDefinitionBody) model);
+      final EPREFIX_TYPE type = interface_.getType();
+      String _xifexpression = null;
+      String _module = type.getModule();
+      boolean _tripleNotEquals = (_module != null);
+      if (_tripleNotEquals) {
+        String _module_1 = type.getModule();
+        _xifexpression = (_module_1 + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _type = type.getType();
+      String interfaceId = (_xifexpression + _type);
+      if ((interfaceId != null)) {
+        final OperationDefinitionData operations = this.getKBReasoner().getOperationsInInterface(interfaceId);
+        if ((operations != null)) {
+          final Image image = this.getImage("icons/operation.png");
+          List<OperationDefinition> _elements = operations.getElements();
+          for (final OperationDefinition oper : _elements) {
+            {
+              final String operation_label = this.getLastSegment(oper.getUri().toString(), "/");
+              final String proposalText = operation_label;
+              final String displayText = operation_label;
+              String _xifexpression_1 = null;
+              String _description = oper.getDescription();
+              boolean _tripleNotEquals_1 = (_description != null);
+              if (_tripleNotEquals_1) {
+                String _description_1 = oper.getDescription();
+                _xifexpression_1 = ("\nDescription: " + _description_1);
+              } else {
+                _xifexpression_1 = "";
               }
+              final String additionalProposalInfo = _xifexpression_1;
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -1005,21 +1003,20 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   @Override
   public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      try {
-        final List<String> importedModules = this.processListModules(model);
-        final ReasonerData<Type> types = this.getKBReasoner().getNodeTypes(importedModules);
-        final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
-        this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
-        this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+      final List<String> importedModules = this.processListModules(model);
+      final ReasonerData<Type> types = this.getKBReasoner().getNodeTypes(importedModules);
+      final TemplateData templates = this.getKBReasoner().getTemplates(importedModules);
+      this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
+      this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -1034,54 +1031,57 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         final RequirementDefinitionData reqs = this.getKBReasoner().getTypeRequirements(qnode);
         this.createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof SodaliteException) {
+        final SodaliteException ex = (SodaliteException)_t;
+        SodaliteLogger.log(ex.getMessage(), ex);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   @Override
   public void completeETargetType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      try {
-        final List<String> importedModules = this.processListModules(model);
-        final TypeData typeData = this.getKBReasoner().getNodeTypes(importedModules);
-        final String type_image = "icons/type.png";
-        final String primitive_type_image = "icons/primitive_type.png";
-        this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
-        Object _findModel = this.findModel(model);
-        final List<ENodeType> localTypes = ((RM_Model) _findModel).getNodeTypes().getNodeTypes();
-        this.createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+      final List<String> importedModules = this.processListModules(model);
+      final TypeData typeData = this.getKBReasoner().getNodeTypes(importedModules);
+      final String type_image = "icons/type.png";
+      final String primitive_type_image = "icons/primitive_type.png";
+      this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
+      Object _findModel = this.findModel(model);
+      final List<ENodeType> localTypes = ((RM_Model) _findModel).getNodeTypes().getNodeTypes();
+      this.createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Override
   public void completeECallOperationActivityDefinitionBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      try {
-        final List<String> importedModules = this.processListModules(model);
-        final OperationDefinitionData operationsData = this.getKBReasoner().getOperations(importedModules);
-        final String type_image = "icons/operation.png";
-        this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
-        final List<EOperationDefinition> localOperations = this.findLocalOperations(model);
-        this.createProposalsForOperationList(localOperations, type_image, null, context, acceptor);
-      } catch (final Throwable _t) {
-        if (_t instanceof NotRolePermissionException) {
-          this.showReadPermissionErrorDialog();
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+      final List<String> importedModules = this.processListModules(model);
+      final OperationDefinitionData operationsData = this.getKBReasoner().getOperations(importedModules);
+      final String type_image = "icons/operation.png";
+      this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
+      final List<EOperationDefinition> localOperations = this.findLocalOperations(model);
+      this.createProposalsForOperationList(localOperations, type_image, null, context, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof NotRolePermissionException) {
+        this.showReadPermissionErrorDialog();
+      } else if (_t instanceof SodaliteException) {
+        final SodaliteException ex_1 = (SodaliteException)_t;
+        SodaliteLogger.log(ex_1.getMessage(), ex_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -1668,8 +1668,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           proposals.add(proposal);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof SodaliteException) {
+        final SodaliteException ex = (SodaliteException)_t;
+        SodaliteLogger.log(ex.getMessage(), ex);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -1739,8 +1744,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           proposals.add(proposal);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof SodaliteException) {
+        final SodaliteException ex = (SodaliteException)_t;
+        SodaliteLogger.log(ex.getMessage(), ex);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   

@@ -71,6 +71,9 @@ import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment
+import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
+import org.sodalite.ide.ui.logger.SodaliteLogger
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -234,6 +237,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -277,6 +282,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -326,6 +333,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -372,6 +381,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -420,6 +431,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -477,6 +490,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			}
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -515,6 +530,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 		
@@ -587,6 +604,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -684,6 +703,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -814,22 +835,28 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	}
 	
 	def findLocalNodesForType(String type, EObject reqAssign) {
-		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
-		val Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>()
-		val AADM_Model model = findModel(reqAssign) as AADM_Model
-		
-		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
-			candidateNodes.put(node_id, node)
+		try{
+			val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+			val Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>()
+			val AADM_Model model = findModel(reqAssign) as AADM_Model
+			
+			for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+				val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
+				candidateNodes.put(node_id, node)
+			}
+			
+			val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
+			val List<String> validSubClasses = getKBReasoner().getSubClassesOf(keys, type)
+			
+			for (String validClass: validSubClasses){
+				nodes.add (candidateNodes.get(validClass))
+			}
+			return nodes	
+		}catch(NotRolePermissionException ex){
+			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
-		
-		val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
-		val List<String> validSubClasses = getKBReasoner().getSubClassesOf(keys, type)
-		
-		for (String validClass: validSubClasses){
-			nodes.add (candidateNodes.get(validClass))
-		}
-		return nodes
 	}
 	
 	def List<ENodeTemplate> findLocalNodes(EObject object){
