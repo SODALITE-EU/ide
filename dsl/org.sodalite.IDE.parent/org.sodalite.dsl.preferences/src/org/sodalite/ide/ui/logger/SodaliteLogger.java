@@ -17,4 +17,8 @@ public class SodaliteLogger {
 	public static void log(String msg, Exception e) {
 		LOGGER.log(new Status((e == null ? Status.INFO : Status.ERROR), BUNDLE.getSymbolicName(), msg, e));
 	}
+
+	public static void log(Exception e) {
+		LOGGER.log(new Status((e == null ? Status.INFO : Status.ERROR), BUNDLE.getSymbolicName(), null, e));
+	}
 }
