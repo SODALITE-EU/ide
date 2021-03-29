@@ -74,6 +74,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment
 import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
 import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
+import java.io.File
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -814,7 +815,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
 		val IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
 		var String properties_path = propertiesFile.getLocationURI().toString();
-		properties_path = properties_path.substring(properties_path.indexOf("/"));
+		properties_path = properties_path.substring(properties_path.indexOf(":") + 2);
+		if (File.separator.equals("/")){ //Linux
+			properties_path = "/" + properties_path
+		}
 		val Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
 	}
