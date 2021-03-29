@@ -11,6 +11,7 @@
 package org.sodalite.dsl.ui.contentassist;
 
 import com.google.common.base.Objects;
+import java.io.File;
 import java.net.URI;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
@@ -1215,7 +1216,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     final String directory = filepath.substring(_plus_1, filepath.lastIndexOf("/"));
     final IFile propertiesFile = project.getFile((((directory + "/.") + filename) + ".properties"));
     String properties_path = propertiesFile.getLocationURI().toString();
-    properties_path = properties_path.substring(properties_path.indexOf("/"));
+    int _indexOf_1 = properties_path.indexOf(":");
+    int _plus_2 = (_indexOf_1 + 2);
+    properties_path = properties_path.substring(_plus_2);
+    boolean _equals = File.separator.equals("/");
+    if (_equals) {
+      properties_path = ("/" + properties_path);
+    }
     final java.nio.file.Path path = FileSystems.getDefault().getPath(properties_path);
     return path;
   }
