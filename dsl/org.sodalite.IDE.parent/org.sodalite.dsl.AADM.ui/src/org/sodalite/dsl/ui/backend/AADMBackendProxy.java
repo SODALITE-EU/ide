@@ -49,6 +49,7 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.json.JSONHelper;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
@@ -139,7 +140,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
-			String version_tag, int workers) throws Exception {
+			String version_tag, int workers, boolean completeModel) throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -150,8 +151,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers, project,
-				event);
+		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
+				completeModel, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -238,16 +239,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
-			Path imageBuildConfPath, String version_tag, int workers, IProject project, ExecutionEvent event) {
+			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, IProject project,
+			ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				int steps = 1;
-				int number_steps = 5;
+				int number_steps = 7;
 				if (imageBuildConfPath != null)
-					number_steps = 7;
+					number_steps = 8;
 
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
@@ -262,13 +264,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Read RM DSL as plain text
 					String aadmDSL = AADMHelper.readFile(aadmfile);
 
+					// Read inputs and convert to JSON
+					String inputs_yaml = AADMHelper.readFile(inputs_yaml_path);
+					String inputs_json = JSONHelper.convertYamlToJson(inputs_yaml);
+
 					// Get module (namespace) from RM
 					String namespace = AADMHelper.getAADMModule(aadmfile, event);
 
-					boolean complete = true;
-					String name = aadmfile.getName();
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
-							complete);
+					String appName = aadmfile.getName();
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, appName, namespace,
+							aadmDSL, completeModel);
 					if (saveReport == null)
 						throw new Exception(
 								"There was a problem to save the AADM into the KB, please contact Sodalite administrator");
@@ -348,6 +353,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 						TimeUnit.SECONDS.sleep(5);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
+
+					// Report deployment to Refactorer
+					subMonitor.setTaskName("Reporting deployment to Refactorer");
+					getKBReasoner().notifyDeploymentToRefactoring(appName, aadmURI, depl_report.getBlueprint_id(),
+							depl_report.getDeployment_id(), inputs_json);
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {

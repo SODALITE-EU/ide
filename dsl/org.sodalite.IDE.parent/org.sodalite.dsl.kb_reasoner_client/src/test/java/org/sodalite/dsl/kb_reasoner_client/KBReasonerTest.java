@@ -65,6 +65,7 @@ class KBReasonerTest {
 	private final String xOPERA_URI = "http://192.168.2.15:5000/";
 	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
+	private final String Refactorer_URI = "http://192.168.2.166:8080/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -75,8 +76,8 @@ class KBReasonerTest {
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI,
-				PDS_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
+				Refactorer_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,

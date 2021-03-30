@@ -132,4 +132,7 @@ public interface KBReasoner {
 	BuildImageStatusReport checkBuildImageStatus(String innvocation_id) throws SodaliteException;
 
 	PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws SodaliteException;
+
+	void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
+			String inputs) throws SodaliteException;
 }

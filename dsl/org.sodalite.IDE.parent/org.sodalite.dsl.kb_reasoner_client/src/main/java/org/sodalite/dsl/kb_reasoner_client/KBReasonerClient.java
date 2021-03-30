@@ -105,6 +105,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String xoperaUri;
 	private String keycloakUri;
 	private String pdsUri;
+	private String refactorerUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -113,13 +114,14 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri) throws Exception {
+			String keycloakUri, String pdsUri, String refactorerUri) throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
 		this.pdsUri = pdsUri;
+		this.refactorerUri = refactorerUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -1184,6 +1186,36 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (Exception ex) {
 			throw new SodaliteException(ex.getMessage());
 		}
+	}
+
+	@Override
+	public void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
+			String inputs_json) throws SodaliteException {
+
+		Assert.notNull(appName, "Pass a not null appName");
+		Assert.notNull(aadm_id, "Pass a not null aadm_id");
+		Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
+		Assert.notNull(deployment_id, "Pass a not null deployment_id");
+		Assert.notNull(inputs_json, "Pass a not null inputs");
+		String url = refactorerUri + "rule-based-refactorer/v0.1/api/" + appName + "/deployments/";
+
+		Gson gson = new Gson();
+		JsonObject inputsJson = gson.fromJson(inputs_json, JsonObject.class);
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.add("inputs", inputsJson);
+		jsonObject.addProperty("aadm_id", aadm_id);
+		jsonObject.addProperty("blueprint_id", blueprint_id);
+		jsonObject.addProperty("deployment_id", deployment_id);
+		String payload = jsonObject.toString();
+
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			throw new SodaliteException(e.getMessage());
+		}
+
+		postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
 	}
 
 	private ModelData getModelsInModule(String type, String module) throws SodaliteException {
