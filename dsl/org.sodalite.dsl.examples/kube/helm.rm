@@ -157,7 +157,7 @@ node_types:
       kube_node:
         node: kube/sodalite.nodes.Kubernetes.Node
         capability: tosca.capabilities.Compute
-        relationship: tosca.relationships.HostedOn
+        relationship: tosca.relationships.DependsOn
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

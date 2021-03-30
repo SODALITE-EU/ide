@@ -27,8 +27,9 @@ node_templates:
         persistence:
           enabled: false
     requirements:
-      host:
-        node: kube/kube-master-remote-vm
       kube_node:
         node: kube/node-filesrv
+      host:
+        node: kube/kube-master-remote-vm
+
         

@@ -13,14 +13,6 @@ node_types:
         description: "Name of the node"
         required: true 
         type: string 
-      annotations:  
-        required: false 
-        type: map
-        default: "{}"
-      labels:  
-        required: false 
-        type: map
-        default: "{}"
       cpus:  
         required: false 
         type: integer
