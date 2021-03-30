@@ -126,8 +126,12 @@ public class RMBackendProxy {
 		if (pdsURI.isEmpty())
 			raiseConfigurationIssue("PDS URI user not set");
 
+		String refactorerURI = store.getString(PreferenceConstants.Refactorer_URI);
+		if (pdsURI.isEmpty())
+			raiseConfigurationIssue("Refactorer URI user not set");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI);
+				keycloakURI, pdsURI, refactorerURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

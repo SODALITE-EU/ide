@@ -51,8 +51,9 @@ public class AADMDeployHandler implements IHandler {
 					Path imageBuildConfPath = dialog.getImageBuildConfPath();
 					String version_tag = dialog.getVersionTag();
 					int workers = dialog.getWorkers();
+					boolean completeModel = dialog.getCompleteModel();
 					backendProxy.processDeployAADM(event, aadmFile, inputs_yaml_path, imageBuildConfPath, version_tag,
-							workers);
+							workers, completeModel);
 				}
 			}
 		} catch (Exception ex) {

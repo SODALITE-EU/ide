@@ -10,13 +10,15 @@ import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -37,6 +39,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private Path imageBuildConfPath = null;
 	private Spinner workersSpinner = null;
 	private Text versionTagText = null;
+	private Button completeModelCB = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
@@ -75,36 +78,78 @@ public class DeploymentWizardMainPage extends WizardPage {
 //				.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
 	}
 
+	public boolean getCompleteModel() {
+		return this.completeModelCB.getSelection();
+	}
+
+//	@Override
+//	public void createControl(Composite parent) {
+//		final Composite rootComposite = new Composite(parent, SWT.NONE);
+//		rootComposite.setLayout(GridLayoutFactory.fillDefaults().create());
+//
+//		final ScrolledComposite sc = new ScrolledComposite(rootComposite, SWT.BORDER | SWT.V_SCROLL);
+//		sc.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).hint(SWT.DEFAULT, 200).create());
+//		sc.setExpandHorizontal(true);
+//		sc.setExpandVertical(true);
+//
+//		final Composite containerMain = new Composite(sc, SWT.NULL);
+//		containerMain.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
+//
+//		for (int i = 0; i < 50; i++) {
+//			final Label label = new Label(containerMain, SWT.NONE);
+//			label.setText("Label " + i + 1);
+//		}
+//
+//		sc.setContent(containerMain);
+//		sc.setMinSize(containerMain.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+//
+//		setControl(rootComposite);
+//	}
+
 	@Override
 	public void createControl(Composite parent) {
-		container = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 3;
-		container.setLayout(layout);
+		final Composite rootComposite = new Composite(parent, SWT.NONE);
+		rootComposite.setLayout(GridLayoutFactory.fillDefaults().create());
+
+		final ScrolledComposite sc = new ScrolledComposite(rootComposite, SWT.BORDER | SWT.V_SCROLL);
+		sc.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).create());
+		sc.setExpandHorizontal(true);
+		sc.setExpandVertical(true);
+
+		sc.addListener(SWT.Resize, event -> {
+			int width = sc.getClientArea().width;
+			sc.setMinSize(parent.computeSize(width, SWT.DEFAULT));
+		});
+
+		final Composite containerMain = new Composite(sc, SWT.NULL);
+		containerMain.setLayout(GridLayoutFactory.swtDefaults().numColumns(3).create());
+
+		sc.setContent(containerMain);
+		sc.setMinSize(containerMain.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		// Version tag
-		Label versionTagLabel = new Label(container, SWT.NONE);
+		Label versionTagLabel = new Label(containerMain, SWT.NONE);
 		versionTagLabel.setText("Version tag (optional):");
 
-		versionTagText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		versionTagText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 		GridData versionTagGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		versionTagText.setLayoutData(versionTagGridData);
 
 		// Workers
-		Label workersLabel = new Label(container, SWT.NONE);
+		Label workersLabel = new Label(containerMain, SWT.NONE);
 		workersLabel.setText("Number orchestrator workers (optional):");
 
-		workersSpinner = new Spinner(container, SWT.BORDER | SWT.SINGLE);
+		workersSpinner = new Spinner(containerMain, SWT.BORDER | SWT.SINGLE);
 		GridData workersGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		workersSpinner.setLayoutData(workersGridData);
 		workersSpinner.setMinimum(0);
 		workersSpinner.setSelection(1);
 
 		// Image Build Configuration
-		Label imageBuildConfLabel = new Label(container, SWT.NONE);
+		Label imageBuildConfLabel = new Label(containerMain, SWT.NONE);
 		imageBuildConfLabel.setText("Select a image build configuration (optional):");
 
-		Text imageBuildConfText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		Text imageBuildConfText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);
 		imageBuildConfText.setLayoutData(imageBuildConfGridData);
 
@@ -114,7 +159,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 //			};
 //		});
 
-		Button buttonSelectImageBuildConfFile = new Button(container, SWT.PUSH);
+		Button buttonSelectImageBuildConfFile = new Button(containerMain, SWT.PUSH);
 		buttonSelectImageBuildConfFile.setText("Select...");
 		buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
@@ -134,16 +179,25 @@ public class DeploymentWizardMainPage extends WizardPage {
 			}
 		});
 
+		// Complete AADM model
+		Label completeModelLabel = new Label(containerMain, SWT.NONE);
+		completeModelLabel.setText("Complete AADM (optional):");
+		completeModelLabel.setToolTipText("Ask KB to complete the AADM model before deployment");
+
+		completeModelCB = new Button(containerMain, SWT.CHECK);
+		GridData completeModelGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		completeModelCB.setLayoutData(completeModelGridData);
+
 		// Inputs file
 		if (this.inputDefs != null && !this.inputDefs.isEmpty()) {
-			Label inputsFileLabel = new Label(container, SWT.NONE);
+			Label inputsFileLabel = new Label(containerMain, SWT.NONE);
 			inputsFileLabel.setText("Select an inputs file:");
 
-			Text inputsFileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+			Text inputsFileText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 			GridData inputsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
 			inputsFileText.setLayoutData(inputsFileGridData);
 
-			Button buttonSelectFile = new Button(container, SWT.PUSH);
+			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
 			buttonSelectFile.setText("Select...");
 			buttonSelectFile.addListener(SWT.Selection, new Listener() {
 				private String current_key = null;
@@ -200,15 +254,15 @@ public class DeploymentWizardMainPage extends WizardPage {
 			});
 
 			// Separator
-			Label separator = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
+			Label separator = new Label(containerMain, SWT.SEPARATOR | SWT.HORIZONTAL);
 			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 			separator.setLayoutData(data);
 
 			// Inputs
-			Label inputsLabel = new Label(container, SWT.NONE);
+			Label inputsLabel = new Label(containerMain, SWT.NONE);
 			inputsLabel.setText("Inputs:");
 			FontData fontData = inputsLabel.getFont().getFontData()[0];
-			Font font = new Font(container.getDisplay(),
+			Font font = new Font(containerMain.getDisplay(),
 					new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
 			inputsLabel.setFont(font);
 			data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
@@ -216,7 +270,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 			for (String input : inputDefs.keySet()) {
 				// Label
-				Label label = new Label(container, SWT.NONE);
+				Label label = new Label(containerMain, SWT.NONE);
 				label.setText(input);
 
 				// Text
@@ -224,12 +278,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 				String inputType = inputDefs.get(input).getType();
 				if (inputType != null && (inputType.contains("map") || inputType.contains("list"))) {
 					int number_lines = 5;
-					text = new Text(container, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
+					text = new Text(containerMain, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
 					GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 					gridData.heightHint = number_lines * text.getLineHeight();
 					text.setLayoutData(gridData);
 				} else {
-					text = new Text(container, SWT.BORDER | SWT.SINGLE);
+					text = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 					GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 					text.setLayoutData(gd);
 				}
@@ -245,7 +299,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 			}
 		}
 
-		setControl(container);
+		setControl(rootComposite);
 		setPageComplete(false);
 	}
 

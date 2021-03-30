@@ -1,2 +1,20 @@
-ssh-key-name: 154-48-185-206-xOpera
-docker-registry-ip: 154.48.185.207
+image-name:  centos-node_exporter
+mysql-db-pass:  somepassword
+docker-network:  snow
+docker-registry-url:  154.48.185.207
+flavor-name:  m1.medium
+security-groups:  default,remote_access,snow
+demo-files-path:  /demo
+env: 
+
+docker-registry-cert-country-name:  SI
+docker-registry-cert-organization-name:  XLAB
+docker-registry-cert-email-address:  some@xlab.si
+mysql-env: 
+  MYSQL_DATABASE: wc_crawler_db
+  MYSQL_ROOT_PASSWORD: somepassword
+
+ssh-key-name:  154-48-185-209-xOpera
+openstack-network-name:  orchestrator-network
+username: yosu
+

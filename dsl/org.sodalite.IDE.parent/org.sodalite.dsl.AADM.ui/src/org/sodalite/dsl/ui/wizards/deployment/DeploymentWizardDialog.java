@@ -40,4 +40,8 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getWorkers();
 	}
 
+	public boolean getCompleteModel() {
+		return ((DeploymentWizard) this.getWizard()).getCompleteModel();
+	}
+
 }
