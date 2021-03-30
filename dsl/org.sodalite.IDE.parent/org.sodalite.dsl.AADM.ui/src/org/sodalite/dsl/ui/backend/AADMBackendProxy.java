@@ -49,7 +49,6 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
-import org.sodalite.dsl.kb_reasoner_client.json.JSONHelper;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
@@ -266,13 +265,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Read inputs and convert to JSON
 					String inputs_yaml = AADMHelper.readFile(inputs_yaml_path);
-					String inputs_json = JSONHelper.convertYamlToJson(inputs_yaml);
 
 					// Get module (namespace) from RM
 					String namespace = AADMHelper.getAADMModule(aadmfile, event);
 
-					String appName = aadmfile.getName();
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, appName, namespace,
+					String aadmName = aadmfile.getName();
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, aadmName, namespace,
 							aadmDSL, completeModel);
 					if (saveReport == null)
 						throw new Exception(
@@ -356,8 +354,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
+					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadmURI, depl_report.getBlueprint_id(),
-							depl_report.getDeployment_id(), inputs_json);
+							depl_report.getDeployment_id(), inputs_yaml);
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {

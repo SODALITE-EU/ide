@@ -152,6 +152,7 @@ public class KBReasonerClient implements KBReasoner {
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
 			requestFactory.setReadTimeout(0); // Unlimited
 			sslRestTemplate = new RestTemplate(requestFactory);
+			sslRestTemplate.setErrorHandler(new SodaliteRestClientErrorHandler());
 		}
 		return sslRestTemplate;
 	}
@@ -163,6 +164,7 @@ public class KBReasonerClient implements KBReasoner {
 			requestFactory.setReadTimeout(0); // Unlimited
 
 			restTemplate = new RestTemplate(requestFactory);
+			restTemplate.setErrorHandler(new SodaliteRestClientErrorHandler());
 		}
 		return restTemplate;
 	}
@@ -1190,32 +1192,36 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
-			String inputs_json) throws SodaliteException {
-
-		Assert.notNull(appName, "Pass a not null appName");
-		Assert.notNull(aadm_id, "Pass a not null aadm_id");
-		Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
-		Assert.notNull(deployment_id, "Pass a not null deployment_id");
-		Assert.notNull(inputs_json, "Pass a not null inputs");
-		String url = refactorerUri + "rule-based-refactorer/v0.1/api/" + appName + "/deployments/";
-
-		Gson gson = new Gson();
-		JsonObject inputsJson = gson.fromJson(inputs_json, JsonObject.class);
-		JsonObject jsonObject = new JsonObject();
-		jsonObject.add("inputs", inputsJson);
-		jsonObject.addProperty("aadm_id", aadm_id);
-		jsonObject.addProperty("blueprint_id", blueprint_id);
-		jsonObject.addProperty("deployment_id", deployment_id);
-		String payload = jsonObject.toString();
-
-		URI uri;
+			String inputs) throws SodaliteException {
 		try {
-			uri = new URI(url);
-		} catch (URISyntaxException e) {
-			throw new SodaliteException(e.getMessage());
-		}
+			Assert.notNull(appName, "Pass a not null appName");
+			Assert.notNull(aadm_id, "Pass a not null aadm_id");
+			Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
+			Assert.notNull(deployment_id, "Pass a not null deployment_id");
+			Assert.notNull(inputs, "Pass a not null inputs");
+			String url = refactorerUri + "rule-based-refactorer/v0.1/api/" + appName + "/deployments/";
 
-		postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+			Gson gson = new Gson();
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("inputs", inputs);
+			jsonObject.addProperty("aadm_id", aadm_id);
+			jsonObject.addProperty("blueprint_id", blueprint_id);
+			jsonObject.addProperty("deployment_id", deployment_id);
+			String payload = jsonObject.toString();
+
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException e) {
+				throw new SodaliteException(e.getMessage());
+			}
+
+			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
+		}
 	}
 
 	private ModelData getModelsInModule(String type, String module) throws SodaliteException {

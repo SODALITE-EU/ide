@@ -304,6 +304,17 @@ class KBReasonerTest {
 		assertNotNull(report.getURI());
 	}
 
+	@Test
+	void testNotifyDeploymentToRefactoring() throws Exception {
+		String appName = "snow";
+		String aadm_id = "https\\://www.sodalite.eu/ontologies/workspace/1/vbeit9auui3d3j0tdekbljfndl/AADM_92aj0uo7t6l6u8mv5tmh99pjnb";
+		String blueprint_id = "51d1671d-c9f5-418d-b19f-94437f5460ac";
+		String deployment_id = "612efea0-c666-42de-9803-5adce8d59eac";
+		Path inputs_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
+		String inputs = new String(Files.readAllBytes(inputs_path));
+		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, blueprint_id, deployment_id, inputs);
+	}
+
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)
 			throws IOException, Exception {
 		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
