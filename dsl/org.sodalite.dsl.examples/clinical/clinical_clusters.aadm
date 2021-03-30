@@ -41,13 +41,13 @@ node_templates:
       scheduler: "slurm"
       username: "kamil"
     attributes:
-      public_address: "134.158.151.31"
+      public_address: "149.156.182.39"
     capabilities:
       resources:
         properties:
-          gpus: 5
-          cpus: 200
-          memory: 650687
+          gpus: 0
+          cpus: 4
+          memory: 8192
       optimisations:
         properties:
           target: "egi"

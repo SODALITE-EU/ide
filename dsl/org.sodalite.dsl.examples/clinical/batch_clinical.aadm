@@ -62,7 +62,6 @@ node_templates:
       standard_output_file: "density-mapper.out"
       standard_error_file: "density-mapper.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
@@ -83,7 +82,6 @@ node_templates:
       standard_output_file: "prob-mapper.out"
       standard_error_file: "prob-mapper.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
@@ -104,7 +102,6 @@ node_templates:
       standard_output_file: "boundary-condition.out"
       standard_error_file: "boundary-condition.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
