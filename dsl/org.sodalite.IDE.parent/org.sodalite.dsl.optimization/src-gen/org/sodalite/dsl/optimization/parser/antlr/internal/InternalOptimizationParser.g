@@ -2460,7 +2460,7 @@ ruleEHPCConfig returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEHPCConfigRule());
 					}
-					add(
+					set(
 						$current,
 						"parallelisation",
 						lv_parallelisation_1_0,
@@ -2469,31 +2469,6 @@ ruleEHPCConfig returns [EObject current=null]
 				}
 			)
 		)
-		(
-			otherlv_2=Comma
-			{
-				newLeafNode(otherlv_2, grammarAccess.getEHPCConfigAccess().getCommaKeyword_2_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getEHPCConfigAccess().getParallelisationEParallelisationParserRuleCall_2_1_0());
-					}
-					lv_parallelisation_3_0=ruleEParallelisation
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getEHPCConfigRule());
-						}
-						add(
-							$current,
-							"parallelisation",
-							lv_parallelisation_3_0,
-							"org.sodalite.dsl.optimization.Optimization.EParallelisation");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
 	)
 ;
 

@@ -15,16 +15,18 @@ node_types:
 					create:
 						inputs:
 							volume_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/add_volume.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_volume.yml"
 					delete:
 						inputs:
 							volume_name:    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/docker/playbooks/remove_volume.yml"
+							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_volume.yml"

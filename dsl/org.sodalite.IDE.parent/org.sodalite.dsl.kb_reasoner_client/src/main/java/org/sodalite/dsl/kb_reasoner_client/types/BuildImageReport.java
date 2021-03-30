@@ -1,32 +1,18 @@
 package org.sodalite.dsl.kb_reasoner_client.types;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BuildImageReport {
 
-	String status;
-	String message;
-	String session_token;
+	String invocation_id;
 
-	public String getStatus() {
-		return status;
+	public String getInvocation_id() {
+		return invocation_id;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setInvocation_id(String invocation_id) {
+		this.invocation_id = invocation_id;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getSession_token() {
-		return session_token;
-	}
-
-	public void setSession_token(String session_token) {
-		this.session_token = session_token;
-	}
 }

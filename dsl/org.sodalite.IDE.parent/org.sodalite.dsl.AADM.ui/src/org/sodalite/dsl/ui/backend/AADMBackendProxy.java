@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +51,7 @@ import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -61,6 +63,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSuggestion;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.optimization.optimization.EAITraining;
 import org.sodalite.dsl.optimization.optimization.EAITrainingCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
@@ -151,8 +154,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 				event);
 	}
 
-	public void processSaveImages(ExecutionEvent event, Path imageBuildConfPath) throws Exception {
-		saveImages(imageBuildConfPath, event);
+	public void processBuildImages(Path imageBuildConfPath) throws Exception {
+		buildImages(imageBuildConfPath);
+	}
+
+	public void processPDSUpdate(Path inputsFilePath, String namespace, String platformType) {
+		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
@@ -298,12 +305,13 @@ public class AADMBackendProxy extends RMBackendProxy {
 						// Ask ImageBuilder status
 						subMonitor.setTaskName("Checking image creation status");
 
-						BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
-						while (!(biStatus == BuildImageStatus.DONE)) {
-							if (biStatus == BuildImageStatus.FAILED)
+						BuildImageStatusReport statusReport = getKBReasoner()
+								.checkBuildImageStatus(biReport.getInvocation_id());
+						while (!(statusReport.getStatus() == BuildImageStatus.DONE)) {
+							if (statusReport.getStatus() == BuildImageStatus.FAILED)
 								throw new Exception("Build image failed as reported by Image Builder");
 							TimeUnit.SECONDS.sleep(5);
-							biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+							statusReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 						}
 						subMonitor.worked(steps++);
 					}
@@ -345,9 +353,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with token: "
-									+ admin_report[0];
-							showInfoDialog(admin_report[0], "Deploy AADM", message);
+							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with: \nblueprint id: "
+									+ admin_report[0] + "\ndeployment id:" + admin_report[1];
+							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment_id: "
+									+ admin_report[1];
+							showInfoDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message);
 						}
 					});
@@ -363,8 +373,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 							String message = "There were problems to deploy the AADM into the infrastructure: "
 									+ e.getMessage()
 									+ "\nPlease contact Sodalite administrator and provide her/him this information: "
-									+ "blueprint token: " + admin_report[0] + ", session token: " + admin_report[1];
-							showErrorDialog(admin_report[0], "Deploy AADM", message);
+									+ "blueprint id: " + admin_report[0] + ", deployment id: " + admin_report[1];
+							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment id: "
+									+ admin_report[1];
+							showErrorDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
@@ -378,14 +390,15 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void saveImages(Path imageBuildConfPath, ExecutionEvent event) {
-		Job job = new Job("Save images") {
+	private void buildImages(Path imageBuildConfPath) {
+		Job job = new Job("Build images") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-
+				String[] report = new String[1];
+				;
 				try {
 					// Ask ImageBuilder to build the images
 					subMonitor.setTaskName("Requesting the creation of images");
@@ -398,12 +411,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask ImageBuilder status
 					subMonitor.setTaskName("Checking image creation status");
 
-					BuildImageStatus biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
-					while (!(biStatus == BuildImageStatus.DONE)) {
-						if (biStatus == BuildImageStatus.FAILED)
-							throw new Exception("Build image failed as reported by Image Builder");
+					BuildImageStatusReport bisReport = getKBReasoner()
+							.checkBuildImageStatus(biReport.getInvocation_id());
+					report[0] = biReport.getInvocation_id();
+					while (!(bisReport.getStatus() == BuildImageStatus.DONE)) {
+						if (bisReport.getStatus() == BuildImageStatus.FAILED)
+							throw new Exception("\nImage Builde failed with response: " + bisReport.getResponse());
 						TimeUnit.SECONDS.sleep(5);
-						biStatus = getKBReasoner().checkBuildImageStatus(biReport.getSession_token());
+						bisReport = getKBReasoner().checkBuildImageStatus(biReport.getInvocation_id());
 					}
 
 					// Upon completion, show dialog
@@ -420,7 +435,56 @@ public class AADMBackendProxy extends RMBackendProxy {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "There were problems to save the images: " + e.getMessage()
+							String message = "Build images did not success"
+									+ "\nPlease contact Sodalite administrator and provide the reference below"
+									+ "\nInvocation_id: " + report[0];
+							String infoToPaste = "Invocation_id: " + report[0];
+							showErrorDialog(infoToPaste, "Save images", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error building images", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void pdsUpdate(Path inputsFilePath, String namespace, String platformType) {
+		Job job = new Job("PDS update") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				// TODO Inform about percentage of progress
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+
+				try {
+					// Ask PDS to update
+					subMonitor.setTaskName("Requesting update to PDS");
+
+					String inputs = RMHelper.readFile(inputsFilePath);
+					PDSUpdateReport report = getKBReasoner().pdsUpdate(inputs, namespace, platformType);
+					subMonitor.worked(1);
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "PDS update have been successfully created with \naadm_uri: "
+									+ report.getAadmuri() + "\nrm_uri: " + report.getRmuri();
+							showInfoDialog("", "Save images", message);
+						}
+					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems in PDS to update: " + e.getMessage()
 									+ "\nPlease contact Sodalite administrator and report her/him above error message";
 							showErrorDialog("", "Save images", message);
 							SodaliteLogger.log(message, e);
@@ -601,12 +665,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
+				String message = error.getDescription() + ": " + error.getEntity_name();
+				List<String> hierarchyPath = Arrays.asList(error.getContext(), error.getEntity_name());
+				String path = createPath(hierarchyPath);
 				String pathType = getPathType(error.getType());
-				String path = error.getEntity_name() != null ? error.getContext() + "/" + error.getEntity_name()
-						: error.getContext();
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						path, pathType, Severity.ERROR, error.getType(), error.getDescription()));
+				List<String> type = Arrays.asList(error.getType());
+				String code = getCode(type); // Code is used for quick fixes
+				List<String> data = Arrays.asList(error.getEntity_name(), error.getContext());
+				issues.add(new ValidationIssue(message, path, pathType, Severity.ERROR, code, data));
 			}
 		}
 
@@ -627,7 +693,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
 				String path = createPath(suggestion.getHierarchyPath());
 				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode(suggestion.getHierarchyPath());
+				String code = getCode(suggestion.getHierarchyPath()); // Code is used for quick fixes
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -642,6 +708,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String code = "Suggestion";
 		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
+		} else if (hierarchyPath.contains("RequiredProperty")) {
+			code = ValidationIssue.PROPERTY;
 		}
 
 		return code;
@@ -707,17 +775,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 			if (eobject instanceof AADM_Model) {
 				AADM_Model model = (AADM_Model) eobject;
 				StringTokenizer st = new StringTokenizer(path, "/");
-				EObject target = AADMHelper.findElement(model, st.nextToken());
-				if (target != null) {
-					if (target instanceof ENodeTemplate)
-						path = "node_templates/" + path;
-					else if (target instanceof EPolicyDefinition)
-						path = "policies/" + path;
-					st = new StringTokenizer(path, "/");
-					result = getAADMIssueFeature(model, path, path_type, st);
-				}
+				result = getAADMIssueFeature(model, path, path_type, st);
 			} else if (eobject instanceof Optimization_Model) {
-				StringTokenizer st = new StringTokenizer(path, "/");
 				Optimization_Model model = (Optimization_Model) eobject;
 				result = getOptimizationIssueFeature(model, path, path_type);
 			}
@@ -831,4 +890,5 @@ public class AADMBackendProxy extends RMBackendProxy {
 			req = matcher.group(1);
 		return req;
 	}
+
 }

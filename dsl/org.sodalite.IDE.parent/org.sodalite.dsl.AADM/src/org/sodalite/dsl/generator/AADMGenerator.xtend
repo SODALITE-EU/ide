@@ -209,11 +209,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  «IF p.property.req_cap.module !== null»
 	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
-	  «ELSE»
-	  exchange:value "«p.property.req_cap.type»" ; 
-	  «ENDIF» 
 	.
 	«ENDIF»		
 	

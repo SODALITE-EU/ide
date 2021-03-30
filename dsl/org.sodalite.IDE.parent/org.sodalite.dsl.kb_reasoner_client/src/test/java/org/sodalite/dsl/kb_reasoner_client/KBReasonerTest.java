@@ -28,6 +28,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -39,6 +42,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
@@ -56,21 +60,23 @@ class KBReasonerTest {
 	String nodeType = "tosca.nodes.SoftwareComponent";
 
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
-	private final String IaC_URI = "http://154.48.185.202:8080/";
-	private final String image_builder__URI = ""; // FIXME set default value
-	private final String xOPERA_URI = "http://154.48.185.209:5001/";
+	private final String IaC_URI = "http://192.168.2.107:8081/";
+	private final String image_builder__URI = "http://192.168.2.70:5000/";
+	private final String xOPERA_URI = "http://192.168.2.15:5000/";
 	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
+	private final String PDS_URI = "http://192.168.2.178:8089/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
 
 	private String aadmURI = null;
 
-	private boolean AIM_Enabled = false;
+	private boolean AIM_Enabled = true;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
-		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI);
+		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI,
+				PDS_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -423,5 +429,28 @@ class KBReasonerTest {
 		List<String> modules = Arrays.asList("radon");
 		OperationDefinitionData operations = kbclient.getOperations(modules);
 		assertNotNull(operations);
+	}
+
+	@Test
+	void testBuildImage() throws Exception {
+		Path build_image_json_path = FileSystems.getDefault().getPath("src/test/resources/build_image.json");
+		String image_build_conf = new String(Files.readAllBytes(build_image_json_path));
+		BuildImageReport report = kbclient.buildImage(image_build_conf);
+		BuildImageStatusReport status = null;
+		do {
+			status = kbclient.checkBuildImageStatus(report.getInvocation_id());
+			System.out.println("status: " + status.getStatus() + ", state: " + status.getState());
+			Thread.currentThread().sleep(5000);
+		} while (status != null && status.getStatus().equals(BuildImageStatus.BUILDING));
+	}
+
+	@Test
+	void testPDSUpdate() throws Exception {
+		Path pds_inputs_path = FileSystems.getDefault().getPath("src/test/resources/pds_inputs.json");
+		String pds_inputs = new String(Files.readAllBytes(pds_inputs_path));
+		String namespace = "TestOpenstack";
+		String platform_type = "openstack";
+		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
+		assertNotNull(report);
 	}
 }

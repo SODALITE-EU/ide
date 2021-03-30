@@ -12,7 +12,9 @@ public class DeploymentReport {
 	Map<String, String> inputs;
 	String operation;
 	String state;
-	String timestamp;
+	String timestamp_start;
+	String timestamp_submission;
+	String timestamp_end;
 	String version_id;
 	Integer workers;
 
@@ -56,14 +58,6 @@ public class DeploymentReport {
 		this.state = state;
 	}
 
-	public String getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
-
 	public String getVersion_id() {
 		return version_id;
 	}
@@ -79,4 +73,29 @@ public class DeploymentReport {
 	public void setWorkers(Integer workers) {
 		this.workers = workers;
 	}
+
+	public String getTimestamp_start() {
+		return timestamp_start;
+	}
+
+	public void setTimestamp_start(String timestamp_start) {
+		this.timestamp_start = timestamp_start;
+	}
+
+	public String getTimestamp_submission() {
+		return timestamp_submission;
+	}
+
+	public void setTimestamp_submission(String timestamp_submission) {
+		this.timestamp_submission = timestamp_submission;
+	}
+
+	public String getTimestamp_end() {
+		return timestamp_end;
+	}
+
+	public void setTimestamp_end(String timestamp_end) {
+		this.timestamp_end = timestamp_end;
+	}
+
 }

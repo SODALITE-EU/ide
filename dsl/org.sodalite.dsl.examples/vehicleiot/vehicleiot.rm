@@ -15,8 +15,8 @@ node_types:
 									attribute: tosca.nodes.Compute.public_address
 									req_cap: tosca.nodes.SoftwareComponent.host
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
+							primary: "/workspace/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"
+							dependencies: ["/workspace/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
 							
 	sodalite.nodes.PrometheusDockerizedComponent:  
 		derived_from: docker/sodalite.nodes.DockerizedComponent
@@ -40,5 +40,4 @@ relationship_types:
 									entity: TARGET //FIXME: provide content assistance support for TARGET
 									attribute: tosca.nodes.Compute.public_address 
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/prometheus.yml.tmpl"]
+							primary: "/workspace/iac-management/use-cases/vehicleiot-uc/full-demo/playbooks/configure_prometheus.yml"

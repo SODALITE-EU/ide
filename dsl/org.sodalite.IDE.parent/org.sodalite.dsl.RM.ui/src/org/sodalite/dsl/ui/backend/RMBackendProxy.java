@@ -122,8 +122,12 @@ public class RMBackendProxy {
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
 
+		String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+		if (pdsURI.isEmpty())
+			raiseConfigurationIssue("PDS URI user not set");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI);
+				keycloakURI, pdsURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
@@ -365,6 +369,9 @@ public class RMBackendProxy {
 			// Process Issues
 			IProgressMonitor monitor = new NullProgressMonitor();
 			issueProcessor.processIssues(issues, monitor);
+
+			// TODO keep issues attached to the model until they are fixed (they should not
+			// vanish after the model is saved)
 		}
 	}
 

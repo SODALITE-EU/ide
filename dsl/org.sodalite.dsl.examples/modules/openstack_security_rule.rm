@@ -39,34 +39,48 @@ node_types:
 				description: "Description of the security group in openstack"
 				required: true 
 				type: string 
+			env:
+				description: "Optional OpenStack environment"
+				type: map
+				required: false
+				default: ''				
 		interfaces:  
 			Standard:  
 				type: tosca.interfaces.node.lifecycle.Standard   
 				operations:
 					create:  
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							ports: 
+								type: map
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.ports
 									
 							group_name:
+								type: string
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name
 							group_description: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_description
+							env:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.env										
 					delete:  
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							group_name: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.SecurityRules.group_name

@@ -36,7 +36,7 @@ capability_types:
 									// entity: SELF
 									// property: sodalite.nodes.hpc.job.torque.configuration.name
 						// implementation:
-							// primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/library/torque/torque-job/playbooks/dummy-relation-interface.yml"
+							// primary: "/workspace/iac-management/hpc/hpc-discovery/library/torque/torque-job/playbooks/dummy-relation-interface.yml"
 
 
 node_types:
@@ -109,12 +109,12 @@ node_types:
 									entity: SELF
 									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit		
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml"
+							primary: "/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml"
 							dependencies: [
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/job.sh",
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh",
-							"/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2",
-							"/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/job.pbs.j2"
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/job.sh",
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh",
+							"/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2",
+							"/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/job.pbs.j2"
 							]
 	
 	sodalite.nodes.hpc.job.torque.configuration.base:
@@ -282,12 +282,12 @@ node_types:
 									entity: SELF
 									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit
 						implementation: 
-							primary: '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml'
+							primary: '/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create.yml'
 							dependencies: [
-							'/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2',
-							'/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/job.pbs.j2',
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/job.sh",
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh"]
+							'/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2',
+							'/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/job.pbs.j2',
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/job.sh",
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh"]
 
 	
 							
@@ -334,11 +334,11 @@ node_types:
 									entity: SELF
 									property: hpc/sodalite.nodes.hpc.job.torque.configuration.base.enable_audit
 						implementation: 
-							primary: '/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create-preconfigured.yml'
-							dependencies: ['/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2',
-							'/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/templates/preconfigured-job.pbs.j2',
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/job.sh",
-							"/home/yosu/Projects/Sodalite/Git/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh"]							
+							primary: '/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/create-preconfigured.yml'
+							dependencies: ['/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/audit.sh.j2',
+							'/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/templates/preconfigured-job.pbs.j2',
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/job.sh",
+							"/workspace/iac-management/hpc/hpc-discovery/artifacts/failed.job.sh"]							
 	
 	sodalite.nodes.hpc.wm.torque: 
 		description: "torque wm, here we can define properties/attributes applicable for torque WM"
@@ -407,7 +407,7 @@ node_types:
 									property: hpc/sodalite.nodes.hpc.job.torque.configuration.workspace
 									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/configure.yml"
+							primary: "/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/configure.yml"
 								
 					start:
 						inputs:
@@ -447,7 +447,7 @@ node_types:
 									property: hpc/sodalite.nodes.hpc.job.torque.configuration.enable_audit
 									req_cap: hpc/sodalite.nodes.hpc.job.torque.configured_job
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
+							primary: "/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/start.yml"
 		capabilities:
 			job:
 				type: hpc/sodalite.capabilities.hpc.StartedJob
@@ -537,5 +537,5 @@ node_types:
 									attribute: hpc/sodalite.nodes.hpc.job.torque.job_enable_audit
 									req_cap: hpc/sodalite.nodes.hpc.job.torque.job		
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/check.yml"    		
+							primary: "/workspace/iac-management/use-cases/modules/hpc/torque/torque-job/playbooks/check.yml"    		
 		

@@ -70,7 +70,7 @@ node_types:
 									entity: SELF
 									property: sodalite.data.textFile.content
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/create-text-file.yml"
+							primary: "/workspace/iac-management/hpc/data-movement/library/data/mover/playbooks/create-text-file.yml"
 							
 	sodalite.data.mover:
 		description: 'Moves data from "src" node to "dst" node'
@@ -123,7 +123,7 @@ node_types:
 									entity: SELF
 									property: sodalite.data.mover.url.dst
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/create-url.yml"	
+							primary: "/workspace/iac-management/hpc/data-movement/library/data/mover/playbooks/create-url.yml"	
 		
 	sodalite.data.mover.gridftp:
 		description: 'Moves data from "src" location to "dst" location.
@@ -189,7 +189,7 @@ node_types:
 									attribute: sodalite.nodes.hpc.wm.torque.ssh-key
 									req_cap: sodalite.nodes.hpc.job.torque.configuration.base.host
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/configure-gridftp-client.yml"
+							primary: "/workspace/iac-management/hpc/data-movement/library/data/mover/playbooks/configure-gridftp-client.yml"
 					start:
 						inputs:
 							remote_host_public_address:
@@ -244,6 +244,6 @@ node_types:
 									entity: SELF
 									property: sodalite.data.mover.gridftp.parallel_streams
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/hpc/data-movement/library/data/mover/playbooks/start-gridftp-client.yml"
+							primary: "/workspace/iac-management/hpc/data-movement/library/data/mover/playbooks/start-gridftp-client.yml"
 				
 							

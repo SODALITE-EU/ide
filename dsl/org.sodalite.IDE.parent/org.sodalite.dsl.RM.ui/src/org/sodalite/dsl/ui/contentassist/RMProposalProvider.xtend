@@ -68,6 +68,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
 import org.sodalite.dsl.rM.EPolicyType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EInterfaceType
+import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -112,8 +114,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
+			
+		val String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+		if (pdsURI.isEmpty())
+			raiseConfigurationIssue("PDS URI user not set");
 
-		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI);
+		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI);
 
 		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
 		if (keycloak_enabled.equalsIgnoreCase("true")) {
@@ -163,21 +169,26 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeRM_Model_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for imports")
-		
-		val ReasonerData<String> modules = getKBReasoner().modules
+		try{
+			System.out.println("Invoking content assist for imports")
 			
-		System.out.println ("Modules retrieved from KB: " + modules.elements)
-		for (module: modules.elements){
-			System.out.println ("\tModule: " + module)
-			val proposalText = extractModule(module)
-			val displayText = proposalText
-			val additionalProposalInfo = null
-			val Image image = getImage("icons/module2.png");
-			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			val ReasonerData<String> modules = getKBReasoner().modules
+				
+			System.out.println ("Modules retrieved from KB: " + modules.elements)
+			for (module: modules.elements){
+				System.out.println ("\tModule: " + module)
+				val proposalText = extractModule(module)
+				val displayText = proposalText
+				val additionalProposalInfo = null
+				val Image image = getImage("icons/module2.png");
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+	
+			super.completeRM_Model_Imports(model, assignment, context, acceptor)
+			
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
-
-		super.completeRM_Model_Imports(model, assignment, context, acceptor)
 	}
 	
 	override void completeENodeType_Name(EObject model, Assignment assignment, ContentAssistContext context,
@@ -232,6 +243,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -274,6 +287,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -314,8 +329,9 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
-	
 	}
 	
 	override void completeEPolicyTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -355,6 +371,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	
 	}
@@ -394,6 +412,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -432,6 +452,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -470,7 +492,9 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
-		}		
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
 	}
 	
 	override void completeEPropertyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -538,6 +562,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 		}catch(NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -720,15 +746,21 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}	
 	}
 	
 	override void completeEEvenFilter_Requirement(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val EEvenFilter filter = model as EEvenFilter
-		if (filter.node !== null){
-			var String qnode = getNodeName (filter.node)
-			val RequirementDefinitionData reqs = getKBReasoner().getTypeRequirements(qnode)
-			createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
+		try{
+			val EEvenFilter filter = model as EEvenFilter
+			if (filter.node !== null){
+				var String qnode = getNodeName (filter.node)
+				val RequirementDefinitionData reqs = getKBReasoner().getTypeRequirements(qnode)
+				createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
+			}
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -744,6 +776,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -758,6 +792,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			createProposalsForOperationList(localOperations, type_image, null, context, acceptor)
 		}catch (NotRolePermissionException ex){
 			showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -1128,14 +1164,18 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	def proposeAttributesForEntityInKB(String resourceId, List<String> proposals){
-		val AttributeDefinitionData attributeData = getKBReasoner().getTypeAttributes(resourceId)
-		for (attr:attributeData.elements){
-			val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
-			var attr_owner = resourceId
-			if (attr.definedIn !== null)
-				attr_owner = attr.definedIn.substring(prefix.length)
-			val proposal = attr_owner + '.' + getLastSegment(attr.uri.toString, '/')
-			proposals.add(proposal)
+		try{
+			val AttributeDefinitionData attributeData = getKBReasoner().getTypeAttributes(resourceId)
+			for (attr:attributeData.elements){
+				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
+				var attr_owner = resourceId
+				if (attr.definedIn !== null)
+					attr_owner = attr.definedIn.substring(prefix.length)
+				val proposal = attr_owner + '.' + getLastSegment(attr.uri.toString, '/')
+				proposals.add(proposal)
+			}
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}
 	
@@ -1163,14 +1203,18 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
-		val PropertyDefinitionData propertyData = getKBReasoner().getTypeProperties(resourceId)
-		for (prop:propertyData.elements){
-			val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
-			var prop_owner = resourceId
-			if (prop.definedIn !== null)
-				prop_owner = prop.definedIn.substring(prefix.length)
-			val proposal = prop_owner + '.' + getLastSegment(prop.uri.toString, '/')
-			proposals.add(proposal)
+		try{
+			val PropertyDefinitionData propertyData = getKBReasoner().getTypeProperties(resourceId)
+			for (prop:propertyData.elements){
+				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
+				var prop_owner = resourceId
+				if (prop.definedIn !== null)
+					prop_owner = prop.definedIn.substring(prefix.length)
+				val proposal = prop_owner + '.' + getLastSegment(prop.uri.toString, '/')
+				proposals.add(proposal)
+			}	
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
 		}
 	}	
 	

@@ -9,12 +9,13 @@ public class ValidationIssue {
 	String code;
 	Object data;
 	Severity type;
-	
+
 	public static final String OPTIMIZATION = "Optimization";
 	public static final String OPTIMIZATION_MISMATCH = "OptimizationMismatch";
 	public static final String REQUIREMENT = "Requirement";
-	
-	public ValidationIssue (String message, String path, String pathType, Severity type, String code, Object data){
+	public static final String PROPERTY = "Property";
+
+	public ValidationIssue(String message, String path, String pathType, Severity type, String code, Object data) {
 		this.message = message;
 		this.path = path;
 		this.pathType = pathType;
@@ -30,15 +31,15 @@ public class ValidationIssue {
 	public String getPath() {
 		return path;
 	}
-	
+
 	public Severity getType() {
 		return type;
 	}
-	
+
 	public String getPathType() {
 		return pathType;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}

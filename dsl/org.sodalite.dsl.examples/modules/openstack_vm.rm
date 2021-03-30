@@ -45,6 +45,11 @@ node_types:
 				type: string
 				default: ""
 				required: false 
+			env:
+				description: "Optional OpenStack environment"
+				type: map
+				required: false
+				default: ''					
 		attributes:  
 			id:  
 				description: "OpenStack id of the VM"
@@ -67,59 +72,77 @@ node_types:
 					create:  
 						inputs: 
 							network: 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.network
 							flavor: 	
+								type: string
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.flavor
 							key_name:                 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.key_name
 							image:                    
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.image
 							security_groups:          
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.security_groups								
 							vm_name:                  
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.name
 							ansible_user:             
+								type: string
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 							include_exporter:         
+								type: boolean
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.include_exporter
 							timeout:                  
+								type: integer
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.timeout
 							floating_ip_pools:        
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.floating_ip_pools
 							userdata:                 
+								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.userdata
+							env:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.env		
+																
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
 					delete:  
 						inputs:  
 							id:                       
+								type: string
 								default: get_attribute:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
-							dependencies: ["/home/yosu/Projects/Sodalite/Git/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
+							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
             

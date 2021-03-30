@@ -12,6 +12,7 @@ package org.sodalite.dsl.kb_reasoner_client;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -34,11 +35,13 @@ import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
+import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
@@ -57,6 +60,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.PDSUpdateReport;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementAssignmentData;
@@ -100,6 +104,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String image_builder_uri;
 	private String xoperaUri;
 	private String keycloakUri;
+	private String pdsUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -108,16 +113,17 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri) throws Exception {
+			String keycloakUri, String pdsUri) throws Exception {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
 		this.xoperaUri = xoperaUri;
 		this.keycloakUri = keycloakUri;
+		this.pdsUri = pdsUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
-			throws Exception {
+			throws SodaliteException {
 		this.keycloak_user = user;
 		this.keycloak_password = password;
 		this.keycloak_client_id = client_id;
@@ -142,7 +148,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(120 * 1000);
+			requestFactory.setReadTimeout(0); // Unlimited
 			sslRestTemplate = new RestTemplate(requestFactory);
 		}
 		return sslRestTemplate;
@@ -152,38 +158,38 @@ public class KBReasonerClient implements KBReasoner {
 		if (restTemplate == null) {
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
-			requestFactory.setReadTimeout(120 * 1000);
+			requestFactory.setReadTimeout(0); // Unlimited
 
 			restTemplate = new RestTemplate(requestFactory);
 		}
 		return restTemplate;
 	}
 
-	public TypeData getNodeTypes(List<String> modules) throws Exception {
+	public TypeData getNodeTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.NODETYPE);
 	}
 
-	public TypeData getDataTypes(List<String> modules) throws Exception {
+	public TypeData getDataTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.DATATYPE);
 	}
 
-	public TypeData getCapabilityTypes(List<String> modules) throws Exception {
+	public TypeData getCapabilityTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.CAPABILITY_TYPE);
 	}
 
-	public TypeData getRelationshipTypes(List<String> modules) throws Exception {
+	public TypeData getRelationshipTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.RELATIONSHIP_TYPE);
 	}
 
-	public TypeData getInterfaceTypes(List<String> modules) throws Exception {
+	public TypeData getInterfaceTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.INTERFACE_TYPE);
 	}
 
-	public TypeData getPolicyTypes(List<String> modules) throws Exception {
+	public TypeData getPolicyTypes(List<String> modules) throws SodaliteException {
 		return getTypes(modules, TypeKind.POLICY_TYPE);
 	}
 
-	private TypeData getTypes(List<String> modules, TypeKind kind) throws Exception {
+	private TypeData getTypes(List<String> modules, TypeKind kind) throws SodaliteException {
 		Assert.notNull(modules, "Pass a not null modules");
 		Assert.notNull(kind, "Pass a not null type kind");
 		String url = kbReasonerUri + "types";
@@ -207,10 +213,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypes(modules, kind);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public TemplateData getTemplates(List<String> modules) throws Exception {
+	public TemplateData getTemplates(List<String> modules) throws SodaliteException {
 		Assert.notNull(modules, "Pass a not null modules");
 		String url = kbReasonerUri + "templates";
 		for (String module : modules)
@@ -232,10 +242,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplates(modules);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public ModuleData getModules() throws Exception {
+	public ModuleData getModules() throws SodaliteException {
 		String url = kbReasonerUri + "namespaces";
 		if (IAM_enabled)
 			url += "?token=" + this.aai_token;
@@ -254,12 +268,16 @@ public class KBReasonerClient implements KBReasoner {
 				return getModules();
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	// Type entities
 
-	public AttributeDefinitionData getTypeAttributes(String resourceId) throws Exception {
+	public AttributeDefinitionData getTypeAttributes(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "attributes?resource=" + resourceId;
 		if (IAM_enabled)
@@ -280,10 +298,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeAttributes(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public CapabilityDefinitionData getTypeCapabilities(String resourceId) throws Exception {
+	public CapabilityDefinitionData getTypeCapabilities(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId;
 		if (IAM_enabled)
@@ -304,10 +326,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeCapabilities(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public InterfaceDefinitionData getTypeInterfaces(String resourceId) throws Exception {
+	public InterfaceDefinitionData getTypeInterfaces(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId;
 		if (IAM_enabled)
@@ -328,10 +354,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeInterfaces(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public PropertyDefinitionData getTypeProperties(String resourceId) throws Exception {
+	public PropertyDefinitionData getTypeProperties(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "properties?resource=" + resourceId;
 		if (IAM_enabled)
@@ -352,10 +382,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeProperties(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public RequirementDefinitionData getTypeRequirements(String resourceId) throws Exception {
+	public RequirementDefinitionData getTypeRequirements(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId;
 		if (IAM_enabled)
@@ -376,12 +410,16 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeRequirements(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	// Template entities
 
-	public AttributeAssignmentData getTemplateAttributes(String resourceId) throws Exception {
+	public AttributeAssignmentData getTemplateAttributes(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=attr";
 		if (IAM_enabled)
@@ -402,10 +440,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplateAttributes(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public CapabilityAssignmentData getTemplateCapabilities(String resourceId) throws Exception {
+	public CapabilityAssignmentData getTemplateCapabilities(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "capabilities?resource=" + resourceId + "&template=true";
 		if (IAM_enabled)
@@ -426,10 +468,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplateCapabilities(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public InterfaceAssignmentData getTemplateInterfaces(String resourceId) throws Exception {
+	public InterfaceAssignmentData getTemplateInterfaces(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "interfaces?resource=" + resourceId + "&template=true";
 		if (IAM_enabled)
@@ -450,10 +496,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplateInterfaces(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public PropertyAssignmentData getTemplateProperties(String resourceId) throws Exception {
+	public PropertyAssignmentData getTemplateProperties(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "prop-attr-names?resource=" + resourceId + "&element=prop";
 		if (IAM_enabled)
@@ -474,10 +524,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplateProperties(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	public RequirementAssignmentData getTemplateRequirements(String resourceId) throws Exception {
+	public RequirementAssignmentData getTemplateRequirements(String resourceId) throws SodaliteException {
 		Assert.notNull(resourceId, "Pass a not null resourceId");
 		String url = kbReasonerUri + "requirements?resource=" + resourceId + "&template=true";
 		if (IAM_enabled)
@@ -498,11 +552,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getTemplateRequirements(resourceId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	public ValidRequirementNodeData getValidRequirementNodes(String requirementId, String nodeType,
-			List<String> modules) throws Exception {
+			List<String> modules) throws SodaliteException {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
 		Assert.notNull(modules, "Pass a not null modules");
@@ -510,8 +568,13 @@ public class KBReasonerClient implements KBReasoner {
 				+ encodeValue(nodeType);
 		for (String module : modules)
 			url += ";imports=" + module;
-		ValidRequirementNodeData data = getJSONObjectForType(ValidRequirementNodeData.class, new URI(url),
-				HttpStatus.OK);
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			throw new SodaliteException(e.getMessage());
+		}
+		ValidRequirementNodeData data = getJSONObjectForType(ValidRequirementNodeData.class, uri, HttpStatus.OK);
 		if (data == null) {
 			data = new ValidRequirementNodeData();
 			data.setElements(new ArrayList<>());
@@ -521,7 +584,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public TypeData getTypeOfValidRequirementNodes(String requirementId, String nodeType, List<String> modules)
-			throws Exception {
+			throws SodaliteException {
 		Assert.notNull(requirementId, "Pass a not null requirementId");
 		Assert.notNull(nodeType, "Pass a not null nodeType");
 		Assert.notNull(modules, "Pass a not null modules");
@@ -546,11 +609,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public Boolean isSubClassOf(String subclass, String superclass) throws Exception {
+	public Boolean isSubClassOf(String subclass, String superclass) throws SodaliteException {
 		Assert.notNull(subclass, "Pass a not null subclass");
 		Assert.notNull(superclass, "Pass a not null superclass");
 		String url = kbReasonerUri + "is-subclass-of;nodeTypes=" + encodeValue(subclass) + ";superNodeType="
@@ -568,11 +635,15 @@ public class KBReasonerClient implements KBReasoner {
 				return isSubClassOf(subclass, superclass);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public List<String> getSubClassesOf(List<String> subclasses, String superclass) throws Exception {
+	public List<String> getSubClassesOf(List<String> subclasses, String superclass) throws SodaliteException {
 		Assert.notNull(subclasses, "Pass a not null subclasses");
 		Assert.notEmpty(subclasses, "Pass a not empty subclasses");
 		Assert.notNull(superclass, "Pass a not null superclass");
@@ -593,12 +664,16 @@ public class KBReasonerClient implements KBReasoner {
 				return getSubClassesOf(subclasses, superclass);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
 	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete) throws Exception {
+			boolean complete) throws SodaliteException {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
@@ -631,23 +706,24 @@ public class KBReasonerClient implements KBReasoner {
 			if (suggestionsJson != null) {
 				report.setSuggestions(processSuggestions(suggestionsJson));
 			}
-		} catch (Exception ex) {
-			if (ex instanceof HttpClientErrorException) {
-				HttpClientErrorException hcee = (HttpClientErrorException) ex;
-				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
-					String result = hcee.getResponseBodyAsString();
-					String json = result.substring(result.indexOf(":") + 1);
+		} catch (HttpClientErrorException ex) {
+			if (ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
+				String result = ex.getResponseBodyAsString();
+				String json = result.substring(result.indexOf(":") + 1);
+				try {
 					report.setErrors(processErrors(json));
-				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
-					throw new NotRolePermissionException();
-				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
-					throw new TokenExpiredException();
-				} else {
-					throw ex;
+				} catch (Exception e) {
+					throw new SodaliteException(e.getMessage());
 				}
+			} else if (ex.getStatusCode() == HttpStatus.FORBIDDEN) {
+				throw new NotRolePermissionException(ex.getMessage());
+			} else if (ex.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+				throw new TokenExpiredException(ex.getMessage());
 			} else {
-				throw ex;
+				throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 			}
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 
 		return report;
@@ -655,7 +731,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL)
-			throws Exception {
+			throws SodaliteException {
 		Assert.isTrue(!rmTTL.isEmpty(), "Turtle content for RM can neither be null nor empty");
 		String url = kbReasonerUri + "saveRM";
 
@@ -682,30 +758,31 @@ public class KBReasonerClient implements KBReasoner {
 			if (warningsJson != null) {
 				report.setWarnings(processWarnings(warningsJson.toString()));
 			}
-		} catch (Exception ex) {
-			if (ex instanceof HttpClientErrorException) {
-				HttpClientErrorException hcee = (HttpClientErrorException) ex;
-				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
-					String result = hcee.getResponseBodyAsString();
-					String json = result.substring(result.indexOf(":") + 1);
+		} catch (HttpClientErrorException ex) {
+			if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
+				String result = ex.getResponseBodyAsString();
+				String json = result.substring(result.indexOf(":") + 1);
+				try {
 					report.setErrors(processErrors(json));
-				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
-					throw new NotRolePermissionException();
-				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
-					throw new TokenExpiredException();
-				} else {
-					throw ex;
+				} catch (Exception e) {
+					throw new SodaliteException(e.getMessage());
 				}
+			} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
+				throw new NotRolePermissionException(ex.getMessage());
+			} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
+				throw new TokenExpiredException(ex.getMessage());
 			} else {
 				throw ex;
 			}
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 
 		return report;
 	}
 
 	@Override
-	public KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws Exception {
+	public KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws SodaliteException {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		String url = kbReasonerUri + "optimizations";
 
@@ -732,34 +809,39 @@ public class KBReasonerClient implements KBReasoner {
 				throw new Exception("No optimizations have been returned from the KB");
 			}
 			processOptimizations(optimizationsJson, report);
-		} catch (Exception ex) {
-			if (ex instanceof HttpClientErrorException) {
-				HttpClientErrorException hcee = (HttpClientErrorException) ex;
-				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
-					String result = hcee.getResponseBodyAsString();
-					JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-					JsonElement errors = jsonObject.get("errors");
-					if (errors.isJsonArray()) { // There are validation errors
+		} catch (HttpClientErrorException ex) {
+			if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
+				String result = ex.getResponseBodyAsString();
+				JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+				JsonElement errors = jsonObject.get("errors");
+				if (errors.isJsonArray()) { // There are validation errors
+					try {
 						report.setErrors(processErrors(errors.getAsJsonArray().toString()));
-					} else { // There are optimization errors
-						JsonElement optimization_errors = errors.getAsJsonObject().get("templates_optimizations");
-						if (optimization_errors != null) {
+					} catch (Exception e) {
+						throw new SodaliteException(e.getMessage());
+					}
+				} else { // There are optimization errors
+					JsonElement optimization_errors = errors.getAsJsonObject().get("templates_optimizations");
+					if (optimization_errors != null) {
+						try {
 							report.setErrors(processOptimizationErrors(optimization_errors.toString()));
+						} catch (Exception e) {
+							throw new SodaliteException(e.getMessage());
 						}
 					}
-				} else {
-					throw ex;
 				}
 			} else {
 				throw ex;
 			}
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 
 		return report;
 	}
 
 	@Override
-	public String getAADM(String aadmURI) throws Exception {
+	public String getAADM(String aadmURI) throws SodaliteException {
 		Assert.notNull(aadmURI, "Pass a not null aadmURI");
 		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmURI;
 		if (IAM_enabled)
@@ -774,98 +856,156 @@ public class KBReasonerClient implements KBReasoner {
 				return getAADM(aadmURI);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
 	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json)
-			throws Exception {
+			throws SodaliteException {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = iacUri + "parse";
 		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
-		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, new URI(url),
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			throw new SodaliteException(e.getMessage());
+		}
+		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, uri,
 				HttpStatus.CREATED);
 	}
 
 	@Override
-	public BuildImageReport buildImage(String image_build_conf) throws Exception {
+	public BuildImageReport buildImage(String image_build_conf) throws SodaliteException {
 		Assert.notNull(image_build_conf, "Pass a not null image_build_conf");
-		String url = image_builder_uri + "build";
-		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, new URI(url),
-				HttpStatus.ACCEPTED);
+		String url = image_builder_uri + "build/";
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			throw new SodaliteException(e.getMessage());
+		}
+		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, uri, HttpStatus.ACCEPTED);
 	}
 
 	@Override
-	public BuildImageStatus checkBuildImageStatus(String session_token) throws Exception {
-		Assert.notNull(session_token, "Pass a not null session_token");
-		String url = image_builder_uri + "info/status/" + session_token;
-		BuildImageStatus buildStatus = null;
+	public BuildImageStatusReport checkBuildImageStatus(String invocation_id) throws SodaliteException {
+		Assert.notNull(invocation_id, "Pass a not null invocation_id");
+		String url = image_builder_uri + "status/" + invocation_id;
+		BuildImageStatusReport buildStatus = null;
 		try {
-			HttpStatus status = getStatusOfURI(new URI(url));
-			if (status == HttpStatus.CREATED)
-				buildStatus = BuildImageStatus.DONE;
-			else if (status == HttpStatus.ACCEPTED)
-				buildStatus = BuildImageStatus.BUILDING;
+			ResponseEntity<BuildImageStatusReport> response = getJSONMessage(new URI(url),
+					BuildImageStatusReport.class);
+			HttpStatus status = response.getStatusCode();
+			buildStatus = response.getBody();
+			if (status == HttpStatus.OK && buildStatus.getState().equals("in_progress"))
+				buildStatus.setStatus(BuildImageStatus.BUILDING);
+			else if (status == HttpStatus.OK && buildStatus.getState().equals("success"))
+				buildStatus.setStatus(BuildImageStatus.DONE);
+			else if (status == HttpStatus.OK && buildStatus.getState().equals("failed"))
+				buildStatus.setStatus(BuildImageStatus.FAILED);
+			else if (status == HttpStatus.NOT_FOUND)
+				buildStatus.setStatus(BuildImageStatus.NOT_FOUND);
 			else if (status == HttpStatus.INTERNAL_SERVER_ERROR)
-				buildStatus = BuildImageStatus.FAILED;
-		} catch (Exception e) {
-			throw e;
+				buildStatus.setStatus(BuildImageStatus.FAILED);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 		return buildStatus;
 	}
 
 	@Override
 	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
-			throws Exception {
-		Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
-		Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
-		String url = xoperaUri + "/deployment/deploy?blueprint_id=" + blueprint_id;
+			throws SodaliteException {
+		try {
+			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
+			Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
+			String url = xoperaUri + "/deployment/deploy?blueprint_id=" + blueprint_id;
 
-		if (version_id != null && !version_id.isEmpty())
-			url += "&version_id=" + version_id;
+			if (version_id != null && !version_id.isEmpty())
+				url += "&version_id=" + version_id;
 
-		if (workers >= 0)
-			url += "&workers=" + workers;
+			if (workers >= 0)
+				url += "&workers=" + workers;
 
-		LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
-		Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
-			@Override
-			public String getFilename() {
-				return inputs_yaml_path.getFileName().toString();
+			Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
+				@Override
+				public String getFilename() {
+					return inputs_yaml_path.getFileName().toString();
+				}
+			};
+
+			HttpHeaders xmlHeaders = new HttpHeaders();
+			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+			if (IAM_enabled) {
+				this.aai_token = getSecurityToken();
+				xmlHeaders.setBearerAuth(this.aai_token);
 			}
-		};
+			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
 
-		HttpHeaders xmlHeaders = new HttpHeaders();
-		xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
-		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
-			xmlHeaders.setBearerAuth(this.aai_token);
+			parts.add("inputs_file", fileEntity);
+
+			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
+					HttpStatus.ACCEPTED);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
-		HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
-
-		parts.add("inputs_file", fileEntity);
-
-		return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
-				HttpStatus.ACCEPTED);
 	}
 
 	@Override
-	public DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws Exception {
+	public DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws SodaliteException {
 		DeploymentStatusReport deploymentStatus = null;
 		Assert.notNull(deployment_id, "Pass a not null deployment_id");
 		String url = xoperaUri + "deployment/" + deployment_id + "/status";
 		try {
 			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.OK);
-		} catch (Exception e) {
-			throw e;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 
 		return deploymentStatus;
 	}
 
 	@Override
-	public ModelData getModelForResource(String resource, String module) throws Exception {
+	public PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws SodaliteException {
+		Assert.notNull(inputs, "Pass a not null inputs");
+		Assert.notNull(namespace, "Pass a not null namespace");
+		Assert.notNull(platformType, "Pass a not null platformType");
+
+		// Build JSON payload
+		Gson gson = new Gson();
+		JsonObject inputsJson = gson.fromJson(inputs, JsonObject.class);
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.add("inputs", inputsJson);
+		jsonObject.addProperty("namespace", namespace);
+		jsonObject.addProperty("platform_type", platformType);
+
+		String payload = jsonObject.toString();
+
+		String url = pdsUri + "update";
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			throw new SodaliteException(e.getMessage());
+		}
+		return postObjectAndReturnAnotherType(payload, PDSUpdateReport.class, uri, HttpStatus.OK);
+	}
+
+	@Override
+	public ModelData getModelForResource(String resource, String module) throws SodaliteException {
 		Assert.notNull(resource, "Pass a not null resource");
 		Assert.notNull(module, "Pass a not null module");
 		String url = kbReasonerUri + "model?resource=" + resource
@@ -882,11 +1022,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getModelForResource(resource, module);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public ModelData getModel(String modelId) throws Exception {
+	public ModelData getModel(String modelId) throws SodaliteException {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "model?uri=" + modelId;
 		if (IAM_enabled)
@@ -901,22 +1045,26 @@ public class KBReasonerClient implements KBReasoner {
 				return getModel(modelId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public ModelData getAADMsInModule(String module) throws Exception {
+	public ModelData getAADMsInModule(String module) throws SodaliteException {
 		return getModelsInModule("AADM", module);
 	}
 
 	@Override
-	public ModelData getRMsInModule(String module) throws Exception {
+	public ModelData getRMsInModule(String module) throws SodaliteException {
 		return getModelsInModule("RM", module);
 	}
 
 	@Override
 	public CapabilityDefinitionData getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(String nodeType,
-			String requirementName) throws Exception {
+			String requirementName) throws SodaliteException {
 		Assert.notNull(nodeType, "Pass a not null nodeType");
 		Assert.notNull(requirementName, "Pass a not null requirementName");
 		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeType + "&requirement="
@@ -939,12 +1087,16 @@ public class KBReasonerClient implements KBReasoner {
 				return getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType, requirementName);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
 	public CapabilityAssignmentData getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(String nodeTemplate,
-			String requirementName) throws Exception {
+			String requirementName) throws SodaliteException {
 		Assert.notNull(nodeTemplate, "Pass a not null nodeTemplate");
 		Assert.notNull(requirementName, "Pass a not null requirementName");
 		String url = kbReasonerUri + "capability-from-requirement?resource=" + nodeTemplate + "&requirement="
@@ -967,11 +1119,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeTemplate, requirementName);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public OperationDefinitionData getOperationsInInterface(String interfaceType) throws Exception {
+	public OperationDefinitionData getOperationsInInterface(String interfaceType) throws SodaliteException {
 		Assert.notNull(interfaceType, "Pass a not null interfaceType");
 		String url = kbReasonerUri + "operations?resource=" + interfaceType;
 		if (IAM_enabled)
@@ -992,11 +1148,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getOperationsInInterface(interfaceType);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public OperationDefinitionData getOperations(List<String> modules) throws Exception {
+	public OperationDefinitionData getOperations(List<String> modules) throws SodaliteException {
 		Assert.notNull(modules, "Pass a not null modules");
 		String url = kbReasonerUri + "operationsFromNamespaces";
 		for (String module : modules)
@@ -1019,10 +1179,14 @@ public class KBReasonerClient implements KBReasoner {
 				return getOperations(modules);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
-	private ModelData getModelsInModule(String type, String module) throws Exception {
+	private ModelData getModelsInModule(String type, String module) throws SodaliteException {
 		String url = kbReasonerUri + "models?type=" + type;
 		if (IAM_enabled)
 			url += "&token=" + this.aai_token;
@@ -1045,11 +1209,15 @@ public class KBReasonerClient implements KBReasoner {
 				return getModelsInModule(type, module);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public void deleteModel(String modelId) throws Exception {
+	public void deleteModel(String modelId) throws SodaliteException {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "delete?uri=" + modelId;
 		if (IAM_enabled)
@@ -1064,6 +1232,10 @@ public class KBReasonerClient implements KBReasoner {
 				deleteModel(modelId);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
@@ -1203,7 +1375,7 @@ public class KBReasonerClient implements KBReasoner {
 			return getRestTemplate().exchange(request, clazz);
 	}
 
-	private <T> T getJSONObjectForType(Class<T> type, URI uri, HttpStatus expectedStatus) throws Exception {
+	private <T> T getJSONObjectForType(Class<T> type, URI uri, HttpStatus expectedStatus) throws SodaliteException {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			ResponseEntity<T> response = getJSONMessage(uri, type);
@@ -1211,21 +1383,22 @@ public class KBReasonerClient implements KBReasoner {
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Located " + type + " JSON object: " + object);
 			} else {
-				throw new Exception("There was a problem getting JSON object in uri: " + uri);
+				throw new SodaliteException("There was a problem getting JSON object in uri: " + uri);
 			}
 			return object;
-		} catch (Exception ex) {
+		} catch (HttpClientErrorException ex) {
 			log.info("There was a problem getting JSON object(s) in uri: " + uri);
 			log.error(ex.getMessage(), ex);
-			if (ex instanceof HttpClientErrorException) {
-				HttpClientErrorException hcee = (HttpClientErrorException) ex;
-				if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.UNAUTHORIZED) {
-					throw new TokenExpiredException();
-				} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
-					throw new NotRolePermissionException();
-				}
+
+			if (ex.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+				throw new TokenExpiredException(ex.getMessage());
+			} else if (ex.getStatusCode() == HttpStatus.FORBIDDEN) {
+				throw new NotRolePermissionException(ex.getMessage());
+			} else {
+				throw ex;
 			}
-			throw ex;
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
@@ -1258,7 +1431,7 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	private <T, S> S postObjectAndReturnAnotherType(T object, Class<S> returnedType, URI uri, HttpStatus expectedStatus)
-			throws Exception {
+			throws SodaliteException {
 		S result = null;
 		try {
 			Assert.notNull(object, "Provide a valid object of type " + object.getClass());
@@ -1272,10 +1445,10 @@ public class KBReasonerClient implements KBReasoner {
 				throw new Exception("There was a problem inserting JSON object " + object + " in URI: " + uri);
 			}
 			return result;
-		} catch (Exception e) {
-			log.info("There was a problem inserting JSON object " + object + " in URI: " + uri);
-			log.error(e.getMessage(), e);
+		} catch (HttpClientErrorException e) {
 			throw e;
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
 		}
 	}
 
@@ -1386,19 +1559,25 @@ public class KBReasonerClient implements KBReasoner {
 		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
 	}
 
-	private String getSecurityToken() throws Exception {
-		String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token";
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+	private String getSecurityToken() throws SodaliteException {
+		try {
+			String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/token";
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
-		map.add("grant_type", "password");
-		map.add("username", this.keycloak_user);
-		map.add("password", this.keycloak_password);
-		map.add("client_id", this.keycloak_client_id);
-		map.add("client_secret", this.keycloak_client_secret);
+			map.add("grant_type", "password");
+			map.add("username", this.keycloak_user);
+			map.add("password", this.keycloak_password);
+			map.add("client_id", this.keycloak_client_id);
+			map.add("client_secret", this.keycloak_client_secret);
 
-		String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
-		JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-		return jsonObject.get("access_token").getAsString();
+			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
+			return jsonObject.get("access_token").getAsString();
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex.getMessage());
+		}
 	}
 
 	private Boolean isValidToken(String token) throws Exception {

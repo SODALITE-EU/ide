@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
@@ -79,23 +80,30 @@ public class KBView {
 		for (String module : moduleData.getElements()) {
 			module = parseModule(module);
 			// RMs
-			ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
-			if (!rmModelData.getElements().isEmpty()) {
-				TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
-				for (Model model : rmModelData.getElements()) {
-					moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+			try {
+				ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
+				if (!rmModelData.getElements().isEmpty()) {
+					TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
+					for (Model model : rmModelData.getElements()) {
+						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+					}
 				}
+			} catch (NotRolePermissionException ex) {
+				// Ignored
 			}
 
 			// AADMs
-			ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
-			if (!aadmModelData.getElements().isEmpty()) {
-				TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
-				for (Model model : aadmModelData.getElements()) {
-					moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+			try {
+				ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
+				if (!aadmModelData.getElements().isEmpty()) {
+					TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
+					for (Model model : aadmModelData.getElements()) {
+						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+					}
 				}
+			} catch (NotRolePermissionException ex) {
+				// Ignored
 			}
-
 		}
 		return root;
 	}
