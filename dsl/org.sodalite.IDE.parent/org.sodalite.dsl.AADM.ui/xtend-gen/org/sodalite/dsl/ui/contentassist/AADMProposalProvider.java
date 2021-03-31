@@ -690,9 +690,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         String _type = nodeType.getType();
         final String resourceId = (_xifexpression + _type);
-        Object _findModel = this.findModel(model);
-        final AADM_Model rootModel = ((AADM_Model) _findModel);
-        final String aadmURI = this.getAADMURI(rootModel);
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
         importedModules.add(module);
