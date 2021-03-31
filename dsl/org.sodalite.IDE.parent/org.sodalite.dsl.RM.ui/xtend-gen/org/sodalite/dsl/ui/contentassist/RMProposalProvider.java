@@ -117,40 +117,75 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public KBReasoner getKBReasoner() {
     try {
       final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-      final String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+      String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI).trim();
       boolean _isEmpty = kbReasonerURI.isEmpty();
       if (_isEmpty) {
         this.raiseConfigurationIssue("KB Reasoner URI user not set");
       }
-      final String iacURI = store.getString(PreferenceConstants.IaC_URI);
+      boolean _endsWith = kbReasonerURI.endsWith("/");
+      boolean _not = (!_endsWith);
+      if (_not) {
+        kbReasonerURI = kbReasonerURI.concat("/");
+      }
+      String iacURI = store.getString(PreferenceConstants.IaC_URI);
       boolean _isEmpty_1 = iacURI.isEmpty();
       if (_isEmpty_1) {
         this.raiseConfigurationIssue("IaC URI user not set");
       }
-      final String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
+      boolean _endsWith_1 = iacURI.endsWith("/");
+      boolean _not_1 = (!_endsWith_1);
+      if (_not_1) {
+        iacURI = iacURI.concat("/");
+      }
+      String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI).trim();
       boolean _isEmpty_2 = image_builder_URI.isEmpty();
       if (_isEmpty_2) {
         this.raiseConfigurationIssue("Image Builder URI user not set");
       }
-      final String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
+      boolean _endsWith_2 = image_builder_URI.endsWith("/");
+      boolean _not_2 = (!_endsWith_2);
+      if (_not_2) {
+        image_builder_URI = image_builder_URI.concat("/");
+      }
+      String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI).trim();
       boolean _isEmpty_3 = xoperaURI.isEmpty();
       if (_isEmpty_3) {
         this.raiseConfigurationIssue("xOpera URI user not set");
       }
-      final String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
+      boolean _endsWith_3 = xoperaURI.endsWith("/");
+      boolean _not_3 = (!_endsWith_3);
+      if (_not_3) {
+        xoperaURI = xoperaURI.concat("/");
+      }
+      String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI).trim();
       boolean _isEmpty_4 = keycloakURI.isEmpty();
       if (_isEmpty_4) {
         this.raiseConfigurationIssue("Keycloak URI user not set");
       }
-      final String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+      boolean _endsWith_4 = keycloakURI.endsWith("/");
+      boolean _not_4 = (!_endsWith_4);
+      if (_not_4) {
+        keycloakURI = keycloakURI.concat("/");
+      }
+      String pdsURI = store.getString(PreferenceConstants.PDS_URI).trim();
       boolean _isEmpty_5 = pdsURI.isEmpty();
       if (_isEmpty_5) {
         this.raiseConfigurationIssue("PDS URI user not set");
       }
-      final String refactorerURI = store.getString(PreferenceConstants.PDS_URI);
+      boolean _endsWith_5 = pdsURI.endsWith("/");
+      boolean _not_5 = (!_endsWith_5);
+      if (_not_5) {
+        pdsURI = pdsURI.concat("/");
+      }
+      String refactorerURI = store.getString(PreferenceConstants.PDS_URI).trim();
       boolean _isEmpty_6 = refactorerURI.isEmpty();
       if (_isEmpty_6) {
         this.raiseConfigurationIssue("Refactorer URI user not set");
+      }
+      boolean _endsWith_6 = refactorerURI.endsWith("/");
+      boolean _not_6 = (!_endsWith_6);
+      if (_not_6) {
+        refactorerURI = refactorerURI.concat("/");
       }
       final KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI, refactorerURI);
       final String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);

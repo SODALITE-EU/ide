@@ -447,8 +447,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
 			val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
 			
-			val AADM_Model rootModel = findModel(model) as AADM_Model
-			val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
+			// val AADM_Model rootModel = findModel(model) as AADM_Model
+			// val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
 			
 			//Get valid requirement nodes from KB
 			//Get modules from model
