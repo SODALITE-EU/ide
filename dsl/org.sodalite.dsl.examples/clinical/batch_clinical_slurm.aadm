@@ -14,17 +14,17 @@ node_templates:
       executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
     requirements:
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   prob-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application
-    optimization: hlrs.mpi
+    optimization: egi.mpi
     properties:
       app_tag: "prob-mapper"
       app_type: "hpc"
-      mpi_ranks: 4
+      mpi_ranks: 2
       container_runtime: "private://moduli:1.0.0" // from private registry
       executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
       build:
@@ -45,9 +45,9 @@ node_templates:
       executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
     requirements:
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
 
 
   // JOB EXECUTIONS
@@ -68,16 +68,16 @@ node_templates:
       application:
         node: clinical/density-mapper-app
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   prob-mapper-job:
     type: batch/sodalite.nodes.batch.Container.JobExecution
     properties:
       job_name: "prob-mapper-job"
       node_count: 2
-      process_count_per_node: 2
+      process_count_per_node: 1
       wall_time_limit: "1:00:00"
       request_event_notification: "abe"
       standard_output_file: "prob-mapper.out"
@@ -110,9 +110,9 @@ node_templates:
       application:
         node: clinical/prob-mapper-app
       runtime:
-        node: clinical/hlrs-singularity-runtime
+        node: clinical/ec3-slurm-singularity-runtime
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
       
       
   // WORKFLOW
@@ -122,7 +122,7 @@ node_templates:
       execution: 
         node: clinical/density-mapper-job
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   dm-result:
     type: batch/sodalite.nodes.workflow.Result
@@ -130,7 +130,7 @@ node_templates:
       job:
         node: clinical/dm-exec
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
   
   pm-exec:
     type: batch/sodalite.nodes.workflow.Job
@@ -156,7 +156,7 @@ node_templates:
       execution:
         node: clinical/boundary-condition-job
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
       dependency:
         node: clinical/pm-result
   
@@ -166,7 +166,7 @@ node_templates:
       job:
         node: clinical/bc-exec
       host:
-        node: clinical/hlrs-testbed
+        node: clinical/ec3-slurm-testbed
       
       
       

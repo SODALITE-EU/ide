@@ -46,7 +46,7 @@ node_templates:
       resources:
         properties:
           gpus: 0
-          cpus: 4
+          cpus: 2
           memory: 8192
       optimisations:
         properties:
