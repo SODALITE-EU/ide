@@ -687,15 +687,18 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
-						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
-						Severity.WARNING, warning.getType(), warning.getDescription()));
+				String message = warning.getType() + " ." + warning.getDescription() + " Warning located at: "
+						+ warning.getEntity_name();
+				List<String> hierarchyPath = Arrays.asList(warning.getContext(), warning.getEntity_name());
+				String path = createPath(hierarchyPath);
+				String pathType = getPathType(warning.getType());
+				List<String> type = Arrays.asList(warning.getType());
+				String code = getCode(type); // Code is used for quick fixes
+				List<String> data = Arrays.asList(warning.getEntity_name(), warning.getContext());
+				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
 		}
 
-		// Suggestions are not shown in model
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
 				String message = MessageFormat.format("The following nodes can satisfy the requirement {0}: {1}",
@@ -753,7 +756,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private String getPathType(String type) {
-		if (type.contains("Property"))
+		if (type.contains("Property") || type.contains("InvalidPortRange") || type.contains("AdminByDefault")
+				|| type.contains("HardcodedSecret") || type.contains("InvalidIPAddressBinding"))
 			return "Property";
 		else if (type.contains("Capability"))
 			return "Capability";
