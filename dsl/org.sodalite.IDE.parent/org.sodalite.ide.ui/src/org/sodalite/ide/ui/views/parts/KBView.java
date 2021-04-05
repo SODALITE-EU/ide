@@ -6,7 +6,9 @@ import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.action.Action;
@@ -43,6 +45,15 @@ public class KBView {
 	private Label myLabelInView;
 	private Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	private TreeViewer viewer = null;
+	private static KBView view = null;
+
+	public KBView() {
+		this.view = this;
+	}
+
+	public static KBView getView() {
+		return view;
+	}
 
 	@PostConstruct
 	public void createPartControl(Composite parent) throws Exception {
@@ -60,11 +71,29 @@ public class KBView {
 		createContextMenu(viewer);
 
 		// Model
-		TreeNode<Node> root = populateKBContent();
+		TreeNode<Node> root = null;
 
 		viewer.setInput(root);
 
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+
+		Job job = Job.create("Refreshing KB", (ICoreRunnable) monitor -> {
+			try {
+				TreeNode<Node> uproot = populateKBContent();
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						viewer.setInput(uproot);
+						viewer.refresh();
+					}
+				});
+			} catch (Exception e) {
+				showErrorDialog("KB Update", "The KB Browser could not be refreshed from KB");
+				SodaliteLogger.log(e);
+			}
+		});
+		job.setPriority(Job.SHORT);
+		job.schedule();
 	}
 
 	private TreeNode<Node> populateKBContent() throws Exception {
@@ -160,15 +189,7 @@ public class KBView {
 				// workspace
 				Action refreshAction = new Action() {
 					public void run() {
-
-						try {
-							System.out.println("Refresh KB invoked");
-							TreeNode<Node> root = populateKBContent();
-							viewer.setInput(root);
-							viewer.refresh();
-						} catch (Exception e) {
-							SodaliteLogger.log("Error", e);
-						}
+						refreshKB();
 					}
 				};
 				refreshAction.setText("Refresh KB");
@@ -393,5 +414,44 @@ public class KBView {
 		// Test if label exists (inject methods are called before PostConstruct)
 		if (myLabelInView != null)
 			myLabelInView.setText("This is a multiple selection of " + selectedObjects.length + " objects");
+	}
+
+	public void refreshKB() {
+		Job job = Job.create("Refresh KB", (ICoreRunnable) monitor -> {
+			try {
+				TreeNode<Node> root = populateKBContent();
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						viewer.setInput(root);
+						viewer.refresh();
+					}
+				});
+				showDialog("KB Update", "The KB Browser was refreshed from KB");
+			} catch (Exception e) {
+				showErrorDialog("KB Update", "The KB Browser could not be refreshed from KB");
+				SodaliteLogger.log(e);
+			}
+		});
+		job.setPriority(Job.SHORT);
+		job.schedule();
+	}
+
+	public void showDialog(String dialogTitle, String dialogMessage) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(shell, dialogTitle, dialogMessage);
+			}
+		});
+	}
+
+	public void showErrorDialog(String dialogTitle, String dialogMessage) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(shell, dialogTitle, dialogMessage);
+			}
+		});
 	}
 }

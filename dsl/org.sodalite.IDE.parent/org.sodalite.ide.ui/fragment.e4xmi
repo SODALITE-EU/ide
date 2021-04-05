@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_EI7oACerEeWxCPrV0pAZQQ" featurename="descriptors" parentElementId="xpath:/">
-    <elements xsi:type="basic:PartDescriptor" xmi:id="_KMklcCerEeWxCPrV0pAZQQ" elementId="sodalite.partDescFragment.KBBrowserView" label="KB Browser View" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/kb.png" tooltip="" category="Sodalite" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.KBView">
+    <elements xsi:type="basic:PartDescriptor" xmi:id="_KMklcCerEeWxCPrV0pAZQQ" elementId="sodalite.partDescFragment.KBBrowserView" label="KB Browser View" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/kb.png" tooltip="" allowMultiple="true" category="Sodalite" closeable="true" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.KBView">
       <tags>View</tags>
       <tags>categoryTag:Sodalite</tags>
+      <handlers xmi:id="_ogW84JYFEeuzq4hucbBZbg" elementId="org.sodalite.ide.ui.handler.KBBrowserRefresh" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.KBRefreshHandler"/>
+      <toolbar xmi:id="_NlRSoJYJEeuzq4hucbBZbg" elementId="org.sodalite.ide.ui.toolbar.1">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_WPdFcJYSEeuzq4hucbBZbg" elementId="org.sodalite.ide.ui.directtoolitem.browsekb" label="Refresh KB Content" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/update.png" tooltip="Refresh the KB content on Browser View" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.KBRefresh"/>
+      </toolbar>
     </elements>
   </fragments>
 </fragment:ModelFragments>
