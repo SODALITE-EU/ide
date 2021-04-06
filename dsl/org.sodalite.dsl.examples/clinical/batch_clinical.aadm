@@ -58,7 +58,6 @@ node_templates:
       node_count: 1
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "density-mapper.out"
       standard_error_file: "density-mapper.err"
       combine_stdout_stderr: true
@@ -78,7 +77,6 @@ node_templates:
       node_count: 2
       process_count_per_node: 2
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "prob-mapper.out"
       standard_error_file: "prob-mapper.err"
       combine_stdout_stderr: true
@@ -98,7 +96,6 @@ node_templates:
       node_count: 1
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "boundary-condition.out"
       standard_error_file: "boundary-condition.err"
       combine_stdout_stderr: true

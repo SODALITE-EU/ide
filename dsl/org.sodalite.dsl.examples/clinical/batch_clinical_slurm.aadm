@@ -29,7 +29,7 @@ node_templates:
       executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
       build:
         src: "$HOME/moduli/.git"
-        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install setuptools && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
     requirements:
       runtime:
         node: clinical/ec3-slurm-singularity-runtime
@@ -58,11 +58,9 @@ node_templates:
       node_count: 1
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "density-mapper.out"
       standard_error_file: "density-mapper.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
@@ -79,11 +77,9 @@ node_templates:
       node_count: 2
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "prob-mapper.out"
       standard_error_file: "prob-mapper.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
@@ -100,15 +96,13 @@ node_templates:
       node_count: 1
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      request_event_notification: "abe"
       standard_output_file: "boundary-condition.out"
       standard_error_file: "boundary-condition.err"
       combine_stdout_stderr: true
-      email_address: "tokmakov@hlrs.de"
       workspace: "~/workflow-ide"
     requirements:
       application:
-        node: clinical/prob-mapper-app
+        node: clinical/boundary-condition-app
       runtime:
         node: clinical/ec3-slurm-singularity-runtime
       host:
