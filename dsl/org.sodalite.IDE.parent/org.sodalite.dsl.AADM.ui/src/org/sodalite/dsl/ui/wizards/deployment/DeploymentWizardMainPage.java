@@ -237,17 +237,18 @@ public class DeploymentWizardMainPage extends WizardPage {
 								input_value += ":" + st.nextToken();
 							inputWidgets.get(current_key).setText(input_value);
 						}
-					} else {
-						if (st.hasMoreTokens()) {
-							String input_value = st.nextToken();
-							while (st.hasMoreTokens())
-								input_value += ":" + st.nextToken();
-							current_value = inputWidgets.get(current_key).getText();
-
-							inputWidgets.get(current_key)
-									.setText(current_value + input_name + ":" + input_value + "\n");
-						}
 					}
+//					else {
+//						if (st.hasMoreTokens()) {
+//							String input_value = st.nextToken();
+//							while (st.hasMoreTokens())
+//								input_value += ":" + st.nextToken();
+//							current_value = inputWidgets.get(current_key).getText();
+//
+//							inputWidgets.get(current_key)
+//									.setText(current_value + input_name + ":" + input_value + "\n");
+//						}
+//					}
 
 					return input;
 				}
