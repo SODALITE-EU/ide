@@ -13,7 +13,7 @@ import org.sodalite.dsl.ui.AbstractRMUiModule;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class RMUiModule extends AbstractRMUiModule {
-  public RMUiModule(final AbstractUIPlugin plugin) {
-    super(plugin);
+  public RMUiModule(final AbstractUIPlugin arg0) {
+    super(arg0);
   }
 }

@@ -6,6 +6,9 @@ import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.jobs.Job;
@@ -307,7 +310,21 @@ public class KBView {
 							if (result.length == 0)
 								return;
 							IPath path = (IPath) result[0];
-							IFolder targetFolder = root.getFolder(path);
+							IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+							IProject[] projects = wsRoot.getProjects();
+							IProject targetProject = null;
+							IContainer targetFolder = null;
+							for (IProject project : projects) {
+								if (project.getFullPath().equals(path)) {
+									targetProject = project;
+									break;
+								}
+							}
+							if (targetProject != null) {
+								targetFolder = targetProject;
+							} else {
+								targetFolder = root.getFolder(path);
+							}
 							RMHelper.saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(),
 									targetFolder);
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
