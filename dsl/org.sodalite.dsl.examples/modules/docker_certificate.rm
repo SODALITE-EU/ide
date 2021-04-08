@@ -59,7 +59,13 @@ node_types:
 								default: get_attribute: 
 									entity: SELF
 									attribute: tosca.nodes.Compute.name
-									req_cap: tosca.nodes.SoftwareComponent.host									
+									req_cap: tosca.nodes.SoftwareComponent.host	
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host																		
 						implementation:
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
 								relative_path: "playbooks"
@@ -73,6 +79,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.RegistryCertificate.registry_ip
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
               
