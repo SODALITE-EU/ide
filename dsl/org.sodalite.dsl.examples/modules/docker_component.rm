@@ -23,6 +23,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
 					delete:
@@ -32,6 +38,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.DockerNetwork.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"
 
@@ -60,9 +72,22 @@ node_types:
 									entity: SELF
 									attribute: docker/sodalite.nodes.DockerHost.public_address
 									req_cap: docker/sodalites.nodes.DockerHost.host
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation:  
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
 					delete:  
+						inputs:
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host							
 						implementation:  
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
 
@@ -341,6 +366,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: sodalite.nodes.TestComponent.test_port
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
 		requirements:
