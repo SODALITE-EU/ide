@@ -36,6 +36,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_pass
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
 					delete:
@@ -45,6 +51,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerRegistry.docker_registry_url
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
               

@@ -20,6 +20,7 @@ public class DeploymentWizard extends Wizard {
 	private Path imageBuildConfPath = null;
 	private String versionTag = null;
 	private int workers = 0;
+	private boolean completeModel = false;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -76,6 +77,9 @@ public class DeploymentWizard extends Wizard {
 			return false;
 		}
 
+		// Get completeModel
+		this.completeModel = mainPage.getCompleteModel();
+
 		return true;
 	}
 
@@ -93,6 +97,10 @@ public class DeploymentWizard extends Wizard {
 
 	public int getWorkers() {
 		return this.workers;
+	}
+
+	public boolean getCompleteModel() {
+		return this.completeModel;
 	}
 
 }

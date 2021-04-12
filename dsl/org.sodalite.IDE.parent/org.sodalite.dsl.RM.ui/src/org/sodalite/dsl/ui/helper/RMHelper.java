@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -93,9 +94,17 @@ public class RMHelper {
 
 	}
 
-	public static void saveFileInFolder(String filename, String filecontent, IFolder targetFolder) {
+	public static void saveFileInFolder(String filename, String filecontent, IContainer targetFolder) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		IFile targetFile = targetFolder.getFile(filename);
+		IFile targetFile = null;
+		if (targetFolder instanceof IProject)
+			targetFile = ((IProject) targetFolder).getFile(filename);
+		else if (targetFolder instanceof IFolder)
+			targetFile = ((IFolder) targetFolder).getFile(filename);
+		if (targetFile == null) {
+			MessageDialog.openError(shell, "Folder not found",
+					"Folder " + targetFolder.getName() + " could not be found");
+		}
 		if (!targetFile.exists()) {
 			saveContentInFile(filecontent, targetFile);
 		} else {

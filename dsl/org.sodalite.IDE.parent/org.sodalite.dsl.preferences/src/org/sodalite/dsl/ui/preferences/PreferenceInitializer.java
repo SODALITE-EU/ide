@@ -35,19 +35,27 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		String kb_reasoner_uri = prop.getProperty(PreferenceConstants.KB_REASONER_URI);
 		if (kb_reasoner_uri == null)
 			// kb_reasoner_uri = "http://160.40.52.200:8084/reasoner-api/v0.6/"; //CERTH
-			kb_reasoner_uri = "http://192.168.2.34:8080/reasoner-api/v0.6/"; // TestBed
+			kb_reasoner_uri = "http://192.168.2.97:8080/reasoner-api/v0.6/"; // TestBed
+
 		String iac_uri = prop.getProperty(PreferenceConstants.IaC_URI);
 		if (iac_uri == null)
 			iac_uri = "http://192.168.2.107:8081/";
+
 		String image_builder_uri = prop.getProperty(PreferenceConstants.Image_Builder_URI);
 		if (image_builder_uri == null)
 			image_builder_uri = "http://192.168.2.70:5000/";
+
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
 			xOpera_uri = "http://192.168.2.15:5000/";
+
 		String pds_uri = prop.getProperty(PreferenceConstants.PDS_URI);
 		if (pds_uri == null)
 			pds_uri = "http://192.168.2.178:8089/";
+
+		String refactorer_uri = prop.getProperty(PreferenceConstants.Refactorer_URI);
+		if (refactorer_uri == null)
+			refactorer_uri = "http://192.168.2.166:8080/";
 
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
@@ -66,12 +74,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			keycloak_enabled = true;
 		}
 
-		LOGGER.log(
-				new Status(Status.INFO, BUNDLE.getSymbolicName(),
-						MessageFormat.format("Default Sodalite backend services configuration read from properties: "
-								+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
-								+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}", kb_reasoner_uri,
-								iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri)));
+		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
+				"Default Sodalite backend services configuration read from properties: "
+						+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
+						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}",
+				kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri)));
 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
@@ -79,6 +86,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Image_Builder_URI, image_builder_uri);
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
+		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);

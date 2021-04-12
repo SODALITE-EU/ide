@@ -1,0 +1,92 @@
+module: monitoring_rules
+
+data_types:
+	sodalite.datatypes.Monitoring.Rule:
+		derived_from: tosca.datatypes.Root
+		properties:
+			name:
+				type: string
+				required: true
+			expr:
+				type: string
+				required: true
+			for:
+				type: string
+				required: true
+			desc:
+				type: string
+				default: ""
+			summary:
+				type: string
+				default: ""
+	
+node_types:
+	sodalite.nodes.Configuration.ruleset:
+		derived_from: tosca.nodes.SoftwareComponent
+		description: 'Node for registration/deregistration of the ruleset file'
+		properties:
+			ruleset:
+				type: list
+				entry_schema: monitoring_rules/sodalite.datatypes.Monitoring.Rule
+				description: 'ruleset list with rules to register'
+				required: true
+				constraints: 
+					min_length: 1
+			ruleserver_address:
+				type: string
+				description: 'IP address of the ruleserver'
+				required: true
+			ruleset_id: 
+				type: string
+				description: 'name of the ruleset to register'
+				required: true
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+ 						inputs:
+ 							ruleset:            
+ 								default: get_property: 
+ 									entity: SELF
+ 									property: monitoring_rules/sodalite.nodes.Configuration.ruleset.ruleset
+ 								type: string
+ 							ruleserver_address: 
+ 								default: get_property: 
+ 									entity: SELF
+ 									property: monitoring_rules/sodalite.nodes.Configuration.ruleset.ruleserver_address
+ 								type: string
+ 							ruleset_id:
+ 								default: get_property:
+ 									entity: SELF
+ 									property: monitoring_rules/sodalite.nodes.Configuration.ruleset.ruleset_id
+ 								type: string
+ 						implementation:
+ 							primary: "/workspace/iac-modules/misc/rules/playbooks/ruleset_register.yml" 
+ 							dependencies: ["/workspace/iac-modules/misc/rules/artifacts/ruleset.yml.j2"]
+					delete:
+						inputs:
+							ruleserver_address:
+								default: get_property:
+									entity: SELF
+									property: monitoring_rules/sodalite.nodes.Configuration.ruleset.ruleserver_address
+								type: string
+							ruleset_id:
+								default: get_property:
+									entity: SELF
+									property: monitoring_rules/sodalite.nodes.Configuration.ruleset.ruleset_id
+								type: string
+						implementation:
+							primary: "/workspace/iac-modules/misc/rules/playbooks/ruleset_deregister.yml"
+ 						
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+						

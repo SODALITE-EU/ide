@@ -31,6 +31,12 @@ node_types:
 								default: get_property:
 									property: snow/sodalite.nodes.ConfigurationDemo.mysql_db_pass
 									entity: SELF
+							ansible_user: 
+								type: string
+								default: get_attribute: 
+									entity: SELF
+									attribute: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/configure_demo.yml"
 							dependencies: ["/workspace/iac-management/use-cases/snow-uc/snow-demo/playbooks/config.json.tmpl"]

@@ -102,32 +102,50 @@ public class RMBackendProxy {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
-		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
+		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI).trim();
 		if (kbReasonerURI.isEmpty())
 			raiseConfigurationIssue("KB Reasoner URI user not set");
+		if (!kbReasonerURI.endsWith("/"))
+			kbReasonerURI.concat("/");
 
 		String iacURI = store.getString(PreferenceConstants.IaC_URI);
 		if (iacURI.isEmpty())
 			raiseConfigurationIssue("IaC URI user not set");
+		if (!iacURI.endsWith("/"))
+			iacURI.concat("/");
 
-		String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
+		String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI).trim();
 		if (image_builder_URI.isEmpty())
 			raiseConfigurationIssue("Image Builder URI user not set");
+		if (!image_builder_URI.endsWith("/"))
+			image_builder_URI.concat("/");
 
-		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
+		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI).trim();
 		if (xoperaURI.isEmpty())
 			raiseConfigurationIssue("xOpera URI user not set");
+		if (!xoperaURI.endsWith("/"))
+			xoperaURI.concat("/");
 
-		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
+		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI).trim();
 		if (keycloakURI.isEmpty())
 			raiseConfigurationIssue("Keycloak URI user not set");
+		if (!keycloakURI.endsWith("/"))
+			keycloakURI.concat("/");
 
-		String pdsURI = store.getString(PreferenceConstants.PDS_URI);
+		String pdsURI = store.getString(PreferenceConstants.PDS_URI).trim();
 		if (pdsURI.isEmpty())
 			raiseConfigurationIssue("PDS URI user not set");
+		if (!pdsURI.endsWith("/"))
+			pdsURI.concat("/");
+
+		String refactorerURI = store.getString(PreferenceConstants.Refactorer_URI).trim();
+		if (refactorerURI.isEmpty())
+			raiseConfigurationIssue("Refactorer URI user not set");
+		if (!refactorerURI.endsWith("/"))
+			refactorerURI.concat("/");
 
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI);
+				keycloakURI, pdsURI, refactorerURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

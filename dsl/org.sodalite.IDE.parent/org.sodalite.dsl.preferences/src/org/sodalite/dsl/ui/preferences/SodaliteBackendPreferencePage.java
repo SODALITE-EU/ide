@@ -35,6 +35,7 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.xOPERA_URI, "xOPERA URI:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.PDS_URI, "PDS URI:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URI:", getFieldEditorParent()));
 	}
 
 	/*

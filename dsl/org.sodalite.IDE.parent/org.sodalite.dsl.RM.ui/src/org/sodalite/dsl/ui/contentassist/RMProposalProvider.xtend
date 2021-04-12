@@ -95,31 +95,63 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		// Configure KBReasonerClient endpoint from preference page information
 		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
-		val String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI);
-		if (kbReasonerURI.isEmpty())
-			raiseConfigurationIssue("KB Reasoner URI user not set");
+		var String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI).trim();
+		if (kbReasonerURI.isEmpty()){ 
+			raiseConfigurationIssue("KB Reasoner URI user not set");	
+		}
+		if (!kbReasonerURI.endsWith("/")){
+			kbReasonerURI = kbReasonerURI.concat("/");
+		}
 
-		val String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty())
+		var String iacURI = store.getString(PreferenceConstants.IaC_URI);
+		if (iacURI.isEmpty()){
 			raiseConfigurationIssue("IaC URI user not set");
+		}
+		if (!iacURI.endsWith("/")){
+			iacURI = iacURI.concat("/");
+		}
 			
-		val String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI);
-		if (image_builder_URI.isEmpty())
+		var String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI).trim();
+		if (image_builder_URI.isEmpty()){
 			raiseConfigurationIssue("Image Builder URI user not set");
+		}
+		if (!image_builder_URI.endsWith("/")){
+			image_builder_URI = image_builder_URI.concat("/");
+		}
 
-		val String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI);
-		if (xoperaURI.isEmpty())
+		var String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI).trim();
+		if (xoperaURI.isEmpty()){
 			raiseConfigurationIssue("xOpera URI user not set");
+		}
+		if (!xoperaURI.endsWith("/")){
+			xoperaURI = xoperaURI.concat("/");
+		}
 
-		val String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI);
-		if (keycloakURI.isEmpty())
+		var String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI).trim();
+		if (keycloakURI.isEmpty()){
 			raiseConfigurationIssue("Keycloak URI user not set");
+		}
+		if (!keycloakURI.endsWith("/")){
+			keycloakURI = keycloakURI.concat("/");
+		}
 			
-		val String pdsURI = store.getString(PreferenceConstants.PDS_URI);
-		if (pdsURI.isEmpty())
+		var String pdsURI = store.getString(PreferenceConstants.PDS_URI).trim();
+		if (pdsURI.isEmpty()){
 			raiseConfigurationIssue("PDS URI user not set");
+		}
+		if (!pdsURI.endsWith("/")){
+			pdsURI = pdsURI.concat("/");
+		}
+		
+		var String refactorerURI = store.getString(PreferenceConstants.PDS_URI).trim();
+		if (refactorerURI.isEmpty()){
+			raiseConfigurationIssue("Refactorer URI user not set");
+		}
+		if (!refactorerURI.endsWith("/")){
+			refactorerURI = refactorerURI.concat("/");
+		}
 
-		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI);
+		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI, refactorerURI);
 
 		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
 		if (keycloak_enabled.equalsIgnoreCase("true")) {

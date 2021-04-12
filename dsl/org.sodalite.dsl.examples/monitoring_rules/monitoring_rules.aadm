@@ -1,0 +1,17 @@
+import: monitoring_rules
+
+inputs:
+	ruleserver_address:
+		type: string
+	ruleset_id:
+		type: string
+	ruleset:
+		type: list
+		
+node_templates:
+	rule-config:
+		type: sodalite.nodes.Configuration.ruleset
+		properties:
+			ruleset: get_input: ruleset
+			ruleserver_address: get_input: ruleserver_address
+			ruleset_id: get_input: ruleset_id

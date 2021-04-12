@@ -19,6 +19,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host												
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_volume.yml"
 					delete:
@@ -28,5 +34,11 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: docker/sodalite.nodes.DockerVolume.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host											
 						implementation: 
 							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_volume.yml"
