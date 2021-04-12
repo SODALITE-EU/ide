@@ -10,7 +10,7 @@ node_templates:
     properties:
       app_tag: "density-mapper"
       app_type: "fortran"
-      container_runtime: "private://cadt:1.0.0" // from private registry
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
       executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
     requirements:
       runtime:
@@ -41,7 +41,7 @@ node_templates:
     properties:
       app_tag: "boundary-condition"
       app_type: "fortran"
-      container_runtime: "private://cadt:1.0.0" // from private registry
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
       executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
     requirements:
       runtime:

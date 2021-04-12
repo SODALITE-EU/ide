@@ -1,0 +1,108 @@
+module: clinical
+
+import: aws
+import: batch
+
+inputs:
+
+  aws-ssh-key-name:  
+    type: string 
+  aws-ssh-public-key:  
+    type: string 
+  vpc-id:  
+    type: string 
+  region:  
+    type: string 
+  vpc-subnet-id:  
+    type: string 
+  _get_secret_aws-access-key:  
+    type: string 
+  _get_secret_aws-secret-key:  
+    type: string 
+
+  aws-image-name:  
+    type: string 
+  aws-security-rules:  
+    type: list 
+  aws-security-groups:  
+    type: list 
+  aws-flavor-name:  
+    type: string 
+  aws-vm-username:  
+    type: string 
+  aws-userdata:  
+    type: string 
+
+  _get_secret_gridftp-usercert:
+    type: string
+  _get_secret_gridftp-userkey:
+    type: string
+
+
+node_templates:
+
+  aws-keypair:
+    type: aws/sodalite.nodes.AWS.Keypair
+    properties:  
+      name:             get_input: aws-ssh-key-name
+      public_key:       get_input: aws-ssh-public-key
+      region:           get_input: region
+      aws_access_key:   get_input: _get_secret_aws-access-key
+      aws_secret_key:   get_input: _get_secret_aws-secret-key
+
+  aws-security-rules:  
+    type: aws/sodalite.nodes.AWS.SecurityRules 
+    properties:        
+      group_name: "clinical-uc-sec-group" 
+      group_description: "Clinical UC SSH, GridFTP Security Rules" 
+      rules:            get_input: aws-security-rules 
+      vpc_id:           get_input: vpc-id  
+      region:           get_input: region  
+      aws_access_key:   get_input: _get_secret_aws-access-key  
+      aws_secret_key:   get_input: _get_secret_aws-secret-key  
+
+  aws-vm:  
+    type: aws/sodalite.nodes.AWS.VM
+    properties:  
+      name:             "clinical-uc-vm"
+      key_name:         get_input: aws-ssh-key-name  
+      image:            get_input: aws-image-name 
+      network:          get_input: vpc-subnet-id  
+      security_groups:  get_input: aws-security-groups  
+      flavor:           get_input: aws-flavor-name 
+      username:         get_input: aws-vm-username 
+      region:           get_input: region  
+      aws_access_key:   get_input: _get_secret_aws-access-key  
+      aws_secret_key:   get_input: _get_secret_aws-secret-key  
+      userdata:         get_input: aws-userdata  
+    requirements:  
+      protected_by:
+        node: aws-security-rules
+      dependency:
+        node: aws-keypair
+
+  gridftp-client:
+    type: batch/sodalite.data.mover.GridFTP.Client
+    properties:
+      cert_path: "/tmp/test-gridftp-certs"
+      usercert: get_input: _get_secret_gridftp-usercert
+      userkey:  get_input: _get_secret_gridftp-userkey
+    requirements:
+      host: 
+        node: aws-vm
+
+  gridftp-transfer:
+    type: batch/sodalite.data.mover.GridFTP.Transfer
+    properties:
+      name: "Transfer of a file"
+      src_protocol: "file"
+      src_address: "localhost"
+      src_path: "/tmp/test-gridftp-certs/usercert.pem"
+      dst_protocol: "gsiftp"
+      dst_address: "sodalite-fe.hlrs.de"
+      dst_path: "~/from-aws-usercert.pem"
+    requirements:
+      client:
+        node: gridftp-client
+      host: 
+        node: aws-vm
