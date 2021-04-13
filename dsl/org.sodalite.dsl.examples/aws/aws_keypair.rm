@@ -34,22 +34,27 @@ node_types:
               primary: "/workspace/iac-modules/aws/playbooks/keypair_create.yml"
             inputs:
               name: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.name
               public_key: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.public_key
               region: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.region
               aws_access_key: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.aws_access_key
               aws_secret_key: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.aws_secret_key
@@ -58,18 +63,22 @@ node_types:
               primary: "/workspace/iac-modules/aws/playbooks/keypair_delete.yml"
             inputs:  
               name: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.name
               region: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.region
               aws_access_key: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.aws_access_key
               aws_secret_key: 
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.Keypair.aws_secret_key

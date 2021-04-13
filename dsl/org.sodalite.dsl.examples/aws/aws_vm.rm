@@ -72,46 +72,57 @@ node_types:
           create:  
             inputs:  
               region:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.region
               aws_access_key:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.aws_access_key
               aws_secret_key:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.aws_secret_key
               vm_name:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.name
               flavor:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.flavor  
               image:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.image
               network:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.network
               key_name:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.key_name
               security_groups:  
+                type: list
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.security_groups
               userdata:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.userdata
               ansible_user:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.username
@@ -120,18 +131,22 @@ node_types:
           delete:  
             inputs:  
               id:  
+                type: string
                 default: get_attribute:
                   entity: SELF
                   attribute: aws/sodalite.nodes.AWS.VM.id
               aws_access_key:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.aws_access_key
               aws_secret_key:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.aws_secret_key
               vm_name:  
+                type: string
                 default: get_property:
                   entity: SELF
                   property: aws/sodalite.nodes.AWS.VM.name
