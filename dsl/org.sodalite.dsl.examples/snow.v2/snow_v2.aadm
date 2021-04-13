@@ -18,6 +18,10 @@ inputs:
 		default: ""       
 	docker-registry-url: 
 		type: string
+	docker-pass: 
+		type: string
+	docker-user: 
+		type: string
 	docker-network: 
 		type: string      
 	docker-registry-cert-country-name:
@@ -123,6 +127,8 @@ node_templates:
 		type: docker/sodalite.nodes.DockerRegistry
 		properties:
 			docker_registry_url: get_input: docker-registry-url
+			docker_pass: get_input: docker-pass
+			docker_user: get_input: docker-user
 		requirements:
 			host:
 				node: snow/snow-vm

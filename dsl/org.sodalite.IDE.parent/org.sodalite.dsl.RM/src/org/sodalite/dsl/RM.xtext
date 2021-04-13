@@ -348,7 +348,7 @@ EPropertyDefinition:
 EPropertyDefinitionBody:
 	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
-	('required:' required=BOOLEAN)? &
+	('required:' required=EBOOLEAN)? &
 	('default:' default=EValueExpression)? &
 	('status:' status=STRING)? &
 	('constraints:'

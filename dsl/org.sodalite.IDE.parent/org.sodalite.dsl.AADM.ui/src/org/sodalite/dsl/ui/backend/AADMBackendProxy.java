@@ -845,10 +845,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (st.hasMoreElements()) { // Node_Template children
 						String entity_name = st.nextToken();
 						if ("Property".equals(path_type)) {
-							for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
-								if (property.getName().contentEquals(entity_name)) {
-									result = new ValidationSourceFeature(property,
-											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+							if (node.getNode().getProperties() != null) {
+								for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
+									if (property.getName().contentEquals(entity_name)) {
+										result = new ValidationSourceFeature(property,
+												RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+									}
 								}
 							}
 						} else if ("requirements".equals(path_type)) {

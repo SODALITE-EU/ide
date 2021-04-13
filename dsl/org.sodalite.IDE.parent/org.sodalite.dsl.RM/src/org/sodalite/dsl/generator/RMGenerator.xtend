@@ -1104,7 +1104,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "required" ;
-	  exchange:value '«p.property.required»' ;
+	  «IF p.property.required != null»
+	  exchange:value '«p.property.required.value»' ;
+	«ELSE»
+	  exchange:value 'true' ;
+	«ENDIF»
 	.
 	
 	«IF p.property.^default !== null»

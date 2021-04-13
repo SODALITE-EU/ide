@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
@@ -28,7 +29,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#isRequired <em>Required</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getRequired <em>Required</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getDefault <em>Default</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EPropertyDefinitionBodyImpl#getConstraints <em>Constraints</em>}</li>
@@ -70,24 +71,14 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
   protected String description = DESCRIPTION_EDEFAULT;
 
   /**
-   * The default value of the '{@link #isRequired() <em>Required</em>}' attribute.
+   * The cached value of the '{@link #getRequired() <em>Required</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isRequired()
+   * @see #getRequired()
    * @generated
    * @ordered
    */
-  protected static final boolean REQUIRED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isRequired()
-   * @generated
-   * @ordered
-   */
-  protected boolean required = REQUIRED_EDEFAULT;
+  protected EBOOLEAN required;
 
   /**
    * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
@@ -241,7 +232,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    */
   @Override
-  public boolean isRequired()
+  public EBOOLEAN getRequired()
   {
     return required;
   }
@@ -251,13 +242,38 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setRequired(boolean newRequired)
+  public NotificationChain basicSetRequired(EBOOLEAN newRequired, NotificationChain msgs)
   {
-    boolean oldRequired = required;
+    EBOOLEAN oldRequired = required;
     required = newRequired;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED, oldRequired, required));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED, oldRequired, newRequired);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRequired(EBOOLEAN newRequired)
+  {
+    if (newRequired != required)
+    {
+      NotificationChain msgs = null;
+      if (required != null)
+        msgs = ((InternalEObject)required).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED, null, msgs);
+      if (newRequired != null)
+        msgs = ((InternalEObject)newRequired).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED, null, msgs);
+      msgs = basicSetRequired(newRequired, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED, newRequired, newRequired));
   }
 
   /**
@@ -447,6 +463,8 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     {
       case RMPackage.EPROPERTY_DEFINITION_BODY__TYPE:
         return basicSetType(null, msgs);
+      case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
+        return basicSetRequired(null, msgs);
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         return basicSetDefault(null, msgs);
       case RMPackage.EPROPERTY_DEFINITION_BODY__CONSTRAINTS:
@@ -472,7 +490,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
       case RMPackage.EPROPERTY_DEFINITION_BODY__DESCRIPTION:
         return getDescription();
       case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
-        return isRequired();
+        return getRequired();
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         return getDefault();
       case RMPackage.EPROPERTY_DEFINITION_BODY__STATUS:
@@ -502,7 +520,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setDescription((String)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
-        setRequired((Boolean)newValue);
+        setRequired((EBOOLEAN)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         setDefault((EValueExpression)newValue);
@@ -537,7 +555,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setDescription(DESCRIPTION_EDEFAULT);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
-        setRequired(REQUIRED_EDEFAULT);
+        setRequired((EBOOLEAN)null);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         setDefault((EValueExpression)null);
@@ -570,7 +588,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
       case RMPackage.EPROPERTY_DEFINITION_BODY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EPROPERTY_DEFINITION_BODY__REQUIRED:
-        return required != REQUIRED_EDEFAULT;
+        return required != null;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
         return default_ != null;
       case RMPackage.EPROPERTY_DEFINITION_BODY__STATUS:
@@ -596,8 +614,6 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (description: ");
     result.append(description);
-    result.append(", required: ");
-    result.append(required);
     result.append(", status: ");
     result.append(status);
     result.append(')');

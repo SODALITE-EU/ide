@@ -75,6 +75,7 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
 import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import java.io.File
+import org.sodalite.dsl.rM.EParameterDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -706,6 +707,18 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
+	override void completeGetInput_Input(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//Find local inputs
+		val AADM_Model aadm = findModel(model) as AADM_Model
+		if (aadm !== null){
+			var Image image = getImage("icons/input.png")
+			for (EParameterDefinition input: aadm.inputs.inputs){
+				val proposalText = input.name
+				createNonEditableCompletionProposal(proposalText, proposalText, image, context, null, acceptor);
+			}
 		}
 	}
 	

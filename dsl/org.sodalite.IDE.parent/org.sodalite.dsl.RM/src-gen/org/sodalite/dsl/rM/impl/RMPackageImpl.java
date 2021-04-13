@@ -2589,9 +2589,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEPropertyDefinitionBody_Required()
+  public EReference getEPropertyDefinitionBody_Required()
   {
-    return (EAttribute)ePropertyDefinitionBodyEClass.getEStructuralFeatures().get(2);
+    return (EReference)ePropertyDefinitionBodyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -4439,7 +4439,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     ePropertyDefinitionBodyEClass = createEClass(EPROPERTY_DEFINITION_BODY);
     createEReference(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__TYPE);
     createEAttribute(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__DESCRIPTION);
-    createEAttribute(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__REQUIRED);
+    createEReference(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__REQUIRED);
     createEReference(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__DEFAULT);
     createEAttribute(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__STATUS);
     createEReference(ePropertyDefinitionBodyEClass, EPROPERTY_DEFINITION_BODY__CONSTRAINTS);
@@ -4916,7 +4916,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(ePropertyDefinitionBodyEClass, EPropertyDefinitionBody.class, "EPropertyDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEPropertyDefinitionBody_Type(), this.getEDataTypeName(), null, "type", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPropertyDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEPropertyDefinitionBody_Required(), ecorePackage.getEBoolean(), "required", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEPropertyDefinitionBody_Required(), this.getEBOOLEAN(), null, "required", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPropertyDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPropertyDefinitionBody_Status(), ecorePackage.getEString(), "status", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEPropertyDefinitionBody_Constraints(), this.getEConstraints(), null, "constraints", null, 0, 1, EPropertyDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
