@@ -227,6 +227,8 @@ public class DeploymentWizardMainPage extends WizardPage {
 				}
 
 				private Object processInput(String input) {
+					if (input.isEmpty())
+						return input;
 					StringTokenizer st = new StringTokenizer(input, ":");
 					String input_name = st.nextToken();
 					if (inputDefs.keySet().contains(input_name)) {
