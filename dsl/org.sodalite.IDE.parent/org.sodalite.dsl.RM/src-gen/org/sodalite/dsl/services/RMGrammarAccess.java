@@ -2567,7 +2567,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cRequiredKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cRequiredAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cRequiredBOOLEANTerminalRuleCall_2_1_0 = (RuleCall)cRequiredAssignment_2_1.eContents().get(0);
+		private final RuleCall cRequiredEBOOLEANParserRuleCall_2_1_0 = (RuleCall)cRequiredAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
 		private final Keyword cDefaultKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cDefaultAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
@@ -2588,14 +2588,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cEntry_schemaEDataTypeNameParserRuleCall_6_1_0 = (RuleCall)cEntry_schemaAssignment_6_1.eContents().get(0);
 		
 		//EPropertyDefinitionBody:
-		//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=BOOLEAN)? & ('default:'
+		//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
 		//	default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:'
 		//	BEGIN
 		//	constraints=EConstraints
 		//	END)? & ('entry_schema:' entry_schema=EDataTypeName)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=BOOLEAN)? & ('default:'
+		//'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
 		//default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:' BEGIN constraints=EConstraints END)? &
 		//('entry_schema:' entry_schema=EDataTypeName)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
@@ -2624,17 +2624,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_1_0; }
 		
-		//('required:' required=BOOLEAN)?
+		//('required:' required=EBOOLEAN)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'required:'
 		public Keyword getRequiredKeyword_2_0() { return cRequiredKeyword_2_0; }
 		
-		//required=BOOLEAN
+		//required=EBOOLEAN
 		public Assignment getRequiredAssignment_2_1() { return cRequiredAssignment_2_1; }
 		
-		//BOOLEAN
-		public RuleCall getRequiredBOOLEANTerminalRuleCall_2_1_0() { return cRequiredBOOLEANTerminalRuleCall_2_1_0; }
+		//EBOOLEAN
+		public RuleCall getRequiredEBOOLEANParserRuleCall_2_1_0() { return cRequiredEBOOLEANParserRuleCall_2_1_0; }
 		
 		//('default:' default=EValueExpression)?
 		public Group getGroup_3() { return cGroup_3; }
@@ -5760,7 +5760,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EPropertyDefinitionBody:
-	//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=BOOLEAN)? & ('default:'
+	//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
 	//	default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:'
 	//	BEGIN
 	//	constraints=EConstraints

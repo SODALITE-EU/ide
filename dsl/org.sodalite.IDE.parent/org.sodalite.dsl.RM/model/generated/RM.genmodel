@@ -201,7 +201,7 @@
     <genClasses ecoreClass="RM.ecore#//EPropertyDefinitionBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/required"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/required"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/default"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPropertyDefinitionBody/status"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EPropertyDefinitionBody/constraints"/>

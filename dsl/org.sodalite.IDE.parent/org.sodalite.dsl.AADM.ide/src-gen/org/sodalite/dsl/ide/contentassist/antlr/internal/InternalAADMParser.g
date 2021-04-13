@@ -25095,9 +25095,9 @@ rule__EPropertyDefinitionBody__RequiredAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); }
-		RULE_BOOLEAN
-		{ after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); }
+		{ before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); }
+		ruleEBOOLEAN
+		{ after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); }
 	)
 ;
 finally {

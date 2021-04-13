@@ -85,6 +85,7 @@ import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
@@ -1040,6 +1041,22 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         SodaliteLogger.log(ex_1.getMessage(), ex_1);
       } else {
         throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Override
+  public void completeGetInput_Input(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    Object _findModel = this.findModel(model);
+    final AADM_Model aadm = ((AADM_Model) _findModel);
+    if ((aadm != null)) {
+      Image image = this.getImage("icons/input.png");
+      EList<EParameterDefinition> _inputs = aadm.getInputs().getInputs();
+      for (final EParameterDefinition input : _inputs) {
+        {
+          final String proposalText = input.getName();
+          this.createNonEditableCompletionProposal(proposalText, proposalText, image, context, null, acceptor);
+        }
       }
     }
   }

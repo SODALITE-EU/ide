@@ -47,6 +47,10 @@ node_templates:
 			registry: "private"
 			certs_location: "certs"
 			images_location: "/mnt/nfs/home/kamil/images"
+			puller_image: "<set_value>"
+			puller_image_remote: "<set_value>"
+
+
 		requirements:
 			host: 
 				node: clinical/hpc-wm-torque
@@ -59,6 +63,10 @@ node_templates:
 			registry: "private"
 			certs_location: "certs"
 			images_location: "/mnt/nfs/home/kamil/images"
+			puller_image: "<set_value>"
+			puller_image_remote: "<set_value>"
+
+
 		requirements:
 			host: 
 				node: clinical/hpc-wm-torque
@@ -70,6 +78,10 @@ node_templates:
 			image: "quay.io/tianyikillua/code_aster"
 			registry: "docker"
 			images_location: "/mnt/nfs/home/kamil/images"
+			puller_image: "<set_value>"
+			puller_image_remote: "<set_value>"
+
+
 		requirements:
 			host: 
 				node: clinical/hpc-wm-torque				
@@ -247,25 +259,41 @@ node_templates:
 
 	density-mapping-job-result:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
+		properties:
+			enable_audit: "<set_value>"
+			monitor_period: "<set_value>"
+			monitor_retries_headroom: "<set_value>"
+
 		requirements:
-			host: 
-				node: clinical/hpc-wm-torque
-			job: 
-				node: clinical/density-mapping-job
+				host:
+					node: clinical/hpc-wm-torque
+				job:
+					node: clinical/density-mapping-job
 
 	probabilistic-mapping-job-result:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
+		properties:
+			enable_audit: "<set_value>"
+			monitor_period: "<set_value>"
+			monitor_retries_headroom: "<set_value>"
+
+
 		requirements:
-			host: 
-				node: clinical/hpc-wm-torque
-			job: 
-				node: clinical/probabilistic-mapping-job
+				host:
+					node: clinical/hpc-wm-torque
+				job:
+					node: clinical/probabilistic-mapping-job
 
 	boundary-conditions-job-result:
 		type: hpc/sodalite.nodes.hpc.job.torque.result
+		properties:
+			enable_audit: "<set_value>"
+			monitor_period: "<set_value>"
+			monitor_retries_headroom: "<set_value>"
+
 		requirements:
-			host: 
-				node: clinical/hpc-wm-torque
-			job: 
-				node: clinical/boundary-conditions-job
+				host:
+					node: clinical/hpc-wm-torque
+				job:
+					node: clinical/boundary-conditions-job
 	

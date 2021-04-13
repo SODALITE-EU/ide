@@ -10406,11 +10406,11 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA7_3 = input.LA(2);
 
-                if ( (LA7_3==EOF||LA7_3==Greater_or_equal||LA7_3==Less_or_equal||LA7_3==Entry_schema||LA7_3==Greater_than||(LA7_3>=Valid_values && LA7_3<=Description)||(LA7_3>=Max_length && LA7_3<=Min_length)||LA7_3==Less_than||LA7_3==In_range||LA7_3==Required||LA7_3==Default||LA7_3==Length||(LA7_3>=Status && LA7_3<=Equal)||LA7_3==Value||LA7_3==Type||LA7_3==Comma||(LA7_3>=RightSquareBracket && LA7_3<=RULE_ID)||LA7_3==RULE_END) ) {
-                    alt7=4;
-                }
-                else if ( (LA7_3==FullStop) ) {
+                if ( (LA7_3==FullStop) ) {
                     alt7=3;
+                }
+                else if ( (LA7_3==EOF||LA7_3==Greater_or_equal||LA7_3==Less_or_equal||LA7_3==Entry_schema||LA7_3==Greater_than||(LA7_3>=Valid_values && LA7_3<=Description)||(LA7_3>=Max_length && LA7_3<=Min_length)||LA7_3==Less_than||LA7_3==In_range||LA7_3==Required||LA7_3==Default||LA7_3==Length||(LA7_3>=Status && LA7_3<=Equal)||LA7_3==Value||LA7_3==Type||LA7_3==Comma||(LA7_3>=RightSquareBracket && LA7_3<=RULE_ID)||LA7_3==RULE_END) ) {
+                    alt7=4;
                 }
                 else {
                     NoViableAltException nvae =
@@ -10550,11 +10550,11 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA8_2 = input.LA(2);
 
-                if ( (LA8_2==EOF||LA8_2==Greater_or_equal||LA8_2==Less_or_equal||LA8_2==Greater_than||LA8_2==Valid_values||(LA8_2>=Max_length && LA8_2<=Min_length)||LA8_2==Less_than||LA8_2==In_range||LA8_2==Length||LA8_2==Equal||LA8_2==Comma||LA8_2==RightSquareBracket||LA8_2==RULE_END) ) {
-                    alt8=3;
-                }
-                else if ( (LA8_2==FullStop) ) {
+                if ( (LA8_2==FullStop) ) {
                     alt8=2;
+                }
+                else if ( (LA8_2==EOF||LA8_2==Greater_or_equal||LA8_2==Less_or_equal||LA8_2==Greater_than||LA8_2==Valid_values||(LA8_2>=Max_length && LA8_2<=Min_length)||LA8_2==Less_than||LA8_2==In_range||LA8_2==Length||LA8_2==Equal||LA8_2==Comma||LA8_2==RightSquareBracket||LA8_2==RULE_END) ) {
+                    alt8=3;
                 }
                 else {
                     NoViableAltException nvae =
@@ -10675,24 +10675,24 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA9_2 = input.LA(2);
 
-                if ( (LA9_2==Solidus) ) {
-                    int LA9_4 = input.LA(3);
+                if ( (LA9_2==EOF||LA9_2==Attribute||LA9_2==Property||LA9_2==Req_cap||LA9_2==Entity||LA9_2==RULE_END) ) {
+                    alt9=3;
+                }
+                else if ( (LA9_2==Solidus) ) {
+                    int LA9_5 = input.LA(3);
 
-                    if ( (LA9_4==RULE_ID) ) {
+                    if ( (LA9_5==RULE_ID) ) {
                         alt9=3;
                     }
-                    else if ( (LA9_4==RULE_QUALIFIED_NAME) ) {
+                    else if ( (LA9_5==RULE_QUALIFIED_NAME) ) {
                         alt9=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 9, 4, input);
+                            new NoViableAltException("", 9, 5, input);
 
                         throw nvae;
                     }
-                }
-                else if ( (LA9_2==EOF||LA9_2==Attribute||LA9_2==Property||LA9_2==Req_cap||LA9_2==Entity||LA9_2==RULE_END) ) {
-                    alt9=3;
                 }
                 else {
                     NoViableAltException nvae =
@@ -76507,21 +76507,25 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__RequiredAssignment_2_1"
-    // InternalAADMParser.g:25092:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( RULE_BOOLEAN ) ;
+    // InternalAADMParser.g:25092:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( ruleEBOOLEAN ) ;
     public final void rule__EPropertyDefinitionBody__RequiredAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:25096:1: ( ( RULE_BOOLEAN ) )
-            // InternalAADMParser.g:25097:2: ( RULE_BOOLEAN )
+            // InternalAADMParser.g:25096:1: ( ( ruleEBOOLEAN ) )
+            // InternalAADMParser.g:25097:2: ( ruleEBOOLEAN )
             {
-            // InternalAADMParser.g:25097:2: ( RULE_BOOLEAN )
-            // InternalAADMParser.g:25098:3: RULE_BOOLEAN
+            // InternalAADMParser.g:25097:2: ( ruleEBOOLEAN )
+            // InternalAADMParser.g:25098:3: ruleEBOOLEAN
             {
-             before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); 
-            match(input,RULE_BOOLEAN,FOLLOW_2); 
-             after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); 
+             before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleEBOOLEAN();
+
+            state._fsp--;
+
+             after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); 
 
             }
 

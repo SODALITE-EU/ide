@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.File;
 import java.nio.file.Files;
@@ -3130,12 +3131,22 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("  ");
     _builder.append("exchange:name \"required\" ;");
     _builder.newLine();
-    _builder.append("  ");
-    _builder.append("exchange:value \'");
-    boolean _isRequired = p.getProperty().isRequired();
-    _builder.append(_isRequired, "  ");
-    _builder.append("\' ;");
-    _builder.newLineIfNotEmpty();
+    {
+      EBOOLEAN _required = p.getProperty().getRequired();
+      boolean _notEquals = (!Objects.equal(_required, null));
+      if (_notEquals) {
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        boolean _isValue = p.getProperty().getRequired().isValue();
+        _builder.append(_isValue, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("  ");
+        _builder.append("exchange:value \'true\' ;");
+        _builder.newLine();
+      }
+    }
     _builder.append(".");
     _builder.newLine();
     _builder.newLine();

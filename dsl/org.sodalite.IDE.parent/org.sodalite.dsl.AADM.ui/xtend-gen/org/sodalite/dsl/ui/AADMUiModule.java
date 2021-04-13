@@ -19,7 +19,7 @@ public class AADMUiModule extends AbstractAADMUiModule {
     return AADMTextEditComposer.class;
   }
   
-  public AADMUiModule(final AbstractUIPlugin arg0) {
-    super(arg0);
+  public AADMUiModule(final AbstractUIPlugin plugin) {
+    super(plugin);
   }
 }

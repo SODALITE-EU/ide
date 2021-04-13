@@ -10286,11 +10286,11 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA7_3 = input.LA(2);
 
-                if ( (LA7_3==EOF||LA7_3==Greater_or_equal||LA7_3==Less_or_equal||LA7_3==Entry_schema||LA7_3==Greater_than||(LA7_3>=Valid_values && LA7_3<=Description)||(LA7_3>=Max_length && LA7_3<=Min_length)||LA7_3==Less_than||LA7_3==In_range||LA7_3==Required||LA7_3==Default||LA7_3==Length||(LA7_3>=Status && LA7_3<=Equal)||LA7_3==Value||LA7_3==Type||LA7_3==Comma||(LA7_3>=RightSquareBracket && LA7_3<=RULE_ID)||LA7_3==RULE_END) ) {
-                    alt7=4;
-                }
-                else if ( (LA7_3==FullStop) ) {
+                if ( (LA7_3==FullStop) ) {
                     alt7=3;
+                }
+                else if ( (LA7_3==EOF||LA7_3==Greater_or_equal||LA7_3==Less_or_equal||LA7_3==Entry_schema||LA7_3==Greater_than||(LA7_3>=Valid_values && LA7_3<=Description)||(LA7_3>=Max_length && LA7_3<=Min_length)||LA7_3==Less_than||LA7_3==In_range||LA7_3==Required||LA7_3==Default||LA7_3==Length||(LA7_3>=Status && LA7_3<=Equal)||LA7_3==Value||LA7_3==Type||LA7_3==Comma||(LA7_3>=RightSquareBracket && LA7_3<=RULE_ID)||LA7_3==RULE_END) ) {
+                    alt7=4;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -10448,11 +10448,11 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
                 {
                 int LA8_2 = input.LA(2);
 
-                if ( (LA8_2==EOF||LA8_2==Greater_or_equal||LA8_2==Less_or_equal||LA8_2==Greater_than||LA8_2==Valid_values||(LA8_2>=Max_length && LA8_2<=Min_length)||LA8_2==Less_than||LA8_2==In_range||LA8_2==Length||LA8_2==Equal||LA8_2==Comma||LA8_2==RightSquareBracket||LA8_2==RULE_END) ) {
-                    alt8=3;
-                }
-                else if ( (LA8_2==FullStop) ) {
+                if ( (LA8_2==FullStop) ) {
                     alt8=2;
+                }
+                else if ( (LA8_2==EOF||LA8_2==Greater_or_equal||LA8_2==Less_or_equal||LA8_2==Greater_than||LA8_2==Valid_values||(LA8_2>=Max_length && LA8_2<=Min_length)||LA8_2==Less_than||LA8_2==In_range||LA8_2==Length||LA8_2==Equal||LA8_2==Comma||LA8_2==RightSquareBracket||LA8_2==RULE_END) ) {
+                    alt8=3;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -71697,24 +71697,28 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__RequiredAssignment_2_1"
-    // InternalRMParser.g:22277:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( RULE_BOOLEAN ) ;
+    // InternalRMParser.g:22277:1: rule__EPropertyDefinitionBody__RequiredAssignment_2_1 : ( ruleEBOOLEAN ) ;
     public final void rule__EPropertyDefinitionBody__RequiredAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:22281:1: ( ( RULE_BOOLEAN ) )
-            // InternalRMParser.g:22282:2: ( RULE_BOOLEAN )
+            // InternalRMParser.g:22281:1: ( ( ruleEBOOLEAN ) )
+            // InternalRMParser.g:22282:2: ( ruleEBOOLEAN )
             {
-            // InternalRMParser.g:22282:2: ( RULE_BOOLEAN )
-            // InternalRMParser.g:22283:3: RULE_BOOLEAN
+            // InternalRMParser.g:22282:2: ( ruleEBOOLEAN )
+            // InternalRMParser.g:22283:3: ruleEBOOLEAN
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); 
+               before(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); 
             }
-            match(input,RULE_BOOLEAN,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleEBOOLEAN();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0()); 
+               after(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0()); 
             }
 
             }
