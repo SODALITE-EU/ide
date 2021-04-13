@@ -143,16 +143,16 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.env		
 																
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"							
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml", "/workspace/iac-management/use-cases/modules/openstack/artifacts/node_exporter.json.j2"]
+							primary: "/workspace/iac-modules/openstack/playbooks/vm_create.yml"							
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml", "/workspace/iac-modules/openstack/artifacts/node_exporter.json.j2"]
 					delete:  
-						inputs:  
+						inputs:
 							id:                       
 								type: string
 								default: get_attribute:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]
             

@@ -26,7 +26,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host												
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_volume.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/add_volume.yml"
 					delete:
 						inputs:
 							volume_name:    
@@ -41,4 +41,4 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host											
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_volume.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/remove_volume.yml"

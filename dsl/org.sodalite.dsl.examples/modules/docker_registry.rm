@@ -43,7 +43,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/login_user.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/login_user.yml"
 					delete:
 						inputs:
 							docker_registry_url:      
@@ -58,6 +58,6 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/logout_user.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/logout_user.yml"
               
               

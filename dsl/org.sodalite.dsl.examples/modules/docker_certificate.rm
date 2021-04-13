@@ -67,7 +67,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host																		
 						implementation:
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_cert.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/add_cert.yml"
 								relative_path: "playbooks"
 							dependencies: ["/workspace/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.crt", "/workspace/ide/dsl/org.sodalite.dsl.examples/certificates/docker/ca.key"]
 								relative_path: "artifacts"
@@ -86,6 +86,6 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_cert.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/remove_cert.yml"
               
               

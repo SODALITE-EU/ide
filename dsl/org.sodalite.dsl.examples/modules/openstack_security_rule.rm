@@ -50,8 +50,8 @@ node_types:
 				operations:
 					create:  
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_create.yml" 
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-modules/openstack/playbooks/security_rule_create.yml" 
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							ports: 
 								type: map
@@ -76,8 +76,8 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.env										
 					delete:  
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/security_rule_delete.yml"
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-modules/openstack/playbooks/security_rule_delete.yml"
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]
 						inputs:  
 							group_name: 
 								type: string
