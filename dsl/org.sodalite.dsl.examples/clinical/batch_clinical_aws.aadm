@@ -5,6 +5,11 @@ import: batch
 
 inputs:
 
+  clinical-uc-input-tarball-url:
+    type: string
+  clinical-uc-output-tarball-url:
+    type: string
+
   aws-ssh-key-name:  
     type: string 
   aws-ssh-public-key:  
@@ -24,6 +29,8 @@ inputs:
     type: string 
   aws-security-rules:  
     type: list 
+  aws-security-rules_egress:  
+    type: list 
   aws-security-groups:  
     type: list 
   aws-flavor-name:  
@@ -36,6 +43,8 @@ inputs:
   _get_secret_gridftp-usercert:
     type: string
   _get_secret_gridftp-userkey:
+    type: string
+  globus_certificates_tarball_url:
     type: string
 
 
@@ -56,6 +65,7 @@ node_templates:
       group_name: "clinical-uc-sec-group" 
       group_description: "Clinical UC SSH, GridFTP Security Rules" 
       rules:            get_input: aws-security-rules 
+      rules_egress:     get_input: aws-security-rules_egress
       vpc_id:           get_input: vpc-id  
       region:           get_input: region  
       aws_access_key:   get_input: _get_secret_aws-access-key  
@@ -64,7 +74,7 @@ node_templates:
   aws-vm:  
     type: aws/sodalite.nodes.AWS.VM
     properties:  
-      name:             "clinical-uc-vm"
+      name:             "clinical-uc-ec2-vm-3"
       key_name:         get_input: aws-ssh-key-name  
       image:            get_input: aws-image-name 
       network:          get_input: vpc-subnet-id  
@@ -77,32 +87,221 @@ node_templates:
       userdata:         get_input: aws-userdata  
     requirements:  
       protected_by:
-        node: aws-security-rules
+        node: clinical/aws-security-rules
       dependency:
-        node: aws-keypair
+        node: clinical/aws-keypair
+  
+  clinical-uc-config:
+    type: clinical/sodalite.nodes.clinical.Config
+    properties:
+      workspace:          "~/workflow-ide"
+      input_tarball_url:  get_input: clinical-uc-input-tarball-url
+      output_tarball_url: get_input: clinical-uc-output-tarball-url
+    requirements:
+      host:
+        node: clinical/aws-vm
+  
+  aws-vm-singularity-runtime:
+    type: batch/sodalite.nodes.batch.Container.Runtime
+    properties:
+      runtime: "singularity"
+      images_location: "images"
+    requirements:
+      host:
+        node: clinical/aws-vm
 
-  gridftp-client:
+  aws-gridftp-client:
     type: batch/sodalite.data.mover.GridFTP.Client
     properties:
       cert_path: "/tmp/test-gridftp-certs"
       usercert: get_input: _get_secret_gridftp-usercert
       userkey:  get_input: _get_secret_gridftp-userkey
+      globus_certificates_tarball_url:  get_input: globus_certificates_tarball_url
     requirements:
       host: 
-        node: aws-vm
+        node: clinical/aws-vm
 
-  gridftp-transfer:
+  // APPLICATIONS
+  density-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "density-mapper"
+      app_type: "fortran"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/aws-vm-singularity-runtime
+      host:
+        node: clinical/aws-vm
+      dependency:
+        node: clinical/clinical-uc-config
+  
+  prob-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    optimization: hlrs.mpi
+    properties:
+      app_tag: "prob-mapper"
+      app_type: "hpc"
+      mpi_ranks: 2
+      container_runtime: "private://moduli:1.0.0" // from private registry
+      executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
+      build:
+        src: "$HOME/moduli/.git"
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install setuptools && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+      dependency:
+        node: clinical/clinical-uc-config
+  
+  boundary-condition-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "boundary-condition"
+      app_type: "fortran"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/aws-vm-singularity-runtime
+      host:
+        node: clinical/aws-vm
+      dependency:
+        node: clinical/clinical-uc-config
+
+  // JOB EXECUTIONS
+  density-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.BatchExecution
+    properties:
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/density-mapper-app
+      runtime:
+        node: clinical/aws-vm-singularity-runtime
+      host:
+        node: clinical/aws-vm
+  
+  prob-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "prob-mapper-job"
+      node_count: 2
+      process_count_per_node: 2
+      wall_time_limit: "1:00:00"
+      standard_output_file: "prob-mapper.out"
+      standard_error_file: "prob-mapper.err"
+      combine_stdout_stderr: true
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/prob-mapper-app
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+  
+  boundary-condition-job:
+    type: batch/sodalite.nodes.batch.Container.BatchExecution
+    properties:
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/boundary-condition-app
+      runtime:
+        node: clinical/aws-vm-singularity-runtime
+      host:
+        node: clinical/aws-vm
+
+
+  // WORKFLOW
+  dm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution: 
+        node: clinical/density-mapper-job
+      host:
+        node: clinical/aws-vm
+  
+  dm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/dm-exec
+      host:
+        node: clinical/aws-vm
+  
+  dm-result-transfer:
+    type: batch/sodalite.data.mover.GridFTP.Transfer
+    properties:
+      name: "Transfer density mapper results"
+      src_protocol: "file"
+      src_address: "localhost"
+      src_path: "~/workflow-ide/output/"
+      dst_protocol: "gsiftp"
+      dst_address: "sodalite-fe.hlrs.de"
+      dst_path: "~/workflow-ide/output/"
+    requirements:
+      client:
+        node: clinical/aws-gridftp-client
+      host: 
+        node: clinical/aws-vm
+      dependency:
+        node: clinical/dm-result
+  
+  pm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/prob-mapper-job
+      host:
+        node: clinical/hlrs-testbed
+      dependency:
+        node: clinical/dm-result-transfer
+  
+  pm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/pm-exec
+      host:
+        node: clinical/hlrs-testbed
+  
+  pm-result-transfer:
     type: batch/sodalite.data.mover.GridFTP.Transfer
     properties:
       name: "Transfer of a file"
-      src_protocol: "file"
-      src_address: "localhost"
-      src_path: "/tmp/test-gridftp-certs/usercert.pem"
-      dst_protocol: "gsiftp"
-      dst_address: "sodalite-fe.hlrs.de"
-      dst_path: "~/from-aws-usercert.pem"
+      src_protocol: "gsiftp"
+      src_address: "sodalite-fe.hlrs.de"
+      src_path: "~/workflow-ide/output/"
+      dst_protocol: "file"
+      dst_address: "localhost"
+      dst_path: "~/workflow-ide/output/"
     requirements:
       client:
-        node: gridftp-client
+        node: clinical/aws-gridftp-client
       host: 
-        node: aws-vm
+        node: clinical/aws-vm
+      dependency:
+        node: clinical/pm-result
+  
+  bc-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/boundary-condition-job
+      host:
+        node: clinical/aws-vm
+      dependency:
+        node: clinical/pm-result-transfer
+  
+  bc-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/bc-exec
+      host:
+        node: clinical/aws-vm
