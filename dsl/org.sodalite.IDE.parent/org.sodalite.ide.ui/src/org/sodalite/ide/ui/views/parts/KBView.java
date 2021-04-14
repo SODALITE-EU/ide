@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
@@ -120,8 +121,9 @@ public class KBView {
 						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
 					}
 				}
-			} catch (NotRolePermissionException ex) {
-				// Ignored
+			} catch (SodaliteException ex) {
+				if (!(ex.getCause() instanceof NotRolePermissionException))
+					throw ex;
 			}
 
 			// AADMs
@@ -133,8 +135,9 @@ public class KBView {
 						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
 					}
 				}
-			} catch (NotRolePermissionException ex) {
-				// Ignored
+			} catch (SodaliteException ex) {
+				if (!(ex.getCause() instanceof NotRolePermissionException))
+					throw ex;
 			}
 		}
 		return root;

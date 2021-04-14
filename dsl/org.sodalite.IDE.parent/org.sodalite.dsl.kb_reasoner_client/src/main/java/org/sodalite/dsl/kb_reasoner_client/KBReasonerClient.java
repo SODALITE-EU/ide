@@ -220,7 +220,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -249,7 +249,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -275,7 +275,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -305,7 +305,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -333,7 +333,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -361,7 +361,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -389,7 +389,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -417,7 +417,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -447,7 +447,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -475,7 +475,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -503,7 +503,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -531,7 +531,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -559,7 +559,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -575,8 +575,8 @@ public class KBReasonerClient implements KBReasoner {
 		URI uri;
 		try {
 			uri = new URI(url);
-		} catch (URISyntaxException e) {
-			throw new SodaliteException(e.getMessage());
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
 		}
 		ValidRequirementNodeData data = getJSONObjectForType(ValidRequirementNodeData.class, uri, HttpStatus.OK);
 		if (data == null) {
@@ -616,7 +616,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -642,7 +642,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -671,7 +671,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -717,7 +717,7 @@ public class KBReasonerClient implements KBReasoner {
 				try {
 					report.setErrors(processErrors(json));
 				} catch (Exception e) {
-					throw new SodaliteException(e.getMessage());
+					throw new SodaliteException(e);
 				}
 			} else if (ex.getStatusCode() == HttpStatus.FORBIDDEN) {
 				throw new NotRolePermissionException(ex.getMessage());
@@ -727,7 +727,7 @@ public class KBReasonerClient implements KBReasoner {
 				throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 			}
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 
 		return report;
@@ -769,7 +769,7 @@ public class KBReasonerClient implements KBReasoner {
 				try {
 					report.setErrors(processErrors(json));
 				} catch (Exception e) {
-					throw new SodaliteException(e.getMessage());
+					throw new SodaliteException(e);
 				}
 			} else if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.FORBIDDEN) {
 				throw new NotRolePermissionException(ex.getMessage());
@@ -779,7 +779,7 @@ public class KBReasonerClient implements KBReasoner {
 				throw ex;
 			}
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 
 		return report;
@@ -822,7 +822,7 @@ public class KBReasonerClient implements KBReasoner {
 					try {
 						report.setErrors(processErrors(errors.getAsJsonArray().toString()));
 					} catch (Exception e) {
-						throw new SodaliteException(e.getMessage());
+						throw new SodaliteException(e);
 					}
 				} else { // There are optimization errors
 					JsonElement optimization_errors = errors.getAsJsonObject().get("templates_optimizations");
@@ -830,7 +830,7 @@ public class KBReasonerClient implements KBReasoner {
 						try {
 							report.setErrors(processOptimizationErrors(optimization_errors.toString()));
 						} catch (Exception e) {
-							throw new SodaliteException(e.getMessage());
+							throw new SodaliteException(e);
 						}
 					}
 				}
@@ -838,7 +838,7 @@ public class KBReasonerClient implements KBReasoner {
 				throw ex;
 			}
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 
 		return report;
@@ -863,7 +863,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -876,8 +876,8 @@ public class KBReasonerClient implements KBReasoner {
 		URI uri;
 		try {
 			uri = new URI(url);
-		} catch (URISyntaxException e) {
-			throw new SodaliteException(e.getMessage());
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
 		}
 		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, uri,
 				HttpStatus.CREATED);
@@ -890,8 +890,8 @@ public class KBReasonerClient implements KBReasoner {
 		URI uri;
 		try {
 			uri = new URI(url);
-		} catch (URISyntaxException e) {
-			throw new SodaliteException(e.getMessage());
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
 		}
 		return postObjectAndReturnAnotherType(image_build_conf, BuildImageReport.class, uri, HttpStatus.ACCEPTED);
 	}
@@ -919,7 +919,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 		return buildStatus;
 	}
@@ -962,7 +962,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -976,7 +976,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 
 		return deploymentStatus;
@@ -1002,8 +1002,8 @@ public class KBReasonerClient implements KBReasoner {
 		URI uri;
 		try {
 			uri = new URI(url);
-		} catch (URISyntaxException e) {
-			throw new SodaliteException(e.getMessage());
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
 		}
 		return postObjectAndReturnAnotherType(payload, PDSUpdateReport.class, uri, HttpStatus.OK);
 	}
@@ -1029,7 +1029,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1052,7 +1052,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1094,7 +1094,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1126,7 +1126,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1155,7 +1155,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1186,7 +1186,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1212,15 +1212,15 @@ public class KBReasonerClient implements KBReasoner {
 			URI uri;
 			try {
 				uri = new URI(url);
-			} catch (URISyntaxException e) {
-				throw new SodaliteException(e.getMessage());
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
 			}
 
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1250,7 +1250,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1273,7 +1273,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1436,7 +1436,7 @@ public class KBReasonerClient implements KBReasoner {
 				throw ex;
 			}
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1486,7 +1486,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException e) {
 			throw e;
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
@@ -1614,7 +1614,7 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
-			throw new SodaliteException(ex.getMessage());
+			throw new SodaliteException(ex);
 		}
 	}
 
