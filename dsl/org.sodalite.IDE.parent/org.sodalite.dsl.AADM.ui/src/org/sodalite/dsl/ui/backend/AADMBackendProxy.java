@@ -282,6 +282,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
 					saveURI(saveReport.getURI(), aadmfile, project);
+					String aadm_id = saveReport.getURI();
 					subMonitor.worked(steps++);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
@@ -355,7 +356,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
 					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
-					getKBReasoner().notifyDeploymentToRefactoring(appName, aadmURI, depl_report.getBlueprint_id(),
+					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
 							depl_report.getDeployment_id(), inputs_yaml);
 
 					// Upon completion, show dialog
