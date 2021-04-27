@@ -895,12 +895,13 @@ class RMGenerator extends AbstractGenerator {
 	:CapabilityType_«capabilitytype_counter++»
 	  rdf:type exchange:Type ;
 	  exchange:name "«c.name»" ;
+	  «IF c.capability.superType !== null»
 	  «IF c.capability.superType.module !== null»
 	  exchange:derivesFrom '«c.capability.superType.module»/«c.capability.superType.type»' ;  
 	  «ELSE»
 	  exchange:derivesFrom '«c.capability.superType.type»' ;  
 	  «ENDIF»	  
-	  
+	  «ENDIF»
 	«IF c.capability.description !== null»
 	exchange:description '«processDescription(c.capability.description)»' ;
 	«ENDIF»
@@ -937,11 +938,13 @@ class RMGenerator extends AbstractGenerator {
 	:RelationshipType_«relationship_counter++»
 	  rdf:type exchange:Type ;
 	  exchange:name "«r.name»" ;
+	  «IF r.relationship.superType !== null»
 	  «IF r.relationship.superType.module !== null»
 	  exchange:derivesFrom '«r.relationship.superType.module»/«r.relationship.superType.type»' ;  
 	  «ELSE»
 	  exchange:derivesFrom '«r.relationship.superType.type»' ;  
 	  «ENDIF»	  
+	  «ENDIF»
 	  «IF r.relationship.description !== null»
 	  exchange:description '«processDescription(r.relationship.description)»' ;
 	  «ENDIF»
@@ -973,10 +976,12 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(n.node.description)»' ;
 	  «ENDIF»
 	  exchange:name "«n.name»" ;
+	  «IF n.node.superType !== null»
 	  «IF n.node.superType.module !== null»
 	  exchange:derivesFrom '«n.node.superType.module»/«n.node.superType.type»' ;  
 	  «ELSE»
 	  exchange:derivesFrom '«n.node.superType.type»' ;  
+	  «ENDIF»
 	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
@@ -1010,7 +1015,9 @@ class RMGenerator extends AbstractGenerator {
 	:DataType_«data_type_counter++»
 	  rdf:type exchange:Type ;
 	  exchange:name "«trim(d.name.compile)»" ;
+	  «IF d.data.superType !== null»
 	  exchange:derivesFrom '«trim(d.data.superType.compile)»' ;
+	  «ENDIF»
 	  «IF d.data.description !== null»
 	  exchange:description '«processDescription(d.data.description)»' ;
 	  «ENDIF»
@@ -1044,10 +1051,12 @@ class RMGenerator extends AbstractGenerator {
 	  «IF p.policy.description !== null»
 	  exchange:description '«processDescription(p.policy.description)»' ;
 	  «ENDIF»
+	  «IF p.policy.superType !== null»
 	  «IF p.policy.superType.module !== null»
 	  exchange:derivesFrom '«p.policy.superType.module»/«p.policy.superType.type»' ;
 	  «ELSE»
 	  exchange:derivesFrom '«p.policy.superType.type»' ;
+	  «ENDIF»
 	  «ENDIF»
 	  «IF p.policy.properties !== null»
 	  «FOR prop:p.policy.properties.properties»
@@ -1072,10 +1081,12 @@ class RMGenerator extends AbstractGenerator {
 	  «IF i.interface.description !== null»
 	  exchange:description '«processDescription(i.interface.description)»' ;
 	  «ENDIF»
+	  «IF i.interface.superType !== null»
 	  «IF i.interface.superType.module !== null»
 	  exchange:derivesFrom '«i.interface.superType.module»/«i.interface.superType.type»' ;
 	  «ELSE»
 	  exchange:derivesFrom '«i.interface.superType.type»' ;
+	  «ENDIF»
 	  «ENDIF»
 	  «IF i.interface.inputs !== null»
 	  «FOR prop:(i.interface.inputs.properties)»
@@ -1104,7 +1115,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "required" ;
-	  exchange:value '«p.property.required»' ;
+	  «IF p.property.required != null»
+	  exchange:value '«p.property.required.value»' ;
+	«ELSE»
+	  exchange:value 'true' ;
+	«ENDIF»
 	.
 	
 	«IF p.property.^default !== null»

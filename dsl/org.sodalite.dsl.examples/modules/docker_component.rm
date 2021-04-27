@@ -30,7 +30,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_network.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/add_network.yml"
 					delete:
 						inputs:
 							docker_network_name:
@@ -45,7 +45,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_network.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/remove_network.yml"
 
 	sodalite.nodes.DockerHost:  
 		derived_from: tosca.nodes.SoftwareComponent
@@ -79,7 +79,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host									
 						implementation:  
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/create_docker_host.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/create_docker_host.yml"
 					delete:  
 						inputs:
 							ansible_user: 
@@ -89,7 +89,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host							
 						implementation:  
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/delete_docker_host.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/delete_docker_host.yml"
 
 	sodalite.nodes.DockerizedComponent:  
 		derived_from: tosca.nodes.SoftwareComponent 
@@ -316,7 +316,7 @@ node_types:
 									attribute: docker/sodalite.nodes.DockerHost.username
 									req_cap: docker/sodalite.nodes.DockerizedComponent.host
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/add_container.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/add_container.yml"
 					delete:  
 						inputs:  
 							alias: 
@@ -328,10 +328,10 @@ node_types:
 								type: string
 								default: get_attribute: 
 									entity: SELF
-									attribute: docker/sodalite.nodes.DockerHost.public_address
+									attribute: docker/sodalite.nodes.DockerHost.username
 									req_cap: docker/sodalite.nodes.DockerizedComponent.host
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/remove_container.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/remove_container.yml"
 	
 	sodalite.nodes.TestComponent:
 		derived_from: tosca.nodes.SoftwareComponent
@@ -373,7 +373,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.username
 									req_cap: tosca.nodes.SoftwareComponent.host										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/docker/playbooks/test_container.yml"
+							primary: "/workspace/iac-modules/docker/playbooks/test_container.yml"
 		requirements:
 			tested_component:
 				node: tosca.nodes.SoftwareComponent  

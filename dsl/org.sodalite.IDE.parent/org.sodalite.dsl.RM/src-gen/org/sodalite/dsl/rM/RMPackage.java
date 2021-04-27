@@ -1878,7 +1878,7 @@ public interface RMPackage extends EPackage
   int EPROPERTY_DEFINITION_BODY__DESCRIPTION = 1;
 
   /**
-   * The feature id for the '<em><b>Required</b></em>' attribute.
+   * The feature id for the '<em><b>Required</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -5460,15 +5460,15 @@ public interface RMPackage extends EPackage
   EAttribute getEPropertyDefinitionBody_Description();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#isRequired <em>Required</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getRequired <em>Required</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Required</em>'.
-   * @see org.sodalite.dsl.rM.EPropertyDefinitionBody#isRequired()
+   * @return the meta object for the containment reference '<em>Required</em>'.
+   * @see org.sodalite.dsl.rM.EPropertyDefinitionBody#getRequired()
    * @see #getEPropertyDefinitionBody()
    * @generated
    */
-  EAttribute getEPropertyDefinitionBody_Required();
+  EReference getEPropertyDefinitionBody_Required();
 
   /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getDefault <em>Default</em>}'.
@@ -8354,12 +8354,12 @@ public interface RMPackage extends EPackage
     EAttribute EPROPERTY_DEFINITION_BODY__DESCRIPTION = eINSTANCE.getEPropertyDefinitionBody_Description();
 
     /**
-     * The meta object literal for the '<em><b>Required</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Required</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EPROPERTY_DEFINITION_BODY__REQUIRED = eINSTANCE.getEPropertyDefinitionBody_Required();
+    EReference EPROPERTY_DEFINITION_BODY__REQUIRED = eINSTANCE.getEPropertyDefinitionBody_Required();
 
     /**
      * The meta object literal for the '<em><b>Default</b></em>' containment reference feature.

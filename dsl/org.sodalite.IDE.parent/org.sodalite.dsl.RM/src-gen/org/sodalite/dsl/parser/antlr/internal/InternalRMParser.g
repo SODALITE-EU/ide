@@ -4596,19 +4596,20 @@ ruleEPropertyDefinitionBody returns [EObject current=null]
 							}
 							(
 								(
-									lv_required_6_0=RULE_BOOLEAN
 									{
-										newLeafNode(lv_required_6_0, grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredBOOLEANTerminalRuleCall_2_1_0());
+										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getRequiredEBOOLEANParserRuleCall_2_1_0());
 									}
+									lv_required_6_0=ruleEBOOLEAN
 									{
 										if ($current==null) {
-											$current = createModelElement(grammarAccess.getEPropertyDefinitionBodyRule());
+											$current = createModelElementForParent(grammarAccess.getEPropertyDefinitionBodyRule());
 										}
-										setWithLastConsumed(
+										set(
 											$current,
 											"required",
 											lv_required_6_0,
-											"org.sodalite.dsl.RM.BOOLEAN");
+											"org.sodalite.dsl.RM.EBOOLEAN");
+										afterParserOrEnumRuleCall();
 									}
 								)
 							)

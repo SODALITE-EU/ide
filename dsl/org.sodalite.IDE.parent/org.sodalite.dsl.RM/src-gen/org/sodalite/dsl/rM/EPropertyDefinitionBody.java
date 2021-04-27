@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getType <em>Type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getDescription <em>Description</em>}</li>
- *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#isRequired <em>Required</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getRequired <em>Required</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getDefault <em>Default</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getStatus <em>Status</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getConstraints <em>Constraints</em>}</li>
@@ -74,26 +74,26 @@ public interface EPropertyDefinitionBody extends EObject
   void setDescription(String value);
 
   /**
-   * Returns the value of the '<em><b>Required</b></em>' attribute.
+   * Returns the value of the '<em><b>Required</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Required</em>' attribute.
-   * @see #setRequired(boolean)
+   * @return the value of the '<em>Required</em>' containment reference.
+   * @see #setRequired(EBOOLEAN)
    * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinitionBody_Required()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  boolean isRequired();
+  EBOOLEAN getRequired();
 
   /**
-   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#isRequired <em>Required</em>}' attribute.
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getRequired <em>Required</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Required</em>' attribute.
-   * @see #isRequired()
+   * @param value the new value of the '<em>Required</em>' containment reference.
+   * @see #getRequired()
    * @generated
    */
-  void setRequired(boolean value);
+  void setRequired(EBOOLEAN value);
 
   /**
    * Returns the value of the '<em><b>Default</b></em>' containment reference.

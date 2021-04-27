@@ -1533,7 +1533,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (
 	 *         type=EDataTypeName | 
 	 *         description=STRING | 
-	 *         required=BOOLEAN | 
+	 *         required=EBOOLEAN | 
 	 *         default=EValueExpression | 
 	 *         status=STRING | 
 	 *         constraints=EConstraints | 

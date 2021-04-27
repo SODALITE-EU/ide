@@ -45,6 +45,11 @@ node_types:
 				type: string
 				default: ""
 				required: false 
+			consul_server_address:
+				description: 'Public IPv4 address of the consul server (for the node exporter to register into)'
+				type: string
+				default: ""
+				required: false					
 			env:
 				description: "Optional OpenStack environment"
 				type: map
@@ -126,6 +131,11 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.userdata
+							consul_server_address:
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address								
 							env:                 
 								type: map
 								default: get_property: 
@@ -133,16 +143,21 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.env		
 																
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_create.yml"
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-modules/openstack/playbooks/vm_create.yml"							
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml", "/workspace/iac-modules/openstack/artifacts/node_exporter.json.j2"]
 					delete:  
-						inputs:  
+						inputs:
 							id:                       
 								type: string
 								default: get_attribute:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
+							consul_server_address:
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address										
 						implementation: 
-							primary: "/workspace/iac-management/use-cases/modules/openstack/playbooks/vm_delete.yml" 
-							dependencies: ["/workspace/iac-management/use-cases/modules/openstack/playbooks/egi_refresh_token.yml"]
+							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]
             

@@ -282,6 +282,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
 					saveURI(saveReport.getURI(), aadmfile, project);
+					String aadm_id = saveReport.getURI();
 					subMonitor.worked(steps++);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
@@ -355,7 +356,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
 					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
-					getKBReasoner().notifyDeploymentToRefactoring(appName, aadmURI, depl_report.getBlueprint_id(),
+					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
 							depl_report.getDeployment_id(), inputs_yaml);
 
 					// Upon completion, show dialog
@@ -845,10 +846,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (st.hasMoreElements()) { // Node_Template children
 						String entity_name = st.nextToken();
 						if ("Property".equals(path_type)) {
-							for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
-								if (property.getName().contentEquals(entity_name)) {
-									result = new ValidationSourceFeature(property,
-											RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+							if (node.getNode().getProperties() != null) {
+								for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
+									if (property.getName().contentEquals(entity_name)) {
+										result = new ValidationSourceFeature(property,
+												RMPackage.Literals.EPROPERTY_ASSIGNMENT__NAME);
+									}
 								}
 							}
 						} else if ("requirements".equals(path_type)) {
