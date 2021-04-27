@@ -1,4 +1,6 @@
-module: kube
+module: vehicleiot
+
+import: kube
 
 node_templates:
 
@@ -7,7 +9,6 @@ node_templates:
     properties:
       name: "jetson-nano"
       ready_status: false
-      gpus: 1
       cpus: 1
       arm64_cpus: 1
 
@@ -32,7 +33,6 @@ node_templates:
     properties:
       name: "sgx-celsius-w550power"
       ready_status: true
-      edgetpus: 1
       cpus: 1
       amd64_cpus: 1
 
@@ -41,6 +41,13 @@ node_templates:
     properties:
       name: "xavier-nx"
       ready_status: true
-      gpus: 1
       cpus: 1
       arm64_cpus: 1
+
+  node-minikube: 
+    type: kube/sodalite.nodes.Kubernetes.Node
+    properties:
+      name: "minikube"
+      ready_status: true
+      cpus: 1
+      amd64_cpus: 1
