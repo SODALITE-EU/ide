@@ -276,9 +276,11 @@ public class Services {
 
 	public EList<ETriggerDefinition> getTriggerDefinitions(AADM_Model model) {
 		EList<ETriggerDefinition> result = new BasicEList<>();
-		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
-			if (policy.getPolicy().getTriggers() != null)
-				result.addAll(policy.getPolicy().getTriggers().getTriggers());
+		if (model.getPolicies() != null) {
+			for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+				if (policy.getPolicy().getTriggers() != null)
+					result.addAll(policy.getPolicy().getTriggers().getTriggers());
+			}
 		}
 		return result;
 	}

@@ -381,6 +381,37 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Inputs" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']" iconPath="/org.sodalite.ide.ui/icons/input.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EInputs" referenceName="inputs" variableName="inputs"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Input" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']/@subContainerMappings[name='Input']" iconPath="/org.sodalite.ide.ui/icons/input.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.inputs">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EParameterDefinition" referenceName="inputs" variableName="input">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_input"/>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:input">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EParameterDefinitionBody" referenceName="parameter" variableName="new_parameter">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_parameter">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPRIMITIVE_TYPE" referenceName="type" variableName="type">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:type">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="string"/>
+                          </subModelOperations>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>

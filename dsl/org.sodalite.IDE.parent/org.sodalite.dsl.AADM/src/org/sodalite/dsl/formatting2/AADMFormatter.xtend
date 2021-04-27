@@ -22,25 +22,51 @@ import org.sodalite.dsl.aADM.EAttributeAssignments
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EMAP
 import org.sodalite.dsl.rM.EPREFIX_ID
+import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.rM.EParameterDefinitionBody
 
 class AADMFormatter extends RMFormatter {
 
 	@Inject extension AADMGrammarAccess
 
 	def dispatch void format(AADM_Model aADM_Model, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		aADM_Model.prepend[setNewLines(0, 0, 0); noSpace]
 		aADM_Model.regionFor.keyword("node_templates:").append[newLine]
 		aADM_Model.inputs.format
 		aADM_Model.nodeTemplates.format
 	}
+	
+	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
+		for (eInput : eInputs.inputs) {
+			eInput.format
+		}
+	}
+	
+	def dispatch void format(EParameterDefinition eParameter, extension IFormattableDocument document) {
+		eParameter.surround[indent]
+		eParameter.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
+		eParameter.regionFor.keyword(":").append[newLine]
+		eParameter.parameter.surround[indent].format
+	}
+	
+	def dispatch void format(EParameterDefinitionBody eParameterBody, extension IFormattableDocument document) {
+		eParameterBody.regionFor.keyword("type:").append[oneSpace]
+		eParameterBody.type.format.append[newLine]
+
+		eParameterBody.regionFor.keyword("value:").append[oneSpace]
+		eParameterBody.value.format.append[newLine]
+
+		eParameterBody.regionFor.keyword("default:").append[oneSpace]
+		eParameterBody.^default.format.append[newLine]
+	}
 
 	def dispatch void format(ENodeTemplates eNodeTemplates, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc.
 		for (eNodeTemplate : eNodeTemplates.nodeTemplates) {
 			eNodeTemplate.format
 		}
 	}
+	
 
 	// TODO: implement for ENodeTemplate, ENodeTemplateBody, ERequirementAssignments, ECapabilityAssignments, ECapabilityAssignment, EAttributeAssigments, EAttributeAssignment, EPropertyAssigments, EPropertyAssignment
 	def dispatch void format(ENodeTemplate eNodeTemplate, extension IFormattableDocument document) {
