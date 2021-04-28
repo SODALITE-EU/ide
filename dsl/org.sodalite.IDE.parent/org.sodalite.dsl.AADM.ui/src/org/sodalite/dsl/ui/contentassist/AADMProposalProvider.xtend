@@ -76,6 +76,7 @@ import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import java.io.File
 import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.aADM.ECapabilityAssignments
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -308,6 +309,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				type = (model as ENodeTemplateImpl).node.type
 			else if (model instanceof EPolicyDefinitionBodyImpl)
 				type = (model as EPolicyDefinitionBodyImpl).type
+			else if (model instanceof ECapabilityAssignments)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
 				
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
@@ -350,8 +353,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			var resourceId = ""
 			var EPREFIX_TYPE type = null
 			
-			if (model instanceof ENodeTemplateBodyImpl)
-				type = (model as ENodeTemplateBodyImpl).type
+			if (model instanceof ENodeTemplateImpl)
+				type = (model as ENodeTemplateImpl).node.type
+			else if (model instanceof ENodeTemplateBodyImpl)
+				type = (model.eContainer as ENodeTemplateBodyImpl).type
 			else if (model instanceof ECapabilityAssignmentsImpl)
 				type = (model.eContainer as ENodeTemplateBodyImpl).type
 				

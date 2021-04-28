@@ -25,6 +25,8 @@ import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EInputs
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.EParameterDefinitionBody
+import org.sodalite.dsl.aADM.ECapabilityAssignment
+import org.sodalite.dsl.aADM.ECapabilityAssignments
 
 class AADMFormatter extends RMFormatter {
 
@@ -94,12 +96,19 @@ class AADMFormatter extends RMFormatter {
 
 		eNodeTemplateBody.regionFor.keyword("requirements:").append[newLine]
 		eNodeTemplateBody.requirements.surround[indent].format
+		
+		eNodeTemplateBody.regionFor.keyword("capabilities:").append[newLine]
+		eNodeTemplateBody.capabilities.surround[indent].format
 	}
 
 	def dispatch void format(EPropertyAssignments ePropertyAssigments, extension IFormattableDocument document) {
 		for (property : ePropertyAssigments.properties) {
 			if (!document.request.textRegionAccess.toString.contains("node_templates")){ //For local changes caused by quick fixes
-				property.surround[indent].surround[indent]
+				if (property.eContainer.eContainer instanceof ENodeTemplateBody){
+					property.surround[indent].surround[indent]
+				}else if (property.eContainer.eContainer instanceof ECapabilityAssignment){
+					property.surround[indent].surround[indent].surround[indent]
+				}
 			}
 			property.format.append[newLine]
 		}
@@ -136,12 +145,28 @@ class AADMFormatter extends RMFormatter {
 			req.format.append[newLine]
 		}
 	}
-
+	
 	def dispatch void format(ERequirementAssignment req, extension IFormattableDocument document) {
 		req.regionFor.feature(EREQUIREMENT_ASSIGNMENT__NAME).append[noSpace]
 		req.regionFor.keyword(":").append[newLine]
 		req.regionFor.keyword("node:").surround[indent]
 		req.node.format
+	}
+
+	def dispatch void format(ECapabilityAssignment cap, extension IFormattableDocument document) {
+		cap.regionFor.feature(ECAPABILITY_ASSIGNMENT__NAME).append[noSpace]
+		cap.regionFor.keyword(":").append[newLine]
+		cap.regionFor.keyword("properties:").append[newLine]
+		cap.properties.surround[indent].format
+	}
+	
+	def dispatch void format(ECapabilityAssignments eECapabilityAssignments, extension IFormattableDocument document) {
+		for (cap : eECapabilityAssignments.capabilities) {
+			if (!document.request.textRegionAccess.toString.contains("node_templates")){ //For local changes caused by quick fixes
+				cap.surround[indent].surround[indent]
+			}
+			cap.format.append[newLine]
+		}
 	}
 
 	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {

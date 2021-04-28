@@ -414,6 +414,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           } else {
             if ((model instanceof EPolicyDefinitionBodyImpl)) {
               type = ((EPolicyDefinitionBodyImpl) model).getType();
+            } else {
+              if ((model instanceof ECapabilityAssignments)) {
+                EObject _eContainer_1 = ((ECapabilityAssignments)model).eContainer();
+                type = ((ENodeTemplateBodyImpl) _eContainer_1).getType();
+              }
             }
           }
         }
@@ -498,12 +503,17 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
       String additionalProposalInfo = "";
       String resourceId = "";
       EPREFIX_TYPE type = null;
-      if ((model instanceof ENodeTemplateBodyImpl)) {
-        type = ((ENodeTemplateBodyImpl) model).getType();
+      if ((model instanceof ENodeTemplateImpl)) {
+        type = ((ENodeTemplateImpl) model).getNode().getType();
       } else {
-        if ((model instanceof ECapabilityAssignmentsImpl)) {
-          EObject _eContainer = ((ECapabilityAssignmentsImpl)model).eContainer();
+        if ((model instanceof ENodeTemplateBodyImpl)) {
+          EObject _eContainer = ((ENodeTemplateBodyImpl)model).eContainer();
           type = ((ENodeTemplateBodyImpl) _eContainer).getType();
+        } else {
+          if ((model instanceof ECapabilityAssignmentsImpl)) {
+            EObject _eContainer_1 = ((ECapabilityAssignmentsImpl)model).eContainer();
+            type = ((ENodeTemplateBodyImpl) _eContainer_1).getType();
+          }
         }
       }
       String _xifexpression = null;
