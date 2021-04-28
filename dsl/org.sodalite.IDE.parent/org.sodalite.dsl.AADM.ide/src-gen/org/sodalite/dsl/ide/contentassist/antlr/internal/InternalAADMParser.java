@@ -14148,31 +14148,31 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ENodeTemplateBody__Group_4__2__Impl"
-    // InternalAADMParser.g:4573:1: rule__ENodeTemplateBody__Group_4__2__Impl : ( ( rule__ENodeTemplateBody__AtributesAssignment_4_2 ) ) ;
+    // InternalAADMParser.g:4573:1: rule__ENodeTemplateBody__Group_4__2__Impl : ( ( rule__ENodeTemplateBody__AttributesAssignment_4_2 ) ) ;
     public final void rule__ENodeTemplateBody__Group_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:4577:1: ( ( ( rule__ENodeTemplateBody__AtributesAssignment_4_2 ) ) )
-            // InternalAADMParser.g:4578:1: ( ( rule__ENodeTemplateBody__AtributesAssignment_4_2 ) )
+            // InternalAADMParser.g:4577:1: ( ( ( rule__ENodeTemplateBody__AttributesAssignment_4_2 ) ) )
+            // InternalAADMParser.g:4578:1: ( ( rule__ENodeTemplateBody__AttributesAssignment_4_2 ) )
             {
-            // InternalAADMParser.g:4578:1: ( ( rule__ENodeTemplateBody__AtributesAssignment_4_2 ) )
-            // InternalAADMParser.g:4579:2: ( rule__ENodeTemplateBody__AtributesAssignment_4_2 )
+            // InternalAADMParser.g:4578:1: ( ( rule__ENodeTemplateBody__AttributesAssignment_4_2 ) )
+            // InternalAADMParser.g:4579:2: ( rule__ENodeTemplateBody__AttributesAssignment_4_2 )
             {
-             before(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2()); 
-            // InternalAADMParser.g:4580:2: ( rule__ENodeTemplateBody__AtributesAssignment_4_2 )
-            // InternalAADMParser.g:4580:3: rule__ENodeTemplateBody__AtributesAssignment_4_2
+             before(grammarAccess.getENodeTemplateBodyAccess().getAttributesAssignment_4_2()); 
+            // InternalAADMParser.g:4580:2: ( rule__ENodeTemplateBody__AttributesAssignment_4_2 )
+            // InternalAADMParser.g:4580:3: rule__ENodeTemplateBody__AttributesAssignment_4_2
             {
             pushFollow(FOLLOW_2);
-            rule__ENodeTemplateBody__AtributesAssignment_4_2();
+            rule__ENodeTemplateBody__AttributesAssignment_4_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2()); 
+             after(grammarAccess.getENodeTemplateBodyAccess().getAttributesAssignment_4_2()); 
 
             }
 
@@ -71751,9 +71751,9 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ENodeTemplateBody__PropertiesAssignment_3_2"
 
 
-    // $ANTLR start "rule__ENodeTemplateBody__AtributesAssignment_4_2"
-    // InternalAADMParser.g:23307:1: rule__ENodeTemplateBody__AtributesAssignment_4_2 : ( ruleEAttributeAssignments ) ;
-    public final void rule__ENodeTemplateBody__AtributesAssignment_4_2() throws RecognitionException {
+    // $ANTLR start "rule__ENodeTemplateBody__AttributesAssignment_4_2"
+    // InternalAADMParser.g:23307:1: rule__ENodeTemplateBody__AttributesAssignment_4_2 : ( ruleEAttributeAssignments ) ;
+    public final void rule__ENodeTemplateBody__AttributesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -71764,13 +71764,13 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             // InternalAADMParser.g:23312:2: ( ruleEAttributeAssignments )
             // InternalAADMParser.g:23313:3: ruleEAttributeAssignments
             {
-             before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
+             before(grammarAccess.getENodeTemplateBodyAccess().getAttributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
             pushFollow(FOLLOW_2);
             ruleEAttributeAssignments();
 
             state._fsp--;
 
-             after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
+             after(grammarAccess.getENodeTemplateBodyAccess().getAttributesEAttributeAssignmentsParserRuleCall_4_2_0()); 
 
             }
 
@@ -71789,7 +71789,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ENodeTemplateBody__AtributesAssignment_4_2"
+    // $ANTLR end "rule__ENodeTemplateBody__AttributesAssignment_4_2"
 
 
     // $ANTLR start "rule__ENodeTemplateBody__RequirementsAssignment_5_2"

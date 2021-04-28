@@ -297,8 +297,8 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:properties :Property_«property_numbers.get(p)» ;
 	  «ENDFOR»
 	  «ENDIF»
-	  «IF n.node.atributes !== null»
-	  «FOR a:n.node.atributes.attributes»
+	  «IF n.node.attributes !== null»
+	  «FOR a:n.node.attributes.attributes»
 	  exchange:attributes :Attribute_«attribute_numbers.get(a)» ;
   	  «ENDFOR»
   	  «ENDIF»

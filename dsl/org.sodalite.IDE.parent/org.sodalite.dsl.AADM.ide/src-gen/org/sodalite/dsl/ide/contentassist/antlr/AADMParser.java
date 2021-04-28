@@ -273,7 +273,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getDescriptionAssignment_1_1(), "rule__ENodeTemplateBody__DescriptionAssignment_1_1");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getOptimizationAssignment_2_1(), "rule__ENodeTemplateBody__OptimizationAssignment_2_1");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getPropertiesAssignment_3_2(), "rule__ENodeTemplateBody__PropertiesAssignment_3_2");
-			builder.put(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2(), "rule__ENodeTemplateBody__AtributesAssignment_4_2");
+			builder.put(grammarAccess.getENodeTemplateBodyAccess().getAttributesAssignment_4_2(), "rule__ENodeTemplateBody__AttributesAssignment_4_2");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getRequirementsAssignment_5_2(), "rule__ENodeTemplateBody__RequirementsAssignment_5_2");
 			builder.put(grammarAccess.getENodeTemplateBodyAccess().getCapabilitiesAssignment_6_2(), "rule__ENodeTemplateBody__CapabilitiesAssignment_6_2");
 			builder.put(grammarAccess.getERequirementAssignmentsAccess().getRequirementsAssignment_1(), "rule__ERequirementAssignments__RequirementsAssignment_1");

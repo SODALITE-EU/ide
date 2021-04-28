@@ -54,7 +54,7 @@ ENodeTemplateBody:
 	END)? &
 	('attributes:'
 	BEGIN
-		atributes=EAttributeAssignments
+		attributes=EAttributeAssignments
 	END)? &
 	('requirements:'
 	BEGIN

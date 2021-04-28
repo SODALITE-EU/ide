@@ -4576,9 +4576,9 @@ rule__ENodeTemplateBody__Group_4__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2()); }
-	(rule__ENodeTemplateBody__AtributesAssignment_4_2)
-	{ after(grammarAccess.getENodeTemplateBodyAccess().getAtributesAssignment_4_2()); }
+	{ before(grammarAccess.getENodeTemplateBodyAccess().getAttributesAssignment_4_2()); }
+	(rule__ENodeTemplateBody__AttributesAssignment_4_2)
+	{ after(grammarAccess.getENodeTemplateBodyAccess().getAttributesAssignment_4_2()); }
 )
 ;
 finally {
@@ -23304,15 +23304,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ENodeTemplateBody__AtributesAssignment_4_2
+rule__ENodeTemplateBody__AttributesAssignment_4_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
+		{ before(grammarAccess.getENodeTemplateBodyAccess().getAttributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
 		ruleEAttributeAssignments
-		{ after(grammarAccess.getENodeTemplateBodyAccess().getAtributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
+		{ after(grammarAccess.getENodeTemplateBodyAccess().getAttributesEAttributeAssignmentsParserRuleCall_4_2_0()); }
 	)
 ;
 finally {

@@ -90,7 +90,7 @@ class AADMFormatter extends RMFormatter {
 		eNodeTemplateBody.properties.surround[indent].format
 
 		eNodeTemplateBody.regionFor.keyword("attributes:").append[newLine]
-		eNodeTemplateBody.atributes.surround[indent].format
+		eNodeTemplateBody.attributes.surround[indent].format
 
 		eNodeTemplateBody.regionFor.keyword("requirements:").append[newLine]
 		eNodeTemplateBody.requirements.surround[indent].format
@@ -115,6 +115,9 @@ class AADMFormatter extends RMFormatter {
 
 	def dispatch void format(EAttributeAssignments eAttributeAssigments, extension IFormattableDocument document) {
 		for (attribute : eAttributeAssigments.attributes) {
+			if (!document.request.textRegionAccess.toString.contains("node_templates")){ //For local changes caused by quick fixes
+				attribute.surround[indent].surround[indent]
+			}
 			attribute.format.append[newLine]
 		}
 	}
