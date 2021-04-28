@@ -83,8 +83,8 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Properties" preconditionExpression="aql:self.properties->size() > 0" semanticCandidatesExpression="aql:self.node.properties" domainClass="rM::EPropertyAssignments" childrenPresentation="List">
-            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties" domainClass="rM::EPropertyAssignment">
+          <subContainerMappings name="Properties" semanticCandidatesExpression="aql:self.node" domainClass="aADM::ENodeTemplateBody" childrenPresentation="List">
+            <subNodeMappings name="Property" semanticCandidatesExpression="aql:self.properties.properties" domainClass="rM::EPropertyAssignment">
               <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="service:getPropertyLabel()" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -359,7 +359,7 @@
           </style>
         </containerMappings>
         <toolSections name="Palette">
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Node Template" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" iconPath="/org.sodalite.dsl.AADM.design/icons/node.png">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Node Template" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']" iconPath="/org.sodalite.dsl.AADM.design/icons/template.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -381,7 +381,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Inputs" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']" iconPath="/org.sodalite.ide.ui/icons/input.png">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Inputs" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']" iconPath="/org.sodalite.dsl.AADM.design/icons/inputs.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -390,7 +390,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Input" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']/@subContainerMappings[name='Input']" iconPath="/org.sodalite.ide.ui/icons/input.png">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Input" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Inputs']/@subContainerMappings[name='Input']" iconPath="/org.sodalite.dsl.AADM.design/icons/input.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -405,6 +405,27 @@
                             <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="string"/>
                           </subModelOperations>
                         </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Property" nodeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']" iconPath="/org.sodalite.dsl.AADM.design/icons/property.png">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.properties == null">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPropertyAssignments" referenceName="properties" variableName="properties"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.properties">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPropertyAssignment" referenceName="properties" variableName="property">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_property"/>
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:property">
+                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::ESTRING" referenceName="value" variableName="value">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="value" valueExpression="new_value"/>
                       </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
