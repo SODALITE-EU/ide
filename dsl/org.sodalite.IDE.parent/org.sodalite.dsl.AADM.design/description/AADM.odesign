@@ -457,7 +457,7 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
-            <tools xsi:type="tool:ContainerCreationDescription" name="Capability" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']" iconPath="/org.sodalite.dsl.AADM.design/icons/capability_tool.png">
+            <tools xsi:type="tool:ContainerCreationDescription" name="Capability" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']" iconPath="/org.sodalite.dsl.AADM.design/icons/capabilities.png">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
@@ -468,6 +468,29 @@
                   <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.capabilities">
                     <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ECapabilityAssignment" referenceName="capabilities" variableName="new_capability">
                       <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_capability"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Requirement" nodeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@borderedNodeMappings[name='BRequirements']" iconPath="/org.sodalite.dsl.AADM.design/icons/requirement_tool.png">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.node">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.requirements == null">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ERequirementAssignments" referenceName="requirements" variableName="requirements"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.requirements">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ERequirementAssignment" referenceName="requirements" variableName="requirement">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_requirement"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:requirement">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_ID" referenceName="node" variableName="node">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:node">
+                            <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="node_id"/>
+                          </subModelOperations>
+                        </subModelOperations>
+                      </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
                 </firstModelOperations>

@@ -117,9 +117,13 @@ public class Services {
 		}
 		if (object instanceof ERequirementAssignment) {
 			ERequirementAssignment requirement = (ERequirementAssignment) object;
-			ENodeTemplate nodeTemplate = findNode(requirement.getNode());
-			if (nodeTemplate == null)
+			if (requirement.getNode() != null) {
+				ENodeTemplate nodeTemplate = findNode(requirement.getNode());
+				if (nodeTemplate == null)
+					label = "req:" + requirement.getName();
+			} else {
 				label = "req:" + requirement.getName();
+			}
 		}
 		return label;
 	}
