@@ -383,7 +383,9 @@ public class KBReasonerProxy {
 		EPREFIX_TYPE nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
 		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
 		List<String> modules = new ArrayList<>();
-		modules.add(AADM_Helper.getModule(req));
+		String module = AADM_Helper.getModule(req);
+		if (module != null)
+			modules.add(module);
 		modules.addAll(AADM_Helper.getImports(req));
 		ValidRequirementNodeData vrnd = RMBackendProxy.getKBReasoner().getValidRequirementNodes(req.getName(),
 				resourceId, modules);

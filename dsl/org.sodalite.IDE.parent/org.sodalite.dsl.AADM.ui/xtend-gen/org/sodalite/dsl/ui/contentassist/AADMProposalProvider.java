@@ -22,6 +22,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -703,7 +704,9 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final String resourceId = (_xifexpression + _type);
         final List<String> importedModules = this.getImportedModules(model);
         final String module = this.getModule(model);
-        importedModules.add(module);
+        if ((module != null)) {
+          importedModules.add(module);
+        }
         final ValidRequirementNodeData vrnd = this.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
         final TypeData tovrnd = this.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
         boolean _isEmpty = vrnd.getElements().isEmpty();
@@ -1283,7 +1286,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   public List<ENodeTemplate> findLocalNodesForType(final String type, final EObject reqAssign) {
     try {
       final List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
-      final Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>();
+      final Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>();
       Object _findModel = this.findModel(reqAssign);
       final AADM_Model model = ((AADM_Model) _findModel);
       EList<ENodeTemplate> _nodeTemplates = model.getNodeTemplates().getNodeTemplates();
@@ -1300,14 +1303,23 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
           }
           String _type = node.getNode().getType().getType();
           final String node_id = (_xifexpression + _type);
-          candidateNodes.put(node_id, node);
+          boolean _contains = candidateNodes.keySet().contains(node_id);
+          boolean _not = (!_contains);
+          if (_not) {
+            HashSet<ENodeTemplate> _hashSet = new HashSet<ENodeTemplate>();
+            candidateNodes.put(node_id, _hashSet);
+          }
+          candidateNodes.get(node_id).add(node);
         }
       }
       Set<String> _keySet = candidateNodes.keySet();
       final List<String> keys = new ArrayList<String>(_keySet);
       final List<String> validSubClasses = this.getKBReasoner().getSubClassesOf(keys, type);
       for (final String validClass : validSubClasses) {
-        nodes.add(candidateNodes.get(validClass));
+        boolean _containsKey = candidateNodes.containsKey(validClass);
+        if (_containsKey) {
+          nodes.addAll(candidateNodes.get(validClass));
+        }
       }
       return nodes;
     } catch (final Throwable _t) {

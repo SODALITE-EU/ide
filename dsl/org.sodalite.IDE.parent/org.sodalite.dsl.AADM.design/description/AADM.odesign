@@ -496,6 +496,17 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Requirement node link" edgeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='RequirementLink']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setRequirementNode(target)"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
           </ownedTools>
         </toolSections>
       </defaultLayer>

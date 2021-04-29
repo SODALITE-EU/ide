@@ -77,6 +77,8 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import java.io.File
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.aADM.ECapabilityAssignments
+import java.util.Set
+import java.util.HashSet
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -461,7 +463,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			val List<String> importedModules = getImportedModules(model)
 			val String module = getModule(model)
 			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			if (module !== null)
+				importedModules.add(module)
 			
 			val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
 			val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
@@ -859,19 +862,22 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	def findLocalNodesForType(String type, EObject reqAssign) {
 		try{
 			val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
-			val Map<String, ENodeTemplate> candidateNodes = new HashMap<String, ENodeTemplate>()
+			val Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>()
 			val AADM_Model model = findModel(reqAssign) as AADM_Model
 			
 			for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
 				val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
-				candidateNodes.put(node_id, node)
+				if (!candidateNodes.keySet.contains(node_id))
+					candidateNodes.put(node_id, new HashSet())
+				candidateNodes.get(node_id).add(node)
 			}
 			
 			val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
 			val List<String> validSubClasses = getKBReasoner().getSubClassesOf(keys, type)
 			
 			for (String validClass: validSubClasses){
-				nodes.add (candidateNodes.get(validClass))
+				if (candidateNodes.containsKey(validClass))
+					nodes.addAll (candidateNodes.get(validClass))
 			}
 			return nodes	
 		}catch(NotRolePermissionException ex){
