@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.impl.KeywordImpl
-import org.eclipse.xtext.ParserRule
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
 import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl
@@ -29,35 +28,18 @@ import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode
-import java.util.SortedSet
 import java.util.List
 import org.sodalite.dsl.aADM.ENodeTemplate
 import java.util.ArrayList
 import org.sodalite.dsl.aADM.AADM_Model
-import java.nio.file.Path
-import java.nio.file.Files
-import java.util.Properties
-import java.nio.channels.FileChannel
-import java.nio.file.StandardOpenOption
-import java.nio.channels.FileLock
-import java.nio.channels.Channels
-import java.nio.file.FileSystems
-import org.eclipse.core.resources.IFile
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.resources.IResource
 import org.sodalite.dsl.aADM.impl.ECapabilityAssignmentsImpl
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
-import java.util.HashMap
-import java.util.Map
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
-import org.sodalite.dsl.rM.EEntityReference
-import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.impl.ENodeTemplateImpl
@@ -68,17 +50,14 @@ import org.sodalite.dsl.rM.EEvenFilter
 import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
-import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment
-import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
 import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
-import java.io.File
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.aADM.ECapabilityAssignments
-import java.util.Set
-import java.util.HashSet
+import org.sodalite.dsl.ui.helper.AADMHelper
+import org.sodalite.dsl.ui.helper.BackendHelper
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -121,9 +100,9 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
-		val String module = getModule(model)
+		val String module = AADMHelper.getModule(model)
 		//Get entity in this GetProperty body. If null, return
-		val node = getEntityNode(model as GetPropertyBodyImpl)
+		val node = AADMHelper.getEntityNode(model as GetPropertyBodyImpl)
 		
 		if (node === null){
 			return
@@ -148,10 +127,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::property property")
-		val String module = getModule(model)
+		val String module = AADMHelper.getModule(model)
 		//Get entity in this GetProperty body. If null, return
 		val body = model as GetPropertyBodyImpl
-		val node = getEntityNode(body)
+		val node = AADMHelper.getEntityNode(body)
 		
 		if (node === null)
 			return
@@ -159,14 +138,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var List<String> proposals = new ArrayList<String>()
 		// Get the properties defined within the selected node requirements or capabilities
 		if (body.req_cap !== null){
-			val req_cap_name = getLastSegment(body.req_cap.type, '.')
-			val ENodeTemplate req_node = findRequirementNodeInTemplate(req_cap_name, node)
+			val req_cap_name = AADMHelper.getLastSegment(body.req_cap.type, '.')
+			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node)
 			if (req_node !== null)
 				for (prop:req_node.node.properties.properties)
 					proposals.add(module + '/' + req_node.name + "." + prop.name)
 			//else
 				//TODO Find requirement node in KB
-			val ECapabilityAssignment cap = findCapabilityInTemplate(req_cap_name, node)
+			val ECapabilityAssignment cap = AADMHelper.findCapabilityInTemplate(req_cap_name, node)
 			if (cap !== null)
 				for (prop:cap.properties.properties)
 					proposals.add(prop.name)
@@ -220,16 +199,16 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		try {
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
+			val List<String> importedModules = AADMHelper.getImportedModules(model)
+			val String module = AADMHelper.getModule(model)
 			//Add current module to imported ones for searching in the KB
 			importedModules.add(module)
 			
-			val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
+			val ReasonerData<Type> nodes = BackendHelper.KBReasoner.getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (node: nodes.elements){
 				System.out.println ("\tNode: " + node.label)
-				val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+				val qnode = node.module !== null?AADMHelper.getLastSegment(node.module, '/') + '/' + node.label:node.label
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = node.description
@@ -241,7 +220,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -265,7 +244,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 	
 			if (resourceId !== null){
-				val ReasonerData<AttributeDefinition> attributes = getKBReasoner().getTypeAttributes(resourceId)
+				val ReasonerData<AttributeDefinition> attributes = BackendHelper.KBReasoner.getTypeAttributes(resourceId)
 				if (attributes !== null){}
 					System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/attribute.png")
@@ -286,7 +265,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -317,7 +296,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<PropertyDefinition> properties = getKBReasoner().getTypeProperties(resourceId)
+				val ReasonerData<PropertyDefinition> properties = BackendHelper.KBReasoner.getTypeProperties(resourceId)
 				if (properties !== null){
 					System.out.println ("Properties retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/property.png")
@@ -339,7 +318,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -365,7 +344,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<CapabilityDefinition> capabilities = getKBReasoner().getTypeCapabilities(resourceId)
+				val ReasonerData<CapabilityDefinition> capabilities = BackendHelper.KBReasoner.getTypeCapabilities(resourceId)
 				if (capabilities !== null){
 					System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/capability.png")
@@ -389,7 +368,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -413,7 +392,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<RequirementDefinition> requirements = getKBReasoner().getTypeRequirements(resourceId)
+				val ReasonerData<RequirementDefinition> requirements = BackendHelper.KBReasoner.getTypeRequirements(resourceId)
 				if (requirements !== null){
 					System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/requirement.png")
@@ -439,7 +418,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -447,36 +426,19 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeERequirementAssignment_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ERequirementAssignment::node property")
-		try{
-			var String proposalText = ""
-			var String displayText = ""
-			var String additionalProposalInfo = ""
-			val requirementId = (model as ERequirementAssignmentImpl).name
-			val nodeType = (model.eContainer.eContainer as ENodeTemplateBodyImpl).type
-			val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
-			
-			// val AADM_Model rootModel = findModel(model) as AADM_Model
-			// val String aadmURI = getAADMURI (rootModel); //TODO Use aadmURI to determine if KB suggestion belongs to the local model
-			
+		try{	
 			//Get valid requirement nodes from KB
-			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			if (module !== null)
-				importedModules.add(module)
+			val ValidRequirementNodeData vrnd = AADMHelper.getValidRequirementNodes(model as ERequirementAssignmentImpl);
+			val TypeData tovrnd = AADMHelper.getTypeOfValidRequirementNodes(model as ERequirementAssignmentImpl);
 			
-			val ValidRequirementNodeData vrnd = getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
-			val TypeData tovrnd = getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
 			if (!vrnd.elements.empty){
-				System.out.println ("Valid requirement nodes retrieved from KB for requirement: " + requirementId)
 				val Image image = getImage("icons/resource2.png")
+				val additionalProposalInfo = ""
 				for (ValidRequirementNode vrn: vrnd.elements){
-					val qtype = vrn.type.module !== null ?getLastSegment(vrn.type.module, '/') + '/' + vrn.type.label:vrn.type.label
-					val qnode = vrn.module !== null ?getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
+					val qnode = vrn.module !== null?AADMHelper.getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
 					System.out.println ("Valid requirement node: " + qnode)
-				 	displayText = qnode
-					proposalText = qnode
+				 	val displayText = qnode
+					val proposalText = qnode
 					
 					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
@@ -486,20 +448,21 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			if (tovrnd.elements.isEmpty)
 				throw new Exception ("Type of valid nodes satisfying the requirement not found");
 			val Type superType = tovrnd.elements.get(0)
-			val String qsuperType = superType.module !== null ?getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
-			val List<ENodeTemplate> localnodes = findLocalNodesForType(qsuperType, model)
+			val String qsuperType = superType.module !== null?AADMHelper.getLastSegment(superType.module, '/') + '/' + superType.label:superType.label
+			val List<ENodeTemplate> localnodes = AADMHelper.findLocalNodesForType(qsuperType, model)
 			val Image image = getImage("icons/resource2.png")
+			val module = AADMHelper.getModule(model)
+			val additionalProposalInfo = ""
 			for (ENodeTemplate node: localnodes){
 				if (node !== null){
-					System.out.println ("Valid requirement local node: " + node.name)
 				 	val qnode = module !== null? module + '/' + node.name: node.name
-					proposalText = qnode
-					displayText = qnode
+					val proposalText = qnode
+					val displayText = qnode
 					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 				}
 			}
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -508,8 +471,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeEEvenFilter_Node(model, assignment, context, acceptor)
 		//Provide suggestions for local templates
-		val List<ENodeTemplate> localTemplates = findLocalNodes(model);	
-		val String module = getModule(model)
+		val List<ENodeTemplate> localTemplates = AADMHelper.findLocalNodes(model);	
+		val String module = AADMHelper.getModule(model)
 		createProposalsForLocalTemplateList(localTemplates, module, "icons/resource2.png",  context, acceptor);
 	}
 	
@@ -517,16 +480,16 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for EDataType::supertype property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
+			val List<String> importedModules = AADMHelper.getImportedModules(model)
+			val String module = AADMHelper.getModule(model)
 			//Add current module to imported ones for searching in the KB
 			if (module !== null)
 				importedModules.add(module)
-			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+			val ReasonerData<Type> types = BackendHelper.KBReasoner.getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tData type: " + type.label)
-				val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val qtype = type.module !== null?AADMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 				val proposalText = qtype
 				val displayText = qtype
 				val additionalProposalInfo = type.description
@@ -539,7 +502,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 	
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -592,16 +555,16 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for NodeTemplate::type property")
 		try {
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
+			val List<String> importedModules = AADMHelper.getImportedModules(model)
+			val String module = AADMHelper.getModule(model)
 			//Add current module to imported ones for searching in the KB
 			importedModules.add(module)
 			
-			val ReasonerData<Type> policies = getKBReasoner().getPolicyTypes(importedModules)
+			val ReasonerData<Type> policies = BackendHelper.KBReasoner.getPolicyTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (policy: policies.elements){
 				System.out.println ("\tNode: " + policy.label)
-				val qpolicy = policy.module !== null ?getLastSegment(policy.module, '/') + '/' + policy.label:policy.label
+				val qpolicy = policy.module !== null?AADMHelper.getLastSegment(policy.module, '/') + '/' + policy.label:policy.label
 				val proposalText = qpolicy
 				val displayText = qpolicy
 				val additionalProposalInfo = policy.description
@@ -613,7 +576,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 			super.completeENodeTemplateBody_Type(model, assignment, context, acceptor)
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -622,10 +585,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	override void completeEEvenFilter_Requirement(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val EEvenFilter filter = model as EEvenFilter
 		if (filter.node !== null){
-			var String qnode = getNodeName (filter.node)
-			val ENodeTemplate node = findNodeInModel(model, qnode)
+			var String qnode = AADMHelper.getNodeName (filter.node)
+			val ENodeTemplate node = AADMHelper.findNodeInModel(model, qnode)
 			if (node !== null){
-				val String module = getModule(model)
+				val String module = AADMHelper.getModule(model)
 				createProposalsForRequirementsList(node.node.requirements.requirements, module, "icons/requirement.png", context, acceptor);
 			}else{
 				super.completeEEvenFilter_Requirement(model, assignment, context, acceptor)
@@ -635,32 +598,32 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeEEvenFilter_Capability(EObject object, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val EEvenFilter filter = object as EEvenFilter
-		val module = getModule(object)
-		val AADM_Model model = findModel(object) as AADM_Model
+		val module = AADMHelper.getModule(object)
+		val AADM_Model model = AADMHelper.findModel(object) as AADM_Model
 		var List<CapabilityDefinition> capabilityDefinitions = null
 		var List<CapabilityAssignment> capabilityAssignments = null
 		var String cap_assign_type = null
 		var String cap_def_type = null
 		if (filter.requirement === null){ //If requirement not set
 			// Find capabilities defined in filter node template type
-			val node_module = filter.node.module
+			val node_module = module
 			var String filter_node_type = null
 			if (node_module.equals(module)){
-				val node_id = getId (filter.node)
-				val ENodeTemplate filter_node = findNode(model, node_id)
+				val node_id = AADMHelper.getId (filter.node)
+				val ENodeTemplate filter_node = AADMHelper.findNode(model, node_id)
 				if (filter_node !== null){
 					// A) Node lives in RM
-					filter_node_type = getReference(filter_node.node.type)
+					filter_node_type = AADMHelper.getReference(filter_node.node.type)
 				} 
 			}
 			
 			if (filter_node_type === null) {
 				// B) Node lives in KB
-				filter_node_type = findNodeTemplateInKB(object, getReference(filter.node))
+				filter_node_type = AADMHelper.findNodeTemplateInKB(object, AADMHelper.getReference(filter.node))
 			}
 			if (filter_node_type !== null){
 				// Find capabilities defined in filter node template type
-				capabilityDefinitions = findCapabilitiesInNodeType (filter_node_type)
+				capabilityDefinitions = AADMHelper.findCapabilitiesInNodeType (filter_node_type)
 				cap_def_type = filter_node_type // FIXME take defining type from capability
 			}
 			
@@ -668,18 +631,18 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			// Find capabilities defined in filter node requirement node: req_node (if node is template in its type)
 			
 			// Find requirement node in local model from requirement ref
-			val ENodeTemplate req_node = findRequirementNodeInLocalModel (object, filter.requirement)
+			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInLocalModel (object, filter.requirement)
 			if (req_node !== null){ // A) Node lives in RM
 				// Find capabilities defined in req node type
-				val node_type = getReference(req_node.node.type)
-				val CapabilityDefinitionData capabilityData = KBReasoner.getTypeCapabilities(node_type)
+				val node_type = AADMHelper.getReference(req_node.node.type)
+				val CapabilityDefinitionData capabilityData = BackendHelper.KBReasoner.getTypeCapabilities(node_type)
 				capabilityDefinitions = capabilityData.elements
 				cap_def_type = node_type // FIXME take defining type from capability
 			} else { // B) Node lives in KB
-				val nodeName = getNodeFromRequirementRef (filter.requirement)
-				val req_name = getRequirementNameFromRequirementRef(filter.requirement)
+				val nodeName = AADMHelper.getNodeFromRequirementRef (filter.requirement)
+				val req_name = AADMHelper.getRequirementNameFromRequirementRef(filter.requirement)
 				val CapabilityAssignmentData capabilityData = 
-					KBReasoner.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name)
+					BackendHelper.KBReasoner.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name)
 				capabilityAssignments = capabilityData.elements
 				cap_assign_type = nodeName // FIXME take defining type from capability
 			}
@@ -688,7 +651,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		if (capabilityAssignments!==null){
 			// Prepare suggestions for capabilities
 			for (cap: capabilityAssignments){
-				val String proposal = cap_assign_type + '.' + getLastSegment(cap.uri.toString, '/')
+				val String proposal = cap_assign_type + '.' + AADMHelper.getLastSegment(cap.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 		}
@@ -697,7 +660,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			// Prepare suggestions for capabilities
 			// Prepare suggestions for capabilities
 			for (cap: capabilityDefinitions){
-				val String proposal = cap_def_type + '.' + getLastSegment(cap.uri.toString, '/')
+				val String proposal = cap_def_type + '.' + AADMHelper.getLastSegment(cap.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 		}
@@ -706,13 +669,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	override void completeETarget_Target(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
 			//Find local and KB node templates
-			val List<String> importedModules = processListModules(model)
-			val TemplateData templates = getKBReasoner().getTemplates(importedModules)		
+			val List<String> importedModules = AADMHelper.processListModules(model)
+			val TemplateData templates = BackendHelper.KBReasoner.getTemplates(importedModules)		
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
-			val List<ENodeTemplate> localNodes = findLocalNodes(model)
+			val List<ENodeTemplate> localNodes = AADMHelper.findLocalNodes(model)
 			createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			AADMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -720,7 +683,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	
 	override void completeGetInput_Input(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		//Find local inputs
-		val AADM_Model aadm = findModel(model) as AADM_Model
+		val AADM_Model aadm = AADMHelper.findModel(model) as AADM_Model
 		if (aadm !== null){
 			var Image image = getImage("icons/input.png")
 			for (EParameterDefinition input: aadm.inputs.inputs){
@@ -741,7 +704,8 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	def void createProposalsForTemplateList(List<ENodeTemplate> templates, String defaultImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (template: templates){
-			val qtype = template.module !== null ?template.module + '/' + template.name:template.name
+			val module = AADMHelper.getModule(template)
+			val qtype = module !== null?module + '/' + template.name:template.name
 			val proposalText = qtype
 			val displayText = qtype
 			var Image image = getImage(defaultImage)
@@ -749,36 +713,36 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 
-	def findRequirementNodeInLocalModel(EObject object, EPREFIX_REF reqRef) {
-		val nodeName = getNodeFromRequirementRef (reqRef)
-		val req_name = getRequirementNameFromRequirementRef(reqRef)
-		//Find node in local model
-		val ENodeTemplate nodeTemplate = findNodeInModel (object, nodeName)
-		if (nodeTemplate !== null){
-			//Get requirement, if found, get node
-			return findRequirementNodeInTemplate(req_name, nodeTemplate)
-		}
-		return null
-	}
-
-	def findNodeTemplateInKB(EObject object, String nodeRef){
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(object)
-		val String module = getModule(object)
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		
-		val TemplateData templates = KBReasoner.getTemplates(importedModules)
-		for (nodeTemplate:templates.elements){
-			val nodeTemplateRef = nodeTemplate.module !== null?
-				nodeTemplate.module + '/' + nodeTemplate.label:
-				nodeTemplate.label
-			if (nodeTemplateRef.equals(nodeRef)){
-				return nodeTemplateRef
-			}
-		}
-		return null
-	}
+//	def findRequirementNodeInLocalModel(EObject object, EPREFIX_REF reqRef) {
+//		val nodeName = AADMHelper.getNodeFromRequirementRef (reqRef)
+//		val req_name = AADMHelper.getRequirementNameFromRequirementRef(reqRef)
+//		//Find node in local model
+//		val ENodeTemplate nodeTemplate = findNodeInModel (object, nodeName)
+//		if (nodeTemplate !== null){
+//			//Get requirement, if found, get node
+//			return findRequirementNodeInTemplate(req_name, nodeTemplate)
+//		}
+//		return null
+//	}
+//
+//	def findNodeTemplateInKB(EObject object, String nodeRef){
+//		//Get modules from model
+//		val List<String> importedModules = AADMHelper.getImportedModules(object)
+//		val String module = AADMHelper.getModule(object)
+//		//Add current module to imported ones for searching in the KB
+//		importedModules.add(module)
+//		
+//		val TemplateData templates = BackendHelper.KBReasoner.getTemplates(importedModules)
+//		for (nodeTemplate:templates.elements){
+//			val nodeTemplateRef = nodeTemplate.module !== null?
+//				nodeTemplate.module + '/' + nodeTemplate.label:
+//				nodeTemplate.label
+//			if (nodeTemplateRef.equals(nodeRef)){
+//				return nodeTemplateRef
+//			}
+//		}
+//		return null
+//	}
 
 	def void createProposalsForRequirementsList(List<ERequirementAssignment> reqs, String module, String defaultImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -811,193 +775,193 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 		
-	def getAADMURI(AADM_Model model) {
-		//val String filename = model.eResource.URI.lastSegment
-		val String filepath = model.eResource.URI.toString().substring('platform:/resource'.length)
-		val IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(new org.eclipse.core.runtime.Path(filepath));
-		val IProject project = resource.project
-		val Path path = getAadmPropertiesFile(resource.toString, project);
-		var String uri = null;
-		if (Files.exists(path)) {
-			val Properties props = new Properties();
-			try(val FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-			val FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(channel));
-			}
-			uri = props.getProperty("URI");
-		}
-		
-		return uri;
-	}
-		
-	def getAadmPropertiesFile(String filepath, IProject project) {
-		//val String filepath = aadmFile.toString();
-		val String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
-		val String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
-		val IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
-		var String properties_path = propertiesFile.getLocationURI().toString();
-		properties_path = properties_path.substring(properties_path.indexOf(":") + 2);
-		if (File.separator.equals("/")){ //Linux
-			properties_path = "/" + properties_path
-		}
-		val Path path = FileSystems.getDefault().getPath(properties_path);
-		return path;
-	}
+//	def getAADMURI(AADM_Model model) {
+//		//val String filename = model.eResource.URI.lastSegment
+//		val String filepath = model.eResource.URI.toString().substring('platform:/resource'.length)
+//		val IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(new org.eclipse.core.runtime.Path(filepath));
+//		val IProject project = resource.project
+//		val Path path = getAadmPropertiesFile(resource.toString, project);
+//		var String uri = null;
+//		if (Files.exists(path)) {
+//			val Properties props = new Properties();
+//			try(val FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
+//			val FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
+//				props.load(Channels.newInputStream(channel));
+//			}
+//			uri = props.getProperty("URI");
+//		}
+//		
+//		return uri;
+//	}
+//		
+//	def getAadmPropertiesFile(String filepath, IProject project) {
+//		//val String filepath = aadmFile.toString();
+//		val String filename = filepath.substring(filepath.lastIndexOf("/") + 1);
+//		val String directory = filepath.substring(filepath.indexOf('/', 2) + 1, filepath.lastIndexOf("/"));
+//		val IFile propertiesFile = project.getFile(directory + "/." + filename + ".properties");
+//		var String properties_path = propertiesFile.getLocationURI().toString();
+//		properties_path = properties_path.substring(properties_path.indexOf(":") + 2);
+//		if (File.separator.equals("/")){ //Linux
+//			properties_path = "/" + properties_path
+//		}
+//		val Path path = FileSystems.getDefault().getPath(properties_path);
+//		return path;
+//	}
+//	
+//	
+//		
+//	def findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
+//		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+//		if (types.isEmpty)
+//			return nodes
+//		val AADM_Model model = AADMHelper.findModel(reqAssign) as AADM_Model
+//		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+//			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
+//			if (types.contains(node_id))
+//				nodes.add(node)
+//		}
+//		return nodes
+//	}
 	
+//	def findLocalNodesForType(String type, EObject reqAssign) {
+//		try{
+//			val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
+//			val Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>()
+//			val AADM_Model model = AADMHelper.findModel(reqAssign) as AADM_Model
+//			
+//			for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+//				val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
+//				if (!candidateNodes.keySet.contains(node_id))
+//					candidateNodes.put(node_id, new HashSet())
+//				candidateNodes.get(node_id).add(node)
+//			}
+//			
+//			val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
+//			val List<String> validSubClasses = BackendHelper.KBReasoner.getSubClassesOf(keys, type)
+//			
+//			for (String validClass: validSubClasses){
+//				if (candidateNodes.containsKey(validClass))
+//					nodes.addAll (candidateNodes.get(validClass))
+//			}
+//			return nodes	
+//		}catch(NotRolePermissionException ex){
+//			showReadPermissionErrorDialog
+//		}catch(SodaliteException ex){
+//			SodaliteLogger.log(ex.message, ex);
+//		}
+//	}
 	
+//	def List<ENodeTemplate> findLocalNodes(EObject object){
+//		val AADM_Model model = AADMHelper.findModel(object) as AADM_Model
+//		if (model !== null)
+//			return model.nodeTemplates.nodeTemplates
+//		else
+//			new ArrayList<ENodeTemplate>()
+//	}
+//	
+//	def ENodeTemplate findNodeInModel(EObject object, String nodeName){
+//		val AADM_Model model = AADMHelper.findModel(object) as AADM_Model
+//		val String module = AADMHelper.getModule(object)
+//		val String targetModule = nodeName.substring(0, nodeName.indexOf("/"))
+//		val String targetNode = nodeName.substring(nodeName.lastIndexOf("/") + 1)
+//		if (!module.equals(targetModule)){
+//			return null
+//		}
+//		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
+//			if (node.name.equals(targetNode)){
+//				return node
+//			}
+//		}
+//		return null
+//	}
 		
-	def findLocalNodesForTypes(SortedSet<String> types, EObject reqAssign) {
-		val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
-		if (types.isEmpty)
-			return nodes
-		val AADM_Model model = findModel(reqAssign) as AADM_Model
-		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			val node_id = (node.node.type.module !== null? node.node.type.module + '/') + node.node.type.type
-			if (types.contains(node_id))
-				nodes.add(node)
-		}
-		return nodes
-	}
+//	override def findModel(EObject object) {
+//		if (object.eContainer == null)
+//			return null
+//		else if (object.eContainer instanceof AADM_Model)
+//			return object.eContainer
+//		else
+//			return findModel(object.eContainer)
+//	}
 	
-	def findLocalNodesForType(String type, EObject reqAssign) {
-		try{
-			val List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>()
-			val Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>()
-			val AADM_Model model = findModel(reqAssign) as AADM_Model
-			
-			for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-				val node_id = (node.node.type.module !== null? node.node.type.module + '/':"") + node.node.type.type
-				if (!candidateNodes.keySet.contains(node_id))
-					candidateNodes.put(node_id, new HashSet())
-				candidateNodes.get(node_id).add(node)
-			}
-			
-			val List<String> keys = new ArrayList<String>(candidateNodes.keySet)
-			val List<String> validSubClasses = getKBReasoner().getSubClassesOf(keys, type)
-			
-			for (String validClass: validSubClasses){
-				if (candidateNodes.containsKey(validClass))
-					nodes.addAll (candidateNodes.get(validClass))
-			}
-			return nodes	
-		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
-		}catch(SodaliteException ex){
-			SodaliteLogger.log(ex.message, ex);
-		}
-	}
-	
-	def List<ENodeTemplate> findLocalNodes(EObject object){
-		val AADM_Model model = findModel(object) as AADM_Model
-		if (model !== null)
-			return model.nodeTemplates.nodeTemplates
-		else
-			new ArrayList<ENodeTemplate>()
-	}
-	
-	def ENodeTemplate findNodeInModel(EObject object, String nodeName){
-		val AADM_Model model = findModel(object) as AADM_Model
-		val String module = getModule(object)
-		val String targetModule = nodeName.substring(0, nodeName.indexOf("/"))
-		val String targetNode = nodeName.substring(nodeName.lastIndexOf("/") + 1)
-		if (!module.equals(targetModule)){
-			return null
-		}
-		for (ENodeTemplate node: model.nodeTemplates.nodeTemplates){
-			if (node.name.equals(targetNode)){
-				return node
-			}
-		}
-		return null
-	}
+//	override def String getModule(EObject object) {
+//		val AADM_Model model = findModel(object) as AADM_Model
+//		return model.module
+//	}
 		
-	override def findModel(EObject object) {
-		if (object.eContainer == null)
-			return null
-		else if (object.eContainer instanceof AADM_Model)
-			return object.eContainer
-		else
-			return findModel(object.eContainer)
-	}
-	
-	override def String getModule(EObject object) {
-		val AADM_Model model = findModel(object) as AADM_Model
-		return model.module
-	}
-		
-	override def getImportedModules(EObject object) {
-		val List<String> modules = new ArrayList()
-		val AADM_Model model = findModel(object) as AADM_Model
-		for (import: model.imports)
-			modules.add(import)
-		
-		return modules
-	}
+//	override def getImportedModules(EObject object) {
+//		val List<String> modules = new ArrayList()
+//		val AADM_Model model = findModel(object) as AADM_Model
+//		for (import: model.imports)
+//			modules.add(import)
+//		
+//		return modules
+//	}
 
-	def getNodeTemplate(EObject object) {
-		if (object.eContainer === null)
-			return null
-		else if (object.eContainer instanceof ENodeTemplate)
-			return object.eContainer
-		else
-			return getNodeTemplate(object.eContainer)
-	}
-	
-	def getEntityNode (GetPropertyBodyImpl body){
-		val EEntityReference eEntityReference = body.entity
-		var ENodeTemplate node = null
-		if (eEntityReference instanceof EEntity){
-			val EEntity eEntity = eEntityReference as EEntity
-			if (eEntity.entity.equals('SELF')){
-				node = getNodeTemplate(body) as ENodeTemplate
-			}
-		} else {
-			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
-		}
-		return node
-	}
-		
-	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
-		var ENodeTemplate node = null
-		if (template.node.requirements === null)
-			return node
-		for (req: template.node.requirements.requirements){
-			if (req.name.equals(requirement)){
-				val AADM_Model model = findModel(template) as AADM_Model
-				var module1 = model.module
-				if (module1 === null)
-					module1 = ""
-				var module2 = req.node.module
-				if (module2 === null)
-					module2 = ""
-				if (module1.equals(module2)){
-					node = findNode(model, req.node.id)						
-				}else{
-					//TODO Find node in KB
-				} 
-			}
-		}
-		return node
-	}
-	
-	def findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
-		var ECapabilityAssignment capability = null
-		if (template.node.capabilities === null)
-			return capability
-		for (cap: template.node.capabilities.capabilities){
-			if (cap.name.equals(capabilityName))
-				capability = cap
-		}
-		return capability
-	}
-		
-	def findNode(AADM_Model model, String nodeName) {
-		for (node: model.nodeTemplates.nodeTemplates){
-			if (node.name.equals(nodeName))
-				return node
-		}
-		return null
-	}
+//	def getNodeTemplate(EObject object) {
+//		if (object.eContainer === null)
+//			return null
+//		else if (object.eContainer instanceof ENodeTemplate)
+//			return object.eContainer
+//		else
+//			return getNodeTemplate(object.eContainer)
+//	}
+//	
+//	def getEntityNode (GetPropertyBodyImpl body){
+//		val EEntityReference eEntityReference = body.entity
+//		var ENodeTemplate node = null
+//		if (eEntityReference instanceof EEntity){
+//			val EEntity eEntity = eEntityReference as EEntity
+//			if (eEntity.entity.equals('SELF')){
+//				node = getNodeTemplate(body) as ENodeTemplate
+//			}
+//		} else {
+//			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+//		}
+//		return node
+//	}
+//		
+//	def findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
+//		var ENodeTemplate node = null
+//		if (template.node.requirements === null)
+//			return node
+//		for (req: template.node.requirements.requirements){
+//			if (req.name.equals(requirement)){
+//				val AADM_Model model = AADMHelper.findModel(template) as AADM_Model
+//				var module1 = model.module
+//				if (module1 === null)
+//					module1 = ""
+//				var module2 = req.node.module
+//				if (module2 === null)
+//					module2 = ""
+//				if (module1.equals(module2)){
+//					node = findNode(model, req.node.id)						
+//				}else{
+//					//TODO Find node in KB
+//				} 
+//			}
+//		}
+//		return node
+//	}
+//	
+//	def findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
+//		var ECapabilityAssignment capability = null
+//		if (template.node.capabilities === null)
+//			return capability
+//		for (cap: template.node.capabilities.capabilities){
+//			if (cap.name.equals(capabilityName))
+//				capability = cap
+//		}
+//		return capability
+//	}
+//		
+//	def findNode(AADM_Model model, String nodeName) {
+//		for (node: model.nodeTemplates.nodeTemplates){
+//			if (node.name.equals(nodeName))
+//				return node
+//		}
+//		return null
+//	}
 
 	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
 		if (proposal instanceof ConfigurableCompletionProposal) {
@@ -1009,7 +973,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 	def String getAdditionalProposalInfo(Keyword keyword) {
 		if (keyword instanceof KeywordImpl) {
 			val keywordImpl = keyword as KeywordImpl
-			val rule = findParserRule (keywordImpl)
+			val rule = AADMHelper.findParserRule (keywordImpl)
 			
 			//ENodeTemplate
 			if (rule.name == "ENodeTemplate" && keyword.value == "type:")
@@ -1030,14 +994,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		}
 	}
 
-	def ParserRule findParserRule (EObject obj){
-		if (obj === null)
-			return null
-		else if (obj instanceof ParserRule)
-			return obj as ParserRule
-		else
-			return findParserRule (obj.eContainer) 
-	}
+//	def ParserRule findParserRule (EObject obj){
+//		if (obj === null)
+//			return null
+//		else if (obj instanceof ParserRule)
+//			return obj as ParserRule
+//		else
+//			return findParserRule (obj.eContainer) 
+//	}
 	
 
 }
