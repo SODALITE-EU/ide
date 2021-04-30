@@ -1112,6 +1112,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
 		try{
+			//FIXME: obtain all properties for types subclasses of given resourceId
 			val PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId)
 			for (prop:propertyData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"

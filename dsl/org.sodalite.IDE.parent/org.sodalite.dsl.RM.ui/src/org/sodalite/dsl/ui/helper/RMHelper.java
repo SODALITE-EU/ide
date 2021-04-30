@@ -4,11 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -104,12 +107,19 @@ public class RMHelper {
 	}
 
 	public static EObject findModel(EObject object) {
-		if (object.eContainer() == null)
-			return null;
-		else if (object.eContainer() instanceof RM_Model)
-			return object.eContainer();
-		else
-			return findModel(object.eContainer());
+		EObject container = object.eContainer();
+		while (container != null) {
+			if (isModel(container))
+				return container;
+			container = container.eContainer();
+		}
+		return null;
+	}
+
+	private static boolean isModel(EObject container) {
+		List<Method> methods = Arrays.asList(container.getClass().getMethods());
+		List<String> names = methods.stream().map(m -> m.getName()).collect(Collectors.toList());
+		return names.contains("getModule") && names.contains("getImports");
 	}
 
 	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws SodaliteException {
@@ -253,12 +263,20 @@ public class RMHelper {
 	}
 
 	public static List<String> getImportedModules(EObject object) {
-		List<String> modules = new ArrayList<String>();
-		RM_Model model = (RM_Model) findModel(object);
-		for (String _import : model.getImports())
-			modules.add(_import);
+		EObject model = findModel(object);
+		return invokeGetImports(model);
+	}
 
-		return modules;
+	private static List<String> invokeGetImports(EObject model) {
+		List<String> imports = new ArrayList<>();
+		try {
+			Class noparams[] = {};
+			Method method = model.getClass().getMethod("getImports", noparams);
+			imports = (List<String>) method.invoke(model, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return imports;
 	}
 
 	public static String getLastSegment(String _string, String delimiter) {
@@ -269,8 +287,20 @@ public class RMHelper {
 	}
 
 	public static String getModule(EObject object) {
-		RM_Model model = (RM_Model) findModel(object);
-		return model.getModule();
+		EObject model = findModel(object);
+		return invokeGetModule(model);
+	}
+
+	private static String invokeGetModule(EObject model) {
+		String module = "";
+		try {
+			Class noparams[] = {};
+			Method method = model.getClass().getMethod("getModule", noparams);
+			module = (String) method.invoke(model, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return module;
 	}
 
 	public static String getNodeFromRequirementRef(EPREFIX_REF reqRef) {

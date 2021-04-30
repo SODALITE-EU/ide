@@ -108,7 +108,7 @@ public class AADMHelper extends RMHelper {
 		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
 		try {
 			Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>();
-			AADM_Model model = (AADM_Model) AADMHelper.findModel(reqAssign);
+			AADM_Model model = (AADM_Model) findModel(reqAssign);
 
 			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
 				String node_id = (node.getNode().getType().getModule() != null
@@ -135,29 +135,29 @@ public class AADMHelper extends RMHelper {
 		return nodes;
 	}
 
-	public static EObject findModel(EObject object) {
-		EObject container = object.eContainer();
-		while (container != null) {
-			if (container instanceof AADM_Model)
-				return (AADM_Model) container;
-			container = container.eContainer();
-		}
-		return null;
-	}
+//	public static EObject findModel(EObject object) {
+//		EObject container = object.eContainer();
+//		while (container != null) {
+//			if (container instanceof AADM_Model)
+//				return (AADM_Model) container;
+//			container = container.eContainer();
+//		}
+//		return null;
+//	}
 
-	public static String getAADMModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
+	public static String getModule(IFile rmFile, ExecutionEvent event) throws PartInitException {
 		AADM_Model model = readAADMModel(rmFile, event);
 		return model.getModule();
 	}
 
-	public static List<String> getImportedModules(EObject object) {
-		List<String> modules = new ArrayList();
-		AADM_Model model = (AADM_Model) findModel(object);
-		for (String _import : model.getImports())
-			modules.add(_import);
-
-		return modules;
-	}
+//	public static List<String> getImportedModules(EObject object) {
+//		List<String> modules = new ArrayList<String>();
+//		AADM_Model model = (AADM_Model) findModel(object);
+//		for (String _import : model.getImports())
+//			modules.add(_import);
+//
+//		return modules;
+//	}
 
 	public static Path getInputsYamlPath() throws Exception {
 //		Bundle bundle = Platform.getBundle("org.sodalite.dsl.AADM.ui");
@@ -168,10 +168,10 @@ public class AADMHelper extends RMHelper {
 		return file.toPath();
 	}
 
-	public static String getModule(EObject object) {
-		AADM_Model model = (AADM_Model) findModel(object);
-		return model.getModule();
-	}
+//	public static String getModule(EObject object) {
+//		AADM_Model model = (AADM_Model) findModel(object);
+//		return model.getModule();
+//	}
 
 	public static TypeData getTypeOfValidRequirementNodes(ERequirementAssignmentImpl req)
 			throws SodaliteException, Exception {
@@ -275,6 +275,16 @@ public class AADMHelper extends RMHelper {
 			return findRequirementNodeInTemplate(req_name, nodeTemplate);
 		}
 		return null;
+	}
+
+	public static List<String> processListModules(EObject model) {
+		// Get modules from model
+		List<String> importedModules = getImportedModules(model);
+		String module = getModule(model);
+		// Add current module to imported ones for searching in the KB
+		if (module != null)
+			importedModules.add(module);
+		return importedModules;
 	}
 
 	public static String findNodeTemplateInKB(EObject object, String nodeRef) throws SodaliteException {
