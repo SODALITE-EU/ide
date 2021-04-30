@@ -513,6 +513,32 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Target" nodeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@borderedNodeMappings[name='BTargets']" iconPath="/org.sodalite.dsl.AADM.design/icons/target_tool.png">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.policy">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ETarget" referenceName="targets" variableName="target">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_ID" referenceName="target" variableName="target">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="target_id"/>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Target node link" edgeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='TargetLink']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setPolicyTarget(target)"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
           </ownedTools>
           <ownedTools xsi:type="tool:NodeCreationDescription" name="Property" nodeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property'] //@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='NodeTemplate']/@subContainerMappings[name='Capabilities']/@subContainerMappings[name='Capability']/@subNodeMappings[name='Properties'] //@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Policy%20Definition']/@subContainerMappings[name='Properties']/@subNodeMappings[name='Property']" iconPath="/org.sodalite.dsl.AADM.design/icons/property.png">
             <variable name="container"/>

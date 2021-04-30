@@ -780,6 +780,12 @@ public class Services {
 		req.setNode(createNodeRef(nodeRef));
 	}
 
+	public void setPolicyTarget(EPREFIX_ID target, ENodeTemplate node) {
+		String module = AADM_Helper.getModule(node);
+		target.setModule(module);
+		target.setId(node.getName());
+	}
+
 	public void setPolicyTarget(EPREFIX_ID object, String target) {
 		object.setModule(getTrailingSegment(target, "/"));
 		object.setId(getLastSegment(target, "/"));
