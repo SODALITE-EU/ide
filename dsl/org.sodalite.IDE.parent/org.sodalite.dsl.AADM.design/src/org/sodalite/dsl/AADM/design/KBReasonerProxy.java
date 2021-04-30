@@ -14,9 +14,9 @@ import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
 import org.sodalite.dsl.aADM.ENodeTemplate;
-import org.sodalite.dsl.aADM.ENodeTemplateBody;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignment;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
@@ -32,6 +32,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.Template;
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EEvenFilter;
@@ -39,6 +40,8 @@ import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
+import org.sodalite.dsl.ui.helper.AADMHelper;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -380,15 +383,7 @@ public class KBReasonerProxy {
 		// Find nodes that satisfy a given requirement
 		SortedSet<String> result = new TreeSet<String>();
 		SortedSet<String> types = new TreeSet<String>();
-		EPREFIX_TYPE nodeType = ((ENodeTemplateBody) req.eContainer().eContainer()).getType();
-		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
-		List<String> modules = new ArrayList<>();
-		String module = AADM_Helper.getModule(req);
-		if (module != null)
-			modules.add(module);
-		modules.addAll(AADM_Helper.getImports(req));
-		ValidRequirementNodeData vrnd = RMBackendProxy.getKBReasoner().getValidRequirementNodes(req.getName(),
-				resourceId, modules);
+		ValidRequirementNodeData vrnd = AADMHelper.getValidRequirementNodes((ERequirementAssignmentImpl) req);
 		if (vrnd != null) {
 			System.out.println("Valid requirement nodes retrieved from KB for requirement: " + req.getName());
 			for (ValidRequirementNode vrn : vrnd.getElements()) {
@@ -399,7 +394,14 @@ public class KBReasonerProxy {
 		}
 
 		// Find local nodes that belongs to suggested types
-		List<ENodeTemplate> localnodes = AADM_Helper.findLocalNodesForTypes(types, req);
+		TypeData tovrnd = AADMHelper.getTypeOfValidRequirementNodes((ERequirementAssignmentImpl) req);
+		if (tovrnd.getElements().isEmpty())
+			throw new Exception("Type of valid nodes satisfying the requirement not found");
+		Type superType = tovrnd.getElements().get(0);
+		String qsuperType = superType.getModule() != null
+				? RMHelper.getLastSegment(superType.getModule(), "/") + "/" + superType.getLabel()
+				: superType.getLabel();
+		List<ENodeTemplate> localnodes = AADMHelper.findLocalNodesForType(qsuperType, req);
 		for (ENodeTemplate node : localnodes) {
 			System.out.println("Valid requirement local node: " + node.getName());
 			result.add(AADM_Helper.renderTemplate(node));
