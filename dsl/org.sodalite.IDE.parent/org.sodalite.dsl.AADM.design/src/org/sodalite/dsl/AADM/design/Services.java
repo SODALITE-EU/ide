@@ -58,6 +58,7 @@ import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.ESingleValue;
+import org.sodalite.dsl.rM.ETimeInterval;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggerDefinitionBody;
 import org.sodalite.dsl.rM.GetInput;
@@ -77,10 +78,23 @@ public class Services {
 	}
 
 	public void setPeriod(ETriggerDefinition trigger, String period) {
+		if (trigger.getTrigger().getCondition() == null) {
+			EExtendedTriggerCondition condition = RMFactory.eINSTANCE.createEExtendedTriggerCondition();
+			trigger.getTrigger().setCondition(condition);
+		}
 		trigger.getTrigger().getCondition().setPeriod(period);
 	}
 
 	public void setEvaluations(ETriggerDefinition trigger, String evaluations) {
+		if (trigger.getTrigger().getCondition() == null) {
+			EExtendedTriggerCondition condition = RMFactory.eINSTANCE.createEExtendedTriggerCondition();
+			trigger.getTrigger().setCondition(condition);
+		}
+		if (trigger.getTrigger().getCondition().getEvaluations() == null) {
+			ESIGNEDINT evaluationsObj = RMFactory.eINSTANCE.createESIGNEDINT();
+			trigger.getTrigger().getCondition().setEvaluations(evaluationsObj);
+			;
+		}
 		trigger.getTrigger().getCondition().getEvaluations().setValue(Integer.parseInt(evaluations));
 	}
 
@@ -89,6 +103,10 @@ public class Services {
 	}
 
 	public void setScheduleStartTime(ETriggerDefinition trigger, String start_time) {
+		if (trigger.getTrigger().getSchedule() == null) {
+			ETimeInterval schedule = RMFactory.eINSTANCE.createETimeInterval();
+			trigger.getTrigger().setSchedule(schedule);
+		}
 		trigger.getTrigger().getSchedule().setStart_time(start_time);
 	}
 

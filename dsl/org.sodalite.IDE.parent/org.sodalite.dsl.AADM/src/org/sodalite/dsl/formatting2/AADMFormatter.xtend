@@ -41,6 +41,7 @@ class AADMFormatter extends RMFormatter {
 		aADM_Model.inputs.format
 		aADM_Model.nodeTemplates.format
 		aADM_Model.policies.format
+		aADM_Model.append[newLine]
 	}
 	
 	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
