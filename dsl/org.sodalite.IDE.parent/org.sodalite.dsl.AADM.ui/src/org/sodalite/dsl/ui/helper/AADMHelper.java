@@ -451,4 +451,12 @@ public class AADMHelper extends RMHelper {
 		else
 			return findParserRule(obj.eContainer());
 	}
+
+	public static EPolicyDefinition findPolicy(AADM_Model model, String policyName) {
+		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+			if (policy.getName().equals(policyName))
+				return policy;
+		}
+		return null;
+	}
 }

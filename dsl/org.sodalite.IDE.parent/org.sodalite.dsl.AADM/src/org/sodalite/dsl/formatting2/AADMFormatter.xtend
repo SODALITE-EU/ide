@@ -27,6 +27,9 @@ import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.EParameterDefinitionBody
 import org.sodalite.dsl.aADM.ECapabilityAssignment
 import org.sodalite.dsl.aADM.ECapabilityAssignments
+import org.sodalite.dsl.aADM.EPolicies
+import org.sodalite.dsl.aADM.EPolicyDefinition
+import org.sodalite.dsl.aADM.EPolicyDefinitionBody
 
 class AADMFormatter extends RMFormatter {
 
@@ -37,6 +40,7 @@ class AADMFormatter extends RMFormatter {
 		aADM_Model.regionFor.keyword("node_templates:").append[newLine]
 		aADM_Model.inputs.format
 		aADM_Model.nodeTemplates.format
+		aADM_Model.policies.format
 	}
 	
 	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
@@ -68,7 +72,6 @@ class AADMFormatter extends RMFormatter {
 			eNodeTemplate.format
 		}
 	}
-	
 
 	// TODO: implement for ENodeTemplate, ENodeTemplateBody, ERequirementAssignments, ECapabilityAssignments, ECapabilityAssignment, EAttributeAssigments, EAttributeAssignment, EPropertyAssigments, EPropertyAssignment
 	def dispatch void format(ENodeTemplate eNodeTemplate, extension IFormattableDocument document) {
@@ -167,6 +170,37 @@ class AADMFormatter extends RMFormatter {
 			}
 			cap.format.append[newLine]
 		}
+	}
+	
+	def dispatch void format(EPolicies policies, extension IFormattableDocument document) {
+		for (policy : policies.policies) {
+			policy.format
+		}
+	}
+	
+	def dispatch void format(EPolicyDefinition policy, extension IFormattableDocument document) {
+		policy.surround[indent]
+		policy.regionFor.feature(EPOLICY_DEFINITION__NAME).append[noSpace]
+		policy.regionFor.keyword(":").append[newLine]
+		policy.policy.surround[indent].format
+	}
+
+	def dispatch void format(EPolicyDefinitionBody policy, extension IFormattableDocument document) {
+		policy.regionFor.keyword("type:").append[oneSpace]
+		policy.type.format.append[newLine]
+
+		policy.regionFor.keyword("description:").append[oneSpace]
+		policy.regionFor.feature(EPOLICY_DEFINITION_BODY__DESCRIPTION).append[newLine]
+
+		policy.regionFor.keyword("properties:").append[newLine]
+		policy.properties.surround[indent].format
+
+		policy.regionFor.keyword("targets:").append[oneSpace]
+		policy.regionFor.keyword("[").append[noSpace]
+		policy.regionFor.keyword("]").append[newLine]
+
+		policy.regionFor.keyword("triggers:").append[newLine]
+		policy.triggers.surround[indent].format
 	}
 
 	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {

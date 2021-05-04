@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.sodalite.dsl.aADM.AADMFactory;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
@@ -18,8 +19,10 @@ import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EActivityDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
@@ -62,6 +65,7 @@ import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMFactory;
 import org.sodalite.dsl.scoping.AADMScopeProvider;
+import org.sodalite.dsl.ui.helper.AADMHelper;
 
 /**
  * The services class used by VSM.
@@ -266,12 +270,24 @@ public class Services {
 		return label;
 	}
 
+	public SortedSet<String> getPolicies(AADM_Model model) {
+		SortedSet<String> policies = new TreeSet<String>();
+		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+			policies.add(policy.getName());
+		}
+		return policies;
+	}
+
 	public String getScheduleStartTime(ETriggerDefinitionBody trigger) {
-		return "start_time: " + trigger.getSchedule().getStart_time();
+		if (trigger.getSchedule() != null)
+			return "start_time: " + trigger.getSchedule().getStart_time();
+		return null;
 	}
 
 	public String getScheduleEndTime(ETriggerDefinitionBody trigger) {
-		return "end_time: " + trigger.getSchedule().getEnd_time();
+		if (trigger.getSchedule() != null)
+			return "end_time: " + trigger.getSchedule().getEnd_time();
+		return null;
 	}
 
 	public String getTriggerLabel(ETriggerDefinition trigger) {
@@ -409,6 +425,14 @@ public class Services {
 	public void cancelAddAction(ETriggerDefinition trigger, Integer size) {
 		if (trigger.getTrigger().getAction().getList().size() != size)
 			trigger.getTrigger().getAction().getList().remove(size);
+	}
+
+	public void createTrigger(AADM_Model model, String policyName) {
+		EPolicyDefinition policy = AADMHelper.findPolicy(model, policyName);
+		if (policy.getPolicy().getTriggers() == null) {
+			policy.getPolicy().setTriggers(createETriggerDefinitions());
+		}
+		policy.getPolicy().getTriggers().getTriggers().add(createETriggerDefinition());
 	}
 
 	public void editCallOperation(ETriggerDefinition trigger, Integer index,
@@ -724,6 +748,30 @@ public class Services {
 		ESIGNEDINT eInt = RMFactory.eINSTANCE.createESIGNEDINT();
 		eInt.setValue(Integer.valueOf(value));
 		return eInt;
+	}
+
+	private ETriggerDefinitions createETriggerDefinitions() {
+		return AADMFactory.eINSTANCE.createETriggerDefinitions();
+	}
+
+	private ETriggerDefinition createETriggerDefinition() {
+		ETriggerDefinition trigger = RMFactory.eINSTANCE.createETriggerDefinition();
+		ETriggerDefinitionBody body = RMFactory.eINSTANCE.createETriggerDefinitionBody();
+		EActivityDefinitions actions = RMFactory.eINSTANCE.createEActivityDefinitions();
+		ECallOperationActivityDefinition action = RMFactory.eINSTANCE.createECallOperationActivityDefinition();
+		ECallOperationActivityDefinitionBody actionBody = RMFactory.eINSTANCE
+				.createECallOperationActivityDefinitionBody();
+		EPREFIX_TYPE operation = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		operation.setModule("tosca");
+		operation.setType("tosca.interfaces.node.lifecycle.Standard.create");
+		actionBody.setOperation(operation);
+		action.setOperation(actionBody);
+		actions.getList().add(action);
+		body.setEvent("event_name");
+		body.setAction(actions);
+		trigger.setName("new.trigger.definition");
+		trigger.setTrigger(body);
+		return trigger;
 	}
 
 	private EFLOAT createFloatValue(String value) {

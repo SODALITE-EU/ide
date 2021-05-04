@@ -335,8 +335,8 @@
               <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
             </style>
           </subContainerMappings>
-          <subContainerMappings name="Action section" semanticCandidatesExpression="aql:self.trigger.action" domainClass="rM::EActivityDefinitions" childrenPresentation="List">
-            <subNodeMappings name="activity" semanticCandidatesExpression="aql:self.list" domainClass="rM::EActivityDefinition">
+          <subContainerMappings name="Action section" semanticCandidatesExpression="aql:self.trigger" domainClass="rM::ETriggerDefinitionBody" childrenPresentation="List">
+            <subNodeMappings name="activity" semanticCandidatesExpression="aql:self.action.list" domainClass="rM::EActivityDefinition">
               <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="service:getActivityLabel" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                 <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                 <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -524,6 +524,34 @@
                         <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="target_id"/>
                       </subModelOperations>
                     </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:ContainerCreationDescription" name="Trigger" containerMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']" iconPath="/org.sodalite.dsl.AADM.design/icons/trigger.png">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Select Policy">
+                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                      <initialOperation/>
+                    </buttons>
+                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                      <initialOperation>
+                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:createTrigger(policy)"/>
+                      </initialOperation>
+                    </buttons>
+                    <page name="Default Page" labelExpression="Select Policy" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Policies']/@tools.2/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
+                    <groups name="Default Group" labelExpression="Policy" semanticCandidateExpression="var:self">
+                      <controls xsi:type="properties:SelectDescription" name="policy" labelExpression="Policy:" candidatesExpression="service:getPolicies" candidateDisplayExpression="aql:candidate">
+                        <initialOperation>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
+                            <subModelOperations xsi:type="tool_1:Let" variableName="policy" valueExpression="var:newValue"/>
+                          </firstModelOperations>
+                        </initialOperation>
+                      </controls>
+                    </groups>
                   </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
