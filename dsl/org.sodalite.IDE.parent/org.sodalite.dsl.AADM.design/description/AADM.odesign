@@ -544,7 +544,7 @@
                     </buttons>
                     <page name="Default Page" labelExpression="Select Policy" semanticCandidateExpression="var:self" groups="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Policies']/@tools.2/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
                     <groups name="Default Group" labelExpression="Policy" semanticCandidateExpression="var:self">
-                      <controls xsi:type="properties:SelectDescription" name="policy" labelExpression="Policy:" candidatesExpression="service:getPolicies" candidateDisplayExpression="aql:candidate">
+                      <controls xsi:type="properties:SelectDescription" name="policy" labelExpression="Policy:" valueExpression="var:policy" candidatesExpression="service:getPolicies" candidateDisplayExpression="aql:candidate">
                         <initialOperation>
                           <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
                             <subModelOperations xsi:type="tool_1:Let" variableName="policy" valueExpression="var:newValue"/>
@@ -636,10 +636,12 @@
                     </buttons>
                     <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                     <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                      <controls xsi:type="properties:SelectDescription" name="new import" labelExpression="Item value:" candidatesExpression="service:getImports" candidateDisplayExpression="aql:candidate">
+                      <controls xsi:type="properties:SelectDescription" name="new import" labelExpression="Item value:" valueExpression="var:import" candidatesExpression="service:getImports" candidateDisplayExpression="aql:candidate">
                         <initialOperation>
                           <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                            <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addImport(newValue)"/>
+                            <subModelOperations xsi:type="tool_1:Let" variableName="import" valueExpression="var:newValue">
+                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addImport(newValue)"/>
+                            </subModelOperations>
                           </firstModelOperations>
                         </initialOperation>
                       </controls>
@@ -812,10 +814,12 @@
                       </buttons>
                       <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.7/@controls.0/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                       <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                        <controls xsi:type="properties:SelectDescription" name="new call operation" labelExpression="Call operation:" valueExpression="service:getAddedActivityLabel(list_size)" candidatesExpression="service:getOperations" candidateDisplayExpression="aql:candidate">
+                        <controls xsi:type="properties:SelectDescription" name="new call operation" labelExpression="Call operation:" valueExpression="var:action" candidatesExpression="service:getOperations" candidateDisplayExpression="aql:candidate">
                           <initialOperation>
                             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addCallAction(newValue)"/>
+                              <subModelOperations xsi:type="tool_1:Let" variableName="action" valueExpression="var:newValue">
+                                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addCallAction(newValue)"/>
+                              </subModelOperations>
                             </firstModelOperations>
                           </initialOperation>
                         </controls>
