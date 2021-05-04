@@ -556,6 +556,23 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Target filter" nodeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@containerMappings[name='Trigger%20Definition']/@borderedNodeMappings[name='TargetFilter']" iconPath="/org.sodalite.dsl.AADM.design/icons/filter.png">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.trigger">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EEvenFilter" referenceName="target_filter" variableName="target_filter">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:target_filter">
+                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_ID" referenceName="node" variableName="node">
+                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:node">
+                          <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="node_ref"/>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
             <tools xsi:type="tool:EdgeCreationDescription" name="Target node link" edgeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='TargetLink']">
               <sourceVariable name="source"/>
               <targetVariable name="target"/>
@@ -564,6 +581,17 @@
               <initialOperation>
                 <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
                   <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setPolicyTarget(target)"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Target filter node link" edgeMappings="//@ownedViewpoints[name='ADDMView']/@ownedRepresentations[name='AADM%20Diagram']/@defaultLayer/@edgeMappings[name='TargetFilterNodeLink']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setEventFilterNode(target)"/>
                 </firstModelOperations>
               </initialOperation>
             </tools>

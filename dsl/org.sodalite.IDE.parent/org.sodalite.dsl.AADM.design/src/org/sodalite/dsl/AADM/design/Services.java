@@ -120,7 +120,7 @@ public class Services {
 
 	public String getNodeBorderedLabel(EObject node) {
 		ENodeTemplate nodeTemplate = findNode((EPREFIX_REF) node);
-		if (nodeTemplate == null)
+		if (nodeTemplate != null)
 			return "node: " + parse(node);
 		else
 			return "";
@@ -847,6 +847,12 @@ public class Services {
 	}
 
 	public void setPolicyTarget(EPREFIX_ID target, ENodeTemplate node) {
+		String module = AADM_Helper.getModule(node);
+		target.setModule(module);
+		target.setId(node.getName());
+	}
+
+	public void setEventFilterNode(EPREFIX_ID target, ENodeTemplate node) {
 		String module = AADM_Helper.getModule(node);
 		target.setModule(module);
 		target.setId(node.getName());
