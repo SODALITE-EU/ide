@@ -858,6 +858,13 @@ public class Services {
 		target.setId(node.getName());
 	}
 
+	public void setEventFilterRequirement(EPREFIX_TYPE target, ERequirementAssignment req) {
+		String module = AADM_Helper.getModule(req);
+		String node = ((ENodeTemplate) req.eContainer().eContainer().eContainer()).getName();
+		target.setModule(module);
+		target.setType(node + "." + req.getName());
+	}
+
 	public void setPolicyTarget(EPREFIX_ID object, String target) {
 		object.setModule(getTrailingSegment(target, "/"));
 		object.setId(getLastSegment(target, "/"));

@@ -294,7 +294,7 @@ public class KBReasonerProxy {
 		if (filter.getRequirement() == null) { // If requirement not set
 			// Find capabilities defined in filter node template type
 			String filter_node_type = null;
-			if (AADM_Helper.moduleBelongsToModel(type)) {
+			if (AADM_Helper.moduleBelongsToModel(filter.getNode())) {
 				ENodeTemplate filter_node = AADM_Helper.findNode(filter, filter.getNode());
 				if (filter_node != null) {
 					// A) Node lives in RM
@@ -359,7 +359,7 @@ public class KBReasonerProxy {
 		SortedSet<String> result = new TreeSet<String>();
 		EEvenFilter filter = (EEvenFilter) type.eContainer();
 		if (filter.getNode() != null) {
-			if (AADM_Helper.moduleBelongsToModel(type)) {
+			if (AADM_Helper.moduleBelongsToModel(filter.getNode())) {
 				ENodeTemplate node = AADM_Helper.findNode(filter, filter.getNode());
 				if (node != null) { // Local node
 					for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {
