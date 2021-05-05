@@ -120,7 +120,7 @@ public class Services {
 
 	public String getNodeBorderedLabel(EObject node) {
 		ENodeTemplate nodeTemplate = findNode((EPREFIX_REF) node);
-		if (nodeTemplate != null)
+		if (nodeTemplate == null)
 			return "node: " + parse(node);
 		else
 			return "";
