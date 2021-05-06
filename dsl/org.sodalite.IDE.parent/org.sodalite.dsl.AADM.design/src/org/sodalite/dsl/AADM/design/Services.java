@@ -205,7 +205,9 @@ public class Services {
 	}
 
 	public String parseConditionClause(ETriggerDefinition trigger) {
-		return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
+		if (trigger.getTrigger().getCondition() != null)
+			return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
+		return "";
 	}
 
 	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {

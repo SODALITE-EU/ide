@@ -30,6 +30,20 @@ import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.aADM.EPolicies
 import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody
+import org.sodalite.dsl.aADM.ETriggerDefinitions
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.ETriggerDefinitionBody
+import org.sodalite.dsl.rM.EActivityDefinitions
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody
+import org.sodalite.dsl.rM.ETimeInterval
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.EExtendedTriggerCondition
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+import org.sodalite.dsl.rM.EAssertionDefinition
 
 class AADMFormatter extends RMFormatter {
 
@@ -203,9 +217,127 @@ class AADMFormatter extends RMFormatter {
 		policy.regionFor.keyword("triggers:").append[newLine]
 		policy.triggers.surround[indent].format
 	}
+	
+	def dispatch void format(ETriggerDefinitions triggers, extension IFormattableDocument document) {
+		for (trigger : triggers.triggers) {
+			trigger.format
+		}
+	}
+	
+	def dispatch void format(ETriggerDefinition trigger, extension IFormattableDocument document) {
+		trigger.regionFor.feature(ETRIGGER_DEFINITION__NAME).append[noSpace]
+		trigger.regionFor.keyword(":").append[newLine]
+		trigger.trigger.surround[indent].format
+	}
+	
+	def dispatch void format(ETriggerDefinitionBody trigger, extension IFormattableDocument document) {
+		trigger.regionFor.keyword("description:").append[oneSpace]
+		trigger.regionFor.feature(ETRIGGER_DEFINITION_BODY__DESCRIPTION).append[newLine]
+
+		trigger.regionFor.keyword("event:").append[oneSpace]
+		trigger.regionFor.feature(ETRIGGER_DEFINITION_BODY__EVENT).append[newLine]
+
+		trigger.regionFor.keyword("schedule:").append[newLine]
+		trigger.schedule.surround[indent].format
+
+		trigger.regionFor.keyword("target_filter:").append[newLine]
+		trigger.target_filter.surround[indent].format
+
+		trigger.regionFor.keyword("condition:").append[newLine]
+		trigger.condition.surround[indent].format
+		
+		trigger.regionFor.keyword("action:").append[newLine]
+		trigger.action.surround[indent].format
+	}
+	
+	def dispatch void format(EActivityDefinitions activities, extension IFormattableDocument document) {
+		for (activity : activities.list) {
+			activity.format
+		}
+	}
+	
+	def dispatch void format(ECallOperationActivityDefinition call, extension IFormattableDocument document) {
+		call.surround[indent]
+		call.regionFor.keyword("call_operation:").append[newLine]
+		call.operation.surround[indent].format
+	}
+	
+	def dispatch void format(ECallOperationActivityDefinitionBody body, extension IFormattableDocument document) {
+		body.regionFor.keyword("operation:").append[oneSpace]
+		body.operation.format.append[newLine]
+
+		body.regionFor.keyword("inputs:").append[newLine]
+		body.inputs.surround[indent].format
+	}
+	
+	def dispatch void format(ETimeInterval ti, extension IFormattableDocument document) {
+		ti.regionFor.keyword("start_time:").append[oneSpace]
+		ti.regionFor.feature(ETIME_INTERVAL__START_TIME).append[newLine]
+		
+		ti.regionFor.keyword("end_time:").append[oneSpace]
+		ti.regionFor.feature(ETIME_INTERVAL__END_TIME).append[newLine]
+	}
+	
+	def dispatch void format(EEvenFilter ef, extension IFormattableDocument document) {
+		ef.regionFor.keyword("node:").append[oneSpace]
+		ef.node.format.append[newLine]
+		
+		ef.regionFor.keyword("requirement:").append[oneSpace]
+		ef.requirement.format.append[newLine]
+		
+		ef.regionFor.keyword("capability:").append[oneSpace]
+		ef.capability.format.append[newLine]
+	}
+	
+	def dispatch void format(EExtendedTriggerCondition condition, extension IFormattableDocument document) {
+		condition.regionFor.keyword("constraint:").append[newLine]
+		condition.constraint.surround[indent].format
+		
+		condition.regionFor.keyword("period:").append[oneSpace]
+		condition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__PERIOD).append[newLine]
+
+		condition.regionFor.keyword("evaluations:").append[oneSpace]
+		condition.evaluations.format.append[newLine]
+		
+		condition.regionFor.keyword("method:").append[oneSpace]
+		condition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__METHOD).append[newLine]	
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionAND and, extension IFormattableDocument document) {
+		and.regionFor.keyword("and:").append[newLine]
+		and.and.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionOR or, extension IFormattableDocument document) {
+		or.regionFor.keyword("or:").append[newLine]
+		or.or.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionNOT not, extension IFormattableDocument document) {
+		not.regionFor.keyword("not:").append[newLine]
+		not.not.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionAssert assertions, extension IFormattableDocument document) {
+		for (assertion : assertions.assertions) {
+			assertion.format
+		}
+	}
+
+	def dispatch void format(EAssertionDefinition assertion, extension IFormattableDocument document) {
+		assertion.regionFor.feature(EASSERTION_DEFINITION__ATTRIBUTE_NAME).append[noSpace]
+		assertion.regionFor.keyword(":").append[oneSpace]
+		assertion.regionFor.keyword("[").append[noSpace]
+		assertion.regionFor.keyword("]").append[newLine]
+	}	
 
 	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {
 		prefix.regionFor.feature(EPREFIX_ID__MODULE).append[noSpace]
+		prefix.regionFor.keyword("/").append[noSpace]
+	}
+	
+	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
+		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
 		prefix.regionFor.keyword("/").append[noSpace]
 	}
 }

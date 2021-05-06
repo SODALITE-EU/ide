@@ -4082,16 +4082,9 @@ rule__ENodeTemplates__Group__1__Impl
 	}
 :
 (
-	(
-		{ before(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
-		(rule__ENodeTemplates__NodeTemplatesAssignment_1)
-		{ after(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
-	)
-	(
-		{ before(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
-		(rule__ENodeTemplates__NodeTemplatesAssignment_1)*
-		{ after(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
-	)
+	{ before(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
+	(rule__ENodeTemplates__NodeTemplatesAssignment_1)*
+	{ after(grammarAccess.getENodeTemplatesAccess().getNodeTemplatesAssignment_1()); }
 )
 ;
 finally {
@@ -5547,16 +5540,9 @@ rule__EPolicies__Group__1__Impl
 	}
 :
 (
-	(
-		{ before(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
-		(rule__EPolicies__PoliciesAssignment_1)
-		{ after(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
-	)
-	(
-		{ before(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
-		(rule__EPolicies__PoliciesAssignment_1)*
-		{ after(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
-	)
+	{ before(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
+	(rule__EPolicies__PoliciesAssignment_1)*
+	{ after(grammarAccess.getEPoliciesAccess().getPoliciesAssignment_1()); }
 )
 ;
 finally {
@@ -6175,16 +6161,9 @@ rule__ETriggerDefinitions__Group__1__Impl
 	}
 :
 (
-	(
-		{ before(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
-		(rule__ETriggerDefinitions__TriggersAssignment_1)
-		{ after(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
-	)
-	(
-		{ before(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
-		(rule__ETriggerDefinitions__TriggersAssignment_1)*
-		{ after(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
-	)
+	{ before(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
+	(rule__ETriggerDefinitions__TriggersAssignment_1)*
+	{ after(grammarAccess.getETriggerDefinitionsAccess().getTriggersAssignment_1()); }
 )
 ;
 finally {

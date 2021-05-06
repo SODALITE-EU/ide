@@ -35,7 +35,7 @@ AADM_Model:
 
 
 ENodeTemplates:
-	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)+;
+	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)*;
 
 ENodeTemplate:
 	name = ID ':'
@@ -94,7 +94,7 @@ EAttributeAssignment:
 	name = ID ':' value=EAssignmentValue;
 
 EPolicies:
-	{EPolicies} (policies+=EPolicyDefinition)+;
+	{EPolicies} (policies+=EPolicyDefinition)*;
 	
 EPolicyDefinition:
 	name = ID ':'
@@ -118,7 +118,7 @@ EPolicyDefinitionBody:
 ;
 
 ETriggerDefinitions:
-	{ETriggerDefinitions} (triggers+=ETriggerDefinition)+;
+	{ETriggerDefinitions} (triggers+=ETriggerDefinition)*;
 	
 	
 
