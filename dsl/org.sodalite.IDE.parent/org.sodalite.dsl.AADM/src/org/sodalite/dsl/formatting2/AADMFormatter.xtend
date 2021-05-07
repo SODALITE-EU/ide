@@ -51,10 +51,12 @@ class AADMFormatter extends RMFormatter {
 
 	def dispatch void format(AADM_Model aADM_Model, extension IFormattableDocument document) {
 		aADM_Model.prepend[setNewLines(0, 0, 0); noSpace]
+		aADM_Model.regionFor.keyword("inputs:").append[newLine]
+		aADM_Model.inputs.surround[indent].format.append[newLine]
 		aADM_Model.regionFor.keyword("node_templates:").append[newLine]
-		aADM_Model.inputs.format
-		aADM_Model.nodeTemplates.format
-		aADM_Model.policies.format
+		aADM_Model.nodeTemplates.surround[indent].format
+		aADM_Model.regionFor.keyword("policies:").append[newLine]
+		aADM_Model.policies.surround[indent].format
 		aADM_Model.append[newLine]
 	}
 	
@@ -65,7 +67,6 @@ class AADMFormatter extends RMFormatter {
 	}
 	
 	def dispatch void format(EParameterDefinition eParameter, extension IFormattableDocument document) {
-		eParameter.surround[indent]
 		eParameter.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
 		eParameter.regionFor.keyword(":").append[newLine]
 		eParameter.parameter.surround[indent].format
@@ -90,7 +91,6 @@ class AADMFormatter extends RMFormatter {
 
 	// TODO: implement for ENodeTemplate, ENodeTemplateBody, ERequirementAssignments, ECapabilityAssignments, ECapabilityAssignment, EAttributeAssigments, EAttributeAssignment, EPropertyAssigments, EPropertyAssignment
 	def dispatch void format(ENodeTemplate eNodeTemplate, extension IFormattableDocument document) {
-		eNodeTemplate.surround[indent]
 		eNodeTemplate.regionFor.feature(ENODE_TEMPLATE__NAME).append[noSpace]
 		eNodeTemplate.regionFor.keyword(":").append[newLine]
 		eNodeTemplate.node.surround[indent].format
@@ -194,7 +194,6 @@ class AADMFormatter extends RMFormatter {
 	}
 	
 	def dispatch void format(EPolicyDefinition policy, extension IFormattableDocument document) {
-		policy.surround[indent]
 		policy.regionFor.feature(EPOLICY_DEFINITION__NAME).append[noSpace]
 		policy.regionFor.keyword(":").append[newLine]
 		policy.policy.surround[indent].format
@@ -257,7 +256,6 @@ class AADMFormatter extends RMFormatter {
 	}
 	
 	def dispatch void format(ECallOperationActivityDefinition call, extension IFormattableDocument document) {
-		call.surround[indent]
 		call.regionFor.keyword("call_operation:").append[newLine]
 		call.operation.surround[indent].format
 	}

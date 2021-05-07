@@ -400,15 +400,20 @@
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.nodeTemplates">
-                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ENodeTemplate" referenceName="nodeTemplates" variableName="new_node_template">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_node_template"/>
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_node_template">
-                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ENodeTemplateBody" referenceName="node" variableName="new_node">
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_node">
-                          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_TYPE" referenceName="type" variableName="type">
-                            <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:type">
-                              <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="node.type"/>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.nodeTemplates == null">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ENodeTemplates" referenceName="nodeTemplates" variableName="nodeTemplates"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.nodeTemplates">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ENodeTemplate" referenceName="nodeTemplates" variableName="new_node_template">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_node_template"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_node_template">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::ENodeTemplateBody" referenceName="node" variableName="new_node">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_node">
+                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_TYPE" referenceName="type" variableName="type">
+                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:type">
+                                <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="node.type"/>
+                              </subModelOperations>
                             </subModelOperations>
                           </subModelOperations>
                         </subModelOperations>
@@ -495,15 +500,20 @@
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.policies">
-                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::EPolicyDefinition" referenceName="policies" variableName="new_policy">
-                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_policy"/>
-                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_policy">
-                      <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::EPolicyDefinitionBody" referenceName="policy" variableName="new_policy_body">
-                        <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_policy_body">
-                          <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_TYPE" referenceName="type" variableName="type">
-                            <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:type">
-                              <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="policy.type"/>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:self.policies == null">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::EPolicies" referenceName="policies" variableName="policies"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.policies">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::EPolicyDefinition" referenceName="policies" variableName="new_policy">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new_policy"/>
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_policy">
+                        <subModelOperations xsi:type="tool_1:CreateInstance" typeName="aADM::EPolicyDefinitionBody" referenceName="policy" variableName="new_policy_body">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:new_policy_body">
+                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="rM::EPREFIX_TYPE" referenceName="type" variableName="type">
+                              <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:type">
+                                <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="policy.type"/>
+                              </subModelOperations>
                             </subModelOperations>
                           </subModelOperations>
                         </subModelOperations>
@@ -1093,7 +1103,7 @@
         </controls>
         <controls xsi:type="properties:SelectDescription" name="Type" labelExpression="Type" valueExpression="service:renderParameterType()" candidatesExpression="service:getDataTypes()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
-            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self"/>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setParameterType(newValue)"/>
           </initialOperation>
         </controls>
       </groups>

@@ -17,16 +17,16 @@ import "http://www.sodalite.org/dsl/optimization/Optimization" as opt
 //import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 AADM_Model:
-	('module:' module=ID)?
-	('import:' imports+=ID)*
+	('module:' module=ID)? &
+	('import:' imports+=ID)* &
 	('inputs:'
 		BEGIN
 		inputs = EInputs
-		END)? 
+		END)? &
 	('node_templates:'
 		BEGIN
 		nodeTemplates=ENodeTemplates
-		END)?
+		END)? &
 	('policies:'
 		BEGIN
 		policies=EPolicies

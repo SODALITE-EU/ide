@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
 import org.sodalite.dsl.aADM.AADMFactory;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
@@ -72,6 +75,31 @@ import org.sodalite.dsl.ui.helper.AADMHelper;
  * The services class used by VSM.
  */
 public class Services {
+
+	private static Session session;
+
+	public void registerAADMModelChangeTrigger(EObject object) {
+		EObject semanticRootElement = EcoreUtil.getRootContainer(object);
+		if (session == null) {
+			Services.session = SessionManager.INSTANCE.getSession(semanticRootElement);
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.PROPERTY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.INPUT_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.ATTRIBUTE_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.CAPABILITY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.NODE_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.POLICY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.REQUIREMENT_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.TRIGGER_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+		}
+	}
 
 	public void setConstraint(ETriggerDefinition trigger, String constraint) {
 		// TODO
@@ -415,12 +443,14 @@ public class Services {
 	}
 
 	public String getTypeLabel(ENodeTemplateBody node) {
+		registerAADMModelChangeTrigger(node);
 		String type = (node.getType().getModule() != null ? node.getType().getModule() + "/" : "")
 				+ node.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
 	}
 
 	public String getPolicyTypeLabel(EPolicyDefinitionBody policy) {
+		registerAADMModelChangeTrigger(policy);
 		String type = (policy.getType().getModule() != null ? policy.getType().getModule() + "/" : "")
 				+ policy.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
@@ -620,6 +650,7 @@ public class Services {
 	}
 
 	public String renderParameterType(EParameterDefinition par) throws Exception {
+		registerAADMModelChangeTrigger(par);
 		return AADM_Helper.renderType(par.getParameter().getType());
 	}
 
@@ -774,6 +805,10 @@ public class Services {
 		return AADMFactory.eINSTANCE.createETriggerDefinitions();
 	}
 
+	private ENodeTemplates createENodeTemplates() {
+		return AADMFactory.eINSTANCE.createENodeTemplates();
+	}
+
 	private ETriggerDefinition createETriggerDefinition() {
 		ETriggerDefinition trigger = RMFactory.eINSTANCE.createETriggerDefinition();
 		ETriggerDefinitionBody body = RMFactory.eINSTANCE.createETriggerDefinitionBody();
@@ -824,6 +859,12 @@ public class Services {
 		String type = parseType(value);
 		node.getNode().getType().setModule(module);
 		node.getNode().getType().setType(type);
+	}
+
+	public void setParameterType(EParameterDefinition par, String value) {
+		String module = parseModule(value);
+		String type = parseType(value);
+		par.getParameter().getType().setType(value);
 	}
 
 	public void setPolicyType(EPolicyDefinition policy, String newType) {
