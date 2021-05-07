@@ -28,6 +28,13 @@ import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EPropertyAssignments;
 
+/**
+ * This trigger captures model delete notifications on AADM collections, so that
+ * the collection can be removed in case it is empty.
+ * 
+ * @author yosu
+ *
+ */
 public class AADMModelChangeTrigger implements ModelChangeTrigger {
 
 	private TransactionalEditingDomain domain;
