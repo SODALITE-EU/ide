@@ -40,6 +40,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sodalite.dsl.AADM.ui.internal,
  org.sodalite.dsl.ui.backend,
  org.sodalite.dsl.ui.contentassist,
+ org.sodalite.dsl.ui.helper,
  org.sodalite.dsl.ui.quickfix
 Bundle-Activator: org.sodalite.dsl.AADM.ui.internal.AADMActivator
 Bundle-ClassPath: .,

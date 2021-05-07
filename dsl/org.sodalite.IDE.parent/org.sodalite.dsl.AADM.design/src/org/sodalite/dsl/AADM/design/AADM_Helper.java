@@ -114,7 +114,10 @@ public class AADM_Helper {
 	}
 
 	public static String renderPrefixId(EPREFIX_ID id) {
-		return (id.getModule() != null ? renderModule(id.getModule()) + "/" : "") + id.getId();
+		if (id == null)
+			return "";
+		else
+			return (id.getModule() != null ? renderModule(id.getModule()) + "/" : "") + id.getId();
 	}
 
 	public static String renderTemplate(ENodeTemplate type) {

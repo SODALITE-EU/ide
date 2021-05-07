@@ -11,23 +11,13 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.Keyword
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
-import org.sodalite.dsl.kb_reasoner_client.KBReasoner
-import org.eclipse.jface.preference.IPreferenceStore
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient
-import java.text.MessageFormat
-import org.sodalite.dsl.ui.preferences.PreferenceConstants
-import org.sodalite.dsl.ui.preferences.Activator
 import java.util.List
 import org.sodalite.dsl.kb_reasoner_client.types.Type
 import org.sodalite.dsl.rM.RM_Model
 import java.util.ArrayList
 import org.eclipse.xtext.RuleCall
-import org.eclipse.ui.PlatformUI
-import org.eclipse.swt.widgets.FileDialog
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.sodalite.dsl.rM.EPREFIX_TYPE
-import org.eclipse.jface.dialogs.MessageDialog
-import org.eclipse.swt.widgets.Shell
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException
 import org.eclipse.swt.graphics.Image
 import java.net.URL
@@ -41,19 +31,13 @@ import org.eclipse.core.runtime.Platform
 import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData
 import org.sodalite.dsl.rM.EEvenFilter
-import org.sodalite.dsl.rM.EPREFIX_ID
-import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinitionData
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl
 import org.sodalite.dsl.rM.EEntityReference
-import org.sodalite.dsl.rM.EEntity
 import org.sodalite.dsl.rM.ENodeType
-import org.sodalite.dsl.rM.ECapabilityDefinition
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl
 import org.sodalite.dsl.rM.EFunction
-import org.sodalite.dsl.rM.GetProperty
-import org.sodalite.dsl.rM.GetAttribute
 import org.sodalite.dsl.kb_reasoner_client.types.PropertyDefinitionData
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData
 import org.sodalite.dsl.rM.GetAttributeBody
@@ -61,15 +45,15 @@ import org.sodalite.dsl.rM.GetPropertyBody
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData
 import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.dsl.rM.EAttributeDefinition
-import org.sodalite.dsl.rM.ERequirementDefinition
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody
 import org.sodalite.dsl.kb_reasoner_client.types.OperationDefinitionData
 import org.sodalite.dsl.rM.EPolicyType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EInterfaceType
-import org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
+import org.sodalite.dsl.ui.helper.BackendHelper
+import org.sodalite.dsl.ui.helper.RMHelper
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -91,107 +75,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	var Map <String, Image> images = new HashMap<String, Image>();
 	
-	def KBReasoner getKBReasoner() {
-		// Configure KBReasonerClient endpoint from preference page information
-		val IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		
-		var String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI).trim();
-		if (kbReasonerURI.isEmpty()){ 
-			raiseConfigurationIssue("KB Reasoner URI user not set");	
-		}
-		if (!kbReasonerURI.endsWith("/")){
-			kbReasonerURI = kbReasonerURI.concat("/");
-		}
 
-		var String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty()){
-			raiseConfigurationIssue("IaC URI user not set");
-		}
-		if (!iacURI.endsWith("/")){
-			iacURI = iacURI.concat("/");
-		}
-			
-		var String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI).trim();
-		if (image_builder_URI.isEmpty()){
-			raiseConfigurationIssue("Image Builder URI user not set");
-		}
-		if (!image_builder_URI.endsWith("/")){
-			image_builder_URI = image_builder_URI.concat("/");
-		}
-
-		var String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI).trim();
-		if (xoperaURI.isEmpty()){
-			raiseConfigurationIssue("xOpera URI user not set");
-		}
-		if (!xoperaURI.endsWith("/")){
-			xoperaURI = xoperaURI.concat("/");
-		}
-
-		var String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI).trim();
-		if (keycloakURI.isEmpty()){
-			raiseConfigurationIssue("Keycloak URI user not set");
-		}
-		if (!keycloakURI.endsWith("/")){
-			keycloakURI = keycloakURI.concat("/");
-		}
-			
-		var String pdsURI = store.getString(PreferenceConstants.PDS_URI).trim();
-		if (pdsURI.isEmpty()){
-			raiseConfigurationIssue("PDS URI user not set");
-		}
-		if (!pdsURI.endsWith("/")){
-			pdsURI = pdsURI.concat("/");
-		}
-		
-		var String refactorerURI = store.getString(PreferenceConstants.PDS_URI).trim();
-		if (refactorerURI.isEmpty()){
-			raiseConfigurationIssue("Refactorer URI user not set");
-		}
-		if (!refactorerURI.endsWith("/")){
-			refactorerURI = refactorerURI.concat("/");
-		}
-
-		val KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI, keycloakURI, pdsURI, refactorerURI);
-
-		val String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED)
-		if (keycloak_enabled.equalsIgnoreCase("true")) {
-			val String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-			if (keycloak_user.isEmpty())
-				raiseConfigurationIssue("Keycloak user not set");
 	
-			val String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-			if (keycloak_password.isEmpty())
-				raiseConfigurationIssue("Keycloak password not set");
-	
-			val String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-			if (keycloak_client_id.isEmpty())
-				raiseConfigurationIssue("Keycloak client_id not set");
-	
-			val String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-			if (keycloak_client_secret.isEmpty())
-				raiseConfigurationIssue("Keycloak client secret not set");
-	
-			val String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id, keycloak_client_secret);
-			
-			if (token === null){
-				raiseConfigurationIssue("Security token could not be obtained. Check your IAM configuration in preferences");
-			} else {
-				SodaliteLogger.log("Security token: " + token);	
-			}
-		}
-
-		SodaliteLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
-
-		return kbclient;
-	}
-	
-	def private void raiseConfigurationIssue(String message) throws Exception {
-		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
+//	def private void raiseConfigurationIssue(String message) throws Exception {
+//		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		MessageDialog.openError(parent, "Sodalite Preferences Error", message + " in Sodalite preferences pages");
+//		throw new Exception(message + " in Sodalite preferences pages");
+//	}
 	
 	
 	// this override filters the keywords for which to create content assist proposals
@@ -204,12 +94,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			System.out.println("Invoking content assist for imports")
 			
-			val ReasonerData<String> modules = getKBReasoner().modules
+			val ReasonerData<String> modules = BackendHelper.getKBReasoner().modules
 				
 			System.out.println ("Modules retrieved from KB: " + modules.elements)
 			for (module: modules.elements){
 				System.out.println ("\tModule: " + module)
-				val proposalText = extractModule(module)
+				val proposalText = RMHelper.extractModule(module)
 				val displayText = proposalText
 				val additionalProposalInfo = null
 				val Image image = getImage("icons/module2.png");
@@ -237,17 +127,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for EDataType::supertype property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			if (module !== null)
-				importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = getKBReasoner().getDataTypes(importedModules)
+			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tData type: " + type.label)
-				val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val qtype = type.module !== null?RMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 				val proposalText = qtype
 				val displayText = qtype
 				val additionalProposalInfo = type.description
@@ -258,7 +145,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other data types defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (dataType: rootModel.dataTypes.dataTypes){
 				val EPREFIX_TYPE ePrefixType = dataType.name as EPREFIX_TYPE
@@ -274,7 +161,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -284,17 +171,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for NodeType::superType property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			if (module !== null)
-				importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> nodes = getKBReasoner().getNodeTypes(importedModules)
+			val ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (node: nodes.elements){
 				System.out.println ("\tNode: " + node.label)
-				val qnode = node.module !== null ?getLastSegment(node.module, '/') + '/' + node.label:node.label
+				val qnode = node.module !== null ?RMHelper.getLastSegment(node.module, '/') + '/' + node.label:node.label
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = node.description
@@ -305,7 +189,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other nodes defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (nodeType: rootModel.nodeTypes.nodeTypes){
 				System.out.println ("\tLocal node: " + nodeType.name)
@@ -318,7 +202,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -328,17 +212,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for Interface Type::superType property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			if (module !== null)
-				importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tInterface: " + type.label)
-				val qnode = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val qnode = type.module !== null?RMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = type.description
@@ -347,7 +228,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other interface types defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (interfaceType: rootModel.interfaceTypes.interfaceTypes){
 				System.out.println ("\tLocal interface: " + interfaceType.name)
@@ -360,7 +241,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -370,17 +251,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for Policy Type::superType property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			if (module !== null)
-				importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = getKBReasoner().getPolicyTypes(importedModules)
+			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules)
 			System.out.println ("Policies retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tPolicy: " + type.label)
-				val qnode = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+				val qnode = type.module !== null?RMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 				val proposalText = qnode
 				val displayText = qnode
 				val additionalProposalInfo = type.description
@@ -389,7 +267,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other interface types defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (policyType: rootModel.policyTypes.policyTypes){
 				System.out.println ("\tLocal policy: " + policyType.name)
@@ -402,7 +280,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -413,17 +291,15 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for RelationshipType::supertype property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> relationships = getKBReasoner().getRelationshipTypes(importedModules)
+			val ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules)
 			System.out.println ("Relationships retrieved from KB:")
 			val Image image = getImage("icons/relationship.png")
 			for (relationship: relationships.elements){
 				System.out.println ("\tRelationship: " + relationship.label)
-				val qrelationship = relationship.module !== null ?getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
+				val qrelationship = relationship.module !== null?RMHelper.getLastSegment(relationship.module, '/') + '/' + relationship.label:relationship.label
 				val proposalText = qrelationship
 				val displayText = qrelationship
 				val additionalProposalInfo = relationship.description
@@ -431,7 +307,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other relationships defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (relationshipType: rootModel.relationshipTypes.relationshipTypes){
 				System.out.println ("\tLocal relationship type: " + relationshipType.name)
@@ -443,7 +319,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -453,17 +329,16 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for CapabilityType::supertype property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> capabilitiess = getKBReasoner().getCapabilityTypes(importedModules)
+			
+			val ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules)
 			System.out.println ("Capabilities retrieved from KB:")
 			val Image image = getImage("icons/capability.png")
 			for (cap: capabilitiess.elements){
 				System.out.println ("\tCapability: " + cap.label)
-				val qcap = cap.module !== null ?getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
+				val qcap = cap.module !== null?RMHelper.getLastSegment(cap.module, '/') + '/' + cap.label:cap.label
 				val proposalText = qcap
 				val displayText = qcap
 				val additionalProposalInfo = cap.description
@@ -471,7 +346,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other capabilities defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (cap: rootModel.capabilityTypes.capabilityTypes){
 				System.out.println ("\tLocal capability type: " + cap.name)
@@ -483,7 +358,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)	
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -493,17 +368,16 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		System.out.println("Invoking content assist for InterfaceDefinition::type property")
 		try{
 			//Get modules from model
-			val List<String> importedModules = getImportedModules(model)
-			val String module = getModule(model)
-			//Add current module to imported ones for searching in the KB
-			importedModules.add(module)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
+		
 			
-			val ReasonerData<Type> interfaces = getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Interfaces retrieved from KB:")
 			val Image image = getImage("icons/interface.png")
 			for (interface: interfaces.elements){
 				System.out.println ("\tCapability: " + interface.label)
-				val qinterface = interface.module !== null ?getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
+				val qinterface = interface.module !== null?RMHelper.getLastSegment(interface.module, '/') + '/' + interface.label:interface.label
 				val proposalText = qinterface
 				val displayText = qinterface
 				val additionalProposalInfo = interface.description
@@ -511,7 +385,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			
 			//Add other interfaces defined locally in the model
-			val rootModel = findModel(model) as RM_Model
+			val rootModel = RMHelper.findModel(model) as RM_Model
 			
 			for (interface: rootModel.interfaceTypes.interfaceTypes){
 				System.out.println ("\tLocal interface type: " + interface.name)
@@ -523,7 +397,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -580,11 +454,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			var interfaceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (interfaceId !== null){
-				val OperationDefinitionData operations = getKBReasoner().getOperationsInInterface(interfaceId)
+				val OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId)
 				if (operations !== null){
 					val Image image = getImage("icons/operation.png")
 					for (oper: operations.elements){
-					 	val operation_label = getLastSegment(oper.uri.toString, '/')
+					 	val operation_label = RMHelper.getLastSegment(oper.uri.toString, '/')
 						val proposalText = operation_label
 						val displayText = operation_label
 						val additionalProposalInfo = oper.getDescription!==null?"\nDescription: " + oper.getDescription:""
@@ -593,7 +467,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 				}
 			}
 		}catch(NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -759,25 +633,25 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
-		val input = selectFile ("Select implementation primary file")
+		val input = "\"" + RMHelper.selectFile ("Select implementation primary file") + "\""
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
 	override void completeEDependencies_Files(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
-		val input = selectFile ("Select implementation dependency file")
+		val input = "\"" + RMHelper.selectFile ("Select implementation dependency file") + "\""
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
 	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
-			val List<String> importedModules = processListModules(model)
-			val ReasonerData<Type> types = getKBReasoner().getNodeTypes(importedModules)
-			val TemplateData templates = getKBReasoner().getTemplates(importedModules)		
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+			val TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules)		
 			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor)
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}	
@@ -787,8 +661,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			val EEvenFilter filter = model as EEvenFilter
 			if (filter.node !== null){
-				var String qnode = getNodeName (filter.node)
-				val RequirementDefinitionData reqs = getKBReasoner().getTypeRequirements(qnode)
+				var String qnode = RMHelper.getNodeName (filter.node)
+				val RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode)
 				createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
 			}
 		}catch(SodaliteException ex){
@@ -799,15 +673,15 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeETargetType_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
 			//Find local and KB node types
-			val List<String> importedModules = processListModules(model)
-			val TypeData typeData = getKBReasoner().getNodeTypes(importedModules)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
 			val type_image = "icons/type.png";	
 			val primitive_type_image = "icons/primitive_type.png";
 			createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor)
-			val List<ENodeType> localTypes = (findModel(model) as RM_Model).nodeTypes.nodeTypes
+			val List<ENodeType> localTypes = (RMHelper.findModel(model) as RM_Model).nodeTypes.nodeTypes
 			createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -816,14 +690,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeECallOperationActivityDefinitionBody_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
 			//Find local and KB node types
-			val List<String> importedModules = processListModules(model)
-			val OperationDefinitionData operationsData = getKBReasoner().getOperations(importedModules)
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules)
 			val type_image = "icons/operation.png";	
 			createProposalsForOperationData(operationsData, type_image, null, context, acceptor)
-			val List<EOperationDefinition> localOperations = findLocalOperations(model)
+			val List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model)
 			createProposalsForOperationList(localOperations, type_image, null, context, acceptor)
 		}catch (NotRolePermissionException ex){
-			showReadPermissionErrorDialog
+			RMHelper.showReadPermissionErrorDialog
 		}catch(SodaliteException ex){
 			SodaliteLogger.log(ex.message, ex);
 		}
@@ -837,34 +711,34 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
 	}
 	
-	def List<EOperationDefinition> findLocalOperations(EObject object){
-		var List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>()
-		val RM_Model model = (findModel(object) as RM_Model)
-		for (interface: model.interfaceTypes.interfaceTypes){
-			for (op:interface.interface.operations.operations){
-				operations.add(op)
-			}
-		}
-		return operations
-	}
+//	def List<EOperationDefinition> findLocalOperations(EObject object){
+//		var List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>()
+//		val RM_Model model = (RMHelper.findModel(object) as RM_Model)
+//		for (interface: model.interfaceTypes.interfaceTypes){
+//			for (op:interface.interface.operations.operations){
+//				operations.add(op)
+//			}
+//		}
+//		return operations
+//	}
 	
-	def String getNodeName (EPREFIX_REF nodeRef){
-		var String qnode = null
-		if (nodeRef instanceof EPREFIX_TYPE){
-			val EPREFIX_TYPE node = nodeRef as EPREFIX_TYPE
-			qnode = node.module !== null? node.module + '/' + node.type: node.type
-		}else if (nodeRef instanceof EPREFIX_ID){
-			val EPREFIX_ID node = nodeRef as EPREFIX_ID
-			qnode = node.module !== null? node.module + '/' + node.id: node.id
-		}
-		return qnode
-	}
+//	def String getNodeName (EPREFIX_REF nodeRef){
+//		var String qnode = null
+//		if (nodeRef instanceof EPREFIX_TYPE){
+//			val EPREFIX_TYPE node = nodeRef as EPREFIX_TYPE
+//			qnode = node.module !== null? node.module + '/' + node.type: node.type
+//		}else if (nodeRef instanceof EPREFIX_ID){
+//			val EPREFIX_ID node = nodeRef as EPREFIX_ID
+//			qnode = node.module !== null? node.module + '/' + node.id: node.id
+//		}
+//		return qnode
+//	}
 	
 	
 	def void createProposalsForTypeList(ReasonerData<Type> types, String defaultImage, String primitiveImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (type: types.elements){
-			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val qtype = type.module !== null ?RMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 			val proposalText = qtype
 			val displayText = qtype
 			val additionalProposalInfo = type.description
@@ -878,7 +752,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def void createProposalsForTypeList(TypeData types, String defaultImage, String primitiveImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (type: types.elements){
-			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.label:type.label
+			val qtype = type.module !== null?RMHelper.getLastSegment(type.module, '/') + '/' + type.label:type.label
 			val proposalText = qtype
 			val displayText = qtype
 			val additionalProposalInfo = type.description
@@ -892,9 +766,9 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def void createProposalsForOperationData(OperationDefinitionData operations, String defaultImage, String primitiveImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (operation: operations.elements){
-			val module = getBetweenLast2Delimiters(operation.definedIn, '/')
-			val _interface = getLastSegment(operation.definedIn, '/')
-			val oper_name = getLastSegment(operation.uri.toString, '/')
+			val module = RMHelper.getBetweenLast2Delimiters(operation.definedIn, '/')
+			val _interface = RMHelper.getLastSegment(operation.definedIn, '/')
+			val oper_name = RMHelper.getLastSegment(operation.uri.toString, '/')
 			val qOperation = module !== 'tosca'?
 				module + '/' + _interface + '.' + oper_name:_interface + '.' + oper_name
 			val proposalText = qOperation
@@ -909,7 +783,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (operation: operations){
 			val _interface = operation.eContainer.eContainer.eContainer as EInterfaceType
-			val module = getModule(operation)
+			val module = RMHelper.getModule(operation)
 			val qOperation = module!==null? 
 				module + '/' + _interface.name + '.' + operation.name:
 				_interface.name + '.' + operation.name
@@ -924,12 +798,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def void createProposalsForTypeList(List<ENodeType> types, String defaultImage, String primitiveImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (type: types){
-			val qtype = type.module !== null ?getLastSegment(type.module, '/') + '/' + type.name:type.name
+			val module = RMHelper.getModule(type)
+			val qtype = module !== null?RMHelper.getLastSegment(module, '/') + '/' + type.name:type.name
 			val proposalText = qtype
 			val displayText = qtype
 			val additionalProposalInfo = type.node.description
 			var Image image = getImage(defaultImage)
-			if (type.module !== null) 
+			if (module !== null) 
 				image = getImage(primitiveImage)
 			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 		}
@@ -938,7 +813,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def void createProposalsForTemplateList(TemplateData templates, String defaultImage,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		for (template: templates.elements){
-			val qtype = template.module !== null ?getLastSegment(template.module, '/') + '/' + template.label:template.label
+			val qtype = template.module !== null?RMHelper.getLastSegment(template.module, '/') + '/' + template.label:template.label
 			val proposalText = qtype
 			val displayText = qtype
 			var Image image = getImage(defaultImage)
@@ -969,15 +844,15 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createNonEditableCompletionProposal(proposalText, displayText, image, context, null, acceptor);	
 	}
 	
-	def List<String> processListModules(EObject model){
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(model)
-		val String module = getModule(model)
-		//Add current module to imported ones for searching in the KB
-		if (module !== null)
-			importedModules.add(module)
-		return importedModules
-	}
+//	def List<String> processListModules(EObject model){
+//		//Get modules from model
+//		val List<String> importedModules = RMHelper.getImportedModules(model)
+//		val String module = RMHelper.getModule(model)
+//		//Add current module to imported ones for searching in the KB
+//		if (module !== null)
+//			importedModules.add(module)
+//		return importedModules
+//	}
 	
 	def void _completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 		ICompletionProposalAcceptor acceptor) {
@@ -999,59 +874,59 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		return images.get(path)
 	}
 	
-	def extractModule(String module) {
-		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
-	}
+//	def extractModule(String module) {
+//		return module.substring(module.lastIndexOf("/", module.length - 2) + 1, module.length - 1)
+//	}
+//	
+//	def getBetweenLast2Delimiters(String input, String delimiter) {
+//		val endIndex = input.lastIndexOf(delimiter)
+//		val subInput = input.substring(0, endIndex)
+//		val beginIndex = subInput.lastIndexOf(delimiter)
+//		return input.subSequence(beginIndex + 1, endIndex)
+//	}
+//	
+//	def getLastSegment(String string, String delimiter) {
+//		var newString = string
+//		if (string.endsWith(delimiter))
+//			newString = string.substring(0, string.length - delimiter.length)
+//		return newString.substring(newString.lastIndexOf(delimiter) + 1)
+//	}
+//	
+//	def getModule(EObject object) {
+//		val RM_Model model = findModel(object) as RM_Model
+//		return model.module
+//	}
+//	
+//	def getImportedModules(EObject object) {
+//		val List<String> modules = new ArrayList()
+//		val RM_Model model = findModel(object) as RM_Model
+//		for (import: model.imports)
+//			modules.add(import)
+//		
+//		return modules
+//	}
+//	
+//	def findModel(EObject object) {
+//		if (object.eContainer == null)
+//			return null
+//		else if (object.eContainer instanceof RM_Model)
+//			return object.eContainer
+//		else
+//			return findModel(object.eContainer)
+//	}
 	
-	def getBetweenLast2Delimiters(String input, String delimiter) {
-		val endIndex = input.lastIndexOf(delimiter)
-		val subInput = input.substring(0, endIndex)
-		val beginIndex = subInput.lastIndexOf(delimiter)
-		return input.subSequence(beginIndex + 1, endIndex)
-	}
-	
-	def getLastSegment(String string, String delimiter) {
-		var newString = string
-		if (string.endsWith(delimiter))
-			newString = string.substring(0, string.length - delimiter.length)
-		return newString.substring(newString.lastIndexOf(delimiter) + 1)
-	}
-	
-	def getModule(EObject object) {
-		val RM_Model model = findModel(object) as RM_Model
-		return model.module
-	}
-	
-	def getImportedModules(EObject object) {
-		val List<String> modules = new ArrayList()
-		val RM_Model model = findModel(object) as RM_Model
-		for (import: model.imports)
-			modules.add(import)
-		
-		return modules
-	}
-	
-	def findModel(EObject object) {
-		if (object.eContainer == null)
-			return null
-		else if (object.eContainer instanceof RM_Model)
-			return object.eContainer
-		else
-			return findModel(object.eContainer)
-	}
-	
-	protected def String selectFile (String dialogText){
-		var shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
-		// File standard dialog
-		var fileDialog = new FileDialog(shell);
-		fileDialog.setText(dialogText);
-		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
-		// Put in a readable name for the filter
-		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
-		var selected = fileDialog.open();
-		System.out.println(dialogText +": " + selected);
-		return "\"" + selected + "\""
-	}
+//	protected def String selectFile (String dialogText){
+//		var shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()
+//		// File standard dialog
+//		var fileDialog = new FileDialog(shell);
+//		fileDialog.setText(dialogText);
+//		//fileDialog.setFilterExtensions(new String[] { "*.txt" });
+//		// Put in a readable name for the filter
+//		//fileDialog.setFilterNames(new String[] { "Textfiles(*.txt)" });
+//		var selected = fileDialog.open();
+//		System.out.println(dialogText +": " + selected);
+//		return "\"" + selected + "\""
+//	}
 	
 	protected def void createEntityProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val Image image = getImage("icons/resource2.png")
@@ -1086,109 +961,109 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		acceptor.accept(proposal)
 	}
 	
-	protected def showReadPermissionErrorDialog(){
-		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		MessageDialog.openError(parent, "Role Permissions error", 
-			"Your account does not have permissions to read some declared imports or module. \nPlease, check and fix them")
-	}
-	
-	protected def getEntityType (EFunction function){
-		var EEntityReference eEntityReference = null
-		if (function instanceof GetProperty)
-			eEntityReference = (function as GetProperty).property.entity
-		else if (function instanceof GetAttribute)
-			eEntityReference = (function as GetAttribute).attribute.entity
-			
-		if (eEntityReference === null)
-			return null
-			
-		var EObject node = null
-		if (eEntityReference instanceof EEntity){
-			val EEntity eEntity = eEntityReference as EEntity
-			if (eEntity.entity.equals('SELF')){
-				node = getType(function) as EObject
-			}
-		} else {
-			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
-		}
-		return node
-	}
-	
-	def getNodeType(EObject object) {
-		if (object.eContainer === null)
-			return null
-		else if (object.eContainer instanceof ENodeType)
-			return object.eContainer
-		else
-			return getNodeType(object.eContainer)
-	}
-	
-	def getType(EObject object) {
-		if (object.eContainer === null)
-			return null
-		else if (object.eContainer instanceof ENodeType)
-			return object.eContainer
-		else if (object.eContainer instanceof EPolicyType)
-			return object.eContainer
-		else
-			return getType(object.eContainer)
-	}
-	
-	def findRequirementNodeInLocalType(String requirement, ENodeType nodeType) {
-		val RM_Model model = findModel(nodeType) as RM_Model
-		var ENodeType node = null
-		var module1 = model.module
-		if (module1 === null)
-			module1 = ""
-		if (nodeType.node.requirements === null)
-			return node
-		for (req: nodeType.node.requirements.requirements){
-			var module2 = req.requirement.node.module
-			if (module2 === null)
-				module2 = ""
-			if (req.name.equals(requirement)){
-				if (module1.equals(module2)){
-					node = findNodeType(model, req.requirement.node.type)						
-				}
-			}
-		}
-		return node
-	}
-	
-	def findRequirementInLocalType(String requirement, ENodeType nodeType) {
-		if (nodeType.node.requirements!==null){
-			for (req: nodeType.node.requirements.requirements){
-				if (req.name.equals(requirement)){
-					return req
-				}
-			}
-		}
-		return null
-	}
-	
-	def findCapabilityInLocalType(String capabilityName, ENodeType nodeType) {
-		var ECapabilityDefinition capability = null
-		if (nodeType.node.capabilities === null)
-			return capability
-		for (cap: nodeType.node.capabilities.capabilities){
-			if (cap.name.equals(capabilityName))
-				capability = cap
-		}
-		return capability
-	}
-	
-	def findNodeType(RM_Model model, String nodeName) {
-		for (node: model.nodeTypes.nodeTypes){
-			if (node.name.equals(nodeName))
-				return node
-		}
-		return null
-	}
+//	protected def showReadPermissionErrorDialog(){
+//		val Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		MessageDialog.openError(parent, "Role Permissions error", 
+//			"Your account does not have permissions to read some declared imports or module. \nPlease, check and fix them")
+//	}
+//	
+//	protected def getEntityType (EFunction function){
+//		var EEntityReference eEntityReference = null
+//		if (function instanceof GetProperty)
+//			eEntityReference = (function as GetProperty).property.entity
+//		else if (function instanceof GetAttribute)
+//			eEntityReference = (function as GetAttribute).attribute.entity
+//			
+//		if (eEntityReference === null)
+//			return null
+//			
+//		var EObject node = null
+//		if (eEntityReference instanceof EEntity){
+//			val EEntity eEntity = eEntityReference as EEntity
+//			if (eEntity.entity.equals('SELF')){
+//				node = getType(function) as EObject
+//			}
+//		} else {
+//			//TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+//		}
+//		return node
+//	}
+//	
+//	def getNodeType(EObject object) {
+//		if (object.eContainer === null)
+//			return null
+//		else if (object.eContainer instanceof ENodeType)
+//			return object.eContainer
+//		else
+//			return getNodeType(object.eContainer)
+//	}
+//	
+//	def getType(EObject object) {
+//		if (object.eContainer === null)
+//			return null
+//		else if (object.eContainer instanceof ENodeType)
+//			return object.eContainer
+//		else if (object.eContainer instanceof EPolicyType)
+//			return object.eContainer
+//		else
+//			return getType(object.eContainer)
+//	}
+//	
+//	def findRequirementNodeInLocalType(String requirement, ENodeType nodeType) {
+//		val RM_Model model = RMHelper.findModel(nodeType) as RM_Model
+//		var ENodeType node = null
+//		var module1 = model.module
+//		if (module1 === null)
+//			module1 = ""
+//		if (nodeType.node.requirements === null)
+//			return node
+//		for (req: nodeType.node.requirements.requirements){
+//			var module2 = req.requirement.node.module
+//			if (module2 === null)
+//				module2 = ""
+//			if (req.name.equals(requirement)){
+//				if (module1.equals(module2)){
+//					node = findNodeType(model, req.requirement.node.type)						
+//				}
+//			}
+//		}
+//		return node
+//	}
+//	
+//	def findRequirementInLocalType(String requirement, ENodeType nodeType) {
+//		if (nodeType.node.requirements!==null){
+//			for (req: nodeType.node.requirements.requirements){
+//				if (req.name.equals(requirement)){
+//					return req
+//				}
+//			}
+//		}
+//		return null
+//	}
+//	
+//	def findCapabilityInLocalType(String capabilityName, ENodeType nodeType) {
+//		var ECapabilityDefinition capability = null
+//		if (nodeType.node.capabilities === null)
+//			return capability
+//		for (cap: nodeType.node.capabilities.capabilities){
+//			if (cap.name.equals(capabilityName))
+//				capability = cap
+//		}
+//		return capability
+//	}
+//	
+//	def findNodeType(RM_Model model, String nodeName) {
+//		for (node: model.nodeTypes.nodeTypes){
+//			if (node.name.equals(nodeName))
+//				return node
+//		}
+//		return null
+//	}
 	
 	def proposeAttributesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			val nodeName = getLastSegment(nodeRef, "/")
+			val nodeName = RMHelper.getLastSegment(nodeRef, "/")
 			proposeAttributesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposeAttributesForEntityInKB (nodeRef, proposals)
@@ -1197,13 +1072,13 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposeAttributesForEntityInKB(String resourceId, List<String> proposals){
 		try{
-			val AttributeDefinitionData attributeData = getKBReasoner().getTypeAttributes(resourceId)
+			val AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId)
 			for (attr:attributeData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var attr_owner = resourceId
 				if (attr.definedIn !== null)
 					attr_owner = attr.definedIn.substring(prefix.length)
-				val proposal = attr_owner + '.' + getLastSegment(attr.uri.toString, '/')
+				val proposal = attr_owner + '.' + RMHelper.getLastSegment(attr.uri.toString, '/')
 				proposals.add(proposal)
 			}
 		}catch(SodaliteException ex){
@@ -1212,22 +1087,23 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	def proposeAttributesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
-		val ENodeType node = findNodeType(model, resourceId)
+		val ENodeType node = RMHelper.findNodeType(model, resourceId)
+		val module = RMHelper.getModule(model)
 		if (node !== null)
 			for (attr:node.node.attributes.attributes){
-				val proposal = attr.module !== null? 
-					attr.module + "/" + node.name + "." + attr.name: node.name + "." + attr.name
+				val proposal = module !== null? 
+					module + "/" + node.name + "." + attr.name: node.name + "." + attr.name
 				proposals.add(proposal)
 			}
 		//Get Attributes for superclass in KB
-		val superclass = getReference(node.node.superType)
+		val superclass = RMHelper.getReference(node.node.superType)
 		proposeAttributesForEntityInKB(superclass, proposals)
 	}
 	
 	def proposePropertiesForEntity(RM_Model model, String resourceId, List<String> proposals){
 		val nodeRef = resourceId.substring(resourceId.indexOf(":") + 1)
 		if (resourceId.startsWith("local:")){
-			val nodeName = getLastSegment(nodeRef, "/")
+			val nodeName = RMHelper.getLastSegment(nodeRef, "/")
 			proposePropertiesForEntityInLocal (model, nodeName, proposals)
 		}else if (resourceId.startsWith("kb:")){
 			proposePropertiesForEntityInKB (nodeRef, proposals)
@@ -1236,13 +1112,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
 		try{
-			val PropertyDefinitionData propertyData = getKBReasoner().getTypeProperties(resourceId)
+			//FIXME: obtain all properties for types subclasses of given resourceId
+			val PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId)
 			for (prop:propertyData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var prop_owner = resourceId
 				if (prop.definedIn !== null)
 					prop_owner = prop.definedIn.substring(prefix.length)
-				val proposal = prop_owner + '.' + getLastSegment(prop.uri.toString, '/')
+				val proposal = prop_owner + '.' + RMHelper.getLastSegment(prop.uri.toString, '/')
 				proposals.add(proposal)
 			}	
 		}catch(SodaliteException ex){
@@ -1251,10 +1128,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}	
 	
 	def proposePropertiesForEntityInLocal(RM_Model model, String resourceId, List<String> proposals){
-		val ENodeType node = findNodeType(model, resourceId)
+		val ENodeType node = RMHelper.findNodeType(model, resourceId)
+		val module = RMHelper.getModule(model)
 		if (node !== null)
 			for (prop:node.node.properties.properties){
-				val proposal = prop.module !== null? prop.module + "/" + prop.name: prop.name
+				val proposal = module !== null? module + "/" + prop.name: prop.name
 				proposals.add(proposal)
 			}
 		//TODO: Get Properties for superclass in KB
@@ -1283,8 +1161,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		//If superClass defined in local model
 		var ENodeType superNode = null
 		if (module.equals(node.node.superType.module)){
-			val RM_Model model = findModel(node as EObject) as RM_Model
-			superNode = findNodeType(model, node.node.superType.type)
+			val RM_Model model = RMHelper.findModel(node as EObject) as RM_Model
+			superNode = RMHelper.findNodeType(model, node.node.superType.type)
 			if (superNode !== null)
 				suggestRequirementsOrCapabilitiesInNode(module, superNode, context, acceptor)
 		}
@@ -1293,17 +1171,17 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val superType = node.node.superType.module !== null?
 				node.node.superType.module + '/' + node.node.superType.type:
 				node.node.superType.type
-			val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(superType)
+			val RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType)
 			var Image image = getImage("icons/requirement.png")
 			for (req: reqData.elements){
-				val String proposal = superType + '.' + getLastSegment(req.uri.toString, '/')
+				val String proposal = superType + '.' + RMHelper.getLastSegment(req.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 			
-			val CapabilityDefinitionData capData = KBReasoner.getTypeCapabilities(superType)
+			val CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType)
 			image = getImage("icons/capability.png")
 			for (cap: capData.elements){
-				val String proposal = superType + '.' + getLastSegment(cap.uri.toString, '/')
+				val String proposal = superType + '.' + RMHelper.getLastSegment(cap.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 		}
@@ -1327,42 +1205,42 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 	}
 	
-	def getRequirementByNameInLocalNode (ENodeType node, String req_name){
-		if (node.node.requirements !== null){
-			for (ERequirementDefinition req: node.node.requirements.requirements){
-				if (req.name.equals(req_name))
-					return req		
-			}
-		}
-		return null
-	}
+//	def getRequirementByNameInLocalNode (ENodeType node, String req_name){
+//		if (node.node.requirements !== null){
+//			for (ERequirementDefinition req: node.node.requirements.requirements){
+//				if (req.name.equals(req_name))
+//					return req		
+//			}
+//		}
+//		return null
+//	}
 	
 	def completeGetAttributeOrPropertyFunction_AttributeOrProperty(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		//TODO This method only supports SELF Entity. 
 		// Refactor it for future support of other ENTITIES
 		// Check getEntityType method
 		var List<String> proposals = new ArrayList<String>()
-		val String module = getModule(model)
-		val RM_Model rm_model = findModel(model) as RM_Model
+		val String module = RMHelper.getModule(model)
+		val RM_Model rm_model = RMHelper.findModel(model) as RM_Model
 		//Get entity in this GetProperty body. If null, return
 		var EObject node = null
 		var EPREFIX_TYPE req_cap = null
 		if (model instanceof GetPropertyBodyImpl){
 			var body = model as GetPropertyBodyImpl
-			node = getEntityType(body.eContainer as EFunction)
+			node = RMHelper.getEntityType(body.eContainer as EFunction)
 			req_cap = body.req_cap
 		}else if (model instanceof GetAttributeBodyImpl){
 			var body = model as GetAttributeBodyImpl
-			node = getEntityType(body.eContainer as EFunction)
+			node = RMHelper.getEntityType(body.eContainer as EFunction)
 			req_cap = body.req_cap
 		}
 		if (node === null){
 			return
 		}
 		if (node instanceof ENodeType && req_cap !== null){ //TODO support the case a capability is given
-			val req_cap_name = getLastSegment(req_cap.type, '.')
+			val req_cap_name = RMHelper.getLastSegment(req_cap.type, '.')
 			val nodeType = (node as ENodeType)
-			val String targetNodeRef = findRequirementTargetNode(nodeType, req_cap_name)
+			val String targetNodeRef = RMHelper.findRequirementTargetNode(nodeType, req_cap_name)
 			if (targetNodeRef !== null){
 				// Find properties/attributes in target node, create suggestions
 				if (model instanceof GetPropertyBodyImpl)
@@ -1408,85 +1286,85 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 	}
 	
-	def String findRequirementTargetNode (ENodeType node, String req_name){
-		// Find requirement in local node
-		var String nodeRef = null
-		val RM_Model model = findModel(node) as RM_Model
-		val ERequirementDefinition req = findRequirementInLocalType(req_name, node)
-		if (req !== null){
-			val EPREFIX_TYPE req_node = req.requirement.node
-			if (req_node !== null){
-				// Find requirement target node in local model, or
-				if (model.module.equals(req_node.module)){
-					val ENodeType target_node = findNodeType(model, req_node.type)
-					if (target_node !== null)
-						nodeRef = "local:" + getReference (target_node)
-				}
-				if (nodeRef === null){
-					// Find requirement target node in KB
-					nodeRef = "kb:" + findNodeByNameInKB(req_node)
-				}
-			}
-		}else{
-			// Find requirement in KB for node superclass, find node in KB
-			nodeRef = "kb:" + findRequirementNodeByNameInKB(getReference(node.node.superType), req_name)
-		}
-		return nodeRef
-	}
+//	def String findRequirementTargetNode (ENodeType node, String req_name){
+//		// Find requirement in local node
+//		var String nodeRef = null
+//		val RM_Model model = RMHelper.findModel(node) as RM_Model
+//		val ERequirementDefinition req = RMHelper.findRequirementInLocalType(req_name, node)
+//		if (req !== null){
+//			val EPREFIX_TYPE req_node = req.requirement.node
+//			if (req_node !== null){
+//				// Find requirement target node in local model, or
+//				if (model.module.equals(req_node.module)){
+//					val ENodeType target_node = RMHelper.findNodeType(model, req_node.type)
+//					if (target_node !== null)
+//						nodeRef = "local:" + RMHelper.getReference(target_node)
+//				}
+//				if (nodeRef === null){
+//					// Find requirement target node in KB
+//					nodeRef = "kb:" + RMHelper.findNodeByNameInKB(req_node)
+//				}
+//			}
+//		}else{
+//			// Find requirement in KB for node superclass, find node in KB
+//			nodeRef = "kb:" + RMHelper.findRequirementNodeByNameInKB(RMHelper.getReference(node.node.superType), req_name)
+//		}
+//		return nodeRef
+//	}
 	
-	def getReference (ENodeType node){
-		node.module !== null?node.module + '/' + node.name:node.name
-	}
-	
-	def getReference (EPREFIX_TYPE node){
-		node.module !== null?node.module + '/' + node.type:node.type
-	}
-	
-	def getReference (EPREFIX_REF node){
-		if (node instanceof EPREFIX_TYPE){
-			node.module !== null?node.module + '/' + node.type:node.type
-		} else if (node instanceof EPREFIX_ID){
-			node.module !== null?node.module + '/' + node.id:node.id
-		}
-	}
-	
-	def findRequirementNodeByNameInKB(String type, String reqName){
-		val RequirementDefinitionData reqData = KBReasoner.getTypeRequirements(type)
-		for (req: reqData.elements){
-			val name = req.uri.toString.substring(req.uri.toString.lastIndexOf('/') + 1)
-			if (name.equals(reqName))
-				return req.node.module !== null?
-					req.node.module + '/' + req.node.label:req.node.label
-		}
-		return null
-	}
-	
-	def findNodeByNameInKB(EPREFIX_TYPE node){
-		//Get modules from model
-		val List<String> importedModules = getImportedModules(node)
-		val String module = getModule(node)
-
-		//Add current module to imported ones for searching in the KB
-		importedModules.add(module)
-		val TypeData typeData = KBReasoner.getNodeTypes(importedModules)
-		for (type: typeData.elements){
-			val name = type.uri.toString.substring(type.uri.toString.lastIndexOf('/') + 1)
-			if (name.equals(node.type)){
-				var String type_module = null
-				if (type.module !== null){
-					type_module = type.module.substring (type.module.lastIndexOf("/", type.module.length - 2) + 1, type.module.length - 1)
-				}
-				return type_module !== null?
-					type_module + '/' + type.label:type.label	
-			}
-		}
-		return null
-	}
+//	def getReference (ENodeType node){
+//		RMHelper.getModule(node) !== null?RMHelper.getModule(node) + '/' + node.name:node.name
+//	}
+//	
+//	def getReference (EPREFIX_TYPE node){
+//		node.module !== null?node.module + '/' + node.type:node.type
+//	}
+//	
+//	def getReference (EPREFIX_REF node){
+//		if (node instanceof EPREFIX_TYPE){
+//			node.module !== null?node.module + '/' + node.type:node.type
+//		} else if (node instanceof EPREFIX_ID){
+//			node.module !== null?node.module + '/' + node.id:node.id
+//		}
+//	}
+//	
+//	def findRequirementNodeByNameInKB(String type, String reqName){
+//		val RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(type)
+//		for (req: reqData.elements){
+//			val name = req.uri.toString.substring(req.uri.toString.lastIndexOf('/') + 1)
+//			if (name.equals(reqName))
+//				return req.node.module !== null?
+//					req.node.module + '/' + req.node.label:req.node.label
+//		}
+//		return null
+//	}
+//	
+//	def findNodeByNameInKB(EPREFIX_TYPE node){
+//		//Get modules from model
+//		val List<String> importedModules = RMHelper.getImportedModules(node)
+//		val String module = RMHelper.getModule(node)
+//
+//		//Add current module to imported ones for searching in the KB
+//		importedModules.add(module)
+//		val TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+//		for (type: typeData.elements){
+//			val name = type.uri.toString.substring(type.uri.toString.lastIndexOf('/') + 1)
+//			if (name.equals(node.type)){
+//				var String type_module = null
+//				if (type.module !== null){
+//					type_module = type.module.substring (type.module.lastIndexOf("/", type.module.length - 2) + 1, type.module.length - 1)
+//				}
+//				return type_module !== null?
+//					type_module + '/' + type.label:type.label	
+//			}
+//		}
+//		return null
+//	}
 	
 	def completeGetAttributeOrPropertyFunction_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		val String module = getModule(model)
+		val String module = RMHelper.getModule(model)
 		//Get entity in this GetProperty body. If null, return
-		val ENodeType node = getEntityType(model.eContainer as EFunction) as ENodeType
+		val ENodeType node = RMHelper.getEntityType(model.eContainer as EFunction) as ENodeType
 		
 		if (node === null){
 			return
@@ -1505,47 +1383,47 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
 	}
 	
-	def findCapabilitiesInNodeType (String nodeRef){
-		val CapabilityDefinitionData capabilities = KBReasoner.getTypeCapabilities(nodeRef)
-		return capabilities.elements
-	}
-	
-	def getRequirementNameFromRequirementRef (EPREFIX_REF reqRef){
-		var String reqName = null
-		if (reqRef instanceof EPREFIX_TYPE){
-			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
-			reqName = getLastSegment(req.type, '.')
-		}else if (reqRef instanceof EPREFIX_ID){
-			val EPREFIX_ID req = reqRef as EPREFIX_ID
-			reqName = getLastSegment(req.id, '.')
-		}
-		return reqName
-	}
-	
-	def getNodeFromRequirementRef (EPREFIX_REF reqRef){
-		var String nodeRef = null
-		if (reqRef instanceof EPREFIX_TYPE){
-			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
-			val nodeName = req.type.substring (0, req.type.lastIndexOf('.'))
-			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
-		}else if (reqRef instanceof EPREFIX_ID){
-			val EPREFIX_ID req = reqRef as EPREFIX_ID
-			val nodeName = req.id.substring (0, req.id.lastIndexOf('.'))
-			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
-		}
-		return nodeRef
-	}
-	
-	def getId(EPREFIX_REF ref) {
-		if (ref instanceof EPREFIX_TYPE){
-			(ref as EPREFIX_TYPE).type
-		}else if (ref instanceof EPREFIX_ID){
-			(ref as EPREFIX_ID).id
-		}
-	}
-	
-	static enum Boolean{
-		True, False
-	}
+//	def findCapabilitiesInNodeType (String nodeRef){
+//		val CapabilityDefinitionData capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(nodeRef)
+//		return capabilities.elements
+//	}
+//	
+//	def getRequirementNameFromRequirementRef (EPREFIX_REF reqRef){
+//		var String reqName = null
+//		if (reqRef instanceof EPREFIX_TYPE){
+//			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
+//			reqName = RMHelper.getLastSegment(req.type, '.')
+//		}else if (reqRef instanceof EPREFIX_ID){
+//			val EPREFIX_ID req = reqRef as EPREFIX_ID
+//			reqName = RMHelper.getLastSegment(req.id, '.')
+//		}
+//		return reqName
+//	}
+//	
+//	def getNodeFromRequirementRef (EPREFIX_REF reqRef){
+//		var String nodeRef = null
+//		if (reqRef instanceof EPREFIX_TYPE){
+//			val EPREFIX_TYPE req = reqRef as EPREFIX_TYPE
+//			val nodeName = req.type.substring (0, req.type.lastIndexOf('.'))
+//			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
+//		}else if (reqRef instanceof EPREFIX_ID){
+//			val EPREFIX_ID req = reqRef as EPREFIX_ID
+//			val nodeName = req.id.substring (0, req.id.lastIndexOf('.'))
+//			nodeRef = req.module !== null? req.module + '/' + nodeName: nodeName
+//		}
+//		return nodeRef
+//	}
+//	
+//	def getId(EPREFIX_REF ref) {
+//		if (ref instanceof EPREFIX_TYPE){
+//			(ref as EPREFIX_TYPE).type
+//		}else if (ref instanceof EPREFIX_ID){
+//			(ref as EPREFIX_ID).id
+//		}
+//	}
+//	
+//	static enum Boolean{
+//		True, False
+//	}
 
 }

@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
+import org.sodalite.dsl.aADM.AADMFactory;
 import org.sodalite.dsl.aADM.AADM_Model;
 import org.sodalite.dsl.aADM.EAttributeAssignment;
 import org.sodalite.dsl.aADM.ECapabilityAssignment;
@@ -18,8 +22,10 @@ import org.sodalite.dsl.aADM.ENodeTemplates;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.EPolicyDefinitionBody;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 import org.sodalite.dsl.rM.EActivityDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
@@ -55,6 +61,7 @@ import org.sodalite.dsl.rM.EPropertyAssignment;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
 import org.sodalite.dsl.rM.ESingleValue;
+import org.sodalite.dsl.rM.ETimeInterval;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggerDefinitionBody;
 import org.sodalite.dsl.rM.GetInput;
@@ -62,21 +69,60 @@ import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RMFactory;
 import org.sodalite.dsl.scoping.AADMScopeProvider;
+import org.sodalite.dsl.ui.helper.AADMHelper;
 
 /**
  * The services class used by VSM.
  */
 public class Services {
 
+	private static Session session;
+
+	public void registerAADMModelChangeTrigger(EObject object) {
+		EObject semanticRootElement = EcoreUtil.getRootContainer(object);
+		if (session == null) {
+			Services.session = SessionManager.INSTANCE.getSession(semanticRootElement);
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.PROPERTY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.INPUT_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.ATTRIBUTE_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.CAPABILITY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.NODE_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.POLICY_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.REQUIREMENT_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+			Services.session.getEventBroker().addLocalTrigger(AADMModelChangeTrigger.TRIGGER_REMOVED_FILTER,
+					new AADMModelChangeTrigger(Services.session.getTransactionalEditingDomain()));
+		}
+	}
+
 	public void setConstraint(ETriggerDefinition trigger, String constraint) {
 		// TODO
 	}
 
 	public void setPeriod(ETriggerDefinition trigger, String period) {
+		if (trigger.getTrigger().getCondition() == null) {
+			EExtendedTriggerCondition condition = RMFactory.eINSTANCE.createEExtendedTriggerCondition();
+			trigger.getTrigger().setCondition(condition);
+		}
 		trigger.getTrigger().getCondition().setPeriod(period);
 	}
 
 	public void setEvaluations(ETriggerDefinition trigger, String evaluations) {
+		if (trigger.getTrigger().getCondition() == null) {
+			EExtendedTriggerCondition condition = RMFactory.eINSTANCE.createEExtendedTriggerCondition();
+			trigger.getTrigger().setCondition(condition);
+		}
+		if (trigger.getTrigger().getCondition().getEvaluations() == null) {
+			ESIGNEDINT evaluationsObj = RMFactory.eINSTANCE.createESIGNEDINT();
+			trigger.getTrigger().getCondition().setEvaluations(evaluationsObj);
+			;
+		}
 		trigger.getTrigger().getCondition().getEvaluations().setValue(Integer.parseInt(evaluations));
 	}
 
@@ -85,6 +131,10 @@ public class Services {
 	}
 
 	public void setScheduleStartTime(ETriggerDefinition trigger, String start_time) {
+		if (trigger.getTrigger().getSchedule() == null) {
+			ETimeInterval schedule = RMFactory.eINSTANCE.createETimeInterval();
+			trigger.getTrigger().setSchedule(schedule);
+		}
 		trigger.getTrigger().getSchedule().setStart_time(start_time);
 	}
 
@@ -117,9 +167,13 @@ public class Services {
 		}
 		if (object instanceof ERequirementAssignment) {
 			ERequirementAssignment requirement = (ERequirementAssignment) object;
-			ENodeTemplate nodeTemplate = findNode(requirement.getNode());
-			if (nodeTemplate == null)
+			if (requirement.getNode() != null) {
+				ENodeTemplate nodeTemplate = findNode(requirement.getNode());
+				if (nodeTemplate == null)
+					label = "req:" + requirement.getName();
+			} else {
 				label = "req:" + requirement.getName();
+			}
 		}
 		return label;
 	}
@@ -130,14 +184,14 @@ public class Services {
 		return parse(callOperationActivity.getOperation().getOperation());
 	}
 
-	public String getAddedActivityLabel(ETriggerDefinition trigger, Integer index) {
-		if (index < trigger.getTrigger().getAction().getList().size()) {
-			EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index);
-			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
-			return parse(callOperationActivity.getOperation().getOperation());
-		}
-		return null;
-	}
+//	public String getAddedActivityLabel(ETriggerDefinition trigger, Integer index) {
+//		if (index < trigger.getTrigger().getAction().getList().size()) {
+//			EActivityDefinition activity = trigger.getTrigger().getAction().getList().get(index);
+//			ECallOperationActivityDefinition callOperationActivity = (ECallOperationActivityDefinition) activity;
+//			return parse(callOperationActivity.getOperation().getOperation());
+//		}
+//		return null;
+//	}
 
 	public String getActivityLabel(ETriggerDefinition trigger, ECallOperationActivityDefinition callOperationActivity) {
 		return "call operation: " + parse(callOperationActivity.getOperation().getOperation());
@@ -179,7 +233,9 @@ public class Services {
 	}
 
 	public String parseConditionClause(ETriggerDefinition trigger) {
-		return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
+		if (trigger.getTrigger().getCondition() != null)
+			return parseConditionClause(trigger.getTrigger().getCondition().getConstraint(), null);
+		return "";
 	}
 
 	private String parseConditionClause(EConditionClauseDefinition constraint, String delimiter) {
@@ -262,12 +318,24 @@ public class Services {
 		return label;
 	}
 
+	public SortedSet<String> getPolicies(AADM_Model model) {
+		SortedSet<String> policies = new TreeSet<String>();
+		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+			policies.add(policy.getName());
+		}
+		return policies;
+	}
+
 	public String getScheduleStartTime(ETriggerDefinitionBody trigger) {
-		return "start_time: " + trigger.getSchedule().getStart_time();
+		if (trigger.getSchedule() != null)
+			return "start_time: " + trigger.getSchedule().getStart_time();
+		return null;
 	}
 
 	public String getScheduleEndTime(ETriggerDefinitionBody trigger) {
-		return "end_time: " + trigger.getSchedule().getEnd_time();
+		if (trigger.getSchedule() != null)
+			return "end_time: " + trigger.getSchedule().getEnd_time();
+		return null;
 	}
 
 	public String getTriggerLabel(ETriggerDefinition trigger) {
@@ -276,9 +344,11 @@ public class Services {
 
 	public EList<ETriggerDefinition> getTriggerDefinitions(AADM_Model model) {
 		EList<ETriggerDefinition> result = new BasicEList<>();
-		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
-			if (policy.getPolicy().getTriggers() != null)
-				result.addAll(policy.getPolicy().getTriggers().getTriggers());
+		if (model.getPolicies() != null) {
+			for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {
+				if (policy.getPolicy().getTriggers() != null)
+					result.addAll(policy.getPolicy().getTriggers().getTriggers());
+			}
 		}
 		return result;
 	}
@@ -373,12 +443,14 @@ public class Services {
 	}
 
 	public String getTypeLabel(ENodeTemplateBody node) {
+		registerAADMModelChangeTrigger(node);
 		String type = (node.getType().getModule() != null ? node.getType().getModule() + "/" : "")
 				+ node.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
 	}
 
 	public String getPolicyTypeLabel(EPolicyDefinitionBody policy) {
+		registerAADMModelChangeTrigger(policy);
 		String type = (policy.getType().getModule() != null ? policy.getType().getModule() + "/" : "")
 				+ policy.getType().getType();
 		return type.substring(type.lastIndexOf('.') + 1);
@@ -403,6 +475,14 @@ public class Services {
 	public void cancelAddAction(ETriggerDefinition trigger, Integer size) {
 		if (trigger.getTrigger().getAction().getList().size() != size)
 			trigger.getTrigger().getAction().getList().remove(size);
+	}
+
+	public void createTrigger(AADM_Model model, String policyName) {
+		EPolicyDefinition policy = AADMHelper.findPolicy(model, policyName);
+		if (policy.getPolicy().getTriggers() == null) {
+			policy.getPolicy().setTriggers(createETriggerDefinitions());
+		}
+		policy.getPolicy().getTriggers().getTriggers().add(createETriggerDefinition());
 	}
 
 	public void editCallOperation(ETriggerDefinition trigger, Integer index,
@@ -570,6 +650,7 @@ public class Services {
 	}
 
 	public String renderParameterType(EParameterDefinition par) throws Exception {
+		registerAADMModelChangeTrigger(par);
 		return AADM_Helper.renderType(par.getParameter().getType());
 	}
 
@@ -720,6 +801,34 @@ public class Services {
 		return eInt;
 	}
 
+	private ETriggerDefinitions createETriggerDefinitions() {
+		return AADMFactory.eINSTANCE.createETriggerDefinitions();
+	}
+
+	private ENodeTemplates createENodeTemplates() {
+		return AADMFactory.eINSTANCE.createENodeTemplates();
+	}
+
+	private ETriggerDefinition createETriggerDefinition() {
+		ETriggerDefinition trigger = RMFactory.eINSTANCE.createETriggerDefinition();
+		ETriggerDefinitionBody body = RMFactory.eINSTANCE.createETriggerDefinitionBody();
+		EActivityDefinitions actions = RMFactory.eINSTANCE.createEActivityDefinitions();
+		ECallOperationActivityDefinition action = RMFactory.eINSTANCE.createECallOperationActivityDefinition();
+		ECallOperationActivityDefinitionBody actionBody = RMFactory.eINSTANCE
+				.createECallOperationActivityDefinitionBody();
+		EPREFIX_TYPE operation = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		operation.setModule("tosca");
+		operation.setType("tosca.interfaces.node.lifecycle.Standard.create");
+		actionBody.setOperation(operation);
+		action.setOperation(actionBody);
+		actions.getList().add(action);
+		body.setEvent("event_name");
+		body.setAction(actions);
+		trigger.setName("new.trigger.definition");
+		trigger.setTrigger(body);
+		return trigger;
+	}
+
 	private EFLOAT createFloatValue(String value) {
 		EFLOAT eInt = RMFactory.eINSTANCE.createEFLOAT();
 		eInt.setValue(Float.valueOf(value));
@@ -752,6 +861,12 @@ public class Services {
 		node.getNode().getType().setType(type);
 	}
 
+	public void setParameterType(EParameterDefinition par, String value) {
+		String module = parseModule(value);
+		String type = parseType(value);
+		par.getParameter().getType().setType(value);
+	}
+
 	public void setPolicyType(EPolicyDefinition policy, String newType) {
 		String module = parseModule(newType);
 		String type = parseType(newType);
@@ -766,6 +881,31 @@ public class Services {
 
 	public void setRequirementNode(ERequirementAssignment req, String node) {
 		req.setNode(createNodeRef(node));
+	}
+
+	public void setRequirementNode(ERequirementAssignment req, ENodeTemplate node) {
+		String module = AADM_Helper.getModule(node);
+		String nodeRef = module != null ? module + node.getName() : node.getName();
+		req.setNode(createNodeRef(nodeRef));
+	}
+
+	public void setPolicyTarget(EPREFIX_ID target, ENodeTemplate node) {
+		String module = AADM_Helper.getModule(node);
+		target.setModule(module);
+		target.setId(node.getName());
+	}
+
+	public void setEventFilterNode(EPREFIX_ID target, ENodeTemplate node) {
+		String module = AADM_Helper.getModule(node);
+		target.setModule(module);
+		target.setId(node.getName());
+	}
+
+	public void setEventFilterRequirement(EPREFIX_TYPE target, ERequirementAssignment req) {
+		String module = AADM_Helper.getModule(req);
+		String node = ((ENodeTemplate) req.eContainer().eContainer().eContainer()).getName();
+		target.setModule(module);
+		target.setType(node + "." + req.getName());
 	}
 
 	public void setPolicyTarget(EPREFIX_ID object, String target) {

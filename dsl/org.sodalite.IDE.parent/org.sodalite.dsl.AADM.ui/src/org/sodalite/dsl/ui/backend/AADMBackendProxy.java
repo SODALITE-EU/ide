@@ -172,7 +172,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				String aadmDSL = AADMHelper.readFile(aadmFile);
 
 				// Get module (namespace) from RM
-				String namespace = AADMHelper.getAADMModule(aadmFile, event);
+				String namespace = AADMHelper.getModule(aadmFile, event);
 
 				// TODO Ask user on save model whether to complete the model by KB
 				boolean complete = false;
@@ -267,7 +267,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					String inputs_yaml = AADMHelper.readFile(inputs_yaml_path);
 
 					// Get module (namespace) from RM
-					String namespace = AADMHelper.getAADMModule(aadmfile, event);
+					String namespace = AADMHelper.getModule(aadmfile, event);
 
 					String aadmName = aadmfile.getName();
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, aadmName, namespace,

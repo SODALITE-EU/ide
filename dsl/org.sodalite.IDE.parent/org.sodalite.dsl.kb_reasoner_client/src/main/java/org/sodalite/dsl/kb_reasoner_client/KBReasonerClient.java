@@ -114,7 +114,7 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri) throws Exception {
+			String keycloakUri, String pdsUri, String refactorerUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
