@@ -83,6 +83,16 @@ public class Services {
 
 	private static Session session;
 
+	public static SortedSet<String> valueTypes = new TreeSet<String>();
+	public static int ID = 0;
+	static {
+		valueTypes.add("Single Value");
+		valueTypes.add("List");
+		valueTypes.add("Nested Value");
+		valueTypes.add("Get Input");
+		valueTypes.add("Get Property");
+	}
+
 	public void registerAADMModelChangeTrigger(EObject object) {
 		EObject semanticRootElement = EcoreUtil.getRootContainer(object);
 		if (session == null) {
@@ -1075,44 +1085,36 @@ public class Services {
 			return split[0];
 	}
 
-	public static SortedSet<String> valueTypes = new TreeSet<String>();
-	static {
-		valueTypes.add("Single Value");
-		valueTypes.add("List");
-		valueTypes.add("Nested Value");
-		valueTypes.add("Get Input");
-		valueTypes.add("Get Property");
-	}
-
 	public SortedSet<String> getPropertyValueTypes(EObject ignored) {
 		return Services.valueTypes;
 	}
 
-	public String getValueType(EPropertyAssignment property) {
+	public String getValueType(EPropertyAssignment property, String newEntry) {
 		// Find new created nested property by name: newNestedProperty, and return
 		// is value type
 		if (property.getValue() instanceof EMAP) {
 			EList map = ((EMAP) property.getValue()).getMap();
-			return findPropertyByNameInMap("newNestedProperty", map);
+			return findPropertyByNameInMap(newEntry, map);
 		}
 		return null;
 	}
 
 	private String findPropertyByNameInMap(String target, EList<EMapEntry> map) {
-		for (EMapEntry entry : map) {
-			if (entry.getKey().equals(target)) {
-				return renderPropertyValueType(entry);
+		if (target != null)
+			for (EMapEntry entry : map) {
+				if (entry.getKey().equals(target)) {
+					return renderPropertyValueType(entry);
+				}
+				if (entry.getValue() instanceof EMAP) {
+					String found = findPropertyByNameInMap(target, ((EMAP) entry.getValue()).getMap());
+					if (found != null)
+						return found;
+				}
 			}
-			if (entry.getValue() instanceof EMAP) {
-				String found = findPropertyByNameInMap(target, ((EMAP) entry.getValue()).getMap());
-				if (found != null)
-					return found;
-			}
-		}
 		return null;
 	}
 
-	public void addNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
+	public String addNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
 			String newType) {
 		EMapEntry newEntry = createEMapEntry(newType, AADM_Helper.findModel(property));
 		if (selection.isEmpty()) {
@@ -1127,11 +1129,37 @@ public class Services {
 				((EMAP) selectedEntry.getValue()).getMap().add(newEntry);
 			}
 		}
+		return newEntry.getKey();
+	}
+
+	public void removeNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
+			String newEntry) {
+		if (selection.isEmpty()) {
+			// Remove new nested property from root property
+			if (property.getValue() instanceof EMAP) {
+				removeEntryByNameInMap(newEntry, ((EMAP) property.getValue()).getMap());
+			}
+		} else if (selection.size() == 1) { // Only one selection allowed
+			// Remove new nested property from selected property
+			EMapEntry selectedEntry = (EMapEntry) selection.get(0).keySet().iterator().next();
+			if (selectedEntry.getValue() instanceof EMAP) {
+				removeEntryByNameInMap(newEntry, ((EMAP) selectedEntry.getValue()).getMap());
+			}
+		}
+	}
+
+	private void removeEntryByNameInMap(String key, EList<EMapEntry> map) {
+		for (EMapEntry entry : map) {
+			if (entry.getKey().equals(key)) {
+				map.remove(entry);
+				break;
+			}
+		}
 	}
 
 	private EMapEntry createEMapEntry(String newType, AADM_Model model) {
 		EMapEntry newEntry = RMFactory.eINSTANCE.createEMapEntry();
-		newEntry.setKey("newNestedProperty");
+		newEntry.setKey("newNestedProperty" + ID++);
 		newEntry.setValue((EAssignmentValue) createValueType(newType, model));
 		return newEntry;
 	}

@@ -1108,21 +1108,25 @@
             <actions labelExpression="New Item">
               <initialOperation>
                 <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
-                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Item">
-                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                      <initialOperation/>
-                    </buttons>
-                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
-                      <initialOperation/>
-                    </buttons>
-                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.7/@controls.1/@controls.0/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
-                    <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                      <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" helpExpression="Select the value type for the new nested property:" valueExpression="service:getValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+                  <subModelOperations xsi:type="tool_1:Let" variableName="newEntry" valueExpression="null">
+                    <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="New Item">
+                      <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
                         <initialOperation>
-                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:addNewNestedProperty(selection, newValue)"/>
+                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:removeNewNestedProperty(selection, newEntry)"/>
                         </initialOperation>
-                      </controls>
-                    </groups>
+                      </buttons>
+                      <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                        <initialOperation/>
+                      </buttons>
+                      <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.7/@controls.1/@controls.0/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                      <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" helpExpression="Select the value type for the new nested property:" valueExpression="service:getValueType(newEntry)" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+                          <initialOperation>
+                            <firstModelOperations xsi:type="tool_1:Let" variableName="newEntry" valueExpression="service:addNewNestedProperty(selection, newValue)"/>
+                          </initialOperation>
+                        </controls>
+                      </groups>
+                    </subModelOperations>
                   </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
