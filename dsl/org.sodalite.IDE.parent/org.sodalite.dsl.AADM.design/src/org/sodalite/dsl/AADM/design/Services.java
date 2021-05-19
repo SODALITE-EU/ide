@@ -1,6 +1,7 @@
 package org.sodalite.dsl.AADM.design;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -52,6 +53,7 @@ import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -390,19 +392,21 @@ public class Services {
 			result += ": " + value.getValue();
 		} else if (assignmentValue instanceof GetInput) {
 			GetInput gInput = (GetInput) assignmentValue;
-			result += ": getInput(" + gInput.getInput().getName() + ")";
+			String input = gInput.getInput() != null ? gInput.getInput().getName() : "";
+			result += ": getInput(" + input + ")";
 		} else if (assignmentValue instanceof GetProperty) {
 			GetProperty gProperty = (GetProperty) assignmentValue;
-			result += ": getProperty(" + gProperty.getProperty().getProperty().getType() + ")";
+			String property = gProperty.getProperty() != null ? gProperty.getProperty().getProperty().getType() : "";
+			result += ": getProperty(" + property + ")";
 		} else if (assignmentValue instanceof ELIST) {
 			ELIST value = (ELIST) assignmentValue;
 			EList list = value.getList();
-			result += ": [" + renderValue(list.get(0));
-			for (int i = 1; i < list.size(); i++)
+			result += ": [";
+			for (int i = 0; i < list.size(); i++)
 				result += ", " + renderValue(list.get(i));
 			result += "]";
 		} else if (assignmentValue instanceof EMAP) {
-			result += ": <Complex Value>";
+			result += ": ...";
 		} else if (assignmentValue instanceof ESIGNEDINT) {
 			ESIGNEDINT value = (ESIGNEDINT) assignmentValue;
 			result += ": " + value.getValue();
@@ -669,7 +673,10 @@ public class Services {
 
 	public String renderGetPropertyReq_Cap(EPropertyAssignment property) {
 		EPREFIX_TYPE req_cap = ((GetProperty) property.getValue()).getProperty().getReq_cap();
-		return AADM_Helper.renderType(req_cap);
+		if (req_cap != null)
+			return AADM_Helper.renderType(req_cap);
+		else
+			return "";
 	}
 
 	public String renderGetPropertyProperty(EPropertyAssignment property) {
@@ -756,9 +763,30 @@ public class Services {
 		prop.setValue(newValue);
 	}
 
+	public void setValueType(EPropertyAssignment prop, String valueType) {
+		AADM_Model model = AADM_Helper.findModel(prop);
+		EAssignmentValue newValue = (EAssignmentValue) createValueType(valueType, model);
+		prop.setValue(newValue);
+	}
+
 	public void setValue(EAttributeAssignment attr, String value) {
 		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
 		attr.setValue(newValue);
+	}
+
+	private EObject createValueType(String type, AADM_Model model) {
+		if (type.equals("Single Value"))
+			return createStringValue();
+		else if (type.equals("List"))
+			return createListValue();
+		else if (type.equals("Nested Value"))
+			return createMapValue();
+		else if (type.equals("Get Property"))
+			return createGetPropertyValue();
+		else if (type.equals("Get Input"))
+			return createGetInputValue(model);
+		else
+			return null;
 	}
 
 	private EObject createValue(String value) {
@@ -789,6 +817,10 @@ public class Services {
 		return eBoolean;
 	}
 
+	private ESTRING createStringValue() {
+		return createStringValue("value");
+	}
+
 	private ESTRING createStringValue(String value) {
 		ESTRING eString = RMFactory.eINSTANCE.createESTRING();
 		eString.setValue(value);
@@ -799,6 +831,45 @@ public class Services {
 		ESIGNEDINT eInt = RMFactory.eINSTANCE.createESIGNEDINT();
 		eInt.setValue(Integer.valueOf(value));
 		return eInt;
+	}
+
+	private ELIST createListValue() {
+		return RMFactory.eINSTANCE.createELIST();
+	}
+
+	private EMAP createMapValue() {
+		EMAP map = RMFactory.eINSTANCE.createEMAP();
+		EMapEntry entry = RMFactory.eINSTANCE.createEMapEntry();
+		ESTRING value = RMFactory.eINSTANCE.createESTRING();
+		value.setValue("value");
+		entry.setKey("key");
+		entry.setValue(value);
+		map.getMap().add(entry);
+		return map;
+	}
+
+	private GetProperty createGetPropertyValue() {
+		GetProperty getProperty = RMFactory.eINSTANCE.createGetProperty();
+		GetPropertyBody body = RMFactory.eINSTANCE.createGetPropertyBody();
+		EEntity entity = RMFactory.eINSTANCE.createEEntity();
+		entity.setEntity("SELF");
+		body.setEntity(entity);
+		EPREFIX_TYPE property = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		property.setType("");
+		body.setProperty(property);
+		getProperty.setProperty(body);
+		return getProperty;
+	}
+
+	private GetInput createGetInputValue(AADM_Model model) {
+		GetInput getInput = RMFactory.eINSTANCE.createGetInput();
+		List<EParameterDefinition> inputs = AADM_Helper.findInputs(model);
+		if (!inputs.isEmpty()) {
+			getInput.setInput(inputs.get(0));
+		} else {
+			// TODO Create input
+		}
+		return getInput;
 	}
 
 	private ETriggerDefinitions createETriggerDefinitions() {
@@ -960,5 +1031,30 @@ public class Services {
 			return split[1];
 		else
 			return split[0];
+	}
+
+	public SortedSet<String> getPropertyValueTypes(EObject ignored) {
+		SortedSet<String> valueTypes = new TreeSet<String>();
+		valueTypes.add("Single Value");
+		valueTypes.add("List");
+		valueTypes.add("Nested Value");
+		valueTypes.add("Get Input");
+		valueTypes.add("Get Property");
+		return valueTypes;
+	}
+
+	public String renderPropertyValueType(EPropertyAssignment property) {
+		if (property.getValue() instanceof ESingleValue)
+			return "Single Value";
+		else if (property.getValue() instanceof ELIST)
+			return "List";
+		else if (property.getValue() instanceof EMAP)
+			return "Nested Value";
+		else if (property.getValue() instanceof GetProperty)
+			return "Get Property";
+		else if (property.getValue() instanceof GetInput)
+			return "Get Input";
+		else
+			return "";
 	}
 }

@@ -7748,16 +7748,23 @@ ruleELIST returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0=LeftSquareBracket
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getELISTAccess().getELISTAction_0(),
+					$current);
+			}
+		)
+		otherlv_1=LeftSquareBracket
 		{
-			newLeafNode(otherlv_0, grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_0());
 				}
-				lv_list_1_0=ruleEAlphaNumericValue
+				lv_list_2_0=ruleEAlphaNumericValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getELISTRule());
@@ -7765,23 +7772,23 @@ ruleELIST returns [EObject current=null]
 					add(
 						$current,
 						"list",
-						lv_list_1_0,
+						lv_list_2_0,
 						"org.sodalite.dsl.RM.EAlphaNumericValue");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)?
 		(
-			otherlv_2=Comma
+			otherlv_3=Comma
 			{
-				newLeafNode(otherlv_2, grammarAccess.getELISTAccess().getCommaKeyword_2_0());
+				newLeafNode(otherlv_3, grammarAccess.getELISTAccess().getCommaKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_3_1_0());
 					}
-					lv_list_3_0=ruleEAlphaNumericValue
+					lv_list_4_0=ruleEAlphaNumericValue
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getELISTRule());
@@ -7789,16 +7796,16 @@ ruleELIST returns [EObject current=null]
 						add(
 							$current,
 							"list",
-							lv_list_3_0,
+							lv_list_4_0,
 							"org.sodalite.dsl.RM.EAlphaNumericValue");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)*
-		otherlv_4=RightSquareBracket
+		otherlv_5=RightSquareBracket
 		{
-			newLeafNode(otherlv_4, grammarAccess.getELISTAccess().getRightSquareBracketKeyword_3());
+			newLeafNode(otherlv_5, grammarAccess.getELISTAccess().getRightSquareBracketKeyword_4());
 		}
 	)
 ;

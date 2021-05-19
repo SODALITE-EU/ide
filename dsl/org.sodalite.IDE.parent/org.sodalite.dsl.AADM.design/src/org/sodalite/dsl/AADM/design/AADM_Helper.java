@@ -22,6 +22,7 @@ import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
+import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADM_Helper {
@@ -128,6 +129,14 @@ public class AADM_Helper {
 	public static String renderModule(String module) {
 		String[] split = module.split("/");
 		return split[split.length - 1];
+	}
+
+	public static List<EParameterDefinition> findInputs(AADM_Model model) {
+		List<EParameterDefinition> inputs = new ArrayList<>();
+		for (EParameterDefinition input : model.getInputs().getInputs()) {
+			inputs.add(input);
+		}
+		return inputs;
 	}
 
 	public static ENodeTemplate findNode(EObject object, EPREFIX_REF ref) {

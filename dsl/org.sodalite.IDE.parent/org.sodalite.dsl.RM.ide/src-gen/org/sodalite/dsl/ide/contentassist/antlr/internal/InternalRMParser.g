@@ -16503,9 +16503,9 @@ rule__ELIST__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_0()); }
-	LeftSquareBracket
-	{ after(grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_0()); }
+	{ before(grammarAccess.getELISTAccess().getELISTAction_0()); }
+	()
+	{ after(grammarAccess.getELISTAccess().getELISTAction_0()); }
 )
 ;
 finally {
@@ -16530,9 +16530,9 @@ rule__ELIST__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getListAssignment_1()); }
-	(rule__ELIST__ListAssignment_1)
-	{ after(grammarAccess.getELISTAccess().getListAssignment_1()); }
+	{ before(grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_1()); }
+	LeftSquareBracket
+	{ after(grammarAccess.getELISTAccess().getLeftSquareBracketKeyword_1()); }
 )
 ;
 finally {
@@ -16557,9 +16557,9 @@ rule__ELIST__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getGroup_2()); }
-	(rule__ELIST__Group_2__0)*
-	{ after(grammarAccess.getELISTAccess().getGroup_2()); }
+	{ before(grammarAccess.getELISTAccess().getListAssignment_2()); }
+	(rule__ELIST__ListAssignment_2)?
+	{ after(grammarAccess.getELISTAccess().getListAssignment_2()); }
 )
 ;
 finally {
@@ -16572,6 +16572,7 @@ rule__ELIST__Group__3
 	}
 :
 	rule__ELIST__Group__3__Impl
+	rule__ELIST__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -16583,9 +16584,35 @@ rule__ELIST__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getRightSquareBracketKeyword_3()); }
+	{ before(grammarAccess.getELISTAccess().getGroup_3()); }
+	(rule__ELIST__Group_3__0)*
+	{ after(grammarAccess.getELISTAccess().getGroup_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ELIST__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__ELIST__Group__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ELIST__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getELISTAccess().getRightSquareBracketKeyword_4()); }
 	RightSquareBracket
-	{ after(grammarAccess.getELISTAccess().getRightSquareBracketKeyword_3()); }
+	{ after(grammarAccess.getELISTAccess().getRightSquareBracketKeyword_4()); }
 )
 ;
 finally {
@@ -16593,53 +16620,53 @@ finally {
 }
 
 
-rule__ELIST__Group_2__0
+rule__ELIST__Group_3__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ELIST__Group_2__0__Impl
-	rule__ELIST__Group_2__1
+	rule__ELIST__Group_3__0__Impl
+	rule__ELIST__Group_3__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ELIST__Group_2__0__Impl
+rule__ELIST__Group_3__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getCommaKeyword_2_0()); }
+	{ before(grammarAccess.getELISTAccess().getCommaKeyword_3_0()); }
 	Comma
-	{ after(grammarAccess.getELISTAccess().getCommaKeyword_2_0()); }
+	{ after(grammarAccess.getELISTAccess().getCommaKeyword_3_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ELIST__Group_2__1
+rule__ELIST__Group_3__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ELIST__Group_2__1__Impl
+	rule__ELIST__Group_3__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ELIST__Group_2__1__Impl
+rule__ELIST__Group_3__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getELISTAccess().getListAssignment_2_1()); }
-	(rule__ELIST__ListAssignment_2_1)
-	{ after(grammarAccess.getELISTAccess().getListAssignment_2_1()); }
+	{ before(grammarAccess.getELISTAccess().getListAssignment_3_1()); }
+	(rule__ELIST__ListAssignment_3_1)
+	{ after(grammarAccess.getELISTAccess().getListAssignment_3_1()); }
 )
 ;
 finally {
@@ -23373,30 +23400,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ELIST__ListAssignment_1
+rule__ELIST__ListAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0()); }
+		{ before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_0()); }
 		ruleEAlphaNumericValue
-		{ after(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_1_0()); }
+		{ after(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ELIST__ListAssignment_2_1
+rule__ELIST__ListAssignment_3_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_3_1_0()); }
 		ruleEAlphaNumericValue
-		{ after(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_2_1_0()); }
+		{ after(grammarAccess.getELISTAccess().getListEAlphaNumericValueParserRuleCall_3_1_0()); }
 	)
 ;
 finally {

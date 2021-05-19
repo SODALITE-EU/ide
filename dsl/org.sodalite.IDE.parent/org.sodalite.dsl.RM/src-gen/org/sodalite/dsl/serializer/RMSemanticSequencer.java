@@ -1108,7 +1108,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EAssignmentValue returns ELIST
 	 *
 	 * Constraint:
-	 *     (list+=EAlphaNumericValue list+=EAlphaNumericValue*)
+	 *     (list+=EAlphaNumericValue? list+=EAlphaNumericValue*)
 	 */
 	protected void sequence_ELIST(ISerializationContext context, ELIST semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

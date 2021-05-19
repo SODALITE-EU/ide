@@ -245,7 +245,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getELengthAccess().getGroup(), "rule__ELength__Group__0");
 			builder.put(grammarAccess.getEValid_ValuesAccess().getGroup(), "rule__EValid_Values__Group__0");
 			builder.put(grammarAccess.getELISTAccess().getGroup(), "rule__ELIST__Group__0");
-			builder.put(grammarAccess.getELISTAccess().getGroup_2(), "rule__ELIST__Group_2__0");
+			builder.put(grammarAccess.getELISTAccess().getGroup_3(), "rule__ELIST__Group_3__0");
 			builder.put(grammarAccess.getEInRangeAccess().getGroup(), "rule__EInRange__Group__0");
 			builder.put(grammarAccess.getELessOrEqualAccess().getGroup(), "rule__ELessOrEqual__Group__0");
 			builder.put(grammarAccess.getELessThanAccess().getGroup(), "rule__ELessThan__Group__0");
@@ -473,8 +473,8 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEMinLengthAccess().getValAssignment_1(), "rule__EMinLength__ValAssignment_1");
 			builder.put(grammarAccess.getELengthAccess().getValAssignment_1(), "rule__ELength__ValAssignment_1");
 			builder.put(grammarAccess.getEValid_ValuesAccess().getValAssignment_1(), "rule__EValid_Values__ValAssignment_1");
-			builder.put(grammarAccess.getELISTAccess().getListAssignment_1(), "rule__ELIST__ListAssignment_1");
-			builder.put(grammarAccess.getELISTAccess().getListAssignment_2_1(), "rule__ELIST__ListAssignment_2_1");
+			builder.put(grammarAccess.getELISTAccess().getListAssignment_2(), "rule__ELIST__ListAssignment_2");
+			builder.put(grammarAccess.getELISTAccess().getListAssignment_3_1(), "rule__ELIST__ListAssignment_3_1");
 			builder.put(grammarAccess.getEInRangeAccess().getStartAssignment_2(), "rule__EInRange__StartAssignment_2");
 			builder.put(grammarAccess.getEInRangeAccess().getEndAssignment_4(), "rule__EInRange__EndAssignment_4");
 			builder.put(grammarAccess.getELessOrEqualAccess().getValAssignment_1(), "rule__ELessOrEqual__ValAssignment_1");

@@ -952,6 +952,11 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
+        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" valueExpression="service:renderPropertyValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValueType(newValue)"/>
+          </initialOperation>
+        </controls>
         <controls xsi:type="properties:TextDescription" name="SingleStringValue" labelExpression="Value" valueExpression="aql:self.value.oclAsType(rM::ESTRING).value">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValue(newValue)"/>
@@ -964,6 +969,11 @@
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
             </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" valueExpression="service:renderPropertyValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValueType(newValue)"/>
           </initialOperation>
         </controls>
         <controls xsi:type="properties:ListDescription" name="Values List" labelExpression="List of values" valueExpression="aql:self.value.oclAsType(rM::ELIST).list" displayExpression="service:renderListItem(value)">
@@ -982,7 +992,7 @@
                     <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
                       <initialOperation/>
                     </buttons>
-                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.1/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                    <page name="Default Page" labelExpression="New Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.2/@actions.0/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                     <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
                       <controls xsi:type="properties:TextDescription" name="newItem" labelExpression="Item value:">
                         <initialOperation>
@@ -1010,7 +1020,7 @@
                         <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
                           <initialOperation/>
                         </buttons>
-                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.1/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.5/@controls.2/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
                         <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
                           <controls xsi:type="properties:TextDescription" name="editItem" labelExpression="Item value:" valueExpression="service:renderListItem(oldValue)">
                             <initialOperation>
@@ -1046,6 +1056,11 @@
             </firstModelOperations>
           </initialOperation>
         </controls>
+        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" valueExpression="service:renderPropertyValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValueType(newValue)"/>
+          </initialOperation>
+        </controls>
         <controls xsi:type="properties:SelectDescription" name="GetInputValue" labelExpression="Get input" valueExpression="aql:self.value.oclAsType(rM::GetInput).input.oclAsType(rM::EParameterDefinition).name" candidatesExpression="service:getInputs()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self.value.oclAsType(rM::GetInput)">
@@ -1060,6 +1075,11 @@
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
               <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:newValue"/>
             </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" valueExpression="service:renderPropertyValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValueType(newValue)"/>
           </initialOperation>
         </controls>
         <controls xsi:type="properties:TextDescription" name="ComplexValue" labelExpression="Complex value" valueExpression="&lt;complex_value>">
@@ -1121,10 +1141,15 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="GetPropertyValueProperty" labelExpression="Property" domainClass="aADM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetProperty)">
+      <groups name="GetPropertyValueProperty" labelExpression="Property" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" preconditionExpression="aql:self.value.oclIsKindOf(rM::GetProperty)">
         <controls xsi:type="properties:SelectDescription" name="Name" labelExpression="Name" valueExpression="feature:name" candidatesExpression="service:getProperties()" candidateDisplayExpression="aql:candidate">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:SelectDescription" name="ValueType" labelExpression="ValueType" valueExpression="service:renderPropertyValueType()" candidatesExpression="service:getPropertyValueTypes()" candidateDisplayExpression="aql:candidate">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setValueType(newValue)"/>
           </initialOperation>
         </controls>
         <controls xsi:type="properties:SelectDescription" name="Entity" labelExpression="Entity" valueExpression="aql:self.value.oclAsType(rM::GetProperty).property.entity.oclAsType(rM::EEntity).entity" candidatesExpression="service:getPropertyEntities()" candidateDisplayExpression="aql:candidate">
