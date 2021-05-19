@@ -552,6 +552,14 @@ public class Services {
 		list.getList().remove(item);
 	}
 
+	public void removeItemFromPropertyValueMap(EPropertyAssignment object,
+			ArrayList<Map<EObject, Integer>> selections) {
+		for (Map<EObject, Integer> selection : selections) {
+			EMapEntry entry = (EMapEntry) selection.keySet().iterator().next();
+			((EMAP) entry.eContainer()).getMap().remove(entry);
+		}
+	}
+
 	public void editItemInPropertyValueList(ELIST list, Integer index, EAlphaNumericValue oldValue, String newValue) {
 		System.out.println("Requested to edit an item in a property list value. List: " + list + ". Index: " + index
 				+ ". NewValue: " + newValue + ". OldValue: " + oldValue);
