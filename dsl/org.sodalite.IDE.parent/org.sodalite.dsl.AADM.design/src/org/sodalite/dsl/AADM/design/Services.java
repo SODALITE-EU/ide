@@ -89,13 +89,21 @@ public class Services {
 	private static Session session;
 
 	public static SortedSet<String> valueTypes = new TreeSet<String>();
+	public static SortedSet<String> clauseTypes = new TreeSet<String>();
 	public static int ID = 0;
 	static {
+		// Value types
 		valueTypes.add("Single Value");
 		valueTypes.add("List");
 		valueTypes.add("Nested Value");
 		valueTypes.add("Get Input");
 		valueTypes.add("Get Property");
+
+		// Clause types
+		clauseTypes.add("And");
+		clauseTypes.add("Or");
+		clauseTypes.add("Not");
+		clauseTypes.add("Assertion");
 	}
 
 	public void registerAADMModelChangeTrigger(EObject object) {
@@ -573,6 +581,27 @@ public class Services {
 		for (Map<EMapEntry, Integer> selection : selections) {
 			EMapEntry entry = selection.keySet().iterator().next();
 			((EMAP) entry.eContainer()).getMap().remove(entry);
+		}
+	}
+
+	public void removeConstraintClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> clauses) {
+		for (Map<EObject, Integer> selection : clauses) {
+			EObject entry = selection.keySet().iterator().next();
+			if (entry instanceof EAssertionDefinition) {
+				EAssertionDefinition assertion = (EAssertionDefinition) entry;
+				((EConditionClauseDefinitionAssert) assertion.eContainer()).getAssertions().remove(assertion);
+			} else if (entry instanceof EConditionClauseDefinition) {
+				EObject parent = entry.eContainer();
+				if (parent instanceof EConditionClauseDefinitionAND) {
+					((EConditionClauseDefinitionAND) parent).setAnd(null);
+				} else if (parent instanceof EConditionClauseDefinitionOR) {
+					((EConditionClauseDefinitionOR) parent).setOr(null);
+				} else if (parent instanceof EConditionClauseDefinitionNOT) {
+					((EConditionClauseDefinitionNOT) parent).setNot(null);
+				} else if (parent instanceof EExtendedTriggerCondition) {
+					((EExtendedTriggerCondition) parent).setConstraint(null);
+				}
+			}
 		}
 	}
 
@@ -1254,6 +1283,10 @@ public class Services {
 		return Services.valueTypes;
 	}
 
+	public SortedSet<String> getClauseTypes(EObject ignored) {
+		return Services.clauseTypes;
+	}
+
 	public String getValueType(EPropertyAssignment property, String newEntry) {
 		// Find new created nested property by name: newNestedProperty, and return
 		// is value type
@@ -1295,6 +1328,112 @@ public class Services {
 			}
 		}
 		return newEntry.getKey();
+	}
+
+	public boolean canAddClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection) {
+		return (trigger.getTrigger().getCondition().getConstraint() == null)
+				|| (trigger.getTrigger().getCondition().getConstraint() != null && selection.size() == 1);
+	}
+
+	public boolean canNotAddClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection) {
+		return !canAddClause(trigger, selection);
+	}
+
+	public String addClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection, String newType) {
+		if (selection.isEmpty()) {
+			EConditionClauseDefinition root = trigger.getTrigger().getCondition().getConstraint();
+			if (root == null) { // Insert new clause at root level if no condition available
+				insertEConditionClauseDefinition(newType, trigger.getTrigger().getCondition());
+			}
+		} else { // Insert clause in selection
+			EConditionClauseDefinition parent = (EConditionClauseDefinition) selection.get(0).keySet().iterator()
+					.next();
+			insertEConditionClauseDefinition(newType, parent);
+		}
+		return newType;
+	}
+
+	private void insertEConditionClauseDefinition(String newType, EObject parent) {
+		EObject clause = null;
+		if ("Not".equals(newType)) {
+			clause = createEConditionClauseDefinitionNOT();
+		} else if ("And".equals(newType)) {
+			clause = createEConditionClauseDefinitionAND();
+		} else if ("Or".equals(newType)) {
+			clause = createEConditionClauseDefinitionOR();
+		} else if ("Assertion".equals(newType)) {
+			clause = createEAssertionDefinition();
+		}
+		if (clause != null)
+			insertClause(clause, parent);
+	}
+
+	private void insertClause(EObject clause, EObject parent) {
+		if (clause instanceof EAssertionDefinition) {
+			if (!(parent instanceof EConditionClauseDefinitionAssert)) {
+				EConditionClauseDefinitionAssert ccda = getEConditionClauseDefinitionAssert(
+						(EConditionClauseDefinition) parent);
+				if (ccda == null) {
+					ccda = createEConditionClauseDefinitionAssertion();
+					insertClause(ccda, parent);
+				}
+				ccda.getAssertions().add((EAssertionDefinition) clause);
+			} else {
+				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
+			}
+		} else if (clause instanceof EConditionClauseDefinition) {
+			if (parent instanceof EConditionClauseDefinitionAND) {
+				((EConditionClauseDefinitionAND) parent).setAnd((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EConditionClauseDefinitionOR) {
+				((EConditionClauseDefinitionOR) parent).setOr((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EConditionClauseDefinitionNOT) {
+				((EConditionClauseDefinitionNOT) parent).setNot((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EExtendedTriggerCondition) {
+				((EExtendedTriggerCondition) parent).setConstraint((EConditionClauseDefinition) clause);
+			}
+		}
+	}
+
+	private EConditionClauseDefinitionAssert getEConditionClauseDefinitionAssert(EConditionClauseDefinition parent) {
+		EConditionClauseDefinitionAssert ccda = null;
+		EObject candidate = null;
+		if (parent instanceof EConditionClauseDefinitionAND) {
+			candidate = ((EConditionClauseDefinitionAND) parent).getAnd();
+		} else if (parent instanceof EConditionClauseDefinitionOR) {
+			candidate = ((EConditionClauseDefinitionOR) parent).getOr();
+		} else if (parent instanceof EConditionClauseDefinitionNOT) {
+			candidate = ((EConditionClauseDefinitionNOT) parent).getNot();
+		}
+		ccda = (candidate instanceof EConditionClauseDefinitionAssert) ? (EConditionClauseDefinitionAssert) candidate
+				: null;
+		return ccda;
+	}
+
+	private EConditionClauseDefinitionNOT createEConditionClauseDefinitionNOT() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionNOT();
+	}
+
+	private EConditionClauseDefinitionAND createEConditionClauseDefinitionAND() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAND();
+	}
+
+	private EConditionClauseDefinitionOR createEConditionClauseDefinitionOR() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionOR();
+	}
+
+	private EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssertion() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAssert();
+	}
+
+	private EAssertionDefinition createEAssertionDefinition() {
+		EAssertionDefinition assertion = RMFactory.eINSTANCE.createEAssertionDefinition();
+		assertion.setAttribute_name("attribute_name_" + ID++);
+		assertion.setConstraints(createEConstraintList());
+		return assertion;
+	}
+
+	private EConstraintList createEConstraintList() {
+		return RMFactory.eINSTANCE.createEConstraintList();
 	}
 
 	public void removeNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
