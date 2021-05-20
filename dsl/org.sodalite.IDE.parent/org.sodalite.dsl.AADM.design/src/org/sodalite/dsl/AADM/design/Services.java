@@ -52,11 +52,15 @@ import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
+import org.sodalite.dsl.rM.EInRange;
 import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EMapEntry;
+import org.sodalite.dsl.rM.EMaxLength;
+import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -69,6 +73,7 @@ import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.ETimeInterval;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggerDefinitionBody;
+import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
@@ -729,6 +734,34 @@ public class Services {
 		return null;
 	}
 
+	public List<Map<EObject, Integer>> getConstraintList(ETriggerDefinition trigger) throws Exception {
+		List<Map<EObject, Integer>> constraintList = new ArrayList<>();
+		EConditionClauseDefinition condition = trigger.getTrigger().getCondition().getConstraint();
+		if (condition != null) {
+			addNestedConstraint(constraintList, condition, 0);
+		}
+		return constraintList;
+	}
+
+	private void addNestedConstraint(List<Map<EObject, Integer>> constraintList, EObject condition, int depth) {
+		if (!(condition instanceof EConditionClauseDefinitionAssert)) {
+			Map<EObject, Integer> entry = new HashMap<>();
+			entry.put(condition, depth);
+			constraintList.add(entry);
+		}
+
+		if (condition instanceof EConditionClauseDefinitionAND) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionAND) condition).getAnd(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionOR) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionOR) condition).getOr(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionNOT) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionNOT) condition).getNot(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionAssert) {
+			for (EAssertionDefinition _assert : ((EConditionClauseDefinitionAssert) condition).getAssertions())
+				addNestedConstraint(constraintList, _assert, depth + 1);
+		}
+	}
+
 	private void addNestedElements(List<Map<EObject, Integer>> nestedList, EList<EMapEntry> elementsToAdd, int depth) {
 		for (EMapEntry element : elementsToAdd) {
 			Map<EObject, Integer> entry = new HashMap<>();
@@ -740,13 +773,106 @@ public class Services {
 		}
 	}
 
-	public String renderNestedItem(EPropertyAssignment object, Map<EObject, Integer> item) throws Exception {
+	public String renderNestedItem(EPropertyAssignment property, Map<EObject, Integer> item) throws Exception {
 		EMapEntry entry = (EMapEntry) item.keySet().iterator().next();
 		if (entry.getValue() instanceof EMAP) {
 			return getIndentation(item.get(entry)) + entry.getKey() + ":";
 		} else {
 			return getIndentation(item.get(entry)) + entry.getKey() + ": " + renderValue(entry.getValue());
 		}
+	}
+
+	public String renderConstraintItem(EObject constraint, Map<EObject, Integer> item) throws Exception {
+		EObject condition = item.keySet().iterator().next();
+		String render = null;
+		if (condition instanceof EConditionClauseDefinitionAND) {
+			render = getIndentation(item.get(condition)) + "and:";
+		} else if (condition instanceof EConditionClauseDefinitionOR) {
+			render = getIndentation(item.get(condition)) + "or:";
+		} else if (condition instanceof EConditionClauseDefinitionNOT) {
+			render = getIndentation(item.get(condition)) + "not:";
+		} else if (condition instanceof EAssertionDefinition) {
+			render = getIndentation(item.get(condition))
+					+ renderEConditionClauseDefinitionAssert((EAssertionDefinition) condition);
+		}
+		return render;
+	}
+
+	private String renderEConditionClauseDefinitionAssert(EAssertionDefinition assertion) {
+		return assertion.getAttribute_name() + ": [" + renderEConstraintList(assertion.getConstraints()) + "]";
+	}
+
+	private String renderEConstraintList(EConstraintList constraints) {
+		if (constraints.getList().isEmpty())
+			return "";
+		StringBuffer sb = new StringBuffer(renderEConstraint(constraints.getList().get(0)));
+		for (int i = 1; i < constraints.getList().size(); i++)
+			sb.append(',' + renderEConstraint(constraints.getList().get(i)));
+		return sb.toString();
+	}
+
+	private String renderEConstraint(EConstraint constraint) {
+		String render = null;
+		if (constraint instanceof EEqual) {
+			render = "equal: " + renderESingleValue(((EEqual) constraint).getVal());
+		} else if (constraint instanceof EGreaterThan) {
+			render = "greater_than: " + renderEAlphaNumericValue(((EGreaterThan) constraint).getVal());
+		} else if (constraint instanceof EGreaterOrEqual) {
+			render = "greater_or_equal: " + renderEAlphaNumericValue(((EGreaterOrEqual) constraint).getVal());
+		} else if (constraint instanceof ELessThan) {
+			render = "less_than: " + renderEAlphaNumericValue(((ELessThan) constraint).getVal());
+		} else if (constraint instanceof ELessOrEqual) {
+			render = "less_or_equal: " + renderEAlphaNumericValue(((ELessOrEqual) constraint).getVal());
+		} else if (constraint instanceof EInRange) {
+			render = "in_range: [" + renderEAlphaNumericValue(((EInRange) constraint).getStart()) + ", "
+					+ renderEAlphaNumericValue(((EInRange) constraint).getEnd()) + "]";
+		} else if (constraint instanceof EValid_Values) {
+			render = "valid_values: " + renderEList(((EValid_Values) constraint).getVal());
+		} else if (constraint instanceof ELength) {
+			render = "length: " + renderEAlphaNumericValue(((ELength) constraint).getVal());
+		} else if (constraint instanceof EMinLength) {
+			render = "min_length: " + renderEAlphaNumericValue(((EMinLength) constraint).getVal());
+		} else if (constraint instanceof EMaxLength) {
+			render = "max_length: " + renderEAlphaNumericValue(((EMaxLength) constraint).getVal());
+		}
+		return render;
+	}
+
+	private String renderEList(ELIST val) {
+		StringBuffer sb = new StringBuffer('[');
+		boolean firstValue = true;
+		for (EAlphaNumericValue value : val.getList()) {
+			sb.append(firstValue ? "" : "," + renderEAlphaNumericValue(value));
+			firstValue = false;
+		}
+		sb.append(']');
+		return sb.toString();
+	}
+
+	private String renderESingleValue(ESingleValue value) {
+		String render = null;
+		if (value instanceof ESTRING) {
+			render = ((ESTRING) value).getValue();
+		} else if (value instanceof EFLOAT) {
+			render = Float.toString(((EFLOAT) value).getValue());
+		} else if (value instanceof ESIGNEDINT) {
+			render = Integer.toString(((ESIGNEDINT) value).getValue());
+		} else if (value instanceof EBOOLEAN) {
+			render = Boolean.toString(((EBOOLEAN) value).isValue());
+		}
+		return render;
+	}
+
+	private String renderEAlphaNumericValue(EAlphaNumericValue value) {
+		String render = null;
+		if (value instanceof ESTRING) {
+			render = ((ESTRING) value).getValue();
+		} else if (value instanceof EFLOAT) {
+			render = Float.toString(((EFLOAT) value).getValue());
+		} else if (value instanceof ESIGNEDINT) {
+			render = Integer.toString(((ESIGNEDINT) value).getValue());
+		}
+		return render;
 	}
 
 	private String getIndentation(Integer depth) {
