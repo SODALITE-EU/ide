@@ -1287,6 +1287,49 @@ public class Services {
 		return Services.clauseTypes;
 	}
 
+	public String getClauseType(ETriggerDefinition trigger, List<Map<EObject, Integer>> selection) {
+		String type = null;
+		EConditionClauseDefinition clause = (EConditionClauseDefinition) selection.get(0).keySet().iterator().next();
+
+		if (clause instanceof EConditionClauseDefinitionNOT) {
+			type = "Not";
+		} else if (clause instanceof EConditionClauseDefinitionAND) {
+			type = "And";
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			type = "Or";
+		} else if (clause instanceof EAssertionDefinition) {
+			type = "Assertion";
+		}
+		return type;
+	}
+
+	public void setClauseType(ETriggerDefinition object, List<Map<EObject, Integer>> selection, String newType) {
+		EConditionClauseDefinition clause = (EConditionClauseDefinition) selection.get(0).keySet().iterator().next();
+		Integer depth = selection.get(0).get(clause);
+		EConditionClauseDefinition newClause = replaceClauseForType(clause, newType);
+		selection.remove(0);
+		Map<EObject, Integer> map = new HashMap<>();
+		map.put(newClause, depth);
+		selection.add(map);
+	}
+
+	private EConditionClauseDefinition replaceClauseForType(EConditionClauseDefinition clause, String newType) {
+		EConditionClauseDefinition newClause = cloneEConditionClauseDefinition(newType, clause);
+		EObject parent = clause.eContainer();
+		setClauseChild(parent, newClause);
+		return newClause;
+	}
+
+//	private void setClauseChild(EConditionClauseDefinition parent, EConditionClauseDefinition child) {
+//		if (parent instanceof EConditionClauseDefinitionNOT) {
+//			((EConditionClauseDefinitionNOT) parent).setNot(child);
+//		} else if (parent instanceof EConditionClauseDefinitionAND) {
+//			((EConditionClauseDefinitionAND) parent).setAnd(child);
+//		} else if (parent instanceof EConditionClauseDefinitionOR) {
+//			((EConditionClauseDefinitionOR) parent).setOr(child);
+//		}
+//	}
+
 	public String getValueType(EPropertyAssignment property, String newEntry) {
 		// Find new created nested property by name: newNestedProperty, and return
 		// is value type
@@ -1354,6 +1397,12 @@ public class Services {
 	}
 
 	private void insertEConditionClauseDefinition(String newType, EObject parent) {
+		EObject clause = createEConditionClause(newType);
+		if (clause != null)
+			insertClause(clause, parent);
+	}
+
+	private EObject createEConditionClause(String newType) {
 		EObject clause = null;
 		if ("Not".equals(newType)) {
 			clause = createEConditionClauseDefinitionNOT();
@@ -1364,8 +1413,35 @@ public class Services {
 		} else if ("Assertion".equals(newType)) {
 			clause = createEAssertionDefinition();
 		}
-		if (clause != null)
-			insertClause(clause, parent);
+		return clause;
+	}
+
+	private EConditionClauseDefinition cloneEConditionClauseDefinition(String newType,
+			EConditionClauseDefinition oldClone) {
+		EConditionClauseDefinition newClause = null;
+		if ("Not".equals(newType)) {
+			newClause = createEConditionClauseDefinitionNOT();
+			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClone));
+		} else if ("And".equals(newType)) {
+			newClause = createEConditionClauseDefinitionAND();
+			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClone));
+		} else if ("Or".equals(newType)) {
+			newClause = createEConditionClauseDefinitionOR();
+			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClone));
+		}
+		return newClause;
+	}
+
+	private EConditionClauseDefinition getClauseChild(EConditionClauseDefinition oldClone) {
+		EConditionClauseDefinition clause = null;
+		if (oldClone instanceof EConditionClauseDefinitionNOT) {
+			clause = ((EConditionClauseDefinitionNOT) oldClone).getNot();
+		} else if (oldClone instanceof EConditionClauseDefinitionAND) {
+			clause = ((EConditionClauseDefinitionAND) oldClone).getAnd();
+		} else if (oldClone instanceof EConditionClauseDefinitionOR) {
+			clause = ((EConditionClauseDefinitionOR) oldClone).getOr();
+		}
+		return clause;
 	}
 
 	private void insertClause(EObject clause, EObject parent) {
@@ -1382,15 +1458,33 @@ public class Services {
 				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
 			}
 		} else if (clause instanceof EConditionClauseDefinition) {
+			EConditionClauseDefinition nestedClause = null;
 			if (parent instanceof EConditionClauseDefinitionAND) {
+				nestedClause = ((EConditionClauseDefinitionAND) parent).getAnd();
 				((EConditionClauseDefinitionAND) parent).setAnd((EConditionClauseDefinition) clause);
 			} else if (parent instanceof EConditionClauseDefinitionOR) {
+				nestedClause = ((EConditionClauseDefinitionOR) parent).getOr();
 				((EConditionClauseDefinitionOR) parent).setOr((EConditionClauseDefinition) clause);
 			} else if (parent instanceof EConditionClauseDefinitionNOT) {
+				nestedClause = ((EConditionClauseDefinitionNOT) parent).getNot();
 				((EConditionClauseDefinitionNOT) parent).setNot((EConditionClauseDefinition) clause);
 			} else if (parent instanceof EExtendedTriggerCondition) {
 				((EExtendedTriggerCondition) parent).setConstraint((EConditionClauseDefinition) clause);
 			}
+			if (nestedClause != null)
+				setClauseChild(clause, nestedClause);
+		}
+	}
+
+	private void setClauseChild(EObject clause, EConditionClauseDefinition nestedClause) {
+		if (clause instanceof EConditionClauseDefinitionAND) {
+			((EConditionClauseDefinitionAND) clause).setAnd((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			((EConditionClauseDefinitionOR) clause).setOr((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EConditionClauseDefinitionNOT) {
+			((EConditionClauseDefinitionNOT) clause).setNot((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EExtendedTriggerCondition) {
+			((EExtendedTriggerCondition) clause).setConstraint((EConditionClauseDefinition) nestedClause);
 		}
 	}
 
