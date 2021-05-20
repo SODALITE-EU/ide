@@ -439,6 +439,17 @@ public class Services {
 		return value;
 	}
 
+	private String editableRenderValue(Object eanValue) {
+		String value = null;
+		if (eanValue instanceof ESTRING)
+			value = ((ESTRING) eanValue).getValue();
+		else if (eanValue instanceof EFLOAT)
+			value = String.valueOf(((EFLOAT) eanValue).getValue());
+		else if (eanValue instanceof ESIGNEDINT)
+			value = String.valueOf(((ESIGNEDINT) eanValue).getValue());
+		return value;
+	}
+
 	public String getAttributeLabel(EAttributeAssignment attribute) {
 		String result = attribute.getName();
 		return processValue(result, attribute.getValue());
@@ -552,12 +563,32 @@ public class Services {
 		list.getList().remove(item);
 	}
 
-	public void removeItemFromPropertyValueMap(EPropertyAssignment object,
-			ArrayList<Map<EObject, Integer>> selections) {
-		for (Map<EObject, Integer> selection : selections) {
-			EMapEntry entry = (EMapEntry) selection.keySet().iterator().next();
+	public void removeItemFromPropertyValueMap(EPropertyAssignment property,
+			ArrayList<Map<EMapEntry, Integer>> selections) {
+		for (Map<EMapEntry, Integer> selection : selections) {
+			EMapEntry entry = selection.keySet().iterator().next();
 			((EMAP) entry.eContainer()).getMap().remove(entry);
 		}
+	}
+
+	public String renderEMapEntryKey(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return selection.keySet().iterator().next().getKey();
+	}
+
+	public String renderEMapEntryValue(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return editableRenderValue(selection.keySet().iterator().next().getValue());
+	}
+
+	public boolean isValueEditable(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return !(selection.keySet().iterator().next().getValue() instanceof EMAP);
+	}
+
+	public void editEMapEntryKey(EPropertyAssignment property, Map<EMapEntry, Integer> oldValue, String newValue) {
+		oldValue.keySet().iterator().next().setKey(newValue);
+	}
+
+	public void editEMapEntryValue(EPropertyAssignment property, Map<EMapEntry, Integer> oldValue, String newValue) {
+		oldValue.keySet().iterator().next().setValue((EAssignmentValue) createValue(newValue));
 	}
 
 	public void editItemInPropertyValueList(ELIST list, Integer index, EAlphaNumericValue oldValue, String newValue) {
