@@ -891,13 +891,24 @@ public class Services {
 	}
 
 	private String renderEList(ELIST val) {
-		StringBuffer sb = new StringBuffer('[');
+		StringBuffer sb = new StringBuffer();
+		sb.append('[');
 		boolean firstValue = true;
 		for (EAlphaNumericValue value : val.getList()) {
-			sb.append(firstValue ? "" : "," + renderEAlphaNumericValue(value));
+			sb.append((firstValue ? "" : ",") + renderEAlphaNumericValue(value));
 			firstValue = false;
 		}
 		sb.append(']');
+		return sb.toString();
+	}
+
+	private String renderEListValue(ELIST val) {
+		StringBuffer sb = new StringBuffer();
+		boolean firstValue = true;
+		for (EAlphaNumericValue value : val.getList()) {
+			sb.append((firstValue ? "" : ",") + renderEAlphaNumericValue(value));
+			firstValue = false;
+		}
 		return sb.toString();
 	}
 
@@ -1506,8 +1517,106 @@ public class Services {
 			selectedAssertion.keySet().iterator().next().getConstraints().getList().add(newConstraint);
 	}
 
+	public void removeConstraintsFromAssertion(ETriggerDefinition trigger,
+			Map<EAssertionDefinition, Integer> selectedAssertion, List<EObject> constraints) {
+		selectedAssertion.keySet().iterator().next().getConstraints().getList().removeAll(constraints);
+	}
+
 	public EConstraint createNewConstraintForAssertion(ETriggerDefinition trigger, String newType) {
 		return createEConstraint(newType);
+	}
+
+	public boolean constraintHasOneValue(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return constraintHasOneValue(selection.get(0));
+	}
+
+	private boolean constraintHasOneValue(EConstraint constraint) {
+		boolean result = true;
+		if (constraint instanceof EInRange)
+			result = false;
+		return result;
+	}
+
+	public String renderConstraintValueLabel(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderConstraintValueLabel(selection.get(0));
+	}
+
+	public void setConstraintValue(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		setConstraintValue(selection.get(0), newValue);
+	}
+
+	private void setConstraintValue(EConstraint constraint, String newValue) {
+		if (constraint instanceof EEqual) {
+			((EEqual) constraint).setVal(createESingleValue(newValue));
+		} else if (constraint instanceof EGreaterThan) {
+			((EGreaterThan) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EGreaterOrEqual) {
+			((EGreaterOrEqual) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof ELessThan) {
+			((ELessThan) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof ELessOrEqual) {
+			((ELessOrEqual) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EValid_Values) {
+			((EValid_Values) constraint).setVal(createELIST(newValue));
+		} else if (constraint instanceof ELength) {
+			((ELength) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EMinLength) {
+			((EMinLength) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EMaxLength) {
+			((EMaxLength) constraint).setVal(createEAlphaNumericValue(newValue));
+		}
+	}
+
+	private String renderConstraintValueLabel(EConstraint constraint) {
+		String label = null;
+		if (constraint instanceof EEqual) {
+			label = "equal";
+		} else if (constraint instanceof EGreaterThan) {
+			label = "greater_than";
+		} else if (constraint instanceof EGreaterOrEqual) {
+			label = "greater_or_equal";
+		} else if (constraint instanceof ELessThan) {
+			label = "less_than";
+		} else if (constraint instanceof ELessOrEqual) {
+			label = "less_or_equal";
+		} else if (constraint instanceof EValid_Values) {
+			label = "valid_values";
+		} else if (constraint instanceof ELength) {
+			label = "length";
+		} else if (constraint instanceof EMinLength) {
+			label = "min_length";
+		} else if (constraint instanceof EMaxLength) {
+			label = "max_length";
+		}
+		return label;
+	}
+
+	public String renderConstraintValue(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderConstraintValue(selection.get(0));
+	}
+
+	private String renderConstraintValue(EConstraint constraint) {
+		String value = null;
+		if (constraint instanceof EEqual) {
+			value = renderValue(((EEqual) constraint).getVal());
+		} else if (constraint instanceof EGreaterThan) {
+			value = renderValue(((EGreaterThan) constraint).getVal());
+		} else if (constraint instanceof EGreaterOrEqual) {
+			value = renderValue(((EGreaterOrEqual) constraint).getVal());
+		} else if (constraint instanceof ELessThan) {
+			value = renderValue(((ELessThan) constraint).getVal());
+		} else if (constraint instanceof ELessOrEqual) {
+			value = renderValue(((ELessOrEqual) constraint).getVal());
+		} else if (constraint instanceof EValid_Values) {
+			value = renderEListValue(((EValid_Values) constraint).getVal());
+		} else if (constraint instanceof ELength) {
+			value = renderValue(((ELength) constraint).getVal());
+		} else if (constraint instanceof EMinLength) {
+			value = renderValue(((EMinLength) constraint).getVal());
+		} else if (constraint instanceof EMaxLength) {
+			value = renderValue(((EMaxLength) constraint).getVal());
+		}
+		return value;
 	}
 
 	private EConstraint createEConstraint(String newType) {
@@ -1555,7 +1664,24 @@ public class Services {
 	}
 
 	private EConstraint createEValid_Values() {
-		return RMFactory.eINSTANCE.createEValid_Values();
+		EValid_Values vv = RMFactory.eINSTANCE.createEValid_Values();
+		vv.setVal(createELIST());
+		return vv;
+	}
+
+	private ELIST createELIST() {
+		return RMFactory.eINSTANCE.createELIST();
+	}
+
+	private ELIST createELIST(String list) {
+		ELIST eList = RMFactory.eINSTANCE.createELIST();
+		List<String> items = Arrays.asList(list.split(","));
+		List<EAlphaNumericValue> listItems = new ArrayList<>();
+		for (String item : items) {
+			listItems.add(createEAlphaNumericValue(item.trim()));
+		}
+		eList.getList().addAll(listItems);
+		return eList;
 	}
 
 	private EConstraint createEInRange() {

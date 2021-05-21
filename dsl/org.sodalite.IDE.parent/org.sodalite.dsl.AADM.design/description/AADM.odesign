@@ -942,48 +942,47 @@
                                 <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
                                   <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:selection->size()=1">
                                     <subModelOperations xsi:type="tool_1:Let" variableName="oldValue" valueExpression="aql:selection->first()">
-                                      <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Edit Item">
-                                        <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                                          <initialOperation/>
-                                        </buttons>
-                                        <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
-                                          <initialOperation/>
-                                        </buttons>
-                                        <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.5/@controls.0/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.2/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
-                                        <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
-                                          <controls xsi:type="properties:TextDescription" name="key" labelExpression="Item key:" valueExpression="service:renderEMapEntryKey(oldValue)">
-                                            <initialOperation>
-                                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:editEMapEntryKey(oldValue, newValue)"/>
-                                            </initialOperation>
-                                          </controls>
-                                          <controls xsi:type="properties:TextDescription" name="value" labelExpression="Item value:" isEnabledExpression="service:isValueEditable(oldValue)" valueExpression="service:renderEMapEntryValue(oldValue)">
-                                            <initialOperation>
-                                              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:editEMapEntryValue(oldValue, newValue)"/>
-                                            </initialOperation>
-                                          </controls>
-                                        </groups>
+                                      <subModelOperations xsi:type="tool_1:If" conditionExpression="service:constraintHasOneValue(selection)">
+                                        <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Edit Constraint">
+                                          <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                                            <initialOperation/>
+                                          </buttons>
+                                          <buttons labelExpression="OK" isEnabledExpression="service:" default="true" closeDialogOnClick="true">
+                                            <initialOperation/>
+                                          </buttons>
+                                          <page name="Default Page" labelExpression="Edit Item" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.5/@controls.0/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.2/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                                          <groups name="Default Group" labelExpression="Item" semanticCandidateExpression="var:self">
+                                            <controls xsi:type="properties:TextDescription" name="val" labelExpression="service:renderConstraintValueLabel(selection)" valueExpression="service:renderConstraintValue(selection)">
+                                              <initialOperation>
+                                                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:setConstraintValue(selection, newValue)"/>
+                                              </initialOperation>
+                                            </controls>
+                                          </groups>
+                                        </subModelOperations>
                                       </subModelOperations>
                                     </subModelOperations>
                                   </subModelOperations>
                                 </firstModelOperations>
                               </initialOperation>
                             </actions>
-                            <actions labelExpression="Remove Constraint">
+                            <actions labelExpression="Remove Constraint(s)">
                               <initialOperation>
                                 <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:self">
-                                  <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Confirmation Dialog">
-                                    <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
-                                      <initialOperation/>
-                                    </buttons>
-                                    <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
-                                      <initialOperation>
-                                        <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:removeItemFromPropertyValueMap(selection)"/>
-                                      </initialOperation>
-                                    </buttons>
-                                    <page name="Default Page" labelExpression="Delete nested properties" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.5/@controls.0/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.2/@actions.2/@initialOperation/@firstModelOperations/@subModelOperations.0/@groups.0"/>
-                                    <groups name="Default Group" labelExpression="Confirmation" semanticCandidateExpression="var:self">
-                                      <controls xsi:type="properties:LabelDescription" name="Message" labelExpression="Do you want to delete the selected clauses?"/>
-                                    </groups>
+                                  <subModelOperations xsi:type="tool_1:If" conditionExpression="aql:selection->size()>=1">
+                                    <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="Confirmation Dialog">
+                                      <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                                        <initialOperation/>
+                                      </buttons>
+                                      <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                                        <initialOperation>
+                                          <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="service:removeConstraintsFromAssertion(selectedAssertion, selection)"/>
+                                        </initialOperation>
+                                      </buttons>
+                                      <page name="Default Page" labelExpression="Delete assertion constraints" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.3/@controls.5/@controls.0/@actions.1/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@subModelOperations.0/@groups.0/@controls.2/@actions.2/@initialOperation/@firstModelOperations/@subModelOperations.0/@subModelOperations.0/@groups.0"/>
+                                      <groups name="Default Group" labelExpression="Confirmation" semanticCandidateExpression="var:self">
+                                        <controls xsi:type="properties:LabelDescription" name="Message" labelExpression="Do you want to delete the selected assertion constraints?"/>
+                                      </groups>
+                                    </subModelOperations>
                                   </subModelOperations>
                                 </firstModelOperations>
                               </initialOperation>
