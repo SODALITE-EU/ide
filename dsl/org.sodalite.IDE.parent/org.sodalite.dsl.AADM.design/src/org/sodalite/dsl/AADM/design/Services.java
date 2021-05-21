@@ -90,6 +90,7 @@ public class Services {
 
 	public static SortedSet<String> valueTypes = new TreeSet<String>();
 	public static SortedSet<String> clauseTypes = new TreeSet<String>();
+	public static SortedSet<String> constraintTypes = new TreeSet<String>();
 	public static int ID = 0;
 	static {
 		// Value types
@@ -104,6 +105,18 @@ public class Services {
 		clauseTypes.add("Or");
 		clauseTypes.add("Not");
 		clauseTypes.add("Assertion");
+
+		// Constraint types
+		constraintTypes.add("Equal");
+		constraintTypes.add("GreaterThan");
+		constraintTypes.add("GreaterOrEqual");
+		constraintTypes.add("LessThan");
+		constraintTypes.add("LessOrEqual");
+		constraintTypes.add("InRange");
+		constraintTypes.add("ValidValues");
+		constraintTypes.add("Length");
+		constraintTypes.add("MinLength");
+		constraintTypes.add("MaxLength");
 	}
 
 	public void registerAADMModelChangeTrigger(EObject object) {
@@ -559,7 +572,7 @@ public class Services {
 
 	public void addItemToPropertyValueList(ELIST list, String item) {
 		System.out.println("Requested to add item to property list value. List: " + list + ". Item: " + item);
-		EAlphaNumericValue value = (EAlphaNumericValue) createValue(item);
+		EAlphaNumericValue value = (EAlphaNumericValue) createESingleValue(item);
 		list.getList().add(value);
 	}
 
@@ -622,13 +635,13 @@ public class Services {
 	}
 
 	public void editEMapEntryValue(EPropertyAssignment property, Map<EMapEntry, Integer> oldValue, String newValue) {
-		oldValue.keySet().iterator().next().setValue((EAssignmentValue) createValue(newValue));
+		oldValue.keySet().iterator().next().setValue((EAssignmentValue) createESingleValue(newValue));
 	}
 
 	public void editItemInPropertyValueList(ELIST list, Integer index, EAlphaNumericValue oldValue, String newValue) {
 		System.out.println("Requested to edit an item in a property list value. List: " + list + ". Index: " + index
 				+ ". NewValue: " + newValue + ". OldValue: " + oldValue);
-		EAlphaNumericValue value = (EAlphaNumericValue) createValue(newValue);
+		EAlphaNumericValue value = (EAlphaNumericValue) createESingleValue(newValue);
 		list.getList().set(index - 1, value);
 	}
 
@@ -772,6 +785,12 @@ public class Services {
 		return constraintList;
 	}
 
+	public List<EConstraint> getAssertionConstraintList(ETriggerDefinition object,
+			Map<EAssertionDefinition, Integer> selectedAssertion) throws Exception {
+		EAssertionDefinition condition = selectedAssertion.keySet().iterator().next();
+		return condition.getConstraints().getList();
+	}
+
 	private void addNestedConstraint(List<Map<EObject, Integer>> constraintList, EObject condition, int depth) {
 		if (!(condition instanceof EConditionClauseDefinitionAssert)) {
 			Map<EObject, Integer> entry = new HashMap<>();
@@ -811,7 +830,7 @@ public class Services {
 		}
 	}
 
-	public String renderConstraintItem(EObject constraint, Map<EObject, Integer> item) throws Exception {
+	public String renderConstraintItem(ETriggerDefinition constraint, Map<EObject, Integer> item) throws Exception {
 		EObject condition = item.keySet().iterator().next();
 		String render = null;
 		if (condition instanceof EConditionClauseDefinitionAND) {
@@ -825,6 +844,10 @@ public class Services {
 					+ renderEConditionClauseDefinitionAssert((EAssertionDefinition) condition);
 		}
 		return render;
+	}
+
+	public String renderAssertionConstraintItem(ETriggerDefinition object, EConstraint constraint) throws Exception {
+		return renderEConstraint(constraint);
 	}
 
 	private String renderEConditionClauseDefinitionAssert(EAssertionDefinition assertion) {
@@ -1005,7 +1028,7 @@ public class Services {
 	}
 
 	public void setValue(EPropertyAssignment prop, String value) {
-		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		EAssignmentValue newValue = (EAssignmentValue) createESingleValue(value);
 		prop.setValue(newValue);
 	}
 
@@ -1016,7 +1039,7 @@ public class Services {
 	}
 
 	public void setValue(EAttributeAssignment attr, String value) {
-		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		EAssignmentValue newValue = (EAssignmentValue) createESingleValue(value);
 		attr.setValue(newValue);
 	}
 
@@ -1035,12 +1058,29 @@ public class Services {
 			return null;
 	}
 
-	private EObject createValue(String value) {
+	private ESingleValue createESingleValue(String value) {
 		// Try boolean value
 		if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
 			return createBooleanValue(value);
 		}
 
+		// Try integer or float
+		try {
+			ESIGNEDINT eInt = createIntegerValue(value);
+			return eInt;
+		} catch (NumberFormatException ex1) {
+			try {
+				EFLOAT eFloat = createFloatValue(value);
+				return eFloat;
+			} catch (NumberFormatException ex2) {
+				// String value
+				ESTRING eString = createStringValue(value);
+				return eString;
+			}
+		}
+	}
+
+	private EAlphaNumericValue createEAlphaNumericValue(String value) {
 		// Try integer or float
 		try {
 			ESIGNEDINT eInt = createIntegerValue(value);
@@ -1287,9 +1327,29 @@ public class Services {
 		return Services.clauseTypes;
 	}
 
-	public String getClauseType(ETriggerDefinition trigger, List<Map<EObject, Integer>> selection) {
+	public SortedSet<String> getConstraintTypes(EObject ignored) {
+		return Services.constraintTypes;
+	}
+
+//	public String getClauseType(ETriggerDefinition trigger, List<Map<EObject, Integer>> selection) {
+//		String type = null;
+//		EObject clause = selection.get(0).keySet().iterator().next();
+//
+//		if (clause instanceof EConditionClauseDefinitionNOT) {
+//			type = "Not";
+//		} else if (clause instanceof EConditionClauseDefinitionAND) {
+//			type = "And";
+//		} else if (clause instanceof EConditionClauseDefinitionOR) {
+//			type = "Or";
+//		} else if (clause instanceof EAssertionDefinition) {
+//			type = "Assertion";
+//		}
+//		return type;
+//	}
+
+	public String getClauseType(ETriggerDefinition trigger, Map<EObject, Integer> selection) {
 		String type = null;
-		EConditionClauseDefinition clause = (EConditionClauseDefinition) selection.get(0).keySet().iterator().next();
+		EObject clause = selection.keySet().iterator().next();
 
 		if (clause instanceof EConditionClauseDefinitionNOT) {
 			type = "Not";
@@ -1301,6 +1361,60 @@ public class Services {
 			type = "Assertion";
 		}
 		return type;
+	}
+
+	public String getConstraintType(ETriggerDefinition object, EConstraint constraint) {
+		return getConstraintType(constraint);
+	}
+
+	private String getConstraintType(EConstraint constraint) {
+		String type = null;
+		if (constraint instanceof EEqual) {
+			type = "Equal";
+		} else if (constraint instanceof EGreaterThan) {
+			type = "GreaterThan";
+		} else if (constraint instanceof EGreaterOrEqual) {
+			type = "GreaterOrEqual";
+		} else if (constraint instanceof ELessThan) {
+			type = "LessThan";
+		} else if (constraint instanceof ELessOrEqual) {
+			type = "LessOrEqual";
+		} else if (constraint instanceof EInRange) {
+			type = "InRange";
+		} else if (constraint instanceof EValid_Values) {
+			type = "ValidValues";
+		} else if (constraint instanceof ELength) {
+			type = "Length";
+		} else if (constraint instanceof EMinLength) {
+			type = "MinLength";
+		} else if (constraint instanceof EMaxLength) {
+			type = "MaxLength";
+		}
+		return type;
+	}
+
+	public boolean isAssertionDefinition(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		return clause instanceof EAssertionDefinition;
+	}
+
+	public boolean isNotAssertionDefinition(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		return !isAssertionDefinition(trigger, selectedAssertion);
+	}
+
+	public String getAttributeName(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition) {
+			return ((EAssertionDefinition) clause).getAttribute_name();
+		}
+		return null;
+	}
+
+	public void setAttributeName(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion, String newValue) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition) {
+			((EAssertionDefinition) clause).setAttribute_name(newValue);
+		}
 	}
 
 	public void setClauseType(ETriggerDefinition object, List<Map<EObject, Integer>> selection, String newType) {
@@ -1319,16 +1433,6 @@ public class Services {
 		setClauseChild(parent, newClause);
 		return newClause;
 	}
-
-//	private void setClauseChild(EConditionClauseDefinition parent, EConditionClauseDefinition child) {
-//		if (parent instanceof EConditionClauseDefinitionNOT) {
-//			((EConditionClauseDefinitionNOT) parent).setNot(child);
-//		} else if (parent instanceof EConditionClauseDefinitionAND) {
-//			((EConditionClauseDefinitionAND) parent).setAnd(child);
-//		} else if (parent instanceof EConditionClauseDefinitionOR) {
-//			((EConditionClauseDefinitionOR) parent).setOr(child);
-//		}
-//	}
 
 	public String getValueType(EPropertyAssignment property, String newEntry) {
 		// Find new created nested property by name: newNestedProperty, and return
@@ -1394,6 +1498,101 @@ public class Services {
 			insertEConditionClauseDefinition(newType, parent);
 		}
 		return newType;
+	}
+
+	public void addNewConstraintToAssertion(ETriggerDefinition trigger,
+			Map<EAssertionDefinition, Integer> selectedAssertion, EConstraint newConstraint) {
+		if (newConstraint != null)
+			selectedAssertion.keySet().iterator().next().getConstraints().getList().add(newConstraint);
+	}
+
+	public EConstraint createNewConstraintForAssertion(ETriggerDefinition trigger, String newType) {
+		return createEConstraint(newType);
+	}
+
+	private EConstraint createEConstraint(String newType) {
+		EConstraint constraint = null;
+		if ("Equal".equals(newType)) {
+			constraint = createEEqual();
+		} else if ("GreaterThan".equals(newType)) {
+			constraint = createEGreaterThan();
+		} else if ("GreaterOrEqual".equals(newType)) {
+			constraint = createEGreaterOrEqual();
+		} else if ("LessThan".equals(newType)) {
+			constraint = createELessThan();
+		} else if ("LessOrEqual".equals(newType)) {
+			constraint = createELessOrEqual();
+		} else if ("InRange".equals(newType)) {
+			constraint = createEInRange();
+		} else if ("ValidValues".equals(newType)) {
+			constraint = createEValid_Values();
+		} else if ("Length".equals(newType)) {
+			constraint = createELength();
+		} else if ("MinLength".equals(newType)) {
+			constraint = createEMinLength();
+		} else if ("MaxLength".equals(newType)) {
+			constraint = createEMaxLength();
+		}
+		return constraint;
+	}
+
+	private EConstraint createEMaxLength() {
+		EMaxLength min = RMFactory.eINSTANCE.createEMaxLength();
+		min.setVal(createEAlphaNumericValue("0"));
+		return min;
+	}
+
+	private EConstraint createEMinLength() {
+		EMinLength min = RMFactory.eINSTANCE.createEMinLength();
+		min.setVal(createEAlphaNumericValue("0"));
+		return min;
+	}
+
+	private EConstraint createELength() {
+		ELength length = RMFactory.eINSTANCE.createELength();
+		length.setVal(createEAlphaNumericValue("0"));
+		return length;
+	}
+
+	private EConstraint createEValid_Values() {
+		return RMFactory.eINSTANCE.createEValid_Values();
+	}
+
+	private EConstraint createEInRange() {
+		EInRange ir = RMFactory.eINSTANCE.createEInRange();
+		ir.setStart(createEAlphaNumericValue("0"));
+		ir.setEnd(createEAlphaNumericValue("1"));
+		return ir;
+	}
+
+	private EConstraint createELessOrEqual() {
+		ELessOrEqual loe = RMFactory.eINSTANCE.createELessOrEqual();
+		loe.setVal(createEAlphaNumericValue("0"));
+		return loe;
+	}
+
+	private EConstraint createELessThan() {
+		ELessThan lt = RMFactory.eINSTANCE.createELessThan();
+		lt.setVal(createEAlphaNumericValue("0"));
+		return lt;
+	}
+
+	private EConstraint createEGreaterOrEqual() {
+		EGreaterOrEqual egoe = RMFactory.eINSTANCE.createEGreaterOrEqual();
+		egoe.setVal(createEAlphaNumericValue("0"));
+		return egoe;
+	}
+
+	private EConstraint createEGreaterThan() {
+		EGreaterThan egt = RMFactory.eINSTANCE.createEGreaterThan();
+		egt.setVal(createEAlphaNumericValue("0"));
+		return egt;
+	}
+
+	private EConstraint createEEqual() {
+		EEqual ee = RMFactory.eINSTANCE.createEEqual();
+		ee.setVal(createESingleValue("0"));
+		return ee;
 	}
 
 	private void insertEConditionClauseDefinition(String newType, EObject parent) {
