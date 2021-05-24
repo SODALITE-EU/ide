@@ -604,15 +604,27 @@ public class Services {
 				EAssertionDefinition assertion = (EAssertionDefinition) entry;
 				((EConditionClauseDefinitionAssert) assertion.eContainer()).getAssertions().remove(assertion);
 			} else if (entry instanceof EConditionClauseDefinition) {
+				EConditionClauseDefinition child = null;
+				if (entry instanceof EConditionClauseDefinitionAND) {
+					EConditionClauseDefinitionAND and = (EConditionClauseDefinitionAND) entry;
+					child = and.getAnd();
+				} else if (entry instanceof EConditionClauseDefinitionOR) {
+					EConditionClauseDefinitionOR or = (EConditionClauseDefinitionOR) entry;
+					child = or.getOr();
+				} else if (entry instanceof EConditionClauseDefinitionNOT) {
+					EConditionClauseDefinitionNOT not = (EConditionClauseDefinitionNOT) entry;
+					child = not.getNot();
+				}
+
 				EObject parent = entry.eContainer();
 				if (parent instanceof EConditionClauseDefinitionAND) {
-					((EConditionClauseDefinitionAND) parent).setAnd(null);
+					((EConditionClauseDefinitionAND) parent).setAnd(child);
 				} else if (parent instanceof EConditionClauseDefinitionOR) {
-					((EConditionClauseDefinitionOR) parent).setOr(null);
+					((EConditionClauseDefinitionOR) parent).setOr(child);
 				} else if (parent instanceof EConditionClauseDefinitionNOT) {
-					((EConditionClauseDefinitionNOT) parent).setNot(null);
+					((EConditionClauseDefinitionNOT) parent).setNot(child);
 				} else if (parent instanceof EExtendedTriggerCondition) {
-					((EExtendedTriggerCondition) parent).setConstraint(null);
+					((EExtendedTriggerCondition) parent).setConstraint(child);
 				}
 			}
 		}
@@ -787,8 +799,10 @@ public class Services {
 
 	public List<EConstraint> getAssertionConstraintList(ETriggerDefinition object,
 			Map<EAssertionDefinition, Integer> selectedAssertion) throws Exception {
-		EAssertionDefinition condition = selectedAssertion.keySet().iterator().next();
-		return condition.getConstraints().getList();
+		EObject condition = selectedAssertion.keySet().iterator().next();
+		if (condition instanceof EAssertionDefinition)
+			return ((EAssertionDefinition) condition).getConstraints().getList();
+		return null;
 	}
 
 	private void addNestedConstraint(List<Map<EObject, Integer>> constraintList, EObject condition, int depth) {
@@ -1342,25 +1356,28 @@ public class Services {
 		return Services.constraintTypes;
 	}
 
-//	public String getClauseType(ETriggerDefinition trigger, List<Map<EObject, Integer>> selection) {
-//		String type = null;
-//		EObject clause = selection.get(0).keySet().iterator().next();
-//
-//		if (clause instanceof EConditionClauseDefinitionNOT) {
-//			type = "Not";
-//		} else if (clause instanceof EConditionClauseDefinitionAND) {
-//			type = "And";
-//		} else if (clause instanceof EConditionClauseDefinitionOR) {
-//			type = "Or";
-//		} else if (clause instanceof EAssertionDefinition) {
-//			type = "Assertion";
-//		}
-//		return type;
-//	}
-
-	public String getClauseType(ETriggerDefinition trigger, Map<EObject, Integer> selection) {
+	public String getClauseType(ETriggerDefinition trigger, Map<EObject, Integer> selected, Object edited) {
 		String type = null;
-		EObject clause = selection.keySet().iterator().next();
+		EObject clause = null;
+		if (edited instanceof EObject)
+			clause = (EObject) edited;
+		else
+			clause = selected.keySet().iterator().next();
+
+		if (clause instanceof EConditionClauseDefinitionNOT) {
+			type = "Not";
+		} else if (clause instanceof EConditionClauseDefinitionAND) {
+			type = "And";
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			type = "Or";
+		} else if (clause instanceof EAssertionDefinition) {
+			type = "Assertion";
+		}
+		return type;
+	}
+
+	public String getClauseType(ETriggerDefinition trigger, EObject clause) {
+		String type = null;
 
 		if (clause instanceof EConditionClauseDefinitionNOT) {
 			type = "Not";
@@ -1497,18 +1514,29 @@ public class Services {
 		return !canAddClause(trigger, selection);
 	}
 
-	public String addClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection, String newType) {
+	public void addClauseToCondition(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection,
+			EObject newClause) {
 		if (selection.isEmpty()) {
 			EConditionClauseDefinition root = trigger.getTrigger().getCondition().getConstraint();
 			if (root == null) { // Insert new clause at root level if no condition available
-				insertEConditionClauseDefinition(newType, trigger.getTrigger().getCondition());
+				insertEConditionClauseDefinition(newClause, trigger.getTrigger().getCondition());
 			}
 		} else { // Insert clause in selection
 			EConditionClauseDefinition parent = (EConditionClauseDefinition) selection.get(0).keySet().iterator()
 					.next();
-			insertEConditionClauseDefinition(newType, parent);
+			insertEConditionClauseDefinition(newClause, parent);
 		}
-		return newType;
+	}
+
+	public EObject createEditedClauseForCondition(ETriggerDefinition trigger, String newType) {
+		return createEConditionClause(newType);
+	}
+
+	public void editClauseForCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+			EConditionClauseDefinition editedClause) {
+		EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selection.keySet().iterator().next();
+		EObject parent = selectedClause.eContainer();
+		replaceClause(selectedClause, editedClause);
 	}
 
 	public void addNewConstraintToAssertion(ETriggerDefinition trigger,
@@ -1528,6 +1556,26 @@ public class Services {
 
 	public boolean constraintHasOneValue(ETriggerDefinition trigger, List<EConstraint> selection) {
 		return constraintHasOneValue(selection.get(0));
+	}
+
+	public boolean isInRangeConstraint(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return selection.get(0) instanceof EInRange;
+	}
+
+	public String renderInRangeConstraintStart(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderEAlphaNumericValue(((EInRange) selection.get(0)).getStart());
+	}
+
+	public String renderInRangeConstraintEnd(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderEAlphaNumericValue(((EInRange) selection.get(0)).getEnd());
+	}
+
+	public void setInRangeConstraintStart(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		((EInRange) selection.get(0)).setStart(createEAlphaNumericValue(newValue));
+	}
+
+	public void setInRangeConstraintEnd(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		((EInRange) selection.get(0)).setEnd(createEAlphaNumericValue(newValue));
 	}
 
 	private boolean constraintHasOneValue(EConstraint constraint) {
@@ -1721,10 +1769,13 @@ public class Services {
 		return ee;
 	}
 
-	private void insertEConditionClauseDefinition(String newType, EObject parent) {
-		EObject clause = createEConditionClause(newType);
+	private void insertEConditionClauseDefinition(EObject clause, EObject parent) {
 		if (clause != null)
 			insertClause(clause, parent);
+	}
+
+	public EObject createNewClauseForCondition(ETriggerDefinition object, String newType) {
+		return createEConditionClause(newType);
 	}
 
 	private EObject createEConditionClause(String newType) {
@@ -1801,6 +1852,18 @@ public class Services {
 		}
 	}
 
+	private void replaceClause(EConditionClauseDefinition originalClause, EObject newClause) {
+		EObject parent = originalClause.eContainer();
+		if (parent instanceof EExtendedTriggerCondition) {
+			parent = (EExtendedTriggerCondition) parent;
+			((EExtendedTriggerCondition) parent).setConstraint((EConditionClauseDefinition) newClause);
+		} else {
+			parent = (EConditionClauseDefinition) parent;
+			setClauseChild(parent, (EConditionClauseDefinition) newClause);
+		}
+		setClauseChild(newClause, getClauseChild(originalClause));
+	}
+
 	private void setClauseChild(EObject clause, EConditionClauseDefinition nestedClause) {
 		if (clause instanceof EConditionClauseDefinitionAND) {
 			((EConditionClauseDefinitionAND) clause).setAnd((EConditionClauseDefinition) nestedClause);
@@ -1812,6 +1875,20 @@ public class Services {
 			((EExtendedTriggerCondition) clause).setConstraint((EConditionClauseDefinition) nestedClause);
 		}
 	}
+
+//	private EConditionClauseDefinition getClauseChild(EObject clause) {
+//		EConditionClauseDefinition child = null;
+//		if (clause instanceof EConditionClauseDefinitionAND) {
+//			child = ((EConditionClauseDefinitionAND) clause).getAnd();
+//		} else if (clause instanceof EConditionClauseDefinitionOR) {
+//			child = ((EConditionClauseDefinitionOR) clause).getOr();
+//		} else if (clause instanceof EConditionClauseDefinitionNOT) {
+//			child = ((EConditionClauseDefinitionNOT) clause).getNot();
+//		} else if (clause instanceof EExtendedTriggerCondition) {
+//			child = ((EExtendedTriggerCondition) clause).getConstraint();
+//		}
+//		return child;
+//	}
 
 	private EConditionClauseDefinitionAssert getEConditionClauseDefinitionAssert(EConditionClauseDefinition parent) {
 		EConditionClauseDefinitionAssert ccda = null;
