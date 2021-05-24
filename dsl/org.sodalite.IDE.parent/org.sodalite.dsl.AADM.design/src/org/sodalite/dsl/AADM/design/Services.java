@@ -1395,6 +1395,14 @@ public class Services {
 		return getConstraintType(constraint);
 	}
 
+	public String getConstraintType(ETriggerDefinition object, Object constraint) {
+		if (constraint instanceof EConstraint) {
+			return getConstraintType((EConstraint) constraint);
+		} else {
+			return null;
+		}
+	}
+
 	private String getConstraintType(EConstraint constraint) {
 		String type = null;
 		if (constraint instanceof EEqual) {
@@ -1532,11 +1540,36 @@ public class Services {
 		return createEConditionClause(newType);
 	}
 
+	public EObject editAttributeNameForClauseInCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+			String newAttributeValue) {
+		EObject selectedClause = selection.keySet().iterator().next();
+		EAssertionDefinition newClause = null;
+		if (selectedClause instanceof EAssertionDefinition) {
+			newClause = cloneEAssertionDefinition((EAssertionDefinition) selectedClause);
+			newClause.setAttribute_name(newAttributeValue);
+		}
+
+		return newClause;
+	}
+
+//	public void editClauseForCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+//			EObject editedClause) {
+//		EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selection.keySet().iterator().next();
+//		replaceClause(selectedClause, editedClause);
+//	}
+
 	public void editClauseForCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
-			EConditionClauseDefinition editedClause) {
-		EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selection.keySet().iterator().next();
-		EObject parent = selectedClause.eContainer();
-		replaceClause(selectedClause, editedClause);
+			Object editedClause) {
+		if (editedClause instanceof EObject) {
+			EObject selected = selection.keySet().iterator().next();
+			if (selected instanceof EConditionClauseDefinition) {
+				EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selected;
+				replaceClause(selectedClause, (EObject) editedClause);
+			} else if (selected instanceof EAssertionDefinition) {
+				EAssertionDefinition selectedClause = (EAssertionDefinition) selected;
+				replaceClause(selectedClause, (EAssertionDefinition) editedClause);
+			}
+		}
 	}
 
 	public void addNewConstraintToAssertion(ETriggerDefinition trigger,
@@ -1793,19 +1826,45 @@ public class Services {
 	}
 
 	private EConditionClauseDefinition cloneEConditionClauseDefinition(String newType,
-			EConditionClauseDefinition oldClone) {
+			EConditionClauseDefinition oldClause) {
 		EConditionClauseDefinition newClause = null;
 		if ("Not".equals(newType)) {
 			newClause = createEConditionClauseDefinitionNOT();
-			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClone));
+			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClause));
 		} else if ("And".equals(newType)) {
 			newClause = createEConditionClauseDefinitionAND();
-			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClone));
+			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClause));
 		} else if ("Or".equals(newType)) {
 			newClause = createEConditionClauseDefinitionOR();
-			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClone));
+			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClause));
 		}
 		return newClause;
+	}
+
+	private EConditionClauseDefinition cloneEConditionClauseDefinition(EConditionClauseDefinition oldClause) {
+		EConditionClauseDefinition newClause = null;
+		if (oldClause instanceof EConditionClauseDefinitionNOT) {
+			newClause = createEConditionClauseDefinitionNOT();
+			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionAND) {
+			newClause = createEConditionClauseDefinitionAND();
+			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionOR) {
+			newClause = createEConditionClauseDefinitionOR();
+			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionAssert) {
+			newClause = createEConditionClauseDefinitionAssert();
+			((EConditionClauseDefinitionAssert) newClause).getAssertions()
+					.addAll(((EConditionClauseDefinitionAssert) oldClause).getAssertions());
+		}
+		return newClause;
+	}
+
+	private EAssertionDefinition cloneEAssertionDefinition(EAssertionDefinition oldAssertion) {
+		EAssertionDefinition newAssertion = createEAssertionDefinition();
+		newAssertion.setAttribute_name(oldAssertion.getAttribute_name());
+		newAssertion.getConstraints().getList().addAll(oldAssertion.getConstraints().getList());
+		return newAssertion;
 	}
 
 	private EConditionClauseDefinition getClauseChild(EConditionClauseDefinition oldClone) {
@@ -1850,6 +1909,13 @@ public class Services {
 			if (nestedClause != null)
 				setClauseChild(clause, nestedClause);
 		}
+	}
+
+	private void replaceClause(EAssertionDefinition originalClause, EAssertionDefinition newClause) {
+		EConditionClauseDefinitionAssert parent = (EConditionClauseDefinitionAssert) originalClause.eContainer();
+		int index = parent.getAssertions().indexOf(originalClause);
+		parent.getAssertions().remove(originalClause);
+		parent.getAssertions().add(index, newClause);
 	}
 
 	private void replaceClause(EConditionClauseDefinition originalClause, EObject newClause) {
@@ -1915,6 +1981,10 @@ public class Services {
 
 	private EConditionClauseDefinitionOR createEConditionClauseDefinitionOR() {
 		return RMFactory.eINSTANCE.createEConditionClauseDefinitionOR();
+	}
+
+	private EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssert() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAssert();
 	}
 
 	private EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssertion() {
