@@ -1530,8 +1530,7 @@ public class Services {
 				insertEConditionClauseDefinition(newClause, trigger.getTrigger().getCondition());
 			}
 		} else { // Insert clause in selection
-			EConditionClauseDefinition parent = (EConditionClauseDefinition) selection.get(0).keySet().iterator()
-					.next();
+			EObject parent = selection.get(0).keySet().iterator().next();
 			insertEConditionClauseDefinition(newClause, parent);
 		}
 	}
@@ -1881,7 +1880,7 @@ public class Services {
 
 	private void insertClause(EObject clause, EObject parent) {
 		if (clause instanceof EAssertionDefinition) {
-			if (!(parent instanceof EConditionClauseDefinitionAssert)) {
+			if (!(parent instanceof EConditionClauseDefinitionAssert) && parent instanceof EConditionClauseDefinition) {
 				EConditionClauseDefinitionAssert ccda = getEConditionClauseDefinitionAssert(
 						(EConditionClauseDefinition) parent);
 				if (ccda == null) {
@@ -1889,6 +1888,9 @@ public class Services {
 					insertClause(ccda, parent);
 				}
 				ccda.getAssertions().add((EAssertionDefinition) clause);
+			} else if (parent instanceof EAssertionDefinition) {
+				parent = ((EAssertionDefinition) parent).eContainer();
+				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
 			} else {
 				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
 			}
