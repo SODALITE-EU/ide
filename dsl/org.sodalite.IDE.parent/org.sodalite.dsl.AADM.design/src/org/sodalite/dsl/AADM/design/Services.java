@@ -90,6 +90,8 @@ public class Services {
 
 	public static SortedSet<String> valueTypes = new TreeSet<String>();
 	public static SortedSet<String> clauseTypes = new TreeSet<String>();
+	public static SortedSet<String> assertionType = new TreeSet<String>();
+	public static SortedSet<String> clauseDefinitionTypes = new TreeSet<String>();
 	public static SortedSet<String> constraintTypes = new TreeSet<String>();
 	public static int ID = 0;
 	static {
@@ -105,6 +107,14 @@ public class Services {
 		clauseTypes.add("Or");
 		clauseTypes.add("Not");
 		clauseTypes.add("Assertion");
+
+		// Clause types (special case of clause types without assertion)
+		clauseDefinitionTypes.add("And");
+		clauseDefinitionTypes.add("Or");
+		clauseDefinitionTypes.add("Not");
+
+		// Clause types (special case of clause types for assertions
+		assertionType.add("Assertion");
 
 		// Constraint types
 		constraintTypes.add("Equal");
@@ -462,6 +472,8 @@ public class Services {
 			value = String.valueOf(((EFLOAT) eanValue).getValue());
 		else if (eanValue instanceof ESIGNEDINT)
 			value = String.valueOf(((ESIGNEDINT) eanValue).getValue());
+		else if (eanValue instanceof EBOOLEAN)
+			value = Boolean.toString(((EBOOLEAN) eanValue).isValue());
 		return value;
 	}
 
@@ -1350,6 +1362,14 @@ public class Services {
 
 	public SortedSet<String> getClauseTypes(EObject ignored) {
 		return Services.clauseTypes;
+	}
+
+	public SortedSet<String> getClauseTypes(EObject ignored, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition)
+			return Services.assertionType;
+		else
+			return Services.clauseDefinitionTypes;
 	}
 
 	public SortedSet<String> getConstraintTypes(EObject ignored) {
