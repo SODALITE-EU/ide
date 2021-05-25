@@ -1,0 +1,121 @@
+module: batch
+
+node_types:
+
+  sodalite.nodes.workflow.Job: 
+    derived_from: tosca.nodes.SoftwareComponent
+    requirements:
+      host:
+        node: tosca.nodes.Compute
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+      execution:
+        node: batch/sodalite.nodes.batch.Container.BatchExecution
+        capability: tosca.capabilities.Node
+        relationship: tosca.relationships.DependsOn
+    attributes:
+      job_id:
+        type: string
+      job_walltime:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:  
+          start:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.workflow.Job.host
+              scheduler: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.scheduler
+                  req_cap: batch/sodalite.nodes.workflow.Job.host
+              exec_name: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.batch.Container.JobExecution.exec_name
+                  req_cap: batch/sodalite.nodes.workflow.Job.execution
+              workspace: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.JobExecution.workspace
+                  req_cap: batch/sodalite.nodes.workflow.Job.execution
+              env: 
+                type: map
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.batch.Container.JobExecution.env
+                  req_cap: batch/sodalite.nodes.workflow.Job.execution
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/workflows/start.yml"
+              dependencies: ["/workspace/iac-modules/hpc/app/playbooks/workflows/batch/start_batch.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/slurm/start_slurm.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/torque/start_torque.yml"]
+
+  sodalite.nodes.workflow.Result: 
+    derived_from: tosca.nodes.SoftwareComponent
+    requirements:
+      host:
+        node: tosca.nodes.Compute
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+      job:
+        node: batch/sodalite.nodes.workflow.Job
+        capability: tosca.capabilities.Node
+        relationship: tosca.relationships.DependsOn
+    properties:
+      monitor_period:
+        type: integer
+        default: 10
+      monitor_retries_headroom:
+        type: integer
+        default: 2
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:  
+          start:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.workflow.Job.host
+              scheduler: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.scheduler
+                  req_cap: batch/sodalite.nodes.workflow.Job.host
+              job_monitor_period: 
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.workflow.Result.monitor_period
+              job_monitor_retries_headroom: 
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.workflow.Result.monitor_retries_headroom
+              job_id: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.workflow.Job.job_id
+                  req_cap: batch/sodalite.nodes.workflow.Result.job
+              job_walltime: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.workflow.Job.job_walltime
+                  req_cap: batch/sodalite.nodes.workflow.Result.job
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/workflows/check.yml"
+              dependencies: ["/workspace/iac-modules/hpc/app/playbooks/workflows/batch/check_batch.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/slurm/check_slurm.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/torque/check_torque.yml"]

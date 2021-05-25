@@ -1,0 +1,35 @@
+module: vehicleiot
+
+import: kube
+
+node_templates:
+
+  kube-master-remote-vm:
+    type: kube/sodalite.nodes.Kubernetes.Cluster
+    properties:
+      kubeconfig: "~/.kube/config"
+      username: "centos"
+    attributes:
+      public_address: "192.168.2.56" // not quite public
+
+  mysql-deployment-via-helm:
+    type: kube/sodalite.nodes.Kubernetes.Definition.Helm.Node
+    properties:
+      name: "mysql-release-1-from-helm"
+      namespace: "default"
+      chart: "stable/mysql"
+      chart_version: "latest"
+      repo_name: "stable"
+      repo_url: "https://charts.helm.sh/stable"
+      keep_repo: false
+      values:
+        replicas: 1
+        persistence:
+          enabled: false
+    requirements:
+      kube_node:
+        node: kube/node-filesrv
+      host:
+        node: kube/kube-master-remote-vm
+
+        

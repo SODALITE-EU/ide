@@ -1,0 +1,294 @@
+module: batch
+
+data_types:
+
+  sodalite.datatypes.application.build:
+    derived_from: tosca.datatypes.Root
+    properties:
+      src:
+        type: string
+      build_command:
+        type: string
+
+
+node_types:
+
+  sodalite.nodes.batch.Container.Application:
+    derived_from: tosca.nodes.Root
+    properties:
+      app_tag:
+        type: string
+      app_type:
+        type: string
+      container_runtime:
+        type: string
+        description: "Format: [private|docker|shub|library]://[repository/]image-name:tags"
+      executable:
+        type: string
+      arguments:
+        type: string
+        required: false
+        default: ""
+      mpi_ranks:
+        type: integer
+        required: false
+        default: "null"
+      threads:
+        type: integer
+        required: false
+        default: "null"
+      pre-execution:
+        type: string
+        required: false
+        default: "null"
+      post-execution:
+        type: string
+        required: false
+        default: "null"
+      build:
+        type: map
+        required: false
+        default: "null"
+    requirements:
+      runtime:
+        node: batch/sodalite.nodes.batch.Container.Runtime
+        capability: tosca.capabilities.Node
+        relationship: tosca.relationships.DependsOn
+      host:
+        node: tosca.nodes.Compute
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.host
+              runtime: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.runtime
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+              container_runtime: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Application.container_runtime
+              certs_location: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.certs_location
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+              private_registry: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.private_registry
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+              images_location: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.images_location
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+              images_location_full_path: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.batch.Container.Runtime.images_location_full_path
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+              puller_image: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.puller_image
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.runtime
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/apps/configure_app_runtime.yml"
+
+  sodalite.nodes.batch.Container.BatchExecution:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      content:
+        type: string
+      workspace:
+        type: string
+        required: false
+        default: "~/"
+    attributes:
+      env:
+        type: map
+        default: "{}"
+      exec_name:
+        type: string
+    requirements:
+      application:
+        node: batch/sodalite.nodes.batch.Container.Application
+        capability: tosca.capabilities.Node
+        relationship: tosca.relationships.DependsOn
+      runtime:
+        node: batch/sodalite.nodes.batch.Container.Runtime
+        capability: tosca.capabilities.Node
+        relationship: tosca.relationships.DependsOn
+      host:
+        node: tosca.nodes.Compute
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.batch.Container.Application.host
+              exec_name: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Application.app_tag
+                  req_cap: batch/sodalite.nodes.batch.Container.BatchExecution.application
+              content: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.BatchExecution.content
+              workspace: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.BatchExecution.workspace
+              env: 
+                type: map
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.batch.Container.BatchExecution.env
+              runtime: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.runtime
+                  req_cap: batch/sodalite.nodes.batch.Container.BatchExecution.runtime
+              images_location_full_path: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.batch.Container.Runtime.images_location_full_path
+                  req_cap: batch/sodalite.nodes.batch.Container.BatchExecution.runtime
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/apps/create_batch_execution.yml"
+
+  sodalite.nodes.batch.Container.JobExecution:
+    derived_from: batch/sodalite.nodes.batch.Container.BatchExecution
+    properties:
+      job_name:
+        type: string
+      account:
+        type: string
+        required: false
+        default: "null"
+      queue:
+        type: string
+        required: false
+        default: "null"
+      wall_time_limit:
+        type: string
+        required: false
+        default: "null"
+      node_count:
+        type: integer
+        required: false
+        default: "null"
+      core_count:
+        type: integer
+        required: false
+        default: "null"
+      process_count_per_node:
+        type: integer
+        required: false
+        default: "null"
+      core_count_per_process:
+        type: integer
+        required: false
+        default: "null"
+      memory_limit:
+        type: scalar-unit.size
+        required: false
+        default: "null"
+      minimum_memory_per_processor:
+        type: scalar-unit.size
+        required: false
+        default: "null"
+      request_gpus:
+        type: integer
+        required: false
+        default: "null"
+      request_specific_nodes:
+        type: string
+        required: false
+        default: "null"
+      job_array:
+        type: string
+        required: false
+        default: "null"
+      standard_output_file:
+        type: string
+        required: false
+        default: "null"
+      standard_error_file:
+        type: string
+        required: false
+        default: "null"
+      combine_stdout_stderr:
+        type: boolean
+        required: false
+        default: "null"
+      architecture_constraint:
+        type: string
+        required: false
+        default: "null"
+      copy_environment:
+        type: boolean
+        required: false
+        default: "null"
+      copy_environment_variable:
+        type: string
+        required: false
+        default: "null"
+      job_dependency:
+        type: string
+        required: false
+        default: "null"
+      request_event_notification:
+        type: string
+        required: false
+        default: "null"
+      email_address:
+        type: string
+        required: false
+        default: "null"
+      defer_job:
+        type: string
+        required: false
+        default: "null"
+      node_exclusive:
+        type: boolean
+        required: false
+        default: "null"
+    requirements:
+      host:
+        node: batch/sodalite.nodes.hpc.WM
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn

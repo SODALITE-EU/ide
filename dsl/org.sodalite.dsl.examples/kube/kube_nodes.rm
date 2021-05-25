@@ -1,0 +1,39 @@
+module: kube
+
+node_types:
+
+  sodalite.nodes.Kubernetes.Node:  
+    derived_from: tosca.nodes.Compute
+    capabilities:
+      host:
+        type: tosca.capabilities.Compute
+        valid_source_types: [ kube/sodalite.nodes.Kubernetes.Definition ]
+    properties:  
+      name:  
+        description: "Name of the node"
+        required: true 
+        type: string 
+      cpus:  
+        required: false 
+        type: integer
+        default: 0
+      gpus:  
+        required: false 
+        type: integer
+        default: 0
+      edgetpus:  
+        required: false 
+        type: integer
+        default: 0
+      arm64_cpus:  
+        required: false 
+        type: integer
+        default: 0
+      amd64_cpus:  
+        required: false 
+        type: integer
+        default: 0
+      ready_status:
+        type: boolean
+        default: false
+        description: "Node is ready for deployment"

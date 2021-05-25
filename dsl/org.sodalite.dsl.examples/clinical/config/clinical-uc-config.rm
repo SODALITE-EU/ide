@@ -1,0 +1,44 @@
+module: clinical
+
+import: batch
+
+node_types:
+
+  sodalite.nodes.clinical.Config: 
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      workspace:
+        type: string
+      input_tarball_url:
+        type: string
+      output_tarball_url:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              workspace: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: clinical/sodalite.nodes.clinical.Config.workspace
+              input_tarball_url: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: clinical/sodalite.nodes.clinical.Config.input_tarball_url
+              output_tarball_url: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: clinical/sodalite.nodes.clinical.Config.output_tarball_url
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: clinical/sodalite.nodes.clinical.Config.host
+                  property: batch/sodalite.nodes.hpc.WM.username
+            implementation: 
+              primary: "/workspace/examples/clinical/config/playbooks/create-config.yaml"

@@ -1,0 +1,66 @@
+module: clinical
+
+import: batch
+
+node_templates:
+
+  // HLRS testbed
+  hlrs-testbed:
+    type: batch/sodalite.nodes.hpc.WM
+    properties:
+      scheduler: "torque"
+      username: "kamil"
+    attributes:
+      public_address: "sodalite-fe.hlrs.de"
+    capabilities:
+      resources:
+        properties:
+          gpus: 5
+          cpus: 200
+          memory: 650687
+      optimisations:
+        properties:
+          target: "hlrs_testbed"
+
+  // HLRS container runtime
+  hlrs-singularity-runtime:
+    type: batch/sodalite.nodes.batch.Container.Runtime
+    properties:
+      runtime: "singularity"
+      images_location: "images"
+      certs_location: "certs"
+      private_registry: "77.231.202.207"
+    requirements:
+      host:
+        node: clinical/hlrs-testbed
+
+  // EC3 Slurm testbed
+  ec3-slurm-testbed:
+    type: batch/sodalite.nodes.hpc.WM
+    properties:
+      scheduler: "slurm"
+      username: "kamil"
+    attributes:
+      public_address: "149.156.182.39"
+    capabilities:
+      resources:
+        properties:
+          gpus: 0
+          cpus: 2
+          memory: 8192
+      optimisations:
+        properties:
+          target: "egi"
+
+  // EC3 Slurm container runtime
+  ec3-slurm-singularity-runtime:
+    type: batch/sodalite.nodes.batch.Container.Runtime
+    properties:
+      runtime: "singularity"
+      images_location: "images"
+      certs_location: "certs"
+      private_registry: "77.231.202.207"
+    requirements:
+      host:
+        node: clinical/ec3-slurm-testbed
+        

@@ -1,0 +1,15 @@
+optimization egi.mpi:
+  enable_opt_build: true
+  enable_autotuning: false
+  app_type: hpc
+  opt_build:
+    acc_type: none
+    cpu_type: x86
+  app_type-hpc:
+    config:
+      parallelisation: mpi
+    data:
+      location: ""
+    parallelisation-mpi:
+      library: openmpi
+      version: "3.1.3"

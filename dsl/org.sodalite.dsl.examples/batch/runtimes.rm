@@ -1,0 +1,91 @@
+module: batch
+
+node_types:
+
+  sodalite.nodes.batch.Container.Runtime:
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      runtime:
+        type: string
+        constraints:
+          valid_values: [ "singularity" ]
+      images_location:
+        type: string
+        required: false
+        default: "images"
+      certs_location:
+        type: string
+        required: false
+        default: ""
+      private_registry:
+        type: string
+        required: false
+        default: ""
+      puller_image:
+        type: string
+        default: "puller.sif"
+      puller_image_remote:
+        type: string
+        default: "modakopt/modak:puller"
+    attributes:
+      images_location_full_path:
+        type: string
+    requirements:
+      host:
+        node: tosca.nodes.Compute
+        capability: tosca.capabilities.Compute
+        relationship: tosca.relationships.HostedOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.batch.Container.Runtime.host
+              runtime: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.runtime
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/runtimes/create_runtime.yml"
+          configure:
+            inputs:
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.username
+                  req_cap: batch/sodalite.nodes.batch.Container.Runtime.host
+              runtime: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.runtime
+              certs_location: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.certs_location
+              images_location: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.images_location
+              puller_image: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.puller_image
+              puller_image_remote: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.batch.Container.Runtime.puller_image_remote
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/runtimes/configure_runtime.yml"

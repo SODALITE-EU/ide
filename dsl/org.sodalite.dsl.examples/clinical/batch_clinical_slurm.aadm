@@ -1,0 +1,168 @@
+module: clinical
+
+import: batch
+
+node_templates:
+
+  // APPLICATIONS
+  density-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "density-mapper"
+      app_type: "fortran"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  prob-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    optimization: egi.mpi
+    properties:
+      app_tag: "prob-mapper"
+      app_type: "hpc"
+      mpi_ranks: 2
+      container_runtime: "private://moduli:1.0.0" // from private registry
+      executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
+      build:
+        src: "$HOME/moduli/.git"
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install setuptools && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
+    requirements:
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  boundary-condition-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    properties:
+      app_tag: "boundary-condition"
+      app_type: "fortran"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
+    requirements:
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+
+
+  // JOB EXECUTIONS
+  density-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "density-mapper-job"
+      node_count: 1
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      standard_output_file: "density-mapper.out"
+      standard_error_file: "density-mapper.err"
+      combine_stdout_stderr: true
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/density-mapper-app
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  prob-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "prob-mapper-job"
+      node_count: 2
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      standard_output_file: "prob-mapper.out"
+      standard_error_file: "prob-mapper.err"
+      combine_stdout_stderr: true
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/prob-mapper-app
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  boundary-condition-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "boundary-condition-job"
+      node_count: 1
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      standard_output_file: "boundary-condition.out"
+      standard_error_file: "boundary-condition.err"
+      combine_stdout_stderr: true
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/boundary-condition-app
+      runtime:
+        node: clinical/ec3-slurm-singularity-runtime
+      host:
+        node: clinical/ec3-slurm-testbed
+      
+      
+  // WORKFLOW
+  dm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution: 
+        node: clinical/density-mapper-job
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  dm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/dm-exec
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  pm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/prob-mapper-job
+      host:
+        node: clinical/ec3-slurm-testbed
+      dependency:
+        node: clinical/dm-result
+  
+  pm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/pm-exec
+      host:
+        node: clinical/ec3-slurm-testbed
+  
+  bc-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/boundary-condition-job
+      host:
+        node: clinical/ec3-slurm-testbed
+      dependency:
+        node: clinical/pm-result
+  
+  bc-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/bc-exec
+      host:
+        node: clinical/ec3-slurm-testbed
+      
+      
+      
+      
+      

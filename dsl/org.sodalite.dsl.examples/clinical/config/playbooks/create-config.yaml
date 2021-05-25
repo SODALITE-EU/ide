@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: no
+  vars:
+    INPUT_TARBALL: "input.tar"
+    OUTPUT_TARBALL: "output.tar"
+  tasks:
+    - name: "Register workspace"
+      shell: readlink -f {{ ( workspace != None and workspace != '' ) | ternary(workspace, ansible_env.HOME) }}
+      register: workspace_dir_results
+    - name: "Save full path of workspace dir as attribute"
+      set_fact:
+        workspace_path: "{{ workspace_dir_results.stdout }}"
+    - name: "Create workspace dir"
+      file:
+        dest: "{{ workspace_path }}"
+        state: directory
+    - name: "Pull and extract input and output tars"
+      shell: |
+        wget -q -O {{ workspace_path }}/{{ INPUT_TARBALL }} {{ input_tarball_url }}
+        tar -xf {{ INPUT_TARBALL }}
+        wget -q -O {{ workspace_path }}/{{ OUTPUT_TARBALL }} {{ output_tarball_url }}
+        tar -xf {{ OUTPUT_TARBALL }}
+      args:
+        chdir: "{{ workspace_path }}"

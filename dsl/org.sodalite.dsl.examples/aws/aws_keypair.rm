@@ -1,0 +1,85 @@
+module: aws
+
+node_types:
+
+  sodalite.nodes.AWS.Keypair:  
+    derived_from: tosca.nodes.Root 
+    properties:  
+      name:  
+        description: "Name of the keypair"
+        required: true 
+        type: string 
+      public_key:
+        description: "Public key for keypair"
+        required: true 
+        type: string 
+      region:
+        description: "The AWS region to use."
+        required: false 
+        type: string     
+      aws_access_key:
+        description: "The AWS region to use."
+        required: false 
+        type: string   
+      aws_secret_key:
+        description: "The AWS region to use."
+        required: false 
+        type: string             
+    interfaces:  
+      Standard:  
+        type: tosca.interfaces.node.lifecycle.Standard   
+        operations:
+          create:  
+            implementation: 
+              primary: "/workspace/iac-modules/aws/playbooks/keypair_create.yml"
+            inputs:
+              name: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.name
+              public_key: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.public_key
+              region: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.region
+              aws_access_key: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.aws_access_key
+              aws_secret_key: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.aws_secret_key
+          delete:  
+            implementation: 
+              primary: "/workspace/iac-modules/aws/playbooks/keypair_delete.yml"
+            inputs:  
+              name: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.name
+              region: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.region
+              aws_access_key: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.aws_access_key
+              aws_secret_key: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.Keypair.aws_secret_key
+      

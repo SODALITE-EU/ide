@@ -1,3 +1,5 @@
+module: aws
+
 node_types:
 
   sodalite.nodes.AWS.VM:  
@@ -35,7 +37,19 @@ node_types:
       aws_secret_key:
         description: "The AWS secret key."
         required: false 
-        type: string           
+        type: string   
+      userdata:
+        description: "Additional userdata applied to configure the VM"
+        type: string
+        default: ""
+        required: false 
+      scheduler:
+        description: "Scheduler type for batch execution"
+        type: string
+        default: "batch"
+        required: false 
+        constraints:
+          valid_values: [ "batch" ]           
     attributes:  
       id:  
         description: "AWS id of the VM" 
@@ -44,10 +58,10 @@ node_types:
         description: "ansible ipv4" 
         type: string 
     requirements:  
-    	protected_by:  
-			relationship: tosca.relationships.DependsOn 
-			node: sodalite.nodes.AWS.SecurityRules 
-			capability: tosca.capabilities.Node 
+      protected_by:  
+        relationship: tosca.relationships.DependsOn 
+        node: aws/sodalite.nodes.AWS.SecurityRules 
+        capability: tosca.capabilities.Node 
     capabilities:  
       feature:  
         type: tosca.capabilities.Node 
@@ -57,65 +71,84 @@ node_types:
         operations:
           create:  
             inputs:  
-				region:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.region
-				aws_access_key:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.aws_access_key
-				aws_secret_key:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.aws_secret_key
-				vm_name:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.name
-				flavor:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.flavor	
-				image:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.image
-				network:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.network
-				key_name:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.key_name
-				security_groups:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.security_groups
-				ansible_user:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.username
+              region:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.region
+              aws_access_key:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.aws_access_key
+              aws_secret_key:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.aws_secret_key
+              vm_name:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.name
+              flavor:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.flavor  
+              image:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.image
+              network:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.network
+              key_name:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.key_name
+              security_groups:  
+                type: list
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.security_groups
+              userdata:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.userdata
+              ansible_user:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.username
             implementation: 
-              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/vm_create.yml" 
+              primary: "/workspace/iac-modules/aws/playbooks/vm_create.yml" 
           delete:  
             inputs:  
-				id:  
-					default: get_attribute:
-						entity: SELF
-						attribute: sodalite.nodes.AWS.VM.id
-				aws_access_key:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.aws_access_key
-				aws_secret_key:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.aws_secret_key
-				vm_name:  
-					default: get_property:
-						entity: SELF
-						property: sodalite.nodes.AWS.VM.name
+              id:  
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: aws/sodalite.nodes.AWS.VM.id
+              aws_access_key:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.aws_access_key
+              aws_secret_key:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.aws_secret_key
+              vm_name:  
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: aws/sodalite.nodes.AWS.VM.name
             implementation: 
-              primary: "/workspace/iac-management/use-cases/aws/modules/aws/playbooks/vm_delete.yml" 
+              primary: "/workspace/iac-modules/aws/playbooks/vm_delete.yml" 

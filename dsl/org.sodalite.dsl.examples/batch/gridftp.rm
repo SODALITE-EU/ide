@@ -1,0 +1,217 @@
+module: batch
+
+capability_types:
+
+  sodalite.capabilities.data.mover.GridFTP.Client:
+    derived_from: tosca.capabilities.Root
+
+node_types:
+
+  sodalite.data.mover.GridFTP.Client: 
+    description: "GridFTP client"
+    derived_from: tosca.nodes.SoftwareComponent
+    capabilities:
+      client:
+        type: batch/sodalite.capabilities.data.mover.GridFTP.Client
+    properties:
+      cert_path:
+        type: string
+        required: false
+        default: "~/.globus"
+        description: "Location of globus client certificates"
+      usercert:
+        type: string
+        required: false
+        default: ""
+      userkey:
+        type: string
+        required: false
+        default: ""
+      globus_certificates_tarball_url:
+        type: string
+        required: false
+        default: ""
+      hostnames:
+        type: map
+        required: false
+        default: "{}"
+      env:
+        type: map
+        required: false
+        default: "{}"
+    attributes:
+      cert_full_path:
+        type: string
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              cert_path: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.cert_path
+              usercert: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.usercert
+              userkey: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.userkey
+              globus_certificates_tarball_url: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.globus_certificates_tarball_url
+              hostnames: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.hostnames
+              env: 
+                type: map
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Client.env
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: batch/sodalite.data.mover.GridFTP.Client.host
+                  property: batch/sodalite.nodes.hpc.WM.username
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/data/mover/playbooks/configure-gridftp-client.yml"
+
+  sodalite.data.mover.GridFTP.Transfer:
+    description: "Moves data from src location to dst location. src and dst must be absolute path"
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      name:
+        type: string
+        required: false
+        default: "Sample gridftp transfer"
+      parallel_streams:
+        type: integer
+        required: false
+        default: 1
+        constraints:
+          greater_than: 0
+      src_protocol:
+        type: string
+        constraints:
+          valid_values: [ "ftp", "sshftp", "gsiftp", "file" ]
+        default: "file"
+      src_address:
+        type: string
+        default: "localhost"
+      src_port:
+        type: tosca.datatypes.network.PortDef
+        required: false
+        default: 0
+      src_path:
+        type: string
+      dst_protocol:
+        type: string
+        constraints:
+          valid_values: [ "ftp", "sshftp", "gsiftp", "file" ]
+        default: "file"
+      dst_address:
+        type: string
+        default: "localhost"
+      dst_port:
+        type: tosca.datatypes.network.PortDef
+        required: false
+        default: 0
+      dst_path:
+        type: string
+    requirements:
+      client:
+        node: batch/sodalite.data.mover.GridFTP.Client
+        capability: batch/sodalite.capabilities.data.mover.GridFTP.Client
+        relationship: tosca.relationships.DependsOn
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              cert_path: 
+                type: string
+                default: get_attribute: 
+                  entity: SELF
+                  req_cap: batch/sodalite.data.mover.GridFTP.Transfer.client
+                  attribute: batch/sodalite.data.mover.GridFTP.Client.cert_full_path
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: batch/sodalite.data.mover.GridFTP.Client.host
+                  property: batch/sodalite.nodes.hpc.WM.username
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/data/mover/playbooks/configure-gridftp-proxy.yml"
+          start:
+            inputs:
+              src_protocol:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.src_protocol
+              src_address:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.src_address
+              src_port:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.src_port
+              src_path:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.src_path
+              dst_protocol:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.dst_protocol
+              dst_address:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.dst_address
+              dst_port:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.dst_port
+              dst_path:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.dst_path
+              parallel_streams:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: batch/sodalite.data.mover.GridFTP.Transfer.parallel_streams
+              cert_path: 
+                type: string
+                default: get_attribute: 
+                  entity: SELF
+                  req_cap: batch/sodalite.data.mover.GridFTP.Transfer.client
+                  attribute: batch/sodalite.data.mover.GridFTP.Client.cert_full_path
+              ansible_user: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  req_cap: batch/sodalite.data.mover.GridFTP.Client.host
+                  property: batch/sodalite.nodes.hpc.WM.username
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/data/mover/playbooks/start-gridftp-transfer.yml"

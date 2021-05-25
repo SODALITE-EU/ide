@@ -1,0 +1,48 @@
+module: batch
+
+capability_types:
+
+  // shall be discovered
+  // target name shall be in-sync with MODAK db
+  sodalite.capabilities.OptimisedTarget:
+    derived_from: tosca.capabilities.Compute
+    properties:
+      target:
+        type: string
+
+  // from discovery defs
+  sodalite.capabilities.WM.JobResources:
+    derived_from: tosca.capabilities.Compute
+    properties:
+      gpus:
+        type: integer
+        required: false
+      cpus:
+        type: integer
+        required: false
+      memory:
+        type: integer
+        required: false
+
+node_types:
+
+  // from discovery defs
+  sodalite.nodes.hpc.WM: 
+    derived_from: tosca.nodes.Compute
+    properties:
+      scheduler:
+        type: string
+        default: "batch"
+        constraints:
+          valid_values: [ "torque", "slurm", "batch" ]
+      username:
+        type: string
+      ssh-key:
+        required: false
+        type: string
+        default: ""
+    capabilities:
+      resources:
+        type: batch/sodalite.capabilities.WM.JobResources
+      optimisations:
+        type: batch/sodalite.capabilities.OptimisedTarget
