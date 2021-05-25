@@ -11,6 +11,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="policies" eType="#//EPolicies"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOutputs"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENodeTemplates">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeTemplates" upperBound="-1"

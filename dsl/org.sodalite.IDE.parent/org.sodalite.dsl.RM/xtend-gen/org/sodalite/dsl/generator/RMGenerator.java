@@ -1412,8 +1412,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"inputs\" ;");
         _builder.newLine();
         {
-          EList<EParameterDefinition> _inputs_1 = o.getOperation().getInputs().getInputs();
-          for(final EParameterDefinition i : _inputs_1) {
+          EList<EParameterDefinition> _parameters = o.getOperation().getInputs().getParameters();
+          for(final EParameterDefinition i : _parameters) {
             _builder.append("  ");
             _builder.append("exchange:hasParameter :Parameter_");
             Integer _parameterNumber_9 = this.getParameterNumber(i, "name");
@@ -1474,8 +1474,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EInputs _inputs_2 = o.getOperation().getInputs();
-      boolean _tripleNotEquals_9 = (_inputs_2 != null);
+      EInputs _inputs_1 = o.getOperation().getInputs();
+      boolean _tripleNotEquals_9 = (_inputs_1 != null);
       if (_tripleNotEquals_9) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");

@@ -554,7 +554,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "inputs" ;
-	  «FOR i:o.operation.inputs.inputs»
+	  «FOR i:o.operation.inputs.parameters»
 	  exchange:hasParameter :Parameter_«getParameterNumber(i, "name")» ;
   	  «ENDFOR»
 	.

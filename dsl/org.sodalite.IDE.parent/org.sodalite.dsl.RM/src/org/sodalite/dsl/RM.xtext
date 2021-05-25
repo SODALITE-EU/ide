@@ -436,7 +436,10 @@ EDependencyFiles:
 ;
 
 EInputs:
-	{EInputs} (inputs+=EParameterDefinition)*;
+	{EInputs} (parameters+=EParameterDefinition)*;
+	
+EOutputs:
+	{EOutputs} (parameters+=EParameterDefinition)*;
 
 	//inputs of operation definition in NodeTypes are ParameterDefinition
 EParameterDefinition:

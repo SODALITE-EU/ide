@@ -72,6 +72,7 @@ import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
@@ -298,6 +299,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EOPERATIONS:
 				sequence_EOperations(context, (EOperations) semanticObject); 
+				return; 
+			case RMPackage.EOUTPUTS:
+				sequence_EOutputs(context, (EOutputs) semanticObject); 
 				return; 
 			case RMPackage.EPREFIX_ID:
 				sequence_EPREFIX_ID(context, (EPREFIX_ID) semanticObject); 
@@ -1005,7 +1009,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EInputs returns EInputs
 	 *
 	 * Constraint:
-	 *     inputs+=EParameterDefinition*
+	 *     parameters+=EParameterDefinition*
 	 */
 	protected void sequence_EInputs(ISerializationContext context, EInputs semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1338,6 +1342,18 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     operations+=EOperationDefinition*
 	 */
 	protected void sequence_EOperations(ISerializationContext context, EOperations semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EOutputs returns EOutputs
+	 *
+	 * Constraint:
+	 *     parameters+=EParameterDefinition*
+	 */
+	protected void sequence_EOutputs(ISerializationContext context, EOutputs semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

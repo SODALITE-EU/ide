@@ -1009,8 +1009,8 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     final AADM_Model aadm = ((AADM_Model) _findModel);
     if ((aadm != null)) {
       Image image = this.getImage("icons/input.png");
-      EList<EParameterDefinition> _inputs = aadm.getInputs().getInputs();
-      for (final EParameterDefinition input : _inputs) {
+      EList<EParameterDefinition> _parameters = aadm.getInputs().getParameters();
+      for (final EParameterDefinition input : _parameters) {
         {
           final String proposalText = input.getName();
           this.createNonEditableCompletionProposal(proposalText, proposalText, image, context, null, acceptor);

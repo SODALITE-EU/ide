@@ -30,6 +30,10 @@ AADM_Model:
 	('policies:'
 		BEGIN
 		policies=EPolicies
+		END)? &
+	('outputs:'
+		BEGIN
+		outputs = EOutputs
 		END)?
 ;
 

@@ -22,6 +22,7 @@ import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.ETarget;
 import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -59,8 +60,28 @@ public class AADMLabelProvider extends DefaultEObjectLabelProvider {
     return "inputs.png";
   }
   
+  public String text(final EOutputs entry) {
+    return "outputs";
+  }
+  
+  public String image(final EOutputs entry) {
+    return "outputs.png";
+  }
+  
   public String image(final EParameterDefinition entry) {
-    return "input.png";
+    String _xifexpression = null;
+    EObject _eContainer = entry.eContainer();
+    if ((_eContainer instanceof EInputs)) {
+      _xifexpression = "input.png";
+    } else {
+      String _xifexpression_1 = null;
+      EObject _eContainer_1 = entry.eContainer();
+      if ((_eContainer_1 instanceof EOutputs)) {
+        _xifexpression_1 = "output.png";
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   public String text(final ENodeTemplates entry) {

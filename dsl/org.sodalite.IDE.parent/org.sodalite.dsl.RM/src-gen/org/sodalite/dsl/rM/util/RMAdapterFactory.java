@@ -381,6 +381,11 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createEInputsAdapter();
       }
       @Override
+      public Adapter caseEOutputs(EOutputs object)
+      {
+        return createEOutputsAdapter();
+      }
+      @Override
       public Adapter caseEParameterDefinition(EParameterDefinition object)
       {
         return createEParameterDefinitionAdapter();
@@ -1538,6 +1543,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEInputsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EOutputs <em>EOutputs</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EOutputs
+   * @generated
+   */
+  public Adapter createEOutputsAdapter()
   {
     return null;
   }

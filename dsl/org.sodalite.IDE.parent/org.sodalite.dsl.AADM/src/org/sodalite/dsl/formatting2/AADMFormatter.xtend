@@ -23,6 +23,7 @@ import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EMAP
 import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EOutputs
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.EParameterDefinitionBody
 import org.sodalite.dsl.aADM.ECapabilityAssignment
@@ -58,11 +59,19 @@ class AADMFormatter extends RMFormatter {
 		aADM_Model.nodeTemplates.surround[indent].format
 		aADM_Model.regionFor.keyword("policies:").append[newLine]
 		aADM_Model.policies.surround[indent].format
+		aADM_Model.regionFor.keyword("outputs:").append[newLine]
+		aADM_Model.outputs.surround[indent].format.append[newLine]
 		aADM_Model.append[newLine]
 	}
 	
-	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
-		for (eInput : eInputs.inputs) {
+	def dispatch void format(EInputs inputs, extension IFormattableDocument document) {
+		for (eInput : inputs.parameters) {
+			eInput.format
+		}
+	}
+	
+	def dispatch void format(EOutputs outputs, extension IFormattableDocument document) {
+		for (eInput : outputs.parameters) {
 			eInput.format
 		}
 	}

@@ -177,6 +177,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEDependencyFilesAccess().getGroup(), "rule__EDependencyFiles__Group__0");
 			builder.put(grammarAccess.getEDependencyFilesAccess().getGroup_1(), "rule__EDependencyFiles__Group_1__0");
 			builder.put(grammarAccess.getEInputsAccess().getGroup(), "rule__EInputs__Group__0");
+			builder.put(grammarAccess.getEOutputsAccess().getGroup(), "rule__EOutputs__Group__0");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getGroup(), "rule__EParameterDefinition__Group__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup(), "rule__EParameterDefinitionBody__Group__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_0(), "rule__EParameterDefinitionBody__Group_1_0__0");
@@ -366,7 +367,8 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEDependenciesAccess().getRelative_pathAssignment_4_2(), "rule__EDependencies__Relative_pathAssignment_4_2");
 			builder.put(grammarAccess.getEDependencyFilesAccess().getFilesAssignment_0(), "rule__EDependencyFiles__FilesAssignment_0");
 			builder.put(grammarAccess.getEDependencyFilesAccess().getFilesAssignment_1_1(), "rule__EDependencyFiles__FilesAssignment_1_1");
-			builder.put(grammarAccess.getEInputsAccess().getInputsAssignment_1(), "rule__EInputs__InputsAssignment_1");
+			builder.put(grammarAccess.getEInputsAccess().getParametersAssignment_1(), "rule__EInputs__ParametersAssignment_1");
+			builder.put(grammarAccess.getEOutputsAccess().getParametersAssignment_1(), "rule__EOutputs__ParametersAssignment_1");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getNameAssignment_0(), "rule__EParameterDefinition__NameAssignment_0");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getParameterAssignment_3(), "rule__EParameterDefinition__ParameterAssignment_3");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getTypeAssignment_1_0_1(), "rule__EParameterDefinitionBody__TypeAssignment_1_0_1");

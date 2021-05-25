@@ -7,7 +7,6 @@ import com.google.inject.Inject
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.sodalite.dsl.aADM.AADM_Model
-import org.sodalite.dsl.rM.EInputs
 import org.sodalite.dsl.aADM.ENodeTemplates
 import org.sodalite.dsl.aADM.EAttributeAssignments
 import org.sodalite.dsl.aADM.ERequirementAssignments
@@ -27,6 +26,8 @@ import org.sodalite.dsl.rM.EPREFIX_ID
 import org.sodalite.dsl.aADM.ETriggerDefinitions
 import org.sodalite.dsl.rM.ETriggerDefinition
 import org.sodalite.dsl.aADM.ETarget
+import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EOutputs
 
 /**
  * Provides labels for EObjects.
@@ -55,8 +56,19 @@ class AADMLabelProvider extends DefaultEObjectLabelProvider {
 		"inputs.png"
 	}
 	
+	def text (EOutputs entry){
+		"outputs"
+	}
+	
+	def image (EOutputs entry){
+		"outputs.png"
+	}
+	
 	def image (EParameterDefinition entry){
-		"input.png"
+		if (entry.eContainer instanceof EInputs)
+			"input.png"
+		else if (entry.eContainer instanceof EOutputs)
+			"output.png"
 	}
 	
 	def text (ENodeTemplates entry){

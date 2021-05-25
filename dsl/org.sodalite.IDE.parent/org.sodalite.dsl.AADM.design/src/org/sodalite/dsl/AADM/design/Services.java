@@ -679,7 +679,7 @@ public class Services {
 	public SortedSet<String> getInputs(EPropertyAssignment prop) {
 		SortedSet<String> result = new TreeSet<String>();
 		AADM_Model model = AADM_Helper.findModel(prop);
-		for (EParameterDefinition input : model.getInputs().getInputs()) {
+		for (EParameterDefinition input : model.getInputs().getParameters()) {
 			result.add(input.getName());
 		}
 		return result;
@@ -687,7 +687,7 @@ public class Services {
 
 	public void setInput(GetInput gInput, String input) {
 		AADM_Model model = AADM_Helper.findModel(gInput);
-		for (EParameterDefinition pd : model.getInputs().getInputs()) {
+		for (EParameterDefinition pd : model.getInputs().getParameters()) {
 			if (input.equals(pd.getName())) {
 				gInput.setInput(pd);
 				break;
