@@ -53,6 +53,7 @@ import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.EInRange;
+import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
@@ -61,6 +62,7 @@ import org.sodalite.dsl.rM.EMAP;
 import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -993,6 +995,15 @@ public class Services {
 	public String renderParameterType(EParameterDefinitionBody parameter) {
 		EDataTypeName type = parameter.getType();
 		return "type: " + AADM_Helper.renderType(type);
+	}
+
+	public String getParameterKind(EParameterDefinition parameter) {
+		if (parameter.eContainer() instanceof EInputs)
+			return "Input";
+		else if (parameter.eContainer() instanceof EOutputs)
+			return "Output";
+		else
+			return null;
 	}
 
 	public SortedSet<String> getPropertyReq_Cap(EPropertyAssignment property) {

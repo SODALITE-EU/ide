@@ -738,7 +738,7 @@
       <pages name="Property Default Page" labelExpression="General" domainClass="rM::EPropertyAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.4 //@extensions.0/@categories.0/@groups.5 //@extensions.0/@categories.0/@groups.6 //@extensions.0/@categories.0/@groups.7 //@extensions.0/@categories.0/@groups.12 //@extensions.0/@categories.0/@groups.13"/>
       <pages name="Capability Default Page" labelExpression="General" domainClass="aADM::ECapabilityAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.8"/>
       <pages name="Requirement Default Page" labelExpression="General" domainClass="aADM::ERequirementAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.9"/>
-      <pages name="Input Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.10"/>
+      <pages name="InputOutput Default Page" labelExpression="General" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.10"/>
       <pages name="Attribute Default Page" labelExpression="General" domainClass="aADM::EAttributeAssignment" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.11"/>
       <pages name="TargetFilter Node Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().node" groups="//@extensions.0/@categories.0/@groups.14"/>
       <pages name="TargetFilter Requirement Default Page" labelExpression="General" domainClass="rM::EPREFIX_REF" semanticCandidateExpression="var:self" preconditionExpression="aql:self=self.eContainer().requirement" groups="//@extensions.0/@categories.0/@groups.15"/>
@@ -1458,7 +1458,7 @@
           </initialOperation>
         </controls>
       </groups>
-      <groups name="ParameterDefinition" labelExpression="Input" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self">
+      <groups name="ParameterDefinition" labelExpression="service:getParameterKind()" domainClass="rM::EParameterDefinition" semanticCandidateExpression="var:self">
         <controls xsi:type="properties:TextDescription" name="Name" labelExpression="Name" valueExpression="feature:name">
           <initialOperation>
             <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
