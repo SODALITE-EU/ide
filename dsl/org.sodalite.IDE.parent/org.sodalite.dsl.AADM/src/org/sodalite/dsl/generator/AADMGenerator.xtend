@@ -22,6 +22,7 @@ import java.util.Map
 import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.eclipse.emf.ecore.EObject
 import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EOutputs
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.ELIST
 import org.sodalite.dsl.rM.EMAP
@@ -83,6 +84,7 @@ class AADMGenerator extends AbstractGenerator {
 	var int node_template_counter = 1
 	var int policy_template_counter = 1
 	var int input_counter = 1
+	var int output_counter = 1
 	var int property_counter = 1
 	var int attribute_counter = 1
 	var int requirement_counter = 1
@@ -100,6 +102,7 @@ class AADMGenerator extends AbstractGenerator {
 		node_template_counter = 1
 		policy_template_counter = 1
 		input_counter = 1
+		output_counter = 1
 		property_counter = 1
 		attribute_counter = 1
 		requirement_counter = 1
@@ -240,6 +243,20 @@ class AADMGenerator extends AbstractGenerator {
 	
 	:Input_«input_counter++»
 	  rdf:type exchange:Input ;
+	  exchange:name "«p.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
+	.
+	«ENDIF»
+	«IF p.eContainer !== null && p.eContainer instanceof EOutputs»
+	«putParameterNumber(p, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(p.parameter.type.compile.toString)»' ;
+	.
+	
+	:Output_«output_counter++»
+	  rdf:type exchange:Output ;
 	  exchange:name "«p.name»" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
 	.

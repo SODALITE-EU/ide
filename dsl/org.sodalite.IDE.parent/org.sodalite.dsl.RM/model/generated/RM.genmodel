@@ -261,7 +261,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EDependencyFiles/files"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EInputs">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInputs/inputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EInputs/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EOutputs">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EOutputs/parameters"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EParameterDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EParameterDefinition/name"/>

@@ -9,21 +9,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>EInputs</b></em>'.
+ * A representation of the model object '<em><b>EOutputs</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.EInputs#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EOutputs#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
- * @see org.sodalite.dsl.rM.RMPackage#getEInputs()
+ * @see org.sodalite.dsl.rM.RMPackage#getEOutputs()
  * @model
  * @generated
  */
-public interface EInputs extends EObject
+public interface EOutputs extends EObject
 {
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
@@ -31,10 +31,10 @@ public interface EInputs extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameters</em>' containment reference list.
-   * @see org.sodalite.dsl.rM.RMPackage#getEInputs_Parameters()
+   * @see org.sodalite.dsl.rM.RMPackage#getEOutputs_Parameters()
    * @model containment="true"
    * @generated
    */
   EList<EParameterDefinition> getParameters();
 
-} // EInputs
+} // EOutputs

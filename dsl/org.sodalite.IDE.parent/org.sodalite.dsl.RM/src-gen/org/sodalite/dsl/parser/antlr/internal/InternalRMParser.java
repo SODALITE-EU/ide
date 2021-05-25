@@ -14893,22 +14893,22 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEInputs"
-    // InternalRMParser.g:5904:1: ruleEInputs returns [EObject current=null] : ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) ;
+    // InternalRMParser.g:5904:1: ruleEInputs returns [EObject current=null] : ( () ( (lv_parameters_1_0= ruleEParameterDefinition ) )* ) ;
     public final EObject ruleEInputs() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_inputs_1_0 = null;
+        EObject lv_parameters_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRMParser.g:5910:2: ( ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* ) )
-            // InternalRMParser.g:5911:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
+            // InternalRMParser.g:5910:2: ( ( () ( (lv_parameters_1_0= ruleEParameterDefinition ) )* ) )
+            // InternalRMParser.g:5911:2: ( () ( (lv_parameters_1_0= ruleEParameterDefinition ) )* )
             {
-            // InternalRMParser.g:5911:2: ( () ( (lv_inputs_1_0= ruleEParameterDefinition ) )* )
-            // InternalRMParser.g:5912:3: () ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
+            // InternalRMParser.g:5911:2: ( () ( (lv_parameters_1_0= ruleEParameterDefinition ) )* )
+            // InternalRMParser.g:5912:3: () ( (lv_parameters_1_0= ruleEParameterDefinition ) )*
             {
             // InternalRMParser.g:5912:3: ()
             // InternalRMParser.g:5913:4: 
@@ -14921,7 +14921,7 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRMParser.g:5919:3: ( (lv_inputs_1_0= ruleEParameterDefinition ) )*
+            // InternalRMParser.g:5919:3: ( (lv_parameters_1_0= ruleEParameterDefinition ) )*
             loop46:
             do {
                 int alt46=2;
@@ -14934,16 +14934,16 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
 
                 switch (alt46) {
             	case 1 :
-            	    // InternalRMParser.g:5920:4: (lv_inputs_1_0= ruleEParameterDefinition )
+            	    // InternalRMParser.g:5920:4: (lv_parameters_1_0= ruleEParameterDefinition )
             	    {
-            	    // InternalRMParser.g:5920:4: (lv_inputs_1_0= ruleEParameterDefinition )
-            	    // InternalRMParser.g:5921:5: lv_inputs_1_0= ruleEParameterDefinition
+            	    // InternalRMParser.g:5920:4: (lv_parameters_1_0= ruleEParameterDefinition )
+            	    // InternalRMParser.g:5921:5: lv_parameters_1_0= ruleEParameterDefinition
             	    {
 
-            	    					newCompositeNode(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0());
+            	    					newCompositeNode(grammarAccess.getEInputsAccess().getParametersEParameterDefinitionParserRuleCall_1_0());
             	    				
             	    pushFollow(FOLLOW_43);
-            	    lv_inputs_1_0=ruleEParameterDefinition();
+            	    lv_parameters_1_0=ruleEParameterDefinition();
 
             	    state._fsp--;
 
@@ -14953,8 +14953,8 @@ public class InternalRMParser extends AbstractInternalAntlrParser {
             	    					}
             	    					add(
             	    						current,
-            	    						"inputs",
-            	    						lv_inputs_1_0,
+            	    						"parameters",
+            	    						lv_parameters_1_0,
             	    						"org.sodalite.dsl.RM.EParameterDefinition");
             	    					afterParserOrEnumRuleCall();
             	    				

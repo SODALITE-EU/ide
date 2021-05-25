@@ -250,7 +250,7 @@ public class AADMHelper extends RMHelper {
 		AADMHelper helper = new AADMHelper();
 
 		if (aadmModel.getInputs() != null)
-			for (EParameterDefinition parameter : aadmModel.getInputs().getInputs()) {
+			for (EParameterDefinition parameter : aadmModel.getInputs().getParameters()) {
 				String type = convertType(parameter.getParameter().getType());
 				InputDef inDef = helper.new InputDef(parameter.getName(), type, parameter.getParameter().getDefault());
 				inputs.put(parameter.getName(), inDef);

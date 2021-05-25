@@ -43624,22 +43624,22 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EInputs__Group__1__Impl"
-    // InternalRMParser.g:13853:1: rule__EInputs__Group__1__Impl : ( ( rule__EInputs__InputsAssignment_1 )* ) ;
+    // InternalRMParser.g:13853:1: rule__EInputs__Group__1__Impl : ( ( rule__EInputs__ParametersAssignment_1 )* ) ;
     public final void rule__EInputs__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRMParser.g:13857:1: ( ( ( rule__EInputs__InputsAssignment_1 )* ) )
-            // InternalRMParser.g:13858:1: ( ( rule__EInputs__InputsAssignment_1 )* )
+            // InternalRMParser.g:13857:1: ( ( ( rule__EInputs__ParametersAssignment_1 )* ) )
+            // InternalRMParser.g:13858:1: ( ( rule__EInputs__ParametersAssignment_1 )* )
             {
-            // InternalRMParser.g:13858:1: ( ( rule__EInputs__InputsAssignment_1 )* )
-            // InternalRMParser.g:13859:2: ( rule__EInputs__InputsAssignment_1 )*
+            // InternalRMParser.g:13858:1: ( ( rule__EInputs__ParametersAssignment_1 )* )
+            // InternalRMParser.g:13859:2: ( rule__EInputs__ParametersAssignment_1 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEInputsAccess().getInputsAssignment_1()); 
+               before(grammarAccess.getEInputsAccess().getParametersAssignment_1()); 
             }
-            // InternalRMParser.g:13860:2: ( rule__EInputs__InputsAssignment_1 )*
+            // InternalRMParser.g:13860:2: ( rule__EInputs__ParametersAssignment_1 )*
             loop37:
             do {
                 int alt37=2;
@@ -43652,10 +43652,10 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
 
                 switch (alt37) {
             	case 1 :
-            	    // InternalRMParser.g:13860:3: rule__EInputs__InputsAssignment_1
+            	    // InternalRMParser.g:13860:3: rule__EInputs__ParametersAssignment_1
             	    {
             	    pushFollow(FOLLOW_31);
-            	    rule__EInputs__InputsAssignment_1();
+            	    rule__EInputs__ParametersAssignment_1();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -43669,7 +43669,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEInputsAccess().getInputsAssignment_1()); 
+               after(grammarAccess.getEInputsAccess().getParametersAssignment_1()); 
             }
 
             }
@@ -73223,9 +73223,9 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EDependencyFiles__FilesAssignment_1_1"
 
 
-    // $ANTLR start "rule__EInputs__InputsAssignment_1"
-    // InternalRMParser.g:22799:1: rule__EInputs__InputsAssignment_1 : ( ruleEParameterDefinition ) ;
-    public final void rule__EInputs__InputsAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__EInputs__ParametersAssignment_1"
+    // InternalRMParser.g:22799:1: rule__EInputs__ParametersAssignment_1 : ( ruleEParameterDefinition ) ;
+    public final void rule__EInputs__ParametersAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -73237,7 +73237,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             // InternalRMParser.g:22805:3: ruleEParameterDefinition
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0()); 
+               before(grammarAccess.getEInputsAccess().getParametersEParameterDefinitionParserRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleEParameterDefinition();
@@ -73245,7 +73245,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0()); 
+               after(grammarAccess.getEInputsAccess().getParametersEParameterDefinitionParserRuleCall_1_0()); 
             }
 
             }
@@ -73265,7 +73265,7 @@ public class InternalRMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__EInputs__InputsAssignment_1"
+    // $ANTLR end "rule__EInputs__ParametersAssignment_1"
 
 
     // $ANTLR start "rule__EParameterDefinition__NameAssignment_0"

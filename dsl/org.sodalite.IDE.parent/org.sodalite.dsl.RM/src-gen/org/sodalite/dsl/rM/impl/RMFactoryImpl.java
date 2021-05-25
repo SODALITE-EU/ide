@@ -126,6 +126,7 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
       case RMPackage.EDEPENDENCIES: return createEDependencies();
       case RMPackage.EDEPENDENCY_FILES: return createEDependencyFiles();
       case RMPackage.EINPUTS: return createEInputs();
+      case RMPackage.EOUTPUTS: return createEOutputs();
       case RMPackage.EPARAMETER_DEFINITION: return createEParameterDefinition();
       case RMPackage.EPARAMETER_DEFINITION_BODY: return createEParameterDefinitionBody();
       case RMPackage.EVALUE_EXPRESSION: return createEValueExpression();
@@ -906,6 +907,18 @@ public class RMFactoryImpl extends EFactoryImpl implements RMFactory
   {
     EInputsImpl eInputs = new EInputsImpl();
     return eInputs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EOutputs createEOutputs()
+  {
+    EOutputsImpl eOutputs = new EOutputsImpl();
+    return eOutputs;
   }
 
   /**

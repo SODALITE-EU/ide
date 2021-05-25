@@ -2,6 +2,7 @@ package org.sodalite.dsl.AADM.design;
 
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.AADM_MODEL__INPUTS;
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.AADM_MODEL__NODE_TEMPLATES;
+import static org.sodalite.dsl.aADM.AADMPackage.Literals.AADM_MODEL__OUTPUTS;
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.AADM_MODEL__POLICIES;
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.ENODE_TEMPLATE_BODY__ATTRIBUTES;
 import static org.sodalite.dsl.aADM.AADMPackage.Literals.ENODE_TEMPLATE_BODY__CAPABILITIES;
@@ -26,6 +27,7 @@ import org.sodalite.dsl.aADM.EPolicies;
 import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.aADM.ETriggerDefinitions;
 import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EPropertyAssignments;
 
 /**
@@ -58,6 +60,12 @@ public class AADMModelChangeTrigger implements ModelChangeTrigger {
 	public static final NotificationFilter INPUT_REMOVED_FILTER = new NotificationFilter.Custom() {
 		public boolean matches(Notification input) {
 			return input.getNotifier() instanceof EInputs && input.getEventType() == Notification.REMOVE;
+		}
+	};
+
+	public static final NotificationFilter OUPUT_REMOVED_FILTER = new NotificationFilter.Custom() {
+		public boolean matches(Notification output) {
+			return output.getNotifier() instanceof EOutputs && output.getEventType() == Notification.REMOVE;
 		}
 	};
 
@@ -111,9 +119,14 @@ public class AADMModelChangeTrigger implements ModelChangeTrigger {
 								pa.eContainer().eSet(ENODE_TEMPLATE_BODY__PROPERTIES, null);
 							}
 						} else if (notif.getNotifier() instanceof EInputs) {
-							EInputs ins = (EInputs) notif.getNotifier();
-							if (ins.getInputs().isEmpty()) {
-								ins.eContainer().eSet(AADM_MODEL__INPUTS, null);
+							EInputs parDefs = (EInputs) notif.getNotifier();
+							if (parDefs.getParameters().isEmpty()) {
+								parDefs.eContainer().eSet(AADM_MODEL__INPUTS, null);
+							}
+						} else if (notif.getNotifier() instanceof EOutputs) {
+							EOutputs parDefs = (EOutputs) notif.getNotifier();
+							if (parDefs.getParameters().isEmpty()) {
+								parDefs.eContainer().eSet(AADM_MODEL__OUTPUTS, null);
 							}
 						} else if (notif.getNotifier() instanceof EAttributeAssignments) {
 							EAttributeAssignments aas = (EAttributeAssignments) notif.getNotifier();

@@ -12,6 +12,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/inputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/nodeTemplates"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/policies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//AADM_Model/outputs"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ENodeTemplates">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplates/nodeTemplates"/>

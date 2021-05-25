@@ -133,7 +133,7 @@ public class AADM_Helper {
 
 	public static List<EParameterDefinition> findInputs(AADM_Model model) {
 		List<EParameterDefinition> inputs = new ArrayList<>();
-		for (EParameterDefinition input : model.getInputs().getInputs()) {
+		for (EParameterDefinition input : model.getInputs().getParameters()) {
 			inputs.add(input);
 		}
 		return inputs;

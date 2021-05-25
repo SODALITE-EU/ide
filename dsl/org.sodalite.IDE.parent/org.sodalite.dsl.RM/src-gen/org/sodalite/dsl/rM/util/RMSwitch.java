@@ -505,6 +505,13 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.EOUTPUTS:
+      {
+        EOutputs eOutputs = (EOutputs)theEObject;
+        T result = caseEOutputs(eOutputs);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.EPARAMETER_DEFINITION:
       {
         EParameterDefinition eParameterDefinition = (EParameterDefinition)theEObject;
@@ -1845,6 +1852,22 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEInputs(EInputs object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EOutputs</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EOutputs</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEOutputs(EOutputs object)
   {
     return null;
   }

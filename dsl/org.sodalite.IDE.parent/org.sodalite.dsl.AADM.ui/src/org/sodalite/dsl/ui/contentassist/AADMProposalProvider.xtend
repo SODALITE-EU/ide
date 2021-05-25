@@ -686,7 +686,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		val AADM_Model aadm = AADMHelper.findModel(model) as AADM_Model
 		if (aadm !== null){
 			var Image image = getImage("icons/input.png")
-			for (EParameterDefinition input: aadm.inputs.inputs){
+			for (EParameterDefinition input: aadm.inputs.parameters){
 				val proposalText = input.name
 				createNonEditableCompletionProposal(proposalText, proposalText, image, context, null, acceptor);
 			}

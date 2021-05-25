@@ -72,6 +72,7 @@ import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
 import org.sodalite.dsl.rM.EPolicyType;
@@ -543,6 +544,13 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   private EClass eInputsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eOutputsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -3095,9 +3103,31 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getEInputs_Inputs()
+  public EReference getEInputs_Parameters()
   {
     return (EReference)eInputsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getEOutputs()
+  {
+    return eOutputsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEOutputs_Parameters()
+  {
+    return (EReference)eOutputsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -4499,7 +4529,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEAttribute(eDependencyFilesEClass, EDEPENDENCY_FILES__FILES);
 
     eInputsEClass = createEClass(EINPUTS);
-    createEReference(eInputsEClass, EINPUTS__INPUTS);
+    createEReference(eInputsEClass, EINPUTS__PARAMETERS);
+
+    eOutputsEClass = createEClass(EOUTPUTS);
+    createEReference(eOutputsEClass, EOUTPUTS__PARAMETERS);
 
     eParameterDefinitionEClass = createEClass(EPARAMETER_DEFINITION);
     createEAttribute(eParameterDefinitionEClass, EPARAMETER_DEFINITION__NAME);
@@ -4976,7 +5009,10 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEAttribute(getEDependencyFiles_Files(), ecorePackage.getEString(), "files", null, 0, -1, EDependencyFiles.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eInputsEClass, EInputs.class, "EInputs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEInputs_Inputs(), this.getEParameterDefinition(), null, "inputs", null, 0, -1, EInputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEInputs_Parameters(), this.getEParameterDefinition(), null, "parameters", null, 0, -1, EInputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eOutputsEClass, EOutputs.class, "EOutputs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEOutputs_Parameters(), this.getEParameterDefinition(), null, "parameters", null, 0, -1, EOutputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eParameterDefinitionEClass, EParameterDefinition.class, "EParameterDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEParameterDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

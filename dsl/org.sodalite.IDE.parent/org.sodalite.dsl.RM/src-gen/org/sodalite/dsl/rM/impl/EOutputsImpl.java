@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EOutputs;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EInputs</b></em>'.
+ * An implementation of the model object '<em><b>EOutputs</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.dsl.rM.impl.EInputsImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EOutputsImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
+public class EOutputsImpl extends MinimalEObjectImpl.Container implements EOutputs
 {
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EInputsImpl()
+  protected EOutputsImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   @Override
   protected EClass eStaticClass()
   {
-    return RMPackage.Literals.EINPUTS;
+    return RMPackage.Literals.EOUTPUTS;
   }
 
   /**
@@ -77,7 +77,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     if (parameters == null)
     {
-      parameters = new EObjectContainmentEList<EParameterDefinition>(EParameterDefinition.class, this, RMPackage.EINPUTS__PARAMETERS);
+      parameters = new EObjectContainmentEList<EParameterDefinition>(EParameterDefinition.class, this, RMPackage.EOUTPUTS__PARAMETERS);
     }
     return parameters;
   }
@@ -92,7 +92,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     switch (featureID)
     {
-      case RMPackage.EINPUTS__PARAMETERS:
+      case RMPackage.EOUTPUTS__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +108,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     switch (featureID)
     {
-      case RMPackage.EINPUTS__PARAMETERS:
+      case RMPackage.EOUTPUTS__PARAMETERS:
         return getParameters();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -125,7 +125,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     switch (featureID)
     {
-      case RMPackage.EINPUTS__PARAMETERS:
+      case RMPackage.EOUTPUTS__PARAMETERS:
         getParameters().clear();
         getParameters().addAll((Collection<? extends EParameterDefinition>)newValue);
         return;
@@ -143,7 +143,7 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     switch (featureID)
     {
-      case RMPackage.EINPUTS__PARAMETERS:
+      case RMPackage.EOUTPUTS__PARAMETERS:
         getParameters().clear();
         return;
     }
@@ -160,10 +160,10 @@ public class EInputsImpl extends MinimalEObjectImpl.Container implements EInputs
   {
     switch (featureID)
     {
-      case RMPackage.EINPUTS__PARAMETERS:
+      case RMPackage.EOUTPUTS__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EInputsImpl
+} //EOutputsImpl

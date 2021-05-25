@@ -573,6 +573,15 @@ public interface RMFactory extends EFactory
   EInputs createEInputs();
 
   /**
+   * Returns a new object of class '<em>EOutputs</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EOutputs</em>'.
+   * @generated
+   */
+  EOutputs createEOutputs();
+
+  /**
    * Returns a new object of class '<em>EParameter Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

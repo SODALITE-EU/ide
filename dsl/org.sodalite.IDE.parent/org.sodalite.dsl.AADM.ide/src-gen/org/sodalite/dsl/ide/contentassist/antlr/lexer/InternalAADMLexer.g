@@ -123,6 +123,8 @@ Triggers : 'triggers:';
 
 Default : 'default:';
 
+Outputs : 'outputs:';
+
 Primary : 'primary:';
 
 Req_cap : 'req_cap:';

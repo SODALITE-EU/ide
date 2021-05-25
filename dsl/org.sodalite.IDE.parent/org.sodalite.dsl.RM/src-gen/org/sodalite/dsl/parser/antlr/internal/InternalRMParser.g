@@ -5919,17 +5919,17 @@ ruleEInputs returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getEInputsAccess().getInputsEParameterDefinitionParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getEInputsAccess().getParametersEParameterDefinitionParserRuleCall_1_0());
 				}
-				lv_inputs_1_0=ruleEParameterDefinition
+				lv_parameters_1_0=ruleEParameterDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEInputsRule());
 					}
 					add(
 						$current,
-						"inputs",
-						lv_inputs_1_0,
+						"parameters",
+						lv_parameters_1_0,
 						"org.sodalite.dsl.RM.EParameterDefinition");
 					afterParserOrEnumRuleCall();
 				}

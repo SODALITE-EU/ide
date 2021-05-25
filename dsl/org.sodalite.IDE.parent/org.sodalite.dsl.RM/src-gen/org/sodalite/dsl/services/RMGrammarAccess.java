@@ -3323,24 +3323,47 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EInputs");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cEInputsAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cInputsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cInputsEParameterDefinitionParserRuleCall_1_0 = (RuleCall)cInputsAssignment_1.eContents().get(0);
+		private final Assignment cParametersAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParametersEParameterDefinitionParserRuleCall_1_0 = (RuleCall)cParametersAssignment_1.eContents().get(0);
 		
 		//EInputs:
-		//	{EInputs} inputs+=EParameterDefinition*;
+		//	{EInputs} parameters+=EParameterDefinition*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EInputs} inputs+=EParameterDefinition*
+		//{EInputs} parameters+=EParameterDefinition*
 		public Group getGroup() { return cGroup; }
 		
 		//{EInputs}
 		public Action getEInputsAction_0() { return cEInputsAction_0; }
 		
-		//inputs+=EParameterDefinition*
-		public Assignment getInputsAssignment_1() { return cInputsAssignment_1; }
+		//parameters+=EParameterDefinition*
+		public Assignment getParametersAssignment_1() { return cParametersAssignment_1; }
 		
 		//EParameterDefinition
-		public RuleCall getInputsEParameterDefinitionParserRuleCall_1_0() { return cInputsEParameterDefinitionParserRuleCall_1_0; }
+		public RuleCall getParametersEParameterDefinitionParserRuleCall_1_0() { return cParametersEParameterDefinitionParserRuleCall_1_0; }
+	}
+	public class EOutputsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EOutputs");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEOutputsAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cParametersAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cParametersEParameterDefinitionParserRuleCall_1_0 = (RuleCall)cParametersAssignment_1.eContents().get(0);
+		
+		//EOutputs:
+		//	{EOutputs} parameters+=EParameterDefinition*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{EOutputs} parameters+=EParameterDefinition*
+		public Group getGroup() { return cGroup; }
+		
+		//{EOutputs}
+		public Action getEOutputsAction_0() { return cEOutputsAction_0; }
+		
+		//parameters+=EParameterDefinition*
+		public Assignment getParametersAssignment_1() { return cParametersAssignment_1; }
+		
+		//EParameterDefinition
+		public RuleCall getParametersEParameterDefinitionParserRuleCall_1_0() { return cParametersEParameterDefinitionParserRuleCall_1_0; }
 	}
 	public class EParameterDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EParameterDefinition");
@@ -4967,6 +4990,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final EDependenciesElements pEDependencies;
 	private final EDependencyFilesElements pEDependencyFiles;
 	private final EInputsElements pEInputs;
+	private final EOutputsElements pEOutputs;
 	private final EParameterDefinitionElements pEParameterDefinition;
 	private final EParameterDefinitionBodyElements pEParameterDefinitionBody;
 	private final EValueExpressionElements pEValueExpression;
@@ -5091,6 +5115,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pEDependencies = new EDependenciesElements();
 		this.pEDependencyFiles = new EDependencyFilesElements();
 		this.pEInputs = new EInputsElements();
+		this.pEOutputs = new EOutputsElements();
 		this.pEParameterDefinition = new EParameterDefinitionElements();
 		this.pEParameterDefinitionBody = new EParameterDefinitionBodyElements();
 		this.pEValueExpression = new EValueExpressionElements();
@@ -5930,13 +5955,23 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EInputs:
-	//	{EInputs} inputs+=EParameterDefinition*;
+	//	{EInputs} parameters+=EParameterDefinition*;
 	public EInputsElements getEInputsAccess() {
 		return pEInputs;
 	}
 	
 	public ParserRule getEInputsRule() {
 		return getEInputsAccess().getRule();
+	}
+	
+	//EOutputs:
+	//	{EOutputs} parameters+=EParameterDefinition*;
+	public EOutputsElements getEOutputsAccess() {
+		return pEOutputs;
+	}
+	
+	public ParserRule getEOutputsRule() {
+		return getEOutputsAccess().getRule();
 	}
 	
 	////inputs of operation definition in NodeTypes are ParameterDefinition
