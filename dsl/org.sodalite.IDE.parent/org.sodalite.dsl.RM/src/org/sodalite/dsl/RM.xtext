@@ -545,9 +545,9 @@ ELength:
 
 EValid_Values:
 	'valid_values:' val=ELIST;
-
+	
 ELIST:
-	'['list+=EAlphaNumericValue ("," list+=EAlphaNumericValue)* ']'
+	{ELIST} '[' list+=EAlphaNumericValue? ("," list+=EAlphaNumericValue)* ']'
 ;
 
 EInRange:

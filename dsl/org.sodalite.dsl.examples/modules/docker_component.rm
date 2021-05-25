@@ -328,7 +328,7 @@ node_types:
 								type: string
 								default: get_attribute: 
 									entity: SELF
-									attribute: docker/sodalite.nodes.DockerHost.username
+									attribute: docker/sodalite.nodes.DockerHost.public_address
 									req_cap: docker/sodalite.nodes.DockerizedComponent.host
 						implementation: 
 							primary: "/workspace/iac-modules/docker/playbooks/remove_container.yml"

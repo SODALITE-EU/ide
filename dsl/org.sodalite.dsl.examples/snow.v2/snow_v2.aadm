@@ -156,6 +156,15 @@ node_templates:
 				node: snow/snow-vm
 			dependency:
 				node: snow/snow-docker-host
+	snow-docker-volume-masks:
+		type: docker/sodalite.nodes.DockerVolume
+		properties:
+			name: "snow_volume_masks"
+		requirements:
+			host:
+				node: snow/snow-vm
+			dependency:
+				node: snow/snow-docker-host
 	snow-docker-volume-daily-shots:
 		type: docker/sodalite.nodes.DockerVolume
 		properties:
@@ -194,7 +203,7 @@ node_templates:
 			registry:
 				node: snow/snow-docker-registry
 			host:
-				node: snow/snow-docker-host
+				node: snow/snow-vm
 
 	snow-webcam-crawler:
 		type: docker/sodalite.nodes.DockerizedComponent
@@ -206,6 +215,7 @@ node_templates:
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/WebCamCrawler/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks:/SnowWatch-SODALITE/data/masks", 
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
 			image_name: "snow-webcam-crawler:latest"
 			alias: "snow-webcam-crawler"
@@ -218,8 +228,6 @@ node_templates:
 				node: snow/snow-mysql
 			dependency:
 				node: snow/snow-docker-volume-shots
-			dependency:
-				node: snow/snow-docker-volume-daily-shots				
 			dependency:
 				node: snow/snow-configuration-demo
 			network:
@@ -236,6 +244,7 @@ node_templates:
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
+			//"/tmp/masks: /SnowWatch-SODALITE/data/masks", 
 			"snow_volume_daily_shots:/SnowWatch-SODALITE/data/daily_shots"]
 			image_name: "snow-weather-condition-filter:latest"
 			alias: "snow-weather-condition-filter"
@@ -251,6 +260,8 @@ node_templates:
 				node: snow/snow-mysql
 			dependency:
 				node: snow/snow-docker-volume-shots
+			dependency:
+				node: snow/snow-docker-volume-masks
 			dependency:
 				node: snow/snow-docker-volume-daily-shots
 			dependency:

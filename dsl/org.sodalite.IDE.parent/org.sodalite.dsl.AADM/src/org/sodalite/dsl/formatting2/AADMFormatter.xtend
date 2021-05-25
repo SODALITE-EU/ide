@@ -44,6 +44,7 @@ import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
 import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
 import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
 import org.sodalite.dsl.rM.EAssertionDefinition
+import org.sodalite.dsl.rM.EMapEntry
 
 class AADMFormatter extends RMFormatter {
 
@@ -137,6 +138,28 @@ class AADMFormatter extends RMFormatter {
 			ePropertyAssigment.regionFor.feature(EPROPERTY_ASSIGNMENT__NAME).append[noSpace]
 			ePropertyAssigment.regionFor.keyword(":").append[oneSpace]
 			ePropertyAssigment.value.format.append[newLine]
+		}else{
+			ePropertyAssigment.regionFor.feature(EPROPERTY_ASSIGNMENT__NAME).append[noSpace]
+			ePropertyAssigment.regionFor.keyword(":").append[newLine]
+			val eMap = ePropertyAssigment.value as EMAP
+			for (nestedProperty: eMap.map){
+				nestedProperty.surround[indent].format
+			}
+		}
+	}
+	
+	def dispatch void format(EMapEntry eMapEntry, extension IFormattableDocument document) {
+		if (!(eMapEntry.value instanceof EMAP)){
+			eMapEntry.regionFor.feature(EMAP_ENTRY__KEY).append[noSpace]
+			eMapEntry.regionFor.keyword(":").append[oneSpace]
+			eMapEntry.value.format.append[newLine]
+		}else{
+			eMapEntry.regionFor.feature(EMAP_ENTRY__KEY).append[noSpace]
+			eMapEntry.regionFor.keyword(":").append[newLine]
+			val eMap = eMapEntry.value as EMAP
+			for (nestedProperty: eMap.map){
+				nestedProperty.surround[indent].format
+			}
 		}
 	}
 

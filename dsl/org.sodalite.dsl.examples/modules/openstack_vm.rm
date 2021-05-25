@@ -152,11 +152,6 @@ node_types:
 								default: get_attribute:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
-							consul_server_address:
-								type: string
-								default: get_property: 
-									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address										
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
 							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]

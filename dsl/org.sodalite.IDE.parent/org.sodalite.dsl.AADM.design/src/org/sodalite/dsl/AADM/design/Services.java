@@ -1,6 +1,10 @@
 package org.sodalite.dsl.AADM.design;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -48,10 +52,15 @@ import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EFLOAT;
 import org.sodalite.dsl.rM.EGreaterOrEqual;
 import org.sodalite.dsl.rM.EGreaterThan;
+import org.sodalite.dsl.rM.EInRange;
 import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
 import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EMapEntry;
+import org.sodalite.dsl.rM.EMaxLength;
+import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
@@ -64,6 +73,7 @@ import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.ETimeInterval;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggerDefinitionBody;
+import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.GetPropertyBody;
@@ -77,6 +87,47 @@ import org.sodalite.dsl.ui.helper.AADMHelper;
 public class Services {
 
 	private static Session session;
+
+	public static SortedSet<String> valueTypes = new TreeSet<String>();
+	public static SortedSet<String> clauseTypes = new TreeSet<String>();
+	public static SortedSet<String> assertionType = new TreeSet<String>();
+	public static SortedSet<String> clauseDefinitionTypes = new TreeSet<String>();
+	public static SortedSet<String> constraintTypes = new TreeSet<String>();
+	public static int ID = 0;
+	static {
+		// Value types
+		valueTypes.add("Single Value");
+		valueTypes.add("List");
+		valueTypes.add("Nested Value");
+		valueTypes.add("Get Input");
+		valueTypes.add("Get Property");
+
+		// Clause types
+		clauseTypes.add("And");
+		clauseTypes.add("Or");
+		clauseTypes.add("Not");
+		clauseTypes.add("Assertion");
+
+		// Clause types (special case of clause types without assertion)
+		clauseDefinitionTypes.add("And");
+		clauseDefinitionTypes.add("Or");
+		clauseDefinitionTypes.add("Not");
+
+		// Clause types (special case of clause types for assertions
+		assertionType.add("Assertion");
+
+		// Constraint types
+		constraintTypes.add("Equal");
+		constraintTypes.add("GreaterThan");
+		constraintTypes.add("GreaterOrEqual");
+		constraintTypes.add("LessThan");
+		constraintTypes.add("LessOrEqual");
+		constraintTypes.add("InRange");
+		constraintTypes.add("ValidValues");
+		constraintTypes.add("Length");
+		constraintTypes.add("MinLength");
+		constraintTypes.add("MaxLength");
+	}
 
 	public void registerAADMModelChangeTrigger(EObject object) {
 		EObject semanticRootElement = EcoreUtil.getRootContainer(object);
@@ -390,19 +441,21 @@ public class Services {
 			result += ": " + value.getValue();
 		} else if (assignmentValue instanceof GetInput) {
 			GetInput gInput = (GetInput) assignmentValue;
-			result += ": getInput(" + gInput.getInput().getName() + ")";
+			String input = gInput.getInput() != null ? gInput.getInput().getName() : "";
+			result += ": getInput(" + input + ")";
 		} else if (assignmentValue instanceof GetProperty) {
 			GetProperty gProperty = (GetProperty) assignmentValue;
-			result += ": getProperty(" + gProperty.getProperty().getProperty().getType() + ")";
+			String property = gProperty.getProperty() != null ? gProperty.getProperty().getProperty().getType() : "";
+			result += ": getProperty(" + property + ")";
 		} else if (assignmentValue instanceof ELIST) {
 			ELIST value = (ELIST) assignmentValue;
 			EList list = value.getList();
-			result += ": [" + renderValue(list.get(0));
-			for (int i = 1; i < list.size(); i++)
-				result += ", " + renderValue(list.get(i));
+			result += ": [";
+			for (int i = 0; i < list.size(); i++)
+				result += i > 0 ? ", " : "" + renderValue(list.get(i));
 			result += "]";
 		} else if (assignmentValue instanceof EMAP) {
-			result += ": <Complex Value>";
+			result += ": ...";
 		} else if (assignmentValue instanceof ESIGNEDINT) {
 			ESIGNEDINT value = (ESIGNEDINT) assignmentValue;
 			result += ": " + value.getValue();
@@ -412,6 +465,19 @@ public class Services {
 	}
 
 	private String renderValue(Object eanValue) {
+		String value = null;
+		if (eanValue instanceof ESTRING)
+			value = "\"" + ((ESTRING) eanValue).getValue() + "\"";
+		else if (eanValue instanceof EFLOAT)
+			value = String.valueOf(((EFLOAT) eanValue).getValue());
+		else if (eanValue instanceof ESIGNEDINT)
+			value = String.valueOf(((ESIGNEDINT) eanValue).getValue());
+		else if (eanValue instanceof EBOOLEAN)
+			value = Boolean.toString(((EBOOLEAN) eanValue).isValue());
+		return value;
+	}
+
+	private String editableRenderValue(Object eanValue) {
 		String value = null;
 		if (eanValue instanceof ESTRING)
 			value = ((ESTRING) eanValue).getValue();
@@ -518,7 +584,7 @@ public class Services {
 
 	public void addItemToPropertyValueList(ELIST list, String item) {
 		System.out.println("Requested to add item to property list value. List: " + list + ". Item: " + item);
-		EAlphaNumericValue value = (EAlphaNumericValue) createValue(item);
+		EAlphaNumericValue value = (EAlphaNumericValue) createESingleValue(item);
 		list.getList().add(value);
 	}
 
@@ -535,10 +601,71 @@ public class Services {
 		list.getList().remove(item);
 	}
 
+	public void removeItemFromPropertyValueMap(EPropertyAssignment property,
+			ArrayList<Map<EMapEntry, Integer>> selections) {
+		for (Map<EMapEntry, Integer> selection : selections) {
+			EMapEntry entry = selection.keySet().iterator().next();
+			((EMAP) entry.eContainer()).getMap().remove(entry);
+		}
+	}
+
+	public void removeConstraintClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> clauses) {
+		for (Map<EObject, Integer> selection : clauses) {
+			EObject entry = selection.keySet().iterator().next();
+			if (entry instanceof EAssertionDefinition) {
+				EAssertionDefinition assertion = (EAssertionDefinition) entry;
+				((EConditionClauseDefinitionAssert) assertion.eContainer()).getAssertions().remove(assertion);
+			} else if (entry instanceof EConditionClauseDefinition) {
+				EConditionClauseDefinition child = null;
+				if (entry instanceof EConditionClauseDefinitionAND) {
+					EConditionClauseDefinitionAND and = (EConditionClauseDefinitionAND) entry;
+					child = and.getAnd();
+				} else if (entry instanceof EConditionClauseDefinitionOR) {
+					EConditionClauseDefinitionOR or = (EConditionClauseDefinitionOR) entry;
+					child = or.getOr();
+				} else if (entry instanceof EConditionClauseDefinitionNOT) {
+					EConditionClauseDefinitionNOT not = (EConditionClauseDefinitionNOT) entry;
+					child = not.getNot();
+				}
+
+				EObject parent = entry.eContainer();
+				if (parent instanceof EConditionClauseDefinitionAND) {
+					((EConditionClauseDefinitionAND) parent).setAnd(child);
+				} else if (parent instanceof EConditionClauseDefinitionOR) {
+					((EConditionClauseDefinitionOR) parent).setOr(child);
+				} else if (parent instanceof EConditionClauseDefinitionNOT) {
+					((EConditionClauseDefinitionNOT) parent).setNot(child);
+				} else if (parent instanceof EExtendedTriggerCondition) {
+					((EExtendedTriggerCondition) parent).setConstraint(child);
+				}
+			}
+		}
+	}
+
+	public String renderEMapEntryKey(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return selection.keySet().iterator().next().getKey();
+	}
+
+	public String renderEMapEntryValue(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return editableRenderValue(selection.keySet().iterator().next().getValue());
+	}
+
+	public boolean isValueEditable(EPropertyAssignment property, Map<EMapEntry, Integer> selection) {
+		return !(selection.keySet().iterator().next().getValue() instanceof EMAP);
+	}
+
+	public void editEMapEntryKey(EPropertyAssignment property, Map<EMapEntry, Integer> oldValue, String newValue) {
+		oldValue.keySet().iterator().next().setKey(newValue);
+	}
+
+	public void editEMapEntryValue(EPropertyAssignment property, Map<EMapEntry, Integer> oldValue, String newValue) {
+		oldValue.keySet().iterator().next().setValue((EAssignmentValue) createESingleValue(newValue));
+	}
+
 	public void editItemInPropertyValueList(ELIST list, Integer index, EAlphaNumericValue oldValue, String newValue) {
 		System.out.println("Requested to edit an item in a property list value. List: " + list + ". Index: " + index
 				+ ". NewValue: " + newValue + ". OldValue: " + oldValue);
-		EAlphaNumericValue value = (EAlphaNumericValue) createValue(newValue);
+		EAlphaNumericValue value = (EAlphaNumericValue) createESingleValue(newValue);
 		list.getList().set(index - 1, value);
 	}
 
@@ -663,13 +790,199 @@ public class Services {
 			return "UNRENDERED_VALUE";
 	}
 
+	public List<Map<EObject, Integer>> getNestedList(EPropertyAssignment object) throws Exception {
+		if (object.getValue() instanceof EMAP) {
+			List<Map<EObject, Integer>> nestedList = new ArrayList<>();
+			EMAP map = (EMAP) object.getValue();
+			addNestedElements(nestedList, map.getMap(), 0);
+			return nestedList;
+		}
+		return null;
+	}
+
+	public List<Map<EObject, Integer>> getConstraintList(ETriggerDefinition trigger) throws Exception {
+		List<Map<EObject, Integer>> constraintList = new ArrayList<>();
+		EConditionClauseDefinition condition = trigger.getTrigger().getCondition().getConstraint();
+		if (condition != null) {
+			addNestedConstraint(constraintList, condition, 0);
+		}
+		return constraintList;
+	}
+
+	public List<EConstraint> getAssertionConstraintList(ETriggerDefinition object,
+			Map<EAssertionDefinition, Integer> selectedAssertion) throws Exception {
+		EObject condition = selectedAssertion.keySet().iterator().next();
+		if (condition instanceof EAssertionDefinition)
+			return ((EAssertionDefinition) condition).getConstraints().getList();
+		return null;
+	}
+
+	private void addNestedConstraint(List<Map<EObject, Integer>> constraintList, EObject condition, int depth) {
+		if (!(condition instanceof EConditionClauseDefinitionAssert)) {
+			Map<EObject, Integer> entry = new HashMap<>();
+			entry.put(condition, depth);
+			constraintList.add(entry);
+		}
+
+		if (condition instanceof EConditionClauseDefinitionAND) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionAND) condition).getAnd(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionOR) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionOR) condition).getOr(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionNOT) {
+			addNestedConstraint(constraintList, ((EConditionClauseDefinitionNOT) condition).getNot(), depth + 1);
+		} else if (condition instanceof EConditionClauseDefinitionAssert) {
+			for (EAssertionDefinition _assert : ((EConditionClauseDefinitionAssert) condition).getAssertions())
+				addNestedConstraint(constraintList, _assert, depth + 1);
+		}
+	}
+
+	private void addNestedElements(List<Map<EObject, Integer>> nestedList, EList<EMapEntry> elementsToAdd, int depth) {
+		for (EMapEntry element : elementsToAdd) {
+			Map<EObject, Integer> entry = new HashMap<>();
+			entry.put(element, depth);
+			nestedList.add(entry);
+			if (element.getValue() instanceof EMAP) {
+				addNestedElements(nestedList, ((EMAP) element.getValue()).getMap(), depth + 1);
+			}
+		}
+	}
+
+	public String renderNestedItem(EPropertyAssignment property, Map<EObject, Integer> item) throws Exception {
+		EMapEntry entry = (EMapEntry) item.keySet().iterator().next();
+		if (entry.getValue() instanceof EMAP) {
+			return getIndentation(item.get(entry)) + entry.getKey() + ":";
+		} else {
+			return getIndentation(item.get(entry)) + entry.getKey() + ": " + renderValue(entry.getValue());
+		}
+	}
+
+	public String renderConstraintItem(ETriggerDefinition constraint, Map<EObject, Integer> item) throws Exception {
+		EObject condition = item.keySet().iterator().next();
+		String render = null;
+		if (condition instanceof EConditionClauseDefinitionAND) {
+			render = getIndentation(item.get(condition)) + "and:";
+		} else if (condition instanceof EConditionClauseDefinitionOR) {
+			render = getIndentation(item.get(condition)) + "or:";
+		} else if (condition instanceof EConditionClauseDefinitionNOT) {
+			render = getIndentation(item.get(condition)) + "not:";
+		} else if (condition instanceof EAssertionDefinition) {
+			render = getIndentation(item.get(condition))
+					+ renderEConditionClauseDefinitionAssert((EAssertionDefinition) condition);
+		}
+		return render;
+	}
+
+	public String renderAssertionConstraintItem(ETriggerDefinition object, EConstraint constraint) throws Exception {
+		return renderEConstraint(constraint);
+	}
+
+	private String renderEConditionClauseDefinitionAssert(EAssertionDefinition assertion) {
+		return assertion.getAttribute_name() + ": [" + renderEConstraintList(assertion.getConstraints()) + "]";
+	}
+
+	private String renderEConstraintList(EConstraintList constraints) {
+		if (constraints.getList().isEmpty())
+			return "";
+		StringBuffer sb = new StringBuffer(renderEConstraint(constraints.getList().get(0)));
+		for (int i = 1; i < constraints.getList().size(); i++)
+			sb.append(',' + renderEConstraint(constraints.getList().get(i)));
+		return sb.toString();
+	}
+
+	private String renderEConstraint(EConstraint constraint) {
+		String render = null;
+		if (constraint instanceof EEqual) {
+			render = "equal: " + renderESingleValue(((EEqual) constraint).getVal());
+		} else if (constraint instanceof EGreaterThan) {
+			render = "greater_than: " + renderEAlphaNumericValue(((EGreaterThan) constraint).getVal());
+		} else if (constraint instanceof EGreaterOrEqual) {
+			render = "greater_or_equal: " + renderEAlphaNumericValue(((EGreaterOrEqual) constraint).getVal());
+		} else if (constraint instanceof ELessThan) {
+			render = "less_than: " + renderEAlphaNumericValue(((ELessThan) constraint).getVal());
+		} else if (constraint instanceof ELessOrEqual) {
+			render = "less_or_equal: " + renderEAlphaNumericValue(((ELessOrEqual) constraint).getVal());
+		} else if (constraint instanceof EInRange) {
+			render = "in_range: [" + renderEAlphaNumericValue(((EInRange) constraint).getStart()) + ", "
+					+ renderEAlphaNumericValue(((EInRange) constraint).getEnd()) + "]";
+		} else if (constraint instanceof EValid_Values) {
+			render = "valid_values: " + renderEList(((EValid_Values) constraint).getVal());
+		} else if (constraint instanceof ELength) {
+			render = "length: " + renderEAlphaNumericValue(((ELength) constraint).getVal());
+		} else if (constraint instanceof EMinLength) {
+			render = "min_length: " + renderEAlphaNumericValue(((EMinLength) constraint).getVal());
+		} else if (constraint instanceof EMaxLength) {
+			render = "max_length: " + renderEAlphaNumericValue(((EMaxLength) constraint).getVal());
+		}
+		return render;
+	}
+
+	private String renderEList(ELIST val) {
+		StringBuffer sb = new StringBuffer();
+		sb.append('[');
+		boolean firstValue = true;
+		for (EAlphaNumericValue value : val.getList()) {
+			sb.append((firstValue ? "" : ",") + renderEAlphaNumericValue(value));
+			firstValue = false;
+		}
+		sb.append(']');
+		return sb.toString();
+	}
+
+	private String renderEListValue(ELIST val) {
+		StringBuffer sb = new StringBuffer();
+		boolean firstValue = true;
+		for (EAlphaNumericValue value : val.getList()) {
+			sb.append((firstValue ? "" : ",") + renderEAlphaNumericValue(value));
+			firstValue = false;
+		}
+		return sb.toString();
+	}
+
+	private String renderESingleValue(ESingleValue value) {
+		String render = null;
+		if (value instanceof ESTRING) {
+			render = ((ESTRING) value).getValue();
+		} else if (value instanceof EFLOAT) {
+			render = Float.toString(((EFLOAT) value).getValue());
+		} else if (value instanceof ESIGNEDINT) {
+			render = Integer.toString(((ESIGNEDINT) value).getValue());
+		} else if (value instanceof EBOOLEAN) {
+			render = Boolean.toString(((EBOOLEAN) value).isValue());
+		}
+		return render;
+	}
+
+	private String renderEAlphaNumericValue(EAlphaNumericValue value) {
+		String render = null;
+		if (value instanceof ESTRING) {
+			render = ((ESTRING) value).getValue();
+		} else if (value instanceof EFLOAT) {
+			render = Float.toString(((EFLOAT) value).getValue());
+		} else if (value instanceof ESIGNEDINT) {
+			render = Integer.toString(((ESIGNEDINT) value).getValue());
+		}
+		return render;
+	}
+
+	private String getIndentation(Integer depth) {
+		String indentation = "";
+		String ind = "    ";
+		int i = 0;
+		while (i++ < depth)
+			indentation += ind;
+		return indentation;
+	}
+
 	public SortedSet<String> getPropertyEntities(EPropertyAssignment property) {
 		return new TreeSet<String>(Arrays.asList(new String[] { "SELF", "SOURCE", "TARGET", "HOST" }));
 	}
 
 	public String renderGetPropertyReq_Cap(EPropertyAssignment property) {
 		EPREFIX_TYPE req_cap = ((GetProperty) property.getValue()).getProperty().getReq_cap();
-		return AADM_Helper.renderType(req_cap);
+		if (req_cap != null)
+			return AADM_Helper.renderType(req_cap);
+		else
+			return "";
 	}
 
 	public String renderGetPropertyProperty(EPropertyAssignment property) {
@@ -752,21 +1065,59 @@ public class Services {
 	}
 
 	public void setValue(EPropertyAssignment prop, String value) {
-		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		EAssignmentValue newValue = (EAssignmentValue) createESingleValue(value);
+		prop.setValue(newValue);
+	}
+
+	public void setValueType(EPropertyAssignment prop, String valueType) {
+		AADM_Model model = AADM_Helper.findModel(prop);
+		EAssignmentValue newValue = (EAssignmentValue) createValueType(valueType, model);
 		prop.setValue(newValue);
 	}
 
 	public void setValue(EAttributeAssignment attr, String value) {
-		EAssignmentValue newValue = (EAssignmentValue) createValue(value);
+		EAssignmentValue newValue = (EAssignmentValue) createESingleValue(value);
 		attr.setValue(newValue);
 	}
 
-	private EObject createValue(String value) {
+	private EObject createValueType(String type, AADM_Model model) {
+		if (type.equals("Single Value"))
+			return createStringValue();
+		else if (type.equals("List"))
+			return createListValue();
+		else if (type.equals("Nested Value"))
+			return createMapValue();
+		else if (type.equals("Get Property"))
+			return createGetPropertyValue();
+		else if (type.equals("Get Input"))
+			return createGetInputValue(model);
+		else
+			return null;
+	}
+
+	private ESingleValue createESingleValue(String value) {
 		// Try boolean value
 		if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
 			return createBooleanValue(value);
 		}
 
+		// Try integer or float
+		try {
+			ESIGNEDINT eInt = createIntegerValue(value);
+			return eInt;
+		} catch (NumberFormatException ex1) {
+			try {
+				EFLOAT eFloat = createFloatValue(value);
+				return eFloat;
+			} catch (NumberFormatException ex2) {
+				// String value
+				ESTRING eString = createStringValue(value);
+				return eString;
+			}
+		}
+	}
+
+	private EAlphaNumericValue createEAlphaNumericValue(String value) {
 		// Try integer or float
 		try {
 			ESIGNEDINT eInt = createIntegerValue(value);
@@ -789,6 +1140,10 @@ public class Services {
 		return eBoolean;
 	}
 
+	private ESTRING createStringValue() {
+		return createStringValue("value");
+	}
+
 	private ESTRING createStringValue(String value) {
 		ESTRING eString = RMFactory.eINSTANCE.createESTRING();
 		eString.setValue(value);
@@ -799,6 +1154,45 @@ public class Services {
 		ESIGNEDINT eInt = RMFactory.eINSTANCE.createESIGNEDINT();
 		eInt.setValue(Integer.valueOf(value));
 		return eInt;
+	}
+
+	private ELIST createListValue() {
+		return RMFactory.eINSTANCE.createELIST();
+	}
+
+	private EMAP createMapValue() {
+		EMAP map = RMFactory.eINSTANCE.createEMAP();
+		EMapEntry entry = RMFactory.eINSTANCE.createEMapEntry();
+		ESTRING value = RMFactory.eINSTANCE.createESTRING();
+		value.setValue("value");
+		entry.setKey("key");
+		entry.setValue(value);
+		map.getMap().add(entry);
+		return map;
+	}
+
+	private GetProperty createGetPropertyValue() {
+		GetProperty getProperty = RMFactory.eINSTANCE.createGetProperty();
+		GetPropertyBody body = RMFactory.eINSTANCE.createGetPropertyBody();
+		EEntity entity = RMFactory.eINSTANCE.createEEntity();
+		entity.setEntity("SELF");
+		body.setEntity(entity);
+		EPREFIX_TYPE property = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		property.setType("");
+		body.setProperty(property);
+		getProperty.setProperty(body);
+		return getProperty;
+	}
+
+	private GetInput createGetInputValue(AADM_Model model) {
+		GetInput getInput = RMFactory.eINSTANCE.createGetInput();
+		List<EParameterDefinition> inputs = AADM_Helper.findInputs(model);
+		if (!inputs.isEmpty()) {
+			getInput.setInput(inputs.get(0));
+		} else {
+			// TODO Create input
+		}
+		return getInput;
 	}
 
 	private ETriggerDefinitions createETriggerDefinitions() {
@@ -960,5 +1354,735 @@ public class Services {
 			return split[1];
 		else
 			return split[0];
+	}
+
+	public SortedSet<String> getPropertyValueTypes(EObject ignored) {
+		return Services.valueTypes;
+	}
+
+	public SortedSet<String> getClauseTypes(EObject ignored) {
+		return Services.clauseTypes;
+	}
+
+	public SortedSet<String> getClauseTypes(EObject ignored, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition)
+			return Services.assertionType;
+		else
+			return Services.clauseDefinitionTypes;
+	}
+
+	public SortedSet<String> getConstraintTypes(EObject ignored) {
+		return Services.constraintTypes;
+	}
+
+	public String getClauseType(ETriggerDefinition trigger, Map<EObject, Integer> selected, Object edited) {
+		String type = null;
+		EObject clause = null;
+		if (edited instanceof EObject)
+			clause = (EObject) edited;
+		else
+			clause = selected.keySet().iterator().next();
+
+		if (clause instanceof EConditionClauseDefinitionNOT) {
+			type = "Not";
+		} else if (clause instanceof EConditionClauseDefinitionAND) {
+			type = "And";
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			type = "Or";
+		} else if (clause instanceof EAssertionDefinition) {
+			type = "Assertion";
+		}
+		return type;
+	}
+
+	public String getClauseType(ETriggerDefinition trigger, EObject clause) {
+		String type = null;
+
+		if (clause instanceof EConditionClauseDefinitionNOT) {
+			type = "Not";
+		} else if (clause instanceof EConditionClauseDefinitionAND) {
+			type = "And";
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			type = "Or";
+		} else if (clause instanceof EAssertionDefinition) {
+			type = "Assertion";
+		}
+		return type;
+	}
+
+	public String getConstraintType(ETriggerDefinition object, EConstraint constraint) {
+		return getConstraintType(constraint);
+	}
+
+	public String getConstraintType(ETriggerDefinition object, Object constraint) {
+		if (constraint instanceof EConstraint) {
+			return getConstraintType((EConstraint) constraint);
+		} else {
+			return null;
+		}
+	}
+
+	private String getConstraintType(EConstraint constraint) {
+		String type = null;
+		if (constraint instanceof EEqual) {
+			type = "Equal";
+		} else if (constraint instanceof EGreaterThan) {
+			type = "GreaterThan";
+		} else if (constraint instanceof EGreaterOrEqual) {
+			type = "GreaterOrEqual";
+		} else if (constraint instanceof ELessThan) {
+			type = "LessThan";
+		} else if (constraint instanceof ELessOrEqual) {
+			type = "LessOrEqual";
+		} else if (constraint instanceof EInRange) {
+			type = "InRange";
+		} else if (constraint instanceof EValid_Values) {
+			type = "ValidValues";
+		} else if (constraint instanceof ELength) {
+			type = "Length";
+		} else if (constraint instanceof EMinLength) {
+			type = "MinLength";
+		} else if (constraint instanceof EMaxLength) {
+			type = "MaxLength";
+		}
+		return type;
+	}
+
+	public boolean isAssertionDefinition(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		return clause instanceof EAssertionDefinition;
+	}
+
+	public boolean isNotAssertionDefinition(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		return !isAssertionDefinition(trigger, selectedAssertion);
+	}
+
+	public String getAttributeName(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition) {
+			return ((EAssertionDefinition) clause).getAttribute_name();
+		}
+		return null;
+	}
+
+	public void setAttributeName(ETriggerDefinition trigger, Map<EObject, Integer> selectedAssertion, String newValue) {
+		EObject clause = selectedAssertion.keySet().iterator().next();
+		if (clause instanceof EAssertionDefinition) {
+			((EAssertionDefinition) clause).setAttribute_name(newValue);
+		}
+	}
+
+	public void setClauseType(ETriggerDefinition object, List<Map<EObject, Integer>> selection, String newType) {
+		EConditionClauseDefinition clause = (EConditionClauseDefinition) selection.get(0).keySet().iterator().next();
+		Integer depth = selection.get(0).get(clause);
+		EConditionClauseDefinition newClause = replaceClauseForType(clause, newType);
+		selection.remove(0);
+		Map<EObject, Integer> map = new HashMap<>();
+		map.put(newClause, depth);
+		selection.add(map);
+	}
+
+	private EConditionClauseDefinition replaceClauseForType(EConditionClauseDefinition clause, String newType) {
+		EConditionClauseDefinition newClause = cloneEConditionClauseDefinition(newType, clause);
+		EObject parent = clause.eContainer();
+		setClauseChild(parent, newClause);
+		return newClause;
+	}
+
+	public String getValueType(EPropertyAssignment property, String newEntry) {
+		// Find new created nested property by name: newNestedProperty, and return
+		// is value type
+		if (property.getValue() instanceof EMAP) {
+			EList map = ((EMAP) property.getValue()).getMap();
+			return findPropertyByNameInMap(newEntry, map);
+		}
+		return null;
+	}
+
+	private String findPropertyByNameInMap(String target, EList<EMapEntry> map) {
+		if (target != null)
+			for (EMapEntry entry : map) {
+				if (entry.getKey().equals(target)) {
+					return renderPropertyValueType(entry);
+				}
+				if (entry.getValue() instanceof EMAP) {
+					String found = findPropertyByNameInMap(target, ((EMAP) entry.getValue()).getMap());
+					if (found != null)
+						return found;
+				}
+			}
+		return null;
+	}
+
+	public String addNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
+			String newType) {
+		EMapEntry newEntry = createEMapEntry(newType, AADM_Helper.findModel(property));
+		if (selection.isEmpty()) {
+			// Add new nested property of given type to root property
+			if (property.getValue() instanceof EMAP) {
+				((EMAP) property.getValue()).getMap().add(newEntry);
+			}
+		} else if (selection.size() == 1) { // Only one selection allowed
+			// Add new nested property of given type to selected property
+			EMapEntry selectedEntry = (EMapEntry) selection.get(0).keySet().iterator().next();
+			if (selectedEntry.getValue() instanceof EMAP) {
+				((EMAP) selectedEntry.getValue()).getMap().add(newEntry);
+			}
+		}
+		return newEntry.getKey();
+	}
+
+	public boolean canAddClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection) {
+		return (trigger.getTrigger().getCondition().getConstraint() == null)
+				|| (trigger.getTrigger().getCondition().getConstraint() != null && selection.size() == 1);
+	}
+
+	public boolean canNotAddClause(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection) {
+		return !canAddClause(trigger, selection);
+	}
+
+	public void addClauseToCondition(ETriggerDefinition trigger, ArrayList<Map<EObject, Integer>> selection,
+			EObject newClause) {
+		if (selection.isEmpty()) {
+			EConditionClauseDefinition root = trigger.getTrigger().getCondition().getConstraint();
+			if (root == null) { // Insert new clause at root level if no condition available
+				insertEConditionClauseDefinition(newClause, trigger.getTrigger().getCondition());
+			}
+		} else { // Insert clause in selection
+			EObject parent = selection.get(0).keySet().iterator().next();
+			insertEConditionClauseDefinition(newClause, parent);
+		}
+	}
+
+	public EObject createEditedClauseForCondition(ETriggerDefinition trigger, String newType) {
+		return createEConditionClause(newType);
+	}
+
+	public EObject editAttributeNameForClauseInCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+			String newAttributeValue) {
+		EObject selectedClause = selection.keySet().iterator().next();
+		EAssertionDefinition newClause = null;
+		if (selectedClause instanceof EAssertionDefinition) {
+			newClause = cloneEAssertionDefinition((EAssertionDefinition) selectedClause);
+			newClause.setAttribute_name(newAttributeValue);
+		}
+
+		return newClause;
+	}
+
+//	public void editClauseForCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+//			EObject editedClause) {
+//		EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selection.keySet().iterator().next();
+//		replaceClause(selectedClause, editedClause);
+//	}
+
+	public void editClauseForCondition(ETriggerDefinition trigger, Map<EObject, Integer> selection,
+			Object editedClause) {
+		if (editedClause instanceof EObject) {
+			EObject selected = selection.keySet().iterator().next();
+			if (selected instanceof EConditionClauseDefinition) {
+				EConditionClauseDefinition selectedClause = (EConditionClauseDefinition) selected;
+				replaceClause(selectedClause, (EObject) editedClause);
+			} else if (selected instanceof EAssertionDefinition) {
+				EAssertionDefinition selectedClause = (EAssertionDefinition) selected;
+				replaceClause(selectedClause, (EAssertionDefinition) editedClause);
+			}
+		}
+	}
+
+	public void addNewConstraintToAssertion(ETriggerDefinition trigger,
+			Map<EAssertionDefinition, Integer> selectedAssertion, EConstraint newConstraint) {
+		if (newConstraint != null)
+			selectedAssertion.keySet().iterator().next().getConstraints().getList().add(newConstraint);
+	}
+
+	public void removeConstraintsFromAssertion(ETriggerDefinition trigger,
+			Map<EAssertionDefinition, Integer> selectedAssertion, List<EObject> constraints) {
+		selectedAssertion.keySet().iterator().next().getConstraints().getList().removeAll(constraints);
+	}
+
+	public EConstraint createNewConstraintForAssertion(ETriggerDefinition trigger, String newType) {
+		return createEConstraint(newType);
+	}
+
+	public boolean constraintHasOneValue(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return constraintHasOneValue(selection.get(0));
+	}
+
+	public boolean isInRangeConstraint(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return selection.get(0) instanceof EInRange;
+	}
+
+	public String renderInRangeConstraintStart(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderEAlphaNumericValue(((EInRange) selection.get(0)).getStart());
+	}
+
+	public String renderInRangeConstraintEnd(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderEAlphaNumericValue(((EInRange) selection.get(0)).getEnd());
+	}
+
+	public void setInRangeConstraintStart(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		((EInRange) selection.get(0)).setStart(createEAlphaNumericValue(newValue));
+	}
+
+	public void setInRangeConstraintEnd(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		((EInRange) selection.get(0)).setEnd(createEAlphaNumericValue(newValue));
+	}
+
+	private boolean constraintHasOneValue(EConstraint constraint) {
+		boolean result = true;
+		if (constraint instanceof EInRange)
+			result = false;
+		return result;
+	}
+
+	public String renderConstraintValueLabel(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderConstraintValueLabel(selection.get(0));
+	}
+
+	public void setConstraintValue(ETriggerDefinition trigger, List<EConstraint> selection, String newValue) {
+		setConstraintValue(selection.get(0), newValue);
+	}
+
+	private void setConstraintValue(EConstraint constraint, String newValue) {
+		if (constraint instanceof EEqual) {
+			((EEqual) constraint).setVal(createESingleValue(newValue));
+		} else if (constraint instanceof EGreaterThan) {
+			((EGreaterThan) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EGreaterOrEqual) {
+			((EGreaterOrEqual) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof ELessThan) {
+			((ELessThan) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof ELessOrEqual) {
+			((ELessOrEqual) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EValid_Values) {
+			((EValid_Values) constraint).setVal(createELIST(newValue));
+		} else if (constraint instanceof ELength) {
+			((ELength) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EMinLength) {
+			((EMinLength) constraint).setVal(createEAlphaNumericValue(newValue));
+		} else if (constraint instanceof EMaxLength) {
+			((EMaxLength) constraint).setVal(createEAlphaNumericValue(newValue));
+		}
+	}
+
+	private String renderConstraintValueLabel(EConstraint constraint) {
+		String label = null;
+		if (constraint instanceof EEqual) {
+			label = "equal";
+		} else if (constraint instanceof EGreaterThan) {
+			label = "greater_than";
+		} else if (constraint instanceof EGreaterOrEqual) {
+			label = "greater_or_equal";
+		} else if (constraint instanceof ELessThan) {
+			label = "less_than";
+		} else if (constraint instanceof ELessOrEqual) {
+			label = "less_or_equal";
+		} else if (constraint instanceof EValid_Values) {
+			label = "valid_values";
+		} else if (constraint instanceof ELength) {
+			label = "length";
+		} else if (constraint instanceof EMinLength) {
+			label = "min_length";
+		} else if (constraint instanceof EMaxLength) {
+			label = "max_length";
+		}
+		return label;
+	}
+
+	public String renderConstraintValue(ETriggerDefinition trigger, List<EConstraint> selection) {
+		return renderConstraintValue(selection.get(0));
+	}
+
+	private String renderConstraintValue(EConstraint constraint) {
+		String value = null;
+		if (constraint instanceof EEqual) {
+			value = renderValue(((EEqual) constraint).getVal());
+		} else if (constraint instanceof EGreaterThan) {
+			value = renderValue(((EGreaterThan) constraint).getVal());
+		} else if (constraint instanceof EGreaterOrEqual) {
+			value = renderValue(((EGreaterOrEqual) constraint).getVal());
+		} else if (constraint instanceof ELessThan) {
+			value = renderValue(((ELessThan) constraint).getVal());
+		} else if (constraint instanceof ELessOrEqual) {
+			value = renderValue(((ELessOrEqual) constraint).getVal());
+		} else if (constraint instanceof EValid_Values) {
+			value = renderEListValue(((EValid_Values) constraint).getVal());
+		} else if (constraint instanceof ELength) {
+			value = renderValue(((ELength) constraint).getVal());
+		} else if (constraint instanceof EMinLength) {
+			value = renderValue(((EMinLength) constraint).getVal());
+		} else if (constraint instanceof EMaxLength) {
+			value = renderValue(((EMaxLength) constraint).getVal());
+		}
+		return value;
+	}
+
+	private EConstraint createEConstraint(String newType) {
+		EConstraint constraint = null;
+		if ("Equal".equals(newType)) {
+			constraint = createEEqual();
+		} else if ("GreaterThan".equals(newType)) {
+			constraint = createEGreaterThan();
+		} else if ("GreaterOrEqual".equals(newType)) {
+			constraint = createEGreaterOrEqual();
+		} else if ("LessThan".equals(newType)) {
+			constraint = createELessThan();
+		} else if ("LessOrEqual".equals(newType)) {
+			constraint = createELessOrEqual();
+		} else if ("InRange".equals(newType)) {
+			constraint = createEInRange();
+		} else if ("ValidValues".equals(newType)) {
+			constraint = createEValid_Values();
+		} else if ("Length".equals(newType)) {
+			constraint = createELength();
+		} else if ("MinLength".equals(newType)) {
+			constraint = createEMinLength();
+		} else if ("MaxLength".equals(newType)) {
+			constraint = createEMaxLength();
+		}
+		return constraint;
+	}
+
+	private EConstraint createEMaxLength() {
+		EMaxLength min = RMFactory.eINSTANCE.createEMaxLength();
+		min.setVal(createEAlphaNumericValue("0"));
+		return min;
+	}
+
+	private EConstraint createEMinLength() {
+		EMinLength min = RMFactory.eINSTANCE.createEMinLength();
+		min.setVal(createEAlphaNumericValue("0"));
+		return min;
+	}
+
+	private EConstraint createELength() {
+		ELength length = RMFactory.eINSTANCE.createELength();
+		length.setVal(createEAlphaNumericValue("0"));
+		return length;
+	}
+
+	private EConstraint createEValid_Values() {
+		EValid_Values vv = RMFactory.eINSTANCE.createEValid_Values();
+		vv.setVal(createELIST());
+		return vv;
+	}
+
+	private ELIST createELIST() {
+		return RMFactory.eINSTANCE.createELIST();
+	}
+
+	private ELIST createELIST(String list) {
+		ELIST eList = RMFactory.eINSTANCE.createELIST();
+		List<String> items = Arrays.asList(list.split(","));
+		List<EAlphaNumericValue> listItems = new ArrayList<>();
+		for (String item : items) {
+			listItems.add(createEAlphaNumericValue(item.trim()));
+		}
+		eList.getList().addAll(listItems);
+		return eList;
+	}
+
+	private EConstraint createEInRange() {
+		EInRange ir = RMFactory.eINSTANCE.createEInRange();
+		ir.setStart(createEAlphaNumericValue("0"));
+		ir.setEnd(createEAlphaNumericValue("1"));
+		return ir;
+	}
+
+	private EConstraint createELessOrEqual() {
+		ELessOrEqual loe = RMFactory.eINSTANCE.createELessOrEqual();
+		loe.setVal(createEAlphaNumericValue("0"));
+		return loe;
+	}
+
+	private EConstraint createELessThan() {
+		ELessThan lt = RMFactory.eINSTANCE.createELessThan();
+		lt.setVal(createEAlphaNumericValue("0"));
+		return lt;
+	}
+
+	private EConstraint createEGreaterOrEqual() {
+		EGreaterOrEqual egoe = RMFactory.eINSTANCE.createEGreaterOrEqual();
+		egoe.setVal(createEAlphaNumericValue("0"));
+		return egoe;
+	}
+
+	private EConstraint createEGreaterThan() {
+		EGreaterThan egt = RMFactory.eINSTANCE.createEGreaterThan();
+		egt.setVal(createEAlphaNumericValue("0"));
+		return egt;
+	}
+
+	private EConstraint createEEqual() {
+		EEqual ee = RMFactory.eINSTANCE.createEEqual();
+		ee.setVal(createESingleValue("0"));
+		return ee;
+	}
+
+	private void insertEConditionClauseDefinition(EObject clause, EObject parent) {
+		if (clause != null)
+			insertClause(clause, parent);
+	}
+
+	public EObject createNewClauseForCondition(ETriggerDefinition object, String newType) {
+		return createEConditionClause(newType);
+	}
+
+	private EObject createEConditionClause(String newType) {
+		EObject clause = null;
+		if ("Not".equals(newType)) {
+			clause = createEConditionClauseDefinitionNOT();
+		} else if ("And".equals(newType)) {
+			clause = createEConditionClauseDefinitionAND();
+		} else if ("Or".equals(newType)) {
+			clause = createEConditionClauseDefinitionOR();
+		} else if ("Assertion".equals(newType)) {
+			clause = createEAssertionDefinition();
+		}
+		return clause;
+	}
+
+	private EConditionClauseDefinition cloneEConditionClauseDefinition(String newType,
+			EConditionClauseDefinition oldClause) {
+		EConditionClauseDefinition newClause = null;
+		if ("Not".equals(newType)) {
+			newClause = createEConditionClauseDefinitionNOT();
+			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClause));
+		} else if ("And".equals(newType)) {
+			newClause = createEConditionClauseDefinitionAND();
+			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClause));
+		} else if ("Or".equals(newType)) {
+			newClause = createEConditionClauseDefinitionOR();
+			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClause));
+		}
+		return newClause;
+	}
+
+	private EConditionClauseDefinition cloneEConditionClauseDefinition(EConditionClauseDefinition oldClause) {
+		EConditionClauseDefinition newClause = null;
+		if (oldClause instanceof EConditionClauseDefinitionNOT) {
+			newClause = createEConditionClauseDefinitionNOT();
+			((EConditionClauseDefinitionNOT) newClause).setNot(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionAND) {
+			newClause = createEConditionClauseDefinitionAND();
+			((EConditionClauseDefinitionAND) newClause).setAnd(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionOR) {
+			newClause = createEConditionClauseDefinitionOR();
+			((EConditionClauseDefinitionOR) newClause).setOr(getClauseChild(oldClause));
+		} else if (oldClause instanceof EConditionClauseDefinitionAssert) {
+			newClause = createEConditionClauseDefinitionAssert();
+			((EConditionClauseDefinitionAssert) newClause).getAssertions()
+					.addAll(((EConditionClauseDefinitionAssert) oldClause).getAssertions());
+		}
+		return newClause;
+	}
+
+	private EAssertionDefinition cloneEAssertionDefinition(EAssertionDefinition oldAssertion) {
+		EAssertionDefinition newAssertion = createEAssertionDefinition();
+		newAssertion.setAttribute_name(oldAssertion.getAttribute_name());
+		newAssertion.getConstraints().getList().addAll(oldAssertion.getConstraints().getList());
+		return newAssertion;
+	}
+
+	private EConditionClauseDefinition getClauseChild(EConditionClauseDefinition oldClone) {
+		EConditionClauseDefinition clause = null;
+		if (oldClone instanceof EConditionClauseDefinitionNOT) {
+			clause = ((EConditionClauseDefinitionNOT) oldClone).getNot();
+		} else if (oldClone instanceof EConditionClauseDefinitionAND) {
+			clause = ((EConditionClauseDefinitionAND) oldClone).getAnd();
+		} else if (oldClone instanceof EConditionClauseDefinitionOR) {
+			clause = ((EConditionClauseDefinitionOR) oldClone).getOr();
+		}
+		return clause;
+	}
+
+	private void insertClause(EObject clause, EObject parent) {
+		if (clause instanceof EAssertionDefinition) {
+			if (!(parent instanceof EConditionClauseDefinitionAssert) && parent instanceof EConditionClauseDefinition) {
+				EConditionClauseDefinitionAssert ccda = getEConditionClauseDefinitionAssert(
+						(EConditionClauseDefinition) parent);
+				if (ccda == null) {
+					ccda = createEConditionClauseDefinitionAssertion();
+					insertClause(ccda, parent);
+				}
+				ccda.getAssertions().add((EAssertionDefinition) clause);
+			} else if (parent instanceof EAssertionDefinition) {
+				parent = ((EAssertionDefinition) parent).eContainer();
+				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
+			} else {
+				((EConditionClauseDefinitionAssert) parent).getAssertions().add((EAssertionDefinition) clause);
+			}
+		} else if (clause instanceof EConditionClauseDefinition) {
+			EConditionClauseDefinition nestedClause = null;
+			if (parent instanceof EConditionClauseDefinitionAND) {
+				nestedClause = ((EConditionClauseDefinitionAND) parent).getAnd();
+				((EConditionClauseDefinitionAND) parent).setAnd((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EConditionClauseDefinitionOR) {
+				nestedClause = ((EConditionClauseDefinitionOR) parent).getOr();
+				((EConditionClauseDefinitionOR) parent).setOr((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EConditionClauseDefinitionNOT) {
+				nestedClause = ((EConditionClauseDefinitionNOT) parent).getNot();
+				((EConditionClauseDefinitionNOT) parent).setNot((EConditionClauseDefinition) clause);
+			} else if (parent instanceof EExtendedTriggerCondition) {
+				((EExtendedTriggerCondition) parent).setConstraint((EConditionClauseDefinition) clause);
+			}
+			if (nestedClause != null)
+				setClauseChild(clause, nestedClause);
+		}
+	}
+
+	private void replaceClause(EAssertionDefinition originalClause, EAssertionDefinition newClause) {
+		EConditionClauseDefinitionAssert parent = (EConditionClauseDefinitionAssert) originalClause.eContainer();
+		int index = parent.getAssertions().indexOf(originalClause);
+		parent.getAssertions().remove(originalClause);
+		parent.getAssertions().add(index, newClause);
+	}
+
+	private void replaceClause(EConditionClauseDefinition originalClause, EObject newClause) {
+		EObject parent = originalClause.eContainer();
+		if (parent instanceof EExtendedTriggerCondition) {
+			parent = (EExtendedTriggerCondition) parent;
+			((EExtendedTriggerCondition) parent).setConstraint((EConditionClauseDefinition) newClause);
+		} else {
+			parent = (EConditionClauseDefinition) parent;
+			setClauseChild(parent, (EConditionClauseDefinition) newClause);
+		}
+		setClauseChild(newClause, getClauseChild(originalClause));
+	}
+
+	private void setClauseChild(EObject clause, EConditionClauseDefinition nestedClause) {
+		if (clause instanceof EConditionClauseDefinitionAND) {
+			((EConditionClauseDefinitionAND) clause).setAnd((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EConditionClauseDefinitionOR) {
+			((EConditionClauseDefinitionOR) clause).setOr((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EConditionClauseDefinitionNOT) {
+			((EConditionClauseDefinitionNOT) clause).setNot((EConditionClauseDefinition) nestedClause);
+		} else if (clause instanceof EExtendedTriggerCondition) {
+			((EExtendedTriggerCondition) clause).setConstraint((EConditionClauseDefinition) nestedClause);
+		}
+	}
+
+//	private EConditionClauseDefinition getClauseChild(EObject clause) {
+//		EConditionClauseDefinition child = null;
+//		if (clause instanceof EConditionClauseDefinitionAND) {
+//			child = ((EConditionClauseDefinitionAND) clause).getAnd();
+//		} else if (clause instanceof EConditionClauseDefinitionOR) {
+//			child = ((EConditionClauseDefinitionOR) clause).getOr();
+//		} else if (clause instanceof EConditionClauseDefinitionNOT) {
+//			child = ((EConditionClauseDefinitionNOT) clause).getNot();
+//		} else if (clause instanceof EExtendedTriggerCondition) {
+//			child = ((EExtendedTriggerCondition) clause).getConstraint();
+//		}
+//		return child;
+//	}
+
+	private EConditionClauseDefinitionAssert getEConditionClauseDefinitionAssert(EConditionClauseDefinition parent) {
+		EConditionClauseDefinitionAssert ccda = null;
+		EObject candidate = null;
+		if (parent instanceof EConditionClauseDefinitionAND) {
+			candidate = ((EConditionClauseDefinitionAND) parent).getAnd();
+		} else if (parent instanceof EConditionClauseDefinitionOR) {
+			candidate = ((EConditionClauseDefinitionOR) parent).getOr();
+		} else if (parent instanceof EConditionClauseDefinitionNOT) {
+			candidate = ((EConditionClauseDefinitionNOT) parent).getNot();
+		}
+		ccda = (candidate instanceof EConditionClauseDefinitionAssert) ? (EConditionClauseDefinitionAssert) candidate
+				: null;
+		return ccda;
+	}
+
+	private EConditionClauseDefinitionNOT createEConditionClauseDefinitionNOT() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionNOT();
+	}
+
+	private EConditionClauseDefinitionAND createEConditionClauseDefinitionAND() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAND();
+	}
+
+	private EConditionClauseDefinitionOR createEConditionClauseDefinitionOR() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionOR();
+	}
+
+	private EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssert() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAssert();
+	}
+
+	private EConditionClauseDefinitionAssert createEConditionClauseDefinitionAssertion() {
+		return RMFactory.eINSTANCE.createEConditionClauseDefinitionAssert();
+	}
+
+	private EAssertionDefinition createEAssertionDefinition() {
+		EAssertionDefinition assertion = RMFactory.eINSTANCE.createEAssertionDefinition();
+		assertion.setAttribute_name("attribute_name_" + ID++);
+		assertion.setConstraints(createEConstraintList());
+		return assertion;
+	}
+
+	private EConstraintList createEConstraintList() {
+		return RMFactory.eINSTANCE.createEConstraintList();
+	}
+
+	public void removeNewNestedProperty(EPropertyAssignment property, ArrayList<Map<EObject, Integer>> selection,
+			String newEntry) {
+		if (selection.isEmpty()) {
+			// Remove new nested property from root property
+			if (property.getValue() instanceof EMAP) {
+				removeEntryByNameInMap(newEntry, ((EMAP) property.getValue()).getMap());
+			}
+		} else if (selection.size() == 1) { // Only one selection allowed
+			// Remove new nested property from selected property
+			EMapEntry selectedEntry = (EMapEntry) selection.get(0).keySet().iterator().next();
+			if (selectedEntry.getValue() instanceof EMAP) {
+				removeEntryByNameInMap(newEntry, ((EMAP) selectedEntry.getValue()).getMap());
+			}
+		}
+	}
+
+	private void removeEntryByNameInMap(String key, EList<EMapEntry> map) {
+		for (EMapEntry entry : map) {
+			if (entry.getKey().equals(key)) {
+				map.remove(entry);
+				break;
+			}
+		}
+	}
+
+	private EMapEntry createEMapEntry(String newType, AADM_Model model) {
+		EMapEntry newEntry = RMFactory.eINSTANCE.createEMapEntry();
+		newEntry.setKey("newNestedProperty" + ID++);
+		newEntry.setValue((EAssignmentValue) createValueType(newType, model));
+		return newEntry;
+	}
+
+	public String renderPropertyValueType(EPropertyAssignment property) {
+		if (property.getValue() instanceof ESingleValue)
+			return "Single Value";
+		else if (property.getValue() instanceof ELIST)
+			return "List";
+		else if (property.getValue() instanceof EMAP)
+			return "Nested Value";
+		else if (property.getValue() instanceof GetProperty)
+			return "Get Property";
+		else if (property.getValue() instanceof GetInput)
+			return "Get Input";
+		else
+			return "";
+	}
+
+	public String renderPropertyValueType(EMapEntry entry) {
+		if (entry.getValue() instanceof ESingleValue)
+			return "Single Value";
+		else if (entry.getValue() instanceof ELIST)
+			return "List";
+		else if (entry.getValue() instanceof EMAP)
+			return "Nested Value";
+		else if (entry.getValue() instanceof GetProperty)
+			return "Get Property";
+		else if (entry.getValue() instanceof GetInput)
+			return "Get Input";
+		else
+			return "";
 	}
 }
