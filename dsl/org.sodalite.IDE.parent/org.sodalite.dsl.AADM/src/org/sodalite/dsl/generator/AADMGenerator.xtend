@@ -255,7 +255,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:value '«trim(p.parameter.type.compile.toString)»' ;
 	.
 	
-	:Input_«output_counter++»
+	:Output_«output_counter++»
 	  rdf:type exchange:Output ;
 	  exchange:name "«p.name»" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(p, "type")» ;
