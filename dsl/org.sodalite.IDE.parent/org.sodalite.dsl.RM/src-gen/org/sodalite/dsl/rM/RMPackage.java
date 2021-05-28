@@ -2534,13 +2534,22 @@ public interface RMPackage extends EPackage
   int EPARAMETER_DEFINITION_BODY__TYPE = 0;
 
   /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPARAMETER_DEFINITION_BODY__DESCRIPTION = 1;
+
+  /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPARAMETER_DEFINITION_BODY__VALUE = 1;
+  int EPARAMETER_DEFINITION_BODY__VALUE = 2;
 
   /**
    * The feature id for the '<em><b>Default</b></em>' containment reference.
@@ -2549,7 +2558,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPARAMETER_DEFINITION_BODY__DEFAULT = 2;
+  int EPARAMETER_DEFINITION_BODY__DEFAULT = 3;
 
   /**
    * The number of structural features of the '<em>EParameter Definition Body</em>' class.
@@ -2558,7 +2567,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EPARAMETER_DEFINITION_BODY_FEATURE_COUNT = 3;
+  int EPARAMETER_DEFINITION_BODY_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EValueExpressionImpl <em>EValue Expression</em>}' class.
@@ -6065,6 +6074,17 @@ public interface RMPackage extends EPackage
   EReference getEParameterDefinitionBody_Type();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Description</em>'.
+   * @see org.sodalite.dsl.rM.EParameterDefinitionBody#getDescription()
+   * @see #getEParameterDefinitionBody()
+   * @generated
+   */
+  EAttribute getEParameterDefinitionBody_Description();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -8867,6 +8887,14 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EReference EPARAMETER_DEFINITION_BODY__TYPE = eINSTANCE.getEParameterDefinitionBody_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPARAMETER_DEFINITION_BODY__DESCRIPTION = eINSTANCE.getEParameterDefinitionBody_Description();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.

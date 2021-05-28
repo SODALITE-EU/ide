@@ -1411,7 +1411,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EParameterDefinitionBody returns EParameterDefinitionBody
 	 *
 	 * Constraint:
-	 *     (type=EDataTypeName | value=EValueExpression | default=EValueExpression)*
+	 *     (type=EDataTypeName | description=STRING | value=EValueExpression | default=EValueExpression)*
 	 */
 	protected void sequence_EParameterDefinitionBody(ISerializationContext context, EParameterDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

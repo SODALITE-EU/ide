@@ -6075,26 +6075,25 @@ ruleEParameterDefinitionBody returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 1);
 					}
-								({true}?=>(otherlv_4=Value
+								({true}?=>(otherlv_4=Description
 								{
-									newLeafNode(otherlv_4, grammarAccess.getEParameterDefinitionBodyAccess().getValueKeyword_1_1_0());
+									newLeafNode(otherlv_4, grammarAccess.getEParameterDefinitionBodyAccess().getDescriptionKeyword_1_1_0());
 								}
 								(
 									(
+										lv_description_5_0=RULE_STRING
 										{
-											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getValueEValueExpressionParserRuleCall_1_1_1_0());
+											newLeafNode(lv_description_5_0, grammarAccess.getEParameterDefinitionBodyAccess().getDescriptionSTRINGTerminalRuleCall_1_1_1_0());
 										}
-										lv_value_5_0=ruleEValueExpression
 										{
 											if ($current==null) {
-												$current = createModelElementForParent(grammarAccess.getEParameterDefinitionBodyRule());
+												$current = createModelElement(grammarAccess.getEParameterDefinitionBodyRule());
 											}
-											set(
+											setWithLastConsumed(
 												$current,
-												"value",
-												lv_value_5_0,
-												"org.sodalite.dsl.RM.EValueExpression");
-											afterParserOrEnumRuleCall();
+												"description",
+												lv_description_5_0,
+												"org.eclipse.xtext.common.Terminals.STRING");
 										}
 									)
 								)
@@ -6109,16 +6108,50 @@ ruleEParameterDefinitionBody returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 2);
 					}
-								({true}?=>(otherlv_6=Default
+								({true}?=>(otherlv_6=Value
 								{
-									newLeafNode(otherlv_6, grammarAccess.getEParameterDefinitionBodyAccess().getDefaultKeyword_1_2_0());
+									newLeafNode(otherlv_6, grammarAccess.getEParameterDefinitionBodyAccess().getValueKeyword_1_2_0());
 								}
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_1_2_1_0());
+											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getValueEValueExpressionParserRuleCall_1_2_1_0());
 										}
-										lv_default_7_0=ruleEValueExpression
+										lv_value_7_0=ruleEValueExpression
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEParameterDefinitionBodyRule());
+											}
+											set(
+												$current,
+												"value",
+												lv_value_7_0,
+												"org.sodalite.dsl.RM.EValueExpression");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+								))
+					{ 
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1());
+					}
+				)
+			)|
+			(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 3)}?=>(
+					{
+						getUnorderedGroupHelper().select(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), 3);
+					}
+								({true}?=>(otherlv_8=Default
+								{
+									newLeafNode(otherlv_8, grammarAccess.getEParameterDefinitionBodyAccess().getDefaultKeyword_1_3_0());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_1_3_1_0());
+										}
+										lv_default_9_0=ruleEValueExpression
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getEParameterDefinitionBodyRule());
@@ -6126,7 +6159,7 @@ ruleEParameterDefinitionBody returns [EObject current=null]
 											set(
 												$current,
 												"default",
-												lv_default_7_0,
+												lv_default_9_0,
 												"org.sodalite.dsl.RM.EValueExpression");
 											afterParserOrEnumRuleCall();
 										}

@@ -272,6 +272,7 @@
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EParameterDefinitionBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EParameterDefinitionBody/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EParameterDefinitionBody/default"/>
     </genClasses>

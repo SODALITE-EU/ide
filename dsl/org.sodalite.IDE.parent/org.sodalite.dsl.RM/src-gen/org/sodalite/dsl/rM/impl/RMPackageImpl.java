@@ -3191,9 +3191,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EAttribute getEParameterDefinitionBody_Description()
+  {
+    return (EAttribute)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getEParameterDefinitionBody_Value()
   {
-    return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(1);
+    return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -3204,7 +3215,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
   @Override
   public EReference getEParameterDefinitionBody_Default()
   {
-    return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(2);
+    return (EReference)eParameterDefinitionBodyEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -4540,6 +4551,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     eParameterDefinitionBodyEClass = createEClass(EPARAMETER_DEFINITION_BODY);
     createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__TYPE);
+    createEAttribute(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__DESCRIPTION);
     createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__VALUE);
     createEReference(eParameterDefinitionBodyEClass, EPARAMETER_DEFINITION_BODY__DEFAULT);
 
@@ -5020,6 +5032,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     initEClass(eParameterDefinitionBodyEClass, EParameterDefinitionBody.class, "EParameterDefinitionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEParameterDefinitionBody_Type(), this.getEDataTypeName(), null, "type", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEParameterDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Value(), this.getEValueExpression(), null, "value", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEParameterDefinitionBody_Default(), this.getEValueExpression(), null, "default", null, 0, 1, EParameterDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

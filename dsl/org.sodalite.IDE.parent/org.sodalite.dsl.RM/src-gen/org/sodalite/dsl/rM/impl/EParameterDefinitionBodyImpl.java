@@ -26,6 +26,7 @@ import org.sodalite.dsl.rM.RMPackage;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EParameterDefinitionBodyImpl#getDefault <em>Default</em>}</li>
  * </ul>
@@ -43,6 +44,26 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
    * @ordered
    */
   protected EDataTypeName type;
+
+  /**
+   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDescription()
+   * @generated
+   * @ordered
+   */
+  protected static final String DESCRIPTION_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDescription()
+   * @generated
+   * @ordered
+   */
+  protected String description = DESCRIPTION_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -133,6 +154,31 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__TYPE, newType, newType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getDescription()
+  {
+    return description;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDescription(String newDescription)
+  {
+    String oldDescription = description;
+    description = newDescription;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EPARAMETER_DEFINITION_BODY__DESCRIPTION, oldDescription, description));
   }
 
   /**
@@ -267,6 +313,8 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
         return getType();
+      case RMPackage.EPARAMETER_DEFINITION_BODY__DESCRIPTION:
+        return getDescription();
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return getValue();
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
@@ -287,6 +335,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
         setType((EDataTypeName)newValue);
+        return;
+      case RMPackage.EPARAMETER_DEFINITION_BODY__DESCRIPTION:
+        setDescription((String)newValue);
         return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)newValue);
@@ -311,6 +362,9 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
         setType((EDataTypeName)null);
         return;
+      case RMPackage.EPARAMETER_DEFINITION_BODY__DESCRIPTION:
+        setDescription(DESCRIPTION_EDEFAULT);
+        return;
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         setValue((EValueExpression)null);
         return;
@@ -333,12 +387,31 @@ public class EParameterDefinitionBodyImpl extends MinimalEObjectImpl.Container i
     {
       case RMPackage.EPARAMETER_DEFINITION_BODY__TYPE:
         return type != null;
+      case RMPackage.EPARAMETER_DEFINITION_BODY__DESCRIPTION:
+        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case RMPackage.EPARAMETER_DEFINITION_BODY__VALUE:
         return value != null;
       case RMPackage.EPARAMETER_DEFINITION_BODY__DEFAULT:
         return default_ != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (description: ");
+    result.append(description);
+    result.append(')');
+    return result.toString();
   }
 
 } //EParameterDefinitionBodyImpl

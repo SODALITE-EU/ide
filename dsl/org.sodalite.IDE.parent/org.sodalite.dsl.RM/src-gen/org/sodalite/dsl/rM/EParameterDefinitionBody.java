@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getType <em>Type</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getDescription <em>Description</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getValue <em>Value</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getDefault <em>Default</em>}</li>
  * </ul>
@@ -46,6 +47,28 @@ public interface EParameterDefinitionBody extends EObject
    * @generated
    */
   void setType(EDataTypeName value);
+
+  /**
+   * Returns the value of the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Description</em>' attribute.
+   * @see #setDescription(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getEParameterDefinitionBody_Description()
+   * @model
+   * @generated
+   */
+  String getDescription();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EParameterDefinitionBody#getDescription <em>Description</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Description</em>' attribute.
+   * @see #getDescription()
+   * @generated
+   */
+  void setDescription(String value);
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.

@@ -216,6 +216,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_0(), "rule__EParameterDefinitionBody__Group_1_0__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_1(), "rule__EParameterDefinitionBody__Group_1_1__0");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_2(), "rule__EParameterDefinitionBody__Group_1_2__0");
+			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getGroup_1_3(), "rule__EParameterDefinitionBody__Group_1_3__0");
 			builder.put(grammarAccess.getGetInputAccess().getGroup(), "rule__GetInput__Group__0");
 			builder.put(grammarAccess.getGetAttributeAccess().getGroup(), "rule__GetAttribute__Group__0");
 			builder.put(grammarAccess.getGetAttributeBodyAccess().getGroup_0(), "rule__GetAttributeBody__Group_0__0");
@@ -441,8 +442,9 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getNameAssignment_0(), "rule__EParameterDefinition__NameAssignment_0");
 			builder.put(grammarAccess.getEParameterDefinitionAccess().getParameterAssignment_3(), "rule__EParameterDefinition__ParameterAssignment_3");
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getTypeAssignment_1_0_1(), "rule__EParameterDefinitionBody__TypeAssignment_1_0_1");
-			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getValueAssignment_1_1_1(), "rule__EParameterDefinitionBody__ValueAssignment_1_1_1");
-			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultAssignment_1_2_1(), "rule__EParameterDefinitionBody__DefaultAssignment_1_2_1");
+			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EParameterDefinitionBody__DescriptionAssignment_1_1_1");
+			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getValueAssignment_1_2_1(), "rule__EParameterDefinitionBody__ValueAssignment_1_2_1");
+			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getDefaultAssignment_1_3_1(), "rule__EParameterDefinitionBody__DefaultAssignment_1_3_1");
 			builder.put(grammarAccess.getGetInputAccess().getInputAssignment_1(), "rule__GetInput__InputAssignment_1");
 			builder.put(grammarAccess.getGetAttributeAccess().getAttributeAssignment_2(), "rule__GetAttribute__AttributeAssignment_2");
 			builder.put(grammarAccess.getGetAttributeBodyAccess().getAttributeAssignment_0_1(), "rule__GetAttributeBody__AttributeAssignment_0_1");

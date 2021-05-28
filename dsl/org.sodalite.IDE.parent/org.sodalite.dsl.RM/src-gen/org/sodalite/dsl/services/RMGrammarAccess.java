@@ -3418,27 +3418,32 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Assignment cTypeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cTypeEDataTypeNameParserRuleCall_1_0_1_0 = (RuleCall)cTypeAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
-		private final Keyword cValueKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cValueAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cValueEValueExpressionParserRuleCall_1_1_1_0 = (RuleCall)cValueAssignment_1_1_1.eContents().get(0);
+		private final Keyword cDescriptionKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cDescriptionAssignment_1_1_1.eContents().get(0);
 		private final Group cGroup_1_2 = (Group)cUnorderedGroup_1.eContents().get(2);
-		private final Keyword cDefaultKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
-		private final Assignment cDefaultAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final RuleCall cDefaultEValueExpressionParserRuleCall_1_2_1_0 = (RuleCall)cDefaultAssignment_1_2_1.eContents().get(0);
+		private final Keyword cValueKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cValueAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cValueEValueExpressionParserRuleCall_1_2_1_0 = (RuleCall)cValueAssignment_1_2_1.eContents().get(0);
+		private final Group cGroup_1_3 = (Group)cUnorderedGroup_1.eContents().get(3);
+		private final Keyword cDefaultKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
+		private final Assignment cDefaultAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cDefaultEValueExpressionParserRuleCall_1_3_1_0 = (RuleCall)cDefaultAssignment_1_3_1.eContents().get(0);
 		
 		//EParameterDefinitionBody:
-		//	{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('value:' value=EValueExpression)? & ('default:'
-		//	default=EValueExpression)?);
+		//	{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('description:' description=STRING)? & ('value:'
+		//	value=EValueExpression)? & ('default:' default=EValueExpression)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('value:' value=EValueExpression)? & ('default:'
-		//default=EValueExpression)?)
+		//{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('description:' description=STRING)? & ('value:'
+		//value=EValueExpression)? & ('default:' default=EValueExpression)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{EParameterDefinitionBody}
 		public Action getEParameterDefinitionBodyAction_0() { return cEParameterDefinitionBodyAction_0; }
 		
-		//(('type:' type=EDataTypeName)? & ('value:' value=EValueExpression)? & ('default:' default=EValueExpression)?)
+		//(('type:' type=EDataTypeName)? & ('description:' description=STRING)? & ('value:' value=EValueExpression)? & ('default:'
+		//default=EValueExpression)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//('type:' type=EDataTypeName)?
@@ -3453,29 +3458,41 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EDataTypeName
 		public RuleCall getTypeEDataTypeNameParserRuleCall_1_0_1_0() { return cTypeEDataTypeNameParserRuleCall_1_0_1_0; }
 		
-		//('value:' value=EValueExpression)?
+		//('description:' description=STRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//'value:'
-		public Keyword getValueKeyword_1_1_0() { return cValueKeyword_1_1_0; }
+		//'description:'
+		public Keyword getDescriptionKeyword_1_1_0() { return cDescriptionKeyword_1_1_0; }
 		
-		//value=EValueExpression
-		public Assignment getValueAssignment_1_1_1() { return cValueAssignment_1_1_1; }
+		//description=STRING
+		public Assignment getDescriptionAssignment_1_1_1() { return cDescriptionAssignment_1_1_1; }
 		
-		//EValueExpression
-		public RuleCall getValueEValueExpressionParserRuleCall_1_1_1_0() { return cValueEValueExpressionParserRuleCall_1_1_1_0; }
+		//STRING
+		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_1_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_1_1_0; }
 		
-		//('default:' default=EValueExpression)?
+		//('value:' value=EValueExpression)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
-		//'default:'
-		public Keyword getDefaultKeyword_1_2_0() { return cDefaultKeyword_1_2_0; }
+		//'value:'
+		public Keyword getValueKeyword_1_2_0() { return cValueKeyword_1_2_0; }
 		
-		//default=EValueExpression
-		public Assignment getDefaultAssignment_1_2_1() { return cDefaultAssignment_1_2_1; }
+		//value=EValueExpression
+		public Assignment getValueAssignment_1_2_1() { return cValueAssignment_1_2_1; }
 		
 		//EValueExpression
-		public RuleCall getDefaultEValueExpressionParserRuleCall_1_2_1_0() { return cDefaultEValueExpressionParserRuleCall_1_2_1_0; }
+		public RuleCall getValueEValueExpressionParserRuleCall_1_2_1_0() { return cValueEValueExpressionParserRuleCall_1_2_1_0; }
+		
+		//('default:' default=EValueExpression)?
+		public Group getGroup_1_3() { return cGroup_1_3; }
+		
+		//'default:'
+		public Keyword getDefaultKeyword_1_3_0() { return cDefaultKeyword_1_3_0; }
+		
+		//default=EValueExpression
+		public Assignment getDefaultAssignment_1_3_1() { return cDefaultAssignment_1_3_1; }
+		
+		//EValueExpression
+		public RuleCall getDefaultEValueExpressionParserRuleCall_1_3_1_0() { return cDefaultEValueExpressionParserRuleCall_1_3_1_0; }
 	}
 	public class EValueExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EValueExpression");
@@ -5989,8 +6006,8 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EParameterDefinitionBody:
-	//	{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('value:' value=EValueExpression)? & ('default:'
-	//	default=EValueExpression)?);
+	//	{EParameterDefinitionBody} (('type:' type=EDataTypeName)? & ('description:' description=STRING)? & ('value:'
+	//	value=EValueExpression)? & ('default:' default=EValueExpression)?);
 	public EParameterDefinitionBodyElements getEParameterDefinitionBodyAccess() {
 		return pEParameterDefinitionBody;
 	}
