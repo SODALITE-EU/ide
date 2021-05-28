@@ -1,0 +1,48 @@
+module: test
+
+import: docker
+import: openstack
+
+inputs:
+
+	ssh-key-name:
+		type: string
+	image-name:
+		type: string
+		default: "image_name"
+	openstack-network-name:
+		type: string
+	security-groups:
+		type: string
+	flavor-name:
+		type: string
+	username:
+		type: string
+		
+node_templates:
+	
+	test-vm:
+		type: openstack/sodalite.nodes.OpenStack.VM
+		properties:
+			key_name: get_input: ssh-key-name
+			image: get_input: image-name
+			name: "test-exporter-1"
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor: get_input: flavor-name
+			username: get_input: username
+			
+	docker-host:
+		type: docker/sodalite.nodes.DockerHost
+		requirements:
+			host:
+				node: test/test-vm
+				
+outputs:
+	public_ip:
+		type: string
+		description: 'The public IP of the provisioned VM'
+		value: get_attribute:
+			entity: test/test-vm 
+			attribute: test/test-vm.public_address
+		
