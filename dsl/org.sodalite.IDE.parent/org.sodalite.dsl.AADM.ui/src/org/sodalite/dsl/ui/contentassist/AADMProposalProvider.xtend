@@ -23,7 +23,6 @@ import org.eclipse.xtext.impl.KeywordImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
 import org.sodalite.dsl.kb_reasoner_client.types.Type
 import org.sodalite.dsl.aADM.impl.EAttributeAssignmentsImpl
-import org.sodalite.dsl.aADM.impl.ERequirementAssignmentsImpl
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
 import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl
@@ -58,6 +57,9 @@ import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.ui.helper.AADMHelper
 import org.sodalite.dsl.ui.helper.BackendHelper
+import org.sodalite.dsl.aADM.ERequirementAssignments
+import org.sodalite.dsl.aADM.ENodeTemplateBody
+import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -92,9 +94,19 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		super.completeRM_Model_Imports(model, assignment, context, acceptor);
 	}
 	
-	override void completeGetPropertyBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void completeGetPropertyBody_Entity(EObject property, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::entity property")
 		//TODO Populate as well with existing templates in scope (local, KB)
+		val List<ENodeTemplate> nodes = AADMHelper.findNodes(property) //Local nodes
+		createNodeProposals(nodes, context, acceptor)
+		createEntityProposals (context, acceptor);
+	}
+	
+	override void completeGetAttributeBody_Entity(EObject attribute, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetAttributeBody::entity property")
+		//TODO Populate as well with existing templates in scope (local, KB)
+		val List<ENodeTemplate> nodes = AADMHelper.findNodes(attribute) //Local nodes
+		createNodeProposals(nodes, context, acceptor)
 		createEntityProposals (context, acceptor);
 	}
 	
@@ -151,14 +163,93 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 					proposals.add(prop.name)
 		}else{
 			//Get the properties defined within the entity
-			for (prop:node.node.properties.properties)
-					proposals.add(prop.name)
+			val type = node.node.type
+			val resourceId = (type.module !== null? type.module + '/':'') + type.type
+			val ReasonerData<PropertyDefinition> properties = BackendHelper.KBReasoner.getTypeProperties(resourceId)
+			if (properties !== null){
+				System.out.println ("Properties retrieved from KB for resource: " + resourceId)
+				createProposalsForProperties (node, properties, context, acceptor)
+			}
 		}
 		
 		//Create proposals for each found property. Prefix property with req|cap name when applies
 		val Image image = getImage("icons/property.png")
 		for (proposal: proposals){
 			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
+	}
+	
+	override void completeGetAttributeBody_Attribute(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetAttributeBody::attribute property")
+		val String module = AADMHelper.getModule(model)
+		//Get entity in this GetAttribute body. If null, return
+		val body = model as GetAttributeBodyImpl
+		val node = AADMHelper.getEntityNode(body)
+		
+		if (node === null)
+			return
+			
+		var List<String> proposals = new ArrayList<String>()
+		// Get the attributes defined within the selected node requirements or capabilities
+		if (body.req_cap !== null){
+			val req_cap_name = AADMHelper.getLastSegment(body.req_cap.type, '.')
+			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node)
+			if (req_node !== null)
+				for (attr:req_node.node.attributes.attributes)
+					proposals.add(module + '/' + req_node.name + "." + attr.name)
+			//else
+				//TODO Find requirement node in KB
+		}else{
+			//Get the attributes defined within the entity type
+			val type = node.node.type
+			val resourceId = (type.module !== null? type.module + '/':'') + type.type
+			val ReasonerData<AttributeDefinition> attributes = BackendHelper.KBReasoner.getTypeAttributes(resourceId)
+			if (attributes !== null){
+				System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
+				createProposalsForAttributes (node, attributes, context, acceptor)
+			}
+		}
+		
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		val Image image = getImage("icons/attribute.png")
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
+	}
+	
+	def createProposalsForAttributes(ENodeTemplate node, ReasonerData<AttributeDefinition> attributes, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var String proposalText = ""
+		var String displayText = ""
+		var String additionalProposalInfo = ""
+		val Image image = getImage("icons/attribute.png")
+		for (attribute: attributes.elements){
+			System.out.println ("\tAttribute: " + attribute.uri)
+		var attribute_label = attribute.uri.toString.substring(attribute.uri.toString.lastIndexOf('/') + 1, attribute.uri.toString.length)
+		var module = AADMHelper.getModule(node)
+		attribute_label = (module !== null?module + '/':'') + node.name + '.' + attribute_label
+		proposalText = attribute_label
+		displayText = attribute_label
+		additionalProposalInfo = attribute.getType.getLabel!==null?"Type: " + attribute.getType.getLabel:""
+		additionalProposalInfo += attribute.getDescription!==null?"\nDescription: " + attribute.getDescription:""
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+		}
+	}
+	
+	def createProposalsForProperties(ENodeTemplate node, ReasonerData<PropertyDefinition> properties, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var String proposalText = ""
+		var String displayText = ""
+		var String additionalProposalInfo = ""
+		val Image image = getImage("icons/property.png")
+		for (property: properties.elements){
+			System.out.println ("\tProperty: " + property.uri)
+		var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
+		var module = AADMHelper.getModule(node)
+		property_label = (module !== null?module + '/':'') + node.name + '.' + property_label
+		proposalText = property_label
+		displayText = property_label
+		additionalProposalInfo = property.getType.getLabel!==null?"Type: " + property.getType.getLabel:""
+		additionalProposalInfo += property.getDescription!==null?"\nDescription: " + property.getDescription:""
+			createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
 		}
 	}
 	
@@ -384,10 +475,12 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			var resourceId = ""
 			var EPREFIX_TYPE type = null
 			
-			if (model instanceof ENodeTemplateBodyImpl)
+			if (model instanceof ENodeTemplate)
+				type = (model as ENodeTemplate).node.type
+			else if (model instanceof ENodeTemplateBody)
 				type = (model as ENodeTemplateBodyImpl).type
-			else if (model instanceof ERequirementAssignmentsImpl)
-				type = (model.eContainer as ENodeTemplateBodyImpl).type
+			else if (model instanceof ERequirementAssignments)
+				type = (model.eContainer as ENodeTemplateBody).type
 				
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
@@ -423,13 +516,20 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			SodaliteLogger.log(ex.message, ex);
 		}
 	}
-	
+
 	override void completeERequirementAssignment_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for ERequirementAssignment::node property")
 		try{	
+			var ERequirementAssignment requirement = null;
+			if (model instanceof ERequirementAssignment){
+				requirement = model as ERequirementAssignment;
+			} else { //Workaround
+				requirement = context.previousModel as ERequirementAssignment;
+			}
+			
 			//Get valid requirement nodes from KB
-			val ValidRequirementNodeData vrnd = AADMHelper.getValidRequirementNodes(model as ERequirementAssignmentImpl);
-			val TypeData tovrnd = AADMHelper.getTypeOfValidRequirementNodes(model as ERequirementAssignmentImpl);
+			val ValidRequirementNodeData vrnd = AADMHelper.getValidRequirementNodes(requirement);
+			val TypeData tovrnd = AADMHelper.getTypeOfValidRequirementNodes(requirement);
 			
 			if (!vrnd.elements.empty){
 				val Image image = getImage("icons/resource2.png")
@@ -1003,5 +1103,20 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 //			return findParserRule (obj.eContainer) 
 //	}
 	
+	
+	protected def void createNodeProposals (List<ENodeTemplate> nodes, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		if (nodes.empty) return
+		val Image image = getImage("icons/resource2.png")
+		val module = AADMHelper.getModule(nodes.get(0))
+		val additionalProposalInfo = ""
+		for (ENodeTemplate node: nodes){
+			if (node !== null){
+			 	val qnode = module !== null? module + '/' + node.name: node.name
+				val proposalText = qnode
+				val displayText = qnode
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+			}
+		}
+	}
 
 }

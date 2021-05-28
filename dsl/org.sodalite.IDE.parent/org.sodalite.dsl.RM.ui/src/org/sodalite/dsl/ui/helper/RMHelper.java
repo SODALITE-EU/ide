@@ -504,4 +504,13 @@ public class RMHelper {
 				"Your account does not have permissions to read some declared imports or module. \nPlease, check and fix them");
 	}
 
+	public static boolean areModulesIdentical(String module1, String module2) {
+		if (module1 == null && module2 == null)
+			return true;
+		else if (module1 == null && module2 != null || module1 != null && module2 == null)
+			return false;
+		else
+			return module1.equals(module2);
+	}
+
 }

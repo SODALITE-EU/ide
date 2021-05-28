@@ -47,7 +47,6 @@ import org.sodalite.dsl.aADM.ENodeTemplate;
 import org.sodalite.dsl.aADM.EPolicyDefinition;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
-import org.sodalite.dsl.aADM.impl.ERequirementAssignmentImpl;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.Template;
@@ -56,9 +55,11 @@ import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -173,7 +174,7 @@ public class AADMHelper extends RMHelper {
 //		return model.getModule();
 //	}
 
-	public static TypeData getTypeOfValidRequirementNodes(ERequirementAssignmentImpl req)
+	public static TypeData getTypeOfValidRequirementNodes(ERequirementAssignment req)
 			throws SodaliteException, Exception {
 		String requirementId = req.getName();
 		EPREFIX_TYPE nodeType = ((ENodeTemplateBodyImpl) req.eContainer().eContainer()).getType();
@@ -190,7 +191,7 @@ public class AADMHelper extends RMHelper {
 		return BackendHelper.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
 	}
 
-	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignmentImpl req)
+	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignment req)
 			throws SodaliteException, Exception {
 		String requirementId = req.getName();
 		EPREFIX_TYPE nodeType = ((ENodeTemplateBodyImpl) req.eContainer().eContainer()).getType();
@@ -401,6 +402,27 @@ public class AADMHelper extends RMHelper {
 		return node;
 	}
 
+	public static ENodeTemplate getEntityNode(GetAttributeBodyImpl body) {
+		EEntityReference eEntityReference = body.getEntity();
+		ENodeTemplate node = null;
+		if (eEntityReference instanceof EEntity) {
+			EEntity eEntity = (EEntity) eEntityReference;
+			if (eEntity.getEntity().equals("SELF")) {
+				node = (ENodeTemplate) getNodeTemplate(body);
+			}
+			// TODO Support other entities: TARGET, HOST, SOURCE
+		} else if (eEntityReference instanceof EPREFIX_ID) {
+			// TODO Support concrete entity
+			EPREFIX_ID ref = (EPREFIX_ID) eEntityReference;
+			String module = getModule(body);
+			AADM_Model model = (AADM_Model) AADMHelper.findModel(eEntityReference);
+			if (AADMHelper.areModulesIdentical(module, ref.getModule())) {
+				node = AADMHelper.findNode(model, ref.getId());
+			}
+		}
+		return node;
+	}
+
 	public static ENodeTemplate findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
 		ENodeTemplate node = null;
 		if (template.getNode().getRequirements() == null)
@@ -441,6 +463,11 @@ public class AADMHelper extends RMHelper {
 				return node;
 		}
 		return null;
+	}
+
+	public static List<ENodeTemplate> findNodes(EObject object) {
+		AADM_Model model = (AADM_Model) findModel(object);
+		return model.getNodeTemplates().getNodeTemplates();
 	}
 
 	public static ParserRule findParserRule(EObject obj) {
