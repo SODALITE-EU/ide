@@ -4631,9 +4631,9 @@ ruleEPropertyDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0());
+										newCompositeNode(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_3_1_0());
 									}
-									lv_default_8_0=ruleEValueExpression
+									lv_default_8_0=ruleEAssignmentValue
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEPropertyDefinitionBodyRule());
@@ -4642,7 +4642,7 @@ ruleEPropertyDefinitionBody returns [EObject current=null]
 											$current,
 											"default",
 											lv_default_8_0,
-											"org.sodalite.dsl.RM.EValueExpression");
+											"org.sodalite.dsl.RM.EAssignmentValue");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -4986,9 +4986,9 @@ ruleEAttributeDefinitionBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0());
+										newCompositeNode(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_2_1_0());
 									}
-									lv_default_6_0=ruleEValueExpression
+									lv_default_6_0=ruleEAssignmentValue
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getEAttributeDefinitionBodyRule());
@@ -4997,7 +4997,7 @@ ruleEAttributeDefinitionBody returns [EObject current=null]
 											$current,
 											"default",
 											lv_default_6_0,
-											"org.sodalite.dsl.RM.EValueExpression");
+											"org.sodalite.dsl.RM.EAssignmentValue");
 										afterParserOrEnumRuleCall();
 									}
 								)

@@ -274,7 +274,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" eType="#//EBOOLEAN"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EAssignmentValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" eType="#//EConstraints"
@@ -295,7 +295,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataTypeName"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EValueExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//EAssignmentValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entry_schema" eType="#//EDataTypeName"

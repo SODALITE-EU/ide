@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EBOOLEAN;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
-import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -88,7 +88,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    * @ordered
    */
-  protected EValueExpression default_;
+  protected EAssignmentValue default_;
 
   /**
    * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -282,7 +282,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    */
   @Override
-  public EValueExpression getDefault()
+  public EAssignmentValue getDefault()
   {
     return default_;
   }
@@ -292,9 +292,9 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDefault(EValueExpression newDefault, NotificationChain msgs)
+  public NotificationChain basicSetDefault(EAssignmentValue newDefault, NotificationChain msgs)
   {
-    EValueExpression oldDefault = default_;
+    EAssignmentValue oldDefault = default_;
     default_ = newDefault;
     if (eNotificationRequired())
     {
@@ -310,7 +310,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
    * @generated
    */
   @Override
-  public void setDefault(EValueExpression newDefault)
+  public void setDefault(EAssignmentValue newDefault)
   {
     if (newDefault != default_)
     {
@@ -523,7 +523,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setRequired((EBOOLEAN)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
-        setDefault((EValueExpression)newValue);
+        setDefault((EAssignmentValue)newValue);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__STATUS:
         setStatus((String)newValue);
@@ -558,7 +558,7 @@ public class EPropertyDefinitionBodyImpl extends MinimalEObjectImpl.Container im
         setRequired((EBOOLEAN)null);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__DEFAULT:
-        setDefault((EValueExpression)null);
+        setDefault((EAssignmentValue)null);
         return;
       case RMPackage.EPROPERTY_DEFINITION_BODY__STATUS:
         setStatus(STATUS_EDEFAULT);

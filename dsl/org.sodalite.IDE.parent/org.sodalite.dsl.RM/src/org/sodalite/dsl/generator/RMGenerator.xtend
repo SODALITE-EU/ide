@@ -1128,7 +1128,11 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "default" ;
 	  «IF p.property.^default !== null»
-	  «IF p.property.^default instanceof EFunction»
+	  «IF p.property.^default instanceof ELIST»
+	  «FOR entry:(p.property.^default as ELIST).list»
+	  exchange:listValue "«trim(entry.compile().toString)»" ;
+	  «ENDFOR»
+	  «ELSEIF p.property.^default instanceof EFunction»
 	  «IF p.property.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
 	   «ELSEIF p.property.^default instanceof GetProperty || p.property.^default instanceof GetAttribute»

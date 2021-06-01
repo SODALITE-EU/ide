@@ -100,12 +100,12 @@ public interface EPropertyDefinitionBody extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Default</em>' containment reference.
-   * @see #setDefault(EValueExpression)
+   * @see #setDefault(EAssignmentValue)
    * @see org.sodalite.dsl.rM.RMPackage#getEPropertyDefinitionBody_Default()
    * @model containment="true"
    * @generated
    */
-  EValueExpression getDefault();
+  EAssignmentValue getDefault();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.EPropertyDefinitionBody#getDefault <em>Default</em>}' containment reference.
@@ -115,7 +115,7 @@ public interface EPropertyDefinitionBody extends EObject
    * @see #getDefault()
    * @generated
    */
-  void setDefault(EValueExpression value);
+  void setDefault(EAssignmentValue value);
 
   /**
    * Returns the value of the '<em><b>Status</b></em>' attribute.

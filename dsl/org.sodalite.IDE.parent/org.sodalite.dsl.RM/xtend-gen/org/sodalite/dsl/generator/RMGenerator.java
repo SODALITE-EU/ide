@@ -3185,7 +3185,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     {
-      EValueExpression _default = p.getProperty().getDefault();
+      EAssignmentValue _default = p.getProperty().getDefault();
       boolean _tripleNotEquals_1 = (_default != null);
       if (_tripleNotEquals_1) {
         this.putParameterNumber(p, "default", Integer.valueOf(this.parameter_counter));
@@ -3201,42 +3201,58 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"default\" ;");
         _builder.newLine();
         {
-          EValueExpression _default_1 = p.getProperty().getDefault();
+          EAssignmentValue _default_1 = p.getProperty().getDefault();
           boolean _tripleNotEquals_2 = (_default_1 != null);
           if (_tripleNotEquals_2) {
             {
-              EValueExpression _default_2 = p.getProperty().getDefault();
-              if ((_default_2 instanceof EFunction)) {
+              EAssignmentValue _default_2 = p.getProperty().getDefault();
+              if ((_default_2 instanceof ELIST)) {
                 {
-                  EValueExpression _default_3 = p.getProperty().getDefault();
-                  if ((_default_3 instanceof GetInput)) {
+                  EAssignmentValue _default_3 = p.getProperty().getDefault();
+                  EList<EAlphaNumericValue> _list = ((ELIST) _default_3).getList();
+                  for(final EAlphaNumericValue entry : _list) {
                     _builder.append("  ");
-                    _builder.append("exchange:hasParameter :Parameter_");
-                    Integer _parameterNumber = this.getParameterNumber(p.getProperty().getDefault(), "name");
-                    _builder.append(_parameterNumber, "  ");
-                    _builder.append(" ;");
+                    _builder.append("exchange:listValue \"");
+                    String _trim_1 = this.trim(this.compile(entry).toString());
+                    _builder.append(_trim_1, "  ");
+                    _builder.append("\" ;");
                     _builder.newLineIfNotEmpty();
-                  } else {
-                    if (((p.getProperty().getDefault() instanceof GetProperty) || (p.getProperty().getDefault() instanceof GetAttribute))) {
-                      _builder.append("  ");
-                      _builder.append("exchange:hasParameter :Parameter_");
-                      Integer _parameterNumber_1 = this.getParameterNumber(p.getProperty().getDefault(), "name");
-                      _builder.append(_parameterNumber_1, "  ");
-                      _builder.append(" ;");
-                      _builder.newLineIfNotEmpty();
-                    }
                   }
                 }
               } else {
-                EValueExpression _default_4 = p.getProperty().getDefault();
-                if ((_default_4 instanceof ESingleValue)) {
-                  _builder.append("  ");
-                  _builder.append("exchange:value \"");
-                  EValueExpression _default_5 = p.getProperty().getDefault();
-                  String _trim_1 = this.trim(this.compile(((ESingleValue) _default_5)).toString());
-                  _builder.append(_trim_1, "  ");
-                  _builder.append("\" ;");
-                  _builder.newLineIfNotEmpty();
+                EAssignmentValue _default_4 = p.getProperty().getDefault();
+                if ((_default_4 instanceof EFunction)) {
+                  {
+                    EAssignmentValue _default_5 = p.getProperty().getDefault();
+                    if ((_default_5 instanceof GetInput)) {
+                      _builder.append("  ");
+                      _builder.append("exchange:hasParameter :Parameter_");
+                      Integer _parameterNumber = this.getParameterNumber(p.getProperty().getDefault(), "name");
+                      _builder.append(_parameterNumber, "  ");
+                      _builder.append(" ;");
+                      _builder.newLineIfNotEmpty();
+                    } else {
+                      if (((p.getProperty().getDefault() instanceof GetProperty) || (p.getProperty().getDefault() instanceof GetAttribute))) {
+                        _builder.append("  ");
+                        _builder.append("exchange:hasParameter :Parameter_");
+                        Integer _parameterNumber_1 = this.getParameterNumber(p.getProperty().getDefault(), "name");
+                        _builder.append(_parameterNumber_1, "  ");
+                        _builder.append(" ;");
+                        _builder.newLineIfNotEmpty();
+                      }
+                    }
+                  }
+                } else {
+                  EAssignmentValue _default_6 = p.getProperty().getDefault();
+                  if ((_default_6 instanceof ESingleValue)) {
+                    _builder.append("  ");
+                    _builder.append("exchange:value \"");
+                    EAssignmentValue _default_7 = p.getProperty().getDefault();
+                    String _trim_2 = this.trim(this.compile(((ESingleValue) _default_7)).toString());
+                    _builder.append(_trim_2, "  ");
+                    _builder.append("\" ;");
+                    _builder.newLineIfNotEmpty();
+                  }
                 }
               }
             }
@@ -3290,8 +3306,8 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _trim_2 = this.trim(this.compile(p.getProperty().getEntry_schema()));
-        _builder.append(_trim_2, "  ");
+        String _trim_3 = this.trim(this.compile(p.getProperty().getEntry_schema()));
+        _builder.append(_trim_3, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
         _builder.append(".");
@@ -3412,8 +3428,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(" ;");
     _builder.newLineIfNotEmpty();
     {
-      EValueExpression _default_6 = p.getProperty().getDefault();
-      boolean _tripleNotEquals_8 = (_default_6 != null);
+      EAssignmentValue _default_8 = p.getProperty().getDefault();
+      boolean _tripleNotEquals_8 = (_default_8 != null);
       if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -3909,7 +3925,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      EValueExpression _default = a.getAttribute().getDefault();
+      EAssignmentValue _default = a.getAttribute().getDefault();
       boolean _tripleNotEquals_1 = (_default != null);
       if (_tripleNotEquals_1) {
         this.putParameterNumber(a, "default", Integer.valueOf(this.parameter_counter));
@@ -3925,14 +3941,14 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"default\" ;");
         _builder.newLine();
         {
-          EValueExpression _default_1 = a.getAttribute().getDefault();
+          EAssignmentValue _default_1 = a.getAttribute().getDefault();
           boolean _tripleNotEquals_2 = (_default_1 != null);
           if (_tripleNotEquals_2) {
             {
-              EValueExpression _default_2 = a.getAttribute().getDefault();
+              EAssignmentValue _default_2 = a.getAttribute().getDefault();
               if ((_default_2 instanceof EFunction)) {
                 {
-                  EValueExpression _default_3 = a.getAttribute().getDefault();
+                  EAssignmentValue _default_3 = a.getAttribute().getDefault();
                   if ((_default_3 instanceof GetInput)) {
                     _builder.append("  ");
                     _builder.append("exchange:hasParameter :Parameter_");
@@ -3952,11 +3968,11 @@ public class RMGenerator extends AbstractGenerator {
                   }
                 }
               } else {
-                EValueExpression _default_4 = a.getAttribute().getDefault();
+                EAssignmentValue _default_4 = a.getAttribute().getDefault();
                 if ((_default_4 instanceof ESingleValue)) {
                   _builder.append("  ");
                   _builder.append("exchange:value \"");
-                  EValueExpression _default_5 = a.getAttribute().getDefault();
+                  EAssignmentValue _default_5 = a.getAttribute().getDefault();
                   String _trim_1 = this.trim(this.compile(((ESingleValue) _default_5)).toString());
                   _builder.append(_trim_1, "  ");
                   _builder.append("\" ;");
@@ -4067,7 +4083,7 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EValueExpression _default_6 = a.getAttribute().getDefault();
+      EAssignmentValue _default_6 = a.getAttribute().getDefault();
       boolean _tripleNotEquals_7 = (_default_6 != null);
       if (_tripleNotEquals_7) {
         _builder.append("  ");

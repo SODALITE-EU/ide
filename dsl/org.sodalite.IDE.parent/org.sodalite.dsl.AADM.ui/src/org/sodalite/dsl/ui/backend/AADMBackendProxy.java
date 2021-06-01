@@ -291,8 +291,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-					// Files.write(Paths.get(System.getProperty("user.dir") + "/" + submissionId +
-					// ".json"), aadmJson.getBytes());
+//					Files.write(Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json"),
+//							aadmJson.getBytes());
 
 					subMonitor.worked(steps++);
 

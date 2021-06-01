@@ -349,7 +349,7 @@ EPropertyDefinitionBody:
 	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
 	('required:' required=EBOOLEAN)? &
-	('default:' default=EValueExpression)? &
+	('default:' default=EAssignmentValue)? &
 	('status:' status=STRING)? &
 	('constraints:'
 	BEGIN
@@ -369,7 +369,7 @@ EAttributeDefinition:
 EAttributeDefinitionBody:
 	('type:' type=EDataTypeName) &
 	('description:' description=STRING)? &
-	('default:' default=EValueExpression)? &
+	('default:' default=EAssignmentValue)? &
 	('status:' status=STRING)? &
 	('entry_schema:' entry_schema=EDataTypeName)?;
 

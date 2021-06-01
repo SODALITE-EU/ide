@@ -499,7 +499,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EAttributeDefinitionBody returns EAttributeDefinitionBody
 	 *
 	 * Constraint:
-	 *     (type=EDataTypeName | description=STRING | default=EValueExpression | status=STRING | entry_schema=EDataTypeName)+
+	 *     (type=EDataTypeName | description=STRING | default=EAssignmentValue | status=STRING | entry_schema=EDataTypeName)+
 	 */
 	protected void sequence_EAttributeDefinitionBody(ISerializationContext context, EAttributeDefinitionBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1550,7 +1550,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         type=EDataTypeName | 
 	 *         description=STRING | 
 	 *         required=EBOOLEAN | 
-	 *         default=EValueExpression | 
+	 *         default=EAssignmentValue | 
 	 *         status=STRING | 
 	 *         constraints=EConstraints | 
 	 *         entry_schema=EDataTypeName

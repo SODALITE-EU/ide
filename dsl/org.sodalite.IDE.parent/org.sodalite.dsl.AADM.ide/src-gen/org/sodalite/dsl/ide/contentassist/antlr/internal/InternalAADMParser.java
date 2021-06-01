@@ -82091,28 +82091,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EPropertyDefinitionBody__DefaultAssignment_3_1"
-    // InternalAADMParser.g:25460:1: rule__EPropertyDefinitionBody__DefaultAssignment_3_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:25460:1: rule__EPropertyDefinitionBody__DefaultAssignment_3_1 : ( ruleEAssignmentValue ) ;
     public final void rule__EPropertyDefinitionBody__DefaultAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:25464:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:25465:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:25464:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:25465:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:25465:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:25466:3: ruleEValueExpression
+            // InternalAADMParser.g:25465:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:25466:3: ruleEAssignmentValue
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0()); 
+               before(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_3_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEValueExpression();
+            ruleEAssignmentValue();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0()); 
+               after(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_3_1_0()); 
             }
 
             }
@@ -82484,28 +82484,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EAttributeDefinitionBody__DefaultAssignment_2_1"
-    // InternalAADMParser.g:25595:1: rule__EAttributeDefinitionBody__DefaultAssignment_2_1 : ( ruleEValueExpression ) ;
+    // InternalAADMParser.g:25595:1: rule__EAttributeDefinitionBody__DefaultAssignment_2_1 : ( ruleEAssignmentValue ) ;
     public final void rule__EAttributeDefinitionBody__DefaultAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:25599:1: ( ( ruleEValueExpression ) )
-            // InternalAADMParser.g:25600:2: ( ruleEValueExpression )
+            // InternalAADMParser.g:25599:1: ( ( ruleEAssignmentValue ) )
+            // InternalAADMParser.g:25600:2: ( ruleEAssignmentValue )
             {
-            // InternalAADMParser.g:25600:2: ( ruleEValueExpression )
-            // InternalAADMParser.g:25601:3: ruleEValueExpression
+            // InternalAADMParser.g:25600:2: ( ruleEAssignmentValue )
+            // InternalAADMParser.g:25601:3: ruleEAssignmentValue
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0()); 
+               before(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_2_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEValueExpression();
+            ruleEAssignmentValue();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0()); 
+               after(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_2_1_0()); 
             }
 
             }

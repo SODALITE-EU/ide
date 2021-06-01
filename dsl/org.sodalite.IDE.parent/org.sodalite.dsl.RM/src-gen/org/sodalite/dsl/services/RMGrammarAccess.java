@@ -2571,7 +2571,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
 		private final Keyword cDefaultKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cDefaultAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDefaultEValueExpressionParserRuleCall_3_1_0 = (RuleCall)cDefaultAssignment_3_1.eContents().get(0);
+		private final RuleCall cDefaultEAssignmentValueParserRuleCall_3_1_0 = (RuleCall)cDefaultAssignment_3_1.eContents().get(0);
 		private final Group cGroup_4 = (Group)cUnorderedGroup.eContents().get(4);
 		private final Keyword cStatusKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cStatusAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
@@ -2589,14 +2589,14 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		
 		//EPropertyDefinitionBody:
 		//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
-		//	default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:'
+		//	default=EAssignmentValue)? & ('status:' status=STRING)? & ('constraints:'
 		//	BEGIN
 		//	constraints=EConstraints
 		//	END)? & ('entry_schema:' entry_schema=EDataTypeName)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
-		//default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:' BEGIN constraints=EConstraints END)? &
+		//default=EAssignmentValue)? & ('status:' status=STRING)? & ('constraints:' BEGIN constraints=EConstraints END)? &
 		//('entry_schema:' entry_schema=EDataTypeName)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
@@ -2636,17 +2636,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EBOOLEAN
 		public RuleCall getRequiredEBOOLEANParserRuleCall_2_1_0() { return cRequiredEBOOLEANParserRuleCall_2_1_0; }
 		
-		//('default:' default=EValueExpression)?
+		//('default:' default=EAssignmentValue)?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'default:'
 		public Keyword getDefaultKeyword_3_0() { return cDefaultKeyword_3_0; }
 		
-		//default=EValueExpression
+		//default=EAssignmentValue
 		public Assignment getDefaultAssignment_3_1() { return cDefaultAssignment_3_1; }
 		
-		//EValueExpression
-		public RuleCall getDefaultEValueExpressionParserRuleCall_3_1_0() { return cDefaultEValueExpressionParserRuleCall_3_1_0; }
+		//EAssignmentValue
+		public RuleCall getDefaultEAssignmentValueParserRuleCall_3_1_0() { return cDefaultEAssignmentValueParserRuleCall_3_1_0; }
 		
 		//('status:' status=STRING)?
 		public Group getGroup_4() { return cGroup_4; }
@@ -2769,7 +2769,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cDefaultKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cDefaultAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cDefaultEValueExpressionParserRuleCall_2_1_0 = (RuleCall)cDefaultAssignment_2_1.eContents().get(0);
+		private final RuleCall cDefaultEAssignmentValueParserRuleCall_2_1_0 = (RuleCall)cDefaultAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cUnorderedGroup.eContents().get(3);
 		private final Keyword cStatusKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cStatusAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
@@ -2780,11 +2780,11 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final RuleCall cEntry_schemaEDataTypeNameParserRuleCall_4_1_0 = (RuleCall)cEntry_schemaAssignment_4_1.eContents().get(0);
 		
 		//EAttributeDefinitionBody:
-		//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EValueExpression)? &
+		//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EAssignmentValue)? &
 		//	('status:' status=STRING)? & ('entry_schema:' entry_schema=EDataTypeName)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EValueExpression)? & ('status:'
+		//'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EAssignmentValue)? & ('status:'
 		//status=STRING)? & ('entry_schema:' entry_schema=EDataTypeName)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
@@ -2812,17 +2812,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_1_0; }
 		
-		//('default:' default=EValueExpression)?
+		//('default:' default=EAssignmentValue)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'default:'
 		public Keyword getDefaultKeyword_2_0() { return cDefaultKeyword_2_0; }
 		
-		//default=EValueExpression
+		//default=EAssignmentValue
 		public Assignment getDefaultAssignment_2_1() { return cDefaultAssignment_2_1; }
 		
-		//EValueExpression
-		public RuleCall getDefaultEValueExpressionParserRuleCall_2_1_0() { return cDefaultEValueExpressionParserRuleCall_2_1_0; }
+		//EAssignmentValue
+		public RuleCall getDefaultEAssignmentValueParserRuleCall_2_1_0() { return cDefaultEAssignmentValueParserRuleCall_2_1_0; }
 		
 		//('status:' status=STRING)?
 		public Group getGroup_3() { return cGroup_3; }
@@ -5807,7 +5807,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	//EPropertyDefinitionBody:
 	//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('required:' required=EBOOLEAN)? & ('default:'
-	//	default=EValueExpression)? & ('status:' status=STRING)? & ('constraints:'
+	//	default=EAssignmentValue)? & ('status:' status=STRING)? & ('constraints:'
 	//	BEGIN
 	//	constraints=EConstraints
 	//	END)? & ('entry_schema:' entry_schema=EDataTypeName)?;
@@ -5843,7 +5843,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EAttributeDefinitionBody:
-	//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EValueExpression)? &
+	//	'type:' type=EDataTypeName & ('description:' description=STRING)? & ('default:' default=EAssignmentValue)? &
 	//	('status:' status=STRING)? & ('entry_schema:' entry_schema=EDataTypeName)?;
 	public EAttributeDefinitionBodyElements getEAttributeDefinitionBodyAccess() {
 		return pEAttributeDefinitionBody;

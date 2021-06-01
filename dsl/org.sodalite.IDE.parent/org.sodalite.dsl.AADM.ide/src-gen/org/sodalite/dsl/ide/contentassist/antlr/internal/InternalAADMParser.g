@@ -25463,9 +25463,9 @@ rule__EPropertyDefinitionBody__DefaultAssignment_3_1
 	}
 :
 	(
-		{ before(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0()); }
-		ruleEValueExpression
-		{ after(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_3_1_0()); }
+		{ before(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_3_1_0()); }
+		ruleEAssignmentValue
+		{ after(grammarAccess.getEPropertyDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_3_1_0()); }
 	)
 ;
 finally {
@@ -25598,9 +25598,9 @@ rule__EAttributeDefinitionBody__DefaultAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0()); }
-		ruleEValueExpression
-		{ after(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEValueExpressionParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_2_1_0()); }
+		ruleEAssignmentValue
+		{ after(grammarAccess.getEAttributeDefinitionBodyAccess().getDefaultEAssignmentValueParserRuleCall_2_1_0()); }
 	)
 ;
 finally {

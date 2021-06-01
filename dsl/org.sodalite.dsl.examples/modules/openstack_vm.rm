@@ -37,8 +37,8 @@ node_types:
 				required: false 
 			floating_ip_pools:
 				description: 'Name of floating IP pool from which to choose a floating IP'
-				type: string
-				default: ""
+				type: list
+				default: [] 
 				required: false 
 			userdata:
 				description: 'Additional userdata applied to configure the VM'
