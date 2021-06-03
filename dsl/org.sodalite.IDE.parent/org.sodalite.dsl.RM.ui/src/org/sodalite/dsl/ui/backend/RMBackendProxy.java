@@ -475,6 +475,8 @@ public class RMBackendProxy {
 							}
 						}
 					}
+				} else { // Point to high level model
+					result = new ValidationSourceFeature(model, RMPackage.Literals.RM_MODEL__MODULE);
 				}
 			}
 		}
