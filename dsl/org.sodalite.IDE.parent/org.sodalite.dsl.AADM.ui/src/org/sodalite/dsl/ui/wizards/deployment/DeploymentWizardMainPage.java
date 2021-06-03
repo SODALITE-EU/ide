@@ -39,6 +39,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private Path imageBuildConfPath = null;
 	private Spinner workersSpinner = null;
 	private Text versionTagText = null;
+	private Text deploymentNameText = null;
 	private Button completeModelCB = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
@@ -54,6 +55,10 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 	public String getVersionTag() {
 		return this.versionTagText.getText();
+	}
+
+	public String getDeploymentName() {
+		return this.deploymentNameText.getText();
 	}
 
 	public int getWorkers() {
@@ -82,30 +87,6 @@ public class DeploymentWizardMainPage extends WizardPage {
 		return this.completeModelCB.getSelection();
 	}
 
-//	@Override
-//	public void createControl(Composite parent) {
-//		final Composite rootComposite = new Composite(parent, SWT.NONE);
-//		rootComposite.setLayout(GridLayoutFactory.fillDefaults().create());
-//
-//		final ScrolledComposite sc = new ScrolledComposite(rootComposite, SWT.BORDER | SWT.V_SCROLL);
-//		sc.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).hint(SWT.DEFAULT, 200).create());
-//		sc.setExpandHorizontal(true);
-//		sc.setExpandVertical(true);
-//
-//		final Composite containerMain = new Composite(sc, SWT.NULL);
-//		containerMain.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-//
-//		for (int i = 0; i < 50; i++) {
-//			final Label label = new Label(containerMain, SWT.NONE);
-//			label.setText("Label " + i + 1);
-//		}
-//
-//		sc.setContent(containerMain);
-//		sc.setMinSize(containerMain.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-//
-//		setControl(rootComposite);
-//	}
-
 	@Override
 	public void createControl(Composite parent) {
 		final Composite rootComposite = new Composite(parent, SWT.NONE);
@@ -126,6 +107,20 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 		sc.setContent(containerMain);
 		sc.setMinSize(containerMain.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+
+		// Deployment Name
+		Label deploymentNameLabel = new Label(containerMain, SWT.NONE);
+		deploymentNameLabel.setText("Deployment name:");
+
+		deploymentNameText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
+		GridData deploymentNameGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		deploymentNameText.setLayoutData(deploymentNameGridData);
+
+		deploymentNameText.addModifyListener(new ModifyListener() {
+			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+				getWizard().getContainer().updateButtons();
+			};
+		});
 
 		// Version tag
 		Label versionTagLabel = new Label(containerMain, SWT.NONE);

@@ -57,6 +57,14 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (refactorer_uri == null)
 			refactorer_uri = "http://192.168.2.166:8080/";
 
+		String consul_uri = prop.getProperty(PreferenceConstants.Consul_URI);
+		if (consul_uri == null)
+			consul_uri = "http://192.168.3.74:8500/";
+
+		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
+		if (grafana_uri == null)
+			grafana_uri = "http://192.168.3.74:3000/";
+
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
 			keycloak_uri = "http://192.168.2.179:8080/";
@@ -87,6 +95,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
+		defaults.put(PreferenceConstants.Consul_URI, consul_uri);
+		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
