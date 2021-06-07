@@ -99,8 +99,13 @@ public class DeploymentWizard extends Wizard {
 			}
 			content.append("deployment_name: " + this.deploymentName + "\n");
 			content.append("consul_uri: " + consul_uri + "\n");
-			// TODO inject deploymentName in grafana_address template
-			content.append("grafana_address: " + grafana_uri + "\n");
+			// Inject deploymentName in grafana_address template
+			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
+			// deployment_label }}
+			String grafana_template = "%1$sd/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{ %2$s }}";
+			String deployment_label = mainPage.getDeploymentName();
+			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
+			content.append("grafana_address: " + grafana_address + "\n");
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			SodaliteLogger.log("Error on closing wizard", e);
