@@ -92,6 +92,7 @@ public class DeploymentWizard extends Wizard {
 			Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 			String consul_uri = defaults.get(PreferenceConstants.Consul_URI, "");
 			String grafana_uri = defaults.get(PreferenceConstants.Grafana_URI, "");
+			String skydive_analyzer_uri = defaults.get(PreferenceConstants.SKYDIVE_ANALYZER_URI, "");
 			if (consul_uri.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
@@ -99,6 +100,7 @@ public class DeploymentWizard extends Wizard {
 			}
 			content.append("deployment_name: " + this.deploymentName + "\n");
 			content.append("consul_uri: " + consul_uri + "\n");
+			content.append("skydive-analyzer-url: " + skydive_analyzer_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
 			// deployment_label }}
