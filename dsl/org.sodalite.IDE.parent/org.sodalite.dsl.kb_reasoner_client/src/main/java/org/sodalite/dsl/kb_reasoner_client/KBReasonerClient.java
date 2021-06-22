@@ -34,6 +34,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.NotFoundException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
@@ -1023,6 +1024,10 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "blueprint/" + blueprintId + "/deployments";
 		try {
 			deploymentData = getJSONObjectForType(DeploymentData.class, new URI(url), HttpStatus.OK);
+		} catch (NotFoundException ex) {
+			deploymentData = new DeploymentData();
+			List<? extends Object> elements = new ArrayList<Object>();
+			deploymentData.setElements(elements);
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1498,6 +1503,8 @@ public class KBReasonerClient implements KBReasoner {
 				throw new TokenExpiredException(ex.getMessage());
 			} else if (ex.getStatusCode() == HttpStatus.FORBIDDEN) {
 				throw new NotRolePermissionException(ex.getMessage());
+			} else if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+				throw new NotFoundException(ex.getMessage());
 			} else {
 				throw ex;
 			}
