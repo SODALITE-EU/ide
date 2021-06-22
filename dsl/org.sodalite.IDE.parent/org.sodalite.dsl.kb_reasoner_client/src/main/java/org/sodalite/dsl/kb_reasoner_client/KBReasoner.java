@@ -16,10 +16,12 @@ import java.util.List;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -135,4 +137,12 @@ public interface KBReasoner {
 
 	void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
 			String inputs) throws SodaliteException;
+
+	BlueprintData getBlueprintsForUser(String username) throws SodaliteException;
+
+	BlueprintData getBlueprintForId(String blueprintId) throws SodaliteException;
+
+	DeploymentData getDeploymentsForBlueprint(String blueprintId) throws SodaliteException;
+
+	DeploymentData getDeploymentForId(String deploymentId) throws SodaliteException;
 }

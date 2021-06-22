@@ -39,11 +39,13 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.TokenExpiredException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -980,6 +982,70 @@ public class KBReasonerClient implements KBReasoner {
 		}
 
 		return deploymentStatus;
+	}
+
+	@Override
+	public BlueprintData getBlueprintsForUser(String username) throws SodaliteException {
+		BlueprintData blueprintData = null;
+		Assert.notNull(username, "Pass a not null username");
+		String url = xoperaUri + "blueprint?username=" + username;
+		try {
+			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+
+		return blueprintData;
+	}
+
+	@Override
+	public BlueprintData getBlueprintForId(String blueprintId) throws SodaliteException {
+		BlueprintData blueprintData = null;
+		Assert.notNull(blueprintId, "Pass a not null blueprintId");
+		String url = xoperaUri + "blueprint/" + blueprintId + "/meta";
+		try {
+			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+
+		return blueprintData;
+	}
+
+	@Override
+	public DeploymentData getDeploymentsForBlueprint(String blueprintId) throws SodaliteException {
+		DeploymentData deploymentData = null;
+		Assert.notNull(blueprintId, "Pass a not null blueprintId");
+		String url = xoperaUri + "blueprint/" + blueprintId + "/deployments";
+		try {
+			deploymentData = getJSONObjectForType(DeploymentData.class, new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+
+		return deploymentData;
+	}
+
+	@Override
+	public DeploymentData getDeploymentForId(String deploymentId) throws SodaliteException {
+		DeploymentData deploymentData = null;
+		Assert.notNull(deploymentId, "Pass a not null deploymentId");
+		String url = xoperaUri + "deployment/" + deploymentId + "/status";
+		try {
+			deploymentData = getJSONObjectForType(DeploymentData.class, new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+
+		return deploymentData;
 	}
 
 	@Override

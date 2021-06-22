@@ -28,11 +28,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -62,8 +64,8 @@ class KBReasonerTest {
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://192.168.2.107:8081/";
 	private final String image_builder__URI = "http://192.168.2.70:5000/";
-	private final String xOPERA_URI = "http://192.168.2.15:5000/";
-	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
+	private final String xOPERA_URI = "http://192.168.2.18:5000/";
+	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
 
@@ -313,6 +315,50 @@ class KBReasonerTest {
 		Path inputs_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String inputs = new String(Files.readAllBytes(inputs_path));
 		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, blueprint_id, deployment_id, inputs);
+	}
+
+	@Test
+	void testGetBlueprintsForUser() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetBlueprintForId() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(0).getBlueprint_id();
+		blueprintData = kbclient.getBlueprintForId(blueprint_id);
+		assertFalse(blueprintData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetDeploymentsForBlueprint() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
+		DeploymentData deploymentData = kbclient.getDeploymentsForBlueprint(blueprint_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetDeploymentForId() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
+		DeploymentData deploymentData = kbclient.getDeploymentsForBlueprint(blueprint_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+
+		String deployment_id = deploymentData.getElements().get(0).getDeployment_id();
+		deploymentData = kbclient.getDeploymentForId(deployment_id);
+		assertFalse(deploymentData.getElements().isEmpty());
 	}
 
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)
