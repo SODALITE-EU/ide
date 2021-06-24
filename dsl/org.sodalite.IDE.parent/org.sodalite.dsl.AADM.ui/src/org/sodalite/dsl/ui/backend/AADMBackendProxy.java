@@ -617,17 +617,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
+				issues.add(new ValidationIssue(error.getType() + "." + error.getDescription(), error.getContext(), null,
+						Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
 		if (optimizationReport.hasWarnings()) {
 			for (KBWarning warning : optimizationReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
+				issues.add(new ValidationIssue(warning.getType() + "." + warning.getDescription(),
 						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
 						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
