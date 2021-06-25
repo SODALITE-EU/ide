@@ -1296,33 +1296,83 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  public void setAdditionalProposalInfo(final ICompletionProposal proposal, final String info) {
-    if ((proposal instanceof ConfigurableCompletionProposal)) {
-      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
-      configurable.setAdditionalProposalInfo(info);
-    }
-  }
-  
+  @Override
   public String getAdditionalProposalInfo(final Keyword keyword) {
     if ((keyword instanceof KeywordImpl)) {
       final KeywordImpl keywordImpl = ((KeywordImpl) keyword);
       final ParserRule rule = AADMHelper.findParserRule(keywordImpl);
-      if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
-        return "The required name of the Node Type the Node Template is based upon";
+      if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "module:"))) {
+        return "The namespace where model entity names will be declared";
       } else {
-        if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
-          return "An optional list of attribute value assignments for the Node Template.";
+        if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "import:"))) {
+          return "Imports another namespace declared within \nthe bound KB to retrieve its model entity definitions";
         } else {
-          if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
-            return "An optional list of property value assignments for the Node Template.";
+          if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+            return "An optional map of input parameters \n(i.e., as parameter definitions) for the Topology Template.";
           } else {
-            if ((Objects.equal(rule.getName(), "ENodeTemplate") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
-              return "An optional sequenced list of requirement assignments for the Node Template.";
+            if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "outputs:"))) {
+              return "An optional map of output parameters \n(i.e., as parameter definitions) for the Topology Template.";
             } else {
-              if ((Objects.equal(rule.getName(), "ERequirementAssignment") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
-                return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime.";
+              if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "node_templates:"))) {
+                return "An optional map of node template definitions \nfor the Topology Template.";
               } else {
-                return "";
+                if ((Objects.equal(rule.getName(), "AADM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "policies:"))) {
+                  return "An optional list of Policy definitions \nfor the Topology Template.";
+                } else {
+                  if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                    return "The required name of the Node Type the Node Template is based upon";
+                  } else {
+                    if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                      return "An optional description for the Node Template.";
+                    } else {
+                      if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+                        return "An optional list of attribute value assignments for the Node Template.";
+                      } else {
+                        if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                          return "An optional list of property value assignments for the Node Template.";
+                        } else {
+                          if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
+                            return "An optional sequenced list of requirement assignments for the Node Template.";
+                          } else {
+                            if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capabilities:"))) {
+                              return "An optional mapof capability assignments for the Node Template.";
+                            } else {
+                              if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "optimization:"))) {
+                                return "An optional reference to an optimization model associated to this Node Template";
+                              } else {
+                                if ((Objects.equal(rule.getName(), "ERequirementAssignment") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                                  return "The optional reserved keyname used to identify the target node of a relationship.\n specifically, it is used to provide either a: \n\t-Node Template: name that can fulfill the target node requirement.\n\t-Node Type: name that the provider will use to select a type-compatible node template to fulfill the requirement at runtime.";
+                                } else {
+                                  if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                    return "The required name of the policy type the policy definition is based upon.";
+                                  } else {
+                                    if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                      return "The optional description for the policy definition.";
+                                    } else {
+                                      if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                                        return "An optional map of property value assignments for the policy definition.";
+                                      } else {
+                                        if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "targets:"))) {
+                                          return "An optional list of valid Node Templates or Groups the Policy \n\t\t\t\t\t\tcan be applied to.";
+                                        } else {
+                                          if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "triggers:"))) {
+                                            return "An optional mapof trigger definitions to invoke when the policy \n\t\t\t\t\t\tis applied by an orchestrator against the associated TOSCA entity.";
+                                          } else {
+                                            return super.getAdditionalProposalInfo(keyword);
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

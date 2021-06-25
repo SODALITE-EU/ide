@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import com.google.common.base.Objects;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,9 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.impl.KeywordImpl;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -1196,8 +1199,349 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void _completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     final ICompletionProposal proposal = this.createCompletionProposal(keyword.getValue(), 
       this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
+    this.setAdditionalProposalInfo(proposal, this.getAdditionalProposalInfo(keyword));
     this.getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
     acceptor.accept(proposal);
+  }
+  
+  public String getAdditionalProposalInfo(final Keyword keyword) {
+    if ((keyword instanceof KeywordImpl)) {
+      final KeywordImpl keywordImpl = ((KeywordImpl) keyword);
+      final ParserRule rule = RMHelper.findParserRule(keywordImpl);
+      if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "module:"))) {
+        return "The namespace where model entity names will be declared";
+      } else {
+        if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "import:"))) {
+          return "Imports another namespace declared within the bound KB \n\t\t\t\t\t\tto retrieve its model entity definitions";
+        } else {
+          if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "artifact_types:"))) {
+            return "This section contains an optional map of artifact type definitions \n\t\t\t\t\t\tfor use in the service template";
+          } else {
+            if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "data_types:"))) {
+              return "Declares a map of optional TOSCA Data Type definitions.";
+            } else {
+              if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability_types:"))) {
+                return "This section contains an optional map of capability type definitions \n\t\t\t\t\t\tfor use in the service template";
+              } else {
+                if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "interface_types:"))) {
+                  return "This section contains an optional map of interface type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                } else {
+                  if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "relationship_types:"))) {
+                    return "This section contains a map of relationship type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                  } else {
+                    if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "node_types:"))) {
+                      return "TThis section contains a mapof node type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                    } else {
+                      if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "policy_types:"))) {
+                        return "This section contains a list of policy type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                      } else {
+                        if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "derived_from:"))) {
+                          return "Represents the required symbolic name of the Node Type being declared";
+                        } else {
+                          if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+                            return "An optional map of attribute definitions for the Node Type.";
+                          } else {
+                            if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                              return "An optional map of property definitions for the Node Type.";
+                            } else {
+                              if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
+                                return "An optional list of requirement definitions for the Node Type.";
+                              } else {
+                                if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capabilities:"))) {
+                                  return "An optional map of capability definitions for the Node Type.";
+                                } else {
+                                  if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "interfaces:"))) {
+                                    return "An optional map of interface definitions supported by the Node Type";
+                                  } else {
+                                    if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                      return "Represents the optional description string for the corresponding node_type_name.";
+                                    } else {
+                                      if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                        return "The required data type for the property.";
+                                      } else {
+                                        if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                          return "The optional description for the property.";
+                                        } else {
+                                          if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "required:"))) {
+                                            return "An optional key that declares a property as required (true) or not (false).";
+                                          } else {
+                                            if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "status:"))) {
+                                              return "The optional status of the property relative to the specification or implementation.\nSee table below for valid values: \n\t\t\t\t\t\tsupported: Indicates the property is supported.  This is the default value for all property definitions.\n\t\t\t\t\t\tunsupported: Indicates the property is not supported.\n\t\t\t\t\t\texperimental: Indicates the property is experimental and has no official standing.\n\t\t\t\t\t\tdeprecated: Indicates the property has been deprecated by a new specification version.";
+                                            } else {
+                                              if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "constraints:"))) {
+                                                return "The optional list of sequenced constraint clauses for the property";
+                                              } else {
+                                                if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entry_schema:"))) {
+                                                  return "The optional schema definition for the entries in properties of TOSCA set types such as list or map.";
+                                                } else {
+                                                  if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                    return "An optional key that may provide a value to be used as a default if not provided by another means";
+                                                  } else {
+                                                    if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                      return "The required data type for the attribute.";
+                                                    } else {
+                                                      if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                        return "The optional description for the attribute.";
+                                                      } else {
+                                                        if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "required:"))) {
+                                                          return "An optional key that declares a property as required (true) or not (false).";
+                                                        } else {
+                                                          if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "status:"))) {
+                                                            return "The optional status of the attribute relative to the specification or implementation.\nSee table below for valid values: \n\t\t\t\t\t\tsupported: Indicates the property is supported.  This is the default value for all property definitions.\n\t\t\t\t\t\tunsupported: Indicates the property is not supported.\n\t\t\t\t\t\texperimental: Indicates the property is experimental and has no official standing.\n\t\t\t\t\t\tdeprecated: Indicates the property has been deprecated by a new specification version.";
+                                                          } else {
+                                                            if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entry_schema:"))) {
+                                                              return "The optional schema definition for the entries in attributes of TOSCA set types such as list or map.";
+                                                            } else {
+                                                              if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                                return "An optional key that may provide a value to be used as a default if not provided by another means. \nThis value SHALL be type compatible with the type declared by the property definition’s type keyname";
+                                                              } else {
+                                                                if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability:"))) {
+                                                                  return "The required reserved keyname used that can be used to provide \nthe name of a valid Capability Type that can fulfill the requirement";
+                                                                } else {
+                                                                  if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                                                                    return "The optional reserved keyname used to provide the name of a valid \nNode Type that contains the capability definition that can be used \nto fulfill the requirement. ";
+                                                                  } else {
+                                                                    if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "relationship:"))) {
+                                                                      return "The optional reserved keyname used to provide the name of \na valid Relationship Type to construct when fulfilling the requirement";
+                                                                    } else {
+                                                                      if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "occurrences:"))) {
+                                                                        return "The optional minimum and maximum occurrences for the requirement. \nNote: the keyword UNBOUNDEDis also supported to represent any positive integer.";
+                                                                      } else {
+                                                                        if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                          return "The required name of the Capability Type the capability definition is based upon";
+                                                                        } else {
+                                                                          if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                            return "The optional description of the Capability definition.";
+                                                                          } else {
+                                                                            if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+                                                                              return "An optional map of attribute definitions for the Capability definition";
+                                                                            } else {
+                                                                              if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                                                                                return "An optional map of property definitions for the Capability definition.";
+                                                                              } else {
+                                                                                if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "occurrences:"))) {
+                                                                                  return "The optional minimum and maximum occurrences for the capability. \nBy default, an exported Capability should allow at least one relationship \nto be formed with it with a maximum of UNBOUNDED relationships.\nNote: the keyword UNBOUNDEDis also supported to represent any positive integer.";
+                                                                                } else {
+                                                                                  if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "valid_source_types:"))) {
+                                                                                    return "An optional list of one or more valid names of Node Types that are supported \nas valid sources of any relationship established to the declared Capability Type.";
+                                                                                  } else {
+                                                                                    if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                                      return "Represents the required symbolic name of the interface as a string";
+                                                                                    } else {
+                                                                                      if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                        return "The optional map of input property definitions available to all defined operations\n for interface definitions that are within TOSCA Node or Relationship Type definitions. \nThis includes when interface definitions are included as part of a\n Requirement definition in a Node Type.";
+                                                                                      } else {
+                                                                                        if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "operations:"))) {
+                                                                                          return "The optional map of operations defined for this interface.";
+                                                                                        } else {
+                                                                                          if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                            return "The optional description string for the associated named operation";
+                                                                                          } else {
+                                                                                            if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "implementation:"))) {
+                                                                                              return "The optional definition of the operation implementation";
+                                                                                            } else {
+                                                                                              if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                                return "The optional map of input properties definitions (i.e., parameter definitions)\n for operation definitions that are within TOSCA Node or Relationship Type definitions.\n This includes when operation definitions are included as part of a Requirement definition in a Node Type";
+                                                                                              } else {
+                                                                                                if ((Objects.equal(rule.getName(), "EPrimary") && Objects.equal(((KeywordImpl)keyword).getValue(), "primary:"))) {
+                                                                                                  return "The optional implementation artifact (i.e., the primary script file within a TOSCA CSAR file). ";
+                                                                                                } else {
+                                                                                                  if ((Objects.equal(rule.getName(), "EPrimary") && Objects.equal(((KeywordImpl)keyword).getValue(), "relative_path:"))) {
+                                                                                                    return "The relative path in user\'s filesystem where artifact is located";
+                                                                                                  } else {
+                                                                                                    if ((Objects.equal(rule.getName(), "EDependencies") && Objects.equal(((KeywordImpl)keyword).getValue(), "dependencies:"))) {
+                                                                                                      return "The optional list of one or more dependent or secondary implementation artifacts\n which are referenced by the primary implementation artifact\n (e.g., a library the script installs or a secondary script).";
+                                                                                                    } else {
+                                                                                                      if ((Objects.equal(rule.getName(), "EDependencies") && Objects.equal(((KeywordImpl)keyword).getValue(), "relative_path:"))) {
+                                                                                                        return "The relative path in user\'s filesystem where artifact is located";
+                                                                                                      } else {
+                                                                                                        if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                                                          return "The required data type for the parameter.";
+                                                                                                        } else {
+                                                                                                          if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                            return "Represents the optional description of the parameter.";
+                                                                                                          } else {
+                                                                                                            if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                                                                              return "Contains a type-compatible value that may be used as a default \n\t\t\t\t\t\tif not provided by another means.";
+                                                                                                            } else {
+                                                                                                              if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "value:"))) {
+                                                                                                                return "The type-compatible value to assign to the named parameter. \n\t\t\t\t\tParameter values may be provided as the result from the \n\t\t\t\t\tevaluation of an expression or a function.";
+                                                                                                              } else {
+                                                                                                                if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "derived_from:"))) {
+                                                                                                                  return "Represents the name (string) of the Policy Type this Policy Type definition\n derives from (i.e., its“parent” type)";
+                                                                                                                } else {
+                                                                                                                  if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                                    return "Represents the optional description string for the corresponding policy_type_name.";
+                                                                                                                  } else {
+                                                                                                                    if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                                                                                                                      return "An optional mapof property definitions for the Policy Type";
+                                                                                                                    } else {
+                                                                                                                      if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "targets:"))) {
+                                                                                                                        return "An optional list of valid Node Types or Group Types the Policy Type can be applied to.\nNote: This can be viewed by TOSCA Orchestrators as an implied relationship to the target nodes,\n but one that does not have operational lifecycle considerations.\n For example, if we were to name this as an explicit Relationship Type we might call this “AppliesTo” (node or group).";
+                                                                                                                      } else {
+                                                                                                                        if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "triggers:"))) {
+                                                                                                                          return "An optional mapof policy triggers for the Policy Type.";
+                                                                                                                        } else {
+                                                                                                                          if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                                            return "The optional description string for the named trigger.";
+                                                                                                                          } else {
+                                                                                                                            if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "event:"))) {
+                                                                                                                              return "The required name of the event that activates the trigger’s action.\n A deprecated form of this keyname is “event_type”";
+                                                                                                                            } else {
+                                                                                                                              if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "schedule:"))) {
+                                                                                                                                return "The optional time interval during which the trigger is valid\n (i.e., during which the declared actions will be processed).";
+                                                                                                                              } else {
+                                                                                                                                if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "target_filter:"))) {
+                                                                                                                                  return "The optional filter used to locate the attribute to monitor for the trigger’s defined condition.\n This filter helps locate the TOSCA entity (i.e., node or relationship) \nor further a specific capability of that entity that contains the attribute to monitor";
+                                                                                                                                } else {
+                                                                                                                                  if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "condition:"))) {
+                                                                                                                                    return "The optional condition which contains a condition clause definition\n specifying one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself  is enough to trigger the action";
+                                                                                                                                  } else {
+                                                                                                                                    if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "action:"))) {
+                                                                                                                                      return "The list of sequential activities to be performed when the event is triggered\n and the condition is met (i.e.evaluates to true)";
+                                                                                                                                    } else {
+                                                                                                                                      if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                                                                                                                                        return "The required name of the node type or template that contains\n either the attribute to be monitored or contains the requirement that\n references the node that contains the attribute to be monitored";
+                                                                                                                                      } else {
+                                                                                                                                        if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirement:"))) {
+                                                                                                                                          return "The optional name of the requirement within the filter’s node\n that can be used to locate a referenced node that contains an attribute to monitor.";
+                                                                                                                                        } else {
+                                                                                                                                          if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability:"))) {
+                                                                                                                                            return "The optional name of a capability within the filter’s node\n or within the node referenced by its requirement that contains the attribute to monitor.";
+                                                                                                                                          } else {
+                                                                                                                                            if ((Objects.equal(rule.getName(), "ETimeInterval") && Objects.equal(((KeywordImpl)keyword).getValue(), "start_time:"))) {
+                                                                                                                                              return "The inclusive start time for the time interval";
+                                                                                                                                            } else {
+                                                                                                                                              if ((Objects.equal(rule.getName(), "ETimeInterval") && Objects.equal(((KeywordImpl)keyword).getValue(), "end_time:"))) {
+                                                                                                                                                return "The inclusive end time for the time interval";
+                                                                                                                                              } else {
+                                                                                                                                                if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "constraint:"))) {
+                                                                                                                                                  return "The optional condition which contains a condition clause definition specifying\n one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself is enough to trigger the action.";
+                                                                                                                                                } else {
+                                                                                                                                                  if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "period:"))) {
+                                                                                                                                                    return "The optional period to use to evaluate for the condition.";
+                                                                                                                                                  } else {
+                                                                                                                                                    if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "evaluations:"))) {
+                                                                                                                                                      return "The optional number of evaluations that must be performed over the period\n to assert the condition exists.";
+                                                                                                                                                    } else {
+                                                                                                                                                      if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "method:"))) {
+                                                                                                                                                        return "The optional statistical method name to use to perform the evaluation of the condition.";
+                                                                                                                                                      } else {
+                                                                                                                                                        if ((Objects.equal(rule.getName(), "ECallOperationActivityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "operation:"))) {
+                                                                                                                                                          return "The name of the operation to call, using the <interface_name>.<operation_name> notation.\n Required in the extended  notation.";
+                                                                                                                                                        } else {
+                                                                                                                                                          if ((Objects.equal(rule.getName(), "ECallOperationActivityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                                                                                            return "The optional map of input parameter assignments for the called operation.\n Any provided input assignments will override the operation input assignment\n in the target node template for this operation call";
+                                                                                                                                                          } else {
+                                                                                                                                                            if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "property:"))) {
+                                                                                                                                                              return "The name of the property definition the function will return the value from";
+                                                                                                                                                            } else {
+                                                                                                                                                              if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entity:"))) {
+                                                                                                                                                                return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named property definition\n the function will return the value from";
+                                                                                                                                                              } else {
+                                                                                                                                                                if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "req_cap:"))) {
+                                                                                                                                                                  return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named property definition the function will return the value from.\n Note:  If the property definition is located in the modelable entity directly,\n then this parameter MAY be omitted";
+                                                                                                                                                                } else {
+                                                                                                                                                                  if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attribute:"))) {
+                                                                                                                                                                    return "The name of the attribute definition the function will return the value from";
+                                                                                                                                                                  } else {
+                                                                                                                                                                    if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entity:"))) {
+                                                                                                                                                                      return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named attribute definition\n the function will return the value from";
+                                                                                                                                                                    } else {
+                                                                                                                                                                      if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "req_cap:"))) {
+                                                                                                                                                                        return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named attribute definition the function will return the value from.\n Note:  If the attribute definition is located in the modelable entity directly,\n then this parameter MAY be omitted";
+                                                                                                                                                                      } else {
+                                                                                                                                                                        return "";
+                                                                                                                                                                      }
+                                                                                                                                                                    }
+                                                                                                                                                                  }
+                                                                                                                                                                }
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                          }
+                                                                                                                                                        }
+                                                                                                                                                      }
+                                                                                                                                                    }
+                                                                                                                                                  }
+                                                                                                                                                }
+                                                                                                                                              }
+                                                                                                                                            }
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  public void setAdditionalProposalInfo(final ICompletionProposal proposal, final String info) {
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setAdditionalProposalInfo(info);
+    }
   }
   
   public Image getImage(final String path) {

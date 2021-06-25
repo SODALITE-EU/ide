@@ -34,6 +34,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.ParserRule;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
@@ -512,6 +513,15 @@ public class RMHelper {
 			return false;
 		else
 			return module1.equals(module2);
+	}
+
+	public static ParserRule findParserRule(EObject obj) {
+		if (obj == null)
+			return null;
+		else if (obj instanceof ParserRule)
+			return (ParserRule) obj;
+		else
+			return findParserRule(obj.eContainer());
 	}
 
 }

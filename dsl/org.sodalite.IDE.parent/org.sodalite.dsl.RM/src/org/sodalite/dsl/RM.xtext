@@ -462,7 +462,7 @@ EFunction:
 	GetProperty | GetAttribute | GetInput;
 
 GetInput:
-	'get_input:' input=[EParameterDefinition] //FIXME do not use cross-reference
+	'get_input:' input=[EParameterDefinition]
 ;
 
 GetAttribute:
