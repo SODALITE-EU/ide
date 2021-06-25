@@ -272,7 +272,8 @@ public class RMHelper {
 		try {
 			Class noparams[] = {};
 			Method method = model.getClass().getMethod("getImports", noparams);
-			imports = (List<String>) method.invoke(model, null);
+			List<String> _imports = (List<String>) method.invoke(model, null);
+			imports.addAll(_imports);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
