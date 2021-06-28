@@ -15,6 +15,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -23,9 +25,13 @@ import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
@@ -45,7 +51,7 @@ public class DeploymentView {
 	private static DeploymentView view = null;
 
 	public DeploymentView() {
-		this.view = this;
+		DeploymentView.view = this;
 	}
 
 	public static DeploymentView getView() {
@@ -59,10 +65,89 @@ public class DeploymentView {
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 
-		TreeViewerColumn viewerColumn = new TreeViewerColumn(viewer, SWT.NONE);
-		viewerColumn.getColumn().setWidth(300);
-		viewerColumn.getColumn().setText("Blueprints");
-		viewerColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new DeploymentLabelProvider()));
+		// Blueprint/Deployment Id column
+		TreeViewerColumn idColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		idColumn.getColumn().setWidth(350);
+		idColumn.getColumn().setText("Id");
+		idColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new IdLabelProvider()));
+
+		// Blueprint/Deployment Name column
+		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		nameColumn.getColumn().setWidth(200);
+		nameColumn.getColumn().setText("Name");
+		nameColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new NameLabelProvider()));
+
+		// AADM column
+		TreeViewerColumn aadmColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		aadmColumn.getColumn().setWidth(100);
+		aadmColumn.getColumn().setText("AADM id");
+		aadmColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new AADMLabelProvider()));
+
+		// Project domain column
+		TreeViewerColumn projectDomainColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		projectDomainColumn.getColumn().setWidth(150);
+		projectDomainColumn.getColumn().setText("Project Domain");
+		projectDomainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ProjectDomainLabelProvider()));
+
+		// URL
+		TreeViewerColumn urlColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		urlColumn.getColumn().setWidth(300);
+		urlColumn.getColumn().setText("URL");
+		urlColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new URLLabelProvider()));
+
+		// Timestamp column
+		TreeViewerColumn timestampColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		timestampColumn.getColumn().setWidth(250);
+		timestampColumn.getColumn().setText("Timestamp");
+		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new TimestampLabelProvider()));
+
+		// Version id column
+		TreeViewerColumn versionColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		versionColumn.getColumn().setWidth(150);
+		versionColumn.getColumn().setText("Version id");
+		versionColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new VersionIdLabelProvider()));
+
+		// Adjust column width automatically
+		Listener listener = new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				TreeItem treeItem = (TreeItem) event.item;
+				final TreeColumn[] treeColumns = treeItem.getParent().getColumns();
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						for (TreeColumn treeColumn : treeColumns)
+							treeColumn.pack();
+					}
+				});
+			}
+		};
+
+		// Open a dedicated view for a selected deployment
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				TreeViewer viewer = (TreeViewer) event.getViewer();
+				IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
+				Object selectedNode = thisSelection.getFirstElement();
+//		        viewer.setExpandedState(selectedNode,
+//		                !viewer.getExpandedState(selectedNode));
+				TreeNode<DeploymentNode> node = (TreeNode<DeploymentNode>) selectedNode;
+				if (node.getData().isDeployment()) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openInformation(shell, "Sodalite Deployment Governance View",
+									"Selected deployment: " + node.getData().getDeployment().getDeployment_id());
+						}
+					});
+				}
+			}
+		});
+
+		viewer.getTree().addListener(SWT.Expand, listener);
 
 		// Menu
 		createContextMenu(viewer);
@@ -124,17 +209,17 @@ public class DeploymentView {
 		return root;
 	}
 
-	private void raiseConfigurationIssue(String message) throws Exception {
-		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		Display.getDefault().asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				MessageDialog.openError(parent, "Sodalite Preferences Error",
-						message + " in Sodalite preferences pages");
-			}
-		});
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
+//	private void raiseConfigurationIssue(String message) throws Exception {
+//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		Display.getDefault().asyncExec(new Runnable() {
+//			@Override
+//			public void run() {
+//				MessageDialog.openError(parent, "Sodalite Preferences Error",
+//						message + " in Sodalite preferences pages");
+//			}
+//		});
+//		throw new Exception(message + " in Sodalite preferences pages");
+//	}
 
 	private void createContextMenu(TreeViewer viewer) {
 
@@ -150,8 +235,8 @@ public class DeploymentView {
 				if (!selection.isEmpty()) {
 					TreeSelection ts = (TreeSelection) selection;
 					if (ts.toList().size() == 1) {
-						TreeNode tn = (TreeNode) ts.getFirstElement();
-						DeploymentNode node = (DeploymentNode) tn.getData();
+						TreeNode<DeploymentNode> tn = (TreeNode) ts.getFirstElement();
+//						DeploymentNode node = (DeploymentNode) tn.getData();
 						createGeneralContextualMenu(manager, tn);
 					}
 				}
@@ -169,50 +254,50 @@ public class DeploymentView {
 				manager.add(refreshAction);
 			}
 
-			private void createModuleContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
-				DeploymentNode node = (DeploymentNode) tn.getData();
+//			private void createModuleContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
+////				DeploymentNode node = (DeploymentNode) tn.getData();
+//
+//				// ACTION: Retrieve all models in a module from KB (upload them into the
+//				// workspace)
+//				Action retrieveAction = new Action() {
+//					public void run() {
+//
+//					}
+//				};
+//				retrieveAction.setText("Retrieve module ...");
+//				manager.add(retrieveAction);
+//
+//				// ACTION: Delete all models in a module from KB
+//				Action deleteAction = new Action() {
+//					public void run() {
+//
+//					}
+//				};
+//				deleteAction.setText("Delete module ...");
+//				manager.add(deleteAction);
+//			}
 
-				// ACTION: Retrieve all models in a module from KB (upload them into the
-				// workspace)
-				Action retrieveAction = new Action() {
-					public void run() {
-
-					}
-				};
-				retrieveAction.setText("Retrieve module ...");
-				manager.add(retrieveAction);
-
-				// ACTION: Delete all models in a module from KB
-				Action deleteAction = new Action() {
-					public void run() {
-
-					}
-				};
-				deleteAction.setText("Delete module ...");
-				manager.add(deleteAction);
-			}
-
-			private void createModelContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
-				DeploymentNode node = (DeploymentNode) tn.getData();
-
-				// ACTION: Retrieve model from KB (upload it into the workspace)
-				Action retrieveAction = new Action() {
-					public void run() {
-
-					}
-				};
-				retrieveAction.setText("Retrieve model ...");
-				manager.add(retrieveAction);
-
-				// ACTION: Delete model from KB
-				Action deleteAction = new Action() {
-					public void run() {
-
-					}
-				};
-				deleteAction.setText("Delete model ...");
-				manager.add(deleteAction);
-			}
+//			private void createModelContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
+//				DeploymentNode node = (DeploymentNode) tn.getData();
+//
+//				// ACTION: Retrieve model from KB (upload it into the workspace)
+//				Action retrieveAction = new Action() {
+//					public void run() {
+//
+//					}
+//				};
+//				retrieveAction.setText("Retrieve model ...");
+//				manager.add(retrieveAction);
+//
+//				// ACTION: Delete model from KB
+//				Action deleteAction = new Action() {
+//					public void run() {
+//
+//					}
+//				};
+//				deleteAction.setText("Delete model ...");
+//				manager.add(deleteAction);
+//			}
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);

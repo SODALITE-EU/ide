@@ -31,4 +31,12 @@ public class DeploymentNode {
 	public boolean isDeployment() {
 		return blueprint == null && deployment != null;
 	}
+
+	public Blueprint getBlueprint() {
+		return this.blueprint;
+	}
+
+	public Deployment getDeployment() {
+		return this.deployment;
+	}
 }

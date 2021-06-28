@@ -52,7 +52,7 @@ public class KBView {
 	private static KBView view = null;
 
 	public KBView() {
-		this.view = this;
+		KBView.view = this;
 	}
 
 	public static KBView getView() {
@@ -116,7 +116,8 @@ public class KBView {
 			try {
 				ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 				if (!rmModelData.getElements().isEmpty()) {
-					TreeNode<ModelNode> moduleNode = rms.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
+					TreeNode<ModelNode> moduleNode = rms
+							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : rmModelData.getElements()) {
 						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
 					}
@@ -130,7 +131,8 @@ public class KBView {
 			try {
 				ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 				if (!aadmModelData.getElements().isEmpty()) {
-					TreeNode<ModelNode> moduleNode = aadms.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
+					TreeNode<ModelNode> moduleNode = aadms
+							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : aadmModelData.getElements()) {
 						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
 					}
@@ -152,17 +154,17 @@ public class KBView {
 		return splits[splits.length - 1];
 	}
 
-	private void raiseConfigurationIssue(String message) throws Exception {
-		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		Display.getDefault().asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				MessageDialog.openError(parent, "Sodalite Preferences Error",
-						message + " in Sodalite preferences pages");
-			}
-		});
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
+//	private void raiseConfigurationIssue(String message) throws Exception {
+//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		Display.getDefault().asyncExec(new Runnable() {
+//			@Override
+//			public void run() {
+//				MessageDialog.openError(parent, "Sodalite Preferences Error",
+//						message + " in Sodalite preferences pages");
+//			}
+//		});
+//		throw new Exception(message + " in Sodalite preferences pages");
+//	}
 
 	private void createContextMenu(TreeViewer viewer) {
 
@@ -178,7 +180,7 @@ public class KBView {
 				if (!selection.isEmpty()) {
 					TreeSelection ts = (TreeSelection) selection;
 					if (ts.toList().size() == 1) {
-						TreeNode tn = (TreeNode) ts.getFirstElement();
+						TreeNode<ModelNode> tn = (TreeNode<ModelNode>) ts.getFirstElement();
 						ModelNode node = (ModelNode) tn.getData();
 						createGeneralContextualMenu(manager, tn);
 						if (node.isModule()) {
