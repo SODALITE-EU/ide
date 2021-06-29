@@ -3,7 +3,7 @@ package org.sodalite.ide.ui.views.parts.deployment;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
-public class DeploymentContentProvider implements ITreeContentProvider {
+public class BlueprintContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {

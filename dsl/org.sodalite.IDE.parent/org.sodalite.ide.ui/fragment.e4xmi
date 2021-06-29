@@ -9,7 +9,7 @@
         <children xsi:type="menu:DirectToolItem" xmi:id="_WPdFcJYSEeuzq4hucbBZbg" elementId="org.sodalite.ide.ui.directtoolitem.browsekb" label="Refresh KB Content" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/update.png" tooltip="Refresh the KB content on Browser View" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.KBRefresh"/>
       </toolbar>
     </elements>
-    <elements xsi:type="basic:PartDescriptor" xmi:id="_HH6BMNQQEeu2hc8b8TXapA" elementId="sodalite.partDescFragment.DeploymentGovernanceView" label="Deployment Governance View" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/deployment.png" allowMultiple="true" category="Sodalite" closeable="true" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.deployment.DeploymentView">
+    <elements xsi:type="basic:PartDescriptor" xmi:id="_HH6BMNQQEeu2hc8b8TXapA" elementId="sodalite.partDescFragment.DeploymentGovernanceView" label="Deployment Governance View" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/blueprint.png" allowMultiple="true" category="Sodalite" closeable="true" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.deployment.BlueprintView">
       <toolbar xmi:id="_keT6gNQQEeu2hc8b8TXapA" elementId="org.sodalite.ide.ui.toolbar.deployment"/>
     </elements>
   </fragments>

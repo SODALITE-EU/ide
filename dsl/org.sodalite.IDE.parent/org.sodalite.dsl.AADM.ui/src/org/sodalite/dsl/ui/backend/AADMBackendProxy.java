@@ -353,6 +353,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
 
+					// TODO Report deployment_label, deployment_id to Grafana Registry with IAM -
+					// POST grafana_registry_url/dashboards
+					// Grafana IP:3001/dashboards
+					// { deployment_label: "", deployment_id: "" }
+
+					// TODO GET dashboard URL associated to a deployment: Grafana
+					// IP:3001/dashboards/deployment/<deployment_Id> with IAM
+					// Return JSON dictionary with a list of pairs for node exporter and associated
+					// dashboard
+
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
 					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
