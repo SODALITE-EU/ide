@@ -30,7 +30,10 @@ import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
+import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
+import org.sodalite.ide.ui.views.model.Node;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
 public class DeploymentView {
@@ -54,23 +57,17 @@ public class DeploymentView {
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 
-		// Deployment Id column
+		// Key column
 		TreeViewerColumn idColumn = new TreeViewerColumn(viewer, SWT.NONE);
-		idColumn.getColumn().setWidth(350);
-		idColumn.getColumn().setText("Id");
-		idColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new IdLabelProvider()));
+		idColumn.getColumn().setWidth(250);
+		idColumn.getColumn().setText("Key");
+		idColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new NodeKeyLabelProvider()));
 
-		// Timestamp column
+		// Value column
 		TreeViewerColumn timestampColumn = new TreeViewerColumn(viewer, SWT.NONE);
-		timestampColumn.getColumn().setWidth(250);
-		timestampColumn.getColumn().setText("Timestamp");
-		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new TimestampLabelProvider()));
-
-		// Version id column
-		TreeViewerColumn versionColumn = new TreeViewerColumn(viewer, SWT.NONE);
-		versionColumn.getColumn().setWidth(150);
-		versionColumn.getColumn().setText("Version id");
-		versionColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new VersionIdLabelProvider()));
+		timestampColumn.getColumn().setWidth(300);
+		timestampColumn.getColumn().setText("Value");
+		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new NodeValueLabelProvider()));
 
 		// Adjust column width automatically
 		Listener listener = new Listener() {
@@ -101,10 +98,19 @@ public class DeploymentView {
 //		MPart mPart = partService.findPart("deployment.details.view.id");
 //		Deployment deployment = (Deployment) mPart.getTransientData().get("deployment");
 		Deployment deployment = BlueprintView.getSelectedDeployment();
+		DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
+				.getDeploymentForId(deployment.getDeployment_id());
+		Deployment deploymentDetails = deploymentData.getElements().get(0);
 
-		TreeNode<DeploymentNode> root = new TreeNode<>(
-				new DeploymentNode("Deployment: " + deployment.getDeployment_id()));
-		root.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
+		TreeNode<Node> root = new TreeNode<>(new Node("Deployment: ", deploymentDetails.getDeployment_id()));
+		root.addChild(new TreeNode<Node>(new Node("deployment_id", deploymentDetails.getDeployment_id())));
+		root.addChild(new TreeNode<Node>(new Node("blueprint_id", deploymentDetails.getBlueprint_id())));
+		root.addChild(new TreeNode<Node>(new Node("state", deploymentDetails.getState())));
+		root.addChild(new TreeNode<Node>(new Node("operation", deploymentDetails.getOperation())));
+		root.addChild(new TreeNode<Node>(new Node("timestamp_start", deploymentDetails.getTimestamp_start())));
+		root.addChild(new TreeNode<Node>(new Node("timestamp_end", deploymentDetails.getTimestamp_end())));
+		root.addChild(new TreeNode<Node>(new Node("stdout", deploymentDetails.getStdout())));
+		root.addChild(new TreeNode<Node>(new Node("stderr", deploymentDetails.getStderr())));
 
 		viewer.setInput(root);
 		viewer.refresh();

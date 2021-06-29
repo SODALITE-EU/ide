@@ -1,16 +1,10 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.Image;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
-public class VersionIdLabelProvider extends LabelProvider implements IStyledLabelProvider {
-
-	public VersionIdLabelProvider() {
-	}
+public class VersionIdLabelProvider extends BlueprintLabelProvider {
 
 	@Override
 	public StyledString getStyledText(Object element) {
@@ -22,15 +16,6 @@ public class VersionIdLabelProvider extends LabelProvider implements IStyledLabe
 			styledString = new StyledString(node.getData().getBlueprint().getVersion_id());
 		}
 		return styledString;
-	}
-
-	@Override
-	public Image getImage(Object element) {
-		return null;
-	}
-
-	@Override
-	public void dispose() {
 	}
 
 }

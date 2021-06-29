@@ -1,13 +1,13 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.Image;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
-public class TimestampLabelProvider extends LabelProvider implements IStyledLabelProvider {
+public class TimestampLabelProvider extends BlueprintLabelProvider {
 
 	public TimestampLabelProvider() {
 	}
@@ -17,20 +17,18 @@ public class TimestampLabelProvider extends LabelProvider implements IStyledLabe
 		TreeNode<DeploymentNode> node = (TreeNode<DeploymentNode>) element;
 		StyledString styledString = new StyledString("-");
 		if (node.getData().isDeployment() && node.getData().getDeployment().getTimestamp() != null) {
-			styledString = new StyledString(node.getData().getDeployment().getTimestamp());
+			styledString = new StyledString(convertFormat(node.getData().getDeployment().getTimestamp()));
 		} else if (node.getData().isBlueprint() && node.getData().getBlueprint().getTimestamp() != null) {
-			styledString = new StyledString(node.getData().getBlueprint().getTimestamp());
+			styledString = new StyledString(convertFormat(node.getData().getBlueprint().getTimestamp()));
 		}
 		return styledString;
 	}
 
-	@Override
-	public Image getImage(Object element) {
-		return null;
+	private String convertFormat(String timestamp) {
+		DateTimeFormatter formatterIn = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.n'Z'");
+		DateTimeFormatter formatterOut = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime parsedDate = LocalDateTime.parse(timestamp, formatterIn);
+		String convertedFormat = parsedDate.format(formatterOut);
+		return convertedFormat;
 	}
-
-	@Override
-	public void dispose() {
-	}
-
 }

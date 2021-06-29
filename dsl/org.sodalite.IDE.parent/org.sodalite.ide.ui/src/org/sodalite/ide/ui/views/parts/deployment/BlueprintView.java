@@ -120,6 +120,12 @@ public class BlueprintView {
 		timestampColumn.getColumn().setText("Timestamp");
 		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new TimestampLabelProvider()));
 
+		// Timestamp column
+		TreeViewerColumn statusColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		statusColumn.getColumn().setWidth(250);
+		statusColumn.getColumn().setText("State");
+		statusColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new StateLabelProvider()));
+
 		// Version id column
 		TreeViewerColumn versionColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		versionColumn.getColumn().setWidth(150);
@@ -156,17 +162,21 @@ public class BlueprintView {
 //		                !viewer.getExpandedState(selectedNode));
 				TreeNode<DeploymentNode> node = (TreeNode<DeploymentNode>) selectedNode;
 				if (node.getData().isDeployment()) {
-					// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("viewId");
 					BlueprintView.setSelectedDeployment(node.getData().getDeployment());
 					DeploymentDetailsViewOpener detailsView = new DeploymentDetailsViewOpener(
 							node.getData().getDeployment());
 					ContextInjectionFactory.inject(detailsView, context);
 					detailsView.open();
+				}
+
+				// TODO Open blueprint url in browser
+				if (node.getData().isBlueprint() && node.getData().getBlueprint().getUrl() != null) {
+					String url = node.getData().getBlueprint().getUrl();
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openInformation(shell, "Sodalite Deployment Governance View",
-									"Selected deployment: " + node.getData().getDeployment().getDeployment_id());
+							MessageDialog.openInformation(shell, "Open link",
+									"Open link " + url + " in external browser");
 						}
 					});
 				}
@@ -214,8 +224,10 @@ public class BlueprintView {
 			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(username);
 			if (!blueprintData.getElements().isEmpty()) {
 				for (Blueprint blueprint : blueprintData.getElements()) {
-					TreeNode<DeploymentNode> node = root
-							.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(blueprint)));
+					BlueprintData blueprintDetailsData = RMBackendProxy.getKBReasoner()
+							.getBlueprintForId(blueprint.getBlueprint_id());
+					TreeNode<DeploymentNode> node = root.addChild(new TreeNode<DeploymentNode>(
+							new DeploymentNode(blueprintDetailsData.getElements().get(0))));
 
 					DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
 							.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
@@ -451,6 +463,7 @@ class DeploymentDetailsViewOpener {
 		MPart mPart = partService.createPart("org.eclipse.ui.browser.view");
 		mPart.setLabel("Deployment: " + deployment.getDeployment_id());
 		mPart.setElementId("deployment.details.view.id");
+		mPart.setIconURI("platform:/plugin/org.sodalite.ide.ui/icons/deployment.png");
 		mPart.setContributionURI(
 				"bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.deployment.DeploymentView");
 //		mPart.getTransientData().put("deployment", deployment);
