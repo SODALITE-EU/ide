@@ -1,5 +1,7 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
+import java.nio.file.Path;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,7 +48,9 @@ import org.sodalite.dsl.kb_reasoner_client.types.Blueprint;
 import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
+import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -73,6 +77,10 @@ public class BlueprintView {
 
 	public static Deployment getSelectedDeployment() {
 		return selectedDeployment;
+	}
+
+	public ISelection getSelection() {
+		return viewer.getSelection();
 	}
 
 	@PostConstruct
@@ -175,8 +183,15 @@ public class BlueprintView {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openInformation(shell, "Open link",
-									"Open link " + url + " in external browser");
+							if (MessageDialog.openConfirm(shell, "Open link",
+									"Do you want to open the link " + url + " in the external default browser?")) {
+								try {
+									UIHelper.openURL(url);
+								} catch (SodaliteException e) {
+									MessageDialog.openError(shell, "Open link",
+											"Link could not be opened. Error: " + e.getMessage());
+								}
+							}
 						}
 					});
 				}
@@ -274,75 +289,47 @@ public class BlueprintView {
 						TreeNode<DeploymentNode> tn = (TreeNode) ts.getFirstElement();
 //						DeploymentNode node = (DeploymentNode) tn.getData();
 						createGeneralContextualMenu(manager, tn);
+						if (tn.getData().isDeployment()) {
+							createDeploymentContextualMenu(manager, tn);
+						}
 					}
 				}
 			}
 
 			private void createGeneralContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
-				// ACTION: Refresh KB
-				// workspace
 				Action refreshAction = new Action() {
 					public void run() {
-						refreshKB();
+						refreshBlueprints();
 					}
 				};
-				refreshAction.setText("Refresh Deployments");
+				refreshAction.setText("Refresh blueprints");
+				manager.add(refreshAction);
+
+				Action deleteAction = new Action() {
+					public void run() {
+						delete(tn.getData());
+					}
+				};
+				deleteAction.setText("Delete");
+				if (tn.getData().isDeployment())
+					deleteAction.setText("Undeploy");
+				manager.add(deleteAction);
+			}
+
+			private void createDeploymentContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
+				Action refreshAction = new Action() {
+					public void run() {
+						resumeDeployment(tn.getData());
+					}
+				};
+				refreshAction.setText("Resume deployment");
 				manager.add(refreshAction);
 			}
 
-//			private void createModuleContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
-////				DeploymentNode node = (DeploymentNode) tn.getData();
-//
-//				// ACTION: Retrieve all models in a module from KB (upload them into the
-//				// workspace)
-//				Action retrieveAction = new Action() {
-//					public void run() {
-//
-//					}
-//				};
-//				retrieveAction.setText("Retrieve module ...");
-//				manager.add(retrieveAction);
-//
-//				// ACTION: Delete all models in a module from KB
-//				Action deleteAction = new Action() {
-//					public void run() {
-//
-//					}
-//				};
-//				deleteAction.setText("Delete module ...");
-//				manager.add(deleteAction);
-//			}
-
-//			private void createModelContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {
-//				DeploymentNode node = (DeploymentNode) tn.getData();
-//
-//				// ACTION: Retrieve model from KB (upload it into the workspace)
-//				Action retrieveAction = new Action() {
-//					public void run() {
-//
-//					}
-//				};
-//				retrieveAction.setText("Retrieve model ...");
-//				manager.add(retrieveAction);
-//
-//				// ACTION: Delete model from KB
-//				Action deleteAction = new Action() {
-//					public void run() {
-//
-//					}
-//				};
-//				deleteAction.setText("Delete model ...");
-//				manager.add(deleteAction);
-//			}
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getTree());
 		viewer.getTree().setMenu(menu);
 	}
-
-//	@Focus
-//	public void setFocus() {
-//		myLabelInView.setFocus();
-//	}
 
 	/**
 	 * This method is kept for E3 compatiblity. You can remove it if you do not mix
@@ -406,8 +393,8 @@ public class BlueprintView {
 			myLabelInView.setText("This is a multiple selection of " + selectedObjects.length + " objects");
 	}
 
-	public void refreshKB() {
-		Job job = Job.create("Refresh KB", (ICoreRunnable) monitor -> {
+	public void refreshBlueprints() {
+		Job job = Job.create("Refresh Blueprints", (ICoreRunnable) monitor -> {
 			try {
 				TreeNode<DeploymentNode> root = retrieveDeploymentContent();
 				Display.getDefault().asyncExec(new Runnable() {
@@ -417,9 +404,9 @@ public class BlueprintView {
 						viewer.refresh();
 					}
 				});
-				showDialog("KB Update", "The KB Browser was refreshed from KB");
+				showDialog("Blueprints Update", "User's blueprints have been updated");
 			} catch (Exception e) {
-				showErrorDialog("KB Update", "The KB Browser could not be refreshed from KB");
+				showErrorDialog("Blueprints Update", "User's blueprints could not be refreshed from Orchestrator");
 				SodaliteLogger.log(e);
 			}
 		});
@@ -443,6 +430,37 @@ public class BlueprintView {
 				MessageDialog.openError(shell, dialogTitle, dialogMessage);
 			}
 		});
+	}
+
+	public void delete(DeploymentNode node) {
+		// TODO Show confirmation/wizard dialog depending on node type
+		try {
+			if (node.isBlueprint()) {
+				RMBackendProxy.getKBReasoner().deleteBlueprintForId(node.getBlueprint().getBlueprint_id());
+			} else if (node.isDeployment()) {
+				Path inputs_yaml_path = null; // TODO get it from Wizard
+				int workers = 0; // TODO get it from Wizard
+				DeploymentReport report = RMBackendProxy.getKBReasoner()
+						.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
+			}
+		} catch (Exception e) {
+			showErrorDialog("Delete error", e.getMessage());
+		}
+	}
+
+	public void resumeDeployment(DeploymentNode node) {
+		// TODO Show resume deployment wizard dialog
+		try {
+			Path inputs_yaml_path = null; // TODO get it from Wizard
+			int workers = 0; // TODO get it from Wizard
+			boolean clean_state = false; // TODO get it from Wizard
+			if (node.isDeployment()) {
+				DeploymentReport report = RMBackendProxy.getKBReasoner().resumeDeploymentForId(
+						node.getDeployment().getDeployment_id(), inputs_yaml_path, clean_state, workers);
+			}
+		} catch (Exception e) {
+			showErrorDialog("Resume deployment error", e.getMessage());
+		}
 	}
 }
 

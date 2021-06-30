@@ -145,4 +145,12 @@ public interface KBReasoner {
 	DeploymentData getDeploymentsForBlueprint(String blueprintId) throws SodaliteException;
 
 	DeploymentData getDeploymentForId(String deploymentId) throws SodaliteException;
+
+	void deleteBlueprintForId(String blueprintId) throws SodaliteException;
+
+	DeploymentReport deleteDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers)
+			throws SodaliteException;
+
+	DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state, int workers)
+			throws SodaliteException;
 }

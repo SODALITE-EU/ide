@@ -10,7 +10,11 @@
       </toolbar>
     </elements>
     <elements xsi:type="basic:PartDescriptor" xmi:id="_HH6BMNQQEeu2hc8b8TXapA" elementId="sodalite.partDescFragment.DeploymentGovernanceView" label="Deployment Governance View" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/blueprint.png" allowMultiple="true" category="Sodalite" closeable="true" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.views.parts.deployment.BlueprintView">
-      <toolbar xmi:id="_keT6gNQQEeu2hc8b8TXapA" elementId="org.sodalite.ide.ui.toolbar.deployment"/>
+      <toolbar xmi:id="_keT6gNQQEeu2hc8b8TXapA" elementId="org.sodalite.ide.ui.toolbar.deployment">
+        <children xsi:type="menu:DirectToolItem" xmi:id="_IwXn0Nl2EeumVYKLrbT4og" elementId="org.sodalite.ide.ui.directtoolitem.refreshBlueprints" label="Refresh blueprints" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/update.png" tooltip="Refresh the blueprints content on Deployment Governance View" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.BlueprintsRefresh"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_mSXEENmMEeumVYKLrbT4og" elementId="org.sodalite.ide.ui.directtoolitem.delete" label="Delete selected blueprint/deployment" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/delete.png" tooltip="Delete selected blueprint/deployment" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.DeleteBlueprintOrDeployment"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_7SPXUNmMEeumVYKLrbT4og" elementId="org.sodalite.ide.ui.directtoolitem.resume" accessibilityPhrase="" label="Resume deployment" iconURI="platform:/plugin/org.sodalite.ide.ui/icons/resume.png" tooltip="Resume a failed deployment" contributionURI="bundleclass://org.sodalite.ide.ui/org.sodalite.ide.ui.commands.ResumeDeployment"/>
+      </toolbar>
     </elements>
   </fragments>
 </fragment:ModelFragments>

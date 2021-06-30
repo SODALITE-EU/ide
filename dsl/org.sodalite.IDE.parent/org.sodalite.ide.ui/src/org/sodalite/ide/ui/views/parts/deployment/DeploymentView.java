@@ -106,6 +106,14 @@ public class DeploymentView {
 		root.addChild(new TreeNode<Node>(new Node("deployment_id", deploymentDetails.getDeployment_id())));
 		root.addChild(new TreeNode<Node>(new Node("blueprint_id", deploymentDetails.getBlueprint_id())));
 		root.addChild(new TreeNode<Node>(new Node("state", deploymentDetails.getState())));
+		if (deploymentDetails.getInstance_state() != null) {
+			TreeNode<Node> instance_state = new TreeNode<Node>(new Node("instance_state", ""));
+			for (String key : deploymentDetails.getInstance_state().keySet()) {
+				instance_state
+						.addChild(new TreeNode<Node>(new Node(key, deploymentDetails.getInstance_state().get(key))));
+			}
+			root.addChild(instance_state);
+		}
 		root.addChild(new TreeNode<Node>(new Node("operation", deploymentDetails.getOperation())));
 		root.addChild(new TreeNode<Node>(new Node("timestamp_start", deploymentDetails.getTimestamp_start())));
 		root.addChild(new TreeNode<Node>(new Node("timestamp_end", deploymentDetails.getTimestamp_end())));

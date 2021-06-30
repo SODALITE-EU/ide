@@ -1054,6 +1054,95 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
+	public void deleteBlueprintForId(String blueprintId) throws SodaliteException {
+		Assert.notNull(blueprintId, "Pass a not null blueprintId");
+		String url = xoperaUri + "blueprint/" + blueprintId + "?force=false";
+		try {
+			deleteUriResource(new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public DeploymentReport deleteDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers)
+			throws SodaliteException {
+		try {
+			Assert.notNull(deploymentId, "Pass a not null deploymentId");
+			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
+			String url = xoperaUri + "deployment/" + deploymentId + "/undeploy";
+			if (workers >= 0)
+				url += "&workers=" + workers;
+
+			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+
+			Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
+				@Override
+				public String getFilename() {
+					return inputs_yaml_path.getFileName().toString();
+				}
+			};
+
+			HttpHeaders xmlHeaders = new HttpHeaders();
+			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+			if (IAM_enabled) {
+				this.aai_token = getSecurityToken();
+				xmlHeaders.setBearerAuth(this.aai_token);
+			}
+			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
+
+			parts.add("inputs_file", fileEntity);
+
+			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
+					HttpStatus.ACCEPTED);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state,
+			int workers) throws SodaliteException {
+		try {
+			Assert.notNull(deploymentId, "Pass a not null deploymentId");
+			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
+			String url = xoperaUri + "deployment/" + deploymentId + "/deploy_continue&clean_state=" + clean_state;
+			if (workers >= 0)
+				url += "&workers=" + workers;
+
+			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+
+			Resource inputs_yaml = new ByteArrayResource(Files.readAllBytes(inputs_yaml_path)) {
+				@Override
+				public String getFilename() {
+					return inputs_yaml_path.getFileName().toString();
+				}
+			};
+
+			HttpHeaders xmlHeaders = new HttpHeaders();
+			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
+			if (IAM_enabled) {
+				this.aai_token = getSecurityToken();
+				xmlHeaders.setBearerAuth(this.aai_token);
+			}
+			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
+
+			parts.add("inputs_file", fileEntity);
+
+			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
+					HttpStatus.ACCEPTED);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
 	public PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws SodaliteException {
 		Assert.notNull(inputs, "Pass a not null inputs");
 		Assert.notNull(namespace, "Pass a not null namespace");
@@ -1662,8 +1751,12 @@ public class KBReasonerClient implements KBReasoner {
 		return getRestTemplate().exchange(uri, HttpMethod.GET, requestEntity, String.class);
 	}
 
-	private ResponseEntity<String> deleteJsonMessage(URI uri) {
+	private ResponseEntity<String> deleteJsonMessage(URI uri) throws SodaliteException {
 		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
 		headers.add("Content-Type", "application/json");
 		headers.add("Accept", "*/*");
 		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
