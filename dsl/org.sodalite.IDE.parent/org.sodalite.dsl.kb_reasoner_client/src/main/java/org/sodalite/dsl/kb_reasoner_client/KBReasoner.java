@@ -21,6 +21,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
@@ -153,4 +154,11 @@ public interface KBReasoner {
 
 	DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state, int workers)
 			throws SodaliteException;
+
+	void createMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException;
+
+	void deleteMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException;
+
+	DashboardData getMonitoringDashboards(String monitoring_Id) throws SodaliteException;
+
 }

@@ -66,7 +66,7 @@ public class BackendHelper {
 			pdsURI = pdsURI.concat("/");
 		}
 
-		String refactorerURI = store.getString(PreferenceConstants.PDS_URI).trim();
+		String refactorerURI = store.getString(PreferenceConstants.Refactorer_URI).trim();
 		if (refactorerURI.isEmpty()) {
 			raiseConfigurationIssue("Refactorer URI user not set");
 		}
@@ -74,8 +74,16 @@ public class BackendHelper {
 			refactorerURI = refactorerURI.concat("/");
 		}
 
+		String grafanaURI = store.getString(PreferenceConstants.Grafana_URI).trim();
+		if (grafanaURI.isEmpty()) {
+			raiseConfigurationIssue("Grafana URI user not set");
+		}
+		if (!grafanaURI.endsWith("/")) {
+			grafanaURI = refactorerURI.concat("/");
+		}
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI);
 
 		String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);
 		if (keycloak_enabled.equalsIgnoreCase("true")) {

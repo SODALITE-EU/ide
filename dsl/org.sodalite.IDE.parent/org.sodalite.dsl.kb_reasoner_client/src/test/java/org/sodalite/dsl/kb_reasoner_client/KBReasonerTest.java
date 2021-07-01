@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
@@ -68,6 +70,7 @@ class KBReasonerTest {
 	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
+	private final String Grafana_URI = "http://192.168.3.74:3001/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -79,7 +82,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI);
+				Refactorer_URI, Grafana_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -510,5 +513,29 @@ class KBReasonerTest {
 		String platform_type = "openstack";
 		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
 		assertNotNull(report);
+	}
+
+	@Test
+	void testCreateDashboard() throws Exception {
+		String monitoring_Id = UUID.randomUUID().toString();
+		String deployment_label = "deployment_label";
+		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
+	}
+
+	@Test
+	void testGetMonitoringDashboards() throws Exception {
+		String monitoring_Id = "354f8651-5ec9-4d4a-9465-2b1a71e14ba5";
+		String deployment_label = "deployment_label";
+		DashboardData dashboards = kbclient.getMonitoringDashboards(monitoring_Id);
+		assertFalse(dashboards.getDashboard().isEmpty());
+	}
+
+	@Test
+	void testDeleteMonitoringDashboards() throws Exception {
+		String monitoring_Id = UUID.randomUUID().toString();
+		String deployment_label = "deployment_label";
+		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
+		Thread.currentThread().sleep(1000);
+		kbclient.deleteMonitoringDashboard(monitoring_Id, deployment_label);
 	}
 }

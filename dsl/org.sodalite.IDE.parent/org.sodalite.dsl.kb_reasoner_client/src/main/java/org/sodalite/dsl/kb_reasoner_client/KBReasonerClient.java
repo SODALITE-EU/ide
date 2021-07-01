@@ -46,6 +46,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
@@ -109,6 +110,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloakUri;
 	private String pdsUri;
 	private String refactorerUri;
+	private String grafanaUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -117,7 +119,7 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri) {
+			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -125,6 +127,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.keycloakUri = keycloakUri;
 		this.pdsUri = pdsUri;
 		this.refactorerUri = refactorerUri;
+		this.grafanaUri = grafanaUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -1437,6 +1440,64 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	@Override
+	public void createMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException {
+		Assert.notNull(monitoring_Id, "Pass a not null monitoring_Id");
+		Assert.notNull(deployment_label, "Pass a not null deployment_label");
+
+		// Build JSON payload
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("monitoring_id", monitoring_Id);
+		jsonObject.addProperty("deployment_label", deployment_label);
+
+		String payload = jsonObject.toString();
+
+		String url = grafanaUri + "dashboards";
+		try {
+			postObject(payload, new URI(url), HttpStatus.OK);
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void deleteMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException {
+		Assert.notNull(monitoring_Id, "Pass a not null modelId");
+		Assert.notNull(deployment_label, "Pass a not null deployment_label");
+
+		// Build JSON payload
+		Gson gson = new Gson();
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("monitoring_id", monitoring_Id);
+		jsonObject.addProperty("deployment_label", deployment_label);
+
+		String payload = jsonObject.toString();
+
+		String url = grafanaUri + "dashboards";
+		try {
+			deleteUriResource(new URI(url), payload, HttpStatus.OK);
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public DashboardData getMonitoringDashboards(String monitoring_Id) throws SodaliteException {
+		DashboardData dashboardData = null;
+		Assert.notNull(monitoring_Id, "Pass a not null monitoring_Id");
+		String url = grafanaUri + "dashboards/deployment/" + monitoring_Id;
+		try {
+			dashboardData = getJSONObjectForType(DashboardData.class, new URI(url), HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+
+		return dashboardData;
+	}
+
 	private List<KBError> processErrors(String json) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		List<KBError> errors = mapper.readValue(json, new TypeReference<List<KBError>>() {
@@ -1652,6 +1713,26 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
+	private <T> void postObject(T object, URI uri, HttpStatus expectedStatus) throws SodaliteException {
+		String result = null;
+		try {
+			Assert.notNull(object, "Provide a valid object of type " + object.getClass());
+			Assert.notNull(uri, "Provide a valid uri");
+			ResponseEntity<String> response = postJsonMessageWithoutResult(object, uri, object.getClass());
+			result = response.getBody();
+			if (response.getStatusCode().equals(expectedStatus)) {
+				log.info("Successfully inserted JSON object " + object);
+				log.info("Result obtained: " + result);
+			} else {
+				throw new Exception("There was a problem inserting JSON object " + object + " in URI: " + uri);
+			}
+		} catch (HttpClientErrorException e) {
+			throw e;
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
 	private <T> T sendFormURLEncodedMessageWithCredentials(URI uri, Class<T> returnType,
 			MultiValueMap<String, Object> parts, HttpMethod method, String username, String password) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -1717,6 +1798,20 @@ public class KBReasonerClient implements KBReasoner {
 			return (ResponseEntity<T>) getRestTemplate().exchange(request, clazz);
 	}
 
+	private <T> ResponseEntity<String> postJsonMessageWithoutResult(T object, URI uri, Class clazz) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+		RequestEntity<T> request = RequestEntity.post(uri).headers(headers).contentType(MediaType.APPLICATION_JSON)
+				.body(object);
+		if (uri.getScheme().equals("https"))
+			return (ResponseEntity<String>) getSslRestTemplate().exchange(request, clazz);
+		else
+			return (ResponseEntity<String>) getRestTemplate().exchange(request, clazz);
+	}
+
 	private static String encodeValue(String value) {
 		try {
 			return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
@@ -1730,6 +1825,24 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
 			ResponseEntity<String> response = deleteJsonMessage(uri);
+			if (response.getStatusCode().equals(expectedStatus)) {
+				log.info("Successfully delete in uri " + uri);
+				result = true;
+			} else {
+				log.info("There was a problem deleting in URI: " + uri);
+			}
+			return result;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return false;
+		}
+	}
+
+	private boolean deleteUriResource(URI uri, String json, HttpStatus expectedStatus) throws Exception {
+		boolean result = false;
+		try {
+			Assert.notNull(uri, "Provide a valid uri");
+			ResponseEntity<String> response = deleteJsonMessage(json, uri);
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Successfully delete in uri " + uri);
 				result = true;
@@ -1760,6 +1873,19 @@ public class KBReasonerClient implements KBReasoner {
 		headers.add("Content-Type", "application/json");
 		headers.add("Accept", "*/*");
 		HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
+	}
+
+	private ResponseEntity<String> deleteJsonMessage(String json, URI uri) throws SodaliteException {
+		HttpHeaders headers = new HttpHeaders();
+		if (IAM_enabled) {
+			this.aai_token = getSecurityToken();
+			headers.setBearerAuth(this.aai_token);
+		}
+
+		headers.add("Content-Type", "application/json");
+		headers.add("Accept", "*/*");
+		HttpEntity<String> requestEntity = new HttpEntity<>(json, headers);
 		return getRestTemplate().exchange(uri, HttpMethod.DELETE, requestEntity, String.class);
 	}
 

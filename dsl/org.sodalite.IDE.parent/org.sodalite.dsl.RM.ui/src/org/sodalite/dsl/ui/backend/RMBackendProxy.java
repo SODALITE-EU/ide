@@ -144,8 +144,14 @@ public class RMBackendProxy {
 		if (!refactorerURI.endsWith("/"))
 			refactorerURI.concat("/");
 
+		String grafanaURI = store.getString(PreferenceConstants.Grafana_URI).trim();
+		if (grafanaURI.isEmpty())
+			raiseConfigurationIssue("Grafana URI user not set");
+		if (!grafanaURI.endsWith("/"))
+			grafanaURI.concat("/");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
