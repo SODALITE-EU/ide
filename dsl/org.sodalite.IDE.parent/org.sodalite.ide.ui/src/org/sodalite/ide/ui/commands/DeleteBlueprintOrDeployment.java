@@ -10,7 +10,7 @@ import org.sodalite.ide.ui.views.parts.deployment.BlueprintView;
 public class DeleteBlueprintOrDeployment {
 	@Execute
 	public void execute() throws Exception {
-		// TODO Get selected node
+		// Get selected node
 		ISelection selection = BlueprintView.getView().getSelection();
 		if (!selection.isEmpty()) {
 			TreeNode<DeploymentNode> node = (TreeNode<DeploymentNode>) ((TreeSelection) selection).getFirstElement();

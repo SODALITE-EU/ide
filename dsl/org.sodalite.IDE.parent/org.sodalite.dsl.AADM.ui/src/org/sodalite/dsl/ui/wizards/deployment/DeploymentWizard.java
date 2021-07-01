@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.UUID;
 
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -106,6 +107,7 @@ public class DeploymentWizard extends Wizard {
 			String deployment_label = mainPage.getDeploymentName();
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
+			content.append("monitoring_id: " + UUID.randomUUID());
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			SodaliteLogger.log("Error on closing wizard", e);

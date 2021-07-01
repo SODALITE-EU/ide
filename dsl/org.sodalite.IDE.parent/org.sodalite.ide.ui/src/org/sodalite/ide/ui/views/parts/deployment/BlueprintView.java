@@ -7,6 +7,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.runtime.ICoreRunnable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -54,6 +58,10 @@ import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
+import org.sodalite.ide.ui.wizards.deleteDeployment.DeleteDeploymentWizard;
+import org.sodalite.ide.ui.wizards.deleteDeployment.DeleteDeploymentWizardDialog;
+import org.sodalite.ide.ui.wizards.resume.ResumeWizard;
+import org.sodalite.ide.ui.wizards.resume.ResumeWizardDialog;
 
 public class BlueprintView {
 	private Label myLabelInView;
@@ -433,15 +441,22 @@ public class BlueprintView {
 	}
 
 	public void delete(DeploymentNode node) {
-		// TODO Show confirmation/wizard dialog depending on node type
+		// Show confirmation/wizard dialog depending on node type
 		try {
 			if (node.isBlueprint()) {
-				RMBackendProxy.getKBReasoner().deleteBlueprintForId(node.getBlueprint().getBlueprint_id());
+				if (MessageDialog.openConfirm(shell, "Delete blueprint",
+						"Do you want to delete the blueprint " + node.getBlueprint().getBlueprint_id())) {
+					deleteBlueprint(node);
+				}
 			} else if (node.isDeployment()) {
-				Path inputs_yaml_path = null; // TODO get it from Wizard
-				int workers = 0; // TODO get it from Wizard
-				DeploymentReport report = RMBackendProxy.getKBReasoner()
-						.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
+				DeleteDeploymentWizardDialog dialog = new DeleteDeploymentWizardDialog(shell,
+						new DeleteDeploymentWizard());
+				if (dialog.OK == dialog.open()) {
+					// Get inputs from Wizard
+					Path inputs_yaml_path = dialog.getInputsFile();
+					int workers = dialog.getWorkers();
+					deleteDeployment(node, inputs_yaml_path, workers);
+				}
 			}
 		} catch (Exception e) {
 			showErrorDialog("Delete error", e.getMessage());
@@ -449,18 +464,170 @@ public class BlueprintView {
 	}
 
 	public void resumeDeployment(DeploymentNode node) {
-		// TODO Show resume deployment wizard dialog
+		// Show resume deployment wizard dialog
 		try {
-			Path inputs_yaml_path = null; // TODO get it from Wizard
-			int workers = 0; // TODO get it from Wizard
-			boolean clean_state = false; // TODO get it from Wizard
 			if (node.isDeployment()) {
-				DeploymentReport report = RMBackendProxy.getKBReasoner().resumeDeploymentForId(
-						node.getDeployment().getDeployment_id(), inputs_yaml_path, clean_state, workers);
+				ResumeWizardDialog dialog = new ResumeWizardDialog(shell, new ResumeWizard());
+				if (dialog.OK == dialog.open()) {
+					// Get inputs from Wizard
+					Path inputs_yaml_path = dialog.getInputsFile();
+					boolean clean_state = dialog.getCleanState();
+					int workers = dialog.getWorkers();
+					resumeDeployment(node, inputs_yaml_path, clean_state, workers);
+				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			showErrorDialog("Resume deployment error", e.getMessage());
 		}
+	}
+
+	private void resumeDeployment(DeploymentNode node, Path inputs_yaml_path, boolean clean_state, int workers) {
+		Job job = new Job("Resume deployment") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				int steps = 1;
+				int number_steps = 1;
+				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
+				try {
+					subMonitor.setTaskName("Resuming deployment");
+					DeploymentReport report = RMBackendProxy.getKBReasoner().resumeDeploymentForId(
+							node.getDeployment().getDeployment_id(), inputs_yaml_path, clean_state, workers);
+					subMonitor.worked(steps++);
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "The selected deployment has been successfully resumed with: \ndeployment id: "
+									+ report.getDeployment_id();
+							String infoToPaste = "deployment id: " + report.getDeployment_id();
+							showInfoDialog(infoToPaste, "Resume deployment", message);
+							SodaliteLogger.log(message);
+						}
+					});
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems to resume the deployment : "
+									+ node.getDeployment().getDeployment_id() + " with error: " + e.getMessage();
+							String infoToPaste = null;
+							showErrorDialog(infoToPaste, "Resume deployment", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error resuming a deployment", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void deleteDeployment(DeploymentNode node, Path inputs_yaml_path, int workers) {
+		Job job = new Job("Delete deployment") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				int steps = 1;
+				int number_steps = 1;
+				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
+				try {
+					subMonitor.setTaskName("Deleting deployment");
+					DeploymentReport report = RMBackendProxy.getKBReasoner()
+							.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
+					subMonitor.worked(steps++);
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "The selected deployment has been successfully deleted";
+							String infoToPaste = null;
+							showInfoDialog(infoToPaste, "Delete deployment", message);
+							SodaliteLogger.log(message);
+						}
+					});
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems to delete the deployment : "
+									+ node.getDeployment().getDeployment_id() + " with error: " + e.getMessage();
+							String infoToPaste = null;
+							showErrorDialog(infoToPaste, "Delete deployment", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error deleting a deployment", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void deleteBlueprint(DeploymentNode node) {
+		Job job = new Job("Delete blueprint") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				int steps = 1;
+				int number_steps = 1;
+				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
+				try {
+					subMonitor.setTaskName("Deleting blueprint");
+					RMBackendProxy.getKBReasoner().deleteBlueprintForId(node.getBlueprint().getBlueprint_id());
+					subMonitor.worked(steps++);
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "The selected deployment has been successfully deleted";
+							String infoToPaste = null;
+							showInfoDialog(infoToPaste, "Delete blueprint", message);
+							SodaliteLogger.log(message);
+						}
+					});
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems to delete the blueprint : "
+									+ node.getBlueprint().getBlueprint_id() + " with error: " + e.getMessage();
+							String infoToPaste = null;
+							showErrorDialog(infoToPaste, "Delete blueprint", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error deleting a blueprint", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {
+		if (info != null)
+			RMBackendProxy.pasteInClipboard(info);
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(shell, dialogTitle, dialogMessage);
+			}
+		});
+	}
+
+	public void showInfoDialog(String info, String dialogTitle, String dialogMessage) {
+		if (info != null)
+			RMBackendProxy.pasteInClipboard(info);
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(shell, dialogTitle, dialogMessage);
+			}
+		});
 	}
 }
 
