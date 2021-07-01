@@ -27,6 +27,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -54,6 +55,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
+import org.sodalite.dsl.ui.preferences.Activator;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
@@ -240,11 +243,16 @@ public class BlueprintView {
 		// TODO Retrieve user's blueprints and deployments from xOpera
 		TreeNode<DeploymentNode> root = new TreeNode<>(new DeploymentNode("Blueprints"));
 
-		// FIXME get IDE user for preferences
-		String username = "user_1";
+		// Get IDE user for preferences
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+		if (keycloak_user.isEmpty())
+			RMBackendProxy.raiseConfigurationIssue("Keycloak user not set");
+
+		keycloak_user = "user_1"; // TODO remove after testing
 
 		try {
-			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(username);
+			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(keycloak_user);
 			if (!blueprintData.getElements().isEmpty()) {
 				for (Blueprint blueprint : blueprintData.getElements()) {
 					BlueprintData blueprintDetailsData = RMBackendProxy.getKBReasoner()
@@ -258,7 +266,8 @@ public class BlueprintView {
 						node.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
 					}
 				}
-
+			} else {
+				showErrorDialog("Blueprints", "No blueprints were found for registered IDE user");
 			}
 		} catch (SodaliteException ex) {
 			if (!(ex.getCause() instanceof NotRolePermissionException))
@@ -519,6 +528,7 @@ public class BlueprintView {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -530,13 +540,21 @@ public class BlueprintView {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				int steps = 1;
-				int number_steps = 1;
+				int number_steps = 2;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
 					subMonitor.setTaskName("Deleting deployment");
 					DeploymentReport report = RMBackendProxy.getKBReasoner()
 							.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
 					subMonitor.worked(steps++);
+
+					subMonitor.setTaskName("Deleting deployment monitoring dashboardst");
+					// Delete monitoring dashboards for deployment
+					String monitoring_Id = node.getDeployment().getMonitoring_id();
+					String deployment_label = node.getDeployment().getLabel();
+					RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
+					subMonitor.worked(steps++);
+
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
@@ -561,6 +579,7 @@ public class BlueprintView {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -572,9 +591,17 @@ public class BlueprintView {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				int steps = 1;
-				int number_steps = 1;
+				int number_steps = 2;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
+					// Get all associated deployments for given blueprint
+//					Map<String, String> deployment_ids = new HashMap<>();
+//					DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
+//							.getDeploymentsForBlueprint(node.getBlueprint().getBlueprint_id());
+//					for (Deployment deployment : deploymentData.getElements()) {
+//						deployment_ids.put(deployment.getDeployment_id(), deployment.getLabel());
+//					}
+
 					subMonitor.setTaskName("Deleting blueprint");
 					RMBackendProxy.getKBReasoner().deleteBlueprintForId(node.getBlueprint().getBlueprint_id());
 					subMonitor.worked(steps++);
@@ -587,6 +614,14 @@ public class BlueprintView {
 							SodaliteLogger.log(message);
 						}
 					});
+//					subMonitor.setTaskName("Deleting dashbords for associated deployments");
+
+					// Delete monitoring dashboards for blueprint deployments
+//					for (String id : deployment_ids.keySet()) {
+//						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(id, deployment_ids.get(id));
+//					}
+//					subMonitor.worked(steps++);
+
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -606,6 +641,7 @@ public class BlueprintView {
 		};
 		job.setPriority(Job.LONG);
 		job.schedule();
+
 	}
 
 	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {

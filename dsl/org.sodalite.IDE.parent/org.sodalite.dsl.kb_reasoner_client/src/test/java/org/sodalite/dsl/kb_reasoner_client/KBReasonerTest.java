@@ -447,8 +447,10 @@ class KBReasonerTest {
 		Path inputs_json_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String blueprint_token = "070132fd-5e61-4c6c-87f9-74474b891efa";
 		String version_id = "snow_deploy";
+		String deployment_label = "my_snow_deployment";
 		int workers = 5;
-		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers);
+		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers,
+				deployment_label);
 		assertNotNull(report.getDeployment_id());
 	}
 

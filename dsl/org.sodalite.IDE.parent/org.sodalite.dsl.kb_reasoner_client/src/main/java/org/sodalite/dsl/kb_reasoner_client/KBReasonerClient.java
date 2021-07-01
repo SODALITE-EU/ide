@@ -931,8 +931,8 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
-			throws SodaliteException {
+	public DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers,
+			String deployment_label) throws SodaliteException {
 		try {
 			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
 			Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
@@ -943,6 +943,9 @@ public class KBReasonerClient implements KBReasoner {
 
 			if (workers >= 0)
 				url += "&workers=" + workers;
+
+			if (deployment_label != null && !deployment_label.isEmpty())
+				url += "&deployment_label=" + deployment_label;
 
 			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 

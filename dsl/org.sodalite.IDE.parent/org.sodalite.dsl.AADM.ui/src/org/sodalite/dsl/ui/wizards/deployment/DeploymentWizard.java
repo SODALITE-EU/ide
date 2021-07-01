@@ -32,6 +32,7 @@ public class DeploymentWizard extends Wizard {
 	private String deploymentName = null;
 	private int workers = 0;
 	private boolean completeModel = false;
+	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -107,7 +108,8 @@ public class DeploymentWizard extends Wizard {
 			String deployment_label = mainPage.getDeploymentName();
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
-			content.append("monitoring_id: " + UUID.randomUUID());
+			this.monitoring_id = UUID.randomUUID().toString();
+			content.append("monitoring_id: " + this.monitoring_id);
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			SodaliteLogger.log("Error on closing wizard", e);
@@ -142,6 +144,10 @@ public class DeploymentWizard extends Wizard {
 
 	public boolean getCompleteModel() {
 		return this.completeModel;
+	}
+
+	public String getMonitoringId() {
+		return this.monitoring_id;
 	}
 
 	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {

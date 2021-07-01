@@ -48,4 +48,8 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getCompleteModel();
 	}
 
+	public String getMonitoringId() {
+		return ((DeploymentWizard) this.getWizard()).getMonitoringId();
+	}
+
 }

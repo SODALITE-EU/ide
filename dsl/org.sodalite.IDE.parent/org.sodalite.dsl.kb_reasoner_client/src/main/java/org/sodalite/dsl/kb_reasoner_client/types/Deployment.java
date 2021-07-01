@@ -19,6 +19,8 @@ public class Deployment {
 	String timestamp_submission;
 	String version_id;
 	String workers;
+	String label;
+	String monitoring_id; // TODO read it from deployment inputs
 
 	public String getBlueprint_id() {
 		return blueprint_id;
@@ -122,5 +124,21 @@ public class Deployment {
 
 	public void setWorkers(String workers) {
 		this.workers = workers;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getMonitoring_id() {
+		return monitoring_id;
+	}
+
+	public void setMonitoring_id(String monitoring_id) {
+		this.monitoring_id = monitoring_id;
 	}
 }

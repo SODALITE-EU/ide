@@ -69,6 +69,8 @@ public class DeploymentView {
 		timestampColumn.getColumn().setText("Value");
 		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new NodeValueLabelProvider()));
 
+		// TODO visualized Monitoring dashboards
+
 		// Adjust column width automatically
 		Listener listener = new Listener() {
 

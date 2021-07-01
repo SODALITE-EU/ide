@@ -103,8 +103,8 @@ public interface KBReasoner {
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json)
 			throws SodaliteException;
 
-	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
-			throws SodaliteException;
+	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers,
+			String deployment_name) throws SodaliteException;
 
 	DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws SodaliteException;
 

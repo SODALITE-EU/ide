@@ -139,7 +139,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
-			String version_tag, int workers, boolean completeModel) throws Exception {
+			String version_tag, int workers, String deployment_name, String monitoring_id, boolean completeModel)
+			throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -151,7 +152,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
-				completeModel, project, event);
+				completeModel, deployment_name, monitoring_id, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -238,17 +239,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
-			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, IProject project,
-			ExecutionEvent event) {
+			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, String deployment_name,
+			String monitoring_id, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				int steps = 1;
-				int number_steps = 7;
+				int number_steps = 8;
 				if (imageBuildConfPath != null)
-					number_steps = 8;
+					number_steps = 9;
 
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
@@ -334,7 +335,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path,
-							iacReport.getBlueprint_id(), version_tag, workers);
+							iacReport.getBlueprint_id(), version_tag, workers, deployment_name);
 					admin_report[1] = depl_report.getDeployment_id();
 					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
@@ -352,22 +353,19 @@ public class AADMBackendProxy extends RMBackendProxy {
 						TimeUnit.SECONDS.sleep(5);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
+					subMonitor.worked(steps++);
 
-					// TODO Report deployment_label, deployment_id to Grafana Registry with IAM -
-					// POST grafana_registry_url/dashboards
-					// Grafana IP:3001/dashboards
-					// { deployment_label: "", deployment_id: "" }
-
-					// TODO GET dashboard URL associated to a deployment: Grafana
-					// IP:3001/dashboards/deployment/<deployment_Id> with IAM
-					// Return JSON dictionary with a list of pairs for node exporter and associated
-					// dashboard
+					// Report deployment_label, deployment_id to Grafana Registry with IAM -
+					subMonitor.setTaskName("Reporting deployment to Monitoring Dashboard (Grafana)");
+					getKBReasoner().createMonitoringDashboard(monitoring_id, deployment_name);
+					subMonitor.worked(steps++);
 
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
 					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
 							depl_report.getDeployment_id(), inputs_yaml);
+					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {
@@ -405,6 +403,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 				return Status.OK_STATUS;
 			}
+
 		};
 		job.setPriority(Job.LONG);
 		job.schedule();
@@ -467,6 +466,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -514,6 +514,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);

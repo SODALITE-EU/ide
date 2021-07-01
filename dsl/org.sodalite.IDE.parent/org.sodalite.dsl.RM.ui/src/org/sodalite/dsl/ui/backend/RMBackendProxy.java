@@ -186,7 +186,7 @@ public class RMBackendProxy {
 		return kbclient;
 	}
 
-	private static void raiseConfigurationIssue(String message) throws Exception {
+	public static void raiseConfigurationIssue(String message) throws Exception {
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
 
