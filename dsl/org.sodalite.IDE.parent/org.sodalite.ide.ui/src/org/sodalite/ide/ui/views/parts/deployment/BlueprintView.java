@@ -249,7 +249,7 @@ public class BlueprintView {
 		if (keycloak_user.isEmpty())
 			RMBackendProxy.raiseConfigurationIssue("Keycloak user not set");
 
-		keycloak_user = "user_1"; // TODO remove after testing
+		// keycloak_user = "user_1"; // TODO remove after testing
 
 		try {
 			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(keycloak_user);

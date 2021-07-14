@@ -47,7 +47,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
-			xOpera_uri = "http://192.168.2.15:5000/";
+			xOpera_uri = "http://192.168.2.18:5000/";
 
 		String pds_uri = prop.getProperty(PreferenceConstants.PDS_URI);
 		if (pds_uri == null)
