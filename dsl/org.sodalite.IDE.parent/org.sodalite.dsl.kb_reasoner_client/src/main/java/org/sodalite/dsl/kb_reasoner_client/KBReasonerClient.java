@@ -874,11 +874,13 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json)
-			throws SodaliteException {
+	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
+			String username, String aadm_json) throws SodaliteException {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = iacUri + "parse";
-		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
+
+		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"blueprint_name\" : \"" + blueprint_name
+				+ "\",\n" + "\"username\" : \"" + username + "\",\n" + "\"data\" : " + aadm_json + "\n}";
 		URI uri;
 		try {
 			uri = new URI(url);

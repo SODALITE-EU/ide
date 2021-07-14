@@ -63,7 +63,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
 		if (grafana_uri == null)
-			grafana_uri = "http://192.168.3.74:3000/";
+			grafana_uri = "http://192.168.3.74:3001/";
 
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)

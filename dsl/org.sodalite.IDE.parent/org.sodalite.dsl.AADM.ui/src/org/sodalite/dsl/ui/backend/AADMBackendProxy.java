@@ -139,8 +139,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
-			String version_tag, int workers, String deployment_name, String monitoring_id, boolean completeModel)
-			throws Exception {
+			String version_tag, int workers, String deployment_name, String monitoring_id, String username,
+			boolean completeModel) throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -152,7 +152,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
-				completeModel, deployment_name, monitoring_id, project, event);
+				completeModel, deployment_name, monitoring_id, username, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -240,7 +240,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
 			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, String deployment_name,
-			String monitoring_id, IProject project, ExecutionEvent event) {
+			String monitoring_id, String username, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -305,8 +305,6 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 						BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
 
-						subMonitor.worked(steps++);
-
 						// Ask ImageBuilder status
 						subMonitor.setTaskName("Checking image creation status");
 
@@ -324,7 +322,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
 					IaCBuilderAADMRegistrationReport iacReport = getKBReasoner()
-							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
+							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmfile.getName(), username, aadmJson);
 					if (iacReport == null || iacReport.getBlueprint_id().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getBlueprint_id();
@@ -341,7 +339,6 @@ public class AADMBackendProxy extends RMBackendProxy {
 					SodaliteLogger.log(message);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
-					subMonitor.worked(steps++);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -372,9 +369,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with: \nblueprint id: "
-									+ admin_report[0] + "\ndeployment id:" + admin_report[1];
+									+ admin_report[0] + "\ndeployment id:" + admin_report[1] + "\nmonitoring id:"
+									+ monitoring_id;
 							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment_id: "
-									+ admin_report[1];
+									+ admin_report[1] + ", monitoring_id: " + monitoring_id;
 							showInfoDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message);
 						}
