@@ -143,6 +143,11 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
 	.
 	
+	«includeDefaultInput("monitoring_id")»
+	«includeDefaultInput("deployment_name")»
+	«includeDefaultInput("consul_uri")»
+	«includeDefaultInput("grafana_address")»
+	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 		«p.compile»
 	«ENDFOR»
@@ -191,6 +196,19 @@ class AADMGenerator extends AbstractGenerator {
 	«f.compile»
 	«ENDFOR»
 
+	'''
+		
+	def includeDefaultInput(String input_name) '''
+	:Parameter_«parameter_counter»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value 'string' ;
+	.
+	:Input_«input_counter++»
+	  rdf:type exchange:Input ;
+	  exchange:name "«input_name»" ;
+	  exchange:hasParameter :Parameter_«parameter_counter++» ;
+	.
 	'''
 	
 	def compile(GetProperty p) '''
