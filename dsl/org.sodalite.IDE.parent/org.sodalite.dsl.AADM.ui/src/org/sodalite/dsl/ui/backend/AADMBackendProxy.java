@@ -108,7 +108,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		}
 	}
 
-	public void processSaveAADM(ExecutionEvent event) throws Exception {
+	public void processSaveAADM(String version, ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
@@ -120,7 +120,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmURI = getModelURI(aadmFile, project);
 
 		// Send model to the KB
-		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
+		saveAADM(aadmTTL, aadmFile, aadmURI, version, project, event);
 	}
 
 	public void processOptimizeAADM(ExecutionEvent event) throws Exception {
@@ -163,7 +163,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
-	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
+	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, String version, IProject project,
+			ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				// Generate Model
@@ -179,7 +180,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				boolean complete = false;
 				String name = aadmFile.getName();
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
-						complete);
+						complete, version);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
@@ -271,8 +272,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 					String namespace = AADMHelper.getModule(aadmfile, event);
 
 					String aadmName = aadmfile.getName();
+
+					// TODO AADM version needs to be taken from Deployment Wizard
+					String version = null;
 					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, aadmName, namespace,
-							aadmDSL, completeModel);
+							aadmDSL, completeModel, version);
 					if (saveReport == null)
 						throw new Exception(
 								"There was a problem to save the AADM into the KB, please contact Sodalite administrator");

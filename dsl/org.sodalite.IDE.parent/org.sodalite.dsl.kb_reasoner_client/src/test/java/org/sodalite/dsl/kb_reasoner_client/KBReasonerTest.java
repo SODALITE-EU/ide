@@ -380,7 +380,8 @@ class KBReasonerTest {
 		String aadmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String aadmDSL = new String(Files.readAllBytes(dsl_path));
-		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete);
+		String version = null;
+		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, version);
 		return report;
 	}
 
@@ -411,7 +412,9 @@ class KBReasonerTest {
 		String module = "docker";
 		ModelData models = kbclient.getRMsInModule(module);
 		assertNotNull(models);
-		ModelData model = kbclient.getModel(models.getElements().get(0).getUri().toASCIIString());
+		// TODO: get list of model versions
+		String version = null;
+		ModelData model = kbclient.getModel(models.getElements().get(0).getUri().toASCIIString(), version);
 		assertNotNull(model);
 	}
 

@@ -683,7 +683,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete) throws SodaliteException {
+			boolean complete, String version) throws SodaliteException {
 		Assert.isTrue(!aadmTTL.isEmpty(), "Turtle content for AADM can neither be null nor empty");
 		Assert.isTrue(!aadmDSL.isEmpty(), "AADM DSL content can neither be null nor empty");
 		String url = kbReasonerUri + "saveAADM";
@@ -696,6 +696,7 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("name", name);
 		map.add("namespace", namespace);
 		map.add("aadmDSL", aadmDSL);
+		map.add("version", version);
 		if (IAM_enabled) {
 			String token = getSecurityToken();
 			Assert.notNull(token, "Error retrieving a valid security token");
@@ -1200,9 +1201,11 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public ModelData getModel(String modelId) throws SodaliteException {
+	public ModelData getModel(String modelId, String version) throws SodaliteException {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "model?uri=" + modelId;
+		if (version != null && !version.isEmpty())
+			url += "&version=" + version;
 		if (IAM_enabled)
 			url += "&token=" + this.aai_token;
 		try {
@@ -1212,7 +1215,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (IAM_enabled)
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
-				return getModel(modelId);
+				return getModel(modelId, version);
 			else
 				throw ex;
 		} catch (HttpClientErrorException ex) {
@@ -1421,9 +1424,34 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public void deleteModel(String modelId) throws SodaliteException {
+	public void deleteModel(String modelId, String version) throws SodaliteException {
 		Assert.notNull(modelId, "Pass a not null modelId");
 		String url = kbReasonerUri + "delete?uri=" + modelId;
+		if (version != null && !version.isEmpty())
+			url += "&version=" + version;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			deleteUriResource(new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				deleteModel(modelId, version);
+			else
+				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void deleteModel(String modelId) throws SodaliteException {
+		Assert.notNull(modelId, "Pass a not null modelId");
+		String url = kbReasonerUri + "delete?uri=" + modelId + "?hard=true";
 		if (IAM_enabled)
 			url += "&token=" + this.aai_token;
 		try {

@@ -92,7 +92,7 @@ public class PDSUpdateWizardMainPage extends WizardPage {
 			}
 		});
 
-		// Inputs File
+		// Namespace
 		Label namespaceLabel = new Label(container, SWT.NONE);
 		namespaceLabel.setText("Namespace:");
 

@@ -91,7 +91,7 @@ public interface KBReasoner {
 	List<String> getSubClassesOf(List<String> subclasses, String superclass) throws SodaliteException;
 
 	KBSaveReportData saveAADM(String aadmTTL, String aadmURI, String name, String namespace, String aadmDSL,
-			boolean complete) throws SodaliteException;
+			boolean complete, String version) throws SodaliteException;
 
 	KBSaveReportData saveRM(String rmTTL, String rmURI, String name, String namespace, String rmDSL)
 			throws SodaliteException;
@@ -110,11 +110,13 @@ public interface KBReasoner {
 
 	ModelData getModelForResource(String resource, String module) throws SodaliteException;
 
-	ModelData getModel(String modelId) throws SodaliteException;
+	ModelData getModel(String modelId, String version) throws SodaliteException;
 
 	ModelData getAADMsInModule(String module) throws SodaliteException;
 
 	ModelData getRMsInModule(String module) throws SodaliteException;
+
+	void deleteModel(String modelId, String version) throws SodaliteException;
 
 	void deleteModel(String modelId) throws SodaliteException;
 
