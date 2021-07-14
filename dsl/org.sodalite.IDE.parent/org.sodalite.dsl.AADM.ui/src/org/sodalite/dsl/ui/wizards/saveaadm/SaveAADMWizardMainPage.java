@@ -45,7 +45,7 @@ public class SaveAADMWizardMainPage extends WizardPage {
 		versionLabel.setText("Version:");
 
 		Text versionText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData namespaceGridData = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+		GridData namespaceGridData = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1);
 		versionText.setLayoutData(namespaceGridData);
 
 		versionText.addModifyListener(new ModifyListener() {
@@ -72,8 +72,10 @@ public class SaveAADMWizardMainPage extends WizardPage {
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = ((ComboViewer) event.getSource()).getSelection();
-				if (!selection.isEmpty() && selection instanceof StructuredSelection)
+				if (!selection.isEmpty() && selection instanceof StructuredSelection) {
 					version = ((StructuredSelection) selection).getFirstElement().toString();
+					versionText.setText(version);
+				}
 				getWizard().getContainer().updateButtons();
 			};
 		});
