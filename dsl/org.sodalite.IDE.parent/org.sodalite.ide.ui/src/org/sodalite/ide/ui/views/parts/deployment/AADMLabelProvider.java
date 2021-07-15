@@ -19,7 +19,9 @@ public class AADMLabelProvider extends LabelProvider implements IStyledLabelProv
 		if (node.getData().isDeployment()) {
 			styledString = new StyledString("-");
 		} else if (node.getData().isBlueprint()) {
-			styledString = new StyledString(node.getData().getBlueprint().getAadm_id());
+			String aadm_id = node.getData().getBlueprint().getAadm_id();
+			aadm_id = aadm_id.substring(aadm_id.indexOf("AADM"));
+			styledString = new StyledString(aadm_id);
 		}
 		return styledString;
 	}

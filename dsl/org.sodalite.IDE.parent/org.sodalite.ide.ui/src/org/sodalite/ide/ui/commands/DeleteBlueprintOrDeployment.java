@@ -14,7 +14,7 @@ public class DeleteBlueprintOrDeployment {
 		ISelection selection = BlueprintView.getView().getSelection();
 		if (!selection.isEmpty()) {
 			TreeNode<DeploymentNode> node = (TreeNode<DeploymentNode>) ((TreeSelection) selection).getFirstElement();
-			BlueprintView.getView().delete(node.getData());
+			BlueprintView.getView().delete(node);
 		}
 	}
 }

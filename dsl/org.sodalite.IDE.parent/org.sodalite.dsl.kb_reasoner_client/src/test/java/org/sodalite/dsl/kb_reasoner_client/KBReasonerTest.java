@@ -364,6 +364,13 @@ class KBReasonerTest {
 		assertFalse(deploymentData.getElements().isEmpty());
 	}
 
+	@Test
+	void testGetDeploymentForId2() throws Exception {
+		String deployment_id = "4cd04513-7b76-4cae-9adc-3c37c8003bc1";
+		DeploymentData deploymentData = kbclient.getDeploymentForId(deployment_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)
 			throws IOException, Exception {
 		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);

@@ -42,14 +42,11 @@ public class DeploymentDataJsonDeserializer extends JsonDeserializer<ReasonerDat
 		if (null == arrayNode // if no data node could be found
 				|| !arrayNode.isArray() // or data node is not an array
 				|| !arrayNode.elements().hasNext()) { // or data node doesn't contain any entry
-			Deployment deployment = mapper.readerFor(deploymentType).readValue(arrayNode);
-			// TODO read monitoring_id from deployment inputs
-			deployments.add(deployment);
+			deployments.add(mapper.readerFor(deploymentType).readValue(arrayNode));
 		} else {
 			arrayNode.forEach(bp -> {
 				try {
 					Deployment deployment = mapper.readerFor(deploymentType).readValue(bp);
-					// TODO read monitoring_id from deployment inputs
 					if (!deployments.contains(deployment))
 						deployments.add(deployment);
 				} catch (IOException e) {

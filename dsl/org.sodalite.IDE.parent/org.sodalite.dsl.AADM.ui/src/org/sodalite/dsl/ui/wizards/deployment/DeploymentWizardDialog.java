@@ -36,8 +36,8 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getVersionTag();
 	}
 
-	public String getDeploymentName() {
-		return ((DeploymentWizard) this.getWizard()).getDeploymentName();
+	public String getDeploymentLabel() {
+		return ((DeploymentWizard) this.getWizard()).getDeploymentLabel();
 	}
 
 	public int getWorkers() {

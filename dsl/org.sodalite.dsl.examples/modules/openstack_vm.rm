@@ -1,12 +1,86 @@
 module: openstack
 
+data_types:
+
+  sodalite.datatypes.OpenStack.env:  
+    derived_from: tosca.datatypes.Root
+    properties:
+      checkin_env:
+        type: map
+        required: false
+        default: '[]'
+        entry_schema: sodalite.datatypes.OpenStack.env.Token.EGI
+      os_env:
+        type: map
+        required: false
+        default: '[]'
+        entry_schema: sodalite.datatypes.OpenStack.env.OS
+
+  sodalite.datatypes.OpenStack.env.Token.EGI:  
+    derived_from: tosca.datatypes.Root
+    properties:  
+      CHECKIN_CLIENT_ID:  
+        type: string 
+      CHECKIN_CLIENT_SECRET:  
+        type: string 
+      CHECKIN_REFRESH_TOKEN:  
+        type: string 
+      EGI_SITE:  
+        type: string
+
+  sodalite.datatypes.OpenStack.env.OS:  
+    derived_from: tosca.datatypes.Root
+    properties:  
+      OS_AUTH_URL:  
+        type: string 
+        default: ""
+      OS_AUTH_TYPE:  
+        type: string 
+        default: ""
+      OS_IDENTITY_PROVIDER:  
+        type: string 
+        default: ""
+      OS_PROTOCOL:  
+        type: string
+        default: ""
+      OS_ACCESS_TOKEN:  
+        type: string
+        default: ""
+      OS_PROJECT_ID:  
+        type: string
+        default: ""
+      OS_PROJECT_NAME:  
+        type: string 
+        default: ""
+      OS_PROJECT_DOMAIN_ID: 
+        type: string 
+        default: ""
+      OS_USER_DOMAIN_NAME:  
+        type: string 
+        default: ""
+      OS_REGION_NAME:  
+        type: string 
+        default: ""
+      OS_USERNAME:  
+        type: string
+        default: ""
+      OS_PASSWORD:  
+        type: string
+        default: ""
+      OS_INTERFACE: 
+        type: string
+        default: ""
+      OS_IDENTITY_API_VERSION: 
+        type: string
+        default: ""
+
 node_types:
 	sodalite.nodes.OpenStack.VM:  
 		derived_from: tosca.nodes.Compute 
 		properties:  
 			network:  
 				description: "OpenStack network id (network names are not accepted)" 
-				type: string 
+				type: string
 			name:  
 				description: "Name that should be given to the VM in OpenStack"
 				type: string 
@@ -24,7 +98,12 @@ node_types:
 				type: string 
 			username:  
 				description: 'Username for SSH connection' 
-				type: string   
+				type: string
+			ssh_config:
+				description: 'Additional ssh config, to be added to default ansible_ssh_common_args'
+				type: map
+				required: false
+				default: ""  
 			include_exporter:
 				description: 'Flag to include exporter'
 				type: boolean
@@ -44,29 +123,47 @@ node_types:
 				description: 'Additional userdata applied to configure the VM'
 				type: string
 				default: ""
-				required: false 
+				required: false
+			scheduler:
+				description: 'Scheduler type for batch execution'
+				type: string
+				default: "batch"
+				required: false
+				constraints:
+					valid_values: [ "batch" ] 
 			consul_server_address:
 				description: 'Public IPv4 address of the consul server (for the node exporter to register into)'
 				type: string
 				default: ""
-				required: false					
+				required: false
+			skydive_analyzer:
+				description: 'Address and Port of skydive analyzer'
+				type: string
+				default: ""
+				required: false				
 			env:
 				description: "Optional OpenStack environment"
 				type: map
+				entry_schema: sodalite.datatypes.OpenStack.env
 				required: false
-				default: ''					
+				default: ''
+					
 		attributes:  
 			id:  
 				description: "OpenStack id of the VM"
 				type: string 
 			ansible_ip:  
 				description: "ansible ipv4"
-				type: string 
+				type: string
+			public_address:
+				type: string
+				description: 'Public ipv4'
 		requirements:  
 			protected_by:  
 				relationship: tosca.relationships.DependsOn 
 				node: openstack/sodalite.nodes.OpenStack.SecurityRules 
-				capability: tosca.capabilities.Node 
+				capability: tosca.capabilities.Node
+				occurrences: [0, "UNBOUNDED"] 
 		capabilities:  
 			feature:  
 				type: tosca.capabilities.Node 
@@ -111,6 +208,11 @@ node_types:
 								default: get_property:
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.username
+							ssh_config:             
+								type: string
+								default: get_property:
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.ssh_config
 							include_exporter:         
 								type: boolean
 								default: get_property: 
@@ -131,20 +233,38 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.userdata
+							env:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.env
 							consul_server_address:
 								type: string
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address								
-							env:                 
+							skydive_analyzer:                 
 								type: map
 								default: get_property: 
 									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.env		
+									property: openstack/sodalite.nodes.OpenStack.VM.skydive_analyzer
+							deployment_label:                 
+								type: map
+								default: get_input: deployment_label
+							monitoring_id:                 
+								type: map
+								default: get_input: monitoring_id
+							instance_name:                 
+								type: map
+								default: get_attribute: 
+									entity: SELF
+									attribute: openstack/sodalite.nodes.OpenStack.VM.tosca_name		
 																
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_create.yml"							
-							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml", "/workspace/iac-modules/openstack/artifacts/node_exporter.json.j2"]
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml", 
+							"/workspace/iac-modules/openstack/artifacts/node_exporter.json.j2",
+							"/workspace/iac-modules/openstack/artifacts/node_exporter.service.j2"]
 					delete:  
 						inputs:
 							id:                       
@@ -152,6 +272,22 @@ node_types:
 								default: get_attribute:
 									entity: SELF
 									attribute: openstack/sodalite.nodes.OpenStack.VM.id
+							env:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.env
+							monitoring_id:                 
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.monitoring_id
+							consul_server_address:
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address								
+
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
 							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]

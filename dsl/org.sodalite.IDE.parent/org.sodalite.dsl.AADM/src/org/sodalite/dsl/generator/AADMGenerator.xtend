@@ -144,7 +144,7 @@ class AADMGenerator extends AbstractGenerator {
 	.
 	
 	«includeDefaultInput("monitoring_id")»
-	«includeDefaultInput("deployment_name")»
+	«includeDefaultInput("deployment_label")»
 	«includeDefaultInput("consul_uri")»
 	«includeDefaultInput("grafana_address")»
 	

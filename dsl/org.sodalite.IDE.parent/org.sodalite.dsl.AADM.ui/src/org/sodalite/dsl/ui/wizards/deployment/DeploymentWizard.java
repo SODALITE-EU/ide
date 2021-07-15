@@ -29,7 +29,7 @@ public class DeploymentWizard extends Wizard {
 	private Path inputsFile = null;
 	private Path imageBuildConfPath = null;
 	private String versionTag = null;
-	private String deploymentName = null;
+	private String deploymentLabel = null;
 	private int workers = 0;
 	private boolean completeModel = false;
 	private String monitoring_id = null;
@@ -76,7 +76,7 @@ public class DeploymentWizard extends Wizard {
 		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
 
 		// Get deploymentName
-		this.deploymentName = mainPage.getDeploymentName();
+		this.deploymentLabel = mainPage.getDeploymentName();
 
 		// Get versionTag
 		this.versionTag = mainPage.getVersionTag();
@@ -99,7 +99,7 @@ public class DeploymentWizard extends Wizard {
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
 				return false;
 			}
-			content.append("deployment_name: " + this.deploymentName + "\n");
+			content.append("deployment_label: " + this.deploymentLabel + "\n");
 			content.append("consul_uri: " + consul_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
@@ -130,8 +130,8 @@ public class DeploymentWizard extends Wizard {
 		return this.imageBuildConfPath;
 	}
 
-	public String getDeploymentName() {
-		return this.deploymentName;
+	public String getDeploymentLabel() {
+		return this.deploymentLabel;
 	}
 
 	public String getVersionTag() {
