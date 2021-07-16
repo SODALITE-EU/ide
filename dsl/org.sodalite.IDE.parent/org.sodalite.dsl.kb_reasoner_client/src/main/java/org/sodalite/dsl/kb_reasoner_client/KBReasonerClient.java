@@ -1082,7 +1082,7 @@ public class KBReasonerClient implements KBReasoner {
 			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
 			String url = xoperaUri + "deployment/" + deploymentId + "/undeploy";
 			if (workers >= 0)
-				url += "&workers=" + workers;
+				url += "?workers=" + workers;
 
 			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 

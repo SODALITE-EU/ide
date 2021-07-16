@@ -203,7 +203,7 @@ public class BlueprintView {
 					detailsView.open();
 				}
 
-				// TODO Open blueprint url in browser
+				// Open blueprint url in browser
 				if (node.getData().isBlueprint() && node.getData().getBlueprint().getUrl() != null) {
 					String url = node.getData().getBlueprint().getUrl();
 					Display.getDefault().asyncExec(new Runnable() {
@@ -255,7 +255,7 @@ public class BlueprintView {
 	}
 
 	private TreeNode<DeploymentNode> retrieveDeploymentContent() throws Exception {
-		// TODO Retrieve user's blueprints and deployments from xOpera
+		// Retrieve user's blueprints and deployments from xOpera
 		TreeNode<DeploymentNode> root = new TreeNode<>(new DeploymentNode("Blueprints"));
 
 		// Get IDE user for preferences
@@ -263,8 +263,6 @@ public class BlueprintView {
 		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
 		if (keycloak_user.isEmpty())
 			RMBackendProxy.raiseConfigurationIssue("Keycloak user not set");
-
-		// keycloak_user = "user_1"; // TODO remove after testing
 
 		try {
 			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(keycloak_user);
@@ -579,7 +577,8 @@ public class BlueprintView {
 					// Delete monitoring dashboards for deployment
 					String monitoring_Id = node.getDeployment().getMonitoringId();
 					String deployment_label = node.getDeployment().getLabel();
-					RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
+					if (monitoring_Id != null)
+						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
 					subMonitor.worked(steps++);
 
 					Display.getDefault().asyncExec(new Runnable() {

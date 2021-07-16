@@ -100,7 +100,7 @@ public class DeploymentWizard extends Wizard {
 				return false;
 			}
 			content.append("deployment_label: " + this.deploymentLabel + "\n");
-			content.append("consul_uri: " + consul_uri + "\n");
+			content.append("consul_server_address: " + consul_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
 			// deployment_label }}

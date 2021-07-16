@@ -131,11 +131,6 @@ node_types:
 				required: false
 				constraints:
 					valid_values: [ "batch" ] 
-			consul_server_address:
-				description: 'Public IPv4 address of the consul server (for the node exporter to register into)'
-				type: string
-				default: ""
-				required: false
 			skydive_analyzer:
 				description: 'Address and Port of skydive analyzer'
 				type: string
@@ -240,9 +235,7 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.env
 							consul_server_address:
 								type: string
-								default: get_property: 
-									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address								
+								default: get_input: consul_server_address								
 							skydive_analyzer:                 
 								type: map
 								default: get_property: 
@@ -279,14 +272,10 @@ node_types:
 									property: openstack/sodalite.nodes.OpenStack.VM.env
 							monitoring_id:                 
 								type: map
-								default: get_property: 
-									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.monitoring_id
+								default: get_input: monitoring_id
 							consul_server_address:
 								type: string
-								default: get_property: 
-									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.consul_server_address								
+								default: get_input: consul_server_address								
 
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
