@@ -281,8 +281,9 @@ class KBReasonerTest {
 		String name = "snow.aadm";
 		String namespace = "snow";
 		boolean complete = false;
+		String version = "v1.0";
 		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/optimization.aadm.ttl",
-				"src/test/resources/snow.aadm", name, namespace, complete);
+				"src/test/resources/snow.aadm", name, namespace, complete, version);
 		assertTrue(report.hasErrors());
 	}
 
@@ -292,8 +293,9 @@ class KBReasonerTest {
 		String name = "snow.aadm";
 		String namespace = "snow";
 		boolean complete = false;
+		String version = "v1.0";
 		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/snow.v2.snow_v2.aadm.ttl",
-				"src/test/resources/snow_v2.aadm", name, namespace, complete);
+				"src/test/resources/snow_v2.aadm", name, namespace, complete, version);
 		assertFalse(report.hasErrors());
 		assertNotNull(report.getURI());
 	}
@@ -382,12 +384,11 @@ class KBReasonerTest {
 	}
 
 	private KBSaveReportData saveAADM(String aadmURI, String ttlPath, String dslPath, String name, String namespace,
-			boolean complete) throws IOException, Exception {
+			boolean complete, String version) throws IOException, Exception {
 		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
 		String aadmTTL = new String(Files.readAllBytes(ttl_path));
 		Path dsl_path = FileSystems.getDefault().getPath(dslPath);
 		String aadmDSL = new String(Files.readAllBytes(dsl_path));
-		String version = null;
 		KBSaveReportData report = kbclient.saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, version);
 		return report;
 	}
