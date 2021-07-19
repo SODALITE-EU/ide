@@ -22,17 +22,21 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinition;
+import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -62,10 +66,11 @@ class KBReasonerTest {
 	private final String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/";
 	private final String IaC_URI = "http://192.168.2.107:8081/";
 	private final String image_builder__URI = "http://192.168.2.70:5000/";
-	private final String xOPERA_URI = "http://192.168.2.15:5000/";
-	private final String KEYCLOAK_URI = "http://192.168.2.179:8080/";
+	private final String xOPERA_URI = "http://192.168.2.18:5000/";
+	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
+	private final String Grafana_URI = "http://192.168.3.74:3001/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -77,7 +82,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI);
+				Refactorer_URI, Grafana_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -315,6 +320,57 @@ class KBReasonerTest {
 		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, blueprint_id, deployment_id, inputs);
 	}
 
+	@Test
+	void testGetBlueprintsForUser() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetBlueprintForId() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(0).getBlueprint_id();
+		blueprintData = kbclient.getBlueprintForId(blueprint_id);
+		assertFalse(blueprintData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetDeploymentsForBlueprint() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
+		DeploymentData deploymentData = kbclient.getDeploymentsForBlueprint(blueprint_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetDeploymentForId() throws Exception {
+		String username = "user_1";
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		assertFalse(blueprintData.getElements().isEmpty());
+
+		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
+		DeploymentData deploymentData = kbclient.getDeploymentsForBlueprint(blueprint_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+
+		String deployment_id = deploymentData.getElements().get(0).getDeployment_id();
+		deploymentData = kbclient.getDeploymentForId(deployment_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
+	@Test
+	void testGetDeploymentForId2() throws Exception {
+		String deployment_id = "4cd04513-7b76-4cae-9adc-3c37c8003bc1";
+		DeploymentData deploymentData = kbclient.getDeploymentForId(deployment_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)
 			throws IOException, Exception {
 		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
@@ -388,7 +444,10 @@ class KBReasonerTest {
 	void testAskIaCBuilderToRegisterAADM() throws Exception {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
 		String aadm_json = new String(Files.readAllBytes(aadm_json_path));
-		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", aadm_json);
+		String blueprint_name = "snow";
+		String username = "yosu";
+		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", blueprint_name, username,
+				aadm_json);
 		assertNotNull(report.getBlueprint_id());
 	}
 
@@ -398,8 +457,10 @@ class KBReasonerTest {
 		Path inputs_json_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String blueprint_token = "070132fd-5e61-4c6c-87f9-74474b891efa";
 		String version_id = "snow_deploy";
+		String deployment_label = "my_snow_deployment";
 		int workers = 5;
-		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers);
+		DeploymentReport report = kbclient.deployAADM(inputs_json_path, blueprint_token, version_id, workers,
+				deployment_label);
 		assertNotNull(report.getDeployment_id());
 	}
 
@@ -464,5 +525,29 @@ class KBReasonerTest {
 		String platform_type = "openstack";
 		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
 		assertNotNull(report);
+	}
+
+	@Test
+	void testCreateDashboard() throws Exception {
+		String monitoring_Id = UUID.randomUUID().toString();
+		String deployment_label = "deployment_label";
+		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
+	}
+
+	@Test
+	void testGetMonitoringDashboards() throws Exception {
+		String monitoring_Id = "354f8651-5ec9-4d4a-9465-2b1a71e14ba5";
+		String deployment_label = "deployment_label";
+		DashboardData dashboards = kbclient.getMonitoringDashboards(monitoring_Id);
+		assertFalse(dashboards.getDashboard().isEmpty());
+	}
+
+	@Test
+	void testDeleteMonitoringDashboards() throws Exception {
+		String monitoring_Id = UUID.randomUUID().toString();
+		String deployment_label = "deployment_label";
+		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
+		Thread.currentThread().sleep(1000);
+		kbclient.deleteMonitoringDashboard(monitoring_Id, deployment_label);
 	}
 }

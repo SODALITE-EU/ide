@@ -1,9 +1,9 @@
-package org.sodalite.ide.ui.views.parts;
+package org.sodalite.ide.ui.views.parts.deployment;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
-public class KBContentProvider implements ITreeContentProvider {
+public class BlueprintContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {

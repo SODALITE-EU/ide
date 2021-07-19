@@ -47,7 +47,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
-			xOpera_uri = "http://192.168.2.15:5000/";
+			xOpera_uri = "http://192.168.2.18:5000/";
 
 		String pds_uri = prop.getProperty(PreferenceConstants.PDS_URI);
 		if (pds_uri == null)
@@ -63,7 +63,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
 		if (grafana_uri == null)
-			grafana_uri = "http://192.168.3.74:3000/";
+			grafana_uri = "http://192.168.3.74:3001/";
 
 		String skydive_analyzer_uri = prop.getProperty(PreferenceConstants.SKYDIVE_ANALYZER_URI);
 		if (skydive_analyzer_uri == null)

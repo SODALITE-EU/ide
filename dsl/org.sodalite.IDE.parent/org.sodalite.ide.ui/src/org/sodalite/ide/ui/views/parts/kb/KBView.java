@@ -1,4 +1,4 @@
-package org.sodalite.ide.ui.views.parts;
+package org.sodalite.ide.ui.views.parts.kb;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -42,7 +42,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
-import org.sodalite.ide.ui.views.model.Node;
+import org.sodalite.ide.ui.views.model.ModelNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
 public class KBView {
@@ -52,7 +52,7 @@ public class KBView {
 	private static KBView view = null;
 
 	public KBView() {
-		this.view = this;
+		KBView.view = this;
 	}
 
 	public static KBView getView() {
@@ -75,7 +75,7 @@ public class KBView {
 		createContextMenu(viewer);
 
 		// Model
-		TreeNode<Node> root = null;
+		TreeNode<ModelNode> root = null;
 
 		viewer.setInput(root);
 
@@ -83,7 +83,7 @@ public class KBView {
 
 		Job job = Job.create("Refreshing KB", (ICoreRunnable) monitor -> {
 			try {
-				TreeNode<Node> uproot = populateKBContent();
+				TreeNode<ModelNode> uproot = populateKBContent();
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
@@ -100,12 +100,12 @@ public class KBView {
 		job.schedule();
 	}
 
-	private TreeNode<Node> populateKBContent() throws Exception {
+	private TreeNode<ModelNode> populateKBContent() throws Exception {
 		// Retrieve KB tree model (modules, models) from the KB Reasoner
 
-		TreeNode<Node> root = new TreeNode<>(new Node("KB"));
-		TreeNode<Node> rms = root.addChild(new TreeNode<Node>(new Node("RMs")));
-		TreeNode<Node> aadms = root.addChild(new TreeNode<Node>(new Node("AADMs")));
+		TreeNode<ModelNode> root = new TreeNode<>(new ModelNode("KB"));
+		TreeNode<ModelNode> rms = root.addChild(new TreeNode<ModelNode>(new ModelNode("RMs")));
+		TreeNode<ModelNode> aadms = root.addChild(new TreeNode<ModelNode>(new ModelNode("AADMs")));
 
 		// RMs
 
@@ -116,9 +116,10 @@ public class KBView {
 			try {
 				ModelData rmModelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
 				if (!rmModelData.getElements().isEmpty()) {
-					TreeNode<Node> moduleNode = rms.addChild(new TreeNode<Node>(new Node(module, module)));
+					TreeNode<ModelNode> moduleNode = rms
+							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : rmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -130,9 +131,10 @@ public class KBView {
 			try {
 				ModelData aadmModelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
 				if (!aadmModelData.getElements().isEmpty()) {
-					TreeNode<Node> moduleNode = aadms.addChild(new TreeNode<Node>(new Node(module, module)));
+					TreeNode<ModelNode> moduleNode = aadms
+							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : aadmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<Node>(new Node(model.getName(), module, model)));
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -152,17 +154,17 @@ public class KBView {
 		return splits[splits.length - 1];
 	}
 
-	private void raiseConfigurationIssue(String message) throws Exception {
-		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		Display.getDefault().asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				MessageDialog.openError(parent, "Sodalite Preferences Error",
-						message + " in Sodalite preferences pages");
-			}
-		});
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
+//	private void raiseConfigurationIssue(String message) throws Exception {
+//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//		Display.getDefault().asyncExec(new Runnable() {
+//			@Override
+//			public void run() {
+//				MessageDialog.openError(parent, "Sodalite Preferences Error",
+//						message + " in Sodalite preferences pages");
+//			}
+//		});
+//		throw new Exception(message + " in Sodalite preferences pages");
+//	}
 
 	private void createContextMenu(TreeViewer viewer) {
 
@@ -178,8 +180,8 @@ public class KBView {
 				if (!selection.isEmpty()) {
 					TreeSelection ts = (TreeSelection) selection;
 					if (ts.toList().size() == 1) {
-						TreeNode tn = (TreeNode) ts.getFirstElement();
-						Node node = (Node) tn.getData();
+						TreeNode<ModelNode> tn = (TreeNode<ModelNode>) ts.getFirstElement();
+						ModelNode node = (ModelNode) tn.getData();
 						createGeneralContextualMenu(manager, tn);
 						if (node.isModule()) {
 							createModuleContextualMenu(manager, tn);
@@ -190,7 +192,7 @@ public class KBView {
 				}
 			}
 
-			private void createGeneralContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
+			private void createGeneralContextualMenu(IMenuManager manager, TreeNode<ModelNode> tn) {
 				// ACTION: Refresh KB
 				// workspace
 				Action refreshAction = new Action() {
@@ -202,8 +204,8 @@ public class KBView {
 				manager.add(refreshAction);
 			}
 
-			private void createModuleContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
-				Node node = (Node) tn.getData();
+			private void createModuleContextualMenu(IMenuManager manager, TreeNode<ModelNode> tn) {
+				ModelNode node = (ModelNode) tn.getData();
 
 				// ACTION: Retrieve all models in a module from KB (upload them into the
 				// workspace)
@@ -295,8 +297,8 @@ public class KBView {
 				manager.add(deleteAction);
 			}
 
-			private void createModelContextualMenu(IMenuManager manager, TreeNode<Node> tn) {
-				Node node = (Node) tn.getData();
+			private void createModelContextualMenu(IMenuManager manager, TreeNode<ModelNode> tn) {
+				ModelNode node = (ModelNode) tn.getData();
 
 				// ACTION: Retrieve model from KB (upload it into the workspace)
 				Action retrieveAction = new Action() {
@@ -439,7 +441,7 @@ public class KBView {
 	public void refreshKB() {
 		Job job = Job.create("Refresh KB", (ICoreRunnable) monitor -> {
 			try {
-				TreeNode<Node> root = populateKBContent();
+				TreeNode<ModelNode> root = populateKBContent();
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {

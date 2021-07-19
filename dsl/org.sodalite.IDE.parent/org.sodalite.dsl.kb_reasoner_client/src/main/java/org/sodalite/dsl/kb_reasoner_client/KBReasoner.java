@@ -16,10 +16,13 @@ import java.util.List;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
@@ -97,11 +100,11 @@ public interface KBReasoner {
 
 	String getAADM(String aadmIRI) throws SodaliteException;
 
-	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json)
-			throws SodaliteException;
+	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
+			String username, String aadm_json) throws SodaliteException;
 
-	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers)
-			throws SodaliteException;
+	DeploymentReport deployAADM(Path inputs_yaml_path, String blueprint_id, String version_id, int workers,
+			String deployment_name) throws SodaliteException;
 
 	DeploymentStatusReport getAADMDeploymentStatus(String deployment_id) throws SodaliteException;
 
@@ -135,4 +138,27 @@ public interface KBReasoner {
 
 	void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
 			String inputs) throws SodaliteException;
+
+	BlueprintData getBlueprintsForUser(String username) throws SodaliteException;
+
+	BlueprintData getBlueprintForId(String blueprintId) throws SodaliteException;
+
+	DeploymentData getDeploymentsForBlueprint(String blueprintId) throws SodaliteException;
+
+	DeploymentData getDeploymentForId(String deploymentId) throws SodaliteException;
+
+	void deleteBlueprintForId(String blueprintId) throws SodaliteException;
+
+	DeploymentReport deleteDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers)
+			throws SodaliteException;
+
+	DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state, int workers)
+			throws SodaliteException;
+
+	void createMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException;
+
+	void deleteMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException;
+
+	DashboardData getMonitoringDashboards(String monitoring_Id) throws SodaliteException;
+
 }

@@ -10,6 +10,8 @@ inputs:
 	image-name:
 		type: string
 		default: "image_name"
+	vm-name:
+		type: string
 	openstack-network-name:
 		type: string
 	security-groups:
@@ -26,7 +28,7 @@ node_templates:
 		properties:
 			key_name: get_input: ssh-key-name
 			image: get_input: image-name
-			name: "test-exporter-1"
+			name: get_input: vm-name
 			network: get_input: openstack-network-name
 			security_groups: get_input: security-groups
 			flavor: get_input: flavor-name

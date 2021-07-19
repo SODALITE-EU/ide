@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.UUID;
 
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -28,9 +29,10 @@ public class DeploymentWizard extends Wizard {
 	private Path inputsFile = null;
 	private Path imageBuildConfPath = null;
 	private String versionTag = null;
-	private String deploymentName = null;
+	private String deploymentLabel = null;
 	private int workers = 0;
 	private boolean completeModel = false;
+	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -74,7 +76,7 @@ public class DeploymentWizard extends Wizard {
 		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
 
 		// Get deploymentName
-		this.deploymentName = mainPage.getDeploymentName();
+		this.deploymentLabel = mainPage.getDeploymentName();
 
 		// Get versionTag
 		this.versionTag = mainPage.getVersionTag();
@@ -98,9 +100,9 @@ public class DeploymentWizard extends Wizard {
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
 				return false;
 			}
-			content.append("deployment_name: " + this.deploymentName + "\n");
-			content.append("consul_uri: " + consul_uri + "\n");
-			content.append("skydive-analyzer-url: " + skydive_analyzer_uri + "\n");
+			content.append("deployment_label: " + this.deploymentLabel + "\n");
+			content.append("consul_server_address: " + consul_uri + "\n");
+      content.append("skydive-analyzer-url: " + skydive_analyzer_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
 			// deployment_label }}
@@ -108,6 +110,8 @@ public class DeploymentWizard extends Wizard {
 			String deployment_label = mainPage.getDeploymentName();
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
+			this.monitoring_id = UUID.randomUUID().toString();
+			content.append("monitoring_id: " + this.monitoring_id);
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			SodaliteLogger.log("Error on closing wizard", e);
@@ -128,8 +132,8 @@ public class DeploymentWizard extends Wizard {
 		return this.imageBuildConfPath;
 	}
 
-	public String getDeploymentName() {
-		return this.deploymentName;
+	public String getDeploymentLabel() {
+		return this.deploymentLabel;
 	}
 
 	public String getVersionTag() {
@@ -142,6 +146,10 @@ public class DeploymentWizard extends Wizard {
 
 	public boolean getCompleteModel() {
 		return this.completeModel;
+	}
+
+	public String getMonitoringId() {
+		return this.monitoring_id;
 	}
 
 	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {

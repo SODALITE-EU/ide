@@ -139,7 +139,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
-			String version_tag, int workers, boolean completeModel) throws Exception {
+			String version_tag, int workers, String deployment_name, String monitoring_id, String username,
+			boolean completeModel) throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -151,7 +152,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		// Deploy AADM model
 		String aadmURI = getModelURI(aadmFile, project);
 		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
-				completeModel, project, event);
+				completeModel, deployment_name, monitoring_id, username, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -238,17 +239,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
-			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, IProject project,
-			ExecutionEvent event) {
+			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, String deployment_name,
+			String monitoring_id, String username, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				int steps = 1;
-				int number_steps = 7;
+				int number_steps = 8;
 				if (imageBuildConfPath != null)
-					number_steps = 8;
+					number_steps = 9;
 
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
@@ -304,8 +305,6 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 						BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
 
-						subMonitor.worked(steps++);
-
 						// Ask ImageBuilder status
 						subMonitor.setTaskName("Checking image creation status");
 
@@ -323,7 +322,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
 					IaCBuilderAADMRegistrationReport iacReport = getKBReasoner()
-							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
+							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmfile.getName(), username, aadmJson);
 					if (iacReport == null || iacReport.getBlueprint_id().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getBlueprint_id();
@@ -334,13 +333,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path,
-							iacReport.getBlueprint_id(), version_tag, workers);
+							iacReport.getBlueprint_id(), version_tag, workers, deployment_name);
 					admin_report[1] = depl_report.getDeployment_id();
 					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
-					subMonitor.worked(steps++);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -352,6 +350,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 						TimeUnit.SECONDS.sleep(5);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
+					subMonitor.worked(steps++);
+
+					// Report deployment_label, deployment_id to Grafana Registry with IAM -
+					subMonitor.setTaskName("Reporting deployment to Monitoring Dashboard (Grafana)");
+					getKBReasoner().createMonitoringDashboard(monitoring_id, deployment_name);
+					subMonitor.worked(steps++);
 
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
@@ -359,15 +363,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 							: aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
 							depl_report.getDeployment_id(), inputs_yaml);
+					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with: \nblueprint id: "
-									+ admin_report[0] + "\ndeployment id:" + admin_report[1];
+									+ admin_report[0] + "\ndeployment id:" + admin_report[1] + "\nmonitoring id:"
+									+ monitoring_id;
 							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment_id: "
-									+ admin_report[1];
+									+ admin_report[1] + ", monitoring_id: " + monitoring_id;
 							showInfoDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message);
 						}
@@ -396,6 +402,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 				return Status.OK_STATUS;
 			}
+
 		};
 		job.setPriority(Job.LONG);
 		job.schedule();
@@ -458,6 +465,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -505,6 +513,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
