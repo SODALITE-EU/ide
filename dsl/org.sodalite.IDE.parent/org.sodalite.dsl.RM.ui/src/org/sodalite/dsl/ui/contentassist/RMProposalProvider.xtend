@@ -54,6 +54,7 @@ import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.ui.helper.RMHelper
+import org.eclipse.xtext.impl.KeywordImpl
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -858,8 +859,248 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
 			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+	
+	def String getAdditionalProposalInfo(Keyword keyword) {
+		if (keyword instanceof KeywordImpl) {
+			val keywordImpl = keyword as KeywordImpl
+			val rule = RMHelper.findParserRule (keywordImpl)
+			
+			//RM_Model
+			if (rule.name == "RM_Model" && keyword.value == "module:")
+				return "The namespace where model entity names will be declared"
+			else if (rule.name == "RM_Model" && keyword.value == "import:")
+				return "Imports another namespace declared within the bound KB 
+						to retrieve its model entity definitions"
+			else if (rule.name == "RM_Model" && keyword.value == "artifact_types:")
+				return "This section contains an optional map of artifact type definitions 
+						for use in the service template"
+			else if (rule.name == "RM_Model" && keyword.value == "data_types:")
+				return "Declares a map of optional TOSCA Data Type definitions."
+			else if (rule.name == "RM_Model" && keyword.value == "capability_types:")
+				return "This section contains an optional map of capability type definitions 
+						for use in the service template"
+			else if (rule.name == "RM_Model" && keyword.value == "interface_types:")
+				return "This section contains an optional map of interface type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "relationship_types:")
+				return "This section contains a map of relationship type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "node_types:")
+				return "TThis section contains a mapof node type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "policy_types:")
+				return "This section contains a list of policy type definitions 
+						for use in the service template."
+			
+			//ENodeTypeBody
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "derived_from:")
+				return "Represents the required symbolic name of the Node Type being declared"
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "attributes:")
+				return "An optional map of attribute definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "properties:")
+				return "An optional map of property definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "requirements:")
+				return "An optional list of requirement definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "capabilities:")
+				return "An optional map of capability definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "interfaces:")
+				return "An optional map of interface definitions supported by the Node Type"
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "description:")
+				return "Represents the optional description string for the corresponding node_type_name."
+				
+			//EPropertyDefinitionBody
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the property."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "description:")
+				return "The optional description for the property."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "required:")
+				return "An optional key that declares a property as required (true) or not (false)."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "status:")
+				return "The optional status of the property relative to the specification or implementation.\nSee table below for valid values: 
+						supported: Indicates the property is supported.  This is the default value for all property definitions.
+						unsupported: Indicates the property is not supported.
+						experimental: Indicates the property is experimental and has no official standing.
+						deprecated: Indicates the property has been deprecated by a new specification version."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "constraints:")
+				return "The optional list of sequenced constraint clauses for the property"
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "entry_schema:")
+				return "The optional schema definition for the entries in properties of TOSCA set types such as list or map."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "default:")
+				return "An optional key that may provide a value to be used as a default if not provided by another means"
+				
+			//EAttributeDefinitionBody
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the attribute."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "description:")
+				return "The optional description for the attribute."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "required:")
+				return "An optional key that declares a property as required (true) or not (false)."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "status:")
+				return "The optional status of the attribute relative to the specification or implementation.\nSee table below for valid values: 
+						supported: Indicates the property is supported.  This is the default value for all property definitions.
+						unsupported: Indicates the property is not supported.
+						experimental: Indicates the property is experimental and has no official standing.
+						deprecated: Indicates the property has been deprecated by a new specification version."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "entry_schema:")
+				return "The optional schema definition for the entries in attributes of TOSCA set types such as list or map."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "default:")
+				return "An optional key that may provide a value to be used as a default if not provided by another means. \nThis value SHALL be type compatible with the type declared by the property definition’s type keyname"
+						
+			//ERequirementDefinitionBody
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "capability:")
+				return "The required reserved keyname used that can be used to provide \nthe name of a valid Capability Type that can fulfill the requirement"
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "node:")
+				return "The optional reserved keyname used to provide the name of a valid \nNode Type that contains the capability definition that can be used \nto fulfill the requirement. "
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "relationship:")
+				return "The optional reserved keyname used to provide the name of \na valid Relationship Type to construct when fulfilling the requirement"
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "occurrences:")
+				return "The optional minimum and maximum occurrences for the requirement. \nNote: the keyword UNBOUNDEDis also supported to represent any positive integer."
+			
+			//ECapabilityDefinitionBody
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "type:")
+				return "The required name of the Capability Type the capability definition is based upon"
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "description:")
+				return "The optional description of the Capability definition."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "attributes:")
+				return "An optional map of attribute definitions for the Capability definition"
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "properties:")
+				return "An optional map of property definitions for the Capability definition."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "occurrences:")
+				return "The optional minimum and maximum occurrences for the capability. \nBy default, an exported Capability should allow at least one relationship \nto be formed with it with a maximum of UNBOUNDED relationships.\nNote: the keyword UNBOUNDEDis also supported to represent any positive integer."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "valid_source_types:")
+				return "An optional list of one or more valid names of Node Types that are supported \nas valid sources of any relationship established to the declared Capability Type."
+			
+				
+			//EInterfaceDefinitionBody
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "type:")
+				return "Represents the required symbolic name of the interface as a string"
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input property definitions available to all defined operations\n for interface definitions that are within TOSCA Node or Relationship Type definitions. \nThis includes when interface definitions are included as part of a\n Requirement definition in a Node Type."
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "operations:")
+				return "The optional map of operations defined for this interface."	
+				
+				
+			//EOperationDefinitionBody
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "description:")
+				return "The optional description string for the associated named operation"
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "implementation:")
+				return "The optional definition of the operation implementation"
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input properties definitions (i.e., parameter definitions)\n for operation definitions that are within TOSCA Node or Relationship Type definitions.\n This includes when operation definitions are included as part of a Requirement definition in a Node Type"
+			
+			//EPrimary
+			else if (rule.name == "EPrimary" && keyword.value == "primary:")
+				return "The optional implementation artifact (i.e., the primary script file within a TOSCA CSAR file). "
+			else if (rule.name == "EPrimary" && keyword.value == "relative_path:")
+				return "The relative path in user's filesystem where artifact is located"
+				
+			//EDependencies
+			else if (rule.name == "EDependencies" && keyword.value == "dependencies:")
+				return "The optional list of one or more dependent or secondary implementation artifacts\n which are referenced by the primary implementation artifact\n (e.g., a library the script installs or a secondary script)."
+			else if (rule.name == "EDependencies" && keyword.value == "relative_path:")
+				return "The relative path in user's filesystem where artifact is located"
+			
+			//EParameterDefinitionBody
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the parameter."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "description:")
+				return "Represents the optional description of the parameter."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "default:")
+				return "Contains a type-compatible value that may be used as a default 
+						if not provided by another means."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "value:")
+				return "The type-compatible value to assign to the named parameter. 
+					Parameter values may be provided as the result from the 
+					evaluation of an expression or a function."
+					
+			//EPolicyTypeBody
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "derived_from:")
+				return "Represents the name (string) of the Policy Type this Policy Type definition\n derives from (i.e., its“parent” type)"
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "description:")
+				return "Represents the optional description string for the corresponding policy_type_name."
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "properties:")
+				return "An optional mapof property definitions for the Policy Type"
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "targets:")
+				return "An optional list of valid Node Types or Group Types the Policy Type can be applied to.\nNote: This can be viewed by TOSCA Orchestrators as an implied relationship to the target nodes,\n but one that does not have operational lifecycle considerations.\n For example, if we were to name this as an explicit Relationship Type we might call this “AppliesTo” (node or group)."
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "triggers:")
+				return "An optional mapof policy triggers for the Policy Type."
+		
+			
+			//ETriggerDefinitionBody
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "description:")
+				return "The optional description string for the named trigger."
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "event:")
+				return "The required name of the event that activates the trigger’s action.\n A deprecated form of this keyname is “event_type”"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "schedule:")
+				return "The optional time interval during which the trigger is valid\n (i.e., during which the declared actions will be processed)."
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "target_filter:")
+				return "The optional filter used to locate the attribute to monitor for the trigger’s defined condition.\n This filter helps locate the TOSCA entity (i.e., node or relationship) \nor further a specific capability of that entity that contains the attribute to monitor"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "condition:")
+				return "The optional condition which contains a condition clause definition\n specifying one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself  is enough to trigger the action"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "action:")
+				return "The list of sequential activities to be performed when the event is triggered\n and the condition is met (i.e.evaluates to true)"
+			
+			
+			//EEvenFilter
+			else if (rule.name == "EEvenFilter" && keyword.value == "node:")
+				return "The required name of the node type or template that contains\n either the attribute to be monitored or contains the requirement that\n references the node that contains the attribute to be monitored"
+			else if (rule.name == "EEvenFilter" && keyword.value == "requirement:")
+				return "The optional name of the requirement within the filter’s node\n that can be used to locate a referenced node that contains an attribute to monitor."
+			else if (rule.name == "EEvenFilter" && keyword.value == "capability:")
+				return "The optional name of a capability within the filter’s node\n or within the node referenced by its requirement that contains the attribute to monitor."
+			
+			//ETimeInterval
+			else if (rule.name == "ETimeInterval" && keyword.value == "start_time:")
+				return "The inclusive start time for the time interval"
+			else if (rule.name == "ETimeInterval" && keyword.value == "end_time:")
+				return "The inclusive end time for the time interval"
+			
+			//EExtendedTriggerCondition
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "constraint:")
+				return "The optional condition which contains a condition clause definition specifying\n one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself is enough to trigger the action."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "period:")
+				return "The optional period to use to evaluate for the condition."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "evaluations:")
+				return "The optional number of evaluations that must be performed over the period\n to assert the condition exists."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "method:")
+				return "The optional statistical method name to use to perform the evaluation of the condition."
+			
+			//ECallOperationActivityDefinitionBody
+			else if (rule.name == "ECallOperationActivityDefinitionBody" && keyword.value == "operation:")
+				return "The name of the operation to call, using the <interface_name>.<operation_name> notation.\n Required in the extended  notation."
+			else if (rule.name == "ECallOperationActivityDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input parameter assignments for the called operation.\n Any provided input assignments will override the operation input assignment\n in the target node template for this operation call"
+			
+			//GetPropertyBody
+			else if (rule.name == "GetPropertyBody" && keyword.value == "property:")
+				return "The name of the property definition the function will return the value from"
+			else if (rule.name == "GetPropertyBody" && keyword.value == "entity:")
+				return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named property definition\n the function will return the value from"
+			else if (rule.name == "GetPropertyBody" && keyword.value == "req_cap:")
+				return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named property definition the function will return the value from.\n Note:  If the property definition is located in the modelable entity directly,\n then this parameter MAY be omitted"
+				
+			//GetAttributeBody
+			else if (rule.name == "GetAttributeBody" && keyword.value == "attribute:")
+				return "The name of the attribute definition the function will return the value from"
+			else if (rule.name == "GetAttributeBody" && keyword.value == "entity:")
+				return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named attribute definition\n the function will return the value from"
+			else if (rule.name == "GetAttributeBody" && keyword.value == "req_cap:")
+				return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named attribute definition the function will return the value from.\n Note:  If the attribute definition is located in the modelable entity directly,\n then this parameter MAY be omitted"
+						
+			else
+				return ""
+		}		
+	}
+	
+	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(info);
+		}
 	}
 	
 	def getImage(String path){

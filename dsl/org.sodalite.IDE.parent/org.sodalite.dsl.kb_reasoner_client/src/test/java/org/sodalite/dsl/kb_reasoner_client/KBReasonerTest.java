@@ -364,6 +364,13 @@ class KBReasonerTest {
 		assertFalse(deploymentData.getElements().isEmpty());
 	}
 
+	@Test
+	void testGetDeploymentForId2() throws Exception {
+		String deployment_id = "4cd04513-7b76-4cae-9adc-3c37c8003bc1";
+		DeploymentData deploymentData = kbclient.getDeploymentForId(deployment_id);
+		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)
 			throws IOException, Exception {
 		Path ttl_path = FileSystems.getDefault().getPath(ttlPath);
@@ -440,7 +447,10 @@ class KBReasonerTest {
 	void testAskIaCBuilderToRegisterAADM() throws Exception {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");
 		String aadm_json = new String(Files.readAllBytes(aadm_json_path));
-		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", aadm_json);
+		String blueprint_name = "snow";
+		String username = "yosu";
+		IaCBuilderAADMRegistrationReport report = kbclient.askIaCBuilderToRegisterAADM("snow", blueprint_name, username,
+				aadm_json);
 		assertNotNull(report.getBlueprint_id());
 	}
 

@@ -2399,7 +2399,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_input\" ;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("exchange:hasValue \"");
+    _builder.append("exchange:value \"");
     String _name = gi.getInput().getName();
     _builder.append(_name, "  ");
     _builder.append("\";");

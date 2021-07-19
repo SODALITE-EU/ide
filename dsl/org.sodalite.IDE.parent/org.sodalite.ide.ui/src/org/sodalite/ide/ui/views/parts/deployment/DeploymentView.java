@@ -12,7 +12,10 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -29,9 +32,15 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
+import org.sodalite.dsl.ui.preferences.Activator;
+import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.helper.UIHelper;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.DeploymentNode;
 import org.sodalite.ide.ui.views.model.Node;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -41,6 +50,17 @@ public class DeploymentView {
 	private Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	private TreeViewer viewer = null;
 	private static DeploymentView view = null;
+	private static String grafana_uri = null;
+	static {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		grafana_uri = store.getString(PreferenceConstants.Grafana_URI);
+		if (grafana_uri.isEmpty())
+			try {
+				RMBackendProxy.raiseConfigurationIssue("Grafana URL not set");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
 
 	public DeploymentView() {
 		DeploymentView.view = this;
@@ -69,8 +89,6 @@ public class DeploymentView {
 		timestampColumn.getColumn().setText("Value");
 		timestampColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new NodeValueLabelProvider()));
 
-		// TODO visualized Monitoring dashboards
-
 		// Adjust column width automatically
 		Listener listener = new Listener() {
 
@@ -88,6 +106,44 @@ public class DeploymentView {
 				});
 			}
 		};
+
+		// Open a dedicated view for a selected deployment
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				TreeViewer viewer = (TreeViewer) event.getViewer();
+				IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
+				Object selectedNode = thisSelection.getFirstElement();
+				TreeNode<Node> node = (TreeNode<Node>) selectedNode;
+
+				// Open monitoring dashboard url in browser
+				TreeNode<Node> parent = node.getParent();
+				String parentKey = parent.getData().getKey();
+				if (parentKey.equals("monitoring_dashboards") && node.getData().getValue() != null) {
+					String url = node.getData().getValue();
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							if (MessageDialog.openConfirm(shell, "Open link",
+									"Do you want to open the link " + url + " in the external default browser?")) {
+								try {
+									UIHelper.openURL(url);
+								} catch (SodaliteException e) {
+									MessageDialog.openError(shell, "Open link",
+											"Link could not be opened. Error: " + e.getMessage());
+								}
+							}
+						}
+					});
+				} else if (node.getData().getKey().equals("stdout") || node.getData().getKey().equals("stderr")) {
+					if (node.getData().getValue() != null && !node.getData().getValue().isEmpty()) {
+						ShowTextContentDialog dialog = new ShowTextContentDialog(shell, node.getData().getKey(),
+								node.getData().getValue());
+						dialog.open();
+					}
+				}
+			}
+		});
 
 		viewer.getTree().addListener(SWT.Expand, listener);
 
@@ -107,6 +163,7 @@ public class DeploymentView {
 		TreeNode<Node> root = new TreeNode<>(new Node("Deployment: ", deploymentDetails.getDeployment_id()));
 		root.addChild(new TreeNode<Node>(new Node("deployment_id", deploymentDetails.getDeployment_id())));
 		root.addChild(new TreeNode<Node>(new Node("blueprint_id", deploymentDetails.getBlueprint_id())));
+		root.addChild(new TreeNode<Node>(new Node("deployment label", deploymentDetails.getDeployment_label())));
 		root.addChild(new TreeNode<Node>(new Node("state", deploymentDetails.getState())));
 		if (deploymentDetails.getInstance_state() != null) {
 			TreeNode<Node> instance_state = new TreeNode<Node>(new Node("instance_state", ""));
@@ -116,7 +173,38 @@ public class DeploymentView {
 			}
 			root.addChild(instance_state);
 		}
+
+		if (deploymentDetails.getMonitoringId() != null) {
+			try {
+				TreeNode<Node> monitoringDashboards = new TreeNode<Node>(new Node("monitoring_dashboards", ""));
+				DashboardData dashboardData = RMBackendProxy.getKBReasoner()
+						.getMonitoringDashboards(deploymentDetails.getMonitoringId());
+				for (String key : dashboardData.getDashboard().keySet()) {
+					String dashboardUrl = dashboardData.getDashboard().get(key);
+					dashboardUrl = grafana_uri.substring(0, grafana_uri.lastIndexOf(':') + 1)
+							+ dashboardUrl.substring("http://grafana/".length());
+					monitoringDashboards.addChild(new TreeNode<Node>(new Node(key, dashboardUrl)));
+				}
+				root.addChild(monitoringDashboards);
+			} catch (SodaliteException ex) {
+				SodaliteLogger.log("Monitoring dashboards could not be retrieved for this deployment", ex);
+			}
+		}
 		root.addChild(new TreeNode<Node>(new Node("operation", deploymentDetails.getOperation())));
+		if (deploymentDetails.getInputs() != null) {
+			TreeNode<Node> instance_state = new TreeNode<Node>(new Node("inputs", ""));
+			for (String key : deploymentDetails.getInputs().keySet()) {
+				instance_state.addChild(new TreeNode<Node>(new Node(key, deploymentDetails.getInputs().get(key))));
+			}
+			root.addChild(instance_state);
+		}
+		if (deploymentDetails.getOutputs() != null) {
+			TreeNode<Node> instance_state = new TreeNode<Node>(new Node("outputs", ""));
+			for (String key : deploymentDetails.getOutputs().keySet()) {
+				instance_state.addChild(new TreeNode<Node>(new Node(key, deploymentDetails.getOutputs().get(key))));
+			}
+			root.addChild(instance_state);
+		}
 		root.addChild(new TreeNode<Node>(new Node("timestamp_start", deploymentDetails.getTimestamp_start())));
 		root.addChild(new TreeNode<Node>(new Node("timestamp_end", deploymentDetails.getTimestamp_end())));
 		root.addChild(new TreeNode<Node>(new Node("stdout", deploymentDetails.getStdout())));

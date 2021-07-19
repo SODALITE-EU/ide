@@ -1,7 +1,5 @@
 package org.sodalite.ide.ui.wizards.deleteDeployment;
 
-import java.nio.file.Path;
-
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -22,10 +20,6 @@ public class DeleteDeploymentWizardDialog extends WizardDialog {
 		Button finishButton = getButton(IDialogConstants.FINISH_ID);
 		finishButton.setText("Delete");
 
-	}
-
-	public Path getInputsFile() {
-		return ((DeleteDeploymentWizard) this.getWizard()).getInputsFile();
 	}
 
 	public int getWorkers() {

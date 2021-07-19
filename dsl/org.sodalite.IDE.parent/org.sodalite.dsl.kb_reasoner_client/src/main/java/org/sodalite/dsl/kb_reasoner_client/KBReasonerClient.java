@@ -875,11 +875,13 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String aadm_json)
-			throws SodaliteException {
+	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
+			String username, String aadm_json) throws SodaliteException {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
 		String url = iacUri + "parse";
-		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"data\" : " + aadm_json + "\n}";
+
+		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"blueprint_name\" : \"" + blueprint_name
+				+ "\",\n" + "\"username\" : \"" + username + "\",\n" + "\"data\" : " + aadm_json + "\n}";
 		URI uri;
 		try {
 			uri = new URI(url);
@@ -1081,7 +1083,7 @@ public class KBReasonerClient implements KBReasoner {
 			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
 			String url = xoperaUri + "deployment/" + deploymentId + "/undeploy";
 			if (workers >= 0)
-				url += "&workers=" + workers;
+				url += "?workers=" + workers;
 
 			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 

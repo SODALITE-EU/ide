@@ -15,8 +15,9 @@ public class NameLabelProvider extends BlueprintLabelProvider {
 		StyledString styledString = new StyledString("-");
 		if (node.getData().isBlueprint() && node.getData().getBlueprint().getBlueprint_name() != null) {
 			styledString = new StyledString(node.getData().getBlueprint().getBlueprint_name());
+		} else if (node.getData().isDeployment() && node.getData().getDeployment().getDeployment_label() != null) {
+			styledString = new StyledString(node.getData().getDeployment().getDeployment_label());
 		}
 		return styledString;
 	}
-
 }

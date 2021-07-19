@@ -1,13 +1,11 @@
 package org.sodalite.ide.ui.wizards.deleteDeployment;
 
-import java.nio.file.Path;
-
 import org.eclipse.jface.wizard.Wizard;
 
 public class DeleteDeploymentWizard extends Wizard {
 
 	protected DeleteDeploymentWizardMainPage mainPage;
-	private Path inputsFile = null;
+
 	private int workers = 0;
 
 	public DeleteDeploymentWizard() {
@@ -28,23 +26,15 @@ public class DeleteDeploymentWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
-		return mainPage.getInputsFile() != null;
+		return true;
 	}
 
 	@Override
 	public boolean performFinish() {
-
 		// Get workers
 		this.workers = mainPage.getWorkers();
 
-		// Inputs file
-		this.inputsFile = mainPage.getInputsFile();
-
 		return true;
-	}
-
-	public Path getInputsFile() {
-		return this.inputsFile;
 	}
 
 	public int getWorkers() {

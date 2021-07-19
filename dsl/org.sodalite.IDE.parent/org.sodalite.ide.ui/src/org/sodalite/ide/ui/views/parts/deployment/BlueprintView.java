@@ -1,7 +1,11 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -36,6 +40,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -54,6 +60,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -103,6 +110,19 @@ public class BlueprintView {
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 
+		// Sort blueprints by timestamp
+		viewer.setComparator(new ViewerComparator() {
+			public int compare(Viewer viewer, Object e1, Object e2) {
+				DeploymentNode dn1 = ((TreeNode<DeploymentNode>) e1).getData();
+				DeploymentNode dn2 = ((TreeNode<DeploymentNode>) e2).getData();
+				if (dn1.isBlueprint()) {
+					return dn1.getBlueprint().getTimestamp().compareTo(dn2.getBlueprint().getTimestamp());
+				} else {
+					return dn1.getDeployment().getTimestamp().compareTo(dn2.getDeployment().getTimestamp());
+				}
+			};
+		});
+
 		// Blueprint/Deployment Id column
 		TreeViewerColumn idColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		idColumn.getColumn().setWidth(350);
@@ -124,7 +144,7 @@ public class BlueprintView {
 		// Project domain column
 		TreeViewerColumn projectDomainColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		projectDomainColumn.getColumn().setWidth(150);
-		projectDomainColumn.getColumn().setText("Project Domain");
+		projectDomainColumn.getColumn().setText("Module");
 		projectDomainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ProjectDomainLabelProvider()));
 
 		// URL
@@ -188,7 +208,7 @@ public class BlueprintView {
 					detailsView.open();
 				}
 
-				// TODO Open blueprint url in browser
+				// Open blueprint url in browser
 				if (node.getData().isBlueprint() && node.getData().getBlueprint().getUrl() != null) {
 					String url = node.getData().getBlueprint().getUrl();
 					Display.getDefault().asyncExec(new Runnable() {
@@ -240,7 +260,7 @@ public class BlueprintView {
 	}
 
 	private TreeNode<DeploymentNode> retrieveDeploymentContent() throws Exception {
-		// TODO Retrieve user's blueprints and deployments from xOpera
+		// Retrieve user's blueprints and deployments from xOpera
 		TreeNode<DeploymentNode> root = new TreeNode<>(new DeploymentNode("Blueprints"));
 
 		// Get IDE user for preferences
@@ -248,8 +268,6 @@ public class BlueprintView {
 		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
 		if (keycloak_user.isEmpty())
 			RMBackendProxy.raiseConfigurationIssue("Keycloak user not set");
-
-		// keycloak_user = "user_1"; // TODO remove after testing
 
 		try {
 			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(keycloak_user);
@@ -324,7 +342,7 @@ public class BlueprintView {
 
 				Action deleteAction = new Action() {
 					public void run() {
-						delete(tn.getData());
+						delete(tn);
 					}
 				};
 				deleteAction.setText("Delete");
@@ -431,6 +449,10 @@ public class BlueprintView {
 		job.schedule();
 	}
 
+	public void refreshView() {
+		viewer.refresh();
+	}
+
 	public void showDialog(String dialogTitle, String dialogMessage) {
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
@@ -449,24 +471,39 @@ public class BlueprintView {
 		});
 	}
 
-	public void delete(DeploymentNode node) {
+	public void delete(TreeNode<DeploymentNode> treeNode) {
 		// Show confirmation/wizard dialog depending on node type
 		try {
+			DeploymentNode node = treeNode.getData();
 			if (node.isBlueprint()) {
+				if (!treeNode.getChildren().isEmpty()) {
+					MessageDialog.openError(shell, "Delete blueprint",
+							"Blueprint contains deployments. Delete them before deleting the blueprint");
+					return;
+				}
 				if (MessageDialog.openConfirm(shell, "Delete blueprint",
 						"Do you want to delete the blueprint " + node.getBlueprint().getBlueprint_id())) {
-					deleteBlueprint(node);
+					deleteBlueprint(treeNode);
 				}
 			} else if (node.isDeployment()) {
 				DeleteDeploymentWizardDialog dialog = new DeleteDeploymentWizardDialog(shell,
 						new DeleteDeploymentWizard());
 				if (dialog.OK == dialog.open()) {
-					// Get inputs from Wizard
-					Path inputs_yaml_path = dialog.getInputsFile();
+					// Read inputs from deployment details and stroe in temporary file
+					String deployment_id = treeNode.getData().getDeployment().getDeployment_id();
+					DeploymentData deploymentData = RMBackendProxy.getKBReasoner().getDeploymentForId(deployment_id);
+					Deployment deploymentDetails = deploymentData.getElements().get(0);
+					Map<String, String> inputs = deploymentDetails.getInputs();
+					Path inputs_yaml_path = File
+							.createTempFile("inputs", null, new File(System.getProperty("user.home"))).toPath();
+					StringBuilder content = new StringBuilder();
+					inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
+					Files.write(inputs_yaml_path, content.toString().getBytes(), StandardOpenOption.APPEND);
 					int workers = dialog.getWorkers();
-					deleteDeployment(node, inputs_yaml_path, workers);
+					deleteDeployment(treeNode, inputs_yaml_path, workers);
 				}
 			}
+
 		} catch (Exception e) {
 			showErrorDialog("Delete error", e.getMessage());
 		}
@@ -535,7 +572,7 @@ public class BlueprintView {
 		job.schedule();
 	}
 
-	private void deleteDeployment(DeploymentNode node, Path inputs_yaml_path, int workers) {
+	private void deleteDeployment(TreeNode<DeploymentNode> treeNode, Path inputs_yaml_path, int workers) {
 		Job job = new Job("Delete deployment") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -543,16 +580,31 @@ public class BlueprintView {
 				int number_steps = 2;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
+					DeploymentNode node = treeNode.getData();
 					subMonitor.setTaskName("Deleting deployment");
 					DeploymentReport report = RMBackendProxy.getKBReasoner()
 							.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
+
+					// Ask xOpera deployment deletion status
+					subMonitor.setTaskName("Checking deletion status");
+					DeploymentStatusReport dsr = RMBackendProxy.getKBReasoner()
+							.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+					while (!dsr.getState().equals("success")) {
+						if (dsr.getState().equals("failed"))
+							throw new Exception("Deployment deletion failed as reported by xOpera");
+						TimeUnit.SECONDS.sleep(5);
+						dsr = RMBackendProxy.getKBReasoner()
+								.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+					}
+
 					subMonitor.worked(steps++);
 
-					subMonitor.setTaskName("Deleting deployment monitoring dashboardst");
+					subMonitor.setTaskName("Deleting deployment monitoring dashboards");
 					// Delete monitoring dashboards for deployment
-					String monitoring_Id = node.getDeployment().getMonitoring_id();
+					String monitoring_Id = node.getDeployment().getMonitoringId();
 					String deployment_label = node.getDeployment().getLabel();
-					RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
+					if (monitoring_Id != null)
+						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
 					subMonitor.worked(steps++);
 
 					Display.getDefault().asyncExec(new Runnable() {
@@ -562,6 +614,10 @@ public class BlueprintView {
 							String infoToPaste = null;
 							showInfoDialog(infoToPaste, "Delete deployment", message);
 							SodaliteLogger.log(message);
+
+							// Remove node from tree
+							treeNode.getParent().getChildren().remove(treeNode);
+							BlueprintView.getView().refreshView();
 						}
 					});
 				} catch (Exception e) {
@@ -569,7 +625,8 @@ public class BlueprintView {
 						@Override
 						public void run() {
 							String message = "There were problems to delete the deployment : "
-									+ node.getDeployment().getDeployment_id() + " with error: " + e.getMessage();
+									+ treeNode.getData().getDeployment().getDeployment_id() + " with error: "
+									+ e.getMessage();
 							String infoToPaste = null;
 							showErrorDialog(infoToPaste, "Delete deployment", message);
 							SodaliteLogger.log(message, e);
@@ -586,7 +643,7 @@ public class BlueprintView {
 		job.schedule();
 	}
 
-	private void deleteBlueprint(DeploymentNode node) {
+	private void deleteBlueprint(TreeNode<DeploymentNode> treeNode) {
 		Job job = new Job("Delete blueprint") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -594,14 +651,7 @@ public class BlueprintView {
 				int number_steps = 2;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
-					// Get all associated deployments for given blueprint
-//					Map<String, String> deployment_ids = new HashMap<>();
-//					DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
-//							.getDeploymentsForBlueprint(node.getBlueprint().getBlueprint_id());
-//					for (Deployment deployment : deploymentData.getElements()) {
-//						deployment_ids.put(deployment.getDeployment_id(), deployment.getLabel());
-//					}
-
+					DeploymentNode node = treeNode.getData();
 					subMonitor.setTaskName("Deleting blueprint");
 					RMBackendProxy.getKBReasoner().deleteBlueprintForId(node.getBlueprint().getBlueprint_id());
 					subMonitor.worked(steps++);
@@ -612,22 +662,18 @@ public class BlueprintView {
 							String infoToPaste = null;
 							showInfoDialog(infoToPaste, "Delete blueprint", message);
 							SodaliteLogger.log(message);
+							// Remove node from tree
+							treeNode.getParent().getChildren().remove(treeNode);
+							BlueprintView.getView().refreshView();
 						}
 					});
-//					subMonitor.setTaskName("Deleting dashbords for associated deployments");
-
-					// Delete monitoring dashboards for blueprint deployments
-//					for (String id : deployment_ids.keySet()) {
-//						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(id, deployment_ids.get(id));
-//					}
-//					subMonitor.worked(steps++);
-
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
 							String message = "There were problems to delete the blueprint : "
-									+ node.getBlueprint().getBlueprint_id() + " with error: " + e.getMessage();
+									+ treeNode.getData().getBlueprint().getBlueprint_id() + " with error: "
+									+ e.getMessage();
 							String infoToPaste = null;
 							showErrorDialog(infoToPaste, "Delete blueprint", message);
 							SodaliteLogger.log(message, e);

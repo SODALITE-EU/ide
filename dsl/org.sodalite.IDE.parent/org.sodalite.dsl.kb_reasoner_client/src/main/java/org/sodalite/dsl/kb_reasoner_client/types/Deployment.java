@@ -8,6 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Deployment {
 	String blueprint_id;
 	String deployment_id;
+	String deployment_label;
+	Map<String, String> last_inputs;
+	Map<String, String> inputs;
+	Map<String, String> outputs;
 	Map<String, String> instance_state;
 	String operation;
 	String state;
@@ -20,7 +24,6 @@ public class Deployment {
 	String version_id;
 	String workers;
 	String label;
-	String monitoring_id; // TODO read it from deployment inputs
 
 	public String getBlueprint_id() {
 		return blueprint_id;
@@ -134,11 +137,44 @@ public class Deployment {
 		this.label = label;
 	}
 
-	public String getMonitoring_id() {
-		return monitoring_id;
+	public String getDeployment_label() {
+		return deployment_label;
 	}
 
-	public void setMonitoring_id(String monitoring_id) {
-		this.monitoring_id = monitoring_id;
+	public void setDeployment_label(String deployment_label) {
+		this.deployment_label = deployment_label;
+	}
+
+	public Map<String, String> getLast_inputs() {
+		return last_inputs;
+	}
+
+	public void setLast_inputs(Map<String, String> last_inputs) {
+		this.last_inputs = last_inputs;
+	}
+
+	public Map<String, String> getInputs() {
+		return inputs;
+	}
+
+	public void setInputs(Map<String, String> inputs) {
+		this.inputs = inputs;
+	}
+
+	public Map<String, String> getOutputs() {
+		return outputs;
+	}
+
+	public void setOutputs(Map<String, String> outputs) {
+		this.outputs = outputs;
+	}
+
+	public String getMonitoringId() {
+		if (this.getInputs() != null && this.getInputs().keySet().contains("monitoring_id"))
+			return this.getInputs().get("monitoring_id");
+		else if (this.getInputs() != null && this.getInputs().keySet().contains("monitoring_id"))
+			return this.getLast_inputs().get("monitoring_id");
+		else
+			return null;
 	}
 }
