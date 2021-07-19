@@ -1,6 +1,11 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -56,6 +61,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.BlueprintData;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -484,8 +490,16 @@ public class BlueprintView {
 				DeleteDeploymentWizardDialog dialog = new DeleteDeploymentWizardDialog(shell,
 						new DeleteDeploymentWizard());
 				if (dialog.OK == dialog.open()) {
-					// Get inputs from Wizard
-					Path inputs_yaml_path = dialog.getInputsFile();
+					// Read inputs from deployment details and stroe in temporary file
+					String deployment_id = treeNode.getData().getDeployment().getDeployment_id();
+					DeploymentData deploymentData = RMBackendProxy.getKBReasoner().getDeploymentForId(deployment_id);
+					Deployment deploymentDetails = deploymentData.getElements().get(0);
+					Map<String, String> inputs = deploymentDetails.getInputs();
+					Path inputs_yaml_path = File
+							.createTempFile("inputs", null, new File(System.getProperty("user.home"))).toPath();
+					StringBuilder content = new StringBuilder();
+					inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
+					Files.write(inputs_yaml_path, content.toString().getBytes(), StandardOpenOption.APPEND);
 					int workers = dialog.getWorkers();
 					deleteDeployment(treeNode, inputs_yaml_path, workers);
 				}
@@ -571,9 +585,22 @@ public class BlueprintView {
 					subMonitor.setTaskName("Deleting deployment");
 					DeploymentReport report = RMBackendProxy.getKBReasoner()
 							.deleteDeploymentForId(node.getDeployment().getDeployment_id(), inputs_yaml_path, workers);
+
+					// Ask xOpera deployment deletion status
+					subMonitor.setTaskName("Checking deletion status");
+					DeploymentStatusReport dsr = RMBackendProxy.getKBReasoner()
+							.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+					while (!dsr.getState().equals("success")) {
+						if (dsr.getState().equals("failed"))
+							throw new Exception("Deployment deletion failed as reported by xOpera");
+						TimeUnit.SECONDS.sleep(5);
+						dsr = RMBackendProxy.getKBReasoner()
+								.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+					}
+
 					subMonitor.worked(steps++);
 
-					subMonitor.setTaskName("Deleting deployment monitoring dashboardst");
+					subMonitor.setTaskName("Deleting deployment monitoring dashboards");
 					// Delete monitoring dashboards for deployment
 					String monitoring_Id = node.getDeployment().getMonitoringId();
 					String deployment_label = node.getDeployment().getLabel();

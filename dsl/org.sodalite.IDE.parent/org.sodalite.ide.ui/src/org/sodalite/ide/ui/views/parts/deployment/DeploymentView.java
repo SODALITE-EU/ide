@@ -135,6 +135,12 @@ public class DeploymentView {
 							}
 						}
 					});
+				} else if (node.getData().getKey().equals("stdout") || node.getData().getKey().equals("stderr")) {
+					if (node.getData().getValue() != null && !node.getData().getValue().isEmpty()) {
+						ShowTextContentDialog dialog = new ShowTextContentDialog(shell, node.getData().getKey(),
+								node.getData().getValue());
+						dialog.open();
+					}
 				}
 			}
 		});
