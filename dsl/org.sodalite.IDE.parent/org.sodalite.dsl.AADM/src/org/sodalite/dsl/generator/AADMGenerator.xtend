@@ -147,6 +147,7 @@ class AADMGenerator extends AbstractGenerator {
 	«includeDefaultInput("deployment_label")»
 	«includeDefaultInput("consul_uri")»
 	«includeDefaultInput("grafana_address")»
+	«includeDefaultInput("skydive_analyzer")»
 	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 		«p.compile»

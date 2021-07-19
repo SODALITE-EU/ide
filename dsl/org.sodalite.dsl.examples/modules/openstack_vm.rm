@@ -130,12 +130,7 @@ node_types:
 				default: "batch"
 				required: false
 				constraints:
-					valid_values: [ "batch" ] 
-			skydive_analyzer:
-				description: 'Address and Port of skydive analyzer'
-				type: string
-				default: ""
-				required: false				
+					valid_values: [ "batch" ] 			
 			env:
 				description: "Optional OpenStack environment"
 				type: map
@@ -143,7 +138,7 @@ node_types:
 				required: false
 				default: ''
 					
-		attributes:  
+		attributes: 
 			id:  
 				description: "OpenStack id of the VM"
 				type: string 
@@ -238,9 +233,7 @@ node_types:
 								default: get_input: consul_server_address								
 							skydive_analyzer:                 
 								type: map
-								default: get_property: 
-									entity: SELF
-									property: openstack/sodalite.nodes.OpenStack.VM.skydive_analyzer
+								default: get_input: skydive_analyzer
 							deployment_label:                 
 								type: map
 								default: get_input: deployment_label

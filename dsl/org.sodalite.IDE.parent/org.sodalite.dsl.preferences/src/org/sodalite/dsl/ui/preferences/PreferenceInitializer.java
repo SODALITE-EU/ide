@@ -71,7 +71,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
-			keycloak_uri = "http://192.168.2.179:8080/";
+			keycloak_uri = "http://192.168.2.53:8080/";
 
 		String keycloak_client_id = prop.getProperty(PreferenceConstants.KEYCLOAK_CLIENT_ID);
 		if (keycloak_client_id == null)
