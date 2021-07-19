@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
@@ -80,6 +82,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.helper.RMHelper;
@@ -355,17 +358,14 @@ public class RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
+				issues.add(new ValidationIssue(error.getType() + "." + error.getDescription(), error.getContext(), null,
+						Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
+				issues.add(new ValidationIssue(warning.getType() + "." + warning.getDescription(),
 						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
 						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
@@ -455,34 +455,69 @@ public class RMBackendProxy {
 
 	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
-		StringTokenizer st = new StringTokenizer(path, "/");
+
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
-			RM_Model model = (RM_Model) resource.getAllContents().next();
-			if (st.hasMoreTokens()) {
-				if ("node_templates".equals(st.nextToken()) && model.getNodeTypes() != null) {
-					if (st.hasMoreTokens()) { // Node_template
-						String node_name = st.nextToken();
-						for (ENodeType node : model.getNodeTypes().getNodeTypes()) {
-							if (node.getName().contentEquals(node_name)) {
-								result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
-								if (st.hasMoreElements()) { // Node_Template children
-									String entity_name = st.nextToken();
-									if ("Property".equals(path_type)) {
-										for (EPropertyDefinition property : node.getNode().getProperties()
-												.getProperties()) {
-											if (property.getName().contentEquals(entity_name)) {
-												result = new ValidationSourceFeature(property,
-														RMPackage.Literals.EPROPERTY_DEFINITION__NAME);
-											}
+			EObject eobject = resource.getAllContents().next();
+			if (eobject instanceof RM_Model) {
+				RM_Model model = (RM_Model) eobject;
+				StringTokenizer st = new StringTokenizer(path, "/");
+				result = getRMIssueFeature(model, path, path_type, st);
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getRMIssueFeature(RM_Model model, String path, String path_type,
+			StringTokenizer st) {
+		ValidationSourceFeature result = null;
+		if (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			if ("node_types".equals(token)) {
+				result = getRMIssueFeatureInNodeType(model, path, path_type, st, result);
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getRMIssueFeatureInNodeType(RM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) {
+			String node_name = st.nextToken();
+			for (ENodeType node : model.getNodeTypes().getNodeTypes()) {
+				if (node.getName().contentEquals(node_name)) {
+					result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
+					if (st.hasMoreElements()) {
+						String entity_name = st.nextToken();
+						if (path.contains("properties")) {
+							if (node.getNode().getProperties() != null) {
+								for (EPropertyDefinition property : node.getNode().getProperties().getProperties()) {
+									if (property.getName().contentEquals(entity_name)) {
+										result = new ValidationSourceFeature(property,
+												RMPackage.Literals.EPROPERTY_DEFINITION__NAME);
+									}
+								}
+							}
+						} else if (path.contains("requirements")) {
+							boolean req_found = false;
+							if (node.getNode().getRequirements() != null) {
+								for (ERequirementDefinition req : node.getNode().getRequirements().getRequirements()) {
+									// Target requirement found
+									if (req.getName().contentEquals(getRequirement(path))) {
+										req_found = true;
+										result = new ValidationSourceFeature(req, RMPackage.Literals.EREQ_OR_CAP__NAME);
+										if (path.contains("node")) {
+											result = new ValidationSourceFeature(req.getRequirement().getNode(),
+													RMPackage.Literals.EDATA_TYPE_NAME__TYPE);
 										}
 									}
 								}
 							}
+							if (!req_found)
+								result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
+
 						}
 					}
-				} else { // Point to high level model
-					result = new ValidationSourceFeature(model, RMPackage.Literals.RM_MODEL__MODULE);
 				}
 			}
 		}
@@ -612,6 +647,15 @@ public class RMBackendProxy {
 		if (model != null)
 			EcoreUtil2.resolveAll(model.eResource());
 		return model;
+	}
+
+	private String getRequirement(String path) {
+		String req = null;
+		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Matcher matcher = pattern.matcher(path);
+		if (matcher.find())
+			req = matcher.group(1);
+		return req;
 	}
 
 }

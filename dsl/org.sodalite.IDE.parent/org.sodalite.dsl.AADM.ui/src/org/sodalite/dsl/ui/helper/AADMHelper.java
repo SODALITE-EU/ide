@@ -31,7 +31,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -470,14 +469,14 @@ public class AADMHelper extends RMHelper {
 		return model.getNodeTemplates().getNodeTemplates();
 	}
 
-	public static ParserRule findParserRule(EObject obj) {
-		if (obj == null)
-			return null;
-		else if (obj instanceof ParserRule)
-			return (ParserRule) obj;
-		else
-			return findParserRule(obj.eContainer());
-	}
+//	public static ParserRule findParserRule(EObject obj) {
+//		if (obj == null)
+//			return null;
+//		else if (obj instanceof ParserRule)
+//			return (ParserRule) obj;
+//		else
+//			return findParserRule(obj.eContainer());
+//	}
 
 	public static EPolicyDefinition findPolicy(AADM_Model model, String policyName) {
 		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {

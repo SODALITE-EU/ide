@@ -29,15 +29,17 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 	 */
 	public void createFieldEditors() {
 		addField(
-				new StringFieldEditor(PreferenceConstants.KB_REASONER_URI, "KB Reasoner URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.IaC_URI, "IaC Builder URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.Image_Builder_URI, "Image Builder URI:",
+				new StringFieldEditor(PreferenceConstants.KB_REASONER_URI, "KB Reasoner URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.IaC_URI, "IaC Builder URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Image_Builder_URI, "Image Builder URL:",
 				getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.xOPERA_URI, "xOPERA URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.PDS_URI, "PDS URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.Consul_URI, "Consul URI:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.Grafana_URI, "Grafana URI:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.xOPERA_URI, "xOPERA URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.PDS_URI, "PDS URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Consul_URI, "Consul URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Grafana_URI, "Grafana URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.SKYDIVE_ANALYZER_URI, "Skydive Analyzer URL:",
+				getFieldEditorParent()));
 	}
 
 	/*

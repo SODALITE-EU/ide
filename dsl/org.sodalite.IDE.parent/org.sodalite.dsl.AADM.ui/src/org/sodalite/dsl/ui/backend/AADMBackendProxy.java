@@ -359,7 +359,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
-					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
+					String appName = namespace != null && !namespace.isEmpty() ? namespace
+							: aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
 							depl_report.getDeployment_id(), inputs_yaml);
 					subMonitor.worked(steps++);
@@ -625,17 +626,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
+				issues.add(new ValidationIssue(error.getType() + "." + error.getDescription(), error.getContext(), null,
+						Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
 		if (optimizationReport.hasWarnings()) {
 			for (KBWarning warning : optimizationReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
+				issues.add(new ValidationIssue(warning.getType() + "." + warning.getDescription(),
 						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
 						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
@@ -778,7 +776,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 	}
 
 	private String createPath(List<String> entityHierarchy) {
-		StringBuilder sb = new StringBuilder("node_templates");
+		StringBuilder sb = new StringBuilder("");
 		for (String entry : entityHierarchy) {
 			if (entry.contains("https"))
 				entry = entry.substring(entry.lastIndexOf('/') + 1);
@@ -854,7 +852,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
 					if (st.hasMoreElements()) { // Node_Template children
 						String entity_name = st.nextToken();
-						if ("Property".equals(path_type)) {
+						if (path.contains("properties")) {
+							if (entity_name.equals("properties"))
+								entity_name = st.nextToken();
 							if (node.getNode().getProperties() != null) {
 								for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
 									if (property.getName().contentEquals(entity_name)) {
@@ -863,7 +863,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 									}
 								}
 							}
-						} else if ("requirements".equals(path_type)) {
+						} else if (path.contains("requirements")) {
+							if (entity_name.equals("requirements"))
+								entity_name = st.nextToken();
 							boolean req_found = false;
 							if (node.getNode().getRequirements() != null) {
 								for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {

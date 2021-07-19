@@ -65,6 +65,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (grafana_uri == null)
 			grafana_uri = "http://192.168.3.74:3001/";
 
+		String skydive_analyzer_uri = prop.getProperty(PreferenceConstants.SKYDIVE_ANALYZER_URI);
+		if (skydive_analyzer_uri == null)
+			skydive_analyzer_uri = "192.168.2.11:8088";
+
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
 			keycloak_uri = "http://192.168.2.179:8080/";
@@ -97,6 +101,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
 		defaults.put(PreferenceConstants.Consul_URI, consul_uri);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
+		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
