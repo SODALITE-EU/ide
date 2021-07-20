@@ -1229,6 +1229,29 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
+	public ModelData getModelVersions(String modelId) throws SodaliteException {
+		Assert.notNull(modelId, "Pass a not null modelId");
+		String url = kbReasonerUri + "model?uri=" + modelId;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getModelVersions(modelId);
+			else
+				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
 	public ModelData getAADMsInModule(String module) throws SodaliteException {
 		return getModelsInModule("AADM", module);
 	}

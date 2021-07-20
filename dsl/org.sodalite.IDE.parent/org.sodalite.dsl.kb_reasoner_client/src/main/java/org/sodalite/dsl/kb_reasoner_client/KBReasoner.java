@@ -112,6 +112,8 @@ public interface KBReasoner {
 
 	ModelData getModel(String modelId, String version) throws SodaliteException;
 
+	ModelData getModelVersions(String modelId) throws SodaliteException;
+
 	ModelData getAADMsInModule(String module) throws SodaliteException;
 
 	ModelData getRMsInModule(String module) throws SodaliteException;

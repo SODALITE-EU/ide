@@ -427,6 +427,15 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetModelVersions() throws Exception {
+		String module = "test";
+		ModelData models = kbclient.getAADMsInModule(module);
+		assertNotNull(models);
+		ModelData model = kbclient.getModelVersions(models.getElements().get(0).getUri().toASCIIString());
+		assertNotNull(model.getElements());
+	}
+
+	@Test
 	void testOptimizeAADM() throws Exception {
 		Path aadm_path = FileSystems.getDefault().getPath("src/test/resources/optimization.aadm.ttl");
 		String aadmTTL = new String(Files.readAllBytes(aadm_path));
