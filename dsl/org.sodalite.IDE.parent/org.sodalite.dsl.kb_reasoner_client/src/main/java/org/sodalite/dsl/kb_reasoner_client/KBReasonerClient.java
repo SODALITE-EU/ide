@@ -765,7 +765,7 @@ public class KBReasonerClient implements KBReasoner {
 			// Send multipart-form message
 			String result = sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
 			JsonObject jsonObject = new Gson().fromJson(result, JsonObject.class);
-			report.setURI(jsonObject.get("rmuri").getAsString());
+			report.setURI(jsonObject.get("uri").getAsString());
 			JsonArray warningsJson = jsonObject.getAsJsonArray("warnings");
 			if (warningsJson != null) {
 				report.setWarnings(processWarnings(warningsJson.toString()));

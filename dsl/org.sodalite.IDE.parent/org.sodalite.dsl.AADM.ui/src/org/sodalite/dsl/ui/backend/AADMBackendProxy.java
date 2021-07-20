@@ -117,10 +117,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile, project);
-		String aadmURI = getModelURI(aadmFile, project);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		if (version == null)
+			version = mm.getVersion();
 
 		// Send model to the KB
-		saveAADM(aadmTTL, aadmFile, aadmURI, version, project, event);
+		saveAADM(aadmTTL, aadmFile, mm.getUri(), version, project, event);
 	}
 
 	public void processOptimizeAADM(ExecutionEvent event) throws Exception {
@@ -134,8 +136,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Send model to the KB
-		String aadmURI = getModelURI(aadmFile, project);
-		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		optimizeAADM(aadmTTL, aadmFile, mm.getUri(), project, event);
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
@@ -150,9 +152,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Deploy AADM model
-		String aadmURI = getModelURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
-				completeModel, deployment_name, monitoring_id, username, project, event);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		deployAADM(aadmTTL, aadmFile, mm, inputs_yaml_path, imageBuildConfPath, version_tag, workers, completeModel,
+				deployment_name, monitoring_id, username, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -186,7 +188,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					throw new Exception(
 							"The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(saveReport.getURI(), aadmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(saveReport.getURI());
+				mm.setVersion(saveReport.getVersion());
+				saveModelMetadata(mm, aadmFile, project);
 
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
@@ -222,7 +227,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					throw new Exception(
 							"AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(optimizationReport.getURI(), aadmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(optimizationReport.getURI());
+				saveModelMetadata(mm, aadmFile, project);
 				showInfoDialog(null, "Get AADM optimization recommendations",
 						"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
 								+ "AADM model have been saved with URI:\n" + optimizationReport.getURI());
@@ -239,7 +246,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
+	private void deployAADM(String aadmTTL, IFile aadmfile, ModelMetadata mm, Path inputs_yaml_path,
 			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, String deployment_name,
 			String monitoring_id, String username, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
@@ -270,13 +277,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Get module (namespace) from RM
 					String namespace = AADMHelper.getModule(aadmfile, event);
-
 					String aadmName = aadmfile.getName();
-
-					// TODO AADM version needs to be taken from Deployment Wizard
-					String version = null;
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, aadmName, namespace,
-							aadmDSL, completeModel, version);
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, mm.getUri(), aadmName, namespace,
+							aadmDSL, completeModel, mm.getVersion());
 					if (saveReport == null)
 						throw new Exception(
 								"There was a problem to save the AADM into the KB, please contact Sodalite administrator");
@@ -286,7 +289,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
-					saveURI(saveReport.getURI(), aadmfile, project);
+					ModelMetadata mm = new ModelMetadata();
+					mm.setUri(saveReport.getURI());
+					mm.setVersion(saveReport.getVersion());
+					saveModelMetadata(mm, aadmfile, project);
 					String aadm_id = saveReport.getURI();
 					subMonitor.worked(steps++);
 

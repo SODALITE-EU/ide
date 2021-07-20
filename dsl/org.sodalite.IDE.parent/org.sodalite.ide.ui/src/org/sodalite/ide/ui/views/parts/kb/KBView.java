@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -41,6 +40,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.ModelNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -119,7 +119,9 @@ public class KBView {
 					TreeNode<ModelNode> moduleNode = rms
 							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : rmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
+						String name = model.getName()
+								+ (model.getVersion() != null ? "(version: " + model.getVersion() + ")" : "");
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(name, module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -134,7 +136,9 @@ public class KBView {
 					TreeNode<ModelNode> moduleNode = aadms
 							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : aadmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
+						String name = model.getName()
+								+ (model.getVersion() != null ? "(version: " + model.getVersion() + ")" : "");
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(name, module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -234,14 +238,28 @@ public class KBView {
 									if (result.length == 0)
 										return;
 									IPath path = (IPath) result[0];
-									IFolder targetFolder = root.getFolder(path);
-									targetFolder = targetFolder.getFolder(module);
-									if (!targetFolder.exists()) {
-										targetFolder.create(false, false, null);
+									IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+									IProject[] projects = wsRoot.getProjects();
+									IProject targetProject = null;
+									IContainer targetFolder = null;
+									for (IProject project : projects) {
+										if (project.getFullPath().equals(path)) {
+											targetProject = project;
+											break;
+										}
+									}
+									if (targetProject != null) {
+										targetFolder = targetProject;
+									} else {
+										targetFolder = root.getFolder(path);
 									}
 									// For each model in module, copy it into the target module folder
+									// Manage different version of a model
 									for (Model model : modelData.getElements()) {
-										RMHelper.saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
+										String name = UIHelper.getFileName(model.getName())
+												+ (model.getVersion() != null ? "_" + model.getVersion() : "")
+												+ UIHelper.getExtension(model.getName());
+										RMHelper.saveFileInFolder(name, model.getDsl(), targetFolder);
 									}
 									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
 											+ " successfully copied into " + targetFolder.getName() + " folder");
@@ -274,7 +292,8 @@ public class KBView {
 									try {
 										// For each model in module, delete it
 										for (Model model : modelData.getElements()) {
-											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString());
+											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString(),
+													model.getVersion());
 										}
 
 										// Refresh KB View
@@ -330,8 +349,10 @@ public class KBView {
 							} else {
 								targetFolder = root.getFolder(path);
 							}
-							RMHelper.saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(),
-									targetFolder);
+							String name = UIHelper.getFileName(node.getModel().getName())
+									+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
+									+ UIHelper.getExtension(node.getModel().getName());
+							RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
 									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
@@ -350,7 +371,8 @@ public class KBView {
 								"Do you want to delete model " + node.getModel().getName());
 						if (confirmed) {
 							try {
-								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString());
+								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString(),
+										node.getModel().getVersion());
 								// Refresh KB View
 								tn.getParent().removeChild(tn);
 								viewer.refresh();

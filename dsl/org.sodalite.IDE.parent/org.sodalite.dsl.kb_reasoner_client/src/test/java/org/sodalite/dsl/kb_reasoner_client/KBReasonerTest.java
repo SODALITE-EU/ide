@@ -294,7 +294,7 @@ class KBReasonerTest {
 		String namespace = "snow";
 		boolean complete = false;
 		String version = "v1.0";
-		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/snow.v2.snow_v2.aadm.ttl",
+		KBSaveReportData report = saveAADM(aadmURI, "src/test/resources/deployment_test.test.aadm.ttl",
 				"src/test/resources/snow_v2.aadm", name, namespace, complete, version);
 		assertFalse(report.hasErrors());
 		assertNotNull(report.getURI());
@@ -402,7 +402,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetAADMsInModule() throws Exception {
-		String module = "snow";
+		String module = "test";
 		ModelData models = kbclient.getAADMsInModule(module);
 		assertNotNull(models);
 	}

@@ -204,8 +204,8 @@ public class RMBackendProxy {
 		String rmTTL = readTurtle(rmFile, project);
 
 		// Send model to the KB
-		String rmUri = getModelURI(rmFile, project);
-		saveRM(rmTTL, rmFile, rmUri, project, event);
+		ModelMetadata mm = getModelMetadata(rmFile, project);
+		saveRM(rmTTL, rmFile, mm.getUri(), project, event);
 	}
 
 	private void generateRMModel(IFile rmFile, IProgressMonitor monitor) {
@@ -254,9 +254,9 @@ public class RMBackendProxy {
 		return content;
 	}
 
-	protected String getModelURI(IFile modelfile, IProject project) throws IOException {
+	protected ModelMetadata getModelMetadata(IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
-		String uri = null;
+		ModelMetadata mm = new ModelMetadata();
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
@@ -264,9 +264,10 @@ public class RMBackendProxy {
 					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
 				props.load(in);
 			}
-			uri = props.getProperty("URI");
+			mm.setUri(props.getProperty("URI"));
+			mm.setVersion(props.getProperty("Version"));
 		}
-		return uri;
+		return mm;
 	}
 
 	protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
@@ -284,7 +285,7 @@ public class RMBackendProxy {
 		return path;
 	}
 
-	public void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+	public void saveModelMetadata(ModelMetadata mm, IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
@@ -296,7 +297,8 @@ public class RMBackendProxy {
 				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
 			props.load(in);
 		}
-		props.setProperty("URI", uri);
+		props.setProperty("URI", mm.getUri());
+		props.setProperty("Version", mm.getVersion());
 		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
 				final OutputStream out = Channels.newOutputStream(outChannel)) {
 			props.store(out, "Sodalite Metadata");
@@ -321,7 +323,9 @@ public class RMBackendProxy {
 					throw new Exception(
 							"The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(saveReport.getURI(), rmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(saveReport.getURI());
+				saveModelMetadata(mm, rmFile, project);
 
 				showInfoDialog(null, "Save RM",
 						"The selected RM model has been successfully store in the KB with URI:\n"
