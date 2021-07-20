@@ -276,40 +276,7 @@ public class KBView {
 				// ACTION: Delete all models in a module from KB
 				Action deleteAction = new Action() {
 					public void run() {
-						try {
-							System.out.println("Delete module invoked");
-							String module = node.getModule();
-							ModelData modelData = null;
-							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
-							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
-							}
-							if (modelData != null && !modelData.getElements().isEmpty()) {
-								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
-										"Do you want to delete all the models in module " + module);
-								if (confirmed) {
-									try {
-										// For each model in module, delete it
-										for (Model model : modelData.getElements()) {
-											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString(),
-													model.getVersion());
-										}
-
-										// Refresh KB View
-										tn.getParent().removeChild(tn);
-										viewer.refresh();
-
-										MessageDialog.openInformation(shell, "Delete model",
-												"Models in module " + module + " successfully deleted");
-									} catch (Exception e) {
-										SodaliteLogger.log("Error", e);
-									}
-								}
-							}
-						} catch (Exception ex) {
-							SodaliteLogger.log("Error", ex);
-						}
+						deleteModelsInModule(tn, node);
 					}
 				};
 				deleteAction.setText("Delete module ...");
@@ -364,25 +331,7 @@ public class KBView {
 				// ACTION: Delete model from KB
 				Action deleteAction = new Action() {
 					public void run() {
-						// the action code
-						System.out.println("Delete model invoked");
-
-						boolean confirmed = MessageDialog.openConfirm(shell, "Delete model",
-								"Do you want to delete model " + node.getModel().getName());
-						if (confirmed) {
-							try {
-								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString(),
-										node.getModel().getVersion());
-								// Refresh KB View
-								tn.getParent().removeChild(tn);
-								viewer.refresh();
-
-								MessageDialog.openInformation(shell, "Delete model",
-										"Model " + node.getModel().getName() + " successfully deleted");
-							} catch (Exception e) {
-								SodaliteLogger.log("Error", e);
-							}
-						}
+						deleteModel(tn, node);
 					}
 				};
 				deleteAction.setText("Delete model ...");
@@ -479,6 +428,79 @@ public class KBView {
 		});
 		job.setPriority(Job.SHORT);
 		job.schedule();
+	}
+
+	private void deleteModel(TreeNode<ModelNode> tn, ModelNode node) {
+		boolean confirmed = MessageDialog.openConfirm(shell, "Delete model",
+				"Do you want to delete model " + node.getModel().getName());
+		if (confirmed) {
+			Job job = Job.create("Delete model", (ICoreRunnable) monitor -> {
+				try {
+					RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString(),
+							node.getModel().getVersion());
+					// Refresh KB View
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							tn.getParent().removeChild(tn);
+							viewer.refresh();
+						}
+					});
+					showDialog("Delete model", "Model " + node.getModel().getName() + " successfully deleted");
+				} catch (Exception e) {
+					showErrorDialog("Delete model", "Model could not be deleted");
+					SodaliteLogger.log(e);
+				}
+			});
+			job.setPriority(Job.SHORT);
+			job.schedule();
+		}
+	}
+
+	private void deleteModelsInModule(TreeNode<ModelNode> tn, ModelNode node) {
+		try {
+			String module = node.getModule();
+			final ModelData modelData;
+			if (tn.getParent().getData().getLabel().contains("RMs")) {
+				modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
+			} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
+				modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
+			} else {
+				modelData = null;
+			}
+			if (modelData != null && !modelData.getElements().isEmpty()) {
+				boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
+						"Do you want to delete all the models in module " + module);
+				if (confirmed) {
+					Job job = Job.create("Delete models in module", (ICoreRunnable) monitor -> {
+						try {
+							// For each model in module, delete it
+							for (Model model : modelData.getElements()) {
+								RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString(),
+										model.getVersion());
+							}
+							// Refresh KB View
+							Display.getDefault().asyncExec(new Runnable() {
+								@Override
+								public void run() {
+									tn.getParent().removeChild(tn);
+									viewer.refresh();
+								}
+							});
+							showDialog("Delete models in Module",
+									"Models in module " + module + " successfully deleted");
+						} catch (Exception e) {
+							showErrorDialog("Delete model", "Models in module " + module + " could not be deleted");
+							SodaliteLogger.log(e);
+						}
+					});
+					job.setPriority(Job.SHORT);
+					job.schedule();
+				}
+			}
+		} catch (Exception ex) {
+			SodaliteLogger.log("Error", ex);
+		}
 	}
 
 	public void showDialog(String dialogTitle, String dialogMessage) {

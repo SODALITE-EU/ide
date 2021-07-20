@@ -8,6 +8,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.AADMBackendProxy;
+import org.sodalite.dsl.ui.backend.ModelMetadata;
 import org.sodalite.dsl.ui.wizards.saveaadm.SaveAADMWizard;
 import org.sodalite.dsl.ui.wizards.saveaadm.SaveAADMWizardDialog;
 
@@ -29,8 +30,8 @@ public class AADMSaveHandler implements IHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) { // Ask to save model before continue
-				// Show Save AADM Wizard
-				SaveAADMWizardDialog dialog = new SaveAADMWizardDialog(parent, new SaveAADMWizard());
+				ModelMetadata mm = AADMBackendProxy.getSelectedModelMetadata();
+				SaveAADMWizardDialog dialog = new SaveAADMWizardDialog(parent, new SaveAADMWizard(mm.getUri()));
 
 				if (dialog.OK == dialog.open()) {
 					String version = dialog.getVersion();

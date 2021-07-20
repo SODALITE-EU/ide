@@ -1,6 +1,6 @@
 package org.sodalite.dsl.ui.wizards.saveaadm;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -18,13 +18,19 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.sodalite.dsl.kb_reasoner_client.types.Model;
+import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class SaveAADMWizardMainPage extends WizardPage {
 	private Composite container;
 	private String version = null;
+	private String uri = null;
 
-	protected SaveAADMWizardMainPage() {
+	protected SaveAADMWizardMainPage(String uri) {
 		super("Save AADM");
+		this.uri = uri;
 		setTitle("Save AADM");
 		setDescription("Save AADM into the KB");
 	}
@@ -80,11 +86,19 @@ public class SaveAADMWizardMainPage extends WizardPage {
 			};
 		});
 
-		// TODO Read existing versions from KB
-		// TODO Read AADM URI from metadata
-		List<String> platformTypes = Arrays.asList("v1.0", "v2.0", "v3.0", "v4.0", "v5.0");
-
-		previousVersionsCombo.setInput(platformTypes);
+		// Read existing versions from KB
+		try {
+			if (uri != null) {
+				ModelData modelVersions = AADMBackendProxy.getKBReasoner().getModelVersions(uri);
+				List<String> versions = new ArrayList<>();
+				for (Model model : modelVersions.getElements())
+					if (model.getVersion() != null)
+						versions.add(model.getVersion());
+				previousVersionsCombo.setInput(versions);
+			}
+		} catch (Exception ex) {
+			SodaliteLogger.log(ex);
+		}
 
 		setControl(container);
 		setPageComplete(false);

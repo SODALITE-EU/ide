@@ -77,6 +77,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.RM.ui.internal.RMActivator;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
@@ -254,7 +255,16 @@ public class RMBackendProxy {
 		return content;
 	}
 
-	protected ModelMetadata getModelMetadata(IFile modelfile, IProject project) throws IOException {
+	public static ModelMetadata getSelectedModelMetadata() throws Exception {
+		IFile modelFile = RMHelper.getSelectedFile();
+		if (modelFile == null)
+			throw new SodaliteException("Selected Model could not be found");
+
+		IProject project = modelFile.getProject();
+		return getModelMetadata(modelFile, project);
+	}
+
+	public static ModelMetadata getModelMetadata(IFile modelfile, IProject project) throws Exception {
 		Path path = getModelPropertiesFile(modelfile, project);
 		ModelMetadata mm = new ModelMetadata();
 		if (Files.exists(path)) {
@@ -270,7 +280,7 @@ public class RMBackendProxy {
 		return mm;
 	}
 
-	protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
+	static protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
 		String filepath = modelfile.toString();
 		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
 		int index1 = filepath.indexOf(File.separator, 2) + 1;

@@ -6,9 +6,11 @@ public class SaveAADMWizard extends Wizard {
 
 	protected SaveAADMWizardMainPage mainPage;
 	private String version = null;
+	private String uri = null;
 
-	public SaveAADMWizard() {
+	public SaveAADMWizard(String uri) {
 		super();
+		this.uri = uri;
 		setNeedsProgressMonitor(true);
 	}
 
@@ -19,7 +21,7 @@ public class SaveAADMWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		mainPage = new SaveAADMWizardMainPage();
+		mainPage = new SaveAADMWizardMainPage(this.uri);
 		addPage(mainPage);
 	}
 
