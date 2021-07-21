@@ -3,6 +3,8 @@ module: test
 import: docker
 import: openstack
 
+description: 'Simple app to test the deployment process'
+
 inputs:
 
 	ssh-key-name:
