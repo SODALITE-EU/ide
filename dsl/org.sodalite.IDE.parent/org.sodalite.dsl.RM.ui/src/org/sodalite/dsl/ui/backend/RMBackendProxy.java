@@ -308,7 +308,8 @@ public class RMBackendProxy {
 			props.load(in);
 		}
 		props.setProperty("URI", mm.getUri());
-		props.setProperty("Version", mm.getVersion());
+		if (mm.getVersion() != null)
+			props.setProperty("Version", mm.getVersion());
 		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
 				final OutputStream out = Channels.newOutputStream(outChannel)) {
 			props.store(out, "Sodalite Metadata");

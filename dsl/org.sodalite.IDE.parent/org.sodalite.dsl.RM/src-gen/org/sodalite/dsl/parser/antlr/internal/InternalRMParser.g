@@ -80,15 +80,15 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 0);
 				}
-							({true}?=>(otherlv_1=Module
+							({true}?=>(otherlv_1=Description
 							{
-								newLeafNode(otherlv_1, grammarAccess.getRM_ModelAccess().getModuleKeyword_0_0());
+								newLeafNode(otherlv_1, grammarAccess.getRM_ModelAccess().getDescriptionKeyword_0_0());
 							}
 							(
 								(
-									lv_module_2_0=RULE_ID
+									lv_description_2_0=RULE_STRING
 									{
-										newLeafNode(lv_module_2_0, grammarAccess.getRM_ModelAccess().getModuleIDTerminalRuleCall_0_1_0());
+										newLeafNode(lv_description_2_0, grammarAccess.getRM_ModelAccess().getDescriptionSTRINGTerminalRuleCall_0_1_0());
 									}
 									{
 										if ($current==null) {
@@ -96,9 +96,9 @@ ruleRM_Model returns [EObject current=null]
 										}
 										setWithLastConsumed(
 											$current,
-											"module",
-											lv_module_2_0,
-											"org.sodalite.dsl.RM.ID");
+											"description",
+											lv_description_2_0,
+											"org.eclipse.xtext.common.Terminals.STRING");
 									}
 								)
 							)
@@ -113,15 +113,48 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 1);
 				}
-							({true}?=>(otherlv_3=Import
+							({true}?=>(otherlv_3=Module
 							{
-								newLeafNode(otherlv_3, grammarAccess.getRM_ModelAccess().getImportKeyword_1_0());
+								newLeafNode(otherlv_3, grammarAccess.getRM_ModelAccess().getModuleKeyword_1_0());
 							}
 							(
 								(
-									lv_imports_4_0=RULE_ID
+									lv_module_4_0=RULE_ID
 									{
-										newLeafNode(lv_imports_4_0, grammarAccess.getRM_ModelAccess().getImportsIDTerminalRuleCall_1_1_0());
+										newLeafNode(lv_module_4_0, grammarAccess.getRM_ModelAccess().getModuleIDTerminalRuleCall_1_1_0());
+									}
+									{
+										if ($current==null) {
+											$current = createModelElement(grammarAccess.getRM_ModelRule());
+										}
+										setWithLastConsumed(
+											$current,
+											"module",
+											lv_module_4_0,
+											"org.sodalite.dsl.RM.ID");
+									}
+								)
+							)
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRM_ModelAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 2)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 2);
+				}
+							({true}?=>(otherlv_5=Import
+							{
+								newLeafNode(otherlv_5, grammarAccess.getRM_ModelAccess().getImportKeyword_2_0());
+							}
+							(
+								(
+									lv_imports_6_0=RULE_ID
+									{
+										newLeafNode(lv_imports_6_0, grammarAccess.getRM_ModelAccess().getImportsIDTerminalRuleCall_2_1_0());
 									}
 									{
 										if ($current==null) {
@@ -130,7 +163,7 @@ ruleRM_Model returns [EObject current=null]
 										addWithLastConsumed(
 											$current,
 											"imports",
-											lv_imports_4_0,
+											lv_imports_6_0,
 											"org.sodalite.dsl.RM.ID");
 									}
 								)
@@ -142,24 +175,24 @@ ruleRM_Model returns [EObject current=null]
 			)
 		)|
 		(
-			{getUnorderedGroupHelper().canSelect(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 2)}?=>(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 3)}?=>(
 				{
-					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 2);
+					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 3);
 				}
-							({true}?=>(otherlv_5=Data_types
+							({true}?=>(otherlv_7=Data_types
 							{
-								newLeafNode(otherlv_5, grammarAccess.getRM_ModelAccess().getData_typesKeyword_2_0());
+								newLeafNode(otherlv_7, grammarAccess.getRM_ModelAccess().getData_typesKeyword_3_0());
 							}
-							this_BEGIN_6=RULE_BEGIN
+							this_BEGIN_8=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_6, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_2_1());
+								newLeafNode(this_BEGIN_8, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_3_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getDataTypesEDataTypesParserRuleCall_2_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getDataTypesEDataTypesParserRuleCall_3_2_0());
 									}
-									lv_dataTypes_7_0=ruleEDataTypes
+									lv_dataTypes_9_0=ruleEDataTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
@@ -167,57 +200,15 @@ ruleRM_Model returns [EObject current=null]
 										set(
 											$current,
 											"dataTypes",
-											lv_dataTypes_7_0,
+											lv_dataTypes_9_0,
 											"org.sodalite.dsl.RM.EDataTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_8=RULE_END
+							this_END_10=RULE_END
 							{
-								newLeafNode(this_END_8, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_2_3());
-							}
-							))
-				{ 
-					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRM_ModelAccess().getUnorderedGroup());
-				}
-			)
-		)|
-		(
-			{getUnorderedGroupHelper().canSelect(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 3)}?=>(
-				{
-					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 3);
-				}
-							({true}?=>(otherlv_9=Artifact_types
-							{
-								newLeafNode(otherlv_9, grammarAccess.getRM_ModelAccess().getArtifact_typesKeyword_3_0());
-							}
-							this_BEGIN_10=RULE_BEGIN
-							{
-								newLeafNode(this_BEGIN_10, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_3_1());
-							}
-							(
-								(
-									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getArtifactTypesEArtifactTypesParserRuleCall_3_2_0());
-									}
-									lv_artifactTypes_11_0=ruleEArtifactTypes
-									{
-										if ($current==null) {
-											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
-										}
-										set(
-											$current,
-											"artifactTypes",
-											lv_artifactTypes_11_0,
-											"org.sodalite.dsl.RM.EArtifactTypes");
-										afterParserOrEnumRuleCall();
-									}
-								)
-							)
-							this_END_12=RULE_END
-							{
-								newLeafNode(this_END_12, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_3_3());
+								newLeafNode(this_END_10, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_3_3());
 							}
 							))
 				{ 
@@ -230,36 +221,36 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 4);
 				}
-							({true}?=>(otherlv_13=Capability_types
+							({true}?=>(otherlv_11=Artifact_types
 							{
-								newLeafNode(otherlv_13, grammarAccess.getRM_ModelAccess().getCapability_typesKeyword_4_0());
+								newLeafNode(otherlv_11, grammarAccess.getRM_ModelAccess().getArtifact_typesKeyword_4_0());
 							}
-							this_BEGIN_14=RULE_BEGIN
+							this_BEGIN_12=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_14, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_4_1());
+								newLeafNode(this_BEGIN_12, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_4_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getCapabilityTypesECapabilityTypesParserRuleCall_4_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getArtifactTypesEArtifactTypesParserRuleCall_4_2_0());
 									}
-									lv_capabilityTypes_15_0=ruleECapabilityTypes
+									lv_artifactTypes_13_0=ruleEArtifactTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
 										}
 										set(
 											$current,
-											"capabilityTypes",
-											lv_capabilityTypes_15_0,
-											"org.sodalite.dsl.RM.ECapabilityTypes");
+											"artifactTypes",
+											lv_artifactTypes_13_0,
+											"org.sodalite.dsl.RM.EArtifactTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_16=RULE_END
+							this_END_14=RULE_END
 							{
-								newLeafNode(this_END_16, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_4_3());
+								newLeafNode(this_END_14, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_4_3());
 							}
 							))
 				{ 
@@ -272,36 +263,36 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 5);
 				}
-							({true}?=>(otherlv_17=Interface_types
+							({true}?=>(otherlv_15=Capability_types
 							{
-								newLeafNode(otherlv_17, grammarAccess.getRM_ModelAccess().getInterface_typesKeyword_5_0());
+								newLeafNode(otherlv_15, grammarAccess.getRM_ModelAccess().getCapability_typesKeyword_5_0());
 							}
-							this_BEGIN_18=RULE_BEGIN
+							this_BEGIN_16=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_18, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_5_1());
+								newLeafNode(this_BEGIN_16, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_5_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getInterfaceTypesEInterfaceTypesParserRuleCall_5_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getCapabilityTypesECapabilityTypesParserRuleCall_5_2_0());
 									}
-									lv_interfaceTypes_19_0=ruleEInterfaceTypes
+									lv_capabilityTypes_17_0=ruleECapabilityTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
 										}
 										set(
 											$current,
-											"interfaceTypes",
-											lv_interfaceTypes_19_0,
-											"org.sodalite.dsl.RM.EInterfaceTypes");
+											"capabilityTypes",
+											lv_capabilityTypes_17_0,
+											"org.sodalite.dsl.RM.ECapabilityTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_20=RULE_END
+							this_END_18=RULE_END
 							{
-								newLeafNode(this_END_20, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_5_3());
+								newLeafNode(this_END_18, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_5_3());
 							}
 							))
 				{ 
@@ -314,36 +305,36 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 6);
 				}
-							({true}?=>(otherlv_21=Relationship_types
+							({true}?=>(otherlv_19=Interface_types
 							{
-								newLeafNode(otherlv_21, grammarAccess.getRM_ModelAccess().getRelationship_typesKeyword_6_0());
+								newLeafNode(otherlv_19, grammarAccess.getRM_ModelAccess().getInterface_typesKeyword_6_0());
 							}
-							this_BEGIN_22=RULE_BEGIN
+							this_BEGIN_20=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_22, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_6_1());
+								newLeafNode(this_BEGIN_20, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_6_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getRelationshipTypesERelationshipTypesParserRuleCall_6_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getInterfaceTypesEInterfaceTypesParserRuleCall_6_2_0());
 									}
-									lv_relationshipTypes_23_0=ruleERelationshipTypes
+									lv_interfaceTypes_21_0=ruleEInterfaceTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
 										}
 										set(
 											$current,
-											"relationshipTypes",
-											lv_relationshipTypes_23_0,
-											"org.sodalite.dsl.RM.ERelationshipTypes");
+											"interfaceTypes",
+											lv_interfaceTypes_21_0,
+											"org.sodalite.dsl.RM.EInterfaceTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_24=RULE_END
+							this_END_22=RULE_END
 							{
-								newLeafNode(this_END_24, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_6_3());
+								newLeafNode(this_END_22, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_6_3());
 							}
 							))
 				{ 
@@ -356,36 +347,36 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 7);
 				}
-							({true}?=>(otherlv_25=Node_types
+							({true}?=>(otherlv_23=Relationship_types
 							{
-								newLeafNode(otherlv_25, grammarAccess.getRM_ModelAccess().getNode_typesKeyword_7_0());
+								newLeafNode(otherlv_23, grammarAccess.getRM_ModelAccess().getRelationship_typesKeyword_7_0());
 							}
-							this_BEGIN_26=RULE_BEGIN
+							this_BEGIN_24=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_26, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_7_1());
+								newLeafNode(this_BEGIN_24, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_7_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getNodeTypesENodeTypesParserRuleCall_7_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getRelationshipTypesERelationshipTypesParserRuleCall_7_2_0());
 									}
-									lv_nodeTypes_27_0=ruleENodeTypes
+									lv_relationshipTypes_25_0=ruleERelationshipTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
 										}
 										set(
 											$current,
-											"nodeTypes",
-											lv_nodeTypes_27_0,
-											"org.sodalite.dsl.RM.ENodeTypes");
+											"relationshipTypes",
+											lv_relationshipTypes_25_0,
+											"org.sodalite.dsl.RM.ERelationshipTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_28=RULE_END
+							this_END_26=RULE_END
 							{
-								newLeafNode(this_END_28, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_7_3());
+								newLeafNode(this_END_26, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_7_3());
 							}
 							))
 				{ 
@@ -398,20 +389,62 @@ ruleRM_Model returns [EObject current=null]
 				{
 					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 8);
 				}
-							({true}?=>(otherlv_29=Policy_types
+							({true}?=>(otherlv_27=Node_types
 							{
-								newLeafNode(otherlv_29, grammarAccess.getRM_ModelAccess().getPolicy_typesKeyword_8_0());
+								newLeafNode(otherlv_27, grammarAccess.getRM_ModelAccess().getNode_typesKeyword_8_0());
 							}
-							this_BEGIN_30=RULE_BEGIN
+							this_BEGIN_28=RULE_BEGIN
 							{
-								newLeafNode(this_BEGIN_30, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_8_1());
+								newLeafNode(this_BEGIN_28, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_8_1());
 							}
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getRM_ModelAccess().getPolicyTypesEPolicyTypesParserRuleCall_8_2_0());
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getNodeTypesENodeTypesParserRuleCall_8_2_0());
 									}
-									lv_policyTypes_31_0=ruleEPolicyTypes
+									lv_nodeTypes_29_0=ruleENodeTypes
+									{
+										if ($current==null) {
+											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
+										}
+										set(
+											$current,
+											"nodeTypes",
+											lv_nodeTypes_29_0,
+											"org.sodalite.dsl.RM.ENodeTypes");
+										afterParserOrEnumRuleCall();
+									}
+								)
+							)
+							this_END_30=RULE_END
+							{
+								newLeafNode(this_END_30, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_8_3());
+							}
+							))
+				{ 
+					getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRM_ModelAccess().getUnorderedGroup());
+				}
+			)
+		)|
+		(
+			{getUnorderedGroupHelper().canSelect(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 9)}?=>(
+				{
+					getUnorderedGroupHelper().select(grammarAccess.getRM_ModelAccess().getUnorderedGroup(), 9);
+				}
+							({true}?=>(otherlv_31=Policy_types
+							{
+								newLeafNode(otherlv_31, grammarAccess.getRM_ModelAccess().getPolicy_typesKeyword_9_0());
+							}
+							this_BEGIN_32=RULE_BEGIN
+							{
+								newLeafNode(this_BEGIN_32, grammarAccess.getRM_ModelAccess().getBEGINTerminalRuleCall_9_1());
+							}
+							(
+								(
+									{
+										newCompositeNode(grammarAccess.getRM_ModelAccess().getPolicyTypesEPolicyTypesParserRuleCall_9_2_0());
+									}
+									lv_policyTypes_33_0=ruleEPolicyTypes
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getRM_ModelRule());
@@ -419,15 +452,15 @@ ruleRM_Model returns [EObject current=null]
 										set(
 											$current,
 											"policyTypes",
-											lv_policyTypes_31_0,
+											lv_policyTypes_33_0,
 											"org.sodalite.dsl.RM.EPolicyTypes");
 										afterParserOrEnumRuleCall();
 									}
 								)
 							)
-							this_END_32=RULE_END
+							this_END_34=RULE_END
 							{
-								newLeafNode(this_END_32, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_8_3());
+								newLeafNode(this_END_34, grammarAccess.getRM_ModelAccess().getENDTerminalRuleCall_9_3());
 							}
 							))
 				{ 

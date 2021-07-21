@@ -68,13 +68,22 @@ public interface RMPackage extends EPackage
   int RM_MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RM_MODEL__DESCRIPTION = 0;
+
+  /**
    * The feature id for the '<em><b>Module</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RM_MODEL__MODULE = 0;
+  int RM_MODEL__MODULE = 1;
 
   /**
    * The feature id for the '<em><b>Imports</b></em>' attribute list.
@@ -83,7 +92,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__IMPORTS = 1;
+  int RM_MODEL__IMPORTS = 2;
 
   /**
    * The feature id for the '<em><b>Data Types</b></em>' containment reference.
@@ -92,7 +101,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__DATA_TYPES = 2;
+  int RM_MODEL__DATA_TYPES = 3;
 
   /**
    * The feature id for the '<em><b>Artifact Types</b></em>' containment reference.
@@ -101,7 +110,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__ARTIFACT_TYPES = 3;
+  int RM_MODEL__ARTIFACT_TYPES = 4;
 
   /**
    * The feature id for the '<em><b>Capability Types</b></em>' containment reference.
@@ -110,7 +119,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__CAPABILITY_TYPES = 4;
+  int RM_MODEL__CAPABILITY_TYPES = 5;
 
   /**
    * The feature id for the '<em><b>Interface Types</b></em>' containment reference.
@@ -119,7 +128,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__INTERFACE_TYPES = 5;
+  int RM_MODEL__INTERFACE_TYPES = 6;
 
   /**
    * The feature id for the '<em><b>Relationship Types</b></em>' containment reference.
@@ -128,7 +137,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__RELATIONSHIP_TYPES = 6;
+  int RM_MODEL__RELATIONSHIP_TYPES = 7;
 
   /**
    * The feature id for the '<em><b>Node Types</b></em>' containment reference.
@@ -137,7 +146,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__NODE_TYPES = 7;
+  int RM_MODEL__NODE_TYPES = 8;
 
   /**
    * The feature id for the '<em><b>Policy Types</b></em>' containment reference.
@@ -146,7 +155,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL__POLICY_TYPES = 8;
+  int RM_MODEL__POLICY_TYPES = 9;
 
   /**
    * The number of structural features of the '<em>RM Model</em>' class.
@@ -155,7 +164,7 @@ public interface RMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RM_MODEL_FEATURE_COUNT = 9;
+  int RM_MODEL_FEATURE_COUNT = 10;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EDataTypesImpl <em>EData Types</em>}' class.
@@ -3893,6 +3902,17 @@ public interface RMPackage extends EPackage
   EClass getRM_Model();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.RM_Model#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Description</em>'.
+   * @see org.sodalite.dsl.rM.RM_Model#getDescription()
+   * @see #getRM_Model()
+   * @generated
+   */
+  EAttribute getRM_Model_Description();
+
+  /**
    * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.RM_Model#getModule <em>Module</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7129,6 +7149,14 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EClass RM_MODEL = eINSTANCE.getRM_Model();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RM_MODEL__DESCRIPTION = eINSTANCE.getRM_Model_Description();
 
     /**
      * The meta object literal for the '<em><b>Module</b></em>' attribute feature.

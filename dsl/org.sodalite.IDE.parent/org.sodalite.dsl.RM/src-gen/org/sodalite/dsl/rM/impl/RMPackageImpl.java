@@ -947,7 +947,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getRM_Model_Module()
+  public EAttribute getRM_Model_Description()
   {
     return (EAttribute)rM_ModelEClass.getEStructuralFeatures().get(0);
   }
@@ -958,7 +958,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getRM_Model_Imports()
+  public EAttribute getRM_Model_Module()
   {
     return (EAttribute)rM_ModelEClass.getEStructuralFeatures().get(1);
   }
@@ -969,9 +969,9 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_DataTypes()
+  public EAttribute getRM_Model_Imports()
   {
-    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)rM_ModelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -980,7 +980,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_ArtifactTypes()
+  public EReference getRM_Model_DataTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(3);
   }
@@ -991,7 +991,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_CapabilityTypes()
+  public EReference getRM_Model_ArtifactTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(4);
   }
@@ -1002,7 +1002,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_InterfaceTypes()
+  public EReference getRM_Model_CapabilityTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(5);
   }
@@ -1013,7 +1013,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_RelationshipTypes()
+  public EReference getRM_Model_InterfaceTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(6);
   }
@@ -1024,7 +1024,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_NodeTypes()
+  public EReference getRM_Model_RelationshipTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(7);
   }
@@ -1035,9 +1035,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EReference getRM_Model_PolicyTypes()
+  public EReference getRM_Model_NodeTypes()
   {
     return (EReference)rM_ModelEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRM_Model_PolicyTypes()
+  {
+    return (EReference)rM_ModelEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -4284,6 +4295,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     // Create classes and their features
     rM_ModelEClass = createEClass(RM_MODEL);
+    createEAttribute(rM_ModelEClass, RM_MODEL__DESCRIPTION);
     createEAttribute(rM_ModelEClass, RM_MODEL__MODULE);
     createEAttribute(rM_ModelEClass, RM_MODEL__IMPORTS);
     createEReference(rM_ModelEClass, RM_MODEL__DATA_TYPES);
@@ -4765,6 +4777,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(rM_ModelEClass, RM_Model.class, "RM_Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRM_Model_Description(), ecorePackage.getEString(), "description", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRM_Model_Module(), ecorePackage.getEString(), "module", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRM_Model_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRM_Model_DataTypes(), this.getEDataTypes(), null, "dataTypes", null, 0, 1, RM_Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

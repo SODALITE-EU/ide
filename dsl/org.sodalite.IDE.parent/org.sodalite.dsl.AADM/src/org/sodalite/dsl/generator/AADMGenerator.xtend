@@ -75,6 +75,7 @@ import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetAttribute
+import org.sodalite.dsl.aADM.AADM_Model
 
 /**
  * Generates code from your model files on save.
@@ -138,11 +139,6 @@ class AADMGenerator extends AbstractGenerator {
 	  owl:versionInfo "Created by the SODALITE IDE" ;
 	.
 	
-	:AADM_1
-	  rdf:type exchange:AADM ;
-	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
-	.
-	
 	«includeDefaultInput("monitoring_id")»
 	«includeDefaultInput("deployment_label")»
 	«includeDefaultInput("consul_uri")»
@@ -195,7 +191,21 @@ class AADMGenerator extends AbstractGenerator {
 	«FOR f:r.allContents.toIterable.filter(EPolicyDefinition)»
 	«f.compile»
 	«ENDFOR»
+	
+	«FOR m:r.allContents.toIterable.filter(AADM_Model)»
+	«m.compile»
+	«ENDFOR»
 
+	'''
+	
+	def compile(AADM_Model m) '''
+	:AADM_1
+	  rdf:type exchange:AADM ;
+	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+	  «IF m.description !== null»
+	  exchange:description "«m.description»"
+  	«ENDIF»
+	.
 	'''
 		
 	def includeDefaultInput(String input_name) '''

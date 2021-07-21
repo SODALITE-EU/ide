@@ -1951,6 +1951,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
+	 *         description=STRING | 
 	 *         module=ID | 
 	 *         imports+=ID | 
 	 *         dataTypes=EDataTypes | 

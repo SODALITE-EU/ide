@@ -93,6 +93,7 @@ import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
+import org.sodalite.dsl.rM.RM_Model;
 
 /**
  * Generates code from your model files on save.
@@ -211,17 +212,6 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("owl:versionInfo \"Created by the SODALITE IDE\" ;");
-    _builder.newLine();
-    _builder.append(".");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append(":RM_1");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("rdf:type exchange:RM ;");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("exchange:userId \"27827d44-0f6c-11ea-8d71-362b9e155667\" ;");
     _builder.newLine();
     _builder.append(".");
     _builder.newLine();
@@ -396,6 +386,42 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
+    {
+      Iterable<RM_Model> _filter_19 = Iterables.<RM_Model>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), RM_Model.class);
+      for(final RM_Model m : _filter_19) {
+        CharSequence _compile_19 = this.compile(m);
+        _builder.append(_compile_19);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final RM_Model m) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(":RM_1");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:RM ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:userId \"27827d44-0f6c-11ea-8d71-362b9e155667\" ;");
+    _builder.newLine();
+    {
+      String _description = m.getDescription();
+      boolean _tripleNotEquals = (_description != null);
+      if (_tripleNotEquals) {
+        _builder.append("  ");
+        _builder.append("exchange:description \"");
+        String _description_1 = m.getDescription();
+        _builder.append(_description_1, "  ");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".");
+    _builder.newLine();
     return _builder;
   }
   

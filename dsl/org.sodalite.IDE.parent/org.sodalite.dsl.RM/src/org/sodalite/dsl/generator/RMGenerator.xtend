@@ -71,6 +71,7 @@ import org.sodalite.dsl.rM.ETargetType
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EInterfaceType
+import org.sodalite.dsl.rM.RM_Model
 
 /**
  * Generates code from your model files on save.
@@ -145,11 +146,6 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type owl:Ontology ;
 	  owl:imports exchange: ;
 	  owl:versionInfo "Created by the SODALITE IDE" ;
-	.
-	
-	:RM_1
-	  rdf:type exchange:RM ;
-	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
 	.
 
 	«FOR c:r.allContents.toIterable.filter(EConstraint)»
@@ -227,6 +223,20 @@ class RMGenerator extends AbstractGenerator {
 	«FOR i:r.allContents.toIterable.filter(EInterfaceType)»
 	«i.compile»
 	«ENDFOR»
+	
+	«FOR m:r.allContents.toIterable.filter(RM_Model)»
+	«m.compile»
+	«ENDFOR»
+	'''
+	
+	def compile(RM_Model m) '''
+	:RM_1
+	  rdf:type exchange:RM ;
+	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+	  «IF m.description !== null»
+	  exchange:description "«m.description»"
+  	«ENDIF»
+	.
 	'''
 	
 	def compile (EConstraint c) '''
