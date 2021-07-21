@@ -124,8 +124,6 @@ EPolicyDefinitionBody:
 
 ETriggerDefinitions:
 	{ETriggerDefinitions} (triggers+=ETriggerDefinition)*;
-	
-	
 
 ETarget:
 	target+=EPREFIX_ID (',' target+=EPREFIX_ID)*;

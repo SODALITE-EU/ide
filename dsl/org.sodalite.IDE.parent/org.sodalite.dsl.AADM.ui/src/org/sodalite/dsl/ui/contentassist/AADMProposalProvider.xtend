@@ -535,7 +535,10 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				val Image image = getImage("icons/resource2.png")
 				val additionalProposalInfo = ""
 				for (ValidRequirementNode vrn: vrnd.elements){
-					val qnode = vrn.module !== null?AADMHelper.getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label
+					val qnode = 
+						(vrn.module !== null?
+						AADMHelper.getLastSegment(vrn.module, '/') + '/' + vrn.label:vrn.label) +
+						(vrn.version !== null?'@' + vrn.version : "")
 					System.out.println ("Valid requirement node: " + qnode)
 				 	val displayText = qnode
 					val proposalText = qnode
@@ -870,7 +873,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			else if (rule.name == "ENodeTemplateBody" && keyword.value == "requirements:")
 				return "An optional sequenced list of requirement assignments for the Node Template."
 			else if (rule.name == "ENodeTemplateBody" && keyword.value == "capabilities:")
-				return "An optional mapof capability assignments for the Node Template."
+				return "An optional map of capability assignments for the Node Template."
 			else if (rule.name == "ENodeTemplateBody" && keyword.value == "optimization:")
 				return "An optional reference to an optimization model associated to this Node Template"
 			
@@ -889,7 +892,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 				return "An optional list of valid Node Templates or Groups the Policy 
 						can be applied to."
 			else if (rule.name == "EPolicyDefinitionBody" && keyword.value == "triggers:")
-				return "An optional mapof trigger definitions to invoke when the policy 
+				return "An optional map of trigger definitions to invoke when the policy 
 						is applied by an orchestrator against the associated TOSCA entity."
 				
 			else

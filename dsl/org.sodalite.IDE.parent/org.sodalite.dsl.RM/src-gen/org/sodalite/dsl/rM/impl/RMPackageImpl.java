@@ -4236,6 +4236,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
+  public EAttribute getEPREFIX_ID_Version()
+  {
+    return (EAttribute)eprefiX_IDEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getEPRIMITIVE_TYPE()
   {
     return eprimitivE_TYPEEClass;
@@ -4698,6 +4709,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     eprefiX_IDEClass = createEClass(EPREFIX_ID);
     createEAttribute(eprefiX_IDEClass, EPREFIX_ID__MODULE);
     createEAttribute(eprefiX_IDEClass, EPREFIX_ID__ID);
+    createEAttribute(eprefiX_IDEClass, EPREFIX_ID__VERSION);
 
     eprimitivE_TYPEEClass = createEClass(EPRIMITIVE_TYPE);
 
@@ -5180,6 +5192,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEClass(eprefiX_IDEClass, org.sodalite.dsl.rM.EPREFIX_ID.class, "EPREFIX_ID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEPREFIX_ID_Module(), ecorePackage.getEString(), "module", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEPREFIX_ID_Id(), ecorePackage.getEString(), "id", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEPREFIX_ID_Version(), ecorePackage.getEString(), "version", null, 0, 1, org.sodalite.dsl.rM.EPREFIX_ID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eprimitivE_TYPEEClass, org.sodalite.dsl.rM.EPRIMITIVE_TYPE.class, "EPRIMITIVE_TYPE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -537,6 +537,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_ID" eSuperTypes="#//EEntityReference #//EPREFIX_REF">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPRIMITIVE_TYPE" eSuperTypes="#//EDataTypeName"/>
   <eClassifiers xsi:type="ecore:EClass" name="EEntity" eSuperTypes="#//EEntityReference">

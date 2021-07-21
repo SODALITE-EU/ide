@@ -3826,13 +3826,22 @@ public interface RMPackage extends EPackage
   int EPREFIX_ID__ID = EENTITY_REFERENCE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Version</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EPREFIX_ID__VERSION = EENTITY_REFERENCE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>EPREFIX ID</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EPREFIX_ID_FEATURE_COUNT = EENTITY_REFERENCE_FEATURE_COUNT + 2;
+  int EPREFIX_ID_FEATURE_COUNT = EENTITY_REFERENCE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.
@@ -7087,6 +7096,17 @@ public interface RMPackage extends EPackage
   EAttribute getEPREFIX_ID_Id();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EPREFIX_ID#getVersion <em>Version</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Version</em>'.
+   * @see org.sodalite.dsl.rM.EPREFIX_ID#getVersion()
+   * @see #getEPREFIX_ID()
+   * @generated
+   */
+  EAttribute getEPREFIX_ID_Version();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EPRIMITIVE_TYPE <em>EPRIMITIVE TYPE</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -9749,6 +9769,14 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EAttribute EPREFIX_ID__ID = eINSTANCE.getEPREFIX_ID_Id();
+
+    /**
+     * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EPREFIX_ID__VERSION = eINSTANCE.getEPREFIX_ID_Version();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EPRIMITIVE_TYPEImpl <em>EPRIMITIVE TYPE</em>}' class.

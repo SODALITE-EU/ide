@@ -616,7 +616,7 @@ EEntityReference:
 ;
 
 EPREFIX_REF:
-	EPREFIX_TYPE | EPREFIX_ID
+	EPREFIX_TYPE | EPREFIX_ID 
 ;
 
 EPREFIX_TYPE:
@@ -624,7 +624,7 @@ EPREFIX_TYPE:
 ;
 
 EPREFIX_ID:
-	(module=ID '/')? id=ID
+	(module=ID '/')? id=ID ('@'version=VERSION)?
 ;
 
 EPRIMITIVE_TYPE:
@@ -652,6 +652,9 @@ terminal ENTITY:
 @Override
 terminal ID:
 	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
+	
+terminal VERSION:
+	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '.' | '0'..'9')*;
 
 //Blocks delimited with curly braces
 //terminal START_BLOCK:

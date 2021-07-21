@@ -4862,12 +4862,16 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Keyword cSolidusKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cIdIDTerminalRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommercialAtKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cVersionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cVersionVERSIONTerminalRuleCall_2_1_0 = (RuleCall)cVersionAssignment_2_1.eContents().get(0);
 		
 		//EPREFIX_ID:
-		//	(module=ID '/')? id=ID;
+		//	(module=ID '/')? id=ID ('@' version=VERSION)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(module=ID '/')? id=ID
+		//(module=ID '/')? id=ID ('@' version=VERSION)?
 		public Group getGroup() { return cGroup; }
 		
 		//(module=ID '/')?
@@ -4887,6 +4891,18 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
+		
+		//('@' version=VERSION)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'@'
+		public Keyword getCommercialAtKeyword_2_0() { return cCommercialAtKeyword_2_0; }
+		
+		//version=VERSION
+		public Assignment getVersionAssignment_2_1() { return cVersionAssignment_2_1; }
+		
+		//VERSION
+		public RuleCall getVersionVERSIONTerminalRuleCall_2_1_0() { return cVersionVERSIONTerminalRuleCall_2_1_0; }
 	}
 	public class EPRIMITIVE_TYPEElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.EPRIMITIVE_TYPE");
@@ -5075,6 +5091,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	private final FLOATElements pFLOAT;
 	private final TerminalRule tENTITY;
 	private final TerminalRule tID;
+	private final TerminalRule tVERSION;
 	private final TerminalRule tBEGIN;
 	private final TerminalRule tEND;
 	
@@ -5200,6 +5217,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		this.pFLOAT = new FLOATElements();
 		this.tENTITY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ENTITY");
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ID");
+		this.tVERSION = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.VERSION");
 		this.tBEGIN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.BEGIN");
 		this.tEND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.END");
 	}
@@ -6456,7 +6474,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//EPREFIX_ID:
-	//	(module=ID '/')? id=ID;
+	//	(module=ID '/')? id=ID ('@' version=VERSION)?;
 	public EPREFIX_IDElements getEPREFIX_IDAccess() {
 		return pEPREFIX_ID;
 	}
@@ -6528,6 +6546,12 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
+	}
+	
+	//terminal VERSION:
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '.' | '0'..'9')*;
+	public TerminalRule getVERSIONRule() {
+		return tVERSION;
 	}
 	
 	//terminal BEGIN:

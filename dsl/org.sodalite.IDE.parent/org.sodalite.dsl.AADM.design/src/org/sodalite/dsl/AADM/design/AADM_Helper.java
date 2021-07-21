@@ -118,7 +118,8 @@ public class AADM_Helper {
 		if (id == null)
 			return "";
 		else
-			return (id.getModule() != null ? renderModule(id.getModule()) + "/" : "") + id.getId();
+			return (id.getModule() != null ? renderModule(id.getModule()) + "/" : "") + id.getId()
+					+ (id.getVersion() != null ? "@" + id.getVersion() : "");
 	}
 
 	public static String renderTemplate(ENodeTemplate type) {

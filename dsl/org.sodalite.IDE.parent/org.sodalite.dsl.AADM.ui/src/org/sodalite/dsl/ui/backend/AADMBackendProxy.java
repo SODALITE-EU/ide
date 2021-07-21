@@ -119,7 +119,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 		ModelMetadata mm = getModelMetadata(aadmFile, project);
 		if (version == null)
-			version = mm.getVersion();
+			version = "";
 
 		// Send model to the KB
 		saveAADM(aadmTTL, aadmFile, mm.getUri(), version, project, event);

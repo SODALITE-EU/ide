@@ -8760,6 +8760,30 @@ ruleEPREFIX_ID returns [EObject current=null]
 				}
 			)
 		)
+		(
+			otherlv_3=CommercialAt
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEPREFIX_IDAccess().getCommercialAtKeyword_2_0());
+			}
+			(
+				(
+					lv_version_4_0=RULE_VERSION
+					{
+						newLeafNode(lv_version_4_0, grammarAccess.getEPREFIX_IDAccess().getVersionVERSIONTerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEPREFIX_IDRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"version",
+							lv_version_4_0,
+							"org.sodalite.dsl.RM.VERSION");
+					}
+				)
+			)
+		)?
 	)
 ;
 

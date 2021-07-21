@@ -71,6 +71,11 @@ public class KBView {
 		viewerColumn.getColumn().setText("KB Content");
 		viewerColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new KBLabelProvider()));
 
+		TreeViewerColumn descriptionColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		descriptionColumn.getColumn().setWidth(300);
+		descriptionColumn.getColumn().setText("Description");
+		descriptionColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ModelDescriptionProvider()));
+
 		// Menu
 		createContextMenu(viewer);
 

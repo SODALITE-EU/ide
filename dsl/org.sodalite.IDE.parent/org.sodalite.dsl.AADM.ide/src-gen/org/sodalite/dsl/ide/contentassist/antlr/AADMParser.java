@@ -263,6 +263,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPREFIX_TYPEAccess().getGroup_0(), "rule__EPREFIX_TYPE__Group_0__0");
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getGroup(), "rule__EPREFIX_ID__Group__0");
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getGroup_0(), "rule__EPREFIX_ID__Group_0__0");
+			builder.put(grammarAccess.getEPREFIX_IDAccess().getGroup_2(), "rule__EPREFIX_ID__Group_2__0");
 			builder.put(grammarAccess.getSIGNEDINTAccess().getGroup(), "rule__SIGNEDINT__Group__0");
 			builder.put(grammarAccess.getFLOATAccess().getGroup(), "rule__FLOAT__Group__0");
 			builder.put(grammarAccess.getAADM_ModelAccess().getDescriptionAssignment_0_1(), "rule__AADM_Model__DescriptionAssignment_0_1");
@@ -503,6 +504,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEPREFIX_TYPEAccess().getTypeAssignment_1(), "rule__EPREFIX_TYPE__TypeAssignment_1");
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getModuleAssignment_0_0(), "rule__EPREFIX_ID__ModuleAssignment_0_0");
 			builder.put(grammarAccess.getEPREFIX_IDAccess().getIdAssignment_1(), "rule__EPREFIX_ID__IdAssignment_1");
+			builder.put(grammarAccess.getEPREFIX_IDAccess().getVersionAssignment_2_1(), "rule__EPREFIX_ID__VersionAssignment_2_1");
 			builder.put(grammarAccess.getEPRIMITIVE_TYPEAccess().getTypeAssignment(), "rule__EPRIMITIVE_TYPE__TypeAssignment");
 			builder.put(grammarAccess.getEEntityAccess().getEntityAssignment(), "rule__EEntity__EntityAssignment");
 			builder.put(grammarAccess.getAADM_ModelAccess().getUnorderedGroup(), "rule__AADM_Model__UnorderedGroup");

@@ -1365,7 +1365,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EPREFIX_ID returns EPREFIX_ID
 	 *
 	 * Constraint:
-	 *     (module=ID? id=ID)
+	 *     (module=ID? id=ID version=VERSION?)
 	 */
 	protected void sequence_EPREFIX_ID(ISerializationContext context, EPREFIX_ID semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
