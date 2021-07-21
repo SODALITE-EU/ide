@@ -8,6 +8,7 @@ import com.google.common.collect.Iterables;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -4372,8 +4373,7 @@ public class RMGenerator extends AbstractGenerator {
   
   public String readFileAsString(final String path) {
     try {
-      byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
-      String content = new String(_readAllBytes);
+      String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
       return content.replace("\\", "\\\\").replace("\'", "\\\'").replaceAll("[\\n\\r]+", "\\\\n");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
