@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -41,6 +40,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.ide.ui.views.model.ModelNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
@@ -70,6 +70,11 @@ public class KBView {
 		viewerColumn.getColumn().setWidth(300);
 		viewerColumn.getColumn().setText("KB Content");
 		viewerColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new KBLabelProvider()));
+
+		TreeViewerColumn descriptionColumn = new TreeViewerColumn(viewer, SWT.NONE);
+		descriptionColumn.getColumn().setWidth(300);
+		descriptionColumn.getColumn().setText("Description");
+		descriptionColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ModelDescriptionProvider()));
 
 		// Menu
 		createContextMenu(viewer);
@@ -119,7 +124,9 @@ public class KBView {
 					TreeNode<ModelNode> moduleNode = rms
 							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : rmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
+						String name = model.getName()
+								+ (model.getVersion() != null ? "(version: " + model.getVersion() + ")" : "");
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(name, module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -134,7 +141,9 @@ public class KBView {
 					TreeNode<ModelNode> moduleNode = aadms
 							.addChild(new TreeNode<ModelNode>(new ModelNode(module, module)));
 					for (Model model : aadmModelData.getElements()) {
-						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(model.getName(), module, model)));
+						String name = model.getName()
+								+ (model.getVersion() != null ? "(version: " + model.getVersion() + ")" : "");
+						moduleNode.addChild(new TreeNode<ModelNode>(new ModelNode(name, module, model)));
 					}
 				}
 			} catch (SodaliteException ex) {
@@ -234,14 +243,28 @@ public class KBView {
 									if (result.length == 0)
 										return;
 									IPath path = (IPath) result[0];
-									IFolder targetFolder = root.getFolder(path);
-									targetFolder = targetFolder.getFolder(module);
-									if (!targetFolder.exists()) {
-										targetFolder.create(false, false, null);
+									IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+									IProject[] projects = wsRoot.getProjects();
+									IProject targetProject = null;
+									IContainer targetFolder = null;
+									for (IProject project : projects) {
+										if (project.getFullPath().equals(path)) {
+											targetProject = project;
+											break;
+										}
+									}
+									if (targetProject != null) {
+										targetFolder = targetProject;
+									} else {
+										targetFolder = root.getFolder(path);
 									}
 									// For each model in module, copy it into the target module folder
+									// Manage different version of a model
 									for (Model model : modelData.getElements()) {
-										RMHelper.saveFileInFolder(model.getName(), model.getDsl(), targetFolder);
+										String name = UIHelper.getFileName(model.getName())
+												+ (model.getVersion() != null ? "_" + model.getVersion() : "")
+												+ UIHelper.getExtension(model.getName());
+										RMHelper.saveFileInFolder(name, model.getDsl(), targetFolder);
 									}
 									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
 											+ " successfully copied into " + targetFolder.getName() + " folder");
@@ -258,39 +281,7 @@ public class KBView {
 				// ACTION: Delete all models in a module from KB
 				Action deleteAction = new Action() {
 					public void run() {
-						try {
-							System.out.println("Delete module invoked");
-							String module = node.getModule();
-							ModelData modelData = null;
-							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
-							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
-							}
-							if (modelData != null && !modelData.getElements().isEmpty()) {
-								boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
-										"Do you want to delete all the models in module " + module);
-								if (confirmed) {
-									try {
-										// For each model in module, delete it
-										for (Model model : modelData.getElements()) {
-											RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString());
-										}
-
-										// Refresh KB View
-										tn.getParent().removeChild(tn);
-										viewer.refresh();
-
-										MessageDialog.openInformation(shell, "Delete model",
-												"Models in module " + module + " successfully deleted");
-									} catch (Exception e) {
-										SodaliteLogger.log("Error", e);
-									}
-								}
-							}
-						} catch (Exception ex) {
-							SodaliteLogger.log("Error", ex);
-						}
+						deleteModelsInModule(tn, node);
 					}
 				};
 				deleteAction.setText("Delete module ...");
@@ -330,8 +321,10 @@ public class KBView {
 							} else {
 								targetFolder = root.getFolder(path);
 							}
-							RMHelper.saveFileInFolder(node.getModel().getName(), node.getModel().getDsl(),
-									targetFolder);
+							String name = UIHelper.getFileName(node.getModel().getName())
+									+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
+									+ UIHelper.getExtension(node.getModel().getName());
+							RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
 									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
@@ -343,24 +336,7 @@ public class KBView {
 				// ACTION: Delete model from KB
 				Action deleteAction = new Action() {
 					public void run() {
-						// the action code
-						System.out.println("Delete model invoked");
-
-						boolean confirmed = MessageDialog.openConfirm(shell, "Delete model",
-								"Do you want to delete model " + node.getModel().getName());
-						if (confirmed) {
-							try {
-								RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString());
-								// Refresh KB View
-								tn.getParent().removeChild(tn);
-								viewer.refresh();
-
-								MessageDialog.openInformation(shell, "Delete model",
-										"Model " + node.getModel().getName() + " successfully deleted");
-							} catch (Exception e) {
-								SodaliteLogger.log("Error", e);
-							}
-						}
+						deleteModel(tn, node);
 					}
 				};
 				deleteAction.setText("Delete model ...");
@@ -457,6 +433,79 @@ public class KBView {
 		});
 		job.setPriority(Job.SHORT);
 		job.schedule();
+	}
+
+	private void deleteModel(TreeNode<ModelNode> tn, ModelNode node) {
+		boolean confirmed = MessageDialog.openConfirm(shell, "Delete model",
+				"Do you want to delete model " + node.getModel().getName());
+		if (confirmed) {
+			Job job = Job.create("Delete model", (ICoreRunnable) monitor -> {
+				try {
+					RMBackendProxy.getKBReasoner().deleteModel(node.getModel().getUri().toString(),
+							node.getModel().getVersion());
+					// Refresh KB View
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							tn.getParent().removeChild(tn);
+							viewer.refresh();
+						}
+					});
+					showDialog("Delete model", "Model " + node.getModel().getName() + " successfully deleted");
+				} catch (Exception e) {
+					showErrorDialog("Delete model", "Model could not be deleted");
+					SodaliteLogger.log(e);
+				}
+			});
+			job.setPriority(Job.SHORT);
+			job.schedule();
+		}
+	}
+
+	private void deleteModelsInModule(TreeNode<ModelNode> tn, ModelNode node) {
+		try {
+			String module = node.getModule();
+			final ModelData modelData;
+			if (tn.getParent().getData().getLabel().contains("RMs")) {
+				modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
+			} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
+				modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
+			} else {
+				modelData = null;
+			}
+			if (modelData != null && !modelData.getElements().isEmpty()) {
+				boolean confirmed = MessageDialog.openConfirm(shell, "Delete models in module",
+						"Do you want to delete all the models in module " + module);
+				if (confirmed) {
+					Job job = Job.create("Delete models in module", (ICoreRunnable) monitor -> {
+						try {
+							// For each model in module, delete it
+							for (Model model : modelData.getElements()) {
+								RMBackendProxy.getKBReasoner().deleteModel(model.getUri().toString(),
+										model.getVersion());
+							}
+							// Refresh KB View
+							Display.getDefault().asyncExec(new Runnable() {
+								@Override
+								public void run() {
+									tn.getParent().removeChild(tn);
+									viewer.refresh();
+								}
+							});
+							showDialog("Delete models in Module",
+									"Models in module " + module + " successfully deleted");
+						} catch (Exception e) {
+							showErrorDialog("Delete model", "Models in module " + module + " could not be deleted");
+							SodaliteLogger.log(e);
+						}
+					});
+					job.setPriority(Job.SHORT);
+					job.schedule();
+				}
+			}
+		} catch (Exception ex) {
+			SodaliteLogger.log("Error", ex);
+		}
 	}
 
 	public void showDialog(String dialogTitle, String dialogMessage) {

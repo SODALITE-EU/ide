@@ -15,6 +15,7 @@ package org.sodalite.dsl.rM;
  * <ul>
  *   <li>{@link org.sodalite.dsl.rM.EPREFIX_ID#getModule <em>Module</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.EPREFIX_ID#getId <em>Id</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.EPREFIX_ID#getVersion <em>Version</em>}</li>
  * </ul>
  *
  * @see org.sodalite.dsl.rM.RMPackage#getEPREFIX_ID()
@@ -66,5 +67,27 @@ public interface EPREFIX_ID extends EEntityReference, EPREFIX_REF
    * @generated
    */
   void setId(String value);
+
+  /**
+   * Returns the value of the '<em><b>Version</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Version</em>' attribute.
+   * @see #setVersion(String)
+   * @see org.sodalite.dsl.rM.RMPackage#getEPREFIX_ID_Version()
+   * @model
+   * @generated
+   */
+  String getVersion();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.EPREFIX_ID#getVersion <em>Version</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Version</em>' attribute.
+   * @see #getVersion()
+   * @generated
+   */
+  void setVersion(String value);
 
 } // EPREFIX_ID

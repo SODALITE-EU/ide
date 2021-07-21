@@ -26,7 +26,6 @@ public class NodeValueLabelProvider extends BlueprintLabelProvider {
 			return new StyledString(value, StyledString.COUNTER_STYLER);
 		}
 		return new StyledString(value);
-
 	}
 
 	@Override

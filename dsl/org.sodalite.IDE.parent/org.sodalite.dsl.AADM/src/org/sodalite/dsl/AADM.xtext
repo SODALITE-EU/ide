@@ -17,6 +17,7 @@ import "http://www.sodalite.org/dsl/optimization/Optimization" as opt
 //import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 AADM_Model:
+	('description:' description=STRING)? &
 	('module:' module=ID)? &
 	('import:' imports+=ID)* &
 	('inputs:'
@@ -123,8 +124,6 @@ EPolicyDefinitionBody:
 
 ETriggerDefinitions:
 	{ETriggerDefinitions} (triggers+=ETriggerDefinition)*;
-	
-	
 
 ETarget:
 	target+=EPREFIX_ID (',' target+=EPREFIX_ID)*;

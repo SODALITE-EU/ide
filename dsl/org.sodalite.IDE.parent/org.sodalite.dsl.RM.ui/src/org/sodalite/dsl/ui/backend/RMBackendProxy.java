@@ -77,6 +77,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.RM.ui.internal.RMActivator;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
@@ -204,8 +205,8 @@ public class RMBackendProxy {
 		String rmTTL = readTurtle(rmFile, project);
 
 		// Send model to the KB
-		String rmUri = getModelURI(rmFile, project);
-		saveRM(rmTTL, rmFile, rmUri, project, event);
+		ModelMetadata mm = getModelMetadata(rmFile, project);
+		saveRM(rmTTL, rmFile, mm.getUri(), project, event);
 	}
 
 	private void generateRMModel(IFile rmFile, IProgressMonitor monitor) {
@@ -254,9 +255,18 @@ public class RMBackendProxy {
 		return content;
 	}
 
-	protected String getModelURI(IFile modelfile, IProject project) throws IOException {
+	public static ModelMetadata getSelectedModelMetadata() throws Exception {
+		IFile modelFile = RMHelper.getSelectedFile();
+		if (modelFile == null)
+			throw new SodaliteException("Selected Model could not be found");
+
+		IProject project = modelFile.getProject();
+		return getModelMetadata(modelFile, project);
+	}
+
+	public static ModelMetadata getModelMetadata(IFile modelfile, IProject project) throws Exception {
 		Path path = getModelPropertiesFile(modelfile, project);
-		String uri = null;
+		ModelMetadata mm = new ModelMetadata();
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
@@ -264,12 +274,13 @@ public class RMBackendProxy {
 					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
 				props.load(in);
 			}
-			uri = props.getProperty("URI");
+			mm.setUri(props.getProperty("URI"));
+			mm.setVersion(props.getProperty("Version"));
 		}
-		return uri;
+		return mm;
 	}
 
-	protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
+	static protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
 		String filepath = modelfile.toString();
 		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
 		int index1 = filepath.indexOf(File.separator, 2) + 1;
@@ -284,7 +295,7 @@ public class RMBackendProxy {
 		return path;
 	}
 
-	public void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+	public void saveModelMetadata(ModelMetadata mm, IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
@@ -296,7 +307,9 @@ public class RMBackendProxy {
 				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
 			props.load(in);
 		}
-		props.setProperty("URI", uri);
+		props.setProperty("URI", mm.getUri());
+		if (mm.getVersion() != null)
+			props.setProperty("Version", mm.getVersion());
 		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
 				final OutputStream out = Channels.newOutputStream(outChannel)) {
 			props.store(out, "Sodalite Metadata");
@@ -321,7 +334,9 @@ public class RMBackendProxy {
 					throw new Exception(
 							"The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(saveReport.getURI(), rmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(saveReport.getURI());
+				saveModelMetadata(mm, rmFile, project);
 
 				showInfoDialog(null, "Save RM",
 						"The selected RM model has been successfully store in the KB with URI:\n"

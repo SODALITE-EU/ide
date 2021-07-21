@@ -7,6 +7,7 @@
   <genPackages prefix="RM" basePackage="org.sodalite.dsl" disposableProviderFactory="true"
       fileExtensions="rm" ecorePackage="RM.ecore#/">
     <genClasses ecoreClass="RM.ecore#//RM_Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/module"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//RM_Model/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//RM_Model/dataTypes"/>
@@ -399,6 +400,7 @@
     <genClasses ecoreClass="RM.ecore#//EPREFIX_ID">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/module"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EPREFIX_ID/version"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EPRIMITIVE_TYPE"/>
     <genClasses ecoreClass="RM.ecore#//EEntity">

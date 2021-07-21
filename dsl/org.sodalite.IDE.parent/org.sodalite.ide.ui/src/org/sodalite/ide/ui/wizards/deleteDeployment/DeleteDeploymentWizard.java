@@ -5,6 +5,7 @@ import org.eclipse.jface.wizard.Wizard;
 public class DeleteDeploymentWizard extends Wizard {
 
 	protected DeleteDeploymentWizardMainPage mainPage;
+
 	private int workers = 0;
 
 	public DeleteDeploymentWizard() {

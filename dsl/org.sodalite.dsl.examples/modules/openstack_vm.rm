@@ -1,5 +1,7 @@
 module: openstack
 
+description: 'specification of resources for Openstack VM'
+
 data_types:
 
   sodalite.datatypes.OpenStack.env:  

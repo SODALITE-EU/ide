@@ -175,6 +175,8 @@ Solidus : '/';
 
 Colon : ':';
 
+CommercialAt : '@';
+
 LeftSquareBracket : '[';
 
 RightSquareBracket : ']';
@@ -186,6 +188,8 @@ RULE_BOOLEAN : ('true'|'false');
 RULE_ENTITY : ('SELF'|'SOURCE'|'TARGET'|'HOST');
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*;
+
+RULE_VERSION : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'.'|'0'..'9')*;
 
 fragment RULE_BEGIN : ;
 

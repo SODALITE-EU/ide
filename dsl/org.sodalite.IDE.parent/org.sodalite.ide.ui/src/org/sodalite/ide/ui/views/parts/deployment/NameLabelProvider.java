@@ -20,5 +20,4 @@ public class NameLabelProvider extends BlueprintLabelProvider {
 		}
 		return styledString;
 	}
-
 }

@@ -890,7 +890,16 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
               } else {
                 _xifexpression = vrn.getLabel();
               }
-              final String qnode = _xifexpression;
+              String _xifexpression_1 = null;
+              String _version = vrn.getVersion();
+              boolean _tripleNotEquals_1 = (_version != null);
+              if (_tripleNotEquals_1) {
+                String _version_1 = vrn.getVersion();
+                _xifexpression_1 = ("@" + _version_1);
+              } else {
+                _xifexpression_1 = "";
+              }
+              final String qnode = (_xifexpression + _xifexpression_1);
               System.out.println(("Valid requirement node: " + qnode));
               final String displayText = qnode;
               final String proposalText = qnode;
@@ -1335,7 +1344,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                             return "An optional sequenced list of requirement assignments for the Node Template.";
                           } else {
                             if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capabilities:"))) {
-                              return "An optional mapof capability assignments for the Node Template.";
+                              return "An optional map of capability assignments for the Node Template.";
                             } else {
                               if ((Objects.equal(rule.getName(), "ENodeTemplateBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "optimization:"))) {
                                 return "An optional reference to an optimization model associated to this Node Template";
@@ -1356,7 +1365,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
                                           return "An optional list of valid Node Templates or Groups the Policy \n\t\t\t\t\t\tcan be applied to.";
                                         } else {
                                           if ((Objects.equal(rule.getName(), "EPolicyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "triggers:"))) {
-                                            return "An optional mapof trigger definitions to invoke when the policy \n\t\t\t\t\t\tis applied by an orchestrator against the associated TOSCA entity.";
+                                            return "An optional map of trigger definitions to invoke when the policy \n\t\t\t\t\t\tis applied by an orchestrator against the associated TOSCA entity.";
                                           } else {
                                             return super.getAdditionalProposalInfo(keyword);
                                           }

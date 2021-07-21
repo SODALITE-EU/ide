@@ -173,6 +173,7 @@ public class DeploymentView {
 			}
 			root.addChild(instance_state);
 		}
+
 		if (deploymentDetails.getMonitoringId() != null) {
 			try {
 				TreeNode<Node> monitoringDashboards = new TreeNode<Node>(new Node("monitoring_dashboards", ""));

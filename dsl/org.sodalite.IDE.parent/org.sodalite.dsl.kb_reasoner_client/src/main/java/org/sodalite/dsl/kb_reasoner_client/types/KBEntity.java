@@ -14,6 +14,7 @@ import java.net.URI;
 
 public class KBEntity {
 	URI uri;
+	String version;
 	String module;
 
 	public URI getUri() {
@@ -22,6 +23,14 @@ public class KBEntity {
 
 	public void setUri(URI uri) {
 		this.uri = uri;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public String getModule() {
@@ -39,7 +48,8 @@ public class KBEntity {
 		if (this.getClass() != o.getClass())
 			return false;
 		KBEntity entity = (KBEntity) o;
-		return entity.getUri().equals(this.getUri());
+		return entity.getUri().equals(this.getUri()) && (entity.getVersion() == null && this.getVersion() == null
+				|| (entity.getVersion() != null && entity.getVersion().equals(this.getVersion())));
 	}
 
 	@Override

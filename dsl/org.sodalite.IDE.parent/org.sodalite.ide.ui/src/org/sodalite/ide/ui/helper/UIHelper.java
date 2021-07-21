@@ -25,4 +25,12 @@ public class UIHelper {
 			}
 		}
 	}
+
+	public static String getFileName(String name) {
+		return name.substring(0, name.lastIndexOf('.'));
+	}
+
+	public static String getExtension(String name) {
+		return name.substring(name.lastIndexOf('.'));
+	}
 }
