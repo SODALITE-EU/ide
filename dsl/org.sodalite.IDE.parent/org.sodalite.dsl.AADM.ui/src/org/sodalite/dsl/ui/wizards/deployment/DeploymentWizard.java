@@ -92,16 +92,16 @@ public class DeploymentWizard extends Wizard {
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			// Adding additional inputs
 			Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-			String consul_uri = defaults.get(PreferenceConstants.Consul_URI, "");
+			String consul_ip = defaults.get(PreferenceConstants.Consul_IP, "");
 			String grafana_uri = defaults.get(PreferenceConstants.Grafana_URI, "");
 			String skydive_analyzer_uri = defaults.get(PreferenceConstants.SKYDIVE_ANALYZER_URI, "");
-			if (consul_uri.isEmpty() || grafana_uri.isEmpty()) {
+			if (consul_ip.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
 				return false;
 			}
 			content.append("deployment_label: " + this.deploymentLabel + "\n");
-			content.append("consul_server_address: " + consul_uri + "\n");
+			content.append("consul_server_address: " + consul_ip + "\n");
 			content.append("skydive_analyzer: " + skydive_analyzer_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{

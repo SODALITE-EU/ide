@@ -57,9 +57,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (refactorer_uri == null)
 			refactorer_uri = "http://192.168.2.166:8080/";
 
-		String consul_uri = prop.getProperty(PreferenceConstants.Consul_URI);
-		if (consul_uri == null)
-			consul_uri = "http://192.168.3.74:8500/";
+		String consul_ip = prop.getProperty(PreferenceConstants.Consul_IP);
+		if (consul_ip == null)
+			consul_ip = "192.168.3.74";
 
 		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
 		if (grafana_uri == null)
@@ -99,7 +99,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
-		defaults.put(PreferenceConstants.Consul_URI, consul_uri);
+		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
