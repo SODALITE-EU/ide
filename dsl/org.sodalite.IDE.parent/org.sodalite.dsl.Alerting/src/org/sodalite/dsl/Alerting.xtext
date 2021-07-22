@@ -18,11 +18,15 @@ Alerting_Model:
 ;
 	
 EGroups:
-	{EGroups}
-		'group:' name = ID 
-		BEGIN
-		(rules+=ERule)*
-		END;
+	groups += EGroup
+;
+
+EGroup:
+	'group:' name = ID 
+	BEGIN
+	(rules+=ERule)*
+	END
+;
 
 ERule:
 	'alert:' alert = ID
