@@ -39,7 +39,7 @@ class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 			else if (rule.name == "ERule" && keyword.value == "expr:")
 				return "The PromQL expression to evaluate.\nIn every evaluation cycle this expression is evaluated at the current time,\n and all resultant time series become on pending/firing alerts."
 			else if (rule.name == "ERule" && keyword.value == "for:")
-				return "Alerts are considered for firing once they have been returned for this long.\n Alerts which have not yet fired for long enough are considered pending."
+				return "Alerts are considered for firing once the expression condition holds for given duration.\n Alerts which have not yet fired before given duration are considered pending."
 			else if (rule.name == "ERule" && keyword.value == "labels:")
 				return "Labels to add or overwrite for each alert."
 			else if (rule.name == "ERule" && keyword.value == "annotations:")

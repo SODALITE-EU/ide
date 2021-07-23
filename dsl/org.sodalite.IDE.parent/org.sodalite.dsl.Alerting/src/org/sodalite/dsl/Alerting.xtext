@@ -12,6 +12,7 @@
 grammar org.sodalite.dsl.Alerting with org.eclipse.xtext.common.Terminals
 
 generate alerting "http://www.sodalite.org/dsl/Alerting"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Alerting_Model:
 	(groups+=EGroups)*
@@ -31,7 +32,10 @@ EGroup:
 ERule:
 	'alert:' alert = ID
 	BEGIN
-		'expr:' expr = STRING
+		'expr:' 
+		BEGIN
+			expr = EExpression
+		END
 		('for:' duration = STRING)?
 		('labels:'
 		BEGIN
@@ -44,13 +48,94 @@ ERule:
 	END
 ;
 
+
+
 ELabel:
 	key = ID ":" value = STRING
 ;
-	
-	
 
+EExpression:
+	expr=EStatement | EUniaryLogicOperator | EBinaryLogicOperation
+;
+
+EStatement:
+	EOperationStatement |  ENUMBER | {EStatement} STRING | EFunction | EMetric
+;
+
+EFunction:
+	function = EFunctionType '(' (params += STRING)* ')'
+;
+
+EMetric:
+	metric = EMetricType '{' (tags += ETag)* '}' ('[' period = STRING ']')?
+;
+
+ETag:
+	key=ID ':' value=STRING
+;
+
+EMetricType:
+	type = 'node_cpu_seconds_total' | {EMetricType} 'node_network_receive_bytes_total' | {EMetricType} 'node_filesystem_readonly' | {EMetricType} 'node_filesystem_avail_bytes' | {EMetricType} 'node_filesystem_size_bytes'
+;
+
+EFunctionType:
+	type = 'ON' | {EFunctionType} 'count_by' | {EFunctionType} 'vector'
+;
+
+EOperationStatement:
+	oper = EOperator
+	BEGIN
+		stmt1 = EStatement
+		stmt2 = EStatement
+	END
+;
+
+ENUMBER:
+	value = NUMBER
+;
+
+EOperator:
+	oper = '+:' | {EOperator} '-:' | {EOperator} '*:' | {EOperator} '/:' | {EOperator} '<:' | {EOperator} '>:' | {EOperator} '<=:' | {EOperator} '>=:' | {EOperator} '==:'
+;
+
+
+EUniaryLogicOperator:
+	Enot
+;
+
+EBinaryLogicOperation:
+	EAnd | EOr
+;
+
+Enot:
+	'not:'
+	BEGIN
+	not=EExpression
+	END
+;
+
+EAnd:
+	'and:'
+	BEGIN
+	first=EExpression
+	second=EExpression
+	END
+;
+	
+EOr:
+	'or:'
+	BEGIN
+	first=EExpression
+	second=EExpression
+	END
+;
+
+NUMBER returns ecore::EFloat: '-'? INT ('.' INT)?;
 	
 //Positional blocks delimited with indentation
 terminal BEGIN: 'synthetic:BEGIN';
 terminal END: 'synthetic:END';
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false';
+	
