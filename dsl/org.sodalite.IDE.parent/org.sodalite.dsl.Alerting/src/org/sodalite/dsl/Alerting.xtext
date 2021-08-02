@@ -59,19 +59,27 @@ EExpression:
 ;
 
 EStatement:
-	EOperationStatement |  ENUMBER | {EStatement} STRING | EFunction | EMetric
+	EOperationStatement |  ENUMBER | {EStatement} STRING | EFunction | EVectorExpr
 ;
 
 EFunction:
-	function = EFunctionType '(' (params += STRING)* ')'
+	function = EFunctionType '(' (params += EParam)? (',' params += EParam)* ')'
 ;
 
-EMetric:
-	metric = EMetricType '{' (tags += ETag)* '}' ('[' period = STRING ']')?
+EParam:
+	param = ID
+;
+
+EVectorExpr:
+	type = EMetricType '{' (tags += ETag)? (',' tags += ETag)* '}' ('[' period = STRING ']')?
 ;
 
 ETag:
-	key=ID ':' value=STRING
+	key=ID oper=EOperAssociation value=STRING
+;
+
+EOperAssociation:
+	type = '=' | {EOperAssociation} '=~' | {EOperAssociation} '!=' | {EOperAssociation} '~'
 ;
 
 EMetricType:
@@ -79,11 +87,11 @@ EMetricType:
 ;
 
 EFunctionType:
-	type = 'ON' | {EFunctionType} 'count_by' | {EFunctionType} 'vector'
+	type = 'on' | {EFunctionType} 'count_by' | {EFunctionType} 'vector'
 ;
 
 EOperationStatement:
-	oper = EOperator
+	oper = EBinaryOperator
 	BEGIN
 		stmt1 = EStatement
 		stmt2 = EStatement
@@ -94,8 +102,16 @@ ENUMBER:
 	value = NUMBER
 ;
 
-EOperator:
-	oper = '+:' | {EOperator} '-:' | {EOperator} '*:' | {EOperator} '/:' | {EOperator} '<:' | {EOperator} '>:' | {EOperator} '<=:' | {EOperator} '>=:' | {EOperator} '==:'
+EBinaryOperator:
+	EAritmeticOperator | EComparisonOperator
+;
+
+EAritmeticOperator:
+	type = '+:' | {EOperator} '-:' | {EOperator} '*:' | {EOperator} '/:' | {EAritmeticOperator} '%:' | {EAritmeticOperator} '^:'
+;
+
+EComparisonOperator:
+	type = '<:' | {EOperator} '>:' | {EOperator} '<=:' | {EOperator} '>=:' | {EOperator} '==:'
 ;
 
 
@@ -104,7 +120,7 @@ EUniaryLogicOperator:
 ;
 
 EBinaryLogicOperation:
-	EAnd | EOr
+	EAnd | EOr | EUnless
 ;
 
 Enot:
@@ -124,6 +140,14 @@ EAnd:
 	
 EOr:
 	'or:'
+	BEGIN
+	first=EExpression
+	second=EExpression
+	END
+;
+
+EUnless:
+	'unless:'
 	BEGIN
 	first=EExpression
 	second=EExpression
