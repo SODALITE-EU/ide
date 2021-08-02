@@ -55,22 +55,57 @@ ELabel:
 ;
 
 EExpression:
-	expr=EStatement | EUniaryLogicOperator | EBinaryLogicOperation
+	expr=EStatement 
 ;
 
 EStatement:
-	EOperationStatement |  ENUMBER | {EStatement} STRING | EFunction | EVectorExpr
+	EUniaryLogicOperator | EBinaryLogicOperation | EOperationStatement |  ENUMBER | {EStatement} STRING | EVectorMatching | EVectorExpr | EAggregationExpr
 ;
 
-EFunction:
-	function = EFunctionType '(' (params += EParam)? (',' params += EParam)* ')'
+EVectorMatching:
+	type = EVectorMatchingType '(' labels = ELabelList ')' expr=EVectorExpr
 ;
 
-EParam:
-	param = ID
+ELabelList:
+	{ELabelList} (list += ESingleLabel)? (',' list += ESingleLabel)*
+;
+
+ESingleLabel:
+	label = ID
+;
+
+EAggregationExpr:
+	oper = EAggregationOper ( modifier=EAggregationOperModifier '(' labels = ELabelList ')')? '(' expr = EVectorExpr ')'
+;
+
+EAggregationOper:
+	oper = 'sum' | {EAggregationOper} 'min' | {EAggregationOper} 'max' | {EAggregationOper} 'avg' | 
+	{EAggregationOper} 'group' | {EAggregationOper} 'stddev' | {EAggregationOper} 'stdvar' | 
+	{EAggregationOper} 'count' | {EAggregationOper} 'count_values' | {EAggregationOper} 'bottomk' | 
+	{EAggregationOper} 'topk' | {EAggregationOper} 'quantile'
+;
+
+EAggregationOperModifier:
+	mod = 'without' | {EAggregationOperModifier} 'by'
 ;
 
 EVectorExpr:
+	EFunctionExpr | EMetricExpr | EAritmeticExpr
+;
+
+EAritmeticExpr:
+	'(' loperad = EVectorExpr oper=EAritmeticOperator roperad = EVectorExpr  ')'
+;
+
+EFunctionExpr:
+	function = EFunctionType '(' (expr = EVectorExpr)? ')'
+;
+
+EFunctionType:
+	type = 'increase' | {EFunctionType} 'rate' | {EFunctionType} 'vector'
+;
+
+EMetricExpr:
 	type = EMetricType '{' (tags += ETag)? (',' tags += ETag)* '}' ('[' period = STRING ']')?
 ;
 
@@ -86,8 +121,8 @@ EMetricType:
 	type = 'node_cpu_seconds_total' | {EMetricType} 'node_network_receive_bytes_total' | {EMetricType} 'node_filesystem_readonly' | {EMetricType} 'node_filesystem_avail_bytes' | {EMetricType} 'node_filesystem_size_bytes'
 ;
 
-EFunctionType:
-	type = 'on' | {EFunctionType} 'count_by' | {EFunctionType} 'vector'
+EVectorMatchingType:
+	type = 'on' | {EVectorMatchingType} 'ignoring'
 ;
 
 EOperationStatement:
@@ -107,11 +142,11 @@ EBinaryOperator:
 ;
 
 EAritmeticOperator:
-	type = '+:' | {EOperator} '-:' | {EOperator} '*:' | {EOperator} '/:' | {EAritmeticOperator} '%:' | {EAritmeticOperator} '^:'
+	type = '+:' | {EAritmeticOperator} '-:' | {EAritmeticOperator} '*:' | {EAritmeticOperator} '/:' | {EAritmeticOperator} '%:' | {EAritmeticOperator} '^:'
 ;
 
 EComparisonOperator:
-	type = '<:' | {EOperator} '>:' | {EOperator} '<=:' | {EOperator} '>=:' | {EOperator} '==:'
+	type = '<:' | {EComparisonOperator} '>:' | {EComparisonOperator} '<=:' | {EComparisonOperator} '>=:' | {EComparisonOperator} '==:'
 ;
 
 
