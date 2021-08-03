@@ -59,7 +59,7 @@ EExpression:
 ;
 
 EStatement:
-	EUniaryLogicOperator | EBinaryLogicOperation | EOperationStatement |  ENUMBER | {EStatement} STRING | EVectorMatching | EVectorExpr | EAggregationExpr
+	EUniaryLogicOperator | EBinaryLogicOperation | EVectorExpr
 ;
 
 EVectorMatching:
@@ -89,12 +89,13 @@ EAggregationOperModifier:
 	mod = 'without' | {EAggregationOperModifier} 'by'
 ;
 
+
 EVectorExpr:
-	EFunctionExpr | EMetricExpr | EAritmeticExpr
+	ENUMBER | EFunctionExpr | EMetricExpr | EAritmeticExpr | EVectorMatching | EAggregationExpr
 ;
 
 EAritmeticExpr:
-	'(' loperad = EVectorExpr oper=EAritmeticOperator roperad = EVectorExpr  ')'
+	'(' loperad = EVectorExpr oper=EBinaryOperator roperad = EVectorExpr  ')'
 ;
 
 EFunctionExpr:
@@ -142,11 +143,11 @@ EBinaryOperator:
 ;
 
 EAritmeticOperator:
-	type = '+:' | {EAritmeticOperator} '-:' | {EAritmeticOperator} '*:' | {EAritmeticOperator} '/:' | {EAritmeticOperator} '%:' | {EAritmeticOperator} '^:'
+	type = '+' | {EAritmeticOperator} '-' | {EAritmeticOperator} '*' | {EAritmeticOperator} '/' | {EAritmeticOperator} '%' | {EAritmeticOperator} '^'
 ;
 
 EComparisonOperator:
-	type = '<:' | {EComparisonOperator} '>:' | {EComparisonOperator} '<=:' | {EComparisonOperator} '>=:' | {EComparisonOperator} '==:'
+	type = '<' | {EComparisonOperator} '>' | {EComparisonOperator} '<=' | {EComparisonOperator} '>=' | {EComparisonOperator} '=='
 ;
 
 
