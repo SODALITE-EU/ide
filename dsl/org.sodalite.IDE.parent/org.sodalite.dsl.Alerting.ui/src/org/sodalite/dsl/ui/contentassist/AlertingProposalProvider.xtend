@@ -11,6 +11,15 @@ import org.eclipse.xtext.impl.KeywordImpl
 import org.eclipse.xtext.ParserRule
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.swt.graphics.Image
+import java.util.Map
+import java.util.HashMap
+import org.osgi.framework.Bundle
+import org.eclipse.core.runtime.FileLocator
+import org.eclipse.jface.resource.ImageDescriptor
+import java.net.URL
+import org.eclipse.core.runtime.Platform
+import org.eclipse.core.runtime.Path
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -19,11 +28,81 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 		ICompletionProposalAcceptor acceptor) {
+		val Image image = getImage(getImagePath(keyword))
 		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
-			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+			getKeywordDisplayString(keyword), image, contentAssistContext);
 		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
+		
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+		
+	def String getImagePath(Keyword keyword) {
+		if (isMetricKeyword(keyword))
+			return "icons/metrics.png"
+		else if (isAggregationOperKeyword(keyword))
+			return "icons/aggregation.png"
+		else if (isFunctionKeyword(keyword))
+			return "icons/function.png"
+		else if (isVectorMatchingKeyword(keyword))
+			return "icons/vector.png"
+		else if (isArithmeticKeyword(keyword))
+			return "icons/arithmetic.png"
+		else if (isComparisonKeyword(keyword))
+			return "icons/comparison.png"
+		else if (isLogicKeyword(keyword))
+			return "icons/logic.png"
+		else
+			return null;
+	}
+	
+	val logics = #{'not', 'and', 'or', 'unless'}
+	def isLogicKeyword(Keyword keyword) {
+		return logics.contains(keyword.value)
+	}
+	
+	val comparisons = #{'<', '>', '<=', '>=', '=='}
+	def isComparisonKeyword(Keyword keyword) {
+		return comparisons.contains(keyword.value)
+	}
+	
+	val arithmetics = #{'+', '-', '*', '/', '%', '^'}
+	def isArithmeticKeyword(Keyword keyword) {
+		return arithmetics.contains(keyword.value)
+	}
+	
+	val vectorMatchings = #{'on', 'ignoring'}
+	def isVectorMatchingKeyword(Keyword keyword) {
+		return vectorMatchings.contains(keyword.value)
+	}
+	
+	val functions = #{'increase', 'rate', 'vector'}
+	def isFunctionKeyword(Keyword keyword) {
+		return functions.contains(keyword.value)
+	}
+	
+	val aggregationOpers = #{'sum', 'min', 'max', 'avg', 'group', 'stddev', 'stdvar', 'count', 'count_values', 'bottomk', 'topk', 'quantile'}
+	def isAggregationOperKeyword(Keyword keyword) {
+		return aggregationOpers.contains(keyword.value)
+	}
+		
+	def isMetricKeyword(Keyword keyword) {
+		return (keyword.value.startsWith("slurm") || keyword.value.startsWith("pbs") || keyword.value.startsWith("node"))
+	}
+	
+	var Map <String, Image> images = new HashMap<String, Image>();
+	def getImage(String path){
+		if (path == null)
+			return null
+		if (!images.containsKey(path)){
+			val Bundle bundle = Platform.getBundle("org.sodalite.dsl.Alerting.ui");
+			val URL fullPathString = FileLocator.find(bundle, new Path(path), null)
+			val ImageDescriptor imageDesc = ImageDescriptor.createFromURL(fullPathString)
+			val Image image = imageDesc.createImage()
+			if (image !== null)
+				images.put(path, image)
+		}
+		return images.get(path)
 	}
 	
 	def String getAdditionalProposalInfo(Keyword keyword) {

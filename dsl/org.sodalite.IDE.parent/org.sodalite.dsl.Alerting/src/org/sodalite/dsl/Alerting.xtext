@@ -230,10 +230,10 @@ ENUMBER:
 ;
 
 EBinaryOperator:
-	EAritmeticOperator | EComparisonOperator
+	EArithmeticOperator | EComparisonOperator
 ;
 
-EAritmeticOperator:
+EArithmeticOperator:
 	type = '+' | {EAritmeticOperator} '-' | {EAritmeticOperator} '*' | {EAritmeticOperator} '/' | {EAritmeticOperator} '%' | {EAritmeticOperator} '^'
 ;
 
