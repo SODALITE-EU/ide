@@ -83,10 +83,8 @@ EAggregationExpr:
 ;
 
 EAggregationOper:
-	oper = 'sum' | {EAggregationOper} 'min' | {EAggregationOper} 'max' | {EAggregationOper} 'avg' | 
-	{EAggregationOper} 'group' | {EAggregationOper} 'stddev' | {EAggregationOper} 'stdvar' | 
-	{EAggregationOper} 'count' | {EAggregationOper} 'count_values' | {EAggregationOper} 'bottomk' | 
-	{EAggregationOper} 'topk' | {EAggregationOper} 'quantile'
+	type = ('sum' | 'min' | 'max' | 'avg' | 'group' | 'stddev' | 'stdvar' | 
+	'count' | 'count_values' | 'bottomk' | 'topk' | 'quantile')
 ;
 
 EAggregationOperModifier:
@@ -107,7 +105,7 @@ EFunctionExpr:
 ;
 
 EFunctionType:
-	type = 'increase' | {EFunctionType} 'rate' | {EFunctionType} 'vector'
+	type = ('increase' | 'rate' | 'vector')
 ;
 
 EMetricExpr:
@@ -119,110 +117,110 @@ ETag:
 ;
 
 EOperAssociation:
-	type = '=' | {EOperAssociation} '=~' | {EOperAssociation} '!=' | {EOperAssociation} '~'
+	type = ('=' | '=~' | '!=' | '~')
 ;
 
 EMetricType:
-	ENodeExporter | ESlurmExporter | EPBSExporter
+	type = (ESLURMEXPORTER | EPBSEXPORTER | ENODEEXPORTER)
 ;
 
-ENodeExporter:
-	type = 'node_arp_entries'|{ENodeExporter} 'node_boot_time_seconds'|{ENodeExporter} 'node_context_switches_total'|
-	{ENodeExporter} 'node_cooling_device_cur_state'|{ENodeExporter} 'node_cpu_guest_seconds_total'|{ENodeExporter} 'node_cpu_seconds_total'|
-	{ENodeExporter} 'node_disk_io_now'|{ENodeExporter} 'node_disk_io_time_seconds_total'|{ENodeExporter} 'node_disk_io_time_weighted_seconds_total'|
-	{ENodeExporter} 'node_disk_read_bytes_total'|{ENodeExporter} 'node_disk_read_time_seconds_total'|{ENodeExporter} 'node_disk_reads_completed_total'|
-	{ENodeExporter} 'node_disk_reads_merged_total'|{ENodeExporter} 'node_disk_write_time_seconds_total'|{ENodeExporter} 'node_disk_writes_completed_total'|
-	{ENodeExporter} 'node_disk_writes_merged_total'|{ENodeExporter} 'node_disk_written_bytes_total'|{ENodeExporter} 'node_entropy_available_bits'|
-	{ENodeExporter} 'node_entropy_pool_size_bits'|{ENodeExporter} 'node_exporter_build_info'|{ENodeExporter} 'node_filefd_allocated'|
-	{ENodeExporter} 'node_filefd_maximum'|{ENodeExporter} 'node_filesystem_avail_bytes'|{ENodeExporter} 'node_filesystem_device_error'|
-	{ENodeExporter} 'node_filesystem_files'|{ENodeExporter} 'node_filesystem_files_free'|{ENodeExporter} 'node_filesystem_free_bytes'|
-	{ENodeExporter} 'node_filesystem_readonly'|{ENodeExporter} 'node_filesystem_size_bytes'|{ENodeExporter} 'node_forks_total'|
-	{ENodeExporter} 'node_intr_total'|{ENodeExporter} 'node_load1'|{ENodeExporter} 'node_load15'|{ENodeExporter} 'node_load5'|
-	{ENodeExporter} 'node_memory_Active_anon_bytes'|{ENodeExporter} 'node_memory_Active_bytes'|{ENodeExporter} 'node_memory_Active_file_bytes'|
-	{ENodeExporter} 'node_memory_AnonHugePages_bytes'|{ENodeExporter} 'node_memory_AnonPages_bytes'|{ENodeExporter} 'node_memory_Bounce_bytes'|
-	{ENodeExporter} 'node_memory_Buffers_bytes'|{ENodeExporter} 'node_memory_Cached_bytes'|{ENodeExporter} 'node_memory_CmaFree_bytes'|
-	{ENodeExporter} 'node_memory_CmaTotal_bytes'|{ENodeExporter} 'node_memory_CommitLimit_bytes'|{ENodeExporter} 'node_memory_Committed_AS_bytes'|
-	{ENodeExporter} 'node_memory_DirectMap1G_bytes'|{ENodeExporter} 'node_memory_DirectMap2M_bytes'|{ENodeExporter} 'node_memory_DirectMap4k_bytes'|
-	{ENodeExporter} 'node_memory_Dirty_bytes'|{ENodeExporter} 'node_memory_HardwareCorrupted_bytes'|{ENodeExporter} 'node_memory_HugePages_Free'|
-	{ENodeExporter} 'node_memory_HugePages_Rsvd'|{ENodeExporter} 'node_memory_HugePages_Surp'|{ENodeExporter} 'node_memory_HugePages_Total'|
-	{ENodeExporter} 'node_memory_Hugepagesize_bytes'|{ENodeExporter} 'node_memory_Inactive_anon_bytes'|{ENodeExporter} 'node_memory_Inactive_bytes'|
-	{ENodeExporter} 'node_memory_Inactive_file_bytes'|{ENodeExporter} 'node_memory_KernelStack_bytes'|{ENodeExporter} 'node_memory_Mapped_bytes'|
-	{ENodeExporter} 'node_memory_MemAvailable_bytes'|{ENodeExporter} 'node_memory_MemFree_bytes'|{ENodeExporter} 'node_memory_MemTotal_bytes'|
-	{ENodeExporter} 'node_memory_Mlocked_bytes'|{ENodeExporter} 'node_memory_NFS_Unstable_bytes'|{ENodeExporter} 'node_memory_PageTables_bytes'|
-	{ENodeExporter} 'node_memory_SReclaimable_bytes'|{ENodeExporter} 'node_memory_SUnreclaim_bytes'|{ENodeExporter} 'node_memory_ShmemHugePages_bytes'|
-	{ENodeExporter} 'node_memory_ShmemPmdMapped_bytes'|{ENodeExporter} 'node_memory_Shmem_bytes'|{ENodeExporter} 'node_memory_Slab_bytes'|
-	{ENodeExporter} 'node_memory_SwapCached_bytes'|{ENodeExporter} 'node_memory_SwapFree_bytes'|{ENodeExporter} 'node_memory_SwapTotal_bytes'|
-	{ENodeExporter} 'node_memory_Unevictable_bytes'|{ENodeExporter} 'node_memory_VmallocChunk_bytes'|{ENodeExporter} 'node_memory_VmallocTotal_bytes'|
-	{ENodeExporter} 'node_memory_VmallocUsed_bytes'|{ENodeExporter} 'node_memory_WritebackTmp_bytes'|{ENodeExporter} 'node_memory_Writeback_bytes'|
-	{ENodeExporter} 'node_netstat_Icmp6_InErrors'|{ENodeExporter} 'node_netstat_Icmp6_InMsgs'|{ENodeExporter} 'node_netstat_Icmp6_OutMsgs'|
-	{ENodeExporter} 'node_netstat_Icmp_InErrors'|{ENodeExporter} 'node_netstat_Icmp_InMsgs'|{ENodeExporter} 'node_netstat_Icmp_OutMsgs'|
-	{ENodeExporter} 'node_netstat_Ip6_InOctets'|{ENodeExporter} 'node_netstat_Ip6_OutOctets'|{ENodeExporter} 'node_netstat_IpExt_InOctets'|
-	{ENodeExporter} 'node_netstat_IpExt_OutOctets'|{ENodeExporter} 'node_netstat_Ip_Forwarding'|{ENodeExporter} 'node_netstat_TcpExt_ListenDrops'|
-	{ENodeExporter} 'node_netstat_TcpExt_ListenOverflows'|{ENodeExporter} 'node_netstat_TcpExt_SyncookiesFailed'|{ENodeExporter} 'node_netstat_TcpExt_SyncookiesRecv'|
-	{ENodeExporter} 'node_netstat_TcpExt_SyncookiesSent'|{ENodeExporter} 'node_netstat_TcpExt_TCPSynRetrans'|{ENodeExporter} 'node_netstat_Tcp_ActiveOpens'|
-	{ENodeExporter} 'node_netstat_Tcp_CurrEstab'|{ENodeExporter} 'node_netstat_Tcp_InErrs'|{ENodeExporter} 'node_netstat_Tcp_InSegs'|
-	{ENodeExporter} 'node_netstat_Tcp_OutRsts'|{ENodeExporter} 'node_netstat_Tcp_OutSegs'|{ENodeExporter} 'node_netstat_Tcp_PassiveOpens'|
-	{ENodeExporter} 'node_netstat_Tcp_RetransSegs'|{ENodeExporter} 'node_netstat_Udp6_InDatagrams'|{ENodeExporter} 'node_netstat_Udp6_InErrors'|
-	{ENodeExporter} 'node_netstat_Udp6_NoPorts'|{ENodeExporter} 'node_netstat_Udp6_OutDatagrams'|{ENodeExporter} 'node_netstat_Udp6_RcvbufErrors'|
-	{ENodeExporter} 'node_netstat_Udp6_SndbufErrors'|{ENodeExporter} 'node_netstat_UdpLite6_InErrors'|{ENodeExporter} 'node_netstat_UdpLite_InErrors'|
-	{ENodeExporter} 'node_netstat_Udp_InDatagrams'|{ENodeExporter} 'node_netstat_Udp_InErrors'|{ENodeExporter} 'node_netstat_Udp_NoPorts'|
-	{ENodeExporter} 'node_netstat_Udp_OutDatagrams'|{ENodeExporter} 'node_netstat_Udp_RcvbufErrors'|{ENodeExporter} 'node_netstat_Udp_SndbufErrors'|
-	{ENodeExporter} 'node_network_address_assign_type'|{ENodeExporter} 'node_network_carrier_changes_total'|
-	{ENodeExporter} 'node_network_carrier_down_changes_total'|{ENodeExporter} 'node_network_carrier_up_changes_total'|
-	{ENodeExporter} 'node_network_device_id'|{ENodeExporter} 'node_network_dormant'|{ENodeExporter} 'node_network_flags'|
-	{ENodeExporter} 'node_network_iface_id'|{ENodeExporter} 'node_network_iface_link'|{ENodeExporter} 'node_network_iface_link_mode'|
-	{ENodeExporter} 'node_network_info'|{ENodeExporter} 'node_network_mtu_bytes'|{ENodeExporter} 'node_network_name_assign_type'|
-	{ENodeExporter} 'node_network_net_dev_group'|{ENodeExporter} 'node_network_protocol_type'|{ENodeExporter} 'node_network_receive_bytes_total'|
-	{ENodeExporter} 'node_network_receive_compressed_total'|{ENodeExporter} 'node_network_receive_drop_total'|
-	{ENodeExporter} 'node_network_receive_errs_total'|{ENodeExporter} 'node_network_receive_fifo_total'|
-	{ENodeExporter} 'node_network_receive_frame_total'|{ENodeExporter} 'node_network_receive_multicast_total'|
-	{ENodeExporter} 'node_network_receive_packets_total'|{ENodeExporter} 'node_network_speed_bytes'|{ENodeExporter} 'node_network_transmit_bytes_total'|
-	{ENodeExporter} 'node_network_transmit_carrier_total'|{ENodeExporter} 'node_network_transmit_colls_total'|
-	{ENodeExporter} 'node_network_transmit_compressed_total'|{ENodeExporter} 'node_network_transmit_drop_total'|
-	{ENodeExporter} 'node_network_transmit_errs_total'|{ENodeExporter} 'node_network_transmit_fifo_total'|
-	{ENodeExporter} 'node_network_transmit_packets_total'|{ENodeExporter} 'node_network_transmit_queue_length'|
-	{ENodeExporter} 'node_network_up'|{ENodeExporter} 'node_nf_conntrack_entries'|{ENodeExporter} 'node_nf_conntrack_entries_limit'|
-	{ENodeExporter} 'node_procs_blocked'|{ENodeExporter} 'node_procs_running'|{ENodeExporter} 'node_schedstat_running_seconds_total'|
-	{ENodeExporter} 'node_schedstat_timeslices_total'|{ENodeExporter} 'node_schedstat_waiting_seconds_total'|
-	{ENodeExporter} 'node_scrape_collector_duration_seconds'|{ENodeExporter} 'node_scrape_collector_success'|
-	{ENodeExporter} 'node_sockstat_FRAG6_inuse'|{ENodeExporter} 'node_sockstat_FRAG6_memory'|{ENodeExporter} 'node_sockstat_FRAG_inuse'|
-	{ENodeExporter} 'node_sockstat_FRAG_memory'|{ENodeExporter} 'node_sockstat_RAW6_inuse'|{ENodeExporter} 'node_sockstat_RAW_inuse'|
-	{ENodeExporter} 'node_sockstat_TCP6_inuse'|{ENodeExporter} 'node_sockstat_TCP_alloc'|{ENodeExporter} 'node_sockstat_TCP_inuse'|
-	{ENodeExporter} 'node_sockstat_TCP_mem'|{ENodeExporter} 'node_sockstat_TCP_mem_bytes'|{ENodeExporter} 'node_sockstat_TCP_orphan'|
-	{ENodeExporter} 'node_sockstat_TCP_tw'|{ENodeExporter} 'node_sockstat_UDP6_inuse'|{ENodeExporter} 'node_sockstat_UDPLITE6_inuse'|
-	{ENodeExporter} 'node_sockstat_UDPLITE_inuse'|{ENodeExporter} 'node_sockstat_UDP_inuse'|{ENodeExporter} 'node_sockstat_UDP_mem'|
-	{ENodeExporter} 'node_sockstat_UDP_mem_bytes'|{ENodeExporter} 'node_sockstat_sockets_used'|{ENodeExporter} 'node_softnet_dropped_total'|
-	{ENodeExporter} 'node_softnet_processed_total'|{ENodeExporter} 'node_softnet_times_squeezed_total'|{ENodeExporter} 'node_textfile_scrape_error'|
-	{ENodeExporter} 'node_time_seconds'|{ENodeExporter} 'node_timex_estimated_error_seconds'|{ENodeExporter} 'node_timex_frequency_adjustment_ratio'|
-	{ENodeExporter} 'node_timex_loop_time_constant'|{ENodeExporter} 'node_timex_maxerror_seconds'|{ENodeExporter} 'node_timex_offset_seconds'|
-	{ENodeExporter} 'node_timex_pps_calibration_total'|{ENodeExporter} 'node_timex_pps_error_total'|{ENodeExporter} 'node_timex_pps_frequency_hertz'|
-	{ENodeExporter} 'node_timex_pps_jitter_seconds'|{ENodeExporter} 'node_timex_pps_jitter_total'|{ENodeExporter} 'node_timex_pps_shift_seconds'|
-	{ENodeExporter} 'node_timex_pps_stability_exceeded_total'|{ENodeExporter} 'node_timex_pps_stability_hertz'|{ENodeExporter} 'node_timex_status'|
-	{ENodeExporter} 'node_timex_sync_status'|{ENodeExporter} 'node_timex_tai_offset_seconds'|{ENodeExporter} 'node_timex_tick_seconds'|
-	{ENodeExporter} 'node_udp_queues'|{ENodeExporter} 'node_uname_info'|{ENodeExporter} 'node_vmstat_oom_kill'|{ENodeExporter} 'node_vmstat_pgfault'|
-	{ENodeExporter} 'node_vmstat_pgmajfault'|{ENodeExporter} 'node_vmstat_pgpgin'|{ENodeExporter} 'node_vmstat_pgpgout'|
-	{ENodeExporter} 'node_vmstat_pswpin'|{ENodeExporter} 'node_vmstat_pswpout'
+terminal ENODEEXPORTER:
+	 'node_arp_entries'| 'node_boot_time_seconds'| 'node_context_switches_total'|
+	 'node_cooling_device_cur_state'| 'node_cpu_guest_seconds_total'| 'node_cpu_seconds_total'|
+	 'node_disk_io_now'| 'node_disk_io_time_seconds_total'| 'node_disk_io_time_weighted_seconds_total'|
+	 'node_disk_read_bytes_total'| 'node_disk_read_time_seconds_total'| 'node_disk_reads_completed_total'|
+	 'node_disk_reads_merged_total'| 'node_disk_write_time_seconds_total'| 'node_disk_writes_completed_total'|
+	 'node_disk_writes_merged_total'| 'node_disk_written_bytes_total'| 'node_entropy_available_bits'|
+	 'node_entropy_pool_size_bits'| 'node_exporter_build_info'| 'node_filefd_allocated'|
+	 'node_filefd_maximum'| 'node_filesystem_avail_bytes'| 'node_filesystem_device_error'|
+	 'node_filesystem_files'| 'node_filesystem_files_free'| 'node_filesystem_free_bytes'|
+	 'node_filesystem_readonly'| 'node_filesystem_size_bytes'| 'node_forks_total'|
+	 'node_intr_total'| 'node_load1'| 'node_load15'| 'node_load5'|
+	 'node_memory_Active_anon_bytes'| 'node_memory_Active_bytes'| 'node_memory_Active_file_bytes'|
+	 'node_memory_AnonHugePages_bytes'| 'node_memory_AnonPages_bytes'| 'node_memory_Bounce_bytes'|
+	 'node_memory_Buffers_bytes'| 'node_memory_Cached_bytes'| 'node_memory_CmaFree_bytes'|
+	 'node_memory_CmaTotal_bytes'| 'node_memory_CommitLimit_bytes'| 'node_memory_Committed_AS_bytes'|
+	 'node_memory_DirectMap1G_bytes'| 'node_memory_DirectMap2M_bytes'| 'node_memory_DirectMap4k_bytes'|
+	 'node_memory_Dirty_bytes'| 'node_memory_HardwareCorrupted_bytes'| 'node_memory_HugePages_Free'|
+	 'node_memory_HugePages_Rsvd'| 'node_memory_HugePages_Surp'| 'node_memory_HugePages_Total'|
+	 'node_memory_Hugepagesize_bytes'| 'node_memory_Inactive_anon_bytes'| 'node_memory_Inactive_bytes'|
+	 'node_memory_Inactive_file_bytes'| 'node_memory_KernelStack_bytes'| 'node_memory_Mapped_bytes'|
+	 'node_memory_MemAvailable_bytes'| 'node_memory_MemFree_bytes'| 'node_memory_MemTotal_bytes'|
+	 'node_memory_Mlocked_bytes'| 'node_memory_NFS_Unstable_bytes'| 'node_memory_PageTables_bytes'|
+	 'node_memory_SReclaimable_bytes'| 'node_memory_SUnreclaim_bytes'| 'node_memory_ShmemHugePages_bytes'|
+	 'node_memory_ShmemPmdMapped_bytes'| 'node_memory_Shmem_bytes'| 'node_memory_Slab_bytes'|
+	 'node_memory_SwapCached_bytes'| 'node_memory_SwapFree_bytes'| 'node_memory_SwapTotal_bytes'|
+	 'node_memory_Unevictable_bytes'| 'node_memory_VmallocChunk_bytes'| 'node_memory_VmallocTotal_bytes'|
+	 'node_memory_VmallocUsed_bytes'| 'node_memory_WritebackTmp_bytes'| 'node_memory_Writeback_bytes'|
+	 'node_netstat_Icmp6_InErrors'| 'node_netstat_Icmp6_InMsgs'| 'node_netstat_Icmp6_OutMsgs'|
+	 'node_netstat_Icmp_InErrors'| 'node_netstat_Icmp_InMsgs'| 'node_netstat_Icmp_OutMsgs'|
+	 'node_netstat_Ip6_InOctets'| 'node_netstat_Ip6_OutOctets'| 'node_netstat_IpExt_InOctets'|
+	 'node_netstat_IpExt_OutOctets'| 'node_netstat_Ip_Forwarding'| 'node_netstat_TcpExt_ListenDrops'|
+	 'node_netstat_TcpExt_ListenOverflows'| 'node_netstat_TcpExt_SyncookiesFailed'| 'node_netstat_TcpExt_SyncookiesRecv'|
+	 'node_netstat_TcpExt_SyncookiesSent'| 'node_netstat_TcpExt_TCPSynRetrans'| 'node_netstat_Tcp_ActiveOpens'|
+	 'node_netstat_Tcp_CurrEstab'| 'node_netstat_Tcp_InErrs'| 'node_netstat_Tcp_InSegs'|
+	 'node_netstat_Tcp_OutRsts'| 'node_netstat_Tcp_OutSegs'| 'node_netstat_Tcp_PassiveOpens'|
+	 'node_netstat_Tcp_RetransSegs'| 'node_netstat_Udp6_InDatagrams'| 'node_netstat_Udp6_InErrors'|
+	 'node_netstat_Udp6_NoPorts'| 'node_netstat_Udp6_OutDatagrams'| 'node_netstat_Udp6_RcvbufErrors'|
+	 'node_netstat_Udp6_SndbufErrors'| 'node_netstat_UdpLite6_InErrors'| 'node_netstat_UdpLite_InErrors'|
+	 'node_netstat_Udp_InDatagrams'| 'node_netstat_Udp_InErrors'| 'node_netstat_Udp_NoPorts'|
+	 'node_netstat_Udp_OutDatagrams'| 'node_netstat_Udp_RcvbufErrors'| 'node_netstat_Udp_SndbufErrors'|
+	 'node_network_address_assign_type'| 'node_network_carrier_changes_total'|
+	 'node_network_carrier_down_changes_total'| 'node_network_carrier_up_changes_total'|
+	 'node_network_device_id'| 'node_network_dormant'| 'node_network_flags'|
+	 'node_network_iface_id'| 'node_network_iface_link'| 'node_network_iface_link_mode'|
+	 'node_network_info'| 'node_network_mtu_bytes'| 'node_network_name_assign_type'|
+	 'node_network_net_dev_group'| 'node_network_protocol_type'| 'node_network_receive_bytes_total'|
+	 'node_network_receive_compressed_total'| 'node_network_receive_drop_total'|
+	 'node_network_receive_errs_total'| 'node_network_receive_fifo_total'|
+	 'node_network_receive_frame_total'| 'node_network_receive_multicast_total'|
+	 'node_network_receive_packets_total'| 'node_network_speed_bytes'| 'node_network_transmit_bytes_total'|
+	 'node_network_transmit_carrier_total'| 'node_network_transmit_colls_total'|
+	 'node_network_transmit_compressed_total'| 'node_network_transmit_drop_total'|
+	 'node_network_transmit_errs_total'| 'node_network_transmit_fifo_total'|
+	 'node_network_transmit_packets_total'| 'node_network_transmit_queue_length'|
+	 'node_network_up'| 'node_nf_conntrack_entries'| 'node_nf_conntrack_entries_limit'|
+	 'node_procs_blocked'| 'node_procs_running'| 'node_schedstat_running_seconds_total'|
+	 'node_schedstat_timeslices_total'| 'node_schedstat_waiting_seconds_total'|
+	 'node_scrape_collector_duration_seconds'| 'node_scrape_collector_success'|
+	 'node_sockstat_FRAG6_inuse'| 'node_sockstat_FRAG6_memory'| 'node_sockstat_FRAG_inuse'|
+	 'node_sockstat_FRAG_memory'| 'node_sockstat_RAW6_inuse'| 'node_sockstat_RAW_inuse'|
+	 'node_sockstat_TCP6_inuse'| 'node_sockstat_TCP_alloc'| 'node_sockstat_TCP_inuse'|
+	 'node_sockstat_TCP_mem'| 'node_sockstat_TCP_mem_bytes'| 'node_sockstat_TCP_orphan'|
+	 'node_sockstat_TCP_tw'| 'node_sockstat_UDP6_inuse'| 'node_sockstat_UDPLITE6_inuse'|
+	 'node_sockstat_UDPLITE_inuse'| 'node_sockstat_UDP_inuse'| 'node_sockstat_UDP_mem'|
+	 'node_sockstat_UDP_mem_bytes'| 'node_sockstat_sockets_used'| 'node_softnet_dropped_total'|
+	 'node_softnet_processed_total'| 'node_softnet_times_squeezed_total'| 'node_textfile_scrape_error'|
+	 'node_time_seconds'| 'node_timex_estimated_error_seconds'| 'node_timex_frequency_adjustment_ratio'|
+	 'node_timex_loop_time_constant'| 'node_timex_maxerror_seconds'| 'node_timex_offset_seconds'|
+	 'node_timex_pps_calibration_total'| 'node_timex_pps_error_total'| 'node_timex_pps_frequency_hertz'|
+	 'node_timex_pps_jitter_seconds'| 'node_timex_pps_jitter_total'| 'node_timex_pps_shift_seconds'|
+	 'node_timex_pps_stability_exceeded_total'| 'node_timex_pps_stability_hertz'| 'node_timex_status'|
+	 'node_timex_sync_status'| 'node_timex_tai_offset_seconds'| 'node_timex_tick_seconds'|
+	 'node_udp_queues'| 'node_uname_info'| 'node_vmstat_oom_kill'| 'node_vmstat_pgfault'|
+	 'node_vmstat_pgmajfault'| 'node_vmstat_pgpgin'| 'node_vmstat_pgpgout'|
+	 'node_vmstat_pswpin'| 'node_vmstat_pswpout'
 ;
 
-ESlurmExporter:
-	type = 'slurm_job_state' | {ESlurmExporter} 'slurm_job_walltime_used' | {ESlurmExporter} 'slurm_job_cpu_n' | {ESlurmExporter} 'slurm_job_memory_virtual_max' | 
-	{ESlurmExporter} 'slurm_job_memory_physical_max' | {ESlurmExporter} 'slurm_job_queued' | {ESlurmExporter} 'slurm_job_exit_code' | 
-	{ESlurmExporter} 'slurm_job_exit_signal' | {ESlurmExporter} 'slurm_partition_availability' | {ESlurmExporter} 'slurm_partition_cores_idle' | 
-	{ESlurmExporter} 'slurm_partition_cores_allocated' | {ESlurmExporter} 'slurm_partition_cores_total' 
+terminal ESLURMEXPORTER:
+	'slurm_job_state' | 'slurm_job_walltime_used' | 'slurm_job_cpu_n' | 'slurm_job_memory_virtual_max' | 
+	'slurm_job_memory_physical_max' | 'slurm_job_queued' | 'slurm_job_exit_code' | 
+	'slurm_job_exit_signal' | 'slurm_partition_availability' | 'slurm_partition_cores_idle' | 
+	'slurm_partition_cores_allocated' | 'slurm_partition_cores_total' 
 ;
 
-EPBSExporter:
-	type = 'pbs_job_state' | {EPBSExporter} 'pbs_job_priority' | {EPBSExporter} 'pbs_job_walltime_used' | {EPBSExporter} 'pbs_job_walltime_max' | 
-	{EPBSExporter} 'pbs_job_walltime_remaining' | {EPBSExporter} 'pbs_job_cpu_time' | {EPBSExporter} 'pbs_job_cpu_n' | 
-	{EPBSExporter} 'pbs_job_mem_virtual' | {EPBSExporter} 'pbs_job_mem_physical' | {EPBSExporter} 'pbs_job_time_queued' | 
-	{EPBSExporter} 'pbs_job_exit_status' | {EPBSExporter} 'pbs_queue_enabled' | {EPBSExporter} 'pbs_queue_started' | 
-	{EPBSExporter} 'pbs_queue_jobs_total' | {EPBSExporter} 'pbs_queue_jobs_max' | {EPBSExporter} 'pbs_queue_jobs_queued' | 
-	{EPBSExporter} 'pbs_queue_jobs_running' | {EPBSExporter} 'pbs_queue_jobs_held' | {EPBSExporter} 'pbs_queue_jobs_waiting' | 
-	{EPBSExporter} 'pbs_queue_jobs_transit' | {EPBSExporter} 'pbs_queue_jobs_exiting' | {EPBSExporter} 'pbs_queue_jobs_complete'
+terminal EPBSEXPORTER:
+	'pbs_job_state' | 'pbs_job_priority' | 'pbs_job_walltime_used' | 'pbs_job_walltime_max' | 
+	'pbs_job_walltime_remaining' | 'pbs_job_cpu_time' | 'pbs_job_cpu_n' | 
+	'pbs_job_mem_virtual' | 'pbs_job_mem_physical' | 'pbs_job_time_queued' | 
+	'pbs_job_exit_status' | 'pbs_queue_enabled' | 'pbs_queue_started' | 
+	'pbs_queue_jobs_total' | 'pbs_queue_jobs_max' | 'pbs_queue_jobs_queued' | 
+	'pbs_queue_jobs_running' | 'pbs_queue_jobs_held' | 'pbs_queue_jobs_waiting' | 
+	'pbs_queue_jobs_transit' | 'pbs_queue_jobs_exiting' | 'pbs_queue_jobs_complete'
 ;
 
 EVectorMatchingType:
-	type = 'on' | {EVectorMatchingType} 'ignoring'
+	type = ('on' | 'ignoring')
 ;
 
 ENUMBER:
@@ -234,11 +232,11 @@ EBinaryOperator:
 ;
 
 EArithmeticOperator:
-	type = '+' | {EAritmeticOperator} '-' | {EAritmeticOperator} '*' | {EAritmeticOperator} '/' | {EAritmeticOperator} '%' | {EAritmeticOperator} '^'
+	type = ('+' | '-' | '*' | '/' | '%' | '^')
 ;
 
 EComparisonOperator:
-	type = '<' | {EComparisonOperator} '>' | {EComparisonOperator} '<=' | {EComparisonOperator} '>=' | {EComparisonOperator} '=='
+	type = ('<' | '>' | '<=' | '>=' | '==')
 ;
 
 
@@ -251,7 +249,7 @@ EBinaryLogicExpr:
 ;
 
 EBinaryLogicOperator:
-	type = 'and' | {EBinaryLogicOperator} 'or' | {EBinaryLogicOperator} 'unless'
+	type = ('and' | 'or' | 'unless')
 ;
 
 Enot:
