@@ -59,7 +59,11 @@ EExpression:
 ;
 
 EStatement:
-	EUniaryLogicOperator | EBinaryLogicOperation | EVectorExpr
+	ELogicExpr | EVectorExpr
+;
+
+ELogicExpr:
+	EUniaryLogicExpr | EBinaryLogicExpr
 ;
 
 EVectorMatching:
@@ -95,7 +99,7 @@ EVectorExpr:
 ;
 
 EAritmeticExpr:
-	'(' loperad = EVectorExpr oper=EBinaryOperator roperad = EVectorExpr  ')'
+	'(' loperad = EStatement oper=EBinaryOperator roperad = EStatement  ')'
 ;
 
 EFunctionExpr:
@@ -119,19 +123,106 @@ EOperAssociation:
 ;
 
 EMetricType:
-	type = 'node_cpu_seconds_total' | {EMetricType} 'node_network_receive_bytes_total' | {EMetricType} 'node_filesystem_readonly' | {EMetricType} 'node_filesystem_avail_bytes' | {EMetricType} 'node_filesystem_size_bytes'
+	ENodeExporter | ESlurmExporter | EPBSExporter
+;
+
+ENodeExporter:
+	type = 'node_arp_entries'|{ENodeExporter} 'node_boot_time_seconds'|{ENodeExporter} 'node_context_switches_total'|
+	{ENodeExporter} 'node_cooling_device_cur_state'|{ENodeExporter} 'node_cpu_guest_seconds_total'|{ENodeExporter} 'node_cpu_seconds_total'|
+	{ENodeExporter} 'node_disk_io_now'|{ENodeExporter} 'node_disk_io_time_seconds_total'|{ENodeExporter} 'node_disk_io_time_weighted_seconds_total'|
+	{ENodeExporter} 'node_disk_read_bytes_total'|{ENodeExporter} 'node_disk_read_time_seconds_total'|{ENodeExporter} 'node_disk_reads_completed_total'|
+	{ENodeExporter} 'node_disk_reads_merged_total'|{ENodeExporter} 'node_disk_write_time_seconds_total'|{ENodeExporter} 'node_disk_writes_completed_total'|
+	{ENodeExporter} 'node_disk_writes_merged_total'|{ENodeExporter} 'node_disk_written_bytes_total'|{ENodeExporter} 'node_entropy_available_bits'|
+	{ENodeExporter} 'node_entropy_pool_size_bits'|{ENodeExporter} 'node_exporter_build_info'|{ENodeExporter} 'node_filefd_allocated'|
+	{ENodeExporter} 'node_filefd_maximum'|{ENodeExporter} 'node_filesystem_avail_bytes'|{ENodeExporter} 'node_filesystem_device_error'|
+	{ENodeExporter} 'node_filesystem_files'|{ENodeExporter} 'node_filesystem_files_free'|{ENodeExporter} 'node_filesystem_free_bytes'|
+	{ENodeExporter} 'node_filesystem_readonly'|{ENodeExporter} 'node_filesystem_size_bytes'|{ENodeExporter} 'node_forks_total'|
+	{ENodeExporter} 'node_intr_total'|{ENodeExporter} 'node_load1'|{ENodeExporter} 'node_load15'|{ENodeExporter} 'node_load5'|
+	{ENodeExporter} 'node_memory_Active_anon_bytes'|{ENodeExporter} 'node_memory_Active_bytes'|{ENodeExporter} 'node_memory_Active_file_bytes'|
+	{ENodeExporter} 'node_memory_AnonHugePages_bytes'|{ENodeExporter} 'node_memory_AnonPages_bytes'|{ENodeExporter} 'node_memory_Bounce_bytes'|
+	{ENodeExporter} 'node_memory_Buffers_bytes'|{ENodeExporter} 'node_memory_Cached_bytes'|{ENodeExporter} 'node_memory_CmaFree_bytes'|
+	{ENodeExporter} 'node_memory_CmaTotal_bytes'|{ENodeExporter} 'node_memory_CommitLimit_bytes'|{ENodeExporter} 'node_memory_Committed_AS_bytes'|
+	{ENodeExporter} 'node_memory_DirectMap1G_bytes'|{ENodeExporter} 'node_memory_DirectMap2M_bytes'|{ENodeExporter} 'node_memory_DirectMap4k_bytes'|
+	{ENodeExporter} 'node_memory_Dirty_bytes'|{ENodeExporter} 'node_memory_HardwareCorrupted_bytes'|{ENodeExporter} 'node_memory_HugePages_Free'|
+	{ENodeExporter} 'node_memory_HugePages_Rsvd'|{ENodeExporter} 'node_memory_HugePages_Surp'|{ENodeExporter} 'node_memory_HugePages_Total'|
+	{ENodeExporter} 'node_memory_Hugepagesize_bytes'|{ENodeExporter} 'node_memory_Inactive_anon_bytes'|{ENodeExporter} 'node_memory_Inactive_bytes'|
+	{ENodeExporter} 'node_memory_Inactive_file_bytes'|{ENodeExporter} 'node_memory_KernelStack_bytes'|{ENodeExporter} 'node_memory_Mapped_bytes'|
+	{ENodeExporter} 'node_memory_MemAvailable_bytes'|{ENodeExporter} 'node_memory_MemFree_bytes'|{ENodeExporter} 'node_memory_MemTotal_bytes'|
+	{ENodeExporter} 'node_memory_Mlocked_bytes'|{ENodeExporter} 'node_memory_NFS_Unstable_bytes'|{ENodeExporter} 'node_memory_PageTables_bytes'|
+	{ENodeExporter} 'node_memory_SReclaimable_bytes'|{ENodeExporter} 'node_memory_SUnreclaim_bytes'|{ENodeExporter} 'node_memory_ShmemHugePages_bytes'|
+	{ENodeExporter} 'node_memory_ShmemPmdMapped_bytes'|{ENodeExporter} 'node_memory_Shmem_bytes'|{ENodeExporter} 'node_memory_Slab_bytes'|
+	{ENodeExporter} 'node_memory_SwapCached_bytes'|{ENodeExporter} 'node_memory_SwapFree_bytes'|{ENodeExporter} 'node_memory_SwapTotal_bytes'|
+	{ENodeExporter} 'node_memory_Unevictable_bytes'|{ENodeExporter} 'node_memory_VmallocChunk_bytes'|{ENodeExporter} 'node_memory_VmallocTotal_bytes'|
+	{ENodeExporter} 'node_memory_VmallocUsed_bytes'|{ENodeExporter} 'node_memory_WritebackTmp_bytes'|{ENodeExporter} 'node_memory_Writeback_bytes'|
+	{ENodeExporter} 'node_netstat_Icmp6_InErrors'|{ENodeExporter} 'node_netstat_Icmp6_InMsgs'|{ENodeExporter} 'node_netstat_Icmp6_OutMsgs'|
+	{ENodeExporter} 'node_netstat_Icmp_InErrors'|{ENodeExporter} 'node_netstat_Icmp_InMsgs'|{ENodeExporter} 'node_netstat_Icmp_OutMsgs'|
+	{ENodeExporter} 'node_netstat_Ip6_InOctets'|{ENodeExporter} 'node_netstat_Ip6_OutOctets'|{ENodeExporter} 'node_netstat_IpExt_InOctets'|
+	{ENodeExporter} 'node_netstat_IpExt_OutOctets'|{ENodeExporter} 'node_netstat_Ip_Forwarding'|{ENodeExporter} 'node_netstat_TcpExt_ListenDrops'|
+	{ENodeExporter} 'node_netstat_TcpExt_ListenOverflows'|{ENodeExporter} 'node_netstat_TcpExt_SyncookiesFailed'|{ENodeExporter} 'node_netstat_TcpExt_SyncookiesRecv'|
+	{ENodeExporter} 'node_netstat_TcpExt_SyncookiesSent'|{ENodeExporter} 'node_netstat_TcpExt_TCPSynRetrans'|{ENodeExporter} 'node_netstat_Tcp_ActiveOpens'|
+	{ENodeExporter} 'node_netstat_Tcp_CurrEstab'|{ENodeExporter} 'node_netstat_Tcp_InErrs'|{ENodeExporter} 'node_netstat_Tcp_InSegs'|
+	{ENodeExporter} 'node_netstat_Tcp_OutRsts'|{ENodeExporter} 'node_netstat_Tcp_OutSegs'|{ENodeExporter} 'node_netstat_Tcp_PassiveOpens'|
+	{ENodeExporter} 'node_netstat_Tcp_RetransSegs'|{ENodeExporter} 'node_netstat_Udp6_InDatagrams'|{ENodeExporter} 'node_netstat_Udp6_InErrors'|
+	{ENodeExporter} 'node_netstat_Udp6_NoPorts'|{ENodeExporter} 'node_netstat_Udp6_OutDatagrams'|{ENodeExporter} 'node_netstat_Udp6_RcvbufErrors'|
+	{ENodeExporter} 'node_netstat_Udp6_SndbufErrors'|{ENodeExporter} 'node_netstat_UdpLite6_InErrors'|{ENodeExporter} 'node_netstat_UdpLite_InErrors'|
+	{ENodeExporter} 'node_netstat_Udp_InDatagrams'|{ENodeExporter} 'node_netstat_Udp_InErrors'|{ENodeExporter} 'node_netstat_Udp_NoPorts'|
+	{ENodeExporter} 'node_netstat_Udp_OutDatagrams'|{ENodeExporter} 'node_netstat_Udp_RcvbufErrors'|{ENodeExporter} 'node_netstat_Udp_SndbufErrors'|
+	{ENodeExporter} 'node_network_address_assign_type'|{ENodeExporter} 'node_network_carrier_changes_total'|
+	{ENodeExporter} 'node_network_carrier_down_changes_total'|{ENodeExporter} 'node_network_carrier_up_changes_total'|
+	{ENodeExporter} 'node_network_device_id'|{ENodeExporter} 'node_network_dormant'|{ENodeExporter} 'node_network_flags'|
+	{ENodeExporter} 'node_network_iface_id'|{ENodeExporter} 'node_network_iface_link'|{ENodeExporter} 'node_network_iface_link_mode'|
+	{ENodeExporter} 'node_network_info'|{ENodeExporter} 'node_network_mtu_bytes'|{ENodeExporter} 'node_network_name_assign_type'|
+	{ENodeExporter} 'node_network_net_dev_group'|{ENodeExporter} 'node_network_protocol_type'|{ENodeExporter} 'node_network_receive_bytes_total'|
+	{ENodeExporter} 'node_network_receive_compressed_total'|{ENodeExporter} 'node_network_receive_drop_total'|
+	{ENodeExporter} 'node_network_receive_errs_total'|{ENodeExporter} 'node_network_receive_fifo_total'|
+	{ENodeExporter} 'node_network_receive_frame_total'|{ENodeExporter} 'node_network_receive_multicast_total'|
+	{ENodeExporter} 'node_network_receive_packets_total'|{ENodeExporter} 'node_network_speed_bytes'|{ENodeExporter} 'node_network_transmit_bytes_total'|
+	{ENodeExporter} 'node_network_transmit_carrier_total'|{ENodeExporter} 'node_network_transmit_colls_total'|
+	{ENodeExporter} 'node_network_transmit_compressed_total'|{ENodeExporter} 'node_network_transmit_drop_total'|
+	{ENodeExporter} 'node_network_transmit_errs_total'|{ENodeExporter} 'node_network_transmit_fifo_total'|
+	{ENodeExporter} 'node_network_transmit_packets_total'|{ENodeExporter} 'node_network_transmit_queue_length'|
+	{ENodeExporter} 'node_network_up'|{ENodeExporter} 'node_nf_conntrack_entries'|{ENodeExporter} 'node_nf_conntrack_entries_limit'|
+	{ENodeExporter} 'node_procs_blocked'|{ENodeExporter} 'node_procs_running'|{ENodeExporter} 'node_schedstat_running_seconds_total'|
+	{ENodeExporter} 'node_schedstat_timeslices_total'|{ENodeExporter} 'node_schedstat_waiting_seconds_total'|
+	{ENodeExporter} 'node_scrape_collector_duration_seconds'|{ENodeExporter} 'node_scrape_collector_success'|
+	{ENodeExporter} 'node_sockstat_FRAG6_inuse'|{ENodeExporter} 'node_sockstat_FRAG6_memory'|{ENodeExporter} 'node_sockstat_FRAG_inuse'|
+	{ENodeExporter} 'node_sockstat_FRAG_memory'|{ENodeExporter} 'node_sockstat_RAW6_inuse'|{ENodeExporter} 'node_sockstat_RAW_inuse'|
+	{ENodeExporter} 'node_sockstat_TCP6_inuse'|{ENodeExporter} 'node_sockstat_TCP_alloc'|{ENodeExporter} 'node_sockstat_TCP_inuse'|
+	{ENodeExporter} 'node_sockstat_TCP_mem'|{ENodeExporter} 'node_sockstat_TCP_mem_bytes'|{ENodeExporter} 'node_sockstat_TCP_orphan'|
+	{ENodeExporter} 'node_sockstat_TCP_tw'|{ENodeExporter} 'node_sockstat_UDP6_inuse'|{ENodeExporter} 'node_sockstat_UDPLITE6_inuse'|
+	{ENodeExporter} 'node_sockstat_UDPLITE_inuse'|{ENodeExporter} 'node_sockstat_UDP_inuse'|{ENodeExporter} 'node_sockstat_UDP_mem'|
+	{ENodeExporter} 'node_sockstat_UDP_mem_bytes'|{ENodeExporter} 'node_sockstat_sockets_used'|{ENodeExporter} 'node_softnet_dropped_total'|
+	{ENodeExporter} 'node_softnet_processed_total'|{ENodeExporter} 'node_softnet_times_squeezed_total'|{ENodeExporter} 'node_textfile_scrape_error'|
+	{ENodeExporter} 'node_time_seconds'|{ENodeExporter} 'node_timex_estimated_error_seconds'|{ENodeExporter} 'node_timex_frequency_adjustment_ratio'|
+	{ENodeExporter} 'node_timex_loop_time_constant'|{ENodeExporter} 'node_timex_maxerror_seconds'|{ENodeExporter} 'node_timex_offset_seconds'|
+	{ENodeExporter} 'node_timex_pps_calibration_total'|{ENodeExporter} 'node_timex_pps_error_total'|{ENodeExporter} 'node_timex_pps_frequency_hertz'|
+	{ENodeExporter} 'node_timex_pps_jitter_seconds'|{ENodeExporter} 'node_timex_pps_jitter_total'|{ENodeExporter} 'node_timex_pps_shift_seconds'|
+	{ENodeExporter} 'node_timex_pps_stability_exceeded_total'|{ENodeExporter} 'node_timex_pps_stability_hertz'|{ENodeExporter} 'node_timex_status'|
+	{ENodeExporter} 'node_timex_sync_status'|{ENodeExporter} 'node_timex_tai_offset_seconds'|{ENodeExporter} 'node_timex_tick_seconds'|
+	{ENodeExporter} 'node_udp_queues'|{ENodeExporter} 'node_uname_info'|{ENodeExporter} 'node_vmstat_oom_kill'|{ENodeExporter} 'node_vmstat_pgfault'|
+	{ENodeExporter} 'node_vmstat_pgmajfault'|{ENodeExporter} 'node_vmstat_pgpgin'|{ENodeExporter} 'node_vmstat_pgpgout'|
+	{ENodeExporter} 'node_vmstat_pswpin'|{ENodeExporter} 'node_vmstat_pswpout'
+;
+
+ESlurmExporter:
+	type = 'slurm_job_state' | {ESlurmExporter} 'slurm_job_walltime_used' | {ESlurmExporter} 'slurm_job_cpu_n' | {ESlurmExporter} 'slurm_job_memory_virtual_max' | 
+	{ESlurmExporter} 'slurm_job_memory_physical_max' | {ESlurmExporter} 'slurm_job_queued' | {ESlurmExporter} 'slurm_job_exit_code' | 
+	{ESlurmExporter} 'slurm_job_exit_signal' | {ESlurmExporter} 'slurm_partition_availability' | {ESlurmExporter} 'slurm_partition_cores_idle' | 
+	{ESlurmExporter} 'slurm_partition_cores_allocated' | {ESlurmExporter} 'slurm_partition_cores_total' 
+;
+
+EPBSExporter:
+	type = 'pbs_job_state' | {EPBSExporter} 'pbs_job_priority' | {EPBSExporter} 'pbs_job_walltime_used' | {EPBSExporter} 'pbs_job_walltime_max' | 
+	{EPBSExporter} 'pbs_job_walltime_remaining' | {EPBSExporter} 'pbs_job_cpu_time' | {EPBSExporter} 'pbs_job_cpu_n' | 
+	{EPBSExporter} 'pbs_job_mem_virtual' | {EPBSExporter} 'pbs_job_mem_physical' | {EPBSExporter} 'pbs_job_time_queued' | 
+	{EPBSExporter} 'pbs_job_exit_status' | {EPBSExporter} 'pbs_queue_enabled' | {EPBSExporter} 'pbs_queue_started' | 
+	{EPBSExporter} 'pbs_queue_jobs_total' | {EPBSExporter} 'pbs_queue_jobs_max' | {EPBSExporter} 'pbs_queue_jobs_queued' | 
+	{EPBSExporter} 'pbs_queue_jobs_running' | {EPBSExporter} 'pbs_queue_jobs_held' | {EPBSExporter} 'pbs_queue_jobs_waiting' | 
+	{EPBSExporter} 'pbs_queue_jobs_transit' | {EPBSExporter} 'pbs_queue_jobs_exiting' | {EPBSExporter} 'pbs_queue_jobs_complete'
 ;
 
 EVectorMatchingType:
 	type = 'on' | {EVectorMatchingType} 'ignoring'
-;
-
-EOperationStatement:
-	oper = EBinaryOperator
-	BEGIN
-		stmt1 = EStatement
-		stmt2 = EStatement
-	END
 ;
 
 ENUMBER:
@@ -151,43 +242,28 @@ EComparisonOperator:
 ;
 
 
-EUniaryLogicOperator:
+EUniaryLogicExpr:
 	Enot
 ;
 
-EBinaryLogicOperation:
-	EAnd | EOr | EUnless
+EBinaryLogicExpr:
+	oper = EBinaryLogicOperator LEFT_SEPARATOR first=EStatement ',' second=EStatement RIGHT_SEPARATOR
+;
+
+EBinaryLogicOperator:
+	type = 'and' | {EBinaryLogicOperator} 'or' | {EBinaryLogicOperator} 'unless'
 ;
 
 Enot:
-	'not:'
-	BEGIN
-	not=EExpression
-	END
+	'not' not=EExpression
 ;
 
-EAnd:
-	'and:'
-	BEGIN
-	first=EExpression
-	second=EExpression
-	END
-;
-	
-EOr:
-	'or:'
-	BEGIN
-	first=EExpression
-	second=EExpression
-	END
+LEFT_SEPARATOR:
+	'(' | BEGIN
 ;
 
-EUnless:
-	'unless:'
-	BEGIN
-	first=EExpression
-	second=EExpression
-	END
+RIGHT_SEPARATOR:
+	')' | END
 ;
 
 NUMBER returns ecore::EFloat: '-'? INT ('.' INT)?;
