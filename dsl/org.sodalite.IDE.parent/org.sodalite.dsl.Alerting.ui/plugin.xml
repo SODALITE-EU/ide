@@ -318,6 +318,10 @@
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+        	class="org.sodalite.dsl.ui.handlers.SendAlertsHandler"
+        	commandId="org.sodalite.dsl.Alerting.ui.handler.sendAlerts">
+  		</handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -325,6 +329,17 @@
 			description="Open the quick outline."
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 			name="Quick Outline">
+		</command>
+		<category
+		    id="org.sodalite.category"
+		    name="Sodalite">
+		</category>
+		<command
+		    categoryId="org.sodalite.category"
+		    defaultHandler="org.sodalite.dsl.ui.handlers.SendAlertsHandler"
+		    description="Send alerts to monitoring"
+		    id="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
+		    name="sendAlerts">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -337,6 +352,99 @@
 					<reference definitionId="org.sodalite.dsl.Alerting.Editor.opened"/>
 				</visibleWhen>
 			</command>
+		</menuContribution>
+		<menuContribution
+		     allPopups="false"
+		     locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+		     <menu
+		           id="eu.sodalite.menu.projectexplorer"
+		           label="Sodalite">
+		        <command
+		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
+		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
+		              label="Send alerts to monitoring"
+		              style="push"
+		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		           <visibleWhen
+		                 checkEnabled="false">
+		              <with
+		                    variable="activeMenuSelection">
+		                 <iterate
+		                       ifEmpty="false">
+		                    <adapt
+		                          type="org.eclipse.core.resources.IResource">
+		                       <test
+		                             property="org.eclipse.core.resources.name"
+		                             value="*.alert">
+		                       </test>
+		                    </adapt>
+		                 </iterate>
+		              </with>
+	               </visibleWhen>
+		      </command>
+		   </menu>
+		</menuContribution>
+		<menuContribution
+		     allPopups="false"
+		     locationURI="popup:org.eclipse.jdt.ui.PackageExplorer#PopupMenu?after=additions">
+		     <menu
+		           id="eu.sodalite.menu.packageexplorer"
+		           label="Sodalite">
+		        <command
+		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
+		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
+		              label="Send alerts to monitoring"
+		              style="push"
+		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		           <visibleWhen
+		                 checkEnabled="false">
+		              <with
+		                    variable="activeMenuSelection">
+		                 <iterate
+		                       ifEmpty="false">
+		                    <adapt
+		                          type="org.eclipse.core.resources.IResource">
+		                       <test
+		                             property="org.eclipse.core.resources.name"
+		                             value="*.alert">
+		                       </test>
+		                    </adapt>
+		                 </iterate>
+		              </with>
+	               </visibleWhen>
+		      </command>
+		   </menu>
+		</menuContribution>
+		<menuContribution
+		     allPopups="false"
+		     locationURI="popup:org.eclipse.sirius.ui.tools.views.model.explorer#PopupMenu?after=additions">
+		     <menu
+		           id="eu.sodalite.menu.siriusexplorer"
+		           label="Sodalite">
+		        <command
+		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
+		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
+		              label="Send alerts to monitoring"
+		              style="push"
+		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		           <visibleWhen
+		                 checkEnabled="false">
+		              <with
+		                    variable="activeMenuSelection">
+		                 <iterate
+		                       ifEmpty="false">
+		                    <adapt
+		                          type="org.eclipse.core.resources.IResource">
+		                       <test
+		                             property="org.eclipse.core.resources.name"
+		                             value="*.alert">
+		                       </test>
+		                    </adapt>
+		                 </iterate>
+		              </with>
+	               </visibleWhen>
+		      </command>
+		   </menu>
 		</menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.Alerting -->
