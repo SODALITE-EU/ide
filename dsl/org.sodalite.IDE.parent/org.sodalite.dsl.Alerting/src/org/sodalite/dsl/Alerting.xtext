@@ -67,7 +67,7 @@ ELogicExpr:
 ;
 
 EVectorMatching:
-	type = EVectorMatchingType '(' labels = ELabelList ')' expr=EVectorExpr
+	type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' expr=EVectorExpr
 ;
 
 ELabelList:
@@ -79,16 +79,16 @@ ESingleLabel:
 ;
 
 EAggregationExpr:
-	oper = EAggregationOper ( modifier=EAggregationOperModifier '(' labels = ELabelList ')')? '(' expr = EVectorExpr ')'
+	oper = EAGGREGATIONOPER ( modifier=EAGGREGATIONOPERMODIFIER '(' labels = ELabelList ')')? '(' expr = EVectorExpr ')'
 ;
 
-EAggregationOper:
-	type = ('sum' | 'min' | 'max' | 'avg' | 'group' | 'stddev' | 'stdvar' | 
-	'count' | 'count_values' | 'bottomk' | 'topk' | 'quantile')
+terminal EAGGREGATIONOPER:
+	'sum' | 'min' | 'max' | 'avg' | 'group' | 'stddev' | 'stdvar' | 
+	'count' | 'count_values' | 'bottomk' | 'topk' | 'quantile'
 ;
 
-EAggregationOperModifier:
-	mod = 'without' | {EAggregationOperModifier} 'by'
+terminal EAGGREGATIONOPERMODIFIER:
+	'without' | 'by'
 ;
 
 
@@ -101,11 +101,11 @@ EAritmeticExpr:
 ;
 
 EFunctionExpr:
-	function = EFunctionType '(' (expr = EVectorExpr)? ')'
+	function = EFUNCTIONTYPE '(' (expr = EVectorExpr)? ')'
 ;
 
-EFunctionType:
-	type = ('increase' | 'rate' | 'vector')
+terminal EFUNCTIONTYPE:
+	'increase' | 'rate' | 'vector'
 ;
 
 EMetricExpr:
@@ -219,8 +219,8 @@ terminal EPBSEXPORTER:
 	'pbs_queue_jobs_transit' | 'pbs_queue_jobs_exiting' | 'pbs_queue_jobs_complete'
 ;
 
-EVectorMatchingType:
-	type = ('on' | 'ignoring')
+terminal EVECTORMATCHINGTYPE:
+	'on' | 'ignoring'
 ;
 
 ENUMBER:

@@ -740,8 +740,24 @@ class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 		createProposals (pbs_exporters, "icons/metrics.png", context, acceptor)
 		createProposals (node_exporters, "icons/metrics.png", context, acceptor)
 	}
-		
 	
+	override void completeEFunctionExpr_Function(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createProposals (functions, "icons/function.png", context, acceptor)
+	}
+	
+	override void completeEAggregationExpr_Oper(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createProposals (aggregationOpers, "icons/aggregation.png", context, acceptor)
+	}
+	
+	override void completeEVectorMatching_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createProposals (vectorMatchings, "icons/vector.png", context, acceptor)
+	}
+	
+	val aggregationOperModifiers = #{'by', 'without'}
+	override void completeEAggregationExpr_Modifier(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createProposals (aggregationOperModifiers, "icons/aggregation.png", context, acceptor)
+	}
+		
 	protected def void createProposals (Set<String> proposals, String imagePath, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val Image image = getImage(imagePath)
 		
@@ -1280,15 +1296,7 @@ class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 		
 		return parameters;
 	}
-	
-	override void completeEAggregationExpr_Oper(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for completeEAggregationExpr_Oper property")
-	}
-	
-	override void completeEFunctionType_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("Invoking content assist for completeEFunctionType_Type property")
-	}
-	
+			
 	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
