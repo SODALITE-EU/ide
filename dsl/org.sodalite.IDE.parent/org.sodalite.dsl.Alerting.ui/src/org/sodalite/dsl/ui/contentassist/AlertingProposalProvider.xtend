@@ -757,6 +757,11 @@ class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 	override void completeEAggregationExpr_Modifier(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createProposals (aggregationOperModifiers, "icons/aggregation.png", context, acceptor)
 	}
+	
+	val periodUnits = #{'ms', 's', 'm', 'h', 'd', 'w', 'y'}
+	override void completeEPeriodSegment_Unit(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createProposals (periodUnits, "icons/time.png", context, acceptor)
+	}
 		
 	protected def void createProposals (Set<String> proposals, String imagePath, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val Image image = getImage(imagePath)

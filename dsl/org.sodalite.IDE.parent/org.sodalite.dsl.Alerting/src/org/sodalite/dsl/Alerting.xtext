@@ -109,7 +109,19 @@ terminal EFUNCTIONTYPE:
 ;
 
 EMetricExpr:
-	type = EMetricType '{' (tags += ETag)? (',' tags += ETag)* '}' ('[' period = STRING ']')?
+	type = EMetricType '{' (tags += ETag)? (',' tags += ETag)* '}' ('[' period = EPeriod ']')?
+;
+
+EPeriod:
+	segments += EPeriodSegment (segments += EPeriodSegment)*
+;
+
+EPeriodSegment:
+	value = INT unit = EPERIODUNIT
+;
+
+terminal EPERIODUNIT:
+	'ms' | 's' | 'm' | 'h' | 'd' | 'w' | 'y'
 ;
 
 ETag:
