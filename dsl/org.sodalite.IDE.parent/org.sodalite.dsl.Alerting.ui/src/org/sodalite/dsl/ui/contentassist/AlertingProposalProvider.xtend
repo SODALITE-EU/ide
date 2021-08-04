@@ -774,8 +774,510 @@ class AlertingProposalProvider extends AbstractAlertingProposalProvider {
 		
 	def getMetricParameters(String metric) {
 		var Set<String> parameters = #{}
-		if (metric.equals('node_filesystem_size_bytes'))
+		//Slurm exporter
+		if (metric.equals('slurm_job_state'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_walltime_used'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_cpu_n'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_memory_virtual_max'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_memory_physical_max'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_queued'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_exit_code'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_job_exit_signal'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_partition'}
+		else if (metric.equals('slurm_partition_availability'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'partition'}
+		else if (metric.equals('slurm_partition_cores_idle'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'partition'}
+		else if (metric.equals('slurm_partition_cores_allocated'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'partition'}
+		else if (metric.equals('slurm_partition_cores_total'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'partition'}
+		
+		//PBS exporter
+		else if (metric.equals('pbs_job_state'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_priority'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_walltime_used'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_walltime_max'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_walltime_remaining'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_cpu_time'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_cpu_n'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_mem_virtual'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_mem_physical'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_time_queued'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_job_exit_status'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'job_id', 'job_name', 'job_user', 'job_queue'}
+		else if (metric.equals('pbs_queue_enabled'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_started'))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_total' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_max' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_queued' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_running' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_held' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_waiting' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_transit' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_exiting' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		else if (metric.equals('pbs_queue_jobs_complete' ))
+			parameters = #{'monitoring_id', 'deployment_label', 'hpc', 'queue_name', 'queue_type'}
+		
+		//Node exporter
+		else if (metric.equals('node_arp_entries'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_boot_time_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_context_switches_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_cooling_device_cur_state'))
+			parameters = #{'deployment_label','instance_name','monitoring_id','name','type'}
+		else if (metric.equals('node_cpu_guest_seconds_total'))
+			parameters = #{'cpu','deployment_label','instance_name','mode','monitoring_id'}
+		else if (metric.equals('node_cpu_seconds_total'))
+			parameters = #{'cpu','deployment_label','instance_name','mode','monitoring_id'}
+		else if (metric.equals('node_disk_io_now'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_io_time_seconds_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_io_time_weighted_seconds_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_read_bytes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_read_time_seconds_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_reads_completed_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_reads_merged_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_write_time_seconds_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_writes_completed_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_writes_merged_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_disk_written_bytes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_entropy_available_bits'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_entropy_pool_size_bits'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_exporter_build_info'))
+			parameters = #{'branch','goversion','revision','version'}
+		else if (metric.equals('node_filefd_allocated'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_filefd_maximum'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_filesystem_avail_bytes'))
 			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_device_error'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_files'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_files_free'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_free_bytes'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_readonly'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_filesystem_size_bytes'))
+			parameters = #{'device','fstype','deployment_label','instance_name','monitoring_id','mountpoint'}
+		else if (metric.equals('node_forks_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_intr_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_load1'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_load15'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_load5'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Active_anon_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Active_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Active_file_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_AnonHugePages_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_AnonPages_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Bounce_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Buffers_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Cached_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_CmaFree_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_CmaTotal_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_CommitLimit_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Committed_AS_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_DirectMap1G_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_DirectMap2M_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_DirectMap4k_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Dirty_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_HardwareCorrupted_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_HugePages_Free'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_HugePages_Rsvd'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_HugePages_Surp'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_HugePages_Total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Hugepagesize_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Inactive_anon_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Inactive_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Inactive_file_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_KernelStack_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Mapped_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_MemAvailable_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_MemFree_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_MemTotal_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Mlocked_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_NFS_Unstable_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_PageTables_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_SReclaimable_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_SUnreclaim_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_ShmemHugePages_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_ShmemPmdMapped_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Shmem_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Slab_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_SwapCached_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_SwapFree_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_SwapTotal_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Unevictable_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_VmallocChunk_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_VmallocTotal_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_VmallocUsed_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_WritebackTmp_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_memory_Writeback_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp6_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp6_InMsgs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp6_OutMsgs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp_InMsgs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Icmp_OutMsgs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Ip6_InOctets'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Ip6_OutOctets'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_IpExt_InOctets'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_IpExt_OutOctets'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Ip_Forwarding'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_ListenDrops'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_ListenOverflows'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_SyncookiesFailed'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_SyncookiesRecv'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_SyncookiesSent'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_TcpExt_TCPSynRetrans'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_ActiveOpens'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_CurrEstab'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_InErrs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_InSegs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_OutRsts'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_OutSegs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_PassiveOpens'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Tcp_RetransSegs'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_InDatagrams'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_NoPorts'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_OutDatagrams'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_RcvbufErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp6_SndbufErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_UdpLite6_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_UdpLite_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_InDatagrams'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_InErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_NoPorts'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_OutDatagrams'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_RcvbufErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_netstat_Udp_SndbufErrors'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_address_assign_type'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_carrier_changes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_carrier_down_changes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_carrier_up_changes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_device_id'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		if (metric.equals('node_network_dormant'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_flags'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_iface_id'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_iface_link'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_iface_link_mode'))
+			parameters = #{'device','deploelse ifent_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_info'))
+			parameters = #{'address','broadcast','device','duplex','deployment_label','ifalias','instance_name','monitoring_id','operstate'}
+		else if (metric.equals('node_network_mtu_bytes'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_name_assign_type'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_net_dev_group'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_protocol_type'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_bytes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_compressed_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_drop_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_errs_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_fifo_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_frame_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_multicast_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_receive_packets_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_speed_bytes'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_bytes_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_carrier_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_colls_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_compressed_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_drop_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_errs_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_fifo_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_packets_total'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_transmit_queue_length'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_network_up'))
+			parameters = #{'device','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_nf_conntrack_entries'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_nf_conntrack_entries_limit'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_procs_blocked'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_procs_running'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_schedstat_running_seconds_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_schedstat_timeslices_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_schedstat_waiting_seconds_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_scrape_collector_duration_seconds'))
+			parameters = #{'collector','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_scrape_collector_success'))
+			parameters = #{'collector','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_FRAG6_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_FRAG6_memory'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_FRAG_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_FRAG_memory'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_RAW6_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_RAW_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP6_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_alloc'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_mem'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_mem_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_orphan'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_TCP_tw'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDP6_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDPLITE6_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDPLITE_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDP_inuse'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDP_mem'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_UDP_mem_bytes'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_sockstat_sockets_used'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_softnet_dropped_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_softnet_processed_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_softnet_times_squeezed_total'))
+			parameters = #{'cpu','deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_textfile_scrape_error'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_time_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_estimated_error_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_frequency_adjustment_ratio'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_loop_time_constant'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_maxerror_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_offset_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_calibration_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_error_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_frequency_hertz'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_jitter_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_jitter_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_shift_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_stability_exceeded_total'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_pps_stability_hertz'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_status'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_sync_status'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_tai_offset_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_timex_tick_seconds'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_udp_queues'))
+			parameters = #{'deployment_label','instance_name','ip','monitoring_id','queue'}
+		else if (metric.equals('node_uname_info'))
+			parameters = #{'domainname','machine','nodename','release','sysname','version'}
+		else if (metric.equals('node_vmstat_oom_kill'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pgfault'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pgmajfault'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pgpgin'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pgpgout'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pswpin'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		else if (metric.equals('node_vmstat_pswpout'))
+			parameters = #{'deployment_label','instance_name','monitoring_id'}
+		
 		return parameters;
 	}
 	
