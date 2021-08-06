@@ -9,16 +9,50 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.sodalite.dsl.rM.EArtifactTypes;
-import org.sodalite.dsl.rM.ECapabilityTypes;
-import org.sodalite.dsl.rM.EDataType;
-import org.sodalite.dsl.rM.EDataTypes;
-import org.sodalite.dsl.rM.EInterfaceTypes;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.sodalite.dsl.rM.EAssignmentValue;
+import org.sodalite.dsl.rM.EAttributeDefinition;
+import org.sodalite.dsl.rM.EAttributeDefinitionBody;
+import org.sodalite.dsl.rM.EAttributes;
+import org.sodalite.dsl.rM.EBOOLEAN;
+import org.sodalite.dsl.rM.ECapabilities;
+import org.sodalite.dsl.rM.ECapabilityDefinition;
+import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
+import org.sodalite.dsl.rM.EConstraints;
+import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EImplementation;
+import org.sodalite.dsl.rM.EInputs;
+import org.sodalite.dsl.rM.EInterfaceDefinition;
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
+import org.sodalite.dsl.rM.EInterfaces;
+import org.sodalite.dsl.rM.ENodeType;
+import org.sodalite.dsl.rM.ENodeTypeBody;
 import org.sodalite.dsl.rM.ENodeTypes;
-import org.sodalite.dsl.rM.EPolicyTypes;
-import org.sodalite.dsl.rM.ERelationshipTypes;
+import org.sodalite.dsl.rM.EOperationDefinition;
+import org.sodalite.dsl.rM.EOperationDefinitionBody;
+import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_REF;
+import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EParameterDefinition;
+import org.sodalite.dsl.rM.EParameterDefinitionBody;
+import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.EPropertyDefinitionBody;
+import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.ERequirementDefinitionBody;
+import org.sodalite.dsl.rM.ERequirements;
+import org.sodalite.dsl.rM.EValidSourceType;
+import org.sodalite.dsl.rM.EValueExpression;
+import org.sodalite.dsl.rM.GetAttribute;
+import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetInput;
+import org.sodalite.dsl.rM.GetProperty;
+import org.sodalite.dsl.rM.GetPropertyBody;
+import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.services.RMGrammarAccess;
 
@@ -29,44 +63,742 @@ public class RMFormatter extends AbstractFormatter2 {
   private RMGrammarAccess _rMGrammarAccess;
   
   protected void _format(final RM_Model rM_Model, @Extension final IFormattableDocument document) {
-    document.<EDataTypes>format(rM_Model.getDataTypes());
-    document.<EArtifactTypes>format(rM_Model.getArtifactTypes());
-    document.<ECapabilityTypes>format(rM_Model.getCapabilityTypes());
-    document.<EInterfaceTypes>format(rM_Model.getInterfaceTypes());
-    document.<ERelationshipTypes>format(rM_Model.getRelationshipTypes());
-    document.<ENodeTypes>format(rM_Model.getNodeTypes());
-    document.<EPolicyTypes>format(rM_Model.getPolicyTypes());
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(0, 0, 0);
+      it.noSpace();
+    };
+    document.<RM_Model>prepend(rM_Model, _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(rM_Model).keyword("node_types:"), _function_1), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ENodeTypes>format(document.<ENodeTypes>surround(rM_Model.getNodeTypes(), _function_3));
   }
   
-  protected void _format(final EDataTypes eDataTypes, @Extension final IFormattableDocument document) {
-    EList<EDataType> _dataTypes = eDataTypes.getDataTypes();
-    for (final EDataType eDataType : _dataTypes) {
-      document.<EDataType>format(eDataType);
+  protected void _format(final ENodeTypes eNodeTypes, @Extension final IFormattableDocument document) {
+    EList<ENodeType> _nodeTypes = eNodeTypes.getNodeTypes();
+    for (final ENodeType eNodeType : _nodeTypes) {
+      document.<ENodeType>format(eNodeType);
     }
   }
   
-  public void format(final Object eDataTypes, final IFormattableDocument document) {
-    if (eDataTypes instanceof XtextResource) {
-      _format((XtextResource)eDataTypes, document);
+  protected void _format(final ENodeType eNodeType, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeType).feature(RMPackage.Literals.ENODE_TYPE__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeType).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ENodeTypeBody>format(document.<ENodeTypeBody>surround(eNodeType.getNode(), _function_2));
+  }
+  
+  protected void _format(final ENodeTypeBody eNodeTypeBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("derived_from:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eNodeTypeBody.getSuperType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).feature(RMPackage.Literals.ENODE_TYPE_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("properties:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eNodeTypeBody.getProperties(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("attributes:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EAttributes>format(document.<EAttributes>surround(eNodeTypeBody.getAttributes(), _function_7));
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("requirements:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ERequirements>format(document.<ERequirements>surround(eNodeTypeBody.getRequirements(), _function_9));
+    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("capabilities:"), _function_10);
+    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ECapabilities>format(document.<ECapabilities>surround(eNodeTypeBody.getCapabilities(), _function_11));
+    final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eNodeTypeBody).keyword("interfaces:"), _function_12);
+    final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EInterfaces>format(document.<EInterfaces>surround(eNodeTypeBody.getInterfaces(), _function_13));
+  }
+  
+  protected void _format(final EProperties eProperties, @Extension final IFormattableDocument document) {
+    EList<EPropertyDefinition> _properties = eProperties.getProperties();
+    for (final EPropertyDefinition property : _properties) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EPropertyDefinition>append(document.<EPropertyDefinition>format(property), _function);
+    }
+  }
+  
+  protected void _format(final EAttributes eAttributes, @Extension final IFormattableDocument document) {
+    EList<EAttributeDefinition> _attributes = eAttributes.getAttributes();
+    for (final EAttributeDefinition attribute : _attributes) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EAttributeDefinition>append(document.<EAttributeDefinition>format(attribute), _function);
+    }
+  }
+  
+  protected void _format(final EInterfaces eInterfaces, @Extension final IFormattableDocument document) {
+    EList<EInterfaceDefinition> _interfaces = eInterfaces.getInterfaces();
+    for (final EInterfaceDefinition interface_ : _interfaces) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EInterfaceDefinition>append(document.<EInterfaceDefinition>format(interface_), _function);
+    }
+  }
+  
+  protected void _format(final ECapabilities eCapabilities, @Extension final IFormattableDocument document) {
+    EList<ECapabilityDefinition> _capabilities = eCapabilities.getCapabilities();
+    for (final ECapabilityDefinition capability : _capabilities) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<ECapabilityDefinition>append(document.<ECapabilityDefinition>format(capability), _function);
+    }
+  }
+  
+  protected void _format(final ERequirements eRequirements, @Extension final IFormattableDocument document) {
+    EList<ERequirementDefinition> _requirements = eRequirements.getRequirements();
+    for (final ERequirementDefinition requirement : _requirements) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<ERequirementDefinition>append(document.<ERequirementDefinition>format(requirement), _function);
+    }
+  }
+  
+  protected void _format(final EPropertyDefinition ePropertyDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinition).feature(RMPackage.Literals.EPROPERTY_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EPropertyDefinitionBody>format(document.<EPropertyDefinitionBody>surround(ePropertyDefinition.getProperty(), _function_2));
+  }
+  
+  protected void _format(final EAttributeDefinition eAttributeDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinition).feature(RMPackage.Literals.EATTRIBUTE_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EAttributeDefinitionBody>format(document.<EAttributeDefinitionBody>surround(eAttributeDefinition.getAttribute(), _function_2));
+  }
+  
+  protected void _format(final EInterfaceDefinition eInterfaceDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceDefinition).feature(RMPackage.Literals.EINTERFACE_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EInterfaceDefinitionBody>format(document.<EInterfaceDefinitionBody>surround(eInterfaceDefinition.getInterface(), _function_2));
+  }
+  
+  protected void _format(final ECapabilityDefinition eCapabilityDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinition).feature(RMPackage.Literals.EREQ_OR_CAP__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ECapabilityDefinitionBody>format(document.<ECapabilityDefinitionBody>surround(eCapabilityDefinition.getCapability(), _function_2));
+  }
+  
+  protected void _format(final ERequirementDefinition eRequirementDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinition).feature(RMPackage.Literals.EREQ_OR_CAP__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ERequirementDefinitionBody>format(document.<ERequirementDefinitionBody>surround(eRequirementDefinition.getRequirement(), _function_2));
+  }
+  
+  protected void _format(final EPropertyDefinitionBody ePropertyDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("type:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(ePropertyDefinitionBody.getType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).feature(RMPackage.Literals.EPROPERTY_DEFINITION_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("required:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EBOOLEAN>append(document.<EBOOLEAN>format(ePropertyDefinitionBody.getRequired()), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("default:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EAssignmentValue>append(document.<EAssignmentValue>format(ePropertyDefinitionBody.getDefault()), _function_7);
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("status:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).feature(RMPackage.Literals.EPROPERTY_DEFINITION_BODY__STATUS), _function_9);
+    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("constraints:"), _function_10);
+    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EConstraints>append(document.<EConstraints>format(ePropertyDefinitionBody.getConstraints()), _function_11);
+    final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("entry_schema:"), _function_12);
+    final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(ePropertyDefinitionBody.getEntry_schema()), _function_13);
+  }
+  
+  protected void _format(final EAttributeDefinitionBody eAttributeDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).keyword("type:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(eAttributeDefinitionBody.getType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).feature(RMPackage.Literals.EATTRIBUTE_DEFINITION_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).keyword("default:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EAssignmentValue>append(document.<EAssignmentValue>format(eAttributeDefinitionBody.getDefault()), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).keyword("status:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).feature(RMPackage.Literals.EPROPERTY_DEFINITION_BODY__STATUS), _function_7);
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eAttributeDefinitionBody).keyword("entry_schema:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(eAttributeDefinitionBody.getEntry_schema()), _function_9);
+  }
+  
+  protected void _format(final ECapabilityDefinitionBody eCapabilityDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("type:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eCapabilityDefinitionBody.getType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).feature(RMPackage.Literals.ECAPABILITY_DEFINITION_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("properties:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eCapabilityDefinitionBody.getProperties(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("attributes:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EAttributes>format(document.<EAttributes>surround(eCapabilityDefinitionBody.getAttributes(), _function_7));
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("valid_source_types:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EValidSourceType>append(document.<EValidSourceType>format(eCapabilityDefinitionBody.getValid_source_types()), _function_9);
+    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("occurrences:"), _function_10);
+  }
+  
+  protected void _format(final ERequirementDefinitionBody eRequirementDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinitionBody).keyword("capability:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eRequirementDefinitionBody.getCapability()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinitionBody).keyword("node:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eRequirementDefinitionBody.getNode()), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinitionBody).keyword("relationship:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eRequirementDefinitionBody.getRelationship()), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eRequirementDefinitionBody).keyword("occurrences:"), _function_6);
+  }
+  
+  protected void _format(final EInterfaceDefinitionBody eInterfaceDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceDefinitionBody).keyword("type:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eInterfaceDefinitionBody.getType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceDefinitionBody).keyword("inputs:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eInterfaceDefinitionBody.getInputs(), _function_3));
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceDefinitionBody).keyword("operations:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EOperations>format(document.<EOperations>surround(eInterfaceDefinitionBody.getOperations(), _function_5));
+  }
+  
+  protected void _format(final EOperations eOperations, @Extension final IFormattableDocument document) {
+    EList<EOperationDefinition> _operations = eOperations.getOperations();
+    for (final EOperationDefinition operation : _operations) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EOperationDefinition>append(document.<EOperationDefinition>format(operation), _function);
+    }
+  }
+  
+  protected void _format(final EOperationDefinition eOperationDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinition).feature(RMPackage.Literals.EOPERATION_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EOperationDefinitionBody>format(document.<EOperationDefinitionBody>surround(eOperationDefinition.getOperation(), _function_2));
+  }
+  
+  protected void _format(final EOperationDefinitionBody eOperationDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).keyword("description:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).feature(RMPackage.Literals.ECAPABILITY_DEFINITION_BODY__DESCRIPTION), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).keyword("inputs:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EInputs>format(document.<EInputs>surround(eOperationDefinitionBody.getInputs(), _function_3));
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).keyword("implementation:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EImplementation>format(document.<EImplementation>surround(eOperationDefinitionBody.getImplementation(), _function_5));
+  }
+  
+  protected void _format(final EInputs eInputs, @Extension final IFormattableDocument document) {
+    EList<EParameterDefinition> _parameters = eInputs.getParameters();
+    for (final EParameterDefinition eInput : _parameters) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EParameterDefinition>append(document.<EParameterDefinition>format(eInput), _function);
+    }
+  }
+  
+  protected void _format(final EParameterDefinition eParameterDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinition).feature(RMPackage.Literals.EPARAMETER_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EParameterDefinitionBody>format(document.<EParameterDefinitionBody>surround(eParameterDefinition.getParameter(), _function_2));
+  }
+  
+  protected void _format(final EParameterDefinitionBody eParameterDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinitionBody).keyword("type:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(eParameterDefinitionBody.getType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinitionBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinitionBody).feature(RMPackage.Literals.EPARAMETER_DEFINITION_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinitionBody).keyword("value:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EValueExpression>append(document.<EValueExpression>format(eParameterDefinitionBody.getValue()), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eParameterDefinitionBody).keyword("default:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EValueExpression>append(document.<EValueExpression>format(eParameterDefinitionBody.getDefault()), _function_7);
+  }
+  
+  protected void _format(final GetProperty getProperty, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(getProperty).keyword("get_property:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<GetPropertyBody>format(document.<GetPropertyBody>surround(getProperty.getProperty(), _function_1));
+  }
+  
+  protected void _format(final GetPropertyBody getPropertyBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getPropertyBody).keyword("property:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(getPropertyBody.getProperty()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getPropertyBody).keyword("entity:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EEntityReference>append(document.<EEntityReference>format(getPropertyBody.getEntity()), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getPropertyBody).keyword("req_cap:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(getPropertyBody.getReq_cap()), _function_5);
+  }
+  
+  protected void _format(final GetAttribute getAttribute, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(getAttribute).keyword("get_attribute:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<GetAttributeBody>format(document.<GetAttributeBody>surround(getAttribute.getAttribute(), _function_1));
+  }
+  
+  protected void _format(final GetAttributeBody getAttributeBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getAttributeBody).keyword("attribute:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(getAttributeBody.getAttribute()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getAttributeBody).keyword("entity:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EEntityReference>append(document.<EEntityReference>format(getAttributeBody.getEntity()), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(getAttributeBody).keyword("req_cap:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(getAttributeBody.getReq_cap()), _function_5);
+  }
+  
+  protected void _format(final GetInput getInput, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(getInput).keyword("get_input:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EParameterDefinition>format(document.<EParameterDefinition>surround(getInput.getInput(), _function_1));
+  }
+  
+  public void format(final Object getAttribute, final IFormattableDocument document) {
+    if (getAttribute instanceof XtextResource) {
+      _format((XtextResource)getAttribute, document);
       return;
-    } else if (eDataTypes instanceof EDataTypes) {
-      _format((EDataTypes)eDataTypes, document);
+    } else if (getAttribute instanceof GetAttribute) {
+      _format((GetAttribute)getAttribute, document);
       return;
-    } else if (eDataTypes instanceof RM_Model) {
-      _format((RM_Model)eDataTypes, document);
+    } else if (getAttribute instanceof GetInput) {
+      _format((GetInput)getAttribute, document);
       return;
-    } else if (eDataTypes instanceof EObject) {
-      _format((EObject)eDataTypes, document);
+    } else if (getAttribute instanceof GetProperty) {
+      _format((GetProperty)getAttribute, document);
       return;
-    } else if (eDataTypes == null) {
+    } else if (getAttribute instanceof ECapabilityDefinition) {
+      _format((ECapabilityDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ERequirementDefinition) {
+      _format((ERequirementDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EAttributeDefinition) {
+      _format((EAttributeDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EAttributeDefinitionBody) {
+      _format((EAttributeDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EAttributes) {
+      _format((EAttributes)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ECapabilities) {
+      _format((ECapabilities)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ECapabilityDefinitionBody) {
+      _format((ECapabilityDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInputs) {
+      _format((EInputs)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaceDefinition) {
+      _format((EInterfaceDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaceDefinitionBody) {
+      _format((EInterfaceDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaces) {
+      _format((EInterfaces)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ENodeType) {
+      _format((ENodeType)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ENodeTypeBody) {
+      _format((ENodeTypeBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ENodeTypes) {
+      _format((ENodeTypes)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EOperationDefinition) {
+      _format((EOperationDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EOperationDefinitionBody) {
+      _format((EOperationDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EOperations) {
+      _format((EOperations)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EParameterDefinition) {
+      _format((EParameterDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EParameterDefinitionBody) {
+      _format((EParameterDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EProperties) {
+      _format((EProperties)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPropertyDefinition) {
+      _format((EPropertyDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPropertyDefinitionBody) {
+      _format((EPropertyDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ERequirementDefinitionBody) {
+      _format((ERequirementDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ERequirements) {
+      _format((ERequirements)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof GetAttributeBody) {
+      _format((GetAttributeBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof GetPropertyBody) {
+      _format((GetPropertyBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof RM_Model) {
+      _format((RM_Model)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EObject) {
+      _format((EObject)getAttribute, document);
+      return;
+    } else if (getAttribute == null) {
       _format((Void)null, document);
       return;
-    } else if (eDataTypes != null) {
-      _format(eDataTypes, document);
+    } else if (getAttribute != null) {
+      _format(getAttribute, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(eDataTypes, document).toString());
+        Arrays.<Object>asList(getAttribute, document).toString());
     }
   }
 }
