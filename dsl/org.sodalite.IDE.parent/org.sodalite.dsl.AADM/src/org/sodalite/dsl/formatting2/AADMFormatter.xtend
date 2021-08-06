@@ -64,11 +64,11 @@ class AADMFormatter extends RMFormatter {
 		aADM_Model.append[newLine]
 	}
 	
-	def dispatch void format(EInputs inputs, extension IFormattableDocument document) {
-		for (eInput : inputs.parameters) {
-			eInput.format
-		}
-	}
+//	def dispatch void format(EInputs inputs, extension IFormattableDocument document) {
+//		for (eInput : inputs.parameters) {
+//			eInput.format
+//		}
+//	}
 	
 	def dispatch void format(EOutputs outputs, extension IFormattableDocument document) {
 		for (eInput : outputs.parameters) {
@@ -76,22 +76,22 @@ class AADMFormatter extends RMFormatter {
 		}
 	}
 	
-	def dispatch void format(EParameterDefinition eParameter, extension IFormattableDocument document) {
-		eParameter.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
-		eParameter.regionFor.keyword(":").append[newLine]
-		eParameter.parameter.surround[indent].format
-	}
+//	def dispatch void format(EParameterDefinition eParameter, extension IFormattableDocument document) {
+//		eParameter.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
+//		eParameter.regionFor.keyword(":").append[newLine]
+//		eParameter.parameter.surround[indent].format
+//	}
 	
-	def dispatch void format(EParameterDefinitionBody eParameterBody, extension IFormattableDocument document) {
-		eParameterBody.regionFor.keyword("type:").append[oneSpace]
-		eParameterBody.type.format.append[newLine]
-
-		eParameterBody.regionFor.keyword("value:").append[oneSpace]
-		eParameterBody.value.format.append[newLine]
-
-		eParameterBody.regionFor.keyword("default:").append[oneSpace]
-		eParameterBody.^default.format.append[newLine]
-	}
+//	def dispatch void format(EParameterDefinitionBody eParameterBody, extension IFormattableDocument document) {
+//		eParameterBody.regionFor.keyword("type:").append[oneSpace]
+//		eParameterBody.type.format.append[newLine]
+//
+//		eParameterBody.regionFor.keyword("value:").append[oneSpace]
+//		eParameterBody.value.format.append[newLine]
+//
+//		eParameterBody.regionFor.keyword("default:").append[oneSpace]
+//		eParameterBody.^default.format.append[newLine]
+//	}
 
 	def dispatch void format(ENodeTemplates eNodeTemplates, extension IFormattableDocument document) {
 		for (eNodeTemplate : eNodeTemplates.nodeTemplates) {
