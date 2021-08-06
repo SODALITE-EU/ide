@@ -180,10 +180,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         return;
       }
       List<String> proposals = new ArrayList<String>();
-      EPREFIX_TYPE _req_cap = body.getReq_cap();
+      EPREFIX_REF _req_cap = body.getReq_cap();
       boolean _tripleNotEquals = (_req_cap != null);
       if (_tripleNotEquals) {
-        final String req_cap_name = AADMHelper.getLastSegment(body.getReq_cap().getType(), ".");
+        final String req_cap_name = AADMHelper.getLastSegment(body.getReq_cap(), ".");
         final ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node);
         if ((req_node != null)) {
           EList<EPropertyAssignment> _properties = req_node.getNode().getProperties().getProperties();
@@ -242,10 +242,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         return;
       }
       List<String> proposals = new ArrayList<String>();
-      EPREFIX_TYPE _req_cap = body.getReq_cap();
+      EPREFIX_REF _req_cap = body.getReq_cap();
       boolean _tripleNotEquals = (_req_cap != null);
       if (_tripleNotEquals) {
-        final String req_cap_name = AADMHelper.getLastSegment(body.getReq_cap().getType(), ".");
+        final String req_cap_name = AADMHelper.getLastSegment(body.getReq_cap(), ".");
         final ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node);
         if ((req_node != null)) {
           EList<EAttributeAssignment> _attributes = req_node.getNode().getAttributes().getAttributes();

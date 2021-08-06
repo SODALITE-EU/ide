@@ -5072,17 +5072,17 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getGetAttribute_Attribute(), this.getGetAttributeBody(), null, "attribute", null, 0, 1, GetAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getAttributeBodyEClass, GetAttributeBody.class, "GetAttributeBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetAttributeBody_Attribute(), this.getEPREFIX_TYPE(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Attribute(), this.getEPREFIX_REF(), null, "attribute", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetAttributeBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetAttributeBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetAttributeBody_Req_cap(), this.getEPREFIX_REF(), null, "req_cap", null, 0, 1, GetAttributeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyEClass, GetProperty.class, "GetProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetProperty_Property(), this.getGetPropertyBody(), null, "property", null, 0, 1, GetProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getPropertyBodyEClass, GetPropertyBody.class, "GetPropertyBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetPropertyBody_Property(), this.getEPREFIX_TYPE(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Property(), this.getEPREFIX_REF(), null, "property", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGetPropertyBody_Entity(), this.getEEntityReference(), null, "entity", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGetPropertyBody_Req_cap(), this.getEPREFIX_TYPE(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGetPropertyBody_Req_cap(), this.getEPREFIX_REF(), null, "req_cap", null, 0, 1, GetPropertyBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilitiesEClass, ECapabilities.class, "ECapabilities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getECapabilities_Capabilities(), this.getECapabilityDefinition(), null, "capabilities", null, 0, -1, ECapabilities.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5095,7 +5095,7 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEAttribute(getECapabilityDefinitionBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Attributes(), this.getEAttributes(), null, "attributes", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getECapabilityDefinitionBody_Valid_source_types(), this.getEValidSourceType(), null, "valid_source_types", null, 0, -1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getECapabilityDefinitionBody_Valid_source_types(), this.getEValidSourceType(), null, "valid_source_types", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Occurrences_start(), this.getEAlphaNumericValue(), null, "occurrences_start", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getECapabilityDefinitionBody_Occurrences_end(), this.getEAlphaNumericValue(), null, "occurrences_end", null, 0, 1, ECapabilityDefinitionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

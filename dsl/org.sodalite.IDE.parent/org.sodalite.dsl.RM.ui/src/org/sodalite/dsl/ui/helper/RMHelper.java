@@ -288,6 +288,16 @@ public class RMHelper {
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
 	}
 
+	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
+		if (ref instanceof EPREFIX_TYPE) {
+			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
+		} else if (ref instanceof EPREFIX_TYPE) {
+			return ((EPREFIX_ID) ref).getId();
+		} else {
+			return null;
+		}
+	}
+
 	public static String getModule(EObject object) {
 		EObject model = findModel(object);
 		return invokeGetModule(model);

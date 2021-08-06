@@ -98,12 +98,12 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (']' 'valid_source_types:' '[')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     attributes=EAttributes END 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     description=STRING 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     occurrences_end=EAlphaNumericValue ']' 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     properties=EProperties END 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
-	 *     type=EPREFIX_TYPE 'valid_source_types:' '[' (ambiguity) valid_source_types+=EValidSourceType
+	 *     (rule start) 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
+	 *     attributes=EAttributes END 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
+	 *     description=STRING 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
+	 *     occurrences_end=EAlphaNumericValue ']' 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
+	 *     properties=EProperties END 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
+	 *     type=EPREFIX_TYPE 'valid_source_types:' '[' (ambiguity) valid_source_types=EValidSourceType
 	 */
 	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -114,7 +114,7 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (']' 'valid_source_types:' '[')+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     valid_source_types+=EValidSourceType (ambiguity) valid_source_types+=EValidSourceType
+	 *     valid_source_types=EValidSourceType (ambiguity) valid_source_types=EValidSourceType
 	 */
 	protected void emit_ECapabilityDefinitionBody___RightSquareBracketKeyword_4_3_Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -161,12 +161,12 @@ public class RMSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     type=EPREFIX_TYPE (ambiguity) 'properties:' BEGIN properties=EProperties
 	 *     type=EPREFIX_TYPE (ambiguity) 'type:' type=EPREFIX_TYPE
 	 *     type=EPREFIX_TYPE (ambiguity) (rule end)
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'description:' description=STRING
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'properties:' BEGIN properties=EProperties
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) 'type:' type=EPREFIX_TYPE
-	 *     valid_source_types+=EValidSourceType ']' (ambiguity) (rule end)
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) 'attributes:' BEGIN attributes=EAttributes
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) 'description:' description=STRING
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) 'occurrences:' '[' occurrences_start=EAlphaNumericValue
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) 'properties:' BEGIN properties=EProperties
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) 'type:' type=EPREFIX_TYPE
+	 *     valid_source_types=EValidSourceType ']' (ambiguity) (rule end)
 	 */
 	protected void emit_ECapabilityDefinitionBody___Valid_source_typesKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

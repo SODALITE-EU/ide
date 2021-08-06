@@ -609,7 +609,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         (type=EPREFIX_TYPE | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types+=EValidSourceType)? 
+	 *         (type=EPREFIX_TYPE | description=STRING | properties=EProperties | attributes=EAttributes | valid_source_types=EValidSourceType)? 
 	 *         (occurrences_start=EAlphaNumericValue occurrences_end=EAlphaNumericValue)?
 	 *     )+
 	 */
@@ -1863,7 +1863,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetAttributeBody returns GetAttributeBody
 	 *
 	 * Constraint:
-	 *     (attribute=EPREFIX_TYPE | entity=EEntityReference | req_cap=EPREFIX_TYPE)+
+	 *     (attribute=EPREFIX_REF | entity=EEntityReference | req_cap=EPREFIX_REF)+
 	 */
 	protected void sequence_GetAttributeBody(ISerializationContext context, GetAttributeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1917,7 +1917,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     GetPropertyBody returns GetPropertyBody
 	 *
 	 * Constraint:
-	 *     (property=EPREFIX_TYPE | entity=EEntityReference | req_cap=EPREFIX_TYPE)+
+	 *     (property=EPREFIX_REF | entity=EEntityReference | req_cap=EPREFIX_REF)+
 	 */
 	protected void sequence_GetPropertyBody(ISerializationContext context, GetPropertyBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

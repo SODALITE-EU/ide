@@ -3619,7 +3619,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cAttributeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cAttributeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cAttributeEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cAttributeAssignment_0_1.eContents().get(0);
+		private final RuleCall cAttributeEPREFIX_REFParserRuleCall_0_1_0 = (RuleCall)cAttributeAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cEntityKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cEntityAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -3627,26 +3627,26 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cReq_capKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cReq_capAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cReq_capEPREFIX_TYPEParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
+		private final RuleCall cReq_capEPREFIX_REFParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
 		
 		//GetAttributeBody:
-		//	'attribute:' attribute=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?;
+		//	'attribute:' attribute=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'attribute:' attribute=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?
+		//'attribute:' attribute=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'attribute:' attribute=EPREFIX_TYPE
+		//'attribute:' attribute=EPREFIX_REF
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'attribute:'
 		public Keyword getAttributeKeyword_0_0() { return cAttributeKeyword_0_0; }
 		
-		//attribute=EPREFIX_TYPE
+		//attribute=EPREFIX_REF
 		public Assignment getAttributeAssignment_0_1() { return cAttributeAssignment_0_1; }
 		
-		//EPREFIX_TYPE
-		public RuleCall getAttributeEPREFIX_TYPEParserRuleCall_0_1_0() { return cAttributeEPREFIX_TYPEParserRuleCall_0_1_0; }
+		//EPREFIX_REF
+		public RuleCall getAttributeEPREFIX_REFParserRuleCall_0_1_0() { return cAttributeEPREFIX_REFParserRuleCall_0_1_0; }
 		
 		//'entity:' entity=EEntityReference
 		public Group getGroup_1() { return cGroup_1; }
@@ -3660,17 +3660,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EEntityReference
 		public RuleCall getEntityEEntityReferenceParserRuleCall_1_1_0() { return cEntityEEntityReferenceParserRuleCall_1_1_0; }
 		
-		//('req_cap:' req_cap=EPREFIX_TYPE)?
+		//('req_cap:' req_cap=EPREFIX_REF)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'req_cap:'
 		public Keyword getReq_capKeyword_2_0() { return cReq_capKeyword_2_0; }
 		
-		//req_cap=EPREFIX_TYPE
+		//req_cap=EPREFIX_REF
 		public Assignment getReq_capAssignment_2_1() { return cReq_capAssignment_2_1; }
 		
-		//EPREFIX_TYPE
-		public RuleCall getReq_capEPREFIX_TYPEParserRuleCall_2_1_0() { return cReq_capEPREFIX_TYPEParserRuleCall_2_1_0; }
+		//EPREFIX_REF
+		public RuleCall getReq_capEPREFIX_REFParserRuleCall_2_1_0() { return cReq_capEPREFIX_REFParserRuleCall_2_1_0; }
 	}
 	public class GetPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.GetProperty");
@@ -3712,7 +3712,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cUnorderedGroup.eContents().get(0);
 		private final Keyword cPropertyKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cPropertyAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cPropertyEPREFIX_TYPEParserRuleCall_0_1_0 = (RuleCall)cPropertyAssignment_0_1.eContents().get(0);
+		private final RuleCall cPropertyEPREFIX_REFParserRuleCall_0_1_0 = (RuleCall)cPropertyAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cUnorderedGroup.eContents().get(1);
 		private final Keyword cEntityKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cEntityAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -3720,26 +3720,26 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_2 = (Group)cUnorderedGroup.eContents().get(2);
 		private final Keyword cReq_capKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cReq_capAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cReq_capEPREFIX_TYPEParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
+		private final RuleCall cReq_capEPREFIX_REFParserRuleCall_2_1_0 = (RuleCall)cReq_capAssignment_2_1.eContents().get(0);
 		
 		//GetPropertyBody:
-		//	'property:' property=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?;
+		//	'property:' property=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'property:' property=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?
+		//'property:' property=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
-		//'property:' property=EPREFIX_TYPE
+		//'property:' property=EPREFIX_REF
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'property:'
 		public Keyword getPropertyKeyword_0_0() { return cPropertyKeyword_0_0; }
 		
-		//property=EPREFIX_TYPE
+		//property=EPREFIX_REF
 		public Assignment getPropertyAssignment_0_1() { return cPropertyAssignment_0_1; }
 		
-		//EPREFIX_TYPE
-		public RuleCall getPropertyEPREFIX_TYPEParserRuleCall_0_1_0() { return cPropertyEPREFIX_TYPEParserRuleCall_0_1_0; }
+		//EPREFIX_REF
+		public RuleCall getPropertyEPREFIX_REFParserRuleCall_0_1_0() { return cPropertyEPREFIX_REFParserRuleCall_0_1_0; }
 		
 		//'entity:' entity=EEntityReference
 		public Group getGroup_1() { return cGroup_1; }
@@ -3753,17 +3753,17 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//EEntityReference
 		public RuleCall getEntityEEntityReferenceParserRuleCall_1_1_0() { return cEntityEEntityReferenceParserRuleCall_1_1_0; }
 		
-		//('req_cap:' req_cap=EPREFIX_TYPE)?
+		//('req_cap:' req_cap=EPREFIX_REF)?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'req_cap:'
 		public Keyword getReq_capKeyword_2_0() { return cReq_capKeyword_2_0; }
 		
-		//req_cap=EPREFIX_TYPE
+		//req_cap=EPREFIX_REF
 		public Assignment getReq_capAssignment_2_1() { return cReq_capAssignment_2_1; }
 		
-		//EPREFIX_TYPE
-		public RuleCall getReq_capEPREFIX_TYPEParserRuleCall_2_1_0() { return cReq_capEPREFIX_TYPEParserRuleCall_2_1_0; }
+		//EPREFIX_REF
+		public RuleCall getReq_capEPREFIX_REFParserRuleCall_2_1_0() { return cReq_capEPREFIX_REFParserRuleCall_2_1_0; }
 	}
 	public class ECapabilitiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECapabilities");
@@ -3876,12 +3876,12 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//	END)? & ('attributes:'
 		//	BEGIN
 		//	attributes=EAttributes
-		//	END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '['
+		//	END)? & ('valid_source_types:' '[' valid_source_types=EValidSourceType? ']')? & ('occurrences:' '['
 		//	occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type:' type=EPREFIX_TYPE & ('description:' description=STRING)? & ('properties:' BEGIN properties=EProperties END)? &
-		//('attributes:' BEGIN attributes=EAttributes END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType?
+		//('attributes:' BEGIN attributes=EAttributes END)? & ('valid_source_types:' '[' valid_source_types=EValidSourceType?
 		//']')? & ('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?
 		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
 		
@@ -3945,7 +3945,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//END
 		public RuleCall getENDTerminalRuleCall_3_3() { return cENDTerminalRuleCall_3_3; }
 		
-		//('valid_source_types:' '[' valid_source_types+=EValidSourceType? ']')?
+		//('valid_source_types:' '[' valid_source_types=EValidSourceType? ']')?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'valid_source_types:'
@@ -3954,7 +3954,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//'['
 		public Keyword getLeftSquareBracketKeyword_4_1() { return cLeftSquareBracketKeyword_4_1; }
 		
-		//valid_source_types+=EValidSourceType?
+		//valid_source_types=EValidSourceType?
 		public Assignment getValid_source_typesAssignment_4_2() { return cValid_source_typesAssignment_4_2; }
 		
 		//EValidSourceType
@@ -6094,7 +6094,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//GetAttributeBody:
-	//	'attribute:' attribute=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?;
+	//	'attribute:' attribute=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?;
 	public GetAttributeBodyElements getGetAttributeBodyAccess() {
 		return pGetAttributeBody;
 	}
@@ -6117,7 +6117,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	}
 	
 	//GetPropertyBody:
-	//	'property:' property=EPREFIX_TYPE & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_TYPE)?;
+	//	'property:' property=EPREFIX_REF & 'entity:' entity=EEntityReference & ('req_cap:' req_cap=EPREFIX_REF)?;
 	public GetPropertyBodyElements getGetPropertyBodyAccess() {
 		return pGetPropertyBody;
 	}
@@ -6156,7 +6156,7 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	//	END)? & ('attributes:'
 	//	BEGIN
 	//	attributes=EAttributes
-	//	END)? & ('valid_source_types:' '[' valid_source_types+=EValidSourceType? ']')? & ('occurrences:' '['
+	//	END)? & ('valid_source_types:' '[' valid_source_types=EValidSourceType? ']')? & ('occurrences:' '['
 	//	occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 	public ECapabilityDefinitionBodyElements getECapabilityDefinitionBodyAccess() {
 		return pECapabilityDefinitionBody;

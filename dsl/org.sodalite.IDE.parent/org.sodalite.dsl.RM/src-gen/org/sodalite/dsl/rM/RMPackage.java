@@ -2932,7 +2932,7 @@ public interface RMPackage extends EPackage
   int ECAPABILITY_DEFINITION_BODY__ATTRIBUTES = 3;
 
   /**
-   * The feature id for the '<em><b>Valid source types</b></em>' containment reference list.
+   * The feature id for the '<em><b>Valid source types</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -6401,10 +6401,10 @@ public interface RMPackage extends EPackage
   EReference getECapabilityDefinitionBody_Attributes();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getValid_source_types <em>Valid source types</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getValid_source_types <em>Valid source types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Valid source types</em>'.
+   * @return the meta object for the containment reference '<em>Valid source types</em>'.
    * @see org.sodalite.dsl.rM.ECapabilityDefinitionBody#getValid_source_types()
    * @see #getECapabilityDefinitionBody()
    * @generated
@@ -9181,7 +9181,7 @@ public interface RMPackage extends EPackage
     EReference ECAPABILITY_DEFINITION_BODY__ATTRIBUTES = eINSTANCE.getECapabilityDefinitionBody_Attributes();
 
     /**
-     * The meta object literal for the '<em><b>Valid source types</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Valid source types</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

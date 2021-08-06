@@ -55,6 +55,7 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.ui.helper.RMHelper
 import org.eclipse.xtext.impl.KeywordImpl
+import org.sodalite.dsl.rM.EPREFIX_REF
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -1465,7 +1466,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val RM_Model rm_model = RMHelper.findModel(model) as RM_Model
 		//Get entity in this GetProperty body. If null, return
 		var EObject node = null
-		var EPREFIX_TYPE req_cap = null
+		var EPREFIX_REF req_cap = null
 		if (model instanceof GetPropertyBodyImpl){
 			var body = model as GetPropertyBodyImpl
 			node = RMHelper.getEntityType(body.eContainer as EFunction)
@@ -1479,7 +1480,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			return
 		}
 		if (node instanceof ENodeType && req_cap !== null){ //TODO support the case a capability is given
-			val req_cap_name = RMHelper.getLastSegment(req_cap.type, '.')
+			val req_cap_name = RMHelper.getLastSegment(req_cap, '.')
 			val nodeType = (node as ENodeType)
 			val String targetNodeRef = RMHelper.findRequirementTargetNode(nodeType, req_cap_name)
 			if (targetNodeRef !== null){

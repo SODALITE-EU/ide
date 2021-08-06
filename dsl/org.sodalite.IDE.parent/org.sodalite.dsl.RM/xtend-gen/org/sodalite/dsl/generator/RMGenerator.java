@@ -86,7 +86,6 @@ import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.ETargetType;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggers;
-import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
@@ -869,7 +868,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().isEmpty()))) {
+      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().getSourceTypes().isEmpty()))) {
         this.putParameterNumber(c, "valid_source_types", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -883,33 +882,28 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"valid_source_types\" ;");
         _builder.newLine();
         {
-          EList<EValidSourceType> _valid_source_types = c.getCapability().getValid_source_types();
-          for(final EValidSourceType entry : ((EObjectContainmentEList<EValidSourceType>) _valid_source_types)) {
+          EList<EPREFIX_TYPE> _sourceTypes = c.getCapability().getValid_source_types().getSourceTypes();
+          for(final EPREFIX_TYPE s : _sourceTypes) {
             {
-              EList<EPREFIX_TYPE> _sourceTypes = entry.getSourceTypes();
-              for(final EPREFIX_TYPE s : _sourceTypes) {
-                {
-                  String _module = s.getModule();
-                  boolean _tripleNotEquals_1 = (_module != null);
-                  if (_tripleNotEquals_1) {
-                    _builder.append("  ");
-                    _builder.append("exchange:listValue \"");
-                    String _module_1 = s.getModule();
-                    _builder.append(_module_1, "  ");
-                    _builder.append("/");
-                    String _type_1 = s.getType();
-                    _builder.append(_type_1, "  ");
-                    _builder.append("\" ;");
-                    _builder.newLineIfNotEmpty();
-                  } else {
-                    _builder.append("  ");
-                    _builder.append("exchange:listValue \"");
-                    String _type_2 = s.getType();
-                    _builder.append(_type_2, "  ");
-                    _builder.append("\" ;");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
+              String _module = s.getModule();
+              boolean _tripleNotEquals_1 = (_module != null);
+              if (_tripleNotEquals_1) {
+                _builder.append("  ");
+                _builder.append("exchange:listValue \"");
+                String _module_1 = s.getModule();
+                _builder.append(_module_1, "  ");
+                _builder.append("/");
+                String _type_1 = s.getType();
+                _builder.append(_type_1, "  ");
+                _builder.append("\" ;");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("  ");
+                _builder.append("exchange:listValue \"");
+                String _type_2 = s.getType();
+                _builder.append(_type_2, "  ");
+                _builder.append("\" ;");
+                _builder.newLineIfNotEmpty();
               }
             }
           }
@@ -961,7 +955,7 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().isEmpty()))) {
+      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().getSourceTypes().isEmpty()))) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
         Integer _parameterNumber_1 = this.getParameterNumber(c, "valid_source_types");
@@ -2141,7 +2135,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetProperty p) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPREFIX_TYPE _property = p.getProperty().getProperty();
+      EPREFIX_REF _property = p.getProperty().getProperty();
       boolean _tripleNotEquals = (_property != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(p, "property", Integer.valueOf(this.parameter_counter));
@@ -2156,12 +2150,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"property\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment = this.lastSegment(p.getProperty().getProperty().getType(), ".");
-        _builder.append(_lastSegment, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _property_1 = p.getProperty().getProperty();
+          if ((_property_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _property_2 = p.getProperty().getProperty();
+            String _lastSegment = this.lastSegment(((EPREFIX_TYPE) _property_2).getType(), ".");
+            _builder.append(_lastSegment, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _property_3 = p.getProperty().getProperty();
+            if ((_property_3 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _property_4 = p.getProperty().getProperty();
+              String _lastSegment_1 = this.lastSegment(((EPREFIX_ID) _property_4).getId(), ".");
+              _builder.append(_lastSegment_1, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2195,7 +2206,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      EPREFIX_TYPE _req_cap = p.getProperty().getReq_cap();
+      EPREFIX_REF _req_cap = p.getProperty().getReq_cap();
       boolean _tripleNotEquals_2 = (_req_cap != null);
       if (_tripleNotEquals_2) {
         this.putParameterNumber(p, "req_cap", Integer.valueOf(this.parameter_counter));
@@ -2210,12 +2221,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"req_cap\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment_1 = this.lastSegment(p.getProperty().getReq_cap().getType(), ".");
-        _builder.append(_lastSegment_1, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _req_cap_1 = p.getProperty().getReq_cap();
+          if ((_req_cap_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _req_cap_2 = p.getProperty().getReq_cap();
+            String _lastSegment_2 = this.lastSegment(((EPREFIX_TYPE) _req_cap_2).getType(), ".");
+            _builder.append(_lastSegment_2, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _property_5 = p.getProperty().getProperty();
+            if ((_property_5 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _req_cap_3 = p.getProperty().getReq_cap();
+              String _lastSegment_3 = this.lastSegment(((EPREFIX_ID) _req_cap_3).getId(), ".");
+              _builder.append(_lastSegment_3, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2234,8 +2262,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_property\" ;");
     _builder.newLine();
     {
-      EPREFIX_TYPE _property_1 = p.getProperty().getProperty();
-      boolean _tripleNotEquals_3 = (_property_1 != null);
+      EPREFIX_REF _property_6 = p.getProperty().getProperty();
+      boolean _tripleNotEquals_3 = (_property_6 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2258,8 +2286,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EPREFIX_TYPE _req_cap_1 = p.getProperty().getReq_cap();
-      boolean _tripleNotEquals_5 = (_req_cap_1 != null);
+      EPREFIX_REF _req_cap_4 = p.getProperty().getReq_cap();
+      boolean _tripleNotEquals_5 = (_req_cap_4 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2277,7 +2305,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetAttribute a) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPREFIX_TYPE _attribute = a.getAttribute().getAttribute();
+      EPREFIX_REF _attribute = a.getAttribute().getAttribute();
       boolean _tripleNotEquals = (_attribute != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(a, "attribute", Integer.valueOf(this.parameter_counter));
@@ -2292,12 +2320,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"attribute\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment = this.lastSegment(a.getAttribute().getAttribute().getType(), ".");
-        _builder.append(_lastSegment, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _attribute_1 = a.getAttribute().getAttribute();
+          if ((_attribute_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _attribute_2 = a.getAttribute().getAttribute();
+            String _lastSegment = this.lastSegment(((EPREFIX_TYPE) _attribute_2).getType(), ".");
+            _builder.append(_lastSegment, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _attribute_3 = a.getAttribute().getAttribute();
+            if ((_attribute_3 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _attribute_4 = a.getAttribute().getAttribute();
+              String _lastSegment_1 = this.lastSegment(((EPREFIX_ID) _attribute_4).getId(), ".");
+              _builder.append(_lastSegment_1, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2331,7 +2376,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      EPREFIX_TYPE _req_cap = a.getAttribute().getReq_cap();
+      EPREFIX_REF _req_cap = a.getAttribute().getReq_cap();
       boolean _tripleNotEquals_2 = (_req_cap != null);
       if (_tripleNotEquals_2) {
         this.putParameterNumber(a, "req_cap", Integer.valueOf(this.parameter_counter));
@@ -2346,12 +2391,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"req_cap\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment_1 = this.lastSegment(a.getAttribute().getReq_cap().getType(), ".");
-        _builder.append(_lastSegment_1, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _req_cap_1 = a.getAttribute().getReq_cap();
+          if ((_req_cap_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _req_cap_2 = a.getAttribute().getReq_cap();
+            String _lastSegment_2 = this.lastSegment(((EPREFIX_TYPE) _req_cap_2).getType(), ".");
+            _builder.append(_lastSegment_2, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _attribute_5 = a.getAttribute().getAttribute();
+            if ((_attribute_5 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _req_cap_3 = a.getAttribute().getReq_cap();
+              String _lastSegment_3 = this.lastSegment(((EPREFIX_ID) _req_cap_3).getId(), ".");
+              _builder.append(_lastSegment_3, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2370,8 +2432,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_attribute\" ;");
     _builder.newLine();
     {
-      EPREFIX_TYPE _attribute_1 = a.getAttribute().getAttribute();
-      boolean _tripleNotEquals_3 = (_attribute_1 != null);
+      EPREFIX_REF _attribute_6 = a.getAttribute().getAttribute();
+      boolean _tripleNotEquals_3 = (_attribute_6 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2394,8 +2456,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EPREFIX_TYPE _req_cap_1 = a.getAttribute().getReq_cap();
-      boolean _tripleNotEquals_5 = (_req_cap_1 != null);
+      EPREFIX_REF _req_cap_4 = a.getAttribute().getReq_cap();
+      boolean _tripleNotEquals_5 = (_req_cap_4 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2405,7 +2467,7 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append(".\t");
+    _builder.append(".");
     _builder.newLine();
     return _builder;
   }

@@ -1853,7 +1853,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       EObject _findModel = RMHelper.findModel(model);
       final RM_Model rm_model = ((RM_Model) _findModel);
       EObject node = null;
-      EPREFIX_TYPE req_cap = null;
+      EPREFIX_REF req_cap = null;
       if ((model instanceof GetPropertyBodyImpl)) {
         GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
         EObject _eContainer = body.eContainer();
@@ -1871,7 +1871,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         return;
       }
       if (((node instanceof ENodeType) && (req_cap != null))) {
-        final String req_cap_name = RMHelper.getLastSegment(req_cap.getType(), ".");
+        final String req_cap_name = RMHelper.getLastSegment(req_cap, ".");
         final ENodeType nodeType = ((ENodeType) node);
         final String targetNodeRef = RMHelper.findRequirementTargetNode(nodeType, req_cap_name);
         if ((targetNodeRef != null)) {
