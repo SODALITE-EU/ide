@@ -182,9 +182,25 @@ class AlertingGenerator extends AbstractGenerator {
 				st.append(", ")
 			else
 				comma = true
-			st.append(t.key + t.oper.type + "\"" + t.value + "\"")
+			if (t.key.equals("monitoring_id"))
+				st.append(t.key + t.oper.type + "\"" + "{{ $labels.monitoring_id }}" + "\"")
+			else
+				st.append(t.key + t.oper.type + "\"" + t.value + "\"")
 		}
+		
+		if (!containsMonitoringId(list))
+			if (comma)
+				st.append(", ")
+			st.append("monitoring_id" + "=" + "\"" + "{{ $labels.monitoring_id }}" + "\"")
 		return st.toString
+	}
+		
+	def containsMonitoringId(EList<ETag> list) {
+		for (t: list){
+			if (t.key.equals("monitoring_id"))
+				return true
+		}
+		return false
 	}
 	
 	def getFilename(URI uri) {
