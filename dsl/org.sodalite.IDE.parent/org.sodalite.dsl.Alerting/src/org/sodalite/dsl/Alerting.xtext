@@ -55,19 +55,12 @@ ELabel:
 ;
 
 EExpression:
-	expr=EStatement 
+	expr=EVectorExpr 
 ;
 
-EStatement:
-	ELogicExpr | EVectorExpr
-;
-
-ELogicExpr:
-	EUniaryLogicExpr | EBinaryLogicExpr
-;
 
 EVectorMatching:
-	type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' expr=EVectorExpr
+	'(' lexpr=EVectorExpr type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' rexpr=EVectorExpr ')'
 ;
 
 ELabelList:
@@ -91,13 +84,12 @@ terminal EAGGREGATIONOPERMODIFIER:
 	'without' | 'by'
 ;
 
-
 EVectorExpr:
-	ENUMBER | EFunctionExpr | EMetricExpr | EAritmeticExpr | EVectorMatching | EAggregationExpr
+	ENUMBER | EFunctionExpr | EMetricExpr | =>(EVectorMatching) | EAggregationExpr | EBinaryExpr
 ;
 
-EAritmeticExpr:
-	'(' loperad = EStatement oper=EBinaryOperator roperad = EStatement  ')'
+EBinaryExpr:
+	'(' lexpr = EVectorExpr oper=EBinaryOperator rexpr = EVectorExpr ')'
 ;
 
 EFunctionExpr:
@@ -240,7 +232,7 @@ ENUMBER:
 ;
 
 EBinaryOperator:
-	EArithmeticOperator | EComparisonOperator
+	EArithmeticOperator | EComparisonOperator | EBinaryLogicOperator
 ;
 
 EArithmeticOperator:
@@ -251,21 +243,8 @@ EComparisonOperator:
 	type = ('<' | '>' | '<=' | '>=' | '==')
 ;
 
-
-EUniaryLogicExpr:
-	Enot
-;
-
-EBinaryLogicExpr:
-	oper = EBinaryLogicOperator LEFT_SEPARATOR first=EStatement ',' second=EStatement RIGHT_SEPARATOR
-;
-
 EBinaryLogicOperator:
 	type = ('and' | 'or' | 'unless')
-;
-
-Enot:
-	'not' not=EExpression
 ;
 
 LEFT_SEPARATOR:

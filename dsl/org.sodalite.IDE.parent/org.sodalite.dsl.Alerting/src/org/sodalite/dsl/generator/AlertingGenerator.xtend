@@ -11,24 +11,19 @@ import org.eclipse.emf.common.util.URI
 import org.sodalite.dsl.alerting.EGroup
 import org.sodalite.dsl.alerting.ERule
 import org.sodalite.dsl.alerting.ELabel
-import org.sodalite.dsl.alerting.ELogicExpr
 import org.sodalite.dsl.alerting.EVectorExpr
-import org.sodalite.dsl.alerting.EStatement
-import org.sodalite.dsl.alerting.EBinaryLogicExpr
-import org.sodalite.dsl.alerting.Enot
 import org.sodalite.dsl.alerting.EExpression
 import org.sodalite.dsl.alerting.ENUMBER
 import org.sodalite.dsl.alerting.EFunctionExpr
 import org.sodalite.dsl.alerting.EMetricExpr
-import org.sodalite.dsl.alerting.EAritmeticExpr
 import org.sodalite.dsl.alerting.EVectorMatching
 import org.sodalite.dsl.alerting.EAggregationExpr
 import org.sodalite.dsl.alerting.ELabelList
-import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.sodalite.dsl.alerting.ESingleLabel
 import org.sodalite.dsl.alerting.ETag
 import java.text.DecimalFormat
+import org.sodalite.dsl.alerting.EBinaryExpr
 
 /**
  * Generates code from your model files on save.
@@ -84,22 +79,6 @@ class AlertingGenerator extends AbstractGenerator {
 		«trim(e.expr.compile.toString)»
 	'''
 	
-	def compile(EStatement s) '''
-	«IF s instanceof ELogicExpr»
-	«(s as ELogicExpr).compile»	
-	«ELSEIF s instanceof EVectorExpr»
-	«(s as EVectorExpr).compile»
-	«ENDIF»
-	'''
-	
-	def compile(ELogicExpr le) '''
-	«IF le instanceof Enot»
-	«(le as Enot).compile»	
-	«ELSEIF le instanceof EBinaryLogicExpr»
-	«(le as EBinaryLogicExpr).compile»
-	«ENDIF»
-	'''
-	
 	def compile(EVectorExpr ve) '''
 	«IF ve instanceof ENUMBER»
 	«(ve as ENUMBER).compile»	
@@ -107,8 +86,8 @@ class AlertingGenerator extends AbstractGenerator {
 	«(ve as EFunctionExpr).compile»
 	«ELSEIF ve instanceof EMetricExpr»
 	«(ve as EMetricExpr).compile»
-	«ELSEIF ve instanceof EAritmeticExpr»
-	«(ve as EAritmeticExpr).compile»
+	«ELSEIF ve instanceof EBinaryExpr»
+	«(ve as EBinaryExpr).compile»
 	«ELSEIF ve instanceof EVectorMatching»
 	«(ve as EVectorMatching).compile»
 	«ELSEIF ve instanceof EAggregationExpr»
@@ -133,12 +112,12 @@ class AlertingGenerator extends AbstractGenerator {
 	«me.type.type»{«processTagList(me.tags)»}«IF me.period !== null»[«FOR seg: me.period.segments»«seg.value»«seg.unit»«ENDFOR»]«ENDIF»
 	'''
 	
-	def compile(EAritmeticExpr ae) '''
-	(«ae.loperad.compile» «ae.oper.type» «ae.roperad.compile»)
+	def compile(EBinaryExpr ae) '''
+	(«ae.lexpr.compile» «ae.oper.type» «ae.rexpr.compile»)
 	'''
 	
 	def compile(EVectorMatching vm) '''
-	«vm.type»(«vm.labels.compile») «vm.expr.compile»
+	«vm.lexpr.compile» «vm.type»(«vm.labels.compile») «vm.rexpr.compile»
 	'''
 	
 	def compile(ELabelList ll) '''
@@ -147,14 +126,6 @@ class AlertingGenerator extends AbstractGenerator {
 	
 	def compile(EAggregationExpr ae) '''
 	«ae.oper» «IF ae.modifier !== null»«ae.modifier»(«ae.labels.compile»)«ENDIF»(«ae.expr.compile»)
-	'''
-	
-	def compile(EBinaryLogicExpr ble) '''
-	(«ble.first.compile» «ble.oper.type» «ble.second.compile»)
-	'''
-	
-	def compile(Enot n) '''
-	not(«n.not.compile»)
 	'''
 	
 	def compile(ELabel l) '''
