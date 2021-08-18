@@ -111,6 +111,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String pdsUri;
 	private String refactorerUri;
 	private String grafanaUri;
+	private String rulesServerUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -119,7 +120,7 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri) {
+			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -128,6 +129,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.pdsUri = pdsUri;
 		this.refactorerUri = refactorerUri;
 		this.grafanaUri = grafanaUri;
+		this.rulesServerUri = rulesServerUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -1520,7 +1522,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public void deleteMonitoringDashboard(String monitoring_Id, String deployment_label) throws SodaliteException {
-		Assert.notNull(monitoring_Id, "Pass a not null modelId");
+		Assert.notNull(monitoring_Id, "Pass a not null monitoring_Id");
 		Assert.notNull(deployment_label, "Pass a not null deployment_label");
 
 		// Build JSON payload
@@ -1553,6 +1555,31 @@ public class KBReasonerClient implements KBReasoner {
 		}
 
 		return dashboardData;
+	}
+
+	@Override
+	public void registerAlertingRules(String monitoring_id, String rules) throws SodaliteException {
+		Assert.notNull(monitoring_id, "Pass a not null monitoring_id");
+		Assert.notNull(rules, "Pass a not null rules");
+
+		String url = rulesServerUri + "rules/" + monitoring_id;
+		try {
+			postObject(rules, new URI(url), HttpStatus.OK);
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void deregisterAlertingRules(String monitoring_id) throws SodaliteException {
+		Assert.notNull(monitoring_id, "Pass a not null monitoring_id");
+
+		String url = rulesServerUri + "rules/" + monitoring_id;
+		try {
+			deleteUriResource(new URI(url), "", HttpStatus.OK);
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
 	}
 
 	private List<KBError> processErrors(String json) throws Exception {

@@ -71,6 +71,7 @@ class KBReasonerTest {
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
+	private final String RulesServer_URI = "http://192.168.3.74:9092/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -82,7 +83,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, Grafana_URI);
+				Refactorer_URI, Grafana_URI, RulesServer_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -371,6 +372,14 @@ class KBReasonerTest {
 		String deployment_id = "4cd04513-7b76-4cae-9adc-3c37c8003bc1";
 		DeploymentData deploymentData = kbclient.getDeploymentForId(deployment_id);
 		assertFalse(deploymentData.getElements().isEmpty());
+	}
+
+	@Test
+	void testRegisterAlertingRules() throws Exception {
+		String monitoring_id = "9996c880-ccea-47be-9ee2-46df78740509";
+		Path rules_path = FileSystems.getDefault().getPath("src/test/resources/test.alert.rules");
+		String rules = new String(Files.readAllBytes(rules_path));
+		kbclient.registerAlertingRules(monitoring_id, rules);
 	}
 
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)

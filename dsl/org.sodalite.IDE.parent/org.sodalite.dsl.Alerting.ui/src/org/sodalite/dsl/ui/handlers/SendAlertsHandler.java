@@ -26,11 +26,12 @@ public class SendAlertsHandler implements IHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			if (PlatformUI.getWorkbench().saveAllEditors(true)) // Ask to save model before continue
-				backendProxy.processSendAlerts(event);
+			if (PlatformUI.getWorkbench().saveAllEditors(true)) { // Ask to save model before continue
+				AlertingBackendProxy.startSendAlertsWizard(event);
+			}
 		} catch (Exception ex) {
-			MessageDialog.openError(parent, "Save RM Error",
-					"There were an error reported by the KB:\n" + ex.getMessage());
+			MessageDialog.openError(parent, "Sent alerts to monitoring",
+					"There were an error reported by the monitoring backend:\n" + ex.getMessage());
 		}
 		return this;
 	}
