@@ -5,26 +5,29 @@ import java.util.List;
 import org.eclipse.jface.wizard.Wizard;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 
-public class SendAlertsWizard extends Wizard {
+public class AlertingRulesWizard extends Wizard {
 
-	protected SendAlertsWizardMainPage mainPage;
+	protected AlertingRulesWizardMainPage mainPage;
 	private String monitoringId = null;
 	private List<Deployment> deployments;
+	private String windowTitle;
+	private String description;
 
-	public SendAlertsWizard(List<Deployment> deployments) {
+	public AlertingRulesWizard(List<Deployment> deployments, String windowTitle, String description) {
 		super();
 		setNeedsProgressMonitor(true);
 		this.deployments = deployments;
+		this.windowTitle = windowTitle;
 	}
 
 	@Override
 	public String getWindowTitle() {
-		return "Send alerts";
+		return windowTitle;
 	}
 
 	@Override
 	public void addPages() {
-		mainPage = new SendAlertsWizardMainPage(deployments);
+		mainPage = new AlertingRulesWizardMainPage(deployments, windowTitle, description);
 		addPage(mainPage);
 	}
 

@@ -7,10 +7,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-public class SendAlertsWizardDialog extends WizardDialog {
+public class AlertingRulesWizardDialog extends WizardDialog {
+	private String buttonLabel;
 
-	public SendAlertsWizardDialog(Shell parentShell, IWizard newWizard) {
+	public AlertingRulesWizardDialog(Shell parentShell, IWizard newWizard, String buttonLabel) {
 		super(parentShell, newWizard);
+		this.buttonLabel = buttonLabel;
 	}
 
 	@Override
@@ -18,12 +20,12 @@ public class SendAlertsWizardDialog extends WizardDialog {
 		super.createButtonsForButtonBar(parent);
 
 		Button finishButton = getButton(IDialogConstants.FINISH_ID);
-		finishButton.setText("Send");
+		finishButton.setText(buttonLabel);
 
 	}
 
 	public String getMonitoringId() {
-		return ((SendAlertsWizard) this.getWizard()).getMonitoringId();
+		return ((AlertingRulesWizard) this.getWizard()).getMonitoringId();
 	}
 
 }

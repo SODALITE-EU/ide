@@ -18,15 +18,15 @@ import org.eclipse.swt.widgets.Label;
 import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
-public class SendAlertsWizardMainPage extends WizardPage {
+public class AlertingRulesWizardMainPage extends WizardPage {
 	private Composite container;
 	private String monitoringId = null;
 	List<Deployment> deployments = null;
 
-	protected SendAlertsWizardMainPage(List<Deployment> deployments) {
-		super("Send alerting rules");
-		setTitle("Sent alerting rules");
-		setDescription("Send monitoring alerting rules for a given deployment");
+	protected AlertingRulesWizardMainPage(List<Deployment> deployments, String title, String description) {
+		super(title);
+		setTitle(title);
+		setDescription(description);
 		this.deployments = deployments;
 	}
 

@@ -31,13 +31,13 @@ import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
-import org.sodalite.dsl.ui.wizards.SendAlertsWizard;
-import org.sodalite.dsl.ui.wizards.SendAlertsWizardDialog;
+import org.sodalite.dsl.ui.wizards.AlertingRulesWizard;
+import org.sodalite.dsl.ui.wizards.AlertingRulesWizardDialog;
 
 public class AlertingBackendProxy extends RMBackendProxy {
 	private static Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-	public static void processSendAlerts(String monitoringId, ExecutionEvent event) throws Exception {
+	public static void processRegisterAlertingRules(String monitoringId, ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile alertFile = getSelectedFile();
 		if (alertFile == null)
@@ -57,7 +57,7 @@ public class AlertingBackendProxy extends RMBackendProxy {
 				"Alerting rules have been successfully updated in monitoring for selected deployment");
 	}
 
-	public static void processDeleteAlerts(String monitoringId, ExecutionEvent event) throws Exception {
+	public static void processDeregisterAlertingRules(String monitoringId, ExecutionEvent event) throws Exception {
 		// Delete alerting rules in monitoring
 		getKBReasoner().deregisterAlertingRules(monitoringId);
 
@@ -65,63 +65,32 @@ public class AlertingBackendProxy extends RMBackendProxy {
 				"Alerting rules have been successfully deregistered in monitoring for selected deployment");
 	}
 
-	public static void startSendAlertsWizard(ExecutionEvent event) {
-		Job job = new Job("Getting user's existing deployments") {
+	public static void startRegisteringAlertingRulesWizard(ExecutionEvent event) {
+		Job job = new Job("Getting user's active deployments") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
-				// TODO Inform about percentage of progress
-				int steps = 1;
-				int number_steps = 1;
-				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
-
-				List<Deployment> deployments = new ArrayList<Deployment>();
-
-				// Get IDE user for preferences
-				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-				String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-				if (keycloak_user.isEmpty()) {
-					showErrorDialog("Getting user's existing deployments", "Keycloak user not set");
-					return Status.CANCEL_STATUS;
-				}
-
-				try {
-					BlueprintData blueprintData = getKBReasoner().getBlueprintsForUser(keycloak_user);
-					if (!blueprintData.getElements().isEmpty()) {
-						for (Blueprint blueprint : blueprintData.getElements()) {
-							DeploymentData deploymentData = getKBReasoner()
-									.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
-							for (Deployment deployment : deploymentData.getElements()) {
-								deployments.add(deployment);
-							}
-						}
-					} else {
-						showErrorDialog("Getting user's existing deployments",
-								"No deployments were found for registered IDE user");
-						return Status.CANCEL_STATUS;
-					}
-				} catch (Exception ex) {
-					if (!(ex.getCause() instanceof NotRolePermissionException))
-						showErrorDialog("Getting user's existing deployments", "Keycloak user has not role permission");
-					else
-						showErrorDialog("Getting user's existing deployments", ex.getMessage());
-					return Status.CANCEL_STATUS;
-				}
-
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+				List<Deployment> deployments = getUserDeployments();
 				subMonitor.done();
+
+				if (deployments.isEmpty())
+					return Status.CANCEL_STATUS;
 
 				// Open send alerts wizard
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						SendAlertsWizardDialog dialog = new SendAlertsWizardDialog(shell,
-								new SendAlertsWizard(deployments));
+						AlertingRulesWizardDialog dialog = new AlertingRulesWizardDialog(shell,
+								new AlertingRulesWizard(deployments, "Register alerting rules",
+										"Register monitoring alerting rules for a given deployment"),
+								"Register");
 						if (dialog.OK == dialog.open()) {
 							String monitoringId = dialog.getMonitoringId();
 							try {
-								processSendAlerts(monitoringId, event);
+								processRegisterAlertingRules(monitoringId, event);
 							} catch (Exception e) {
-								showErrorDialog("Sending alerting rules", e.getMessage());
+								showErrorDialog("Register alerting rules", e.getMessage());
 							}
 						}
 					}
@@ -131,6 +100,76 @@ public class AlertingBackendProxy extends RMBackendProxy {
 		};
 		job.setPriority(Job.LONG);
 		job.schedule();
+	}
+
+	public static void startDeregisteringAlertingRulesWizard(ExecutionEvent event) {
+		Job job = new Job("Getting user's active deployments") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+				List<Deployment> deployments = getUserDeployments();
+				subMonitor.done();
+
+				if (deployments.isEmpty())
+					return Status.CANCEL_STATUS;
+
+				// Open send alerts wizard
+				Display.getDefault().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						AlertingRulesWizardDialog dialog = new AlertingRulesWizardDialog(shell,
+								new AlertingRulesWizard(deployments, "Deregister alerting rules",
+										"Deregister monitoring alerting rules for a given deployment"),
+								"Deregister");
+						if (dialog.OK == dialog.open()) {
+							String monitoringId = dialog.getMonitoringId();
+							try {
+								processDeregisterAlertingRules(monitoringId, event);
+							} catch (Exception e) {
+								showErrorDialog("Deregister alerting rules", e.getMessage());
+							}
+						}
+					}
+				});
+				return Status.OK_STATUS;
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private static List<Deployment> getUserDeployments() {
+		List<Deployment> deployments = new ArrayList<Deployment>();
+
+		// Get IDE user for preferences
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
+		if (keycloak_user.isEmpty()) {
+			showErrorDialog("Getting user's existing deployments", "Keycloak user not set");
+		}
+
+		try {
+			BlueprintData blueprintData = getKBReasoner().getBlueprintsForUser(keycloak_user);
+			if (!blueprintData.getElements().isEmpty()) {
+				for (Blueprint blueprint : blueprintData.getElements()) {
+					DeploymentData deploymentData = getKBReasoner()
+							.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
+					for (Deployment deployment : deploymentData.getElements()) {
+						deployments.add(deployment);
+					}
+				}
+			} else {
+				showErrorDialog("Getting user's existing deployments",
+						"No deployments were found for registered IDE user");
+			}
+		} catch (Exception ex) {
+			if (!(ex.getCause() instanceof NotRolePermissionException))
+				showErrorDialog("Getting user's existing deployments", "Keycloak user has not role permission");
+			else
+				showErrorDialog("Getting user's existing deployments", ex.getMessage());
+		}
+		return deployments;
 	}
 
 	public static void showErrorDialog(String dialogTitle, String dialogMessage) {

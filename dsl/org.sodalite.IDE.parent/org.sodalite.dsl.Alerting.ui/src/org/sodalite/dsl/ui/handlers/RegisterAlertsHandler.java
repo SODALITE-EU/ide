@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.AlertingBackendProxy;
 
-public class SendAlertsHandler implements IHandler {
+public class RegisterAlertsHandler implements IHandler {
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	private AlertingBackendProxy backendProxy = new AlertingBackendProxy();
 
@@ -27,10 +27,10 @@ public class SendAlertsHandler implements IHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) { // Ask to save model before continue
-				AlertingBackendProxy.startSendAlertsWizard(event);
+				AlertingBackendProxy.startRegisteringAlertingRulesWizard(event);
 			}
 		} catch (Exception ex) {
-			MessageDialog.openError(parent, "Sent alerts to monitoring",
+			MessageDialog.openError(parent, "Register alerting rules into monitoring",
 					"There were an error reported by the monitoring backend:\n" + ex.getMessage());
 		}
 		return this;
