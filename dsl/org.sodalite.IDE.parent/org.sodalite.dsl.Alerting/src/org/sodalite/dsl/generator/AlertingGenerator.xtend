@@ -24,6 +24,8 @@ import org.sodalite.dsl.alerting.ESingleLabel
 import org.sodalite.dsl.alerting.ETag
 import java.text.DecimalFormat
 import org.sodalite.dsl.alerting.EBinaryExpr
+import org.sodalite.dsl.alerting.EBinaryStatement
+import org.sodalite.dsl.alerting.EStatement
 
 /**
  * Generates code from your model files on save.
@@ -79,6 +81,18 @@ class AlertingGenerator extends AbstractGenerator {
 		«trim(e.expr.compile.toString)»
 	'''
 	
+	def compile(EBinaryStatement bs) '''
+		«trim(bs.lexpr.compile.toString)» «bs.oper.type» «trim(bs.rexpr.compile.toString)»
+	'''
+	
+	def compile(EStatement s) '''
+		«IF s instanceof EVectorMatching»
+		«(s as EVectorMatching).compile»	
+		«ELSEIF s instanceof EVectorExpr»
+		«(s as EVectorExpr).compile»
+		«ENDIF»
+	'''
+	
 	def compile(EVectorExpr ve) '''
 	«IF ve instanceof ENUMBER»
 	«(ve as ENUMBER).compile»	
@@ -88,8 +102,6 @@ class AlertingGenerator extends AbstractGenerator {
 	«(ve as EMetricExpr).compile»
 	«ELSEIF ve instanceof EBinaryExpr»
 	«(ve as EBinaryExpr).compile»
-	«ELSEIF ve instanceof EVectorMatching»
-	«(ve as EVectorMatching).compile»
 	«ELSEIF ve instanceof EAggregationExpr»
 	«(ve as EAggregationExpr).compile»
 	«ENDIF»
@@ -117,7 +129,7 @@ class AlertingGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EVectorMatching vm) '''
-	«vm.lexpr.compile» «vm.type»(«vm.labels.compile») «vm.rexpr.compile»
+	«vm.lexpr.compile» «vm.oper.type» «vm.type»(«vm.labels.compile») «vm.rexpr.compile»
 	'''
 	
 	def compile(ELabelList ll) '''

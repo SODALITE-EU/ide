@@ -32,10 +32,7 @@ EGroup:
 ERule:
 	'alert:' alert = ID
 	BEGIN
-		'expr:' 
-		BEGIN
-			expr = EExpression
-		END
+		'expr:' expr = EExpression
 		('for:' duration = STRING)?
 		('labels:'
 		BEGIN
@@ -55,12 +52,19 @@ ELabel:
 ;
 
 EExpression:
-	expr=EVectorExpr 
+	expr= EBinaryStatement
 ;
 
+EBinaryStatement:
+	 lexpr = EStatement oper=EComparisonOperator rexpr = ENUMBER
+;
+
+EStatement:
+	=>EVectorMatching | EVectorExpr
+;
 
 EVectorMatching:
-	'(' lexpr=EVectorExpr type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' rexpr=EVectorExpr ')'
+	'(' lexpr=EVectorExpr oper=EBinaryOperator type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' rexpr=EVectorExpr ')'
 ;
 
 ELabelList:
@@ -85,7 +89,7 @@ terminal EAGGREGATIONOPERMODIFIER:
 ;
 
 EVectorExpr:
-	ENUMBER | EFunctionExpr | EMetricExpr | =>(EVectorMatching) | EAggregationExpr | EBinaryExpr
+	EBinaryExpr | EFunctionExpr | EAggregationExpr | EMetricExpr | ENUMBER 
 ;
 
 EBinaryExpr:
