@@ -71,7 +71,7 @@ class AlertingGenerator extends AbstractGenerator {
 	      «FOR a:r.annotations»
 	      «a.compile»
 	      «ENDFOR»
-	      monitoring_id: '{{ $labels.monitoring_id }}'
+	      monitoring_id: 'monitoring_id_value'
 	      instance: '{{ $labels.instance }}'
 	      hpc: '{{ $labels.hpc }}'
 	    «ENDIF»
@@ -166,7 +166,7 @@ class AlertingGenerator extends AbstractGenerator {
 			else
 				comma = true
 			if (t.key.equals("monitoring_id"))
-				st.append(t.key + t.oper.type + "\"" + "{{ $labels.monitoring_id }}" + "\"")
+				st.append(t.key + t.oper.type + "\"" + "monitoring_id_value" + "\"")
 			else
 				st.append(t.key + t.oper.type + "\"" + t.value + "\"")
 		}
@@ -174,7 +174,7 @@ class AlertingGenerator extends AbstractGenerator {
 		if (!containsMonitoringId(list))
 			if (comma)
 				st.append(", ")
-			st.append("monitoring_id" + "=" + "\"" + "{{ $labels.monitoring_id }}" + "\"")
+			st.append("monitoring_id" + "=" + "\"" + "monitoring_id_value" + "\"")
 		return st.toString
 	}
 		

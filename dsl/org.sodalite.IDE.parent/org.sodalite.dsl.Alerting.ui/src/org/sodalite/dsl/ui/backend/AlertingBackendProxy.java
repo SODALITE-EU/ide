@@ -44,12 +44,25 @@ public class AlertingBackendProxy extends RMBackendProxy {
 			throw new Exception("Selected Alerting model could not be found");
 		IProject project = alertFile.getProject();
 
-		// Get serialize alerts
+		// Get serialize alerting rules
 		String rules = readAlertModel(alertFile, project);
 
-		// Send alerts to the monitoring
+		// Insert monitoring_Id in rules
+		rules = rules.replaceAll("monitoring_id_value", monitoringId);
+
+		// Send alerting rules to the monitoring
 		getKBReasoner().registerAlertingRules(monitoringId, rules);
 
+		showInformationDialog("Sending alerting rules to monitoring",
+				"Alerting rules have been successfully updated in monitoring for selected deployment");
+	}
+
+	public static void processDeleteAlerts(String monitoringId, ExecutionEvent event) throws Exception {
+		// Delete alerting rules in monitoring
+		getKBReasoner().deregisterAlertingRules(monitoringId);
+
+		showInformationDialog("Deleting alerting rules in monitoring",
+				"Alerting rules have been successfully deregistered in monitoring for selected deployment");
 	}
 
 	public static void startSendAlertsWizard(ExecutionEvent event) {
@@ -67,8 +80,10 @@ public class AlertingBackendProxy extends RMBackendProxy {
 				// Get IDE user for preferences
 				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 				String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-				if (keycloak_user.isEmpty())
+				if (keycloak_user.isEmpty()) {
 					showErrorDialog("Getting user's existing deployments", "Keycloak user not set");
+					return Status.CANCEL_STATUS;
+				}
 
 				try {
 					BlueprintData blueprintData = getKBReasoner().getBlueprintsForUser(keycloak_user);
@@ -83,10 +98,14 @@ public class AlertingBackendProxy extends RMBackendProxy {
 					} else {
 						showErrorDialog("Getting user's existing deployments",
 								"No deployments were found for registered IDE user");
+						return Status.CANCEL_STATUS;
 					}
 				} catch (Exception ex) {
 					if (!(ex.getCause() instanceof NotRolePermissionException))
 						showErrorDialog("Getting user's existing deployments", "Keycloak user has not role permission");
+					else
+						showErrorDialog("Getting user's existing deployments", ex.getMessage());
+					return Status.CANCEL_STATUS;
 				}
 
 				subMonitor.done();
@@ -97,7 +116,6 @@ public class AlertingBackendProxy extends RMBackendProxy {
 					public void run() {
 						SendAlertsWizardDialog dialog = new SendAlertsWizardDialog(shell,
 								new SendAlertsWizard(deployments));
-
 						if (dialog.OK == dialog.open()) {
 							String monitoringId = dialog.getMonitoringId();
 							try {
@@ -108,7 +126,6 @@ public class AlertingBackendProxy extends RMBackendProxy {
 						}
 					}
 				});
-
 				return Status.OK_STATUS;
 			}
 		};
@@ -121,6 +138,15 @@ public class AlertingBackendProxy extends RMBackendProxy {
 			@Override
 			public void run() {
 				MessageDialog.openError(shell, dialogTitle, dialogMessage);
+			}
+		});
+	}
+
+	public static void showInformationDialog(String dialogTitle, String dialogMessage) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(shell, dialogTitle, dialogMessage);
 			}
 		});
 	}
