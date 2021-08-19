@@ -46,6 +46,11 @@
 		<module>org.sodalite.dsl.ansible.ide</module>
 		<module>org.sodalite.dsl.ansible.ui</module>
 		<module>org.sodalite.dsl.ansible.feature</module>
+		<module>org.sodalite.dsl.Alerting</module>
+		<module>org.sodalite.dsl.Alerting.ide</module>
+		<module>org.sodalite.dsl.Alerting.ui</module>
+		<module>org.sodalite.dsl.Alerting.feature</module>
+		
 	</modules>
 	<build>
 		<plugins>
