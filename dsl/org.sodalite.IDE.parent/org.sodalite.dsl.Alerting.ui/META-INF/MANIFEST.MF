@@ -23,6 +23,7 @@ Require-Bundle: org.sodalite.dsl.Alerting,
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sodalite.dsl.Alerting.ui.internal,
+ org.sodalite.dsl.ui.backend,
  org.sodalite.dsl.ui.contentassist,
  org.sodalite.dsl.ui.quickfix
 Bundle-Activator: org.sodalite.dsl.Alerting.ui.internal.AlertingActivator

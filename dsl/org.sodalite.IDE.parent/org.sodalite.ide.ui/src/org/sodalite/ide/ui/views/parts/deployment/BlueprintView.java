@@ -6,10 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -29,6 +33,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -53,6 +58,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.Blueprint;
@@ -61,6 +69,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.Deployment;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.ui.backend.AlertingBackendProxy;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
@@ -359,6 +368,22 @@ public class BlueprintView {
 				};
 				refreshAction.setText("Resume deployment");
 				manager.add(refreshAction);
+
+				Action registerAlertingRulesAction = new Action() {
+					public void run() {
+						registerAlertingRules(tn.getData());
+					}
+				};
+				registerAlertingRulesAction.setText("Register alerting rules");
+				manager.add(registerAlertingRulesAction);
+
+				Action deregisterAlertingRulesAction = new Action() {
+					public void run() {
+						deregisterAlertingRules(tn.getData());
+					}
+				};
+				deregisterAlertingRulesAction.setText("Deregister alerting rules");
+				manager.add(deregisterAlertingRulesAction);
 			}
 
 		});
@@ -525,6 +550,48 @@ public class BlueprintView {
 		} catch (Exception e) {
 			e.printStackTrace();
 			showErrorDialog("Resume deployment error", e.getMessage());
+		}
+	}
+
+	public void registerAlertingRules(DeploymentNode node) {
+		// Register alerting rules for this deployment into the monitoring server
+		try {
+			if (node.isDeployment()) {
+				ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(shell, new WorkbenchLabelProvider(),
+						new BaseWorkbenchContentProvider());
+				dialog.setTitle("Select a alerting rules model");
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+				dialog.setMessage(
+						"Select the alerting rules model that contains the rules to register into the monitoring system");
+				dialog.setInput(root);
+				dialog.addFilter(new FileExtensionFilter("alert"));
+				if (dialog.open() == Dialog.OK) {
+					String monitoring_id = node.getDeployment().getMonitoringId();
+					Object[] files = dialog.getResult();
+					IFile alertingRulesFile = (IFile) files[0];
+					AlertingBackendProxy.processRegisterAlertingRules(monitoring_id, alertingRulesFile);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			showErrorDialog("Register alerting rules error", e.getMessage());
+		}
+	}
+
+	public void deregisterAlertingRules(DeploymentNode node) {
+		// Deregister alerting rules for this deployment in the monitoring server
+		try {
+			if (node.isDeployment()) {
+				boolean confirmed = MessageDialog.openConfirm(shell, "Deregister alerting rules",
+						"Do you want to deregister all the alerting rules for selected deployment?");
+				if (confirmed) {
+					String monitoring_id = node.getDeployment().getMonitoringId();
+					AlertingBackendProxy.processDeregisterAlertingRules(monitoring_id);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			showErrorDialog("Deregister alerting rules error", e.getMessage());
 		}
 	}
 

@@ -37,9 +37,7 @@ import org.sodalite.dsl.ui.wizards.AlertingRulesWizardDialog;
 public class AlertingBackendProxy extends RMBackendProxy {
 	private static Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-	public static void processRegisterAlertingRules(String monitoringId, ExecutionEvent event) throws Exception {
-		// Return selected resource
-		IFile alertFile = getSelectedFile();
+	public static void processRegisterAlertingRules(String monitoringId, IFile alertFile) throws Exception {
 		if (alertFile == null)
 			throw new Exception("Selected Alerting model could not be found");
 		IProject project = alertFile.getProject();
@@ -57,7 +55,7 @@ public class AlertingBackendProxy extends RMBackendProxy {
 				"Alerting rules have been successfully updated in monitoring for selected deployment");
 	}
 
-	public static void processDeregisterAlertingRules(String monitoringId, ExecutionEvent event) throws Exception {
+	public static void processDeregisterAlertingRules(String monitoringId) throws Exception {
 		// Delete alerting rules in monitoring
 		getKBReasoner().deregisterAlertingRules(monitoringId);
 
@@ -88,7 +86,7 @@ public class AlertingBackendProxy extends RMBackendProxy {
 						if (dialog.OK == dialog.open()) {
 							String monitoringId = dialog.getMonitoringId();
 							try {
-								processRegisterAlertingRules(monitoringId, event);
+								processRegisterAlertingRules(monitoringId, getSelectedFile());
 							} catch (Exception e) {
 								showErrorDialog("Register alerting rules", e.getMessage());
 							}
@@ -125,7 +123,7 @@ public class AlertingBackendProxy extends RMBackendProxy {
 						if (dialog.OK == dialog.open()) {
 							String monitoringId = dialog.getMonitoringId();
 							try {
-								processDeregisterAlertingRules(monitoringId, event);
+								processDeregisterAlertingRules(monitoringId);
 							} catch (Exception e) {
 								showErrorDialog("Deregister alerting rules", e.getMessage());
 							}
