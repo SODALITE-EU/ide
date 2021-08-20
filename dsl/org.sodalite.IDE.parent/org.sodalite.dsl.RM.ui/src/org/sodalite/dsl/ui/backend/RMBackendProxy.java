@@ -313,11 +313,13 @@ public class RMBackendProxy {
 				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
 			props.load(in);
 		}
+		props.remove("URI");
 		props.setProperty("URI", mm.getUri());
-		if (mm.getVersion() != null)
+		props.remove("Version");
+		if (mm.getVersion() != null && !mm.getVersion().isEmpty())
 			props.setProperty("Version", mm.getVersion());
-		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
-				final OutputStream out = Channels.newOutputStream(outChannel)) {
+		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.TRUNCATE_EXISTING,
+				StandardOpenOption.WRITE); final OutputStream out = Channels.newOutputStream(outChannel)) {
 			props.store(out, "Sodalite Metadata");
 		}
 	}
