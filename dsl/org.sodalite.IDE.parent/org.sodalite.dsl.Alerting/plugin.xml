@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.sodalite.org/dsl/Alerting"
+			class = "org.sodalite.dsl.alerting.AlertingPackage"
+			genModel = "model/generated/Alerting.genmodel" />
+	</extension>
+</plugin>
