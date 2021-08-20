@@ -32,10 +32,7 @@ EGroup:
 ERule:
 	'alert:' alert = ID
 	BEGIN
-		'expr:' 
-		BEGIN
-			expr = EExpression
-		END
+		'expr:' expr = EExpression
 		('for:' duration = STRING)?
 		('labels:'
 		BEGIN
@@ -55,19 +52,19 @@ ELabel:
 ;
 
 EExpression:
-	expr=EStatement 
+	expr= EBinaryStatement
+;
+
+EBinaryStatement:
+	 lexpr = EStatement oper=EComparisonOperator rexpr = ENUMBER
 ;
 
 EStatement:
-	ELogicExpr | EVectorExpr
-;
-
-ELogicExpr:
-	EUniaryLogicExpr | EBinaryLogicExpr
+	=>EVectorMatching | EVectorExpr
 ;
 
 EVectorMatching:
-	type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' expr=EVectorExpr
+	'(' lexpr=EVectorExpr oper=EBinaryOperator type = EVECTORMATCHINGTYPE '(' labels = ELabelList ')' rexpr=EVectorExpr ')'
 ;
 
 ELabelList:
@@ -83,7 +80,7 @@ EAggregationExpr:
 ;
 
 terminal EAGGREGATIONOPER:
-	'sum' | 'min' | 'max' | 'avg' | 'group' | 'stddev' | 'stdvar' | 
+	'sum' | 'min' | 'max' | 'avg' | 'avg_over_time' | 'group' | 'stddev' | 'stdvar' | 
 	'count' | 'count_values' | 'bottomk' | 'topk' | 'quantile'
 ;
 
@@ -91,13 +88,12 @@ terminal EAGGREGATIONOPERMODIFIER:
 	'without' | 'by'
 ;
 
-
 EVectorExpr:
-	ENUMBER | EFunctionExpr | EMetricExpr | EAritmeticExpr | EVectorMatching | EAggregationExpr
+	EBinaryExpr | EFunctionExpr | EAggregationExpr | EMetricExpr | ENUMBER 
 ;
 
-EAritmeticExpr:
-	'(' loperad = EStatement oper=EBinaryOperator roperad = EStatement  ')'
+EBinaryExpr:
+	'(' lexpr = EVectorExpr oper=EBinaryOperator rexpr = EVectorExpr ')'
 ;
 
 EFunctionExpr:
@@ -105,7 +101,7 @@ EFunctionExpr:
 ;
 
 terminal EFUNCTIONTYPE:
-	'increase' | 'rate' | 'vector'
+	'abs' | 'absent' | 'absent_over_time' | 'avg_over_time' | 'ceil' | 'changes' | 'clamp' | 'clamp_max' | 'clamp_min' | 'count_over_time' | 'day_of_month' | 'day_of_week' | 'days_in_month' | 'delta' | 'deriv' | 'exp' | 'floor' | 'histogram_quantile' | 'holt_winters' | 'hour' | 'idelta' | 'increase' | 'irate' | 'label_join' | 'label_replace' | 'last_over_time' | 'ln' | 'log2' | 'log10' | 'max_over_time' | 'minute' | 'min_over_time' | 'month' | 'predict_linear' | 'present_over_time' | 'quantile_over_time' | 'rate' | 'resets' | 'round' | 'scalar' | 'sgn' | 'sort' | 'sort_desc' | 'sqrt' | 'stdvar_over_time' | 'stddev_over_time' | 'sum_over_time' | 'time' | 'timestamp' | 'vector' | 'year'
 ;
 
 EMetricExpr:
@@ -240,7 +236,7 @@ ENUMBER:
 ;
 
 EBinaryOperator:
-	EArithmeticOperator | EComparisonOperator
+	EArithmeticOperator | EComparisonOperator | EBinaryLogicOperator
 ;
 
 EArithmeticOperator:
@@ -251,21 +247,8 @@ EComparisonOperator:
 	type = ('<' | '>' | '<=' | '>=' | '==')
 ;
 
-
-EUniaryLogicExpr:
-	Enot
-;
-
-EBinaryLogicExpr:
-	oper = EBinaryLogicOperator LEFT_SEPARATOR first=EStatement ',' second=EStatement RIGHT_SEPARATOR
-;
-
 EBinaryLogicOperator:
 	type = ('and' | 'or' | 'unless')
-;
-
-Enot:
-	'not' not=EExpression
 ;
 
 LEFT_SEPARATOR:

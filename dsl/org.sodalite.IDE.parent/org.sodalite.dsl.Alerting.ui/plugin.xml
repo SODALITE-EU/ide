@@ -319,8 +319,12 @@
 			</activeWhen>
 		</handler>
 		<handler
-        	class="org.sodalite.dsl.ui.handlers.SendAlertsHandler"
-        	commandId="org.sodalite.dsl.Alerting.ui.handler.sendAlerts">
+        	class="org.sodalite.dsl.ui.handlers.RegisterAlertsHandler"
+        	commandId="org.sodalite.dsl.Alerting.ui.handler.registerAlerts">
+  		</handler>
+  		<handler
+        	class="org.sodalite.dsl.ui.handlers.DeregisterAlertsHandler"
+        	commandId="org.sodalite.dsl.Alerting.ui.handler.deregisterAlerts">
   		</handler>
 	</extension>
 	<extension
@@ -336,10 +340,17 @@
 		</category>
 		<command
 		    categoryId="org.sodalite.category"
-		    defaultHandler="org.sodalite.dsl.ui.handlers.SendAlertsHandler"
-		    description="Send alerts to monitoring"
-		    id="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
-		    name="sendAlerts">
+		    defaultHandler="org.sodalite.dsl.ui.handlers.RegisterAlertsHandler"
+		    description="Register alerting rules into monitoring"
+		    id="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
+		    name="registerAlerts">
+		</command>
+		<command
+		    categoryId="org.sodalite.category"
+		    defaultHandler="org.sodalite.dsl.ui.handlers.DeregisterAlertsHandler"
+		    description="Deregister alerting rules into monitoring"
+		    id="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
+		    name="deregisterAlerts">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -360,11 +371,11 @@
 		           id="eu.sodalite.menu.projectexplorer"
 		           label="Sodalite">
 		        <command
-		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
-		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
-		              label="Send alerts to monitoring"
+		              commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
+		              id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
+		              label="Register alerting rules into monitoring"
 		              style="push"
-		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		              tooltip="Register alerting rules into the Sodalite monitoring platform">
 		           <visibleWhen
 		                 checkEnabled="false">
 		              <with
@@ -382,6 +393,13 @@
 		              </with>
 	               </visibleWhen>
 		      </command>
+		      <command
+	              commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
+	              id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
+	              label="Deregister alerting rules in monitoring"
+	              style="push"
+	              tooltip="Deregister alerting rules in the Sodalite monitoring platform">
+	       	  </command>
 		   </menu>
 		</menuContribution>
 		<menuContribution
@@ -391,11 +409,11 @@
 		           id="eu.sodalite.menu.packageexplorer"
 		           label="Sodalite">
 		        <command
-		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
-		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
-		              label="Send alerts to monitoring"
+		              commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
+		              id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
+		              label="Register alerting rules into monitoring"
 		              style="push"
-		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		              tooltip="Register alerting rules into the Sodalite monitoring platform">
 		           <visibleWhen
 		                 checkEnabled="false">
 		              <with
@@ -413,6 +431,13 @@
 		              </with>
 	               </visibleWhen>
 		      </command>
+		      <command
+	              commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
+	              id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
+	              label="Deregister alerting rules in monitoring"
+	              style="push"
+	              tooltip="Deregister alerting rules in the Sodalite monitoring platform">
+	       	  </command>
 		   </menu>
 		</menuContribution>
 		<menuContribution
@@ -423,10 +448,10 @@
 		           label="Sodalite">
 		        <command
 		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
-		              id="org.sodalite.dsl.RM.ui.popup.command.sendAlerts"
-		              label="Send alerts to monitoring"
+		              id="org.sodalite.dsl.Alerting.ui.popup.command.sendAlerts"
+		              label="Register alerting rules into monitoring"
 		              style="push"
-		              tooltip="Sent alerts to the Sodalite monitoring platform">
+		              tooltip="Register alerting rules into the Sodalite monitoring platform">
 		           <visibleWhen
 		                 checkEnabled="false">
 		              <with

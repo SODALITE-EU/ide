@@ -15,5 +15,8 @@
    <feature id="org.sodalite.ide.feature">
       <category name="main"/>
    </feature>
+   <feature id="org.sodalite.dsl.Alerting.feature">
+      <category name="main"/>
+   </feature>
    <category-def name="main" label="SODALITE IDE"/>
 </site>

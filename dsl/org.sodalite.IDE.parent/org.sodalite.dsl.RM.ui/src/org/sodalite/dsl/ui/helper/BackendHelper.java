@@ -82,8 +82,16 @@ public class BackendHelper {
 			grafanaURI = refactorerURI.concat("/");
 		}
 
+		String rulesServerURI = store.getString(PreferenceConstants.RulesServer_URI).trim();
+		if (rulesServerURI.isEmpty()) {
+			raiseConfigurationIssue("Rules Server URI user not set");
+		}
+		if (!rulesServerURI.endsWith("/")) {
+			rulesServerURI = refactorerURI.concat("/");
+		}
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, grafanaURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI);
 
 		String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);
 		if (keycloak_enabled.equalsIgnoreCase("true")) {
