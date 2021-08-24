@@ -90,7 +90,12 @@ public class JsonSerializer {
 		res.save(null);
 	}
 
-	private static RM_Model serializeRMfromJson(String rm_json) {
+	// TODO Implement this method
+	public static RM_Model serializeAADMfromJson(String aadm_json) {
+		throw new UnsupportedOperationException();
+	}
+
+	public static RM_Model serializeRMfromJson(String rm_json) {
 		RM_Model model = RMFactory.eINSTANCE.createRM_Model();
 		JsonObject jsonObject = new Gson().fromJson(rm_json, JsonObject.class);
 		Set<String> keys = jsonObject.keySet();

@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -38,6 +39,7 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.serialization.JsonSerializer;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.helper.UIHelper;
@@ -312,9 +314,39 @@ public class KBView {
 							String name = UIHelper.getFileName(node.getModel().getName())
 									+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
 									+ UIHelper.getExtension(node.getModel().getName());
-							RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
-							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
-									+ " successfully copied into " + targetFolder.getName() + " folder");
+							String dsl = node.getModel().getDsl();
+							if (dsl == null || dsl.isEmpty()) {
+								// Generate DSL from JSON representation for RMs and AADMs
+								try {
+									String json = null;
+									EObject model = null;
+									if (node.getModel().getName().endsWith(".rm")) {
+										json = RMBackendProxy.getKBReasoner()
+												.getRM(node.getModel().getUri().toString());
+										model = JsonSerializer.serializeRMfromJson(json);
+									} else if (node.getModel().getName().endsWith(".aadm")) {
+										json = RMBackendProxy.getKBReasoner()
+												.getAADM(node.getModel().getUri().toString());
+										// TODO Serialize AADM from JSON
+										model = JsonSerializer.serializeAADMfromJson(json);
+									}
+									if (model != null)
+										RMHelper.saveModelInFolder(name, model, targetFolder);
+									else
+										throw new SodaliteException(
+												"DSL could not be generated from JSON representation");
+								} catch (Exception e) {
+									SodaliteLogger.log(e);
+									MessageDialog.openError(shell, "Retrieve model", "Model "
+											+ node.getModel().getName()
+											+ " could not be retrieved from the KB.\nPlease, contact Sodalite administrator");
+								}
+							} else {
+								RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
+								MessageDialog.openInformation(shell, "Retrieve model",
+										"Model " + node.getModel().getName() + " successfully copied into "
+												+ targetFolder.getName() + " folder");
+							}
 						}
 					}
 				};

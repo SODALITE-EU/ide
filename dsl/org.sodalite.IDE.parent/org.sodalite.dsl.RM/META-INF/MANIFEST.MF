@@ -18,16 +18,17 @@ Require-Bundle: org.eclipse.xtext,
  com.google.gson
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sodalite.dsl,
+ org.sodalite.dsl.formatting2,
+ org.sodalite.dsl.generator,
  org.sodalite.dsl.parser.antlr,
  org.sodalite.dsl.parser.antlr.internal,
+ org.sodalite.dsl.parser.antlr.lexer,
  org.sodalite.dsl.rM,
  org.sodalite.dsl.rM.impl,
  org.sodalite.dsl.rM.util,
  org.sodalite.dsl.scoping,
+ org.sodalite.dsl.serialization,
  org.sodalite.dsl.serializer,
  org.sodalite.dsl.services,
- org.sodalite.dsl.validation,
- org.sodalite.dsl.generator,
- org.sodalite.dsl.parser.antlr.lexer,
- org.sodalite.dsl.formatting2
+ org.sodalite.dsl.validation
 Import-Package: org.apache.log4j

@@ -462,6 +462,13 @@ class KBReasonerTest {
 	}
 
 	@Test
+	void testGetRM() throws Exception {
+		String rmIRI = "https://www.sodalite.eu/ontologies/workspace/1/5nf45bccrr6rmkt2f4cinoi6u/RM_86u66om7m9kmfiq13rhdv8uche";
+		String json = kbclient.getRM(rmIRI);
+		assertNotNull(json);
+	}
+
+	@Test
 	@Ignore
 	void testAskIaCBuilderToRegisterAADM() throws Exception {
 		Path aadm_json_path = FileSystems.getDefault().getPath("src/test/resources/snow.json");

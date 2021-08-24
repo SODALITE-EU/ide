@@ -878,6 +878,29 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
+	public String getRM(String rmURI) throws SodaliteException {
+		Assert.notNull(rmURI, "Pass a not null rmURI");
+		String url = kbReasonerUri + "rm?rmIRI=" + rmURI;
+		if (IAM_enabled)
+			url += "&token=" + this.aai_token;
+		try {
+			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getAADM(rmURI);
+			else
+				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
 	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
 			String username, String aadm_json) throws SodaliteException {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
