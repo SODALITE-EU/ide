@@ -474,7 +474,8 @@ public class RMHelper {
 
 	public static void saveModel(EObject model, IFile targetFile) throws IOException {
 		XtextResourceSet resourceSet = new XtextResourceSet();
-		Resource res = resourceSet.createResource(URI.createFileURI(targetFile.getFullPath().toString()));
+		Resource res = resourceSet
+				.createResource(URI.createPlatformResourceURI(targetFile.getFullPath().toString(), true));
 		res.getContents().add(model);
 		res.save(null);
 	}

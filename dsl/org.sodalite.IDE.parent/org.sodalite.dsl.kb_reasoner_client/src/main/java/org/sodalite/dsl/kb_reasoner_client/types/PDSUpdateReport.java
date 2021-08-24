@@ -2,23 +2,22 @@ package org.sodalite.dsl.kb_reasoner_client.types;
 
 public class PDSUpdateReport {
 
-	String aadmuri;
-	String rmuri;
+	String aadm_uri;
+	String rm_uri;
 
-	public String getAadmuri() {
-		return aadmuri;
+	public String getAadm_uri() {
+		return aadm_uri;
 	}
 
-	public void setAadmuri(String aadmuri) {
-		this.aadmuri = aadmuri;
+	public void setAadm_uri(String aadm_uri) {
+		this.aadm_uri = aadm_uri;
 	}
 
-	public String getRmuri() {
-		return rmuri;
+	public String getRm_uri() {
+		return rm_uri;
 	}
 
-	public void setRmuri(String rmuri) {
-		this.rmuri = rmuri;
+	public void setRm_uri(String rm_uri) {
+		this.rm_uri = rm_uri;
 	}
-
 }

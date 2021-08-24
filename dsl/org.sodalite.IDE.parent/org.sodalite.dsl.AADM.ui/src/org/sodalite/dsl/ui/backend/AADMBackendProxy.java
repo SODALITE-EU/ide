@@ -454,7 +454,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "Images have been successfully created";
-							showInfoDialog("", "Save images", message);
+							showInfoDialog("", "Build images", message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -467,7 +467,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 									+ "\nPlease contact Sodalite administrator and provide the reference below"
 									+ "\nInvocation_id: " + report[0];
 							String infoToPaste = "Invocation_id: " + report[0];
-							showErrorDialog(infoToPaste, "Save images", message);
+							showErrorDialog(infoToPaste, "Build images", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
@@ -503,8 +503,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "PDS update have been successfully created with \naadm_uri: "
-									+ report.getAadmuri() + "\nrm_uri: " + report.getRmuri();
-							showInfoDialog("", "Save images", message);
+									+ report.getAadm_uri() + "\nrm_uri: " + report.getRm_uri();
+							showInfoDialog("", "PDS Update", message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -515,11 +515,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 						public void run() {
 							String message = "There were problems in PDS to update: " + e.getMessage()
 									+ "\nPlease contact Sodalite administrator and report her/him above error message";
-							showErrorDialog("", "Save images", message);
+							showErrorDialog("", "PDS update", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
-					SodaliteLogger.log("Error building images", e);
+					SodaliteLogger.log("Error requesting PDS update", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;

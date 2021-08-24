@@ -550,7 +550,7 @@ class KBReasonerTest {
 	void testPDSUpdate() throws Exception {
 		Path pds_inputs_path = FileSystems.getDefault().getPath("src/test/resources/pds_inputs.json");
 		String pds_inputs = new String(Files.readAllBytes(pds_inputs_path));
-		String namespace = "TestOpenstack";
+		String namespace = "openstack";
 		String platform_type = "openstack";
 		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
 		assertNotNull(report);
