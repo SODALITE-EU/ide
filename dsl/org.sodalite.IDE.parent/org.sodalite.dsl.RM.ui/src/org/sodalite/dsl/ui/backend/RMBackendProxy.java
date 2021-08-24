@@ -154,8 +154,14 @@ public class RMBackendProxy {
 		if (!grafanaURI.endsWith("/"))
 			grafanaURI.concat("/");
 
+		String rulesServerURI = store.getString(PreferenceConstants.RulesServer_URI).trim();
+		if (rulesServerURI.isEmpty())
+			raiseConfigurationIssue("Rules Server URI user not set");
+		if (!rulesServerURI.endsWith("/"))
+			rulesServerURI.concat("/");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, grafanaURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

@@ -33,5 +33,7 @@ public class PreferenceConstants {
 
 	public static final String Grafana_URI = "Grafana_URI";
 
+	public static final String RulesServer_URI = "RulesServer_URI";
+
 	public static final String SKYDIVE_ANALYZER_URI = "Skydive_Analyzer_URI";
 }

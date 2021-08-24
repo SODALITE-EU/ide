@@ -72,6 +72,7 @@ import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.rM.RM_Model
+import java.util.Base64
 
 /**
  * Generates code from your model files on save.
@@ -1535,7 +1536,7 @@ class RMGenerator extends AbstractGenerator {
 	}
 	
 	def readFileAsString(String path){
-		var String content = new String(Files.readAllBytes(Paths.get(path)));
+		var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
 		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	

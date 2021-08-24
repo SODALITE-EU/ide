@@ -165,4 +165,8 @@ public interface KBReasoner {
 
 	DashboardData getMonitoringDashboards(String monitoring_Id) throws SodaliteException;
 
+	void registerAlertingRules(String monitoring_id, String rules) throws SodaliteException;
+
+	void deregisterAlertingRules(String monitoring_id) throws SodaliteException;
+
 }

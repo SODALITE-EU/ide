@@ -163,18 +163,6 @@ public class KBView {
 		return splits[splits.length - 1];
 	}
 
-//	private void raiseConfigurationIssue(String message) throws Exception {
-//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		Display.getDefault().asyncExec(new Runnable() {
-//			@Override
-//			public void run() {
-//				MessageDialog.openError(parent, "Sodalite Preferences Error",
-//						message + " in Sodalite preferences pages");
-//			}
-//		});
-//		throw new Exception(message + " in Sodalite preferences pages");
-//	}
-
 	private void createContextMenu(TreeViewer viewer) {
 
 		MenuManager menuMgr = new MenuManager();

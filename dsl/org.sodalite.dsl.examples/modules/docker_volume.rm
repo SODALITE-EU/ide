@@ -8,6 +8,11 @@ node_types:
 				type: string
 				description: "The name of the volume"
 				required: true
+			recreate:
+				type: string
+				description: 'Controls when a volume will be recreated'
+				required: false
+				default: 'never'
 		interfaces:
 			Standard:
 				type: tosca.interfaces.node.lifecycle.Standard
@@ -24,7 +29,12 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.username
-									req_cap: tosca.nodes.SoftwareComponent.host												
+									req_cap: tosca.nodes.SoftwareComponent.host
+							recreate:    
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: docker/sodalite.nodes.DockerVolume.recreate											
 						implementation: 
 							primary: "/workspace/iac-modules/docker/playbooks/add_volume.yml"
 					delete:

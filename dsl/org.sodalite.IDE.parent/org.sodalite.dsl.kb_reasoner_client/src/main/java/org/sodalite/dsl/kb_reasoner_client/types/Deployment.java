@@ -172,7 +172,7 @@ public class Deployment {
 	public String getMonitoringId() {
 		if (this.getInputs() != null && this.getInputs().keySet().contains("monitoring_id"))
 			return this.getInputs().get("monitoring_id");
-		else if (this.getInputs() != null && this.getInputs().keySet().contains("monitoring_id"))
+		else if (this.getLast_inputs() != null && this.getLast_inputs().keySet().contains("monitoring_id"))
 			return this.getLast_inputs().get("monitoring_id");
 		else
 			return null;
