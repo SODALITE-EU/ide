@@ -24,6 +24,8 @@ import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.EConstraints;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EDependencies;
+import org.sodalite.dsl.rM.EDependencyFiles;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EImplementation;
@@ -40,8 +42,10 @@ import org.sodalite.dsl.rM.EOperations;
 import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EPRIMITIVE_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
+import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
@@ -124,14 +128,21 @@ public class JsonSerializer {
 		return key.substring(key.lastIndexOf('/') + 1);
 	}
 
+	private static String parseModule(String key) {
+		String module = null;
+		if (!key.contains("tosca")) {
+			int endIndex = key.lastIndexOf('/');
+			int beginIndex = key.substring(0, endIndex).lastIndexOf('/');
+			module = key.substring(beginIndex + 1, endIndex);
+		}
+		return module;
+	}
+
 	private static void parseNodeType(String module, String name, JsonObject member, RM_Model model) {
 		ENodeType nodeType = RMFactory.eINSTANCE.createENodeType();
 		nodeType.setName(name);
 		ENodeTypeBody nodeTypeBody = RMFactory.eINSTANCE.createENodeTypeBody();
-		EPREFIX_TYPE superType = RMFactory.eINSTANCE.createEPREFIX_TYPE();
-		superType.setModule(module);
-		superType.setType(name);
-		nodeTypeBody.setSuperType(superType);
+		nodeTypeBody.setSuperType(parseEPREFIX_TYPE(member.get("type")));
 		nodeType.setNode(nodeTypeBody);
 		if (hasProperties(member)) {
 			nodeTypeBody.setProperties(parseProperties(member.get("properties")));
@@ -529,8 +540,47 @@ public class JsonSerializer {
 	}
 
 	private static EImplementation parseEImplementation(JsonElement jsonElement) {
-		// TODO Auto-generated method stub
-		return null;
+		EImplementation impl = null;
+		if (jsonElement.isJsonObject()) {
+			impl = RMFactory.eINSTANCE.createEImplementation();
+			JsonObject object = (JsonObject) jsonElement;
+			if (object.has("primary"))
+				impl.setPrimary(parseEPrimary(object.get("primary")));
+			if (object.has("dependencies"))
+				impl.setDependencies(parseEDependencies(object.get("dependencies")));
+
+		}
+		return impl;
+	}
+
+	private static EDependencies parseEDependencies(JsonElement jsonElement) {
+		EDependencies dependencies = null;
+		if (jsonElement.isJsonObject()) {
+			dependencies = RMFactory.eINSTANCE.createEDependencies();
+			JsonObject object = (JsonObject) jsonElement;
+			if (object.has("files")) {
+				EDependencyFiles files = RMFactory.eINSTANCE.createEDependencyFiles();
+				dependencies.setFiles(files);
+				JsonArray array = (JsonArray) object.get("files");
+				Iterator<JsonElement> iter = array.iterator();
+				while (iter.hasNext()) {
+					JsonObject elem = (JsonObject) iter.next();
+					files.getFiles().add(elem.get("path").getAsString());
+				}
+			}
+		}
+		return dependencies;
+	}
+
+	private static EPrimary parseEPrimary(JsonElement jsonElement) {
+		EPrimary primary = null;
+		if (jsonElement.isJsonObject()) {
+			primary = RMFactory.eINSTANCE.createEPrimary();
+			JsonObject object = (JsonObject) jsonElement;
+			if (object.has("path"))
+				primary.setFile(object.get("path").getAsString());
+		}
+		return primary;
 	}
 
 	private static EConstraints parseEConstraints(JsonElement jsonElement) {
@@ -646,8 +696,15 @@ public class JsonSerializer {
 	}
 
 	private static EValidSourceType parseEValidSourceType(JsonElement jsonElement) {
-		EValidSourceType vst = null;
-		// TODO
+		EValidSourceType vst = RMFactory.eINSTANCE.createEValidSourceType();
+		if (jsonElement.isJsonArray()) {
+			JsonArray jsonArray = (JsonArray) jsonElement;
+			Iterator<JsonElement> iter = jsonArray.iterator();
+			while (iter.hasNext()) {
+				JsonElement elem = iter.next();
+				vst.getSourceTypes().add(parseEPREFIX_TYPE(elem));
+			}
+		}
 		return vst;
 	}
 
@@ -672,28 +729,48 @@ public class JsonSerializer {
 		if (jsonElement.isJsonObject()) {
 			Iterator<String> iter = ((JsonObject) jsonElement).keySet().iterator();
 			if (iter.hasNext()) {
-				// TODO provide module for EPREFIX_TYPE
+				String key = iter.next();
 				prefixType = RMFactory.eINSTANCE.createEPREFIX_TYPE();
-				prefixType.setType(parseId(iter.next()));
+				prefixType.setType(parseId(key));
+				prefixType.setModule(parseModule(key));
 			}
+		} else if (jsonElement.isJsonPrimitive()) {
+			prefixType = parseEPREFIX_TYPE((JsonPrimitive) jsonElement);
 		}
 		return prefixType;
+	}
+
+	private static EPREFIX_TYPE parseEPREFIX_TYPE(JsonPrimitive jsonPrimitive) {
+		EPREFIX_TYPE prefixType = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		prefixType.setType(parseId(jsonPrimitive.getAsString()));
+		prefixType.setModule(parseModule(jsonPrimitive.getAsString()));
+		return prefixType;
+	}
+
+	private static EPREFIX_TYPE parseEPREFIX_TYPE(String type) {
+		EPREFIX_TYPE prefixType = RMFactory.eINSTANCE.createEPREFIX_TYPE();
+		prefixType.setType(parseId(type));
+		return prefixType;
+	}
+
+	private static EPRIMITIVE_TYPE parseEPRIMITIVE_TYPE(String type) {
+		EPRIMITIVE_TYPE primitiveType = RMFactory.eINSTANCE.createEPRIMITIVE_TYPE();
+		primitiveType.setType(type);
+		return primitiveType;
+	}
+
+	private static EPREFIX_ID parseEPREFIX_ID(JsonPrimitive jsonPrimitive) {
+		EPREFIX_ID prefixId = RMFactory.eINSTANCE.createEPREFIX_ID();
+		prefixId.setId(jsonPrimitive.getAsString());
+		return prefixId;
 	}
 
 	private static EPREFIX_REF parseEPREFIX_REF(JsonElement jsonElement) {
 		EPREFIX_REF prefixRef = null;
 		if (jsonElement.isJsonObject()) {
-			Iterator<String> iter = ((JsonObject) jsonElement).keySet().iterator();
-			if (iter.hasNext()) {
-				// TODO provide module for EPREFIX_TYPE
-				EPREFIX_TYPE prefixType = RMFactory.eINSTANCE.createEPREFIX_TYPE();
-				prefixType.setType(parseId(iter.next()));
-				prefixRef = prefixType;
-			}
+			prefixRef = parseEPREFIX_TYPE(jsonElement);
 		} else if (jsonElement.isJsonPrimitive()) {
-			EPREFIX_ID prefixId = RMFactory.eINSTANCE.createEPREFIX_ID();
-			prefixId.setId(((JsonPrimitive) jsonElement).getAsString());
-			prefixRef = prefixId;
+			prefixRef = parseEPREFIX_ID((JsonPrimitive) jsonElement);
 		}
 		return prefixRef;
 	}
@@ -705,12 +782,9 @@ public class JsonSerializer {
 			if (iter.hasNext()) {
 				String type = parseId(iter.next());
 				if (type.contains(".")) {
-					dt = RMFactory.eINSTANCE.createEPREFIX_TYPE();
-					// TODO provide module for EPREFIX_TYPE
-					dt.setType(type);
+					dt = parseEPREFIX_TYPE(type);
 				} else {
-					dt = RMFactory.eINSTANCE.createEPRIMITIVE_TYPE();
-					dt.setType(type);
+					dt = parseEPRIMITIVE_TYPE(type);
 				}
 			}
 		}

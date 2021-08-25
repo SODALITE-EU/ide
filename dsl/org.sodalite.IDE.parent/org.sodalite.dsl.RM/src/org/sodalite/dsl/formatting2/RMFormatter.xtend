@@ -39,6 +39,9 @@ import org.sodalite.dsl.rM.GetPropertyBody
 import org.sodalite.dsl.rM.GetAttribute
 import org.sodalite.dsl.rM.GetAttributeBody
 import org.sodalite.dsl.rM.GetInput
+import org.sodalite.dsl.rM.EImplementation
+import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EValidSourceType
 
 class RMFormatter extends AbstractFormatter2 {
 	
@@ -198,9 +201,11 @@ class RMFormatter extends AbstractFormatter2 {
 		eCapabilityDefinitionBody.regionFor.keyword("attributes:").append[newLine]
 		eCapabilityDefinitionBody.attributes.surround[indent].format
 		
+		eCapabilityDefinitionBody.regionFor.keyword("[").append[noSpace]
 		eCapabilityDefinitionBody.regionFor.keyword("valid_source_types:").append[oneSpace]
-		eCapabilityDefinitionBody.valid_source_types.format.append[newLine]
-		
+		eCapabilityDefinitionBody.regionFor.keyword("]").prepend[noSpace]
+		eCapabilityDefinitionBody.valid_source_types.format
+	
 		eCapabilityDefinitionBody.regionFor.keyword("occurrences:").append[oneSpace]
 	}
 	
@@ -249,6 +254,11 @@ class RMFormatter extends AbstractFormatter2 {
 
 		eOperationDefinitionBody.regionFor.keyword("implementation:").append[newLine]
 		eOperationDefinitionBody.implementation.surround[indent].format
+	}
+	
+	def dispatch void format(EImplementation implementation, extension IFormattableDocument document) {
+		implementation.primary.append[newLine]
+		implementation.dependencies.append[newLine]
 	}
 	
 	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
@@ -312,5 +322,16 @@ class RMFormatter extends AbstractFormatter2 {
 	def dispatch void format(GetInput getInput, extension IFormattableDocument document) {
 		getInput.regionFor.keyword("get_input:").append[newLine]
 		getInput.input.surround[indent].format
+	}
+	
+	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
+		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
+		prefix.regionFor.keyword("/").append[noSpace]
+	}
+	
+	def dispatch void format(EValidSourceType vst, extension IFormattableDocument document) {
+		for (st : vst.sourceTypes) {
+			st.format.format
+		}
 	}
 }

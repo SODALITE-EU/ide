@@ -366,8 +366,8 @@ class AADMFormatter extends RMFormatter {
 		prefix.regionFor.keyword("/").append[noSpace]
 	}
 	
-	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
-		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
-		prefix.regionFor.keyword("/").append[noSpace]
-	}
+//	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
+//		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
+//		prefix.regionFor.keyword("/").append[noSpace]
+//	}
 }
