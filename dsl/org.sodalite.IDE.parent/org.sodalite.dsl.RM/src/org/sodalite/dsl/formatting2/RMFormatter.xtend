@@ -42,6 +42,9 @@ import org.sodalite.dsl.rM.GetInput
 import org.sodalite.dsl.rM.EImplementation
 import org.sodalite.dsl.rM.EPREFIX_TYPE
 import org.sodalite.dsl.rM.EValidSourceType
+import org.sodalite.dsl.rM.EConstraints
+import org.sodalite.dsl.rM.EDataType
+import org.sodalite.dsl.rM.EDataTypeBody
 
 class RMFormatter extends AbstractFormatter2 {
 	
@@ -51,6 +54,9 @@ class RMFormatter extends AbstractFormatter2 {
 		rM_Model.prepend[setNewLines(0, 0, 0); noSpace]
 		rM_Model.regionFor.keyword("node_types:").prepend[newLine].append[newLine]
 		rM_Model.nodeTypes.surround[indent].format
+		
+		rM_Model.regionFor.keyword("data_types:").prepend[newLine].append[newLine]
+		rM_Model.dataTypes.surround[indent].format
 	}
 	
 	def dispatch void format(ENodeTypes eNodeTypes, extension IFormattableDocument document) {
@@ -58,11 +64,23 @@ class RMFormatter extends AbstractFormatter2 {
 			eNodeType.format
 		}
 	}
+	
+	def dispatch void format(EDataTypes eDataTypes, extension IFormattableDocument document) {
+		for (eDataType : eDataTypes.dataTypes) {
+			eDataType.format
+		}
+	}
 
 	def dispatch void format(ENodeType eNodeType, extension IFormattableDocument document) {
 		eNodeType.regionFor.feature(ENODE_TYPE__NAME).append[noSpace]
 		eNodeType.regionFor.keyword(":").append[newLine]
 		eNodeType.node.surround[indent].format
+	}
+	
+	def dispatch void format(EDataType eDataType, extension IFormattableDocument document) {
+		eDataType.name.append[noSpace]
+		eDataType.regionFor.keyword(":").append[newLine]
+		eDataType.data.surround[indent].format
 	}
 
 	def dispatch void format(ENodeTypeBody eNodeTypeBody, extension IFormattableDocument document) {
@@ -86,6 +104,20 @@ class RMFormatter extends AbstractFormatter2 {
 		
 		eNodeTypeBody.regionFor.keyword("interfaces:").append[newLine]
 		eNodeTypeBody.interfaces.surround[indent].format
+	}
+	
+	def dispatch void format(EDataTypeBody eDataTypeBody, extension IFormattableDocument document) {
+		eDataTypeBody.regionFor.keyword("derived_from:").append[oneSpace]
+		eDataTypeBody.superType.format.append[newLine]
+
+		eDataTypeBody.regionFor.keyword("description:").append[oneSpace]
+		eDataTypeBody.regionFor.feature(EDATA_TYPE_BODY__DESCRIPTION).append[newLine]
+
+		eDataTypeBody.regionFor.keyword("properties:").append[newLine]
+		eDataTypeBody.properties.surround[indent].format
+
+		eDataTypeBody.regionFor.keyword("constraints:").append[newLine]
+		eDataTypeBody.constraints.surround[indent].format
 	}
 	
 	def dispatch void format(EProperties eProperties, extension IFormattableDocument document) {
@@ -164,8 +196,8 @@ class RMFormatter extends AbstractFormatter2 {
 		ePropertyDefinitionBody.regionFor.keyword("status:").append[oneSpace]
 		ePropertyDefinitionBody.regionFor.feature(EPROPERTY_DEFINITION_BODY__STATUS).append[newLine]
 		
-		ePropertyDefinitionBody.regionFor.keyword("constraints:").append[oneSpace]
-		ePropertyDefinitionBody.constraints.format.append[newLine]
+		ePropertyDefinitionBody.regionFor.keyword("constraints:").append[newLine]
+		ePropertyDefinitionBody.constraints.surround[indent].format
 		
 		ePropertyDefinitionBody.regionFor.keyword("entry_schema:").append[oneSpace]
 		ePropertyDefinitionBody.entry_schema.format.append[newLine]
@@ -327,6 +359,12 @@ class RMFormatter extends AbstractFormatter2 {
 	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
 		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
 		prefix.regionFor.keyword("/").append[noSpace]
+	}
+	
+	def dispatch void format(EConstraints constraints, extension IFormattableDocument document) {
+		for (constraint : constraints.constraints) {
+			constraint.format.append[newLine]
+		}
 	}
 	
 	def dispatch void format(EValidSourceType vst, extension IFormattableDocument document) {

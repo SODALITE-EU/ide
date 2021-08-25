@@ -23,16 +23,29 @@ import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
 import org.sodalite.dsl.rM.EConstraints;
+import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EDataTypes;
 import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EDependencyFiles;
 import org.sodalite.dsl.rM.EEntity;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEqual;
+import org.sodalite.dsl.rM.EGreaterOrEqual;
+import org.sodalite.dsl.rM.EGreaterThan;
 import org.sodalite.dsl.rM.EImplementation;
+import org.sodalite.dsl.rM.EInRange;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaces;
+import org.sodalite.dsl.rM.ELIST;
+import org.sodalite.dsl.rM.ELength;
+import org.sodalite.dsl.rM.ELessOrEqual;
+import org.sodalite.dsl.rM.ELessThan;
+import org.sodalite.dsl.rM.EMaxLength;
+import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeBody;
 import org.sodalite.dsl.rM.ENodeTypes;
@@ -54,7 +67,9 @@ import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.ESIGNEDINT;
 import org.sodalite.dsl.rM.ESTRING;
+import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.EValidSourceType;
+import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetAttributeBody;
@@ -117,6 +132,13 @@ public class JsonSerializer {
 						model.setNodeTypes(nodeTypes);
 					}
 					parseNodeType(module, name, member, model);
+				} else if (member.get("class").getAsString().equals("data_types")) {
+					String name = parseId(key);
+					if (model.getDataTypes() == null) {
+						EDataTypes dataTypes = RMFactory.eINSTANCE.createEDataTypes();
+						model.setDataTypes(dataTypes);
+					}
+					parseDataType(module, name, member, model);
 				}
 			}
 		}
@@ -132,8 +154,10 @@ public class JsonSerializer {
 		String module = null;
 		if (!key.contains("tosca")) {
 			int endIndex = key.lastIndexOf('/');
-			int beginIndex = key.substring(0, endIndex).lastIndexOf('/');
-			module = key.substring(beginIndex + 1, endIndex);
+			if (endIndex > 0) {
+				int beginIndex = key.substring(0, endIndex).lastIndexOf('/');
+				module = key.substring(beginIndex + 1, endIndex);
+			}
 		}
 		return module;
 	}
@@ -142,25 +166,46 @@ public class JsonSerializer {
 		ENodeType nodeType = RMFactory.eINSTANCE.createENodeType();
 		nodeType.setName(name);
 		ENodeTypeBody nodeTypeBody = RMFactory.eINSTANCE.createENodeTypeBody();
+		model.getNodeTypes().getNodeTypes().add(nodeType);
+
 		nodeTypeBody.setSuperType(parseEPREFIX_TYPE(member.get("type")));
 		nodeType.setNode(nodeTypeBody);
 		if (hasProperties(member)) {
-			nodeTypeBody.setProperties(parseProperties(member.get("properties")));
+			nodeTypeBody.setProperties(parseEProperties(member.get("properties")));
 		}
 		if (hasAttributes(member)) {
-			nodeTypeBody.setAttributes(parseAttributes(member.get("attributes")));
+			nodeTypeBody.setAttributes(parseEAttributes(member.get("attributes")));
 		}
 		if (hasRequirements(member)) {
-			nodeTypeBody.setRequirements(parseRequirements(member.get("requirements")));
+			nodeTypeBody.setRequirements(parseERequirements(member.get("requirements")));
 		}
 		if (hasCapabilities(member)) {
-			nodeTypeBody.setCapabilities(parseCapabilities(member.get("capabilities")));
+			nodeTypeBody.setCapabilities(parseECapabilities(member.get("capabilities")));
 		}
 		if (hasInterfaces(member)) {
-			nodeTypeBody.setInterfaces(parseInterfaces(member.get("interfaces")));
+			parseEInterfaces(member.get("interfaces"), nodeTypeBody);
 		}
 
-		model.getNodeTypes().getNodeTypes().add(nodeType);
+	}
+
+	private static void parseDataType(String module, String name, JsonObject member, RM_Model model) {
+		EDataType dataType = RMFactory.eINSTANCE.createEDataType();
+		dataType.setName(parseEDataTypeName(name));
+		EDataTypeBody dataTypeBody = RMFactory.eINSTANCE.createEDataTypeBody();
+		dataTypeBody.setSuperType(parseEPREFIX_TYPE(member.get("type")));
+		dataType.setData(dataTypeBody);
+		if (hasProperties(member)) {
+			dataTypeBody.setProperties(parseEProperties(member.get("properties")));
+		}
+		if (hasConstraints(member)) {
+			dataTypeBody.setConstraints(parseEConstraints(member.get("constraints")));
+		}
+
+		model.getDataTypes().getDataTypes().add(dataType);
+	}
+
+	private static boolean hasConstraints(JsonObject jsonObjet) {
+		return hasEntity(jsonObjet, "constraints");
 	}
 
 	private static boolean hasProperties(JsonObject jsonObjet) {
@@ -188,27 +233,24 @@ public class JsonSerializer {
 				&& ((JsonArray) jsonElement.get(entity)).iterator().hasNext();
 	}
 
-	private static EInterfaces parseInterfaces(JsonElement jsonElement) {
+	private static void parseEInterfaces(JsonElement jsonElement, ENodeTypeBody parent) {
 		EInterfaces interfaces = RMFactory.eINSTANCE.createEInterfaces();
+		parent.setInterfaces(interfaces);
 		if (jsonElement.isJsonArray()) {
 			Iterator<JsonElement> iter = ((JsonArray) jsonElement).iterator();
 			while (iter.hasNext()) {
-				JsonElement elem = iter.next();
-				EInterfaceDefinition inter = parseInterface(elem);
-				if (inter != null)
-					interfaces.getInterfaces().add(inter);
+				parseEInterface(iter.next(), interfaces);
 			}
 		}
-		return interfaces;
 	}
 
-	private static ECapabilities parseCapabilities(JsonElement jsonElement) {
+	private static ECapabilities parseECapabilities(JsonElement jsonElement) {
 		ECapabilities capabilities = RMFactory.eINSTANCE.createECapabilities();
 		if (jsonElement.isJsonArray()) {
 			Iterator<JsonElement> iter = ((JsonArray) jsonElement).iterator();
 			while (iter.hasNext()) {
 				JsonElement elem = iter.next();
-				ECapabilityDefinition cap = parseCapability(elem);
+				ECapabilityDefinition cap = parseECapability(elem);
 				if (cap != null)
 					capabilities.getCapabilities().add(cap);
 			}
@@ -216,13 +258,13 @@ public class JsonSerializer {
 		return capabilities;
 	}
 
-	private static ERequirements parseRequirements(JsonElement jsonElement) {
+	private static ERequirements parseERequirements(JsonElement jsonElement) {
 		ERequirements requirements = RMFactory.eINSTANCE.createERequirements();
 		if (jsonElement.isJsonArray()) {
 			Iterator<JsonElement> iter = ((JsonArray) jsonElement).iterator();
 			while (iter.hasNext()) {
 				JsonElement elem = iter.next();
-				ERequirementDefinition req = parseRequirement(elem);
+				ERequirementDefinition req = parseERequirement(elem);
 				if (req != null)
 					requirements.getRequirements().add(req);
 			}
@@ -230,13 +272,13 @@ public class JsonSerializer {
 		return requirements;
 	}
 
-	private static EAttributes parseAttributes(JsonElement jsonElement) {
+	private static EAttributes parseEAttributes(JsonElement jsonElement) {
 		EAttributes attributes = RMFactory.eINSTANCE.createEAttributes();
 		if (jsonElement.isJsonArray()) {
 			Iterator<JsonElement> iter = ((JsonArray) jsonElement).iterator();
 			while (iter.hasNext()) {
 				JsonElement elem = iter.next();
-				EAttributeDefinition attr = parseAttribute(elem);
+				EAttributeDefinition attr = parseEAttribute(elem);
 				if (attr != null)
 					attributes.getAttributes().add(attr);
 			}
@@ -244,13 +286,13 @@ public class JsonSerializer {
 		return attributes;
 	}
 
-	private static EProperties parseProperties(JsonElement jsonElement) {
+	private static EProperties parseEProperties(JsonElement jsonElement) {
 		EProperties properties = RMFactory.eINSTANCE.createEProperties();
 		if (jsonElement.isJsonArray()) {
 			Iterator<JsonElement> iter = ((JsonArray) jsonElement).iterator();
 			while (iter.hasNext()) {
 				JsonElement elem = iter.next();
-				EPropertyDefinition prop = parseProperty(elem);
+				EPropertyDefinition prop = parseEProperty(elem);
 				if (prop != null)
 					properties.getProperties().add(prop);
 			}
@@ -258,43 +300,37 @@ public class JsonSerializer {
 		return properties;
 	}
 
-	private static EInputs parseInputs(JsonElement jsonElement) {
-		EInputs inputs = null;
+	private static void parseEInputs(JsonElement jsonElement, EOperationDefinitionBody operBody) {
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
 			Iterator<String> iter = object.keySet().iterator();
 			if (iter.hasNext()) {
-				inputs = RMFactory.eINSTANCE.createEInputs();
+				EInputs inputs = RMFactory.eINSTANCE.createEInputs();
+				operBody.setInputs(inputs);
 				while (iter.hasNext()) {
 					String key = iter.next();
-					EParameterDefinition par = parseParameter(key, (JsonObject) object.get(key));
-					if (par != null)
-						inputs.getParameters().add(par);
+					parseEParameterDefinition(key, (JsonObject) object.get(key), inputs);
 				}
 			}
 		}
-		return inputs;
 	}
 
-	private static EOperations parseOperations(JsonElement jsonElement) {
-		EOperations operations = null;
+	private static void parseEOperations(JsonElement jsonElement, EInterfaceDefinitionBody parent) {
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
 			Iterator<String> iter = object.keySet().iterator();
 			if (iter.hasNext()) {
-				operations = RMFactory.eINSTANCE.createEOperations();
+				EOperations operations = RMFactory.eINSTANCE.createEOperations();
+				parent.setOperations(operations);
 				while (iter.hasNext()) {
 					String key = iter.next();
-					EOperationDefinition oper = parseOperation(key, (JsonObject) object.get(key));
-					if (oper != null)
-						operations.getOperations().add(oper);
+					parseEOperation(key, (JsonObject) object.get(key), operations);
 				}
 			}
 		}
-		return operations;
 	}
 
-	private static EPropertyDefinition parseProperty(JsonElement jsonElement) {
+	private static EPropertyDefinition parseEProperty(JsonElement jsonElement) {
 		EPropertyDefinition prop = null;
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
@@ -303,27 +339,27 @@ public class JsonSerializer {
 				prop = RMFactory.eINSTANCE.createEPropertyDefinition();
 				String key = iter.next();
 				prop.setName(parseId(key));
-				prop.setProperty(parsePropertyBody(object.get(key)));
+				prop.setProperty(parseEPropertyBody(object.get(key)));
 			}
 		}
 		return prop;
 	}
 
-	private static EParameterDefinition parseParameter(String key, JsonObject jsonObject) {
+	private static void parseEParameterDefinition(String key, JsonObject jsonObject, EInputs inputs) {
 		EParameterDefinition par = RMFactory.eINSTANCE.createEParameterDefinition();
+		inputs.getParameters().add(par);
 		par.setName(parseId(key));
-		par.setParameter(parseParameterBody(jsonObject));
-		return par;
+		parseEParameterDefinitionBody(jsonObject, par);
 	}
 
-	private static EOperationDefinition parseOperation(String key, JsonObject jsonObject) {
+	private static void parseEOperation(String key, JsonObject jsonObject, EOperations parent) {
 		EOperationDefinition oper = RMFactory.eINSTANCE.createEOperationDefinition();
+		parent.getOperations().add(oper);
 		oper.setName(parseId(key));
-		oper.setOperation(parseOperationBody(jsonObject));
-		return oper;
+		parseOperationBody(jsonObject, oper);
 	}
 
-	private static EAttributeDefinition parseAttribute(JsonElement jsonElement) {
+	private static EAttributeDefinition parseEAttribute(JsonElement jsonElement) {
 		EAttributeDefinition attr = null;
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
@@ -338,7 +374,7 @@ public class JsonSerializer {
 		return attr;
 	}
 
-	private static ERequirementDefinition parseRequirement(JsonElement jsonElement) {
+	private static ERequirementDefinition parseERequirement(JsonElement jsonElement) {
 		ERequirementDefinition req = null;
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
@@ -353,7 +389,7 @@ public class JsonSerializer {
 		return req;
 	}
 
-	private static ECapabilityDefinition parseCapability(JsonElement jsonElement) {
+	private static ECapabilityDefinition parseECapability(JsonElement jsonElement) {
 		ECapabilityDefinition cap = null;
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
@@ -368,22 +404,21 @@ public class JsonSerializer {
 		return cap;
 	}
 
-	private static EInterfaceDefinition parseInterface(JsonElement jsonElement) {
-		EInterfaceDefinition inter = null;
+	private static void parseEInterface(JsonElement jsonElement, EInterfaces parent) {
 		if (jsonElement.isJsonObject()) {
 			JsonObject object = (JsonObject) jsonElement;
 			Iterator<String> iter = object.keySet().iterator();
 			if (iter.hasNext()) {
-				inter = RMFactory.eINSTANCE.createEInterfaceDefinition();
+				EInterfaceDefinition inter = RMFactory.eINSTANCE.createEInterfaceDefinition();
+				parent.getInterfaces().add(inter);
 				String key = iter.next();
 				inter.setName(parseId(key));
-				inter.setInterface(parseInterfaceBody(object.get(key)));
+				parseInterfaceBody(object.get(key), inter);
 			}
 		}
-		return inter;
 	}
 
-	private static EPropertyDefinitionBody parsePropertyBody(JsonElement jsonElement) {
+	private static EPropertyDefinitionBody parseEPropertyBody(JsonElement jsonElement) {
 		EPropertyDefinitionBody propBody = null;
 		if (jsonElement.isJsonObject()) {
 			propBody = RMFactory.eINSTANCE.createEPropertyDefinitionBody();
@@ -408,17 +443,18 @@ public class JsonSerializer {
 					propBody.setConstraints(parseEConstraints(specification.get("constraints")));
 				}
 				if (specification.has("entry_schema")) {
-					propBody.setEntry_schema(parseEDataTypeName(specification.get("entry_schema")));
+					propBody.setEntry_schema(
+							parseEDataTypeName(((JsonObject) specification.get("entry_schema")).get("type")));
 				}
 			}
 		}
 		return propBody;
 	}
 
-	private static EParameterDefinitionBody parseParameterBody(JsonElement jsonElement) {
-		EParameterDefinitionBody parBody = null;
+	private static void parseEParameterDefinitionBody(JsonElement jsonElement, EParameterDefinition parDef) {
 		if (jsonElement.isJsonObject()) {
-			parBody = RMFactory.eINSTANCE.createEParameterDefinitionBody();
+			EParameterDefinitionBody parBody = RMFactory.eINSTANCE.createEParameterDefinitionBody();
+			parDef.setParameter(parBody);
 			JsonObject object = (JsonObject) jsonElement;
 			if (object.has("description"))
 				parBody.setDescription(object.get("description").getAsString());
@@ -426,16 +462,15 @@ public class JsonSerializer {
 				parBody.setType(parseEDataTypeName(object.get("type")));
 			}
 			if (object.has("default")) {
-				parBody.setDefault(parseEValueExpression(object.get("default")));
+				parBody.setDefault(parseEValueExpression(object.get("default"), parBody));
 			}
 			if (object.has("value")) {
-				parBody.setValue(parseEValueExpression(object.get("value")));
+				parBody.setValue(parseEValueExpression(object.get("value"), parBody));
 			}
 		}
-		return parBody;
 	}
 
-	private static EValueExpression parseEValueExpression(JsonElement jsonElement) {
+	private static EValueExpression parseEValueExpression(JsonElement jsonElement, EParameterDefinitionBody parent) {
 		EValueExpression ve = null;
 		// TODO support ESingleValue case
 		if (jsonElement.isJsonObject()) {
@@ -452,18 +487,14 @@ public class JsonSerializer {
 					getAttr.setAttribute(renderGetAttributeBody(object.get(key)));
 					ve = getAttr;
 				} else if (key.equals("get_input")) {
-					GetInput getIn = RMFactory.eINSTANCE.createGetInput();
-					getIn.setInput(renderGetInputBody(object.get(key)));
-					ve = getIn;
+					// TODO Use of getInput in RM require changes in RM DSL grammar to properly
+					// reference inputs
+					GetInput getInput = RMFactory.eINSTANCE.createGetInput();
+					ve = getInput;
 				}
 			}
 		}
 		return ve;
-	}
-
-	private static EParameterDefinition renderGetInputBody(JsonElement jsonElement) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private static GetAttributeBody renderGetAttributeBody(JsonElement jsonElement) {
@@ -522,21 +553,20 @@ public class JsonSerializer {
 		return er;
 	}
 
-	private static EOperationDefinitionBody parseOperationBody(JsonElement jsonElement) {
-		EOperationDefinitionBody operBody = null;
+	private static void parseOperationBody(JsonElement jsonElement, EOperationDefinition oper) {
 		if (jsonElement.isJsonObject()) {
-			operBody = RMFactory.eINSTANCE.createEOperationDefinitionBody();
+			EOperationDefinitionBody operBody = RMFactory.eINSTANCE.createEOperationDefinitionBody();
+			oper.setOperation(operBody);
 			JsonObject object = (JsonObject) jsonElement;
 			if (object.has("description"))
 				operBody.setDescription(object.get("description").getAsString());
 			if (object.has("inputs")) {
-				operBody.setInputs(parseInputs(object.get("inputs")));
+				parseEInputs(object.get("inputs"), operBody);
 			}
 			if (object.has("implementation")) {
 				operBody.setImplementation(parseEImplementation(object.get("implementation")));
 			}
 		}
-		return operBody;
 	}
 
 	private static EImplementation parseEImplementation(JsonElement jsonElement) {
@@ -584,13 +614,86 @@ public class JsonSerializer {
 	}
 
 	private static EConstraints parseEConstraints(JsonElement jsonElement) {
-		// TODO
+		EConstraints constraints = RMFactory.eINSTANCE.createEConstraints();
+		if (jsonElement.isJsonObject()) {
+			JsonObject jsonObject = (JsonObject) jsonElement;
+			if (jsonObject.has("min_length")) {
+				EMinLength constraint = RMFactory.eINSTANCE.createEMinLength();
+				constraint.setVal(parseEAlphaNumericValue(jsonObject.get("min_length")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("max_length")) {
+				EMaxLength constraint = RMFactory.eINSTANCE.createEMaxLength();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("min_length")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("equal")) {
+				EEqual constraint = RMFactory.eINSTANCE.createEEqual();
+				constraint.setVal(parseESingleValue((JsonPrimitive) jsonObject.get("equal")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("greater_than")) {
+				EGreaterThan constraint = RMFactory.eINSTANCE.createEGreaterThan();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("greater_than")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("greater_or_equal")) {
+				EGreaterOrEqual constraint = RMFactory.eINSTANCE.createEGreaterOrEqual();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("greater_or_equal")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("less_than")) {
+				ELessThan constraint = RMFactory.eINSTANCE.createELessThan();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("less_than")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("less_or_equal")) {
+				ELessOrEqual constraint = RMFactory.eINSTANCE.createELessOrEqual();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("less_or_equal")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("in_range")) {
+				EInRange constraint = parseEInRange(jsonObject.get("in_range"));
+			} else if (jsonObject.has("valid_values")) {
+				EValid_Values constraint = RMFactory.eINSTANCE.createEValid_Values();
+				constraint.setVal(parseELIST((JsonArray) jsonObject.get("valid_values")));
+				constraints.getConstraints().add(constraint);
+			} else if (jsonObject.has("length")) {
+				ELength constraint = RMFactory.eINSTANCE.createELength();
+				constraint.setVal(parseEAlphaNumericValue((JsonPrimitive) jsonObject.get("length")));
+				constraints.getConstraints().add(constraint);
+			}
+		}
+		return constraints;
+	}
+
+	private static ELIST parseELIST(JsonArray jsonArray) {
+		ELIST list = RMFactory.eINSTANCE.createELIST();
+		Iterator<JsonElement> iter = jsonArray.iterator();
+		while (iter.hasNext()) {
+			JsonElement elem = iter.next();
+			list.getList().add(parseEAlphaNumericValue(elem));
+		}
+		return list;
+	}
+
+	private static EInRange parseEInRange(JsonElement jsonPrimitive) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	private static EAssignmentValue parseEAssignmentValue(JsonElement jsonElement) {
-		// TODO
-		return null;
+		EAssignmentValue av = null;
+		// TODO Support other EAssignmentValue subtypes: ELIST | EMAP | EFunction
+		if (jsonElement.isJsonPrimitive()) {
+			av = parseESingleValue((JsonPrimitive) jsonElement);
+		}
+		return av;
+	}
+
+	private static ESingleValue parseESingleValue(JsonPrimitive jsonPrimitive) {
+		// TODO Support other ESingleValue subtypes: EBOOLEAN | EFLOAT | ESIGNEDINT
+		ESingleValue sv = parseESTRING(jsonPrimitive.getAsString());
+		return sv;
+	}
+
+	private static ESTRING parseESTRING(String value) {
+		ESTRING string = RMFactory.eINSTANCE.createESTRING();
+		string.setValue(value);
+		return string;
 	}
 
 	private static EAttributeDefinitionBody parseAttributeBody(JsonElement jsonElement) {
@@ -658,10 +761,10 @@ public class JsonSerializer {
 					capBody.setType(parseEPREFIX_TYPE(specification.get("type")));
 				}
 				if (specification.has("properties")) {
-					capBody.setProperties(parseProperties(specification.get("properties")));
+					capBody.setProperties(parseEProperties(specification.get("properties")));
 				}
 				if (specification.has("attributes")) {
-					capBody.setAttributes(parseAttributes(specification.get("attributes")));
+					capBody.setAttributes(parseEAttributes(specification.get("attributes")));
 				}
 				if (specification.has("valid_source_types")) {
 					capBody.setValid_source_types((parseEValidSourceType(specification.get("valid_source_types"))));
@@ -676,10 +779,10 @@ public class JsonSerializer {
 		return capBody;
 	}
 
-	private static EInterfaceDefinitionBody parseInterfaceBody(JsonElement jsonElement) {
-		EInterfaceDefinitionBody interBody = null;
+	private static void parseInterfaceBody(JsonElement jsonElement, EInterfaceDefinition parent) {
 		if (jsonElement.isJsonObject()) {
-			interBody = RMFactory.eINSTANCE.createEInterfaceDefinitionBody();
+			EInterfaceDefinitionBody interBody = RMFactory.eINSTANCE.createEInterfaceDefinitionBody();
+			parent.setInterface(interBody);
 			JsonObject object = (JsonObject) jsonElement;
 			if (object.has("specification")) {
 				JsonObject specification = (JsonObject) object.get("specification");
@@ -687,12 +790,11 @@ public class JsonSerializer {
 					interBody.setType(parseEPREFIX_TYPE(specification.get("type")));
 				}
 				if (specification.has("inputs"))
-					interBody.setInputs(parseProperties(specification.get("inputs")));
+					interBody.setInputs(parseEProperties(specification.get("inputs")));
 				if (specification.has("operations"))
-					interBody.setOperations(parseOperations(specification.get("operations")));
+					parseEOperations(specification.get("operations"), interBody);
 			}
 		}
-		return interBody;
 	}
 
 	private static EValidSourceType parseEValidSourceType(JsonElement jsonElement) {
@@ -780,13 +882,29 @@ public class JsonSerializer {
 		if (jsonElement.isJsonObject()) {
 			Iterator<String> iter = ((JsonObject) jsonElement).keySet().iterator();
 			if (iter.hasNext()) {
-				String type = parseId(iter.next());
+				String key = iter.next();
+				String type = parseId(key);
+				String module = parseModule(key);
 				if (type.contains(".")) {
 					dt = parseEPREFIX_TYPE(type);
+					((EPREFIX_TYPE) dt).setModule(module);
 				} else {
 					dt = parseEPRIMITIVE_TYPE(type);
 				}
 			}
+		}
+		return dt;
+	}
+
+	private static EDataTypeName parseEDataTypeName(String key) {
+		EDataTypeName dt = null;
+		String type = parseId(key);
+		String module = parseModule(key);
+		if (type.contains(".")) {
+			dt = parseEPREFIX_TYPE(type);
+			((EPREFIX_TYPE) dt).setModule(module);
+		} else {
+			dt = parseEPRIMITIVE_TYPE(type);
 		}
 		return dt;
 	}
