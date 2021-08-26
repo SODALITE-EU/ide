@@ -39,11 +39,11 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
-import org.sodalite.dsl.serialization.JsonSerializer;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
+import org.sodalite.ide.ui.serialization.JsonSerializer;
 import org.sodalite.ide.ui.views.model.ModelNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
@@ -335,7 +335,7 @@ public class KBView {
 										model = JsonSerializer.serializeRMfromJson(json);
 									} else if (node.getModel().getName().endsWith(".aadm")) {
 										json = RMBackendProxy.getKBReasoner()
-												.getAADM(node.getModel().getUri().toString());
+												.getAADM(node.getModel().getUri().toString(), true);
 										// TODO Serialize AADM from JSON
 										model = JsonSerializer.serializeAADMfromJson(json);
 									}
