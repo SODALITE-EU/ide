@@ -27,7 +27,6 @@ Export-Package: org.sodalite.dsl,
  org.sodalite.dsl.rM.impl,
  org.sodalite.dsl.rM.util,
  org.sodalite.dsl.scoping,
- org.sodalite.dsl.serialization,
  org.sodalite.dsl.serializer,
  org.sodalite.dsl.services,
  org.sodalite.dsl.validation

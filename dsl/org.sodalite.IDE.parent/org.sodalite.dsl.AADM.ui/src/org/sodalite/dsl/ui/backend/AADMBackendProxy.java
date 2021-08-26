@@ -298,7 +298,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
-					String aadmJson = getKBReasoner().getAADM(saveReport.getURI());
+					String aadmJson = getKBReasoner().getAADM(saveReport.getURI(), false);
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging

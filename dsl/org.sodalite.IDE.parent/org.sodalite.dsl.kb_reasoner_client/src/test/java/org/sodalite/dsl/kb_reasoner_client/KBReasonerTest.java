@@ -457,7 +457,7 @@ class KBReasonerTest {
 
 	@Test
 	void testGetAADM() throws Exception {
-		String json = kbclient.getAADM(aadmURI);
+		String json = kbclient.getAADM(aadmURI, false);
 		assertNotNull(json);
 	}
 
