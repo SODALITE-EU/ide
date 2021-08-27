@@ -22,7 +22,9 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -35,6 +37,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
@@ -288,6 +291,16 @@ public class RMHelper {
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
 	}
 
+	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
+		if (ref instanceof EPREFIX_TYPE) {
+			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
+		} else if (ref instanceof EPREFIX_TYPE) {
+			return ((EPREFIX_ID) ref).getId();
+		} else {
+			return null;
+		}
+	}
+
 	public static String getModule(EObject object) {
 		EObject model = findModel(object);
 		return invokeGetModule(model);
@@ -459,6 +472,14 @@ public class RMHelper {
 		}
 	}
 
+	public static void saveModel(EObject model, IFile targetFile) throws IOException {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		Resource res = resourceSet
+				.createResource(URI.createPlatformResourceURI(targetFile.getFullPath().toString(), true));
+		res.getContents().add(model);
+		res.save(null);
+	}
+
 	public static void saveFileInFolder(String filename, String filecontent, IContainer targetFolder) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		IFile targetFile = null;
@@ -484,6 +505,31 @@ public class RMHelper {
 					SodaliteLogger.log("Error", e);
 				}
 
+			}
+		}
+	}
+
+	public static void saveModelInFolder(String filename, EObject model, IContainer targetFolder)
+			throws IOException, CoreException {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		IFile targetFile = null;
+		if (targetFolder instanceof IProject)
+			targetFile = ((IProject) targetFolder).getFile(filename);
+		else if (targetFolder instanceof IFolder)
+			targetFile = ((IFolder) targetFolder).getFile(filename);
+		if (targetFile == null) {
+			MessageDialog.openError(shell, "Folder not found",
+					"Folder " + targetFolder.getName() + " could not be found");
+		}
+		if (!targetFile.exists()) {
+			saveModel(model, targetFile);
+		} else {
+			boolean confirmed = MessageDialog.openConfirm(shell,
+					"Target file exists in folder " + targetFolder.getName(),
+					"Do you want to override target file " + targetFile.getName());
+			if (confirmed) {
+				targetFile.delete(false, null);
+				saveModel(model, targetFile);
 			}
 		}
 	}

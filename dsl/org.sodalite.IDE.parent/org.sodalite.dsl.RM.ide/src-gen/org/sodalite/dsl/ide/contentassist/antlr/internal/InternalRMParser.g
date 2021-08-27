@@ -23200,9 +23200,9 @@ rule__GetAttributeBody__AttributeAssignment_0_1
 	}
 :
 	(
-		{ before(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); }
-		ruleEPREFIX_TYPE
-		{ after(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); }
+		{ before(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_REFParserRuleCall_0_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_REFParserRuleCall_0_1_0()); }
 	)
 ;
 finally {
@@ -23230,9 +23230,9 @@ rule__GetAttributeBody__Req_capAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); }
-		ruleEPREFIX_TYPE
-		{ after(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); }
 	)
 ;
 finally {
@@ -23260,9 +23260,9 @@ rule__GetPropertyBody__PropertyAssignment_0_1
 	}
 :
 	(
-		{ before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); }
-		ruleEPREFIX_TYPE
-		{ after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); }
+		{ before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_REFParserRuleCall_0_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_REFParserRuleCall_0_1_0()); }
 	)
 ;
 finally {
@@ -23290,9 +23290,9 @@ rule__GetPropertyBody__Req_capAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); }
-		ruleEPREFIX_TYPE
-		{ after(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); }
+		ruleEPREFIX_REF
+		{ after(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); }
 	)
 ;
 finally {

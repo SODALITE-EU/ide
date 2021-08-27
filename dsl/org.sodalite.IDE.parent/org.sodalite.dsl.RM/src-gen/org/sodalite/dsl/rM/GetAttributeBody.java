@@ -30,12 +30,12 @@ public interface GetAttributeBody extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' containment reference.
-   * @see #setAttribute(EPREFIX_TYPE)
+   * @see #setAttribute(EPREFIX_REF)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Attribute()
    * @model containment="true"
    * @generated
    */
-  EPREFIX_TYPE getAttribute();
+  EPREFIX_REF getAttribute();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getAttribute <em>Attribute</em>}' containment reference.
@@ -45,7 +45,7 @@ public interface GetAttributeBody extends EObject
    * @see #getAttribute()
    * @generated
    */
-  void setAttribute(EPREFIX_TYPE value);
+  void setAttribute(EPREFIX_REF value);
 
   /**
    * Returns the value of the '<em><b>Entity</b></em>' containment reference.
@@ -74,12 +74,12 @@ public interface GetAttributeBody extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Req cap</em>' containment reference.
-   * @see #setReq_cap(EPREFIX_TYPE)
+   * @see #setReq_cap(EPREFIX_REF)
    * @see org.sodalite.dsl.rM.RMPackage#getGetAttributeBody_Req_cap()
    * @model containment="true"
    * @generated
    */
-  EPREFIX_TYPE getReq_cap();
+  EPREFIX_REF getReq_cap();
 
   /**
    * Sets the value of the '{@link org.sodalite.dsl.rM.GetAttributeBody#getReq_cap <em>Req cap</em>}' containment reference.
@@ -89,6 +89,6 @@ public interface GetAttributeBody extends EObject
    * @see #getReq_cap()
    * @generated
    */
-  void setReq_cap(EPREFIX_TYPE value);
+  void setReq_cap(EPREFIX_REF value);
 
 } // GetAttributeBody

@@ -3,34 +3,546 @@
  */
 package org.sodalite.dsl.formatting2
 
+import static org.sodalite.dsl.rM.RMPackage.Literals.*
 import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.sodalite.dsl.rM.EDataTypes
 import org.sodalite.dsl.rM.RM_Model
 import org.sodalite.dsl.services.RMGrammarAccess
+import org.sodalite.dsl.rM.ENodeTypes
+import org.sodalite.dsl.rM.ENodeType
+import org.sodalite.dsl.rM.ENodeTypeBody
+import org.sodalite.dsl.rM.EProperties
+import org.sodalite.dsl.rM.EAttributes
+import org.sodalite.dsl.rM.EInterfaces
+import org.sodalite.dsl.rM.ECapabilities
+import org.sodalite.dsl.rM.ERequirements
+import org.sodalite.dsl.rM.EPropertyDefinition
+import org.sodalite.dsl.rM.EAttributeDefinition
+import org.sodalite.dsl.rM.EInterfaceDefinition
+import org.sodalite.dsl.rM.ECapabilityDefinition
+import org.sodalite.dsl.rM.ERequirementDefinition
+import org.sodalite.dsl.rM.EPropertyDefinitionBody
+import org.sodalite.dsl.rM.EAttributeDefinitionBody
+import org.sodalite.dsl.rM.ECapabilityDefinitionBody
+import org.sodalite.dsl.rM.ERequirementDefinitionBody
+import org.sodalite.dsl.rM.EInterfaceDefinitionBody
+import org.sodalite.dsl.rM.EOperations
+import org.sodalite.dsl.rM.EOperationDefinition
+import org.sodalite.dsl.rM.EOperationDefinitionBody
+import org.sodalite.dsl.rM.EInputs
+import org.sodalite.dsl.rM.EParameterDefinition
+import org.sodalite.dsl.rM.EParameterDefinitionBody
+import org.sodalite.dsl.rM.GetProperty
+import org.sodalite.dsl.rM.GetPropertyBody
+import org.sodalite.dsl.rM.GetAttribute
+import org.sodalite.dsl.rM.GetAttributeBody
+import org.sodalite.dsl.rM.GetInput
+import org.sodalite.dsl.rM.EImplementation
+import org.sodalite.dsl.rM.EPREFIX_TYPE
+import org.sodalite.dsl.rM.EValidSourceType
+import org.sodalite.dsl.rM.EConstraints
+import org.sodalite.dsl.rM.EDataType
+import org.sodalite.dsl.rM.EDataTypeBody
+import org.sodalite.dsl.rM.EInterfaceTypes
+import org.sodalite.dsl.rM.EInterfaceType
+import org.sodalite.dsl.rM.EInterfaceTypeBody
+import org.sodalite.dsl.rM.EPolicyTypes
+import org.sodalite.dsl.rM.EPolicyType
+import org.sodalite.dsl.rM.EPolicyTypeBody
+import org.sodalite.dsl.rM.ETriggers
+import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.ETriggerDefinitionBody
+import org.sodalite.dsl.rM.EEvenFilter
+import org.sodalite.dsl.rM.EExtendedTriggerCondition
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
+import org.sodalite.dsl.rM.EActivityDefinitions
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody
 
 class RMFormatter extends AbstractFormatter2 {
 	
 	@Inject extension RMGrammarAccess
 
 	def dispatch void format(RM_Model rM_Model, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		rM_Model.dataTypes.format
-		rM_Model.artifactTypes.format
-		rM_Model.capabilityTypes.format
-		rM_Model.interfaceTypes.format
-		rM_Model.relationshipTypes.format
-		rM_Model.nodeTypes.format
-		rM_Model.policyTypes.format
+		rM_Model.prepend[setNewLines(0, 0, 0); noSpace]
+		rM_Model.regionFor.keyword("node_types:").prepend[newLine].append[newLine]
+		rM_Model.nodeTypes.surround[indent].format
+		
+		rM_Model.regionFor.keyword("data_types:").prepend[newLine].append[newLine]
+		rM_Model.dataTypes.surround[indent].format
+		
+		rM_Model.regionFor.keyword("interface_types:").prepend[newLine].append[newLine]
+		rM_Model.interfaceTypes.surround[indent].format
+		
+		rM_Model.regionFor.keyword("policy_types:").prepend[newLine].append[newLine]
+		rM_Model.policyTypes.surround[indent].format
 	}
-
+	
+	def dispatch void format(ENodeTypes eNodeTypes, extension IFormattableDocument document) {
+		for (eNodeType : eNodeTypes.nodeTypes) {
+			eNodeType.format
+		}
+	}
+	
 	def dispatch void format(EDataTypes eDataTypes, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		for (eDataType : eDataTypes.dataTypes) {
 			eDataType.format
 		}
 	}
 	
-	// TODO: implement for EDataType, EDataTypeBody, EArtifactTypes, EArtifactType, ECapabilityTypes, ECapabilityType, ECapabilityTypeBody, EInterfaceTypes, EInterfaceType, EInterfaceTypeBody, EPolicyTypes, EPolicyType, ENodeTypes, ENodeType, ENodeTypeBody, ERelationshipTypes, ERelationshipType, ERelationshipTypeBody, EValidTargetTypes, EProperties, EPropertyDefinition, EPropertyDefinitionBody, EAttributes, EAttributeDefinition, EAttributeDefinitionBody, EInterfaces, EInterfaceDefinition, EInterfaceDefinitionBody, EOperations, EOperationDefinition, EOperationDefinitionBody, EImplementation, EDependencies, EInputs, EParameterDefinition, EParameterDefinitionBody, GetAttribute, GetProperty, ECapabilities, ECapabilityDefinition, ECapabilityDefinitionBody, EValidSourceType, ERequirements, ERequirementDefinition, ERequirementDefinitionBody, EConstraints, EMaxLength, EMinLength, ELength, EValid_Values, ELIST, EInRange, ELessOrEqual, ELessThan, EGreaterOrEqual, EGreaterThan, EEqual, EMAP, EMapEntry
+	def dispatch void format(EInterfaceTypes eInterfaceTypes, extension IFormattableDocument document) {
+		for (eInterfaceType : eInterfaceTypes.interfaceTypes) {
+			eInterfaceType.format
+		}
+	}
+	
+	def dispatch void format(EPolicyTypes ePolicyTypes, extension IFormattableDocument document) {
+		for (ePolicyType : ePolicyTypes.policyTypes) {
+			ePolicyType.format
+		}
+	}
+
+	def dispatch void format(ENodeType eNodeType, extension IFormattableDocument document) {
+		eNodeType.regionFor.feature(ENODE_TYPE__NAME).append[noSpace]
+		eNodeType.regionFor.keyword(":").append[newLine]
+		eNodeType.node.surround[indent].format
+	}
+	
+	def dispatch void format(EDataType eDataType, extension IFormattableDocument document) {
+		eDataType.name.append[noSpace]
+		eDataType.regionFor.keyword(":").append[newLine]
+		eDataType.data.surround[indent].format
+	}
+	
+	def dispatch void format(EInterfaceType eInterfaceType, extension IFormattableDocument document) {
+		eInterfaceType.regionFor.feature(EINTERFACE_TYPE__NAME).append[noSpace]
+		eInterfaceType.regionFor.keyword(":").append[newLine]
+		eInterfaceType.interface.surround[indent].format
+	}
+	
+	def dispatch void format(EPolicyType eEPolicyType, extension IFormattableDocument document) {
+		eEPolicyType.regionFor.feature(EPOLICY_TYPE__NAME).append[noSpace]
+		eEPolicyType.regionFor.keyword(":").append[newLine]
+		eEPolicyType.policy.surround[indent].format
+	}
+
+	def dispatch void format(ENodeTypeBody eNodeTypeBody, extension IFormattableDocument document) {
+		eNodeTypeBody.regionFor.keyword("derived_from:").append[oneSpace]
+		eNodeTypeBody.superType.format.append[newLine]
+
+		eNodeTypeBody.regionFor.keyword("description:").append[oneSpace]
+		eNodeTypeBody.regionFor.feature(ENODE_TYPE_BODY__DESCRIPTION).append[newLine]
+
+		eNodeTypeBody.regionFor.keyword("properties:").append[newLine]
+		eNodeTypeBody.properties.surround[indent].format
+
+		eNodeTypeBody.regionFor.keyword("attributes:").append[newLine]
+		eNodeTypeBody.attributes.surround[indent].format
+
+		eNodeTypeBody.regionFor.keyword("requirements:").append[newLine]
+		eNodeTypeBody.requirements.surround[indent].format
+		
+		eNodeTypeBody.regionFor.keyword("capabilities:").append[newLine]
+		eNodeTypeBody.capabilities.surround[indent].format
+		
+		eNodeTypeBody.regionFor.keyword("interfaces:").append[newLine]
+		eNodeTypeBody.interfaces.surround[indent].format
+	}
+	
+	def dispatch void format(EDataTypeBody eDataTypeBody, extension IFormattableDocument document) {
+		eDataTypeBody.regionFor.keyword("derived_from:").append[oneSpace]
+		eDataTypeBody.superType.format.append[newLine]
+
+		eDataTypeBody.regionFor.keyword("description:").append[oneSpace]
+		eDataTypeBody.regionFor.feature(EDATA_TYPE_BODY__DESCRIPTION).append[newLine]
+
+		eDataTypeBody.regionFor.keyword("properties:").append[newLine]
+		eDataTypeBody.properties.surround[indent].format
+
+		eDataTypeBody.regionFor.keyword("constraints:").append[newLine]
+		eDataTypeBody.constraints.surround[indent].format
+	}
+	
+	def dispatch void format(EInterfaceTypeBody eInterfaceTypeBody, extension IFormattableDocument document) {
+		eInterfaceTypeBody.regionFor.keyword("derived_from:").append[oneSpace]
+		eInterfaceTypeBody.superType.format.append[newLine]
+
+		eInterfaceTypeBody.regionFor.keyword("description:").append[oneSpace]
+		eInterfaceTypeBody.regionFor.feature(EINTERFACE_TYPE_BODY__DESCRIPTION).append[newLine]
+
+		eInterfaceTypeBody.regionFor.keyword("inputs:").append[newLine]
+		eInterfaceTypeBody.inputs.surround[indent].format
+
+		eInterfaceTypeBody.regionFor.keyword("operations:").append[newLine]
+		eInterfaceTypeBody.operations.surround[indent].format
+	}
+	
+	def dispatch void format(EPolicyTypeBody eEPolicyTypeBody, extension IFormattableDocument document) {
+		eEPolicyTypeBody.regionFor.keyword("derived_from:").append[oneSpace]
+		eEPolicyTypeBody.superType.format.append[newLine]
+
+		eEPolicyTypeBody.regionFor.keyword("description:").append[oneSpace]
+		eEPolicyTypeBody.regionFor.feature(EPOLICY_TYPE_BODY__DESCRIPTION).append[newLine]
+		
+		eEPolicyTypeBody.regionFor.keyword("properties:").append[newLine]
+		eEPolicyTypeBody.properties.surround[indent].format
+
+		eEPolicyTypeBody.regionFor.keyword("targets:").append[oneSpace]
+		eEPolicyTypeBody.regionFor.keyword("]").append[newLine]
+
+		eEPolicyTypeBody.regionFor.keyword("triggers:").append[newLine]
+		eEPolicyTypeBody.triggers.surround[indent].format
+	}
+	
+	def dispatch void format(ETriggers eETriggers, extension IFormattableDocument document) {
+		for (eTriggerDefinition : eETriggers.triggers) {
+			eTriggerDefinition.format
+		}
+	}
+	
+	def dispatch void format(ETriggerDefinition eTriggerDefinition, extension IFormattableDocument document) {
+		eTriggerDefinition.regionFor.feature(ETRIGGER_DEFINITION__NAME).append[noSpace]
+		eTriggerDefinition.regionFor.keyword(":").append[newLine]
+		eTriggerDefinition.trigger.surround[indent].format
+	}
+	
+	def dispatch void format(ETriggerDefinitionBody eTriggerDefinitionBody, extension IFormattableDocument document) {
+		eTriggerDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		eTriggerDefinitionBody.regionFor.feature(ETRIGGER_DEFINITION_BODY__DESCRIPTION).append[newLine]
+		
+		eTriggerDefinitionBody.regionFor.keyword("event:").append[oneSpace]
+		eTriggerDefinitionBody.regionFor.feature(ETRIGGER_DEFINITION_BODY__EVENT).append[newLine]
+		
+		eTriggerDefinitionBody.regionFor.keyword("target_filter:").append[newLine]
+		eTriggerDefinitionBody.target_filter.surround[indent].format
+
+		eTriggerDefinitionBody.regionFor.keyword("condition:").append[newLine]
+		eTriggerDefinitionBody.condition.surround[indent].format
+
+		eTriggerDefinitionBody.regionFor.keyword("action:").append[newLine]
+		eTriggerDefinitionBody.action.surround[indent].format
+	}
+	
+	def dispatch void format(EEvenFilter eEvenFilter, extension IFormattableDocument document) {
+		eEvenFilter.regionFor.keyword("node:").append[oneSpace]
+		eEvenFilter.node.format.append[newLine]
+		
+		eEvenFilter.regionFor.keyword("requirement:").append[oneSpace]
+		eEvenFilter.requirement.format.append[newLine]
+		
+		eEvenFilter.regionFor.keyword("capability:").append[newLine]
+		eEvenFilter.capability.format.append[newLine]
+	}
+	
+	def dispatch void format(EExtendedTriggerCondition eExtendedTriggerCondition, extension IFormattableDocument document) {
+		eExtendedTriggerCondition.regionFor.keyword("constraint:").append[newLine]
+		eExtendedTriggerCondition.constraint.surround[indent].format
+		
+		eExtendedTriggerCondition.regionFor.keyword("period:").append[oneSpace]
+		eExtendedTriggerCondition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__PERIOD).append[newLine]
+		
+		eExtendedTriggerCondition.regionFor.keyword("evaluations:").append[oneSpace]
+		eExtendedTriggerCondition.evaluations.format.append[newLine]
+		
+		eExtendedTriggerCondition.regionFor.keyword("method:").append[oneSpace]
+		eExtendedTriggerCondition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__METHOD).append[newLine]
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionAND eccd, extension IFormattableDocument document) {
+		eccd.regionFor.keyword("and:").append[newLine]
+		eccd.and.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionOR eccd, extension IFormattableDocument document) {
+		eccd.regionFor.keyword("or:").append[newLine]
+		eccd.or.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionNOT eccd, extension IFormattableDocument document) {
+		eccd.regionFor.keyword("not:").append[newLine]
+		eccd.not.surround[indent].format
+	}
+	
+	def dispatch void format(EConditionClauseDefinitionAssert ccda, extension IFormattableDocument document) {
+		for (assertion : ccda.assertions) {
+			assertion.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EActivityDefinitions eActivityDefinitions, extension IFormattableDocument document) {
+		for (activity : eActivityDefinitions.list) {
+			activity.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(ECallOperationActivityDefinition coad, extension IFormattableDocument document) {
+		coad.regionFor.keyword("call_operation:").append[newLine]
+		coad.operation.surround[indent].format
+	}
+	
+	def dispatch void format(ECallOperationActivityDefinitionBody coadb, extension IFormattableDocument document) {
+		coadb.regionFor.keyword("operation:").append[oneSpace]
+		coadb.operation.format.append[newLine]
+		
+		coadb.regionFor.keyword("inputs:").append[newLine]
+		coadb.inputs.surround[indent].format
+	}
+	
+	def dispatch void format(EProperties eProperties, extension IFormattableDocument document) {
+		for (property : eProperties.properties) {
+			property.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EAttributes eAttributes, extension IFormattableDocument document) {
+		for (attribute : eAttributes.attributes) {
+			attribute.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EInterfaces eInterfaces, extension IFormattableDocument document) {
+		for (interface : eInterfaces.interfaces) {
+			interface.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(ECapabilities eCapabilities, extension IFormattableDocument document) {
+		for (capability : eCapabilities.capabilities) {
+			capability.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(ERequirements eRequirements, extension IFormattableDocument document) {
+		for (requirement : eRequirements.requirements) {
+			requirement.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EPropertyDefinition ePropertyDefinition, extension IFormattableDocument document) {
+		ePropertyDefinition.regionFor.feature(EPROPERTY_DEFINITION__NAME).append[noSpace]
+		ePropertyDefinition.regionFor.keyword(":").append[newLine]
+		ePropertyDefinition.property.surround[indent].format
+	}
+	
+	def dispatch void format(EAttributeDefinition eAttributeDefinition, extension IFormattableDocument document) {
+		eAttributeDefinition.regionFor.feature(EATTRIBUTE_DEFINITION__NAME).append[noSpace]
+		eAttributeDefinition.regionFor.keyword(":").append[newLine]
+		eAttributeDefinition.attribute.surround[indent].format
+	}
+	
+	def dispatch void format(EInterfaceDefinition eInterfaceDefinition, extension IFormattableDocument document) {
+		eInterfaceDefinition.regionFor.feature(EINTERFACE_DEFINITION__NAME).append[noSpace]
+		eInterfaceDefinition.regionFor.keyword(":").append[newLine]
+		eInterfaceDefinition.interface.surround[indent].format
+	}
+	
+	def dispatch void format(ECapabilityDefinition eCapabilityDefinition, extension IFormattableDocument document) {
+		eCapabilityDefinition.regionFor.feature(EREQ_OR_CAP__NAME).append[noSpace]
+		eCapabilityDefinition.regionFor.keyword(":").append[newLine]
+		eCapabilityDefinition.capability.surround[indent].format
+	}
+	
+	def dispatch void format(ERequirementDefinition eRequirementDefinition, extension IFormattableDocument document) {
+		eRequirementDefinition.regionFor.feature(EREQ_OR_CAP__NAME).append[noSpace]
+		eRequirementDefinition.regionFor.keyword(":").append[newLine]
+		eRequirementDefinition.requirement.surround[indent].format
+	}
+	
+	def dispatch void format(EPropertyDefinitionBody ePropertyDefinitionBody, extension IFormattableDocument document) {
+		ePropertyDefinitionBody.regionFor.keyword("type:").append[oneSpace]
+		ePropertyDefinitionBody.type.format.append[newLine]
+		
+		ePropertyDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		ePropertyDefinitionBody.regionFor.feature(EPROPERTY_DEFINITION_BODY__DESCRIPTION).append[newLine]
+		
+		ePropertyDefinitionBody.regionFor.keyword("required:").append[oneSpace]
+		ePropertyDefinitionBody.required.format.append[newLine]
+		
+		ePropertyDefinitionBody.regionFor.keyword("default:").append[oneSpace]
+		ePropertyDefinitionBody.^default.format.append[newLine]
+		
+		ePropertyDefinitionBody.regionFor.keyword("status:").append[oneSpace]
+		ePropertyDefinitionBody.regionFor.feature(EPROPERTY_DEFINITION_BODY__STATUS).append[newLine]
+		
+		ePropertyDefinitionBody.regionFor.keyword("constraints:").append[newLine]
+		ePropertyDefinitionBody.constraints.surround[indent].format
+		
+		ePropertyDefinitionBody.regionFor.keyword("entry_schema:").append[oneSpace]
+		ePropertyDefinitionBody.entry_schema.format.append[newLine]
+	}
+	
+	def dispatch void format(EAttributeDefinitionBody eAttributeDefinitionBody, extension IFormattableDocument document) {
+		eAttributeDefinitionBody.regionFor.keyword("type:").append[oneSpace]
+		eAttributeDefinitionBody.type.format.append[newLine]
+		
+		eAttributeDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		eAttributeDefinitionBody.regionFor.feature(EATTRIBUTE_DEFINITION_BODY__DESCRIPTION).append[newLine]
+			
+		eAttributeDefinitionBody.regionFor.keyword("default:").append[oneSpace]
+		eAttributeDefinitionBody.^default.format.append[newLine]
+		
+		eAttributeDefinitionBody.regionFor.keyword("status:").append[oneSpace]
+		eAttributeDefinitionBody.regionFor.feature(EPROPERTY_DEFINITION_BODY__STATUS).append[newLine]
+		
+		eAttributeDefinitionBody.regionFor.keyword("entry_schema:").append[oneSpace]
+		eAttributeDefinitionBody.entry_schema.format.append[newLine]
+	}
+	
+	def dispatch void format(ECapabilityDefinitionBody eCapabilityDefinitionBody, extension IFormattableDocument document) {
+		eCapabilityDefinitionBody.regionFor.keyword("type:").append[oneSpace]
+		eCapabilityDefinitionBody.type.format.append[newLine]
+		
+		eCapabilityDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		eCapabilityDefinitionBody.regionFor.feature(ECAPABILITY_DEFINITION_BODY__DESCRIPTION).append[newLine]
+	
+		eCapabilityDefinitionBody.regionFor.keyword("properties:").append[newLine]
+		eCapabilityDefinitionBody.properties.surround[indent].format
+
+		eCapabilityDefinitionBody.regionFor.keyword("attributes:").append[newLine]
+		eCapabilityDefinitionBody.attributes.surround[indent].format
+		
+		eCapabilityDefinitionBody.regionFor.keyword("[").append[noSpace]
+		eCapabilityDefinitionBody.regionFor.keyword("valid_source_types:").append[oneSpace]
+		eCapabilityDefinitionBody.regionFor.keyword("]").prepend[noSpace]
+		eCapabilityDefinitionBody.valid_source_types.format
+	
+		eCapabilityDefinitionBody.regionFor.keyword("occurrences:").append[oneSpace]
+	}
+	
+	def dispatch void format(ERequirementDefinitionBody eRequirementDefinitionBody, extension IFormattableDocument document) {
+		eRequirementDefinitionBody.regionFor.keyword("capability:").append[oneSpace]
+		eRequirementDefinitionBody.capability.format.append[newLine]
+		
+		eRequirementDefinitionBody.regionFor.keyword("node:").append[oneSpace]
+		eRequirementDefinitionBody.node.format.append[newLine]
+		
+		eRequirementDefinitionBody.regionFor.keyword("relationship:").append[oneSpace]
+		eRequirementDefinitionBody.relationship.format.append[newLine]
+			
+		eRequirementDefinitionBody.regionFor.keyword("occurrences:").append[oneSpace]
+	}
+	
+	def dispatch void format(EInterfaceDefinitionBody eInterfaceDefinitionBody, extension IFormattableDocument document) {
+		eInterfaceDefinitionBody.regionFor.keyword("type:").append[oneSpace]
+		eInterfaceDefinitionBody.type.format.append[newLine]
+		
+		eInterfaceDefinitionBody.regionFor.keyword("inputs:").append[newLine]
+		eInterfaceDefinitionBody.inputs.surround[indent].format
+
+		eInterfaceDefinitionBody.regionFor.keyword("operations:").append[newLine]
+		eInterfaceDefinitionBody.operations.surround[indent].format
+	}
+	
+	def dispatch void format(EOperations eOperations, extension IFormattableDocument document) {
+		for (operation : eOperations.operations) {
+			operation.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EOperationDefinition eOperationDefinition, extension IFormattableDocument document) {
+		eOperationDefinition.regionFor.feature(EOPERATION_DEFINITION__NAME).append[noSpace]
+		eOperationDefinition.regionFor.keyword(":").append[newLine]
+		eOperationDefinition.operation.surround[indent].format
+	}
+	
+	def dispatch void format(EOperationDefinitionBody eOperationDefinitionBody, extension IFormattableDocument document) {
+		eOperationDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		eOperationDefinitionBody.regionFor.feature(EOPERATION_DEFINITION_BODY__DESCRIPTION).append[newLine]
+
+		eOperationDefinitionBody.regionFor.keyword("inputs:").append[newLine]
+		eOperationDefinitionBody.inputs.surround[indent].format
+
+		eOperationDefinitionBody.regionFor.keyword("implementation:").append[newLine]
+		eOperationDefinitionBody.implementation.surround[indent].format
+	}
+	
+	def dispatch void format(EImplementation implementation, extension IFormattableDocument document) {
+		implementation.primary.append[newLine]
+		implementation.dependencies.append[newLine]
+	}
+	
+	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
+		for (eInput : eInputs.parameters) {
+			eInput.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EParameterDefinition eParameterDefinition, extension IFormattableDocument document) {
+		eParameterDefinition.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
+		eParameterDefinition.regionFor.keyword(":").append[newLine]
+		eParameterDefinition.parameter.surround[indent].format
+	}
+	
+	def dispatch void format(EParameterDefinitionBody eParameterDefinitionBody, extension IFormattableDocument document) {
+		eParameterDefinitionBody.regionFor.keyword("type:").append[oneSpace]
+		eParameterDefinitionBody.type.format.append[newLine]
+		
+		eParameterDefinitionBody.regionFor.keyword("description:").append[oneSpace]
+		eParameterDefinitionBody.regionFor.feature(EPARAMETER_DEFINITION_BODY__DESCRIPTION).append[newLine]
+		
+		eParameterDefinitionBody.regionFor.keyword("value:").append[oneSpace]
+		eParameterDefinitionBody.value.format.append[newLine]
+		
+		eParameterDefinitionBody.regionFor.keyword("default:").append[oneSpace]
+		eParameterDefinitionBody.^default.format.append[newLine]
+	}
+	
+	def dispatch void format(GetProperty getProperty, extension IFormattableDocument document) {
+		getProperty.regionFor.keyword("get_property:").append[newLine]
+		getProperty.property.surround[indent].format
+	}
+	
+	def dispatch void format(GetPropertyBody getPropertyBody, extension IFormattableDocument document) {
+		getPropertyBody.regionFor.keyword("property:").append[oneSpace]
+		getPropertyBody.property.format.append[newLine]
+		
+		getPropertyBody.regionFor.keyword("entity:").append[oneSpace]
+		getPropertyBody.entity.format.append[newLine]
+		
+		getPropertyBody.regionFor.keyword("req_cap:").append[oneSpace]
+		getPropertyBody.req_cap.format.append[newLine]
+	}
+	
+	def dispatch void format(GetAttribute getAttribute, extension IFormattableDocument document) {
+		getAttribute.regionFor.keyword("get_attribute:").append[newLine]
+		getAttribute.attribute.surround[indent].format
+	}
+	
+	def dispatch void format(GetAttributeBody getAttributeBody, extension IFormattableDocument document) {
+		getAttributeBody.regionFor.keyword("attribute:").append[oneSpace]
+		getAttributeBody.attribute.format.append[newLine]
+		
+		getAttributeBody.regionFor.keyword("entity:").append[oneSpace]
+		getAttributeBody.entity.format.append[newLine]
+		
+		getAttributeBody.regionFor.keyword("req_cap:").append[oneSpace]
+		getAttributeBody.req_cap.format.append[newLine]
+	}
+	
+	def dispatch void format(GetInput getInput, extension IFormattableDocument document) {
+		getInput.regionFor.keyword("get_input:").append[newLine]
+		getInput.input.surround[indent].format
+	}
+	
+	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
+		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
+		prefix.regionFor.keyword("/").append[noSpace]
+	}
+	
+	def dispatch void format(EConstraints constraints, extension IFormattableDocument document) {
+		for (constraint : constraints.constraints) {
+			constraint.format.append[newLine]
+		}
+	}
+	
+	def dispatch void format(EValidSourceType vst, extension IFormattableDocument document) {
+		for (st : vst.sourceTypes) {
+			st.format.format
+		}
+	}
 }

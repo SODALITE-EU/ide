@@ -98,7 +98,9 @@ public interface KBReasoner {
 
 	KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws SodaliteException;
 
-	String getAADM(String aadmIRI) throws SodaliteException;
+	String getAADM(String aadmIRI, boolean withoutReferences) throws SodaliteException;
+
+	String getRM(String rmIRI) throws SodaliteException;
 
 	IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
 			String username, String aadm_json) throws SodaliteException;

@@ -457,7 +457,14 @@ class KBReasonerTest {
 
 	@Test
 	void testGetAADM() throws Exception {
-		String json = kbclient.getAADM(aadmURI);
+		String json = kbclient.getAADM(aadmURI, false);
+		assertNotNull(json);
+	}
+
+	@Test
+	void testGetRM() throws Exception {
+		String rmIRI = "https://www.sodalite.eu/ontologies/workspace/1/5nf45bccrr6rmkt2f4cinoi6u/RM_86u66om7m9kmfiq13rhdv8uche";
+		String json = kbclient.getRM(rmIRI);
 		assertNotNull(json);
 	}
 
@@ -543,7 +550,7 @@ class KBReasonerTest {
 	void testPDSUpdate() throws Exception {
 		Path pds_inputs_path = FileSystems.getDefault().getPath("src/test/resources/pds_inputs.json");
 		String pds_inputs = new String(Files.readAllBytes(pds_inputs_path));
-		String namespace = "TestOpenstack";
+		String namespace = "openstack";
 		String platform_type = "openstack";
 		PDSUpdateReport report = kbclient.pdsUpdate(pds_inputs, namespace, platform_type);
 		assertNotNull(report);

@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -42,6 +43,7 @@ import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.helper.UIHelper;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
+import org.sodalite.ide.ui.serialization.JsonSerializer;
 import org.sodalite.ide.ui.views.model.ModelNode;
 import org.sodalite.ide.ui.views.model.TreeNode;
 
@@ -106,6 +108,8 @@ public class KBView {
 	}
 
 	private TreeNode<ModelNode> populateKBContent() throws Exception {
+		boolean hasRolePermissionException = false;
+
 		// Retrieve KB tree model (modules, models) from the KB Reasoner
 
 		TreeNode<ModelNode> root = new TreeNode<>(new ModelNode("KB"));
@@ -149,8 +153,14 @@ public class KBView {
 			} catch (SodaliteException ex) {
 				if (!(ex.getCause() instanceof NotRolePermissionException))
 					throw ex;
+				else
+					hasRolePermissionException = true;
 			}
 		}
+
+		if (hasRolePermissionException)
+			showErrorDialog("KB Update",
+					"Some model(s) could not be obtained as your account has not permission to read them");
 		return root;
 	}
 
@@ -208,59 +218,7 @@ public class KBView {
 				// workspace)
 				Action retrieveAction = new Action() {
 					public void run() {
-						System.out.println("Retrieve module invoked");
-
-						// Get models in module
-						try {
-							String module = node.getModule();
-							ModelData modelData = null;
-							if (tn.getParent().getData().getLabel().contains("RMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
-							} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
-								modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
-							}
-							if (modelData != null && !modelData.getElements().isEmpty()) {
-								// Prompt user to select the target folder
-								IContainer root = RMHelper.getWorkspaceRoot();
-								String msg = "Select a workspace folder where to upload the models of the selected module";
-								ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
-								int return_code = dialog.open();
-								if (return_code == ContainerSelectionDialog.OK) {
-									Object[] result = dialog.getResult();
-									// Create a folder with module name in target folder
-									if (result.length == 0)
-										return;
-									IPath path = (IPath) result[0];
-									IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
-									IProject[] projects = wsRoot.getProjects();
-									IProject targetProject = null;
-									IContainer targetFolder = null;
-									for (IProject project : projects) {
-										if (project.getFullPath().equals(path)) {
-											targetProject = project;
-											break;
-										}
-									}
-									if (targetProject != null) {
-										targetFolder = targetProject;
-									} else {
-										targetFolder = root.getFolder(path);
-									}
-									// For each model in module, copy it into the target module folder
-									// Manage different version of a model
-									for (Model model : modelData.getElements()) {
-										String name = UIHelper.getFileName(model.getName())
-												+ (model.getVersion() != null ? "_" + model.getVersion() : "")
-												+ UIHelper.getExtension(model.getName());
-										RMHelper.saveFileInFolder(name, model.getDsl(), targetFolder);
-									}
-									MessageDialog.openInformation(shell, "Retrieve module", "Models in module " + module
-											+ " successfully copied into " + targetFolder.getName() + " folder");
-								}
-							}
-						} catch (Exception ex) {
-							SodaliteLogger.log("Error", ex);
-						}
+						retrieveModelsInModule(tn, node);
 					}
 				};
 				retrieveAction.setText("Retrieve module ...");
@@ -282,40 +240,7 @@ public class KBView {
 				// ACTION: Retrieve model from KB (upload it into the workspace)
 				Action retrieveAction = new Action() {
 					public void run() {
-						System.out.println("Retrieve model invoked");
-						// Show Dialog to select workspace folder where to copy the model
-						IContainer root = RMHelper.getWorkspaceRoot();
-						String msg = "Select a workspace folder where to upload the selected model";
-						ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
-						int return_code = dialog.open();
-						if (return_code == ContainerSelectionDialog.OK) {
-							Object[] result = dialog.getResult();
-							// Copy model content into target folder
-							if (result.length == 0)
-								return;
-							IPath path = (IPath) result[0];
-							IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
-							IProject[] projects = wsRoot.getProjects();
-							IProject targetProject = null;
-							IContainer targetFolder = null;
-							for (IProject project : projects) {
-								if (project.getFullPath().equals(path)) {
-									targetProject = project;
-									break;
-								}
-							}
-							if (targetProject != null) {
-								targetFolder = targetProject;
-							} else {
-								targetFolder = root.getFolder(path);
-							}
-							String name = UIHelper.getFileName(node.getModel().getName())
-									+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
-									+ UIHelper.getExtension(node.getModel().getName());
-							RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
-							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
-									+ " successfully copied into " + targetFolder.getName() + " folder");
-						}
+						retrieveModel(node);
 					}
 				};
 				retrieveAction.setText("Retrieve model ...");
@@ -443,6 +368,204 @@ public class KBView {
 				} catch (Exception e) {
 					showErrorDialog("Delete model", "Model could not be deleted");
 					SodaliteLogger.log(e);
+				}
+			});
+			job.setPriority(Job.SHORT);
+			job.schedule();
+		}
+	}
+
+	private void retrieveModel(ModelNode node) {
+		// Show Dialog to select workspace folder where to copy the model
+		IContainer root = RMHelper.getWorkspaceRoot();
+		String msg = "Select a workspace folder where to upload the selected model";
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
+		int return_code = dialog.open();
+		if (return_code == ContainerSelectionDialog.OK) {
+			Job job = Job.create("Retrieving model", (ICoreRunnable) monitor -> {
+				try {
+					Object[] result = dialog.getResult();
+					// Copy model content into target folder
+					if (result.length == 0)
+						return;
+					IPath path = (IPath) result[0];
+					IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+					IProject[] projects = wsRoot.getProjects();
+					IProject targetProject = null;
+					IContainer targetFolder = null;
+					for (IProject project : projects) {
+						if (project.getFullPath().equals(path)) {
+							targetProject = project;
+							break;
+						}
+					}
+					if (targetProject != null) {
+						targetFolder = targetProject;
+					} else {
+						targetFolder = root.getFolder(path);
+					}
+					String name = UIHelper.getFileName(node.getModel().getName())
+							+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
+							+ UIHelper.getExtension(node.getModel().getName());
+					String dsl = node.getModel().getDsl();
+					if (dsl == null || dsl.isEmpty()) {
+						// Generate DSL from JSON representation for RMs and AADMs
+						String json = null;
+						EObject model = null;
+						if (node.getModel().getName().endsWith(".rm")) {
+							json = RMBackendProxy.getKBReasoner().getRM(node.getModel().getUri().toString());
+							model = JsonSerializer.serializeRMfromJson(json);
+						} else if (node.getModel().getName().endsWith(".aadm")) {
+							json = RMBackendProxy.getKBReasoner().getAADM(node.getModel().getUri().toString(), true);
+							model = JsonSerializer.serializeAADMfromJson(json);
+						}
+						if (model != null)
+							saveModelInFolderInUIThread(node, targetFolder, name, model, true);
+						else
+							throw new SodaliteException("DSL could not be generated from JSON representation");
+					} else {
+						saveFileInFolderInUIThread(node.getModel().getDsl(), targetFolder, name, true);
+					}
+
+				} catch (Exception e) {
+					SodaliteLogger.log(e);
+					showErrorDialog(shell, "Retrieve model", "Model " + node.getModel().getName()
+							+ " could not be retrieved from the KB.\nPlease, contact Sodalite administrator");
+				}
+			});
+			job.setPriority(Job.SHORT);
+			job.schedule();
+		}
+	}
+
+	private void showInformationDialog(Shell shell, String title, String message) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openInformation(shell, title, message);
+			}
+		});
+	}
+
+	private void showErrorDialog(Shell shell, String title, String message) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				MessageDialog.openError(shell, title, message);
+			}
+		});
+	}
+
+	private void saveModelInFolderInUIThread(ModelNode node, IContainer targetFolder, String name, EObject model,
+			boolean reportToUser) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					RMHelper.saveModelInFolder(name, model, targetFolder);
+					if (reportToUser)
+						MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
+								+ " successfully copied into " + targetFolder.getName() + " folder");
+				} catch (Exception e) {
+					SodaliteLogger.log(e);
+					MessageDialog.openError(shell, "Retrieve model", "Model " + node.getModel().getName()
+							+ " could not be saved into your workspace\nPlease, contact Sodalite administrator");
+				}
+			}
+		});
+	}
+
+	private void saveFileInFolderInUIThread(String dsl, IContainer targetFolder, String filename,
+			boolean reportToUser) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					RMHelper.saveFileInFolder(filename, dsl, targetFolder);
+					if (reportToUser)
+						MessageDialog.openInformation(shell, "Retrieve model",
+								"Model " + filename + " successfully copied into " + targetFolder + " folder");
+				} catch (Exception e) {
+					SodaliteLogger.log(e);
+					MessageDialog.openError(shell, "Retrieve model", "Model " + filename
+							+ " could not be saved into your workspace\nPlease, contact Sodalite administrator");
+				}
+			}
+		});
+	}
+
+	private void retrieveModelsInModule(TreeNode<ModelNode> tn, ModelNode node) {
+		// Get models in module
+		String module = node.getModule();
+
+		// Prompt user to select the target folder
+		IContainer root = RMHelper.getWorkspaceRoot();
+		String msg = "Select a workspace folder where to upload the models of the selected module";
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
+		int return_code = dialog.open();
+		if (return_code == ContainerSelectionDialog.OK) {
+			Job job = Job.create("Retrieving model", (ICoreRunnable) monitor -> {
+				try {
+					ModelData modelData = null;
+					if (tn.getParent().getData().getLabel().contains("RMs")) {
+						modelData = RMBackendProxy.getKBReasoner().getRMsInModule(module);
+					} else if (tn.getParent().getData().getLabel().contains("AADMs")) {
+						modelData = RMBackendProxy.getKBReasoner().getAADMsInModule(module);
+					}
+					if (modelData != null && !modelData.getElements().isEmpty()) {
+						Object[] result = dialog.getResult();
+						// Create a folder with module name in target folder
+						if (result.length == 0)
+							return;
+						IPath path = (IPath) result[0];
+						IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
+						IProject[] projects = wsRoot.getProjects();
+						IProject targetProject = null;
+						IContainer targetFolder = null;
+						for (IProject project : projects) {
+							if (project.getFullPath().equals(path)) {
+								targetProject = project;
+								break;
+							}
+						}
+						if (targetProject != null) {
+							targetFolder = targetProject;
+						} else {
+							targetFolder = root.getFolder(path);
+						}
+						// For each model in module, copy it into the target module folder
+						// Manage different version of a model
+						for (Model kbmodel : modelData.getElements()) {
+							String name = UIHelper.getFileName(kbmodel.getName())
+									+ (kbmodel.getVersion() != null ? "_" + kbmodel.getVersion() : "")
+									+ UIHelper.getExtension(kbmodel.getName());
+							String dsl = kbmodel.getDsl();
+							if (dsl == null || dsl.isEmpty()) {
+								// Generate DSL from JSON representation for RMs and AADMs
+								String json = null;
+								EObject model = null;
+								if (kbmodel.getName().endsWith(".rm")) {
+									json = RMBackendProxy.getKBReasoner().getRM(kbmodel.getUri().toString());
+									model = JsonSerializer.serializeRMfromJson(json);
+								} else if (kbmodel.getName().endsWith(".aadm")) {
+									json = RMBackendProxy.getKBReasoner().getAADM(node.getModel().getUri().toString(),
+											true);
+									model = JsonSerializer.serializeAADMfromJson(json);
+								}
+								if (model != null)
+									saveModelInFolderInUIThread(node, targetFolder, name, model, false);
+								else
+									throw new SodaliteException("DSL could not be generated from JSON representation");
+							} else {
+								saveFileInFolderInUIThread(dsl, targetFolder, name, false);
+							}
+						}
+					}
+				} catch (Exception ex) {
+					SodaliteLogger.log("Error", ex);
+					showErrorDialog(shell, "Retrieve module", "Models in module " + module
+							+ " could not be retrieved from the KB.\nPlease, contact Sodalite administrator");
+
 				}
 			});
 			job.setPriority(Job.SHORT);

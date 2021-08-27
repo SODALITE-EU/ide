@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.rM;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -120,16 +118,26 @@ public interface ECapabilityDefinitionBody extends EObject
   void setAttributes(EAttributes value);
 
   /**
-   * Returns the value of the '<em><b>Valid source types</b></em>' containment reference list.
-   * The list contents are of type {@link org.sodalite.dsl.rM.EValidSourceType}.
+   * Returns the value of the '<em><b>Valid source types</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Valid source types</em>' containment reference list.
+   * @return the value of the '<em>Valid source types</em>' containment reference.
+   * @see #setValid_source_types(EValidSourceType)
    * @see org.sodalite.dsl.rM.RMPackage#getECapabilityDefinitionBody_Valid_source_types()
    * @model containment="true"
    * @generated
    */
-  EList<EValidSourceType> getValid_source_types();
+  EValidSourceType getValid_source_types();
+
+  /**
+   * Sets the value of the '{@link org.sodalite.dsl.rM.ECapabilityDefinitionBody#getValid_source_types <em>Valid source types</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Valid source types</em>' containment reference.
+   * @see #getValid_source_types()
+   * @generated
+   */
+  void setValid_source_types(EValidSourceType value);
 
   /**
    * Returns the value of the '<em><b>Occurrences start</b></em>' containment reference.

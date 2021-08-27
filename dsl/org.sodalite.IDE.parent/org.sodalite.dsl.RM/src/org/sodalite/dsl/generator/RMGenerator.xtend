@@ -383,19 +383,17 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.empty»
+	«IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.sourceTypes.empty»
 	«putParameterNumber(c, "valid_source_types", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_source_types" ;
-	  «FOR entry:(c.capability.valid_source_types as EObjectContainmentEList<EValidSourceType>)»
-	  «FOR s:(entry.sourceTypes)»
+	  «FOR s:(c.capability.valid_source_types.sourceTypes)»
 	  «IF s.module !== null»
 	  exchange:listValue "«s.module»/«s.type»" ;
 	  «ELSE»
 	  exchange:listValue "«s.type»" ;
 	  «ENDIF»
-	  «ENDFOR»
 	  «ENDFOR»
 	.
 	«ENDIF»
@@ -410,7 +408,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF c.capability.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "type")» ;
 	  «ENDIF»
-	  «IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.empty»
+	  «IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.sourceTypes.empty»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "valid_source_types")» ;
 	  «ENDIF»
 	.
@@ -811,7 +809,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "property" ;  
-	  exchange:value '«lastSegment(p.property.property.type, ".")»' ; 
+	  «IF p.property.property instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -829,7 +831,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
+	  «IF p.property.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF» 
 	.
 	«ENDIF»		
 	
@@ -855,7 +861,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "attribute" ;  
-	  exchange:value '«lastSegment(a.attribute.attribute.type, ".")»' ; 
+	  «IF a.attribute.attribute instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -873,7 +883,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(a.attribute.req_cap.type, '.')»' ; 
+	  «IF a.attribute.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -890,7 +904,7 @@ class RMGenerator extends AbstractGenerator {
 	  «IF a.attribute.req_cap !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "req_cap")» ;
 	  «ENDIF»
-	.	
+	.
 	'''
 	
 	def compile (GetInput gi)'''

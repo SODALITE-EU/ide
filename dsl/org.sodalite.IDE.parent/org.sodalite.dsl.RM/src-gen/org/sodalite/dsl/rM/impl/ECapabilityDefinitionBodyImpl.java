@@ -3,21 +3,14 @@
  */
 package org.sodalite.dsl.rM.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EAttributes;
@@ -99,14 +92,14 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
   protected EAttributes attributes;
 
   /**
-   * The cached value of the '{@link #getValid_source_types() <em>Valid source types</em>}' containment reference list.
+   * The cached value of the '{@link #getValid_source_types() <em>Valid source types</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValid_source_types()
    * @generated
    * @ordered
    */
-  protected EList<EValidSourceType> valid_source_types;
+  protected EValidSourceType valid_source_types;
 
   /**
    * The cached value of the '{@link #getOccurrences_start() <em>Occurrences start</em>}' containment reference.
@@ -330,13 +323,48 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * @generated
    */
   @Override
-  public EList<EValidSourceType> getValid_source_types()
+  public EValidSourceType getValid_source_types()
   {
-    if (valid_source_types == null)
-    {
-      valid_source_types = new EObjectContainmentEList<EValidSourceType>(EValidSourceType.class, this, RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES);
-    }
     return valid_source_types;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetValid_source_types(EValidSourceType newValid_source_types, NotificationChain msgs)
+  {
+    EValidSourceType oldValid_source_types = valid_source_types;
+    valid_source_types = newValid_source_types;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES, oldValid_source_types, newValid_source_types);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setValid_source_types(EValidSourceType newValid_source_types)
+  {
+    if (newValid_source_types != valid_source_types)
+    {
+      NotificationChain msgs = null;
+      if (valid_source_types != null)
+        msgs = ((InternalEObject)valid_source_types).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES, null, msgs);
+      if (newValid_source_types != null)
+        msgs = ((InternalEObject)newValid_source_types).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES, null, msgs);
+      msgs = basicSetValid_source_types(newValid_source_types, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES, newValid_source_types, newValid_source_types));
   }
 
   /**
@@ -456,7 +484,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
       case RMPackage.ECAPABILITY_DEFINITION_BODY__ATTRIBUTES:
         return basicSetAttributes(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
-        return ((InternalEList<?>)getValid_source_types()).basicRemove(otherEnd, msgs);
+        return basicSetValid_source_types(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
         return basicSetOccurrences_start(null, msgs);
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:
@@ -498,7 +526,6 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -517,8 +544,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         setAttributes((EAttributes)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
-        getValid_source_types().clear();
-        getValid_source_types().addAll((Collection<? extends EValidSourceType>)newValue);
+        setValid_source_types((EValidSourceType)newValue);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
         setOccurrences_start((EAlphaNumericValue)newValue);
@@ -553,7 +579,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
         setAttributes((EAttributes)null);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
-        getValid_source_types().clear();
+        setValid_source_types((EValidSourceType)null);
         return;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
         setOccurrences_start((EAlphaNumericValue)null);
@@ -584,7 +610,7 @@ public class ECapabilityDefinitionBodyImpl extends MinimalEObjectImpl.Container 
       case RMPackage.ECAPABILITY_DEFINITION_BODY__ATTRIBUTES:
         return attributes != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__VALID_SOURCE_TYPES:
-        return valid_source_types != null && !valid_source_types.isEmpty();
+        return valid_source_types != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_START:
         return occurrences_start != null;
       case RMPackage.ECAPABILITY_DEFINITION_BODY__OCCURRENCES_END:

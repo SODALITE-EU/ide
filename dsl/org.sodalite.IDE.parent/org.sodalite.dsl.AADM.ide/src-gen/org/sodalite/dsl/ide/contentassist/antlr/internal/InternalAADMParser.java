@@ -12016,7 +12016,7 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
             if ( (LA10_0==RULE_ID) ) {
                 int LA10_1 = input.LA(2);
 
-                if ( (LA10_1==EOF||LA10_1==Requirement||LA10_1==Capability||LA10_1==Node||LA10_1==CommercialAt||LA10_1==RULE_END) ) {
+                if ( (LA10_1==EOF||LA10_1==Requirement||LA10_1==Capability||LA10_1==Attribute||LA10_1==Property||LA10_1==Req_cap||LA10_1==Entity||LA10_1==Node||LA10_1==CommercialAt||LA10_1==RULE_END) ) {
                     alt10=2;
                 }
                 else if ( (LA10_1==Solidus) ) {
@@ -84544,28 +84544,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__AttributeAssignment_0_1"
-    // InternalAADMParser.g:26272:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalAADMParser.g:26272:1: rule__GetAttributeBody__AttributeAssignment_0_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__GetAttributeBody__AttributeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:26276:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalAADMParser.g:26277:2: ( ruleEPREFIX_TYPE )
+            // InternalAADMParser.g:26276:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:26277:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:26277:2: ( ruleEPREFIX_TYPE )
-            // InternalAADMParser.g:26278:3: ruleEPREFIX_TYPE
+            // InternalAADMParser.g:26277:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:26278:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               before(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_REFParserRuleCall_0_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEPREFIX_TYPE();
+            ruleEPREFIX_REF();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               after(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_REFParserRuleCall_0_1_0()); 
             }
 
             }
@@ -84634,28 +84634,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetAttributeBody__Req_capAssignment_2_1"
-    // InternalAADMParser.g:26302:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalAADMParser.g:26302:1: rule__GetAttributeBody__Req_capAssignment_2_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__GetAttributeBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:26306:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalAADMParser.g:26307:2: ( ruleEPREFIX_TYPE )
+            // InternalAADMParser.g:26306:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:26307:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:26307:2: ( ruleEPREFIX_TYPE )
-            // InternalAADMParser.g:26308:3: ruleEPREFIX_TYPE
+            // InternalAADMParser.g:26307:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:26308:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
+               before(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEPREFIX_TYPE();
+            ruleEPREFIX_REF();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
+               after(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); 
             }
 
             }
@@ -84724,28 +84724,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__PropertyAssignment_0_1"
-    // InternalAADMParser.g:26332:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalAADMParser.g:26332:1: rule__GetPropertyBody__PropertyAssignment_0_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__GetPropertyBody__PropertyAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:26336:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalAADMParser.g:26337:2: ( ruleEPREFIX_TYPE )
+            // InternalAADMParser.g:26336:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:26337:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:26337:2: ( ruleEPREFIX_TYPE )
-            // InternalAADMParser.g:26338:3: ruleEPREFIX_TYPE
+            // InternalAADMParser.g:26337:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:26338:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               before(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_REFParserRuleCall_0_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEPREFIX_TYPE();
+            ruleEPREFIX_REF();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0()); 
+               after(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_REFParserRuleCall_0_1_0()); 
             }
 
             }
@@ -84814,28 +84814,28 @@ public class InternalAADMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__GetPropertyBody__Req_capAssignment_2_1"
-    // InternalAADMParser.g:26362:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ruleEPREFIX_TYPE ) ;
+    // InternalAADMParser.g:26362:1: rule__GetPropertyBody__Req_capAssignment_2_1 : ( ruleEPREFIX_REF ) ;
     public final void rule__GetPropertyBody__Req_capAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalAADMParser.g:26366:1: ( ( ruleEPREFIX_TYPE ) )
-            // InternalAADMParser.g:26367:2: ( ruleEPREFIX_TYPE )
+            // InternalAADMParser.g:26366:1: ( ( ruleEPREFIX_REF ) )
+            // InternalAADMParser.g:26367:2: ( ruleEPREFIX_REF )
             {
-            // InternalAADMParser.g:26367:2: ( ruleEPREFIX_TYPE )
-            // InternalAADMParser.g:26368:3: ruleEPREFIX_TYPE
+            // InternalAADMParser.g:26367:2: ( ruleEPREFIX_REF )
+            // InternalAADMParser.g:26368:3: ruleEPREFIX_REF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
+               before(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleEPREFIX_TYPE();
+            ruleEPREFIX_REF();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0()); 
+               after(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0()); 
             }
 
             }

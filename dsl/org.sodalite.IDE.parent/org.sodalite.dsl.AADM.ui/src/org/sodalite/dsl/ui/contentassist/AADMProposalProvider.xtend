@@ -150,7 +150,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var List<String> proposals = new ArrayList<String>()
 		// Get the properties defined within the selected node requirements or capabilities
 		if (body.req_cap !== null){
-			val req_cap_name = AADMHelper.getLastSegment(body.req_cap.type, '.')
+			val req_cap_name = AADMHelper.getLastSegment(body.req_cap, '.')
 			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node)
 			if (req_node !== null)
 				for (prop:req_node.node.properties.properties)
@@ -192,7 +192,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		var List<String> proposals = new ArrayList<String>()
 		// Get the attributes defined within the selected node requirements or capabilities
 		if (body.req_cap !== null){
-			val req_cap_name = AADMHelper.getLastSegment(body.req_cap.type, '.')
+			val req_cap_name = AADMHelper.getLastSegment(body.req_cap, '.')
 			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node)
 			if (req_node !== null)
 				for (attr:req_node.node.attributes.attributes)

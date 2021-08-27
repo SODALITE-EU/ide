@@ -473,9 +473,9 @@ GetAttribute:
 	END;
 
 GetAttributeBody:
-	('attribute:' attribute=EPREFIX_TYPE) &
+	('attribute:' attribute=EPREFIX_REF) &
 	('entity:' entity=EEntityReference) &
-	('req_cap:' req_cap=EPREFIX_TYPE)?;
+	('req_cap:' req_cap=EPREFIX_REF)?;
 
 GetProperty:
 	'get_property:'
@@ -484,9 +484,9 @@ GetProperty:
 	END;
 
 GetPropertyBody:
-	('property:' property=EPREFIX_TYPE) &
+	('property:' property=EPREFIX_REF) &
 	('entity:' entity=EEntityReference) &
-	('req_cap:' req_cap=EPREFIX_TYPE)?;
+	('req_cap:' req_cap=EPREFIX_REF)?;
 
 ECapabilities:
 	{ECapabilities} (capabilities+=ECapabilityDefinition)*;
@@ -508,7 +508,7 @@ ECapabilityDefinitionBody:
 	BEGIN
 	attributes=EAttributes
 	END)? &
-	('valid_source_types:' '[' (valid_source_types+=EValidSourceType)? ']')? &
+	('valid_source_types:' '[' (valid_source_types=EValidSourceType)? ']')? &
 	('occurrences:' '[' occurrences_start=EAlphaNumericValue ',' occurrences_end=EAlphaNumericValue ']')?;
 
 EValidSourceType:

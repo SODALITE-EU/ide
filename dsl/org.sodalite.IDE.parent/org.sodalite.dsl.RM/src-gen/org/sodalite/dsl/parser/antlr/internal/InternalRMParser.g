@@ -6415,9 +6415,9 @@ ruleGetAttributeBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_TYPEParserRuleCall_0_1_0());
+										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getAttributeEPREFIX_REFParserRuleCall_0_1_0());
 									}
-									lv_attribute_2_0=ruleEPREFIX_TYPE
+									lv_attribute_2_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getGetAttributeBodyRule());
@@ -6426,7 +6426,7 @@ ruleGetAttributeBody returns [EObject current=null]
 											$current,
 											"attribute",
 											lv_attribute_2_0,
-											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -6483,9 +6483,9 @@ ruleGetAttributeBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0());
+										newCompositeNode(grammarAccess.getGetAttributeBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0());
 									}
-									lv_req_cap_6_0=ruleEPREFIX_TYPE
+									lv_req_cap_6_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getGetAttributeBodyRule());
@@ -6494,7 +6494,7 @@ ruleGetAttributeBody returns [EObject current=null]
 											$current,
 											"req_cap",
 											lv_req_cap_6_0,
-											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -6599,9 +6599,9 @@ ruleGetPropertyBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_TYPEParserRuleCall_0_1_0());
+										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getPropertyEPREFIX_REFParserRuleCall_0_1_0());
 									}
-									lv_property_2_0=ruleEPREFIX_TYPE
+									lv_property_2_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getGetPropertyBodyRule());
@@ -6610,7 +6610,7 @@ ruleGetPropertyBody returns [EObject current=null]
 											$current,
 											"property",
 											lv_property_2_0,
-											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -6667,9 +6667,9 @@ ruleGetPropertyBody returns [EObject current=null]
 							(
 								(
 									{
-										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_TYPEParserRuleCall_2_1_0());
+										newCompositeNode(grammarAccess.getGetPropertyBodyAccess().getReq_capEPREFIX_REFParserRuleCall_2_1_0());
 									}
-									lv_req_cap_6_0=ruleEPREFIX_TYPE
+									lv_req_cap_6_0=ruleEPREFIX_REF
 									{
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getGetPropertyBodyRule());
@@ -6678,7 +6678,7 @@ ruleGetPropertyBody returns [EObject current=null]
 											$current,
 											"req_cap",
 											lv_req_cap_6_0,
-											"org.sodalite.dsl.RM.EPREFIX_TYPE");
+											"org.sodalite.dsl.RM.EPREFIX_REF");
 										afterParserOrEnumRuleCall();
 									}
 								)
@@ -7008,7 +7008,7 @@ ruleECapabilityDefinitionBody returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElementForParent(grammarAccess.getECapabilityDefinitionBodyRule());
 										}
-										add(
+										set(
 											$current,
 											"valid_source_types",
 											lv_valid_source_types_15_0,

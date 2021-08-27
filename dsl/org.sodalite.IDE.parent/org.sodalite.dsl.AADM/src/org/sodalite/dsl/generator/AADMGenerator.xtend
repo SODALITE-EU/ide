@@ -228,7 +228,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "property" ;
-	  exchange:value '«lastSegment(p.property.property.type, '.')»' ; 
+	  «IF p.property.property instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -237,7 +241,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "entity" ;  
-	  exchange:value '«trim(p.property.entity.compile())»' ; 
+	  exchange:value '«trim(p.property.entity.compile())»' ;
 	.
 	«ENDIF»	
 	
@@ -246,7 +250,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
+	  «IF p.property.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -272,7 +280,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "attribute" ;  
-	  exchange:value '«lastSegment(a.attribute.attribute.type, ".")»' ; 
+	  «IF a.attribute.attribute instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -290,7 +302,11 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(a.attribute.req_cap.type, '.')»' ; 
+	  «IF a.attribute.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
