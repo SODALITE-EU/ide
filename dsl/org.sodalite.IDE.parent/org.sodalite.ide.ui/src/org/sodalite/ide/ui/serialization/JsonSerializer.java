@@ -15,6 +15,15 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.sodalite.dsl.AADMStandaloneSetup;
 import org.sodalite.dsl.aADM.AADMFactory;
 import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.EAttributeAssignment;
+import org.sodalite.dsl.aADM.EAttributeAssignments;
+import org.sodalite.dsl.aADM.ECapabilityAssignment;
+import org.sodalite.dsl.aADM.ECapabilityAssignments;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.ENodeTemplateBody;
+import org.sodalite.dsl.aADM.ENodeTemplates;
+import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.ERequirementAssignments;
 import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EActivityDefinitions;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
@@ -65,6 +74,8 @@ import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.ELength;
 import org.sodalite.dsl.rM.ELessOrEqual;
 import org.sodalite.dsl.rM.ELessThan;
+import org.sodalite.dsl.rM.EMAP;
+import org.sodalite.dsl.rM.EMapEntry;
 import org.sodalite.dsl.rM.EMaxLength;
 import org.sodalite.dsl.rM.EMinLength;
 import org.sodalite.dsl.rM.ENodeType;
@@ -152,9 +163,21 @@ public class JsonSerializer {
 		AADM_Model model = AADMFactory.eINSTANCE.createAADM_Model();
 		JsonObject jsonObject = new Gson().fromJson(aadm_json, JsonObject.class);
 		Set<String> keys = jsonObject.keySet();
-		String module = "";
-		for (String key : keys) {
 
+		String module = ((JsonObject) jsonObject.get(keys.iterator().next())).get("namespace").getAsString();
+		model.setModule(module);
+		JsonArray templates = (JsonArray) ((JsonObject) jsonObject.get(keys.iterator().next())).get("participants");
+
+		Iterator<JsonElement> iter = templates.iterator();
+		while (iter.hasNext()) {
+			String key = iter.next().getAsString();
+			JsonObject member = (JsonObject) jsonObject.get(key);
+			String name = parseId(key);
+			if (model.getNodeTemplates() == null) {
+				ENodeTemplates nodeTemplates = AADMFactory.eINSTANCE.createENodeTemplates();
+				model.setNodeTemplates(nodeTemplates);
+			}
+			parseNodeTemplate(module, name, member, model);
 		}
 		return model;
 	}
@@ -244,6 +267,32 @@ public class JsonSerializer {
 		if (hasInterfaces(member)) {
 			nodeTypeBody.setInterfaces(parseEInterfaces(member.get("interfaces")));
 		}
+	}
+
+	private static void parseNodeTemplate(String module, String name, JsonObject member, AADM_Model model) {
+		ENodeTemplate nodeTemplate = AADMFactory.eINSTANCE.createENodeTemplate();
+		nodeTemplate.setName(filterValidId(name));
+		ENodeTemplateBody nodeTemplateBody = AADMFactory.eINSTANCE.createENodeTemplateBody();
+		model.getNodeTemplates().getNodeTemplates().add(nodeTemplate);
+
+		nodeTemplateBody.setType(parseEPREFIX_TYPE(member.get("type")));
+		nodeTemplate.setNode(nodeTemplateBody);
+		if (hasProperties(member)) {
+			nodeTemplateBody.setProperties(parseEPropertyAssignments(member.get("properties")));
+		}
+		if (hasAttributes(member)) {
+			nodeTemplateBody.setAttributes(parseEAttributeAssignments(member.get("attributes")));
+		}
+		if (hasRequirements(member)) {
+			nodeTemplateBody.setRequirements(parseERequirementAssignments(member.get("requirements")));
+		}
+		if (hasCapabilities(member)) {
+			nodeTemplateBody.setCapabilities(parseECapabilityAssignments(member.get("capabilities")));
+		}
+	}
+
+	private static String filterValidId(String name) {
+		return name.replaceAll("[^a-zA-Z0-9\\_\\-]", "");
 	}
 
 	private static void parseDataType(String module, String name, JsonObject member, RM_Model model) {
@@ -450,8 +499,63 @@ public class JsonSerializer {
 				if (prop != null)
 					properties.getProperties().add(prop);
 			}
+		} else if (jsonElement.isJsonArray()) {
+			JsonArray jsonArray = (JsonArray) jsonElement;
+			Iterator<JsonElement> iter = jsonArray.iterator();
+			while (iter.hasNext()) {
+				JsonObject jsonObject = (JsonObject) iter.next();
+				String key = jsonObject.keySet().iterator().next();
+				EPropertyAssignment prop = parseEPropertyAssignment(key, jsonObject.get(key));
+				if (prop != null)
+					properties.getProperties().add(prop);
+			}
 		}
 		return properties;
+	}
+
+	private static EAttributeAssignments parseEAttributeAssignments(JsonElement jsonElement) {
+		EAttributeAssignments attributes = AADMFactory.eINSTANCE.createEAttributeAssignments();
+		if (jsonElement.isJsonObject()) {
+			JsonObject object = (JsonObject) jsonElement;
+			Iterator<String> iter = object.keySet().iterator();
+			while (iter.hasNext()) {
+				String key = iter.next();
+				EAttributeAssignment attr = parseEAttributeAssignment(key, object.get(key));
+				if (attr != null)
+					attributes.getAttributes().add(attr);
+			}
+		}
+		return attributes;
+	}
+
+	private static ERequirementAssignments parseERequirementAssignments(JsonElement jsonElement) {
+		ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
+		if (jsonElement.isJsonObject()) {
+			JsonObject object = (JsonObject) jsonElement;
+			Iterator<String> iter = object.keySet().iterator();
+			while (iter.hasNext()) {
+				String key = iter.next();
+				ERequirementAssignment req = parseERequirementAssignment(key, object.get(key));
+				if (req != null)
+					requirements.getRequirements().add(req);
+			}
+		}
+		return requirements;
+	}
+
+	private static ECapabilityAssignments parseECapabilityAssignments(JsonElement jsonElement) {
+		ECapabilityAssignments capabilities = AADMFactory.eINSTANCE.createECapabilityAssignments();
+		if (jsonElement.isJsonObject()) {
+			JsonObject object = (JsonObject) jsonElement;
+			Iterator<String> iter = object.keySet().iterator();
+			while (iter.hasNext()) {
+				String key = iter.next();
+				ECapabilityAssignment cap = parseECapabilityAssignment(key, object.get(key));
+				if (cap != null)
+					capabilities.getCapabilities().add(cap);
+			}
+		}
+		return capabilities;
 	}
 
 	private static EInputs parseEInputs(JsonElement jsonElement) {
@@ -516,9 +620,41 @@ public class JsonSerializer {
 			prop = RMFactory.eINSTANCE.createEPropertyAssignment();
 			prop.setName(parseId(name));
 			prop.setValue(parseEAssignmentValue(object));
-
 		}
 		return prop;
+	}
+
+	private static EAttributeAssignment parseEAttributeAssignment(String name, JsonElement jsonElement) {
+		EAttributeAssignment attr = null;
+		if (jsonElement.isJsonObject()) {
+			JsonObject object = (JsonObject) jsonElement;
+			attr = AADMFactory.eINSTANCE.createEAttributeAssignment();
+			attr.setName(parseId(name));
+			attr.setValue(parseEAssignmentValue(object));
+		}
+		return attr;
+	}
+
+	private static ERequirementAssignment parseERequirementAssignment(String name, JsonElement jsonElement) {
+		ERequirementAssignment req = null;
+		if (jsonElement.isJsonPrimitive()) {
+			JsonPrimitive object = (JsonPrimitive) jsonElement;
+			req = AADMFactory.eINSTANCE.createERequirementAssignment();
+			req.setName(parseId(name));
+			req.setNode(parseEPREFIX_ID(object));
+		}
+		return req;
+	}
+
+	private static ECapabilityAssignment parseECapabilityAssignment(String name, JsonElement jsonElement) {
+		ECapabilityAssignment cap = null;
+		if (jsonElement.isJsonObject()) {
+			JsonObject object = (JsonObject) jsonElement;
+			cap = AADMFactory.eINSTANCE.createECapabilityAssignment();
+			cap.setName(parseId(name));
+			cap.setProperties(parseEPropertyAssignments(object.get("properties")));
+		}
+		return cap;
 	}
 
 	private static ETriggerDefinition parseETriggerDefinition(JsonElement jsonElement) {
@@ -1065,9 +1201,44 @@ public class JsonSerializer {
 		} else if (jsonElement.isJsonArray()) {
 			av = parseELIST((JsonArray) jsonElement);
 		} else if (jsonElement.isJsonObject()) {
-			av = parseEFunction((JsonObject) jsonElement);
+			JsonObject jsonObject = (JsonObject) jsonElement;
+			av = parseEFunction(jsonObject);
+			if (av == null) {
+				JsonElement value = jsonObject.get("value");
+				if (value != null)
+					av = parseESingleValue(value.getAsString());
+				else {
+					// parse EMAP
+					JsonElement specification = jsonObject.get("specification");
+					if (specification != null)
+						av = parseEMAP(specification);
+					else
+						av = parseEMAP(jsonObject);
+				}
+			}
 		}
 		return av;
+	}
+
+	private static EMAP parseEMAP(JsonElement jsonElement) {
+		EMAP map = RMFactory.eINSTANCE.createEMAP();
+		if (jsonElement.isJsonObject()) {
+			JsonObject jsonObject = (JsonObject) jsonElement;
+			Iterator<String> iter = jsonObject.keySet().iterator();
+			while (iter.hasNext()) {
+				String key = iter.next();
+				JsonElement value = jsonObject.get(key);
+				map.getMap().add(parseEMapEntry(key, value));
+			}
+		}
+		return map;
+	}
+
+	private static EMapEntry parseEMapEntry(String key, JsonElement value) {
+		EMapEntry mapEntry = RMFactory.eINSTANCE.createEMapEntry();
+		mapEntry.setKey(key);
+		mapEntry.setValue(parseEAssignmentValue(value));
+		return mapEntry;
 	}
 
 	private static ESingleValue parseESingleValue(JsonPrimitive jsonPrimitive) {
@@ -1087,6 +1258,22 @@ public class JsonSerializer {
 			sv = RMFactory.eINSTANCE.createESIGNEDINT();
 			((ESIGNEDINT) sv).setValue(jsonPrimitive.getAsNumber().intValue());
 		}
+		return sv;
+	}
+
+	private static ESingleValue parseESingleValue(String string) {
+		ESingleValue sv = null;
+		Object value = parseValue(string);
+
+		if (value instanceof Boolean)
+			sv = parseEBOOLEAN((Boolean) value);
+		else if (value instanceof Integer)
+			sv = parseESIGNEDINT((Integer) value);
+		else if (value instanceof Float)
+			sv = parseEFLOAT((Float) value);
+		else
+			sv = parseESTRING((String) value);
+
 		return sv;
 	}
 
@@ -1366,6 +1553,12 @@ public class JsonSerializer {
 	}
 
 	private static String parseRMMetadata(JsonObject jsonElement, RM_Model model) {
+		String module = jsonElement.get("namespace").getAsString();
+		model.setModule(module);
+		return module;
+	}
+
+	private static String parseAADMMetadata(JsonObject jsonElement, AADM_Model model) {
 		String module = jsonElement.get("namespace").getAsString();
 		model.setModule(module);
 		return module;
