@@ -15,6 +15,12 @@
          id="org.sodalite.dsl.aadm.ui.preferences.UserAccountPreferencePage"
          name="Sodalite User Account">
    </page>
+   <page
+         category="org.sodalite.dsl.AADM"
+         class="org.sodalite.dsl.ui.preferences.secrets.SecretsPreferencePage"
+         id="org.sodalite.dsl.preferences.secrets"
+         name="Sodalite Secrets">
+   </page>
   </extension>
  <extension
        point="org.eclipse.core.runtime.preferences">
