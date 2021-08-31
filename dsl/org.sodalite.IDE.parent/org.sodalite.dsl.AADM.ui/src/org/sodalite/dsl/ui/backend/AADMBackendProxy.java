@@ -3,6 +3,7 @@ package org.sodalite.dsl.ui.backend;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -298,12 +299,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
-					String aadmJson = getKBReasoner().getAADM(saveReport.getURI(), false);
+					String aadmJson = getKBReasoner().getAADM(saveReport.getURI(), mm.getVersion(), false);
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-//					Files.write(Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json"),
-//							aadmJson.getBytes());
+					Files.write(Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json"),
+							aadmJson.getBytes());
 
 					subMonitor.worked(steps++);
 

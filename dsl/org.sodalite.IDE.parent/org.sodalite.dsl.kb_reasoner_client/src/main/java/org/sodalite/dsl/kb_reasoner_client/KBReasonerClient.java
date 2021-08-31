@@ -855,14 +855,16 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public String getAADM(String aadmURI, boolean withoutReferences) throws SodaliteException {
+	public String getAADM(String aadmURI, String version, boolean withoutReferences) throws SodaliteException {
 		Assert.notNull(aadmURI, "Pass a not null aadmURI");
 		String url = kbReasonerUri + "aadm?aadmIRI=" + aadmURI;
 		if (withoutReferences) {
 			url += "&refactorer=true";
 		}
-		if (IAM_enabled)
-			url += "&token=" + this.aai_token;
+		if (version != null && !version.isEmpty())
+			url += "&version=" + version;
+//		if (IAM_enabled)
+//			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
@@ -870,7 +872,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (IAM_enabled)
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
-				return getAADM(aadmURI, withoutReferences);
+				return getAADM(aadmURI, version, withoutReferences);
 			else
 				throw ex;
 		} catch (HttpClientErrorException ex) {

@@ -416,7 +416,10 @@ public class KBView {
 							json = RMBackendProxy.getKBReasoner().getRM(node.getModel().getUri().toString());
 							model = JsonSerializer.serializeRMfromJson(json);
 						} else if (node.getModel().getName().endsWith(".aadm")) {
-							json = RMBackendProxy.getKBReasoner().getAADM(node.getModel().getUri().toString(), true);
+							// TODO manage version if required
+							String version = null;
+							json = RMBackendProxy.getKBReasoner().getAADM(node.getModel().getUri().toString(), version,
+									true);
 							model = JsonSerializer.serializeAADMfromJson(json);
 						}
 						if (model != null)
@@ -548,8 +551,10 @@ public class KBView {
 									json = RMBackendProxy.getKBReasoner().getRM(kbmodel.getUri().toString());
 									model = JsonSerializer.serializeRMfromJson(json);
 								} else if (kbmodel.getName().endsWith(".aadm")) {
+									// TODO manage version if required
+									String version = null;
 									json = RMBackendProxy.getKBReasoner().getAADM(node.getModel().getUri().toString(),
-											true);
+											version, true);
 									model = JsonSerializer.serializeAADMfromJson(json);
 								}
 								if (model != null)
