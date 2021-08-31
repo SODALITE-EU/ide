@@ -114,7 +114,8 @@ public class SecretsComposite extends Composite {
 
 		SecretDialog dialog = new SecretDialog(getShell(), secret);
 		if (dialog.open() != Window.CANCEL) {
-			// TODO don't update secret if cancelled
+			secret.setKey(dialog.getSecret().getKey());
+			secret.setValue(dialog.getSecret().getValue());
 		}
 		secretsViewer.refresh();
 	}

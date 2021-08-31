@@ -28,7 +28,8 @@ public class SecretDialog extends Dialog {
 		super(shell);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		if (secret != null) {
-			this.secret = secret;
+			this.secret = new SecretData(secret.getKey(), secret.getValue());
+			;
 			isEdit = true;
 		} else {
 			this.secret = new SecretData(null, null);
