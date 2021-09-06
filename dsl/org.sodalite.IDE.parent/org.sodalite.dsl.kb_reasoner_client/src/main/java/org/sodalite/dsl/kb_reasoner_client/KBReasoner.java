@@ -98,7 +98,7 @@ public interface KBReasoner {
 
 	KBOptimizationReportData optimizeAADM(String aadmTTL, String aadmURI) throws SodaliteException;
 
-	String getAADM(String aadmIRI, boolean withoutReferences) throws SodaliteException;
+	String getAADM(String aadmIRI, String version, boolean withoutReferences) throws SodaliteException;
 
 	String getRM(String rmIRI) throws SodaliteException;
 

@@ -357,6 +357,30 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF r.requirement.start !== null && r.requirement.end !== null»
+	«putParameterNumber(r, "min", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "min" ;	  
+	  exchange:value '«trim(r.requirement.start.compile)»' ;  
+	.
+	
+	«putParameterNumber(r, "max", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "max" ;	  
+	  exchange:value '«trim(r.requirement.end.compile)»' ;  
+	.
+	
+	«putParameterNumber(r, "occurrences", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "occurrences" ;	  
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "min")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "max")» ;
+	.
+	«ENDIF»
+	
 	«requirement_numbers.put(r, requirement_counter)»
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
@@ -370,7 +394,11 @@ class RMGenerator extends AbstractGenerator {
 	  «IF r.requirement.relationship !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(r, "relationship")» ;
 	  «ENDIF»
-	.		
+	  «IF r.requirement.start !== null && r.requirement.end !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "occurrences")» ;
+	  «ENDIF»
+	.
+	
 	'''
 	
 	def compile (ECapabilityDefinition c) '''
@@ -397,7 +425,31 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDFOR»
 	.
 	«ENDIF»
-		
+	
+	«IF c.capability.occurrences_start !== null && c.capability.occurrences_end !== null»
+	«putParameterNumber(c, "min", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "min" ;	  
+	  exchange:value '«trim(c.capability.occurrences_start.compile)»' ;  
+	.
+	
+	«putParameterNumber(c, "max", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "max" ;	  
+	  exchange:value '«trim(c.capability.occurrences_end.compile)»' ;  
+	.
+	
+	«putParameterNumber(c, "occurrences", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "occurrences" ;	  
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "min")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "max")» ;
+	.
+	«ENDIF»
+	
 	«capability_numbers.put(c, capability_counter)»
 	:Capability_«capability_counter++»
 	  rdf:type exchange:Capability ;
@@ -410,6 +462,9 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  «IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.sourceTypes.empty»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "valid_source_types")» ;
+	  «ENDIF»
+	  «IF c.capability.occurrences_start !== null && c.capability.occurrences_end !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "occurrences")» ;
 	  «ENDIF»
 	.
 	'''

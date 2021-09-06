@@ -782,12 +782,85 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
+    {
+      if (((r.getRequirement().getStart() != null) && (r.getRequirement().getEnd() != null))) {
+        this.putParameterNumber(r, "min", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"min\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(r.getRequirement().getStart()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(r, "max", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"max\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_1 = this.trim(this.compile(r.getRequirement().getEnd()));
+        _builder.append(_trim_1, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(r, "occurrences", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_5 = this.parameter_counter++;
+        _builder.append(_plusPlus_5);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"occurrences\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(r, "min");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(r, "max");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
     Integer _put = this.requirement_numbers.put(r, Integer.valueOf(this.requirement_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Requirement_");
-    int _plusPlus_3 = this.requirement_counter++;
-    _builder.append(_plusPlus_3);
+    int _plusPlus_6 = this.requirement_counter++;
+    _builder.append(_plusPlus_6);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Requirement ;");
@@ -804,8 +877,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_6) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(r, "capability");
-        _builder.append(_parameterNumber, "  ");
+        Integer _parameterNumber_2 = this.getParameterNumber(r, "capability");
+        _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -816,8 +889,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_7) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_1 = this.getParameterNumber(r, "node");
-        _builder.append(_parameterNumber_1, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(r, "node");
+        _builder.append(_parameterNumber_3, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -828,13 +901,24 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_2 = this.getParameterNumber(r, "relationship");
-        _builder.append(_parameterNumber_2, "  ");
+        Integer _parameterNumber_4 = this.getParameterNumber(r, "relationship");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append(".\t\t");
+    {
+      if (((r.getRequirement().getStart() != null) && (r.getRequirement().getEnd() != null))) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_5 = this.getParameterNumber(r, "occurrences");
+        _builder.append(_parameterNumber_5, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }
@@ -913,14 +997,86 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("\t");
+    _builder.newLine();
+    {
+      if (((c.getCapability().getOccurrences_start() != null) && (c.getCapability().getOccurrences_end() != null))) {
+        this.putParameterNumber(c, "min", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"min\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_1 = this.trim(this.compile(c.getCapability().getOccurrences_start()));
+        _builder.append(_trim_1, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(c, "max", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"max\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_2 = this.trim(this.compile(c.getCapability().getOccurrences_end()));
+        _builder.append(_trim_2, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(c, "occurrences", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"occurrences\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(c, "min");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(c, "max");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     Integer _put = this.capability_numbers.put(c, Integer.valueOf(this.capability_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Capability_");
-    int _plusPlus_2 = this.capability_counter++;
-    _builder.append(_plusPlus_2);
+    int _plusPlus_5 = this.capability_counter++;
+    _builder.append(_plusPlus_5);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Capability ;");
@@ -949,8 +1105,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(c, "type");
-        _builder.append(_parameterNumber, "  ");
+        Integer _parameterNumber_2 = this.getParameterNumber(c, "type");
+        _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -959,8 +1115,18 @@ public class RMGenerator extends AbstractGenerator {
       if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().getSourceTypes().isEmpty()))) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_1 = this.getParameterNumber(c, "valid_source_types");
-        _builder.append(_parameterNumber_1, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(c, "valid_source_types");
+        _builder.append(_parameterNumber_3, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if (((c.getCapability().getOccurrences_start() != null) && (c.getCapability().getOccurrences_end() != null))) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_4 = this.getParameterNumber(c, "occurrences");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
