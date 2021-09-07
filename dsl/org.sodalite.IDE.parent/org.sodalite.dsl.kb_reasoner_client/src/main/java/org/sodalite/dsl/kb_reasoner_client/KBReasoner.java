@@ -12,6 +12,7 @@ package org.sodalite.dsl.kb_reasoner_client;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
@@ -170,5 +171,7 @@ public interface KBReasoner {
 	void registerAlertingRules(String monitoring_id, String rules) throws SodaliteException;
 
 	void deregisterAlertingRules(String monitoring_id) throws SodaliteException;
+
+	void addSecrets(String prefix, Map<String, String> secrets) throws SodaliteException;
 
 }

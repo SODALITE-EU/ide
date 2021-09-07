@@ -37,5 +37,5 @@ public class PreferenceConstants {
 
 	public static final String SKYDIVE_ANALYZER_URI = "Skydive_Analyzer_URI";
 
-	public static final String VAULT_URI = "VAULT_URI";
+	public static final String VAULT_SECRET_UPLOADER_URI = "VAULT_SECRET_UPLOADER_URI";
 }

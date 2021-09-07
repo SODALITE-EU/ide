@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.preferences.secrets;
+package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -8,9 +8,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.TableColumn;
 
-public class SecretsLabelProvider extends BaseLabelProvider implements ITableLabelProvider {
+public class HPCSecretsLabelProvider extends BaseLabelProvider implements ITableLabelProvider {
 
-	public SecretsLabelProvider() {
+	public HPCSecretsLabelProvider() {
 		super();
 	}
 
@@ -24,21 +24,21 @@ public class SecretsLabelProvider extends BaseLabelProvider implements ITableLab
 		if (element == null) {
 			return null;
 		}
-		SecretData data = (SecretData) element;
+		HPCSecretData data = (HPCSecretData) element;
 		switch (columnIndex) {
 		case 0:
 			return null;
 		case 1:
-			return data.getKey();
+			return data.getName();
 		case 2:
-			return data.getValue();
+			return data.getSecrets().toString();
 		default:
 			return null;
 		}
 	}
 
 	public void createColumns(TableViewer viewer) {
-		String[] titles = { "", "key", "value" };
+		String[] titles = { "", "HPC Name", "Secrets" };
 		for (String title : titles) {
 			TableColumn column = new TableViewerColumn(viewer, SWT.NONE).getColumn();
 			column.setText(title);

@@ -1,7 +1,9 @@
-package org.sodalite.dsl.ui.preferences.secrets;
+package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnPixelData;
@@ -25,14 +27,14 @@ import org.eclipse.swt.widgets.Table;
  * @author yosu
  *
  */
-public class SecretsComposite extends Composite {
+public class HPCSecretsComposite extends Composite {
 	CheckboxTableViewer secretsViewer;
 	Button addButton;
 	Button editButton;
 	Button removeButton;
-	private ArrayList<SecretData> secrets = new ArrayList<>();
+	private ArrayList<HPCSecretData> hpcs = new ArrayList<>();
 
-	SecretsComposite(Composite parent, int style) {
+	HPCSecretsComposite(Composite parent, int style) {
 		super(parent, style);
 		createWidgets();
 	}
@@ -41,7 +43,7 @@ public class SecretsComposite extends Composite {
 		setLayout(new GridLayout(2, false));
 
 		Label secretsLabel = new Label(this, SWT.NONE);
-		secretsLabel.setText("User's secrets:");
+		secretsLabel.setText("HPC Infrastructures' secrets:");
 		secretsLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
 
 		Table secretsTable = new Table(this,
@@ -51,8 +53,8 @@ public class SecretsComposite extends Composite {
 		secretsTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3));
 
 		secretsViewer = new CheckboxTableViewer(secretsTable);
-		SecretsLabelProvider labelProvider = new SecretsLabelProvider();
-		SecretsContentProvider contentProvider = new SecretsContentProvider();
+		HPCSecretsLabelProvider labelProvider = new HPCSecretsLabelProvider();
+		HPCSecretsContentProvider contentProvider = new HPCSecretsContentProvider();
 		labelProvider.createColumns(secretsViewer);
 		secretsViewer.setContentProvider(contentProvider);
 		secretsViewer.setLabelProvider(labelProvider);
@@ -63,9 +65,9 @@ public class SecretsComposite extends Composite {
 		tableLayout.addColumnData(new ColumnWeightData(50, 50, true));
 		secretsTable.setLayout(tableLayout);
 
-		addButton = createButton("Add secret ...");
-		editButton = createButton("Edit secret ...");
-		removeButton = createButton("Delete secret");
+		addButton = createButton("Add HPC Infrastructure ...");
+		editButton = createButton("Edit HPC Infrastructure ...");
+		removeButton = createButton("Delete HPC Infrastructure");
 
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -91,18 +93,20 @@ public class SecretsComposite extends Composite {
 
 	public void initializeValues() {
 		// TODO Read user's secrets from Value
-		secrets.add(new SecretData("hpc", "sodalite-fe.hlrs.de"));
-		secrets.add(new SecretData("ssh_user", "yosu"));
-		secrets.add(new SecretData("ssh_password", "my_password"));
-		secrets.add(new SecretData("ssh_pkey", "my key"));
+		Map<String, String> secrets = new HashMap<>();
+		secrets.put("hpc", "sodalite-fe.hlrs.de");
+		secrets.put("ssh_user", "yosu");
+		secrets.put("ssh_password", "my_password");
+		secrets.put("ssh_pkey", "my key");
+		hpcs.add(new HPCSecretData(secrets));
 
-		secretsViewer.setInput(secrets);
+		secretsViewer.setInput(hpcs);
 	}
 
 	protected void addSecret() {
-		SecretDialog dialog = new SecretDialog(getShell(), null);
+		HPCSecretDialog dialog = new HPCSecretDialog(getShell(), null);
 		if (dialog.open() != Window.CANCEL) {
-			secrets.add(dialog.getSecret());
+			hpcs.add(dialog.getSecret());
 		}
 		secretsViewer.refresh();
 	}
@@ -110,12 +114,11 @@ public class SecretsComposite extends Composite {
 	protected void editSecret() {
 		IStructuredSelection selection = secretsViewer.getStructuredSelection();
 		@SuppressWarnings("unchecked")
-		SecretData secret = (SecretData) selection.iterator().next();
+		HPCSecretData hpc = (HPCSecretData) selection.iterator().next();
 
-		SecretDialog dialog = new SecretDialog(getShell(), secret);
+		HPCSecretDialog dialog = new HPCSecretDialog(getShell(), hpc);
 		if (dialog.open() != Window.CANCEL) {
-			secret.setKey(dialog.getSecret().getKey());
-			secret.setValue(dialog.getSecret().getValue());
+			hpc.setSecrets(dialog.getSecret().getSecrets());
 		}
 		secretsViewer.refresh();
 	}
@@ -124,8 +127,8 @@ public class SecretsComposite extends Composite {
 		IStructuredSelection selection = secretsViewer.getStructuredSelection();
 		Iterator<?> it = selection.iterator();
 		while (it.hasNext()) {
-			SecretData data = (SecretData) it.next();
-			secrets.remove(data);
+			HPCSecretData data = (HPCSecretData) it.next();
+			hpcs.remove(data);
 		}
 		secretsViewer.refresh();
 	}

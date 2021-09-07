@@ -20,7 +20,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -72,6 +74,8 @@ class KBReasonerTest {
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
+	private final String Vault_URI = "http://192.168.2.53:8200/";
+	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -83,7 +87,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, Grafana_URI, RulesServer_URI);
+				Refactorer_URI, Grafana_URI, RulesServer_URI, Vault_URI, Vault_Secret_Uploader_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -578,5 +582,21 @@ class KBReasonerTest {
 		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
 		Thread.currentThread().sleep(1000);
 		kbclient.deleteMonitoringDashboard(monitoring_Id, deployment_label);
+	}
+
+//	@Test
+//	void testGetVaultKey() throws Exception {
+//		String key = ((KBReasonerClient) kbclient).getVaultKey();
+//		assertNotNull(key);
+//	}
+
+	@Test
+	void testAddSecret() throws Exception {
+		Map<String, String> secrets = new HashMap<>();
+		secrets.put("hpc", "<hpc address>");
+		secrets.put("ssh_user", "<username>");
+		secrets.put("ssh_password", "<password>");
+		secrets.put("ssh_pkey", "<private key>");
+		kbclient.addSecrets("hpc", secrets);
 	}
 }

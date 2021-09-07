@@ -17,7 +17,7 @@
    </page>
    <page
          category="org.sodalite.dsl.AADM"
-         class="org.sodalite.dsl.ui.preferences.secrets.SecretsPreferencePage"
+         class="org.sodalite.dsl.ui.preferences.hpc_secrets.HPCSecretsPreferencePage"
          id="org.sodalite.dsl.preferences.secrets"
          name="Sodalite Secrets">
    </page>

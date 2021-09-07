@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -112,6 +113,8 @@ public class KBReasonerClient implements KBReasoner {
 	private String refactorerUri;
 	private String grafanaUri;
 	private String rulesServerUri;
+	private String vaultUri;
+	private String vaultSecretUploaderUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -120,7 +123,8 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri) {
+			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri,
+			String vaultUri, String vaultSecretUploaderUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -130,6 +134,8 @@ public class KBReasonerClient implements KBReasoner {
 		this.refactorerUri = refactorerUri;
 		this.grafanaUri = grafanaUri;
 		this.rulesServerUri = rulesServerUri;
+		this.vaultUri = vaultUri;
+		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -1408,6 +1414,61 @@ public class KBReasonerClient implements KBReasoner {
 				return getOperations(modules);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+//	public String getVaultKey() throws SodaliteException {
+//		try {
+//			String url = vaultUri + "v1/auth/jwt/login";
+//			if (!IAM_enabled)
+//				return null;
+//			this.aai_token = getSecurityToken();
+//			Gson gson = new Gson();
+//			JsonObject jsonObject = new JsonObject();
+//			jsonObject.addProperty("jwt", this.aai_token);
+//			jsonObject.addProperty("role", keycloak_user);
+//			String payload = jsonObject.toString();
+//
+//			URI uri;
+//			try {
+//				uri = new URI(url);
+//			} catch (URISyntaxException ex) {
+//				throw new SodaliteException(ex);
+//			}
+//
+//			return postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+//		} catch (HttpClientErrorException ex) {
+//			if (ex.getMessage().contains("role"))
+//				throw new RoleDoesNotExist(ex.getMessage());
+//			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+//		} catch (Exception ex) {
+//			throw new SodaliteException(ex);
+//		}
+//	}
+
+	@Override
+	public void addSecrets(String prefix, Map<String, String> secrets) throws SodaliteException {
+		try {
+			String url = vaultSecretUploaderUri + prefix;
+			Gson gson = new Gson();
+			JsonObject jsonObject = new JsonObject();
+			for (String key : secrets.keySet())
+				jsonObject.addProperty(key, secrets.get(key));
+
+			String payload = jsonObject.toString();
+
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+
+			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {

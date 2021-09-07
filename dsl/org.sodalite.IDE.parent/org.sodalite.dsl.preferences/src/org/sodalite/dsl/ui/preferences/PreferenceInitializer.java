@@ -73,9 +73,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (skydive_analyzer_uri == null)
 			skydive_analyzer_uri = "192.168.2.11:8088";
 
-		String vault_uri = prop.getProperty(PreferenceConstants.VAULT_URI);
-		if (vault_uri == null)
-			vault_uri = "http://192.168.3.74:8202";
+		String vault_secret_uploader_uri = prop.getProperty(PreferenceConstants.VAULT_SECRET_UPLOADER_URI);
+		if (vault_secret_uploader_uri == null)
+			vault_secret_uploader_uri = "http://192.168.3.74:8202";
 
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
@@ -111,7 +111,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
-		defaults.put(PreferenceConstants.VAULT_URI, vault_uri);
+		defaults.put(PreferenceConstants.VAULT_SECRET_UPLOADER_URI, vault_secret_uploader_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);

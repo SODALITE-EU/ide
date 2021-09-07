@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.preferences.secrets;
+package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -13,30 +13,31 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class SecretDialog extends Dialog {
-	protected SecretData secret;
+public class HPCSecretDialog extends Dialog {
+	protected HPCSecretData secret;
 	protected boolean isEdit = false;
-	protected Text keyTextfield;
-	protected Text valueTextfield;
+	protected Text hpcTextfield;
+	protected Text ssh_userTextfield;
+	protected Text ssh_passwordTextfield;
+	protected Text ssh_pkeyTextfield;
 	private Button okButton;
 
 	interface StringModifyListener {
 		public void valueChanged(String s);
 	}
 
-	protected SecretDialog(Shell shell, SecretData secret) {
+	protected HPCSecretDialog(Shell shell, HPCSecretData secret) {
 		super(shell);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		if (secret != null) {
-			this.secret = new SecretData(secret.getKey(), secret.getValue());
-			;
+			this.secret = new HPCSecretData(secret.getSecrets());
 			isEdit = true;
 		} else {
-			this.secret = new SecretData(null, null);
+			this.secret = new HPCSecretData();
 		}
 	}
 
-	public SecretData getSecret() {
+	public HPCSecretData getSecret() {
 		return secret;
 	}
 
@@ -45,9 +46,9 @@ public class SecretDialog extends Dialog {
 		super.configureShell(shell);
 
 		if (isEdit)
-			shell.setText("Edit user's secret");
+			shell.setText("Edit HPC infrastructure's secrets");
 		else
-			shell.setText("Add user's secret");
+			shell.setText("Add HPC infrastructure's secrets");
 	}
 
 	@Override
@@ -57,19 +58,33 @@ public class SecretDialog extends Dialog {
 		((GridLayout) composite.getLayout()).numColumns = 2;
 		composite.setFont(font);
 
-		SecretDialog.createLabel(composite, "Key:").setFont(font);
-		keyTextfield = createText(composite, secret.getKey(), s -> {
-			secret.setKey(s);
+		HPCSecretDialog.createLabel(composite, "hpc:").setFont(font);
+		hpcTextfield = createText(composite, secret.getSecrets().get("hpc"), s -> {
+			secret.getSecrets().put("hpc", s);
 			validateFields();
 		}, false);
-		keyTextfield.setFont(font);
+		hpcTextfield.setFont(font);
 
-		SecretDialog.createLabel(composite, "Value:").setFont(font);
-		valueTextfield = createText(composite, secret.getValue(), s -> {
-			secret.setValue(s);
+		HPCSecretDialog.createLabel(composite, "ssh_user:").setFont(font);
+		ssh_userTextfield = createText(composite, secret.getSecrets().get("ssh_user"), s -> {
+			secret.getSecrets().put("ssh_user", s);
 			validateFields();
 		}, false);
-		valueTextfield.setFont(font);
+		ssh_userTextfield.setFont(font);
+
+		HPCSecretDialog.createLabel(composite, "ssh_password:").setFont(font);
+		ssh_passwordTextfield = createText(composite, secret.getSecrets().get("ssh_password"), s -> {
+			secret.getSecrets().put("ssh_password", s);
+			validateFields();
+		}, false);
+		ssh_passwordTextfield.setFont(font);
+
+		HPCSecretDialog.createLabel(composite, "ssh_pkey:").setFont(font);
+		ssh_pkeyTextfield = createText(composite, secret.getSecrets().get("ssh_pkey"), s -> {
+			secret.getSecrets().put("ssh_pkey", s);
+			validateFields();
+		}, false);
+		ssh_pkeyTextfield.setFont(font);
 
 		return composite;
 	}
@@ -84,12 +99,12 @@ public class SecretDialog extends Dialog {
 	protected void validateFields() {
 		boolean valid = true;
 
-		String key = keyTextfield.getText();
-		if (key == null || key.trim().length() < 1)
+		String hpc = hpcTextfield.getText();
+		if (hpc == null || hpc.trim().length() < 1)
 			valid = false;
 
-		String value = valueTextfield.getText();
-		if (value == null || value.trim().length() < 1)
+		String ssh_user = ssh_userTextfield.getText();
+		if (ssh_user == null || ssh_user.trim().length() < 1)
 			valid = false;
 
 		setOKButtonEnabled(valid);

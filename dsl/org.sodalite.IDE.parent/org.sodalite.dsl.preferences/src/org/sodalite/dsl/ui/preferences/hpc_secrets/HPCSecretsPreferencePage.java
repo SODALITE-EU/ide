@@ -1,4 +1,4 @@
-package org.sodalite.dsl.ui.preferences.secrets;
+package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.PreferencePage;
@@ -13,14 +13,14 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 
-public class SecretsPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
+public class HPCSecretsPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	StringFieldEditor vaultURLEditor;
-	SecretsComposite secretsComposite;
+	HPCSecretsComposite secretsComposite;
 
 	@Override
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Sodalite Secrets");
+		setDescription("Sodalite HPC Infrastructures' secrets");
 	}
 
 	@Override
@@ -42,7 +42,8 @@ public class SecretsPreferencePage extends PreferencePage implements IWorkbenchP
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		vaultURLEditor = new StringFieldEditor(PreferenceConstants.VAULT_URI, "VAULT URL:", composite);
+		vaultURLEditor = new StringFieldEditor(PreferenceConstants.VAULT_SECRET_UPLOADER_URI,
+				"VAULT Secret Uploader URL:", composite);
 		vaultURLEditor.setPreferenceStore(getPreferenceStore());
 		vaultURLEditor.load();
 		vaultURLEditor.setPropertyChangeListener(event -> {
@@ -53,7 +54,7 @@ public class SecretsPreferencePage extends PreferencePage implements IWorkbenchP
 	}
 
 	private void createSecretsComposite(Composite parent) {
-		secretsComposite = new SecretsComposite(parent, SWT.NONE);
+		secretsComposite = new HPCSecretsComposite(parent, SWT.NONE);
 		secretsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 
