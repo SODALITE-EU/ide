@@ -106,6 +106,7 @@ public class HPCSecretsComposite extends Composite {
 
 	public void initializeValues() throws SodaliteException, Exception {
 		// Read user's secrets from Vault
+		hpcs.clear();
 		List<String> hpcInfras = SodaliteBackendProxy.getKBReasoner().listHPCInfrastructures();
 		for (String hpcInfra : hpcInfras) {
 			HPCSecretData secrets = SodaliteBackendProxy.getKBReasoner().getHPCInfrastructure(hpcInfra);

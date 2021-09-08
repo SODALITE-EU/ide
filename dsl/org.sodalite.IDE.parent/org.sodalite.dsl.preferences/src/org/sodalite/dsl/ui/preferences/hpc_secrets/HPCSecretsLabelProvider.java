@@ -39,7 +39,7 @@ public class HPCSecretsLabelProvider extends BaseLabelProvider implements ITable
 	}
 
 	public void createColumns(TableViewer viewer) {
-		String[] titles = { "", "HPC Name", "Secrets" };
+		String[] titles = { "", "HPC Host", "Secrets" };
 		for (String title : titles) {
 			TableColumn column = new TableViewerColumn(viewer, SWT.NONE).getColumn();
 			column.setText(title);
