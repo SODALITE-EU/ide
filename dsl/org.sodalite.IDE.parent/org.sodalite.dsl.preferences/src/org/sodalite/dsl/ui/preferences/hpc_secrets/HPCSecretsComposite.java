@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -22,6 +23,7 @@ import org.eclipse.swt.widgets.Table;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * Code snippets taken from org.eclipse.ui.internal.net.NonProxyHostsComposite
@@ -104,13 +106,19 @@ public class HPCSecretsComposite extends Composite {
 		initializeValues();
 	}
 
-	public void initializeValues() throws SodaliteException, Exception {
+	public void initializeValues() {
 		// Read user's secrets from Vault
 		hpcs.clear();
-		List<String> hpcInfras = SodaliteBackendProxy.getKBReasoner().listHPCInfrastructures();
-		for (String hpcInfra : hpcInfras) {
-			HPCSecretData secrets = SodaliteBackendProxy.getKBReasoner().getHPCInfrastructure(hpcInfra);
-			hpcs.add(secrets);
+		try {
+			List<String> hpcInfras = SodaliteBackendProxy.getKBReasoner().listHPCInfrastructures();
+			for (String hpcInfra : hpcInfras) {
+				HPCSecretData secrets = SodaliteBackendProxy.getKBReasoner().getHPCInfrastructure(hpcInfra);
+				hpcs.add(secrets);
+			}
+		} catch (Exception e) {
+			SodaliteLogger.log(e);
+			MessageDialog.openError(getShell(), "HPC Infrastructures' secrets",
+					"Vault Secrets Uploader not responding.\nContact SODALITE administrator");
 		}
 
 		secretsViewer.setInput(hpcs);
