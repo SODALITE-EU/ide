@@ -3,6 +3,7 @@ package org.sodalite.dsl.ui.preferences.hpc_secrets;
 import java.util.Collection;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 
 public class HPCSecretsContentProvider implements IStructuredContentProvider {
 

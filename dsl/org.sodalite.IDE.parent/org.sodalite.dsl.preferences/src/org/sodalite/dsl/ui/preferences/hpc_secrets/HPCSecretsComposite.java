@@ -1,9 +1,8 @@
 package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnPixelData;
@@ -20,6 +19,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 
 /**
  * Code snippets taken from org.eclipse.ui.internal.net.NonProxyHostsComposite
@@ -33,13 +35,15 @@ public class HPCSecretsComposite extends Composite {
 	Button editButton;
 	Button removeButton;
 	private ArrayList<HPCSecretData> hpcs = new ArrayList<>();
+	private ArrayList<HPCSecretData> hpcsToAdd = new ArrayList<>();
+	private ArrayList<HPCSecretData> hpcsToRemove = new ArrayList<>();
 
-	HPCSecretsComposite(Composite parent, int style) {
+	HPCSecretsComposite(Composite parent, int style) throws SodaliteException, Exception {
 		super(parent, style);
 		createWidgets();
 	}
 
-	protected void createWidgets() {
+	protected void createWidgets() throws SodaliteException, Exception {
 		setLayout(new GridLayout(2, false));
 
 		Label secretsLabel = new Label(this, SWT.NONE);
@@ -88,17 +92,25 @@ public class HPCSecretsComposite extends Composite {
 			}
 		});
 
+		secretsViewer.addSelectionChangedListener(event -> {
+			IStructuredSelection selection = event.getStructuredSelection();
+			if (selection.isEmpty()) {
+				editButton.setEnabled(false);
+				removeButton.setEnabled(false);
+				return;
+			}
+		});
+
 		initializeValues();
 	}
 
-	public void initializeValues() {
-		// TODO Read user's secrets from Value
-		Map<String, String> secrets = new HashMap<>();
-		secrets.put("hpc", "sodalite-fe.hlrs.de");
-		secrets.put("ssh_user", "yosu");
-		secrets.put("ssh_password", "my_password");
-		secrets.put("ssh_pkey", "my key");
-		hpcs.add(new HPCSecretData(secrets));
+	public void initializeValues() throws SodaliteException, Exception {
+		// Read user's secrets from Vault
+		List<String> hpcInfras = SodaliteBackendProxy.getKBReasoner().listHPCInfrastructures();
+		for (String hpcInfra : hpcInfras) {
+			HPCSecretData secrets = SodaliteBackendProxy.getKBReasoner().getHPCInfrastructure(hpcInfra);
+			hpcs.add(secrets);
+		}
 
 		secretsViewer.setInput(hpcs);
 	}
@@ -107,6 +119,7 @@ public class HPCSecretsComposite extends Composite {
 		HPCSecretDialog dialog = new HPCSecretDialog(getShell(), null);
 		if (dialog.open() != Window.CANCEL) {
 			hpcs.add(dialog.getSecret());
+			hpcsToAdd.add(dialog.getSecret());
 		}
 		secretsViewer.refresh();
 	}
@@ -119,6 +132,7 @@ public class HPCSecretsComposite extends Composite {
 		HPCSecretDialog dialog = new HPCSecretDialog(getShell(), hpc);
 		if (dialog.open() != Window.CANCEL) {
 			hpc.setSecrets(dialog.getSecret().getSecrets());
+			hpcsToAdd.add(hpc);
 		}
 		secretsViewer.refresh();
 	}
@@ -129,6 +143,10 @@ public class HPCSecretsComposite extends Composite {
 		while (it.hasNext()) {
 			HPCSecretData data = (HPCSecretData) it.next();
 			hpcs.remove(data);
+			if (hpcsToAdd.contains(data))
+				hpcsToAdd.remove(data);
+			else
+				hpcsToRemove.add(data);
 		}
 		secretsViewer.refresh();
 	}
@@ -138,6 +156,23 @@ public class HPCSecretsComposite extends Composite {
 		button.setText(message);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false));
 		return button;
+	}
+
+	public ArrayList<HPCSecretData> getHpcsToRemove() {
+		return hpcsToRemove;
+	}
+
+	public ArrayList<HPCSecretData> getHpcsToAdd() {
+		return hpcsToAdd;
+	}
+
+	public void resetHpcs() {
+		for (HPCSecretData hpcToRemove : hpcsToAdd)
+			if (hpcs.contains(hpcToRemove))
+				hpcs.remove(hpcToRemove);
+		secretsViewer.refresh();
+		hpcsToAdd = new ArrayList<>();
+		hpcsToRemove = new ArrayList<>();
 	}
 
 }

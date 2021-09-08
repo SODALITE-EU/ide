@@ -115,7 +115,6 @@ public class KBReasonerClient implements KBReasoner {
 	private String refactorerUri;
 	private String grafanaUri;
 	private String rulesServerUri;
-	private String vaultUri;
 	private String vaultSecretUploaderUri;
 	private String keycloak_user;
 	private String keycloak_password;
@@ -126,7 +125,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
 			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri,
-			String vaultUri, String vaultSecretUploaderUri) {
+			String vaultSecretUploaderUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -136,7 +135,6 @@ public class KBReasonerClient implements KBReasoner {
 		this.refactorerUri = refactorerUri;
 		this.grafanaUri = grafanaUri;
 		this.rulesServerUri = rulesServerUri;
-		this.vaultUri = vaultUri;
 		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
 	}
 
@@ -1471,6 +1469,8 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
+			if (ex instanceof NotFoundException)
+				return new ArrayList<String>(); // No hpc infrastructures found
 			throw new SodaliteException(ex);
 		}
 	}

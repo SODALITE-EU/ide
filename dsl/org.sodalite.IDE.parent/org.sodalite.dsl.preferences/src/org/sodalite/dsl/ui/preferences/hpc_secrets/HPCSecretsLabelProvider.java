@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.TableColumn;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 
 public class HPCSecretsLabelProvider extends BaseLabelProvider implements ITableLabelProvider {
 

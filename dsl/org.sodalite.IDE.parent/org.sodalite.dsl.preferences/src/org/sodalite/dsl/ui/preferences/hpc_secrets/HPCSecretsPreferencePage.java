@@ -1,5 +1,7 @@
 package org.sodalite.dsl.ui.preferences.hpc_secrets;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -10,8 +12,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class HPCSecretsPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	StringFieldEditor vaultURLEditor;
@@ -32,7 +38,11 @@ public class HPCSecretsPreferencePage extends PreferencePage implements IWorkben
 		composite.setLayout(layout);
 
 		createVaultComposite(composite);
-		createSecretsComposite(composite);
+		try {
+			createSecretsComposite(composite);
+		} catch (Exception e) {
+			SodaliteLogger.log(e);
+		}
 
 		return composite;
 	}
@@ -53,9 +63,51 @@ public class HPCSecretsPreferencePage extends PreferencePage implements IWorkben
 		});
 	}
 
-	private void createSecretsComposite(Composite parent) {
+	private void createSecretsComposite(Composite parent) throws SodaliteException, Exception {
 		secretsComposite = new HPCSecretsComposite(parent, SWT.NONE);
 		secretsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+	}
+
+	@Override
+	public boolean performCancel() {
+		// Reset list of HPCs
+		secretsComposite.resetHpcs();
+		return super.performCancel();
+	}
+
+	@Override
+	protected void performDefaults() {
+		try {
+			secretsComposite.initializeValues();
+		} catch (Exception e) {
+			SodaliteLogger.log(e);
+		}
+		super.performDefaults();
+	}
+
+	@Override
+	public boolean performOk() {
+		// Add HPCS to create
+		ArrayList<HPCSecretData> hpcsToAdd = secretsComposite.getHpcsToAdd();
+		for (HPCSecretData hpc : hpcsToAdd) {
+			try {
+				SodaliteBackendProxy.getKBReasoner().addHPCSecrets(hpc);
+			} catch (Exception e) {
+				SodaliteLogger.log(e);
+			}
+		}
+		hpcsToAdd.clear();
+		// Delete HPCS to remove
+		ArrayList<HPCSecretData> hpcsToRemove = secretsComposite.getHpcsToRemove();
+		for (HPCSecretData hpc : hpcsToRemove) {
+			try {
+				SodaliteBackendProxy.getKBReasoner().deleteHPCInfrastructure(hpc.getName());
+			} catch (Exception e) {
+				SodaliteLogger.log(e);
+			}
+		}
+		hpcsToRemove.clear();
+		return super.performOk();
 	}
 
 }
