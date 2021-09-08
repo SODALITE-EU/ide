@@ -12,7 +12,6 @@ package org.sodalite.dsl.kb_reasoner_client;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.AttributeAssignmentData;
@@ -26,6 +25,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -172,6 +172,12 @@ public interface KBReasoner {
 
 	void deregisterAlertingRules(String monitoring_id) throws SodaliteException;
 
-	void addSecrets(String prefix, Map<String, String> secrets) throws SodaliteException;
+	void addHPCSecrets(HPCSecretData hpcSecrets) throws SodaliteException;
+
+	List<String> listHPCInfrastructures() throws SodaliteException;
+
+	HPCSecretData getHPCInfrastructure(String hpcName) throws SodaliteException;
+
+	void deleteHPCInfrastructure(String hpcName) throws SodaliteException;
 
 }

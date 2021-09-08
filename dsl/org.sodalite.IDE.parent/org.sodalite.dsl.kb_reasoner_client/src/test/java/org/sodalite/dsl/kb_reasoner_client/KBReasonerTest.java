@@ -41,6 +41,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
@@ -584,19 +585,34 @@ class KBReasonerTest {
 		kbclient.deleteMonitoringDashboard(monitoring_Id, deployment_label);
 	}
 
-//	@Test
-//	void testGetVaultKey() throws Exception {
-//		String key = ((KBReasonerClient) kbclient).getVaultKey();
-//		assertNotNull(key);
-//	}
+	@Test
+	void testAddHPCSecrets() throws Exception {
+		Map<String, String> secrets = new HashMap<>();
+		HPCSecretData hpcSecrets = new HPCSecretData();
+		hpcSecrets.getSecrets().put("hpc", "hpc.sodalite.eu");
+		hpcSecrets.getSecrets().put("ssh_user", "<username>");
+		hpcSecrets.getSecrets().put("ssh_password", "<password>");
+		hpcSecrets.getSecrets().put("ssh_pkey", "<private key>");
+		kbclient.addHPCSecrets(hpcSecrets);
+	}
 
 	@Test
-	void testAddSecret() throws Exception {
-		Map<String, String> secrets = new HashMap<>();
-		secrets.put("hpc", "<hpc address>");
-		secrets.put("ssh_user", "<username>");
-		secrets.put("ssh_password", "<password>");
-		secrets.put("ssh_pkey", "<private key>");
-		kbclient.addSecrets("hpc", secrets);
+	void testListHPCInfrastructures() throws Exception {
+		List<String> hpcInfras = kbclient.listHPCInfrastructures();
+		assertNotNull(hpcInfras);
+		assertTrue(!hpcInfras.isEmpty());
+	}
+
+	@Test
+	void testGetHPCInfrastructure() throws Exception {
+		String hpcName = "hpc.sodalite.eu";
+		HPCSecretData hpcInfras = kbclient.getHPCInfrastructure(hpcName);
+		assertNotNull(hpcInfras);
+	}
+
+	@Test
+	void testDeleteHPCInfrastructure() throws Exception {
+		String hpcName = "hpc.sodalite.eu";
+		kbclient.deleteHPCInfrastructure(hpcName);
 	}
 }

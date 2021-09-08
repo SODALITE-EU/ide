@@ -22,6 +22,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -1421,43 +1423,15 @@ public class KBReasonerClient implements KBReasoner {
 		}
 	}
 
-//	public String getVaultKey() throws SodaliteException {
-//		try {
-//			String url = vaultUri + "v1/auth/jwt/login";
-//			if (!IAM_enabled)
-//				return null;
-//			this.aai_token = getSecurityToken();
-//			Gson gson = new Gson();
-//			JsonObject jsonObject = new JsonObject();
-//			jsonObject.addProperty("jwt", this.aai_token);
-//			jsonObject.addProperty("role", keycloak_user);
-//			String payload = jsonObject.toString();
-//
-//			URI uri;
-//			try {
-//				uri = new URI(url);
-//			} catch (URISyntaxException ex) {
-//				throw new SodaliteException(ex);
-//			}
-//
-//			return postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
-//		} catch (HttpClientErrorException ex) {
-//			if (ex.getMessage().contains("role"))
-//				throw new RoleDoesNotExist(ex.getMessage());
-//			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
-//		} catch (Exception ex) {
-//			throw new SodaliteException(ex);
-//		}
-//	}
-
 	@Override
-	public void addSecrets(String prefix, Map<String, String> secrets) throws SodaliteException {
+	public void addHPCSecrets(HPCSecretData hpcSecrets) throws SodaliteException {
+		Assert.notNull(hpcSecrets, "Pass a not null hpcSecrets");
 		try {
-			String url = vaultSecretUploaderUri + prefix;
+			String url = vaultSecretUploaderUri + "hpc";
 			Gson gson = new Gson();
 			JsonObject jsonObject = new JsonObject();
-			for (String key : secrets.keySet())
-				jsonObject.addProperty(key, secrets.get(key));
+			for (String key : hpcSecrets.getSecrets().keySet())
+				jsonObject.addProperty(key, hpcSecrets.getSecrets().get(key));
 
 			String payload = jsonObject.toString();
 
@@ -1469,6 +1443,79 @@ public class KBReasonerClient implements KBReasoner {
 			}
 
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public List<String> listHPCInfrastructures() throws SodaliteException {
+		try {
+			String url = vaultSecretUploaderUri + "hpc";
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			String data = getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+			JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+			JsonArray jsonArray = jsonObject.get("list").getAsJsonArray();
+			List<String> hpcInfras = new ArrayList<>();
+			Iterator<JsonElement> iter = jsonArray.iterator();
+			while (iter.hasNext())
+				hpcInfras.add(iter.next().getAsString());
+			return hpcInfras;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public HPCSecretData getHPCInfrastructure(String hpcName) throws SodaliteException {
+		Assert.notNull(hpcName, "Pass a not null hpcName");
+		try {
+			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			String data = getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+			JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+			Map<String, String> secrets = new HashMap<>();
+			secrets.put("hpc", jsonObject.get("hpc").getAsString());
+			if (jsonObject.has("ssh_user"))
+				secrets.put("ssh_user", jsonObject.get("ssh_user").getAsString());
+			if (jsonObject.has("ssh_password"))
+				secrets.put("ssh_password", jsonObject.get("ssh_password").getAsString());
+			if (jsonObject.has("ssh_pkey"))
+				secrets.put("ssh_pkey", jsonObject.get("ssh_pkey").getAsString());
+			return new HPCSecretData(secrets);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void deleteHPCInfrastructure(String hpcName) throws SodaliteException {
+		Assert.notNull(hpcName, "Pass a not null hpcName");
+		try {
+			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			deleteJsonMessage(uri);
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
