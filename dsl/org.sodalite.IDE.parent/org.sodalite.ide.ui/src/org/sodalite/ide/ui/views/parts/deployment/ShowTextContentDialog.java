@@ -11,8 +11,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 public class ShowTextContentDialog extends Dialog {
 	String title = null;
@@ -20,7 +20,7 @@ public class ShowTextContentDialog extends Dialog {
 
 	public ShowTextContentDialog(Shell parentShell, String title, String content) {
 		super(parentShell);
-		setShellStyle(SWT.CLOSE | SWT.MODELESS | SWT.BORDER | SWT.TITLE);
+		setShellStyle(SWT.CLOSE | SWT.MODELESS | SWT.BORDER | SWT.TITLE | SWT.RESIZE);
 		setBlockOnOpen(false);
 		this.title = title;
 		this.content = content;
@@ -30,25 +30,36 @@ public class ShowTextContentDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);
 
-		final ScrolledComposite sc = new ScrolledComposite(container, SWT.BORDER | SWT.V_SCROLL);
+		final ScrolledComposite sc = new ScrolledComposite(container, SWT.V_SCROLL | SWT.H_SCROLL);
 		sc.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).create());
 		sc.setExpandHorizontal(true);
 		sc.setExpandVertical(true);
 
-		sc.addListener(SWT.Resize, event -> {
-			int width = sc.getClientArea().width;
-			sc.setMinSize(parent.computeSize(width, SWT.DEFAULT));
-		});
+		Label contentLabel = new Label(sc, SWT.NONE);
+		GridData contentLabelGridData = new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1);
+		contentLabel.setLayoutData(contentLabelGridData);
+		contentLabel.setText(shrinkLines(content.trim()));
 
-		Text contentText = new Text(sc, SWT.BORDER | SWT.MULTI);
-		GridData contentTextGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		contentText.setLayoutData(contentTextGridData);
-		contentText.setText(content.trim());
-
-		sc.setContent(contentText);
-		sc.setMinSize(contentText.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		sc.setContent(contentLabel);
+		sc.setMinSize(contentLabel.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		return container;
+	}
+
+	private String shrinkLines(String text) {
+		// Takes the last lines in text that fits into a Label
+		String[] lines = text.split("\r\n|\r|\n");
+		int nLines = lines.length;
+		// Showing last 1500 lines (SWT Label cannot shown a unlimited number of lines)
+		int maxLines = 1500;
+		String header = "";
+		if (nLines > maxLines)
+			header = "Dropping previous lines ...\n\n";
+		StringBuffer sb = new StringBuffer(header);
+		for (int i = nLines - maxLines; i < nLines; i++) {
+			sb.append(lines[i]).append("\n");
+		}
+		return sb.toString();
 	}
 
 	// overriding this methods allows you to set the
@@ -61,7 +72,7 @@ public class ShowTextContentDialog extends Dialog {
 
 	@Override
 	protected Point getInitialSize() {
-		return new Point(500, 300);
+		return new Point(800, 500);
 	}
 
 	@Override
