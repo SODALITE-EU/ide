@@ -25,6 +25,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -170,5 +171,13 @@ public interface KBReasoner {
 	void registerAlertingRules(String monitoring_id, String rules) throws SodaliteException;
 
 	void deregisterAlertingRules(String monitoring_id) throws SodaliteException;
+
+	void addHPCSecrets(HPCSecretData hpcSecrets) throws SodaliteException;
+
+	List<String> listHPCInfrastructures() throws SodaliteException;
+
+	HPCSecretData getHPCInfrastructure(String hpcName) throws SodaliteException;
+
+	void deleteHPCInfrastructure(String hpcName) throws SodaliteException;
 
 }

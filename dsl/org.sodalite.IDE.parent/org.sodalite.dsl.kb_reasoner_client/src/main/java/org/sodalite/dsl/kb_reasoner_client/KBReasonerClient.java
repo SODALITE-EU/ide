@@ -22,8 +22,10 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -50,6 +52,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceAssignmentData;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
@@ -112,6 +115,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String refactorerUri;
 	private String grafanaUri;
 	private String rulesServerUri;
+	private String vaultSecretUploaderUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -120,7 +124,8 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri) {
+			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri,
+			String vaultSecretUploaderUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -130,6 +135,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.refactorerUri = refactorerUri;
 		this.grafanaUri = grafanaUri;
 		this.rulesServerUri = rulesServerUri;
+		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
 	}
 
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
@@ -1408,6 +1414,108 @@ public class KBReasonerClient implements KBReasoner {
 				return getOperations(modules);
 			else
 				throw ex;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void addHPCSecrets(HPCSecretData hpcSecrets) throws SodaliteException {
+		Assert.notNull(hpcSecrets, "Pass a not null hpcSecrets");
+		try {
+			String url = vaultSecretUploaderUri + "hpc";
+			Gson gson = new Gson();
+			JsonObject jsonObject = new JsonObject();
+			for (String key : hpcSecrets.getSecrets().keySet())
+				jsonObject.addProperty(key, hpcSecrets.getSecrets().get(key));
+
+			String payload = jsonObject.toString();
+
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+
+			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public List<String> listHPCInfrastructures() throws SodaliteException {
+		try {
+			String url = vaultSecretUploaderUri + "hpc";
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			String data = getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+			JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+			JsonArray jsonArray = jsonObject.get("list").getAsJsonArray();
+			List<String> hpcInfras = new ArrayList<>();
+			Iterator<JsonElement> iter = jsonArray.iterator();
+			while (iter.hasNext())
+				hpcInfras.add(iter.next().getAsString());
+			return hpcInfras;
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			if (ex instanceof NotFoundException)
+				return new ArrayList<String>(); // No hpc infrastructures found
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public HPCSecretData getHPCInfrastructure(String hpcName) throws SodaliteException {
+		Assert.notNull(hpcName, "Pass a not null hpcName");
+		try {
+			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			String data = getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
+			JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
+			Map<String, String> secrets = new HashMap<>();
+			secrets.put("hpc", jsonObject.get("hpc").getAsString());
+			if (jsonObject.has("ssh_user"))
+				secrets.put("ssh_user", jsonObject.get("ssh_user").getAsString());
+			if (jsonObject.has("ssh_password"))
+				secrets.put("ssh_password", jsonObject.get("ssh_password").getAsString());
+			if (jsonObject.has("ssh_pkey"))
+				secrets.put("ssh_pkey", jsonObject.get("ssh_pkey").getAsString());
+			return new HPCSecretData(secrets);
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	public void deleteHPCInfrastructure(String hpcName) throws SodaliteException {
+		Assert.notNull(hpcName, "Pass a not null hpcName");
+		try {
+			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			URI uri;
+			try {
+				uri = new URI(url);
+			} catch (URISyntaxException ex) {
+				throw new SodaliteException(ex);
+			}
+			deleteJsonMessage(uri);
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {

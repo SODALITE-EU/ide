@@ -20,7 +20,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -39,6 +41,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.DashboardData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentData;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentReport;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
+import org.sodalite.dsl.kb_reasoner_client.types.HPCSecretData;
 import org.sodalite.dsl.kb_reasoner_client.types.IaCBuilderAADMRegistrationReport;
 import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBOptimizationReportData;
@@ -72,6 +75,7 @@ class KBReasonerTest {
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
+	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -83,7 +87,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, Grafana_URI, RulesServer_URI);
+				Refactorer_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -578,5 +582,36 @@ class KBReasonerTest {
 		kbclient.createMonitoringDashboard(monitoring_Id, deployment_label);
 		Thread.currentThread().sleep(1000);
 		kbclient.deleteMonitoringDashboard(monitoring_Id, deployment_label);
+	}
+
+	@Test
+	void testAddHPCSecrets() throws Exception {
+		Map<String, String> secrets = new HashMap<>();
+		HPCSecretData hpcSecrets = new HPCSecretData();
+		hpcSecrets.getSecrets().put("hpc", "hpc.sodalite.eu");
+		hpcSecrets.getSecrets().put("ssh_user", "<username>");
+		hpcSecrets.getSecrets().put("ssh_password", "<password>");
+		hpcSecrets.getSecrets().put("ssh_pkey", "<private key>");
+		kbclient.addHPCSecrets(hpcSecrets);
+	}
+
+	@Test
+	void testListHPCInfrastructures() throws Exception {
+		List<String> hpcInfras = kbclient.listHPCInfrastructures();
+		assertNotNull(hpcInfras);
+		assertTrue(!hpcInfras.isEmpty());
+	}
+
+	@Test
+	void testGetHPCInfrastructure() throws Exception {
+		String hpcName = "hpc.sodalite.eu";
+		HPCSecretData hpcInfras = kbclient.getHPCInfrastructure(hpcName);
+		assertNotNull(hpcInfras);
+	}
+
+	@Test
+	void testDeleteHPCInfrastructure() throws Exception {
+		String hpcName = "hpc.sodalite.eu";
+		kbclient.deleteHPCInfrastructure(hpcName);
 	}
 }

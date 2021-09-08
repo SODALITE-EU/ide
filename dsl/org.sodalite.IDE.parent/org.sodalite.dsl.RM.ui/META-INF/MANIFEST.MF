@@ -21,18 +21,11 @@ Require-Bundle: org.sodalite.dsl.RM,
  org.sodalite.dsl.preferences;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: com.fasterxml.jackson.databind,
- com.google.gson,
- org.sodalite.dsl.RM.ui.internal,
- org.sodalite.dsl.kb_reasoner_client,
- org.sodalite.dsl.kb_reasoner_client.exceptions,
- org.sodalite.dsl.kb_reasoner_client.json,
- org.sodalite.dsl.kb_reasoner_client.types,
+Export-Package: org.sodalite.dsl.RM.ui.internal,
  org.sodalite.dsl.ui.backend,
  org.sodalite.dsl.ui.contentassist,
  org.sodalite.dsl.ui.helper,
  org.sodalite.dsl.ui.quickfix,
  org.sodalite.dsl.ui.validation
 Bundle-Activator: org.sodalite.dsl.RM.ui.internal.RMActivator
-Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
- .
+Bundle-ClassPath: .

@@ -90,8 +90,16 @@ public class BackendHelper {
 			rulesServerURI = refactorerURI.concat("/");
 		}
 
+		String vaultSecretUploaderURI = store.getString(PreferenceConstants.VAULT_SECRET_UPLOADER_URI).trim();
+		if (vaultSecretUploaderURI.isEmpty()) {
+			raiseConfigurationIssue("VAULT Secret Uploader URI user not set");
+		}
+		if (!vaultSecretUploaderURI.endsWith("/")) {
+			vaultSecretUploaderURI = refactorerURI.concat("/");
+		}
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI, vaultSecretUploaderURI);
 
 		String keycloak_enabled = store.getString(PreferenceConstants.KEYCLOAK_ENABLED);
 		if (keycloak_enabled.equalsIgnoreCase("true")) {

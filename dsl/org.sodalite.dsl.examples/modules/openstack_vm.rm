@@ -265,13 +265,17 @@ node_types:
 								default: get_property: 
 									entity: SELF
 									property: openstack/sodalite.nodes.OpenStack.VM.env
+							include_exporter:
+								type: boolean
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.include_exporter
 							monitoring_id:                 
 								type: map
 								default: get_input: monitoring_id
 							consul_server_address:
 								type: string
-								default: get_input: consul_server_address								
-
+								default: get_input: consul_server_address
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_delete.yml" 
 							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml"]

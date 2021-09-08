@@ -8,7 +8,15 @@ Automatic-Module-Name: org.sodalite.dsl.preferences
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.ui;bundle-version="3.114.0",
  org.eclipse.core.runtime;bundle-version="3.16.0"
-Export-Package: org.sodalite.dsl.ui.preferences,
+Export-Package: com.google.gson,
+ org.sodalite.dsl.kb_reasoner_client,
+ org.sodalite.dsl.kb_reasoner_client.exceptions,
+ org.sodalite.dsl.kb_reasoner_client.json,
+ org.sodalite.dsl.kb_reasoner_client.types,
+ org.sodalite.dsl.ui.preferences,
+ org.sodalite.ide.ui.backend,
  org.sodalite.ide.ui.logger
 Bundle-Activator: org.sodalite.dsl.ui.preferences.Activator
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
+ .
