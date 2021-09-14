@@ -284,13 +284,14 @@ public class BlueprintView {
 				for (Blueprint blueprint : blueprintData.getElements()) {
 					BlueprintData blueprintDetailsData = RMBackendProxy.getKBReasoner()
 							.getBlueprintForId(blueprint.getBlueprint_id());
-					TreeNode<DeploymentNode> node = root.addChild(new TreeNode<DeploymentNode>(
-							new DeploymentNode(blueprintDetailsData.getElements().get(0))));
-
 					DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
 							.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
-					for (Deployment deployment : deploymentData.getElements()) {
-						node.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
+					if (deploymentData.getElements().size() > 0) {
+						TreeNode<DeploymentNode> node = root.addChild(new TreeNode<DeploymentNode>(
+								new DeploymentNode(blueprintDetailsData.getElements().get(0))));
+						for (Deployment deployment : deploymentData.getElements()) {
+							node.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
+						}
 					}
 				}
 			} else {
@@ -349,15 +350,16 @@ public class BlueprintView {
 				refreshAction.setText("Refresh blueprints");
 				manager.add(refreshAction);
 
-				Action deleteAction = new Action() {
-					public void run() {
-						delete(tn);
-					}
-				};
-				deleteAction.setText("Delete");
-				if (tn.getData().isDeployment())
+				if (tn.getData().isDeployment()) {
+					Action deleteAction = new Action() {
+						public void run() {
+							delete(tn);
+						}
+					};
+
 					deleteAction.setText("Undeploy");
-				manager.add(deleteAction);
+					manager.add(deleteAction);
+				}
 			}
 
 			private void createDeploymentContextualMenu(IMenuManager manager, TreeNode<DeploymentNode> tn) {

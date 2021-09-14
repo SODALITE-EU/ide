@@ -13,21 +13,41 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.sodalite.dsl.rM.EActivityDefinition;
+import org.sodalite.dsl.rM.EActivityDefinitions;
+import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.EBOOLEAN;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinition;
+import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.ECapabilityDefinition;
 import org.sodalite.dsl.rM.ECapabilityDefinitionBody;
+import org.sodalite.dsl.rM.EConditionClauseDefinition;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAND;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionNOT;
+import org.sodalite.dsl.rM.EConditionClauseDefinitionOR;
+import org.sodalite.dsl.rM.EConstraint;
 import org.sodalite.dsl.rM.EConstraints;
+import org.sodalite.dsl.rM.EDataType;
+import org.sodalite.dsl.rM.EDataTypeBody;
 import org.sodalite.dsl.rM.EDataTypeName;
+import org.sodalite.dsl.rM.EDataTypes;
+import org.sodalite.dsl.rM.EDependencies;
 import org.sodalite.dsl.rM.EEntityReference;
+import org.sodalite.dsl.rM.EEvenFilter;
+import org.sodalite.dsl.rM.EExtendedTriggerCondition;
 import org.sodalite.dsl.rM.EImplementation;
 import org.sodalite.dsl.rM.EInputs;
 import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
+import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EInterfaceTypeBody;
+import org.sodalite.dsl.rM.EInterfaceTypes;
 import org.sodalite.dsl.rM.EInterfaces;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.ENodeTypeBody;
@@ -39,12 +59,21 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EParameterDefinitionBody;
+import org.sodalite.dsl.rM.EPolicyType;
+import org.sodalite.dsl.rM.EPolicyTypeBody;
+import org.sodalite.dsl.rM.EPolicyTypes;
+import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.EProperties;
+import org.sodalite.dsl.rM.EPropertyAssignments;
 import org.sodalite.dsl.rM.EPropertyDefinition;
 import org.sodalite.dsl.rM.EPropertyDefinitionBody;
 import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.ERequirementDefinitionBody;
 import org.sodalite.dsl.rM.ERequirements;
+import org.sodalite.dsl.rM.ESIGNEDINT;
+import org.sodalite.dsl.rM.ETriggerDefinition;
+import org.sodalite.dsl.rM.ETriggerDefinitionBody;
+import org.sodalite.dsl.rM.ETriggers;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValueExpression;
 import org.sodalite.dsl.rM.GetAttribute;
@@ -79,12 +108,66 @@ public class RMFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<ENodeTypes>format(document.<ENodeTypes>surround(rM_Model.getNodeTypes(), _function_3));
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(rM_Model).keyword("data_types:"), _function_4), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EDataTypes>format(document.<EDataTypes>surround(rM_Model.getDataTypes(), _function_6));
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(rM_Model).keyword("interface_types:"), _function_7), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EInterfaceTypes>format(document.<EInterfaceTypes>surround(rM_Model.getInterfaceTypes(), _function_9));
+    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(rM_Model).keyword("policy_types:"), _function_10), _function_11);
+    final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EPolicyTypes>format(document.<EPolicyTypes>surround(rM_Model.getPolicyTypes(), _function_12));
   }
   
   protected void _format(final ENodeTypes eNodeTypes, @Extension final IFormattableDocument document) {
     EList<ENodeType> _nodeTypes = eNodeTypes.getNodeTypes();
     for (final ENodeType eNodeType : _nodeTypes) {
       document.<ENodeType>format(eNodeType);
+    }
+  }
+  
+  protected void _format(final EDataTypes eDataTypes, @Extension final IFormattableDocument document) {
+    EList<EDataType> _dataTypes = eDataTypes.getDataTypes();
+    for (final EDataType eDataType : _dataTypes) {
+      document.<EDataType>format(eDataType);
+    }
+  }
+  
+  protected void _format(final EInterfaceTypes eInterfaceTypes, @Extension final IFormattableDocument document) {
+    EList<EInterfaceType> _interfaceTypes = eInterfaceTypes.getInterfaceTypes();
+    for (final EInterfaceType eInterfaceType : _interfaceTypes) {
+      document.<EInterfaceType>format(eInterfaceType);
+    }
+  }
+  
+  protected void _format(final EPolicyTypes ePolicyTypes, @Extension final IFormattableDocument document) {
+    EList<EPolicyType> _policyTypes = ePolicyTypes.getPolicyTypes();
+    for (final EPolicyType ePolicyType : _policyTypes) {
+      document.<EPolicyType>format(ePolicyType);
     }
   }
   
@@ -101,6 +184,51 @@ public class RMFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<ENodeTypeBody>format(document.<ENodeTypeBody>surround(eNodeType.getNode(), _function_2));
+  }
+  
+  protected void _format(final EDataType eDataType, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.<EDataTypeName>append(eDataType.getName(), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataType).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EDataTypeBody>format(document.<EDataTypeBody>surround(eDataType.getData(), _function_2));
+  }
+  
+  protected void _format(final EInterfaceType eInterfaceType, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceType).feature(RMPackage.Literals.EINTERFACE_TYPE__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceType).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EInterfaceTypeBody>format(document.<EInterfaceTypeBody>surround(eInterfaceType.getInterface(), _function_2));
+  }
+  
+  protected void _format(final EPolicyType eEPolicyType, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyType).feature(RMPackage.Literals.EPOLICY_TYPE__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyType).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EPolicyTypeBody>format(document.<EPolicyTypeBody>surround(eEPolicyType.getPolicy(), _function_2));
   }
   
   protected void _format(final ENodeTypeBody eNodeTypeBody, @Extension final IFormattableDocument document) {
@@ -160,6 +288,329 @@ public class RMFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<EInterfaces>format(document.<EInterfaces>surround(eNodeTypeBody.getInterfaces(), _function_13));
+  }
+  
+  protected void _format(final EDataTypeBody eDataTypeBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataTypeBody).keyword("derived_from:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDataTypeName>append(document.<EDataTypeName>format(eDataTypeBody.getSuperType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataTypeBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataTypeBody).feature(RMPackage.Literals.EDATA_TYPE_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataTypeBody).keyword("properties:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eDataTypeBody.getProperties(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eDataTypeBody).keyword("constraints:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EConstraints>format(document.<EConstraints>surround(eDataTypeBody.getConstraints(), _function_7));
+  }
+  
+  protected void _format(final EInterfaceTypeBody eInterfaceTypeBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceTypeBody).keyword("derived_from:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eInterfaceTypeBody.getSuperType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceTypeBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceTypeBody).feature(RMPackage.Literals.EINTERFACE_TYPE_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceTypeBody).keyword("inputs:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eInterfaceTypeBody.getInputs(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eInterfaceTypeBody).keyword("operations:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EOperations>format(document.<EOperations>surround(eInterfaceTypeBody.getOperations(), _function_7));
+  }
+  
+  protected void _format(final EPolicyTypeBody eEPolicyTypeBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("derived_from:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(eEPolicyTypeBody.getSuperType()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("description:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).feature(RMPackage.Literals.EPOLICY_TYPE_BODY__DESCRIPTION), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("properties:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EProperties>format(document.<EProperties>surround(eEPolicyTypeBody.getProperties(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("targets:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("]"), _function_7);
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEPolicyTypeBody).keyword("triggers:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ETriggers>format(document.<ETriggers>surround(eEPolicyTypeBody.getTriggers(), _function_9));
+  }
+  
+  protected void _format(final ETriggers eETriggers, @Extension final IFormattableDocument document) {
+    EList<ETriggerDefinition> _triggers = eETriggers.getTriggers();
+    for (final ETriggerDefinition eTriggerDefinition : _triggers) {
+      document.<ETriggerDefinition>format(eTriggerDefinition);
+    }
+  }
+  
+  protected void _format(final ETriggerDefinition eTriggerDefinition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinition).feature(RMPackage.Literals.ETRIGGER_DEFINITION__NAME), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinition).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ETriggerDefinitionBody>format(document.<ETriggerDefinitionBody>surround(eTriggerDefinition.getTrigger(), _function_2));
+  }
+  
+  protected void _format(final ETriggerDefinitionBody eTriggerDefinitionBody, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).keyword("description:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).feature(RMPackage.Literals.ETRIGGER_DEFINITION_BODY__DESCRIPTION), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).keyword("event:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).feature(RMPackage.Literals.ETRIGGER_DEFINITION_BODY__EVENT), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).keyword("target_filter:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EEvenFilter>format(document.<EEvenFilter>surround(eTriggerDefinitionBody.getTarget_filter(), _function_5));
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).keyword("condition:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EExtendedTriggerCondition>format(document.<EExtendedTriggerCondition>surround(eTriggerDefinitionBody.getCondition(), _function_7));
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eTriggerDefinitionBody).keyword("action:"), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EActivityDefinitions>format(document.<EActivityDefinitions>surround(eTriggerDefinitionBody.getAction(), _function_9));
+  }
+  
+  protected void _format(final EEvenFilter eEvenFilter, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEvenFilter).keyword("node:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(eEvenFilter.getNode()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEvenFilter).keyword("requirement:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(eEvenFilter.getRequirement()), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eEvenFilter).keyword("capability:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_REF>append(document.<EPREFIX_REF>format(eEvenFilter.getCapability()), _function_5);
+  }
+  
+  protected void _format(final EExtendedTriggerCondition eExtendedTriggerCondition, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).keyword("constraint:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EConditionClauseDefinition>format(document.<EConditionClauseDefinition>surround(eExtendedTriggerCondition.getConstraint(), _function_1));
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).keyword("period:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).feature(RMPackage.Literals.EEXTENDED_TRIGGER_CONDITION__PERIOD), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).keyword("evaluations:"), _function_4);
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<ESIGNEDINT>append(document.<ESIGNEDINT>format(eExtendedTriggerCondition.getEvaluations()), _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).keyword("method:"), _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eExtendedTriggerCondition).feature(RMPackage.Literals.EEXTENDED_TRIGGER_CONDITION__METHOD), _function_7);
+  }
+  
+  protected void _format(final EConditionClauseDefinitionAND eccd, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eccd).keyword("and:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EConditionClauseDefinition>format(document.<EConditionClauseDefinition>surround(eccd.getAnd(), _function_1));
+  }
+  
+  protected void _format(final EConditionClauseDefinitionOR eccd, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eccd).keyword("or:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EConditionClauseDefinition>format(document.<EConditionClauseDefinition>surround(eccd.getOr(), _function_1));
+  }
+  
+  protected void _format(final EConditionClauseDefinitionNOT eccd, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(eccd).keyword("not:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EConditionClauseDefinition>format(document.<EConditionClauseDefinition>surround(eccd.getNot(), _function_1));
+  }
+  
+  protected void _format(final EConditionClauseDefinitionAssert ccda, @Extension final IFormattableDocument document) {
+    EList<EAssertionDefinition> _assertions = ccda.getAssertions();
+    for (final EAssertionDefinition assertion : _assertions) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EAssertionDefinition>append(document.<EAssertionDefinition>format(assertion), _function);
+    }
+  }
+  
+  protected void _format(final EActivityDefinitions eActivityDefinitions, @Extension final IFormattableDocument document) {
+    EList<EActivityDefinition> _list = eActivityDefinitions.getList();
+    for (final EActivityDefinition activity : _list) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EActivityDefinition>append(document.<EActivityDefinition>format(activity), _function);
+    }
+  }
+  
+  protected void _format(final ECallOperationActivityDefinition coad, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(coad).keyword("call_operation:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ECallOperationActivityDefinitionBody>format(document.<ECallOperationActivityDefinitionBody>surround(coad.getOperation(), _function_1));
+  }
+  
+  protected void _format(final ECallOperationActivityDefinitionBody coadb, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(coadb).keyword("operation:"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPREFIX_TYPE>append(document.<EPREFIX_TYPE>format(coadb.getOperation()), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(coadb).keyword("inputs:"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<EPropertyAssignments>format(document.<EPropertyAssignments>surround(coadb.getInputs(), _function_3));
   }
   
   protected void _format(final EProperties eProperties, @Extension final IFormattableDocument document) {
@@ -329,13 +780,13 @@ public class RMFormatter extends AbstractFormatter2 {
     };
     document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).feature(RMPackage.Literals.EPROPERTY_DEFINITION_BODY__STATUS), _function_9);
     final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
+      it.newLine();
     };
     document.append(this.textRegionExtensions.regionFor(ePropertyDefinitionBody).keyword("constraints:"), _function_10);
     final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
+      it.indent();
     };
-    document.<EConstraints>append(document.<EConstraints>format(ePropertyDefinitionBody.getConstraints()), _function_11);
+    document.<EConstraints>format(document.<EConstraints>surround(ePropertyDefinitionBody.getConstraints(), _function_11));
     final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
@@ -423,17 +874,22 @@ public class RMFormatter extends AbstractFormatter2 {
     };
     document.<EAttributes>format(document.<EAttributes>surround(eCapabilityDefinitionBody.getAttributes(), _function_7));
     final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
+      it.noSpace();
     };
-    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("valid_source_types:"), _function_8);
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("["), _function_8);
     final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<EValidSourceType>append(document.<EValidSourceType>format(eCapabilityDefinitionBody.getValid_source_types()), _function_9);
-    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
-    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("occurrences:"), _function_10);
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("valid_source_types:"), _function_9);
+    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.prepend(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("]"), _function_10);
+    document.<EValidSourceType>format(eCapabilityDefinitionBody.getValid_source_types());
+    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(eCapabilityDefinitionBody).keyword("occurrences:"), _function_11);
   }
   
   protected void _format(final ERequirementDefinitionBody eRequirementDefinitionBody, @Extension final IFormattableDocument document) {
@@ -527,7 +983,7 @@ public class RMFormatter extends AbstractFormatter2 {
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).feature(RMPackage.Literals.ECAPABILITY_DEFINITION_BODY__DESCRIPTION), _function_1);
+    document.append(this.textRegionExtensions.regionFor(eOperationDefinitionBody).feature(RMPackage.Literals.EOPERATION_DEFINITION_BODY__DESCRIPTION), _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
@@ -544,6 +1000,17 @@ public class RMFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<EImplementation>format(document.<EImplementation>surround(eOperationDefinitionBody.getImplementation(), _function_5));
+  }
+  
+  protected void _format(final EImplementation implementation, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EPrimary>append(implementation.getPrimary(), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<EDependencies>append(implementation.getDependencies(), _function_1);
   }
   
   protected void _format(final EInputs eInputs, @Extension final IFormattableDocument document) {
@@ -693,6 +1160,34 @@ public class RMFormatter extends AbstractFormatter2 {
     document.<EParameterDefinition>format(document.<EParameterDefinition>surround(getInput.getInput(), _function_1));
   }
   
+  protected void _format(final EPREFIX_TYPE prefix, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(prefix).feature(RMPackage.Literals.EPREFIX_TYPE__MODULE), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(prefix).keyword("/"), _function_1);
+  }
+  
+  protected void _format(final EConstraints constraints, @Extension final IFormattableDocument document) {
+    EList<EConstraint> _constraints = constraints.getConstraints();
+    for (final EConstraint constraint : _constraints) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EConstraint>append(document.<EConstraint>format(constraint), _function);
+    }
+  }
+  
+  protected void _format(final EValidSourceType vst, @Extension final IFormattableDocument document) {
+    EList<EPREFIX_TYPE> _sourceTypes = vst.getSourceTypes();
+    for (final EPREFIX_TYPE st : _sourceTypes) {
+      document.<EPREFIX_TYPE>format(document.<EPREFIX_TYPE>format(st));
+    }
+  }
+  
   public void format(final Object getAttribute, final IFormattableDocument document) {
     if (getAttribute instanceof XtextResource) {
       _format((XtextResource)getAttribute, document);
@@ -706,11 +1201,32 @@ public class RMFormatter extends AbstractFormatter2 {
     } else if (getAttribute instanceof GetProperty) {
       _format((GetProperty)getAttribute, document);
       return;
+    } else if (getAttribute instanceof ECallOperationActivityDefinition) {
+      _format((ECallOperationActivityDefinition)getAttribute, document);
+      return;
     } else if (getAttribute instanceof ECapabilityDefinition) {
       _format((ECapabilityDefinition)getAttribute, document);
       return;
+    } else if (getAttribute instanceof EConditionClauseDefinitionAND) {
+      _format((EConditionClauseDefinitionAND)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EConditionClauseDefinitionAssert) {
+      _format((EConditionClauseDefinitionAssert)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EConditionClauseDefinitionNOT) {
+      _format((EConditionClauseDefinitionNOT)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EConditionClauseDefinitionOR) {
+      _format((EConditionClauseDefinitionOR)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPREFIX_TYPE) {
+      _format((EPREFIX_TYPE)getAttribute, document);
+      return;
     } else if (getAttribute instanceof ERequirementDefinition) {
       _format((ERequirementDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EActivityDefinitions) {
+      _format((EActivityDefinitions)getAttribute, document);
       return;
     } else if (getAttribute instanceof EAttributeDefinition) {
       _format((EAttributeDefinition)getAttribute, document);
@@ -721,11 +1237,35 @@ public class RMFormatter extends AbstractFormatter2 {
     } else if (getAttribute instanceof EAttributes) {
       _format((EAttributes)getAttribute, document);
       return;
+    } else if (getAttribute instanceof ECallOperationActivityDefinitionBody) {
+      _format((ECallOperationActivityDefinitionBody)getAttribute, document);
+      return;
     } else if (getAttribute instanceof ECapabilities) {
       _format((ECapabilities)getAttribute, document);
       return;
     } else if (getAttribute instanceof ECapabilityDefinitionBody) {
       _format((ECapabilityDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EConstraints) {
+      _format((EConstraints)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EDataType) {
+      _format((EDataType)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EDataTypeBody) {
+      _format((EDataTypeBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EDataTypes) {
+      _format((EDataTypes)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EEvenFilter) {
+      _format((EEvenFilter)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EExtendedTriggerCondition) {
+      _format((EExtendedTriggerCondition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EImplementation) {
+      _format((EImplementation)getAttribute, document);
       return;
     } else if (getAttribute instanceof EInputs) {
       _format((EInputs)getAttribute, document);
@@ -735,6 +1275,15 @@ public class RMFormatter extends AbstractFormatter2 {
       return;
     } else if (getAttribute instanceof EInterfaceDefinitionBody) {
       _format((EInterfaceDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaceType) {
+      _format((EInterfaceType)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaceTypeBody) {
+      _format((EInterfaceTypeBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EInterfaceTypes) {
+      _format((EInterfaceTypes)getAttribute, document);
       return;
     } else if (getAttribute instanceof EInterfaces) {
       _format((EInterfaces)getAttribute, document);
@@ -763,6 +1312,15 @@ public class RMFormatter extends AbstractFormatter2 {
     } else if (getAttribute instanceof EParameterDefinitionBody) {
       _format((EParameterDefinitionBody)getAttribute, document);
       return;
+    } else if (getAttribute instanceof EPolicyType) {
+      _format((EPolicyType)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPolicyTypeBody) {
+      _format((EPolicyTypeBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPolicyTypes) {
+      _format((EPolicyTypes)getAttribute, document);
+      return;
     } else if (getAttribute instanceof EProperties) {
       _format((EProperties)getAttribute, document);
       return;
@@ -777,6 +1335,18 @@ public class RMFormatter extends AbstractFormatter2 {
       return;
     } else if (getAttribute instanceof ERequirements) {
       _format((ERequirements)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ETriggerDefinition) {
+      _format((ETriggerDefinition)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ETriggerDefinitionBody) {
+      _format((ETriggerDefinitionBody)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof ETriggers) {
+      _format((ETriggers)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EValidSourceType) {
+      _format((EValidSourceType)getAttribute, document);
       return;
     } else if (getAttribute instanceof GetAttributeBody) {
       _format((GetAttributeBody)getAttribute, document);
