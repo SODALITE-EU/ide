@@ -372,8 +372,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
 					String appName = namespace != null && !namespace.isEmpty() ? namespace
 							: aadmName.substring(0, aadmName.indexOf(".aadm"));
-					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
-							depl_report.getDeployment_id(), inputs_yaml);
+					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, mm.getVersion(),
+							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), inputs_yaml);
 					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog

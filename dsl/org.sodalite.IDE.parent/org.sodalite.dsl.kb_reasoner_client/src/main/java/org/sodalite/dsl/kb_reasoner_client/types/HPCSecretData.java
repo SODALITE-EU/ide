@@ -9,7 +9,7 @@ public class HPCSecretData {
 	public HPCSecretData() {
 		super();
 		this.secrets = new HashMap<String, String>();
-		secrets.put("hpc", "");
+		secrets.put("ssh_host", "");
 		secrets.put("ssh_user", "");
 		secrets.put("ssh_password", "");
 		secrets.put("ssh_pkey", "");
@@ -21,7 +21,7 @@ public class HPCSecretData {
 	}
 
 	public String getName() {
-		return secrets.get("hpc");
+		return secrets.get("ssh_host");
 	}
 
 	public Map<String, String> getSecrets() {

@@ -59,28 +59,28 @@ public class HPCSecretDialog extends Dialog {
 		((GridLayout) composite.getLayout()).numColumns = 2;
 		composite.setFont(font);
 
-		HPCSecretDialog.createLabel(composite, "hpc:").setFont(font);
-		hpcTextfield = createText(composite, secret.getSecrets().get("hpc"), s -> {
-			secret.getSecrets().put("hpc", s);
+		HPCSecretDialog.createLabel(composite, "host:").setFont(font);
+		hpcTextfield = createText(composite, secret.getSecrets().get("ssh_host"), s -> {
+			secret.getSecrets().put("ssh_host", s);
 			validateFields();
 		}, false);
 		hpcTextfield.setFont(font);
 
-		HPCSecretDialog.createLabel(composite, "ssh_user:").setFont(font);
+		HPCSecretDialog.createLabel(composite, "user:").setFont(font);
 		ssh_userTextfield = createText(composite, secret.getSecrets().get("ssh_user"), s -> {
 			secret.getSecrets().put("ssh_user", s);
 			validateFields();
 		}, false);
 		ssh_userTextfield.setFont(font);
 
-		HPCSecretDialog.createLabel(composite, "ssh_password:").setFont(font);
+		HPCSecretDialog.createLabel(composite, "password:").setFont(font);
 		ssh_passwordTextfield = createText(composite, secret.getSecrets().get("ssh_password"), s -> {
 			secret.getSecrets().put("ssh_password", s);
 			validateFields();
 		}, false);
 		ssh_passwordTextfield.setFont(font);
 
-		HPCSecretDialog.createLabel(composite, "ssh_pkey:").setFont(font);
+		HPCSecretDialog.createLabel(composite, "private key:").setFont(font);
 		ssh_pkeyTextfield = createText(composite, secret.getSecrets().get("ssh_pkey"), s -> {
 			secret.getSecrets().put("ssh_pkey", s);
 			validateFields();

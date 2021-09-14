@@ -1425,7 +1425,7 @@ public class KBReasonerClient implements KBReasoner {
 	public void addHPCSecrets(HPCSecretData hpcSecrets) throws SodaliteException {
 		Assert.notNull(hpcSecrets, "Pass a not null hpcSecrets");
 		try {
-			String url = vaultSecretUploaderUri + "hpc";
+			String url = vaultSecretUploaderUri + "ssh";
 			Gson gson = new Gson();
 			JsonObject jsonObject = new JsonObject();
 			for (String key : hpcSecrets.getSecrets().keySet())
@@ -1451,7 +1451,7 @@ public class KBReasonerClient implements KBReasoner {
 	@Override
 	public List<String> listHPCInfrastructures() throws SodaliteException {
 		try {
-			String url = vaultSecretUploaderUri + "hpc";
+			String url = vaultSecretUploaderUri + "ssh";
 			URI uri;
 			try {
 				uri = new URI(url);
@@ -1479,7 +1479,7 @@ public class KBReasonerClient implements KBReasoner {
 	public HPCSecretData getHPCInfrastructure(String hpcName) throws SodaliteException {
 		Assert.notNull(hpcName, "Pass a not null hpcName");
 		try {
-			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			String url = vaultSecretUploaderUri + "ssh/" + hpcName;
 			URI uri;
 			try {
 				uri = new URI(url);
@@ -1489,7 +1489,7 @@ public class KBReasonerClient implements KBReasoner {
 			String data = getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 			JsonObject jsonObject = new Gson().fromJson(data, JsonObject.class);
 			Map<String, String> secrets = new HashMap<>();
-			secrets.put("hpc", jsonObject.get("hpc").getAsString());
+			secrets.put("ssh_host", jsonObject.get("ssh_host").getAsString());
 			if (jsonObject.has("ssh_user"))
 				secrets.put("ssh_user", jsonObject.get("ssh_user").getAsString());
 			if (jsonObject.has("ssh_password"))
@@ -1508,7 +1508,7 @@ public class KBReasonerClient implements KBReasoner {
 	public void deleteHPCInfrastructure(String hpcName) throws SodaliteException {
 		Assert.notNull(hpcName, "Pass a not null hpcName");
 		try {
-			String url = vaultSecretUploaderUri + "hpc/" + hpcName;
+			String url = vaultSecretUploaderUri + "ssh/" + hpcName;
 			URI uri;
 			try {
 				uri = new URI(url);
@@ -1524,11 +1524,12 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public void notifyDeploymentToRefactoring(String appName, String aadm_id, String blueprint_id, String deployment_id,
-			String inputs) throws SodaliteException {
+	public void notifyDeploymentToRefactoring(String appName, String aadm_id, String aadm_version, String blueprint_id,
+			String deployment_id, String inputs) throws SodaliteException {
 		try {
 			Assert.notNull(appName, "Pass a not null appName");
 			Assert.notNull(aadm_id, "Pass a not null aadm_id");
+			Assert.notNull(aadm_version, "Pass a not null aadm_version");
 			Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
 			Assert.notNull(deployment_id, "Pass a not null deployment_id");
 			Assert.notNull(inputs, "Pass a not null inputs");
@@ -1537,7 +1538,9 @@ public class KBReasonerClient implements KBReasoner {
 			Gson gson = new Gson();
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("inputs", inputs);
-			jsonObject.addProperty("aadm_id", aadm_id);
+			if (aadm_version != null && !aadm_version.isEmpty())
+				jsonObject.addProperty("aadm_id", aadm_id);
+			jsonObject.addProperty("version", aadm_version);
 			jsonObject.addProperty("blueprint_id", blueprint_id);
 			jsonObject.addProperty("deployment_id", deployment_id);
 			String payload = jsonObject.toString();
