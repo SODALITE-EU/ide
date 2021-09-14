@@ -1,7 +1,6 @@
 package org.sodalite.dsl.ui.wizards.deployment;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -18,6 +17,7 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.service.prefs.Preferences;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
+import org.sodalite.dsl.ui.helper.BackendHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -111,9 +111,10 @@ public class DeploymentWizard extends Wizard {
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
 			this.monitoring_id = UUID.randomUUID().toString();
-			content.append("monitoring_id: " + this.monitoring_id);
+			content.append("monitoring_id: " + this.monitoring_id + "\n");
+			content.append("jwt: " + BackendHelper.getKBReasoner().getJWT() + "\n");
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}

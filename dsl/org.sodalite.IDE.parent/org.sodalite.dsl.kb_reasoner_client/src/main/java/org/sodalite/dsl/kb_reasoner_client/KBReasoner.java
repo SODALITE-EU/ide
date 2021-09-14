@@ -180,4 +180,6 @@ public interface KBReasoner {
 
 	void deleteHPCInfrastructure(String hpcName) throws SodaliteException;
 
+	String getJWT() throws SodaliteException;
+
 }

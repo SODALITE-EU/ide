@@ -150,6 +150,10 @@ public class KBReasonerClient implements KBReasoner {
 		return this.aai_token;
 	}
 
+	public String getJWT() throws SodaliteException {
+		return this.aai_token;
+	}
+
 	private RestTemplate getSslRestTemplate()
 			throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 		if (sslRestTemplate == null) {
