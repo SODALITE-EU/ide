@@ -56,7 +56,8 @@ public class ShowTextContentDialog extends Dialog {
 		if (nLines > maxLines)
 			header = "Dropping previous lines ...\n\n";
 		StringBuffer sb = new StringBuffer(header);
-		for (int i = nLines - maxLines; i < nLines; i++) {
+		int linesLimit = Math.min(nLines, maxLines);
+		for (int i = 0; i < linesLimit; i++) {
 			sb.append(lines[i]).append("\n");
 		}
 		return sb.toString();
