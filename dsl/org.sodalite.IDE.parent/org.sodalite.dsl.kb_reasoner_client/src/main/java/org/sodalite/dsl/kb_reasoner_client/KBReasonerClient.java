@@ -163,7 +163,7 @@ public class KBReasonerClient implements KBReasoner {
 					.build();
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
-			requestFactory.setConnectTimeout(10 * 1000); // FIXME set connection timeout by configuration
+			requestFactory.setConnectTimeout(30 * 1000); // FIXME set connection timeout by configuration
 			requestFactory.setReadTimeout(0); // Unlimited
 			sslRestTemplate = new RestTemplate(requestFactory);
 			sslRestTemplate.setErrorHandler(new SodaliteRestClientErrorHandler());
@@ -706,9 +706,9 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("aadmDSL", aadmDSL);
 		map.add("version", version);
 		if (IAM_enabled) {
-			String token = getSecurityToken();
-			Assert.notNull(token, "Error retrieving a valid security token");
-			map.add("token", token);
+//			String token = getSecurityToken();
+//			Assert.notNull(token, "Error retrieving a valid security token");
+			map.add("token", this.aai_token);
 		}
 
 		KBSaveReportData report = new KBSaveReportData();
@@ -763,9 +763,9 @@ public class KBReasonerClient implements KBReasoner {
 		map.add("name", name);
 		map.add("rmDSL", rmDSL);
 		if (IAM_enabled) {
-			String token = getSecurityToken();
-			Assert.notNull(token, "Error retrieving a valid security token");
-			map.add("token", token);
+//			String token = getSecurityToken();
+//			Assert.notNull(token, "Error retrieving a valid security token");
+			map.add("token", this.aai_token);
 		}
 
 		KBSaveReportData report = new KBSaveReportData();
@@ -873,15 +873,17 @@ public class KBReasonerClient implements KBReasoner {
 //			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
-		} catch (TokenExpiredException ex) {
-			// Renew AAI token and try again
-			if (IAM_enabled)
-				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getAADM(aadmURI, version, withoutReferences);
-			else
-				throw ex;
-		} catch (HttpClientErrorException ex) {
+		}
+//		catch (TokenExpiredException ex) {
+//			// Renew AAI token and try again
+//			if (IAM_enabled)
+//				this.aai_token = getSecurityToken();
+//			if (this.aai_token != null)
+//				return getAADM(aadmURI, version, withoutReferences);
+//			else
+//				throw ex;
+//		} 
+		catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
@@ -892,19 +894,21 @@ public class KBReasonerClient implements KBReasoner {
 	public String getRM(String rmURI) throws SodaliteException {
 		Assert.notNull(rmURI, "Pass a not null rmURI");
 		String url = kbReasonerUri + "rm?rmIRI=" + rmURI;
-		if (IAM_enabled)
-			url += "&token=" + this.aai_token;
+//		if (IAM_enabled)
+//			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
-		} catch (TokenExpiredException ex) {
-			// Renew AAI token and try again
-			if (IAM_enabled)
-				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getRM(rmURI);
-			else
-				throw ex;
-		} catch (HttpClientErrorException ex) {
+		}
+//		catch (TokenExpiredException ex) {
+//			// Renew AAI token and try again
+//			if (IAM_enabled)
+//				this.aai_token = getSecurityToken();
+//			if (this.aai_token != null)
+//				return getRM(rmURI);
+//			else
+//				throw ex;
+//		} 
+		catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
@@ -999,7 +1003,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpHeaders xmlHeaders = new HttpHeaders();
 			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
 			if (IAM_enabled) {
-				this.aai_token = getSecurityToken();
+//				this.aai_token = getSecurityToken();
 				xmlHeaders.setBearerAuth(this.aai_token);
 			}
 			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
@@ -1134,7 +1138,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpHeaders xmlHeaders = new HttpHeaders();
 			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
 			if (IAM_enabled) {
-				this.aai_token = getSecurityToken();
+//				this.aai_token = getSecurityToken();
 				xmlHeaders.setBearerAuth(this.aai_token);
 			}
 			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
@@ -1172,7 +1176,7 @@ public class KBReasonerClient implements KBReasoner {
 			HttpHeaders xmlHeaders = new HttpHeaders();
 			xmlHeaders.setContentType(MediaType.TEXT_PLAIN);
 			if (IAM_enabled) {
-				this.aai_token = getSecurityToken();
+//				this.aai_token = getSecurityToken();
 				xmlHeaders.setBearerAuth(this.aai_token);
 			}
 			HttpEntity<Resource> fileEntity = new HttpEntity<Resource>(inputs_yaml, xmlHeaders);
@@ -1525,13 +1529,14 @@ public class KBReasonerClient implements KBReasoner {
 
 	@Override
 	public void notifyDeploymentToRefactoring(String appName, String aadm_id, String aadm_version, String blueprint_id,
-			String deployment_id, String inputs) throws SodaliteException {
+			String deployment_id, String monitoring_id, String inputs) throws SodaliteException {
 		try {
 			Assert.notNull(appName, "Pass a not null appName");
 			Assert.notNull(aadm_id, "Pass a not null aadm_id");
 			Assert.notNull(aadm_version, "Pass a not null aadm_version");
 			Assert.notNull(blueprint_id, "Pass a not null blueprint_id");
 			Assert.notNull(deployment_id, "Pass a not null deployment_id");
+			Assert.notNull(monitoring_id, "Pass a not null monitoring_id");
 			Assert.notNull(inputs, "Pass a not null inputs");
 			String url = refactorerUri + "rule-based-refactorer/v0.1/api/" + appName + "/deployments/";
 
@@ -1543,6 +1548,7 @@ public class KBReasonerClient implements KBReasoner {
 			jsonObject.addProperty("version", aadm_version);
 			jsonObject.addProperty("blueprint_id", blueprint_id);
 			jsonObject.addProperty("deployment_id", deployment_id);
+			jsonObject.addProperty("monitoring_id", monitoring_id);
 			String payload = jsonObject.toString();
 
 			URI uri;
@@ -1846,7 +1852,7 @@ public class KBReasonerClient implements KBReasoner {
 	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+//			this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 		RequestEntity<T> request = (RequestEntity<T>) RequestEntity.get(uri).headers(headers)
@@ -1984,7 +1990,7 @@ public class KBReasonerClient implements KBReasoner {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+			// this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 
@@ -2010,7 +2016,7 @@ public class KBReasonerClient implements KBReasoner {
 	private <T, S> ResponseEntity<T> postJsonMessage(S object, URI uri, Class clazz) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+//			this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 		RequestEntity<S> request = RequestEntity.post(uri).headers(headers).contentType(MediaType.APPLICATION_JSON)
@@ -2024,7 +2030,7 @@ public class KBReasonerClient implements KBReasoner {
 	private <T> ResponseEntity<String> postJsonMessageWithoutResult(T object, URI uri, Class clazz) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+//			this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 		RequestEntity<T> request = RequestEntity.post(uri).headers(headers).contentType(MediaType.APPLICATION_JSON)
@@ -2090,7 +2096,7 @@ public class KBReasonerClient implements KBReasoner {
 	private ResponseEntity<String> deleteJsonMessage(URI uri) throws SodaliteException {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+//			this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 		headers.add("Content-Type", "application/json");
@@ -2102,7 +2108,7 @@ public class KBReasonerClient implements KBReasoner {
 	private ResponseEntity<String> deleteJsonMessage(String json, URI uri) throws SodaliteException {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
-			this.aai_token = getSecurityToken();
+//			this.aai_token = getSecurityToken();
 			headers.setBearerAuth(this.aai_token);
 		}
 

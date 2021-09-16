@@ -144,7 +144,7 @@ public interface KBReasoner {
 	PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws SodaliteException;
 
 	void notifyDeploymentToRefactoring(String appName, String aadm_id, String aadm_version, String blueprint_id,
-			String deployment_id, String inputs) throws SodaliteException;
+			String deployment_id, String monitoring_id, String inputs) throws SodaliteException;
 
 	BlueprintData getBlueprintsForUser(String username) throws SodaliteException;
 

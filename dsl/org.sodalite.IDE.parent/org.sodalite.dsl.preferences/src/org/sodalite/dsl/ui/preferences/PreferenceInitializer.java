@@ -61,9 +61,13 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (consul_ip == null)
 			consul_ip = "192.168.3.74";
 
+		String grafana_registry_uri = prop.getProperty(PreferenceConstants.Grafana_Registry_URI);
+		if (grafana_registry_uri == null)
+			grafana_registry_uri = "http://192.168.3.74:3001/";
+
 		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
 		if (grafana_uri == null)
-			grafana_uri = "http://192.168.3.74:3001/";
+			grafana_uri = "http://192.168.3.74:3000/";
 
 		String rulesServer_uri = prop.getProperty(PreferenceConstants.RulesServer_URI);
 		if (rulesServer_uri == null)
@@ -108,6 +112,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
 		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
+		defaults.put(PreferenceConstants.Grafana_Registry_URI, grafana_registry_uri);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);

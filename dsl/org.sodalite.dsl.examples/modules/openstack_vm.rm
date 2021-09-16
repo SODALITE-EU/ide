@@ -250,8 +250,7 @@ node_types:
 																
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_create.yml"							
-							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml", 
-							"/workspace/iac-modules/openstack/artifacts/node_exporter.json.j2",
+							dependencies: ["/workspace/iac-modules/openstack/playbooks/egi_refresh_token.yml",
 							"/workspace/iac-modules/openstack/artifacts/node_exporter.service.j2"]
 					delete:  
 						inputs:

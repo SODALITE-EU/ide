@@ -55,7 +55,7 @@ public class SodaliteBackendProxy {
 		if (!refactorerURI.endsWith("/"))
 			refactorerURI = refactorerURI.concat("/");
 
-		String grafanaURI = store.getString(PreferenceConstants.Grafana_URI).trim();
+		String grafanaURI = store.getString(PreferenceConstants.Grafana_Registry_URI).trim();
 		if (grafanaURI.isEmpty())
 			raiseConfigurationIssue("Grafana URI user not set");
 		if (!grafanaURI.endsWith("/"))

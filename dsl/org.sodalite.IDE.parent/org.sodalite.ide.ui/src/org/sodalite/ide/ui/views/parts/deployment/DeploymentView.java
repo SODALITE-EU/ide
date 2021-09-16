@@ -181,8 +181,8 @@ public class DeploymentView {
 						.getMonitoringDashboards(deploymentDetails.getMonitoringId());
 				for (String key : dashboardData.getDashboard().keySet()) {
 					String dashboardUrl = dashboardData.getDashboard().get(key);
-					dashboardUrl = grafana_uri.substring(0, grafana_uri.lastIndexOf(':') + 1)
-							+ dashboardUrl.substring("http://grafana/".length());
+					dashboardUrl = grafana_uri
+							+ (dashboardUrl.startsWith("/") ? dashboardUrl.substring(1) : dashboardUrl);
 					monitoringDashboards.addChild(new TreeNode<Node>(new Node(key, dashboardUrl)));
 				}
 				root.addChild(monitoringDashboards);

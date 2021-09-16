@@ -323,9 +323,11 @@ class KBReasonerTest {
 		String aadm_version = null;
 		String blueprint_id = "51d1671d-c9f5-418d-b19f-94437f5460ac";
 		String deployment_id = "612efea0-c666-42de-9803-5adce8d59eac";
+		String monitoring_id = "";
 		Path inputs_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String inputs = new String(Files.readAllBytes(inputs_path));
-		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id, inputs);
+		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id,
+				monitoring_id, inputs);
 	}
 
 	@Test

@@ -360,7 +360,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					while (!dsr.getState().equals("success")) {
 						if (dsr.getState().equals("failed"))
 							throw new Exception("Deployment failed as reported by xOpera");
-						TimeUnit.SECONDS.sleep(5);
+						TimeUnit.SECONDS.sleep(10);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
 					subMonitor.worked(steps++);
@@ -375,7 +375,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					String appName = namespace != null && !namespace.isEmpty() ? namespace
 							: aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, mm.getVersion(),
-							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), inputs_yaml);
+							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), monitoring_id, inputs_yaml);
 					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog

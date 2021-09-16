@@ -37,6 +37,8 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 		addField(new StringFieldEditor(PreferenceConstants.PDS_URI, "PDS URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Consul_IP, "Consul IP:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Grafana_Registry_URI, "Grafana Registry URL:",
+				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Grafana_URI, "Grafana URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.RulesServer_URI, "Rules Server URL:",
 				getFieldEditorParent()));
