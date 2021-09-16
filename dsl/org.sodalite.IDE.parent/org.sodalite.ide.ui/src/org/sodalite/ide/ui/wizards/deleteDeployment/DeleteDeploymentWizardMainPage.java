@@ -12,9 +12,9 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 	private Spinner workersSpinner = null;
 
 	protected DeleteDeploymentWizardMainPage() {
-		super("Delete deployment");
-		setTitle("Delete deployment");
-		setDescription("Initiate the process for deployment deletion");
+		super("Undeploy application");
+		setTitle("Undeploy application");
+		setDescription("Initiate the process for application updeployment");
 	}
 
 	public int getWorkers() {
@@ -32,7 +32,7 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 
 		// Workers
 		Label workersLabel = new Label(container, SWT.NONE);
-		workersLabel.setText("Number orchestrator workers for deployment deletion (optional):");
+		workersLabel.setText("Number orchestrator workers for application undeployment (optional):");
 
 		workersSpinner = new Spinner(container, SWT.BORDER | SWT.SINGLE);
 		GridData workersGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);

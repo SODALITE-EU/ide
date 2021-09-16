@@ -15,7 +15,7 @@ public class DeleteDeploymentWizard extends Wizard {
 
 	@Override
 	public String getWindowTitle() {
-		return "Delete Deployment";
+		return "Undeploy Application";
 	}
 
 	@Override

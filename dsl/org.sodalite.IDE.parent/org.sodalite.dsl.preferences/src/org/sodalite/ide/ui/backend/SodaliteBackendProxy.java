@@ -9,7 +9,20 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class SodaliteBackendProxy {
+	private static KBReasonerClient kbReasonerClient = null;
+
 	public static KBReasonerClient getKBReasoner() throws Exception {
+		if (kbReasonerClient == null) {
+			kbReasonerClient = buildKBReasoner();
+		}
+		return kbReasonerClient;
+	}
+
+	public static void resetKBReasoner() throws Exception {
+		kbReasonerClient = buildKBReasoner();
+	}
+
+	private static KBReasonerClient buildKBReasoner() throws Exception {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 

@@ -138,6 +138,17 @@ public class KBReasonerClient implements KBReasoner {
 		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		if (this.aai_token != null) {
+			// Reseting restTemplate to force the creation of a new one for token revocation
+			this.sslRestTemplate = null;
+			this.restTemplate = null;
+			this.revokeToken();
+		}
+		super.finalize();
+	}
+
 	public String setUserAccount(String user, String password, String client_id, String client_secret)
 			throws SodaliteException {
 		this.keycloak_user = user;
@@ -2136,6 +2147,22 @@ public class KBReasonerClient implements KBReasoner {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
+		}
+	}
+
+	private void revokeToken() {
+		try {
+			String url = keycloakUri + "auth/realms/SODALITE/protocol/openid-connect/revoke";
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map.add("token", this.aai_token);
+			map.add("token_type_hint", "access_token");
+			map.add("client_id", this.keycloak_client_id);
+			map.add("client_secret", this.keycloak_client_secret);
+
+			sendFormURLEncodedMessage(new URI(url), String.class, map, HttpMethod.POST);
+		} catch (Exception ex) {
+			// Ignored
 		}
 	}
 
