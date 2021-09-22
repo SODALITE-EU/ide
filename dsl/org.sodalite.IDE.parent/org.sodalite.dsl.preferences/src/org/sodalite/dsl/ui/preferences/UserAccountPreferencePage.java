@@ -57,11 +57,12 @@ public class UserAccountPreferencePage extends FieldEditorPreferencePage impleme
 
 	@Override
 	public boolean performOk() {
+		super.performOk();
 		try {
 			SodaliteBackendProxy.resetKBReasoner();
 		} catch (Exception e) {
 			SodaliteLogger.log(e);
 		}
-		return super.performOk();
+		return true;
 	}
 }
