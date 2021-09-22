@@ -104,7 +104,7 @@ public class AADMHelper extends RMHelper {
 		return null;
 	}
 
-	public static List<ENodeTemplate> findLocalNodesForType(String type, EObject reqAssign) throws SodaliteException {
+	public static List<ENodeTemplate> findLocalNodesForType(String type, EObject reqAssign) throws Exception {
 		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
 		try {
 			Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>();
@@ -287,7 +287,7 @@ public class AADMHelper extends RMHelper {
 		return importedModules;
 	}
 
-	public static String findNodeTemplateInKB(EObject object, String nodeRef) throws SodaliteException {
+	public static String findNodeTemplateInKB(EObject object, String nodeRef) throws Exception {
 		// Get modules from model
 		List<String> importedModules = AADMHelper.getImportedModules(object);
 		String module = AADMHelper.getModule(object);

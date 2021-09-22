@@ -14,7 +14,20 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class BackendHelper {
-	public static KBReasoner getKBReasoner() throws SodaliteException {
+	private static KBReasoner kbReasonerClient = null;
+
+	public static KBReasoner getKBReasoner() throws Exception {
+		if (kbReasonerClient == null) {
+			kbReasonerClient = buildKBReasoner();
+		}
+		return kbReasonerClient;
+	}
+
+	public static void resetKBReasoner() throws Exception {
+		kbReasonerClient = buildKBReasoner();
+	}
+
+	private static KBReasoner buildKBReasoner() throws SodaliteException {
 		// Configure KBReasonerClient endpoint from preference page information
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 

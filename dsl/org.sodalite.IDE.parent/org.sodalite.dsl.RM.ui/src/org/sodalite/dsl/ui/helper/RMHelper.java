@@ -38,7 +38,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -83,7 +82,7 @@ public class RMHelper {
 		return module.substring(module.lastIndexOf("/", module.length() - 2) + 1, module.length() - 1);
 	}
 
-	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws SodaliteException {
+	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws Exception {
 		CapabilityDefinitionData capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(nodeRef);
 		return capabilities.getElements();
 	}
@@ -126,7 +125,7 @@ public class RMHelper {
 		return names.contains("getModule") && names.contains("getImports");
 	}
 
-	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws SodaliteException {
+	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws Exception {
 		// Get modules from model
 		List<String> importedModules = getImportedModules(node);
 		String module = getModule(node);
@@ -168,7 +167,7 @@ public class RMHelper {
 		return null;
 	}
 
-	public static String findRequirementNodeByNameInKB(String type, String reqName) throws SodaliteException {
+	public static String findRequirementNodeByNameInKB(String type, String reqName) throws Exception {
 		RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(type);
 		for (RequirementDefinition req : reqData.getElements()) {
 			String name = req.getUri().toString().substring(req.getUri().toString().lastIndexOf('/') + 1);
@@ -200,7 +199,7 @@ public class RMHelper {
 		return node;
 	}
 
-	public static String findRequirementTargetNode(ENodeType node, String req_name) throws SodaliteException {
+	public static String findRequirementTargetNode(ENodeType node, String req_name) throws Exception {
 		// Find requirement in local node
 		String nodeRef = null;
 		RM_Model model = (RM_Model) findModel(node);
