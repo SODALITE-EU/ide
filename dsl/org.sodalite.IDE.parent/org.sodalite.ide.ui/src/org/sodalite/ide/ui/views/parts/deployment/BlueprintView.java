@@ -671,7 +671,7 @@ public class BlueprintView {
 					subMonitor.setTaskName("Deleting deployment monitoring dashboards");
 					// Delete monitoring dashboards for deployment
 					String monitoring_Id = node.getDeployment().getMonitoringId();
-					String deployment_label = node.getDeployment().getLabel();
+					String deployment_label = node.getDeployment().getDeployment_label();
 					if (monitoring_Id != null)
 						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
 					subMonitor.worked(steps++);
