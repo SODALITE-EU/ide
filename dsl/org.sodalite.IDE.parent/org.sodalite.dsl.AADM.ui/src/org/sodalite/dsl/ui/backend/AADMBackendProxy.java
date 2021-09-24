@@ -696,12 +696,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
 				String message = error.getDescription() + ": " + error.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(error.getContext(), error.getEntity_name());
-				String path = createPath(hierarchyPath);
+				if (!error.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(error.getSuggestions()));
+				}
+				String path = error.getContext();
 				String pathType = getPathType(error.getType());
-				List<String> type = Arrays.asList(error.getType());
-				String code = getCode(type); // Code is used for quick fixes
-				List<String> data = Arrays.asList(error.getEntity_name(), error.getContext());
+				String code = null;
+				if (!error.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
+				Map<String, SortedSet<String>> data = new HashMap<>();
+				data.put(path, error.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.ERROR, code, data));
 			}
 		}
@@ -710,11 +715,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 			for (KBWarning warning : saveReport.getWarnings()) {
 				String message = warning.getType() + " ." + warning.getDescription() + " Warning located at: "
 						+ warning.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(warning.getContext(), warning.getEntity_name());
-				String path = createPath(hierarchyPath);
+				String path = warning.getContext();
 				String pathType = getPathType(warning.getType());
-				List<String> type = Arrays.asList(warning.getType());
-				String code = getCode(type); // Code is used for quick fixes
+				String code = null; // No suggestions for quick fixes associated to warnings
 				List<String> data = Arrays.asList(warning.getEntity_name(), warning.getContext());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
@@ -722,11 +725,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = MessageFormat.format("The following nodes can satisfy the requirement {0}: {1}",
-						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
-				String path = createPath(suggestion.getHierarchyPath());
-				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode(suggestion.getHierarchyPath()); // Code is used for quick fixes
+				String message = suggestion.getDescription() + ": " + suggestion.getEntity_name();
+				if (!suggestion.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(suggestion.getSuggestions()));
+				}
+				String path = suggestion.getContext();
+				String pathType = getPathType(suggestion.getType());
+				String code = null;
+				if (!suggestion.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -736,12 +744,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 		return issues;
 	}
 
-	private String getCode(List<String> hierarchyPath) {
+	private String getCode(String hierarchyPath) {
 		// Assigns a suggestion code based in the issue hierarchy path
 		String code = "Suggestion";
 		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
-		} else if (hierarchyPath.contains("RequiredProperty")) {
+		} else if (hierarchyPath.contains("properties")) {
 			code = ValidationIssue.PROPERTY;
 		}
 
@@ -782,7 +790,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 			return "Property";
 		else if (type.contains("Capability"))
 			return "Capability";
-		else if (type.contains("Node"))
+		else if (type.contains("Node") || type.contains("RequirementExistence"))
 			return "Node_Template";
 		else
 			return null;

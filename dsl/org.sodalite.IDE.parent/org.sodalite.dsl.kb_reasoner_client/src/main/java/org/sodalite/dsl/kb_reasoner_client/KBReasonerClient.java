@@ -1804,51 +1804,42 @@ public class KBReasonerClient implements KBReasoner {
 		return errors;
 	}
 
-	// FIXME Some suggestions are not read and lost
 	private List<KBSuggestion> processSuggestions(JsonArray jsonArray)
 			throws JsonMappingException, JsonProcessingException {
 		List<KBSuggestion> result = new ArrayList<>();
 		for (JsonElement json : jsonArray) {
 			JsonObject jsonObj = (JsonObject) json;
-			KBSuggestion opt = new KBSuggestion();
-			String node = getSuggestionNode(jsonObj);
-			if (node != null && !node.equals("description")) {
-				KBSuggestion suggestion = new KBSuggestion();
-				suggestion.getHierarchyPath().add(node);
-				JsonObject obj = (JsonObject) jsonObj.get(node);
-				JsonArray array = null;
-				boolean done = false;
-				while (!done) {
-					String key = obj.keySet().iterator().next();
-					suggestion.getHierarchyPath().add(key);
-					try {
-						obj = (JsonObject) obj.get(key);
-					} catch (Exception ex) {
-						array = obj.getAsJsonArray(key);
-						done = true;
-					}
-				}
+			KBSuggestion suggestion = new KBSuggestion();
+			if (jsonObj.has("context"))
+				suggestion.setContext(jsonObj.get("context").getAsString());
+			if (jsonObj.has("type"))
+				suggestion.setType(jsonObj.get("type").getAsString());
+			if (jsonObj.has("description"))
+				suggestion.setDescription(jsonObj.get("description").getAsString());
+			if (jsonObj.has("name"))
+				suggestion.setEntity_name(jsonObj.get("name").getAsString());
+			if (jsonObj.has("suggestions")) {
+				JsonArray array = (JsonArray) jsonObj.get("suggestions");
 				SortedSet<String> suggestions = new Gson().fromJson(array, TreeSet.class);
 				suggestion.setSuggestions(suggestions);
-
-				result.add(suggestion);
 			}
+			result.add(suggestion);
 		}
 		return result;
 	}
 
-	private String getSuggestionNode(JsonObject jsonObj) {
-		String node = null;
-		Iterator<String> iter = jsonObj.keySet().iterator();
-		while (iter.hasNext()) {
-			String candidate = iter.next();
-			if (!candidate.equals("description")) {
-				node = candidate;
-				break;
-			}
-		}
-		return node;
-	}
+//	private String getSuggestionNode(JsonObject jsonObj) {
+//		String node = null;
+//		Iterator<String> iter = jsonObj.keySet().iterator();
+//		while (iter.hasNext()) {
+//			String candidate = iter.next();
+//			if (!candidate.equals("description")) {
+//				node = candidate;
+//				break;
+//			}
+//		}
+//		return node;
+//	}
 
 	/**
 	 * Send GET message to uri, accepting an object of class clazz in JSON

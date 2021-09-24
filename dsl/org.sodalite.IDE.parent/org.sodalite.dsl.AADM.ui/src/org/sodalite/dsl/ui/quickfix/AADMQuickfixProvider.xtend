@@ -37,8 +37,19 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 			val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 			for (String match: matches) {
 				val qMatch = match.trim.substring(prefix.length)
-				val targetNode = qMatch.substring(qMatch.lastIndexOf('/') + 1)
-				val targetModule = qMatch.substring(0, qMatch.lastIndexOf('/'))
+				//Manage possible version for target node
+				val targetModule = qMatch.substring(0, qMatch.indexOf('/'))
+				val remaining = qMatch.substring(qMatch.indexOf('/') + 1)
+				var String tNode = null
+				if (remaining.contains('/')){
+					val version = remaining.substring(0, remaining.indexOf('/'))
+					val node = remaining.substring(remaining.indexOf('/') + 1)
+					tNode = node + "@" + version
+				} else { 
+					tNode = remaining
+				}
+				val String targetNode = tNode
+				
 				val message = MessageFormat.format('Create requirement "{0}" referencing node "{1}"',
 					targetRequirement, targetNode);
 				val sub_message = message
