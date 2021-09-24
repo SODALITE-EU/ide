@@ -54,7 +54,7 @@ class AADMFormatter extends RMFormatter {
 	def dispatch void format(AADM_Model aADM_Model, extension IFormattableDocument document) {
 		aADM_Model.prepend[setNewLines(0, 0, 0); noSpace]
 		aADM_Model.regionFor.keyword("inputs:").append[newLine]
-		aADM_Model.inputs.surround[indent].format.append[newLine]
+		aADM_Model.inputs.surround[indent].format
 		aADM_Model.regionFor.keyword("node_templates:").append[newLine]
 		aADM_Model.nodeTemplates.surround[indent].format
 		aADM_Model.regionFor.keyword("policies:").append[newLine]
@@ -64,34 +64,11 @@ class AADMFormatter extends RMFormatter {
 		aADM_Model.append[newLine]
 	}
 	
-//	def dispatch void format(EInputs inputs, extension IFormattableDocument document) {
-//		for (eInput : inputs.parameters) {
-//			eInput.format
-//		}
-//	}
-	
 	def dispatch void format(EOutputs outputs, extension IFormattableDocument document) {
 		for (eInput : outputs.parameters) {
 			eInput.format
 		}
 	}
-	
-//	def dispatch void format(EParameterDefinition eParameter, extension IFormattableDocument document) {
-//		eParameter.regionFor.feature(EPARAMETER_DEFINITION__NAME).append[noSpace]
-//		eParameter.regionFor.keyword(":").append[newLine]
-//		eParameter.parameter.surround[indent].format
-//	}
-	
-//	def dispatch void format(EParameterDefinitionBody eParameterBody, extension IFormattableDocument document) {
-//		eParameterBody.regionFor.keyword("type:").append[oneSpace]
-//		eParameterBody.type.format.append[newLine]
-//
-//		eParameterBody.regionFor.keyword("value:").append[oneSpace]
-//		eParameterBody.value.format.append[newLine]
-//
-//		eParameterBody.regionFor.keyword("default:").append[oneSpace]
-//		eParameterBody.^default.format.append[newLine]
-//	}
 
 	def dispatch void format(ENodeTemplates eNodeTemplates, extension IFormattableDocument document) {
 		for (eNodeTemplate : eNodeTemplates.nodeTemplates) {
@@ -255,51 +232,6 @@ class AADMFormatter extends RMFormatter {
 		}
 	}
 	
-//	def dispatch void format(ETriggerDefinition trigger, extension IFormattableDocument document) {
-//		trigger.regionFor.feature(ETRIGGER_DEFINITION__NAME).append[noSpace]
-//		trigger.regionFor.keyword(":").append[newLine]
-//		trigger.trigger.surround[indent].format
-//	}
-	
-//	def dispatch void format(ETriggerDefinitionBody trigger, extension IFormattableDocument document) {
-//		trigger.regionFor.keyword("description:").append[oneSpace]
-//		trigger.regionFor.feature(ETRIGGER_DEFINITION_BODY__DESCRIPTION).append[newLine]
-//
-//		trigger.regionFor.keyword("event:").append[oneSpace]
-//		trigger.regionFor.feature(ETRIGGER_DEFINITION_BODY__EVENT).append[newLine]
-//
-//		trigger.regionFor.keyword("schedule:").append[newLine]
-//		trigger.schedule.surround[indent].format
-//
-//		trigger.regionFor.keyword("target_filter:").append[newLine]
-//		trigger.target_filter.surround[indent].format
-//
-//		trigger.regionFor.keyword("condition:").append[newLine]
-//		trigger.condition.surround[indent].format
-//		
-//		trigger.regionFor.keyword("action:").append[newLine]
-//		trigger.action.surround[indent].format
-//	}
-	
-//	def dispatch void format(EActivityDefinitions activities, extension IFormattableDocument document) {
-//		for (activity : activities.list) {
-//			activity.format
-//		}
-//	}
-	
-//	def dispatch void format(ECallOperationActivityDefinition call, extension IFormattableDocument document) {
-//		call.regionFor.keyword("call_operation:").append[newLine]
-//		call.operation.surround[indent].format
-//	}
-	
-//	def dispatch void format(ECallOperationActivityDefinitionBody body, extension IFormattableDocument document) {
-//		body.regionFor.keyword("operation:").append[oneSpace]
-//		body.operation.format.append[newLine]
-//
-//		body.regionFor.keyword("inputs:").append[newLine]
-//		body.inputs.surround[indent].format
-//	}
-	
 	def dispatch void format(ETimeInterval ti, extension IFormattableDocument document) {
 		ti.regionFor.keyword("start_time:").append[oneSpace]
 		ti.regionFor.feature(ETIME_INTERVAL__START_TIME).append[newLine]
@@ -307,52 +239,6 @@ class AADMFormatter extends RMFormatter {
 		ti.regionFor.keyword("end_time:").append[oneSpace]
 		ti.regionFor.feature(ETIME_INTERVAL__END_TIME).append[newLine]
 	}
-	
-//	def dispatch void format(EEvenFilter ef, extension IFormattableDocument document) {
-//		ef.regionFor.keyword("node:").append[oneSpace]
-//		ef.node.format.append[newLine]
-//		
-//		ef.regionFor.keyword("requirement:").append[oneSpace]
-//		ef.requirement.format.append[newLine]
-//		
-//		ef.regionFor.keyword("capability:").append[oneSpace]
-//		ef.capability.format.append[newLine]
-//	}
-	
-//	def dispatch void format(EExtendedTriggerCondition condition, extension IFormattableDocument document) {
-//		condition.regionFor.keyword("constraint:").append[newLine]
-//		condition.constraint.surround[indent].format
-//		
-//		condition.regionFor.keyword("period:").append[oneSpace]
-//		condition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__PERIOD).append[newLine]
-//
-//		condition.regionFor.keyword("evaluations:").append[oneSpace]
-//		condition.evaluations.format.append[newLine]
-//		
-//		condition.regionFor.keyword("method:").append[oneSpace]
-//		condition.regionFor.feature(EEXTENDED_TRIGGER_CONDITION__METHOD).append[newLine]	
-//	}
-	
-//	def dispatch void format(EConditionClauseDefinitionAND and, extension IFormattableDocument document) {
-//		and.regionFor.keyword("and:").append[newLine]
-//		and.and.surround[indent].format
-//	}
-	
-//	def dispatch void format(EConditionClauseDefinitionOR or, extension IFormattableDocument document) {
-//		or.regionFor.keyword("or:").append[newLine]
-//		or.or.surround[indent].format
-//	}
-	
-//	def dispatch void format(EConditionClauseDefinitionNOT not, extension IFormattableDocument document) {
-//		not.regionFor.keyword("not:").append[newLine]
-//		not.not.surround[indent].format
-//	}
-	
-//	def dispatch void format(EConditionClauseDefinitionAssert assertions, extension IFormattableDocument document) {
-//		for (assertion : assertions.assertions) {
-//			assertion.format
-//		}
-//	}
 
 	def dispatch void format(EAssertionDefinition assertion, extension IFormattableDocument document) {
 		assertion.regionFor.feature(EASSERTION_DEFINITION__ATTRIBUTE_NAME).append[noSpace]
@@ -361,13 +247,4 @@ class AADMFormatter extends RMFormatter {
 		assertion.regionFor.keyword("]").append[newLine]
 	}	
 
-	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {
-		prefix.regionFor.feature(EPREFIX_ID__MODULE).append[noSpace]
-		prefix.regionFor.keyword("/").append[noSpace]
-	}
-	
-//	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
-//		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
-//		prefix.regionFor.keyword("/").append[noSpace]
-//	}
 }

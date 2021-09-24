@@ -12,7 +12,6 @@ public class KBError {
 	String context;
 	String description;
 	SortedSet<String> suggestions = new TreeSet<>();
-//	List<String> hierarchyPath = new ArrayList<>();
 
 	public String getType() {
 		return type;
@@ -50,21 +49,10 @@ public class KBError {
 		this.suggestions = suggestions;
 	}
 
-//	public List<String> getHierarchyPath() {
-//		return hierarchyPath;
-//	}
-//
-//	public void setHierarchyPath(List<String> hierarchyPath) {
-//		this.hierarchyPath = hierarchyPath;
-//	}
-
 	@JsonProperty("info")
 	private void unpackNameFromNestedObject(JsonNode info) {
 		entity_name = info.get("name").asText();
 		context = info.get("context").asText();
-//		StringTokenizer st = new StringTokenizer(context);
-//		while (st.hasMoreTokens())
-//			getHierarchyPath().add(st.nextToken());
 		description = info.get("description").asText();
 		if (info.has("suggestions")) {
 			JsonNode suggestionsJson = info.get("suggestions");

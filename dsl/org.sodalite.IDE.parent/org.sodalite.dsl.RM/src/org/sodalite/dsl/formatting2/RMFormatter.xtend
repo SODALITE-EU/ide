@@ -63,6 +63,7 @@ import org.sodalite.dsl.rM.EConditionClauseDefinitionAssert
 import org.sodalite.dsl.rM.EActivityDefinitions
 import org.sodalite.dsl.rM.ECallOperationActivityDefinition
 import org.sodalite.dsl.rM.ECallOperationActivityDefinitionBody
+import org.sodalite.dsl.rM.EPREFIX_ID
 
 class RMFormatter extends AbstractFormatter2 {
 	
@@ -468,7 +469,7 @@ class RMFormatter extends AbstractFormatter2 {
 	
 	def dispatch void format(EInputs eInputs, extension IFormattableDocument document) {
 		for (eInput : eInputs.parameters) {
-			eInput.format.append[newLine]
+			eInput.format
 		}
 	}
 	
@@ -525,13 +526,18 @@ class RMFormatter extends AbstractFormatter2 {
 	}
 	
 	def dispatch void format(GetInput getInput, extension IFormattableDocument document) {
-		getInput.regionFor.keyword("get_input:").append[newLine]
-		getInput.input.surround[indent].format
+		getInput.regionFor.keyword("get_input:").append[oneSpace]
 	}
 	
 	def dispatch void format(EPREFIX_TYPE prefix, extension IFormattableDocument document) {
 		prefix.regionFor.feature(EPREFIX_TYPE__MODULE).append[noSpace]
 		prefix.regionFor.keyword("/").append[noSpace]
+	}
+	
+	def dispatch void format(EPREFIX_ID prefix, extension IFormattableDocument document) {
+		prefix.regionFor.feature(EPREFIX_ID__MODULE).append[noSpace]
+		prefix.regionFor.keyword("/").append[noSpace]
+		prefix.regionFor.keyword("@").prepend[noSpace].append[noSpace]
 	}
 	
 	def dispatch void format(EConstraints constraints, extension IFormattableDocument document) {

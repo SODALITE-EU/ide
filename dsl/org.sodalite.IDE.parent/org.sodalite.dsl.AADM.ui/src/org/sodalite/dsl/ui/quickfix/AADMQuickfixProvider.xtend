@@ -79,9 +79,14 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 						req.node = req_node
 					}
 					req.node.module = targetModule
-					req.node.id = targetNode 
+					if (targetNode.contains('@')){
+						req.node.id = targetNode.substring(0, targetNode.indexOf('@'))
+						req.node.version = targetNode.substring(targetNode.indexOf('@') + 1)
+					} else {
+						req.node.id = targetNode
+					}
 					
-					//TODO Remove issue from model
+					//TODO Remove issue from model. Save unsolved issues in model
 				]
 			}
 	}
