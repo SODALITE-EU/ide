@@ -45,23 +45,35 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
     for (final String match : matches) {
       {
         final String qMatch = match.trim().substring(prefix.length());
-        int _lastIndexOf = qMatch.lastIndexOf("/");
-        int _plus = (_lastIndexOf + 1);
-        final String targetNode = qMatch.substring(_plus);
-        final String targetModule = qMatch.substring(0, qMatch.lastIndexOf("/"));
+        final String targetModule = qMatch.substring(0, qMatch.indexOf("/"));
+        int _indexOf = qMatch.indexOf("/");
+        int _plus = (_indexOf + 1);
+        final String remaining = qMatch.substring(_plus);
+        String tNode = null;
+        boolean _contains = remaining.contains("/");
+        if (_contains) {
+          final String version = remaining.substring(0, remaining.indexOf("/"));
+          int _indexOf_1 = remaining.indexOf("/");
+          int _plus_1 = (_indexOf_1 + 1);
+          final String node = remaining.substring(_plus_1);
+          tNode = ((node + "@") + version);
+        } else {
+          tNode = remaining;
+        }
+        final String targetNode = tNode;
         final String message = MessageFormat.format("Create requirement \"{0}\" referencing node \"{1}\"", targetRequirement, targetNode);
         final String sub_message = message;
         final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
           ERequirementAssignment req = null;
-          ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
-          ERequirementAssignments _requirements = node.getNode().getRequirements();
+          ENodeTemplate node_1 = ((ENodeTemplate) nodeTemplate);
+          ERequirementAssignments _requirements = node_1.getNode().getRequirements();
           boolean _tripleEquals = (_requirements == null);
           if (_tripleEquals) {
             final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
-            ENodeTemplateBody _node = node.getNode();
+            ENodeTemplateBody _node = node_1.getNode();
             _node.setRequirements(requirements);
           }
-          EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
+          EList<ERequirementAssignment> _requirements_1 = node_1.getNode().getRequirements().getRequirements();
           for (final ERequirementAssignment requirement : _requirements_1) {
             boolean _equalsIgnoreCase = requirement.getName().equalsIgnoreCase(targetRequirement);
             if (_equalsIgnoreCase) {
@@ -71,7 +83,7 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
           if ((req == null)) {
             req = AADMFactory.eINSTANCE.createERequirementAssignment();
             req.setName(targetRequirement);
-            node.getNode().getRequirements().getRequirements().add(req);
+            node_1.getNode().getRequirements().getRequirements().add(req);
           }
           System.out.println(("Applying targetNode: " + targetNode));
           EPREFIX_ID _node_1 = req.getNode();
@@ -82,8 +94,18 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
           }
           EPREFIX_ID _node_2 = req.getNode();
           _node_2.setModule(targetModule);
-          EPREFIX_ID _node_3 = req.getNode();
-          _node_3.setId(targetNode);
+          boolean _contains_1 = targetNode.contains("@");
+          if (_contains_1) {
+            EPREFIX_ID _node_3 = req.getNode();
+            _node_3.setId(targetNode.substring(0, targetNode.indexOf("@")));
+            EPREFIX_ID _node_4 = req.getNode();
+            int _indexOf_2 = targetNode.indexOf("@");
+            int _plus_2 = (_indexOf_2 + 1);
+            _node_4.setVersion(targetNode.substring(_plus_2));
+          } else {
+            EPREFIX_ID _node_5 = req.getNode();
+            _node_5.setId(targetNode);
+          }
         };
         acceptor.accept(issue, message, sub_message, "", _function);
       }

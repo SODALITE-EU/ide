@@ -57,6 +57,7 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyType;
 import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.GetArtifact;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.RM_Model;
@@ -239,6 +240,8 @@ public class RMHelper {
 			eEntityReference = ((GetProperty) function).getProperty().getEntity();
 		else if (function instanceof GetAttribute)
 			eEntityReference = ((GetAttribute) function).getAttribute().getEntity();
+		else if (function instanceof GetArtifact)
+			eEntityReference = ((GetArtifact) function).getArtifact().getEntity();
 
 		if (eEntityReference == null)
 			return null;

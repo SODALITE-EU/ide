@@ -15,9 +15,12 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.sodalite.dsl.rM.EActivityDefinitions;
+import org.sodalite.dsl.rM.EArtifactDefinition;
+import org.sodalite.dsl.rM.EArtifactDefinitionBody;
 import org.sodalite.dsl.rM.EArtifactType;
 import org.sodalite.dsl.rM.EArtifactTypeBody;
 import org.sodalite.dsl.rM.EArtifactTypes;
+import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributeDefinitionBody;
@@ -103,6 +106,8 @@ import org.sodalite.dsl.rM.ETriggers;
 import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
+import org.sodalite.dsl.rM.GetArtifact;
+import org.sodalite.dsl.rM.GetArtifactBody;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.GetInput;
@@ -129,6 +134,12 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EACTIVITY_DEFINITIONS:
 				sequence_EActivityDefinitions(context, (EActivityDefinitions) semanticObject); 
 				return; 
+			case RMPackage.EARTIFACT_DEFINITION:
+				sequence_EArtifactDefinition(context, (EArtifactDefinition) semanticObject); 
+				return; 
+			case RMPackage.EARTIFACT_DEFINITION_BODY:
+				sequence_EArtifactDefinitionBody(context, (EArtifactDefinitionBody) semanticObject); 
+				return; 
 			case RMPackage.EARTIFACT_TYPE:
 				sequence_EArtifactType(context, (EArtifactType) semanticObject); 
 				return; 
@@ -137,6 +148,9 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RMPackage.EARTIFACT_TYPES:
 				sequence_EArtifactTypes(context, (EArtifactTypes) semanticObject); 
+				return; 
+			case RMPackage.EARTIFACTS:
+				sequence_EArtifacts(context, (EArtifacts) semanticObject); 
 				return; 
 			case RMPackage.EASSERTION_DEFINITION:
 				sequence_EAssertionDefinition(context, (EAssertionDefinition) semanticObject); 
@@ -393,6 +407,12 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RMPackage.EVALID_VALUES:
 				sequence_EValid_Values(context, (EValid_Values) semanticObject); 
 				return; 
+			case RMPackage.GET_ARTIFACT:
+				sequence_GetArtifact(context, (GetArtifact) semanticObject); 
+				return; 
+			case RMPackage.GET_ARTIFACT_BODY:
+				sequence_GetArtifactBody(context, (GetArtifactBody) semanticObject); 
+				return; 
 			case RMPackage.GET_ATTRIBUTE:
 				sequence_GetAttribute(context, (GetAttribute) semanticObject); 
 				return; 
@@ -425,6 +445,39 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_EActivityDefinitions(ISerializationContext context, EActivityDefinitions semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EArtifactDefinitionBody returns EArtifactDefinitionBody
+	 *
+	 * Constraint:
+	 *     (type=EDataTypeName | file=STRING)+
+	 */
+	protected void sequence_EArtifactDefinitionBody(ISerializationContext context, EArtifactDefinitionBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EArtifactDefinition returns EArtifactDefinition
+	 *
+	 * Constraint:
+	 *     (name=ID artifact=EArtifactDefinitionBody)
+	 */
+	protected void sequence_EArtifactDefinition(ISerializationContext context, EArtifactDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EARTIFACT_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EARTIFACT_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.EARTIFACT_DEFINITION__ARTIFACT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.EARTIFACT_DEFINITION__ARTIFACT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEArtifactDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEArtifactDefinitionAccess().getArtifactEArtifactDefinitionBodyParserRuleCall_3_0(), semanticObject.getArtifact());
+		feeder.finish();
 	}
 	
 	
@@ -469,6 +522,18 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     artifactTypes+=EArtifactType+
 	 */
 	protected void sequence_EArtifactTypes(ISerializationContext context, EArtifactTypes semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EArtifacts returns EArtifacts
+	 *
+	 * Constraint:
+	 *     artifacts+=EArtifactDefinition*
+	 */
+	protected void sequence_EArtifacts(ISerializationContext context, EArtifacts semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1260,7 +1325,8 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         attributes=EAttributes | 
 	 *         interfaces=EInterfaces | 
 	 *         capabilities=ECapabilities | 
-	 *         requirements=ERequirements
+	 *         requirements=ERequirements | 
+	 *         artifacts=EArtifacts
 	 *     )*
 	 */
 	protected void sequence_ENodeTypeBody(ISerializationContext context, ENodeTypeBody semanticObject) {
@@ -1854,6 +1920,39 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEValid_ValuesAccess().getValELISTParserRuleCall_1_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GetArtifactBody returns GetArtifactBody
+	 *
+	 * Constraint:
+	 *     (artifact=EPREFIX_REF | entity=EEntityReference)+
+	 */
+	protected void sequence_GetArtifactBody(ISerializationContext context, GetArtifactBody semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EValueExpression returns GetArtifact
+	 *     EFunction returns GetArtifact
+	 *     GetArtifact returns GetArtifact
+	 *     EAssignmentValue returns GetArtifact
+	 *
+	 * Constraint:
+	 *     artifact=GetArtifactBody
+	 */
+	protected void sequence_GetArtifact(ISerializationContext context, GetArtifact semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RMPackage.Literals.GET_ARTIFACT__ARTIFACT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RMPackage.Literals.GET_ARTIFACT__ARTIFACT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGetArtifactAccess().getArtifactGetArtifactBodyParserRuleCall_2_0(), semanticObject.getArtifact());
 		feeder.finish();
 	}
 	

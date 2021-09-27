@@ -45,6 +45,8 @@ Derived_from : 'derived_from:';
 
 Entry_schema : 'entry_schema:';
 
+Get_artifact : 'get_artifact:';
+
 Get_property : 'get_property:';
 
 Greater_than : 'greater_than:';
@@ -89,6 +91,8 @@ Properties : 'properties:';
 
 Start_time : 'start_time:';
 
+Artifacts : 'artifacts:';
+
 Attribute : 'attribute:';
 
 Condition : 'condition:';
@@ -100,6 +104,8 @@ Less_than : 'less_than:';
 Mime_type : 'mime_type:';
 
 Operation : 'operation:';
+
+Artifact : 'artifact:';
 
 End_time : 'end_time:';
 
@@ -146,6 +152,8 @@ Equal : 'equal:';
 Event : 'event:';
 
 Value : 'value:';
+
+File : 'file:';
 
 Node : 'node:';
 

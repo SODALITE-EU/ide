@@ -30,6 +30,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/requirements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/capabilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ENodeTemplateBody/artifacts"/>
     </genClasses>
     <genClasses ecoreClass="AADM.ecore#//ERequirementAssignments">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AADM.ecore#//ERequirementAssignments/requirements"/>

@@ -170,6 +170,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/interfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/capabilities"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/requirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ENodeTypeBody/artifacts"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ERelationshipTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERelationshipTypes/relationshipTypes"/>
@@ -298,6 +299,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/entity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetPropertyBody/req_cap"/>
     </genClasses>
+    <genClasses ecoreClass="RM.ecore#//GetArtifact">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetArtifact/artifact"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//GetArtifactBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetArtifactBody/artifact"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//GetArtifactBody/entity"/>
+    </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilities">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilities/capabilities"/>
     </genClasses>
@@ -328,6 +336,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/relationship"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/start"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ERequirementDefinitionBody/end"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EArtifacts">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifacts/artifacts"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EArtifactDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactDefinition/artifact"/>
+    </genClasses>
+    <genClasses ecoreClass="RM.ecore#//EArtifactDefinitionBody">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactDefinitionBody/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactDefinitionBody/file"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//EReqOrCap">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EReqOrCap/name"/>

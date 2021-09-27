@@ -1591,13 +1591,22 @@ public interface RMPackage extends EPackage
   int ENODE_TYPE_BODY__REQUIREMENTS = 6;
 
   /**
+   * The feature id for the '<em><b>Artifacts</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENODE_TYPE_BODY__ARTIFACTS = 7;
+
+  /**
    * The number of structural features of the '<em>ENode Type Body</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENODE_TYPE_BODY_FEATURE_COUNT = 7;
+  int ENODE_TYPE_BODY_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ERelationshipTypesImpl <em>ERelationship Types</em>}' class.
@@ -2793,6 +2802,71 @@ public interface RMPackage extends EPackage
   int GET_PROPERTY_BODY_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.GetArtifactImpl <em>Get Artifact</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.GetArtifactImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetArtifact()
+   * @generated
+   */
+  int GET_ARTIFACT = 71;
+
+  /**
+   * The feature id for the '<em><b>Artifact</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_ARTIFACT__ARTIFACT = EFUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Get Artifact</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_ARTIFACT_FEATURE_COUNT = EFUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.GetArtifactBodyImpl <em>Get Artifact Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetArtifactBody()
+   * @generated
+   */
+  int GET_ARTIFACT_BODY = 72;
+
+  /**
+   * The feature id for the '<em><b>Artifact</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_ARTIFACT_BODY__ARTIFACT = 0;
+
+  /**
+   * The feature id for the '<em><b>Entity</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_ARTIFACT_BODY__ENTITY = 1;
+
+  /**
+   * The number of structural features of the '<em>Get Artifact Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_ARTIFACT_BODY_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ECapabilitiesImpl <em>ECapabilities</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2800,7 +2874,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilities()
    * @generated
    */
-  int ECAPABILITIES = 71;
+  int ECAPABILITIES = 73;
 
   /**
    * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
@@ -2828,7 +2902,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEReqOrCap()
    * @generated
    */
-  int EREQ_OR_CAP = 78;
+  int EREQ_OR_CAP = 83;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2856,7 +2930,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinition()
    * @generated
    */
-  int ECAPABILITY_DEFINITION = 72;
+  int ECAPABILITY_DEFINITION = 74;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2893,7 +2967,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getECapabilityDefinitionBody()
    * @generated
    */
-  int ECAPABILITY_DEFINITION_BODY = 73;
+  int ECAPABILITY_DEFINITION_BODY = 75;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -2975,7 +3049,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValidSourceType()
    * @generated
    */
-  int EVALID_SOURCE_TYPE = 74;
+  int EVALID_SOURCE_TYPE = 76;
 
   /**
    * The feature id for the '<em><b>Source Types</b></em>' containment reference list.
@@ -3003,7 +3077,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirements()
    * @generated
    */
-  int EREQUIREMENTS = 75;
+  int EREQUIREMENTS = 77;
 
   /**
    * The feature id for the '<em><b>Requirements</b></em>' containment reference list.
@@ -3031,7 +3105,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinition()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION = 76;
+  int EREQUIREMENT_DEFINITION = 78;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3068,7 +3142,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getERequirementDefinitionBody()
    * @generated
    */
-  int EREQUIREMENT_DEFINITION_BODY = 77;
+  int EREQUIREMENT_DEFINITION_BODY = 79;
 
   /**
    * The feature id for the '<em><b>Capability</b></em>' containment reference.
@@ -3125,6 +3199,108 @@ public interface RMPackage extends EPackage
   int EREQUIREMENT_DEFINITION_BODY_FEATURE_COUNT = 5;
 
   /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EArtifactsImpl <em>EArtifacts</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EArtifactsImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifacts()
+   * @generated
+   */
+  int EARTIFACTS = 80;
+
+  /**
+   * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACTS__ARTIFACTS = 0;
+
+  /**
+   * The number of structural features of the '<em>EArtifacts</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACTS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EArtifactDefinitionImpl <em>EArtifact Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EArtifactDefinitionImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifactDefinition()
+   * @generated
+   */
+  int EARTIFACT_DEFINITION = 81;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Artifact</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION__ARTIFACT = 1;
+
+  /**
+   * The number of structural features of the '<em>EArtifact Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EArtifactDefinitionBodyImpl <em>EArtifact Definition Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sodalite.dsl.rM.impl.EArtifactDefinitionBodyImpl
+   * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifactDefinitionBody()
+   * @generated
+   */
+  int EARTIFACT_DEFINITION_BODY = 82;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION_BODY__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>File</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION_BODY__FILE = 1;
+
+  /**
+   * The number of structural features of the '<em>EArtifact Definition Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_DEFINITION_BODY_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.EConstraintsImpl <em>EConstraints</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3132,7 +3308,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraints()
    * @generated
    */
-  int ECONSTRAINTS = 79;
+  int ECONSTRAINTS = 84;
 
   /**
    * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -3160,7 +3336,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEConstraint()
    * @generated
    */
-  int ECONSTRAINT = 80;
+  int ECONSTRAINT = 85;
 
   /**
    * The number of structural features of the '<em>EConstraint</em>' class.
@@ -3179,7 +3355,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMaxLength()
    * @generated
    */
-  int EMAX_LENGTH = 81;
+  int EMAX_LENGTH = 86;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3207,7 +3383,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMinLength()
    * @generated
    */
-  int EMIN_LENGTH = 82;
+  int EMIN_LENGTH = 87;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3235,7 +3411,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELength()
    * @generated
    */
-  int ELENGTH = 83;
+  int ELENGTH = 88;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3263,7 +3439,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEValid_Values()
    * @generated
    */
-  int EVALID_VALUES = 84;
+  int EVALID_VALUES = 89;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3291,7 +3467,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAssignmentValue()
    * @generated
    */
-  int EASSIGNMENT_VALUE = 92;
+  int EASSIGNMENT_VALUE = 97;
 
   /**
    * The number of structural features of the '<em>EAssignment Value</em>' class.
@@ -3310,7 +3486,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELIST()
    * @generated
    */
-  int ELIST = 85;
+  int ELIST = 90;
 
   /**
    * The feature id for the '<em><b>List</b></em>' containment reference list.
@@ -3338,7 +3514,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEInRange()
    * @generated
    */
-  int EIN_RANGE = 86;
+  int EIN_RANGE = 91;
 
   /**
    * The feature id for the '<em><b>Start</b></em>' containment reference.
@@ -3375,7 +3551,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessOrEqual()
    * @generated
    */
-  int ELESS_OR_EQUAL = 87;
+  int ELESS_OR_EQUAL = 92;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3403,7 +3579,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getELessThan()
    * @generated
    */
-  int ELESS_THAN = 88;
+  int ELESS_THAN = 93;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3431,7 +3607,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterOrEqual()
    * @generated
    */
-  int EGREATER_OR_EQUAL = 89;
+  int EGREATER_OR_EQUAL = 94;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3459,7 +3635,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEGreaterThan()
    * @generated
    */
-  int EGREATER_THAN = 90;
+  int EGREATER_THAN = 95;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3487,7 +3663,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEqual()
    * @generated
    */
-  int EEQUAL = 91;
+  int EEQUAL = 96;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
@@ -3515,7 +3691,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESingleValue()
    * @generated
    */
-  int ESINGLE_VALUE = 93;
+  int ESINGLE_VALUE = 98;
 
   /**
    * The number of structural features of the '<em>ESingle Value</em>' class.
@@ -3534,7 +3710,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEAlphaNumericValue()
    * @generated
    */
-  int EALPHA_NUMERIC_VALUE = 94;
+  int EALPHA_NUMERIC_VALUE = 99;
 
   /**
    * The number of structural features of the '<em>EAlpha Numeric Value</em>' class.
@@ -3553,7 +3729,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESTRING()
    * @generated
    */
-  int ESTRING = 95;
+  int ESTRING = 100;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3581,7 +3757,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEBOOLEAN()
    * @generated
    */
-  int EBOOLEAN = 96;
+  int EBOOLEAN = 101;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3609,7 +3785,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEFLOAT()
    * @generated
    */
-  int EFLOAT = 97;
+  int EFLOAT = 102;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3637,7 +3813,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getESIGNEDINT()
    * @generated
    */
-  int ESIGNEDINT = 98;
+  int ESIGNEDINT = 103;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3665,7 +3841,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMAP()
    * @generated
    */
-  int EMAP = 99;
+  int EMAP = 104;
 
   /**
    * The feature id for the '<em><b>Map</b></em>' containment reference list.
@@ -3693,7 +3869,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEMapEntry()
    * @generated
    */
-  int EMAP_ENTRY = 100;
+  int EMAP_ENTRY = 105;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -3730,7 +3906,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEntityReference()
    * @generated
    */
-  int EENTITY_REFERENCE = 101;
+  int EENTITY_REFERENCE = 106;
 
   /**
    * The number of structural features of the '<em>EEntity Reference</em>' class.
@@ -3749,7 +3925,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_REF()
    * @generated
    */
-  int EPREFIX_REF = 102;
+  int EPREFIX_REF = 107;
 
   /**
    * The number of structural features of the '<em>EPREFIX REF</em>' class.
@@ -3768,7 +3944,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_TYPE()
    * @generated
    */
-  int EPREFIX_TYPE = 103;
+  int EPREFIX_TYPE = 108;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3805,7 +3981,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPREFIX_ID()
    * @generated
    */
-  int EPREFIX_ID = 104;
+  int EPREFIX_ID = 109;
 
   /**
    * The feature id for the '<em><b>Module</b></em>' attribute.
@@ -3851,7 +4027,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEPRIMITIVE_TYPE()
    * @generated
    */
-  int EPRIMITIVE_TYPE = 105;
+  int EPRIMITIVE_TYPE = 110;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3879,7 +4055,7 @@ public interface RMPackage extends EPackage
    * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEEntity()
    * @generated
    */
-  int EENTITY = 106;
+  int EENTITY = 111;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' attribute.
@@ -5270,6 +5446,17 @@ public interface RMPackage extends EPackage
   EReference getENodeTypeBody_Requirements();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.ENodeTypeBody#getArtifacts <em>Artifacts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Artifacts</em>'.
+   * @see org.sodalite.dsl.rM.ENodeTypeBody#getArtifacts()
+   * @see #getENodeTypeBody()
+   * @generated
+   */
+  EReference getENodeTypeBody_Artifacts();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ERelationshipTypes <em>ERelationship Types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6305,6 +6492,59 @@ public interface RMPackage extends EPackage
   EReference getGetPropertyBody_Req_cap();
 
   /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.GetArtifact <em>Get Artifact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Get Artifact</em>'.
+   * @see org.sodalite.dsl.rM.GetArtifact
+   * @generated
+   */
+  EClass getGetArtifact();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.GetArtifact#getArtifact <em>Artifact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Artifact</em>'.
+   * @see org.sodalite.dsl.rM.GetArtifact#getArtifact()
+   * @see #getGetArtifact()
+   * @generated
+   */
+  EReference getGetArtifact_Artifact();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.GetArtifactBody <em>Get Artifact Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Get Artifact Body</em>'.
+   * @see org.sodalite.dsl.rM.GetArtifactBody
+   * @generated
+   */
+  EClass getGetArtifactBody();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.GetArtifactBody#getArtifact <em>Artifact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Artifact</em>'.
+   * @see org.sodalite.dsl.rM.GetArtifactBody#getArtifact()
+   * @see #getGetArtifactBody()
+   * @generated
+   */
+  EReference getGetArtifactBody_Artifact();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.GetArtifactBody#getEntity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Entity</em>'.
+   * @see org.sodalite.dsl.rM.GetArtifactBody#getEntity()
+   * @see #getGetArtifactBody()
+   * @generated
+   */
+  EReference getGetArtifactBody_Entity();
+
+  /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ECapabilities <em>ECapabilities</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -6560,6 +6800,91 @@ public interface RMPackage extends EPackage
    * @generated
    */
   EReference getERequirementDefinitionBody_End();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EArtifacts <em>EArtifacts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EArtifacts</em>'.
+   * @see org.sodalite.dsl.rM.EArtifacts
+   * @generated
+   */
+  EClass getEArtifacts();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.sodalite.dsl.rM.EArtifacts#getArtifacts <em>Artifacts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Artifacts</em>'.
+   * @see org.sodalite.dsl.rM.EArtifacts#getArtifacts()
+   * @see #getEArtifacts()
+   * @generated
+   */
+  EReference getEArtifacts_Artifacts();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EArtifactDefinition <em>EArtifact Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EArtifact Definition</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinition
+   * @generated
+   */
+  EClass getEArtifactDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EArtifactDefinition#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinition#getName()
+   * @see #getEArtifactDefinition()
+   * @generated
+   */
+  EAttribute getEArtifactDefinition_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EArtifactDefinition#getArtifact <em>Artifact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Artifact</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinition#getArtifact()
+   * @see #getEArtifactDefinition()
+   * @generated
+   */
+  EReference getEArtifactDefinition_Artifact();
+
+  /**
+   * Returns the meta object for class '{@link org.sodalite.dsl.rM.EArtifactDefinitionBody <em>EArtifact Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EArtifact Definition Body</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinitionBody
+   * @generated
+   */
+  EClass getEArtifactDefinitionBody();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EArtifactDefinitionBody#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinitionBody#getType()
+   * @see #getEArtifactDefinitionBody()
+   * @generated
+   */
+  EReference getEArtifactDefinitionBody_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EArtifactDefinitionBody#getFile <em>File</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>File</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactDefinitionBody#getFile()
+   * @see #getEArtifactDefinitionBody()
+   * @generated
+   */
+  EAttribute getEArtifactDefinitionBody_File();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.EReqOrCap <em>EReq Or Cap</em>}'.
@@ -8263,6 +8588,14 @@ public interface RMPackage extends EPackage
     EReference ENODE_TYPE_BODY__REQUIREMENTS = eINSTANCE.getENodeTypeBody_Requirements();
 
     /**
+     * The meta object literal for the '<em><b>Artifacts</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENODE_TYPE_BODY__ARTIFACTS = eINSTANCE.getENodeTypeBody_Artifacts();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ERelationshipTypesImpl <em>ERelationship Types</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9103,6 +9436,50 @@ public interface RMPackage extends EPackage
     EReference GET_PROPERTY_BODY__REQ_CAP = eINSTANCE.getGetPropertyBody_Req_cap();
 
     /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.GetArtifactImpl <em>Get Artifact</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.GetArtifactImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetArtifact()
+     * @generated
+     */
+    EClass GET_ARTIFACT = eINSTANCE.getGetArtifact();
+
+    /**
+     * The meta object literal for the '<em><b>Artifact</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_ARTIFACT__ARTIFACT = eINSTANCE.getGetArtifact_Artifact();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.GetArtifactBodyImpl <em>Get Artifact Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getGetArtifactBody()
+     * @generated
+     */
+    EClass GET_ARTIFACT_BODY = eINSTANCE.getGetArtifactBody();
+
+    /**
+     * The meta object literal for the '<em><b>Artifact</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_ARTIFACT_BODY__ARTIFACT = eINSTANCE.getGetArtifactBody_Artifact();
+
+    /**
+     * The meta object literal for the '<em><b>Entity</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_ARTIFACT_BODY__ENTITY = eINSTANCE.getGetArtifactBody_Entity();
+
+    /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ECapabilitiesImpl <em>ECapabilities</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9307,6 +9684,76 @@ public interface RMPackage extends EPackage
      * @generated
      */
     EReference EREQUIREMENT_DEFINITION_BODY__END = eINSTANCE.getERequirementDefinitionBody_End();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EArtifactsImpl <em>EArtifacts</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EArtifactsImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifacts()
+     * @generated
+     */
+    EClass EARTIFACTS = eINSTANCE.getEArtifacts();
+
+    /**
+     * The meta object literal for the '<em><b>Artifacts</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EARTIFACTS__ARTIFACTS = eINSTANCE.getEArtifacts_Artifacts();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EArtifactDefinitionImpl <em>EArtifact Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EArtifactDefinitionImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifactDefinition()
+     * @generated
+     */
+    EClass EARTIFACT_DEFINITION = eINSTANCE.getEArtifactDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EARTIFACT_DEFINITION__NAME = eINSTANCE.getEArtifactDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Artifact</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EARTIFACT_DEFINITION__ARTIFACT = eINSTANCE.getEArtifactDefinition_Artifact();
+
+    /**
+     * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EArtifactDefinitionBodyImpl <em>EArtifact Definition Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sodalite.dsl.rM.impl.EArtifactDefinitionBodyImpl
+     * @see org.sodalite.dsl.rM.impl.RMPackageImpl#getEArtifactDefinitionBody()
+     * @generated
+     */
+    EClass EARTIFACT_DEFINITION_BODY = eINSTANCE.getEArtifactDefinitionBody();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EARTIFACT_DEFINITION_BODY__TYPE = eINSTANCE.getEArtifactDefinitionBody_Type();
+
+    /**
+     * The meta object literal for the '<em><b>File</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EARTIFACT_DEFINITION_BODY__FILE = eINSTANCE.getEArtifactDefinitionBody_File();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.EReqOrCapImpl <em>EReq Or Cap</em>}' class.

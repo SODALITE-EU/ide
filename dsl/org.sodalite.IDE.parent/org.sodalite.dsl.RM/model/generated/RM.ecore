@@ -229,6 +229,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" eType="#//ERequirements"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" eType="#//EArtifacts"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERelationshipTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationshipTypes" upperBound="-1"
@@ -405,6 +407,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="req_cap" eType="#//EPREFIX_REF"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetArtifact" eSuperTypes="#//EFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifact" eType="#//GetArtifactBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetArtifactBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifact" eType="#//EPREFIX_REF"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//EEntityReference"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ECapabilities">
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
         eType="#//ECapabilityDefinition" containment="true"/>
@@ -451,6 +463,20 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EAlphaNumericValue"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EArtifacts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" upperBound="-1"
+        eType="#//EArtifactDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EArtifactDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifact" eType="#//EArtifactDefinitionBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EArtifactDefinitionBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EDataTypeName"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EReqOrCap">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

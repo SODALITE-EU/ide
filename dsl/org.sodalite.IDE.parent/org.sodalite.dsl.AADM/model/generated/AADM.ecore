@@ -37,6 +37,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" eType="#//ECapabilityAssignments"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EArtifacts"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERequirementAssignments">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
 import org.sodalite.dsl.rM.EInterfaces;
@@ -36,6 +37,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeBodyImpl#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeBodyImpl#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeBodyImpl#getRequirements <em>Requirements</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.ENodeTypeBodyImpl#getArtifacts <em>Artifacts</em>}</li>
  * </ul>
  *
  * @generated
@@ -121,6 +123,16 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * @ordered
    */
   protected ERequirements requirements;
+
+  /**
+   * The cached value of the '{@link #getArtifacts() <em>Artifacts</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getArtifacts()
+   * @generated
+   * @ordered
+   */
+  protected EArtifacts artifacts;
 
   /**
    * <!-- begin-user-doc -->
@@ -474,6 +486,56 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
    * @generated
    */
   @Override
+  public EArtifacts getArtifacts()
+  {
+    return artifacts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetArtifacts(EArtifacts newArtifacts, NotificationChain msgs)
+  {
+    EArtifacts oldArtifacts = artifacts;
+    artifacts = newArtifacts;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_BODY__ARTIFACTS, oldArtifacts, newArtifacts);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setArtifacts(EArtifacts newArtifacts)
+  {
+    if (newArtifacts != artifacts)
+    {
+      NotificationChain msgs = null;
+      if (artifacts != null)
+        msgs = ((InternalEObject)artifacts).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE_BODY__ARTIFACTS, null, msgs);
+      if (newArtifacts != null)
+        msgs = ((InternalEObject)newArtifacts).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.ENODE_TYPE_BODY__ARTIFACTS, null, msgs);
+      msgs = basicSetArtifacts(newArtifacts, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.ENODE_TYPE_BODY__ARTIFACTS, newArtifacts, newArtifacts));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -490,6 +552,8 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
         return basicSetCapabilities(null, msgs);
       case RMPackage.ENODE_TYPE_BODY__REQUIREMENTS:
         return basicSetRequirements(null, msgs);
+      case RMPackage.ENODE_TYPE_BODY__ARTIFACTS:
+        return basicSetArtifacts(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -518,6 +582,8 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
         return getCapabilities();
       case RMPackage.ENODE_TYPE_BODY__REQUIREMENTS:
         return getRequirements();
+      case RMPackage.ENODE_TYPE_BODY__ARTIFACTS:
+        return getArtifacts();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -552,6 +618,9 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
         return;
       case RMPackage.ENODE_TYPE_BODY__REQUIREMENTS:
         setRequirements((ERequirements)newValue);
+        return;
+      case RMPackage.ENODE_TYPE_BODY__ARTIFACTS:
+        setArtifacts((EArtifacts)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -588,6 +657,9 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
       case RMPackage.ENODE_TYPE_BODY__REQUIREMENTS:
         setRequirements((ERequirements)null);
         return;
+      case RMPackage.ENODE_TYPE_BODY__ARTIFACTS:
+        setArtifacts((EArtifacts)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -616,6 +688,8 @@ public class ENodeTypeBodyImpl extends MinimalEObjectImpl.Container implements E
         return capabilities != null;
       case RMPackage.ENODE_TYPE_BODY__REQUIREMENTS:
         return requirements != null;
+      case RMPackage.ENODE_TYPE_BODY__ARTIFACTS:
+        return artifacts != null;
     }
     return super.eIsSet(featureID);
   }

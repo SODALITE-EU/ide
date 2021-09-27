@@ -586,6 +586,23 @@ public class RMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RMPackage.GET_ARTIFACT:
+      {
+        GetArtifact getArtifact = (GetArtifact)theEObject;
+        T result = caseGetArtifact(getArtifact);
+        if (result == null) result = caseEFunction(getArtifact);
+        if (result == null) result = caseEValueExpression(getArtifact);
+        if (result == null) result = caseEAssignmentValue(getArtifact);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.GET_ARTIFACT_BODY:
+      {
+        GetArtifactBody getArtifactBody = (GetArtifactBody)theEObject;
+        T result = caseGetArtifactBody(getArtifactBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RMPackage.ECAPABILITIES:
       {
         ECapabilities eCapabilities = (ECapabilities)theEObject;
@@ -634,6 +651,27 @@ public class RMSwitch<T> extends Switch<T>
       {
         ERequirementDefinitionBody eRequirementDefinitionBody = (ERequirementDefinitionBody)theEObject;
         T result = caseERequirementDefinitionBody(eRequirementDefinitionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EARTIFACTS:
+      {
+        EArtifacts eArtifacts = (EArtifacts)theEObject;
+        T result = caseEArtifacts(eArtifacts);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EARTIFACT_DEFINITION:
+      {
+        EArtifactDefinition eArtifactDefinition = (EArtifactDefinition)theEObject;
+        T result = caseEArtifactDefinition(eArtifactDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RMPackage.EARTIFACT_DEFINITION_BODY:
+      {
+        EArtifactDefinitionBody eArtifactDefinitionBody = (EArtifactDefinitionBody)theEObject;
+        T result = caseEArtifactDefinitionBody(eArtifactDefinitionBody);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -2017,6 +2055,38 @@ public class RMSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Artifact</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Artifact</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetArtifact(GetArtifact object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Artifact Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Artifact Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetArtifactBody(GetArtifactBody object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ECapabilities</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -2124,6 +2194,54 @@ public class RMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseERequirementDefinitionBody(ERequirementDefinitionBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EArtifacts</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EArtifacts</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEArtifacts(EArtifacts object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EArtifact Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EArtifact Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEArtifactDefinition(EArtifactDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EArtifact Definition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EArtifact Definition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEArtifactDefinitionBody(EArtifactDefinitionBody object)
   {
     return null;
   }

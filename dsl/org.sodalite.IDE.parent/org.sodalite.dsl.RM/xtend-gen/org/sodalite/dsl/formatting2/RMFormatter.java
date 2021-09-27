@@ -55,6 +55,7 @@ import org.sodalite.dsl.rM.ENodeTypes;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EOperationDefinitionBody;
 import org.sodalite.dsl.rM.EOperations;
+import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
@@ -1016,10 +1017,7 @@ public class RMFormatter extends AbstractFormatter2 {
   protected void _format(final EInputs eInputs, @Extension final IFormattableDocument document) {
     EList<EParameterDefinition> _parameters = eInputs.getParameters();
     for (final EParameterDefinition eInput : _parameters) {
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-        it.newLine();
-      };
-      document.<EParameterDefinition>append(document.<EParameterDefinition>format(eInput), _function);
+      document.<EParameterDefinition>format(eInput);
     }
   }
   
@@ -1151,13 +1149,9 @@ public class RMFormatter extends AbstractFormatter2 {
   
   protected void _format(final GetInput getInput, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.newLine();
+      it.oneSpace();
     };
     document.append(this.textRegionExtensions.regionFor(getInput).keyword("get_input:"), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.indent();
-    };
-    document.<EParameterDefinition>format(document.<EParameterDefinition>surround(getInput.getInput(), _function_1));
   }
   
   protected void _format(final EPREFIX_TYPE prefix, @Extension final IFormattableDocument document) {
@@ -1169,6 +1163,24 @@ public class RMFormatter extends AbstractFormatter2 {
       it.noSpace();
     };
     document.append(this.textRegionExtensions.regionFor(prefix).keyword("/"), _function_1);
+  }
+  
+  protected void _format(final EPREFIX_ID prefix, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(prefix).feature(RMPackage.Literals.EPREFIX_ID__MODULE), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(this.textRegionExtensions.regionFor(prefix).keyword("/"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
+    };
+    document.append(document.prepend(this.textRegionExtensions.regionFor(prefix).keyword("@"), _function_2), _function_3);
   }
   
   protected void _format(final EConstraints constraints, @Extension final IFormattableDocument document) {
@@ -1218,6 +1230,9 @@ public class RMFormatter extends AbstractFormatter2 {
       return;
     } else if (getAttribute instanceof EConditionClauseDefinitionOR) {
       _format((EConditionClauseDefinitionOR)getAttribute, document);
+      return;
+    } else if (getAttribute instanceof EPREFIX_ID) {
+      _format((EPREFIX_ID)getAttribute, document);
       return;
     } else if (getAttribute instanceof EPREFIX_TYPE) {
       _format((EPREFIX_TYPE)getAttribute, document);

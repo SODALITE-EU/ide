@@ -1,0 +1,23 @@
+node_templates:
+	artifacts_file:
+		type: opera.nodes.file
+		properties:
+			json_file: get_artifact:
+				entity: SELF
+				artifact: json_file
+		artifacts:
+			json_file:
+				type: tosca.artifacts.File
+				file: "/home/yosu/Projects/Sodalite/Git/xopera-examples/tosca/artifacts/files/file.json"
+
+outputs:
+	output_attribute_text_file:
+		description: 'Example of attribute output'
+		value: get_attribute: 
+			entity: artifacts_file 
+			attribute: my_text_file_attribute
+	output_attribute_json_file:
+		description: 'Example of attribute output'
+		value: get_attribute: 
+			entity: artifacts_file
+			attribute: my_json_file_attribute
