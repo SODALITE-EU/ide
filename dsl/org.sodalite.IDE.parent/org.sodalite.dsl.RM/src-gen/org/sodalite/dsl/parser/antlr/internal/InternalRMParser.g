@@ -1074,22 +1074,65 @@ ruleEArtifactTypeBody returns [EObject current=null]
 								)+
 								(
 									(
-										lv_file_ext_9_0=RULE_STRING
 										{
-											newLeafNode(lv_file_ext_9_0, grammarAccess.getEArtifactTypeBodyAccess().getFile_extSTRINGTerminalRuleCall_1_3_1_0());
+											newCompositeNode(grammarAccess.getEArtifactTypeBodyAccess().getFile_extELISTParserRuleCall_1_3_1_0());
 										}
+										lv_file_ext_9_0=ruleELIST
 										{
 											if ($current==null) {
-												$current = createModelElement(grammarAccess.getEArtifactTypeBodyRule());
+												$current = createModelElementForParent(grammarAccess.getEArtifactTypeBodyRule());
 											}
-											setWithLastConsumed(
+											set(
 												$current,
 												"file_ext",
 												lv_file_ext_9_0,
-												"org.eclipse.xtext.common.Terminals.STRING");
+												"org.sodalite.dsl.RM.ELIST");
+											afterParserOrEnumRuleCall();
 										}
 									)
 								)
+								))
+					{ 
+						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEArtifactTypeBodyAccess().getUnorderedGroup_1());
+					}
+				)
+			)|
+			(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getEArtifactTypeBodyAccess().getUnorderedGroup_1(), 4)}?=>(
+					{
+						getUnorderedGroupHelper().select(grammarAccess.getEArtifactTypeBodyAccess().getUnorderedGroup_1(), 4);
+					}
+								({true}?=>(otherlv_10=Properties
+								{
+									newLeafNode(otherlv_10, grammarAccess.getEArtifactTypeBodyAccess().getPropertiesKeyword_1_4_0());
+								}
+								this_BEGIN_11=RULE_BEGIN
+								{
+									newLeafNode(this_BEGIN_11, grammarAccess.getEArtifactTypeBodyAccess().getBEGINTerminalRuleCall_1_4_1());
+								}
+								(
+									(
+										{
+											newCompositeNode(grammarAccess.getEArtifactTypeBodyAccess().getPropertiesEPropertiesParserRuleCall_1_4_2_0());
+										}
+										lv_properties_12_0=ruleEProperties
+										{
+											if ($current==null) {
+												$current = createModelElementForParent(grammarAccess.getEArtifactTypeBodyRule());
+											}
+											set(
+												$current,
+												"properties",
+												lv_properties_12_0,
+												"org.sodalite.dsl.RM.EProperties");
+											afterParserOrEnumRuleCall();
+										}
+									)
+								)
+								this_END_13=RULE_END
+								{
+									newLeafNode(this_END_13, grammarAccess.getEArtifactTypeBodyAccess().getENDTerminalRuleCall_1_4_3());
+								}
 								))
 					{ 
 						getUnorderedGroupHelper().returnFromSelection(grammarAccess.getEArtifactTypeBodyAccess().getUnorderedGroup_1());

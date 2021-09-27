@@ -45,7 +45,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/mime_type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RM.ecore#//EArtifactTypeBody/file_ext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/file_ext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//EArtifactTypeBody/properties"/>
     </genClasses>
     <genClasses ecoreClass="RM.ecore#//ECapabilityTypes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RM.ecore#//ECapabilityTypes/capabilityTypes"/>

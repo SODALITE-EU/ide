@@ -417,7 +417,7 @@ public interface RMPackage extends EPackage
   int EARTIFACT_TYPE_BODY__MIME_TYPE = 2;
 
   /**
-   * The feature id for the '<em><b>File ext</b></em>' attribute.
+   * The feature id for the '<em><b>File ext</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -426,13 +426,22 @@ public interface RMPackage extends EPackage
   int EARTIFACT_TYPE_BODY__FILE_EXT = 3;
 
   /**
+   * The feature id for the '<em><b>Properties</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EARTIFACT_TYPE_BODY__PROPERTIES = 4;
+
+  /**
    * The number of structural features of the '<em>EArtifact Type Body</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EARTIFACT_TYPE_BODY_FEATURE_COUNT = 4;
+  int EARTIFACT_TYPE_BODY_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.sodalite.dsl.rM.impl.ECapabilityTypesImpl <em>ECapability Types</em>}' class.
@@ -4421,15 +4430,26 @@ public interface RMPackage extends EPackage
   EAttribute getEArtifactTypeBody_Mime_type();
 
   /**
-   * Returns the meta object for the attribute '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getFile_ext <em>File ext</em>}'.
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getFile_ext <em>File ext</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>File ext</em>'.
+   * @return the meta object for the containment reference '<em>File ext</em>'.
    * @see org.sodalite.dsl.rM.EArtifactTypeBody#getFile_ext()
    * @see #getEArtifactTypeBody()
    * @generated
    */
-  EAttribute getEArtifactTypeBody_File_ext();
+  EReference getEArtifactTypeBody_File_ext();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.sodalite.dsl.rM.EArtifactTypeBody#getProperties <em>Properties</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Properties</em>'.
+   * @see org.sodalite.dsl.rM.EArtifactTypeBody#getProperties()
+   * @see #getEArtifactTypeBody()
+   * @generated
+   */
+  EReference getEArtifactTypeBody_Properties();
 
   /**
    * Returns the meta object for class '{@link org.sodalite.dsl.rM.ECapabilityTypes <em>ECapability Types</em>}'.
@@ -7758,12 +7778,20 @@ public interface RMPackage extends EPackage
     EAttribute EARTIFACT_TYPE_BODY__MIME_TYPE = eINSTANCE.getEArtifactTypeBody_Mime_type();
 
     /**
-     * The meta object literal for the '<em><b>File ext</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>File ext</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EARTIFACT_TYPE_BODY__FILE_EXT = eINSTANCE.getEArtifactTypeBody_File_ext();
+    EReference EARTIFACT_TYPE_BODY__FILE_EXT = eINSTANCE.getEArtifactTypeBody_File_ext();
+
+    /**
+     * The meta object literal for the '<em><b>Properties</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EARTIFACT_TYPE_BODY__PROPERTIES = eINSTANCE.getEArtifactTypeBody_Properties();
 
     /**
      * The meta object literal for the '{@link org.sodalite.dsl.rM.impl.ECapabilityTypesImpl <em>ECapability Types</em>}' class.

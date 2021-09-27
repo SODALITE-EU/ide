@@ -57,6 +57,8 @@ public interface KBReasoner {
 
 	TypeData getPolicyTypes(List<String> modules) throws SodaliteException;
 
+	TypeData getArtifactTypes(List<String> modules) throws SodaliteException;
+
 	TemplateData getTemplates(List<String> modules) throws SodaliteException;
 
 	ModuleData getModules() throws SodaliteException;

@@ -1328,9 +1328,20 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
    * @generated
    */
   @Override
-  public EAttribute getEArtifactTypeBody_File_ext()
+  public EReference getEArtifactTypeBody_File_ext()
   {
-    return (EAttribute)eArtifactTypeBodyEClass.getEStructuralFeatures().get(3);
+    return (EReference)eArtifactTypeBodyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEArtifactTypeBody_Properties()
+  {
+    return (EReference)eArtifactTypeBodyEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -4538,7 +4549,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     createEReference(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__SUPER_TYPE);
     createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__DESCRIPTION);
     createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__MIME_TYPE);
-    createEAttribute(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__FILE_EXT);
+    createEReference(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__FILE_EXT);
+    createEReference(eArtifactTypeBodyEClass, EARTIFACT_TYPE_BODY__PROPERTIES);
 
     eCapabilityTypesEClass = createEClass(ECAPABILITY_TYPES);
     createEReference(eCapabilityTypesEClass, ECAPABILITY_TYPES__CAPABILITY_TYPES);
@@ -5041,7 +5053,8 @@ public class RMPackageImpl extends EPackageImpl implements RMPackage
     initEReference(getEArtifactTypeBody_SuperType(), this.getEPREFIX_TYPE(), null, "superType", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Description(), ecorePackage.getEString(), "description", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEArtifactTypeBody_Mime_type(), ecorePackage.getEString(), "mime_type", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEArtifactTypeBody_File_ext(), ecorePackage.getEString(), "file_ext", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEArtifactTypeBody_File_ext(), this.getELIST(), null, "file_ext", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEArtifactTypeBody_Properties(), this.getEProperties(), null, "properties", null, 0, 1, EArtifactTypeBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eCapabilityTypesEClass, ECapabilityTypes.class, "ECapabilityTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getECapabilityTypes_CapabilityTypes(), this.getECapabilityType(), null, "capabilityTypes", null, 0, -1, ECapabilityTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

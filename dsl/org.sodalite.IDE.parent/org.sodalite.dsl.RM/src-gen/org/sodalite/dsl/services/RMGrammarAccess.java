@@ -553,22 +553,31 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		private final Group cGroup_1_3 = (Group)cUnorderedGroup_1.eContents().get(3);
 		private final Keyword cFile_extKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
 		private final Assignment cFile_extAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
-		private final RuleCall cFile_extSTRINGTerminalRuleCall_1_3_1_0 = (RuleCall)cFile_extAssignment_1_3_1.eContents().get(0);
+		private final RuleCall cFile_extELISTParserRuleCall_1_3_1_0 = (RuleCall)cFile_extAssignment_1_3_1.eContents().get(0);
+		private final Group cGroup_1_4 = (Group)cUnorderedGroup_1.eContents().get(4);
+		private final Keyword cPropertiesKeyword_1_4_0 = (Keyword)cGroup_1_4.eContents().get(0);
+		private final RuleCall cBEGINTerminalRuleCall_1_4_1 = (RuleCall)cGroup_1_4.eContents().get(1);
+		private final Assignment cPropertiesAssignment_1_4_2 = (Assignment)cGroup_1_4.eContents().get(2);
+		private final RuleCall cPropertiesEPropertiesParserRuleCall_1_4_2_0 = (RuleCall)cPropertiesAssignment_1_4_2.eContents().get(0);
+		private final RuleCall cENDTerminalRuleCall_1_4_3 = (RuleCall)cGroup_1_4.eContents().get(3);
 		
 		//EArtifactTypeBody:
 		//	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
-		//	mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
+		//	mime_type=STRING)? & ('file_ext:'+ file_ext=ELIST)? & ('properties:'
+		//	BEGIN
+		//	properties=EProperties
+		//	END)?);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
-		//mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?)
+		//mime_type=STRING)? & ('file_ext:'+ file_ext=ELIST)? & ('properties:' BEGIN properties=EProperties END)?)
 		public Group getGroup() { return cGroup; }
 		
 		//{EArtifactTypeBody}
 		public Action getEArtifactTypeBodyAction_0() { return cEArtifactTypeBodyAction_0; }
 		
 		//(('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:' mime_type=STRING)? &
-		//('file_ext:'+ file_ext=STRING)?)
+		//('file_ext:'+ file_ext=ELIST)? & ('properties:' BEGIN properties=EProperties END)?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//('derived_from:' superType=EPREFIX_TYPE)?
@@ -607,17 +616,35 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 		//STRING
 		public RuleCall getMime_typeSTRINGTerminalRuleCall_1_2_1_0() { return cMime_typeSTRINGTerminalRuleCall_1_2_1_0; }
 		
-		//('file_ext:'+ file_ext=STRING)?
+		//('file_ext:'+ file_ext=ELIST)?
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//'file_ext:'+
 		public Keyword getFile_extKeyword_1_3_0() { return cFile_extKeyword_1_3_0; }
 		
-		//file_ext=STRING
+		//file_ext=ELIST
 		public Assignment getFile_extAssignment_1_3_1() { return cFile_extAssignment_1_3_1; }
 		
-		//STRING
-		public RuleCall getFile_extSTRINGTerminalRuleCall_1_3_1_0() { return cFile_extSTRINGTerminalRuleCall_1_3_1_0; }
+		//ELIST
+		public RuleCall getFile_extELISTParserRuleCall_1_3_1_0() { return cFile_extELISTParserRuleCall_1_3_1_0; }
+		
+		//('properties:' BEGIN properties=EProperties END)?
+		public Group getGroup_1_4() { return cGroup_1_4; }
+		
+		//'properties:'
+		public Keyword getPropertiesKeyword_1_4_0() { return cPropertiesKeyword_1_4_0; }
+		
+		//BEGIN
+		public RuleCall getBEGINTerminalRuleCall_1_4_1() { return cBEGINTerminalRuleCall_1_4_1; }
+		
+		//properties=EProperties
+		public Assignment getPropertiesAssignment_1_4_2() { return cPropertiesAssignment_1_4_2; }
+		
+		//EProperties
+		public RuleCall getPropertiesEPropertiesParserRuleCall_1_4_2_0() { return cPropertiesEPropertiesParserRuleCall_1_4_2_0; }
+		
+		//END
+		public RuleCall getENDTerminalRuleCall_1_4_3() { return cENDTerminalRuleCall_1_4_3; }
 	}
 	public class ECapabilityTypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.sodalite.dsl.RM.ECapabilityTypes");
@@ -5580,7 +5607,10 @@ public class RMGrammarAccess extends AbstractElementFinder.AbstractGrammarElemen
 	
 	//EArtifactTypeBody:
 	//	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? & ('description:' description=STRING)? & ('mime_type:'
-	//	mime_type=STRING)? & ('file_ext:'+ file_ext=STRING)?);
+	//	mime_type=STRING)? & ('file_ext:'+ file_ext=ELIST)? & ('properties:'
+	//	BEGIN
+	//	properties=EProperties
+	//	END)?);
 	public EArtifactTypeBodyElements getEArtifactTypeBodyAccess() {
 		return pEArtifactTypeBody;
 	}

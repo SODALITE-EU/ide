@@ -486,7 +486,7 @@ public class RMSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EArtifactTypeBody returns EArtifactTypeBody
 	 *
 	 * Constraint:
-	 *     (superType=EPREFIX_TYPE | description=STRING | mime_type=STRING | file_ext=STRING)*
+	 *     (superType=EPREFIX_TYPE | description=STRING | mime_type=STRING | file_ext=ELIST | properties=EProperties)*
 	 */
 	protected void sequence_EArtifactTypeBody(ISerializationContext context, EArtifactTypeBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

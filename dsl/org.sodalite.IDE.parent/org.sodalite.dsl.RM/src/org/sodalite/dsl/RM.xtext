@@ -44,7 +44,8 @@ RM_Model:
 	('policy_types:'
 	BEGIN
 	policyTypes=EPolicyTypes
-	END)?;
+	END)?
+	;
 
 EDataTypes:
 	{EDataTypes} (dataTypes+=EDataType)+;
@@ -80,10 +81,16 @@ EArtifactType:
 	END;
 
 EArtifactTypeBody:
-	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
+	{EArtifactTypeBody} (
+	('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('mime_type:' mime_type=STRING)? &
-	('file_ext:'+ file_ext=STRING)?);
+	('file_ext:'+ file_ext=ELIST)? &
+	('properties:'
+	BEGIN
+	properties=EProperties
+	END)?
+	);
 
 ECapabilityTypes:
 	{ECapabilityTypes} (capabilityTypes+=ECapabilityType)+;
