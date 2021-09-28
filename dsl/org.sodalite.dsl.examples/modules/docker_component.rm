@@ -1,5 +1,9 @@
 module: docker
 
+capability_types:
+	sodalite.capabilities.DockerCompute:
+		derived_from: tosca.capabilities.Compute
+
 node_types:
 	sodalite.nodes.DockerNetwork:
 		derived_from: tosca.nodes.SoftwareComponent
@@ -58,7 +62,7 @@ node_types:
 				type: string
 		capabilities:  
 			host:  
-				type: tosca.capabilities.Compute
+				type: sodalite.capabilities.DockerCompute
 				valid_source_types:[docker/sodalite.nodes.DockerizedComponent] 
 		interfaces:  
 			Standard:
@@ -193,7 +197,7 @@ node_types:
 				
 		requirements:  
 			host:
-				capability: tosca.capabilities.Compute
+				capability: sodalite.capabilities.DockerCompute
 				node: docker/sodalite.nodes.DockerHost
 				relationship: tosca.relationships.HostedOn
 			network: 
