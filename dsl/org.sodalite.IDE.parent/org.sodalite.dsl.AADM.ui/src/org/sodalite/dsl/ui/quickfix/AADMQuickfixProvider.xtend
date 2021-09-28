@@ -53,27 +53,33 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 				val message = MessageFormat.format('Create requirement "{0}" referencing node "{1}"',
 					targetRequirement, targetNode);
 				val sub_message = message
-				acceptor.accept(issue, message, sub_message, '') [ nodeTemplate, context |
+				acceptor.accept(issue, message, sub_message, '') [ entity, context |
 					//Get requirement. If not created.
 					//Add/replace node
 					var ERequirementAssignment req = null
-					var node = nodeTemplate as ENodeTemplate
-					if (node.node.requirements === null){
-						val requirements = AADMFactory.eINSTANCE.createERequirementAssignments
-						node.node.requirements = requirements
-					}
-					for (ERequirementAssignment requirement:node.node.requirements.requirements){
-						if (requirement.name.equalsIgnoreCase(targetRequirement)){
-							req = requirement;
+					var ENodeTemplate node = null
+					if (entity instanceof ENodeTemplate){
+						node = entity as ENodeTemplate
+						if (node.node.requirements === null){
+							val requirements = AADMFactory.eINSTANCE.createERequirementAssignments
+							node.node.requirements = requirements
+						}
+						for (ERequirementAssignment requirement:node.node.requirements.requirements){
+							if (requirement.name.equalsIgnoreCase(targetRequirement)){
+								req = requirement;
+							}
+						}
+						if (req === null){
+							//Create a ERequirementAssignment
+							req = AADMFactory.eINSTANCE.createERequirementAssignment
+							req.name = targetRequirement
+							node.node.requirements.requirements.add(req)
 						}
 					}
-					if (req === null){
-						//Create a ERequirementAssignment
-						req = AADMFactory.eINSTANCE.createERequirementAssignment
-						req.name = targetRequirement
-						node.node.requirements.requirements.add(req)
+					if (entity instanceof ERequirementAssignment){
+						req = entity as ERequirementAssignment
 					}
-					System.out.println ("Applying targetNode: " + targetNode)
+					
 					if (req.node === null){
 						var req_node = RMFactory.eINSTANCE.createEPREFIX_ID
 						req.node = req_node

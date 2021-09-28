@@ -1810,18 +1810,21 @@ public class KBReasonerClient implements KBReasoner {
 		for (JsonElement json : jsonArray) {
 			JsonObject jsonObj = (JsonObject) json;
 			KBSuggestion suggestion = new KBSuggestion();
-			if (jsonObj.has("context"))
-				suggestion.setContext(jsonObj.get("context").getAsString());
 			if (jsonObj.has("type"))
 				suggestion.setType(jsonObj.get("type").getAsString());
-			if (jsonObj.has("description"))
-				suggestion.setDescription(jsonObj.get("description").getAsString());
-			if (jsonObj.has("name"))
-				suggestion.setEntity_name(jsonObj.get("name").getAsString());
-			if (jsonObj.has("suggestions")) {
-				JsonArray array = (JsonArray) jsonObj.get("suggestions");
-				SortedSet<String> suggestions = new Gson().fromJson(array, TreeSet.class);
-				suggestion.setSuggestions(suggestions);
+			if (jsonObj.has("info")) {
+				JsonObject info = (JsonObject) jsonObj.get("info");
+				if (info.has("context"))
+					suggestion.setContext(info.get("context").getAsString());
+				if (info.has("description"))
+					suggestion.setDescription(info.get("description").getAsString());
+				if (info.has("name"))
+					suggestion.setEntity_name(info.get("name").getAsString());
+				if (info.has("suggestions")) {
+					JsonArray array = (JsonArray) info.get("suggestions");
+					SortedSet<String> suggestions = new Gson().fromJson(array, TreeSet.class);
+					suggestion.setSuggestions(suggestions);
+				}
 			}
 			result.add(suggestion);
 		}
