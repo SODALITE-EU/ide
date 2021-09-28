@@ -103,6 +103,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_1(), "rule__EArtifactTypeBody__Group_1_1__0");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_2(), "rule__EArtifactTypeBody__Group_1_2__0");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_3(), "rule__EArtifactTypeBody__Group_1_3__0");
+			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_4(), "rule__EArtifactTypeBody__Group_1_4__0");
 			builder.put(grammarAccess.getECapabilityTypesAccess().getGroup(), "rule__ECapabilityTypes__Group__0");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getGroup(), "rule__ECapabilityType__Group__0");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getGroup(), "rule__ECapabilityTypeBody__Group__0");
@@ -337,6 +338,7 @@ public class AADMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EArtifactTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getMime_typeAssignment_1_2_1(), "rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getFile_extAssignment_1_3_1(), "rule__EArtifactTypeBody__File_extAssignment_1_3_1");
+			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getPropertiesAssignment_1_4_2(), "rule__EArtifactTypeBody__PropertiesAssignment_1_4_2");
 			builder.put(grammarAccess.getECapabilityTypesAccess().getCapabilityTypesAssignment_1(), "rule__ECapabilityTypes__CapabilityTypesAssignment_1");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getNameAssignment_0(), "rule__ECapabilityType__NameAssignment_0");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getCapabilityAssignment_3(), "rule__ECapabilityType__CapabilityAssignment_3");
