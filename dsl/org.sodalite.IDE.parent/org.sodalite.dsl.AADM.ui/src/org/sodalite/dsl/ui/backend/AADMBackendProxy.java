@@ -932,7 +932,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	private String getRequirement(String path) {
 		String req = null;
-		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Pattern pattern = Pattern.compile("/requirements/(.+)");
 		Matcher matcher = pattern.matcher(path);
 		if (matcher.find())
 			req = matcher.group(1);
