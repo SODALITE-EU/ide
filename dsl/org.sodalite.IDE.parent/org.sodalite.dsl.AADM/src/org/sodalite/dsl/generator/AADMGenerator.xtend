@@ -76,6 +76,11 @@ import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetAttribute
 import org.sodalite.dsl.aADM.AADM_Model
+import java.lang.reflect.Method
+import java.util.Arrays
+import java.util.List
+import java.util.stream.Collectors
+import org.sodalite.dsl.helper.AADMDSLHelper
 
 /**
  * Generates code from your model files on save.
@@ -894,6 +899,22 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compileNode (EPREFIX_ID t) '''
+	«IF t.version !== null»
+	  «getModule(t)»/«t.id»@«t.version»  
+	«ELSE»
+	  «getModule(t)»/«t.id»
+	«ENDIF»
+	'''
+		
+	def getModule(EPREFIX_ID id) {
+		if (id.module !== null)
+			return id.module
+		else
+			return AADMDSLHelper.getModule(id)
+	}
+	
+	
 	def compile (ESingleValue v) '''
 	«IF v instanceof ESTRING»
 	  «processStringValue((v as ESTRING).value)»
@@ -990,7 +1011,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.node.compile().trim»' ;  
+	  exchange:value '«r.node.compileNode().trim»' ;  
 	  .
 	
 	«requirement_numbers.put(r, requirement_counter)»

@@ -1,3 +1,5 @@
+module: vehicleiot
+
 inputs:
 	docker-registry-ip:  
 		type: string 

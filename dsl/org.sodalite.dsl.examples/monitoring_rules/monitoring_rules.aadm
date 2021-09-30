@@ -1,3 +1,5 @@
+module: monitoring
+
 import: monitoring_rules
 
 inputs:

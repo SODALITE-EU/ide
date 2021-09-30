@@ -1,3 +1,5 @@
+module: snow
+
 node_templates:
 	
 	security-rules-snow:  

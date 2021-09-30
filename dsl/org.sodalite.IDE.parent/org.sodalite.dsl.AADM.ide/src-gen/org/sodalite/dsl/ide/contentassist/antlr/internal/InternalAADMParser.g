@@ -20173,7 +20173,7 @@ rule__AADM_Model__UnorderedGroup
 	}
 :
 	rule__AADM_Model__UnorderedGroup__0
-	?
+	{getUnorderedGroupHelper().canLeave(grammarAccess.getAADM_ModelAccess().getUnorderedGroup())}?
 ;
 finally {
 	getUnorderedGroupHelper().leave(grammarAccess.getAADM_ModelAccess().getUnorderedGroup());
