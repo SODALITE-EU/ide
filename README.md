@@ -10,11 +10,11 @@ This repository contains the Sodalite IDE (based on Eclipse).
 - scripts: scripts to publish the IDE during the dev-ops pipeline
 
 ## Requirements
-- Java SDK 11.0:
-Install the Java JDK 11.0 from [Oracle Downloads](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- Java SDK 16.0:
+Install the Java JDK 16.0 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java16)
 - Eclipse Modeling Tools:
 Install the Eclipse Modeling Tools instance from [Eclipse Downloads](https://www.eclipse.org/downloads/)
-Note: SODALITE IDE has been tested in the version 2020-06 R (4.16.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-modeling-tools)
+Note: SODALITE IDE has been tested in the version 2021-09 R (4.21.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2021-09/r/eclipse-modeling-tools)
 
 ## IDE Installation from the Sodalite IDE update site
 ### Add Software sites for Sodalite IDE and dependencies
@@ -25,7 +25,7 @@ Then, click on *Add* button.
 
 2. Following the same procedure as before add the following external software repositories to your list of software sites:
 Name: Sirius-XText integration, Location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/
-3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you also select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
+3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
 ![Dialog to select the SODALITE features to install](images/Sodalite_Installation_Wizard.png)
 
