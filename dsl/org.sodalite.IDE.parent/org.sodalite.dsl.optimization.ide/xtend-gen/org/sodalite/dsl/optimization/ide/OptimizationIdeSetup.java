@@ -8,14 +8,12 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.util.Modules2;
 import org.sodalite.dsl.optimization.OptimizationRuntimeModule;
 import org.sodalite.dsl.optimization.OptimizationStandaloneSetup;
-import org.sodalite.dsl.optimization.ide.OptimizationIdeModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class OptimizationIdeSetup extends OptimizationStandaloneSetup {
-  @Override
   public Injector createInjector() {
     OptimizationRuntimeModule _optimizationRuntimeModule = new OptimizationRuntimeModule();
     OptimizationIdeModule _optimizationIdeModule = new OptimizationIdeModule();

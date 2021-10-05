@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.optimization;
 
-import org.sodalite.dsl.optimization.AbstractOptimizationRuntimeModule;
-
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
