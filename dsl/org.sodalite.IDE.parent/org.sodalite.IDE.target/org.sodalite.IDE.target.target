@@ -20,7 +20,10 @@
 		<unit id="org.eclipse.sirius.properties.feature.feature.group" version="6.3.1.202006101101"/>
 		<unit id="org.eclipse.sirius.runtime.ide.xtext.feature.group" version="6.3.1.202006101101"/>
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="2.22.0.v20200602-1533"/>
-		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.sirius.specifier.feature.group" version="6.3.1.202006101101"/>
+		<unit id="org.eclipse.sirius.specifier.properties.feature.feature.group" version="6.3.1.202006101101"/>
+		<unit id="org.eclipse.sdk.feature.group" version="4.16.0.v20200604-0951"/>
+		<unit id="org.eclipse.egit.feature.group" version="5.8.0.202006091008-r"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="http://download.eclipse.org/sirius/updates/releases/6.3.1/2019-06"/>
