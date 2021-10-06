@@ -3,8 +3,6 @@
  */
 package org.sodalite.sdl.ansible;
 
-import org.sodalite.sdl.ansible.AbstractAnsibleDslRuntimeModule;
-
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */

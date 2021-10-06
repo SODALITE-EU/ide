@@ -14,7 +14,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-				<version>2.22.0</version>
+				<version>${xtendMavenPlugin}</version>
 				<configuration>
             		<maven.compiler.source>1.8</maven.compiler.source>
         		</configuration>
