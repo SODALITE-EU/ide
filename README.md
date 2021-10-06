@@ -10,8 +10,8 @@ This repository contains the Sodalite IDE (based on Eclipse).
 - scripts: scripts to publish the IDE during the dev-ops pipeline
 
 ## Requirements
-- Java SDK 16.0:
-Install the Java JDK 16.0 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java16)
+- Java SDK 11 or above (tested with JDK 16):
+Install the Java JDK 16 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java16)
 - Eclipse Modeling Tools:
 Install the Eclipse Modeling Tools instance from [Eclipse Downloads](https://www.eclipse.org/downloads/)
 Note: SODALITE IDE has been tested in the version 2021-09 R (4.21.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2021-09/r/eclipse-modeling-tools)
