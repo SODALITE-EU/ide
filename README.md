@@ -36,10 +36,12 @@ Note: update site links are not browsable. Do not think these above links are wr
 Follow the following procedure to download the SODALITE IDE, build and install it into your Eclipse installation:
 
 ### Build the Sodalite IDE update site from sources
-
-1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
-2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
-3. Once complete, open the Eclipse Modeling Tools instance.
+1. Install the following dependencies required to build the IDE:
+- Java SDK 11 (Maven build does not work with a more recent JDK): Install the Java JDK 11 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java11)
+- Maven: Install Maven from [Maven Download](https://maven.apache.org/download.cgi)
+2. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
+3. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
+4. Once complete, open the Eclipse Modeling Tools instance.
 
 ### Add Software sites for Sodalite IDE and dependencies
 
