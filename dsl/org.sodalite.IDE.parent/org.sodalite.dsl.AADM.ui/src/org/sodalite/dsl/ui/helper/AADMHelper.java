@@ -60,6 +60,7 @@ import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.inject.Injector;
@@ -120,7 +121,7 @@ public class AADMHelper extends RMHelper {
 			}
 
 			List<String> keys = new ArrayList<String>(candidateNodes.keySet());
-			List<String> validSubClasses = BackendHelper.getKBReasoner().getSubClassesOf(keys, type);
+			List<String> validSubClasses = SodaliteBackendProxy.getKBReasoner().getSubClassesOf(keys, type);
 
 			for (String validClass : validSubClasses) {
 				if (candidateNodes.containsKey(validClass))
@@ -187,7 +188,8 @@ public class AADMHelper extends RMHelper {
 		if (module != null)
 			importedModules.add(module);
 
-		return BackendHelper.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
+		return SodaliteBackendProxy.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId,
+				importedModules);
 	}
 
 	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignment req)
@@ -204,7 +206,8 @@ public class AADMHelper extends RMHelper {
 		if (module != null)
 			importedModules.add(module);
 
-		return BackendHelper.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
+		return SodaliteBackendProxy.getKBReasoner().getValidRequirementNodes(requirementId, resourceId,
+				importedModules);
 	}
 
 	public static AADM_Model readAADMModel(IFile aadmFile, ExecutionEvent event) throws PartInitException {
@@ -294,7 +297,7 @@ public class AADMHelper extends RMHelper {
 		// Add current module to imported ones for searching in the KB
 		importedModules.add(module);
 
-		TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+		TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
 		for (Template nodeTemplate : templates.getElements()) {
 			String nodeTemplateRef = nodeTemplate.getModule() != null
 					? nodeTemplate.getModule() + '/' + nodeTemplate.getLabel()

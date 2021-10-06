@@ -56,10 +56,10 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.aADM.ECapabilityAssignments
 import org.sodalite.dsl.ui.helper.AADMHelper
-import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.aADM.ERequirementAssignments
 import org.sodalite.dsl.aADM.ENodeTemplateBody
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -165,7 +165,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//Get the properties defined within the entity
 			val type = node.node.type
 			val resourceId = (type.module !== null? type.module + '/':'') + type.type
-			val ReasonerData<PropertyDefinition> properties = BackendHelper.KBReasoner.getTypeProperties(resourceId)
+			val ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.KBReasoner.getTypeProperties(resourceId)
 			if (properties !== null){
 				System.out.println ("Properties retrieved from KB for resource: " + resourceId)
 				createProposalsForProperties (node, properties, context, acceptor)
@@ -203,7 +203,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//Get the attributes defined within the entity type
 			val type = node.node.type
 			val resourceId = (type.module !== null? type.module + '/':'') + type.type
-			val ReasonerData<AttributeDefinition> attributes = BackendHelper.KBReasoner.getTypeAttributes(resourceId)
+			val ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.KBReasoner.getTypeAttributes(resourceId)
 			if (attributes !== null){
 				System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
 				createProposalsForAttributes (node, attributes, context, acceptor)
@@ -295,7 +295,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//Add current module to imported ones for searching in the KB
 			importedModules.add(module)
 			
-			val ReasonerData<Type> nodes = BackendHelper.KBReasoner.getNodeTypes(importedModules)
+			val ReasonerData<Type> nodes = SodaliteBackendProxy.KBReasoner.getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (node: nodes.elements){
 				System.out.println ("\tNode: " + node.label)
@@ -335,7 +335,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 	
 			if (resourceId !== null){
-				val ReasonerData<AttributeDefinition> attributes = BackendHelper.KBReasoner.getTypeAttributes(resourceId)
+				val ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.KBReasoner.getTypeAttributes(resourceId)
 				if (attributes !== null){}
 					System.out.println ("Attributes retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/attribute.png")
@@ -387,7 +387,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<PropertyDefinition> properties = BackendHelper.KBReasoner.getTypeProperties(resourceId)
+				val ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.KBReasoner.getTypeProperties(resourceId)
 				if (properties !== null){
 					System.out.println ("Properties retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/property.png")
@@ -435,7 +435,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<CapabilityDefinition> capabilities = BackendHelper.KBReasoner.getTypeCapabilities(resourceId)
+				val ReasonerData<CapabilityDefinition> capabilities = SodaliteBackendProxy.KBReasoner.getTypeCapabilities(resourceId)
 				if (capabilities !== null){
 					System.out.println ("Capabilities retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/capability.png")
@@ -485,7 +485,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			resourceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (resourceId !== null){
-				val ReasonerData<RequirementDefinition> requirements = BackendHelper.KBReasoner.getTypeRequirements(resourceId)
+				val ReasonerData<RequirementDefinition> requirements = SodaliteBackendProxy.KBReasoner.getTypeRequirements(resourceId)
 				if (requirements !== null){
 					System.out.println ("Requirements retrieved from KB for resource: " + resourceId)
 					val Image image = getImage("icons/requirement.png")
@@ -588,7 +588,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//Add current module to imported ones for searching in the KB
 			if (module !== null)
 				importedModules.add(module)
-			val ReasonerData<Type> types = BackendHelper.KBReasoner.getDataTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.KBReasoner.getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tData type: " + type.label)
@@ -663,7 +663,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			//Add current module to imported ones for searching in the KB
 			importedModules.add(module)
 			
-			val ReasonerData<Type> policies = BackendHelper.KBReasoner.getPolicyTypes(importedModules)
+			val ReasonerData<Type> policies = SodaliteBackendProxy.KBReasoner.getPolicyTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (policy: policies.elements){
 				System.out.println ("\tNode: " + policy.label)
@@ -738,14 +738,14 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 			if (req_node !== null){ // A) Node lives in RM
 				// Find capabilities defined in req node type
 				val node_type = AADMHelper.getReference(req_node.node.type)
-				val CapabilityDefinitionData capabilityData = BackendHelper.KBReasoner.getTypeCapabilities(node_type)
+				val CapabilityDefinitionData capabilityData = SodaliteBackendProxy.KBReasoner.getTypeCapabilities(node_type)
 				capabilityDefinitions = capabilityData.elements
 				cap_def_type = node_type // FIXME take defining type from capability
 			} else { // B) Node lives in KB
 				val nodeName = AADMHelper.getNodeFromRequirementRef (filter.requirement)
 				val req_name = AADMHelper.getRequirementNameFromRequirementRef(filter.requirement)
 				val CapabilityAssignmentData capabilityData = 
-					BackendHelper.KBReasoner.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name)
+					SodaliteBackendProxy.KBReasoner.getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name)
 				capabilityAssignments = capabilityData.elements
 				cap_assign_type = nodeName // FIXME take defining type from capability
 			}
@@ -773,7 +773,7 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		try{
 			//Find local and KB node templates
 			val List<String> importedModules = AADMHelper.processListModules(model)
-			val TemplateData templates = BackendHelper.KBReasoner.getTemplates(importedModules)		
+			val TemplateData templates = SodaliteBackendProxy.KBReasoner.getTemplates(importedModules)		
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
 			val List<ENodeTemplate> localNodes = AADMHelper.findLocalNodes(model)
 			createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);

@@ -73,8 +73,8 @@ import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
-import org.sodalite.dsl.ui.helper.BackendHelper;
 import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -105,7 +105,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       try {
         System.out.println("Invoking content assist for imports");
-        final ReasonerData<String> modules = BackendHelper.getKBReasoner().getModules();
+        final ReasonerData<String> modules = SodaliteBackendProxy.getKBReasoner().getModules();
         List<String> _elements = modules.getElements();
         String _plus = ("Modules retrieved from KB: " + _elements);
         System.out.println(_plus);
@@ -148,7 +148,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -236,7 +236,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = nodes.getElements();
         for (final Type node : _elements) {
@@ -307,7 +307,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
         System.out.println("Types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -373,7 +373,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules);
         System.out.println("Policies retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -439,7 +439,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules);
+        final ReasonerData<Type> relationships = SodaliteBackendProxy.getKBReasoner().getRelationshipTypes(importedModules);
         System.out.println("Relationships retrieved from KB:");
         final Image image = this.getImage("icons/relationship.png");
         List<Type> _elements = relationships.getElements();
@@ -504,7 +504,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules);
+        final ReasonerData<Type> capabilitiess = SodaliteBackendProxy.getKBReasoner().getCapabilityTypes(importedModules);
         System.out.println("Capabilities retrieved from KB:");
         final Image image = this.getImage("icons/capability.png");
         List<Type> _elements = capabilitiess.getElements();
@@ -569,7 +569,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
+        final ReasonerData<Type> interfaces = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
         System.out.println("Interfaces retrieved from KB:");
         final Image image = this.getImage("icons/interface.png");
         List<Type> _elements = interfaces.getElements();
@@ -689,7 +689,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         String _type = type.getType();
         String interfaceId = (_xifexpression + _type);
         if ((interfaceId != null)) {
-          final OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId);
+          final OperationDefinitionData operations = SodaliteBackendProxy.getKBReasoner().getOperationsInInterface(interfaceId);
           if ((operations != null)) {
             final Image image = this.getImage("icons/operation.png");
             List<OperationDefinition> _elements = operations.getElements();
@@ -889,8 +889,8 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
-        final TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
+        final TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
         this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
         this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
       } catch (final Throwable _t) {
@@ -916,7 +916,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         boolean _tripleNotEquals = (_node != null);
         if (_tripleNotEquals) {
           String qnode = RMHelper.getNodeName(filter.getNode());
-          final RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode);
+          final RequirementDefinitionData reqs = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(qnode);
           this.createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
         }
       } catch (final Throwable _t) {
@@ -936,7 +936,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         final String type_image = "icons/type.png";
         final String primitive_type_image = "icons/primitive_type.png";
         this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
@@ -962,7 +962,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules);
+        final OperationDefinitionData operationsData = SodaliteBackendProxy.getKBReasoner().getOperations(importedModules);
         final String type_image = "icons/operation.png";
         this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
         final List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model);
@@ -1612,7 +1612,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void proposeAttributesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       try {
-        final AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+        final AttributeDefinitionData attributeData = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
         List<AttributeDefinition> _elements = attributeData.getElements();
         for (final AttributeDefinition attr : _elements) {
           {
@@ -1689,7 +1689,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void proposePropertiesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       try {
-        final PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+        final PropertyDefinitionData propertyData = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
         List<PropertyDefinition> _elements = propertyData.getElements();
         for (final PropertyDefinition prop : _elements) {
           {
@@ -1796,7 +1796,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           _xifexpression = node.getNode().getSuperType().getType();
         }
         final String superType = _xifexpression;
-        final RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType);
+        final RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(superType);
         Image image_2 = this.getImage("icons/requirement.png");
         List<RequirementDefinition> _elements = reqData.getElements();
         for (final RequirementDefinition req_1 : _elements) {
@@ -1806,7 +1806,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             this.createEditableCompletionProposal(proposal, proposal, image_2, context, null, acceptor);
           }
         }
-        final CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType);
+        final CapabilityDefinitionData capData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(superType);
         image_2 = this.getImage("icons/capability.png");
         List<CapabilityDefinition> _elements_1 = capData.getElements();
         for (final CapabilityDefinition cap_1 : _elements_1) {

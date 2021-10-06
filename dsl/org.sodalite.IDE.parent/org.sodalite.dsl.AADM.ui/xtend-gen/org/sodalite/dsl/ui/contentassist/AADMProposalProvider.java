@@ -70,7 +70,7 @@ import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.ui.helper.AADMHelper;
-import org.sodalite.dsl.ui.helper.BackendHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -208,7 +208,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         String _type = type.getType();
         final String resourceId = (_xifexpression + _type);
-        final ReasonerData<PropertyDefinition> properties = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+        final ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
         if ((properties != null)) {
           System.out.println(("Properties retrieved from KB for resource: " + resourceId));
           this.createProposalsForProperties(node, properties, context, acceptor);
@@ -262,7 +262,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         String _type = type.getType();
         final String resourceId = (_xifexpression + _type);
-        final ReasonerData<AttributeDefinition> attributes = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+        final ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
         if ((attributes != null)) {
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
           this.createProposalsForAttributes(node, attributes, context, acceptor);
@@ -422,7 +422,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final List<String> importedModules = AADMHelper.getImportedModules(model);
         final String module = AADMHelper.getModule(model);
         importedModules.add(module);
-        final ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = nodes.getElements();
         for (final Type node : _elements) {
@@ -500,7 +500,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<AttributeDefinition> attributes = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+          final ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
           if ((attributes != null)) {
           }
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
@@ -604,7 +604,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<PropertyDefinition> properties = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+          final ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
           if ((properties != null)) {
             System.out.println(("Properties retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/property.png");
@@ -700,7 +700,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<CapabilityDefinition> capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(resourceId);
+          final ReasonerData<CapabilityDefinition> capabilities = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(resourceId);
           if ((capabilities != null)) {
             System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/capability.png");
@@ -791,7 +791,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<RequirementDefinition> requirements = BackendHelper.getKBReasoner().getTypeRequirements(resourceId);
+          final ReasonerData<RequirementDefinition> requirements = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(resourceId);
           if ((requirements != null)) {
             System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/requirement.png");
@@ -976,7 +976,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((module != null)) {
           importedModules.add(module);
         }
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -1064,7 +1064,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final List<String> importedModules = AADMHelper.getImportedModules(model);
         final String module = AADMHelper.getModule(model);
         importedModules.add(module);
-        final ReasonerData<Type> policies = BackendHelper.getKBReasoner().getPolicyTypes(importedModules);
+        final ReasonerData<Type> policies = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = policies.getElements();
         for (final Type policy : _elements) {
@@ -1162,13 +1162,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final ENodeTemplate req_node = AADMHelper.findRequirementNodeInLocalModel(object, filter.getRequirement());
         if ((req_node != null)) {
           final String node_type = AADMHelper.getReference(req_node.getNode().getType());
-          final CapabilityDefinitionData capabilityData = BackendHelper.getKBReasoner().getTypeCapabilities(node_type);
+          final CapabilityDefinitionData capabilityData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(node_type);
           capabilityDefinitions = capabilityData.getElements();
           cap_def_type = node_type;
         } else {
           final String nodeName = AADMHelper.getNodeFromRequirementRef(filter.getRequirement());
           final String req_name = AADMHelper.getRequirementNameFromRequirementRef(filter.getRequirement());
-          final CapabilityAssignmentData capabilityData_1 = BackendHelper.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
+          final CapabilityAssignmentData capabilityData_1 = SodaliteBackendProxy.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
           capabilityAssignments = capabilityData_1.getElements();
           cap_assign_type = nodeName;
         }
@@ -1201,7 +1201,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     try {
       try {
         final List<String> importedModules = AADMHelper.processListModules(model);
-        final TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+        final TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
         this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
         final List<ENodeTemplate> localNodes = AADMHelper.findLocalNodes(model);
         this.createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
