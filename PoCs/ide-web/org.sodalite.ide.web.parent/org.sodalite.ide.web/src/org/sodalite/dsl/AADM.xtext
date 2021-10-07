@@ -1,0 +1,415 @@
+grammar org.sodalite.dsl.AADM with org.eclipse.xtext.common.Terminals
+
+generate aADM "http://www.sodalite.org/dsl/AADM"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+
+AADM_Model:
+	('description:' description=STRING)? &
+	('module:' module=ID) &
+	('import:' imports+=ID)* &
+	('inputs:'
+		BEGIN
+		inputs = EInputs
+		END)? &
+	('node_templates:'
+		BEGIN
+		nodeTemplates=ENodeTemplates
+		END)? &
+	('policies:'
+		BEGIN
+		policies=EPolicies
+		END)? &
+	('outputs:'
+		BEGIN
+		outputs = EOutputs
+		END)?
+;
+
+EOutputs:
+	{EOutputs} (parameters+=EParameterDefinition)*;
+
+EPolicies:
+	{EPolicies} (policies+=EPolicyDefinition)*;
+	
+EPolicyDefinition:
+	name = ID ':'
+	BEGIN
+		policy=EPolicyDefinitionBody
+	END
+;
+
+EPolicyDefinitionBody:
+	('type:' type=EPREFIX_TYPE) &
+	('description:' description=STRING)? &
+	('properties:'
+	BEGIN
+		properties=EPropertyAssignments
+	END)? &
+	('targets:' '[' targets=ETarget ']')? &
+	('triggers:'
+	BEGIN
+		triggers=ETriggerDefinitions
+	END)?
+;
+
+ETriggerDefinitions:
+	{ETriggerDefinitions} (triggers+=ETriggerDefinition)*;
+
+ETriggerDefinition:
+	name=QUALIFIED_NAME ':' 
+	BEGIN
+	trigger=ETriggerDefinitionBody
+	END;
+
+ETriggerDefinitionBody:
+	('description:' description=STRING)? &
+	('event:' event=STRING) &
+	('schedule:' 
+		BEGIN
+		schedule=ETimeInterval
+		END
+	)? &
+	('target_filter:'
+		BEGIN 
+		target_filter=EEvenFilter
+		END
+	)? &
+	('condition:'
+		BEGIN
+		condition=EExtendedTriggerCondition
+		END
+	)? &
+	('action:'
+		BEGIN
+		action=EActivityDefinitions
+		END
+	)
+;
+
+EActivityDefinitions:
+	{EActivityDefinitions} (list += EActivityDefinition)*
+;
+
+EActivityDefinition:
+	ECallOperationActivityDefinition
+;
+
+ECallOperationActivityDefinition:
+	'call_operation:' 
+	BEGIN
+	operation=ECallOperationActivityDefinitionBody
+	END
+;	
+
+ECallOperationActivityDefinitionBody:
+	('operation:' operation=EPREFIX_TYPE) &
+	('inputs:'
+		BEGIN 
+		inputs=EPropertyAssignments
+		END
+	)? 
+;
+
+ETimeInterval:
+	('start_time:' start_time=STRING)
+	('end_time:' end_time=STRING)
+;
+
+EEvenFilter:
+	('node:' node=EPREFIX_REF) &
+	('requirement:' requirement=EPREFIX_REF)? &
+	('capability:' capability=EPREFIX_REF)?
+;
+
+EExtendedTriggerCondition:
+	('constraint:'
+		BEGIN
+		constraint=EConditionClauseDefinition
+		END
+	)? &
+	('period:' period=STRING)? &
+	('evaluations:' evaluations=ESIGNEDINT)? &
+	('method:' method=STRING)?
+;
+
+EConditionClauseDefinition:
+	EConditionClauseDefinitionAND | EConditionClauseDefinitionOR | EConditionClauseDefinitionNOT | EConditionClauseDefinitionAssert
+;
+
+EConditionClauseDefinitionAND:
+	'and:'
+	BEGIN
+	and = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionOR:
+	'or:'
+	BEGIN
+	or = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionNOT:
+	'not:'
+	BEGIN
+	not = EConditionClauseDefinition
+	END
+;
+
+EConditionClauseDefinitionAssert:
+	{EConditionClauseDefinitionAssert} (assertions += EAssertionDefinition)*
+;
+
+EAssertionDefinition:
+	attribute_name = ID ':' '[' constraints=EConstraintList ']' 
+;
+
+EConstraintList:
+	list+=EConstraint (',' list+=EConstraint)*;
+
+EConstraint:
+	EEqual | EGreaterThan | EGreaterOrEqual | ELessThan | ELessOrEqual | EInRange | EValid_Values | ELength | EMinLength |
+	EMaxLength;
+
+EMaxLength:
+	'max_length:' val=EAlphaNumericValue;
+
+EMinLength:
+	'min_length:' val=EAlphaNumericValue;
+
+ELength:
+	'length:' val=EAlphaNumericValue;
+
+EValid_Values:
+	'valid_values:' val=ELIST;
+	
+EInRange:
+	'in_range:' '[' start=EAlphaNumericValue "," end=EAlphaNumericValue ']';
+
+ELessOrEqual:
+	'less_or_equal:' val=EAlphaNumericValue;
+
+ELessThan:
+	'less_than:' val=EAlphaNumericValue;
+
+EGreaterOrEqual:
+	'greater_or_equal:' val=EAlphaNumericValue;
+
+EGreaterThan:
+	'greater_than:' val=EAlphaNumericValue;
+
+EEqual:
+	'equal:' val=ESingleValue;
+
+ETarget:
+	target+=EPREFIX_ID (',' target+=EPREFIX_ID)*;
+
+ENodeTemplates:
+	{ENodeTemplates} (nodeTemplates+=ENodeTemplate)*;
+
+ENodeTemplate:
+	name = ID ':'
+	BEGIN
+		node=ENodeTemplateBody
+	END
+;
+
+ENodeTemplateBody:
+	('type:' type=EPREFIX_TYPE) &
+	('description:' description=STRING)? &
+	('properties:'
+	BEGIN
+		properties=EPropertyAssignments
+	END)? &
+	('attributes:'
+	BEGIN
+		attributes=EAttributeAssignments
+	END)? &
+	('requirements:'
+	BEGIN
+		requirements=ERequirementAssignments
+	END)? &
+	('capabilities:'
+	BEGIN
+		capabilities=ECapabilityAssignments
+	END)?
+;
+
+ECapabilityAssignments:
+	{ECapabilityAssignments} (capabilities+=ECapabilityAssignment)*;
+
+ECapabilityAssignment:
+	name = ID ':'
+	BEGIN
+		('properties:'
+		BEGIN
+			properties=EPropertyAssignments
+		END)? 
+	END;
+
+ERequirementAssignments:
+	{ERequirementAssignments} (requirements+=ERequirementAssignment)*;
+
+ERequirementAssignment:
+	name = ID ':'
+	BEGIN
+		('node:' node=EPREFIX_ID)
+	END;
+
+EAttributeAssignments:
+	{EAttributeAssignments} (attributes+=EAttributeAssignment)*;
+
+EAttributeAssignment:
+	name = ID ':' value=EAssignmentValue;
+
+EPropertyAssignments:
+	{EPropertyAssignments} (properties+=EPropertyAssignment)*;
+
+EPropertyAssignment:
+	name = ID ':' value=EAssignmentValue;
+
+EAssignmentValue:
+	ESingleValue | ELIST | EMAP | EFunction
+;
+
+EMAP:
+	BEGIN
+		map+=EMapEntry+
+	END
+;
+
+EMapEntry:
+	key=ID ":" value=EAssignmentValue
+;
+
+ELIST:
+	{ELIST} '[' list+=EAlphaNumericValue? ("," list+=EAlphaNumericValue)* ']'
+;
+
+EAlphaNumericValue:
+	ESTRING | EFLOAT | ESIGNEDINT 
+;
+
+EInputs:
+	{EInputs} (parameters+=EParameterDefinition)*;
+	
+EParameterDefinition:
+	name=ID ':'
+	BEGIN
+	parameter=EParameterDefinitionBody
+	END;
+	
+EParameterDefinitionBody:
+	{EParameterDefinitionBody} (
+	('type:' type=EDataTypeName)? &
+	('description:' description=STRING)? &
+	('value:' value=EValueExpression)? &
+	('default:' default=EValueExpression)?);
+	
+EValueExpression:
+	ESingleValue | EFunction;
+	
+EFunction:
+	GetProperty | GetAttribute | GetInput;
+	
+GetAttribute:
+	'get_attribute:'
+	BEGIN
+	attribute=GetAttributeBody
+	END;
+
+GetAttributeBody:
+	('attribute:' attribute=EPREFIX_REF) &
+	('entity:' entity=EEntityReference) &
+	('req_cap:' req_cap=EPREFIX_REF)?;
+
+EEntityReference:
+	EEntity | EPREFIX_TYPE | EPREFIX_ID
+;
+
+EPREFIX_REF:
+	EPREFIX_TYPE | EPREFIX_ID 
+;
+
+EPREFIX_ID:
+	(module=ID '/')? id=ID ('@'version=VERSION)?
+;
+
+EEntity:
+	entity=ENTITY
+;
+
+GetProperty:
+	'get_property:'
+	BEGIN
+	property=GetPropertyBody
+	END;
+
+GetPropertyBody:
+	('property:' property=EPREFIX_REF) &
+	('entity:' entity=EEntityReference) &
+	('req_cap:' req_cap=EPREFIX_REF)?;
+	
+GetInput:
+	'get_input:' input=[EParameterDefinition]
+;
+	
+ESingleValue:
+	ESTRING | EBOOLEAN | EFLOAT | ESIGNEDINT 
+;
+
+ESTRING:
+	value = STRING
+;
+
+EBOOLEAN:
+	value = BOOLEAN
+;
+
+EFLOAT:
+	value = FLOAT
+;
+
+ESIGNEDINT:
+	value = SIGNEDINT
+;
+	
+EDataTypeName:
+	EPREFIX_TYPE | EPRIMITIVE_TYPE;
+	
+EPREFIX_TYPE:
+	(module=ID '/')? type=QUALIFIED_NAME
+;
+
+EPRIMITIVE_TYPE:
+	type=ID
+;
+
+terminal QUALIFIED_NAME: //FIXME convert to data type rule, remove terminal
+	ID ('.' ID)+;
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false';
+	
+SIGNEDINT returns ecore::EInt: '-'? INT;
+
+FLOAT returns ecore::EFloat: INT? '.' INT;
+
+terminal ENTITY:
+	'SELF' | 'SOURCE' | 'TARGET' | 'HOST';
+	
+@Override
+terminal ID:
+	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
+	
+terminal VERSION:
+	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '.' | '0'..'9')*;
+
+
+
+	
+//Positional blocks delimited with indentation
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';

@@ -1,0 +1,3 @@
+include 'org.sodalite.ide.web'
+include 'org.sodalite.ide.web.ide'
+include 'org.sodalite.ide.web.web'

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/org.sodalite.ide.web"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web.parent&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web.ide&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web.ui&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web.web&quot; type=&quot;4&quot;/&gt;&#10;&lt;item path=&quot;/org.sodalite.ide.web.target&quot; type=&quot;4&quot;/&gt;&#10;;&lt;/resources&gt;}"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="org.sodalite.dsl.GenerateAADM"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.sodalite.ide.web"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m"/>
+</launchConfiguration>
