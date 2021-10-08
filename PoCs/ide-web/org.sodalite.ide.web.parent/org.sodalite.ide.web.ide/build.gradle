@@ -1,5 +1,6 @@
 dependencies {
 	compile project(':org.sodalite.ide.web')
+	compile project(':org.sodalite.ide.web.backend')
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
 }

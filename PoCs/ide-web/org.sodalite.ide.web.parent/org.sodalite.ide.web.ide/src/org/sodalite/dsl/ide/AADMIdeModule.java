@@ -3,9 +3,16 @@
  */
 package org.sodalite.dsl.ide;
 
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
+import org.sodalite.dsl.ide.contentassist.AADMIdeProposalProvider;
 
 /**
  * Use this class to register ide components.
  */
 public class AADMIdeModule extends AbstractAADMIdeModule {
+	
+	public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return AADMIdeProposalProvider.class;
+	}
+
 }

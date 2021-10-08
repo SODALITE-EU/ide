@@ -3,6 +3,7 @@ plugins {
 }
 dependencies {
 	compile project(':org.sodalite.ide.web')
+	compile project(':org.sodalite.ide.web.backend')
 	compile project(':org.sodalite.ide.web.ide')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"

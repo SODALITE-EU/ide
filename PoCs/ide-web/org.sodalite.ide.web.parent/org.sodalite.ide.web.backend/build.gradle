@@ -1,0 +1,17 @@
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-web:2.5.2"
+	compile "org.springframework.boot:spring-boot-starter-test:2.5.2"
+	compile "com.google.code.gson:gson:2.8.7"
+	compile "org.apache.httpcomponents:httpclient:[4.5.13,)"
+	compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.4"
+	compile "com.fasterxml.jackson.core:jackson-core:2.12.4"
+	compile "junit:junit:4.13.2"
+}
+
+apply plugin: 'java'
+
+jar {
+    from {
+        configurations.compile.collect {it.isDirectory() ? it: zipTree(it)}
+    }
+}
