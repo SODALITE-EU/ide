@@ -14,4 +14,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.sodalite.dsl.ide.contentassist.antlr,
  org.sodalite.dsl.ide.contentassist.antlr.internal,
  org.sodalite.dsl.ide.contentassist.antlr.lexer
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/org.sodalite.ide.web.backend-1.0.0-SNAPSHOT.jar

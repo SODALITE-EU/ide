@@ -19,9 +19,10 @@ class AADMIdeProposalProvider extends IdeContentProposalProvider {
             case ga.AADM_ModelAccess.importsAssignment_2_1: {
                 val modules = SodaliteBackendProxy.KBReasoner.modules.elements
                 for (module : modules.filter[it.startsWith(context.prefix)]) {
-                        var proposal = proposalCreator.createProposal(module, context) [
-                            source = RMHelper.extractModule(module)
-                            description = module + " module registered in KB"
+                		val mod = RMHelper.extractModule(module)
+                        var proposal = proposalCreator.createProposal(mod, context) [
+                            source = mod
+                            description = mod + " module registered in KB"
                         ]
                         acceptor.accept(proposal, proposalPriorities.getDefaultPriority(proposal))
                     }

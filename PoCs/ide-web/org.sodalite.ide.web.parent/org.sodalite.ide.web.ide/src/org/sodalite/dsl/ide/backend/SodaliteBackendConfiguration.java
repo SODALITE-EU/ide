@@ -2,7 +2,7 @@ package org.sodalite.dsl.ide.backend;
 
 
 public class SodaliteBackendConfiguration {
-	//final static String KB_REASONER_URI = "http://192.168.2.97:8080/reasoner-api/v0.6/"; // TestBed;
+//	final static String KB_REASONER_URI = "http://192.168.2.97:8080/reasoner-api/v0.6/"; // TestBed;
 	final static String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/"; //CERTH
 
 	final static String IaC_URI = "http://192.168.2.107:8081/";

@@ -23,6 +23,7 @@
 	<modules>
 		<module>org.sodalite.ide.web</module>
 		<module>org.sodalite.ide.web.ide</module>
+		<module>org.sodalite.ide.web.backend</module>
 		<module>org.sodalite.ide.web.ui</module>
 		<module>org.sodalite.ide.web.target</module>
 	</modules>
