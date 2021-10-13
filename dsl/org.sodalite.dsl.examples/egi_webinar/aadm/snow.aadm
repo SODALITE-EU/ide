@@ -136,17 +136,17 @@ node_templates:
 			host:
 				node: snow/snow-docker-host
 	
-	snow-skyline-extractor:
-		type: docker/sodalite.nodes.DockerizedComponent
-		properties:
-			alias: "snow-skyline-extractor"
-			volumes: ["/tmp/docker:/tmp"]
-			image_name: "snow-skyline-extractor:latest"
-			ports: ['8080:8080']
-			exposed_ports: [8080]
-			registry_url: get_input: docker-registry-url
-		requirements:
-			host:
-				node: snow/snow-docker-host
-			registry:
-				node: snow/snow-docker-registry
+//	snow-skyline-extractor:
+//		type: docker/sodalite.nodes.DockerizedComponent
+//		properties:
+//			alias: "snow-skyline-extractor"
+//			volumes: ["/tmp/docker:/tmp"]
+//			image_name: "snow-skyline-extractor:latest"
+//			ports: ['8080:8080']
+//			exposed_ports: [8080]
+//			registry_url: get_input: docker-registry-url
+//		requirements:
+//			host:
+//				node: snow/snow-docker-host
+//			registry:
+//				node: snow/snow-docker-registry
