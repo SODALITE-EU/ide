@@ -12,10 +12,16 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.ECapabilityAssignment;
+import org.sodalite.dsl.aADM.EEntity;
+import org.sodalite.dsl.aADM.EEntityReference;
 import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPREFIX_REF;
 import org.sodalite.dsl.aADM.EPREFIX_TYPE;
+import org.sodalite.dsl.aADM.EPREFIX_ID;
 import org.sodalite.dsl.aADM.ERequirementAssignment;
 import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
+import org.sodalite.dsl.aADM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
 import org.sodalite.dsl.ide.backend.SodaliteBackendProxy;
@@ -88,6 +94,16 @@ public class AADMHelper {
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
 	}
 	
+	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
+		if (ref instanceof EPREFIX_TYPE) {
+			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
+		} else if (ref instanceof EPREFIX_TYPE) {
+			return ((EPREFIX_ID) ref).getId();
+		} else {
+			return null;
+		}
+	}
+	
 	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignment req)
 			throws Exception {
 		String requirementId = req.getName();
@@ -153,5 +169,70 @@ public class AADMHelper {
 	public static List<ENodeTemplate> findNodes(EObject object) {
 		AADM_Model model = (AADM_Model) findModel(object);
 		return model.getNodeTemplates().getNodeTemplates();
+	}
+	
+	public static ENodeTemplate getEntityNode(GetPropertyBodyImpl body) {
+		EEntityReference eEntityReference = body.getEntity();
+		ENodeTemplate node = null;
+		if (eEntityReference instanceof EEntity) {
+			EEntity eEntity = (EEntity) eEntityReference;
+			if (eEntity.getEntity().equals("SELF")) {
+				node = (ENodeTemplate) getNodeTemplate(body);
+			}
+		} else {
+			// TODO Support other entities: TARGET, HOST, SOURCE, concrete entity
+		}
+		return node;
+	}
+	
+	public static EObject getNodeTemplate(EObject object) {
+		if (object.eContainer() == null)
+			return null;
+		else if (object.eContainer() instanceof ENodeTemplate)
+			return object.eContainer();
+		else
+			return getNodeTemplate(object.eContainer());
+	}
+	
+	public static ENodeTemplate findRequirementNodeInTemplate(String requirement, ENodeTemplate template) {
+		ENodeTemplate node = null;
+		if (template.getNode().getRequirements() == null)
+			return node;
+		for (ERequirementAssignment req : template.getNode().getRequirements().getRequirements()) {
+			if (req.getName().equals(requirement)) {
+				AADM_Model model = (AADM_Model) findModel(template);
+				String module1 = model.getModule();
+				if (module1 == null)
+					module1 = "";
+				String module2 = req.getNode().getModule();
+				if (module2 == null)
+					module2 = "";
+				if (module1.equals(module2)) {
+					node = findNode(model, req.getNode().getId());
+				} else {
+					// TODO Find node in KB
+				}
+			}
+		}
+		return node;
+	}
+	
+	public static ENodeTemplate findNode(AADM_Model model, String nodeName) {
+		for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
+			if (node.getName().equals(nodeName))
+				return node;
+		}
+		return null;
+	}
+	
+	public static ECapabilityAssignment findCapabilityInTemplate(String capabilityName, ENodeTemplate template) {
+		ECapabilityAssignment capability = null;
+		if (template.getNode().getCapabilities() == null)
+			return capability;
+		for (ECapabilityAssignment cap : template.getNode().getCapabilities().getCapabilities()) {
+			if (cap.getName().equals(capabilityName))
+				capability = cap;
+		}
+		return capability;
 	}
 }

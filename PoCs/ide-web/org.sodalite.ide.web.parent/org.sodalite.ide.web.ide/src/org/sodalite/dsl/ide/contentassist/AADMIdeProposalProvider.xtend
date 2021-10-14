@@ -29,6 +29,8 @@ import org.sodalite.dsl.aADM.ERequirementAssignment
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNode
+import org.sodalite.dsl.aADM.impl.GetPropertyBodyImpl
+import org.sodalite.dsl.aADM.ECapabilityAssignment
 
 class AADMIdeProposalProvider extends IdeContentProposalProvider {
 	@Inject
@@ -194,8 +196,78 @@ class AADMIdeProposalProvider extends IdeContentProposalProvider {
 	def createGetProperty_Entity(ContentAssistContext context, IIdeContentProposalAcceptor acceptor){
 		val property = context.currentModel
 		val List<ENodeTemplate> nodes = AADMHelper.findNodes(property) //Local nodes
-		createNodeProposals(nodes, context, acceptor)
+		createProposalsForNodes(nodes, context, acceptor)
 		createEntityProposals(context, acceptor)
+	}
+	
+	def createGetProperty_Property(ContentAssistContext context, IIdeContentProposalAcceptor acceptor){
+		//Get entity in this GetProperty body. If null, return
+		val body = context.currentModel as GetPropertyBodyImpl
+		val String module = AADMHelper.getModule(body)
+		val node = AADMHelper.getEntityNode(body)
+		
+		if (node === null)
+			return
+			
+		val Map<String, String> proposals = new HashMap<String, String>();
+		
+		if (body.req_cap !== null){
+			val req_cap_name = AADMHelper.getLastSegment(body.req_cap, '.')
+			val ENodeTemplate req_node = AADMHelper.findRequirementNodeInTemplate(req_cap_name, node)
+			if (req_node !== null)
+				for (prop:req_node.node.properties.properties){
+					val proposal = module + '/' + req_node.name + "." + prop.name
+					val description = ""
+					proposals.put(proposal, description)	
+			}
+			//else
+				//TODO Find requirement node in KB
+			val ECapabilityAssignment cap = AADMHelper.findCapabilityInTemplate(req_cap_name, node)
+			if (cap !== null)
+				for (prop:cap.properties.properties){
+					val proposal = prop.name
+					val description = ""
+					proposals.put(proposal, description)
+				}
+		}else{
+			//Get the properties defined within the entity
+			val type = node.node.type
+			val resourceId = (type.module !== null? type.module + '/':'') + type.type
+			val ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.KBReasoner.getTypeProperties(resourceId)
+			if (properties !== null){
+				createProposalsForProperties (node, properties, context, acceptor)
+			}
+		}
+		
+		addProposals(proposals, context, acceptor)
+	}
+	
+	def createGetProperty_Req_Cap(ContentAssistContext context, IIdeContentProposalAcceptor acceptor){
+		val property = context.currentModel
+		val String module = AADMHelper.getModule(property)
+		//Get entity in this GetProperty body. If null, return
+		val node = AADMHelper.getEntityNode(property as GetPropertyBodyImpl)
+		
+		if (node === null){
+			return
+		}
+		val Map<String, String> proposals = new HashMap<String, String>();
+		//Find requirements and capability assignments defined within the entity
+		if (node.node.requirements !== null){
+			for (req: node.node.requirements.requirements){
+				val String proposal = module + '/' + node.name + '.' + req.name
+				val description = ""
+				proposals.put(proposal, description)
+			}
+		}
+		if (node.node.capabilities !== null){
+			for (cap: node.node.capabilities.capabilities){
+				val String proposal = module + '/' + node.name + '.' + cap.name
+				val description = ""
+				proposals.put(proposal, description)			}
+		}
+		
+		addProposals(proposals, context, acceptor)
 	}
 	
 	def createEntityProposals(ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
@@ -208,7 +280,7 @@ class AADMIdeProposalProvider extends IdeContentProposalProvider {
 		addProposals(proposals, context, acceptor)
 	}
 	
-	def createNodeProposals(List<ENodeTemplate> nodes, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
+	def createProposalsForNodes(List<ENodeTemplate> nodes, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		if (nodes.empty) return
 		val Map<String, String> proposals = new HashMap<String, String>();
 		val module = AADMHelper.getModule(nodes.get(0))
@@ -218,6 +290,18 @@ class AADMIdeProposalProvider extends IdeContentProposalProvider {
 				val description = ""
 				proposals.put(proposal, description)	
 			}
+		}
+		addProposals(proposals, context, acceptor)
+	}
+	
+	def createProposalsForProperties(ENodeTemplate node, ReasonerData<PropertyDefinition> properties, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
+		val Map<String, String> proposals = new HashMap<String, String>();
+		for (property: properties.elements){
+			var property_label = property.uri.toString.substring(property.uri.toString.lastIndexOf('/') + 1, property.uri.toString.length)
+			var module = AADMHelper.getModule(node)
+			val proposal = (module !== null?module + '/':'') + node.name + '.' + property_label
+			val description = ""
+			proposals.put(proposal, description)		
 		}
 		addProposals(proposals, context, acceptor)
 	}
@@ -244,6 +328,12 @@ class AADMIdeProposalProvider extends IdeContentProposalProvider {
             }
             case ga.getPropertyBodyAccess.entityAssignment_1_1:{
             	createGetProperty_Entity(context, acceptor)
+            }
+            case ga.getPropertyBodyAccess.propertyAssignment_0_1:{
+            	createGetProperty_Property(context, acceptor)
+            }
+            case ga.getPropertyBodyAccess.req_capAssignment_2_1:{
+            	createGetProperty_Req_Cap(context, acceptor)
             }
             default : {
             	System.out.println("Content assistance for assignment:" + assignment)
