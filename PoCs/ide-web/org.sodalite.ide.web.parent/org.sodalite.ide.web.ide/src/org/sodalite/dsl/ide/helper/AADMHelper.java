@@ -3,10 +3,22 @@ package org.sodalite.dsl.ide.helper;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.aADM.ENodeTemplate;
+import org.sodalite.dsl.aADM.EPREFIX_TYPE;
+import org.sodalite.dsl.aADM.ERequirementAssignment;
+import org.sodalite.dsl.aADM.impl.ENodeTemplateBodyImpl;
+import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
+import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.sodalite.dsl.ide.backend.SodaliteBackendProxy;
 
 public class AADMHelper {
 
@@ -74,5 +86,72 @@ public class AADMHelper {
 		if (_string.endsWith(delimiter))
 			newString = _string.substring(0, _string.length() - delimiter.length());
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
+	}
+	
+	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignment req)
+			throws Exception {
+		String requirementId = req.getName();
+		EPREFIX_TYPE nodeType = ((ENodeTemplateBodyImpl) req.eContainer().eContainer()).getType();
+		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
+
+		// Get valid requirement nodes from KB
+		// Get modules from model
+		List<String> importedModules = AADMHelper.getImportedModules(req);
+		String module = AADMHelper.getModule(req);
+		// Add current module to imported ones for searching in the KB
+		if (module != null)
+			importedModules.add(module);
+
+		return SodaliteBackendProxy.getKBReasoner().getValidRequirementNodes(requirementId, resourceId,
+				importedModules);
+	}
+	
+	public static TypeData getTypeOfValidRequirementNodes(ERequirementAssignment req)
+			throws Exception {
+		String requirementId = req.getName();
+		EPREFIX_TYPE nodeType = ((ENodeTemplateBodyImpl) req.eContainer().eContainer()).getType();
+		String resourceId = (nodeType.getModule() != null ? nodeType.getModule() + "/" : "") + nodeType.getType();
+
+		// Get valid requirement nodes from KB
+		// Get modules from model
+		List<String> importedModules = AADMHelper.getImportedModules(req);
+		String module = AADMHelper.getModule(req);
+		// Add current module to imported ones for searching in the KB
+		if (module != null)
+			importedModules.add(module);
+
+		return SodaliteBackendProxy.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId,
+				importedModules);
+	}
+	
+	public static List<ENodeTemplate> findLocalNodesForType(String type, EObject reqAssign) throws Exception {
+		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
+		
+		Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>();
+		AADM_Model model = (AADM_Model) findModel(reqAssign);
+
+		for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
+			String node_id = (node.getNode().getType().getModule() != null
+					? node.getNode().getType().getModule() + '/'
+					: "") + node.getNode().getType().getType();
+			if (!candidateNodes.keySet().contains(node_id))
+				candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
+			candidateNodes.get(node_id).add(node);
+		}
+
+		List<String> keys = new ArrayList<String>(candidateNodes.keySet());
+		List<String> validSubClasses = SodaliteBackendProxy.getKBReasoner().getSubClassesOf(keys, type);
+
+		for (String validClass : validSubClasses) {
+			if (candidateNodes.containsKey(validClass))
+				nodes.addAll(candidateNodes.get(validClass));
+		}
+		
+		return nodes;
+	}
+	
+	public static List<ENodeTemplate> findNodes(EObject object) {
+		AADM_Model model = (AADM_Model) findModel(object);
+		return model.getNodeTemplates().getNodeTemplates();
 	}
 }
