@@ -14,6 +14,18 @@ dependencies {
 	providedCompile "org.eclipse.jetty:jetty-annotations:9.4.34.v20201102"
 	providedCompile "org.slf4j:slf4j-simple:1.7.21"
 }
+
+task zipTestFiles(type: Zip) {
+	from('test-files') {
+		include '**/*'
+		into 'test-files'
+	}
+	destinationDirectory = new File( project.buildDir,'libs')
+	archiveFileName = 'test-files.zip'
+}
+
+tasks.war.dependsOn(zipTestFiles)
+
 task jettyRun(type:JavaExec) {
 	dependsOn(sourceSets.main.runtimeClasspath)
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}

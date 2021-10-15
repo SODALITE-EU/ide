@@ -7,6 +7,8 @@ import com.google.inject.Injector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.util.DisposableRegistry;
+import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
+import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
 /**
@@ -21,7 +23,9 @@ public class AADMServlet extends XtextServlet {
 	
 	public void init() throws ServletException {
 		super.init();
-		Injector injector = new AADMWebSetup().createInjectorAndDoEMFRegistration();
+		IResourceBaseProvider resourceBaseProvider = new ResourceBaseProviderImpl("./test-files");
+		Injector injector = new AADMWebSetup(resourceBaseProvider).createInjectorAndDoEMFRegistration();
+//		Injector injector = new AADMWebSetup().createInjectorAndDoEMFRegistration();
 		this.disposableRegistry = injector.getInstance(DisposableRegistry.class);
 	}
 	

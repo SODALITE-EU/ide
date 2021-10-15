@@ -25,18 +25,46 @@
 					baseUrl: baseUrl,
 					syntaxDefinition: "xtext-resources/generated/mode-aadm2"
 				});
+				$("#save-button").click(function() {
+					editor.xtextServices.saveResource();
+				});
+				$("#revert-button").click(function() {
+					editor.xtextServices.revertResource();
+				});
+				$("#generate-button").click(function() {
+					window.open('http://' + location.host + baseUrl + 'xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
+				});
+				$("#change-resource").change(function() {
+					var resourceId = $("#change-resource option:selected").attr("value");
+					editor.xtextServices.serviceBuilder.changeResource(resourceId);
+				});
 			});
 		});
 	</script>
 </head>
 <body>
 
+<div class="header">
+	<h1>AADM Web Editor</h1>
+</div>
 <div class="container">
-	<div class="header">
-		<h1>AADM Web Editor</h1>
+	<div class="button-wrapper">
+		<button id="save-button">Save AADM in KB</button>
+		<button id="revert-button">Deploy AADM</button>
+		<button id="generate-button">Generate TTL</button>
+		<select id="change-resource">
+			<option value="snow.aadm">Snow AADM</option>
+			<option value="test.aadm">Test AADM</option>
+		</select>
 	</div>
 	<div class="content">
-		<div id="xtext-editor" data-editor-xtext-lang="aadm"></div>
+		<div id="xtext-editor" 
+			data-editor-xtext-lang="aadm"
+			data-editor-resource-id="snow.aadm"
+			data-editor-dirty-element="dirty-indicator"
+			data-editor-enable-save-action="true"
+			data-editor-enable-formatting-action="true"
+			data-editor-show-error-dialogs="true"></div>
 	</div>
 </div>
 
