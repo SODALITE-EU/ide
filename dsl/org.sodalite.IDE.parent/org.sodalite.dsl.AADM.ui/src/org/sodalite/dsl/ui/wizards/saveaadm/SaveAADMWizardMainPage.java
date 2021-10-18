@@ -91,9 +91,10 @@ public class SaveAADMWizardMainPage extends WizardPage {
 			if (uri != null) {
 				ModelData modelVersions = AADMBackendProxy.getKBReasoner().getModelVersions(uri);
 				List<String> versions = new ArrayList<>();
-				for (Model model : modelVersions.getElements())
-					if (model.getVersion() != null)
-						versions.add(model.getVersion());
+				if (modelVersions != null && modelVersions.getElements() != null)
+					for (Model model : modelVersions.getElements())
+						if (model.getVersion() != null)
+							versions.add(model.getVersion());
 				previousVersionsCombo.setInput(versions);
 			}
 		} catch (Exception ex) {
