@@ -43,12 +43,9 @@
 	</script>
 </head>
 <body>
-
-<div class="header">
-	<h1>AADM Web Editor</h1>
-</div>
-<div class="container">
-	<div class="button-wrapper">
+	<div class="header"><b>SODALITE IDE</b></div>
+	<div class="header-editor">AADM Editor</div>
+	<div class="container-buttons">
 		<button id="save-button">Save AADM in KB</button>
 		<button id="revert-button">Deploy AADM</button>
 		<button id="generate-button">Generate TTL</button>
@@ -57,7 +54,7 @@
 			<option value="test.aadm">Test AADM</option>
 		</select>
 	</div>
-	<div class="content">
+	<div class="container-editor">
 		<div id="xtext-editor" 
 			data-editor-xtext-lang="aadm"
 			data-editor-resource-id="snow.aadm"
@@ -66,7 +63,6 @@
 			data-editor-enable-formatting-action="true"
 			data-editor-show-error-dialogs="true"></div>
 	</div>
-</div>
 
 </body>
 </html>
