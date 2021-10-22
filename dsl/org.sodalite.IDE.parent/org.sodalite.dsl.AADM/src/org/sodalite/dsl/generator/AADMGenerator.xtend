@@ -421,9 +421,13 @@ class AADMGenerator extends AbstractGenerator {
 	  «IF e.value instanceof ESingleValue»
 	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
 	  «ELSEIF e.value instanceof EFunction»
-	  
+	  «IF e.value instanceof GetInput»
+	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
+	  	«ELSEIF e.value instanceof GetProperty»
+	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
+	  	«ENDIF»
 	  «ELSEIF e.value instanceof ELIST»
-	  
+	  TODO
 	  «ENDIF»
 	.
 	
