@@ -112,12 +112,14 @@ public class AADMHelper extends RMHelper {
 			AADM_Model model = (AADM_Model) findModel(reqAssign);
 
 			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-				String node_id = (node.getNode().getType().getModule() != null
-						? node.getNode().getType().getModule() + '/'
-						: "") + node.getNode().getType().getType();
-				if (!candidateNodes.keySet().contains(node_id))
-					candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
-				candidateNodes.get(node_id).add(node);
+				if (node.getNode() != null) {
+					String node_id = (node.getNode().getType().getModule() != null
+							? node.getNode().getType().getModule() + '/'
+							: "") + node.getNode().getType().getType();
+					if (!candidateNodes.keySet().contains(node_id))
+						candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
+					candidateNodes.get(node_id).add(node);
+				}
 			}
 
 			List<String> keys = new ArrayList<String>(candidateNodes.keySet());
