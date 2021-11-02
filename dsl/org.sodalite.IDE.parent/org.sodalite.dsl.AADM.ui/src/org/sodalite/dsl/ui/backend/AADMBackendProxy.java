@@ -713,11 +713,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				String message = warning.getType() + " ." + warning.getDescription() + " Warning located at: "
+				String message = warning.getType() + ". " + warning.getDescription() + ". Warning located at: "
 						+ warning.getEntity_name();
 				String path = warning.getContext();
 				String pathType = getPathType(warning.getType());
-				String code = null; // No suggestions for quick fixes associated to warnings
+				String code = ""; // No suggestions for quick fixes associated to warnings
 				List<String> data = Arrays.asList(warning.getEntity_name(), warning.getContext());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
@@ -932,7 +932,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	private String getRequirement(String path) {
 		String req = null;
-		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Pattern pattern = Pattern.compile("/requirements/(.+)");
 		Matcher matcher = pattern.matcher(path);
 		if (matcher.find())
 			req = matcher.group(1);

@@ -37,7 +37,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl;
-import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
 
 /**
  * This class contains custom scoping description.
@@ -46,7 +45,6 @@ import org.sodalite.sdl.ansible.scoping.AbstractAnsibleDslScopeProvider;
  */
 @SuppressWarnings("all")
 public class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
-  @Override
   public IScope getScope(final EObject context, final EReference reference) {
     if (((context instanceof EVariableDeclarationVariableReferenceImpl) && Objects.equal(reference, AnsibleDslPackage.Literals.EVARIABLE_DECLARATION_VARIABLE_REFERENCE__VARIABLE_DECLARATION_VARIABLE_REFERENCE))) {
       final EPlayImpl rootPlay = EcoreUtil2.<EPlayImpl>getContainerOfType(context, EPlayImpl.class);

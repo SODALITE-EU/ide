@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.optimization.ide;
 
-import org.sodalite.dsl.optimization.ide.AbstractOptimizationIdeModule;
-
 /**
  * Use this class to register ide components.
  */

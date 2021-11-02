@@ -61,6 +61,7 @@ import org.sodalite.dsl.rM.GetArtifact;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class RMHelper {
@@ -84,7 +85,7 @@ public class RMHelper {
 	}
 
 	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws Exception {
-		CapabilityDefinitionData capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(nodeRef);
+		CapabilityDefinitionData capabilities = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(nodeRef);
 		return capabilities.getElements();
 	}
 
@@ -133,7 +134,7 @@ public class RMHelper {
 
 		// Add current module to imported ones for searching in the KB
 		importedModules.add(module);
-		TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+		TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
 		for (Type type : typeData.getElements()) {
 			String name = type.getUri().toString().substring(type.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(node.getType())) {
@@ -169,7 +170,7 @@ public class RMHelper {
 	}
 
 	public static String findRequirementNodeByNameInKB(String type, String reqName) throws Exception {
-		RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(type);
+		RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(type);
 		for (RequirementDefinition req : reqData.getElements()) {
 			String name = req.getUri().toString().substring(req.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(reqName))

@@ -7,7 +7,9 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<xtextVersion>2.22.0</xtextVersion>
+		<xtextVersion>2.25.0</xtextVersion>
+		<xtendMavenPlugin>2.25.0</xtendMavenPlugin>
+		<mwe2LaunchVersion>2.12.1</mwe2LaunchVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -298,7 +300,7 @@
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>https://download.eclipse.org/releases/2020-06/</url>
+			<url>https://download.eclipse.org/releases/2021-09/</url>
 		</repository>
 		<repository>
 			<id>Xtext Update Site</id>

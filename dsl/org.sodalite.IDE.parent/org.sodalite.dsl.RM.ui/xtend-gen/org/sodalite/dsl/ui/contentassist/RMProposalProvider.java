@@ -60,6 +60,7 @@ import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EInterfaceTypes;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_REF;
@@ -76,9 +77,8 @@ import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
-import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
-import org.sodalite.dsl.ui.helper.BackendHelper;
 import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -101,17 +101,15 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   private Map<String, Image> images = new HashMap<String, Image>();
   
-  @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     this._completeKeyword(keyword, contentAssistContext, acceptor);
   }
   
-  @Override
   public void completeRM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
         System.out.println("Invoking content assist for imports");
-        final ReasonerData<String> modules = BackendHelper.getKBReasoner().getModules();
+        final ReasonerData<String> modules = SodaliteBackendProxy.getKBReasoner().getModules();
         List<String> _elements = modules.getElements();
         String _plus = ("Modules retrieved from KB: " + _elements);
         System.out.println(_plus);
@@ -140,7 +138,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ENodeType::name property");
     final String proposalText = "tosca.types.id";
@@ -149,14 +146,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EDataType::supertype property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -238,14 +234,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeENodeTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeType::superType property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = nodes.getElements();
         for (final Type node : _elements) {
@@ -310,14 +305,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEInterfaceTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for Interface Type::superType property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
         System.out.println("Types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -377,14 +371,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEPolicyTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for Policy Type::superType property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules);
         System.out.println("Policies retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -444,14 +437,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeERelationshipTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for RelationshipType::supertype property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules);
+        final ReasonerData<Type> relationships = SodaliteBackendProxy.getKBReasoner().getRelationshipTypes(importedModules);
         System.out.println("Relationships retrieved from KB:");
         final Image image = this.getImage("icons/relationship.png");
         List<Type> _elements = relationships.getElements();
@@ -510,14 +502,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeECapabilityTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for CapabilityType::supertype property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules);
+        final ReasonerData<Type> capabilitiess = SodaliteBackendProxy.getKBReasoner().getCapabilityTypes(importedModules);
         System.out.println("Capabilities retrieved from KB:");
         final Image image = this.getImage("icons/capability.png");
         List<Type> _elements = capabilitiess.getElements();
@@ -576,14 +567,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEInterfaceDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for InterfaceDefinition::type property");
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
         final String module = RMHelper.getModule(model);
-        final ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
+        final ReasonerData<Type> interfaces = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
         System.out.println("Interfaces retrieved from KB:");
         final Image image = this.getImage("icons/interface.png");
         List<Type> _elements = interfaces.getElements();
@@ -612,18 +602,22 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
         EObject _findModel = RMHelper.findModel(model);
         final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-        for (final EInterfaceType interface__1 : _interfaceTypes) {
-          {
-            String _name = interface__1.getName();
-            String _plus = ("\tLocal interface type: " + _name);
-            System.out.println(_plus);
-            String _name_1 = interface__1.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = interface__1.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = interface__1.getInterface().getDescription();
-            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        EInterfaceTypes _interfaceTypes = rootModel.getInterfaceTypes();
+        boolean _tripleNotEquals = (_interfaceTypes != null);
+        if (_tripleNotEquals) {
+          EList<EInterfaceType> _interfaceTypes_1 = rootModel.getInterfaceTypes().getInterfaceTypes();
+          for (final EInterfaceType interface__1 : _interfaceTypes_1) {
+            {
+              String _name = interface__1.getName();
+              String _plus = ("\tLocal interface type: " + _name);
+              System.out.println(_plus);
+              String _name_1 = interface__1.getName();
+              final String proposalText = ((module + "/") + _name_1);
+              String _name_2 = interface__1.getName();
+              final String displayText = ((module + "/") + _name_2);
+              final String additionalProposalInfo = interface__1.getInterface().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -642,55 +636,45 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEPropertyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinitionBody_Capability(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinitionBody_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinitionBody_Relationship(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeERelationshipTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEAttributeDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEParameterDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::req_cap property");
     this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Attribute(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::attribute property");
     this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetArtifactBody_Artifact(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetArtifactBody::artifact property");
     List<String> proposals = new ArrayList<String>();
@@ -730,13 +714,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEInterfaceDefinitionBody_Operations(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
@@ -754,7 +736,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         String _type = type.getType();
         String interfaceId = (_xifexpression + _type);
         if ((interfaceId != null)) {
-          final OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId);
+          final OperationDefinitionData operations = SodaliteBackendProxy.getKBReasoner().getOperationsInInterface(interfaceId);
           if ((operations != null)) {
             final Image image = this.getImage("icons/operation.png");
             List<OperationDefinition> _elements = operations.getElements();
@@ -793,7 +775,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEDataType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EDataType::name property");
     final String proposalText = "tosca.datatypes.id";
@@ -802,7 +783,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEArtifactType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EArtifactType::name property");
     final String proposalText = "tosca.artifacts.id";
@@ -811,7 +791,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ECapabilityType::name property");
     final String proposalText = "tosca.capabilities.id";
@@ -820,7 +799,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEInterfaceType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EInterfaceType::name property");
     final String proposalText = "tosca.interfaces.id";
@@ -829,7 +807,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeERelationshipType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ERelationshipType::name property");
     final String proposalText = "tosca.relationships.id";
@@ -838,7 +815,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPolicyType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPolicyType::name property");
     final String proposalText = "tosca.policies.id";
@@ -847,7 +823,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPropertyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPropertyDefinition::name property");
     final String proposalText = "property_name";
@@ -856,7 +831,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEAttributeDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EAttributeDefinition::name property");
     final String proposalText = "attribute_name";
@@ -865,7 +839,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEInterfaceDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EInterfaceDefinition::name property");
     final String proposalText = "interface_name";
@@ -874,7 +847,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEOperationDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EOperationDefinition::name property");
     final String proposalText = "operation_name";
@@ -883,7 +855,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEParameterDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EParameterDefinition::name property");
     final String proposalText = "parameter_name";
@@ -892,7 +863,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ECapabilityDefinition::name property");
     final String proposalText = "capability_name";
@@ -901,17 +871,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEValidSourceType_SourceTypes(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ERequirementDefinition::name property");
     final String proposalText = "requirement_name";
@@ -920,50 +887,42 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPropertyDefinitionBody_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPropertyDefinitionBody::required property");
     this.createNonEditableCompletionProposal("true", "true", null, context, "", acceptor);
     this.createNonEditableCompletionProposal("false", "false", null, context, "", acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::entity property");
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeGetArtifactBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetArtifactBody::entity property");
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeEMapEntry_Key(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMapEntry::key property");
     this.createEditableCompletionProposal("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
   }
   
-  @Override
   public void completeELIST_List(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ELIST::list property");
     this.createEditableCompletionProposal("\"value\"", "\"value\"", null, context, "Give a single String value or a comma separate list of String values", acceptor);
   }
   
-  @Override
   public void complete_EMAP(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMAP::map property");
     this.createEditableCompletionProposal("{", "{", null, context, "Start a Map of key=value entries", acceptor);
   }
   
-  @Override
   public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     String _selectFile = RMHelper.selectFile("Select implementation primary file");
     String _plus = ("\"" + _selectFile);
@@ -971,7 +930,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
-  @Override
   public void completeEArtifactDefinitionBody_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     String _selectFile = RMHelper.selectFile("Select artifact file");
     String _plus = ("\"" + _selectFile);
@@ -979,7 +937,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
-  @Override
   public void completeEDependencies_Files(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     String _selectFile = RMHelper.selectFile("Select implementation dependency file");
     String _plus = ("\"" + _selectFile);
@@ -987,13 +944,12 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
-  @Override
   public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
-        final TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
+        final TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
         this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
         this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
       } catch (final Throwable _t) {
@@ -1011,7 +967,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeEEvenFilter_Requirement(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
@@ -1020,7 +975,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         boolean _tripleNotEquals = (_node != null);
         if (_tripleNotEquals) {
           String qnode = RMHelper.getNodeName(filter.getNode());
-          final RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode);
+          final RequirementDefinitionData reqs = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(qnode);
           this.createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
         }
       } catch (final Throwable _t) {
@@ -1036,12 +991,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeETargetType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         final String type_image = "icons/type.png";
         final String primitive_type_image = "icons/primitive_type.png";
         this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
@@ -1063,12 +1017,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeECallOperationActivityDefinitionBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
         final List<String> importedModules = RMHelper.processListModules(model);
-        final OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules);
+        final OperationDefinitionData operationsData = SodaliteBackendProxy.getKBReasoner().getOperations(importedModules);
         final String type_image = "icons/operation.png";
         this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
         final List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model);
@@ -1088,7 +1041,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
-  @Override
   public void completeETriggerDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String proposalText = "trigger_name";
     final String displayText = "trigger_name";
@@ -1719,7 +1671,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void proposeAttributesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       try {
-        final AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+        final AttributeDefinitionData attributeData = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
         List<AttributeDefinition> _elements = attributeData.getElements();
         for (final AttributeDefinition attr : _elements) {
           {
@@ -1796,7 +1748,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void proposePropertiesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
       try {
-        final PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+        final PropertyDefinitionData propertyData = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
         List<PropertyDefinition> _elements = propertyData.getElements();
         for (final PropertyDefinition prop : _elements) {
           {
@@ -1903,7 +1855,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           _xifexpression = node.getNode().getSuperType().getType();
         }
         final String superType = _xifexpression;
-        final RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType);
+        final RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(superType);
         Image image_2 = this.getImage("icons/requirement.png");
         List<RequirementDefinition> _elements = reqData.getElements();
         for (final RequirementDefinition req_1 : _elements) {
@@ -1913,7 +1865,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             this.createEditableCompletionProposal(proposal, proposal, image_2, context, null, acceptor);
           }
         }
-        final CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType);
+        final CapabilityDefinitionData capData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(superType);
         image_2 = this.getImage("icons/capability.png");
         List<CapabilityDefinition> _elements_1 = capData.getElements();
         for (final CapabilityDefinition cap_1 : _elements_1) {

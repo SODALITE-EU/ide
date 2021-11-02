@@ -79,6 +79,11 @@ import org.sodalite.dsl.aADM.AADM_Model
 import org.sodalite.dsl.rM.EArtifactDefinition
 import org.sodalite.dsl.rM.GetArtifact
 import java.util.Base64
+import java.lang.reflect.Method
+import java.util.Arrays
+import java.util.List
+import java.util.stream.Collectors
+import org.sodalite.dsl.helper.AADMDSLHelper
 
 /**
  * Generates code from your model files on save.
@@ -467,9 +472,13 @@ class AADMGenerator extends AbstractGenerator {
 	  «IF e.value instanceof ESingleValue»
 	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
 	  «ELSEIF e.value instanceof EFunction»
-	  
+	  «IF e.value instanceof GetInput»
+	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
+	  	«ELSEIF e.value instanceof GetProperty»
+	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
+	  	«ENDIF»
 	  «ELSEIF e.value instanceof ELIST»
-	  
+	  TODO
 	  «ENDIF»
 	.
 	
@@ -950,6 +959,22 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compileNode (EPREFIX_ID t) '''
+	«IF t.version !== null»
+	  «getModule(t)»/«t.id»@«t.version»  
+	«ELSE»
+	  «getModule(t)»/«t.id»
+	«ENDIF»
+	'''
+		
+	def getModule(EPREFIX_ID id) {
+		if (id.module !== null)
+			return id.module
+		else
+			return AADMDSLHelper.getModule(id)
+	}
+	
+	
 	def compile (ESingleValue v) '''
 	«IF v instanceof ESTRING»
 	  «processStringValue((v as ESTRING).value)»
@@ -1078,7 +1103,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.node.compile().trim»' ;  
+	  exchange:value '«r.node.compileNode().trim»' ;  
 	  .
 	
 	«requirement_numbers.put(r, requirement_counter)»

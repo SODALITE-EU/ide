@@ -1,3 +1,5 @@
+module: snow
+
 inputs:
 	ssh-key-name:
 		type: string

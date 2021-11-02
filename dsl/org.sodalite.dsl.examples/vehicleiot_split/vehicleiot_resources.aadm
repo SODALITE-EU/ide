@@ -1,3 +1,5 @@
+module: vehicleiot
+
 node_templates:
 	vehicle-iot-vm:  
 		type: sodalite.nodes.OpenStack.VM 

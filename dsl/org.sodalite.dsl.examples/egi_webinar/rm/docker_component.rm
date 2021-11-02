@@ -1,0 +1,382 @@
+module: docker
+
+node_types:
+	sodalite.nodes.DockerNetwork:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			name:
+				type: string
+				description: "The name of the network" 
+				required: true
+		capabilities:
+			network:
+				type: tosca.capabilities.Network
+				valid_source_types:[ docker/sodalite.nodes.DockerizedComponent ]
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							docker_network_name:    
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerNetwork.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/add_network.yml"
+					delete:
+						inputs:
+							docker_network_name:
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerNetwork.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host									
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/remove_network.yml"
+
+	sodalite.nodes.DockerHost:  
+		derived_from: tosca.nodes.SoftwareComponent
+		attributes:
+			public_address:
+				description: "Host's IP"
+				type: string
+			username:
+				description: "Host's username"
+				type: string
+		capabilities:  
+			host:  
+				type: tosca.capabilities.Compute
+				valid_source_types:[docker/sodalite.nodes.DockerizedComponent] 
+		interfaces:  
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard 
+				operations:
+					create:  
+						inputs:
+							host_public_address:
+								type: string
+								default: get_attribute:
+									entity: SELF
+									attribute: docker/sodalite.nodes.DockerHost.public_address
+									req_cap: docker/sodalites.nodes.DockerHost.host
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host									
+						implementation:  
+							primary: "/workspace/iac-modules/docker/playbooks/create_docker_host.yml"
+					delete:  
+						inputs:
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host							
+						implementation:  
+							primary: "/workspace/iac-modules/docker/playbooks/delete_docker_host.yml"
+
+	sodalite.nodes.DockerizedComponent:  
+		derived_from: tosca.nodes.SoftwareComponent 
+		properties:
+			registry_url: 
+				description: "The URL of the registry containing images"
+				required: true 
+				type: string     
+			command:  
+				description: "Commands list for starting the container" 
+				default: ""  
+				type: list 
+				required: false
+			volumes:  
+				description: 'A list of mounted volumes for the docker container "host_path:container_path" like "/tmp/docker:/tmp"'
+				type: list 
+				default: "[]"
+				required: false 
+			ports:
+				type: list
+				description: 'Port binding for the docker container "exposed:internal" like "8081:8080"'
+				default: "[]" 
+				required: false        
+			exposed_ports:  
+				description: 'Exposed ports of the container like "8081"' 
+				type: string 
+				default: "[]" 
+				required: false 
+			restart_policy:  
+				description: 'Restart policy [no, on-failure, always, unless-stopped]'
+				default: "always" 
+				type: string 
+				required: false 
+			env:  
+				description: "Map for docker enviroment variables key-value dictionary"
+				required: false 
+				type: map 
+				default: "{}"
+			env_file:
+				description: "Path to file on remote with env vars"
+				required: false
+				type: string    
+				default: ""
+			_capabilities:
+				description: "List of capabilities to add to the container."
+				required: false
+				type: list    
+				default: "[]"
+			labels:
+ 				description: "Dictionary of key value pairs."
+ 				required: false
+ 				type: map
+ 				default: "{}"
+			image_name:  
+				description: "The name of the image on the host" 
+				required: true 
+				type: string 
+			hostname:  
+				description: "The container's hostname"
+				type: string 
+				required: false         
+			alias:  
+				description: "Alias name for docker container" 
+				type: string 
+				required: true
+			sleep:
+				type: integer
+				description: "Sleep after image is deployed"
+				default: "0"
+				required: false
+			docker_network_name: 
+				description: "Alias name for docker container" 
+				type: string 
+				required: false  
+				default: ""
+			ca_cert: 
+				description: "Use a CA certificate when performing server verification by providing the path to a CA certificate file."
+				type: string 
+				required: false  
+				default: ""
+			client_cert: 
+				description: "Path to the client's TLS certificate file."
+				type: string 
+				required: false  
+				default: ""
+			client_key: 
+				description: "Path to the client's TLS key file."
+				type: string 
+				required: false  
+				default: ""
+			etc_hosts:
+				description: "Host-to-IP mappings"
+				required: false 
+				type: map 
+				default: "{}"
+				
+		attributes:  
+			ip_address:
+				description: "IP address of dockerized component"
+				type: string
+				
+		requirements:  
+			host:
+				capability: tosca.capabilities.Compute
+				node: docker/sodalite.nodes.DockerHost
+				relationship: tosca.relationships.HostedOn
+			network: 
+				capability: tosca.capabilities.Network
+				node: docker/sodalite.nodes.DockerNetwork    
+				relationship: tosca.relationships.DependsOn
+				occurrences:[ 0, 1 ]
+			registry:
+				capability: tosca.capabilities.Node
+				node: docker/sodalite.nodes.DockerRegistry    
+				relationship: tosca.relationships.DependsOn
+				occurrences:[ 1, 1 ]          
+		interfaces: 
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard   
+				operations:
+					create:  
+						inputs:  
+							env:                  
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: docker/sodalite.nodes.DockerizedComponent.env
+							env_file:     
+								type: string                 
+								default: get_property: 
+									entity: SELF
+									property: docker/sodalite.nodes.DockerizedComponent.env_file
+							ports:                
+								type: list
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.ports
+							_capabilities:                
+								type: list
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent._capabilities
+							labels:                
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.labels
+							restart_policy:       
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.restart_policy
+							image_name:           
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.image_name
+							alias:                
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.alias
+							exposed_ports:        
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.exposed_ports
+							registry_url:         
+								type: string
+								default: get_property: 
+									entity: SELF
+									req_cap: docker/sodalite.nodes.DockerizedComponent.registry
+									property: sodalite.nodes.DockerRegistry.docker_registry_url
+							volumes:              
+								type: list
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.volumes
+							command:              
+								type: list
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.command
+							docker_network_name:  
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.docker_network_name
+							ca_cert:                
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.ca_cert
+							client_cert:                
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.client_cert
+							client_key:                
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.client_key
+							etc_hosts:                
+								type: map
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.etc_hosts
+							sleep:                
+								type: integer
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.sleep
+							public_address: 
+								type: string
+								default: get_attribute: 
+									entity: SELF
+									attribute: docker/sodalite.nodes.DockerHost.public_address
+									req_cap: docker/sodalite.nodes.DockerizedComponent.host
+							ansible_user: 
+								type: string
+								default: get_attribute: 
+									entity: SELF
+									attribute: docker/sodalite.nodes.DockerHost.username
+									req_cap: docker/sodalite.nodes.DockerizedComponent.host
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/add_container.yml"
+					delete:  
+						inputs:  
+							alias: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.DockerizedComponent.alias
+							ansible_user: 
+								type: string
+								default: get_attribute: 
+									entity: SELF
+									attribute: docker/sodalite.nodes.DockerHost.username
+									req_cap: docker/sodalite.nodes.DockerizedComponent.host
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/remove_container.yml"
+	
+	sodalite.nodes.TestComponent:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			test_delay:
+				type: integer
+				description: "Delay for waiting container to come up"
+				required: false
+			test_port:
+				type: integer
+				description: "Port for testing avalability of the container"
+				required: false
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							component_name: 
+								type: string
+								default: get_attribute:
+									entity: SELF
+									attribute: tosca.nodes.Root.tosca_name
+									req_cap: docker/sodalite.nodes.TestComponent.tested_component
+							test_delay: 
+								type: integer
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.TestComponent.test_delay
+							test_port: 
+								type: integer
+								default: get_property: 
+									entity: SELF
+									property: sodalite.nodes.TestComponent.test_port
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host										
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/test_container.yml"
+		requirements:
+			tested_component:
+				node: tosca.nodes.SoftwareComponent  
+				relationship: tosca.relationships.DependsOn
+				capability: tosca.capabilities.Node
+              

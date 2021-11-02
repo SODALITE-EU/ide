@@ -63,48 +63,55 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
         final String targetNode = tNode;
         final String message = MessageFormat.format("Create requirement \"{0}\" referencing node \"{1}\"", targetRequirement, targetNode);
         final String sub_message = message;
-        final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
-          ERequirementAssignment req = null;
-          ENodeTemplate node_1 = ((ENodeTemplate) nodeTemplate);
-          ERequirementAssignments _requirements = node_1.getNode().getRequirements();
-          boolean _tripleEquals = (_requirements == null);
-          if (_tripleEquals) {
-            final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
-            ENodeTemplateBody _node = node_1.getNode();
-            _node.setRequirements(requirements);
-          }
-          EList<ERequirementAssignment> _requirements_1 = node_1.getNode().getRequirements().getRequirements();
-          for (final ERequirementAssignment requirement : _requirements_1) {
-            boolean _equalsIgnoreCase = requirement.getName().equalsIgnoreCase(targetRequirement);
-            if (_equalsIgnoreCase) {
-              req = requirement;
+        final ISemanticModification _function = new ISemanticModification() {
+          public void apply(final EObject entity, final IModificationContext context) throws Exception {
+            ERequirementAssignment req = null;
+            ENodeTemplate node = null;
+            if ((entity instanceof ENodeTemplate)) {
+              node = ((ENodeTemplate) entity);
+              ERequirementAssignments _requirements = node.getNode().getRequirements();
+              boolean _tripleEquals = (_requirements == null);
+              if (_tripleEquals) {
+                final ERequirementAssignments requirements = AADMFactory.eINSTANCE.createERequirementAssignments();
+                ENodeTemplateBody _node = node.getNode();
+                _node.setRequirements(requirements);
+              }
+              EList<ERequirementAssignment> _requirements_1 = node.getNode().getRequirements().getRequirements();
+              for (final ERequirementAssignment requirement : _requirements_1) {
+                boolean _equalsIgnoreCase = requirement.getName().equalsIgnoreCase(targetRequirement);
+                if (_equalsIgnoreCase) {
+                  req = requirement;
+                }
+              }
+              if ((req == null)) {
+                req = AADMFactory.eINSTANCE.createERequirementAssignment();
+                req.setName(targetRequirement);
+                node.getNode().getRequirements().getRequirements().add(req);
+              }
             }
-          }
-          if ((req == null)) {
-            req = AADMFactory.eINSTANCE.createERequirementAssignment();
-            req.setName(targetRequirement);
-            node_1.getNode().getRequirements().getRequirements().add(req);
-          }
-          System.out.println(("Applying targetNode: " + targetNode));
-          EPREFIX_ID _node_1 = req.getNode();
-          boolean _tripleEquals_1 = (_node_1 == null);
-          if (_tripleEquals_1) {
-            EPREFIX_ID req_node = RMFactory.eINSTANCE.createEPREFIX_ID();
-            req.setNode(req_node);
-          }
-          EPREFIX_ID _node_2 = req.getNode();
-          _node_2.setModule(targetModule);
-          boolean _contains_1 = targetNode.contains("@");
-          if (_contains_1) {
-            EPREFIX_ID _node_3 = req.getNode();
-            _node_3.setId(targetNode.substring(0, targetNode.indexOf("@")));
-            EPREFIX_ID _node_4 = req.getNode();
-            int _indexOf_2 = targetNode.indexOf("@");
-            int _plus_2 = (_indexOf_2 + 1);
-            _node_4.setVersion(targetNode.substring(_plus_2));
-          } else {
-            EPREFIX_ID _node_5 = req.getNode();
-            _node_5.setId(targetNode);
+            if ((entity instanceof ERequirementAssignment)) {
+              req = ((ERequirementAssignment) entity);
+            }
+            EPREFIX_ID _node_1 = req.getNode();
+            boolean _tripleEquals_1 = (_node_1 == null);
+            if (_tripleEquals_1) {
+              EPREFIX_ID req_node = RMFactory.eINSTANCE.createEPREFIX_ID();
+              req.setNode(req_node);
+            }
+            EPREFIX_ID _node_2 = req.getNode();
+            _node_2.setModule(targetModule);
+            boolean _contains = targetNode.contains("@");
+            if (_contains) {
+              EPREFIX_ID _node_3 = req.getNode();
+              _node_3.setId(targetNode.substring(0, targetNode.indexOf("@")));
+              EPREFIX_ID _node_4 = req.getNode();
+              int _indexOf = targetNode.indexOf("@");
+              int _plus = (_indexOf + 1);
+              _node_4.setVersion(targetNode.substring(_plus));
+            } else {
+              EPREFIX_ID _node_5 = req.getNode();
+              _node_5.setId(targetNode);
+            }
           }
         };
         acceptor.accept(issue, message, sub_message, "", _function);
@@ -124,21 +131,23 @@ public class AADMQuickfixProvider extends DefaultQuickfixProvider {
     final String nodeName = st.nextToken().trim();
     final String message = MessageFormat.format("Create property \"{0}\" in node \"{1}\"", propertyName, nodeName);
     final String sub_message = message;
-    final ISemanticModification _function = (EObject nodeTemplate, IModificationContext context) -> {
-      ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
-      EPropertyAssignments _properties = node.getNode().getProperties();
-      boolean _tripleEquals = (_properties == null);
-      if (_tripleEquals) {
-        final EPropertyAssignments properties = RMFactory.eINSTANCE.createEPropertyAssignments();
-        ENodeTemplateBody _node = node.getNode();
-        _node.setProperties(properties);
+    final ISemanticModification _function = new ISemanticModification() {
+      public void apply(final EObject nodeTemplate, final IModificationContext context) throws Exception {
+        ENodeTemplate node = ((ENodeTemplate) nodeTemplate);
+        EPropertyAssignments _properties = node.getNode().getProperties();
+        boolean _tripleEquals = (_properties == null);
+        if (_tripleEquals) {
+          final EPropertyAssignments properties = RMFactory.eINSTANCE.createEPropertyAssignments();
+          ENodeTemplateBody _node = node.getNode();
+          _node.setProperties(properties);
+        }
+        EPropertyAssignment property = RMFactory.eINSTANCE.createEPropertyAssignment();
+        property.setName(propertyName);
+        ESTRING value = RMFactory.eINSTANCE.createESTRING();
+        value.setValue("<set_value>");
+        property.setValue(value);
+        node.getNode().getProperties().getProperties().add(property);
       }
-      EPropertyAssignment property = RMFactory.eINSTANCE.createEPropertyAssignment();
-      property.setName(propertyName);
-      ESTRING value = RMFactory.eINSTANCE.createESTRING();
-      value.setValue("<set_value>");
-      property.setValue(value);
-      node.getNode().getProperties().getProperties().add(property);
     };
     acceptor.accept(issue, message, sub_message, "", _function);
   }

@@ -1,3 +1,5 @@
+module: openstack
+
 capability_types:
 	sodalite.capabilities.Compute:
 		derived_from: tosca.capabilities.Compute

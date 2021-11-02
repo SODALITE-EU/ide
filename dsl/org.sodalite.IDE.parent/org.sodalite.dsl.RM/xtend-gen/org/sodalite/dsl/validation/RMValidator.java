@@ -3,8 +3,6 @@
  */
 package org.sodalite.dsl.validation;
 
-import org.sodalite.dsl.validation.AbstractRMValidator;
-
 /**
  * This class contains custom validation rules.
  * 

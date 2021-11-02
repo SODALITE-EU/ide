@@ -154,7 +154,6 @@ public class RMGenerator extends AbstractGenerator {
   
   private Map<EOperationDefinition, Integer> operation_numbers;
   
-  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.data_type_counter = 1;
     this.node_counter = 1;
@@ -3304,41 +3303,9 @@ public class RMGenerator extends AbstractGenerator {
   
   public CharSequence compile(final EArtifactType a) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      ELIST _file_ext = a.getArtifact().getFile_ext();
-      boolean _tripleNotEquals = (_file_ext != null);
-      if (_tripleNotEquals) {
-        this.putParameterNumber(a, "file_ext", Integer.valueOf(this.parameter_counter));
-        _builder.newLineIfNotEmpty();
-        _builder.append(":Parameter_");
-        int _plusPlus = this.parameter_counter++;
-        _builder.append(_plusPlus);
-        _builder.newLineIfNotEmpty();
-        _builder.append("  ");
-        _builder.append("rdf:type exchange:Parameter ;");
-        _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:name \"file_ext\" ;");
-        _builder.newLine();
-        {
-          EList<EAlphaNumericValue> _list = a.getArtifact().getFile_ext().getList();
-          for(final EAlphaNumericValue entry : ((EObjectContainmentEList<EAlphaNumericValue>) _list)) {
-            _builder.append("  ");
-            _builder.append("exchange:listValue \'");
-            String _trim = this.trim(this.compile(entry));
-            _builder.append(_trim, "  ");
-            _builder.append("\' ; ");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append(".");
-        _builder.newLine();
-      }
-    }
-    _builder.newLine();
     _builder.append(":ArtifactType_");
-    int _plusPlus_1 = this.data_type_counter++;
-    _builder.append(_plusPlus_1);
+    int _plusPlus = this.data_type_counter++;
+    _builder.append(_plusPlus);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Type ;");
@@ -3351,20 +3318,20 @@ public class RMGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     {
       EPREFIX_TYPE _superType = a.getArtifact().getSuperType();
-      boolean _tripleNotEquals_1 = (_superType != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals = (_superType != null);
+      if (_tripleNotEquals) {
         _builder.append("  ");
         _builder.append("exchange:derivesFrom \'");
-        String _trim_1 = this.trim(this.compile(a.getArtifact().getSuperType()));
-        _builder.append(_trim_1, "  ");
+        String _trim = this.trim(this.compile(a.getArtifact().getSuperType()));
+        _builder.append(_trim, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
       String _description = a.getArtifact().getDescription();
-      boolean _tripleNotEquals_2 = (_description != null);
-      if (_tripleNotEquals_2) {
+      boolean _tripleNotEquals_1 = (_description != null);
+      if (_tripleNotEquals_1) {
         _builder.append("  ");
         _builder.append("exchange:description \'");
         String _processDescription = this.processDescription(a.getArtifact().getDescription());
@@ -3375,32 +3342,32 @@ public class RMGenerator extends AbstractGenerator {
     }
     {
       String _mime_type = a.getArtifact().getMime_type();
-      boolean _tripleNotEquals_3 = (_mime_type != null);
-      if (_tripleNotEquals_3) {
+      boolean _tripleNotEquals_2 = (_mime_type != null);
+      if (_tripleNotEquals_2) {
         _builder.append("  ");
-        _builder.append("exchange:mime_type ");
+        _builder.append("exchange:mime_type \'");
         String _mime_type_1 = a.getArtifact().getMime_type();
         _builder.append(_mime_type_1, "  ");
-        _builder.append(" ; ");
+        _builder.append("\' ; ");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      ELIST _file_ext_1 = a.getArtifact().getFile_ext();
-      boolean _tripleNotEquals_4 = (_file_ext_1 != null);
-      if (_tripleNotEquals_4) {
+      ELIST _file_ext = a.getArtifact().getFile_ext();
+      boolean _tripleNotEquals_3 = (_file_ext != null);
+      if (_tripleNotEquals_3) {
         _builder.append("  ");
-        _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(a, "file_ext");
-        _builder.append(_parameterNumber, "  ");
+        _builder.append("exchange:file_ext ");
+        ELIST _file_ext_1 = a.getArtifact().getFile_ext();
+        _builder.append(_file_ext_1, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
       EProperties _properties = a.getArtifact().getProperties();
-      boolean _tripleNotEquals_5 = (_properties != null);
-      if (_tripleNotEquals_5) {
+      boolean _tripleNotEquals_4 = (_properties != null);
+      if (_tripleNotEquals_4) {
         {
           EList<EPropertyDefinition> _properties_1 = a.getArtifact().getProperties().getProperties();
           for(final EPropertyDefinition p : _properties_1) {

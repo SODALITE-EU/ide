@@ -1169,17 +1169,6 @@ class RMGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(EArtifactType a) '''
-	«IF a.artifact.file_ext !== null»
-	«putParameterNumber(a, "file_ext", parameter_counter)»
-	:Parameter_«parameter_counter++»
-	  rdf:type exchange:Parameter ;
-	  exchange:name "file_ext" ;
-	  «FOR entry:(a.artifact.file_ext.list as EObjectContainmentEList<EAlphaNumericValue>)»
-	  exchange:listValue '«trim(entry.compile)»' ; 
-	  «ENDFOR»
-	.
-	«ENDIF»
-	
 	:ArtifactType_«data_type_counter++»
 	  rdf:type exchange:Type ;
 	  exchange:name "«a.name»" ;
@@ -1190,10 +1179,10 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:description '«processDescription(a.artifact.description)»' ;
 	  «ENDIF»
 	  «IF a.artifact.mime_type !== null»
-	  exchange:mime_type «a.artifact.mime_type» ; 
+	  exchange:mime_type '«a.artifact.mime_type»' ; 
 	  «ENDIF»
 	  «IF a.artifact.file_ext !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file_ext")» ;
+	  exchange:file_ext «a.artifact.file_ext» ;
   	  «ENDIF»
 	  «IF a.artifact.properties !== null»
 	  «FOR p:a.artifact.properties.properties»

@@ -66,12 +66,12 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.GetAttribute;
+import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
-import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
-import org.sodalite.dsl.ui.contentassist.AbstractAADMProposalProvider;
 import org.sodalite.dsl.ui.helper.AADMHelper;
-import org.sodalite.dsl.ui.helper.BackendHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -84,7 +84,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
   
   private final Set<String> assignments = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("nodeTemplates"));
   
-  @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     String _value = keyword.getValue();
     String _plus = ("keyword: " + _value);
@@ -97,7 +96,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void _completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     final ICompletionProposal proposal = this.createCompletionProposal(keyword.getValue(), 
       this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
@@ -106,12 +104,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     acceptor.accept(proposal);
   }
   
-  @Override
   public void completeAADM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     super.completeRM_Model_Imports(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Entity(final EObject property, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     final List<ENodeTemplate> nodes = AADMHelper.findNodes(property);
@@ -119,7 +115,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Entity(final EObject attribute, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::entity property");
     final List<ENodeTemplate> nodes = AADMHelper.findNodes(attribute);
@@ -127,7 +122,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     final String module = AADMHelper.getModule(model);
@@ -169,7 +163,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for GetPropertyBody::property property");
@@ -216,7 +209,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         String _type = type.getType();
         final String resourceId = (_xifexpression + _type);
-        final ReasonerData<PropertyDefinition> properties = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+        final ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
         if ((properties != null)) {
           System.out.println(("Properties retrieved from KB for resource: " + resourceId));
           this.createProposalsForProperties(node, properties, context, acceptor);
@@ -231,12 +224,18 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeGetAttributeBody_Attribute(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for GetAttributeBody::attribute property");
       final String module = AADMHelper.getModule(model);
-      final GetAttributeBodyImpl body = ((GetAttributeBodyImpl) model);
+      GetAttributeBody body = null;
+      if ((model instanceof GetAttributeBody)) {
+        body = ((GetAttributeBody) model);
+      } else {
+        if ((model instanceof GetAttribute)) {
+          body = ((GetAttribute) model).getAttribute();
+        }
+      }
       final ENodeTemplate node = AADMHelper.getEntityNode(body);
       if ((node == null)) {
         return;
@@ -271,7 +270,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         }
         String _type = type.getType();
         final String resourceId = (_xifexpression + _type);
-        final ReasonerData<AttributeDefinition> attributes = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+        final ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
         if ((attributes != null)) {
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
           this.createProposalsForAttributes(node, attributes, context, acceptor);
@@ -396,7 +395,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeAssignment(final Assignment assignment, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     String _feature = assignment.getFeature();
     String _plus = ("assignment: " + _feature);
@@ -409,7 +407,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeENodeTemplate_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for NodeTemplate::name property");
     final String proposalText = "node_template_id";
@@ -418,7 +415,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPolicyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for NodeTemplate::name property");
     final String proposalText = "policy_id";
@@ -427,7 +423,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeENodeTemplateBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
@@ -435,7 +430,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final List<String> importedModules = AADMHelper.getImportedModules(model);
         final String module = AADMHelper.getModule(model);
         importedModules.add(module);
-        final ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = nodes.getElements();
         for (final Type node : _elements) {
@@ -483,7 +478,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeEAttributeAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EAttributeAssignment::name property");
@@ -514,7 +508,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<AttributeDefinition> attributes = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
+          final ReasonerData<AttributeDefinition> attributes = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
           if ((attributes != null)) {
           }
           System.out.println(("Attributes retrieved from KB for resource: " + resourceId));
@@ -575,7 +569,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeEPropertyAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EPropertyAssignment::name property");
@@ -619,7 +612,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<PropertyDefinition> properties = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
+          final ReasonerData<PropertyDefinition> properties = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
           if ((properties != null)) {
             System.out.println(("Properties retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/property.png");
@@ -680,7 +673,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeECapabilityAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for ECapabilityAssignment::name property");
@@ -716,7 +708,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<CapabilityDefinition> capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(resourceId);
+          final ReasonerData<CapabilityDefinition> capabilities = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(resourceId);
           if ((capabilities != null)) {
             System.out.println(("Capabilities retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/capability.png");
@@ -773,7 +765,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeERequirementAssignment_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for ERequirementAssignment::name property");
@@ -808,7 +799,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         String _plus = (_xifexpression + _type);
         resourceId = _plus;
         if ((resourceId != null)) {
-          final ReasonerData<RequirementDefinition> requirements = BackendHelper.getKBReasoner().getTypeRequirements(resourceId);
+          final ReasonerData<RequirementDefinition> requirements = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(resourceId);
           if ((requirements != null)) {
             System.out.println(("Requirements retrieved from KB for resource: " + resourceId));
             final Image image = this.getImage("icons/requirement.png");
@@ -877,7 +868,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeERequirementAssignment_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for ERequirementAssignment::node property");
@@ -978,7 +968,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     super.completeEEvenFilter_Node(model, assignment, context, acceptor);
     final List<ENodeTemplate> localTemplates = AADMHelper.findLocalNodes(model);
@@ -986,7 +975,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createProposalsForLocalTemplateList(localTemplates, module, "icons/resource2.png", context, acceptor);
   }
   
-  @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for EDataType::supertype property");
@@ -996,7 +984,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         if ((module != null)) {
           importedModules.add(module);
         }
-        final ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules);
         System.out.println("Data types retrieved from KB:");
         List<Type> _elements = types.getElements();
         for (final Type type : _elements) {
@@ -1043,7 +1031,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void complete_AADM_Model(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String proposalText = "node_templates:";
     final String displayText = "node_templates:";
@@ -1051,12 +1038,10 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     this.createNonEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void complete_ID(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     return;
   }
   
-  @Override
   protected void createNonEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
     ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
@@ -1067,7 +1052,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     acceptor.accept(proposal);
   }
   
-  @Override
   protected void createEditableCompletionProposal(final String proposalText, final String displayText, final Image image, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
     ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, image, context);
     if ((proposal instanceof ConfigurableCompletionProposal)) {
@@ -1081,7 +1065,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     acceptor.accept(proposal);
   }
   
-  @Override
   public void completeEPolicyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       System.out.println("Invoking content assist for NodeTemplate::type property");
@@ -1089,7 +1072,7 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final List<String> importedModules = AADMHelper.getImportedModules(model);
         final String module = AADMHelper.getModule(model);
         importedModules.add(module);
-        final ReasonerData<Type> policies = BackendHelper.getKBReasoner().getPolicyTypes(importedModules);
+        final ReasonerData<Type> policies = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules);
         System.out.println("Nodes retrieved from KB:");
         List<Type> _elements = policies.getElements();
         for (final Type policy : _elements) {
@@ -1137,7 +1120,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeEEvenFilter_Requirement(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final EEvenFilter filter = ((EEvenFilter) model);
     EPREFIX_REF _node = filter.getNode();
@@ -1154,7 +1136,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeEEvenFilter_Capability(final EObject object, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       final EEvenFilter filter = ((EEvenFilter) object);
@@ -1189,13 +1170,13 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
         final ENodeTemplate req_node = AADMHelper.findRequirementNodeInLocalModel(object, filter.getRequirement());
         if ((req_node != null)) {
           final String node_type = AADMHelper.getReference(req_node.getNode().getType());
-          final CapabilityDefinitionData capabilityData = BackendHelper.getKBReasoner().getTypeCapabilities(node_type);
+          final CapabilityDefinitionData capabilityData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(node_type);
           capabilityDefinitions = capabilityData.getElements();
           cap_def_type = node_type;
         } else {
           final String nodeName = AADMHelper.getNodeFromRequirementRef(filter.getRequirement());
           final String req_name = AADMHelper.getRequirementNameFromRequirementRef(filter.getRequirement());
-          final CapabilityAssignmentData capabilityData_1 = BackendHelper.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
+          final CapabilityAssignmentData capabilityData_1 = SodaliteBackendProxy.getKBReasoner().getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeName, req_name);
           capabilityAssignments = capabilityData_1.getElements();
           cap_assign_type = nodeName;
         }
@@ -1224,12 +1205,11 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeETarget_Target(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
       try {
         final List<String> importedModules = AADMHelper.processListModules(model);
-        final TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+        final TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
         this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
         final List<ENodeTemplate> localNodes = AADMHelper.findLocalNodes(model);
         this.createProposalsForTemplateList(localNodes, "icons/resource2.png", context, acceptor);
@@ -1248,7 +1228,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public void completeGetInput_Input(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     EObject _findModel = AADMHelper.findModel(model);
     final AADM_Model aadm = ((AADM_Model) _findModel);
@@ -1337,7 +1316,6 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     }
   }
   
-  @Override
   public String getAdditionalProposalInfo(final Keyword keyword) {
     if ((keyword instanceof KeywordImpl)) {
       final KeywordImpl keywordImpl = ((KeywordImpl) keyword);

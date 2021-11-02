@@ -1,3 +1,5 @@
+module: test
+
 inputs:
 	docker-host-ip:  
 		type: string 

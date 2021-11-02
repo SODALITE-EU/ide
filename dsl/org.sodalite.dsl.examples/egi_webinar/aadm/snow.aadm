@@ -1,0 +1,152 @@
+module: snow
+import: docker
+import: openstack
+
+inputs:
+	ssh-key-name:  
+		type: string 
+	image-name:  
+		type: string 
+	openstack-network-name:  
+		type: string 
+	security-groups:  
+ 		type: string    
+	flavor-name:  
+		type: string      
+	docker-registry-url: 
+		type: string
+	docker-pass: 
+		type: string
+	docker-user: 
+		type: string
+	docker-network: 
+		type: string      
+	docker-registry-cert-country-name:
+		type: string
+		default: ""
+	docker-registry-cert-organization-name: 
+		type: string
+		default: ""
+	docker-registry-cert-email-address: 
+		type: string
+		default: ""
+	mysql-env:
+		type: map
+	env:
+		type: map	
+	username:
+		type: string				
+		
+node_templates:
+	snow-security-rules:
+		type: openstack/sodalite.nodes.OpenStack.SecurityRules
+		properties:
+			ports:  
+				component_ports:
+					port_range_max: 8081 
+					remote_ip_prefix: "0.0.0.0/0" 
+					port_range_min: 8080 
+					protocol: "tcp" 
+				http_port:  
+					port_range_min: 80 
+					port_range_max: 80 
+					protocol: "tcp" 
+					remote_ip_prefix: "0.0.0.0/0"
+			group_name: "snow"
+			group_description: "Snow UC security group"
+			env: get_input: env
+	
+	snow-vm:
+		type: openstack/sodalite.nodes.OpenStack.VM
+		properties:
+			key_name: get_input: ssh-key-name
+			image: get_input: image-name
+			name: "snow-vm_new_1"
+			network: get_input: openstack-network-name
+			security_groups: get_input: security-groups
+			flavor: get_input: flavor-name
+			username: get_input: username
+			env: get_input: env
+		requirements:
+			protected_by:
+				node: snow/snow-security-rules
+
+	snow-docker-host:
+		type: docker/sodalite.nodes.DockerHost
+		requirements:
+			host:
+				node: snow/snow-vm
+	
+	snow-docker-registry-certificate:
+		type: docker/sodalite.nodes.RegistryCertificate
+		properties:
+			registry_ip: get_input: docker-registry-url
+			country_name: get_input: docker-registry-cert-country-name
+			organization_name: get_input: docker-registry-cert-organization-name
+			email_address: get_input: docker-registry-cert-email-address
+		requirements:
+			host:
+				node: snow/snow-vm
+			dependency:
+				node: snow/snow-docker-host
+	
+	snow-docker-registry:
+		type: docker/sodalite.nodes.DockerRegistry
+		properties:
+			docker_registry_url: get_input: docker-registry-url
+			docker_pass: get_input: docker-pass
+			docker_user: get_input: docker-user
+		requirements:
+			host:
+				node: snow/snow-vm
+			dependency:
+				node: snow/snow-docker-host
+			dependency:
+				node: snow/snow-docker-registry-certificate
+	
+	snow-docker-network:
+		type: docker/sodalite.nodes.DockerNetwork
+		properties:
+			name: get_input: docker-network
+		requirements:
+			host:
+				node: snow/snow-vm
+			dependency:
+				node: snow/snow-docker-host
+
+	snow-mysql:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+			docker_network_name: get_property:
+				entity: SELF
+				property: snow/snow-docker-network.name
+				req_cap: snow/snow-mysql.network
+			image_name: "snow-mysql:latest"
+			command: "--default-authentication-plugin=mysql_native_password"
+			ports: ['3306:3306']
+			exposed_ports: [3306]
+			alias: "mysql"
+			env: get_input: mysql-env
+			registry_url: get_input: docker-registry-url
+		requirements:
+			network:
+				node: snow/snow-docker-network
+			registry:
+				node: snow/snow-docker-registry
+			host:
+				node: snow/snow-docker-host
+	
+//	snow-skyline-extractor:
+//		type: docker/sodalite.nodes.DockerizedComponent
+//		properties:
+//			alias: "snow-skyline-extractor"
+//			volumes: ["/tmp/docker:/tmp"]
+//			image_name: "snow-skyline-extractor:latest"
+//			ports: ['8080:8080']
+//			exposed_ports: [8080]
+//			registry_url: get_input: docker-registry-url
+//		requirements:
+//			host:
+//				node: snow/snow-docker-host
+//			registry:
+//				node: snow/snow-docker-registry
