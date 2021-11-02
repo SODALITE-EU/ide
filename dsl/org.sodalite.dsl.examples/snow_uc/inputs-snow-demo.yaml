@@ -1,0 +1,25 @@
+ssh-key-name: 77-231-202-183-xOpera
+image-name: ubuntu
+username: ubuntu
+openstack-network-name: orchestrator-network
+security-groups: default,node-exporter,snow,remote_access
+flavor-name: m1.medium
+docker-network: snow
+docker-registry-url: 77.231.202.207
+docker-registry-cert-country-name: SI
+docker-registry-cert-organization-name: XLAB
+docker-registry-cert-email-address: test@test.com
+mysql-db-pass: nahime27
+mysql-env:
+  MYSQL_ROOT_PASSWORD: nahime27
+  MYSQL_DATABASE: wc_crawler_db
+flickr-db-user: root
+flickr-db-pass: nahime27
+env:
+docker-user:
+docker-pass:
+flicker-env:
+  SNOW_FLICKR_DB_IP: "mysql"
+  SNOW_FLICKR_DB_PORT: "3306"
+  SNOW_FLICKR_DB_USER: "root"
+  SNOW_FLICKR_DB_PASSWORD: "nahime27"
