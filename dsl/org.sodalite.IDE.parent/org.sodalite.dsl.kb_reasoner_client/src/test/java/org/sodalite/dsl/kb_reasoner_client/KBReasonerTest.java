@@ -82,7 +82,7 @@ class KBReasonerTest {
 
 	private String aadmURI = null;
 
-	private boolean AIM_Enabled = true;
+	private boolean AIM_Enabled = false;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
@@ -155,6 +155,15 @@ class KBReasonerTest {
 		assertFalse(policyTypes.getElements().isEmpty());
 		policyTypes.getElements().stream().forEach(type -> System.out
 				.println("Policy type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetArtifactTypes() throws Exception {
+		List<String> modules = Arrays.asList("artifacts");
+		ReasonerData<Type> artifactTypes = kbclient.getArtifactTypes(modules);
+		assertFalse(artifactTypes.getElements().isEmpty());
+		artifactTypes.getElements().stream().forEach(type -> System.out
+				.println("Artifact type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
 	}
 
 	@Test

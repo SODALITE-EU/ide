@@ -1182,7 +1182,9 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:mime_type '«a.artifact.mime_type»' ; 
 	  «ENDIF»
 	  «IF a.artifact.file_ext !== null»
-	  exchange:file_ext «a.artifact.file_ext» ;
+	  «FOR file_ext:a.artifact.file_ext.list»
+	  exchange:file_ext '«trim(file_ext.compile)»' ;
+	  «ENDFOR»
   	  «ENDIF»
 	  «IF a.artifact.properties !== null»
 	  «FOR p:a.artifact.properties.properties»

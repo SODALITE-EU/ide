@@ -1,3 +1,5 @@
+module: artifacts
+
 node_templates:
 	artifacts_file:
 		type: opera.nodes.file

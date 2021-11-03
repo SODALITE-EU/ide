@@ -3356,12 +3356,17 @@ public class RMGenerator extends AbstractGenerator {
       ELIST _file_ext = a.getArtifact().getFile_ext();
       boolean _tripleNotEquals_3 = (_file_ext != null);
       if (_tripleNotEquals_3) {
-        _builder.append("  ");
-        _builder.append("exchange:file_ext ");
-        ELIST _file_ext_1 = a.getArtifact().getFile_ext();
-        _builder.append(_file_ext_1, "  ");
-        _builder.append(" ;");
-        _builder.newLineIfNotEmpty();
+        {
+          EList<EAlphaNumericValue> _list = a.getArtifact().getFile_ext().getList();
+          for(final EAlphaNumericValue file_ext : _list) {
+            _builder.append("  ");
+            _builder.append("exchange:file_ext \'");
+            String _trim_1 = this.trim(this.compile(file_ext));
+            _builder.append(_trim_1, "  ");
+            _builder.append("\' ;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     {

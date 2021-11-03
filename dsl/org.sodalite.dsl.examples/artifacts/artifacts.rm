@@ -1,3 +1,5 @@
+module: artifacts
+
 artifact_types:
 	sodalite.artifacts.TextualFile:
 		derived_from: tosca.artifacts.File
@@ -30,21 +32,21 @@ node_types:
 				operations:
 					create:
 						implementation: 
-							primary: "/home/yosu/Projects/Sodalite/Git/xopera-examples/tosca/artifacts/playbooks/create.yaml"
+							primary: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/artifacts/playbooks/create.yaml"
 						inputs:
 							text_file_artifact:
 								description: 'Text file artifact input'
 								type: string
 								default: get_artifact: 
 									entity: SELF
-									artifact: opera.nodes.file.text_file
+									artifact: artifacts/opera.nodes.file.text_file
 							json_file_artifact:
 								description: 'JSON file artifact input'
 								type: string
 								default: get_property: 
 									entity: SELF
-									property: opera.nodes.file.json_file
+									property: artifacts/opera.nodes.file.json_file
 		artifacts:
 			text_file:
 				type: sodalite.artifacts.TextualFile
-				file: "/home/yosu/Projects/Sodalite/Git/xopera-examples/tosca/artifacts/files/file.txt"
+				file: "//home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/artifacts/files/file.txt"
