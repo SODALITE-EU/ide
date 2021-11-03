@@ -1,8 +1,12 @@
 module: artifacts
 
 node_templates:
+	
+	artifacts_filesystem:
+		type: tosca.nodes.Compute
+
 	artifacts_file:
-		type: opera.nodes.file
+		type: artifacts/opera.nodes.file
 		properties:
 			json_file: get_artifact:
 				entity: SELF
@@ -11,6 +15,9 @@ node_templates:
 			json_file:
 				type: tosca.artifacts.File
 				file: "/home/yosu/Projects/Sodalite/Git/xopera-examples/tosca/artifacts/files/file.json"
+		requirements:
+			host:
+				node: artifacts/artifacts_filesystem
 
 outputs:
 	output_attribute_text_file:
