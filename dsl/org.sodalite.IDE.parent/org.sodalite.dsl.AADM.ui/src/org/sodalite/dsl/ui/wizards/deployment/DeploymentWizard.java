@@ -1,7 +1,6 @@
 package org.sodalite.dsl.ui.wizards.deployment;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -16,6 +15,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.prefs.Preferences;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.dsl.ui.preferences.Activator;
@@ -32,6 +32,7 @@ public class DeploymentWizard extends Wizard {
 	private String deploymentLabel = null;
 	private int workers = 0;
 	private boolean completeModel = false;
+	private boolean validateNiFiCerts = false;
 	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
@@ -112,14 +113,26 @@ public class DeploymentWizard extends Wizard {
 			content.append("grafana_address: " + grafana_address + "\n");
 			this.monitoring_id = UUID.randomUUID().toString();
 			content.append("monitoring_id: " + this.monitoring_id);
+			// NIFI inputs
+			String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
+			content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT);
+			String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
+			content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT);
+			String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
+			content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN);
+			Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
+			content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS);
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}
 
 		// Get completeModel
 		this.completeModel = mainPage.getCompleteModel();
+
+		// Get validate NIFI certificates
+		this.validateNiFiCerts = mainPage.getValidateNiFiCerts();
 
 		return true;
 	}
@@ -146,6 +159,10 @@ public class DeploymentWizard extends Wizard {
 
 	public boolean getCompleteModel() {
 		return this.completeModel;
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return this.validateNiFiCerts;
 	}
 
 	public String getMonitoringId() {

@@ -17,6 +17,8 @@ public class PreferenceConstants {
 
 	public static final String Refactorer_URI = "RefactorerURI";
 
+	public static final String NIFI_URI = "NiFiURI";
+
 	public static final String KEYCLOAK_URI = "KeyCloakURI";
 
 	public static final String KEYCLOAK_CLIENT_ID = "KeyCloakClientID";

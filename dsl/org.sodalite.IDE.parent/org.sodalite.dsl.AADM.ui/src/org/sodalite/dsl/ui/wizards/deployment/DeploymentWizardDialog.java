@@ -48,6 +48,10 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getCompleteModel();
 	}
 
+	public boolean getValidateNiFiCerts() {
+		return ((DeploymentWizard) this.getWizard()).getValidateNiFiCerts();
+	}
+
 	public String getMonitoringId() {
 		return ((DeploymentWizard) this.getWizard()).getMonitoringId();
 	}

@@ -28,11 +28,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.net.ssl.SSLContext;
+
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.conn.ssl.TrustStrategy;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,6 +121,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloakUri;
 	private String pdsUri;
 	private String refactorerUri;
+	private String nifiUri;
 	private String grafanaUri;
 	private String rulesServerUri;
 	private String vaultSecretUploaderUri;
@@ -124,8 +133,8 @@ public class KBReasonerClient implements KBReasoner {
 	private Boolean IAM_enabled = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
-			String keycloakUri, String pdsUri, String refactorerUri, String grafanaUri, String rulesServerUri,
-			String vaultSecretUploaderUri) {
+			String keycloakUri, String pdsUri, String refactorerUri, String nifiUri, String grafanaUri,
+			String rulesServerUri, String vaultSecretUploaderUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -133,6 +142,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.keycloakUri = keycloakUri;
 		this.pdsUri = pdsUri;
 		this.refactorerUri = refactorerUri;
+		this.nifiUri = nifiUri;
 		this.grafanaUri = grafanaUri;
 		this.rulesServerUri = rulesServerUri;
 		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
@@ -1737,6 +1747,78 @@ public class KBReasonerClient implements KBReasoner {
 		String url = rulesServerUri + "rules/" + monitoring_id;
 		try {
 			deleteUriResource(new URI(url), "", HttpStatus.OK);
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
+	/*
+	 * author: Kamil Tokmakov (HLRS)
+	 */
+	public String getNIFIAccessToken() throws SodaliteException {
+		try {
+			String NIFI_API_ENDPOINT = this.nifiUri + "nifi-api";
+			String NIFI_AUTH_REQUEST_URL = NIFI_API_ENDPOINT + "/access/oidc/request";
+			String NIFI_OIDC_TOKEN_EXCHANGE_URL = NIFI_API_ENDPOINT + "/access/oidc/exchange";
+
+			// Cookie store
+			BasicCookieStore cookieStore = new BasicCookieStore();
+
+			// Ignore SSL certificates
+			TrustStrategy acceptingTrustStrategy = (x509Certificates, s) -> true;
+			SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
+					.loadTrustMaterial(null, acceptingTrustStrategy).build();
+			SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier());
+
+			// Create a client with cookie store and disabled SSL check
+			CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf)
+					.setDefaultCookieStore(cookieStore).setRedirectStrategy(new LaxRedirectStrategy()) // To allow
+																										// redirect
+																										// after POST
+																										// requests
+					.build();
+			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+			requestFactory.setHttpClient(httpClient);
+			RestTemplate restTemplate = new RestTemplate(requestFactory);
+
+			// Extracting keycloak login URL from the HTTP response
+			ResponseEntity<String> keycloak_login_response = restTemplate.getForEntity(NIFI_AUTH_REQUEST_URL,
+					String.class);
+			String keycloak_login_url = null;
+			String keycloak_login_body = keycloak_login_response.getBody();
+			Pattern pattern = Pattern.compile("<form.+kc-form-login.+action=\"(.*?(?=\"))\"");
+			Matcher matcher = pattern.matcher(keycloak_login_body);
+			if (matcher.find()) {
+				keycloak_login_url = matcher.group(1).replaceAll("&amp;", "&");
+			}
+
+			// Send POST request to Keycloak authentication with the redirect to NiFi
+			// authentication
+			HttpHeaders keycloak_auth_headers = new HttpHeaders();
+			keycloak_auth_headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+			MultiValueMap<String, String> keycloak_auth_data = new LinkedMultiValueMap<>();
+			keycloak_auth_data.add("username", this.keycloak_user);
+			keycloak_auth_data.add("password", this.keycloak_password);
+			keycloak_auth_data.add("credentialId", "");
+
+			HttpEntity<MultiValueMap<String, String>> keycloak_auth_request = new HttpEntity<>(keycloak_auth_data,
+					keycloak_auth_headers);
+			ResponseEntity<String> keycloak_auth_response = restTemplate.postForEntity(keycloak_login_url,
+					keycloak_auth_request, String.class);
+
+			// Send empty POST request with cookies to NiFi to obtain NiFi access token
+			HttpEntity<String> nifi_token_exchange_request = new HttpEntity<>("");
+			ResponseEntity<String> nifi_token_exchange_response = restTemplate
+					.postForEntity(NIFI_OIDC_TOKEN_EXCHANGE_URL, nifi_token_exchange_request, String.class);
+
+			String NIFI_ACCESS_TOKEN = nifi_token_exchange_response.getBody();
+
+			// Clear all the cookies
+			cookieStore.clear();
+
+			return NIFI_ACCESS_TOKEN;
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}

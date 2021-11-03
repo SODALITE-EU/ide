@@ -156,6 +156,10 @@ class AADMGenerator extends AbstractGenerator {
 	«includeDefaultInput("consul_server_address")»
 	«includeDefaultInput("grafana_address")»
 	«includeDefaultInput("skydive_analyzer")»
+	«includeDefaultInput("NIFI_ENDPOINT")»
+	«includeDefaultInput("NIFI_API_ENDPOINT")»
+	«includeDefaultInput("NIFI_API_ACCESS_TOKEN")»
+	«includeDefaultInput("NIFI_API_VALIDATE_CERTS")»
 	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 		«p.compile»
