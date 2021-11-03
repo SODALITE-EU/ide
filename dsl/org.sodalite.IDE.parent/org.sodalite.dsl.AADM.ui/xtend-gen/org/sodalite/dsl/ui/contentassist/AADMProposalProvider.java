@@ -66,8 +66,9 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
 import org.sodalite.dsl.rM.EPropertyAssignment;
+import org.sodalite.dsl.rM.GetAttribute;
+import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.impl.EPropertyAssignmentsImpl;
-import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.ui.helper.AADMHelper;
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
@@ -227,7 +228,14 @@ public class AADMProposalProvider extends AbstractAADMProposalProvider {
     try {
       System.out.println("Invoking content assist for GetAttributeBody::attribute property");
       final String module = AADMHelper.getModule(model);
-      final GetAttributeBodyImpl body = ((GetAttributeBodyImpl) model);
+      GetAttributeBody body = null;
+      if ((model instanceof GetAttributeBody)) {
+        body = ((GetAttributeBody) model);
+      } else {
+        if ((model instanceof GetAttribute)) {
+          body = ((GetAttribute) model).getAttribute();
+        }
+      }
       final ENodeTemplate node = AADMHelper.getEntityNode(body);
       if ((node == null)) {
         return;

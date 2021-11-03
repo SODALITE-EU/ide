@@ -60,6 +60,8 @@ import org.sodalite.dsl.aADM.ERequirementAssignments
 import org.sodalite.dsl.aADM.ENodeTemplateBody
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy
+import org.sodalite.dsl.rM.GetAttributeBody
+import org.sodalite.dsl.rM.GetAttribute
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -183,7 +185,13 @@ class AADMProposalProvider extends AbstractAADMProposalProvider {
 		System.out.println("Invoking content assist for GetAttributeBody::attribute property")
 		val String module = AADMHelper.getModule(model)
 		//Get entity in this GetAttribute body. If null, return
-		val body = model as GetAttributeBodyImpl
+		var GetAttributeBody body = null 
+		if (model instanceof GetAttributeBody){
+			body = model as GetAttributeBody
+		} else if (model instanceof GetAttribute){
+			body = (model as GetAttribute).attribute
+		}
+			
 		val node = AADMHelper.getEntityNode(body)
 		
 		if (node === null)

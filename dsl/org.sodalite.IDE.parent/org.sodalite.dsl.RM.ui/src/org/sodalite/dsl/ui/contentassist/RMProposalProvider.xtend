@@ -55,6 +55,8 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import org.sodalite.dsl.ui.helper.RMHelper
 import org.eclipse.xtext.impl.KeywordImpl
 import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
+import org.sodalite.dsl.rM.EArtifactDefinition
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy
 
 /**
@@ -388,14 +390,48 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			
 			//Add other interfaces defined locally in the model
 			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.interfaceTypes !== null)
+				for (interface: rootModel.interfaceTypes.interfaceTypes){
+					System.out.println ("\tLocal interface type: " + interface.name)
+					val proposalText = module + "/" + interface.name 
+					val displayText = module + "/" + interface.name 
+					val additionalProposalInfo = interface.interface.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			RMHelper.showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
+	override void completeEArtifactTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Get modules from model
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			for (interface: rootModel.interfaceTypes.interfaceTypes){
-				System.out.println ("\tLocal interface type: " + interface.name)
-				val proposalText = module + "/" + interface.name 
-				val displayText = module + "/" + interface.name 
-				val additionalProposalInfo = interface.interface.description
+			val ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules)
+			val Image image = getImage("icons/artifact.png")
+			for (artifact: artifacts.elements){
+				val qartifact = artifact.module !== null?RMHelper.getLastSegment(artifact.module, '/') + '/' + artifact.label:artifact.label
+				val proposalText = qartifact
+				val displayText = qartifact
+				val additionalProposalInfo = artifact.description
 				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
+			
+			//Add other artifacts defined locally in the model
+			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.artifactTypes !== null)
+				for (artifact: rootModel.artifactTypes.artifactTypes){
+					val proposalText = module + "/" + artifact.name 
+					val displayText = module + "/" + artifact.name 
+					val additionalProposalInfo = artifact.artifact.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
@@ -415,6 +451,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeERequirementDefinitionBody_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEArtifactDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeERequirementDefinitionBody_Relationship(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -442,6 +482,40 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeGetPropertyBody_Property(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::property property")
 		completeGetAttributeOrPropertyFunction_AttributeOrProperty( model, assignment, context, acceptor)
+	}
+	
+	override void completeGetArtifactBody_Artifact(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::artifact property")
+		var List<String> proposals = new ArrayList<String>()
+		val String module = RMHelper.getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		var body = model as GetArtifactBodyImpl
+		var EObject node = RMHelper.getEntityType(body.eContainer as EFunction)
+		
+		if (node === null || !(node instanceof ENodeType)){
+			return
+		}
+		
+		//Get the artifacts defined within the entity
+		var List<EArtifactDefinition> artifacts = null
+		var String node_name = null
+		
+		val nodeType = (node as ENodeType)
+		if (nodeType.node.artifacts!==null)
+			artifacts = nodeType.node.artifacts.artifacts
+		node_name = nodeType.name
+		
+		for (artifact:artifacts){
+			proposals.add((module !== null? module + '/':'') + node_name + "." + artifact.name)
+		}
+
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		var Image image = null
+		image = getImage("icons/artifact.png")
+		
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
 	}
 	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -618,6 +692,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEntityProposals (context, acceptor);
 	}
 	
+	override void completeGetArtifactBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::entity property")
+		createEntityProposals (context, acceptor);
+	}
+	
 	override void completeEMapEntry_Key(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMapEntry::key property")
 		createEditableCompletionProposal ("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
@@ -636,6 +715,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = "\"" + RMHelper.selectFile ("Select implementation primary file") + "\""
+		createEditableCompletionProposal (input, input, null, context, "", acceptor);
+	}
+	
+	override void completeEArtifactDefinitionBody_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
+		val input = "\"" + RMHelper.selectFile ("Select artifact file") + "\""
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
@@ -1509,11 +1594,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			if (model instanceof GetPropertyBodyImpl)
 				for (prop:properties){
-					proposals.add(module + '/' + node_name + "." + prop.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + prop.name)
 				}
 			else if (model instanceof GetAttributeBodyImpl)
 				for (attr:attributes){
-					proposals.add(module + '/' + node_name + "." + attr.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + attr.name)
 				}
 		}
 		

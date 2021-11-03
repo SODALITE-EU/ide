@@ -218,6 +218,10 @@ public class KBReasonerClient implements KBReasoner {
 		return getTypes(modules, TypeKind.POLICY_TYPE);
 	}
 
+	public TypeData getArtifactTypes(List<String> modules) throws SodaliteException {
+		return getTypes(modules, TypeKind.ARTIFACT_TYPE);
+	}
+
 	private TypeData getTypes(List<String> modules, TypeKind kind) throws SodaliteException {
 		Assert.notNull(modules, "Pass a not null modules");
 		Assert.notNull(kind, "Pass a not null type kind");

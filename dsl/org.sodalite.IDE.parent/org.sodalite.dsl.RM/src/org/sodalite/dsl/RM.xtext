@@ -44,7 +44,8 @@ RM_Model:
 	('policy_types:'
 	BEGIN
 	policyTypes=EPolicyTypes
-	END)?;
+	END)?
+	;
 
 EDataTypes:
 	{EDataTypes} (dataTypes+=EDataType)+;
@@ -80,10 +81,16 @@ EArtifactType:
 	END;
 
 EArtifactTypeBody:
-	{EArtifactTypeBody} (('derived_from:' superType=EPREFIX_TYPE)? &
+	{EArtifactTypeBody} (
+	('derived_from:' superType=EPREFIX_TYPE)? &
 	('description:' description=STRING)? &
 	('mime_type:' mime_type=STRING)? &
-	('file_ext:'+ file_ext=STRING)?);
+	('file_ext:'+ file_ext=ELIST)? &
+	('properties:'
+	BEGIN
+	properties=EProperties
+	END)?
+	);
 
 ECapabilityTypes:
 	{ECapabilityTypes} (capabilityTypes+=ECapabilityType)+;
@@ -303,6 +310,10 @@ ENodeTypeBody:
 	('requirements:'
 	BEGIN
 	requirements=ERequirements
+	END)? &
+	('artifacts:'
+	BEGIN
+	artifacts=EArtifacts
 	END)?);
 
 ERelationshipTypes:
@@ -460,7 +471,7 @@ EValueExpression:
 	ESingleValue | EFunction;
 
 EFunction:
-	GetProperty | GetAttribute | GetInput;
+	GetProperty | GetAttribute | GetInput | GetArtifact;
 
 GetInput:
 	'get_input:' input=[EParameterDefinition]
@@ -487,6 +498,17 @@ GetPropertyBody:
 	('property:' property=EPREFIX_REF) &
 	('entity:' entity=EEntityReference) &
 	('req_cap:' req_cap=EPREFIX_REF)?;
+	
+GetArtifact:
+	'get_artifact:'
+	BEGIN
+	artifact=GetArtifactBody
+	END;
+	
+GetArtifactBody:
+	('artifact:' artifact=EPREFIX_REF) &
+	('entity:' entity=EEntityReference)
+;
 
 ECapabilities:
 	{ECapabilities} (capabilities+=ECapabilityDefinition)*;
@@ -528,6 +550,20 @@ ERequirementDefinitionBody:
 	('node:' node=EPREFIX_TYPE)? &
 	('relationship:' relationship=EPREFIX_TYPE)? &
 	('occurrences:' '[' start=EAlphaNumericValue ',' end=EAlphaNumericValue ']')?;
+
+EArtifacts:
+	{EArtifacts} (artifacts+=EArtifactDefinition)*;
+
+EArtifactDefinition:
+	name=ID ':'
+	BEGIN
+	artifact=EArtifactDefinitionBody
+	END;
+	
+EArtifactDefinitionBody:
+	('type:' type=EDataTypeName) &
+	('file:' file=STRING)
+;
 
 EReqOrCap:
 	ERequirementDefinition | ECapabilityDefinition;

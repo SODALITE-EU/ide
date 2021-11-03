@@ -58,8 +58,8 @@ import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
-import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
+import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -392,7 +392,7 @@ public class AADMHelper extends RMHelper {
 			return getNodeTemplate(object.eContainer());
 	}
 
-	public static ENodeTemplate getEntityNode(GetPropertyBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetPropertyBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {
@@ -406,7 +406,7 @@ public class AADMHelper extends RMHelper {
 		return node;
 	}
 
-	public static ENodeTemplate getEntityNode(GetAttributeBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetAttributeBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {

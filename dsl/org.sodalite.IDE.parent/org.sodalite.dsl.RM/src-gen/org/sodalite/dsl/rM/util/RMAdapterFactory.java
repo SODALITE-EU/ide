@@ -431,6 +431,16 @@ public class RMAdapterFactory extends AdapterFactoryImpl
         return createGetPropertyBodyAdapter();
       }
       @Override
+      public Adapter caseGetArtifact(GetArtifact object)
+      {
+        return createGetArtifactAdapter();
+      }
+      @Override
+      public Adapter caseGetArtifactBody(GetArtifactBody object)
+      {
+        return createGetArtifactBodyAdapter();
+      }
+      @Override
       public Adapter caseECapabilities(ECapabilities object)
       {
         return createECapabilitiesAdapter();
@@ -464,6 +474,21 @@ public class RMAdapterFactory extends AdapterFactoryImpl
       public Adapter caseERequirementDefinitionBody(ERequirementDefinitionBody object)
       {
         return createERequirementDefinitionBodyAdapter();
+      }
+      @Override
+      public Adapter caseEArtifacts(EArtifacts object)
+      {
+        return createEArtifactsAdapter();
+      }
+      @Override
+      public Adapter caseEArtifactDefinition(EArtifactDefinition object)
+      {
+        return createEArtifactDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseEArtifactDefinitionBody(EArtifactDefinitionBody object)
+      {
+        return createEArtifactDefinitionBodyAdapter();
       }
       @Override
       public Adapter caseEReqOrCap(EReqOrCap object)
@@ -1698,6 +1723,36 @@ public class RMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetArtifact <em>Get Artifact</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.GetArtifact
+   * @generated
+   */
+  public Adapter createGetArtifactAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.GetArtifactBody <em>Get Artifact Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.GetArtifactBody
+   * @generated
+   */
+  public Adapter createGetArtifactBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.ECapabilities <em>ECapabilities</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1798,6 +1853,51 @@ public class RMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createERequirementDefinitionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EArtifacts <em>EArtifacts</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EArtifacts
+   * @generated
+   */
+  public Adapter createEArtifactsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EArtifactDefinition <em>EArtifact Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EArtifactDefinition
+   * @generated
+   */
+  public Adapter createEArtifactDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.dsl.rM.EArtifactDefinitionBody <em>EArtifact Definition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.dsl.rM.EArtifactDefinitionBody
+   * @generated
+   */
+  public Adapter createEArtifactDefinitionBodyAdapter()
   {
     return null;
   }
