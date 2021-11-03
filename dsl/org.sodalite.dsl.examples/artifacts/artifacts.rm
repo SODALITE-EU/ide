@@ -48,5 +48,5 @@ node_types:
 									property: artifacts/opera.nodes.file.json_file
 		artifacts:
 			text_file:
-				type: sodalite.artifacts.TextualFile
+				type: artifacts/sodalite.artifacts.TextualFile
 				file: "//home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/artifacts/files/file.txt"

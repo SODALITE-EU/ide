@@ -47,6 +47,8 @@ import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.rM.EArtifactDefinition;
+import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifactTypes;
 import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributes;
@@ -636,6 +638,67 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     }
   }
   
+  public void completeEArtifactTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules);
+        final Image image = this.getImage("icons/artifact.png");
+        List<Type> _elements = artifacts.getElements();
+        for (final Type artifact : _elements) {
+          {
+            String _xifexpression = null;
+            String _module = artifact.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(artifact.getModule(), "/");
+              String _plus = (_lastSegment + "/");
+              String _label = artifact.getLabel();
+              _xifexpression = (_plus + _label);
+            } else {
+              _xifexpression = artifact.getLabel();
+            }
+            final String qartifact = _xifexpression;
+            final String proposalText = qartifact;
+            final String displayText = qartifact;
+            final String additionalProposalInfo = artifact.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EArtifactTypes _artifactTypes = rootModel.getArtifactTypes();
+        boolean _tripleNotEquals = (_artifactTypes != null);
+        if (_tripleNotEquals) {
+          EList<EArtifactType> _artifactTypes_1 = rootModel.getArtifactTypes().getArtifactTypes();
+          for (final EArtifactType artifact_1 : _artifactTypes_1) {
+            {
+              String _name = artifact_1.getName();
+              final String proposalText = ((module + "/") + _name);
+              String _name_1 = artifact_1.getName();
+              final String displayText = ((module + "/") + _name_1);
+              final String additionalProposalInfo = artifact_1.getArtifact().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void completeEPropertyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
@@ -646,6 +709,10 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   public void completeERequirementDefinitionBody_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
+  public void completeEArtifactDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
   public void completeERequirementDefinitionBody_Relationship(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {

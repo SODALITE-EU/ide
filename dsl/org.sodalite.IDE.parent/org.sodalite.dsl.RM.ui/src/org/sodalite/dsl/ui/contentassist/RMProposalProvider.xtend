@@ -407,6 +407,40 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 	}
 	
+	override void completeEArtifactTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Get modules from model
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
+			
+			val ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules)
+			val Image image = getImage("icons/artifact.png")
+			for (artifact: artifacts.elements){
+				val qartifact = artifact.module !== null?RMHelper.getLastSegment(artifact.module, '/') + '/' + artifact.label:artifact.label
+				val proposalText = qartifact
+				val displayText = qartifact
+				val additionalProposalInfo = artifact.description
+				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+			}
+			
+			//Add other artifacts defined locally in the model
+			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.artifactTypes !== null)
+				for (artifact: rootModel.artifactTypes.artifactTypes){
+					val proposalText = module + "/" + artifact.name 
+					val displayText = module + "/" + artifact.name 
+					val additionalProposalInfo = artifact.artifact.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			RMHelper.showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
 	override void completeEPropertyDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeEDataTypeBody_SuperType(model, assignment, context, acceptor)
 	}
@@ -417,6 +451,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeERequirementDefinitionBody_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEArtifactDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeERequirementDefinitionBody_Relationship(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
