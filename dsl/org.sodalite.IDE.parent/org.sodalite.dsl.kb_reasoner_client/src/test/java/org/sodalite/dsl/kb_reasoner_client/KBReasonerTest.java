@@ -74,7 +74,7 @@ class KBReasonerTest {
 	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
-	private final String NIFI_URI = "https://nifi01.nifi.cluster:9543/";
+	private final String NIFI_URI = "https://192.168.2.91:9543/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
 	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";

@@ -59,7 +59,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String nifi_uri = prop.getProperty(PreferenceConstants.NIFI_URI);
 		if (nifi_uri == null)
-			nifi_uri = "https://nifi01.nifi.cluster:9543/";
+			nifi_uri = "https://192.168.2.91:9543/";
 
 		String consul_ip = prop.getProperty(PreferenceConstants.Consul_IP);
 		if (consul_ip == null)

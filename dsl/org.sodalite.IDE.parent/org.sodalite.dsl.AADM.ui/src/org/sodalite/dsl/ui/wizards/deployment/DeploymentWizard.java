@@ -112,16 +112,16 @@ public class DeploymentWizard extends Wizard {
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
 			this.monitoring_id = UUID.randomUUID().toString();
-			content.append("monitoring_id: " + this.monitoring_id);
+			content.append("monitoring_id: " + this.monitoring_id + "\n");
 			// NIFI inputs
 			String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
-			content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT);
+			content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
 			String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
-			content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT);
+			content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
 			String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
-			content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN);
+			content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN + "\n");
 			Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
-			content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS);
+			content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS + "\n");
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
