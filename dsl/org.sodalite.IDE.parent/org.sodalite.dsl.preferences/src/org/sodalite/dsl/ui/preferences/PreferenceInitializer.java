@@ -57,6 +57,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (refactorer_uri == null)
 			refactorer_uri = "http://192.168.2.166:8080/";
 
+		String nifi_uri = prop.getProperty(PreferenceConstants.NIFI_URI);
+		if (nifi_uri == null)
+			nifi_uri = "https://192.168.2.91:9543/";
+
 		String consul_ip = prop.getProperty(PreferenceConstants.Consul_IP);
 		if (consul_ip == null)
 			consul_ip = "192.168.3.74";
@@ -98,11 +102,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			keycloak_enabled = true;
 		}
 
-		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
-				"Default Sodalite backend services configuration read from properties: "
+		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
+				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
 						+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
-						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}",
-				kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri)));
+						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}, NIFI endpoint: {7}",
+						kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri,
+						nifi_uri)));
 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
@@ -111,6 +116,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
+		defaults.put(PreferenceConstants.NIFI_URI, nifi_uri);
 		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
 		defaults.put(PreferenceConstants.Grafana_Registry_URI, grafana_registry_uri);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);

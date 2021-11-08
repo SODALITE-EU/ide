@@ -59,6 +59,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.springframework.util.Assert;
 
 class KBReasonerTest {
 	private KBReasoner kbclient;
@@ -73,6 +74,7 @@ class KBReasonerTest {
 	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
+	private final String NIFI_URI = "https://192.168.2.91:9543/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
 	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";
@@ -82,12 +84,12 @@ class KBReasonerTest {
 
 	private String aadmURI = null;
 
-	private boolean AIM_Enabled = false;
+	private boolean AIM_Enabled = true;
 
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
+				Refactorer_URI, NIFI_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -396,6 +398,12 @@ class KBReasonerTest {
 		Path rules_path = FileSystems.getDefault().getPath("src/test/resources/test.alert.rules");
 		String rules = new String(Files.readAllBytes(rules_path));
 		kbclient.registerAlertingRules(monitoring_id, rules);
+	}
+
+	@Test
+	void testGetNIFIToken() throws Exception {
+		String token = kbclient.getNIFIAccessToken();
+		Assert.notNull(token);
 	}
 
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)

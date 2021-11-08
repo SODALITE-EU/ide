@@ -68,6 +68,12 @@ public class SodaliteBackendProxy {
 		if (!refactorerURI.endsWith("/"))
 			refactorerURI = refactorerURI.concat("/");
 
+		String nifiURI = store.getString(PreferenceConstants.NIFI_URI).trim();
+		if (nifiURI.isEmpty())
+			raiseConfigurationIssue("NIFI URI user not set");
+		if (!nifiURI.endsWith("/"))
+			nifiURI = nifiURI.concat("/");
+
 		String grafanaURI = store.getString(PreferenceConstants.Grafana_Registry_URI).trim();
 		if (grafanaURI.isEmpty())
 			raiseConfigurationIssue("Grafana URI user not set");
@@ -87,7 +93,7 @@ public class SodaliteBackendProxy {
 			vaultSecretUploaderURI = vaultSecretUploaderURI.concat("/");
 
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI, vaultSecretUploaderURI);
+				keycloakURI, pdsURI, refactorerURI, nifiURI, grafanaURI, rulesServerURI, vaultSecretUploaderURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

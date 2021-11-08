@@ -41,6 +41,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private Text versionTagText = null;
 	private Text deploymentNameText = null;
 	private Button completeModelCB = null;
+	private Button validateNiFiCertsCB = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
@@ -85,6 +86,10 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 	public boolean getCompleteModel() {
 		return this.completeModelCB.getSelection();
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return this.validateNiFiCertsCB.getSelection();
 	}
 
 	@Override
@@ -182,6 +187,16 @@ public class DeploymentWizardMainPage extends WizardPage {
 		completeModelCB = new Button(containerMain, SWT.CHECK);
 		GridData completeModelGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		completeModelCB.setLayoutData(completeModelGridData);
+
+		// Validate NIF Certificates
+		Label validateNiFiCerts = new Label(containerMain, SWT.NONE);
+		validateNiFiCerts.setText("Validate NIF Certificates (optional):");
+		validateNiFiCerts.setToolTipText(
+				"Whether SSL certificates for NIFI should be validated. For self-signed certificates it should be unchecked");
+
+		validateNiFiCertsCB = new Button(containerMain, SWT.CHECK);
+		GridData validateNiFiCertsGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		validateNiFiCertsCB.setLayoutData(validateNiFiCertsGridData);
 
 		// Inputs file
 		if (this.inputDefs != null && !this.inputDefs.isEmpty()) {
