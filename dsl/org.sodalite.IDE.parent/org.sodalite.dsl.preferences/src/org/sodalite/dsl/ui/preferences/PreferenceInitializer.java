@@ -43,7 +43,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String image_builder_uri = prop.getProperty(PreferenceConstants.Image_Builder_URI);
 		if (image_builder_uri == null)
-			image_builder_uri = "http://192.168.2.70:5000/";
+			image_builder_uri = "http://192.168.2.38:5000/";
 
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)

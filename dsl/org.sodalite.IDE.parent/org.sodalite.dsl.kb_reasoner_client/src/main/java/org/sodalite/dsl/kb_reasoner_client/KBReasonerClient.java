@@ -751,6 +751,14 @@ public class KBReasonerClient implements KBReasoner {
 			if (suggestionsJson != null) {
 				report.setSuggestions(processSuggestions(suggestionsJson));
 			}
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, version);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			if (ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
 				String result = ex.getResponseBodyAsString();
@@ -803,6 +811,14 @@ public class KBReasonerClient implements KBReasoner {
 			if (warningsJson != null) {
 				report.setWarnings(processWarnings(warningsJson.toString()));
 			}
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return saveRM(rmTTL, rmURI, name, namespace, rmDSL);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
 				String result = ex.getResponseBodyAsString();
@@ -898,17 +914,15 @@ public class KBReasonerClient implements KBReasoner {
 //			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
-		}
-//		catch (TokenExpiredException ex) {
-//			// Renew AAI token and try again
-//			if (IAM_enabled)
-//				this.aai_token = getSecurityToken();
-//			if (this.aai_token != null)
-//				return getAADM(aadmURI, version, withoutReferences);
-//			else
-//				throw ex;
-//		} 
-		catch (HttpClientErrorException ex) {
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getAADM(aadmURI, version, withoutReferences);
+			else
+				throw ex;
+		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
@@ -923,17 +937,15 @@ public class KBReasonerClient implements KBReasoner {
 //			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
-		}
-//		catch (TokenExpiredException ex) {
-//			// Renew AAI token and try again
-//			if (IAM_enabled)
-//				this.aai_token = getSecurityToken();
-//			if (this.aai_token != null)
-//				return getRM(rmURI);
-//			else
-//				throw ex;
-//		} 
-		catch (HttpClientErrorException ex) {
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getRM(rmURI);
+			else
+				throw ex;
+		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
@@ -1037,6 +1049,14 @@ public class KBReasonerClient implements KBReasoner {
 
 			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
 					HttpStatus.ACCEPTED);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return deployAADM(inputs_yaml_path, blueprint_id, version_id, workers, deployment_label);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1051,6 +1071,14 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "deployment/" + deployment_id + "/status";
 		try {
 			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getAADMDeploymentStatus(deployment_id);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1067,6 +1095,14 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "blueprint?username=" + username;
 		try {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getBlueprintsForUser(username);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1083,6 +1119,14 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "blueprint/" + blueprintId + "/meta";
 		try {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getBlueprintForId(blueprintId);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1103,6 +1147,14 @@ public class KBReasonerClient implements KBReasoner {
 			deploymentData = new DeploymentData();
 			List<? extends Object> elements = new ArrayList<Object>();
 			deploymentData.setElements(elements);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getDeploymentsForBlueprint(blueprintId);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1119,6 +1171,14 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "deployment/" + deploymentId + "/status";
 		try {
 			deploymentData = getJSONObjectForType(DeploymentData.class, new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getDeploymentForId(deploymentId);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1134,6 +1194,14 @@ public class KBReasonerClient implements KBReasoner {
 		String url = xoperaUri + "blueprint/" + blueprintId + "?force=false";
 		try {
 			deleteUriResource(new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				deleteBlueprintForId(blueprintId);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1172,6 +1240,14 @@ public class KBReasonerClient implements KBReasoner {
 
 			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
 					HttpStatus.ACCEPTED);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return deleteDeploymentForId(deploymentId, inputs_yaml_path, workers);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1210,6 +1286,14 @@ public class KBReasonerClient implements KBReasoner {
 
 			return sendMultipartFormDataMessage(new URI(url), DeploymentReport.class, parts, HttpMethod.POST,
 					HttpStatus.ACCEPTED);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return resumeDeploymentForId(deploymentId, inputs_yaml_path, clean_state, workers);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1470,6 +1554,14 @@ public class KBReasonerClient implements KBReasoner {
 			}
 
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				addHPCSecrets(hpcSecrets);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1495,6 +1587,14 @@ public class KBReasonerClient implements KBReasoner {
 			while (iter.hasNext())
 				hpcInfras.add(iter.next().getAsString());
 			return hpcInfras;
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return listHPCInfrastructures();
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1526,6 +1626,14 @@ public class KBReasonerClient implements KBReasoner {
 			if (jsonObject.has("ssh_pkey"))
 				secrets.put("ssh_pkey", jsonObject.get("ssh_pkey").getAsString());
 			return new HPCSecretData(secrets);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				return getHPCInfrastructure(hpcName);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1545,6 +1653,14 @@ public class KBReasonerClient implements KBReasoner {
 				throw new SodaliteException(ex);
 			}
 			deleteJsonMessage(uri);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				deleteHPCInfrastructure(hpcName);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1584,6 +1700,15 @@ public class KBReasonerClient implements KBReasoner {
 			}
 
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled)
+				this.aai_token = getSecurityToken();
+			if (this.aai_token != null)
+				notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id,
+						monitoring_id, inputs);
+			else
+				throw ex;
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
