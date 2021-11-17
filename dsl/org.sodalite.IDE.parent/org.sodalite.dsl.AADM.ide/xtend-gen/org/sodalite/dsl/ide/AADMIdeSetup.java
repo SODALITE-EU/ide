@@ -8,14 +8,12 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.util.Modules2;
 import org.sodalite.dsl.AADMRuntimeModule;
 import org.sodalite.dsl.AADMStandaloneSetup;
-import org.sodalite.dsl.ide.AADMIdeModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class AADMIdeSetup extends AADMStandaloneSetup {
-  @Override
   public Injector createInjector() {
     AADMRuntimeModule _aADMRuntimeModule = new AADMRuntimeModule();
     AADMIdeModule _aADMIdeModule = new AADMIdeModule();

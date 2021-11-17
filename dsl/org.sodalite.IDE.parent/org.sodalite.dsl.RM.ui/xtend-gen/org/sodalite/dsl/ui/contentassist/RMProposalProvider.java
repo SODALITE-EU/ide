@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.ui.contentassist;
 
+import com.google.common.base.Objects;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,9 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.impl.KeywordImpl;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -43,6 +46,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.Template;
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
+import org.sodalite.dsl.rM.EArtifactDefinition;
+import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifactTypes;
+import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
@@ -55,6 +62,7 @@ import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EFunction;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EInterfaceTypes;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_REF;
@@ -68,11 +76,11 @@ import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
-import org.sodalite.dsl.ui.contentassist.AbstractRMProposalProvider;
-import org.sodalite.dsl.ui.helper.BackendHelper;
 import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
@@ -95,42 +103,43 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   private Map<String, Image> images = new HashMap<String, Image>();
   
-  @Override
   public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     this._completeKeyword(keyword, contentAssistContext, acceptor);
   }
   
-  @Override
   public void completeRM_Model_Imports(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      System.out.println("Invoking content assist for imports");
-      final ReasonerData<String> modules = BackendHelper.getKBReasoner().getModules();
-      List<String> _elements = modules.getElements();
-      String _plus = ("Modules retrieved from KB: " + _elements);
-      System.out.println(_plus);
-      List<String> _elements_1 = modules.getElements();
-      for (final String module : _elements_1) {
-        {
-          System.out.println(("\tModule: " + module));
-          final String proposalText = RMHelper.extractModule(module);
-          final String displayText = proposalText;
-          final Object additionalProposalInfo = null;
-          final Image image = this.getImage("icons/module2.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, ((String)additionalProposalInfo), acceptor);
+      try {
+        System.out.println("Invoking content assist for imports");
+        final ReasonerData<String> modules = SodaliteBackendProxy.getKBReasoner().getModules();
+        List<String> _elements = modules.getElements();
+        String _plus = ("Modules retrieved from KB: " + _elements);
+        System.out.println(_plus);
+        List<String> _elements_1 = modules.getElements();
+        for (final String module : _elements_1) {
+          {
+            System.out.println(("\tModule: " + module));
+            final String proposalText = RMHelper.extractModule(module);
+            final String displayText = proposalText;
+            final Object additionalProposalInfo = null;
+            final Image image = this.getImage("icons/module2.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, ((String)additionalProposalInfo), acceptor);
+          }
+        }
+        super.completeRM_Model_Imports(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof SodaliteException) {
+          final SodaliteException ex = (SodaliteException)_t;
+          SodaliteLogger.log(ex.getMessage(), ex);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      super.completeRM_Model_Imports(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof SodaliteException) {
-        final SodaliteException ex = (SodaliteException)_t;
-        SodaliteLogger.log(ex.getMessage(), ex);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeENodeType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ENodeType::name property");
     final String proposalText = "tosca.types.id";
@@ -139,579 +148,700 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEDataTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for EDataType::supertype property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules);
-      System.out.println("Data types retrieved from KB:");
-      List<Type> _elements = types.getElements();
-      for (final Type type : _elements) {
-        {
-          String _label = type.getLabel();
-          String _plus = ("\tData type: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = type.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = type.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = type.getLabel();
+      System.out.println("Invoking content assist for EDataType::supertype property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules);
+        System.out.println("Data types retrieved from KB:");
+        List<Type> _elements = types.getElements();
+        for (final Type type : _elements) {
+          {
+            String _label = type.getLabel();
+            String _plus = ("\tData type: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = type.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = type.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = type.getLabel();
+            }
+            final String qtype = _xifexpression;
+            final String proposalText = qtype;
+            final String displayText = qtype;
+            final String additionalProposalInfo = type.getDescription();
+            Image image = this.getImage("icons/data_type.png");
+            String _module_1 = type.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_data_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qtype = _xifexpression;
-          final String proposalText = qtype;
-          final String displayText = qtype;
-          final String additionalProposalInfo = type.getDescription();
-          Image image = this.getImage("icons/data_type.png");
-          String _module_1 = type.getModule();
-          boolean _tripleNotEquals_1 = (_module_1 != null);
-          if (_tripleNotEquals_1) {
-            image = this.getImage("icons/primitive_data_type.png");
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
+        for (final EDataType dataType : _dataTypes) {
+          {
+            EDataTypeName _name = dataType.getName();
+            final EPREFIX_TYPE ePrefixType = ((EPREFIX_TYPE) _name);
+            String _type = ePrefixType.getType();
+            String _plus = ("\tLocal node: " + _type);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            if ((module != null)) {
+              String _type_1 = ePrefixType.getType();
+              _xifexpression = ((module + "/") + _type_1);
+            } else {
+              _xifexpression = ePrefixType.getType();
+            }
+            final String proposalText = _xifexpression;
+            String _xifexpression_1 = null;
+            if ((module != null)) {
+              String _type_2 = ePrefixType.getType();
+              _xifexpression_1 = ((module + "/") + _type_2);
+            } else {
+              _xifexpression_1 = ePrefixType.getType();
+            }
+            final String displayText = _xifexpression_1;
+            final String additionalProposalInfo = dataType.getData().getDescription();
+            Image image = this.getImage("icons/data_type.png");
+            if ((module != null)) {
+              image = this.getImage("icons/primitive_data_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<EDataType> _dataTypes = rootModel.getDataTypes().getDataTypes();
-      for (final EDataType dataType : _dataTypes) {
-        {
-          EDataTypeName _name = dataType.getName();
-          final EPREFIX_TYPE ePrefixType = ((EPREFIX_TYPE) _name);
-          String _type = ePrefixType.getType();
-          String _plus = ("\tLocal node: " + _type);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          if ((module != null)) {
-            String _type_1 = ePrefixType.getType();
-            _xifexpression = ((module + "/") + _type_1);
-          } else {
-            _xifexpression = ePrefixType.getType();
-          }
-          final String proposalText = _xifexpression;
-          String _xifexpression_1 = null;
-          if ((module != null)) {
-            String _type_2 = ePrefixType.getType();
-            _xifexpression_1 = ((module + "/") + _type_2);
-          } else {
-            _xifexpression_1 = ePrefixType.getType();
-          }
-          final String displayText = _xifexpression_1;
-          final String additionalProposalInfo = dataType.getData().getDescription();
-          Image image = this.getImage("icons/data_type.png");
-          if ((module != null)) {
-            image = this.getImage("icons/primitive_data_type.png");
-          }
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeENodeTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for NodeType::superType property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
-      System.out.println("Nodes retrieved from KB:");
-      List<Type> _elements = nodes.getElements();
-      for (final Type node : _elements) {
-        {
-          String _label = node.getLabel();
-          String _plus = ("\tNode: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = node.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(node.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = node.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = node.getLabel();
+      System.out.println("Invoking content assist for NodeType::superType property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
+        System.out.println("Nodes retrieved from KB:");
+        List<Type> _elements = nodes.getElements();
+        for (final Type node : _elements) {
+          {
+            String _label = node.getLabel();
+            String _plus = ("\tNode: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = node.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(node.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = node.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = node.getLabel();
+            }
+            final String qnode = _xifexpression;
+            final String proposalText = qnode;
+            final String displayText = qnode;
+            final String additionalProposalInfo = node.getDescription();
+            Image image = this.getImage("icons/type.png");
+            String _module_1 = node.getModule();
+            boolean _tripleNotEquals_1 = (_module_1 != null);
+            if (_tripleNotEquals_1) {
+              image = this.getImage("icons/primitive_type.png");
+            }
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qnode = _xifexpression;
-          final String proposalText = qnode;
-          final String displayText = qnode;
-          final String additionalProposalInfo = node.getDescription();
-          Image image = this.getImage("icons/type.png");
-          String _module_1 = node.getModule();
-          boolean _tripleNotEquals_1 = (_module_1 != null);
-          if (_tripleNotEquals_1) {
-            image = this.getImage("icons/primitive_type.png");
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
+        for (final ENodeType nodeType : _nodeTypes) {
+          {
+            String _name = nodeType.getName();
+            String _plus = ("\tLocal node: " + _name);
+            System.out.println(_plus);
+            String _name_1 = nodeType.getName();
+            final String proposalText = ((module + "/") + _name_1);
+            String _name_2 = nodeType.getName();
+            final String displayText = ((module + "/") + _name_2);
+            final String additionalProposalInfo = nodeType.getNode().getDescription();
+            Image image = this.getImage("icons/type.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<ENodeType> _nodeTypes = rootModel.getNodeTypes().getNodeTypes();
-      for (final ENodeType nodeType : _nodeTypes) {
-        {
-          String _name = nodeType.getName();
-          String _plus = ("\tLocal node: " + _name);
-          System.out.println(_plus);
-          String _name_1 = nodeType.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = nodeType.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = nodeType.getNode().getDescription();
-          Image image = this.getImage("icons/type.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeEInterfaceTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for Interface Type::superType property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
-      System.out.println("Types retrieved from KB:");
-      List<Type> _elements = types.getElements();
-      for (final Type type : _elements) {
-        {
-          String _label = type.getLabel();
-          String _plus = ("\tInterface: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = type.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = type.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = type.getLabel();
+      System.out.println("Invoking content assist for Interface Type::superType property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
+        System.out.println("Types retrieved from KB:");
+        List<Type> _elements = types.getElements();
+        for (final Type type : _elements) {
+          {
+            String _label = type.getLabel();
+            String _plus = ("\tInterface: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = type.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = type.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = type.getLabel();
+            }
+            final String qnode = _xifexpression;
+            final String proposalText = qnode;
+            final String displayText = qnode;
+            final String additionalProposalInfo = type.getDescription();
+            Image image = this.getImage("icons/interface.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qnode = _xifexpression;
-          final String proposalText = qnode;
-          final String displayText = qnode;
-          final String additionalProposalInfo = type.getDescription();
-          Image image = this.getImage("icons/interface.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
+        for (final EInterfaceType interfaceType : _interfaceTypes) {
+          {
+            String _name = interfaceType.getName();
+            String _plus = ("\tLocal interface: " + _name);
+            System.out.println(_plus);
+            String _name_1 = interfaceType.getName();
+            final String proposalText = ((module + "/") + _name_1);
+            String _name_2 = interfaceType.getName();
+            final String displayText = ((module + "/") + _name_2);
+            final String additionalProposalInfo = interfaceType.getInterface().getDescription();
+            Image image = this.getImage("icons/interface.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-      for (final EInterfaceType interfaceType : _interfaceTypes) {
-        {
-          String _name = interfaceType.getName();
-          String _plus = ("\tLocal interface: " + _name);
-          System.out.println(_plus);
-          String _name_1 = interfaceType.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = interfaceType.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = interfaceType.getInterface().getDescription();
-          Image image = this.getImage("icons/interface.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeEPolicyTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for Policy Type::superType property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules);
-      System.out.println("Policies retrieved from KB:");
-      List<Type> _elements = types.getElements();
-      for (final Type type : _elements) {
-        {
-          String _label = type.getLabel();
-          String _plus = ("\tPolicy: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = type.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = type.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = type.getLabel();
+      System.out.println("Invoking content assist for Policy Type::superType property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules);
+        System.out.println("Policies retrieved from KB:");
+        List<Type> _elements = types.getElements();
+        for (final Type type : _elements) {
+          {
+            String _label = type.getLabel();
+            String _plus = ("\tPolicy: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = type.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(type.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = type.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = type.getLabel();
+            }
+            final String qnode = _xifexpression;
+            final String proposalText = qnode;
+            final String displayText = qnode;
+            final String additionalProposalInfo = type.getDescription();
+            Image image = this.getImage("icons/policy_type.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qnode = _xifexpression;
-          final String proposalText = qnode;
-          final String displayText = qnode;
-          final String additionalProposalInfo = type.getDescription();
-          Image image = this.getImage("icons/policy_type.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<EPolicyType> _policyTypes = rootModel.getPolicyTypes().getPolicyTypes();
+        for (final EPolicyType policyType : _policyTypes) {
+          {
+            String _name = policyType.getName();
+            String _plus = ("\tLocal policy: " + _name);
+            System.out.println(_plus);
+            String _name_1 = policyType.getName();
+            final String proposalText = ((module + "/") + _name_1);
+            String _name_2 = policyType.getName();
+            final String displayText = ((module + "/") + _name_2);
+            final String additionalProposalInfo = policyType.getPolicy().getDescription();
+            Image image = this.getImage("icons/policy_type.png");
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<EPolicyType> _policyTypes = rootModel.getPolicyTypes().getPolicyTypes();
-      for (final EPolicyType policyType : _policyTypes) {
-        {
-          String _name = policyType.getName();
-          String _plus = ("\tLocal policy: " + _name);
-          System.out.println(_plus);
-          String _name_1 = policyType.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = policyType.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = policyType.getPolicy().getDescription();
-          Image image = this.getImage("icons/policy_type.png");
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeERelationshipTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for RelationshipType::supertype property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules);
-      System.out.println("Relationships retrieved from KB:");
-      final Image image = this.getImage("icons/relationship.png");
-      List<Type> _elements = relationships.getElements();
-      for (final Type relationship : _elements) {
-        {
-          String _label = relationship.getLabel();
-          String _plus = ("\tRelationship: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = relationship.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(relationship.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = relationship.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = relationship.getLabel();
+      System.out.println("Invoking content assist for RelationshipType::supertype property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> relationships = SodaliteBackendProxy.getKBReasoner().getRelationshipTypes(importedModules);
+        System.out.println("Relationships retrieved from KB:");
+        final Image image = this.getImage("icons/relationship.png");
+        List<Type> _elements = relationships.getElements();
+        for (final Type relationship : _elements) {
+          {
+            String _label = relationship.getLabel();
+            String _plus = ("\tRelationship: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = relationship.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(relationship.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = relationship.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = relationship.getLabel();
+            }
+            final String qrelationship = _xifexpression;
+            final String proposalText = qrelationship;
+            final String displayText = qrelationship;
+            final String additionalProposalInfo = relationship.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qrelationship = _xifexpression;
-          final String proposalText = qrelationship;
-          final String displayText = qrelationship;
-          final String additionalProposalInfo = relationship.getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
+        for (final ERelationshipType relationshipType : _relationshipTypes) {
+          {
+            String _name = relationshipType.getName();
+            String _plus = ("\tLocal relationship type: " + _name);
+            System.out.println(_plus);
+            String _name_1 = relationshipType.getName();
+            final String proposalText = ((module + "/") + _name_1);
+            String _name_2 = relationshipType.getName();
+            final String displayText = ((module + "/") + _name_2);
+            final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<ERelationshipType> _relationshipTypes = rootModel.getRelationshipTypes().getRelationshipTypes();
-      for (final ERelationshipType relationshipType : _relationshipTypes) {
-        {
-          String _name = relationshipType.getName();
-          String _plus = ("\tLocal relationship type: " + _name);
-          System.out.println(_plus);
-          String _name_1 = relationshipType.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = relationshipType.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = relationshipType.getRelationship().getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeECapabilityTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for CapabilityType::supertype property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules);
-      System.out.println("Capabilities retrieved from KB:");
-      final Image image = this.getImage("icons/capability.png");
-      List<Type> _elements = capabilitiess.getElements();
-      for (final Type cap : _elements) {
-        {
-          String _label = cap.getLabel();
-          String _plus = ("\tCapability: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = cap.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(cap.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = cap.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = cap.getLabel();
+      System.out.println("Invoking content assist for CapabilityType::supertype property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> capabilitiess = SodaliteBackendProxy.getKBReasoner().getCapabilityTypes(importedModules);
+        System.out.println("Capabilities retrieved from KB:");
+        final Image image = this.getImage("icons/capability.png");
+        List<Type> _elements = capabilitiess.getElements();
+        for (final Type cap : _elements) {
+          {
+            String _label = cap.getLabel();
+            String _plus = ("\tCapability: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = cap.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(cap.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = cap.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = cap.getLabel();
+            }
+            final String qcap = _xifexpression;
+            final String proposalText = qcap;
+            final String displayText = qcap;
+            final String additionalProposalInfo = cap.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qcap = _xifexpression;
-          final String proposalText = qcap;
-          final String displayText = qcap;
-          final String additionalProposalInfo = cap.getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
+        for (final ECapabilityType cap_1 : _capabilityTypes) {
+          {
+            String _name = cap_1.getName();
+            String _plus = ("\tLocal capability type: " + _name);
+            System.out.println(_plus);
+            String _name_1 = cap_1.getName();
+            final String proposalText = ((module + "/") + _name_1);
+            String _name_2 = cap_1.getName();
+            final String displayText = ((module + "/") + _name_2);
+            final String additionalProposalInfo = cap_1.getCapability().getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<ECapabilityType> _capabilityTypes = rootModel.getCapabilityTypes().getCapabilityTypes();
-      for (final ECapabilityType cap_1 : _capabilityTypes) {
-        {
-          String _name = cap_1.getName();
-          String _plus = ("\tLocal capability type: " + _name);
-          System.out.println(_plus);
-          String _name_1 = cap_1.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = cap_1.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = cap_1.getCapability().getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeEInterfaceDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    System.out.println("Invoking content assist for InterfaceDefinition::type property");
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final String module = RMHelper.getModule(model);
-      final ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules);
-      System.out.println("Interfaces retrieved from KB:");
-      final Image image = this.getImage("icons/interface.png");
-      List<Type> _elements = interfaces.getElements();
-      for (final Type interface_ : _elements) {
-        {
-          String _label = interface_.getLabel();
-          String _plus = ("\tCapability: " + _label);
-          System.out.println(_plus);
-          String _xifexpression = null;
-          String _module = interface_.getModule();
-          boolean _tripleNotEquals = (_module != null);
-          if (_tripleNotEquals) {
-            String _lastSegment = RMHelper.getLastSegment(interface_.getModule(), "/");
-            String _plus_1 = (_lastSegment + "/");
-            String _label_1 = interface_.getLabel();
-            _xifexpression = (_plus_1 + _label_1);
-          } else {
-            _xifexpression = interface_.getLabel();
+      System.out.println("Invoking content assist for InterfaceDefinition::type property");
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> interfaces = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules);
+        System.out.println("Interfaces retrieved from KB:");
+        final Image image = this.getImage("icons/interface.png");
+        List<Type> _elements = interfaces.getElements();
+        for (final Type interface_ : _elements) {
+          {
+            String _label = interface_.getLabel();
+            String _plus = ("\tCapability: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = interface_.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(interface_.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = interface_.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = interface_.getLabel();
+            }
+            final String qinterface = _xifexpression;
+            final String proposalText = qinterface;
+            final String displayText = qinterface;
+            final String additionalProposalInfo = interface_.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
           }
-          final String qinterface = _xifexpression;
-          final String proposalText = qinterface;
-          final String displayText = qinterface;
-          final String additionalProposalInfo = interface_.getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EInterfaceTypes _interfaceTypes = rootModel.getInterfaceTypes();
+        boolean _tripleNotEquals = (_interfaceTypes != null);
+        if (_tripleNotEquals) {
+          EList<EInterfaceType> _interfaceTypes_1 = rootModel.getInterfaceTypes().getInterfaceTypes();
+          for (final EInterfaceType interface__1 : _interfaceTypes_1) {
+            {
+              String _name = interface__1.getName();
+              String _plus = ("\tLocal interface type: " + _name);
+              System.out.println(_plus);
+              String _name_1 = interface__1.getName();
+              final String proposalText = ((module + "/") + _name_1);
+              String _name_2 = interface__1.getName();
+              final String displayText = ((module + "/") + _name_2);
+              final String additionalProposalInfo = interface__1.getInterface().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-      EObject _findModel = RMHelper.findModel(model);
-      final RM_Model rootModel = ((RM_Model) _findModel);
-      EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-      for (final EInterfaceType interface__1 : _interfaceTypes) {
-        {
-          String _name = interface__1.getName();
-          String _plus = ("\tLocal interface type: " + _name);
-          System.out.println(_plus);
-          String _name_1 = interface__1.getName();
-          final String proposalText = ((module + "/") + _name_1);
-          String _name_2 = interface__1.getName();
-          final String displayText = ((module + "/") + _name_2);
-          final String additionalProposalInfo = interface__1.getInterface().getDescription();
-          this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
-        }
-      }
-      super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
+  public void completeEArtifactTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules);
+        final Image image = this.getImage("icons/artifact.png");
+        List<Type> _elements = artifacts.getElements();
+        for (final Type artifact : _elements) {
+          {
+            String _xifexpression = null;
+            String _module = artifact.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(artifact.getModule(), "/");
+              String _plus = (_lastSegment + "/");
+              String _label = artifact.getLabel();
+              _xifexpression = (_plus + _label);
+            } else {
+              _xifexpression = artifact.getLabel();
+            }
+            final String qartifact = _xifexpression;
+            final String proposalText = qartifact;
+            final String displayText = qartifact;
+            final String additionalProposalInfo = artifact.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EArtifactTypes _artifactTypes = rootModel.getArtifactTypes();
+        boolean _tripleNotEquals = (_artifactTypes != null);
+        if (_tripleNotEquals) {
+          EList<EArtifactType> _artifactTypes_1 = rootModel.getArtifactTypes().getArtifactTypes();
+          for (final EArtifactType artifact_1 : _artifactTypes_1) {
+            {
+              String _name = artifact_1.getName();
+              final String proposalText = ((module + "/") + _name);
+              String _name_1 = artifact_1.getName();
+              final String displayText = ((module + "/") + _name_1);
+              final String additionalProposalInfo = artifact_1.getArtifact().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void completeEPropertyDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinitionBody_Capability(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinitionBody_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
+  public void completeEArtifactDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
   public void completeERequirementDefinitionBody_Relationship(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeERelationshipTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEAttributeDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEParameterDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeEDataTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::req_cap property");
     this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Attribute(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::attribute property");
     this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
   }
   
-  @Override
+  public void completeGetArtifactBody_Artifact(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetArtifactBody::artifact property");
+    List<String> proposals = new ArrayList<String>();
+    final String module = RMHelper.getModule(model);
+    GetArtifactBodyImpl body = ((GetArtifactBodyImpl) model);
+    EObject _eContainer = body.eContainer();
+    EObject node = RMHelper.getEntityType(((EFunction) _eContainer));
+    if (((node == null) || (!(node instanceof ENodeType)))) {
+      return;
+    }
+    List<EArtifactDefinition> artifacts = null;
+    String node_name = null;
+    final ENodeType nodeType = ((ENodeType) node);
+    EArtifacts _artifacts = nodeType.getNode().getArtifacts();
+    boolean _tripleNotEquals = (_artifacts != null);
+    if (_tripleNotEquals) {
+      artifacts = nodeType.getNode().getArtifacts().getArtifacts();
+    }
+    node_name = nodeType.getName();
+    for (final EArtifactDefinition artifact : artifacts) {
+      String _xifexpression = null;
+      if ((module != null)) {
+        _xifexpression = (module + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _plus = (_xifexpression + node_name);
+      String _plus_1 = (_plus + ".");
+      String _name = artifact.getName();
+      String _plus_2 = (_plus_1 + _name);
+      proposals.add(_plus_2);
+    }
+    Image image = null;
+    image = this.getImage("icons/artifact.png");
+    for (final String proposal : proposals) {
+      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+    }
+  }
+  
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::req_cap property");
     this.completeGetAttributeOrPropertyFunction_Req_cap(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEInterfaceDefinitionBody_Operations(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      final EInterfaceDefinitionBody interface_ = ((EInterfaceDefinitionBody) model);
-      final EPREFIX_TYPE type = interface_.getType();
-      String _xifexpression = null;
-      String _module = type.getModule();
-      boolean _tripleNotEquals = (_module != null);
-      if (_tripleNotEquals) {
-        String _module_1 = type.getModule();
-        _xifexpression = (_module_1 + "/");
-      } else {
-        _xifexpression = "";
-      }
-      String _type = type.getType();
-      String interfaceId = (_xifexpression + _type);
-      if ((interfaceId != null)) {
-        final OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId);
-        if ((operations != null)) {
-          final Image image = this.getImage("icons/operation.png");
-          List<OperationDefinition> _elements = operations.getElements();
-          for (final OperationDefinition oper : _elements) {
-            {
-              final String operation_label = RMHelper.getLastSegment(oper.getUri().toString(), "/");
-              final String proposalText = operation_label;
-              final String displayText = operation_label;
-              String _xifexpression_1 = null;
-              String _description = oper.getDescription();
-              boolean _tripleNotEquals_1 = (_description != null);
-              if (_tripleNotEquals_1) {
-                String _description_1 = oper.getDescription();
-                _xifexpression_1 = ("\nDescription: " + _description_1);
-              } else {
-                _xifexpression_1 = "";
+      try {
+        final EInterfaceDefinitionBody interface_ = ((EInterfaceDefinitionBody) model);
+        final EPREFIX_TYPE type = interface_.getType();
+        String _xifexpression = null;
+        String _module = type.getModule();
+        boolean _tripleNotEquals = (_module != null);
+        if (_tripleNotEquals) {
+          String _module_1 = type.getModule();
+          _xifexpression = (_module_1 + "/");
+        } else {
+          _xifexpression = "";
+        }
+        String _type = type.getType();
+        String interfaceId = (_xifexpression + _type);
+        if ((interfaceId != null)) {
+          final OperationDefinitionData operations = SodaliteBackendProxy.getKBReasoner().getOperationsInInterface(interfaceId);
+          if ((operations != null)) {
+            final Image image = this.getImage("icons/operation.png");
+            List<OperationDefinition> _elements = operations.getElements();
+            for (final OperationDefinition oper : _elements) {
+              {
+                final String operation_label = RMHelper.getLastSegment(oper.getUri().toString(), "/");
+                final String proposalText = operation_label;
+                final String displayText = operation_label;
+                String _xifexpression_1 = null;
+                String _description = oper.getDescription();
+                boolean _tripleNotEquals_1 = (_description != null);
+                if (_tripleNotEquals_1) {
+                  String _description_1 = oper.getDescription();
+                  _xifexpression_1 = ("\nDescription: " + _description_1);
+                } else {
+                  _xifexpression_1 = "";
+                }
+                final String additionalProposalInfo = _xifexpression_1;
+                this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
               }
-              final String additionalProposalInfo = _xifexpression_1;
-              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
             }
           }
         }
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeEDataType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EDataType::name property");
     final String proposalText = "tosca.datatypes.id";
@@ -720,7 +850,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEArtifactType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EArtifactType::name property");
     final String proposalText = "tosca.artifacts.id";
@@ -729,7 +858,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ECapabilityType::name property");
     final String proposalText = "tosca.capabilities.id";
@@ -738,7 +866,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEInterfaceType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EInterfaceType::name property");
     final String proposalText = "tosca.interfaces.id";
@@ -747,7 +874,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeERelationshipType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ERelationshipType::name property");
     final String proposalText = "tosca.relationships.id";
@@ -756,7 +882,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPolicyType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPolicyType::name property");
     final String proposalText = "tosca.policies.id";
@@ -765,7 +890,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPropertyDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPropertyDefinition::name property");
     final String proposalText = "property_name";
@@ -774,7 +898,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEAttributeDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EAttributeDefinition::name property");
     final String proposalText = "attribute_name";
@@ -783,7 +906,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEInterfaceDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EInterfaceDefinition::name property");
     final String proposalText = "interface_name";
@@ -792,7 +914,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEOperationDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EOperationDefinition::name property");
     final String proposalText = "operation_name";
@@ -801,7 +922,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEParameterDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EParameterDefinition::name property");
     final String proposalText = "parameter_name";
@@ -810,7 +930,6 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ECapabilityDefinition::name property");
     final String proposalText = "capability_name";
@@ -819,17 +938,14 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeECapabilityDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeECapabilityTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeEValidSourceType_SourceTypes(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
-  @Override
   public void completeERequirementDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ERequirementDefinition::name property");
     final String proposalText = "requirement_name";
@@ -838,44 +954,42 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(proposalText, displayText, null, context, additionalProposalInfo, acceptor);
   }
   
-  @Override
   public void completeEPropertyDefinitionBody_Required(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EPropertyDefinitionBody::required property");
     this.createNonEditableCompletionProposal("true", "true", null, context, "", acceptor);
     this.createNonEditableCompletionProposal("false", "false", null, context, "", acceptor);
   }
   
-  @Override
   public void completeGetAttributeBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetAttributeBody::entity property");
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
   public void completeGetPropertyBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::entity property");
     this.createEntityProposals(context, acceptor);
   }
   
-  @Override
+  public void completeGetArtifactBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetArtifactBody::entity property");
+    this.createEntityProposals(context, acceptor);
+  }
+  
   public void completeEMapEntry_Key(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMapEntry::key property");
     this.createEditableCompletionProposal("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
   }
   
-  @Override
   public void completeELIST_List(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for ELIST::list property");
     this.createEditableCompletionProposal("\"value\"", "\"value\"", null, context, "Give a single String value or a comma separate list of String values", acceptor);
   }
   
-  @Override
   public void complete_EMAP(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMAP::map property");
     this.createEditableCompletionProposal("{", "{", null, context, "Start a Map of key=value entries", acceptor);
   }
   
-  @Override
   public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     String _selectFile = RMHelper.selectFile("Select implementation primary file");
     String _plus = ("\"" + _selectFile);
@@ -883,7 +997,13 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
-  @Override
+  public void completeEArtifactDefinitionBody_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    String _selectFile = RMHelper.selectFile("Select artifact file");
+    String _plus = ("\"" + _selectFile);
+    final String input = (_plus + "\"");
+    this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+  }
+  
   public void completeEDependencies_Files(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     String _selectFile = RMHelper.selectFile("Select implementation dependency file");
     String _plus = ("\"" + _selectFile);
@@ -891,92 +1011,103 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
   }
   
-  @Override
   public void completeEEvenFilter_Node(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
-      final TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
-      this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
-      this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
+        final TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
+        this.createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor);
+        this.createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeEEvenFilter_Requirement(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      final EEvenFilter filter = ((EEvenFilter) model);
-      EPREFIX_REF _node = filter.getNode();
-      boolean _tripleNotEquals = (_node != null);
-      if (_tripleNotEquals) {
-        String qnode = RMHelper.getNodeName(filter.getNode());
-        final RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode);
-        this.createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
+      try {
+        final EEvenFilter filter = ((EEvenFilter) model);
+        EPREFIX_REF _node = filter.getNode();
+        boolean _tripleNotEquals = (_node != null);
+        if (_tripleNotEquals) {
+          String qnode = RMHelper.getNodeName(filter.getNode());
+          final RequirementDefinitionData reqs = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(qnode);
+          this.createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor);
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof SodaliteException) {
+          final SodaliteException ex = (SodaliteException)_t;
+          SodaliteLogger.log(ex.getMessage(), ex);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-    } catch (final Throwable _t) {
-      if (_t instanceof SodaliteException) {
-        final SodaliteException ex = (SodaliteException)_t;
-        SodaliteLogger.log(ex.getMessage(), ex);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeETargetType_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
-      final String type_image = "icons/type.png";
-      final String primitive_type_image = "icons/primitive_type.png";
-      this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
-      EObject _findModel = RMHelper.findModel(model);
-      final List<ENodeType> localTypes = ((RM_Model) _findModel).getNodeTypes().getNodeTypes();
-      this.createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
+        final String type_image = "icons/type.png";
+        final String primitive_type_image = "icons/primitive_type.png";
+        this.createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor);
+        EObject _findModel = RMHelper.findModel(model);
+        final List<ENodeType> localTypes = ((RM_Model) _findModel).getNodeTypes().getNodeTypes();
+        this.createProposalsForTypeList(localTypes, type_image, primitive_type_image, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeECallOperationActivityDefinitionBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     try {
-      final List<String> importedModules = RMHelper.processListModules(model);
-      final OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules);
-      final String type_image = "icons/operation.png";
-      this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
-      final List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model);
-      this.createProposalsForOperationList(localOperations, type_image, null, context, acceptor);
-    } catch (final Throwable _t) {
-      if (_t instanceof NotRolePermissionException) {
-        RMHelper.showReadPermissionErrorDialog();
-      } else if (_t instanceof SodaliteException) {
-        final SodaliteException ex_1 = (SodaliteException)_t;
-        SodaliteLogger.log(ex_1.getMessage(), ex_1);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final OperationDefinitionData operationsData = SodaliteBackendProxy.getKBReasoner().getOperations(importedModules);
+        final String type_image = "icons/operation.png";
+        this.createProposalsForOperationData(operationsData, type_image, null, context, acceptor);
+        final List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model);
+        this.createProposalsForOperationList(localOperations, type_image, null, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Override
   public void completeETriggerDefinition_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final String proposalText = "trigger_name";
     final String displayText = "trigger_name";
@@ -1196,8 +1327,349 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void _completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
     final ICompletionProposal proposal = this.createCompletionProposal(keyword.getValue(), 
       this.getKeywordDisplayString(keyword), this.getImage(keyword), contentAssistContext);
+    this.setAdditionalProposalInfo(proposal, this.getAdditionalProposalInfo(keyword));
     this.getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
     acceptor.accept(proposal);
+  }
+  
+  public String getAdditionalProposalInfo(final Keyword keyword) {
+    if ((keyword instanceof KeywordImpl)) {
+      final KeywordImpl keywordImpl = ((KeywordImpl) keyword);
+      final ParserRule rule = RMHelper.findParserRule(keywordImpl);
+      if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "module:"))) {
+        return "The namespace where model entity names will be declared";
+      } else {
+        if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "import:"))) {
+          return "Imports another namespace declared within the bound KB \n\t\t\t\t\t\tto retrieve its model entity definitions";
+        } else {
+          if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "artifact_types:"))) {
+            return "This section contains an optional map of artifact type definitions \n\t\t\t\t\t\tfor use in the service template";
+          } else {
+            if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "data_types:"))) {
+              return "Declares a map of optional TOSCA Data Type definitions.";
+            } else {
+              if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability_types:"))) {
+                return "This section contains an optional map of capability type definitions \n\t\t\t\t\t\tfor use in the service template";
+              } else {
+                if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "interface_types:"))) {
+                  return "This section contains an optional map of interface type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                } else {
+                  if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "relationship_types:"))) {
+                    return "This section contains a map of relationship type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                  } else {
+                    if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "node_types:"))) {
+                      return "TThis section contains a mapof node type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                    } else {
+                      if ((Objects.equal(rule.getName(), "RM_Model") && Objects.equal(((KeywordImpl)keyword).getValue(), "policy_types:"))) {
+                        return "This section contains a list of policy type definitions \n\t\t\t\t\t\tfor use in the service template.";
+                      } else {
+                        if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "derived_from:"))) {
+                          return "Represents the required symbolic name of the Node Type being declared";
+                        } else {
+                          if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+                            return "An optional map of attribute definitions for the Node Type.";
+                          } else {
+                            if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                              return "An optional map of property definitions for the Node Type.";
+                            } else {
+                              if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirements:"))) {
+                                return "An optional list of requirement definitions for the Node Type.";
+                              } else {
+                                if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capabilities:"))) {
+                                  return "An optional map of capability definitions for the Node Type.";
+                                } else {
+                                  if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "interfaces:"))) {
+                                    return "An optional map of interface definitions supported by the Node Type";
+                                  } else {
+                                    if ((Objects.equal(rule.getName(), "ENodeTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                      return "Represents the optional description string for the corresponding node_type_name.";
+                                    } else {
+                                      if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                        return "The required data type for the property.";
+                                      } else {
+                                        if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                          return "The optional description for the property.";
+                                        } else {
+                                          if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "required:"))) {
+                                            return "An optional key that declares a property as required (true) or not (false).";
+                                          } else {
+                                            if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "status:"))) {
+                                              return "The optional status of the property relative to the specification or implementation.\nSee table below for valid values: \n\t\t\t\t\t\tsupported: Indicates the property is supported.  This is the default value for all property definitions.\n\t\t\t\t\t\tunsupported: Indicates the property is not supported.\n\t\t\t\t\t\texperimental: Indicates the property is experimental and has no official standing.\n\t\t\t\t\t\tdeprecated: Indicates the property has been deprecated by a new specification version.";
+                                            } else {
+                                              if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "constraints:"))) {
+                                                return "The optional list of sequenced constraint clauses for the property";
+                                              } else {
+                                                if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entry_schema:"))) {
+                                                  return "The optional schema definition for the entries in properties of TOSCA set types such as list or map.";
+                                                } else {
+                                                  if ((Objects.equal(rule.getName(), "EPropertyDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                    return "An optional key that may provide a value to be used as a default if not provided by another means";
+                                                  } else {
+                                                    if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                      return "The required data type for the attribute.";
+                                                    } else {
+                                                      if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                        return "The optional description for the attribute.";
+                                                      } else {
+                                                        if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "required:"))) {
+                                                          return "An optional key that declares a property as required (true) or not (false).";
+                                                        } else {
+                                                          if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "status:"))) {
+                                                            return "The optional status of the attribute relative to the specification or implementation.\nSee table below for valid values: \n\t\t\t\t\t\tsupported: Indicates the property is supported.  This is the default value for all property definitions.\n\t\t\t\t\t\tunsupported: Indicates the property is not supported.\n\t\t\t\t\t\texperimental: Indicates the property is experimental and has no official standing.\n\t\t\t\t\t\tdeprecated: Indicates the property has been deprecated by a new specification version.";
+                                                          } else {
+                                                            if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entry_schema:"))) {
+                                                              return "The optional schema definition for the entries in attributes of TOSCA set types such as list or map.";
+                                                            } else {
+                                                              if ((Objects.equal(rule.getName(), "EAttributeDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                                return "An optional key that may provide a value to be used as a default if not provided by another means. \nThis value SHALL be type compatible with the type declared by the property definition’s type keyname";
+                                                              } else {
+                                                                if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability:"))) {
+                                                                  return "The required reserved keyname used that can be used to provide \nthe name of a valid Capability Type that can fulfill the requirement";
+                                                                } else {
+                                                                  if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                                                                    return "The optional reserved keyname used to provide the name of a valid \nNode Type that contains the capability definition that can be used \nto fulfill the requirement. ";
+                                                                  } else {
+                                                                    if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "relationship:"))) {
+                                                                      return "The optional reserved keyname used to provide the name of \na valid Relationship Type to construct when fulfilling the requirement";
+                                                                    } else {
+                                                                      if ((Objects.equal(rule.getName(), "ERequirementDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "occurrences:"))) {
+                                                                        return "The optional minimum and maximum occurrences for the requirement. \nNote: the keyword UNBOUNDEDis also supported to represent any positive integer.";
+                                                                      } else {
+                                                                        if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                          return "The required name of the Capability Type the capability definition is based upon";
+                                                                        } else {
+                                                                          if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                            return "The optional description of the Capability definition.";
+                                                                          } else {
+                                                                            if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attributes:"))) {
+                                                                              return "An optional map of attribute definitions for the Capability definition";
+                                                                            } else {
+                                                                              if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                                                                                return "An optional map of property definitions for the Capability definition.";
+                                                                              } else {
+                                                                                if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "occurrences:"))) {
+                                                                                  return "The optional minimum and maximum occurrences for the capability. \nBy default, an exported Capability should allow at least one relationship \nto be formed with it with a maximum of UNBOUNDED relationships.\nNote: the keyword UNBOUNDEDis also supported to represent any positive integer.";
+                                                                                } else {
+                                                                                  if ((Objects.equal(rule.getName(), "ECapabilityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "valid_source_types:"))) {
+                                                                                    return "An optional list of one or more valid names of Node Types that are supported \nas valid sources of any relationship established to the declared Capability Type.";
+                                                                                  } else {
+                                                                                    if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                                      return "Represents the required symbolic name of the interface as a string";
+                                                                                    } else {
+                                                                                      if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                        return "The optional map of input property definitions available to all defined operations\n for interface definitions that are within TOSCA Node or Relationship Type definitions. \nThis includes when interface definitions are included as part of a\n Requirement definition in a Node Type.";
+                                                                                      } else {
+                                                                                        if ((Objects.equal(rule.getName(), "EInterfaceDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "operations:"))) {
+                                                                                          return "The optional map of operations defined for this interface.";
+                                                                                        } else {
+                                                                                          if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                            return "The optional description string for the associated named operation";
+                                                                                          } else {
+                                                                                            if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "implementation:"))) {
+                                                                                              return "The optional definition of the operation implementation";
+                                                                                            } else {
+                                                                                              if ((Objects.equal(rule.getName(), "EOperationDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                                return "The optional map of input properties definitions (i.e., parameter definitions)\n for operation definitions that are within TOSCA Node or Relationship Type definitions.\n This includes when operation definitions are included as part of a Requirement definition in a Node Type";
+                                                                                              } else {
+                                                                                                if ((Objects.equal(rule.getName(), "EPrimary") && Objects.equal(((KeywordImpl)keyword).getValue(), "primary:"))) {
+                                                                                                  return "The optional implementation artifact (i.e., the primary script file within a TOSCA CSAR file). ";
+                                                                                                } else {
+                                                                                                  if ((Objects.equal(rule.getName(), "EPrimary") && Objects.equal(((KeywordImpl)keyword).getValue(), "relative_path:"))) {
+                                                                                                    return "The relative path in user\'s filesystem where artifact is located";
+                                                                                                  } else {
+                                                                                                    if ((Objects.equal(rule.getName(), "EDependencies") && Objects.equal(((KeywordImpl)keyword).getValue(), "dependencies:"))) {
+                                                                                                      return "The optional list of one or more dependent or secondary implementation artifacts\n which are referenced by the primary implementation artifact\n (e.g., a library the script installs or a secondary script).";
+                                                                                                    } else {
+                                                                                                      if ((Objects.equal(rule.getName(), "EDependencies") && Objects.equal(((KeywordImpl)keyword).getValue(), "relative_path:"))) {
+                                                                                                        return "The relative path in user\'s filesystem where artifact is located";
+                                                                                                      } else {
+                                                                                                        if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "type:"))) {
+                                                                                                          return "The required data type for the parameter.";
+                                                                                                        } else {
+                                                                                                          if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                            return "Represents the optional description of the parameter.";
+                                                                                                          } else {
+                                                                                                            if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "default:"))) {
+                                                                                                              return "Contains a type-compatible value that may be used as a default \n\t\t\t\t\t\tif not provided by another means.";
+                                                                                                            } else {
+                                                                                                              if ((Objects.equal(rule.getName(), "EParameterDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "value:"))) {
+                                                                                                                return "The type-compatible value to assign to the named parameter. \n\t\t\t\t\tParameter values may be provided as the result from the \n\t\t\t\t\tevaluation of an expression or a function.";
+                                                                                                              } else {
+                                                                                                                if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "derived_from:"))) {
+                                                                                                                  return "Represents the name (string) of the Policy Type this Policy Type definition\n derives from (i.e., its“parent” type)";
+                                                                                                                } else {
+                                                                                                                  if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                                    return "Represents the optional description string for the corresponding policy_type_name.";
+                                                                                                                  } else {
+                                                                                                                    if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "properties:"))) {
+                                                                                                                      return "An optional mapof property definitions for the Policy Type";
+                                                                                                                    } else {
+                                                                                                                      if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "targets:"))) {
+                                                                                                                        return "An optional list of valid Node Types or Group Types the Policy Type can be applied to.\nNote: This can be viewed by TOSCA Orchestrators as an implied relationship to the target nodes,\n but one that does not have operational lifecycle considerations.\n For example, if we were to name this as an explicit Relationship Type we might call this “AppliesTo” (node or group).";
+                                                                                                                      } else {
+                                                                                                                        if ((Objects.equal(rule.getName(), "EPolicyTypeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "triggers:"))) {
+                                                                                                                          return "An optional mapof policy triggers for the Policy Type.";
+                                                                                                                        } else {
+                                                                                                                          if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "description:"))) {
+                                                                                                                            return "The optional description string for the named trigger.";
+                                                                                                                          } else {
+                                                                                                                            if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "event:"))) {
+                                                                                                                              return "The required name of the event that activates the trigger’s action.\n A deprecated form of this keyname is “event_type”";
+                                                                                                                            } else {
+                                                                                                                              if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "schedule:"))) {
+                                                                                                                                return "The optional time interval during which the trigger is valid\n (i.e., during which the declared actions will be processed).";
+                                                                                                                              } else {
+                                                                                                                                if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "target_filter:"))) {
+                                                                                                                                  return "The optional filter used to locate the attribute to monitor for the trigger’s defined condition.\n This filter helps locate the TOSCA entity (i.e., node or relationship) \nor further a specific capability of that entity that contains the attribute to monitor";
+                                                                                                                                } else {
+                                                                                                                                  if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "condition:"))) {
+                                                                                                                                    return "The optional condition which contains a condition clause definition\n specifying one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself  is enough to trigger the action";
+                                                                                                                                  } else {
+                                                                                                                                    if ((Objects.equal(rule.getName(), "ETriggerDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "action:"))) {
+                                                                                                                                      return "The list of sequential activities to be performed when the event is triggered\n and the condition is met (i.e.evaluates to true)";
+                                                                                                                                    } else {
+                                                                                                                                      if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "node:"))) {
+                                                                                                                                        return "The required name of the node type or template that contains\n either the attribute to be monitored or contains the requirement that\n references the node that contains the attribute to be monitored";
+                                                                                                                                      } else {
+                                                                                                                                        if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "requirement:"))) {
+                                                                                                                                          return "The optional name of the requirement within the filter’s node\n that can be used to locate a referenced node that contains an attribute to monitor.";
+                                                                                                                                        } else {
+                                                                                                                                          if ((Objects.equal(rule.getName(), "EEvenFilter") && Objects.equal(((KeywordImpl)keyword).getValue(), "capability:"))) {
+                                                                                                                                            return "The optional name of a capability within the filter’s node\n or within the node referenced by its requirement that contains the attribute to monitor.";
+                                                                                                                                          } else {
+                                                                                                                                            if ((Objects.equal(rule.getName(), "ETimeInterval") && Objects.equal(((KeywordImpl)keyword).getValue(), "start_time:"))) {
+                                                                                                                                              return "The inclusive start time for the time interval";
+                                                                                                                                            } else {
+                                                                                                                                              if ((Objects.equal(rule.getName(), "ETimeInterval") && Objects.equal(((KeywordImpl)keyword).getValue(), "end_time:"))) {
+                                                                                                                                                return "The inclusive end time for the time interval";
+                                                                                                                                              } else {
+                                                                                                                                                if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "constraint:"))) {
+                                                                                                                                                  return "The optional condition which contains a condition clause definition specifying\n one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself is enough to trigger the action.";
+                                                                                                                                                } else {
+                                                                                                                                                  if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "period:"))) {
+                                                                                                                                                    return "The optional period to use to evaluate for the condition.";
+                                                                                                                                                  } else {
+                                                                                                                                                    if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "evaluations:"))) {
+                                                                                                                                                      return "The optional number of evaluations that must be performed over the period\n to assert the condition exists.";
+                                                                                                                                                    } else {
+                                                                                                                                                      if ((Objects.equal(rule.getName(), "EExtendedTriggerCondition") && Objects.equal(((KeywordImpl)keyword).getValue(), "method:"))) {
+                                                                                                                                                        return "The optional statistical method name to use to perform the evaluation of the condition.";
+                                                                                                                                                      } else {
+                                                                                                                                                        if ((Objects.equal(rule.getName(), "ECallOperationActivityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "operation:"))) {
+                                                                                                                                                          return "The name of the operation to call, using the <interface_name>.<operation_name> notation.\n Required in the extended  notation.";
+                                                                                                                                                        } else {
+                                                                                                                                                          if ((Objects.equal(rule.getName(), "ECallOperationActivityDefinitionBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "inputs:"))) {
+                                                                                                                                                            return "The optional map of input parameter assignments for the called operation.\n Any provided input assignments will override the operation input assignment\n in the target node template for this operation call";
+                                                                                                                                                          } else {
+                                                                                                                                                            if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "property:"))) {
+                                                                                                                                                              return "The name of the property definition the function will return the value from";
+                                                                                                                                                            } else {
+                                                                                                                                                              if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entity:"))) {
+                                                                                                                                                                return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named property definition\n the function will return the value from";
+                                                                                                                                                              } else {
+                                                                                                                                                                if ((Objects.equal(rule.getName(), "GetPropertyBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "req_cap:"))) {
+                                                                                                                                                                  return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named property definition the function will return the value from.\n Note:  If the property definition is located in the modelable entity directly,\n then this parameter MAY be omitted";
+                                                                                                                                                                } else {
+                                                                                                                                                                  if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "attribute:"))) {
+                                                                                                                                                                    return "The name of the attribute definition the function will return the value from";
+                                                                                                                                                                  } else {
+                                                                                                                                                                    if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "entity:"))) {
+                                                                                                                                                                      return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named attribute definition\n the function will return the value from";
+                                                                                                                                                                    } else {
+                                                                                                                                                                      if ((Objects.equal(rule.getName(), "GetAttributeBody") && Objects.equal(((KeywordImpl)keyword).getValue(), "req_cap:"))) {
+                                                                                                                                                                        return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named attribute definition the function will return the value from.\n Note:  If the attribute definition is located in the modelable entity directly,\n then this parameter MAY be omitted";
+                                                                                                                                                                      } else {
+                                                                                                                                                                        return "";
+                                                                                                                                                                      }
+                                                                                                                                                                    }
+                                                                                                                                                                  }
+                                                                                                                                                                }
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                          }
+                                                                                                                                                        }
+                                                                                                                                                      }
+                                                                                                                                                    }
+                                                                                                                                                  }
+                                                                                                                                                }
+                                                                                                                                              }
+                                                                                                                                            }
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  public void setAdditionalProposalInfo(final ICompletionProposal proposal, final String info) {
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
+      configurable.setAdditionalProposalInfo(info);
+    }
   }
   
   public Image getImage(final String path) {
@@ -1265,29 +1737,33 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   public void proposeAttributesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
-      final AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId);
-      List<AttributeDefinition> _elements = attributeData.getElements();
-      for (final AttributeDefinition attr : _elements) {
-        {
-          final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
-          String attr_owner = resourceId;
-          String _definedIn = attr.getDefinedIn();
-          boolean _tripleNotEquals = (_definedIn != null);
-          if (_tripleNotEquals) {
-            attr_owner = attr.getDefinedIn().substring(prefix.length());
+      try {
+        final AttributeDefinitionData attributeData = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId);
+        List<AttributeDefinition> _elements = attributeData.getElements();
+        for (final AttributeDefinition attr : _elements) {
+          {
+            final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
+            String attr_owner = resourceId;
+            String _definedIn = attr.getDefinedIn();
+            boolean _tripleNotEquals = (_definedIn != null);
+            if (_tripleNotEquals) {
+              attr_owner = attr.getDefinedIn().substring(prefix.length());
+            }
+            String _lastSegment = RMHelper.getLastSegment(attr.getUri().toString(), "/");
+            final String proposal = ((attr_owner + ".") + _lastSegment);
+            proposals.add(proposal);
           }
-          String _lastSegment = RMHelper.getLastSegment(attr.getUri().toString(), "/");
-          final String proposal = ((attr_owner + ".") + _lastSegment);
-          proposals.add(proposal);
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof SodaliteException) {
+          final SodaliteException ex = (SodaliteException)_t;
+          SodaliteLogger.log(ex.getMessage(), ex);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (final Throwable _t) {
-      if (_t instanceof SodaliteException) {
-        final SodaliteException ex = (SodaliteException)_t;
-        SodaliteLogger.log(ex.getMessage(), ex);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -1338,29 +1814,33 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   public void proposePropertiesForEntityInKB(final String resourceId, final List<String> proposals) {
     try {
-      final PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId);
-      List<PropertyDefinition> _elements = propertyData.getElements();
-      for (final PropertyDefinition prop : _elements) {
-        {
-          final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
-          String prop_owner = resourceId;
-          String _definedIn = prop.getDefinedIn();
-          boolean _tripleNotEquals = (_definedIn != null);
-          if (_tripleNotEquals) {
-            prop_owner = prop.getDefinedIn().substring(prefix.length());
+      try {
+        final PropertyDefinitionData propertyData = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId);
+        List<PropertyDefinition> _elements = propertyData.getElements();
+        for (final PropertyDefinition prop : _elements) {
+          {
+            final String prefix = "https://www.sodalite.eu/ontologies/workspace/1/";
+            String prop_owner = resourceId;
+            String _definedIn = prop.getDefinedIn();
+            boolean _tripleNotEquals = (_definedIn != null);
+            if (_tripleNotEquals) {
+              prop_owner = prop.getDefinedIn().substring(prefix.length());
+            }
+            String _lastSegment = RMHelper.getLastSegment(prop.getUri().toString(), "/");
+            final String proposal = ((prop_owner + ".") + _lastSegment);
+            proposals.add(proposal);
           }
-          String _lastSegment = RMHelper.getLastSegment(prop.getUri().toString(), "/");
-          final String proposal = ((prop_owner + ".") + _lastSegment);
-          proposals.add(proposal);
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof SodaliteException) {
+          final SodaliteException ex = (SodaliteException)_t;
+          SodaliteLogger.log(ex.getMessage(), ex);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (final Throwable _t) {
-      if (_t instanceof SodaliteException) {
-        final SodaliteException ex = (SodaliteException)_t;
-        SodaliteLogger.log(ex.getMessage(), ex);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -1442,7 +1922,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
           _xifexpression = node.getNode().getSuperType().getType();
         }
         final String superType = _xifexpression;
-        final RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType);
+        final RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(superType);
         Image image_2 = this.getImage("icons/requirement.png");
         List<RequirementDefinition> _elements = reqData.getElements();
         for (final RequirementDefinition req_1 : _elements) {
@@ -1452,7 +1932,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
             this.createEditableCompletionProposal(proposal, proposal, image_2, context, null, acceptor);
           }
         }
-        final CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType);
+        final CapabilityDefinitionData capData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(superType);
         image_2 = this.getImage("icons/capability.png");
         List<CapabilityDefinition> _elements_1 = capData.getElements();
         for (final CapabilityDefinition cap_1 : _elements_1) {
@@ -1509,7 +1989,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
       EObject _findModel = RMHelper.findModel(model);
       final RM_Model rm_model = ((RM_Model) _findModel);
       EObject node = null;
-      EPREFIX_TYPE req_cap = null;
+      EPREFIX_REF req_cap = null;
       if ((model instanceof GetPropertyBodyImpl)) {
         GetPropertyBodyImpl body = ((GetPropertyBodyImpl) model);
         EObject _eContainer = body.eContainer();
@@ -1527,7 +2007,7 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         return;
       }
       if (((node instanceof ENodeType) && (req_cap != null))) {
-        final String req_cap_name = RMHelper.getLastSegment(req_cap.getType(), ".");
+        final String req_cap_name = RMHelper.getLastSegment(req_cap, ".");
         final ENodeType nodeType = ((ENodeType) node);
         final String targetNodeRef = RMHelper.findRequirementTargetNode(nodeType, req_cap_name);
         if ((targetNodeRef != null)) {
@@ -1565,16 +2045,32 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
         if ((model instanceof GetPropertyBodyImpl)) {
           for (final EPropertyDefinition prop : properties) {
+            String _xifexpression = null;
+            if ((module != null)) {
+              _xifexpression = (module + "/");
+            } else {
+              _xifexpression = "";
+            }
+            String _plus = (_xifexpression + node_name);
+            String _plus_1 = (_plus + ".");
             String _name = prop.getName();
-            String _plus = ((((module + "/") + node_name) + ".") + _name);
-            proposals.add(_plus);
+            String _plus_2 = (_plus_1 + _name);
+            proposals.add(_plus_2);
           }
         } else {
           if ((model instanceof GetAttributeBodyImpl)) {
             for (final EAttributeDefinition attr : attributes) {
+              String _xifexpression_1 = null;
+              if ((module != null)) {
+                _xifexpression_1 = (module + "/");
+              } else {
+                _xifexpression_1 = "";
+              }
+              String _plus_3 = (_xifexpression_1 + node_name);
+              String _plus_4 = (_plus_3 + ".");
               String _name_1 = attr.getName();
-              String _plus_1 = ((((module + "/") + node_name) + ".") + _name_1);
-              proposals.add(_plus_1);
+              String _plus_5 = (_plus_4 + _name_1);
+              proposals.add(_plus_5);
             }
           }
         }

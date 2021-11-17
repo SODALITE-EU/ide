@@ -30,7 +30,6 @@ public class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
     final boolean done = true;
   }
   
-  @Override
   protected void _createChildren(final IOutlineNode parentNode, final EObject modelElement) {
     if ((modelElement instanceof EParameterDefinition)) {
       return;
@@ -96,7 +95,6 @@ public class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
     }
   }
   
-  @Override
   public boolean _isLeaf(final EObject modelElement) {
     if ((modelElement instanceof EParameterDefinition)) {
       return true;

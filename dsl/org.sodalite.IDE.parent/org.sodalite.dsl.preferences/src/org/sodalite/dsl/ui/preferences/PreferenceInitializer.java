@@ -47,7 +47,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String xOpera_uri = prop.getProperty(PreferenceConstants.xOPERA_URI);
 		if (xOpera_uri == null)
-			xOpera_uri = "http://192.168.2.15:5000/";
+			xOpera_uri = "http://192.168.2.18:5000/";
 
 		String pds_uri = prop.getProperty(PreferenceConstants.PDS_URI);
 		if (pds_uri == null)
@@ -57,21 +57,37 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (refactorer_uri == null)
 			refactorer_uri = "http://192.168.2.166:8080/";
 
-		String consul_uri = prop.getProperty(PreferenceConstants.Consul_URI);
-		if (consul_uri == null)
-			consul_uri = "http://192.168.3.74:8500/";
+		String nifi_uri = prop.getProperty(PreferenceConstants.NIFI_URI);
+		if (nifi_uri == null)
+			nifi_uri = "https://192.168.2.91:9543/";
+
+		String consul_ip = prop.getProperty(PreferenceConstants.Consul_IP);
+		if (consul_ip == null)
+			consul_ip = "192.168.3.74";
+
+		String grafana_registry_uri = prop.getProperty(PreferenceConstants.Grafana_Registry_URI);
+		if (grafana_registry_uri == null)
+			grafana_registry_uri = "http://192.168.3.74:3001/";
 
 		String grafana_uri = prop.getProperty(PreferenceConstants.Grafana_URI);
 		if (grafana_uri == null)
 			grafana_uri = "http://192.168.3.74:3000/";
 
+		String rulesServer_uri = prop.getProperty(PreferenceConstants.RulesServer_URI);
+		if (rulesServer_uri == null)
+			rulesServer_uri = "http://192.168.3.74:9092/";
+
 		String skydive_analyzer_uri = prop.getProperty(PreferenceConstants.SKYDIVE_ANALYZER_URI);
 		if (skydive_analyzer_uri == null)
 			skydive_analyzer_uri = "192.168.2.11:8088";
 
+		String vault_secret_uploader_uri = prop.getProperty(PreferenceConstants.VAULT_SECRET_UPLOADER_URI);
+		if (vault_secret_uploader_uri == null)
+			vault_secret_uploader_uri = "http://192.168.3.74:8202";
+
 		String keycloak_uri = prop.getProperty(PreferenceConstants.KEYCLOAK_URI);
 		if (keycloak_uri == null)
-			keycloak_uri = "http://192.168.2.179:8080/";
+			keycloak_uri = "http://192.168.2.53:8080/";
 
 		String keycloak_client_id = prop.getProperty(PreferenceConstants.KEYCLOAK_CLIENT_ID);
 		if (keycloak_client_id == null)
@@ -86,11 +102,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			keycloak_enabled = true;
 		}
 
-		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
-				"Default Sodalite backend services configuration read from properties: "
+		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
+				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
 						+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
-						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}",
-				kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri)));
+						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}, NIFI endpoint: {7}",
+						kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri,
+						nifi_uri)));
 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
@@ -99,9 +116,13 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.xOPERA_URI, xOpera_uri);
 		defaults.put(PreferenceConstants.PDS_URI, pds_uri);
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
-		defaults.put(PreferenceConstants.Consul_URI, consul_uri);
+		defaults.put(PreferenceConstants.NIFI_URI, nifi_uri);
+		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
+		defaults.put(PreferenceConstants.Grafana_Registry_URI, grafana_registry_uri);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
+		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
+		defaults.put(PreferenceConstants.VAULT_SECRET_UPLOADER_URI, vault_secret_uploader_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);

@@ -3,6 +3,7 @@ package org.sodalite.dsl.ui.backend;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,7 +109,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 		}
 	}
 
-	public void processSaveAADM(ExecutionEvent event) throws Exception {
+	public void processSaveAADM(String version, ExecutionEvent event) throws Exception {
 		// Return selected resource
 		IFile aadmFile = AADMHelper.getSelectedFile();
 		if (aadmFile == null)
@@ -117,10 +118,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 		IProject project = aadmFile.getProject();
 		// Get serialize AADM model in Turtle
 		String aadmTTL = readTurtle(aadmFile, project);
-		String aadmURI = getModelURI(aadmFile, project);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		if (version == null)
+			version = "";
 
 		// Send model to the KB
-		saveAADM(aadmTTL, aadmFile, aadmURI, project, event);
+		saveAADM(aadmTTL, aadmFile, mm.getUri(), version, project, event);
 	}
 
 	public void processOptimizeAADM(ExecutionEvent event) throws Exception {
@@ -134,12 +137,13 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Send model to the KB
-		String aadmURI = getModelURI(aadmFile, project);
-		optimizeAADM(aadmTTL, aadmFile, aadmURI, project, event);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		optimizeAADM(aadmTTL, aadmFile, mm.getUri(), project, event);
 	}
 
 	public void processDeployAADM(ExecutionEvent event, IFile aadmFile, Path inputs_yaml_path, Path imageBuildConfPath,
-			String version_tag, int workers, boolean completeModel) throws Exception {
+			String version_tag, int workers, String deployment_name, String monitoring_id, String username,
+			boolean completeModel) throws Exception {
 		// Return selected resource
 		// IFile aadmFile = AADMHelper.getSelectedFile(); // FIX Bug
 		if (aadmFile == null)
@@ -149,9 +153,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 		String aadmTTL = readTurtle(aadmFile, project);
 
 		// Deploy AADM model
-		String aadmURI = getModelURI(aadmFile, project);
-		deployAADM(aadmTTL, aadmFile, aadmURI, inputs_yaml_path, imageBuildConfPath, version_tag, workers,
-				completeModel, project, event);
+		ModelMetadata mm = getModelMetadata(aadmFile, project);
+		deployAADM(aadmTTL, aadmFile, mm, inputs_yaml_path, imageBuildConfPath, version_tag, workers, completeModel,
+				deployment_name, monitoring_id, username, project, event);
 	}
 
 	public void processBuildImages(Path imageBuildConfPath) throws Exception {
@@ -162,7 +166,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
-	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, IProject project, ExecutionEvent event) {
+	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, String version, IProject project,
+			ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {
 			try {
 				// Generate Model
@@ -178,13 +183,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 				boolean complete = false;
 				String name = aadmFile.getName();
 				KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
-						complete);
+						complete, version);
 				processValidationIssues(aadmFile, saveReport, event);
 				if (saveReport.getURI() == null && saveReport.getErrors() == null) {
 					throw new Exception(
 							"The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(saveReport.getURI(), aadmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(saveReport.getURI());
+				mm.setVersion(saveReport.getVersion());
+				saveModelMetadata(mm, aadmFile, project);
 
 				Display.getDefault().asyncExec(new Runnable() {
 					@Override
@@ -220,7 +228,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					throw new Exception(
 							"AADM optimization recommendations could not be retrieved from the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(optimizationReport.getURI(), aadmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(optimizationReport.getURI());
+				saveModelMetadata(mm, aadmFile, project);
 				showInfoDialog(null, "Get AADM optimization recommendations",
 						"Optimization recommendations for AADM model has been successfully retrieved from the KB\n. "
 								+ "AADM model have been saved with URI:\n" + optimizationReport.getURI());
@@ -237,18 +247,18 @@ public class AADMBackendProxy extends RMBackendProxy {
 		job.schedule();
 	}
 
-	private void deployAADM(String aadmTTL, IFile aadmfile, String aadmURI, Path inputs_yaml_path,
-			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, IProject project,
-			ExecutionEvent event) {
+	private void deployAADM(String aadmTTL, IFile aadmfile, ModelMetadata mm, Path inputs_yaml_path,
+			Path imageBuildConfPath, String version_tag, int workers, boolean completeModel, String deployment_name,
+			String monitoring_id, String username, IProject project, ExecutionEvent event) {
 		Job job = new Job("Deploy AADM") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// Manage job states
 				// TODO Inform about percentage of progress
 				int steps = 1;
-				int number_steps = 7;
+				int number_steps = 8;
 				if (imageBuildConfPath != null)
-					number_steps = 8;
+					number_steps = 9;
 
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				String[] admin_report = new String[2];
@@ -268,10 +278,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 					// Get module (namespace) from RM
 					String namespace = AADMHelper.getModule(aadmfile, event);
-
 					String aadmName = aadmfile.getName();
-					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, aadmName, namespace,
-							aadmDSL, completeModel);
+					KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, mm.getUri(), aadmName, namespace,
+							aadmDSL, completeModel, mm.getVersion());
 					if (saveReport == null)
 						throw new Exception(
 								"There was a problem to save the AADM into the KB, please contact Sodalite administrator");
@@ -281,18 +290,23 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (saveReport != null && saveReport.hasErrors())
 						throw new Exception("There are detected validation issues in the AADM, please fix them");
 
-					saveURI(saveReport.getURI(), aadmfile, project);
+					ModelMetadata mm = new ModelMetadata();
+					mm.setUri(saveReport.getURI());
+					mm.setVersion(saveReport.getVersion());
+					saveModelMetadata(mm, aadmfile, project);
 					String aadm_id = saveReport.getURI();
 					subMonitor.worked(steps++);
 
 					// Ask the AADM JSON serialization to the KB Reasoner
 					subMonitor.setTaskName("Getting AADM serialization from the KB");
-					String aadmJson = getKBReasoner().getAADM(saveReport.getURI());
+					String aadmJson = getKBReasoner().getAADM(saveReport.getURI(), mm.getVersion(), false);
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-//					Files.write(Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json"),
-//							aadmJson.getBytes());
+					Path aadmJsonPath = Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json");
+					Files.write(aadmJsonPath, aadmJson.getBytes());
+					SodaliteLogger.log("AADM Json reported to IaCBuilder: " + aadmJson);
+					SodaliteLogger.log("AADM Json reported to IaCBuilder stored in " + aadmJsonPath);
 
 					subMonitor.worked(steps++);
 
@@ -303,8 +317,6 @@ public class AADMBackendProxy extends RMBackendProxy {
 						subMonitor.setTaskName("Requesting the creation of images");
 
 						BuildImageReport biReport = getKBReasoner().buildImage(imageBuildConf);
-
-						subMonitor.worked(steps++);
 
 						// Ask ImageBuilder status
 						subMonitor.setTaskName("Checking image creation status");
@@ -323,7 +335,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask IaC Blueprint Builder to build the AADM blueprint
 					subMonitor.setTaskName("Generating AADM blueprint");
 					IaCBuilderAADMRegistrationReport iacReport = getKBReasoner()
-							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmJson);
+							.askIaCBuilderToRegisterAADM(aadmfile.getName(), aadmfile.getName(), username, aadmJson);
 					if (iacReport == null || iacReport.getBlueprint_id().isEmpty())
 						throw new Exception("AADM could not be parsed by IaC Builder");
 					admin_report[0] = iacReport.getBlueprint_id();
@@ -334,13 +346,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 					// Ask xOpera to deploy the AADM blueprint
 					subMonitor.setTaskName("Deploying AADM");
 					DeploymentReport depl_report = getKBReasoner().deployAADM(inputs_yaml_path,
-							iacReport.getBlueprint_id(), version_tag, workers);
+							iacReport.getBlueprint_id(), version_tag, workers, deployment_name);
 					admin_report[1] = depl_report.getDeployment_id();
 					message = "xOpera deployment_id: " + depl_report.getDeployment_id();
 					SodaliteLogger.log(message);
 					// Remove temporary inputs file
 					Files.delete(inputs_yaml_path);
-					subMonitor.worked(steps++);
 
 					// Ask xOpera deployment status: info/status (session-token): status JSON
 					subMonitor.setTaskName("Checking deployment status");
@@ -349,24 +360,33 @@ public class AADMBackendProxy extends RMBackendProxy {
 					while (!dsr.getState().equals("success")) {
 						if (dsr.getState().equals("failed"))
 							throw new Exception("Deployment failed as reported by xOpera");
-						TimeUnit.SECONDS.sleep(5);
+						TimeUnit.SECONDS.sleep(10);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
+					subMonitor.worked(steps++);
+
+					// Report deployment_label, deployment_id to Grafana Registry with IAM -
+					subMonitor.setTaskName("Reporting deployment to Monitoring Dashboard (Grafana)");
+					getKBReasoner().createMonitoringDashboard(monitoring_id, deployment_name);
+					subMonitor.worked(steps++);
 
 					// Report deployment to Refactorer
 					subMonitor.setTaskName("Reporting deployment to Refactorer");
-					String appName = aadmName.substring(0, aadmName.indexOf(".aadm"));
-					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, depl_report.getBlueprint_id(),
-							depl_report.getDeployment_id(), inputs_yaml);
+					String appName = namespace != null && !namespace.isEmpty() ? namespace
+							: aadmName.substring(0, aadmName.indexOf(".aadm"));
+					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, mm.getVersion(),
+							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), monitoring_id, inputs_yaml);
+					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
 							String message = "The selected AADM model has been successfully deployed into the Sodalite backend with: \nblueprint id: "
-									+ admin_report[0] + "\ndeployment id:" + admin_report[1];
+									+ admin_report[0] + "\ndeployment id:" + admin_report[1] + "\nmonitoring id:"
+									+ monitoring_id;
 							String infoToPaste = "blueprint id: " + admin_report[0] + ", deployment_id: "
-									+ admin_report[1];
+									+ admin_report[1] + ", monitoring_id: " + monitoring_id;
 							showInfoDialog(infoToPaste, "Deploy AADM", message);
 							SodaliteLogger.log(message);
 						}
@@ -395,6 +415,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 				}
 				return Status.OK_STATUS;
 			}
+
 		};
 		job.setPriority(Job.LONG);
 		job.schedule();
@@ -436,7 +457,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "Images have been successfully created";
-							showInfoDialog("", "Save images", message);
+							showInfoDialog("", "Build images", message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -449,7 +470,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 									+ "\nPlease contact Sodalite administrator and provide the reference below"
 									+ "\nInvocation_id: " + report[0];
 							String infoToPaste = "Invocation_id: " + report[0];
-							showErrorDialog(infoToPaste, "Save images", message);
+							showErrorDialog(infoToPaste, "Build images", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
@@ -457,6 +478,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -484,8 +506,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 						@Override
 						public void run() {
 							String message = "PDS update have been successfully created with \naadm_uri: "
-									+ report.getAadmuri() + "\nrm_uri: " + report.getRmuri();
-							showInfoDialog("", "Save images", message);
+									+ report.getAadm_uri() + "\nrm_uri: " + report.getRm_uri();
+							showInfoDialog("", "PDS Update", message);
 						}
 					});
 					subMonitor.worked(-1);
@@ -496,14 +518,15 @@ public class AADMBackendProxy extends RMBackendProxy {
 						public void run() {
 							String message = "There were problems in PDS to update: " + e.getMessage()
 									+ "\nPlease contact Sodalite administrator and report her/him above error message";
-							showErrorDialog("", "Save images", message);
+							showErrorDialog("", "PDS update", message);
 							SodaliteLogger.log(message, e);
 						}
 					});
-					SodaliteLogger.log("Error building images", e);
+					SodaliteLogger.log("Error requesting PDS update", e);
 					return Status.CANCEL_STATUS;
 				}
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.setPriority(Job.LONG);
@@ -616,17 +639,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (optimizationReport.hasErrors()) {
 			for (KBError error : optimizationReport.getErrors()) {
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
+				issues.add(new ValidationIssue(error.getType() + "." + error.getDescription(), error.getContext(), null,
+						Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
 		if (optimizationReport.hasWarnings()) {
 			for (KBWarning warning : optimizationReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
+				issues.add(new ValidationIssue(warning.getType() + "." + warning.getDescription(),
 						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
 						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
@@ -676,25 +696,28 @@ public class AADMBackendProxy extends RMBackendProxy {
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
 				String message = error.getDescription() + ": " + error.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(error.getContext(), error.getEntity_name());
-				String path = createPath(hierarchyPath);
+				if (!error.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(error.getSuggestions()));
+				}
+				String path = error.getContext();
 				String pathType = getPathType(error.getType());
-				List<String> type = Arrays.asList(error.getType());
-				String code = getCode(type); // Code is used for quick fixes
-				List<String> data = Arrays.asList(error.getEntity_name(), error.getContext());
+				String code = null;
+				if (!error.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
+				Map<String, SortedSet<String>> data = new HashMap<>();
+				data.put(path, error.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.ERROR, code, data));
 			}
 		}
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				String message = warning.getType() + " ." + warning.getDescription() + " Warning located at: "
+				String message = warning.getType() + ". " + warning.getDescription() + ". Warning located at: "
 						+ warning.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(warning.getContext(), warning.getEntity_name());
-				String path = createPath(hierarchyPath);
+				String path = warning.getContext();
 				String pathType = getPathType(warning.getType());
-				List<String> type = Arrays.asList(warning.getType());
-				String code = getCode(type); // Code is used for quick fixes
+				String code = ""; // No suggestions for quick fixes associated to warnings
 				List<String> data = Arrays.asList(warning.getEntity_name(), warning.getContext());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
@@ -702,11 +725,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = MessageFormat.format("The following nodes can satisfy the requirement {0}: {1}",
-						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
-				String path = createPath(suggestion.getHierarchyPath());
-				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode(suggestion.getHierarchyPath()); // Code is used for quick fixes
+				String message = suggestion.getDescription() + ": " + suggestion.getEntity_name();
+				if (!suggestion.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(suggestion.getSuggestions()));
+				}
+				String path = suggestion.getContext();
+				String pathType = getPathType(suggestion.getType());
+				String code = null;
+				if (!suggestion.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -716,12 +744,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 		return issues;
 	}
 
-	private String getCode(List<String> hierarchyPath) {
+	private String getCode(String hierarchyPath) {
 		// Assigns a suggestion code based in the issue hierarchy path
 		String code = "Suggestion";
 		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
-		} else if (hierarchyPath.contains("RequiredProperty")) {
+		} else if (hierarchyPath.contains("properties")) {
 			code = ValidationIssue.PROPERTY;
 		}
 
@@ -762,14 +790,14 @@ public class AADMBackendProxy extends RMBackendProxy {
 			return "Property";
 		else if (type.contains("Capability"))
 			return "Capability";
-		else if (type.contains("Node"))
+		else if (type.contains("Node") || type.contains("RequirementExistence"))
 			return "Node_Template";
 		else
 			return null;
 	}
 
 	private String createPath(List<String> entityHierarchy) {
-		StringBuilder sb = new StringBuilder("node_templates");
+		StringBuilder sb = new StringBuilder("");
 		for (String entry : entityHierarchy) {
 			if (entry.contains("https"))
 				entry = entry.substring(entry.lastIndexOf('/') + 1);
@@ -845,7 +873,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					result = new ValidationSourceFeature(node, AADMPackage.Literals.ENODE_TEMPLATE__NAME);
 					if (st.hasMoreElements()) { // Node_Template children
 						String entity_name = st.nextToken();
-						if ("Property".equals(path_type)) {
+						if (path.contains("properties")) {
+							if (entity_name.equals("properties"))
+								entity_name = st.nextToken();
 							if (node.getNode().getProperties() != null) {
 								for (EPropertyAssignment property : node.getNode().getProperties().getProperties()) {
 									if (property.getName().contentEquals(entity_name)) {
@@ -854,7 +884,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 									}
 								}
 							}
-						} else if ("requirements".equals(path_type)) {
+						} else if (path.contains("requirements")) {
+							if (entity_name.equals("requirements"))
+								entity_name = st.nextToken();
 							boolean req_found = false;
 							if (node.getNode().getRequirements() != null) {
 								for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {
@@ -900,7 +932,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	private String getRequirement(String path) {
 		String req = null;
-		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Pattern pattern = Pattern.compile("/requirements/(.+)");
 		Matcher matcher = pattern.matcher(path);
 		if (matcher.find())
 			req = matcher.group(1);

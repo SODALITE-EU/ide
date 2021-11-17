@@ -1,0 +1,246 @@
+{
+  "https://www.sodalite.eu/ontologies/workspace/1/5nf45bccrr6rmkt2f4cinoi6u/RM_86u66om7m9kmfiq13rhdv8uche": {
+    "id": "https://www.sodalite.eu/ontologies/workspace/1/5nf45bccrr6rmkt2f4cinoi6u/RM_86u66om7m9kmfiq13rhdv8uche",
+    "namespace": "docker",
+    "type": "ResourceModel",
+    "createdBy": "https://www.sodalite.eu/ontologies/workspace/1/5nf45bccrr6rmkt2f4cinoi6u/27827d44-0f6c-11ea-8d71-362b9e155667",
+    "createdAt": "2021-08-05T11:26:55.310+03:00",
+    "participants": [
+      "https://www.sodalite.eu/ontologies/workspace/1/docker/sodalite.nodes.DockerVolume"
+    ]
+  },
+  "https://www.sodalite.eu/ontologies/workspace/1/docker/sodalite.nodes.DockerVolume": {
+    "type": "https://www.sodalite.eu/ontologies/tosca/tosca.nodes.SoftwareComponent",
+    "isNodeTemplate": false,
+    "class": "node_types",
+    "properties": [
+      {
+        "https://www.sodalite.eu/ontologies/tosca/name": {
+          "description": "The name of the volume",
+          "specification": {
+            "required": true,
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/string": {
+                "label": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "https://www.sodalite.eu/ontologies/tosca/admin_credential": {
+          "description": "The optional credential that can be used to authenticate to the software component.",
+          "specification": {
+            "required": false,
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.datatypes.Credential": {
+                "label": "tosca.datatypes.Credential"
+              }
+            }
+          }
+        }
+      },
+      {
+        "https://www.sodalite.eu/ontologies/tosca/component_version": {
+          "description": "Domain-specific software component version.",
+          "specification": {
+            "required": false,
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/version": {
+                "label": "version"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "https://www.sodalite.eu/ontologies/tosca/tosca_id": {
+          "description": "A unique identifier of the realized instance of a Node Template that derives from any TOSCA normative type",
+          "specification": {
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/string": {
+                "label": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "https://www.sodalite.eu/ontologies/tosca/state": {
+          "description": "The state of the node instance.",
+          "specification": {
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/string": {
+                "label": "string"
+              }
+            }
+          }
+        }
+      },
+      {
+        "https://www.sodalite.eu/ontologies/tosca/tosca_name": {
+          "description": "Reflects the name of the Node Template as defined in the TOSCA service template. This name is not unique to the realized instance model of corresponding deployed application as each template in the model can result in one or more instances (e.g., scaled) when orchestrated to a provider environment.",
+          "specification": {
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/string": {
+                "label": "string"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "requirements": [
+      {
+        "https://www.sodalite.eu/ontologies/tosca/dependency": {
+          "specification": {
+            "capability": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node": {
+                "label": "tosca.capabilities.Node"
+              }
+            },
+            "occurrences": [
+              "0",
+              "UNBOUNDED"
+            ],
+            "relationship": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.relationships.DependsOn": {
+                "label": "tosca.relationships.DependsOn"
+              }
+            },
+            "node": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Root": {
+                "label": "tosca.nodes.Root"
+              }
+            }
+          }
+        }
+      },
+      {
+        "https://www.sodalite.eu/ontologies/tosca/host": {
+          "specification": {
+            "capability": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Compute": {
+                "label": "tosca.capabilities.Compute"
+              }
+            },
+            "relationship": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.relationships.HostedOn": {
+                "label": "tosca.relationships.HostedOn"
+              }
+            },
+            "node": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.nodes.Compute": {
+                "label": "tosca.nodes.Compute"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "capabilities": [
+      {
+        "https://www.sodalite.eu/ontologies/tosca/feature": {
+          "specification": {
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.capabilities.Node": {
+                "label": "tosca.capabilities.Node"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "interfaces": [
+      {
+        "https://www.sodalite.eu/ontologies/tosca/Standard": {
+          "specification": {
+            "operations": {
+              "delete": {
+                "implementation": {
+                  "primary": {
+                    "path": "/workspace/iac-modules/docker/playbooks/remove_volume.yml",
+                    "url": "http://160.40.52.200:8084/Ansibles/0417ef0b-0bdb-4994-913b-df1d3af61fbf"
+                  }
+                },
+                "inputs": {
+                  "ansible_user": {
+                    "default": {
+                      "get_property": {
+                        "req_cap": "host",
+                        "property": "username",
+                        "entity": "SELF"
+                      }
+                    },
+                    "type": {
+                      "https://www.sodalite.eu/ontologies/tosca/string": {
+                        "label": "string"
+                      }
+                    }
+                  },
+                  "volume_name": {
+                    "default": {
+                      "get_property": {
+                        "property": "name",
+                        "entity": "SELF"
+                      }
+                    },
+                    "type": {
+                      "https://www.sodalite.eu/ontologies/tosca/string": {
+                        "label": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "create": {
+                "inputs": {
+                  "volume_name": {
+                    "default": {
+                      "get_property": {
+                        "property": "name",
+                        "entity": "SELF"
+                      }
+                    },
+                    "type": {
+                      "https://www.sodalite.eu/ontologies/tosca/string": {
+                        "label": "string"
+                      }
+                    }
+                  },
+                  "ansible_user": {
+                    "type": {
+                      "https://www.sodalite.eu/ontologies/tosca/string": {
+                        "label": "string"
+                      }
+                    },
+                    "default": {
+                      "get_property": {
+                        "entity": "SELF",
+                        "property": "username",
+                        "req_cap": "host"
+                      }
+                    }
+                  }
+                },
+                "implementation": {
+                  "primary": {
+                    "path": "/workspace/iac-modules/docker/playbooks/add_volume.yml",
+                    "url": "http://160.40.52.200:8084/Ansibles/6d5f5b9c-676b-4e43-9a57-cb660b16cbbe"
+                  }
+                }
+              }
+            },
+            "type": {
+              "https://www.sodalite.eu/ontologies/tosca/tosca.interfaces.node.lifecycle.Standard": {
+                "label": "tosca.interfaces.node.lifecycle.Standard"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

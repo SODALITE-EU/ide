@@ -37,40 +37,62 @@ class AADMQuickfixProvider extends DefaultQuickfixProvider {
 			val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 			for (String match: matches) {
 				val qMatch = match.trim.substring(prefix.length)
-				val targetNode = qMatch.substring(qMatch.lastIndexOf('/') + 1)
-				val targetModule = qMatch.substring(0, qMatch.lastIndexOf('/'))
+				//Manage possible version for target node
+				val targetModule = qMatch.substring(0, qMatch.indexOf('/'))
+				val remaining = qMatch.substring(qMatch.indexOf('/') + 1)
+				var String tNode = null
+				if (remaining.contains('/')){
+					val version = remaining.substring(0, remaining.indexOf('/'))
+					val node = remaining.substring(remaining.indexOf('/') + 1)
+					tNode = node + "@" + version
+				} else { 
+					tNode = remaining
+				}
+				val String targetNode = tNode
+				
 				val message = MessageFormat.format('Create requirement "{0}" referencing node "{1}"',
 					targetRequirement, targetNode);
 				val sub_message = message
-				acceptor.accept(issue, message, sub_message, '') [ nodeTemplate, context |
+				acceptor.accept(issue, message, sub_message, '') [ entity, context |
 					//Get requirement. If not created.
 					//Add/replace node
 					var ERequirementAssignment req = null
-					var node = nodeTemplate as ENodeTemplate
-					if (node.node.requirements === null){
-						val requirements = AADMFactory.eINSTANCE.createERequirementAssignments
-						node.node.requirements = requirements
-					}
-					for (ERequirementAssignment requirement:node.node.requirements.requirements){
-						if (requirement.name.equalsIgnoreCase(targetRequirement)){
-							req = requirement;
+					var ENodeTemplate node = null
+					if (entity instanceof ENodeTemplate){
+						node = entity as ENodeTemplate
+						if (node.node.requirements === null){
+							val requirements = AADMFactory.eINSTANCE.createERequirementAssignments
+							node.node.requirements = requirements
+						}
+						for (ERequirementAssignment requirement:node.node.requirements.requirements){
+							if (requirement.name.equalsIgnoreCase(targetRequirement)){
+								req = requirement;
+							}
+						}
+						if (req === null){
+							//Create a ERequirementAssignment
+							req = AADMFactory.eINSTANCE.createERequirementAssignment
+							req.name = targetRequirement
+							node.node.requirements.requirements.add(req)
 						}
 					}
-					if (req === null){
-						//Create a ERequirementAssignment
-						req = AADMFactory.eINSTANCE.createERequirementAssignment
-						req.name = targetRequirement
-						node.node.requirements.requirements.add(req)
+					if (entity instanceof ERequirementAssignment){
+						req = entity as ERequirementAssignment
 					}
-					System.out.println ("Applying targetNode: " + targetNode)
+					
 					if (req.node === null){
 						var req_node = RMFactory.eINSTANCE.createEPREFIX_ID
 						req.node = req_node
 					}
 					req.node.module = targetModule
-					req.node.id = targetNode 
+					if (targetNode.contains('@')){
+						req.node.id = targetNode.substring(0, targetNode.indexOf('@'))
+						req.node.version = targetNode.substring(targetNode.indexOf('@') + 1)
+					} else {
+						req.node.id = targetNode
+					}
 					
-					//TODO Remove issue from model
+					//TODO Remove issue from model. Save unsolved issues in model
 				]
 			}
 	}

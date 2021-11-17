@@ -1,0 +1,58 @@
+//this is the model of the playbook defined here: https://github.com/SODALITE-EU/iac-modules/blob/master/aws/playbooks/vm_create.yml
+playbook_name: "aws/vm_create"
+used_by:
+	node_type: "sodalite.nodes.AWS.VM"
+	operation: "create"
+plays:
+	play:
+		hosts: "all"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				task_name: "Create VM"
+				module: "ec2"
+					parameters:
+						id: {{ operation_input: "vm_name" }}
+						key_name: {{ operation_input: "key_name" }}
+						instance_type: {{ operation_input: "flavor" }}
+						image: {{ operation_input: "image" }}
+						wait: yes
+						group: {{ operation_input: "security_groups" }}
+						vpc_subnet_id: {{ operation_input: "network" }}
+						region: {{ operation_input: "region" }}
+						aws_access_key: {{ operation_input: "aws_access_key" }}
+						aws_secret_key: {{ operation_input: "aws_secret_key" }}
+						assign_public_ip: yes
+				register: server_info
+			task_to_execute:
+				task_name: "Set attributes"
+				module: "set_stats"
+					parameters:
+						data:
+							private_address: {{ special_variable: item.private_ip }}
+							public_address: {{ special_variable: item.public_ip }}
+							id: {{ special_variable: item.id }}
+				loop:
+					with items: {{ registered_variable: server_info.instances }}
+			task_to_execute:
+				task_name: "Create temporary inventory for ssh wait"
+				module: "add_host"
+					parameters:
+						name: "server"
+						groups: "vms"
+						ansible_host: {{ special_variable: item.public_ip }}
+						ansible_user: {{ operation_input: "ansible_user" }}
+						ansible_ssh_common_args: > 
+							line_of_string: "-o UserKnownHostsFile=/dev/null"
+							line_of_string: "-o StrictHostKeyChecking=no"
+				loop:
+					with items: {{ registered_variable: server_info.instances }}
+	play:
+		hosts: "vms"
+		facts_settings:
+			gather_facts: no
+		tasks_list:
+			task_to_execute:
+				 task_name: "Wait for ssh to wake up"
+				 module: "wait_for_connection"

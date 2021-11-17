@@ -22,7 +22,9 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -34,7 +36,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
-import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -54,9 +57,11 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyType;
 import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.GetArtifact;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class RMHelper {
@@ -79,8 +84,8 @@ public class RMHelper {
 		return module.substring(module.lastIndexOf("/", module.length() - 2) + 1, module.length() - 1);
 	}
 
-	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws SodaliteException {
-		CapabilityDefinitionData capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(nodeRef);
+	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws Exception {
+		CapabilityDefinitionData capabilities = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(nodeRef);
 		return capabilities.getElements();
 	}
 
@@ -122,14 +127,14 @@ public class RMHelper {
 		return names.contains("getModule") && names.contains("getImports");
 	}
 
-	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws SodaliteException {
+	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws Exception {
 		// Get modules from model
 		List<String> importedModules = getImportedModules(node);
 		String module = getModule(node);
 
 		// Add current module to imported ones for searching in the KB
 		importedModules.add(module);
-		TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+		TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
 		for (Type type : typeData.getElements()) {
 			String name = type.getUri().toString().substring(type.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(node.getType())) {
@@ -164,8 +169,8 @@ public class RMHelper {
 		return null;
 	}
 
-	public static String findRequirementNodeByNameInKB(String type, String reqName) throws SodaliteException {
-		RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(type);
+	public static String findRequirementNodeByNameInKB(String type, String reqName) throws Exception {
+		RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(type);
 		for (RequirementDefinition req : reqData.getElements()) {
 			String name = req.getUri().toString().substring(req.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(reqName))
@@ -196,7 +201,7 @@ public class RMHelper {
 		return node;
 	}
 
-	public static String findRequirementTargetNode(ENodeType node, String req_name) throws SodaliteException {
+	public static String findRequirementTargetNode(ENodeType node, String req_name) throws Exception {
 		// Find requirement in local node
 		String nodeRef = null;
 		RM_Model model = (RM_Model) findModel(node);
@@ -236,6 +241,8 @@ public class RMHelper {
 			eEntityReference = ((GetProperty) function).getProperty().getEntity();
 		else if (function instanceof GetAttribute)
 			eEntityReference = ((GetAttribute) function).getAttribute().getEntity();
+		else if (function instanceof GetArtifact)
+			eEntityReference = ((GetArtifact) function).getArtifact().getEntity();
 
 		if (eEntityReference == null)
 			return null;
@@ -272,7 +279,8 @@ public class RMHelper {
 		try {
 			Class noparams[] = {};
 			Method method = model.getClass().getMethod("getImports", noparams);
-			imports = (List<String>) method.invoke(model, null);
+			List<String> _imports = (List<String>) method.invoke(model, null);
+			imports.addAll(_imports);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -284,6 +292,16 @@ public class RMHelper {
 		if (_string.endsWith(delimiter))
 			newString = _string.substring(0, _string.length() - delimiter.length());
 		return newString.substring(newString.lastIndexOf(delimiter) + 1);
+	}
+
+	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
+		if (ref instanceof EPREFIX_TYPE) {
+			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
+		} else if (ref instanceof EPREFIX_TYPE) {
+			return ((EPREFIX_ID) ref).getId();
+		} else {
+			return null;
+		}
 	}
 
 	public static String getModule(EObject object) {
@@ -457,6 +475,14 @@ public class RMHelper {
 		}
 	}
 
+	public static void saveModel(EObject model, IFile targetFile) throws IOException {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		Resource res = resourceSet
+				.createResource(URI.createPlatformResourceURI(targetFile.getFullPath().toString(), true));
+		res.getContents().add(model);
+		res.save(null);
+	}
+
 	public static void saveFileInFolder(String filename, String filecontent, IContainer targetFolder) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		IFile targetFile = null;
@@ -486,6 +512,31 @@ public class RMHelper {
 		}
 	}
 
+	public static void saveModelInFolder(String filename, EObject model, IContainer targetFolder)
+			throws IOException, CoreException {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		IFile targetFile = null;
+		if (targetFolder instanceof IProject)
+			targetFile = ((IProject) targetFolder).getFile(filename);
+		else if (targetFolder instanceof IFolder)
+			targetFile = ((IFolder) targetFolder).getFile(filename);
+		if (targetFile == null) {
+			MessageDialog.openError(shell, "Folder not found",
+					"Folder " + targetFolder.getName() + " could not be found");
+		}
+		if (!targetFile.exists()) {
+			saveModel(model, targetFile);
+		} else {
+			boolean confirmed = MessageDialog.openConfirm(shell,
+					"Target file exists in folder " + targetFolder.getName(),
+					"Do you want to override target file " + targetFile.getName());
+			if (confirmed) {
+				targetFile.delete(false, null);
+				saveModel(model, targetFile);
+			}
+		}
+	}
+
 	public static String selectFile(String dialogText) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		// File standard dialog
@@ -511,6 +562,15 @@ public class RMHelper {
 			return false;
 		else
 			return module1.equals(module2);
+	}
+
+	public static ParserRule findParserRule(EObject obj) {
+		if (obj == null)
+			return null;
+		else if (obj instanceof ParserRule)
+			return (ParserRule) obj;
+		else
+			return findParserRule(obj.eContainer());
 	}
 
 }

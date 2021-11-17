@@ -31,7 +31,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -59,8 +58,9 @@ import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
-import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
+import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetPropertyBody;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.inject.Injector;
@@ -105,23 +105,25 @@ public class AADMHelper extends RMHelper {
 		return null;
 	}
 
-	public static List<ENodeTemplate> findLocalNodesForType(String type, EObject reqAssign) throws SodaliteException {
+	public static List<ENodeTemplate> findLocalNodesForType(String type, EObject reqAssign) throws Exception {
 		List<ENodeTemplate> nodes = new ArrayList<ENodeTemplate>();
 		try {
 			Map<String, Set<ENodeTemplate>> candidateNodes = new HashMap<String, Set<ENodeTemplate>>();
 			AADM_Model model = (AADM_Model) findModel(reqAssign);
 
 			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-				String node_id = (node.getNode().getType().getModule() != null
-						? node.getNode().getType().getModule() + '/'
-						: "") + node.getNode().getType().getType();
-				if (!candidateNodes.keySet().contains(node_id))
-					candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
-				candidateNodes.get(node_id).add(node);
+				if (node.getNode() != null) {
+					String node_id = (node.getNode().getType().getModule() != null
+							? node.getNode().getType().getModule() + '/'
+							: "") + node.getNode().getType().getType();
+					if (!candidateNodes.keySet().contains(node_id))
+						candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
+					candidateNodes.get(node_id).add(node);
+				}
 			}
 
 			List<String> keys = new ArrayList<String>(candidateNodes.keySet());
-			List<String> validSubClasses = BackendHelper.getKBReasoner().getSubClassesOf(keys, type);
+			List<String> validSubClasses = SodaliteBackendProxy.getKBReasoner().getSubClassesOf(keys, type);
 
 			for (String validClass : validSubClasses) {
 				if (candidateNodes.containsKey(validClass))
@@ -188,7 +190,8 @@ public class AADMHelper extends RMHelper {
 		if (module != null)
 			importedModules.add(module);
 
-		return BackendHelper.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId, importedModules);
+		return SodaliteBackendProxy.getKBReasoner().getTypeOfValidRequirementNodes(requirementId, resourceId,
+				importedModules);
 	}
 
 	public static ValidRequirementNodeData getValidRequirementNodes(ERequirementAssignment req)
@@ -205,7 +208,8 @@ public class AADMHelper extends RMHelper {
 		if (module != null)
 			importedModules.add(module);
 
-		return BackendHelper.getKBReasoner().getValidRequirementNodes(requirementId, resourceId, importedModules);
+		return SodaliteBackendProxy.getKBReasoner().getValidRequirementNodes(requirementId, resourceId,
+				importedModules);
 	}
 
 	public static AADM_Model readAADMModel(IFile aadmFile, ExecutionEvent event) throws PartInitException {
@@ -288,14 +292,14 @@ public class AADMHelper extends RMHelper {
 		return importedModules;
 	}
 
-	public static String findNodeTemplateInKB(EObject object, String nodeRef) throws SodaliteException {
+	public static String findNodeTemplateInKB(EObject object, String nodeRef) throws Exception {
 		// Get modules from model
 		List<String> importedModules = AADMHelper.getImportedModules(object);
 		String module = AADMHelper.getModule(object);
 		// Add current module to imported ones for searching in the KB
 		importedModules.add(module);
 
-		TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules);
+		TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules);
 		for (Template nodeTemplate : templates.getElements()) {
 			String nodeTemplateRef = nodeTemplate.getModule() != null
 					? nodeTemplate.getModule() + '/' + nodeTemplate.getLabel()
@@ -388,7 +392,7 @@ public class AADMHelper extends RMHelper {
 			return getNodeTemplate(object.eContainer());
 	}
 
-	public static ENodeTemplate getEntityNode(GetPropertyBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetPropertyBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {
@@ -402,7 +406,7 @@ public class AADMHelper extends RMHelper {
 		return node;
 	}
 
-	public static ENodeTemplate getEntityNode(GetAttributeBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetAttributeBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {
@@ -470,14 +474,14 @@ public class AADMHelper extends RMHelper {
 		return model.getNodeTemplates().getNodeTemplates();
 	}
 
-	public static ParserRule findParserRule(EObject obj) {
-		if (obj == null)
-			return null;
-		else if (obj instanceof ParserRule)
-			return (ParserRule) obj;
-		else
-			return findParserRule(obj.eContainer());
-	}
+//	public static ParserRule findParserRule(EObject obj) {
+//		if (obj == null)
+//			return null;
+//		else if (obj instanceof ParserRule)
+//			return (ParserRule) obj;
+//		else
+//			return findParserRule(obj.eContainer());
+//	}
 
 	public static EPolicyDefinition findPolicy(AADM_Model model, String policyName) {
 		for (EPolicyDefinition policy : model.getPolicies().getPolicies()) {

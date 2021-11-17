@@ -447,7 +447,7 @@ public class Services {
 			result += ": getInput(" + input + ")";
 		} else if (assignmentValue instanceof GetProperty) {
 			GetProperty gProperty = (GetProperty) assignmentValue;
-			String property = gProperty.getProperty() != null ? gProperty.getProperty().getProperty().getType() : "";
+			String property = gProperty.getProperty() != null ? getRefType(gProperty.getProperty().getProperty()) : "";
 			result += ": getProperty(" + property + ")";
 		} else if (assignmentValue instanceof ELIST) {
 			ELIST value = (ELIST) assignmentValue;
@@ -980,16 +980,16 @@ public class Services {
 	}
 
 	public String renderGetPropertyReq_Cap(EPropertyAssignment property) {
-		EPREFIX_TYPE req_cap = ((GetProperty) property.getValue()).getProperty().getReq_cap();
+		EPREFIX_REF req_cap = ((GetProperty) property.getValue()).getProperty().getReq_cap();
 		if (req_cap != null)
-			return AADM_Helper.renderType(req_cap);
+			return AADM_Helper.render(req_cap);
 		else
 			return "";
 	}
 
 	public String renderGetPropertyProperty(EPropertyAssignment property) {
-		EPREFIX_TYPE prop = ((GetProperty) property.getValue()).getProperty().getProperty();
-		return AADM_Helper.renderType(prop);
+		EPREFIX_REF prop = ((GetProperty) property.getValue()).getProperty().getProperty();
+		return AADM_Helper.render(prop);
 	}
 
 	public String renderParameterType(EParameterDefinitionBody parameter) {
@@ -1040,7 +1040,7 @@ public class Services {
 		// Get the properties defined within the selected node requirements or
 		// capabilities
 		if (body.getReq_cap() != null) {
-			String req_cap_name = AADM_Helper.getLastSegment(body.getReq_cap().getType(), ".");
+			String req_cap_name = AADM_Helper.getLastSegment(getRefType(body.getReq_cap()), ".");
 			ENodeTemplate req_node = AADM_Helper.findRequirementNodeInTemplate(req_cap_name, node);
 			if (req_node != null)
 				for (EPropertyAssignment prop : req_node.getNode().getProperties().getProperties())
@@ -1058,6 +1058,16 @@ public class Services {
 		}
 
 		return proposals;
+	}
+
+	private String getRefType(EPREFIX_REF ref) {
+		if (ref instanceof EPREFIX_TYPE)
+			return ((EPREFIX_TYPE) ref).getType();
+		else if (ref instanceof EPREFIX_ID) {
+			return ((EPREFIX_ID) ref).getId();
+		} else {
+			return null;
+		}
 	}
 
 	private ENodeTemplate getEntity(EPropertyAssignment property) {

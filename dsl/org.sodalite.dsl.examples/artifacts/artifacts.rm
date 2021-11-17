@@ -1,0 +1,52 @@
+module: artifacts
+
+artifact_types:
+	sodalite.artifacts.TextualFile:
+		derived_from: tosca.artifacts.File
+		description: 'Textual artifact type'
+		mime_type: 'text/plain'
+		file_ext: ["txt"]
+		properties:
+			creator:
+				description: 'Author of the file'
+				type: string
+				required: false
+
+node_types:
+	opera.nodes.file:
+		derived_from: tosca.nodes.SoftwareComponent
+		attributes:
+			my_text_file_attribute:
+				description: 'Text file contents'
+				type: string
+			my_json_file_attribute:
+				description: 'JSON file contents'
+				type: string
+		properties:
+			json_file:
+				description: 'JSON file path'
+				type: string
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						implementation: 
+							primary: "/home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/artifacts/playbooks/create.yaml"
+						inputs:
+							text_file_artifact:
+								description: 'Text file artifact input'
+								type: string
+								default: get_artifact: 
+									entity: SELF
+									artifact: artifacts/opera.nodes.file.text_file
+							json_file_artifact:
+								description: 'JSON file artifact input'
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: artifacts/opera.nodes.file.json_file
+		artifacts:
+			text_file:
+				type: artifacts/sodalite.artifacts.TextualFile
+				file: "//home/yosu/Projects/Sodalite/Git/ide/dsl/org.sodalite.dsl.examples/artifacts/files/file.txt"

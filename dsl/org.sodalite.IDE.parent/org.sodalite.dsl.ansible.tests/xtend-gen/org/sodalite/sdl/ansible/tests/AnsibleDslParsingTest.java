@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.sodalite.sdl.ansible.ansibleDsl.Model;
-import org.sodalite.sdl.ansible.tests.AnsibleDslInjectorProvider;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(AnsibleDslInjectorProvider.class)

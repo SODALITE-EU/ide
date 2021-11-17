@@ -19,7 +19,6 @@ import org.sodalite.dsl.rM.EInterfaceDefinition
 import org.sodalite.dsl.rM.EValueExpression
 import org.sodalite.dsl.rM.ESTRING
 import org.eclipse.emf.ecore.util.EObjectContainmentEList
-import org.sodalite.dsl.rM.EValidSourceType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.EFunction
@@ -71,6 +70,11 @@ import org.sodalite.dsl.rM.ETargetType
 import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EInterfaceType
+import org.sodalite.dsl.rM.RM_Model
+import java.util.Base64
+import org.sodalite.dsl.rM.EArtifactDefinition
+import org.sodalite.dsl.rM.GetArtifact
+import org.sodalite.dsl.rM.EArtifactType
 
 /**
  * Generates code from your model files on save.
@@ -82,6 +86,7 @@ class RMGenerator extends AbstractGenerator {
 	var int node_counter = 1
 	var int property_counter = 1
 	var int attribute_counter = 1
+	var int artifact_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int capabilitytype_counter = 1
@@ -94,6 +99,7 @@ class RMGenerator extends AbstractGenerator {
 	var int operation_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
+	var Map<EArtifactDefinition, Integer> artifact_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
@@ -106,6 +112,7 @@ class RMGenerator extends AbstractGenerator {
 		node_counter = 1
 		property_counter = 1
 		attribute_counter = 1
+		artifact_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
 		capabilitytype_counter = 1
@@ -118,6 +125,7 @@ class RMGenerator extends AbstractGenerator {
 		operation_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
+		artifact_numbers = new HashMap<EArtifactDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
 		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
@@ -146,11 +154,6 @@ class RMGenerator extends AbstractGenerator {
 	  owl:imports exchange: ;
 	  owl:versionInfo "Created by the SODALITE IDE" ;
 	.
-	
-	:RM_1
-	  rdf:type exchange:RM ;
-	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
-	.
 
 	«FOR c:r.allContents.toIterable.filter(EConstraint)»
 	«c.compile»
@@ -161,6 +164,10 @@ class RMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	«FOR a:r.allContents.toIterable.filter(GetAttribute)»
+	«a.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(GetArtifact)»
 	«a.compile»
 	«ENDFOR»
 	
@@ -188,8 +195,12 @@ class RMGenerator extends AbstractGenerator {
 	«t.compile»
 	«ENDFOR»
 	
- 	«FOR p:r.allContents.toIterable.filter(EAttributeDefinition)»
-	«p.compile»
+ 	«FOR a:r.allContents.toIterable.filter(EAttributeDefinition)»
+	«a.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(EArtifactDefinition)»
+	«a.compile»
 	«ENDFOR»
 	
  	«FOR i:r.allContents.toIterable.filter(EInterfaceDefinition)»
@@ -212,6 +223,10 @@ class RMGenerator extends AbstractGenerator {
 	«d.compile»
 	«ENDFOR»
 	
+	«FOR a:r.allContents.toIterable.filter(EArtifactType)»
+	«a.compile»
+	«ENDFOR»
+	
 	«FOR c:r.allContents.toIterable.filter(ECapabilityType)»
 	«c.compile»
 	«ENDFOR»
@@ -227,6 +242,20 @@ class RMGenerator extends AbstractGenerator {
 	«FOR i:r.allContents.toIterable.filter(EInterfaceType)»
 	«i.compile»
 	«ENDFOR»
+	
+	«FOR m:r.allContents.toIterable.filter(RM_Model)»
+	«m.compile»
+	«ENDFOR»
+	'''
+	
+	def compile(RM_Model m) '''
+	:RM_1
+	  rdf:type exchange:RM ;
+	  exchange:userId "27827d44-0f6c-11ea-8d71-362b9e155667" ;
+	  «IF m.description !== null»
+	  exchange:description "«m.description»"
+  	«ENDIF»
+	.
 	'''
 	
 	def compile (EConstraint c) '''
@@ -346,6 +375,30 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«IF r.requirement.start !== null && r.requirement.end !== null»
+	«putParameterNumber(r, "min", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "min" ;	  
+	  exchange:value '«trim(r.requirement.start.compile)»' ;  
+	.
+	
+	«putParameterNumber(r, "max", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "max" ;	  
+	  exchange:value '«trim(r.requirement.end.compile)»' ;  
+	.
+	
+	«putParameterNumber(r, "occurrences", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "occurrences" ;	  
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "min")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "max")» ;
+	.
+	«ENDIF»
+	
 	«requirement_numbers.put(r, requirement_counter)»
 	:Requirement_«requirement_counter++»
 	  rdf:type exchange:Requirement ;
@@ -359,7 +412,11 @@ class RMGenerator extends AbstractGenerator {
 	  «IF r.requirement.relationship !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(r, "relationship")» ;
 	  «ENDIF»
-	.		
+	  «IF r.requirement.start !== null && r.requirement.end !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(r, "occurrences")» ;
+	  «ENDIF»
+	.
+	
 	'''
 	
 	def compile (ECapabilityDefinition c) '''
@@ -372,23 +429,45 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.empty»
+	«IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.sourceTypes.empty»
 	«putParameterNumber(c, "valid_source_types", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "valid_source_types" ;
-	  «FOR entry:(c.capability.valid_source_types as EObjectContainmentEList<EValidSourceType>)»
-	  «FOR s:(entry.sourceTypes)»
+	  «FOR s:(c.capability.valid_source_types.sourceTypes)»
 	  «IF s.module !== null»
 	  exchange:listValue "«s.module»/«s.type»" ;
 	  «ELSE»
 	  exchange:listValue "«s.type»" ;
 	  «ENDIF»
 	  «ENDFOR»
-	  «ENDFOR»
 	.
 	«ENDIF»
-		
+	
+	«IF c.capability.occurrences_start !== null && c.capability.occurrences_end !== null»
+	«putParameterNumber(c, "min", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "min" ;	  
+	  exchange:value '«trim(c.capability.occurrences_start.compile)»' ;  
+	.
+	
+	«putParameterNumber(c, "max", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:SodaliteParameter ;
+	  exchange:name "max" ;	  
+	  exchange:value '«trim(c.capability.occurrences_end.compile)»' ;  
+	.
+	
+	«putParameterNumber(c, "occurrences", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "occurrences" ;	  
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "min")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "max")» ;
+	.
+	«ENDIF»
+	
 	«capability_numbers.put(c, capability_counter)»
 	:Capability_«capability_counter++»
 	  rdf:type exchange:Capability ;
@@ -399,8 +478,11 @@ class RMGenerator extends AbstractGenerator {
 	  «IF c.capability.type !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "type")» ;
 	  «ENDIF»
-	  «IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.empty»
+	  «IF c.capability.valid_source_types !== null && !c.capability.valid_source_types.sourceTypes.empty»
 	  exchange:hasParameter :Parameter_«getParameterNumber(c, "valid_source_types")» ;
+	  «ENDIF»
+	  «IF c.capability.occurrences_start !== null && c.capability.occurrences_end !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(c, "occurrences")» ;
 	  «ENDIF»
 	.
 	'''
@@ -800,7 +882,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "property" ;  
-	  exchange:value '«lastSegment(p.property.property.type, ".")»' ; 
+	  «IF p.property.property instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.property as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -818,7 +904,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(p.property.req_cap.type, '.')»' ; 
+	  «IF p.property.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF p.property.property instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((p.property.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF» 
 	.
 	«ENDIF»		
 	
@@ -844,7 +934,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "attribute" ;  
-	  exchange:value '«lastSegment(a.attribute.attribute.type, ".")»' ; 
+	  «IF a.attribute.attribute instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.attribute as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»	
 	
@@ -862,7 +956,11 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "req_cap" ;  
-	  exchange:value '«lastSegment(a.attribute.req_cap.type, '.')»' ; 
+	  «IF a.attribute.req_cap instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.attribute.attribute instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.attribute.req_cap as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
 	.
 	«ENDIF»		
 	
@@ -879,7 +977,43 @@ class RMGenerator extends AbstractGenerator {
 	  «IF a.attribute.req_cap !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "req_cap")» ;
 	  «ENDIF»
-	.	
+	.
+	'''
+	
+	def compile(GetArtifact a) '''
+	«IF a.artifact.artifact !== null»
+	«putParameterNumber(a, "artifact", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "artifact" ;  
+	  «IF a.artifact.artifact instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.artifact.artifact instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
+	.
+	«ENDIF»	
+	
+	«IF a.artifact.entity !== null»
+	«putParameterNumber(a, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value '«trim(a.artifact.entity.compile())»' ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(a, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_attribute" ;
+	  «IF a.artifact.artifact !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "artifact")» ;
+	  «ENDIF»	
+	  «IF a.artifact.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entity")» ;
+	  «ENDIF»
+	.
 	'''
 	
 	def compile (GetInput gi)'''
@@ -887,7 +1021,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "get_input" ;
-	  exchange:hasValue "«gi.input.name»";
+	  exchange:value "«gi.input.name»";
 	.
 	'''
 
@@ -1008,6 +1142,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:interfaces :Interface_«interface_numbers.get(i)» ; 
 	  «ENDFOR»
 	  «ENDIF»
+	  «IF n.node.artifacts !== null»
+	  «FOR a:n.node.artifacts.artifacts»
+	  exchange:artifacts :Artifact_«artifact_numbers.get(a)» ; 
+	  «ENDFOR»
+	  «ENDIF»
 	.  
 	'''
 	
@@ -1026,6 +1165,41 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:properties :Property_«property_numbers.get(p)» ; 
 	  «ENDFOR»
 	  «ENDIF»
+	.  
+	'''
+	
+	def compile(EArtifactType a) '''
+	
+	«IF a.artifact.file_ext !== null»
+	«putParameterNumber(a, "file_ext", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  «FOR EAlphaNumericValue ext:a.artifact.file_ext.list»
+	  exchange:listValue "«trim(ext.compile)»" ; 
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	:ArtifactType_«data_type_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«a.name»" ;
+	  «IF a.artifact.superType !== null»
+	  exchange:derivesFrom '«trim(a.artifact.superType.compile)»' ;
+	  «ENDIF»
+	  «IF a.artifact.description !== null»
+	  exchange:description '«processDescription(a.artifact.description)»' ;
+	  «ENDIF»
+	  «IF a.artifact.mime_type !== null»
+	  exchange:mime_type '«a.artifact.mime_type»' ; 
+	  «ENDIF»
+	  «IF a.artifact.file_ext !== null»
+	  exchange:file_ext :Parameter_«getParameterNumber(a, "file_ext")» ;
+  	  «ENDIF»
+	  «IF a.artifact.properties !== null»
+	  «FOR p:a.artifact.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(p)» ; 
+  	  «ENDFOR»
+  	  «ENDIF»
 	.  
 	'''
 	
@@ -1403,6 +1577,38 @@ class RMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	.
 	'''
+
+	def compile (EArtifactDefinition a) '''
+	«putParameterNumber(a, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(a.artifact.type.compile)»' ;
+	.
+	
+	«putParameterNumber(a, "file.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«a.artifact.file»' ;
+	.
+	
+	«putParameterNumber(a, "file.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(a.artifact.file)»' ;
+	.
+	
+	«artifact_numbers.put(a, artifact_counter)»
+	:Artifact_«artifact_counter++»
+	  rdf:type exchange:Artifact ;
+	  exchange:name "«a.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.content")» ;
+	.
+	'''
 	
 	def compile (EValueExpression ve) '''
 		«(ve as ESTRING).value»
@@ -1511,8 +1717,8 @@ class RMGenerator extends AbstractGenerator {
 	}
 	
 	def readFileAsString(String path){
-		var String content = new String(Files.readAllBytes(Paths.get(path)));
-		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+		return Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+//		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def processDescription (String description){

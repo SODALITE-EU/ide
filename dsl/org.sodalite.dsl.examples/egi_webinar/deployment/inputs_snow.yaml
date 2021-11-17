@@ -1,0 +1,7 @@
+ssh-key-name: 77-231-202-183-xOpera
+image-name: ubuntu
+username: ubuntu
+openstack-network-name: orchestrator-network
+security-groups: default,node-exporter,snow,remote_access
+flavor-name: s1.tiny
+vm-name: test-exporter-1

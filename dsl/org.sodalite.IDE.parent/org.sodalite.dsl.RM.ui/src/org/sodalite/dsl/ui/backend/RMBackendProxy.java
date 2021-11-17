@@ -15,12 +15,13 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
@@ -39,7 +40,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -73,116 +73,30 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.sodalite.dsl.RM.ui.internal.RMActivator;
-import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.KBError;
 import org.sodalite.dsl.kb_reasoner_client.types.KBSaveReportData;
 import org.sodalite.dsl.kb_reasoner_client.types.KBWarning;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EPropertyDefinition;
+import org.sodalite.dsl.rM.ERequirementDefinition;
 import org.sodalite.dsl.rM.RMPackage;
 import org.sodalite.dsl.rM.RM_Model;
 import org.sodalite.dsl.ui.helper.RMHelper;
-import org.sodalite.dsl.ui.preferences.Activator;
-import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.dsl.ui.validation.ValidationIssue;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
-public class RMBackendProxy {
+public class RMBackendProxy extends SodaliteBackendProxy {
 	private MarkerCreator markerCreator;
 	private MarkerTypeProvider markerTypeProvider;
 	private IssueResolutionProvider issueResolutionProvider;
 	private IDiagnosticConverter converter;
 	private Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
-	public static KBReasonerClient getKBReasoner() throws Exception {
-		// Configure KBReasonerClient endpoint from preference page information
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		String kbReasonerURI = store.getString(PreferenceConstants.KB_REASONER_URI).trim();
-		if (kbReasonerURI.isEmpty())
-			raiseConfigurationIssue("KB Reasoner URI user not set");
-		if (!kbReasonerURI.endsWith("/"))
-			kbReasonerURI.concat("/");
-
-		String iacURI = store.getString(PreferenceConstants.IaC_URI);
-		if (iacURI.isEmpty())
-			raiseConfigurationIssue("IaC URI user not set");
-		if (!iacURI.endsWith("/"))
-			iacURI.concat("/");
-
-		String image_builder_URI = store.getString(PreferenceConstants.Image_Builder_URI).trim();
-		if (image_builder_URI.isEmpty())
-			raiseConfigurationIssue("Image Builder URI user not set");
-		if (!image_builder_URI.endsWith("/"))
-			image_builder_URI.concat("/");
-
-		String xoperaURI = store.getString(PreferenceConstants.xOPERA_URI).trim();
-		if (xoperaURI.isEmpty())
-			raiseConfigurationIssue("xOpera URI user not set");
-		if (!xoperaURI.endsWith("/"))
-			xoperaURI.concat("/");
-
-		String keycloakURI = store.getString(PreferenceConstants.KEYCLOAK_URI).trim();
-		if (keycloakURI.isEmpty())
-			raiseConfigurationIssue("Keycloak URI user not set");
-		if (!keycloakURI.endsWith("/"))
-			keycloakURI.concat("/");
-
-		String pdsURI = store.getString(PreferenceConstants.PDS_URI).trim();
-		if (pdsURI.isEmpty())
-			raiseConfigurationIssue("PDS URI user not set");
-		if (!pdsURI.endsWith("/"))
-			pdsURI.concat("/");
-
-		String refactorerURI = store.getString(PreferenceConstants.Refactorer_URI).trim();
-		if (refactorerURI.isEmpty())
-			raiseConfigurationIssue("Refactorer URI user not set");
-		if (!refactorerURI.endsWith("/"))
-			refactorerURI.concat("/");
-
-		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI);
-
-		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
-			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
-			if (keycloak_user.isEmpty())
-				raiseConfigurationIssue("Keycloak user not set");
-
-			String keycloak_password = store.getString(PreferenceConstants.KEYCLOAK_PASSWORD);
-			if (keycloak_password.isEmpty())
-				raiseConfigurationIssue("Keycloak password not set");
-
-			String keycloak_client_id = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_ID);
-			if (keycloak_client_id.isEmpty())
-				raiseConfigurationIssue("Keycloak client_id not set");
-
-			String keycloak_client_secret = store.getString(PreferenceConstants.KEYCLOAK_CLIENT_SECRET);
-			if (keycloak_client_secret.isEmpty())
-				raiseConfigurationIssue("Keycloak client secret not set");
-
-			String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id,
-					keycloak_client_secret);
-
-			if (token == null)
-				raiseConfigurationIssue(
-						"Security token could not be obtained. Check your IAM configuration in preferences");
-			else
-				SodaliteLogger.log("Security token: " + token);
-		}
-
-		SodaliteLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
-		return kbclient;
-	}
-
-	private static void raiseConfigurationIssue(String message) throws Exception {
-		throw new Exception(message + " in Sodalite preferences pages");
-	}
 
 	public void processSaveRM(ExecutionEvent event) throws Exception {
 		// Return selected resource
@@ -195,8 +109,8 @@ public class RMBackendProxy {
 		String rmTTL = readTurtle(rmFile, project);
 
 		// Send model to the KB
-		String rmUri = getModelURI(rmFile, project);
-		saveRM(rmTTL, rmFile, rmUri, project, event);
+		ModelMetadata mm = getModelMetadata(rmFile, project);
+		saveRM(rmTTL, rmFile, mm.getUri(), project, event);
 	}
 
 	private void generateRMModel(IFile rmFile, IProgressMonitor monitor) {
@@ -245,9 +159,18 @@ public class RMBackendProxy {
 		return content;
 	}
 
-	protected String getModelURI(IFile modelfile, IProject project) throws IOException {
+	public static ModelMetadata getSelectedModelMetadata() throws Exception {
+		IFile modelFile = RMHelper.getSelectedFile();
+		if (modelFile == null)
+			throw new SodaliteException("Selected Model could not be found");
+
+		IProject project = modelFile.getProject();
+		return getModelMetadata(modelFile, project);
+	}
+
+	public static ModelMetadata getModelMetadata(IFile modelfile, IProject project) throws Exception {
 		Path path = getModelPropertiesFile(modelfile, project);
-		String uri = null;
+		ModelMetadata mm = new ModelMetadata();
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (final FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
@@ -255,12 +178,13 @@ public class RMBackendProxy {
 					final FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
 				props.load(in);
 			}
-			uri = props.getProperty("URI");
+			mm.setUri(props.getProperty("URI"));
+			mm.setVersion(props.getProperty("Version"));
 		}
-		return uri;
+		return mm;
 	}
 
-	protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
+	static protected Path getModelPropertiesFile(IFile modelfile, IProject project) {
 		String filepath = modelfile.toString();
 		String filename = filepath.substring(filepath.lastIndexOf(File.separator) + 1);
 		int index1 = filepath.indexOf(File.separator, 2) + 1;
@@ -275,7 +199,7 @@ public class RMBackendProxy {
 		return path;
 	}
 
-	public void saveURI(String uri, IFile modelfile, IProject project) throws IOException {
+	public void saveModelMetadata(ModelMetadata mm, IFile modelfile, IProject project) throws IOException {
 		Path path = getModelPropertiesFile(modelfile, project);
 		Properties props = new Properties();
 
@@ -287,9 +211,13 @@ public class RMBackendProxy {
 				final FileLock lock = inChannel.lock(0L, Long.MAX_VALUE, true)) {
 			props.load(in);
 		}
-		props.setProperty("URI", uri);
-		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.WRITE);
-				final OutputStream out = Channels.newOutputStream(outChannel)) {
+		props.remove("URI");
+		props.setProperty("URI", mm.getUri());
+		props.remove("Version");
+		if (mm.getVersion() != null && !mm.getVersion().isEmpty())
+			props.setProperty("Version", mm.getVersion());
+		try (final FileChannel outChannel = FileChannel.open(path, StandardOpenOption.TRUNCATE_EXISTING,
+				StandardOpenOption.WRITE); final OutputStream out = Channels.newOutputStream(outChannel)) {
 			props.store(out, "Sodalite Metadata");
 		}
 	}
@@ -312,7 +240,9 @@ public class RMBackendProxy {
 					throw new Exception(
 							"The RM model could not be saved into the KB. Please, contact your Sodalite administrator");
 				}
-				saveURI(saveReport.getURI(), rmFile, project);
+				ModelMetadata mm = new ModelMetadata();
+				mm.setUri(saveReport.getURI());
+				saveModelMetadata(mm, rmFile, project);
 
 				showInfoDialog(null, "Save RM",
 						"The selected RM model has been successfully store in the KB with URI:\n"
@@ -349,17 +279,14 @@ public class RMBackendProxy {
 
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
-				issues.add(new ValidationIssue(
-						error.getType() + "." + error.getDescription() + " error located at: " + error.getEntity_name(),
-						error.getContext(), null, Severity.ERROR, error.getType(), error.getDescription()));
+				issues.add(new ValidationIssue(error.getType() + "." + error.getDescription(), error.getContext(), null,
+						Severity.ERROR, error.getType(), error.getDescription()));
 			}
 		}
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				issues.add(new ValidationIssue(
-						warning.getType() + "." + warning.getDescription() + " warning located at: "
-								+ warning.getEntity_name(),
+				issues.add(new ValidationIssue(warning.getType() + "." + warning.getDescription(),
 						warning.getContext() + "/" + warning.getEntity_name(), warning.getElementType(),
 						Severity.WARNING, warning.getType(), warning.getDescription()));
 			}
@@ -449,34 +376,69 @@ public class RMBackendProxy {
 
 	protected ValidationSourceFeature getIssueFeature(XtextResource resource, String path, String path_type) {
 		// Extract object path to find nodes
-		StringTokenizer st = new StringTokenizer(path, "/");
+
 		ValidationSourceFeature result = null;
 		if (resource.getAllContents().hasNext()) {
-			RM_Model model = (RM_Model) resource.getAllContents().next();
-			if (st.hasMoreTokens()) {
-				if ("node_templates".equals(st.nextToken()) && model.getNodeTypes() != null) {
-					if (st.hasMoreTokens()) { // Node_template
-						String node_name = st.nextToken();
-						for (ENodeType node : model.getNodeTypes().getNodeTypes()) {
-							if (node.getName().contentEquals(node_name)) {
-								result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
-								if (st.hasMoreElements()) { // Node_Template children
-									String entity_name = st.nextToken();
-									if ("Property".equals(path_type)) {
-										for (EPropertyDefinition property : node.getNode().getProperties()
-												.getProperties()) {
-											if (property.getName().contentEquals(entity_name)) {
-												result = new ValidationSourceFeature(property,
-														RMPackage.Literals.EPROPERTY_DEFINITION__NAME);
-											}
+			EObject eobject = resource.getAllContents().next();
+			if (eobject instanceof RM_Model) {
+				RM_Model model = (RM_Model) eobject;
+				StringTokenizer st = new StringTokenizer(path, "/");
+				result = getRMIssueFeature(model, path, path_type, st);
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getRMIssueFeature(RM_Model model, String path, String path_type,
+			StringTokenizer st) {
+		ValidationSourceFeature result = null;
+		if (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			if ("node_types".equals(token)) {
+				result = getRMIssueFeatureInNodeType(model, path, path_type, st, result);
+			}
+		}
+		return result;
+	}
+
+	private ValidationSourceFeature getRMIssueFeatureInNodeType(RM_Model model, String path, String path_type,
+			StringTokenizer st, ValidationSourceFeature result) {
+		if (st.hasMoreTokens()) {
+			String node_name = st.nextToken();
+			for (ENodeType node : model.getNodeTypes().getNodeTypes()) {
+				if (node.getName().contentEquals(node_name)) {
+					result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
+					if (st.hasMoreElements()) {
+						String entity_name = st.nextToken();
+						if (path.contains("properties")) {
+							if (node.getNode().getProperties() != null) {
+								for (EPropertyDefinition property : node.getNode().getProperties().getProperties()) {
+									if (property.getName().contentEquals(entity_name)) {
+										result = new ValidationSourceFeature(property,
+												RMPackage.Literals.EPROPERTY_DEFINITION__NAME);
+									}
+								}
+							}
+						} else if (path.contains("requirements")) {
+							boolean req_found = false;
+							if (node.getNode().getRequirements() != null) {
+								for (ERequirementDefinition req : node.getNode().getRequirements().getRequirements()) {
+									// Target requirement found
+									if (req.getName().contentEquals(getRequirement(path))) {
+										req_found = true;
+										result = new ValidationSourceFeature(req, RMPackage.Literals.EREQ_OR_CAP__NAME);
+										if (path.contains("node")) {
+											result = new ValidationSourceFeature(req.getRequirement().getNode(),
+													RMPackage.Literals.EDATA_TYPE_NAME__TYPE);
 										}
 									}
 								}
 							}
+							if (!req_found)
+								result = new ValidationSourceFeature(node, RMPackage.Literals.ENODE_TYPE__NAME);
+
 						}
 					}
-				} else { // Point to high level model
-					result = new ValidationSourceFeature(model, RMPackage.Literals.RM_MODEL__MODULE);
 				}
 			}
 		}
@@ -606,6 +568,15 @@ public class RMBackendProxy {
 		if (model != null)
 			EcoreUtil2.resolveAll(model.eResource());
 		return model;
+	}
+
+	private String getRequirement(String path) {
+		String req = null;
+		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Matcher matcher = pattern.matcher(path);
+		if (matcher.find())
+			req = matcher.group(1);
+		return req;
 	}
 
 }

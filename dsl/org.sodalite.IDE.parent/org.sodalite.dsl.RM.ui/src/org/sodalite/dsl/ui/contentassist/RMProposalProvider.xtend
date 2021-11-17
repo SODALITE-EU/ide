@@ -52,8 +52,12 @@ import org.sodalite.dsl.rM.EPolicyType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
-import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.ui.helper.RMHelper
+import org.eclipse.xtext.impl.KeywordImpl
+import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
+import org.sodalite.dsl.rM.EArtifactDefinition
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -94,7 +98,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			System.out.println("Invoking content assist for imports")
 			
-			val ReasonerData<String> modules = BackendHelper.getKBReasoner().modules
+			val ReasonerData<String> modules = SodaliteBackendProxy.getKBReasoner().modules
 				
 			System.out.println ("Modules retrieved from KB: " + modules.elements)
 			for (module: modules.elements){
@@ -130,7 +134,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tData type: " + type.label)
@@ -174,7 +178,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+			val ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (node: nodes.elements){
 				System.out.println ("\tNode: " + node.label)
@@ -215,7 +219,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tInterface: " + type.label)
@@ -254,7 +258,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules)
 			System.out.println ("Policies retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tPolicy: " + type.label)
@@ -294,7 +298,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules)
+			val ReasonerData<Type> relationships = SodaliteBackendProxy.getKBReasoner().getRelationshipTypes(importedModules)
 			System.out.println ("Relationships retrieved from KB:")
 			val Image image = getImage("icons/relationship.png")
 			for (relationship: relationships.elements){
@@ -333,7 +337,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val String module = RMHelper.getModule(model)
 			
 			
-			val ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules)
+			val ReasonerData<Type> capabilitiess = SodaliteBackendProxy.getKBReasoner().getCapabilityTypes(importedModules)
 			System.out.println ("Capabilities retrieved from KB:")
 			val Image image = getImage("icons/capability.png")
 			for (cap: capabilitiess.elements){
@@ -372,7 +376,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val String module = RMHelper.getModule(model)
 		
 			
-			val ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> interfaces = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Interfaces retrieved from KB:")
 			val Image image = getImage("icons/interface.png")
 			for (interface: interfaces.elements){
@@ -386,14 +390,48 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			
 			//Add other interfaces defined locally in the model
 			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.interfaceTypes !== null)
+				for (interface: rootModel.interfaceTypes.interfaceTypes){
+					System.out.println ("\tLocal interface type: " + interface.name)
+					val proposalText = module + "/" + interface.name 
+					val displayText = module + "/" + interface.name 
+					val additionalProposalInfo = interface.interface.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			RMHelper.showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
+	override void completeEArtifactTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Get modules from model
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			for (interface: rootModel.interfaceTypes.interfaceTypes){
-				System.out.println ("\tLocal interface type: " + interface.name)
-				val proposalText = module + "/" + interface.name 
-				val displayText = module + "/" + interface.name 
-				val additionalProposalInfo = interface.interface.description
+			val ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules)
+			val Image image = getImage("icons/artifact.png")
+			for (artifact: artifacts.elements){
+				val qartifact = artifact.module !== null?RMHelper.getLastSegment(artifact.module, '/') + '/' + artifact.label:artifact.label
+				val proposalText = qartifact
+				val displayText = qartifact
+				val additionalProposalInfo = artifact.description
 				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
+			
+			//Add other artifacts defined locally in the model
+			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.artifactTypes !== null)
+				for (artifact: rootModel.artifactTypes.artifactTypes){
+					val proposalText = module + "/" + artifact.name 
+					val displayText = module + "/" + artifact.name 
+					val additionalProposalInfo = artifact.artifact.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
@@ -413,6 +451,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeERequirementDefinitionBody_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEArtifactDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeERequirementDefinitionBody_Relationship(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -442,6 +484,40 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		completeGetAttributeOrPropertyFunction_AttributeOrProperty( model, assignment, context, acceptor)
 	}
 	
+	override void completeGetArtifactBody_Artifact(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::artifact property")
+		var List<String> proposals = new ArrayList<String>()
+		val String module = RMHelper.getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		var body = model as GetArtifactBodyImpl
+		var EObject node = RMHelper.getEntityType(body.eContainer as EFunction)
+		
+		if (node === null || !(node instanceof ENodeType)){
+			return
+		}
+		
+		//Get the artifacts defined within the entity
+		var List<EArtifactDefinition> artifacts = null
+		var String node_name = null
+		
+		val nodeType = (node as ENodeType)
+		if (nodeType.node.artifacts!==null)
+			artifacts = nodeType.node.artifacts.artifacts
+		node_name = nodeType.name
+		
+		for (artifact:artifacts){
+			proposals.add((module !== null? module + '/':'') + node_name + "." + artifact.name)
+		}
+
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		var Image image = null
+		image = getImage("icons/artifact.png")
+		
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
+	}
+	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
 		completeGetAttributeOrPropertyFunction_Req_cap( model,  assignment,  context,  acceptor)
@@ -454,7 +530,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			var interfaceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (interfaceId !== null){
-				val OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId)
+				val OperationDefinitionData operations = SodaliteBackendProxy.getKBReasoner().getOperationsInInterface(interfaceId)
 				if (operations !== null){
 					val Image image = getImage("icons/operation.png")
 					for (oper: operations.elements){
@@ -616,6 +692,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEntityProposals (context, acceptor);
 	}
 	
+	override void completeGetArtifactBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::entity property")
+		createEntityProposals (context, acceptor);
+	}
+	
 	override void completeEMapEntry_Key(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMapEntry::key property")
 		createEditableCompletionProposal ("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
@@ -637,6 +718,12 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
+	override void completeEArtifactDefinitionBody_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
+		val input = "\"" + RMHelper.selectFile ("Select artifact file") + "\""
+		createEditableCompletionProposal (input, input, null, context, "", acceptor);
+	}
+	
 	override void completeEDependencies_Files(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
 		val input = "\"" + RMHelper.selectFile ("Select implementation dependency file") + "\""
@@ -646,8 +733,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
-			val TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules)		
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
+			val TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules)		
 			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor)
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor)
 		}catch (NotRolePermissionException ex){
@@ -662,7 +749,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val EEvenFilter filter = model as EEvenFilter
 			if (filter.node !== null){
 				var String qnode = RMHelper.getNodeName (filter.node)
-				val RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode)
+				val RequirementDefinitionData reqs = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(qnode)
 				createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
 			}
 		}catch(SodaliteException ex){
@@ -674,7 +761,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			//Find local and KB node types
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+			val TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
 			val type_image = "icons/type.png";	
 			val primitive_type_image = "icons/primitive_type.png";
 			createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor)
@@ -691,7 +778,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			//Find local and KB node types
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules)
+			val OperationDefinitionData operationsData = SodaliteBackendProxy.getKBReasoner().getOperations(importedModules)
 			val type_image = "icons/operation.png";	
 			createProposalsForOperationData(operationsData, type_image, null, context, acceptor)
 			val List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model)
@@ -858,8 +945,248 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		ICompletionProposalAcceptor acceptor) {
 		val ICompletionProposal proposal = createCompletionProposal(keyword.getValue(),
 			getKeywordDisplayString(keyword), getImage(keyword), contentAssistContext);
+		proposal.additionalProposalInfo = getAdditionalProposalInfo(keyword)
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
+	}
+	
+	def String getAdditionalProposalInfo(Keyword keyword) {
+		if (keyword instanceof KeywordImpl) {
+			val keywordImpl = keyword as KeywordImpl
+			val rule = RMHelper.findParserRule (keywordImpl)
+			
+			//RM_Model
+			if (rule.name == "RM_Model" && keyword.value == "module:")
+				return "The namespace where model entity names will be declared"
+			else if (rule.name == "RM_Model" && keyword.value == "import:")
+				return "Imports another namespace declared within the bound KB 
+						to retrieve its model entity definitions"
+			else if (rule.name == "RM_Model" && keyword.value == "artifact_types:")
+				return "This section contains an optional map of artifact type definitions 
+						for use in the service template"
+			else if (rule.name == "RM_Model" && keyword.value == "data_types:")
+				return "Declares a map of optional TOSCA Data Type definitions."
+			else if (rule.name == "RM_Model" && keyword.value == "capability_types:")
+				return "This section contains an optional map of capability type definitions 
+						for use in the service template"
+			else if (rule.name == "RM_Model" && keyword.value == "interface_types:")
+				return "This section contains an optional map of interface type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "relationship_types:")
+				return "This section contains a map of relationship type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "node_types:")
+				return "TThis section contains a mapof node type definitions 
+						for use in the service template."
+			else if (rule.name == "RM_Model" && keyword.value == "policy_types:")
+				return "This section contains a list of policy type definitions 
+						for use in the service template."
+			
+			//ENodeTypeBody
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "derived_from:")
+				return "Represents the required symbolic name of the Node Type being declared"
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "attributes:")
+				return "An optional map of attribute definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "properties:")
+				return "An optional map of property definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "requirements:")
+				return "An optional list of requirement definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "capabilities:")
+				return "An optional map of capability definitions for the Node Type."
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "interfaces:")
+				return "An optional map of interface definitions supported by the Node Type"
+			else if (rule.name == "ENodeTypeBody" && keyword.value == "description:")
+				return "Represents the optional description string for the corresponding node_type_name."
+				
+			//EPropertyDefinitionBody
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the property."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "description:")
+				return "The optional description for the property."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "required:")
+				return "An optional key that declares a property as required (true) or not (false)."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "status:")
+				return "The optional status of the property relative to the specification or implementation.\nSee table below for valid values: 
+						supported: Indicates the property is supported.  This is the default value for all property definitions.
+						unsupported: Indicates the property is not supported.
+						experimental: Indicates the property is experimental and has no official standing.
+						deprecated: Indicates the property has been deprecated by a new specification version."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "constraints:")
+				return "The optional list of sequenced constraint clauses for the property"
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "entry_schema:")
+				return "The optional schema definition for the entries in properties of TOSCA set types such as list or map."
+			else if (rule.name == "EPropertyDefinitionBody" && keyword.value == "default:")
+				return "An optional key that may provide a value to be used as a default if not provided by another means"
+				
+			//EAttributeDefinitionBody
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the attribute."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "description:")
+				return "The optional description for the attribute."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "required:")
+				return "An optional key that declares a property as required (true) or not (false)."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "status:")
+				return "The optional status of the attribute relative to the specification or implementation.\nSee table below for valid values: 
+						supported: Indicates the property is supported.  This is the default value for all property definitions.
+						unsupported: Indicates the property is not supported.
+						experimental: Indicates the property is experimental and has no official standing.
+						deprecated: Indicates the property has been deprecated by a new specification version."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "entry_schema:")
+				return "The optional schema definition for the entries in attributes of TOSCA set types such as list or map."
+			else if (rule.name == "EAttributeDefinitionBody" && keyword.value == "default:")
+				return "An optional key that may provide a value to be used as a default if not provided by another means. \nThis value SHALL be type compatible with the type declared by the property definition’s type keyname"
+						
+			//ERequirementDefinitionBody
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "capability:")
+				return "The required reserved keyname used that can be used to provide \nthe name of a valid Capability Type that can fulfill the requirement"
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "node:")
+				return "The optional reserved keyname used to provide the name of a valid \nNode Type that contains the capability definition that can be used \nto fulfill the requirement. "
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "relationship:")
+				return "The optional reserved keyname used to provide the name of \na valid Relationship Type to construct when fulfilling the requirement"
+			else if (rule.name == "ERequirementDefinitionBody" && keyword.value == "occurrences:")
+				return "The optional minimum and maximum occurrences for the requirement. \nNote: the keyword UNBOUNDEDis also supported to represent any positive integer."
+			
+			//ECapabilityDefinitionBody
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "type:")
+				return "The required name of the Capability Type the capability definition is based upon"
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "description:")
+				return "The optional description of the Capability definition."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "attributes:")
+				return "An optional map of attribute definitions for the Capability definition"
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "properties:")
+				return "An optional map of property definitions for the Capability definition."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "occurrences:")
+				return "The optional minimum and maximum occurrences for the capability. \nBy default, an exported Capability should allow at least one relationship \nto be formed with it with a maximum of UNBOUNDED relationships.\nNote: the keyword UNBOUNDEDis also supported to represent any positive integer."
+			else if (rule.name == "ECapabilityDefinitionBody" && keyword.value == "valid_source_types:")
+				return "An optional list of one or more valid names of Node Types that are supported \nas valid sources of any relationship established to the declared Capability Type."
+			
+				
+			//EInterfaceDefinitionBody
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "type:")
+				return "Represents the required symbolic name of the interface as a string"
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input property definitions available to all defined operations\n for interface definitions that are within TOSCA Node or Relationship Type definitions. \nThis includes when interface definitions are included as part of a\n Requirement definition in a Node Type."
+			else if (rule.name == "EInterfaceDefinitionBody" && keyword.value == "operations:")
+				return "The optional map of operations defined for this interface."	
+				
+				
+			//EOperationDefinitionBody
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "description:")
+				return "The optional description string for the associated named operation"
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "implementation:")
+				return "The optional definition of the operation implementation"
+			else if (rule.name == "EOperationDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input properties definitions (i.e., parameter definitions)\n for operation definitions that are within TOSCA Node or Relationship Type definitions.\n This includes when operation definitions are included as part of a Requirement definition in a Node Type"
+			
+			//EPrimary
+			else if (rule.name == "EPrimary" && keyword.value == "primary:")
+				return "The optional implementation artifact (i.e., the primary script file within a TOSCA CSAR file). "
+			else if (rule.name == "EPrimary" && keyword.value == "relative_path:")
+				return "The relative path in user's filesystem where artifact is located"
+				
+			//EDependencies
+			else if (rule.name == "EDependencies" && keyword.value == "dependencies:")
+				return "The optional list of one or more dependent or secondary implementation artifacts\n which are referenced by the primary implementation artifact\n (e.g., a library the script installs or a secondary script)."
+			else if (rule.name == "EDependencies" && keyword.value == "relative_path:")
+				return "The relative path in user's filesystem where artifact is located"
+			
+			//EParameterDefinitionBody
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "type:")
+				return "The required data type for the parameter."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "description:")
+				return "Represents the optional description of the parameter."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "default:")
+				return "Contains a type-compatible value that may be used as a default 
+						if not provided by another means."
+			else if (rule.name == "EParameterDefinitionBody" && keyword.value == "value:")
+				return "The type-compatible value to assign to the named parameter. 
+					Parameter values may be provided as the result from the 
+					evaluation of an expression or a function."
+					
+			//EPolicyTypeBody
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "derived_from:")
+				return "Represents the name (string) of the Policy Type this Policy Type definition\n derives from (i.e., its“parent” type)"
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "description:")
+				return "Represents the optional description string for the corresponding policy_type_name."
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "properties:")
+				return "An optional mapof property definitions for the Policy Type"
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "targets:")
+				return "An optional list of valid Node Types or Group Types the Policy Type can be applied to.\nNote: This can be viewed by TOSCA Orchestrators as an implied relationship to the target nodes,\n but one that does not have operational lifecycle considerations.\n For example, if we were to name this as an explicit Relationship Type we might call this “AppliesTo” (node or group)."
+			else if (rule.name == "EPolicyTypeBody" && keyword.value == "triggers:")
+				return "An optional mapof policy triggers for the Policy Type."
+		
+			
+			//ETriggerDefinitionBody
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "description:")
+				return "The optional description string for the named trigger."
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "event:")
+				return "The required name of the event that activates the trigger’s action.\n A deprecated form of this keyname is “event_type”"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "schedule:")
+				return "The optional time interval during which the trigger is valid\n (i.e., during which the declared actions will be processed)."
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "target_filter:")
+				return "The optional filter used to locate the attribute to monitor for the trigger’s defined condition.\n This filter helps locate the TOSCA entity (i.e., node or relationship) \nor further a specific capability of that entity that contains the attribute to monitor"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "condition:")
+				return "The optional condition which contains a condition clause definition\n specifying one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself  is enough to trigger the action"
+			else if (rule.name == "ETriggerDefinitionBody" && keyword.value == "action:")
+				return "The list of sequential activities to be performed when the event is triggered\n and the condition is met (i.e.evaluates to true)"
+			
+			
+			//EEvenFilter
+			else if (rule.name == "EEvenFilter" && keyword.value == "node:")
+				return "The required name of the node type or template that contains\n either the attribute to be monitored or contains the requirement that\n references the node that contains the attribute to be monitored"
+			else if (rule.name == "EEvenFilter" && keyword.value == "requirement:")
+				return "The optional name of the requirement within the filter’s node\n that can be used to locate a referenced node that contains an attribute to monitor."
+			else if (rule.name == "EEvenFilter" && keyword.value == "capability:")
+				return "The optional name of a capability within the filter’s node\n or within the node referenced by its requirement that contains the attribute to monitor."
+			
+			//ETimeInterval
+			else if (rule.name == "ETimeInterval" && keyword.value == "start_time:")
+				return "The inclusive start time for the time interval"
+			else if (rule.name == "ETimeInterval" && keyword.value == "end_time:")
+				return "The inclusive end time for the time interval"
+			
+			//EExtendedTriggerCondition
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "constraint:")
+				return "The optional condition which contains a condition clause definition specifying\n one or multiple attribute constraint that can be monitored.\n Note: this is optional since sometimes the event occurrence itself is enough to trigger the action."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "period:")
+				return "The optional period to use to evaluate for the condition."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "evaluations:")
+				return "The optional number of evaluations that must be performed over the period\n to assert the condition exists."
+			else if (rule.name == "EExtendedTriggerCondition" && keyword.value == "method:")
+				return "The optional statistical method name to use to perform the evaluation of the condition."
+			
+			//ECallOperationActivityDefinitionBody
+			else if (rule.name == "ECallOperationActivityDefinitionBody" && keyword.value == "operation:")
+				return "The name of the operation to call, using the <interface_name>.<operation_name> notation.\n Required in the extended  notation."
+			else if (rule.name == "ECallOperationActivityDefinitionBody" && keyword.value == "inputs:")
+				return "The optional map of input parameter assignments for the called operation.\n Any provided input assignments will override the operation input assignment\n in the target node template for this operation call"
+			
+			//GetPropertyBody
+			else if (rule.name == "GetPropertyBody" && keyword.value == "property:")
+				return "The name of the property definition the function will return the value from"
+			else if (rule.name == "GetPropertyBody" && keyword.value == "entity:")
+				return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named property definition\n the function will return the value from"
+			else if (rule.name == "GetPropertyBody" && keyword.value == "req_cap:")
+				return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named property definition the function will return the value from.\n Note:  If the property definition is located in the modelable entity directly,\n then this parameter MAY be omitted"
+				
+			//GetAttributeBody
+			else if (rule.name == "GetAttributeBody" && keyword.value == "attribute:")
+				return "The name of the attribute definition the function will return the value from"
+			else if (rule.name == "GetAttributeBody" && keyword.value == "entity:")
+				return "The required name of a modelable entity (e.g., Node Template or Relationship Template name)\n as declared in the service template that contains the named attribute definition\n the function will return the value from"
+			else if (rule.name == "GetAttributeBody" && keyword.value == "req_cap:")
+				return "The optional name of the requirement or capability name within the modelable entity\n (i.e., the <modelable_entity_name> which contains the named attribute definition the function will return the value from.\n Note:  If the attribute definition is located in the modelable entity directly,\n then this parameter MAY be omitted"
+						
+			else
+				return ""
+		}		
+	}
+	
+	def setAdditionalProposalInfo(ICompletionProposal proposal, String info) {
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
+			configurable.setAdditionalProposalInfo(info);
+		}
 	}
 	
 	def getImage(String path){
@@ -1072,7 +1399,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposeAttributesForEntityInKB(String resourceId, List<String> proposals){
 		try{
-			val AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId)
+			val AttributeDefinitionData attributeData = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId)
 			for (attr:attributeData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var attr_owner = resourceId
@@ -1113,7 +1440,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
 		try{
 			//FIXME: obtain all properties for types subclasses of given resourceId
-			val PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId)
+			val PropertyDefinitionData propertyData = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId)
 			for (prop:propertyData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var prop_owner = resourceId
@@ -1171,14 +1498,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val superType = node.node.superType.module !== null?
 				node.node.superType.module + '/' + node.node.superType.type:
 				node.node.superType.type
-			val RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType)
+			val RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(superType)
 			var Image image = getImage("icons/requirement.png")
 			for (req: reqData.elements){
 				val String proposal = superType + '.' + RMHelper.getLastSegment(req.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 			
-			val CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType)
+			val CapabilityDefinitionData capData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(superType)
 			image = getImage("icons/capability.png")
 			for (cap: capData.elements){
 				val String proposal = superType + '.' + RMHelper.getLastSegment(cap.uri.toString, '/')
@@ -1224,7 +1551,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		val RM_Model rm_model = RMHelper.findModel(model) as RM_Model
 		//Get entity in this GetProperty body. If null, return
 		var EObject node = null
-		var EPREFIX_TYPE req_cap = null
+		var EPREFIX_REF req_cap = null
 		if (model instanceof GetPropertyBodyImpl){
 			var body = model as GetPropertyBodyImpl
 			node = RMHelper.getEntityType(body.eContainer as EFunction)
@@ -1238,7 +1565,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			return
 		}
 		if (node instanceof ENodeType && req_cap !== null){ //TODO support the case a capability is given
-			val req_cap_name = RMHelper.getLastSegment(req_cap.type, '.')
+			val req_cap_name = RMHelper.getLastSegment(req_cap, '.')
 			val nodeType = (node as ENodeType)
 			val String targetNodeRef = RMHelper.findRequirementTargetNode(nodeType, req_cap_name)
 			if (targetNodeRef !== null){
@@ -1267,11 +1594,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			if (model instanceof GetPropertyBodyImpl)
 				for (prop:properties){
-					proposals.add(module + '/' + node_name + "." + prop.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + prop.name)
 				}
 			else if (model instanceof GetAttributeBodyImpl)
 				for (attr:attributes){
-					proposals.add(module + '/' + node_name + "." + attr.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + attr.name)
 				}
 		}
 		

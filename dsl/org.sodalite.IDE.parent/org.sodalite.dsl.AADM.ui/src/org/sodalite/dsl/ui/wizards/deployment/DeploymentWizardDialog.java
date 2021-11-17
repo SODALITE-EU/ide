@@ -36,8 +36,8 @@ public class DeploymentWizardDialog extends WizardDialog {
 		return ((DeploymentWizard) this.getWizard()).getVersionTag();
 	}
 
-	public String getDeploymentName() {
-		return ((DeploymentWizard) this.getWizard()).getDeploymentName();
+	public String getDeploymentLabel() {
+		return ((DeploymentWizard) this.getWizard()).getDeploymentLabel();
 	}
 
 	public int getWorkers() {
@@ -46,6 +46,14 @@ public class DeploymentWizardDialog extends WizardDialog {
 
 	public boolean getCompleteModel() {
 		return ((DeploymentWizard) this.getWizard()).getCompleteModel();
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return ((DeploymentWizard) this.getWizard()).getValidateNiFiCerts();
+	}
+
+	public String getMonitoringId() {
+		return ((DeploymentWizard) this.getWizard()).getMonitoringId();
 	}
 
 }

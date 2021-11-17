@@ -1,0 +1,44 @@
+module: docker
+
+node_types:
+	sodalite.nodes.DockerVolume:
+		derived_from: tosca.nodes.SoftwareComponent
+		properties:
+			name:
+				type: string
+				description: "The name of the volume"
+				required: true
+		interfaces:
+			Standard:
+				type: tosca.interfaces.node.lifecycle.Standard
+				operations:
+					create:
+						inputs:
+							volume_name:    
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: docker/sodalite.nodes.DockerVolume.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host												
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/add_volume.yml"
+					delete:
+						inputs:
+							volume_name:    
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: docker/sodalite.nodes.DockerVolume.name
+							ansible_user: 
+								type: string
+								default: get_property: 
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.username
+									req_cap: tosca.nodes.SoftwareComponent.host											
+						implementation: 
+							primary: "/workspace/iac-modules/docker/playbooks/remove_volume.yml"

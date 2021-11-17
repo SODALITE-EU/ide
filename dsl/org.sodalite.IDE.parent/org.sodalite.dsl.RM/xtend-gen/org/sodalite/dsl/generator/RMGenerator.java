@@ -8,6 +8,7 @@ import com.google.common.collect.Iterables;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -23,6 +24,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
+import org.sodalite.dsl.rM.EArtifactDefinition;
+import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAssertionDefinition;
 import org.sodalite.dsl.rM.EAssignmentValue;
 import org.sodalite.dsl.rM.EAttributeDefinition;
@@ -86,13 +90,14 @@ import org.sodalite.dsl.rM.ESingleValue;
 import org.sodalite.dsl.rM.ETargetType;
 import org.sodalite.dsl.rM.ETriggerDefinition;
 import org.sodalite.dsl.rM.ETriggers;
-import org.sodalite.dsl.rM.EValidSourceType;
 import org.sodalite.dsl.rM.EValidTargetTypes;
 import org.sodalite.dsl.rM.EValid_Values;
 import org.sodalite.dsl.rM.EValueExpression;
+import org.sodalite.dsl.rM.GetArtifact;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetInput;
 import org.sodalite.dsl.rM.GetProperty;
+import org.sodalite.dsl.rM.RM_Model;
 
 /**
  * Generates code from your model files on save.
@@ -108,6 +113,8 @@ public class RMGenerator extends AbstractGenerator {
   private int property_counter = 1;
   
   private int attribute_counter = 1;
+  
+  private int artifact_counter = 1;
   
   private int requirement_counter = 1;
   
@@ -133,6 +140,8 @@ public class RMGenerator extends AbstractGenerator {
   
   private Map<EAttributeDefinition, Integer> attribute_numbers;
   
+  private Map<EArtifactDefinition, Integer> artifact_numbers;
+  
   private Map<ERequirementDefinition, Integer> requirement_numbers;
   
   private Map<ECapabilityDefinition, Integer> capability_numbers;
@@ -145,12 +154,12 @@ public class RMGenerator extends AbstractGenerator {
   
   private Map<EOperationDefinition, Integer> operation_numbers;
   
-  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.data_type_counter = 1;
     this.node_counter = 1;
     this.property_counter = 1;
     this.attribute_counter = 1;
+    this.artifact_counter = 1;
     this.requirement_counter = 1;
     this.capability_counter = 1;
     this.capabilitytype_counter = 1;
@@ -165,18 +174,20 @@ public class RMGenerator extends AbstractGenerator {
     this.property_numbers = _hashMap;
     HashMap<EAttributeDefinition, Integer> _hashMap_1 = new HashMap<EAttributeDefinition, Integer>();
     this.attribute_numbers = _hashMap_1;
-    HashMap<ERequirementDefinition, Integer> _hashMap_2 = new HashMap<ERequirementDefinition, Integer>();
-    this.requirement_numbers = _hashMap_2;
-    HashMap<ECapabilityDefinition, Integer> _hashMap_3 = new HashMap<ECapabilityDefinition, Integer>();
-    this.capability_numbers = _hashMap_3;
-    HashMap<Object, Map<String, Integer>> _hashMap_4 = new HashMap<Object, Map<String, Integer>>();
-    this.parameter_numbers = _hashMap_4;
-    HashMap<EInterfaceDefinition, Integer> _hashMap_5 = new HashMap<EInterfaceDefinition, Integer>();
-    this.interface_numbers = _hashMap_5;
-    HashMap<ETriggerDefinition, Integer> _hashMap_6 = new HashMap<ETriggerDefinition, Integer>();
-    this.trigger_numbers = _hashMap_6;
-    HashMap<EOperationDefinition, Integer> _hashMap_7 = new HashMap<EOperationDefinition, Integer>();
-    this.operation_numbers = _hashMap_7;
+    HashMap<EArtifactDefinition, Integer> _hashMap_2 = new HashMap<EArtifactDefinition, Integer>();
+    this.artifact_numbers = _hashMap_2;
+    HashMap<ERequirementDefinition, Integer> _hashMap_3 = new HashMap<ERequirementDefinition, Integer>();
+    this.requirement_numbers = _hashMap_3;
+    HashMap<ECapabilityDefinition, Integer> _hashMap_4 = new HashMap<ECapabilityDefinition, Integer>();
+    this.capability_numbers = _hashMap_4;
+    HashMap<Object, Map<String, Integer>> _hashMap_5 = new HashMap<Object, Map<String, Integer>>();
+    this.parameter_numbers = _hashMap_5;
+    HashMap<EInterfaceDefinition, Integer> _hashMap_6 = new HashMap<EInterfaceDefinition, Integer>();
+    this.interface_numbers = _hashMap_6;
+    HashMap<ETriggerDefinition, Integer> _hashMap_7 = new HashMap<ETriggerDefinition, Integer>();
+    this.trigger_numbers = _hashMap_7;
+    HashMap<EOperationDefinition, Integer> _hashMap_8 = new HashMap<EOperationDefinition, Integer>();
+    this.operation_numbers = _hashMap_8;
     final String filename = this.getFilename(resource.getURI());
     fsa.generateFile(filename, this.compileRM(resource));
   }
@@ -215,17 +226,6 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append(".");
     _builder.newLine();
     _builder.newLine();
-    _builder.append(":RM_1");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("rdf:type exchange:RM ;");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("exchange:userId \"27827d44-0f6c-11ea-8d71-362b9e155667\" ;");
-    _builder.newLine();
-    _builder.append(".");
-    _builder.newLine();
-    _builder.newLine();
     {
       Iterable<EConstraint> _filter = Iterables.<EConstraint>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EConstraint.class);
       for(final EConstraint c : _filter) {
@@ -254,148 +254,211 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      Iterable<GetInput> _filter_3 = Iterables.<GetInput>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), GetInput.class);
-      for(final GetInput i : _filter_3) {
-        CharSequence _compile_3 = this.compile(i);
+      Iterable<GetArtifact> _filter_3 = Iterables.<GetArtifact>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), GetArtifact.class);
+      for(final GetArtifact a_1 : _filter_3) {
+        CharSequence _compile_3 = this.compile(a_1);
         _builder.append(_compile_3);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EParameterDefinition> _filter_4 = Iterables.<EParameterDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EParameterDefinition.class);
-      for(final EParameterDefinition p_1 : _filter_4) {
-        CharSequence _compile_4 = this.compile(p_1);
+      Iterable<GetInput> _filter_4 = Iterables.<GetInput>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), GetInput.class);
+      for(final GetInput i : _filter_4) {
+        CharSequence _compile_4 = this.compile(i);
         _builder.append(_compile_4);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EOperationDefinition> _filter_5 = Iterables.<EOperationDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EOperationDefinition.class);
-      for(final EOperationDefinition o : _filter_5) {
-        CharSequence _compile_5 = this.compile(o);
+      Iterable<EParameterDefinition> _filter_5 = Iterables.<EParameterDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EParameterDefinition.class);
+      for(final EParameterDefinition p_1 : _filter_5) {
+        CharSequence _compile_5 = this.compile(p_1);
         _builder.append(_compile_5);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EPropertyDefinition> _filter_6 = Iterables.<EPropertyDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPropertyDefinition.class);
-      for(final EPropertyDefinition p_2 : _filter_6) {
-        CharSequence _compile_6 = this.compile(p_2);
+      Iterable<EOperationDefinition> _filter_6 = Iterables.<EOperationDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EOperationDefinition.class);
+      for(final EOperationDefinition o : _filter_6) {
+        CharSequence _compile_6 = this.compile(o);
         _builder.append(_compile_6);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EPropertyAssignment> _filter_7 = Iterables.<EPropertyAssignment>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPropertyAssignment.class);
-      for(final EPropertyAssignment p_3 : _filter_7) {
-        CharSequence _compile_7 = this.compile(p_3);
+      Iterable<EPropertyDefinition> _filter_7 = Iterables.<EPropertyDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPropertyDefinition.class);
+      for(final EPropertyDefinition p_2 : _filter_7) {
+        CharSequence _compile_7 = this.compile(p_2);
         _builder.append(_compile_7);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ETriggerDefinition> _filter_8 = Iterables.<ETriggerDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ETriggerDefinition.class);
-      for(final ETriggerDefinition t : _filter_8) {
-        CharSequence _compile_8 = this.compile(t);
+      Iterable<EPropertyAssignment> _filter_8 = Iterables.<EPropertyAssignment>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPropertyAssignment.class);
+      for(final EPropertyAssignment p_3 : _filter_8) {
+        CharSequence _compile_8 = this.compile(p_3);
         _builder.append(_compile_8);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EAttributeDefinition> _filter_9 = Iterables.<EAttributeDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EAttributeDefinition.class);
-      for(final EAttributeDefinition p_4 : _filter_9) {
-        CharSequence _compile_9 = this.compile(p_4);
+      Iterable<ETriggerDefinition> _filter_9 = Iterables.<ETriggerDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ETriggerDefinition.class);
+      for(final ETriggerDefinition t : _filter_9) {
+        CharSequence _compile_9 = this.compile(t);
         _builder.append(_compile_9);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EInterfaceDefinition> _filter_10 = Iterables.<EInterfaceDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EInterfaceDefinition.class);
-      for(final EInterfaceDefinition i_1 : _filter_10) {
-        CharSequence _compile_10 = this.compile(i_1);
+      Iterable<EAttributeDefinition> _filter_10 = Iterables.<EAttributeDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EAttributeDefinition.class);
+      for(final EAttributeDefinition a_2 : _filter_10) {
+        CharSequence _compile_10 = this.compile(a_2);
         _builder.append(_compile_10);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ECapabilityDefinition> _filter_11 = Iterables.<ECapabilityDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ECapabilityDefinition.class);
-      for(final ECapabilityDefinition cap : _filter_11) {
-        CharSequence _compile_11 = this.compile(cap);
+      Iterable<EArtifactDefinition> _filter_11 = Iterables.<EArtifactDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EArtifactDefinition.class);
+      for(final EArtifactDefinition a_3 : _filter_11) {
+        CharSequence _compile_11 = this.compile(a_3);
         _builder.append(_compile_11);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ERequirementDefinition> _filter_12 = Iterables.<ERequirementDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ERequirementDefinition.class);
-      for(final ERequirementDefinition req : _filter_12) {
-        CharSequence _compile_12 = this.compile(req);
+      Iterable<EInterfaceDefinition> _filter_12 = Iterables.<EInterfaceDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EInterfaceDefinition.class);
+      for(final EInterfaceDefinition i_1 : _filter_12) {
+        CharSequence _compile_12 = this.compile(i_1);
         _builder.append(_compile_12);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ENodeType> _filter_13 = Iterables.<ENodeType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ENodeType.class);
-      for(final ENodeType n : _filter_13) {
-        CharSequence _compile_13 = this.compile(n);
+      Iterable<ECapabilityDefinition> _filter_13 = Iterables.<ECapabilityDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ECapabilityDefinition.class);
+      for(final ECapabilityDefinition cap : _filter_13) {
+        CharSequence _compile_13 = this.compile(cap);
         _builder.append(_compile_13);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EDataType> _filter_14 = Iterables.<EDataType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EDataType.class);
-      for(final EDataType d : _filter_14) {
-        CharSequence _compile_14 = this.compile(d);
+      Iterable<ERequirementDefinition> _filter_14 = Iterables.<ERequirementDefinition>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ERequirementDefinition.class);
+      for(final ERequirementDefinition req : _filter_14) {
+        CharSequence _compile_14 = this.compile(req);
         _builder.append(_compile_14);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ECapabilityType> _filter_15 = Iterables.<ECapabilityType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ECapabilityType.class);
-      for(final ECapabilityType c_1 : _filter_15) {
-        CharSequence _compile_15 = this.compile(c_1);
+      Iterable<ENodeType> _filter_15 = Iterables.<ENodeType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ENodeType.class);
+      for(final ENodeType n : _filter_15) {
+        CharSequence _compile_15 = this.compile(n);
         _builder.append(_compile_15);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<ERelationshipType> _filter_16 = Iterables.<ERelationshipType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ERelationshipType.class);
-      for(final ERelationshipType rt : _filter_16) {
-        CharSequence _compile_16 = this.compile(rt);
+      Iterable<EDataType> _filter_16 = Iterables.<EDataType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EDataType.class);
+      for(final EDataType d : _filter_16) {
+        CharSequence _compile_16 = this.compile(d);
         _builder.append(_compile_16);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EPolicyType> _filter_17 = Iterables.<EPolicyType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPolicyType.class);
-      for(final EPolicyType p_5 : _filter_17) {
-        CharSequence _compile_17 = this.compile(p_5);
+      Iterable<EArtifactType> _filter_17 = Iterables.<EArtifactType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EArtifactType.class);
+      for(final EArtifactType a_4 : _filter_17) {
+        CharSequence _compile_17 = this.compile(a_4);
         _builder.append(_compile_17);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     {
-      Iterable<EInterfaceType> _filter_18 = Iterables.<EInterfaceType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EInterfaceType.class);
-      for(final EInterfaceType i_2 : _filter_18) {
-        CharSequence _compile_18 = this.compile(i_2);
+      Iterable<ECapabilityType> _filter_18 = Iterables.<ECapabilityType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ECapabilityType.class);
+      for(final ECapabilityType c_1 : _filter_18) {
+        CharSequence _compile_18 = this.compile(c_1);
         _builder.append(_compile_18);
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
+    {
+      Iterable<ERelationshipType> _filter_19 = Iterables.<ERelationshipType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), ERelationshipType.class);
+      for(final ERelationshipType rt : _filter_19) {
+        CharSequence _compile_19 = this.compile(rt);
+        _builder.append(_compile_19);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    {
+      Iterable<EPolicyType> _filter_20 = Iterables.<EPolicyType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EPolicyType.class);
+      for(final EPolicyType p_4 : _filter_20) {
+        CharSequence _compile_20 = this.compile(p_4);
+        _builder.append(_compile_20);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    {
+      Iterable<EInterfaceType> _filter_21 = Iterables.<EInterfaceType>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), EInterfaceType.class);
+      for(final EInterfaceType i_2 : _filter_21) {
+        CharSequence _compile_21 = this.compile(i_2);
+        _builder.append(_compile_21);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    {
+      Iterable<RM_Model> _filter_22 = Iterables.<RM_Model>filter(IteratorExtensions.<EObject>toIterable(r.getAllContents()), RM_Model.class);
+      for(final RM_Model m : _filter_22) {
+        CharSequence _compile_22 = this.compile(m);
+        _builder.append(_compile_22);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence compile(final RM_Model m) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(":RM_1");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:RM ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:userId \"27827d44-0f6c-11ea-8d71-362b9e155667\" ;");
+    _builder.newLine();
+    {
+      String _description = m.getDescription();
+      boolean _tripleNotEquals = (_description != null);
+      if (_tripleNotEquals) {
+        _builder.append("  ");
+        _builder.append("exchange:description \"");
+        String _description_1 = m.getDescription();
+        _builder.append(_description_1, "  ");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".");
+    _builder.newLine();
     return _builder;
   }
   
@@ -756,12 +819,85 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     _builder.newLine();
+    {
+      if (((r.getRequirement().getStart() != null) && (r.getRequirement().getEnd() != null))) {
+        this.putParameterNumber(r, "min", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"min\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(r.getRequirement().getStart()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(r, "max", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"max\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_1 = this.trim(this.compile(r.getRequirement().getEnd()));
+        _builder.append(_trim_1, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(r, "occurrences", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_5 = this.parameter_counter++;
+        _builder.append(_plusPlus_5);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"occurrences\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(r, "min");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(r, "max");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
     Integer _put = this.requirement_numbers.put(r, Integer.valueOf(this.requirement_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Requirement_");
-    int _plusPlus_3 = this.requirement_counter++;
-    _builder.append(_plusPlus_3);
+    int _plusPlus_6 = this.requirement_counter++;
+    _builder.append(_plusPlus_6);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Requirement ;");
@@ -778,8 +914,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_6) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(r, "capability");
-        _builder.append(_parameterNumber, "  ");
+        Integer _parameterNumber_2 = this.getParameterNumber(r, "capability");
+        _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -790,8 +926,8 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_7) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_1 = this.getParameterNumber(r, "node");
-        _builder.append(_parameterNumber_1, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(r, "node");
+        _builder.append(_parameterNumber_3, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -802,13 +938,24 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_8) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_2 = this.getParameterNumber(r, "relationship");
-        _builder.append(_parameterNumber_2, "  ");
+        Integer _parameterNumber_4 = this.getParameterNumber(r, "relationship");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append(".\t\t");
+    {
+      if (((r.getRequirement().getStart() != null) && (r.getRequirement().getEnd() != null))) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_5 = this.getParameterNumber(r, "occurrences");
+        _builder.append(_parameterNumber_5, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }
@@ -843,7 +990,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().isEmpty()))) {
+      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().getSourceTypes().isEmpty()))) {
         this.putParameterNumber(c, "valid_source_types", Integer.valueOf(this.parameter_counter));
         _builder.newLineIfNotEmpty();
         _builder.append(":Parameter_");
@@ -857,33 +1004,28 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("exchange:name \"valid_source_types\" ;");
         _builder.newLine();
         {
-          EList<EValidSourceType> _valid_source_types = c.getCapability().getValid_source_types();
-          for(final EValidSourceType entry : ((EObjectContainmentEList<EValidSourceType>) _valid_source_types)) {
+          EList<EPREFIX_TYPE> _sourceTypes = c.getCapability().getValid_source_types().getSourceTypes();
+          for(final EPREFIX_TYPE s : _sourceTypes) {
             {
-              EList<EPREFIX_TYPE> _sourceTypes = entry.getSourceTypes();
-              for(final EPREFIX_TYPE s : _sourceTypes) {
-                {
-                  String _module = s.getModule();
-                  boolean _tripleNotEquals_1 = (_module != null);
-                  if (_tripleNotEquals_1) {
-                    _builder.append("  ");
-                    _builder.append("exchange:listValue \"");
-                    String _module_1 = s.getModule();
-                    _builder.append(_module_1, "  ");
-                    _builder.append("/");
-                    String _type_1 = s.getType();
-                    _builder.append(_type_1, "  ");
-                    _builder.append("\" ;");
-                    _builder.newLineIfNotEmpty();
-                  } else {
-                    _builder.append("  ");
-                    _builder.append("exchange:listValue \"");
-                    String _type_2 = s.getType();
-                    _builder.append(_type_2, "  ");
-                    _builder.append("\" ;");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
+              String _module = s.getModule();
+              boolean _tripleNotEquals_1 = (_module != null);
+              if (_tripleNotEquals_1) {
+                _builder.append("  ");
+                _builder.append("exchange:listValue \"");
+                String _module_1 = s.getModule();
+                _builder.append(_module_1, "  ");
+                _builder.append("/");
+                String _type_1 = s.getType();
+                _builder.append(_type_1, "  ");
+                _builder.append("\" ;");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("  ");
+                _builder.append("exchange:listValue \"");
+                String _type_2 = s.getType();
+                _builder.append(_type_2, "  ");
+                _builder.append("\" ;");
+                _builder.newLineIfNotEmpty();
               }
             }
           }
@@ -892,14 +1034,86 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("\t");
+    _builder.newLine();
+    {
+      if (((c.getCapability().getOccurrences_start() != null) && (c.getCapability().getOccurrences_end() != null))) {
+        this.putParameterNumber(c, "min", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_2 = this.parameter_counter++;
+        _builder.append(_plusPlus_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"min\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_1 = this.trim(this.compile(c.getCapability().getOccurrences_start()));
+        _builder.append(_trim_1, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(c, "max", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_3 = this.parameter_counter++;
+        _builder.append(_plusPlus_3);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:SodaliteParameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"max\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim_2 = this.trim(this.compile(c.getCapability().getOccurrences_end()));
+        _builder.append(_trim_2, "  ");
+        _builder.append("\' ;  ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+        _builder.newLine();
+        this.putParameterNumber(c, "occurrences", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_4 = this.parameter_counter++;
+        _builder.append(_plusPlus_4);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"occurrences\" ;\t  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(c, "min");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(c, "max");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     Integer _put = this.capability_numbers.put(c, Integer.valueOf(this.capability_counter));
     _builder.append(_put);
     _builder.newLineIfNotEmpty();
     _builder.append(":Capability_");
-    int _plusPlus_2 = this.capability_counter++;
-    _builder.append(_plusPlus_2);
+    int _plusPlus_5 = this.capability_counter++;
+    _builder.append(_plusPlus_5);
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("rdf:type exchange:Capability ;");
@@ -928,18 +1142,28 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber = this.getParameterNumber(c, "type");
-        _builder.append(_parameterNumber, "  ");
+        Integer _parameterNumber_2 = this.getParameterNumber(c, "type");
+        _builder.append(_parameterNumber_2, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().isEmpty()))) {
+      if (((c.getCapability().getValid_source_types() != null) && (!c.getCapability().getValid_source_types().getSourceTypes().isEmpty()))) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
-        Integer _parameterNumber_1 = this.getParameterNumber(c, "valid_source_types");
-        _builder.append(_parameterNumber_1, "  ");
+        Integer _parameterNumber_3 = this.getParameterNumber(c, "valid_source_types");
+        _builder.append(_parameterNumber_3, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if (((c.getCapability().getOccurrences_start() != null) && (c.getCapability().getOccurrences_end() != null))) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_4 = this.getParameterNumber(c, "occurrences");
+        _builder.append(_parameterNumber_4, "  ");
         _builder.append(" ;");
         _builder.newLineIfNotEmpty();
       }
@@ -2115,7 +2339,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetProperty p) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPREFIX_TYPE _property = p.getProperty().getProperty();
+      EPREFIX_REF _property = p.getProperty().getProperty();
       boolean _tripleNotEquals = (_property != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(p, "property", Integer.valueOf(this.parameter_counter));
@@ -2130,12 +2354,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"property\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment = this.lastSegment(p.getProperty().getProperty().getType(), ".");
-        _builder.append(_lastSegment, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _property_1 = p.getProperty().getProperty();
+          if ((_property_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _property_2 = p.getProperty().getProperty();
+            String _lastSegment = this.lastSegment(((EPREFIX_TYPE) _property_2).getType(), ".");
+            _builder.append(_lastSegment, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _property_3 = p.getProperty().getProperty();
+            if ((_property_3 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _property_4 = p.getProperty().getProperty();
+              String _lastSegment_1 = this.lastSegment(((EPREFIX_ID) _property_4).getId(), ".");
+              _builder.append(_lastSegment_1, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2169,7 +2410,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      EPREFIX_TYPE _req_cap = p.getProperty().getReq_cap();
+      EPREFIX_REF _req_cap = p.getProperty().getReq_cap();
       boolean _tripleNotEquals_2 = (_req_cap != null);
       if (_tripleNotEquals_2) {
         this.putParameterNumber(p, "req_cap", Integer.valueOf(this.parameter_counter));
@@ -2184,12 +2425,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"req_cap\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment_1 = this.lastSegment(p.getProperty().getReq_cap().getType(), ".");
-        _builder.append(_lastSegment_1, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _req_cap_1 = p.getProperty().getReq_cap();
+          if ((_req_cap_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _req_cap_2 = p.getProperty().getReq_cap();
+            String _lastSegment_2 = this.lastSegment(((EPREFIX_TYPE) _req_cap_2).getType(), ".");
+            _builder.append(_lastSegment_2, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _property_5 = p.getProperty().getProperty();
+            if ((_property_5 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _req_cap_3 = p.getProperty().getReq_cap();
+              String _lastSegment_3 = this.lastSegment(((EPREFIX_ID) _req_cap_3).getId(), ".");
+              _builder.append(_lastSegment_3, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2208,8 +2466,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_property\" ;");
     _builder.newLine();
     {
-      EPREFIX_TYPE _property_1 = p.getProperty().getProperty();
-      boolean _tripleNotEquals_3 = (_property_1 != null);
+      EPREFIX_REF _property_6 = p.getProperty().getProperty();
+      boolean _tripleNotEquals_3 = (_property_6 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2232,8 +2490,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EPREFIX_TYPE _req_cap_1 = p.getProperty().getReq_cap();
-      boolean _tripleNotEquals_5 = (_req_cap_1 != null);
+      EPREFIX_REF _req_cap_4 = p.getProperty().getReq_cap();
+      boolean _tripleNotEquals_5 = (_req_cap_4 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2251,7 +2509,7 @@ public class RMGenerator extends AbstractGenerator {
   public CharSequence compile(final GetAttribute a) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EPREFIX_TYPE _attribute = a.getAttribute().getAttribute();
+      EPREFIX_REF _attribute = a.getAttribute().getAttribute();
       boolean _tripleNotEquals = (_attribute != null);
       if (_tripleNotEquals) {
         this.putParameterNumber(a, "attribute", Integer.valueOf(this.parameter_counter));
@@ -2266,12 +2524,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"attribute\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment = this.lastSegment(a.getAttribute().getAttribute().getType(), ".");
-        _builder.append(_lastSegment, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _attribute_1 = a.getAttribute().getAttribute();
+          if ((_attribute_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _attribute_2 = a.getAttribute().getAttribute();
+            String _lastSegment = this.lastSegment(((EPREFIX_TYPE) _attribute_2).getType(), ".");
+            _builder.append(_lastSegment, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _attribute_3 = a.getAttribute().getAttribute();
+            if ((_attribute_3 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _attribute_4 = a.getAttribute().getAttribute();
+              String _lastSegment_1 = this.lastSegment(((EPREFIX_ID) _attribute_4).getId(), ".");
+              _builder.append(_lastSegment_1, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2305,7 +2580,7 @@ public class RMGenerator extends AbstractGenerator {
     }
     _builder.newLine();
     {
-      EPREFIX_TYPE _req_cap = a.getAttribute().getReq_cap();
+      EPREFIX_REF _req_cap = a.getAttribute().getReq_cap();
       boolean _tripleNotEquals_2 = (_req_cap != null);
       if (_tripleNotEquals_2) {
         this.putParameterNumber(a, "req_cap", Integer.valueOf(this.parameter_counter));
@@ -2320,12 +2595,29 @@ public class RMGenerator extends AbstractGenerator {
         _builder.append("  ");
         _builder.append("exchange:name \"req_cap\" ;  ");
         _builder.newLine();
-        _builder.append("  ");
-        _builder.append("exchange:value \'");
-        String _lastSegment_1 = this.lastSegment(a.getAttribute().getReq_cap().getType(), ".");
-        _builder.append(_lastSegment_1, "  ");
-        _builder.append("\' ; ");
-        _builder.newLineIfNotEmpty();
+        {
+          EPREFIX_REF _req_cap_1 = a.getAttribute().getReq_cap();
+          if ((_req_cap_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _req_cap_2 = a.getAttribute().getReq_cap();
+            String _lastSegment_2 = this.lastSegment(((EPREFIX_TYPE) _req_cap_2).getType(), ".");
+            _builder.append(_lastSegment_2, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _attribute_5 = a.getAttribute().getAttribute();
+            if ((_attribute_5 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _req_cap_3 = a.getAttribute().getReq_cap();
+              String _lastSegment_3 = this.lastSegment(((EPREFIX_ID) _req_cap_3).getId(), ".");
+              _builder.append(_lastSegment_3, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
         _builder.append(".");
         _builder.newLine();
       }
@@ -2344,8 +2636,8 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_attribute\" ;");
     _builder.newLine();
     {
-      EPREFIX_TYPE _attribute_1 = a.getAttribute().getAttribute();
-      boolean _tripleNotEquals_3 = (_attribute_1 != null);
+      EPREFIX_REF _attribute_6 = a.getAttribute().getAttribute();
+      boolean _tripleNotEquals_3 = (_attribute_6 != null);
       if (_tripleNotEquals_3) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2368,8 +2660,8 @@ public class RMGenerator extends AbstractGenerator {
       }
     }
     {
-      EPREFIX_TYPE _req_cap_1 = a.getAttribute().getReq_cap();
-      boolean _tripleNotEquals_5 = (_req_cap_1 != null);
+      EPREFIX_REF _req_cap_4 = a.getAttribute().getReq_cap();
+      boolean _tripleNotEquals_5 = (_req_cap_4 != null);
       if (_tripleNotEquals_5) {
         _builder.append("  ");
         _builder.append("exchange:hasParameter :Parameter_");
@@ -2379,7 +2671,121 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append(".\t");
+    _builder.append(".");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final GetArtifact a) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EPREFIX_REF _artifact = a.getArtifact().getArtifact();
+      boolean _tripleNotEquals = (_artifact != null);
+      if (_tripleNotEquals) {
+        this.putParameterNumber(a, "artifact", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus = this.parameter_counter++;
+        _builder.append(_plusPlus);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"artifact\" ;  ");
+        _builder.newLine();
+        {
+          EPREFIX_REF _artifact_1 = a.getArtifact().getArtifact();
+          if ((_artifact_1 instanceof EPREFIX_TYPE)) {
+            _builder.append("  ");
+            _builder.append("exchange:value \'");
+            EPREFIX_REF _artifact_2 = a.getArtifact().getArtifact();
+            String _lastSegment = this.lastSegment(((EPREFIX_TYPE) _artifact_2).getType(), ".");
+            _builder.append(_lastSegment, "  ");
+            _builder.append("\' ; ");
+            _builder.newLineIfNotEmpty();
+          } else {
+            EPREFIX_REF _artifact_3 = a.getArtifact().getArtifact();
+            if ((_artifact_3 instanceof EPREFIX_ID)) {
+              _builder.append("  ");
+              _builder.append("exchange:value \'");
+              EPREFIX_REF _artifact_4 = a.getArtifact().getArtifact();
+              String _lastSegment_1 = this.lastSegment(((EPREFIX_ID) _artifact_4).getId(), ".");
+              _builder.append(_lastSegment_1, "  ");
+              _builder.append("\' ;");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    {
+      EEntityReference _entity = a.getArtifact().getEntity();
+      boolean _tripleNotEquals_1 = (_entity != null);
+      if (_tripleNotEquals_1) {
+        this.putParameterNumber(a, "entity", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus_1 = this.parameter_counter++;
+        _builder.append(_plusPlus_1);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:name \"entity\" ;  ");
+        _builder.newLine();
+        _builder.append("  ");
+        _builder.append("exchange:value \'");
+        String _trim = this.trim(this.compile(a.getArtifact().getEntity()));
+        _builder.append(_trim, "  ");
+        _builder.append("\' ; ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    this.putParameterNumber(a, "name", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus_2 = this.parameter_counter++;
+    _builder.append(_plusPlus_2);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"get_attribute\" ;");
+    _builder.newLine();
+    {
+      EPREFIX_REF _artifact_5 = a.getArtifact().getArtifact();
+      boolean _tripleNotEquals_2 = (_artifact_5 != null);
+      if (_tripleNotEquals_2) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(a, "artifact");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EEntityReference _entity_1 = a.getArtifact().getEntity();
+      boolean _tripleNotEquals_3 = (_entity_1 != null);
+      if (_tripleNotEquals_3) {
+        _builder.append("  ");
+        _builder.append("exchange:hasParameter :Parameter_");
+        Integer _parameterNumber_1 = this.getParameterNumber(a, "entity");
+        _builder.append(_parameterNumber_1, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append(".");
     _builder.newLine();
     return _builder;
   }
@@ -2399,7 +2805,7 @@ public class RMGenerator extends AbstractGenerator {
     _builder.append("exchange:name \"get_input\" ;");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("exchange:hasValue \"");
+    _builder.append("exchange:value \"");
     String _name = gi.getInput().getName();
     _builder.append(_name, "  ");
     _builder.append("\";");
@@ -2812,6 +3218,23 @@ public class RMGenerator extends AbstractGenerator {
         }
       }
     }
+    {
+      EArtifacts _artifacts = n.getNode().getArtifacts();
+      boolean _tripleNotEquals_8 = (_artifacts != null);
+      if (_tripleNotEquals_8) {
+        {
+          EList<EArtifactDefinition> _artifacts_1 = n.getNode().getArtifacts().getArtifacts();
+          for(final EArtifactDefinition a_1 : _artifacts_1) {
+            _builder.append("  ");
+            _builder.append("exchange:artifacts :Artifact_");
+            Integer _get_5 = this.artifact_numbers.get(a_1);
+            _builder.append(_get_5, "  ");
+            _builder.append(" ; ");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
     _builder.append(".  ");
     _builder.newLine();
     return _builder;
@@ -2862,6 +3285,121 @@ public class RMGenerator extends AbstractGenerator {
       if (_tripleNotEquals_2) {
         {
           EList<EPropertyDefinition> _properties_1 = d.getData().getProperties().getProperties();
+          for(final EPropertyDefinition p : _properties_1) {
+            _builder.append("  ");
+            _builder.append("exchange:properties :Property_");
+            Integer _get = this.property_numbers.get(p);
+            _builder.append(_get, "  ");
+            _builder.append(" ; ");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append(".  ");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compile(final EArtifactType a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    {
+      ELIST _file_ext = a.getArtifact().getFile_ext();
+      boolean _tripleNotEquals = (_file_ext != null);
+      if (_tripleNotEquals) {
+        this.putParameterNumber(a, "file_ext", Integer.valueOf(this.parameter_counter));
+        _builder.newLineIfNotEmpty();
+        _builder.append(":Parameter_");
+        int _plusPlus = this.parameter_counter++;
+        _builder.append(_plusPlus);
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        _builder.append("rdf:type exchange:Parameter ;");
+        _builder.newLine();
+        {
+          EList<EAlphaNumericValue> _list = a.getArtifact().getFile_ext().getList();
+          for(final EAlphaNumericValue ext : _list) {
+            _builder.append("  ");
+            _builder.append("exchange:listValue \"");
+            String _trim = this.trim(this.compile(ext));
+            _builder.append(_trim, "  ");
+            _builder.append("\" ; ");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append(".");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    _builder.append(":ArtifactType_");
+    int _plusPlus_1 = this.data_type_counter++;
+    _builder.append(_plusPlus_1);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Type ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"");
+    String _name = a.getName();
+    _builder.append(_name, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    {
+      EPREFIX_TYPE _superType = a.getArtifact().getSuperType();
+      boolean _tripleNotEquals_1 = (_superType != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("  ");
+        _builder.append("exchange:derivesFrom \'");
+        String _trim_1 = this.trim(this.compile(a.getArtifact().getSuperType()));
+        _builder.append(_trim_1, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _description = a.getArtifact().getDescription();
+      boolean _tripleNotEquals_2 = (_description != null);
+      if (_tripleNotEquals_2) {
+        _builder.append("  ");
+        _builder.append("exchange:description \'");
+        String _processDescription = this.processDescription(a.getArtifact().getDescription());
+        _builder.append(_processDescription, "  ");
+        _builder.append("\' ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      String _mime_type = a.getArtifact().getMime_type();
+      boolean _tripleNotEquals_3 = (_mime_type != null);
+      if (_tripleNotEquals_3) {
+        _builder.append("  ");
+        _builder.append("exchange:mime_type \'");
+        String _mime_type_1 = a.getArtifact().getMime_type();
+        _builder.append(_mime_type_1, "  ");
+        _builder.append("\' ; ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      ELIST _file_ext_1 = a.getArtifact().getFile_ext();
+      boolean _tripleNotEquals_4 = (_file_ext_1 != null);
+      if (_tripleNotEquals_4) {
+        _builder.append("  ");
+        _builder.append("exchange:file_ext :Parameter_");
+        Integer _parameterNumber = this.getParameterNumber(a, "file_ext");
+        _builder.append(_parameterNumber, "  ");
+        _builder.append(" ;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EProperties _properties = a.getArtifact().getProperties();
+      boolean _tripleNotEquals_5 = (_properties != null);
+      if (_tripleNotEquals_5) {
+        {
+          EList<EPropertyDefinition> _properties_1 = a.getArtifact().getProperties().getProperties();
           for(final EPropertyDefinition p : _properties_1) {
             _builder.append("  ");
             _builder.append("exchange:properties :Property_");
@@ -4123,6 +4661,110 @@ public class RMGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public CharSequence compile(final EArtifactDefinition a) {
+    StringConcatenation _builder = new StringConcatenation();
+    this.putParameterNumber(a, "type", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus = this.parameter_counter++;
+    _builder.append(_plusPlus);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"type\" ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:value \'");
+    String _trim = this.trim(this.compile(a.getArtifact().getType()));
+    _builder.append(_trim, "  ");
+    _builder.append("\' ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append(".");
+    _builder.newLine();
+    _builder.newLine();
+    this.putParameterNumber(a, "file.path", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus_1 = this.parameter_counter++;
+    _builder.append(_plusPlus_1);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"path\" ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:value \'");
+    String _file = a.getArtifact().getFile();
+    _builder.append(_file, "  ");
+    _builder.append("\' ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append(".");
+    _builder.newLine();
+    _builder.newLine();
+    this.putParameterNumber(a, "file.content", Integer.valueOf(this.parameter_counter));
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Parameter_");
+    int _plusPlus_2 = this.parameter_counter++;
+    _builder.append(_plusPlus_2);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Parameter ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"content\" ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:value \'");
+    String _readFileAsString = this.readFileAsString(a.getArtifact().getFile());
+    _builder.append(_readFileAsString, "  ");
+    _builder.append("\' ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append(".");
+    _builder.newLine();
+    _builder.newLine();
+    Integer _put = this.artifact_numbers.put(a, Integer.valueOf(this.artifact_counter));
+    _builder.append(_put);
+    _builder.newLineIfNotEmpty();
+    _builder.append(":Artifact_");
+    int _plusPlus_3 = this.artifact_counter++;
+    _builder.append(_plusPlus_3);
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("rdf:type exchange:Artifact ;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("exchange:name \"");
+    String _name = a.getName();
+    _builder.append(_name, "  ");
+    _builder.append("\" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("exchange:hasParameter :Parameter_");
+    Integer _parameterNumber = this.getParameterNumber(a, "type");
+    _builder.append(_parameterNumber, "  ");
+    _builder.append(" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("exchange:hasParameter :Parameter_");
+    Integer _parameterNumber_1 = this.getParameterNumber(a, "file.path");
+    _builder.append(_parameterNumber_1, "  ");
+    _builder.append(" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("exchange:hasParameter :Parameter_");
+    Integer _parameterNumber_2 = this.getParameterNumber(a, "file.content");
+    _builder.append(_parameterNumber_2, "  ");
+    _builder.append(" ;");
+    _builder.newLineIfNotEmpty();
+    _builder.append(".");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence compile(final EValueExpression ve) {
     StringConcatenation _builder = new StringConcatenation();
     String _value = ((ESTRING) ve).getValue();
@@ -4346,9 +4988,7 @@ public class RMGenerator extends AbstractGenerator {
   
   public String readFileAsString(final String path) {
     try {
-      byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
-      String content = new String(_readAllBytes);
-      return content.replace("\\", "\\\\").replace("\'", "\\\'").replaceAll("[\\n\\r]+", "\\\\n");
+      return Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -1,12 +1,12 @@
 package org.sodalite.dsl.ui.wizards.deployment;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.UUID;
 
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.prefs.Preferences;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.dsl.ui.preferences.Activator;
@@ -28,9 +29,11 @@ public class DeploymentWizard extends Wizard {
 	private Path inputsFile = null;
 	private Path imageBuildConfPath = null;
 	private String versionTag = null;
-	private String deploymentName = null;
+	private String deploymentLabel = null;
 	private int workers = 0;
 	private boolean completeModel = false;
+	private boolean validateNiFiCerts = false;
+	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
 		super();
@@ -74,7 +77,7 @@ public class DeploymentWizard extends Wizard {
 		this.imageBuildConfPath = mainPage.getImageBuildConfPath();
 
 		// Get deploymentName
-		this.deploymentName = mainPage.getDeploymentName();
+		this.deploymentLabel = mainPage.getDeploymentName();
 
 		// Get versionTag
 		this.versionTag = mainPage.getVersionTag();
@@ -90,17 +93,17 @@ public class DeploymentWizard extends Wizard {
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			// Adding additional inputs
 			Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-			String consul_uri = defaults.get(PreferenceConstants.Consul_URI, "");
+			String consul_ip = defaults.get(PreferenceConstants.Consul_IP, "");
 			String grafana_uri = defaults.get(PreferenceConstants.Grafana_URI, "");
 			String skydive_analyzer_uri = defaults.get(PreferenceConstants.SKYDIVE_ANALYZER_URI, "");
-			if (consul_uri.isEmpty() || grafana_uri.isEmpty()) {
+			if (consul_ip.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
 				return false;
 			}
-			content.append("deployment_name: " + this.deploymentName + "\n");
-			content.append("consul_uri: " + consul_uri + "\n");
-			content.append("skydive-analyzer-url: " + skydive_analyzer_uri + "\n");
+			content.append("deployment_label: " + this.deploymentLabel + "\n");
+			content.append("consul_server_address: " + consul_ip + "\n");
+			content.append("skydive_analyzer: " + skydive_analyzer_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{
 			// deployment_label }}
@@ -108,14 +111,28 @@ public class DeploymentWizard extends Wizard {
 			String deployment_label = mainPage.getDeploymentName();
 			String grafana_address = String.format(grafana_template, grafana_uri, deployment_label);
 			content.append("grafana_address: " + grafana_address + "\n");
+			this.monitoring_id = UUID.randomUUID().toString();
+			content.append("monitoring_id: " + this.monitoring_id + "\n");
+			// NIFI inputs
+			String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
+			content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
+			String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
+			content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
+			String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
+			content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN + "\n");
+			Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
+			content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS + "\n");
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}
 
 		// Get completeModel
 		this.completeModel = mainPage.getCompleteModel();
+
+		// Get validate NIFI certificates
+		this.validateNiFiCerts = mainPage.getValidateNiFiCerts();
 
 		return true;
 	}
@@ -128,8 +145,8 @@ public class DeploymentWizard extends Wizard {
 		return this.imageBuildConfPath;
 	}
 
-	public String getDeploymentName() {
-		return this.deploymentName;
+	public String getDeploymentLabel() {
+		return this.deploymentLabel;
 	}
 
 	public String getVersionTag() {
@@ -142,6 +159,14 @@ public class DeploymentWizard extends Wizard {
 
 	public boolean getCompleteModel() {
 		return this.completeModel;
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return this.validateNiFiCerts;
+	}
+
+	public String getMonitoringId() {
+		return this.monitoring_id;
 	}
 
 	public void showErrorDialog(String info, String dialogTitle, String dialogMessage) {

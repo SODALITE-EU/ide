@@ -17,6 +17,8 @@ public class PreferenceConstants {
 
 	public static final String Refactorer_URI = "RefactorerURI";
 
+	public static final String NIFI_URI = "NiFiURI";
+
 	public static final String KEYCLOAK_URI = "KeyCloakURI";
 
 	public static final String KEYCLOAK_CLIENT_ID = "KeyCloakClientID";
@@ -29,9 +31,15 @@ public class PreferenceConstants {
 
 	public static final String KEYCLOAK_ENABLED = "KeyCloakEnabled";
 
-	public static final String Consul_URI = "Consul_URI";
+	public static final String Consul_IP = "Consul_IP";
+
+	public static final String Grafana_Registry_URI = "Grafana_Registry_URI";
 
 	public static final String Grafana_URI = "Grafana_URI";
 
+	public static final String RulesServer_URI = "RulesServer_URI";
+
 	public static final String SKYDIVE_ANALYZER_URI = "Skydive_Analyzer_URI";
+
+	public static final String VAULT_SECRET_UPLOADER_URI = "VAULT_SECRET_UPLOADER_URI";
 }

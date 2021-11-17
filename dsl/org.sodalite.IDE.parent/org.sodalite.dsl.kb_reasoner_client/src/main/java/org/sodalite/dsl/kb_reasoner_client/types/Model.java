@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Model extends KBEntity {
 	String name;
+	String description;
 	String createdBy;
 	String createdAt;
 	String dsl;
@@ -15,6 +16,14 @@ public class Model extends KBEntity {
 
 	public String getCreatedBy() {
 		return createdBy;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getCreatedAt() {
