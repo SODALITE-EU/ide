@@ -4,12 +4,14 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 
 public class DeleteDeploymentWizardMainPage extends WizardPage {
 	private Spinner workersSpinner = null;
+	private Button forceCB = null;
 
 	protected DeleteDeploymentWizardMainPage() {
 		super("Undeploy application");
@@ -23,6 +25,10 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 		} catch (Exception ex) {
 			return 0;
 		}
+	}
+
+	public boolean getForce() {
+		return this.forceCB.getSelection();
 	}
 
 	@Override
@@ -39,6 +45,16 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 		workersSpinner.setLayoutData(workersGridData);
 		workersSpinner.setMinimum(0);
 		workersSpinner.setSelection(1);
+
+		// Force undeployment
+		Label forceLabel = new Label(container, SWT.NONE);
+		forceLabel.setText("Force undeployment:");
+		forceLabel.setToolTipText(
+				"Ask orchestrator to force the application undeployment even if not all allocated resources can be released");
+
+		forceCB = new Button(container, SWT.CHECK);
+		GridData forceGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		forceCB.setLayoutData(forceGridData);
 
 		setControl(container);
 		setPageComplete(false);

@@ -344,14 +344,14 @@ class KBReasonerTest {
 	@Test
 	void testGetBlueprintsForUser() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 	}
 
 	@Test
 	void testGetBlueprintForId() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(0).getBlueprint_id();
@@ -362,7 +362,7 @@ class KBReasonerTest {
 	@Test
 	void testGetDeploymentsForBlueprint() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
@@ -373,7 +373,7 @@ class KBReasonerTest {
 	@Test
 	void testGetDeploymentForId() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();

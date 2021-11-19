@@ -1089,10 +1089,10 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public BlueprintData getBlueprintsForUser(String username) throws SodaliteException {
+	public BlueprintData getBlueprintsForUser(String username, boolean active) throws SodaliteException {
 		BlueprintData blueprintData = null;
 		Assert.notNull(username, "Pass a not null username");
-		String url = xoperaUri + "blueprint?username=" + username;
+		String url = xoperaUri + "blueprint?username=" + username + "&active=" + active;
 		try {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
@@ -1100,7 +1100,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (IAM_enabled)
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
-				return getBlueprintsForUser(username);
+				return getBlueprintsForUser(username, active);
 			else
 				throw ex;
 		} catch (HttpClientErrorException ex) {
@@ -1189,9 +1189,9 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public void deleteBlueprintForId(String blueprintId) throws SodaliteException {
+	public void deleteBlueprintForId(String blueprintId, boolean force) throws SodaliteException {
 		Assert.notNull(blueprintId, "Pass a not null blueprintId");
-		String url = xoperaUri + "blueprint/" + blueprintId + "?force=false";
+		String url = xoperaUri + "blueprint/" + blueprintId + "?force=" + force;
 		try {
 			deleteUriResource(new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
@@ -1199,7 +1199,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (IAM_enabled)
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
-				deleteBlueprintForId(blueprintId);
+				deleteBlueprintForId(blueprintId, force);
 			else
 				throw ex;
 		} catch (HttpClientErrorException ex) {
@@ -1210,14 +1210,14 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
-	public DeploymentReport deleteDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers)
-			throws SodaliteException {
+	public DeploymentReport undeployDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers,
+			boolean force) throws SodaliteException {
 		try {
 			Assert.notNull(deploymentId, "Pass a not null deploymentId");
 			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
-			String url = xoperaUri + "deployment/" + deploymentId + "/undeploy";
+			String url = xoperaUri + "deployment/" + deploymentId + "/undeploy?force=" + force;
 			if (workers >= 0)
-				url += "?workers=" + workers;
+				url += "&workers=" + workers;
 
 			LinkedMultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
 
@@ -1245,7 +1245,7 @@ public class KBReasonerClient implements KBReasoner {
 			if (IAM_enabled)
 				this.aai_token = getSecurityToken();
 			if (this.aai_token != null)
-				return deleteDeploymentForId(deploymentId, inputs_yaml_path, workers);
+				return undeployDeploymentForId(deploymentId, inputs_yaml_path, workers, force);
 			else
 				throw ex;
 		} catch (HttpClientErrorException ex) {
