@@ -148,7 +148,8 @@ public class AlertingBackendProxy extends RMBackendProxy {
 		}
 
 		try {
-			BlueprintData blueprintData = getKBReasoner().getBlueprintsForUser(keycloak_user);
+			boolean active = false; // Obtaining all blueprints, not only the active (i.e. having deployments) ones
+			BlueprintData blueprintData = getKBReasoner().getBlueprintsForUser(keycloak_user, active);
 			if (!blueprintData.getElements().isEmpty()) {
 				for (Blueprint blueprint : blueprintData.getElements()) {
 					DeploymentData deploymentData = getKBReasoner()
