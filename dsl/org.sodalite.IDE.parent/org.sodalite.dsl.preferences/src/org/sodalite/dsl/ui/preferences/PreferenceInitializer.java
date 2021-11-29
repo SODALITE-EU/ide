@@ -79,7 +79,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		String skydive_analyzer_uri = prop.getProperty(PreferenceConstants.SKYDIVE_ANALYZER_URI);
 		if (skydive_analyzer_uri == null)
-			skydive_analyzer_uri = "192.168.2.11:8088";
+			skydive_analyzer_uri = "192.168.2.75:8088";
 
 		String vault_secret_uploader_uri = prop.getProperty(PreferenceConstants.VAULT_SECRET_UPLOADER_URI);
 		if (vault_secret_uploader_uri == null)
