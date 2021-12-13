@@ -680,11 +680,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "value" ;
 	  «IF p.parameter.value instanceof EFunction»
-	  «IF p.parameter.value instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	  «ELSEIF p.parameter.value instanceof GetProperty || p.parameter.value instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	  «ENDIF»
 	  «ELSEIF p.parameter.value instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -697,11 +693,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "default" ;
 	  «IF p.parameter.^default instanceof EFunction»
-	  «IF p.parameter.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	  «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	  «ENDIF»
 	  «ELSEIF p.parameter.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -1006,7 +998,7 @@ class RMGenerator extends AbstractGenerator {
 	«putParameterNumber(a, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
-	  exchange:name "get_attribute" ;
+	  exchange:name "get_artifact" ;
 	  «IF a.artifact.artifact !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "artifact")» ;
 	  «ENDIF»	
@@ -1307,11 +1299,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:listValue "«trim(entry.compile().toString)»" ;
 	  «ENDFOR»
 	  «ELSEIF p.property.^default instanceof EFunction»
-	  «IF p.property.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
-	   «ELSEIF p.property.^default instanceof GetProperty || p.property.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.property.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.property.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -1401,11 +1389,7 @@ class RMGenerator extends AbstractGenerator {
 	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF p.value instanceof EFunction»
-	  	«IF p.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ELSEIF p.value instanceof GetProperty || p.value instanceof GetAttribute»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF p.value instanceof ESingleValue»
 	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -1526,11 +1510,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF a.attribute.^default !== null»
 	  «IF a.attribute.^default instanceof EFunction»
-	  	«IF a.attribute.^default instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
-	  	«ELSEIF a.attribute.^default instanceof GetProperty || a.attribute.^default instanceof GetAttribute»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF a.attribute.^default instanceof ESingleValue»
 	  	exchange:value "«trim((a.attribute.^default as ESingleValue).compile().toString)»" ;
 	  «ENDIF»  

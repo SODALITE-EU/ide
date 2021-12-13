@@ -378,7 +378,7 @@ class AADMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "get_artifact" ;
 	  «IF a.artifact.artifact !== null»
-	  exchange:hasParameter :Parameter_«getParameterNumber(a, "attribute")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "artifact")» ;
 	  «ENDIF»	
 	  «IF a.artifact.entity !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entity")» ;
@@ -401,11 +401,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF p.parameter.^default !== null»
 	  «IF p.parameter.^default instanceof EFunction»
-	  «IF p.parameter.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	   «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.parameter.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -420,11 +416,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "value" ;
 	  «IF p.parameter.value !== null»
 	  «IF p.parameter.value instanceof EFunction»
-	  «IF p.parameter.value instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	   «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.value instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.parameter.value instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.value as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -476,11 +468,7 @@ class AADMGenerator extends AbstractGenerator {
 	  «IF e.value instanceof ESingleValue»
 	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
 	  «ELSEIF e.value instanceof EFunction»
-	  «IF e.value instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
-	  	«ELSEIF e.value instanceof GetProperty»
-	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF e.value instanceof ELIST»
 	  TODO
 	  «ENDIF»
@@ -603,11 +591,7 @@ class AADMGenerator extends AbstractGenerator {
 	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF p.value instanceof EFunction»
-	  	«IF p.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ELSEIF p.value instanceof GetProperty»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF p.value instanceof ESingleValue»
 	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -1039,9 +1023,7 @@ class AADMGenerator extends AbstractGenerator {
 	    exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF a.value instanceof EFunction»
-	  	«IF a.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(a.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF a.value instanceof ESingleValue»
 	  exchange:value "«trim((a.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
