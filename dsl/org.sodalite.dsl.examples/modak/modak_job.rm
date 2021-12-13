@@ -250,9 +250,13 @@ data_types:
 		derived_from: tosca.datatypes.Root
 		properties:
 			parallelisation:
-				type: string
+				type: list
 				constraints:
-					valid_values: [ "mpi", "openmp", "opencc", "opencl" ]
+					min_length: 1
+				entry_schema:
+					type: string
+					constraints:
+						valid_values: [ "mpi", "openmp", "openacc", "opencl" ]
 
 	sodalite.datatypes.modak.optimisation.hpc.data.etl:
 		derived_from: tosca.datatypes.Root
@@ -285,7 +289,7 @@ data_types:
 			library:
 				type: string
 				constraints:
-					valid_values: [ "mvapch", "opnmpi" ]
+					valid_values: [ "mpich", "mvapich", "openmpi" ]
 			version:
 				type: string
 			scaling_efficiency:
@@ -309,7 +313,7 @@ data_types:
 				constraints:
 					valid_values: [ "block", "simple" ]		
 		
-	sodalite.datatypes.modak.optimisation.hpc.parallelisation-opencc:
+	sodalite.datatypes.modak.optimisation.hpc.parallelisation-openacc:
     	derived_from: tosca.datatypes.Root
     	properties:
       		compiler:
