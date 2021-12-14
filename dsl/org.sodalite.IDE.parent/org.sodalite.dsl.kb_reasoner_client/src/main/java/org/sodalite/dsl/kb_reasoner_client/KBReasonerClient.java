@@ -989,7 +989,7 @@ public class KBReasonerClient implements KBReasoner {
 		String url = image_builder_uri + "status/" + invocation_id;
 		BuildImageStatusReport buildStatus = null;
 		try {
-			ResponseEntity<BuildImageStatusReport> response = getJSONMessage(new URI(url),
+			ResponseEntity<BuildImageStatusReport> response = getJsonMessage(new URI(url),
 					BuildImageStatusReport.class);
 			HttpStatus status = response.getStatusCode();
 			buildStatus = response.getBody();
@@ -2065,7 +2065,7 @@ public class KBReasonerClient implements KBReasoner {
 	 * @throws KeyStoreException
 	 * @throws KeyManagementException
 	 */
-	private <T> ResponseEntity<T> getJSONMessage(URI uri, Class<T> clazz) throws Exception {
+	private <T> ResponseEntity<T> getJsonMessage(URI uri, Class<T> clazz) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		if (IAM_enabled) {
 //			this.aai_token = getSecurityToken();
@@ -2082,7 +2082,7 @@ public class KBReasonerClient implements KBReasoner {
 	private <T> T getJSONObjectForType(Class<T> type, URI uri, HttpStatus expectedStatus) throws SodaliteException {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
-			ResponseEntity<T> response = getJSONMessage(uri, type);
+			ResponseEntity<T> response = getJsonMessage(uri, type);
 			T object = response.getBody();
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Located " + type + " JSON object: " + object);
@@ -2112,7 +2112,7 @@ public class KBReasonerClient implements KBReasoner {
 			throws Exception {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
-			ResponseEntity<T[]> response = getJSONMessage(uri, type);
+			ResponseEntity<T[]> response = getJsonMessage(uri, type);
 			T[] objects = response.getBody();
 			if (response.getStatusCode().equals(expectedStatus)) {
 				log.info("Located " + objects.length + " JSON object(s) for type " + type);
@@ -2130,7 +2130,7 @@ public class KBReasonerClient implements KBReasoner {
 	private HttpStatus getStatusOfURI(URI uri) throws Exception {
 		try {
 			Assert.notNull(uri, "Provide a valid uri");
-			return getJSONMessage(uri, String.class).getStatusCode();
+			return getJsonMessage(uri, String.class).getStatusCode();
 		} catch (HttpClientErrorException e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}

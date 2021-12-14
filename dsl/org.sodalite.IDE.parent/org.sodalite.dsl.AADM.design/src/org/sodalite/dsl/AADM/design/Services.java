@@ -318,7 +318,7 @@ public class Services {
 			EConditionClauseDefinitionAssert assertsConstraint = (EConditionClauseDefinitionAssert) constraint;
 			int index = assertsConstraint.getAssertions().size() - 1;
 			for (EAssertionDefinition assertion : assertsConstraint.getAssertions()) {
-				boolean placeDelimiter = delimiter != null & index-- > 0;
+				boolean placeDelimiter = delimiter != null && index-- > 0;
 				label += assertion.getAttribute_name() + parseConstraint(assertion.getConstraints())
 						+ (placeDelimiter ? delimiter : "");
 			}

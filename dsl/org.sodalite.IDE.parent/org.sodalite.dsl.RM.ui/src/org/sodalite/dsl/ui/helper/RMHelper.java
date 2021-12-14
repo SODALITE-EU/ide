@@ -282,7 +282,7 @@ public class RMHelper {
 			List<String> _imports = (List<String>) method.invoke(model, null);
 			imports.addAll(_imports);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 		}
 		return imports;
 	}
@@ -316,7 +316,7 @@ public class RMHelper {
 			Method method = model.getClass().getMethod("getModule", noparams);
 			module = (String) method.invoke(model, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 		}
 		return module;
 	}

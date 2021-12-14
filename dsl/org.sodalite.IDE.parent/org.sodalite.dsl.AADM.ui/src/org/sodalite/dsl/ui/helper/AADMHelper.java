@@ -2,6 +2,7 @@ package org.sodalite.dsl.ui.helper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -322,8 +323,9 @@ public class AADMHelper extends RMHelper {
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-					FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(channel));
+					FileLock lock = channel.lock(0L, Long.MAX_VALUE, true);
+					InputStream is = Channels.newInputStream(channel)) {
+				props.load(is);
 			}
 			uri = props.getProperty("URI");
 		}

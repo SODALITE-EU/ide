@@ -567,7 +567,7 @@ public class BlueprintView {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 			showErrorDialog("Resume deployment error", e.getMessage());
 		}
 	}
@@ -592,7 +592,7 @@ public class BlueprintView {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 			showErrorDialog("Register alerting rules error", e.getMessage());
 		}
 	}
@@ -609,7 +609,7 @@ public class BlueprintView {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 			showErrorDialog("Deregister alerting rules error", e.getMessage());
 		}
 	}

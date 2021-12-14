@@ -58,7 +58,7 @@ public class DeploymentView {
 			try {
 				RMBackendProxy.raiseConfigurationIssue("Grafana URL not set");
 			} catch (Exception e) {
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			}
 	}
 
