@@ -28,8 +28,11 @@
 				$("#save-button").click(function() {
 					editor.xtextServices.saveResource();
 				});
-				$("#generate-button").click(function() {
+				$("#revert-button").click(function() {
 					editor.xtextServices.revertResource();
+				});
+				$("#generate-button").click(function() {
+					window.open('http://' + location.host + baseUrl + 'xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
 				});
 				$("#change-resource").change(function() {
 					var resourceId = $("#change-resource option:selected").attr("value");
@@ -44,7 +47,8 @@
 	<div class="header-editor">AADM Editor</div>
 	<div class="container-buttons">
 		<button id="save-button">Save AADM in KB</button>
-		<button id="generate-button">Deploy AADM</button>
+		<button id="revert-button">Deploy AADM</button>
+		<button id="generate-button">Generate TTL</button>
 		<select id="change-resource">
 			<option value="snow.aadm">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
