@@ -43,8 +43,8 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 				// Generate AADM serialization
 				GeneratorResult generatorResult = (GeneratorResult) getGeneratorService(context).getService().apply();
 				String ttl = generatorResult.getContent();
-				// TODO Save AADM into KB
-				return saveAadmService.save(document, resourceHandler, context);
+				// Save AADM into KB
+				return saveAadmService.save(document, ttl, resourceHandler, context);
 			} catch (Throwable throwable) {
 				return handleError(serviceDescriptor, throwable);
 			}
