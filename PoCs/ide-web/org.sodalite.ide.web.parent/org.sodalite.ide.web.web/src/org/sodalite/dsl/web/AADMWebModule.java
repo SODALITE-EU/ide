@@ -3,6 +3,7 @@
  */
 package org.sodalite.dsl.web;
 
+import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
@@ -36,6 +37,10 @@ public class AADMWebModule extends AbstractAADMWebModule {
 
 	public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
 		return FileResourceHandler.class;
+	}
+	
+	public Class<? extends XtextServiceDispatcher> bindXtextServiceDispatcher() {
+		return AADMServiceDispatcher.class;
 	}
 
 	public AADMWebModule(IResourceBaseProvider resourceBaseProvider) {

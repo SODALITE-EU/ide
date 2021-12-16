@@ -21,18 +21,15 @@
 		});
 		require(["webjars/ace/1.3.3/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
-				xtext.createEditor({
+				var editor = xtext.createEditor({
 					baseUrl: baseUrl,
-					syntaxDefinition: "xtext-resources/generated/mode-aadm2"
+					syntaxDefinition: "xtext-resources/generated/mode-aadm2",
 				});
 				$("#save-button").click(function() {
 					editor.xtextServices.saveResource();
 				});
-				$("#revert-button").click(function() {
-					editor.xtextServices.revertResource();
-				});
 				$("#generate-button").click(function() {
-					window.open('http://' + location.host + baseUrl + 'xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
+					editor.xtextServices.revertResource();
 				});
 				$("#change-resource").change(function() {
 					var resourceId = $("#change-resource option:selected").attr("value");
@@ -47,8 +44,7 @@
 	<div class="header-editor">AADM Editor</div>
 	<div class="container-buttons">
 		<button id="save-button">Save AADM in KB</button>
-		<button id="revert-button">Deploy AADM</button>
-		<button id="generate-button">Generate TTL</button>
+		<button id="generate-button">Deploy AADM</button>
 		<select id="change-resource">
 			<option value="snow.aadm">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
