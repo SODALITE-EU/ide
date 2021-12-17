@@ -51,21 +51,19 @@ public class SaveAadmService {
 						Pattern p = Pattern.compile("(?<=module:).*");
 					    Matcher m = p.matcher(aadmDSL);
 					    if (m.find()) {
-					    	namespace = m.group();
+					    	namespace = m.group().trim();
 					    }
 					} catch (Exception e) {
 						//namespace not found
 					}
 					String version = null;
-					SodaliteBackendProxy.saveAADM(ttl, aadmDSL, aadmURI, name, namespace, version);
-					
-					
+					aadmURI = SodaliteBackendProxy.saveAADM(ttl, aadmDSL, aadmURI, name, namespace, version);
+					return new DocumentStateResult(aadmURI);
 				} catch (IOException ioe) {
 					throw new InvalidRequestException.ResourceNotFoundException(ioe.getMessage(), ioe);
 				} catch (Exception e) {
 					throw new InvalidRequestException.InvalidParametersException(e.getMessage());
 				}
-				return new DocumentStateResult(it.getStateId());
 			}
 		});
 	}

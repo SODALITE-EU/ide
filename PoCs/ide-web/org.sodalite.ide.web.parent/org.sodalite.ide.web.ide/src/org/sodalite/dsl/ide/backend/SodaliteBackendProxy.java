@@ -54,7 +54,7 @@ public class SodaliteBackendProxy {
 		throw new Exception(message + " in Sodalite Web IDE Configuration");
 	}
 	
-	public static void saveAADM(String aadmTTL, String aadmDSL, String aadmURI, String name, String namespace, String version) throws Exception {
+	public static String saveAADM(String aadmTTL, String aadmDSL, String aadmURI, String name, String namespace, String version) throws Exception {
 		try {
 			boolean complete = false;
 			KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
@@ -64,6 +64,7 @@ public class SodaliteBackendProxy {
 				throw new Exception(
 						"The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
 			}
+			return saveReport.getURI();
 		} catch (NotRolePermissionException ex) {
 			//TODO report error to user
 			ex.printStackTrace();
