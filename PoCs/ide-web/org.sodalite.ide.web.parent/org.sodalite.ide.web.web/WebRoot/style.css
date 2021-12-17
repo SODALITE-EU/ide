@@ -52,7 +52,7 @@ a:hover {
 	top: 0;
 	left: 0;
 	right: 0;
-	width:100%
+	width:100%;
 	padding: 30px;
 	text-align: center;
 	border-style: solid;
@@ -66,7 +66,7 @@ a:hover {
 	top: 5%;
 	left: 6%;
 	right: 5%;
-	width: 100%
+	width: 100%;
 	padding: 10px;
 	border-style: solid;
   	border: 2px solid #77767b;
@@ -91,3 +91,35 @@ a:hover {
 	padding: 4px;
 	border: 1px solid #aaa;
 }
+
+.center {
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	z-index: 1;
+    position:relative;
+    opacity: 1;
+    background-color: #e8e8e8;
+}
+
+.hideform {
+    display: none;
+}
+
+.center input {
+    float: right;
+}
+.center label {
+    float: left;
+}
+.center span {
+    display: block;
+    overflow: hidden;
+    flow:right;
+}
+
+.center input, .formLine button {
+    box-sizing: border-box;
+}
+

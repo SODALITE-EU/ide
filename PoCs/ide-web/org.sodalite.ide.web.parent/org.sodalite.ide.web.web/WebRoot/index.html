@@ -38,8 +38,43 @@
 					var resourceId = $("#change-resource option:selected").attr("value");
 					editor.xtextServices.serviceBuilder.changeResource(resourceId);
 				});
+				$('#show').on('click', function () {
+					//TODO Add input elements to deployment form
+					//Read model, parse inputs
+					populate_inputs();
+				    $('.center').show();
+				})
+
+				$('#close').on('click', function () {
+				    $('.center').hide();
+				})
 			});
 		});
+		
+		function populate_inputs() {
+			var inputs = document.querySelector('div[id="inputs"]');
+			if (inputs != null && inputs.childElementCount == 0){
+				let input_label = document.createTextNode("Input 1");
+				let input_text = document.createElement("input1");
+				input_text.setAttribute('type', 'text');
+				input_text.setAttribute('name', "input1");
+				input_text.setAttribute('value', "");
+				inputs.appendChild(input_label);
+				inputs.appendChild(input_text);		
+			}
+		}
+		
+		function increase_worker() {
+			var workers = document.querySelector('input[name="workers"]');
+			workers.value = String(parseInt(workers.value) + 1)
+		}
+		
+		function decrease_worker() {
+			var workers = document.querySelector('input[name="workers"]');
+			if (parseInt(workers.value) > 1)
+				workers.value = String(parseInt(workers.value) - 1)
+		}
+
 	</script>
 </head>
 <body>
@@ -53,6 +88,7 @@
 			<option value="snow.aadm">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
 		</select>
+		<button id="show">Show form</button>
 	</div>
 	<div class="container-editor">
 		<div id="xtext-editor" 
@@ -63,6 +99,40 @@
 			data-editor-enable-formatting-action="true"
 			data-editor-show-error-dialogs="true"></div>
 	</div>
-
+	<div class="center hideform">
+	    <button id="close" style="float: right;">X</button>
+	    <b>AADM Deployment</b><br>
+	    Provide inputs for the AADM
+	    <hr>
+	    <form action="">
+	        Deployment name:
+	        <input type="text" name="deployment_name" value="">
+	        <br>
+	        Version tag (optional):
+	        <input type="text" name="version_tag" value="">
+	        <br>
+	        <span>Number orchestrator workers (optional):
+	        <input type="button" name="workersdecrease" value="-" onclick="decrease_worker()">
+	        <input type="button" name="workersincrease" value="+" onclick="increase_worker()">
+	        <input type="text" name="workers" value="1">
+	        </span>
+	        <br>
+	        Select a image build configuration (optional):
+	       	<input type="file" id="imagebuildfile" name="ibfilename">
+	        <br>
+	        Complete AADM (optional):
+	        <input type="checkbox" name="workers" value="">
+	        <br>
+	        Select an inputs file:
+	        <input type="file" id="inputsfile" name="inputsfilename">
+	        <br>
+	        <hr>
+	        <b>Inputs:</b>
+	        <div id="inputs">
+	        </div>
+	        <br>
+	        <input type="submit" value="Deploy">
+	    </form>
+	</div>
 </body>
 </html>
