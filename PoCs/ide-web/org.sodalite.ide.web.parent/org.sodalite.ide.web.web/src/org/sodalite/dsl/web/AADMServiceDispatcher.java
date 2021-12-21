@@ -29,7 +29,17 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 				case "save":
 					return getSaveAADMService(context);
 				case "deploy":
-					return getDeployAADMService(context);
+					// TODO read request parameters
+					String inputs_yaml = ""; 
+					String imageBuildConf = null; 
+					String version_tag = ""; 
+					int workers = 1; 
+					boolean completeModel = false; 
+					String deployment_name = ""; 
+					String monitoring_id = ""; 
+					String username = "";
+					return getDeployAADMService(context, inputs_yaml, imageBuildConf, version_tag, 
+							workers, completeModel, deployment_name, monitoring_id, username);
 			}
 		}
 		return super.createServiceDescriptor(serviceType, context);
@@ -53,7 +63,8 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 		return serviceDescriptor;
 	}
 	
-	protected ServiceDescriptor getDeployAADMService(IServiceContext context) throws InvalidRequestException {
+	protected ServiceDescriptor getDeployAADMService(IServiceContext context, String inputs_yaml, String imageBuildConf, String version_tag, 
+			int workers, boolean completeModel, String deployment_name, String monitoring_id, String username) throws InvalidRequestException {
 		XtextWebDocumentAccess document = getDocumentAccess(context);
 		ServiceDescriptor serviceDescriptor = new ServiceDescriptor();
 		serviceDescriptor.setService(() -> {
@@ -61,8 +72,9 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 				// Generate AADM serialization
 				GeneratorResult generatorResult = (GeneratorResult) getGeneratorService(context).getService().apply();
 				String ttl = generatorResult.getContent();
-				// TODO Deploy AADM 
-				return deployAadmService.deploy(document, ttl, resourceHandler, context);
+				// Deploy AADM 
+				return deployAadmService.deploy(document, ttl, inputs_yaml, imageBuildConf, version_tag, 
+					workers, completeModel, deployment_name, monitoring_id, username, resourceHandler, context);
 			} catch (Throwable throwable) {
 				return handleError(serviceDescriptor, throwable);
 			}

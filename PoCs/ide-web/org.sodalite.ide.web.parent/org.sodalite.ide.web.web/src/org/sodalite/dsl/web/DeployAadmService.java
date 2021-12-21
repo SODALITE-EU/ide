@@ -32,7 +32,8 @@ public class DeployAadmService {
 	/**
 	 * Save the content of a document.
 	 */
-	public DocumentStateResult deploy(XtextWebDocumentAccess document, String ttl, IServerResourceHandler resourceHandler,
+	public DocumentStateResult deploy(XtextWebDocumentAccess document, String ttl, String inputs_yaml, String imageBuildConf, String version_tag, 
+			int workers, boolean completeModel, String deployment_name, String monitoring_id, String username, IServerResourceHandler resourceHandler,
 			IServiceContext serviceContext) throws InvalidRequestException {
 		return document.readOnly(new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
 			@Override
@@ -57,7 +58,8 @@ public class DeployAadmService {
 						//namespace not found
 					}
 					String version = null;
-					SodaliteBackendProxy.deployAADM(ttl, aadmDSL, aadmURI, name, namespace, version);
+					SodaliteBackendProxy.deployAADM(ttl, aadmDSL, aadmURI, name, namespace, version, inputs_yaml, imageBuildConf, version_tag, workers, completeModel, deployment_name,
+							 monitoring_id,  username);
 					return new DocumentStateResult(aadmURI);
 				} catch (IOException ioe) {
 					throw new InvalidRequestException.ResourceNotFoundException(ioe.getMessage(), ioe);

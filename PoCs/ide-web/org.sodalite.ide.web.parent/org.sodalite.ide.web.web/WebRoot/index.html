@@ -85,7 +85,22 @@
 			// Capture submit event to send form content.
 			form.addEventListener( "submit", function ( event ) {
 				event.preventDefault();
-				editor.xtextServices.deploy();
+				// Create deploy request query
+				var query = "?";
+				const deployment_name = document.querySelector('input[name="deployment_name"]').value
+				query += "deployment_name=" + deployment_name;
+				const version_tag = document.querySelector('input[name="version_tag"]').value
+				if (version_tag != "")
+					query += "&version_tag=" + version_tag;
+				const workers = document.querySelector('input[name="workers"]').value
+				if (workers != "")
+					query += "&workers=" + workers;
+				//TODO Read and transfer file content
+				const ibfilename = document.querySelector('input[name="ibfilename"]').value
+				if (ibfilename != "")
+					query += "&ibfilename=" + ibfilename;
+				
+				editor.xtextServices.deploy(query);
 			} );
 		}
 		
@@ -143,7 +158,7 @@
 	       	<input type="file" id="imagebuildfile" name="ibfilename">
 	        <br>
 	        Complete AADM (optional):
-	        <input type="checkbox" name="workers" value="">
+	        <input type="checkbox" name="complete" value="">
 	        <br>
 	        Select an inputs file:
 	        <input type="file" id="inputsfile" name="inputsfilename">

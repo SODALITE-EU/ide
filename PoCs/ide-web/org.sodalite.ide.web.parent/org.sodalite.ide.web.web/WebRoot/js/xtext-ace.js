@@ -1040,6 +1040,8 @@ define('xtext/ServiceBuilder',[
 		//AADM deployment service
 		services.deployService = new DeployService(options.serviceUrl, options.resourceId);
 		services.deploy = function(addParams) {
+			// TODO Get deployment form, inject data into DeployService and construct the _urlRequest
+			services.deployService._requestUrl += addParams
 			return services.deployService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 		}
 		
