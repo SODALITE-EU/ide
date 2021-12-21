@@ -73,12 +73,20 @@
 					var input_text = document.createElement("input");
 					input_text.type = "text";
 					input_text.name = inputs[i];
+					input_text.id = "form_text";
 					input_text.value = "";
 					div_inputs.appendChild(input_label);
 					div_inputs.appendChild(input_text);
 					div_inputs.appendChild(br.cloneNode());
 				}
 			}
+			
+			const form = document.getElementById( "depl_form" );
+			// Capture submit event to send form content.
+			form.addEventListener( "submit", function ( event ) {
+				event.preventDefault();
+				editor.xtextServices.deploy();
+			} );
 		}
 		
 		function increase_worker() {
@@ -118,12 +126,12 @@
 	    <b>AADM Deployment</b><br>
 	    Provide inputs for the AADM
 	    <hr>
-	    <form action="">
+	    <form id="depl_form" action="">
 	        Deployment name:
-	        <input type="text" name="deployment_name" value="">
+	        <input type="text" name="deployment_name" id= "form_text" value="">
 	        <br>
 	        Version tag (optional):
-	        <input type="text" name="version_tag" value="">
+	        <input type="text" name="version_tag" id= "form_text" value="">
 	        <br>
 	        <span>Number orchestrator workers (optional):
 	        <input type="button" name="workersdecrease" value="-" onclick="decrease_worker()">
@@ -162,18 +170,20 @@
       const inputs = inputsFileContent.split('\n');
       for (var i=0; i<inputs.length; i++){
     	  const input_entry = inputs[i];
-    	  const input_pair = input_entry.split(':');
-    	  const input_key = input_pair[0];
-    	  const input_value = input_pair[1].trim();
-    	  //Find input field by name, set its value
-    	  const input_field = document.querySelector('input[name="'.concat(input_key).concat('"]'));
-    	  if (input_field != null){
-    		  input_field.value = input_value;
+    	  if (input_entry != ""){
+	    	  const input_pair = input_entry.split(':');
+	    	  const input_key = input_pair[0];
+	    	  const input_value = input_pair[1].trim();
+	    	  //Find input field by name, set its value
+	    	  const input_field = document.querySelector('input[name="'.concat(input_key).concat('"]'));
+	    	  if (input_field != null){
+	    		  input_field.value = input_value;
+	    	  }
     	  }
       }
       
     });
     reader.readAsText(inputsfile);
-    
   });
+
 </script>

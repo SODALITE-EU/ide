@@ -28,7 +28,7 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 			switch (serviceType) {
 				case "save":
 					return getSaveAADMService(context);
-				case "revert":
+				case "deploy":
 					return getDeployAADMService(context);
 			}
 		}
@@ -62,7 +62,7 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 				GeneratorResult generatorResult = (GeneratorResult) getGeneratorService(context).getService().apply();
 				String ttl = generatorResult.getContent();
 				// TODO Deploy AADM 
-				return deployAadmService.deploy(document, resourceHandler, context);
+				return deployAadmService.deploy(document, ttl, resourceHandler, context);
 			} catch (Throwable throwable) {
 				return handleError(serviceDescriptor, throwable);
 			}

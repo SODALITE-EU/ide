@@ -12,5 +12,8 @@
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/org.sodalite.ide.web/org.sodalite.ide.web">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/org.sodalite.ide.web.backend/org.sodalite.ide.web.backend">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
 	</wb-module>
 </project-modules>

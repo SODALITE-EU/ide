@@ -343,6 +343,39 @@ define('xtext/services/XtextService',['jquery'], function(jQuery) {
 	return XtextService;
 });
 
+define('xtext/services/DeployService',['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery) {
+	
+	/**
+	 * Service class for deploying AADM models. The resulting deployment is notified to the user
+	 */
+	function DeployService(serviceUrl, resourceId) {
+		this.initialize(serviceUrl, "deploy", resourceId);
+	};
+
+	DeployService.prototype = new XtextService();
+	
+	DeployService.prototype._initServerData = function(serverData, editorContext, params) {
+		return {
+			suppressContent: true,
+			httpMethod: 'POST'
+		};
+	};
+	
+	DeployService.prototype._getSuccessCallback = function(editorContext, params, deferred) {
+		return function(result) {
+			// TODO update
+
+			var listeners = editorContext.updateServerState(result.fullText, result.stateId);
+			for (var i = 0; i < listeners.length; i++) {
+				listeners[i](params);
+			}
+			deferred.resolve(result);
+		}
+	}
+
+	return DeployService;
+});
+
 /*******************************************************************************
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
@@ -938,6 +971,7 @@ define('xtext/ServiceBuilder',[
     'jquery',
     'xtext/services/XtextService',
 	'xtext/services/LoadResourceService',
+	'xtext/services/DeployService',
 	'xtext/services/SaveResourceService',
 	'xtext/services/HighlightingService',
 	'xtext/services/ValidationService',
@@ -946,7 +980,7 @@ define('xtext/ServiceBuilder',[
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
 	'xtext/services/FormattingService'
-], function(jQuery, XtextService, LoadResourceService, SaveResourceService, HighlightingService,
+], function(jQuery, XtextService, LoadResourceService, DeployService, SaveResourceService, HighlightingService,
 		ValidationService, UpdateService, ContentAssistService, HoverService, OccurrencesService,
 		FormattingService) {
 	
@@ -1001,6 +1035,12 @@ define('xtext/ServiceBuilder',[
 				var randomId = Math.floor(Math.random() * 2147483648).toString(16);
 				options.resourceId = randomId + '.' + options.xtextLang;
 			}
+		}
+		
+		//AADM deployment service
+		services.deployService = new DeployService(options.serviceUrl, options.resourceId);
+		services.deploy = function(addParams) {
+			return services.deployService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 		}
 		
 		if (this.setupSyntaxHighlighting) {

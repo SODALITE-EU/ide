@@ -123,3 +123,7 @@ a:hover {
     box-sizing: border-box;
 }
 
+input[type="text"]#form_text{
+	width: 50%
+}
+

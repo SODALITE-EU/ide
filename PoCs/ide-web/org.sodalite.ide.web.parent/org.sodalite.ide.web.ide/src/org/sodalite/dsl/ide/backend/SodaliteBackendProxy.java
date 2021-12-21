@@ -75,4 +75,26 @@ public class SodaliteBackendProxy {
 			throw e;
 		}
 	}
+	
+	public static String deployAADM(String aadmTTL, String aadmDSL, String aadmURI, String name, String namespace, String version) throws Exception {
+		try {
+			boolean complete = false;
+			KBSaveReportData saveReport = getKBReasoner().saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL,
+					complete, version);
+			
+			if (saveReport.getURI() == null && saveReport.getErrors() == null) {
+				throw new Exception(
+						"The AADM model could not be saved into the KB. Please, contact your Sodalite administrator");
+			}
+			return saveReport.getURI();
+		} catch (NotRolePermissionException ex) {
+			//TODO report error to user
+			ex.printStackTrace();
+			throw ex;
+		} catch (Exception e) {
+			//TODO report error to user
+			e.printStackTrace();
+			throw e;
+		}
+	}
 }
