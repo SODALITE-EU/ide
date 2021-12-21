@@ -62,7 +62,6 @@ public class DeployAadmService {
 				} catch (IOException ioe) {
 					throw new InvalidRequestException.ResourceNotFoundException(ioe.getMessage(), ioe);
 				}
-				return new DocumentStateResult(it.getStateId());
 			}
 		});
 	}
