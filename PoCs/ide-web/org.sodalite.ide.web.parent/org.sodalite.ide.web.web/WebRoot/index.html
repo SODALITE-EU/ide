@@ -44,6 +44,20 @@
 		});
 		
 		function populate_deployment_form(editor) {
+			//Reset form values
+			const deployment_name = document.querySelector('input[name="deployment_name"]');
+			deployment_name.value = '';
+			const version_tag = document.querySelector('input[name="version_tag"]');
+			version_tag.value = '';
+			const workers = document.querySelector('input[name="workers"]');
+			workers.value = '1';
+			const complete = document.querySelector('input[name="complete"]');
+			complete.checked = false;
+			const ibfilename = document.querySelector('input[name="ibfilename"]');
+			ibfilename.value = '';
+			const inputsfilename = document.querySelector('input[name="inputsfilename"]');
+			inputsfilename.value = '';
+			
 			// read AADM model from editor
 			let model = editor.xtextServices.editorContext._serverState.text.replace(/\t/g, ' ').replace(/\n/g, ' ');
 			// parse model to get inputs
@@ -95,11 +109,28 @@
 				const workers = document.querySelector('input[name="workers"]').value
 				if (workers != "")
 					query += "&workers=" + workers;
-				//TODO Read and transfer file content
-				const ibfilename = document.querySelector('input[name="ibfilename"]').value
-				if (ibfilename != "")
-					query += "&ibfilename=" + ibfilename;
-				
+				// IB Configuration: Read and transfer file content
+				const reader = new FileReader();
+    			reader.addEventListener('load', (event) => {
+    				ibfilenameContent = event.target.result;
+    			});
+				if (ibfilenameContent != "")
+					query += "&ibfilenameContent=" + ibfilenameContent;
+				const completeField = document.querySelector('input[name="complete"]');
+				const complete = completeField.checked;
+				if (complete)
+					query += "&complete=" + complete;
+				// AADM inputs
+				var inputs = "";
+				var div_inputs = document.querySelector('div[id="inputs"]');
+				for (var i=0; i<div_inputs.childElementCount; i++){
+					input_element = div_inputs.childNodes[i];
+					if (input_element instanceof HTMLInputElement && input_element.type == 'text'){ //check input text
+						inputs += input_element.name + ": " + input_element.value + "\n";
+					}
+				}
+				if (inputs != "")
+					query += "&inputs=" + inputs;
 				editor.xtextServices.deploy(query);
 			} );
 		}
@@ -122,7 +153,7 @@
 	<div class="container-buttons">
 		<button id="save-button">Save AADM in KB</button>
 		<button id="deploy-button">Deploy AADM</button>
-		Select AADM: <select id="change-resource">
+		Select AADM: <select id="change-resource" value="snow.aadm">
 			<option value="snow.aadm">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
 		</select>
@@ -155,13 +186,13 @@
 	        </span>
 	        <br>
 	        Select a image build configuration (optional):
-	       	<input type="file" id="imagebuildfile" name="ibfilename">
+	       	<input type="file" id="imagebuildfile" name="ibfilename" value="">
 	        <br>
 	        Complete AADM (optional):
 	        <input type="checkbox" name="complete" value="">
 	        <br>
 	        Select an inputs file:
-	        <input type="file" id="inputsfile" name="inputsfilename">
+	        <input type="file" id="inputsfile" name="inputsfilename" value="">
 	        <br>
 	        <hr>
 	        <b>Inputs:</b>
@@ -175,8 +206,10 @@
 </html>
 
 <script>
-  const inputsfileField = document.querySelector('input[name="inputsfilename"]');
-  inputsfileField.addEventListener('change', (event) => {
+var ibfilenameContent = "";
+
+const inputsfileField = document.querySelector('input[name="inputsfilename"]');
+inputsfileField.addEventListener('change', (event) => {
     const inputsfile = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
@@ -196,9 +229,17 @@
 	    	  }
     	  }
       }
-      
     });
     reader.readAsText(inputsfile);
-  });
+});
 
+const ibfileField = document.querySelector('input[name="ibfilename"]');
+ibfileField.addEventListener('change', (event) => {
+    const ibfile = event.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+    	ibfilenameContent = event.target.result;
+    });
+    reader.readAsText(ibfile);
+});
 </script>
