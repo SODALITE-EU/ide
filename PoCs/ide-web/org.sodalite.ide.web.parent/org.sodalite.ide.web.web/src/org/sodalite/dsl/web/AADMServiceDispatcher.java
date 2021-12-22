@@ -1,5 +1,7 @@
 package org.sodalite.dsl.web;
 
+import java.util.UUID;
+
 import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
@@ -9,6 +11,7 @@ import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
+import org.sodalite.dsl.ide.backend.SodaliteBackendConfiguration;
 
 import com.google.inject.Inject;
 
@@ -29,15 +32,30 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 				case "save":
 					return getSaveAADMService(context);
 				case "deploy":
-					// TODO read request parameters
-					String inputs_yaml = ""; 
-					String imageBuildConf = null; 
-					String version_tag = ""; 
-					int workers = 1; 
+					// Read request parameters
+					String inputs_yaml = context.getParameter("inputs").replaceAll(";", "\n");
+					String imageBuildConf = null;
+					if (context.getParameter("ibfilenameContent") != null)
+						imageBuildConf = context.getParameter("ibfilenameContent"); 
+					String version_tag = context.getParameter("version_tag"); 
+					int workers = Integer.valueOf(context.getParameter("workers"));
 					boolean completeModel = false; 
-					String deployment_name = ""; 
-					String monitoring_id = ""; 
-					String username = "";
+					if (context.getParameter("complete") != null)
+						completeModel = Boolean.valueOf(context.getParameter("complete"));
+					String deployment_name = context.getParameter("deployment_name");
+					// Adding additional inputs
+					String consul_ip = SodaliteBackendConfiguration.Consul_IP;
+					String grafana_uri = SodaliteBackendConfiguration.Grafana_URI;
+					String skydive_analyzer_uri = SodaliteBackendConfiguration.SKYDIVE_ANALYZER_URI;
+					inputs_yaml += "deployment_label: " + deployment_name + "\n";
+					inputs_yaml += "consul_server_address: " + consul_ip + "\n";
+					inputs_yaml += "skydive_analyzer: " + skydive_analyzer_uri + "\n";
+					String grafana_template = "%1$sd/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{ %2$s }}";
+					String grafana_address = String.format(grafana_template, grafana_uri, deployment_name);
+					inputs_yaml += "grafana_address: " + grafana_address + "\n";
+					String monitoring_id = UUID.randomUUID().toString();
+					inputs_yaml += "monitoring_id: " + monitoring_id;
+					String username = SodaliteBackendConfiguration.KEYCLOAK_USER;
 					return getDeployAADMService(context, inputs_yaml, imageBuildConf, version_tag, 
 							workers, completeModel, deployment_name, monitoring_id, username);
 			}

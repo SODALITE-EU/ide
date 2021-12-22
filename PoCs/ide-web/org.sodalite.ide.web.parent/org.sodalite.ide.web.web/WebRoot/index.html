@@ -123,10 +123,10 @@
 				// AADM inputs
 				var inputs = "";
 				var div_inputs = document.querySelector('div[id="inputs"]');
-				for (var i=0; i<div_inputs.childElementCount; i++){
+				for (var i=0; i<div_inputs.childNodes.length; i++){
 					input_element = div_inputs.childNodes[i];
 					if (input_element instanceof HTMLInputElement && input_element.type == 'text'){ //check input text
-						inputs += input_element.name + ": " + input_element.value + "\n";
+						inputs += input_element.name + ":" + input_element.value + ";";
 					}
 				}
 				if (inputs != "")
@@ -154,7 +154,7 @@
 		<button id="save-button">Save AADM in KB</button>
 		<button id="deploy-button">Deploy AADM</button>
 		Select AADM: <select id="change-resource" value="snow.aadm">
-			<option value="snow.aadm">Snow AADM</option>
+			<option selected value="snow.aadm">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
 		</select>
 	</div>
