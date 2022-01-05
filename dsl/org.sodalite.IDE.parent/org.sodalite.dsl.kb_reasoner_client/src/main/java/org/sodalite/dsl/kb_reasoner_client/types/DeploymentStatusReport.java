@@ -2,9 +2,13 @@ package org.sodalite.dsl.kb_reasoner_client.types;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.sodalite.dsl.kb_reasoner_client.json.DeploymentStatusReportJsonDeserializer;
 
-@JsonIgnoreProperties(value = { "inputs", "instance_state", "outputs" })
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonIgnoreProperties(value = { "inputs", "instance_state", "outputs", "node_error" })
+@JsonDeserialize(using = DeploymentStatusReportJsonDeserializer.class)
 public class DeploymentStatusReport {
 
 	String blueprint_id;
@@ -22,6 +26,15 @@ public class DeploymentStatusReport {
 	String stdout;
 	String stderr;
 	Integer workers;
+	DeploymentNodeError node_error;
+
+	public DeploymentNodeError getNode_error() {
+		return node_error;
+	}
+
+	public void setNode_error(DeploymentNodeError node_error) {
+		this.node_error = node_error;
+	}
 
 	public String getBlueprint_id() {
 		return blueprint_id;
