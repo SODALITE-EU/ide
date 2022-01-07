@@ -26,8 +26,11 @@ public class AADMDSLHelper {
 	}
 
 	public static String getModule(EObject object) {
+		String module = null;
 		EObject model = findModel(object);
-		return invokeGetModule(model);
+		if (model != null)
+			module = invokeGetModule(model);
+		return module;
 	}
 
 	private static String invokeGetModule(EObject model) {

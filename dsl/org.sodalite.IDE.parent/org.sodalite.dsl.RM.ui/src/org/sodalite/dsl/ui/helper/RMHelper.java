@@ -103,11 +103,12 @@ public class RMHelper {
 	public static List<EOperationDefinition> findLocalOperations(EObject object) {
 		List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>();
 		RM_Model model = (RM_Model) findModel(object);
-		for (EInterfaceType _interface : model.getInterfaceTypes().getInterfaceTypes()) {
-			for (EOperationDefinition op : _interface.getInterface().getOperations().getOperations()) {
-				operations.add(op);
+		if (model != null)
+			for (EInterfaceType _interface : model.getInterfaceTypes().getInterfaceTypes()) {
+				for (EOperationDefinition op : _interface.getInterface().getOperations().getOperations()) {
+					operations.add(op);
+				}
 			}
-		}
 		return operations;
 	}
 
@@ -181,20 +182,22 @@ public class RMHelper {
 	}
 
 	public static ENodeType findRequirementNodeInLocalType(String requirement, ENodeType nodeType) {
-		RM_Model model = (RM_Model) findModel(nodeType);
 		ENodeType node = null;
-		String module1 = model.getModule();
-		if (module1 == null)
-			module1 = "";
-		if (nodeType.getNode().getRequirements() == null)
-			return node;
-		for (ERequirementDefinition req : nodeType.getNode().getRequirements().getRequirements()) {
-			String module2 = req.getRequirement().getNode().getModule();
-			if (module2 == null)
-				module2 = "";
-			if (req.getName().equals(requirement)) {
-				if (module1.equals(module2)) {
-					node = findNodeType(model, req.getRequirement().getNode().getType());
+		RM_Model model = (RM_Model) findModel(nodeType);
+		if (model != null) {
+			String module1 = model.getModule();
+			if (module1 == null)
+				module1 = "";
+			if (nodeType.getNode().getRequirements() == null)
+				return node;
+			for (ERequirementDefinition req : nodeType.getNode().getRequirements().getRequirements()) {
+				String module2 = req.getRequirement().getNode().getModule();
+				if (module2 == null)
+					module2 = "";
+				if (req.getName().equals(requirement)) {
+					if (module1.equals(module2)) {
+						node = findNodeType(model, req.getRequirement().getNode().getType());
+					}
 				}
 			}
 		}
@@ -205,25 +208,27 @@ public class RMHelper {
 		// Find requirement in local node
 		String nodeRef = null;
 		RM_Model model = (RM_Model) findModel(node);
-		ERequirementDefinition req = findRequirementInLocalType(req_name, node);
-		if (req != null) {
-			EPREFIX_TYPE req_node = req.getRequirement().getNode();
-			if (req_node != null) {
-				// Find requirement target node in local model, or
-				if (model.getModule().equals(req_node.getModule())) {
-					ENodeType target_node = findNodeType(model, req_node.getType());
-					if (target_node != null)
-						nodeRef = "local:" + getReference(target_node);
+		if (model != null) {
+			ERequirementDefinition req = findRequirementInLocalType(req_name, node);
+			if (req != null) {
+				EPREFIX_TYPE req_node = req.getRequirement().getNode();
+				if (req_node != null) {
+					// Find requirement target node in local model, or
+					if (model.getModule().equals(req_node.getModule())) {
+						ENodeType target_node = findNodeType(model, req_node.getType());
+						if (target_node != null)
+							nodeRef = "local:" + getReference(target_node);
+					}
+					if (nodeRef == null) {
+						// Find requirement target node in KB
+						nodeRef = "kb:" + findNodeByNameInKB(req_node);
+					}
 				}
-				if (nodeRef == null) {
-					// Find requirement target node in KB
-					nodeRef = "kb:" + findNodeByNameInKB(req_node);
-				}
+			} else {
+				// Find requirement in KB for node superclass, find node in KB
+				nodeRef = "kb:"
+						+ RMHelper.findRequirementNodeByNameInKB(getReference(node.getNode().getSuperType()), req_name);
 			}
-		} else {
-			// Find requirement in KB for node superclass, find node in KB
-			nodeRef = "kb:"
-					+ RMHelper.findRequirementNodeByNameInKB(getReference(node.getNode().getSuperType()), req_name);
 		}
 		return nodeRef;
 	}
@@ -270,8 +275,11 @@ public class RMHelper {
 	}
 
 	public static List<String> getImportedModules(EObject object) {
+		List<String> modules = new ArrayList<>();
 		EObject model = findModel(object);
-		return invokeGetImports(model);
+		if (model != null)
+			modules = invokeGetImports(model);
+		return modules;
 	}
 
 	private static List<String> invokeGetImports(EObject model) {
@@ -297,7 +305,7 @@ public class RMHelper {
 	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
 		if (ref instanceof EPREFIX_TYPE) {
 			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
-		} else if (ref instanceof EPREFIX_TYPE) {
+		} else if (ref instanceof EPREFIX_ID) {
 			return ((EPREFIX_ID) ref).getId();
 		} else {
 			return null;
@@ -305,8 +313,11 @@ public class RMHelper {
 	}
 
 	public static String getModule(EObject object) {
+		String module = null;
 		EObject model = findModel(object);
-		return invokeGetModule(model);
+		if (model != null)
+			module = invokeGetModule(model);
+		return module;
 	}
 
 	private static String invokeGetModule(EObject model) {
@@ -493,21 +504,22 @@ public class RMHelper {
 		if (targetFile == null) {
 			MessageDialog.openError(shell, "Folder not found",
 					"Folder " + targetFolder.getName() + " could not be found");
-		}
-		if (!targetFile.exists()) {
-			saveContentInFile(filecontent, targetFile);
 		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				try {
-					targetFile.delete(false, null);
-					saveContentInFile(filecontent, targetFile);
-				} catch (CoreException e) {
-					SodaliteLogger.log("Error", e);
-				}
+			if (!targetFile.exists()) {
+				saveContentInFile(filecontent, targetFile);
+			} else {
+				boolean confirmed = MessageDialog.openConfirm(shell,
+						"Target file exists in folder " + targetFolder.getName(),
+						"Do you want to override target file " + targetFile.getName());
+				if (confirmed) {
+					try {
+						targetFile.delete(false, null);
+						saveContentInFile(filecontent, targetFile);
+					} catch (CoreException e) {
+						SodaliteLogger.log("Error", e);
+					}
 
+				}
 			}
 		}
 	}

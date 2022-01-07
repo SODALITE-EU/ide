@@ -707,6 +707,9 @@ public class BlueprintView {
 							BlueprintView.getView().refreshView();
 						}
 					});
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Undeploying process interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
