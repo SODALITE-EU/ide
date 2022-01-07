@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
@@ -42,6 +43,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 	private Text deploymentNameText = null;
 	private Button completeModelCB = null;
 	private Button validateNiFiCertsCB = null;
+	private Button useDMCB = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
@@ -90,6 +92,10 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 	public boolean getValidateNiFiCerts() {
 		return this.validateNiFiCertsCB.getSelection();
+	}
+
+	public boolean getUseDataManagement() {
+		return this.useDMCB.getSelection();
 	}
 
 	@Override
@@ -188,6 +194,15 @@ public class DeploymentWizardMainPage extends WizardPage {
 		GridData completeModelGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		completeModelCB.setLayoutData(completeModelGridData);
 
+		// Use data management
+		Label useDM = new Label(containerMain, SWT.NONE);
+		useDM.setText("Use Data Management (optional):");
+		useDM.setToolTipText("Check if your AADM requires data management support with Apache NIFI");
+
+		useDMCB = new Button(containerMain, SWT.CHECK);
+		GridData useDMGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		useDMCB.setLayoutData(useDMGridData);
+
 		// Validate NIF Certificates
 		Label validateNiFiCerts = new Label(containerMain, SWT.NONE);
 		validateNiFiCerts.setText("Validate NIF Certificates (optional):");
@@ -210,9 +225,6 @@ public class DeploymentWizardMainPage extends WizardPage {
 			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
 			buttonSelectFile.setText("Select...");
 			buttonSelectFile.addListener(SWT.Selection, new Listener() {
-				private String current_key = null;
-				private String current_value = null;
-
 				public void handleEvent(Event event) {
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
@@ -227,42 +239,64 @@ public class DeploymentWizardMainPage extends WizardPage {
 						File file = new File(selectedInputFile);
 						// Read inputs from file
 						try (Stream<String> lines = Files.lines(file.toPath())) {
-							lines.forEach(
-									// Assign inputs values in wizard form
-									input -> processInput(input));
+							// If line ends with : process following lines as map
+							Iterator<String> iter = lines.iterator();
+							if (iter.hasNext()) {
+								processInput(iter.next(), iter);
+							}
 						} catch (IOException e) {
 							SodaliteLogger.log("Error", e);
 						}
 					}
 				}
 
-				private Object processInput(String input) {
-					if (input.isEmpty())
-						return input;
-					StringTokenizer st = new StringTokenizer(input, ":");
+				private void processInput(String line, Iterator<String> iter) {
+					if (!line.trim().endsWith(":")) { // key:value entry
+						processSingleInput(line, iter);
+					} else { // map entry
+						processMapInput(line, iter);
+					}
+				}
+
+				private void processMapInput(String line, Iterator<String> iter) {
+					StringTokenizer st = new StringTokenizer(line, ":");
+					String input_name = st.nextToken();
+					String input_value = "";
+					String childLine = null;
+					while (true) {
+						childLine = iter.next();
+						if (childLine != null && !childLine.startsWith(" ")) {
+							break;
+						}
+						input_value += childLine + "\n";
+					}
+
+					if (inputDefs.keySet().contains(input_name)) {
+						String input_key = input_name;
+						// Remove empty line
+						if (input_value.endsWith("\n"))
+							input_value = input_value.substring(0, input_value.length() - 1);
+						inputWidgets.get(input_key).setText(input_value);
+					}
+
+					if (childLine != null)
+						processInput(childLine, iter);
+				}
+
+				private void processSingleInput(String line, Iterator<String> iter) {
+					if (line.isEmpty())
+						return;
+					StringTokenizer st = new StringTokenizer(line, ":");
 					String input_name = st.nextToken();
 					if (inputDefs.keySet().contains(input_name)) {
-						current_key = input_name;
-						if (st.hasMoreTokens()) {
-							String input_value = st.nextToken();
-							while (st.hasMoreTokens())
-								input_value += ":" + st.nextToken();
-							inputWidgets.get(current_key).setText(input_value);
-						}
+						String input_key = input_name;
+						String input_value = st.nextToken();
+						inputWidgets.get(input_key).setText(input_value);
 					}
-//					else {
-//						if (st.hasMoreTokens()) {
-//							String input_value = st.nextToken();
-//							while (st.hasMoreTokens())
-//								input_value += ":" + st.nextToken();
-//							current_value = inputWidgets.get(current_key).getText();
-//
-//							inputWidgets.get(current_key)
-//									.setText(current_value + input_name + ":" + input_value + "\n");
-//						}
-//					}
 
-					return input;
+					if (iter.hasNext()) {
+						processInput(iter.next(), iter);
+					}
 				}
 			});
 

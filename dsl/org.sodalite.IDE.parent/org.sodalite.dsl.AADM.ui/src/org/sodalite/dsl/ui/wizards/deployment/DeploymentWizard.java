@@ -33,6 +33,7 @@ public class DeploymentWizard extends Wizard {
 	private int workers = 0;
 	private boolean completeModel = false;
 	private boolean validateNiFiCerts = false;
+	private boolean useDM = false;
 	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
@@ -85,6 +86,15 @@ public class DeploymentWizard extends Wizard {
 		// Get workers
 		this.workers = mainPage.getWorkers();
 
+		// Get completeModel
+		this.completeModel = mainPage.getCompleteModel();
+
+		// Get if data management is used
+		this.useDM = mainPage.getUseDataManagement();
+
+		// Get validate NIFI certificates
+		this.validateNiFiCerts = mainPage.getValidateNiFiCerts();
+
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
@@ -114,25 +124,21 @@ public class DeploymentWizard extends Wizard {
 			this.monitoring_id = UUID.randomUUID().toString();
 			content.append("monitoring_id: " + this.monitoring_id + "\n");
 			// NIFI inputs
-			String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
-			content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
-			String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
-			content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
-			String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
-			content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN + "\n");
-			Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
-			content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS + "\n");
+			if (useDM) {
+				String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
+				content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
+				String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
+				content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
+				String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
+				content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN + "\n");
+				Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
+				content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS + "\n");
+			}
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}
-
-		// Get completeModel
-		this.completeModel = mainPage.getCompleteModel();
-
-		// Get validate NIFI certificates
-		this.validateNiFiCerts = mainPage.getValidateNiFiCerts();
 
 		return true;
 	}

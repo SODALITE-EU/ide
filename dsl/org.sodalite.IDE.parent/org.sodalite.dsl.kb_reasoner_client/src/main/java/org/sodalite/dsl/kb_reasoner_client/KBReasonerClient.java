@@ -33,6 +33,8 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -1887,6 +1889,8 @@ public class KBReasonerClient implements KBReasoner {
 			String NIFI_AUTH_REQUEST_URL = NIFI_API_ENDPOINT + "/access/oidc/request";
 			String NIFI_OIDC_TOKEN_EXCHANGE_URL = NIFI_API_ENDPOINT + "/access/oidc/exchange";
 
+			RequestConfig requestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
+
 			// Cookie store
 			BasicCookieStore cookieStore = new BasicCookieStore();
 
@@ -1898,10 +1902,11 @@ public class KBReasonerClient implements KBReasoner {
 
 			// Create a client with cookie store and disabled SSL check
 			CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf)
-					.setDefaultCookieStore(cookieStore).setRedirectStrategy(new LaxRedirectStrategy()) // To allow
-																										// redirect
-																										// after POST
-																										// requests
+					.setDefaultRequestConfig(requestConfig).setDefaultCookieStore(cookieStore)
+					.setRedirectStrategy(new LaxRedirectStrategy()) // To allow
+																	// redirect
+																	// after POST
+																	// requests
 					.build();
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);
