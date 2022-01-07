@@ -535,16 +535,17 @@ public class RMHelper {
 		if (targetFile == null) {
 			MessageDialog.openError(shell, "Folder not found",
 					"Folder " + targetFolder.getName() + " could not be found");
-		}
-		if (!targetFile.exists()) {
-			saveModel(model, targetFile);
 		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				targetFile.delete(false, null);
+			if (!targetFile.exists()) {
 				saveModel(model, targetFile);
+			} else {
+				boolean confirmed = MessageDialog.openConfirm(shell,
+						"Target file exists in folder " + targetFolder.getName(),
+						"Do you want to override target file " + targetFile.getName());
+				if (confirmed) {
+					targetFile.delete(false, null);
+					saveModel(model, targetFile);
+				}
 			}
 		}
 	}
