@@ -166,6 +166,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
+	public void processManageModakDefinitions(Path definitionsFilePath, String type) {
+		// TODO
+	}
+
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, String version, IProject project,
 			ExecutionEvent event) {
 		Job job = Job.create("Save AADM", (ICoreRunnable) monitor -> {

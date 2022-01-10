@@ -331,6 +331,10 @@
         class="org.sodalite.dsl.ui.handlers.PDSUpdateHandler"
         commandId="org.sodalite.dsl.AADM.ui.handler.pdsUpdate">
   </handler>
+  <handler
+        class="org.sodalite.dsl.ui.handlers.ManageModakHandler"
+        commandId="org.sodalite.dsl.AADM.ui.handler.manageModak">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -373,6 +377,13 @@
         description="Platform Discovery Service - update"
         id="org.sodalite.dsl.AADM.ui.command.pdsUpdate"
         name="pdsUpdate">
+  </command>
+  <command
+        categoryId="org.sodalite.category"
+        defaultHandler="org.sodalite.dsl.ui.handlers.ManageModakHandler"
+        description="Update MODAK definitions"
+        id="org.sodalite.dsl.AADM.ui.command.manageModak"
+        name="manageModak">
   </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -474,6 +485,29 @@
               style="push"
               tooltip="Request Platform Discovery Service to update">
         </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.manageModak"
+              id="org.sodalite.dsl.AADM.ui.popup.command.manageModak"
+              label="Manage MODAK definitions"
+              style="push"
+              tooltip="Send MODAK definitions for infrastructure, scripts and scaling models">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.json">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -564,6 +598,29 @@
               style="push"
               tooltip="Request Platform Discovery Service to update">
         </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.manageModak"
+              id="org.sodalite.dsl.AADM.ui.popup.command.manageModak"
+              label="Manage MODAK definitions"
+              style="push"
+              tooltip="Send MODAK definitions for infrastructure, scripts and scaling models">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.json">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -653,6 +710,29 @@
               label="Platform Discovery Service - update"
               style="push"
               tooltip="Request Platform Discovery Service to update">
+        </command>
+        <command
+              commandId="org.sodalite.dsl.AADM.ui.command.manageModak"
+              id="org.sodalite.dsl.AADM.ui.popup.command.manageModak"
+              label="Manage MODAK definitions"
+              style="push"
+              tooltip="Send MODAK definitions for infrastructure, scripts and scaling models">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.json">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
         </command>
      </menu>
   </menuContribution>

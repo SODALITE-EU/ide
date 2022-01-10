@@ -1,0 +1,50 @@
+{
+  "name": "string",
+  "disabled": "2021-12-09T14:51:34.213Z",
+  "description": "string",
+  "configuration": {
+    "scheduler": "slurm",
+    "storage": {
+      "file:///scratch": {
+        "storage_class": "default-high"
+      },
+      "file:///data": {
+        "storage_class": "common"
+      }
+    },
+    "partitions": {
+      "mc": {
+        "nnodes": 100,
+        "node": {
+          "ncpus": 2,
+          "cpu": {
+            "arch": "x86_64",
+            "microarch": "zen2",
+            "ncores": 64,
+            "nthreads": 2
+          },
+          "naccel": 0,
+          "memory": "512GiB"
+        }
+      },
+      "gpu": {
+        "nnodes": 5,
+        "node": {
+          "ncpus": 1,
+          "cpu": {
+            "arch": "x86_64",
+            "microarch": "zen2",
+            "ncores": 32,
+            "nthreads": 2
+          },
+          "naccel": 2,
+          "accel": {
+            "type": "gpu",
+            "model": "P100"
+          },
+          "memory": "256GiB"
+        }
+      }
+    }
+  }
+}
