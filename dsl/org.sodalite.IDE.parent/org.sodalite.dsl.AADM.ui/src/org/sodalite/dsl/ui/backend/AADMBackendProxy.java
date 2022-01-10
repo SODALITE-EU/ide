@@ -166,8 +166,8 @@ public class AADMBackendProxy extends RMBackendProxy {
 		pdsUpdate(inputsFilePath, namespace, platformType);
 	}
 
-	public void processManageModakDefinitions(Path definitionsFilePath, String type) {
-		// TODO
+	public void processManageModakDefinitions(Path definitionsFilePath, String definitionsType) {
+		manageModakDefinitions(definitionsFilePath, definitionsType);
 	}
 
 	private void saveAADM(String aadmTTL, IFile aadmFile, String aadmURI, String version, IProject project,
@@ -529,6 +529,53 @@ public class AADMBackendProxy extends RMBackendProxy {
 							String message = "There were problems in PDS to update: " + e.getMessage()
 									+ "\nPlease contact Sodalite administrator and report her/him above error message";
 							showErrorDialog("", "PDS update", message);
+							SodaliteLogger.log(message, e);
+						}
+					});
+					SodaliteLogger.log("Error requesting PDS update", e);
+					return Status.CANCEL_STATUS;
+				}
+				return Status.OK_STATUS;
+
+			}
+		};
+		job.setPriority(Job.LONG);
+		job.schedule();
+	}
+
+	private void manageModakDefinitions(Path definitionsFilePath, String definitionsType) {
+		Job job = new Job("Manage MODAK definitions") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// Manage job states
+				SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+
+				try {
+					// Ask PDS to update
+					subMonitor.setTaskName("Manage MODAK definitions");
+
+					String definitions = RMHelper.readFile(definitionsFilePath);
+					getKBReasoner().manageModakDefinitions(definitions, definitionsType);
+					subMonitor.worked(1);
+
+					// Upon completion, show dialog
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "MODAK definitions has been successfully managed";
+							showInfoDialog("", "MODAK", message);
+						}
+					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+				} catch (Exception e) {
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							String message = "There were problems in MODAK to manage definitions. Error: "
+									+ e.getMessage()
+									+ "\nPlease contact Sodalite administrator and report her/him above error message";
+							showErrorDialog("", "MODAK", message);
 							SodaliteLogger.log(message, e);
 						}
 					});

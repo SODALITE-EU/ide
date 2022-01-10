@@ -127,6 +127,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String grafanaUri;
 	private String rulesServerUri;
 	private String vaultSecretUploaderUri;
+	private String modakUri;
 	private String keycloak_user;
 	private String keycloak_password;
 	private String keycloak_client_id;
@@ -136,7 +137,7 @@ public class KBReasonerClient implements KBReasoner {
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
 			String keycloakUri, String pdsUri, String refactorerUri, String nifiUri, String grafanaUri,
-			String rulesServerUri, String vaultSecretUploaderUri) {
+			String rulesServerUri, String vaultSecretUploaderUri, String modakUri) {
 		this.kbReasonerUri = kbReasonerUri;
 		this.iacUri = iacUri;
 		this.image_builder_uri = image_builder_uri;
@@ -148,6 +149,7 @@ public class KBReasonerClient implements KBReasoner {
 		this.grafanaUri = grafanaUri;
 		this.rulesServerUri = rulesServerUri;
 		this.vaultSecretUploaderUri = vaultSecretUploaderUri;
+		this.modakUri = modakUri;
 	}
 
 	@Override
@@ -1952,6 +1954,19 @@ public class KBReasonerClient implements KBReasoner {
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}
+	}
+
+	public void manageModakDefinitions(String definitions, String definitionType) throws SodaliteException {
+		Assert.isTrue(definitions != null && !definitions.isEmpty(), "Pass a not null/empty definitions");
+		Assert.isTrue(definitionType != null && !definitionType.isEmpty(), "Pass a not null/empty definitionType");
+		String url = modakUri + definitionType;
+		URI uri;
+		try {
+			uri = new URI(url);
+		} catch (URISyntaxException ex) {
+			throw new SodaliteException(ex);
+		}
+		postObject(definitions, uri, HttpStatus.CREATED);
 	}
 
 	private List<KBError> processErrors(String json) throws Exception {

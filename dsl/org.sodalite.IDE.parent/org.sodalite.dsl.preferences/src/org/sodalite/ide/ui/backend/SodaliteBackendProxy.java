@@ -92,8 +92,15 @@ public class SodaliteBackendProxy {
 		if (!vaultSecretUploaderURI.endsWith("/"))
 			vaultSecretUploaderURI = vaultSecretUploaderURI.concat("/");
 
+		String modakURI = store.getString(PreferenceConstants.MODAK_URI).trim();
+		if (modakURI.isEmpty())
+			raiseConfigurationIssue("MODAK URI user not set");
+		if (!modakURI.endsWith("/"))
+			modakURI = modakURI.concat("/");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, nifiURI, grafanaURI, rulesServerURI, vaultSecretUploaderURI);
+				keycloakURI, pdsURI, refactorerURI, nifiURI, grafanaURI, rulesServerURI, vaultSecretUploaderURI,
+				modakURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);

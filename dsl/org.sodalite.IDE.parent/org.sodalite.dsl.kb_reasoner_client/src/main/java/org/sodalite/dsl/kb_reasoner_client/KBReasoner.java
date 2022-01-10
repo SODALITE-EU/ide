@@ -184,4 +184,6 @@ public interface KBReasoner {
 
 	String getNIFIAccessToken() throws SodaliteException;
 
+	void manageModakDefinitions(String definitions, String definitionType) throws SodaliteException;
+
 }

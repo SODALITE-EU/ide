@@ -78,6 +78,7 @@ class KBReasonerTest {
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
 	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";
+	private final String MODAK_URI = "http://X.X.X.X:PORT/";
 
 	private final String client_id = "sodalite-ide";
 	private final String client_secret = "1a1083bc-c183-416a-9192-26076f605cc3";
@@ -89,7 +90,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, NIFI_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
+				Refactorer_URI, NIFI_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI, MODAK_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,

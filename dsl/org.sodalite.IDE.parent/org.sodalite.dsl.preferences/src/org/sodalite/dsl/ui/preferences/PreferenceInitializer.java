@@ -81,6 +81,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (skydive_analyzer_uri == null)
 			skydive_analyzer_uri = "192.168.2.75:8088";
 
+		String modak_uri = prop.getProperty(PreferenceConstants.MODAK_URI);
+		if (modak_uri == null)
+			modak_uri = "http://<IP>:<PORT>/";
+
 		String vault_secret_uploader_uri = prop.getProperty(PreferenceConstants.VAULT_SECRET_UPLOADER_URI);
 		if (vault_secret_uploader_uri == null)
 			vault_secret_uploader_uri = "http://192.168.3.74:8202";
@@ -105,9 +109,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
 				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
 						+ "KB_Reasoner endpoint: {0}, IaC Builder endpoint: {1}, Image Builder endpoint: {2},"
-						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}, NIFI endpoint: {7}",
+						+ " xOpera endpoint: {3}, Keycloak endpoint: {4}, PDS endpoint: {5}, Refactorer endpoint: {6}, NIFI endpoint: {7}, MODAK endpoint: {8}",
 						kb_reasoner_uri, iac_uri, image_builder_uri, xOpera_uri, keycloak_uri, pds_uri, refactorer_uri,
-						nifi_uri)));
+						nifi_uri, modak_uri)));
 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
 		defaults.put(PreferenceConstants.KB_REASONER_URI, kb_reasoner_uri);
@@ -122,6 +126,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
+		defaults.put(PreferenceConstants.MODAK_URI, modak_uri);
 		defaults.put(PreferenceConstants.VAULT_SECRET_UPLOADER_URI, vault_secret_uploader_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
