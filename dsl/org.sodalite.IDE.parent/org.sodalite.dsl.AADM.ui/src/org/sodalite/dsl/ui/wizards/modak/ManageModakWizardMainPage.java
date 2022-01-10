@@ -32,10 +32,11 @@ public class ManageModakWizardMainPage extends WizardPage {
 	private Path definitionsFilePath = null;
 	private String definitionType = null;
 
-	protected ManageModakWizardMainPage() {
+	protected ManageModakWizardMainPage(Path definitionsFilePath) {
 		super("MODAK");
 		setTitle("MODAK");
 		setDescription("Manage MODAK definitions");
+		this.definitionsFilePath = definitionsFilePath;
 	}
 
 	public Path getDefinitionsFilePath() {
@@ -54,38 +55,49 @@ public class ManageModakWizardMainPage extends WizardPage {
 		container.setLayout(layout);
 
 		// Definitions File
-		Label definitionsFileLabel = new Label(container, SWT.NONE);
-		definitionsFileLabel.setText("Select the definitions file:");
+		if (definitionsFilePath == null) {
+			Label definitionsFileLabel = new Label(container, SWT.NONE);
+			definitionsFileLabel.setText("Select the definitions file:");
 
-		Text definitionsFileText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData definitionsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
-		definitionsFileText.setLayoutData(definitionsFileGridData);
+			Text definitionsFileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+			GridData definitionsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
+			definitionsFileText.setLayoutData(definitionsFileGridData);
 
-		definitionsFileText.addModifyListener(new ModifyListener() {
-			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-				getWizard().getContainer().updateButtons();
-			};
-		});
+			definitionsFileText.addModifyListener(new ModifyListener() {
+				public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
+					getWizard().getContainer().updateButtons();
+				};
+			});
 
-		Button buttonSelectImageBuildConfFile = new Button(container, SWT.PUSH);
-		buttonSelectImageBuildConfFile.setText("Select...");
-		buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
-				String fileFilterPath = System.getProperty("user.home");
-				fileDialog.setFilterPath(fileFilterPath);
-				fileDialog.setFilterExtensions(new String[] { "*.json" });
+			Button buttonSelectImageBuildConfFile = new Button(container, SWT.PUSH);
+			buttonSelectImageBuildConfFile.setText("Select...");
+			buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event event) {
+					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
+					String fileFilterPath = System.getProperty("user.home");
+					fileDialog.setFilterPath(fileFilterPath);
+					fileDialog.setFilterExtensions(new String[] { "*.json" });
 
-				String selectedInputFile = fileDialog.open();
-				if (selectedInputFile != null) {
-					System.out.println("Selected image build conf file: " + selectedInputFile);
-					File file = new File(selectedInputFile);
-					definitionsFilePath = file.toPath();
-					definitionsFileText.setText(selectedInputFile);
+					String selectedInputFile = fileDialog.open();
+					if (selectedInputFile != null) {
+						System.out.println("Selected image build conf file: " + selectedInputFile);
+						File file = new File(selectedInputFile);
+						definitionsFilePath = file.toPath();
+						definitionsFileText.setText(selectedInputFile);
+					}
 				}
-			}
-		});
+			});
+		} else {
+			Label definitionsFileLabel = new Label(container, SWT.NONE);
+			definitionsFileLabel.setText("Definitions file:");
+
+			Label definitionsFile = new Label(container, SWT.NONE);
+			definitionsFile.setText(definitionsFilePath.getFileName().toString());
+
+			Label separator = new Label(container, SWT.NONE);
+			separator.setText(" ");
+		}
 
 		// Definitions type
 		Label definitionTypeLabel = new Label(container, SWT.NONE);

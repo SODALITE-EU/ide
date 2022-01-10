@@ -10,6 +10,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.ui.backend.AADMBackendProxy;
+import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.dsl.ui.wizards.modak.ManageModakWizard;
 import org.sodalite.dsl.ui.wizards.modak.ManageModakWizardDialog;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -33,12 +34,15 @@ public class ManageModakHandler implements IHandler {
 		try {
 			AADMBackendProxy backendProxy = new AADMBackendProxy();
 			if (PlatformUI.getWorkbench().saveAllEditors(true)) { // Ask to save model before continue
-				// Show ManageModak Wizard
 
-				ManageModakWizardDialog dialog = new ManageModakWizardDialog(parent, new ManageModakWizard());
+				// Get JSON model selection
+				Path definitionsFilePath = RMHelper.getSelection();
+
+				// Show ManageModak Wizard
+				ManageModakWizardDialog dialog = new ManageModakWizardDialog(parent,
+						new ManageModakWizard(definitionsFilePath));
 
 				if (dialog.OK == dialog.open()) {
-					Path definitionsFilePath = dialog.getDefinitionsFilePath();
 					String type = dialog.getType();
 					backendProxy.processManageModakDefinitions(definitionsFilePath, type);
 				}

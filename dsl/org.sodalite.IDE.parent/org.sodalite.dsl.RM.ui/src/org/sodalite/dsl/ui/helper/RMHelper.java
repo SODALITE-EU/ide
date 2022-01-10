@@ -32,12 +32,14 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -420,6 +422,24 @@ public class RMHelper {
 			}
 		}
 		return null;
+	}
+
+	public static Path getSelection() throws SodaliteException {
+		IFile selectionFile = null;
+		try { // Trying current File selection in project explorer
+			selectionFile = RMHelper.getSelectedFile();
+		} catch (Exception ex) {
+			// Trying file opened in editor
+			IWorkbenchPart workbenchPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.getActivePart();
+			selectionFile = (IFile) workbenchPart.getSite().getPage().getActiveEditor().getEditorInput()
+					.getAdapter(IFile.class);
+		}
+		if (selectionFile == null)
+			throw new SodaliteException("Selected file could not be found");
+		String selectionFileString = selectionFile.getLocationURI().toString();
+		selectionFileString = selectionFileString.substring(selectionFileString.indexOf(File.separator));
+		return FileSystems.getDefault().getPath(selectionFileString);
 	}
 
 	public static EObject getType(EObject object) {

@@ -10,9 +10,10 @@ public class ManageModakWizard extends Wizard {
 	private Path definitionsFilePath = null;
 	private String type = null;
 
-	public ManageModakWizard() {
+	public ManageModakWizard(Path definitionsFilePath) {
 		super();
 		setNeedsProgressMonitor(true);
+		this.definitionsFilePath = definitionsFilePath;
 	}
 
 	@Override
@@ -22,13 +23,13 @@ public class ManageModakWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		mainPage = new ManageModakWizardMainPage();
+		mainPage = new ManageModakWizardMainPage(definitionsFilePath);
 		addPage(mainPage);
 	}
 
 	@Override
 	public boolean canFinish() {
-		return true;
+		return mainPage.getDefinitionType() != null;
 	}
 
 	@Override
