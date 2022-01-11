@@ -34,9 +34,8 @@ import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class DeploymentWizardMainPage extends WizardPage {
-	private Composite container;
 	private SortedMap<String, InputDef> inputDefs;
-	private Map<String, Text> inputWidgets = new HashMap<>();
+	private Map<String, InputWidget> inputWidgets = new HashMap<>();
 	private Path imageBuildConfPath = null;
 	private Spinner workersSpinner = null;
 	private Text versionTagText = null;
@@ -76,14 +75,17 @@ public class DeploymentWizardMainPage extends WizardPage {
 		Map<String, String> inputs = new HashMap<>();
 		for (String key : inputWidgets.keySet()) {
 			String type = inputDefs.get(key).getType();
-			String value = inputWidgets.get(key).getText();
-			if (type != null && (type.contains("map") || type.contains("list")))
-				value = "\n" + value;
+			boolean get_secret_checked = inputWidgets.get(key).getGetSecretCheckBox().getSelection();
+			String value = inputWidgets.get(key).getInputText().getText();
+			if (get_secret_checked) {
+				key = "_get_secret_" + key;
+			} else {
+				if (type != null && (type.contains("map") || type.contains("list")))
+					value = "\n" + value;
+			}
 			inputs.put(key, value);
 		}
 		return inputs;
-//		return inputWidgets.entrySet().stream()
-//				.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
 	}
 
 	public boolean getCompleteModel() {
@@ -155,18 +157,13 @@ public class DeploymentWizardMainPage extends WizardPage {
 		Label imageBuildConfLabel = new Label(containerMain, SWT.NONE);
 		imageBuildConfLabel.setText("Select a image build configuration (optional):");
 
+		Button buttonSelectImageBuildConfFile = new Button(containerMain, SWT.PUSH);
+		buttonSelectImageBuildConfFile.setText("Select...");
+
 		Text imageBuildConfText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);
 		imageBuildConfText.setLayoutData(imageBuildConfGridData);
 
-//		imageBuildConfText.addModifyListener(new ModifyListener() {
-//			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-//				getWizard().getContainer().updateButtons();
-//			};
-//		});
-
-		Button buttonSelectImageBuildConfFile = new Button(containerMain, SWT.PUSH);
-		buttonSelectImageBuildConfFile.setText("Select...");
 		buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -218,12 +215,13 @@ public class DeploymentWizardMainPage extends WizardPage {
 			Label inputsFileLabel = new Label(containerMain, SWT.NONE);
 			inputsFileLabel.setText("Select an inputs file:");
 
+			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
+			buttonSelectFile.setText("Select...");
+
 			Text inputsFileText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 			GridData inputsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
 			inputsFileText.setLayoutData(inputsFileGridData);
 
-			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
-			buttonSelectFile.setText("Select...");
 			buttonSelectFile.addListener(SWT.Selection, new Listener() {
 				public void handleEvent(Event event) {
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -234,7 +232,6 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 					String selectedInputFile = fileDialog.open();
 					if (selectedInputFile != null) {
-						System.out.println("Selected inputs file: " + selectedInputFile);
 						inputsFileText.setText(selectedInputFile);
 						File file = new File(selectedInputFile);
 						// Read inputs from file
@@ -276,7 +273,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 						// Remove empty line
 						if (input_value.endsWith("\n"))
 							input_value = input_value.substring(0, input_value.length() - 1);
-						inputWidgets.get(input_key).setText(input_value);
+						inputWidgets.get(input_key).getInputText().setText(input_value);
 					}
 
 					if (childLine != null)
@@ -291,7 +288,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 					if (inputDefs.keySet().contains(input_name)) {
 						String input_key = input_name;
 						String input_value = st.nextToken();
-						inputWidgets.get(input_key).setText(input_value);
+						inputWidgets.get(input_key).getInputText().setText(input_value);
 					}
 
 					if (iter.hasNext()) {
@@ -302,7 +299,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 			// Separator
 			Label separator = new Label(containerMain, SWT.SEPARATOR | SWT.HORIZONTAL);
-			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
 			separator.setLayoutData(data);
 
 			// Inputs
@@ -312,13 +309,29 @@ public class DeploymentWizardMainPage extends WizardPage {
 			Font font = new Font(containerMain.getDisplay(),
 					new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
 			inputsLabel.setFont(font);
-			data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
+			data = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1);
 			inputsLabel.setLayoutData(data);
+
+			Label getSecretLabel = new Label(containerMain, SWT.NONE);
+			getSecretLabel.setText("Get secret");
+			fontData = getSecretLabel.getFont().getFontData()[0];
+			font = new Font(containerMain.getDisplay(),
+					new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
+			getSecretLabel.setFont(font);
+			data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			getSecretLabel.setLayoutData(data);
 
 			for (String input : inputDefs.keySet()) {
 				// Label
 				Label label = new Label(containerMain, SWT.NONE);
 				label.setText(input);
+
+				// Get Secret checkbox
+				Button getSecretCB = new Button(containerMain, SWT.CHECK);
+				getSecretCB.setToolTipText(
+						"Check if input value should be retrieved by the orchestrator from the secret store for given value");
+				GridData getSecretGridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+				getSecretCB.setLayoutData(getSecretGridData);
 
 				// Text
 				Text text = null;
@@ -326,12 +339,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 				if (inputType != null && (inputType.contains("map") || inputType.contains("list"))) {
 					int number_lines = 5;
 					text = new Text(containerMain, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
-					GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+					GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 					gridData.heightHint = number_lines * text.getLineHeight();
 					text.setLayoutData(gridData);
 				} else {
 					text = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
-					GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+					GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 					text.setLayoutData(gd);
 				}
 				text.setText("");
@@ -342,7 +355,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 					};
 				});
 
-				inputWidgets.put(input, text);
+				inputWidgets.put(input, new InputWidget(text, getSecretCB));
 			}
 		}
 
@@ -350,4 +363,22 @@ public class DeploymentWizardMainPage extends WizardPage {
 		setPageComplete(false);
 	}
 
+}
+
+class InputWidget {
+	Text inputText;
+	Button getSecretCheckBox;
+
+	public InputWidget(Text inputText, Button getSecretCheckBox) {
+		this.inputText = inputText;
+		this.getSecretCheckBox = getSecretCheckBox;
+	}
+
+	public Text getInputText() {
+		return inputText;
+	}
+
+	public Button getGetSecretCheckBox() {
+		return getSecretCheckBox;
+	}
 }
