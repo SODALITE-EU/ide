@@ -285,14 +285,18 @@ public class BlueprintView {
 			BlueprintData blueprintData = RMBackendProxy.getKBReasoner().getBlueprintsForUser(keycloak_user, active);
 			if (!blueprintData.getElements().isEmpty()) {
 				for (Blueprint blueprint : blueprintData.getElements()) {
-					BlueprintData blueprintDetailsData = RMBackendProxy.getKBReasoner()
-							.getBlueprintForId(blueprint.getBlueprint_id());
-					DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
-							.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
-					TreeNode<DeploymentNode> node = root.addChild(new TreeNode<DeploymentNode>(
-							new DeploymentNode(blueprintDetailsData.getElements().get(0))));
-					for (Deployment deployment : deploymentData.getElements()) {
-						node.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
+					try {
+						BlueprintData blueprintDetailsData = RMBackendProxy.getKBReasoner()
+								.getBlueprintForId(blueprint.getBlueprint_id());
+						DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
+								.getDeploymentsForBlueprint(blueprint.getBlueprint_id());
+						TreeNode<DeploymentNode> node = root.addChild(new TreeNode<DeploymentNode>(
+								new DeploymentNode(blueprintDetailsData.getElements().get(0))));
+						for (Deployment deployment : deploymentData.getElements()) {
+							node.addChild(new TreeNode<DeploymentNode>(new DeploymentNode(deployment)));
+						}
+					} catch (Exception ex) {
+						SodaliteLogger.log(ex);
 					}
 				}
 			} else {

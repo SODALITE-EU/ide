@@ -133,6 +133,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloak_client_secret;
 	private String aai_token;
 	private Boolean IAM_enabled = false;
+	private boolean IAM_token_renewed = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
 			String keycloakUri, String pdsUri, String refactorerUri, String nifiUri, String grafanaUri,
@@ -252,12 +253,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypes(modules, kind);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					TypeData data = getTypes(modules, kind);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -281,12 +290,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplates(modules);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					TemplateData data = getTemplates(modules);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -307,12 +324,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getModules();
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					ModuleData data = getModules();
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -337,12 +362,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeAttributes(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					AttributeDefinitionData data = getTypeAttributes(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -365,12 +398,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeCapabilities(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					CapabilityDefinitionData data = getTypeCapabilities(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -393,12 +434,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeInterfaces(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					InterfaceDefinitionData data = getTypeInterfaces(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -421,12 +470,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeProperties(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					PropertyDefinitionData data = getTypeProperties(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -449,12 +506,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeRequirements(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					RequirementDefinitionData data = getTypeRequirements(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -479,12 +544,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplateAttributes(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					AttributeAssignmentData data = getTemplateAttributes(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -507,12 +580,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplateCapabilities(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					CapabilityAssignmentData data = getTemplateCapabilities(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -535,12 +616,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplateInterfaces(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					InterfaceAssignmentData data = getTemplateInterfaces(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -563,12 +652,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplateProperties(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					PropertyAssignmentData data = getTemplateProperties(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -591,12 +688,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTemplateRequirements(resourceId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					RequirementAssignmentData data = getTemplateRequirements(resourceId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -648,12 +753,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					TypeData data = getTypeOfValidRequirementNodes(requirementId, nodeType, modules);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -674,12 +787,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data.getElements().contains(subclass);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return isSubClassOf(subclass, superclass);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					Boolean data = isSubClassOf(subclass, superclass);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -703,12 +824,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data.getElements();
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getSubClassesOf(subclasses, superclass);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					List<String> data = getSubClassesOf(subclasses, superclass);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -755,12 +884,20 @@ public class KBReasonerClient implements KBReasoner {
 			}
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, version);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					KBSaveReportData data = saveAADM(aadmTTL, aadmURI, name, namespace, aadmDSL, complete, version);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			if (ex.getStatusCode() == HttpStatus.BAD_REQUEST) {
 				String result = ex.getResponseBodyAsString();
@@ -815,12 +952,20 @@ public class KBReasonerClient implements KBReasoner {
 			}
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return saveRM(rmTTL, rmURI, name, namespace, rmDSL);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					KBSaveReportData data = saveRM(rmTTL, rmURI, name, namespace, rmDSL);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			if (((HttpClientErrorException) ex).getStatusCode() == HttpStatus.BAD_REQUEST) {
 				String result = ex.getResponseBodyAsString();
@@ -912,18 +1057,24 @@ public class KBReasonerClient implements KBReasoner {
 		}
 		if (version != null && !version.isEmpty())
 			url += "&version=" + version;
-//		if (IAM_enabled)
-//			url += "&token=" + this.aai_token;
 		try {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getAADM(aadmURI, version, withoutReferences);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					String data = getAADM(aadmURI, version, withoutReferences);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -941,12 +1092,20 @@ public class KBReasonerClient implements KBReasoner {
 			return getJSONObjectForType(String.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getRM(rmURI);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					String data = getRM(rmURI);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1053,12 +1212,21 @@ public class KBReasonerClient implements KBReasoner {
 					HttpStatus.ACCEPTED);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return deployAADM(inputs_yaml_path, blueprint_id, version_id, workers, deployment_label);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentReport data = deployAADM(inputs_yaml_path, blueprint_id, version_id, workers,
+							deployment_label);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1075,12 +1243,20 @@ public class KBReasonerClient implements KBReasoner {
 			deploymentStatus = getJSONObjectForType(DeploymentStatusReport.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getAADMDeploymentStatus(deployment_id);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentStatusReport data = getAADMDeploymentStatus(deployment_id);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1099,12 +1275,20 @@ public class KBReasonerClient implements KBReasoner {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getBlueprintsForUser(username, active);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					BlueprintData data = getBlueprintsForUser(username, active);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1123,18 +1307,25 @@ public class KBReasonerClient implements KBReasoner {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getBlueprintForId(blueprintId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					BlueprintData bpdat = getBlueprintForId(blueprintId);
+					IAM_token_renewed = false;
+					return bpdat;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}
-
 		return blueprintData;
 	}
 
@@ -1151,12 +1342,20 @@ public class KBReasonerClient implements KBReasoner {
 			deploymentData.setElements(elements);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getDeploymentsForBlueprint(blueprintId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentData dd = getDeploymentsForBlueprint(blueprintId);
+					IAM_token_renewed = false;
+					return dd;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1175,12 +1374,20 @@ public class KBReasonerClient implements KBReasoner {
 			deploymentData = getJSONObjectForType(DeploymentData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getDeploymentForId(deploymentId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentData data = getDeploymentForId(deploymentId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1198,12 +1405,19 @@ public class KBReasonerClient implements KBReasoner {
 			deleteUriResource(new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				deleteBlueprintForId(blueprintId, force);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					deleteBlueprintForId(blueprintId, force);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1244,12 +1458,20 @@ public class KBReasonerClient implements KBReasoner {
 					HttpStatus.ACCEPTED);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return undeployDeploymentForId(deploymentId, inputs_yaml_path, workers, force);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentReport data = undeployDeploymentForId(deploymentId, inputs_yaml_path, workers, force);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1290,12 +1512,20 @@ public class KBReasonerClient implements KBReasoner {
 					HttpStatus.ACCEPTED);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return resumeDeploymentForId(deploymentId, inputs_yaml_path, clean_state, workers);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentReport data = resumeDeploymentForId(deploymentId, inputs_yaml_path, clean_state, workers);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1341,12 +1571,20 @@ public class KBReasonerClient implements KBReasoner {
 			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getModelForResource(resource, module);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					ModelData data = getModelForResource(resource, module);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1366,12 +1604,20 @@ public class KBReasonerClient implements KBReasoner {
 			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getModel(modelId, version);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					ModelData data = getModel(modelId, version);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1389,12 +1635,20 @@ public class KBReasonerClient implements KBReasoner {
 			return getJSONObjectForType(ModelData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getModelVersions(modelId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					ModelData data = getModelVersions(modelId);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1431,12 +1685,21 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType, requirementName);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					CapabilityDefinitionData data = getCapabilitiesDeclaredInTargetNodeForNodeTypeRequirement(nodeType,
+							requirementName);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1463,12 +1726,21 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(nodeTemplate, requirementName);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					CapabilityAssignmentData data = getCapabilitiesDeclaredInTargetNodeForNodeTemplateRequirement(
+							nodeTemplate, requirementName);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1492,12 +1764,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getOperationsInInterface(interfaceType);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					OperationDefinitionData data = getOperationsInInterface(interfaceType);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1523,12 +1803,20 @@ public class KBReasonerClient implements KBReasoner {
 			return data;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getOperations(modules);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					OperationDefinitionData data = getOperations(modules);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1558,12 +1846,19 @@ public class KBReasonerClient implements KBReasoner {
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				addHPCSecrets(hpcSecrets);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					addHPCSecrets(hpcSecrets);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1591,12 +1886,20 @@ public class KBReasonerClient implements KBReasoner {
 			return hpcInfras;
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return listHPCInfrastructures();
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					List<String> data = listHPCInfrastructures();
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1630,12 +1933,20 @@ public class KBReasonerClient implements KBReasoner {
 			return new HPCSecretData(secrets);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getHPCInfrastructure(hpcName);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					HPCSecretData data = getHPCInfrastructure(hpcName);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1657,12 +1968,19 @@ public class KBReasonerClient implements KBReasoner {
 			deleteJsonMessage(uri);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				deleteHPCInfrastructure(hpcName);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					deleteHPCInfrastructure(hpcName);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1704,13 +2022,20 @@ public class KBReasonerClient implements KBReasoner {
 			postObjectAndReturnAnotherType(payload, String.class, uri, HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id,
-						monitoring_id, inputs);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id,
+							monitoring_id, inputs);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1760,12 +2085,19 @@ public class KBReasonerClient implements KBReasoner {
 			deleteUriResource(new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				deleteModel(modelId, version);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					deleteModel(modelId, version);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1783,12 +2115,19 @@ public class KBReasonerClient implements KBReasoner {
 			deleteUriResource(new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				deleteModel(modelId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					deleteModel(modelId);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
