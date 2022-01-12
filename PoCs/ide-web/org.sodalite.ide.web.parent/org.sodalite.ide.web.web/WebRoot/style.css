@@ -29,45 +29,47 @@ a:hover {
 	position: absolute;
 	top: 10%;
 	bottom: 0;
-	left: 5%;
+	left: 0.5%;
 	width: 80%;
 	margin: 20px;
 }
 
 .container-buttons {
 	display: block;
-	position: absolute;
+	position: relative;
 	top: 10%;
 	bottom: 0;
-	left: 85%;
-	width: 10%;
+	left: 80%;
+	width: 15%;
 	margin: 20px;
-	padding: 10px;
+	padding: 20px;
+	font-size: 14px;
+	justify-content: right;
 }
 
 .header {
 	display: block;
 	position: absolute;
-	background-color: #e8e8e8;
+	background-color: rgb(154, 153, 150);
 	top: 0;
 	left: 0;
 	right: 0;
-	width:100%;
-	padding: 30px;
+	padding: 5px;
 	text-align: center;
 	border-style: solid;
   	border: 2px solid #77767b;
+ 	color: white;
 }
 
 .header-editor {
 	display: block;
 	position: absolute;
 	background-color: #e8e8e8;
-	top: 5%;
-	left: 6%;
-	right: 5%;
-	width: 100%;
-	padding: 10px;
+	top: 6%;
+	width: 79.5%;
+	height: 5%;
+	left: 2%;
+	padding: 2px;
 	border-style: solid;
   	border: 2px solid #77767b;
 }
@@ -127,3 +129,6 @@ input[type="text"]#form_text{
 	width: 50%
 }
 
+.button {
+	margin: 2px;
+}
