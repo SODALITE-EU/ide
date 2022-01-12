@@ -33,6 +33,8 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -131,6 +133,7 @@ public class KBReasonerClient implements KBReasoner {
 	private String keycloak_client_secret;
 	private String aai_token;
 	private Boolean IAM_enabled = false;
+	private boolean IAM_token_renewed = false;
 
 	public KBReasonerClient(String kbReasonerUri, String iacUri, String image_builder_uri, String xoperaUri,
 			String keycloakUri, String pdsUri, String refactorerUri, String nifiUri, String grafanaUri,
@@ -1121,18 +1124,25 @@ public class KBReasonerClient implements KBReasoner {
 			blueprintData = getJSONObjectForType(BlueprintData.class, new URI(url), HttpStatus.OK);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getBlueprintForId(blueprintId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					BlueprintData bpdat = getBlueprintForId(blueprintId);
+					IAM_token_renewed = false;
+					return bpdat;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}
-
 		return blueprintData;
 	}
 
@@ -1149,12 +1159,20 @@ public class KBReasonerClient implements KBReasoner {
 			deploymentData.setElements(elements);
 		} catch (TokenExpiredException ex) {
 			// Renew AAI token and try again
-			if (IAM_enabled)
+			if (IAM_enabled && !IAM_token_renewed) {
 				this.aai_token = getSecurityToken();
-			if (this.aai_token != null)
-				return getDeploymentsForBlueprint(blueprintId);
-			else
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					DeploymentData dd = getDeploymentsForBlueprint(blueprintId);
+					IAM_token_renewed = false;
+					return dd;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
 				throw ex;
+			}
 		} catch (HttpClientErrorException ex) {
 			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
 		} catch (Exception ex) {
@@ -1887,6 +1905,8 @@ public class KBReasonerClient implements KBReasoner {
 			String NIFI_AUTH_REQUEST_URL = NIFI_API_ENDPOINT + "/access/oidc/request";
 			String NIFI_OIDC_TOKEN_EXCHANGE_URL = NIFI_API_ENDPOINT + "/access/oidc/exchange";
 
+			RequestConfig requestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
+
 			// Cookie store
 			BasicCookieStore cookieStore = new BasicCookieStore();
 
@@ -1898,10 +1918,11 @@ public class KBReasonerClient implements KBReasoner {
 
 			// Create a client with cookie store and disabled SSL check
 			CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf)
-					.setDefaultCookieStore(cookieStore).setRedirectStrategy(new LaxRedirectStrategy()) // To allow
-																										// redirect
-																										// after POST
-																										// requests
+					.setDefaultRequestConfig(requestConfig).setDefaultCookieStore(cookieStore)
+					.setRedirectStrategy(new LaxRedirectStrategy()) // To allow
+																	// redirect
+																	// after POST
+																	// requests
 					.build();
 			HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 			requestFactory.setHttpClient(httpClient);

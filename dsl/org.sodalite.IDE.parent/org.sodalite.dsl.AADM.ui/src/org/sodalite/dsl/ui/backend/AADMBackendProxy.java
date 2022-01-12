@@ -396,6 +396,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 				} catch (NotRolePermissionException ex) {
 					showErrorDialog(null, "Save AADM", "You have not permissions to save this model. "
 							+ "\nPlease, check your permission in the SODALITE AAI");
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Deploy process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -462,6 +465,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					});
 					subMonitor.worked(-1);
 					subMonitor.done();
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Build image process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override

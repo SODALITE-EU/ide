@@ -40,4 +40,9 @@ public class HPCSecretData {
 			return false;
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return this.getName().hashCode();
+	}
 }
