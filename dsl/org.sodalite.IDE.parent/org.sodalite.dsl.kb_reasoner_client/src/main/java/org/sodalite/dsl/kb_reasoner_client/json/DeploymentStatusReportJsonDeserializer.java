@@ -12,6 +12,7 @@ package org.sodalite.dsl.kb_reasoner_client.json;
 
 import java.io.IOException;
 
+import org.sodalite.dsl.kb_reasoner_client.types.DeploymentNodeError;
 import org.sodalite.dsl.kb_reasoner_client.types.DeploymentStatusReport;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -60,6 +61,23 @@ public class DeploymentStatusReportJsonDeserializer extends JsonDeserializer<Dep
 			report.setWorkers(objectNode.get("workers").asInt());
 		if (objectNode.get("node_error") != null) {
 			JsonNode nodeError = objectNode.get("node_error");
+			if (nodeError instanceof ObjectNode) {
+				ObjectNode error = (ObjectNode) nodeError;
+				DeploymentNodeError node_error = new DeploymentNodeError();
+				String errorNodeName = error.fieldNames().next();
+				node_error.setNode(errorNodeName);
+				String operationName = error.get(errorNodeName).fieldNames().next();
+				JsonNode operation = error.get(errorNodeName).get(operationName);
+				node_error.setOperation(operationName);
+				String taskName = operation.fieldNames().next();
+				JsonNode task = operation.get(taskName);
+				node_error.setTask(taskName);
+				if (task.get("msg") != null)
+					node_error.setMessage(task.get("msg").asText());
+				if (task.get("stderr") != null)
+					node_error.setStderr(task.get("stderr").asText());
+				report.setNode_error(node_error);
+			}
 		}
 
 		return report;
