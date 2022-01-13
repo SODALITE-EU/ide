@@ -57,10 +57,10 @@ public class DeployAadmService {
 					} catch (Exception e) {
 						//namespace not found
 					}
-					String version = null;
-					SodaliteBackendProxy.deployAADM(ttl, aadmDSL, aadmURI, name, namespace, version, inputs_yaml, imageBuildConf, version_tag, workers, completeModel, deployment_name,
+					String version = "";
+					String response = SodaliteBackendProxy.deployAADM(ttl, aadmDSL, aadmURI, name, namespace, version, inputs_yaml, imageBuildConf, version_tag, workers, completeModel, deployment_name,
 							 monitoring_id,  username);
-					return new DocumentStateResult(aadmURI);
+					return new DocumentStateResult(response);
 				} catch (IOException ioe) {
 					throw new InvalidRequestException.ResourceNotFoundException(ioe.getMessage(), ioe);
 				}

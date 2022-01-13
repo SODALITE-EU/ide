@@ -317,7 +317,7 @@ define('xtext/services/XtextService',['jquery'], function(jQuery) {
 			this._recursionCount++;
 
 		if (this._recursionCount >= 10) {
-			this._reportError(editorContext, 'warning', 'Xtext service request failed after 10 attempts.', {});
+			//this._reportError(editorContext, 'warning', 'Xtext service request failed after 10 attempts.', {});
 			return false;
 		}
 		return true;
@@ -1153,6 +1153,10 @@ define('xtext/ServiceBuilder',[
 				serviceType = "Save AADM into the KB";
 				message = requestData.stateId;
 				window.alert('SODALITE IDE: \'' + serviceType + '\' succeedded. AADM saved with uri: ' + message);
+			} else if (serviceType == "deploy"){
+				serviceType = "Deploy AADM";
+				message = requestData.stateId;
+				window.alert('SODALITE IDE: \'' + serviceType + '\' succeedded. AADM desployed with message: ' + message);
 			}
 		}];
 		

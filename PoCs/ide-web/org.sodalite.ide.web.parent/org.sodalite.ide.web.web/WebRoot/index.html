@@ -126,12 +126,13 @@
 				for (var i=0; i<div_inputs.childNodes.length; i++){
 					input_element = div_inputs.childNodes[i];
 					if (input_element instanceof HTMLInputElement && input_element.type == 'text'){ //check input text
-						inputs += input_element.name + ":" + input_element.value + ";";
+						inputs += input_element.name + ": " + input_element.value + ";";
 					}
 				}
 				if (inputs != "")
 					query += "&inputs=" + inputs;
 				editor.xtextServices.deploy(query);
+				$('.center').hide();
 			} );
 		}
 		
@@ -153,8 +154,8 @@
 	<div class="container-buttons">
 		<button id="save-button" class="button">Save AADM in KB</button>
 		<button id="deploy-button" class="button">Deploy AADM</button>
-		<br>Select AADM: <select id="change-resource" class="button" value="snow.aadm">
-			<option selected value="snow.aadm">Snow AADM</option>
+		<br>Select AADM: <select id="change-resource" class="button">
+			<option value="snow.aadm" selected="true">Snow AADM</option>
 			<option value="test.aadm">Test AADM</option>
 		</select>
 	</div>

@@ -1,0 +1,108 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu';
+}
+
+h1{
+  text-align: center;
+  padding: 20px 0;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0;
+}
+
+div{
+  margin: 0;
+  padding: 0;
+}
+
+.header{
+  display: inline-block;
+  padding: 10px 0;
+  border-style: solid;
+  border: 2px solid #77767b;
+  margin: 0px auto;
+  width: 99.6%;
+  text-align: center;
+  background-color: rgb(193,210,222);
+}
+
+.editor{
+  display: inline-block;
+  float: left;
+  width: 70%;
+  text-align: center;
+  padding: 120px 0;
+  margin: 0px;
+  background-color: white;
+  border-style: solid;
+  border: 1px solid #77767b; 
+}
+
+.button{
+  display: inline-block;
+  float: left;
+  width: 29.6%;
+  text-align: left;
+  padding: 120px 0;
+  background-color: #deddda;
+  border-style: solid;
+  border: 1px solid #77767b;  
+}
+
+.c4{
+  display: inline-block;
+  float: left;
+  width: 33.33%;
+  text-align: center;
+  padding: 120px 0;
+  background-color: rgb(230, 150, 134);  
+}
+
+.c5{
+  display: inline-block;
+  float: left;
+  width: 33.33%;
+  text-align: center;
+  padding: 120px 0;
+  background-color: rgb(230, 203, 118);  
+}
+
+.c6{
+  display: inline-block;
+  float: left;
+  width: 33.33%;
+  text-align: center;
+  padding: 120px 0;
+  background-color: rgb(173, 170, 230);  
+}
+
+
+
+
+/* Collapse to full width column */
+
+@media only screen and (max-width: 750px){
+  .c4{
+    width: 100%;
+  }
+  .c5{
+    width: 100%;
+  }
+  .c6{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 660px){
+  .c2{
+    width: 100%;
+  }
+  .c3{
+    width: 100%;
+  }
+}

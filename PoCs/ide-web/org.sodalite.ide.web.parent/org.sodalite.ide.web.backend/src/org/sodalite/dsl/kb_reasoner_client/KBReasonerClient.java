@@ -1555,8 +1555,8 @@ public class KBReasonerClient implements KBReasoner {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("inputs", inputs);
 			if (aadm_version != null && !aadm_version.isEmpty())
-				jsonObject.addProperty("aadm_id", aadm_id);
-			jsonObject.addProperty("version", aadm_version);
+				jsonObject.addProperty("version", aadm_version);
+			jsonObject.addProperty("aadm_id", aadm_id);
 			jsonObject.addProperty("blueprint_id", blueprint_id);
 			jsonObject.addProperty("deployment_id", deployment_id);
 			jsonObject.addProperty("monitoring_id", monitoring_id);

@@ -90,6 +90,13 @@ public class SodaliteBackendProxy {
 	public static String deployAADM(String aadmTTL, String aadmDSL, String aadmURI, String aadmName, String namespace, String version,
 			String inputs_yaml, String imageBuildConf, String version_tag, int workers, boolean completeModel, String deployment_name,
 			String monitoring_id, String username) throws Exception {
+		
+//		// DEBUG REMOVE WHEN DONE
+//			return "The selected AADM model has been successfully deployed into the Sodalite backend with:" + 
+//						"\nblueprint id: afc625fe-fe54-426f-8278-3478346c9f33" +
+//						"\ndeployment id:b48db52e-1f37-4b16-a0e7-9ebae7430b1c" +
+//						"\nmonitoring id:5e7267e0-94a0-4530-ac93-0ca0e4258d05";
+	
 		try {
 			// Save the AADM model into the KB
 			boolean complete = false;

@@ -2,7 +2,7 @@ package org.sodalite.dsl.ide.backend;
 
 
 public class SodaliteBackendConfiguration {
-	final static String KB_REASONER_URI = "http://192.168.2.97:8080/reasoner-api/v0.6/"; // TestBed;
+	final static String KB_REASONER_URI = "http://192.168.2.130:8080/reasoner-api/v0.6/"; // TestBed;
 //	final public static String KB_REASONER_URI = "http://160.40.52.200:8084/reasoner-api/v0.6/"; //CERTH
 
 	final public static String IaC_URI = "http://192.168.2.107:8081/";
@@ -31,12 +31,12 @@ public class SodaliteBackendConfiguration {
 	
 	final public static String KEYCLOAK_USER = "yosu";
 	
-	final public static String KEYCLOAK_PASSWORD = "";
+	final public static String KEYCLOAK_PASSWORD = "qwerty123";
 
 	final public static String KEYCLOAK_CLIENT_ID = "sodalite-ide";
 
 	final public static String KEYCLOAK_CLIENT_SECRET = "1a1083bc-c183-416a-9192-26076f605cc3";
 
-	final public static Boolean KEYCLOAK_ENABLED = false;
+	final public static Boolean KEYCLOAK_ENABLED = true;
 
 }
