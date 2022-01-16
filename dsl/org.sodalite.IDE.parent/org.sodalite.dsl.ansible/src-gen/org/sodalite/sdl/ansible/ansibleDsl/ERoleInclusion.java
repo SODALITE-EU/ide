@@ -28,12 +28,12 @@ public interface ERoleInclusion extends EExecution
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(EStringPassed)
+   * @see #setName(ERoleName)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getERoleInclusion_Name()
    * @model containment="true"
    * @generated
    */
-  EStringPassed getName();
+  ERoleName getName();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion#getName <em>Name</em>}' containment reference.
@@ -43,7 +43,7 @@ public interface ERoleInclusion extends EExecution
    * @see #getName()
    * @generated
    */
-  void setName(EStringPassed value);
+  void setName(ERoleName value);
 
   /**
    * Returns the value of the '<em><b>Error handling</b></em>' containment reference.

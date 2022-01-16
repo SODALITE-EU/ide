@@ -15,7 +15,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EStringPassed;
  *
  * @generated
  */
-public class EStringPassedImpl extends EValuePassedImpl implements EStringPassed
+public class EStringPassedImpl extends EValueWithStringImpl implements EStringPassed
 {
   /**
    * <!-- begin-user-doc -->

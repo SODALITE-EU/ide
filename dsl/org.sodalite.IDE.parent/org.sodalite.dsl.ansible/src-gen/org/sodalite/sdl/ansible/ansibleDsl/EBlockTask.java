@@ -3,7 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,6 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface EBlockTask extends EObject
+public interface EBlockTask extends EBlockTaskRole
 {
 } // EBlockTask

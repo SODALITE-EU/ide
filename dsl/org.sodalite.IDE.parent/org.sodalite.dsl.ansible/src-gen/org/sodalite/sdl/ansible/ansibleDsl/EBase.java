@@ -193,12 +193,12 @@ public interface EBase extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Collections</em>' containment reference.
-   * @see #setCollections(EListPassed)
+   * @see #setCollections(ECollectionListPassed)
    * @see org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage#getEBase_Collections()
    * @model containment="true"
    * @generated
    */
-  EListPassed getCollections();
+  ECollectionListPassed getCollections();
 
   /**
    * Sets the value of the '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase#getCollections <em>Collections</em>}' containment reference.
@@ -208,7 +208,7 @@ public interface EBase extends EObject
    * @see #getCollections()
    * @generated
    */
-  void setCollections(EListPassed value);
+  void setCollections(ECollectionListPassed value);
 
   /**
    * Returns the value of the '<em><b>Tags</b></em>' containment reference.

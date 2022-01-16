@@ -51,6 +51,42 @@ public interface AnsibleDslFactory extends EFactory
   EUsedByBody createEUsedByBody();
 
   /**
+   * Returns a new object of class '<em>Node</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Node</em>'.
+   * @generated
+   */
+  Node createNode();
+
+  /**
+   * Returns a new object of class '<em>Local Node</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Node</em>'.
+   * @generated
+   */
+  LocalNode createLocalNode();
+
+  /**
+   * Returns a new object of class '<em>KB Node</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>KB Node</em>'.
+   * @generated
+   */
+  KBNode createKBNode();
+
+  /**
+   * Returns a new object of class '<em>EPREFIX TYPE</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EPREFIX TYPE</em>'.
+   * @generated
+   */
+  EPREFIX_TYPE createEPREFIX_TYPE();
+
+  /**
    * Returns a new object of class '<em>EBase</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +103,15 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EExecution createEExecution();
+
+  /**
+   * Returns a new object of class '<em>EBlock Task Role</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EBlock Task Role</em>'.
+   * @generated
+   */
+  EBlockTaskRole createEBlockTaskRole();
 
   /**
    * Returns a new object of class '<em>EBlock Task</em>'.
@@ -148,6 +193,24 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   ERoleInclusion createERoleInclusion();
+
+  /**
+   * Returns a new object of class '<em>ERole Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ERole Name</em>'.
+   * @generated
+   */
+  ERoleName createERoleName();
+
+  /**
+   * Returns a new object of class '<em>ENumber Or String Without Quotes Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ENumber Or String Without Quotes Passed</em>'.
+   * @generated
+   */
+  ENumberOrStringWithoutQuotesPassed createENumberOrStringWithoutQuotesPassed();
 
   /**
    * Returns a new object of class '<em>ERole Inclusions</em>'.
@@ -382,6 +445,42 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EMultiLineExpression createEMultiLineExpression();
+
+  /**
+   * Returns a new object of class '<em>EJinja Or String Without Quotes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EJinja Or String Without Quotes</em>'.
+   * @generated
+   */
+  EJinjaOrStringWithoutQuotes createEJinjaOrStringWithoutQuotes();
+
+  /**
+   * Returns a new object of class '<em>EJinja And String Without Quotes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EJinja And String Without Quotes</em>'.
+   * @generated
+   */
+  EJinjaAndStringWithoutQuotes createEJinjaAndStringWithoutQuotes();
+
+  /**
+   * Returns a new object of class '<em>EString Without Quotes Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EString Without Quotes Passed</em>'.
+   * @generated
+   */
+  EStringWithoutQuotesPassed createEStringWithoutQuotesPassed();
+
+  /**
+   * Returns a new object of class '<em>EValue With String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EValue With String</em>'.
+   * @generated
+   */
+  EValueWithString createEValueWithString();
 
   /**
    * Returns a new object of class '<em>EString Passed</em>'.
@@ -672,6 +771,24 @@ public interface AnsibleDslFactory extends EFactory
   EInputOperationVariableReference createEInputOperationVariableReference();
 
   /**
+   * Returns a new object of class '<em>Local EInput Operation Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local EInput Operation Variable Reference</em>'.
+   * @generated
+   */
+  LocalEInputOperationVariableReference createLocalEInputOperationVariableReference();
+
+  /**
+   * Returns a new object of class '<em>KBE Input Operation Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>KBE Input Operation Variable Reference</em>'.
+   * @generated
+   */
+  KBEInputOperationVariableReference createKBEInputOperationVariableReference();
+
+  /**
    * Returns a new object of class '<em>EInput Interface Variable Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -679,6 +796,24 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EInputInterfaceVariableReference createEInputInterfaceVariableReference();
+
+  /**
+   * Returns a new object of class '<em>Local EInput Interface Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local EInput Interface Variable Reference</em>'.
+   * @generated
+   */
+  LocalEInputInterfaceVariableReference createLocalEInputInterfaceVariableReference();
+
+  /**
+   * Returns a new object of class '<em>KBE Input Interface Variable Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>KBE Input Interface Variable Reference</em>'.
+   * @generated
+   */
+  KBEInputInterfaceVariableReference createKBEInputInterfaceVariableReference();
 
   /**
    * Returns a new object of class '<em>ESet Fact Variable Reference</em>'.
@@ -787,6 +922,51 @@ public interface AnsibleDslFactory extends EFactory
    * @generated
    */
   EDictionaryPairJinja createEDictionaryPairJinja();
+
+  /**
+   * Returns a new object of class '<em>ECollection List Passed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECollection List Passed</em>'.
+   * @generated
+   */
+  ECollectionListPassed createECollectionListPassed();
+
+  /**
+   * Returns a new object of class '<em>ECollection List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECollection List</em>'.
+   * @generated
+   */
+  ECollectionList createECollectionList();
+
+  /**
+   * Returns a new object of class '<em>ECollection List In Line</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECollection List In Line</em>'.
+   * @generated
+   */
+  ECollectionListInLine createECollectionListInLine();
+
+  /**
+   * Returns a new object of class '<em>ECollection FQN</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECollection FQN</em>'.
+   * @generated
+   */
+  ECollectionFQN createECollectionFQN();
+
+  /**
+   * Returns a new object of class '<em>ECollection List Indented</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ECollection List Indented</em>'.
+   * @generated
+   */
+  ECollectionListIndented createECollectionListIndented();
 
   /**
    * Returns a new object of class '<em>EList</em>'.
