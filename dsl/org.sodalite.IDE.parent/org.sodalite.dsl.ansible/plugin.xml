@@ -7,4 +7,10 @@
 			class = "org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage"
 			genModel = "model/generated/AnsibleDsl.genmodel" />
 	</extension>
+ <extension
+       point="org.eclipse.ui.startup">
+    <startup
+          class="org.sodalite.sdl.ansible.Startup">
+    </startup>
+ </extension>
 </plugin>
