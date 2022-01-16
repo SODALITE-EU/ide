@@ -5,6 +5,7 @@ package org.sodalite.sdl.ansible.ui.wizard;
 
 import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
 import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
+import org.sodalite.sdl.ansible.ui.wizard.HelloWorldProject;
 
 /**
  * Create a list with all project templates to be shown in the template new project wizard.
@@ -13,6 +14,7 @@ import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
  */
 @SuppressWarnings("all")
 public class AnsibleDslProjectTemplateProvider implements IProjectTemplateProvider {
+  @Override
   public AbstractProjectTemplate[] getProjectTemplates() {
     HelloWorldProject _helloWorldProject = new HelloWorldProject();
     return new AbstractProjectTemplate[] { _helloWorldProject };

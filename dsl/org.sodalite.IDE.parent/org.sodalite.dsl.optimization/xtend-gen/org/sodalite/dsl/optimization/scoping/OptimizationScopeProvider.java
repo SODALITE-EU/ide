@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.optimization.scoping;
 
+import org.sodalite.dsl.optimization.scoping.AbstractOptimizationScopeProvider;
+
 /**
  * This class contains custom scoping description.
  * 

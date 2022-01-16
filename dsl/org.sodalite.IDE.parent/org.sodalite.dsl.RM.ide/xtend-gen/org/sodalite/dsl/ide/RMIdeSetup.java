@@ -8,12 +8,14 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.util.Modules2;
 import org.sodalite.dsl.RMRuntimeModule;
 import org.sodalite.dsl.RMStandaloneSetup;
+import org.sodalite.dsl.ide.RMIdeModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class RMIdeSetup extends RMStandaloneSetup {
+  @Override
   public Injector createInjector() {
     RMRuntimeModule _rMRuntimeModule = new RMRuntimeModule();
     RMIdeModule _rMIdeModule = new RMIdeModule();

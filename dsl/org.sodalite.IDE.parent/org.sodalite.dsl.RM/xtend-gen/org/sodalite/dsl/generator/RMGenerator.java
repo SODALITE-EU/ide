@@ -154,6 +154,7 @@ public class RMGenerator extends AbstractGenerator {
   
   private Map<EOperationDefinition, Integer> operation_numbers;
   
+  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.data_type_counter = 1;
     this.node_counter = 1;

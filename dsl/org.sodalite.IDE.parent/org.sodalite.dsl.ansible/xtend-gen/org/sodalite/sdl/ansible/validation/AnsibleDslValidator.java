@@ -3,6 +3,8 @@
  */
 package org.sodalite.sdl.ansible.validation;
 
+import org.sodalite.sdl.ansible.validation.AbstractAnsibleDslValidator;
+
 /**
  * This class contains custom validation rules.
  * 

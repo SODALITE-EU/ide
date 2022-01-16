@@ -8,12 +8,14 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.util.Modules2;
 import org.sodalite.sdl.ansible.AnsibleDslRuntimeModule;
 import org.sodalite.sdl.ansible.AnsibleDslStandaloneSetup;
+import org.sodalite.sdl.ansible.ide.AnsibleDslIdeModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class AnsibleDslIdeSetup extends AnsibleDslStandaloneSetup {
+  @Override
   public Injector createInjector() {
     AnsibleDslRuntimeModule _ansibleDslRuntimeModule = new AnsibleDslRuntimeModule();
     AnsibleDslIdeModule _ansibleDslIdeModule = new AnsibleDslIdeModule();

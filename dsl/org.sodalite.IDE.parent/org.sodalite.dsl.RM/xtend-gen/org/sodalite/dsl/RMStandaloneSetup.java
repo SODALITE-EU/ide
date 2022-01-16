@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl;
 
+import org.sodalite.dsl.RMStandaloneSetupGenerated;
+
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */

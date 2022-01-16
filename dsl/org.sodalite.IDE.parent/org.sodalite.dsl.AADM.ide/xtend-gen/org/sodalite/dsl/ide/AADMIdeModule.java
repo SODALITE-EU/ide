@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.ide;
 
+import org.sodalite.dsl.ide.AbstractAADMIdeModule;
+
 /**
  * Use this class to register ide components.
  */

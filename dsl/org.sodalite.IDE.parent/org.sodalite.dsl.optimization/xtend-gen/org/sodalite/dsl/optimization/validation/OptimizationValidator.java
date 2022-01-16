@@ -17,6 +17,7 @@ import org.sodalite.dsl.optimization.optimization.EOptimization;
 import org.sodalite.dsl.optimization.optimization.EPyTorchCase;
 import org.sodalite.dsl.optimization.optimization.ETensorFlowCase;
 import org.sodalite.dsl.optimization.optimization.OptimizationPackage;
+import org.sodalite.dsl.optimization.validation.AbstractOptimizationValidator;
 
 /**
  * This class contains custom validation rules.

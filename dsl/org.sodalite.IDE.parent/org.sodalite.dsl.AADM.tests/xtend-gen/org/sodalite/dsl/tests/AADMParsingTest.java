@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.sodalite.dsl.aADM.AADM_Model;
+import org.sodalite.dsl.tests.AADMInjectorProvider;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(AADMInjectorProvider.class)

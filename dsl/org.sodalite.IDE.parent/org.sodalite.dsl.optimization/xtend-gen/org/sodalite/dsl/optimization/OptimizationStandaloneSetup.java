@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.optimization;
 
+import org.sodalite.dsl.optimization.OptimizationStandaloneSetupGenerated;
+
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */

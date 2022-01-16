@@ -3,6 +3,8 @@
  */
 package org.sodalite.dsl.scoping;
 
+import org.sodalite.dsl.scoping.AbstractRMScopeProvider;
+
 /**
  * This class contains custom scoping description.
  * 
