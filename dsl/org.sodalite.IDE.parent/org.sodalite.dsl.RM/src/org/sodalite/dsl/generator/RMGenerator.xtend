@@ -4,6 +4,7 @@
 package org.sodalite.dsl.generator
 
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
@@ -73,6 +74,11 @@ import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.rM.RM_Model
 import java.util.Base64
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.ui.PlatformUI
+import org.sodalite.dsl.CustomOutputConfigurationProvider
+import java.nio.file.NoSuchFileException
 
 /**
  * Generates code from your model files on save.
@@ -127,10 +133,94 @@ class RMGenerator extends AbstractGenerator {
 		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		operation_numbers = new HashMap<EOperationDefinition, Integer>()
 		
-		val filename = getFilename(resource.URI)
-		fsa.generateFile(filename,  compileRM (resource))
+		if(context.cancelIndicator === null){
+			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+			var Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			var String localPath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+			var projectName = localPath.split("/").get(1).replaceAll("%20", " ")
+			//var RMName = getRMName(resource).replaceAll("%20", " ")
+			var String absolutePath = workspaceDir + localPath
+			absolutePath = absolutePath.replace(".rm","")
+			localPath = localPath.replace(".rm","").replace("/"+projectName,"")
+			//generate ansible files from RMs
+			for(node:resource.allContents.toIterable.filter(ENodeType)){
+				val nodeType = node.name
+				for (interface : node.eAllContents.toIterable.filter(EInterfaceDefinition)){
+					val interfaceName = interface.name
+					for(op: interface.interface.eAllContents.toIterable.filter(EOperationDefinition)){
+						val operationName = op.name
+						var AnsiblePath = absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName
+						var File ans_file = new File(AnsiblePath+".ans")
+						var File yaml_file = new File(AnsiblePath+".yaml")
+						if(ans_file.exists && yaml_file.exists){
+							//var BufferedReader ans_reader = new BufferedReader(new FileReader(absolutePath+".ans"));
+							//var String currentLine = ans_reader.readLine();
+							//System.out.println(currentLine)
+							val String[] labels = #['Replace both files','Replace only .ans file',"Replace only .yaml file","Do not replace anything"]
+							var MessageDialog dialog = new MessageDialog(shell, "Create new Ansible files", null,
+	    					"In folder " +absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+" exist already a .ans file and a .yaml file for operation "+operationName+". Please select one of the following options." , MessageDialog.QUESTION, labels, 3);
+	    					var int result = dialog.open();
+	    					//System.out.println(result);
+	    					if(result ==0){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+	    					else if(result ==1){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+	    					}
+	    					else if(result == 2){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+						}
+						else if(ans_file.exists && !yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .ans implementation file",
+							"Abstract implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							}
+						}
+						else if(!ans_file.exists && yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .yaml implementation file",
+							"Concrete implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+							}
+						}
+						else if(!ans_file.exists && !yaml_file.exists){
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+						}
+						
+						
+					}
+				}
+			}
+		}
+		var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var projectName = intermediatePath.split("/").get(1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace("/"+projectName,"")
+		fsa.generateFile(intermediatePath+".ttl",CustomOutputConfigurationProvider::TURTLE_OUTPUT,  compileRM (resource))
+		
 	}
 	
+	def compileAnsibleModel(String nodeType,String interfaceName,String operationName)'''
+	playbook_name:"«interfaceName»_interface_«operationName»_operation"
+	used_by: 
+		node_type:"«nodeType»"
+		interface:"«interfaceName»"
+		operation:"«operationName»"
+	plays:
+		play:
+			play_name:"example play"
+	
+	'''
+	def compileYAMLAnsible()'''
+	#generated
+	- name: "example play"
+	'''
 	
 	def compileRM(Resource r) '''
 	# baseURI: https://www.sodalite.eu/ontologies/exchange/rm/
@@ -479,9 +569,9 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readFileAsString(o.operation.implementation.primary.file)»' ;
+	  exchange:value '«readImplementationFileAsString(o.operation.implementation.primary.file,o.operation.implementation.primary.eResource)»' ;
 	.
-	
+	«/*readFileAsStringRelativePath(o.operation.implementation.primary.eResource.URI.toString.substring(0,o.operation.implementation.primary.eResource.URI.toString.lastIndexOf("/")),o.operation.implementation.primary.file)*/»
 	«IF o.operation.implementation.primary.relative_path !== null»
 	«putParameterNumber(o, "primary.relative_path", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -491,12 +581,34 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«var String content = readImplementationFileAsString(o.operation.implementation.primary.file.replace(".yaml",".ans"),o.operation.implementation.primary.eResource) »
+	«IF content!== null»
+	«putParameterNumber(o, "primary.Ansible_model.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«content»' ;
+	.
+	
+	
+	«putParameterNumber(o, "primary.Ansible_model", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "Ansible_model" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model.content")» ;
+	.
+	«ENDIF»
+	
+	
 	«putParameterNumber(o, "primary", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "primary" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	  «IF getParameterNumber(o, "primary.Ansible_model")!==null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model")» ;
+	  «ENDIF»
 	  «IF o.operation.implementation.primary.relative_path !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.relative_path")» ;
 	  «ENDIF»
@@ -1517,13 +1629,47 @@ class RMGenerator extends AbstractGenerator {
 		return filename 
 	}
 		
-	def String getName(Resource resource){
-		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
+	def String getRMName(Resource resource){
+		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.')) +".rm"
+	}
+	
+	def readImplementationFileAsString(String path,Resource resource){
+		//var eclipsePath = projectPath.replaceAll("%20", " ").replace("platform:/resource", "")
+		//var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		//var String absolutePath = workspaceDir + eclipsePath + filePath
+		//var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
+		//return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+		if(path.startsWith(".")){
+			var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+			var String RMName = resource.URI.segment(resource.URI.segmentCount-1).replaceAll("%20", " ")
+			intermediatePath = intermediatePath.replace(RMName,"")
+			//var String projectName = resource.URI.segment(0)
+			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+			var String absolutePath = workspaceDir + intermediatePath + path.replace("./","")
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
+		else{
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
 	}
 	
 	def readFileAsString(String path){
 		var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
-		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")	
 	}
 	
 	def processDescription (String description){

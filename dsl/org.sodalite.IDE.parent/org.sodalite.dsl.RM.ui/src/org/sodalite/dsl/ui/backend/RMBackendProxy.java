@@ -154,8 +154,14 @@ public class RMBackendProxy {
 		if (!grafanaURI.endsWith("/"))
 			grafanaURI.concat("/");
 
+		String rulesServerURI = store.getString(PreferenceConstants.RulesServer_URI).trim();
+		if (rulesServerURI.isEmpty())
+			raiseConfigurationIssue("Rules Server URI user not set");
+		if (!rulesServerURI.endsWith("/"))
+			rulesServerURI.concat("/");
+
 		KBReasonerClient kbclient = new KBReasonerClient(kbReasonerURI, iacURI, image_builder_URI, xoperaURI,
-				keycloakURI, pdsURI, refactorerURI, grafanaURI);
+				keycloakURI, pdsURI, refactorerURI, grafanaURI, rulesServerURI);
 
 		if (Boolean.valueOf(store.getString(PreferenceConstants.KEYCLOAK_ENABLED))) {
 			String keycloak_user = store.getString(PreferenceConstants.KEYCLOAK_USER);
@@ -211,6 +217,8 @@ public class RMBackendProxy {
 
 	private void generateRMModel(IFile rmFile, IProgressMonitor monitor) {
 		try {
+			final String ANSIBLE_OUTPUT = "ansible_output";
+			String TURTLE_OUTPUT = "ttl_output";
 			URI aadmURI = URI.createURI(rmFile.getFullPath().toPortableString());
 			Injector injector = RMActivator.getInstance().getInjector(RMActivator.ORG_SODALITE_DSL_RM);
 			ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
@@ -224,6 +232,8 @@ public class RMBackendProxy {
 			IProject project = rmFile.getProject();
 			IFile output = project.getFile("src-gen");
 			fsa.setOutputPath(output.getLocation().toOSString());
+			fsa.setOutputPath(ANSIBLE_OUTPUT, output.getLocation().toOSString());
+			fsa.setOutputPath(TURTLE_OUTPUT, output.getLocation().toOSString());
 			generator.doGenerate(r, fsa, new GeneratorContext() {
 				@Override
 				public CancelIndicator getCancelIndicator() {
@@ -236,12 +246,21 @@ public class RMBackendProxy {
 	}
 
 	protected String readTurtle(IFile modelFile, IProject project) throws IOException {
-		String filename = modelFile.getFullPath().toOSString()
-				.substring(modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1)
-				.replaceFirst(File.separator, ".");
-		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+		
+		String filename = modelFile.getFullPath().lastSegment().toString();
+		String path =  modelFile.getFullPath().toString();
+		IFile turtle;
+		if(filename.endsWith(".rm")) {
+			String projectName = modelFile.getFullPath().toString().split("/")[1];
+			String intermediatePath = modelFile.getFullPath().toString().replace("/"+projectName,"");
+			//turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+			turtle = project.getFile(intermediatePath + ".ttl");
+		}
+		else {
+			turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+		}
 		String turtle_path = turtle.getLocationURI().toString();
-		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
+		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator)).replaceAll("%20", " ");
 		Path model_path = FileSystems.getDefault().getPath(turtle_path);
 		String modelTTL = new String(Files.readAllBytes(model_path));
 		return modelTTL;
@@ -249,7 +268,7 @@ public class RMBackendProxy {
 
 	private String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
-		path = path.substring(path.indexOf(File.separator));
+		path = path.substring(path.indexOf(File.separator)).replaceAll("%20", " ");
 		Path file_path = FileSystems.getDefault().getPath(path);
 		String content = new String(Files.readAllBytes(file_path));
 		return content;
@@ -289,7 +308,7 @@ public class RMBackendProxy {
 		if (index2 > index1)
 			directory = filepath.substring(index1, index2);
 		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
-		String properties_path = propertiesFile.getLocationURI().toString();
+		String properties_path = propertiesFile.getLocationURI().toString().replaceAll("%20", " ");
 		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;
