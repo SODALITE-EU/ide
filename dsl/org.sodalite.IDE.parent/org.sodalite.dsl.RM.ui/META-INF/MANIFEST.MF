@@ -22,6 +22,11 @@ Require-Bundle: org.sodalite.dsl.RM,
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: com.fasterxml.jackson.databind,
+ com.mongodb,
+ com.mongodb.client,
+ com.mongodb.client.model,
+ org.bson,
+ org.bson.conversions,
  org.sodalite.dsl.RM.ui.internal,
  org.sodalite.dsl.kb_reasoner_client,
  org.sodalite.dsl.kb_reasoner_client.exceptions,
@@ -33,5 +38,6 @@ Export-Package: com.fasterxml.jackson.databind,
  org.sodalite.dsl.ui.quickfix,
  org.sodalite.dsl.ui.validation
 Bundle-Activator: org.sodalite.dsl.RM.ui.internal.RMActivator
-Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
- .
+Bundle-ClassPath: .,
+ lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
+ lib/mongo-java-driver-3.11.2.jar
