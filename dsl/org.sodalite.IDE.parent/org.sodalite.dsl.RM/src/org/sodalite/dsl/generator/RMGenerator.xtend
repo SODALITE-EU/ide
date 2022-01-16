@@ -75,6 +75,11 @@ import java.util.Base64
 import org.sodalite.dsl.rM.EArtifactDefinition
 import org.sodalite.dsl.rM.GetArtifact
 import org.sodalite.dsl.rM.EArtifactType
+import org.sodalite.dsl.CustomOutputConfigurationProvider
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.ui.PlatformUI
 
 /**
  * Generates code from your model files on save.
@@ -133,9 +138,94 @@ class RMGenerator extends AbstractGenerator {
 		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		operation_numbers = new HashMap<EOperationDefinition, Integer>()
 		
-		val filename = getFilename(resource.URI)
-		fsa.generateFile(filename,  compileRM (resource))
+		if(context.cancelIndicator === null){
+			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+			var Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			var String localPath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+			var projectName = localPath.split("/").get(1).replaceAll("%20", " ")
+			//var RMName = getRMName(resource).replaceAll("%20", " ")
+			var String absolutePath = workspaceDir + localPath
+			absolutePath = absolutePath.replace(".rm","")
+			localPath = localPath.replace(".rm","").replace("/"+projectName,"")
+			//generate ansible files from RMs
+			for(node:resource.allContents.toIterable.filter(ENodeType)){
+				val nodeType = node.name
+				for (interface : node.eAllContents.toIterable.filter(EInterfaceDefinition)){
+					val interfaceName = interface.name
+					for(op: interface.interface.eAllContents.toIterable.filter(EOperationDefinition)){
+						val operationName = op.name
+						var AnsiblePath = absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName
+						var File ans_file = new File(AnsiblePath+".ans")
+						var File yaml_file = new File(AnsiblePath+".yaml")
+						if(ans_file.exists && yaml_file.exists){
+							//var BufferedReader ans_reader = new BufferedReader(new FileReader(absolutePath+".ans"));
+							//var String currentLine = ans_reader.readLine();
+							//System.out.println(currentLine)
+							val String[] labels = #['Replace both files','Replace only .ans file',"Replace only .yaml file","Do not replace anything"]
+							var MessageDialog dialog = new MessageDialog(shell, "Create new Ansible files", null,
+	    					"In folder " +absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+" exist already a .ans file and a .yaml file for operation "+operationName+". Please select one of the following options." , MessageDialog.QUESTION, labels, 3);
+	    					var int result = dialog.open();
+	    					//System.out.println(result);
+	    					if(result ==0){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+	    					else if(result ==1){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+	    					}
+	    					else if(result == 2){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+						}
+						else if(ans_file.exists && !yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .ans implementation file",
+							"Abstract implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							}
+						}
+						else if(!ans_file.exists && yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .yaml implementation file",
+							"Concrete implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+							}
+						}
+						else if(!ans_file.exists && !yaml_file.exists){
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+						}
+						
+						
+					}
+				}
+			}
+		}
+		
+		var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var projectName = intermediatePath.split("/").get(1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace("/"+projectName,"")
+		fsa.generateFile(intermediatePath+".ttl",CustomOutputConfigurationProvider::TURTLE_OUTPUT,  compileRM (resource))
 	}
+	
+	def compileAnsibleModel(String nodeType,String interfaceName,String operationName)'''
+	playbook_name:"«interfaceName»_interface_«operationName»_operation"
+	used_by: 
+		node_type:"«nodeType»"
+		interface:"«interfaceName»"
+		operation:"«operationName»"
+	plays:
+		play:
+			play_name:"example play"
+	
+	'''
+	
+	def compileYAMLAnsible()'''
+	- name: "example play"
+	'''
 	
 	
 	def compileRM(Resource r) '''

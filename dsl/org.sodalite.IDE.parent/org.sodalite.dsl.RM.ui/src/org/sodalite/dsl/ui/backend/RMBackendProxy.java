@@ -115,6 +115,8 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 
 	private void generateRMModel(IFile rmFile, IProgressMonitor monitor) {
 		try {
+			String ANSIBLE_OUTPUT = "ansible_output";
+			String TURTLE_OUTPUT = "ttl_output";
 			URI aadmURI = URI.createURI(rmFile.getFullPath().toPortableString());
 			Injector injector = RMActivator.getInstance().getInjector(RMActivator.ORG_SODALITE_DSL_RM);
 			ResourceSet resourceSet = injector.getInstance(ResourceSet.class);
@@ -128,6 +130,8 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 			IProject project = rmFile.getProject();
 			IFile output = project.getFile("src-gen");
 			fsa.setOutputPath(output.getLocation().toOSString());
+			fsa.setOutputPath(ANSIBLE_OUTPUT, output.getLocation().toOSString());
+			fsa.setOutputPath(TURTLE_OUTPUT, output.getLocation().toOSString());
 			generator.doGenerate(r, fsa, new GeneratorContext() {
 				@Override
 				public CancelIndicator getCancelIndicator() {
@@ -143,9 +147,19 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 		String filename = modelFile.getFullPath().toOSString()
 				.substring(modelFile.getFullPath().toOSString().indexOf(File.separator, 1) + 1)
 				.replaceFirst(File.separator, ".");
-		IFile turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+		String path =  modelFile.getFullPath().toString();
+		IFile turtle;
+		if(filename.endsWith(".rm")) {
+			String projectName = modelFile.getFullPath().toString().split("/")[1];
+			String intermediatePath = modelFile.getFullPath().toString().replace("/"+projectName,"");
+			//turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+			turtle = project.getFile(intermediatePath + ".ttl");
+		}
+		else {
+			turtle = project.getFile("src-gen" + File.separator + filename + ".ttl");
+		}
 		String turtle_path = turtle.getLocationURI().toString();
-		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator));
+		turtle_path = turtle_path.substring(turtle_path.indexOf(File.separator)).replaceAll("%20", " ");
 		Path model_path = FileSystems.getDefault().getPath(turtle_path);
 		String modelTTL = new String(Files.readAllBytes(model_path));
 		return modelTTL;
@@ -153,7 +167,7 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 
 	private String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
-		path = path.substring(path.indexOf(File.separator));
+		path = path.substring(path.indexOf(File.separator)).replaceAll("%20", " ");
 		Path file_path = FileSystems.getDefault().getPath(path);
 		String content = new String(Files.readAllBytes(file_path));
 		return content;
@@ -193,7 +207,7 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 		if (index2 > index1)
 			directory = filepath.substring(index1, index2);
 		IFile propertiesFile = project.getFile(directory + File.separator + "." + filename + ".properties");
-		String properties_path = propertiesFile.getLocationURI().toString();
+		String properties_path = propertiesFile.getLocationURI().toString().replaceAll("%20", " ");
 		properties_path = properties_path.substring(properties_path.indexOf(File.separator));
 		Path path = FileSystems.getDefault().getPath(properties_path);
 		return path;

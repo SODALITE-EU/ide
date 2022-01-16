@@ -3,9 +3,17 @@
  */
 package org.sodalite.dsl
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider
+
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class RMRuntimeModule extends AbstractRMRuntimeModule {
+	
+	
+	def Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
+		return CustomOutputConfigurationProvider
+	}
+	
 }
