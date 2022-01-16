@@ -21,6 +21,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -47,6 +48,13 @@ public class ModelDataJsonDeserializer extends JsonDeserializer<ReasonerData<Mod
 			return null;
 
 		List<Model> models = new ArrayList<>();
+		
+		for(JsonNode node:nodeData) {
+			ObjectMapper mapper = new ObjectMapper();
+			Object mf = mapper.readerFor(nodeType).readValue(node);
+			//System.out.println("deserialization");
+		}
+		
 		nodeData.forEach(node -> {
 			try {
 				Model model = mapper.readerFor(nodeType).readValue(node);

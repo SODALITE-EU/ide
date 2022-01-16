@@ -1,15 +1,21 @@
 package org.sodalite.ide.ui.views.parts.kb;
 
+import java.util.Base64;
+import java.util.LinkedHashMap;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -35,9 +41,13 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.ImplementationData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.NodeType;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.helper.UIHelper;
@@ -162,18 +172,6 @@ public class KBView {
 		String[] splits = string.split(delimiter);
 		return splits[splits.length - 1];
 	}
-
-//	private void raiseConfigurationIssue(String message) throws Exception {
-//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		Display.getDefault().asyncExec(new Runnable() {
-//			@Override
-//			public void run() {
-//				MessageDialog.openError(parent, "Sodalite Preferences Error",
-//						message + " in Sodalite preferences pages");
-//			}
-//		});
-//		throw new Exception(message + " in Sodalite preferences pages");
-//	}
 
 	private void createContextMenu(TreeViewer viewer) {
 
@@ -302,6 +300,8 @@ public class KBView {
 						int return_code = dialog.open();
 						if (return_code == ContainerSelectionDialog.OK) {
 							Object[] result = dialog.getResult();
+							
+							
 							// Copy model content into target folder
 							if (result.length == 0)
 								return;
@@ -325,6 +325,56 @@ public class KBView {
 									+ (node.getModel().getVersion() != null ? "_" + node.getModel().getVersion() : "")
 									+ UIHelper.getExtension(node.getModel().getName());
 							RMHelper.saveFileInFolder(name, node.getModel().getDsl(), targetFolder);
+							boolean Ansible_confirmed = MessageDialog.openConfirm(shell,
+									"Ansible files",
+									"Do you want to retrieve model's Ansible files?");
+							//Retrieve the Ansible files related to the selected RM in the local project directory
+							if(Ansible_confirmed) {
+								String RMName = node.getLabel();
+								RMName = RMName.split("\\.")[0];
+								IContainer AnsibleFolder =  targetFolder.getFolder(new Path(RMName+"-Ansible files"));
+								try {
+									RMHelper.createFolder(AnsibleFolder, true, true, null);
+								} catch (CoreException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								for(String nodeKey : node.getModel().getNodeTypes().keySet()) {
+									NodeType AnsibleNode = node.getModel().getNodeTypes().get(nodeKey);
+									int node_index = nodeKey.lastIndexOf("/");
+									IContainer NodeFolder = AnsibleFolder.getFolder(new Path(nodeKey.substring(node_index+1)));
+									for(LinkedHashMap<String, InterfaceDefinition> map:AnsibleNode.getInterfaces()) {
+										for(InterfaceDefinition inter:map.values()) {
+											String interfaceName = inter.getType().getLabel();
+											int interface_index = interfaceName.lastIndexOf(".");
+											IContainer InterfaceFolder = NodeFolder.getFolder(new Path(interfaceName.substring(interface_index+1)));
+											try {
+												RMHelper.createFolder(InterfaceFolder, true, true, null);
+											} catch (CoreException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+											for(OperationData operation:inter.getOperations_in_interface()) {
+												String operationName = operation.getOperation_name();
+												if(operation.getImplementationData()!=null) {
+													ImplementationData AnsibleData = operation.getImplementationData();
+													if(AnsibleData.getAnsibleModel()!=null) {
+														byte[] decodedBytes = Base64.getDecoder().decode(AnsibleData.getAnsibleModel());
+														String decodedAnsibleModel = new String(decodedBytes);
+														RMHelper.saveFileInFolder(operationName+".ans", decodedAnsibleModel, InterfaceFolder);
+													}
+													else if(AnsibleData.getAnsibleModel()==null && AnsibleData.getAnsibleScript()!=null) {
+														byte[] decodedBytes = Base64.getDecoder().decode(AnsibleData.getAnsibleScript());
+														String decodedAnsibleScript = new String(decodedBytes);
+														RMHelper.saveFileInFolder(operationName+".yaml", decodedAnsibleScript, InterfaceFolder);
+													}
+												}
+											}
+										}
+									}
+									
+								}
+							}
 							MessageDialog.openInformation(shell, "Retrieve model", "Model " + node.getModel().getName()
 									+ " successfully copied into " + targetFolder.getName() + " folder");
 						}
