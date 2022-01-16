@@ -65,6 +65,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (grafana_uri == null)
 			grafana_uri = "http://192.168.3.74:3001/";
 
+		String rulesServer_uri = prop.getProperty(PreferenceConstants.RulesServer_URI);
+		if (rulesServer_uri == null)
+			rulesServer_uri = "http://192.168.3.74:9092/";
+
 		String skydive_analyzer_uri = prop.getProperty(PreferenceConstants.SKYDIVE_ANALYZER_URI);
 		if (skydive_analyzer_uri == null)
 			skydive_analyzer_uri = "192.168.2.11:8088";
@@ -85,6 +89,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (!keycloak_enabled) {
 			keycloak_enabled = true;
 		}
+		
+		String mongodb_uri = prop.getProperty(PreferenceConstants.MONGODB_URI);
+		if (mongodb_uri == null)
+			mongodb_uri = "localhost:27017";
 
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(), MessageFormat.format(
 				"Default Sodalite backend services configuration read from properties: "
@@ -101,11 +109,13 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
 		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
+		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);
 		defaults.put(PreferenceConstants.SKYDIVE_ANALYZER_URI, skydive_analyzer_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_URI, keycloak_uri);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
 		defaults.put(PreferenceConstants.KEYCLOAK_ENABLED, Boolean.toString(keycloak_enabled));
+		defaults.put(PreferenceConstants.MONGODB_URI, mongodb_uri);
 	}
 
 	private Properties readDefaultProperties() {
