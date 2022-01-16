@@ -55,6 +55,11 @@ import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
 import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.ui.helper.RMHelper
 import org.eclipse.xtext.impl.KeywordImpl
+import org.eclipse.xtext.EcoreUtil2
+import org.sodalite.dsl.rM.EInterfaceDefinition
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.util.LineAndColumn
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -632,10 +637,62 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEditableCompletionProposal ("{", "{", null, context, "Start a Map of key=value entries", acceptor);
 	}
 	
+	/*override void complete_EPrimary(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String project_name = project_uri.segment(project_uri.segmentCount-2).replaceAll("%20", " ")
+		val node = EcoreUtil2.getContainerOfType(model,ENodeType).name
+		val interface = EcoreUtil2.getContainerOfType(model,EInterfaceDefinition).name
+		val operation = EcoreUtil2.getContainerOfType(model,EOperationDefinition).name
+		//var String proposal = "primary:"+"\""+workspaceDir+"/"+project_name+"/Ansible"+"/"+node+"/"+interface+"/"+operation+".yaml"+"\""
+		var String proposal = "\""+"/Ansible"+"/"+node+"/"+interface+"/"+operation+".yaml"+"\""
+		createNonEditableCompletionProposal(proposal,proposal,null,context,"Default path where the appropriate .yaml file is generated from .ans file",acceptor)
+	}*/
+	
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		var document = context.document
+		var offset = context.currentNode.offset
+		
+		val node = EcoreUtil2.getContainerOfType(model,ENodeType).name
+		val interface = EcoreUtil2.getContainerOfType(model,EInterfaceDefinition).name
+		val operation = EcoreUtil2.getContainerOfType(model,EOperationDefinition).name
+		RMName = RMName.split("\\.").get(0)
+		var String relativePath = RMName+"-Ansible files"+"/"+node+"/"+interface
+		var String localPath = intermediatePath+relativePath
+		var String absolutePath = workspaceDir+localPath
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
-		val input = "\"" + RMHelper.selectFile ("Select implementation primary file") + "\""
-		createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		var input = RMHelper.selectImplementationFile("Select implementation primary file",absolutePath,localPath,operation+".yaml") 
+		//Relative path
+		if(input.equals(localPath+"/"+operation+".yaml")){
+			input = "\"" + "./" + relativePath+"/"+operation+".yaml" + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+		//No file has been selected
+		else if(input.empty){
+			return
+		}
+		//Absolute path
+		else{
+			input = "\"" + input + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+		
+	}
+	
+	override void completeEPrimary_Relative_path(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		createEditableCompletionProposal ("\"" + workspaceDir + intermediatePath + "\"", "\"" + workspaceDir + intermediatePath + "\"", null, context, "The path where current resource model is located", acceptor);
 	}
 	
 	override void completeEDependencies_Files(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -1622,6 +1679,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		}
 		
 		suggestRequirementsOrCapabilitiesInNode (module, node, context, acceptor)
+	}
+	
+	def String getProjectName(URI project_uri){
+		var project = project_uri.toString
+		project = project.replace("platform:/resource", "")
+		var p = project.split("/")
+		var projectName = project.split("/").get(1).replaceAll("%20", " ")
+		return projectName
 	}
 	
 //	def findCapabilitiesInNodeType (String nodeRef){

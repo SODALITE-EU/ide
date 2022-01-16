@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.nio.file.CopyOption;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +25,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -485,6 +489,100 @@ public class RMHelper {
 				}
 
 			}
+		}
+	}
+	
+	
+	public static void createFolder(IContainer folder, boolean force, boolean local, IProgressMonitor monitor) throws CoreException {
+	    if (!folder.exists()) {
+	        IContainer parent = folder.getParent();
+	        if (parent instanceof IFolder) {
+	            createFolder((IFolder)parent, force, local, null);
+	        }
+	        ((IFolder)folder).create(force, local, monitor);
+	    }
+	}
+	
+	public static String selectImplementationFile(String dialogText,String absolutePath,String localPath,String fileName) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		FileDialog fileDialog = new FileDialog(shell);
+		fileDialog.setText(dialogText);
+		fileDialog.setFilterPath(absolutePath);
+		String selectedFile = fileDialog.open();
+		String[] labels = {"Absolute path","Relative path"};
+		MessageDialog dialog = new MessageDialog(shell, "Select .yaml file", null,
+				"Do you want to reference the implementation file with its absolute path or with its relative path with respect to current resource model? Please select one of the following options." 
+				, MessageDialog.QUESTION, labels, 1);
+		int result = dialog.open();
+		//The user selects to reference .yaml file with its absolute path
+		if(result==0) {
+			return selectedFile;
+		}
+		//The user selects to reference .yaml file with its relative path with respect to resource model
+		else if(result==1) {
+			File folderStructure = new File(absolutePath); 
+			if(folderStructure.exists() && folderStructure.isDirectory()) {
+				System.out.println("Folder structure exists");
+				if(selectedFile.equals(absolutePath+"/"+fileName)) {
+					return localPath+"/"+fileName;
+				}
+				File f = new File(absolutePath+"/"+fileName);
+				if(f.exists()) {
+					System.out.println("Implementation file already exists");
+					boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace implementation file",
+							"Implementation file already exists.Do you want to replace current implementation file?");
+					if(confirmed) {
+						Path src = Paths.get(selectedFile);
+						Path dest = Paths.get(absolutePath+"/"+fileName);
+						CopyOption[] options = new CopyOption[] {
+							StandardCopyOption.COPY_ATTRIBUTES,
+							StandardCopyOption.REPLACE_EXISTING
+						};
+						try {
+							Files.copy(src, dest, options);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				else {
+					Path src = Paths.get(selectedFile);
+					Path dest = Paths.get(absolutePath+"/"+fileName);
+					CopyOption[] options = new CopyOption[] {
+						StandardCopyOption.COPY_ATTRIBUTES,
+						StandardCopyOption.REPLACE_EXISTING
+					};
+					try {
+						Files.copy(src, dest, options);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				return localPath+"/"+fileName;
+			}
+			else {
+				System.out.println("Folder structure does not exist");
+				folderStructure.mkdirs();
+				Path src = Paths.get(selectedFile);
+				Path dest = Paths.get(absolutePath+"/"+fileName);
+				CopyOption[] options = new CopyOption[] {
+					StandardCopyOption.COPY_ATTRIBUTES,
+					StandardCopyOption.REPLACE_EXISTING
+				};
+				try {
+					Files.copy(src, dest, options);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return localPath+"/"+fileName;
+			}
+		}
+		else {
+			return "";
 		}
 	}
 
