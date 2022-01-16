@@ -298,6 +298,7 @@
 		</menuContribution>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
+		
 		<handler
 			class="org.sodalite.dsl.ui.RMExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
@@ -322,6 +323,10 @@
         class="org.sodalite.dsl.ui.handlers.RMSaveHandler"
         commandId="org.sodalite.dsl.RM.ui.handler.saveRM">
   </handler>
+  		<handler
+           class="org.sodalite.dsl.ui.RMExecutableExtensionFactory:org.sodalite.dsl.ui.handlers.GenerationHandler"
+           commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand">
+    	 </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -334,6 +339,13 @@
         id="org.sodalite.category"
         name="Sodalite">
   </category>
+  <command
+        categoryId="org.sodalite.category"
+        defaultHandler="org.sodalite.dsl.ui.RMExecutableExtensionFactory:org.sodalite.dsl.ui.handlers.GenerationHandler"
+        description="Generate Ansible files"
+        id="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+        name="generateAnsible">
+  </command>
   <command
         categoryId="org.sodalite.category"
         defaultHandler="org.sodalite.dsl.ui.handlers.RMSaveHandler"
@@ -353,6 +365,48 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=additions">
+			<command commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+				style="push"
+				label="Generate Ansible files"
+				tooltip="Generate code">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.sodalite.dsl.RM.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	<menuContribution
+        allPopups="false"
+        locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+     <menu
+           id="eu.sodalite.menu.projectexplorer"
+           label="Sodalite">
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+              id="org.sodalite.dsl.RM.ui.popup.command.GenerationCommand"
+              label="Generate Ansible files"
+              style="push"
+              tooltip="Generate code">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+     </menu>
+  </menuContribution>
   <menuContribution
         allPopups="false"
         locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
