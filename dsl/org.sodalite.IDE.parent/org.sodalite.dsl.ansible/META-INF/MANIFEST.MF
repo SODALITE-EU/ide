@@ -15,7 +15,9 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.sodalite.dsl.RM;bundle-version="1.0.0",
- org.eclipse.xtend.lib;bundle-version="2.14.0"
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.sodalite.dsl.preferences;bundle-version="1.0.0",
+ org.eclipse.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sodalite.sdl.ansible,
  org.sodalite.sdl.ansible.ansibleDsl,
@@ -29,4 +31,5 @@ Export-Package: org.sodalite.sdl.ansible,
  org.sodalite.sdl.ansible.ansibleDsl.impl,
  org.sodalite.sdl.ansible.scoping,
  org.sodalite.sdl.ansible.parser.antlr.lexer
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.ui
