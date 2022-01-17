@@ -58,6 +58,10 @@ import org.sodalite.dsl.rM.EPREFIX_REF
 import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
 import org.sodalite.dsl.rM.EArtifactDefinition
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.sodalite.dsl.rM.EInterfaceDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -713,9 +717,48 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		var document = context.document
+		var offset = context.currentNode.offset
+		
+		val node = EcoreUtil2.getContainerOfType(model,ENodeType).name
+		val interface = EcoreUtil2.getContainerOfType(model,EInterfaceDefinition).name
+		val operation = EcoreUtil2.getContainerOfType(model,EOperationDefinition).name
+		RMName = RMName.split("\\.").get(0)
+		var String relativePath = RMName+"-Ansible files"+"/"+node+"/"+interface
+		var String localPath = intermediatePath+relativePath
+		var String absolutePath = workspaceDir+localPath
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
-		val input = "\"" + RMHelper.selectFile ("Select implementation primary file") + "\""
-		createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		var input = RMHelper.selectImplementationFile("Select implementation primary file",absolutePath,localPath,operation+".yaml") 
+		//Relative path
+		if(input.equals(localPath+"/"+operation+".yaml")){
+			input = "\"" + "./" + relativePath+"/"+operation+".yaml" + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+		//No file has been selected
+		else if(input.empty){
+			return
+		}
+		//Absolute path
+		else{
+			input = "\"" + input + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+	}
+	
+	override void completeEPrimary_Relative_path(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		createEditableCompletionProposal ("\"" + workspaceDir + intermediatePath + "\"", "\"" + workspaceDir + intermediatePath + "\"", null, context, "The path where current resource model is located", acceptor);
 	}
 	
 	override void completeEArtifactDefinitionBody_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
