@@ -4,35 +4,53 @@
 package org.sodalite.sdl.ansible.ui.contentassist;
 
 import com.google.common.base.Objects;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
+import java.util.Map;
+import java.util.Set;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.sodalite.dsl.rM.ENodeType;
-import org.sodalite.dsl.rM.EOperationDefinition;
-import org.sodalite.dsl.rM.EProperties;
-import org.sodalite.dsl.rM.EPropertyDefinition;
-import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl;
-import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl;
-import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl;
-import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.sodalite.dsl.ansible.helper.AnsibleHelper;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData;
+import org.sodalite.dsl.kb_reasoner_client.types.Type;
+import org.sodalite.dsl.ui.helper.RMHelper;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
-import org.sodalite.sdl.ansible.ansibleDsl.EUsedByBody;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlayImpl;
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationImpl;
 import org.sodalite.sdl.ansible.ui.contentassist.AbstractAnsibleDslProposalProvider;
@@ -268,25 +286,129 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void complete_BOOLEAN(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(this.createCompletionProposal("False", context));
-    acceptor.accept(this.createCompletionProposal("True", context));
-    acceptor.accept(this.createCompletionProposal("false", context));
-    acceptor.accept(this.createCompletionProposal("true", context));
+    if ((model instanceof EParameter)) {
+      boolean _equals = AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available");
+      if (_equals) {
+        return;
+      }
+      String type = AnsibleHelper.getCacheData().get("currentParameterType");
+      if (((!type.equals("boolean")) && (!type.isEmpty()))) {
+        return;
+      }
+    } else {
+      if (((model instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class) != null))) {
+        boolean _equals_1 = AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available");
+        if (_equals_1) {
+          return;
+        }
+        String type_1 = AnsibleHelper.getCacheData().get("currentSubparameterType");
+        if (((!type_1.equals("boolean")) && (!type_1.isEmpty()))) {
+          return;
+        }
+      }
+    }
+    Boolean _existProposal = AnsibleHelper.existProposal("False", acceptor);
+    boolean _not = (!(_existProposal).booleanValue());
+    if (_not) {
+      acceptor.accept(this.createCompletionProposal("False", context));
+    }
+    Boolean _existProposal_1 = AnsibleHelper.existProposal("True", acceptor);
+    boolean _not_1 = (!(_existProposal_1).booleanValue());
+    if (_not_1) {
+      acceptor.accept(this.createCompletionProposal("True", context));
+    }
+    Boolean _existProposal_2 = AnsibleHelper.existProposal("false", acceptor);
+    boolean _not_2 = (!(_existProposal_2).booleanValue());
+    if (_not_2) {
+      acceptor.accept(this.createCompletionProposal("false", context));
+    }
+    Boolean _existProposal_3 = AnsibleHelper.existProposal("true", acceptor);
+    boolean _not_3 = (!(_existProposal_3).booleanValue());
+    if (_not_3) {
+      acceptor.accept(this.createCompletionProposal("true", context));
+    }
   }
   
   @Override
   public void complete_BOOLEAN_ONLY_ANSIBLE(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(this.createCompletionProposal("no", context));
-    acceptor.accept(this.createCompletionProposal("yes", context));
+    if ((model instanceof EParameter)) {
+      boolean _equals = AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available");
+      if (_equals) {
+        return;
+      }
+      String type = AnsibleHelper.getCacheData().get("currentParameterType");
+      if (((!type.equals("boolean")) && (!type.isEmpty()))) {
+        return;
+      }
+    } else {
+      if (((model instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class) != null))) {
+        boolean _equals_1 = AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available");
+        if (_equals_1) {
+          return;
+        }
+        String type_1 = AnsibleHelper.getCacheData().get("currentSubparameterType");
+        if (((!type_1.equals("boolean")) && (!type_1.isEmpty()))) {
+          return;
+        }
+      }
+    }
+    Boolean _existProposal = AnsibleHelper.existProposal("no", acceptor);
+    boolean _not = (!(_existProposal).booleanValue());
+    if (_not) {
+      acceptor.accept(this.createCompletionProposal("no", context));
+    }
+    Boolean _existProposal_1 = AnsibleHelper.existProposal("yes", acceptor);
+    boolean _not_1 = (!(_existProposal_1).booleanValue());
+    if (_not_1) {
+      acceptor.accept(this.createCompletionProposal("yes", context));
+    }
   }
   
   @Override
   public void complete_NULL(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    acceptor.accept(this.createCompletionProposal("null", context));
+    if ((model instanceof EParameter)) {
+      boolean _equals = AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available");
+      if (_equals) {
+        return;
+      }
+    } else {
+      if (((model instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class) != null))) {
+        boolean _equals_1 = AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available");
+        if (_equals_1) {
+          return;
+        }
+      }
+    }
+    Boolean _existProposal = AnsibleHelper.existProposal("null", acceptor);
+    boolean _not = (!(_existProposal).booleanValue());
+    if (_not) {
+      acceptor.accept(this.createCompletionProposal("null", context));
+    }
   }
   
   @Override
   public void complete_SIMPLE_NUMBER(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    if ((model instanceof EParameter)) {
+      boolean _equals = AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available");
+      if (_equals) {
+        return;
+      }
+      String type = AnsibleHelper.getCacheData().get("currentParameterType");
+      if ((((!type.equals("int")) && (!type.equals("float"))) && (!type.isEmpty()))) {
+        return;
+      }
+    } else {
+      if (((model instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class) != null))) {
+        boolean _equals_1 = AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available");
+        if (_equals_1) {
+          return;
+        }
+        String type_1 = AnsibleHelper.getCacheData().get("currentSubparameterType");
+        if ((((!type_1.equals("int")) && (!type_1.equals("float"))) && (!type_1.isEmpty()))) {
+          return;
+        }
+      }
+    }
     this.createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor);
   }
   
@@ -297,7 +419,209 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   
   @Override
   public void completeEParameter_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    this.createEditableCompletionProposal("Parameter_Name", "Parameter_Name - ID", context, "The identifier of the module parameter.", acceptor);
+    this.createEditableCompletionProposal("Parameter_Name", "Parameter_Name", context, "Name of a parameter", acceptor);
+    if ((model instanceof EModuleCall)) {
+      this.completeEParameter_Name_Module(((EModuleCall) model), assignment, context, acceptor);
+    }
+  }
+  
+  public void completeEParameter_Name_Module(final EModuleCall module, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    Map<String, Map<String, Object>> parameters = AnsibleHelper.findParameters(module, fqn);
+    StyledString.Styler requiredParameterStyler = null;
+    Set<String> _keySet = parameters.keySet();
+    for (final String parameterKey : _keySet) {
+      {
+        Map<String, Object> parameter = parameters.get(parameterKey);
+        String parameterType = null;
+        String description = "";
+        boolean _containsKey = parameter.containsKey("required");
+        if (_containsKey) {
+          requiredParameterStyler = new StyledString.Styler() {
+            @Override
+            public void applyStyles(final TextStyle textStyle) {
+              textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_RED);
+            }
+          };
+        } else {
+          requiredParameterStyler = new StyledString.Styler() {
+            @Override
+            public void applyStyles(final TextStyle textStyle) {
+              textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
+            }
+          };
+        }
+        boolean _containsKey_1 = parameter.containsKey("description");
+        if (_containsKey_1) {
+          Object _get = parameter.get("description");
+          description = ((String) _get);
+        }
+        boolean _containsKey_2 = parameter.containsKey("type");
+        if (_containsKey_2) {
+          Object _get_1 = parameter.get("type");
+          parameterType = ((String) _get_1);
+          String _concat = parameterKey.concat(" - ").concat(parameterType);
+          StyledString _styledString = new StyledString(_concat, requiredParameterStyler);
+          this.createNonEditableCompletionProposal((parameterKey + ":"), _styledString, context, "Parameter of module ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor);
+        } else {
+          StyledString _styledString_1 = new StyledString(parameterKey, requiredParameterStyler);
+          this.createNonEditableCompletionProposal((parameterKey + ":"), _styledString_1, context, "Parameter of module ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor);
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void completeEParameter_Value(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    List<String> booleanValues = Arrays.<String>asList("yes", "no", "True", "False", "true", "false");
+    MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+    EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    String[] nameParts = fqn.split("\\.");
+    String type = "";
+    List<String> choices = new ArrayList<String>();
+    String default_value = "";
+    StyledString.Styler defaultValueParameterStyler = new StyledString.Styler() {
+      @Override
+      public void applyStyles(final TextStyle textStyle) {
+        textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_BLUE);
+      }
+    };
+    StyledString.Styler choicesValueParameterStyler = new StyledString.Styler() {
+      @Override
+      public void applyStyles(final TextStyle textStyle) {
+        textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GREEN);
+      }
+    };
+    String projection = "modules".concat(".").concat(nameParts[2]).concat(".").concat("parameters").concat(".").concat(parameter.getName());
+    Bson match = Aggregates.match(Filters.<String>eq("_id", (nameParts[0]).concat(".").concat(nameParts[1])));
+    Bson details_project = Aggregates.project(Projections.fields(Projections.excludeId(), Projections.<String>computed("details", "$".concat(projection))));
+    Iterator<Document> detailsIterator = mongo_collection.aggregate(Arrays.<Bson>asList(match, details_project)).iterator();
+    while (detailsIterator.hasNext()) {
+      {
+        Document content = detailsIterator.next();
+        boolean _isEmpty = content.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          Object _get = content.get("details");
+          Document details = ((Document) _get);
+          String choicesAvailability = "";
+          Object _get_1 = details.get("choices");
+          boolean _tripleNotEquals = (_get_1 != null);
+          if (_tripleNotEquals) {
+            Object _get_2 = details.get("choices");
+            choices = ((List<String>) _get_2);
+            choicesAvailability = "available";
+          } else {
+            choices = Collections.<String>emptyList();
+            choicesAvailability = "not available";
+          }
+          String _xifexpression = null;
+          Object _get_3 = details.get("default");
+          boolean _tripleNotEquals_1 = (_get_3 != null);
+          if (_tripleNotEquals_1) {
+            _xifexpression = String.valueOf(details.get("default"));
+          } else {
+            _xifexpression = "";
+          }
+          default_value = _xifexpression;
+          String _xifexpression_1 = null;
+          Object _get_4 = details.get("type");
+          boolean _tripleNotEquals_2 = (_get_4 != null);
+          if (_tripleNotEquals_2) {
+            _xifexpression_1 = String.valueOf(details.get("type"));
+          } else {
+            _xifexpression_1 = "";
+          }
+          type = _xifexpression_1;
+          Map<String, String> cacheData = new HashMap<String, String>();
+          cacheData.put("currentModule", fqn);
+          cacheData.put("currentParameter", parameter.getName());
+          cacheData.put("currentParameterType", type);
+          cacheData.put("currentParameterChoices", choicesAvailability);
+          AnsibleHelper.setCacheData(cacheData);
+        }
+      }
+    }
+    if ((((choices == null) || choices.isEmpty()) && (!Objects.equal(default_value, "")))) {
+      String _concat = default_value.concat(" - Default value");
+      StyledString _styledString = new StyledString(_concat, defaultValueParameterStyler);
+      this.createNonEditableCompletionProposal(default_value, _styledString, context, "Default value", acceptor);
+    }
+    if ((choices != null)) {
+      for (final String choice : choices) {
+        {
+          String proposal = null;
+          boolean _contains = booleanValues.contains(choice);
+          if (_contains) {
+            proposal = choice;
+          } else {
+            proposal = "\"".concat(choice).concat("\"");
+          }
+          boolean _equals = choice.equals(default_value);
+          if (_equals) {
+            String _concat_1 = choice.concat(" - Default value");
+            StyledString _styledString_1 = new StyledString(_concat_1, defaultValueParameterStyler);
+            this.createNonEditableCompletionProposal(proposal, _styledString_1, context, "Permitted value", acceptor);
+          } else {
+            StyledString _styledString_2 = new StyledString(choice, choicesValueParameterStyler);
+            this.createNonEditableCompletionProposal(proposal, _styledString_2, context, "Permitted value", acceptor);
+          }
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void completeKeyword(final Keyword keyword, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor) {
+    EObject _currentModel = contentAssistContext.getCurrentModel();
+    if ((_currentModel instanceof EParameter)) {
+      String type = AnsibleHelper.getCacheData().get("currentParameterType");
+      if ((((!type.contains("list")) && (!type.isEmpty())) && (Objects.equal(keyword.getValue(), "[") || Objects.equal(keyword.getValue(), "-")))) {
+        return;
+      }
+      if ((((!type.equals("dictionary")) && (!type.isEmpty())) && Objects.equal(keyword.getValue(), "{"))) {
+        return;
+      }
+    } else {
+      if (((contentAssistContext.getCurrentModel() instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(contentAssistContext.getCurrentModel(), EParameter.class) != null))) {
+        String type_1 = AnsibleHelper.getCacheData().get("currentSubparameterType");
+        if ((((!type_1.contains("list")) && (!type_1.isEmpty())) && (Objects.equal(keyword.getValue(), "[") || Objects.equal(keyword.getValue(), "-")))) {
+          return;
+        }
+        if ((((!type_1.equals("dictionary")) && (!type_1.isEmpty())) && Objects.equal(keyword.getValue(), "{"))) {
+          return;
+        }
+      }
+    }
+    super.completeKeyword(keyword, contentAssistContext, acceptor);
+  }
+  
+  @Override
+  public void complete_STRING(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    if ((model instanceof EParameter)) {
+      boolean _equals = AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available");
+      if (_equals) {
+        return;
+      }
+      String type = AnsibleHelper.getCacheData().get("currentParameterType");
+      if ((((!type.equals("string")) && (!type.equals("path"))) && (!type.isEmpty()))) {
+        return;
+      }
+    } else {
+      if (((model instanceof EDictionaryPairImpl) && (EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class) != null))) {
+        boolean _equals_1 = AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available");
+        if (_equals_1) {
+          return;
+        }
+        String type_1 = AnsibleHelper.getCacheData().get("currentSubparameterType");
+        if ((((!type_1.equals("string")) && (!type_1.equals("path"))) && (!type_1.isEmpty()))) {
+          return;
+        }
+      }
+    }
+    super.complete_STRING(model, ruleCall, context, acceptor);
   }
   
   @Override
@@ -308,6 +632,200 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   @Override
   public void completeEDictionaryPair_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.createEditableCompletionProposal("Name", "Name - ID", context, "The identifier of a key of the dictionary.", acceptor);
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      this.completeSubparameter_Name(model, assignment, context, acceptor);
+    }
+    super.completeEDictionaryPair_Name(model, assignment, context, acceptor);
+  }
+  
+  public void completeSubparameter_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    Iterator<EObject> containers = EcoreUtil2.getAllContainers(model).iterator();
+    List<String> parameterPath = new ArrayList<String>();
+    if ((model instanceof EJinjaAndString)) {
+      containers.next();
+    }
+    if ((model instanceof EDictionaryPair)) {
+      EValuePassed _value = ((EDictionaryPair) model).getValue();
+      boolean _tripleEquals = (_value == null);
+      if (_tripleEquals) {
+        parameterPath.add(0, ((EDictionaryPair) model).getName());
+      }
+    }
+    while (containers.hasNext()) {
+      {
+        EObject container = containers.next();
+        if ((container instanceof EDictionaryPair)) {
+          parameterPath.add(0, ((EDictionaryPair) container).getName());
+        }
+      }
+    }
+    parameterPath.add(0, parameter.getName());
+    Map<String, Map<String, Object>> subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath);
+    StyledString.Styler requiredParameterStyler = null;
+    Set<String> _keySet = subparameters.keySet();
+    for (final String subparameterKey : _keySet) {
+      {
+        Map<String, Object> subparameter = subparameters.get(subparameterKey);
+        String parameterType = null;
+        String description = "";
+        boolean _containsKey = subparameter.containsKey("required");
+        if (_containsKey) {
+          requiredParameterStyler = new StyledString.Styler() {
+            @Override
+            public void applyStyles(final TextStyle textStyle) {
+              textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_RED);
+            }
+          };
+        } else {
+          requiredParameterStyler = new StyledString.Styler() {
+            @Override
+            public void applyStyles(final TextStyle textStyle) {
+              textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
+            }
+          };
+        }
+        boolean _containsKey_1 = subparameter.containsKey("description");
+        if (_containsKey_1) {
+          Object _get = subparameter.get("description");
+          description = ((String) _get);
+        }
+        boolean _containsKey_2 = subparameter.containsKey("type");
+        if (_containsKey_2) {
+          Object _get_1 = subparameter.get("type");
+          parameterType = ((String) _get_1);
+          String _concat = subparameterKey.concat(" - ").concat(parameterType);
+          StyledString _styledString = new StyledString(_concat, requiredParameterStyler);
+          int _size = parameterPath.size();
+          int _minus = (_size - 1);
+          this.createNonEditableCompletionProposal((subparameterKey + ":"), _styledString, context, "Subparameter of ".concat(parameterPath.get(_minus)).concat("\n").concat("Description:").concat("\n").concat(description), acceptor);
+        } else {
+          StyledString _styledString_1 = new StyledString(subparameterKey, requiredParameterStyler);
+          int _size_1 = parameterPath.size();
+          int _minus_1 = (_size_1 - 1);
+          this.createNonEditableCompletionProposal((subparameterKey + ":"), _styledString_1, context, "Subparameter of ".concat(parameterPath.get(_minus_1)).concat("\n").concat("Description:").concat("\n").concat(description), acceptor);
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void completeEDictionaryPair_Value(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      this.completeSubparameter_Value(model, assignment, context, acceptor);
+    }
+    super.completeEDictionaryPair_Value(model, assignment, context, acceptor);
+    StyledString _styledString = new StyledString(":");
+    this.createNonEditableCompletionProposal(":", _styledString, context, "", acceptor);
+  }
+  
+  public void completeSubparameter_Value(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    List<String> booleanValues = Arrays.<String>asList("yes", "no", "True", "False", "true", "false");
+    String type = "";
+    List<String> choices = null;
+    String default_value = "";
+    StyledString.Styler defaultValueStyler = new StyledString.Styler() {
+      @Override
+      public void applyStyles(final TextStyle textStyle) {
+        textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_BLUE);
+      }
+    };
+    StyledString.Styler choicesValueParameterStyler = new StyledString.Styler() {
+      @Override
+      public void applyStyles(final TextStyle textStyle) {
+        textStyle.foreground = Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GREEN);
+      }
+    };
+    Document details = AnsibleHelper.findSubparameterDetails(model);
+    if ((details != null)) {
+      String choicesAvailability = "";
+      Object _get = details.get("choices");
+      boolean _tripleNotEquals = (_get != null);
+      if (_tripleNotEquals) {
+        Object _get_1 = details.get("choices");
+        choices = ((List<String>) _get_1);
+        choicesAvailability = "available";
+      } else {
+        choices = Collections.<String>emptyList();
+        choicesAvailability = "not available";
+      }
+      String _xifexpression = null;
+      Object _get_2 = details.get("default");
+      boolean _tripleNotEquals_1 = (_get_2 != null);
+      if (_tripleNotEquals_1) {
+        _xifexpression = String.valueOf(details.get("default"));
+      } else {
+        _xifexpression = "";
+      }
+      default_value = _xifexpression;
+      String _xifexpression_1 = null;
+      Object _get_3 = details.get("type");
+      boolean _tripleNotEquals_2 = (_get_3 != null);
+      if (_tripleNotEquals_2) {
+        _xifexpression_1 = String.valueOf(details.get("type"));
+      } else {
+        _xifexpression_1 = "";
+      }
+      type = _xifexpression_1;
+      Map<String, String> cacheData = new HashMap<String, String>();
+      cacheData.put("currentSubparameter", "");
+      cacheData.put("currentSubparameterType", type);
+      cacheData.put("currentSubparameterChoices", choicesAvailability);
+      AnsibleHelper.setCacheData(cacheData);
+    }
+    if (((choices == null) && (!Objects.equal(default_value, "")))) {
+      String _concat = default_value.concat(" - Default value");
+      StyledString _styledString = new StyledString(_concat, defaultValueStyler);
+      this.createNonEditableCompletionProposal(default_value, _styledString, context, "Default value", acceptor);
+    }
+    if ((choices != null)) {
+      for (final String choice : choices) {
+        {
+          String proposal = null;
+          boolean _contains = booleanValues.contains(choice);
+          if (_contains) {
+            proposal = choice;
+          } else {
+            proposal = "\"".concat(choice).concat("\"");
+          }
+          boolean _equals = choice.equals(default_value);
+          if (_equals) {
+            String _concat_1 = choice.concat(" - Default value");
+            StyledString _styledString_1 = new StyledString(_concat_1, defaultValueStyler);
+            this.createNonEditableCompletionProposal(proposal, _styledString_1, context, "Permitted value", acceptor);
+          } else {
+            StyledString _styledString_2 = new StyledString(choice, choicesValueParameterStyler);
+            this.createNonEditableCompletionProposal(proposal, _styledString_2, context, "Permitted value", acceptor);
+          }
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void completeEListInLine_Elements(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      this.completeSubparameter_Name(model, assignment, context, acceptor);
+    }
+    super.completeEListInLine_Elements(model, assignment, context, acceptor);
+  }
+  
+  @Override
+  public void completeEListIndented_Elements(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(model, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      this.completeSubparameter_Name(model, assignment, context, acceptor);
+    }
+    super.completeEListIndented_Elements(model, assignment, context, acceptor);
   }
   
   @Override
@@ -331,12 +849,22 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void completeEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeLocalEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeInputOperationVariableReference(model, context, acceptor, false);
   }
   
   @Override
-  public void completeEInputInterfaceVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void completeKBEInputOperationVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeInputOperationVariableReference(model, context, acceptor, false);
+  }
+  
+  @Override
+  public void completeLocalEInputInterfaceVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeInputInterfaceVariableReference(model, context, acceptor, false);
+  }
+  
+  @Override
+  public void completeKBEInputInterfaceVariableReference_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeInputInterfaceVariableReference(model, context, acceptor, false);
   }
   
@@ -351,24 +879,112 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   @Override
-  public void completeEUsedByBody_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    final EPlaybookImpl playbook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    if ((playbook != null)) {
-      final EUsedByBody usedByBody = playbook.getUsed_by();
-      if ((usedByBody != null)) {
-        final ENodeType nodeType = usedByBody.getNode_type();
-        if ((nodeType != null)) {
-          final List<EOperationDefinitionImpl> candidatesOperation = EcoreUtil2.<EOperationDefinitionImpl>getAllContentsOfType(nodeType, EOperationDefinitionImpl.class);
-          for (final EOperationDefinitionImpl candidate : candidatesOperation) {
-            {
-              final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(candidate, EInterfaceDefinitionImpl.class);
-              String _concat = candidate.getName().concat(" - Interface: ");
-              this.createNonEditableCompletionProposal("\"".concat(candidate.getName()).concat("\""), new StyledString(_concat).append(interfaceDefinition.getName(), StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor);
-            }
+  public void completeKBNode_Node_type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final ReasonerData<String> raw_modules = SodaliteBackendProxy.getKBReasoner().getModules();
+        List<String> modules = CollectionLiterals.<String>newArrayList();
+        List<String> _elements = raw_modules.getElements();
+        for (final String raw_module : _elements) {
+          {
+            final String module = RMHelper.extractModule(raw_module);
+            modules.add(module);
           }
         }
+        System.out.println(("Modules retrieved from KB: " + modules));
+        final ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(modules);
+        System.out.println("Nodes retrieved from KB:");
+        List<Type> _elements_1 = nodes.getElements();
+        for (final Type node : _elements_1) {
+          {
+            String _label = node.getLabel();
+            String _plus = ("\tNode: " + _label);
+            System.out.println(_plus);
+            String _xifexpression = null;
+            String _module = node.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(node.getModule(), "/");
+              String _plus_1 = (_lastSegment + "/");
+              String _label_1 = node.getLabel();
+              _xifexpression = (_plus_1 + _label_1);
+            } else {
+              _xifexpression = node.getLabel();
+            }
+            final String qnode = _xifexpression;
+            final String proposalText = qnode;
+            final StyledString displayText = new StyledString(qnode);
+            final String additionalProposalInfo = node.getDescription();
+            this.createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor);
+          }
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof SodaliteException) {
+          final SodaliteException ex = (SodaliteException)_t;
+          SodaliteLogger.log(ex.getMessage(), ex);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  public void completeLocalNode_Interface(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nnode_type cannot be resolved"
+      + "\n!== cannot be resolved");
+  }
+  
+  @Override
+  public void completeKBNode_Interface(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nnode_type cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\ntype cannot be resolved");
+  }
+  
+  @Override
+  public void completeLocalNode_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nnode_type cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\n!== cannot be resolved");
+  }
+  
+  @Override
+  public void completeKBNode_Operation(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nOperationData cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field operations_in_interface is undefined for the type InterfaceDefinition"
+      + "\nnode_type cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\nequals cannot be resolved"
+      + "\noperation_name cannot be resolved");
   }
   
   @Override
@@ -410,6 +1026,99 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
     for (final String lookup : lookups) {
       acceptor.accept(this.createCompletionProposal(lookup, context));
     }
+  }
+  
+  @Override
+  public void completeECollectionFQN_NamespaceOrFqn(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+    FindIterable<Document> iterDoc = mongo_collection.find().projection(Projections.include("namespace"));
+    Iterator<Document> it = iterDoc.iterator();
+    String namespace = null;
+    while (it.hasNext()) {
+      {
+        namespace = it.next().getString("namespace");
+        String _concat = namespace.concat(" - Namespace ");
+        StyledString _styledString = new StyledString(_concat);
+        this.createNonEditableCompletionProposal(namespace, _styledString, context, "Collection Namespace as it is depicted in Ansible Galaxy", acceptor);
+      }
+    }
+  }
+  
+  @Override
+  public void completeECollectionFQN_CollectionName(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field ECollectionFQNImpl is undefined"
+      + "\nThe method or field namespaceOrFqn is undefined for the type EObject"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field namespaceOrFqn is undefined for the type EObject"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field namespaceOrFqn is undefined for the type EObject"
+      + "\nThe method or field EJinjaOrStringWithoutQuotesImpl is undefined"
+      + "\nThe method or field namespaceOrFqn is undefined for the type EObject"
+      + "\nThe method or field namespaceOrFqn is undefined for the type EObject"
+      + "\n!== cannot be resolved");
+  }
+  
+  @Override
+  public void completeEModuleCall_FirstPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method findAnsibleCollections(List<EObject>) is undefined for the type Class<AnsibleHelper>"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method findAnsibleCollections(List<EObject>) is undefined for the type Class<AnsibleHelper>"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method findAnsibleCollections(List<EObject>) is undefined for the type Class<AnsibleHelper>"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method findAnsibleCollections(List<EObject>) is undefined for the type Class<AnsibleHelper>");
+  }
+  
+  @Override
+  public void completeEModuleCall_SecondPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotesImpl is undefined"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\n!== cannot be resolved");
+  }
+  
+  @Override
+  public void completeEModuleCall_ThirdPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotesImpl is undefined"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotes is undefined"
+      + "\nThe method or field stringWithoutQuotes is undefined for the type EObject"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field EJinjaOrStringWithoutQuotesImpl is undefined"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\n!== cannot be resolved"
+      + "\n!== cannot be resolved");
   }
   
   @Override
@@ -519,102 +1228,122 @@ public class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvid
   }
   
   public void completeSetFactVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    final List<EParameterImpl> candidatesSetFactsVariables = EcoreUtil2.<EParameterImpl>getAllContentsOfType(rootPlaybook, EParameterImpl.class);
-    ArrayList<EParameter> legitCandidatesSetFactsVariables = new ArrayList<EParameter>();
-    for (final EParameterImpl parameter : candidatesSetFactsVariables) {
-      {
-        final EModuleCallImpl moduleCall = EcoreUtil2.<EModuleCallImpl>getContainerOfType(parameter, EModuleCallImpl.class);
-        if ((moduleCall != null)) {
-          String _name = moduleCall.getName();
-          boolean _equals = Objects.equal(_name, "set_fact");
-          if (_equals) {
-            legitCandidatesSetFactsVariables.add(parameter);
-          }
-        }
-      }
-    }
-    for (final EParameter candidate : legitCandidatesSetFactsVariables) {
-      if (needsPrefix) {
-        this.createNonEditableCompletionProposal("fact_set: ".concat(candidate.getName()), new StyledString("fact_set: ").append(candidate.getName(), StyledString.COUNTER_STYLER), context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
-      } else {
-        String _name = candidate.getName();
-        String _name_1 = candidate.getName();
-        StyledString _styledString = new StyledString(_name_1, StyledString.COUNTER_STYLER);
-        this.createNonEditableCompletionProposal(_name, _styledString, context, "A variable set with the \'set_fact\' module in this playbook.", acceptor);
-      }
-    }
-  }
-  
-  public void completeInputOperationVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    if ((rootPlaybook != null)) {
-      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
-      if ((usedByBody != null)) {
-        final EOperationDefinition operation = usedByBody.getOperation();
-        if ((operation != null)) {
-          final List<EParameterDefinitionImpl> candidatesInputVariableOperation = EcoreUtil2.<EParameterDefinitionImpl>getAllContentsOfType(operation, EParameterDefinitionImpl.class);
-          for (final EParameterDefinitionImpl candidate : candidatesInputVariableOperation) {
-            if (needsPrefix) {
-              String _concat = "operation_input: ".concat("\"").concat(candidate.getName()).concat("\"");
-              StyledString _append = new StyledString("operation_input: ").append("\"".concat(candidate.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
-              String _name = operation.getName();
-              String _plus = ("An input variable from the \'" + _name);
-              String _plus_1 = (_plus + "\' operation.");
-              this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
-            } else {
-              String _concat_1 = "\"".concat(candidate.getName()).concat("\"");
-              String _concat_2 = "\"".concat(candidate.getName()).concat("\"");
-              StyledString _append_1 = new StyledString(_concat_2, StyledString.COUNTER_STYLER).append(" - RM input");
-              String _name_1 = operation.getName();
-              String _plus_2 = ("An input variable from the \'" + _name_1);
-              String _plus_3 = (_plus_2 + "\' operation.");
-              this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
-            }
-          }
-        }
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field firstPart is undefined for the type EModuleCallImpl"
+      + "\n== cannot be resolved");
   }
   
   public void completeInputInterfaceVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
-    final EPlaybookImpl rootPlaybook = EcoreUtil2.<EPlaybookImpl>getContainerOfType(model, EPlaybookImpl.class);
-    if ((rootPlaybook != null)) {
-      final EUsedByBody usedByBody = rootPlaybook.getUsed_by();
-      if ((usedByBody != null)) {
-        final EOperationDefinition operation = usedByBody.getOperation();
-        if ((operation != null)) {
-          final EInterfaceDefinitionBodyImpl interfaceDefinitionBody = EcoreUtil2.<EInterfaceDefinitionBodyImpl>getContainerOfType(operation, EInterfaceDefinitionBodyImpl.class);
-          final EInterfaceDefinitionImpl interfaceDefinition = EcoreUtil2.<EInterfaceDefinitionImpl>getContainerOfType(operation, EInterfaceDefinitionImpl.class);
-          final EProperties inputsProperties = interfaceDefinitionBody.getInputs();
-          if ((inputsProperties != null)) {
-            EList<EPropertyDefinition> _properties = inputsProperties.getProperties();
-            for (final EPropertyDefinition input : _properties) {
-              if (needsPrefix) {
-                String _concat = "interface_input: ".concat("\"").concat(input.getName()).concat("\"");
-                StyledString _append = new StyledString("interface_input: ").append("\"".concat(input.getName()).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input");
-                String _name = interfaceDefinition.getName();
-                String _plus = ("An input variable from the \'" + _name);
-                String _plus_1 = (_plus + "\' interface.");
-                this.createNonEditableCompletionProposal(_concat, _append, context, _plus_1, acceptor);
-              } else {
-                String _concat_1 = "\"".concat(input.getName()).concat("\"");
-                String _concat_2 = "\"".concat(input.getName()).concat("\"");
-                StyledString _append_1 = new StyledString(_concat_2, StyledString.COUNTER_STYLER).append(" - RM input");
-                String _name_1 = interfaceDefinition.getName();
-                String _plus_2 = ("An input variable from the \'" + _name_1);
-                String _plus_3 = (_plus_2 + "\' interface.");
-                this.createNonEditableCompletionProposal(_concat_1, _append_1, context, _plus_3, acceptor);
-              }
-            }
-          }
-        }
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field inputs is undefined for the type InterfaceDefinition"
+      + "\nThe method or field inputs is undefined for the type InterfaceDefinition"
+      + "\ninterface cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\ninputs cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\ninputs cannot be resolved"
+      + "\nproperties cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nnode_type cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\nequals cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nkeySet cannot be resolved");
+  }
+  
+  public void completeInputOperationVariableReference(final EObject model, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor, final boolean needsPrefix) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nLocalNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nKBNodeImpl cannot be resolved to a type."
+      + "\nOperationData cannot be resolved to a type."
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field node is undefined for the type EUsedByBody"
+      + "\nThe method or field operations_in_interface is undefined for the type InterfaceDefinition"
+      + "\noperation cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nnode_type cannot be resolved"
+      + "\ninterface cannot be resolved"
+      + "\noperation cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nmodule cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\n+ cannot be resolved"
+      + "\ntype cannot be resolved"
+      + "\nequals cannot be resolved"
+      + "\nequals cannot be resolved"
+      + "\noperation_name cannot be resolved"
+      + "\ninputs cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\ninputs cannot be resolved"
+      + "\nkeySet cannot be resolved");
+  }
+  
+  @Override
+  public void completeERoleName_FirstPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method or field ECollectionFQN is undefined"
+      + "\nThe method findAnsibleCollections(List<EObject>) is undefined for the type Class<AnsibleHelper>");
+  }
+  
+  @Override
+  public void completeERoleName_SecondPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field ERoleName is undefined"
+      + "\nThe method getFirstPart() is undefined for the type EObject");
+  }
+  
+  @Override
+  public void completeERoleName_ThirdPart(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field ERoleName is undefined"
+      + "\nThe method getFirstPart() is undefined for the type EObject"
+      + "\nThe method getSecondPart() is undefined for the type EObject");
   }
   
   public void createNonEditableCompletionProposal(final String proposalText, final StyledString displayText, final ContentAssistContext context, final String additionalProposalInfo, final ICompletionProposalAcceptor acceptor) {
-    ICompletionProposal proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    ICompletionProposal proposal = null;
+    if ((context.getPrefix().startsWith("\"") && proposalText.endsWith("\""))) {
+      int _length = proposalText.length();
+      int _minus = (_length - 1);
+      proposal = this.createCompletionProposal(proposalText.substring(0, _minus), displayText, null, context);
+    } else {
+      proposal = this.createCompletionProposal(proposalText, displayText, null, context);
+    }
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       final ConfigurableCompletionProposal configurable = ((ConfigurableCompletionProposal) proposal);
       configurable.setAdditionalProposalInfo(additionalProposalInfo);

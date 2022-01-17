@@ -11,17 +11,23 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.dsl.CustomOutputConfigurationProvider;
 import org.sodalite.dsl.rM.EActivityDefinition;
 import org.sodalite.dsl.rM.EAlphaNumericValue;
 import org.sodalite.dsl.rM.EArtifactDefinition;
@@ -189,8 +195,128 @@ public class RMGenerator extends AbstractGenerator {
     this.trigger_numbers = _hashMap_7;
     HashMap<EOperationDefinition, Integer> _hashMap_8 = new HashMap<EOperationDefinition, Integer>();
     this.operation_numbers = _hashMap_8;
-    final String filename = this.getFilename(resource.getURI());
-    fsa.generateFile(filename, this.compileRM(resource));
+    CancelIndicator _cancelIndicator = context.getCancelIndicator();
+    boolean _tripleEquals = (_cancelIndicator == null);
+    if (_tripleEquals) {
+      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+      Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+      String localPath = resource.getURI().toString().replaceAll("%20", " ").replace("platform:/resource", "");
+      String projectName = (localPath.split("/")[1]).replaceAll("%20", " ");
+      String absolutePath = (workspaceDir + localPath);
+      absolutePath = absolutePath.replace(".rm", "");
+      localPath = localPath.replace(".rm", "").replace(("/" + projectName), "");
+      Iterable<ENodeType> _filter = Iterables.<ENodeType>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), ENodeType.class);
+      for (final ENodeType node : _filter) {
+        {
+          final String nodeType = node.getName();
+          Iterable<EInterfaceDefinition> _filter_1 = Iterables.<EInterfaceDefinition>filter(IteratorExtensions.<EObject>toIterable(node.eAllContents()), EInterfaceDefinition.class);
+          for (final EInterfaceDefinition interface_ : _filter_1) {
+            {
+              final String interfaceName = interface_.getName();
+              Iterable<EOperationDefinition> _filter_2 = Iterables.<EOperationDefinition>filter(IteratorExtensions.<EObject>toIterable(interface_.getInterface().eAllContents()), EOperationDefinition.class);
+              for (final EOperationDefinition op : _filter_2) {
+                {
+                  final String operationName = op.getName();
+                  String AnsiblePath = (((((((absolutePath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName);
+                  File ans_file = new File((AnsiblePath + ".ans"));
+                  File yaml_file = new File((AnsiblePath + ".yaml"));
+                  if ((ans_file.exists() && yaml_file.exists())) {
+                    final String[] labels = { "Replace both files", "Replace only .ans file", "Replace only .yaml file", "Do not replace anything" };
+                    MessageDialog dialog = new MessageDialog(shell, "Create new Ansible files", null, 
+                      (((((((((("In folder " + absolutePath) + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + " exist already a .ans file and a .yaml file for operation ") + operationName) + ". Please select one of the following options."), MessageDialog.QUESTION, labels, 3);
+                    int result = dialog.open();
+                    if ((result == 0)) {
+                      fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".ans"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileAnsibleModel(nodeType, interfaceName, operationName));
+                      fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".yaml"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileYAMLAnsible());
+                    } else {
+                      if ((result == 1)) {
+                        fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".ans"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileAnsibleModel(nodeType, interfaceName, operationName));
+                      } else {
+                        if ((result == 2)) {
+                          fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".yaml"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileYAMLAnsible());
+                        }
+                      }
+                    }
+                  } else {
+                    if ((ans_file.exists() && (!yaml_file.exists()))) {
+                      boolean confirmed = MessageDialog.openConfirm(shell, 
+                        "Replace .ans implementation file", 
+                        (("Abstract implementation file for operation " + operationName) + " already exists.Do you want to replace current implementation file?"));
+                      if (confirmed) {
+                        fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".ans"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileAnsibleModel(nodeType, interfaceName, operationName));
+                      }
+                    } else {
+                      if (((!ans_file.exists()) && yaml_file.exists())) {
+                        boolean confirmed_1 = MessageDialog.openConfirm(shell, 
+                          "Replace .yaml implementation file", 
+                          (("Concrete implementation file for operation " + operationName) + " already exists.Do you want to replace current implementation file?"));
+                        if (confirmed_1) {
+                          fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".ans"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileAnsibleModel(nodeType, interfaceName, operationName));
+                          fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".yaml"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileYAMLAnsible());
+                        }
+                      } else {
+                        if (((!ans_file.exists()) && (!yaml_file.exists()))) {
+                          fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".ans"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileAnsibleModel(nodeType, interfaceName, operationName));
+                          fsa.generateFile(((((((((localPath + "-Ansible files") + "/") + nodeType) + "/") + interfaceName) + "/") + operationName) + ".yaml"), CustomOutputConfigurationProvider.ANSIBLE_OUTPUT, this.compileYAMLAnsible());
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    String intermediatePath = resource.getURI().toString().replaceAll("%20", " ").replace("platform:/resource", "");
+    String projectName_1 = (intermediatePath.split("/")[1]).replaceAll("%20", " ");
+    intermediatePath = intermediatePath.replace(("/" + projectName_1), "");
+    fsa.generateFile((intermediatePath + ".ttl"), CustomOutputConfigurationProvider.TURTLE_OUTPUT, this.compileRM(resource));
+  }
+  
+  public CharSequence compileAnsibleModel(final String nodeType, final String interfaceName, final String operationName) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("playbook_name:\"");
+    _builder.append(interfaceName);
+    _builder.append("_interface_");
+    _builder.append(operationName);
+    _builder.append("_operation\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("used_by: ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("node_type:\"");
+    _builder.append(nodeType, "\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("interface:\"");
+    _builder.append(interfaceName, "\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("operation:\"");
+    _builder.append(operationName, "\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("plays:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("play:");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("play_name:\"example play\"");
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileYAMLAnsible() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("- name: \"example play\"");
+    _builder.newLine();
+    return _builder;
   }
   
   public CharSequence compileRM(final Resource r) {

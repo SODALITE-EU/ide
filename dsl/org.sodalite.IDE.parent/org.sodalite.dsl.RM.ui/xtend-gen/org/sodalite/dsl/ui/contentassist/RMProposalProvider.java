@@ -9,15 +9,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.impl.KeywordImpl;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.osgi.framework.Bundle;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
@@ -60,6 +64,7 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EFunction;
+import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
 import org.sodalite.dsl.rM.EInterfaceTypes;
@@ -1039,10 +1044,54 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   
   @Override
   public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    String _selectFile = RMHelper.selectFile("Select implementation primary file");
-    String _plus = ("\"" + _selectFile);
-    final String input = (_plus + "\"");
-    this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+    try {
+      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+      URI project_uri = context.getDocument().getResourceURI();
+      String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
+      int _segmentCount = project_uri.segmentCount();
+      int _minus = (_segmentCount - 1);
+      String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
+      intermediatePath = intermediatePath.replace(RMName, "");
+      IXtextDocument document = context.getDocument();
+      int offset = context.getCurrentNode().getOffset();
+      final String node = EcoreUtil2.<ENodeType>getContainerOfType(model, ENodeType.class).getName();
+      final String interface_ = EcoreUtil2.<EInterfaceDefinition>getContainerOfType(model, EInterfaceDefinition.class).getName();
+      final String operation = EcoreUtil2.<EOperationDefinition>getContainerOfType(model, EOperationDefinition.class).getName();
+      RMName = RMName.split("\\.")[0];
+      String relativePath = (((((RMName + "-Ansible files") + "/") + node) + "/") + interface_);
+      String localPath = (intermediatePath + relativePath);
+      String absolutePath = (workspaceDir + localPath);
+      String input = RMHelper.selectImplementationFile("Select implementation primary file", absolutePath, localPath, (operation + ".yaml"));
+      boolean _equals = input.equals((((localPath + "/") + operation) + ".yaml"));
+      if (_equals) {
+        input = ((((((("\"" + "./") + relativePath) + "/") + operation) + ".yaml") + "\"") + "\n");
+        document.replace(offset, 1, input);
+        this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+      } else {
+        boolean _isEmpty = input.isEmpty();
+        if (_isEmpty) {
+          return;
+        } else {
+          input = ((("\"" + input) + "\"") + "\n");
+          document.replace(offset, 1, input);
+          this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public void completeEPrimary_Relative_path(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+    URI project_uri = context.getDocument().getResourceURI();
+    String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
+    int _segmentCount = project_uri.segmentCount();
+    int _minus = (_segmentCount - 1);
+    String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
+    intermediatePath = intermediatePath.replace(RMName, "");
+    this.createEditableCompletionProposal(((("\"" + workspaceDir) + intermediatePath) + "\""), ((("\"" + workspaceDir) + intermediatePath) + "\""), null, context, "The path where current resource model is located", acceptor);
   }
   
   @Override

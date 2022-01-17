@@ -7,6 +7,8 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,7 +16,9 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.sodalite.sdl.ansible.YAMLOutputConfigurationProvider;
 import org.sodalite.sdl.ansible.ansibleDsl.EAndExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
@@ -26,7 +30,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValue;
 import org.sodalite.sdl.ansible.ansibleDsl.EComposedValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ECondition;
-import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
@@ -50,9 +53,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.EHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfBlock;
 import org.sodalite.sdl.ansible.ansibleDsl.EIfStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.EIndexOrLoopVariableReference;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
-import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EIsExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaExpressionEvaluation;
@@ -76,18 +76,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumberPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EOperation;
 import org.sodalite.sdl.ansible.ansibleDsl.EOrExpression;
-import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
 import org.sodalite.sdl.ansible.ansibleDsl.EParenthesisedExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlay;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlayExeSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EPlaybook;
-import org.sodalite.sdl.ansible.ansibleDsl.EPrivilegeEscalation;
 import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariable;
-import org.sodalite.sdl.ansible.ansibleDsl.ERegisterVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusion;
 import org.sodalite.sdl.ansible.ansibleDsl.ERoleInclusions;
-import org.sodalite.sdl.ansible.ansibleDsl.ESetFactVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
 import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation;
@@ -100,13 +96,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandler;
 import org.sodalite.sdl.ansible.ansibleDsl.ETaskHandlerErrorHandling;
 import org.sodalite.sdl.ansible.ansibleDsl.ETruthExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EUntil;
-import org.sodalite.sdl.ansible.ansibleDsl.EValidationMode;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueJinja;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassedToJinjaExpression;
 import org.sodalite.sdl.ansible.ansibleDsl.EValueWithoutString;
-import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
-import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EWithLookup;
 
@@ -121,9 +114,20 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<EPlaybook> _filter = Iterables.<EPlaybook>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), EPlaybook.class);
     for (final EPlaybook e : _filter) {
-      String _name = e.getName();
-      String _plus = (_name + ".yaml");
-      fsa.generateFile(_plus, this.compilePlays(e));
+      {
+        String scriptFilePath = "";
+        String[] _segments = resource.getURI().segments();
+        int _size = ((List<String>)Conversions.doWrapArray(resource.getURI().segments())).size();
+        int _minus = (_size - 1);
+        String[] _copyOfRange = Arrays.<String>copyOfRange(_segments, 2, _minus);
+        for (final String segment : _copyOfRange) {
+          scriptFilePath = ((scriptFilePath + "/") + segment);
+        }
+        scriptFilePath = scriptFilePath.replaceAll("%20", " ");
+        String scriptFileName = resource.getURI().lastSegment().toString();
+        String outFileBase = scriptFileName.substring(0, scriptFileName.lastIndexOf("."));
+        fsa.generateFile((((scriptFilePath + "/") + outFileBase) + ".yaml"), YAMLOutputConfigurationProvider.YAML_OUTPUT, this.compilePlays(e));
+      }
     }
   }
   
@@ -306,14 +310,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       int _size_1 = play.getTasks_list().size();
       boolean _tripleNotEquals_14 = (_size_1 != 0);
       if (_tripleNotEquals_14) {
-        _builder.newLine();
         _builder.append(space);
         _builder.append("tasks:");
         _builder.newLineIfNotEmpty();
         {
           EList<EBlockTask> _tasks_list = play.getTasks_list();
           for(final EBlockTask blockTask_1 : _tasks_list) {
-            _builder.newLine();
             CharSequence _compileBlockTask_1 = this.compileBlockTask(blockTask_1, space.concat("  "));
             _builder.append(_compileBlockTask_1);
             _builder.newLineIfNotEmpty();
@@ -430,249 +432,13 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public CharSequence compileRoleInclusion(final ERoleInclusion roleInclusion, final String space) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append(space);
-    _builder.append("- role: ");
-    String _compileStringPassed = this.compileStringPassed(roleInclusion.getName(), space, false);
-    _builder.append(_compileStringPassed);
-    _builder.newLineIfNotEmpty();
-    CharSequence _compileBaseAttributes = this.compileBaseAttributes(roleInclusion, space.concat("  "));
-    _builder.append(_compileBaseAttributes);
-    _builder.newLineIfNotEmpty();
-    CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(roleInclusion, space.concat("  "));
-    _builder.append(_compileExecutionAttributes);
-    _builder.newLineIfNotEmpty();
-    {
-      EBlockAndRoleErrorHandling _error_handling = roleInclusion.getError_handling();
-      boolean _tripleNotEquals = (_error_handling != null);
-      if (_tripleNotEquals) {
-        CharSequence _compileBlockAndRoleErrorHandling = this.compileBlockAndRoleErrorHandling(roleInclusion.getError_handling(), space.concat("  "));
-        _builder.append(_compileBlockAndRoleErrorHandling);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method compileRoleName(ERoleName, String, boolean) from the type AnsibleDslGenerator refers to the missing type ERoleName");
   }
   
   public CharSequence compileBaseAttributes(final EBase base, final String space) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EPrivilegeEscalation _privilege_escalation = base.getPrivilege_escalation();
-      boolean _tripleNotEquals = (_privilege_escalation != null);
-      if (_tripleNotEquals) {
-        {
-          EBooleanPassed _become = base.getPrivilege_escalation().getBecome();
-          boolean _tripleNotEquals_1 = (_become != null);
-          if (_tripleNotEquals_1) {
-            _builder.append(space);
-            _builder.append("become: ");
-            String _compileBooleanPassed = this.compileBooleanPassed(base.getPrivilege_escalation().getBecome(), space);
-            _builder.append(_compileBooleanPassed);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EStringPassed _become_exe = base.getPrivilege_escalation().getBecome_exe();
-          boolean _tripleNotEquals_2 = (_become_exe != null);
-          if (_tripleNotEquals_2) {
-            _builder.append(space);
-            _builder.append("become_exe: ");
-            String _compileStringPassed = this.compileStringPassed(base.getPrivilege_escalation().getBecome_exe(), space, false);
-            _builder.append(_compileStringPassed);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EStringPassed _become_flags = base.getPrivilege_escalation().getBecome_flags();
-          boolean _tripleNotEquals_3 = (_become_flags != null);
-          if (_tripleNotEquals_3) {
-            _builder.append(space);
-            _builder.append("become_flags: ");
-            String _compileStringPassed_1 = this.compileStringPassed(base.getPrivilege_escalation().getBecome_flags(), space, false);
-            _builder.append(_compileStringPassed_1);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EStringPassed _become_method = base.getPrivilege_escalation().getBecome_method();
-          boolean _tripleNotEquals_4 = (_become_method != null);
-          if (_tripleNotEquals_4) {
-            _builder.append(space);
-            _builder.append("become_method: ");
-            String _compileStringPassed_2 = this.compileStringPassed(base.getPrivilege_escalation().getBecome_method(), space, false);
-            _builder.append(_compileStringPassed_2);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EStringPassed _become_user = base.getPrivilege_escalation().getBecome_user();
-          boolean _tripleNotEquals_5 = (_become_user != null);
-          if (_tripleNotEquals_5) {
-            _builder.append(space);
-            _builder.append("become_user: ");
-            String _compileStringPassed_3 = this.compileStringPassed(base.getPrivilege_escalation().getBecome_user(), space, false);
-            _builder.append(_compileStringPassed_3);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    {
-      EValidationMode _validation_mode = base.getValidation_mode();
-      boolean _tripleNotEquals_6 = (_validation_mode != null);
-      if (_tripleNotEquals_6) {
-        {
-          EBooleanPassed _check_mode = base.getValidation_mode().getCheck_mode();
-          boolean _tripleNotEquals_7 = (_check_mode != null);
-          if (_tripleNotEquals_7) {
-            _builder.append(space);
-            _builder.append("check_moode: ");
-            String _compileBooleanPassed_1 = this.compileBooleanPassed(base.getValidation_mode().getCheck_mode(), space);
-            _builder.append(_compileBooleanPassed_1);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EBooleanPassed _diff = base.getValidation_mode().getDiff();
-          boolean _tripleNotEquals_8 = (_diff != null);
-          if (_tripleNotEquals_8) {
-            _builder.append(space);
-            _builder.append("diff: ");
-            String _compileBooleanPassed_2 = this.compileBooleanPassed(base.getValidation_mode().getDiff(), space);
-            _builder.append(_compileBooleanPassed_2);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    {
-      EConnection _connection = base.getConnection();
-      boolean _tripleNotEquals_9 = (_connection != null);
-      if (_tripleNotEquals_9) {
-        {
-          EStringPassed _connection_1 = base.getConnection().getConnection();
-          boolean _tripleNotEquals_10 = (_connection_1 != null);
-          if (_tripleNotEquals_10) {
-            _builder.append(space);
-            _builder.append("connection: ");
-            String _compileStringPassed_4 = this.compileStringPassed(base.getConnection().getConnection(), space, false);
-            _builder.append(_compileStringPassed_4);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          ENumberPassed _port = base.getConnection().getPort();
-          boolean _tripleNotEquals_11 = (_port != null);
-          if (_tripleNotEquals_11) {
-            _builder.append(space);
-            _builder.append("port: ");
-            String _compileNumberPassed = this.compileNumberPassed(base.getConnection().getPort(), space);
-            _builder.append(_compileNumberPassed);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          EStringPassed _remote_user = base.getConnection().getRemote_user();
-          boolean _tripleNotEquals_12 = (_remote_user != null);
-          if (_tripleNotEquals_12) {
-            _builder.append(space);
-            _builder.append("remote_user: ");
-            String _compileStringPassed_5 = this.compileStringPassed(base.getConnection().getRemote_user(), space, false);
-            _builder.append(_compileStringPassed_5);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    {
-      EBooleanPassed _no_log = base.getNo_log();
-      boolean _tripleNotEquals_13 = (_no_log != null);
-      if (_tripleNotEquals_13) {
-        _builder.append(space);
-        _builder.append("no_log: ");
-        String _compileBooleanPassed_3 = this.compileBooleanPassed(base.getNo_log(), space);
-        _builder.append(_compileBooleanPassed_3);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EStringPassed _debugger = base.getDebugger();
-      boolean _tripleNotEquals_14 = (_debugger != null);
-      if (_tripleNotEquals_14) {
-        _builder.append(space);
-        _builder.append("debugger: ");
-        String _compileStringPassed_6 = this.compileStringPassed(base.getDebugger(), space, false);
-        _builder.append(_compileStringPassed_6);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EValuePassed _module_defaults = base.getModule_defaults();
-      boolean _tripleNotEquals_15 = (_module_defaults != null);
-      if (_tripleNotEquals_15) {
-        _builder.append(space);
-        _builder.append("module_defaults: ");
-        Object _compileValuePassed = this.compileValuePassed(base.getModule_defaults(), space, false);
-        _builder.append(_compileValuePassed);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EValuePassed _environment = base.getEnvironment();
-      boolean _tripleNotEquals_16 = (_environment != null);
-      if (_tripleNotEquals_16) {
-        _builder.append(space);
-        _builder.append("environment: ");
-        Object _compileValuePassed_1 = this.compileValuePassed(base.getEnvironment(), space, false);
-        _builder.append(_compileValuePassed_1);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EListPassed _collections = base.getCollections();
-      boolean _tripleNotEquals_17 = (_collections != null);
-      if (_tripleNotEquals_17) {
-        _builder.append(space);
-        _builder.append("collections: ");
-        Serializable _compileListPassed = this.compileListPassed(base.getCollections(), space);
-        _builder.append(_compileListPassed);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      EListPassed _tags = base.getTags();
-      boolean _tripleNotEquals_18 = (_tags != null);
-      if (_tripleNotEquals_18) {
-        _builder.append(space);
-        _builder.append("tags: ");
-        Serializable _compileListPassed_1 = this.compileListPassed(base.getTags(), space);
-        _builder.append(_compileListPassed_1);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      int _size = base.getVariable_declarations().size();
-      boolean _tripleNotEquals_19 = (_size != 0);
-      if (_tripleNotEquals_19) {
-        _builder.append(space);
-        _builder.append("vars:");
-        _builder.newLineIfNotEmpty();
-        {
-          EList<EVariableDeclaration> _variable_declarations = base.getVariable_declarations();
-          for(final EVariableDeclaration variable_declaration : _variable_declarations) {
-            String _concat = space.concat("  ");
-            _builder.append(_concat);
-            String _name = variable_declaration.getName();
-            _builder.append(_name);
-            _builder.append(": ");
-            String _string = this.compileValuePassed(variable_declaration.getValue_passed(), space.concat("  "), false).toString();
-            _builder.append(_string);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    return _builder;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method compileCollectionListPassed(ECollectionListPassed, String) from the type AnsibleDslGenerator refers to the missing type ECollectionListPassed");
   }
   
   public CharSequence compilePlayExeSettings(final EPlayExeSettings playExeSettings, final String space) {
@@ -1079,113 +845,9 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public CharSequence compileTaskHandler(final ETaskHandler taskHandler, final String space) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      String _taskHandlerName = this.taskHandlerName(taskHandler, space);
-      boolean _tripleNotEquals = (_taskHandlerName != null);
-      if (_tripleNotEquals) {
-        _builder.append(space);
-        _builder.append("- name: ");
-        String _taskHandlerName_1 = this.taskHandlerName(taskHandler, space.concat("  "));
-        _builder.append(_taskHandlerName_1);
-        _builder.newLineIfNotEmpty();
-        {
-          EModuleCall _module = taskHandler.getModule();
-          boolean _tripleNotEquals_1 = (_module != null);
-          if (_tripleNotEquals_1) {
-            String _concat = space.concat("  ");
-            _builder.append(_concat);
-            String _name = taskHandler.getModule().getName();
-            _builder.append(_name);
-            _builder.append(":");
-            {
-              EValuePassed _direct_parameter = taskHandler.getModule().getDirect_parameter();
-              boolean _tripleNotEquals_2 = (_direct_parameter != null);
-              if (_tripleNotEquals_2) {
-                _builder.append(" ");
-                Object _compileValuePassed = this.compileValuePassed(taskHandler.getModule().getDirect_parameter(), space.concat("  "), false);
-                _builder.append(_compileValuePassed);
-              }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              EList<EParameter> _parameters = taskHandler.getModule().getParameters();
-              for(final EParameter parameter : _parameters) {
-                String _concat_1 = space.concat("  ").concat("  ");
-                _builder.append(_concat_1);
-                String _name_1 = parameter.getName();
-                _builder.append(_name_1);
-                _builder.append(": ");
-                Object _compileValuePassed_1 = this.compileValuePassed(parameter.getValue_passed(), space.concat("  ").concat("  "), false);
-                _builder.append(_compileValuePassed_1);
-                _builder.newLineIfNotEmpty();
-              }
-            }
-          }
-        }
-      } else {
-        {
-          EModuleCall _module_1 = taskHandler.getModule();
-          boolean _tripleNotEquals_3 = (_module_1 != null);
-          if (_tripleNotEquals_3) {
-            _builder.append(space);
-            _builder.append("- ");
-            String _name_2 = taskHandler.getModule().getName();
-            _builder.append(_name_2);
-            _builder.append(":");
-            {
-              EValuePassed _direct_parameter_1 = taskHandler.getModule().getDirect_parameter();
-              boolean _tripleNotEquals_4 = (_direct_parameter_1 != null);
-              if (_tripleNotEquals_4) {
-                _builder.append(" ");
-                Object _compileValuePassed_2 = this.compileValuePassed(taskHandler.getModule().getDirect_parameter(), space.concat("  "), false);
-                _builder.append(_compileValuePassed_2);
-              }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              EList<EParameter> _parameters_1 = taskHandler.getModule().getParameters();
-              for(final EParameter parameter_1 : _parameters_1) {
-                String _concat_2 = space.concat("  ").concat("  ");
-                _builder.append(_concat_2);
-                String _name_3 = parameter_1.getName();
-                _builder.append(_name_3);
-                _builder.append(": ");
-                Object _compileValuePassed_3 = this.compileValuePassed(parameter_1.getValue_passed(), space.concat("  ").concat("  "), false);
-                _builder.append(_compileValuePassed_3);
-                _builder.newLineIfNotEmpty();
-              }
-            }
-          }
-        }
-      }
-    }
-    CharSequence _compileBaseAttributes = this.compileBaseAttributes(taskHandler, space.concat("  "));
-    _builder.append(_compileBaseAttributes);
-    _builder.newLineIfNotEmpty();
-    CharSequence _compileExecutionAttributes = this.compileExecutionAttributes(taskHandler, space.concat("  "));
-    _builder.append(_compileExecutionAttributes);
-    _builder.newLineIfNotEmpty();
-    CharSequence _compileTaskHandlerAttributes = this.compileTaskHandlerAttributes(taskHandler, space.concat("  "));
-    _builder.append(_compileTaskHandlerAttributes);
-    _builder.newLineIfNotEmpty();
-    {
-      if ((taskHandler instanceof EHandler)) {
-        {
-          int _size = ((EHandler)taskHandler).getListen_to().size();
-          boolean _tripleNotEquals_5 = (_size != 0);
-          if (_tripleNotEquals_5) {
-            String _concat_3 = space.concat("  ");
-            _builder.append(_concat_3);
-            _builder.append("listen: ");
-            ArrayList<String> _compileNotifiedTopics = this.compileNotifiedTopics(((EHandler)taskHandler));
-            _builder.append(_compileNotifiedTopics);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    return _builder;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field value is undefined for the type EParameter"
+      + "\nThe method or field value is undefined for the type EParameter");
   }
   
   public CharSequence compileTaskHandlerAttributes(final ETaskHandler taskHandler, final String space) {
@@ -1517,6 +1179,14 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return null;
   }
   
+  public Serializable compileCollectionListPassed(final /* ECollectionListPassed */Object collectionlistPassed, final String space) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nECollectionList cannot be resolved to a type."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nThe method compileCollectionList(ECollectionList, String) from the type AnsibleDslGenerator refers to the missing type ECollectionList");
+  }
+  
   public Serializable compileListPassed(final EListPassed listPassed, final String space) {
     if ((listPassed instanceof org.sodalite.sdl.ansible.ansibleDsl.EList)) {
       return this.compileList(((org.sodalite.sdl.ansible.ansibleDsl.EList)listPassed), space);
@@ -1806,6 +1476,68 @@ public class AnsibleDslGenerator extends AbstractGenerator {
     return stringToReturn;
   }
   
+  public Serializable compileCollectionList(final /* ECollectionList */Object list, final String space) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nECollectionListInLine cannot be resolved to a type."
+      + "\nECollectionListIndented cannot be resolved to a type."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nThe method compileCollectionFQN(ECollectionFQN, String, boolean) from the type AnsibleDslGenerator refers to the missing type ECollectionFQN"
+      + "\nThe method compileCollectionFQN(ECollectionFQN, String, boolean) from the type AnsibleDslGenerator refers to the missing type ECollectionFQN"
+      + "\nelements cannot be resolved"
+      + "\nelements cannot be resolved");
+  }
+  
+  public String compileModuleName(final EModuleCall module, final String space) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field firstPart is undefined for the type EModuleCall"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field thirdPart is undefined for the type EModuleCall"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method or field thirdPart is undefined for the type EModuleCall"
+      + "\nThe method or field secondPart is undefined for the type EModuleCall"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\n!== cannot be resolved"
+      + "\n!== cannot be resolved");
+  }
+  
+  public String compileCollectionFQN(final /* ECollectionFQN */Object collection, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\ncollectionName cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nnamespaceOrFqn cannot be resolved"
+      + "\ncollectionName cannot be resolved"
+      + "\nnamespaceOrFqn cannot be resolved");
+  }
+  
+  public String compileRoleName(final /* ERoleName */Object role, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method compileNumberOrStringWithoutQuotesPassed(ENumberOrStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type ENumberOrStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileNumberOrStringWithoutQuotesPassed(ENumberOrStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type ENumberOrStringWithoutQuotesPassed"
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed"
+      + "\nThe method compileNumberOrStringWithoutQuotesPassed(ENumberOrStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type ENumberOrStringWithoutQuotesPassed"
+      + "\nthirdPart cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nfirstPart cannot be resolved"
+      + "\nsecondPart cannot be resolved"
+      + "\nthirdPart cannot be resolved"
+      + "\nsecondPart cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\n&& cannot be resolved"
+      + "\nthirdPart cannot be resolved"
+      + "\n=== cannot be resolved"
+      + "\nfirstPart cannot be resolved"
+      + "\nsecondPart cannot be resolved"
+      + "\nfirstPart cannot be resolved");
+  }
+  
   public Serializable compileList(final org.sodalite.sdl.ansible.ansibleDsl.EList list, final String space) {
     if ((list instanceof EListInLine)) {
       ArrayList<Object> newList = new ArrayList<Object>();
@@ -1839,14 +1571,10 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public Object compileValuePassed(final EValuePassed valuePassed, final String space, final boolean isInMultiLine) {
-    if ((valuePassed instanceof EStringPassed)) {
-      return this.compileStringPassed(((EStringPassed)valuePassed), space, isInMultiLine);
-    } else {
-      if ((valuePassed instanceof EValueWithoutString)) {
-        return this.compileValueWithoutString(((EValueWithoutString)valuePassed), space);
-      }
-    }
-    return null;
+    throw new Error("Unresolved compilation problems:"
+      + "\nEStringWithoutQuotesPassed cannot be resolved to a type."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed");
   }
   
   public String compileStringPassed(final EStringPassed stringPassed, final String space, final boolean isInMultiLine) {
@@ -1858,6 +1586,33 @@ public class AnsibleDslGenerator extends AbstractGenerator {
       }
     }
     return null;
+  }
+  
+  public String compileStringWithoutQuotesPassed(final /* EStringWithoutQuotesPassed */Object stringWithoutQuotesPassed, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nEJinjaAndStringWithoutQuotes cannot be resolved to a type."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nThe method compileJinjaAndStringWithoutQuotes(EJinjaAndStringWithoutQuotes, String, boolean) from the type AnsibleDslGenerator refers to the missing type EJinjaAndStringWithoutQuotes");
+  }
+  
+  public String compileNumberOrStringWithoutQuotesPassed(final /* ENumberOrStringWithoutQuotesPassed */Object numberOrStringWithoutQuotesPassed, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nEStringWithoutQuotesPassed cannot be resolved to a type."
+      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
+      + "\nThe method compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed, String, boolean) from the type AnsibleDslGenerator refers to the missing type EStringWithoutQuotesPassed");
+  }
+  
+  public String compileJinjaAndStringWithoutQuotes(final /* EJinjaAndStringWithoutQuotes */Object jinja, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method compileJinjaOrStringWithoutQuotes(EJinjaOrStringWithoutQuotes, String, boolean) from the type AnsibleDslGenerator refers to the missing type EJinjaOrStringWithoutQuotes"
+      + "\njinja_expression_and_stringWithout cannot be resolved");
+  }
+  
+  public Object compileJinjaOrStringWithoutQuotes(final /* EJinjaOrStringWithoutQuotes */Object jinja, final String space, final boolean isInMultiLine) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nstringWithoutQuotes cannot be resolved"
+      + "\n!== cannot be resolved"
+      + "\nstringWithoutQuotes cannot be resolved");
   }
   
   public String compileJinjaAndString(final EJinjaAndString jinja, final String space, final boolean isInMultiLine) {
@@ -2061,42 +1816,29 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileVariableReference(final EVariableReference variableReference) {
-    if ((variableReference instanceof EVariableDeclarationVariableReference)) {
-      String declaredVariableString = "";
-      declaredVariableString = declaredVariableString.concat(((EVariableDeclarationVariableReference)variableReference).getVariable_declaration_variable_reference().getName());
-      return declaredVariableString;
-    } else {
-      if ((variableReference instanceof ERegisterVariableReference)) {
-        String registerVariableString = "";
-        registerVariableString = registerVariableString.concat(((ERegisterVariableReference)variableReference).getRegister_variable_reference().getName());
-        return registerVariableString;
-      } else {
-        if ((variableReference instanceof EInputOperationVariableReference)) {
-          String inputOperationVariableString = "";
-          inputOperationVariableString = inputOperationVariableString.concat(((EInputOperationVariableReference)variableReference).getName().getName());
-          return inputOperationVariableString;
-        } else {
-          if ((variableReference instanceof EInputInterfaceVariableReference)) {
-            String inputInterfaceVariableString = "";
-            inputInterfaceVariableString = inputInterfaceVariableString.concat(((EInputInterfaceVariableReference)variableReference).getName().getName());
-            return inputInterfaceVariableString;
-          } else {
-            if ((variableReference instanceof EIndexOrLoopVariableReference)) {
-              String indexOrLoopVariableString = "";
-              indexOrLoopVariableString = indexOrLoopVariableString.concat(((EIndexOrLoopVariableReference)variableReference).getIndex_or_loop_variable_reference().getName());
-              return indexOrLoopVariableString;
-            } else {
-              if ((variableReference instanceof ESetFactVariableReference)) {
-                String setFactVariableReferenceString = "";
-                setFactVariableReferenceString = setFactVariableReferenceString.concat(((ESetFactVariableReference)variableReference).getName().getName());
-                return setFactVariableReferenceString;
-              }
-            }
-          }
-        }
-      }
-    }
-    return null;
+    throw new Error("Unresolved compilation problems:"
+      + "\nLocalEInputOperationVariableReference cannot be resolved to a type."
+      + "\nLocalEInputOperationVariableReference cannot be resolved to a type."
+      + "\nKBEInputOperationVariableReference cannot be resolved to a type."
+      + "\nKBEInputOperationVariableReference cannot be resolved to a type."
+      + "\nLocalEInputInterfaceVariableReference cannot be resolved to a type."
+      + "\nLocalEInputInterfaceVariableReference cannot be resolved to a type."
+      + "\nKBEInputInterfaceVariableReference cannot be resolved to a type."
+      + "\nKBEInputInterfaceVariableReference cannot be resolved to a type."
+      + "\nThe method or field reference is undefined for the type EInputOperationVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputOperationVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputOperationVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputOperationVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputInterfaceVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputInterfaceVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputInterfaceVariableReference"
+      + "\nThe method or field reference is undefined for the type EInputInterfaceVariableReference"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
   public Object compileLoopList(final EValuePassed loopList, final String space) {
@@ -2199,7 +1941,7 @@ public class AnsibleDslGenerator extends AbstractGenerator {
   }
   
   public String compileDictionaryPair(final EDictionaryPair dictionaryPair, final String space) {
-    return "\'".concat(dictionaryPair.getName()).concat("\'").concat(": ").concat(this.compileValuePassed(dictionaryPair.getValue(), space, false).toString());
+    return dictionaryPair.getName().concat(": ").concat(this.compileValuePassed(dictionaryPair.getValue(), space, false).toString());
   }
   
   public String compileDictionaryOfListIndented(final EDictionaryOfListIndented dictionary, final String space) {

@@ -3,11 +3,16 @@
  */
 package org.sodalite.dsl;
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.sodalite.dsl.AbstractRMRuntimeModule;
+import org.sodalite.dsl.CustomOutputConfigurationProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 @SuppressWarnings("all")
 public class RMRuntimeModule extends AbstractRMRuntimeModule {
+  public Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
+    return CustomOutputConfigurationProvider.class;
+  }
 }
