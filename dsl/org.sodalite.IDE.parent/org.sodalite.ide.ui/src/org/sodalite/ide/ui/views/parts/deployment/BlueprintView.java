@@ -362,7 +362,7 @@ public class BlueprintView {
 						}
 					};
 
-					deleteAction.setText("Undeploy");
+					deleteAction.setText("Undeploy/Delete deployment");
 					manager.add(deleteAction);
 				}
 			}
@@ -542,12 +542,13 @@ public class BlueprintView {
 					Files.write(inputs_yaml_path, content.toString().getBytes(), StandardOpenOption.APPEND);
 					int workers = dialog.getWorkers();
 					boolean force = dialog.getForce();
+					boolean delete = dialog.getDelete();
 					if (force)
 						if (!MessageDialog.openConfirm(shell, "Undeploy deployment",
 								"Forcing the undeployment may leave deployment allocated resources in an inconsistent state.\n"
 										+ "Do you want to continue?"))
 							return;
-					undeployDeployment(treeNode, inputs_yaml_path, workers, force);
+					undeployDeployment(treeNode, inputs_yaml_path, workers, force, delete);
 
 				}
 			}
@@ -663,12 +664,12 @@ public class BlueprintView {
 	}
 
 	private void undeployDeployment(TreeNode<DeploymentNode> treeNode, Path inputs_yaml_path, int workers,
-			boolean force) {
+			boolean force, boolean delete) {
 		Job job = new Job("Undeploy deployment") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				int steps = 1;
-				int number_steps = 2;
+				int number_steps = delete ? 3 : 2;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
 					DeploymentNode node = treeNode.getData();
@@ -677,17 +678,33 @@ public class BlueprintView {
 							node.getDeployment().getDeployment_id(), inputs_yaml_path, workers, force);
 
 					// Ask xOpera deployment deletion status
-					subMonitor.setTaskName("Checking undeployment status");
-					DeploymentStatusReport dsr = RMBackendProxy.getKBReasoner()
-							.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
-					while (!dsr.getState().equals("success")) {
-						if (dsr.getState().equals("failed"))
-							throw new Exception("Undeployment failed as reported by xOpera");
-						TimeUnit.SECONDS.sleep(5);
-						dsr = RMBackendProxy.getKBReasoner()
+					try {
+						subMonitor.setTaskName("Checking undeployment status");
+						DeploymentStatusReport dsr = RMBackendProxy.getKBReasoner()
 								.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+						while (!dsr.getState().equals("success")) {
+							if (dsr.getState().equals("failed")) {
+								String msg = "Undeployment failed as reported by the Orchestrator\n";
+								if (dsr.getNode_error() != null) {
+									msg += "Undeployment error reported by Orchestrator in: \n" + "node: "
+											+ dsr.getNode_error().getNode() + "\n" + "operation: "
+											+ dsr.getNode_error().getOperation() + "\n" + "task: "
+											+ dsr.getNode_error().getTask() + "\n";
+									msg += "Message: " + dsr.getNode_error().getMessage() + "\n";
+								}
+								throw new Exception(msg);
+							}
+							TimeUnit.SECONDS.sleep(5);
+							dsr = RMBackendProxy.getKBReasoner()
+									.getAADMDeploymentStatus(node.getDeployment().getDeployment_id());
+						}
+					} catch (InterruptedException e) {
+						SodaliteLogger.log("Undeploying process interrupted", e);
+						Thread.currentThread().interrupt();
+					} catch (Exception e) {
+						if (!force || !delete)
+							throw e;
 					}
-
 					subMonitor.worked(steps++);
 
 					subMonitor.setTaskName("Deleting deployment monitoring dashboards");
@@ -697,6 +714,13 @@ public class BlueprintView {
 					if (monitoring_Id != null)
 						RMBackendProxy.getKBReasoner().deleteMonitoringDashboard(monitoring_Id, deployment_label);
 					subMonitor.worked(steps++);
+
+					if (delete) {
+						subMonitor.setTaskName("Deleting deployment");
+						RMBackendProxy.getKBReasoner().deleteDeploymentForId(node.getDeployment().getDeployment_id(),
+								force);
+						subMonitor.worked(steps++);
+					}
 
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -718,9 +742,9 @@ public class BlueprintView {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "There were problems to undeploy the deployment : "
-									+ treeNode.getData().getDeployment().getDeployment_id() + " with error: "
-									+ e.getMessage();
+							String message = "There were problems to undeploy " + (delete ? "/delete" : "")
+									+ " the deployment : " + treeNode.getData().getDeployment().getDeployment_id()
+									+ " with error: " + e.getMessage();
 							String infoToPaste = null;
 							showErrorDialog(infoToPaste, "Undeploy deployment", message);
 							SodaliteLogger.log(message, e);

@@ -30,4 +30,8 @@ public class DeleteDeploymentWizardDialog extends WizardDialog {
 		return ((DeleteDeploymentWizard) this.getWizard()).getForce();
 	}
 
+	public boolean getDelete() {
+		return ((DeleteDeploymentWizard) this.getWizard()).getDelete();
+	}
+
 }

@@ -69,13 +69,15 @@ public class DeploymentStatusReportJsonDeserializer extends JsonDeserializer<Dep
 				String operationName = error.get(errorNodeName).fieldNames().next();
 				JsonNode operation = error.get(errorNodeName).get(operationName);
 				node_error.setOperation(operationName);
-				String taskName = operation.fieldNames().next();
-				JsonNode task = operation.get(taskName);
-				node_error.setTask(taskName);
-				if (task.get("msg") != null)
-					node_error.setMessage(task.get("msg").asText());
-				if (task.get("stderr") != null)
-					node_error.setStderr(task.get("stderr").asText());
+				if (operation.fieldNames().hasNext()) {
+					String taskName = operation.fieldNames().next();
+					JsonNode task = operation.get(taskName);
+					node_error.setTask(taskName);
+					if (task.get("msg") != null)
+						node_error.setMessage(task.get("msg").asText());
+					if (task.get("stderr") != null)
+						node_error.setStderr(task.get("stderr").asText());
+				}
 				report.setNode_error(node_error);
 			}
 		}

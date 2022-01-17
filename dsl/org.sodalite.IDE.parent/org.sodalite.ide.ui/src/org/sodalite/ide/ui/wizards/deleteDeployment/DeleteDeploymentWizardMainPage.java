@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Spinner;
 public class DeleteDeploymentWizardMainPage extends WizardPage {
 	private Spinner workersSpinner = null;
 	private Button forceCB = null;
+	private Button deleteCB = null;
 
 	protected DeleteDeploymentWizardMainPage() {
 		super("Undeploy application");
@@ -29,6 +30,10 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 
 	public boolean getForce() {
 		return this.forceCB.getSelection();
+	}
+
+	public boolean getDelete() {
+		return this.deleteCB.getSelection();
 	}
 
 	@Override
@@ -55,6 +60,15 @@ public class DeleteDeploymentWizardMainPage extends WizardPage {
 		forceCB = new Button(container, SWT.CHECK);
 		GridData forceGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		forceCB.setLayoutData(forceGridData);
+
+		// Delete deployment
+		Label deleteLabel = new Label(container, SWT.NONE);
+		deleteLabel.setText("Delete deployment:");
+		deleteLabel.setToolTipText("Ask orchestrator to delete the deployment after being undeployed");
+
+		deleteCB = new Button(container, SWT.CHECK);
+		GridData deleteGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		deleteCB.setLayoutData(deleteGridData);
 
 		setControl(container);
 		setPageComplete(false);
