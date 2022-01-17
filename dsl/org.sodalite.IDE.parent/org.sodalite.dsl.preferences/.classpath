@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/mongo-java-driver-3.11.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar" sourcepath="/org.sodalite.dsl.kb_reasoner_client/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
