@@ -8,6 +8,8 @@ import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
+import com.mongodb.MongoClient;
+
 public class SodaliteBackendProxy {
 	private static KBReasonerClient kbReasonerClient = null;
 
@@ -132,5 +134,22 @@ public class SodaliteBackendProxy {
 
 	public static void raiseConfigurationIssue(String message) throws Exception {
 		throw new Exception(message + " in Sodalite preferences pages");
+	}
+	
+	private static MongoClient mongoClient;
+	private static void createMongoClient() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String mongoDB_URI = store.getString(PreferenceConstants.MONGODB_URI).trim();
+		String mongoDB_host = mongoDB_URI.split(":")[0];
+		String mongoDB_port = mongoDB_URI.split(":")[1];
+		mongoClient = new MongoClient( mongoDB_host , Integer.parseInt(mongoDB_port) );
+	}
+	
+	public static MongoClient getMongoClient() {
+		if(mongoClient == null) {
+			createMongoClient();
+		}
+		//MongoClient mongoClient = new MongoClient( "localhost" , 27017 ); 
+		return mongoClient;	
 	}
 }

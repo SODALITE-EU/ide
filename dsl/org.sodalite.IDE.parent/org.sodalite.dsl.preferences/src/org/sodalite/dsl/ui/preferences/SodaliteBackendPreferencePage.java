@@ -47,6 +47,8 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.SKYDIVE_ANALYZER_URI, "Skydive Analyzer URL:",
 				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.MONGODB_URI, "MongoDB URL:",
+				getFieldEditorParent()));
 	}
 
 	/*

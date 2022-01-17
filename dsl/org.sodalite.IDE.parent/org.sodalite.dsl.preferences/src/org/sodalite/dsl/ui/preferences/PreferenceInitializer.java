@@ -101,6 +101,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (!keycloak_enabled) {
 			keycloak_enabled = true;
 		}
+		
+		String mongodb_uri = prop.getProperty(PreferenceConstants.MONGODB_URI);
+		if (mongodb_uri == null)
+			mongodb_uri = "localhost:27017";
 
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
 				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
@@ -127,6 +131,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_ID, keycloak_client_id);
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
 		defaults.put(PreferenceConstants.KEYCLOAK_ENABLED, Boolean.toString(keycloak_enabled));
+		defaults.put(PreferenceConstants.MONGODB_URI, mongodb_uri);
 	}
 
 	private Properties readDefaultProperties() {
