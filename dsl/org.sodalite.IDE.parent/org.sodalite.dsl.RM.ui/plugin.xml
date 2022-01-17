@@ -457,6 +457,16 @@
         </command>
      </menu>
   </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:#TextEditorContext?after=additions">
+     <command
+           commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+           label="Generate Ansible files"
+           style="push"
+           tooltip="Generate code">
+     </command>
+  </menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.RM -->
 	<extension

@@ -80,6 +80,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.swt.widgets.Shell
 import org.eclipse.ui.PlatformUI
+import java.nio.file.NoSuchFileException
 
 /**
  * Generates code from your model files on save.
@@ -640,7 +641,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readFileAsString(o.operation.implementation.primary.file)»' ;
+	  exchange:value '«readImplementationFileAsString(o.operation.implementation.primary.file,o.operation.implementation.primary.eResource)»' ;
 	.
 	
 	«IF o.operation.implementation.primary.relative_path !== null»
@@ -652,12 +653,31 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«var String content = readImplementationFileAsString(o.operation.implementation.primary.file.replace(".yaml",".ans"),o.operation.implementation.primary.eResource) »
+	«IF content!== null»
+	«putParameterNumber(o, "primary.Ansible_model.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«content»' ;
+	.  
+	«putParameterNumber(o, "primary.Ansible_model", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "Ansible_model" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model.content")» ;
+	 .
+	«ENDIF»
+	
 	«putParameterNumber(o, "primary", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "primary" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	  «IF getParameterNumber(o, "primary.Ansible_model")!==null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model")» ;
+	  «ENDIF»
 	  «IF o.operation.implementation.primary.relative_path !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.relative_path")» ;
 	  «ENDIF»
@@ -1784,6 +1804,40 @@ class RMGenerator extends AbstractGenerator {
 		
 	def String getName(Resource resource){
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
+	}
+	
+	def String getRMName(Resource resource){
+		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.')) +".rm"
+	}
+	
+	def readImplementationFileAsString(String path,Resource resource){
+		
+		if(path.startsWith(".")){
+			var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+			var String RMName = resource.URI.segment(resource.URI.segmentCount-1).replaceAll("%20", " ")
+			intermediatePath = intermediatePath.replace(RMName,"")
+			//var String projectName = resource.URI.segment(0)
+			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+			var String absolutePath = workspaceDir + intermediatePath + path.replace("./","")
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
+		else{
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
 	}
 	
 	def readFileAsString(String path){
