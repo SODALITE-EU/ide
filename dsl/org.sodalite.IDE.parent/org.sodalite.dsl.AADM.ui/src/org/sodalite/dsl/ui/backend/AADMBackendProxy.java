@@ -359,10 +359,11 @@ public class AADMBackendProxy extends RMBackendProxy {
 							.getAADMDeploymentStatus(depl_report.getDeployment_id());
 					while (!dsr.getState().equals("success")) {
 						if (dsr.getState().equals("failed")) {
-							String msg = "Deployment failed as reported by xOpera\n";
+							String msg = "Deployment failed as reported by the Orchestrator\n";
 							if (dsr.getNode_error() != null) {
-								msg += "Error reported in: \n" + "node: " + dsr.getNode_error().getNode() + "\n"
-										+ "operation: " + dsr.getNode_error().getOperation() + "\n" + "task: "
+								msg += "Deployment error reported by Orchestrator in: \n" + "node: "
+										+ dsr.getNode_error().getNode() + "\n" + "operation: "
+										+ dsr.getNode_error().getOperation() + "\n" + "task: "
 										+ dsr.getNode_error().getTask() + "\n";
 								msg += "Message: " + dsr.getNode_error().getMessage() + "\n";
 							}

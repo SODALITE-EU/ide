@@ -161,6 +161,8 @@ public interface KBReasoner {
 	DeploymentReport undeployDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers, boolean force)
 			throws SodaliteException;
 
+	void deleteDeploymentForId(String deploymentId, boolean force) throws SodaliteException;
+
 	DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state, int workers)
 			throws SodaliteException;
 

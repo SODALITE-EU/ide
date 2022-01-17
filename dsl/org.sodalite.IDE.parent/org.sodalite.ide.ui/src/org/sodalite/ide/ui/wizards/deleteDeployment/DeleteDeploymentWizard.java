@@ -8,6 +8,7 @@ public class DeleteDeploymentWizard extends Wizard {
 
 	private int workers = 0;
 	private boolean force = false;
+	private boolean delete = false;
 
 	public DeleteDeploymentWizard() {
 		super();
@@ -34,6 +35,7 @@ public class DeleteDeploymentWizard extends Wizard {
 	public boolean performFinish() {
 		this.workers = mainPage.getWorkers();
 		this.force = mainPage.getForce();
+		this.delete = mainPage.getDelete();
 
 		return true;
 	}
@@ -44,6 +46,10 @@ public class DeleteDeploymentWizard extends Wizard {
 
 	public boolean getForce() {
 		return this.force;
+	}
+
+	public boolean getDelete() {
+		return this.delete;
 	}
 
 }

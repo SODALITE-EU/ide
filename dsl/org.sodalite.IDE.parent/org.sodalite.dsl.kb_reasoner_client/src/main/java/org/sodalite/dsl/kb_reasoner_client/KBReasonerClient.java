@@ -1480,6 +1480,34 @@ public class KBReasonerClient implements KBReasoner {
 	}
 
 	@Override
+	public void deleteDeploymentForId(String deploymentId, boolean force) throws SodaliteException {
+		Assert.notNull(deploymentId, "Pass a not null deploymentId");
+		String url = xoperaUri + "deployment/" + deploymentId + "?force=" + force;
+		try {
+			deleteUriResource(new URI(url), HttpStatus.OK);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled && !IAM_token_renewed) {
+				this.aai_token = getSecurityToken();
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					deleteDeploymentForId(deploymentId, force);
+					IAM_token_renewed = false;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
+				throw ex;
+			}
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
+			throw new SodaliteException(ex);
+		}
+	}
+
+	@Override
 	public DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state,
 			int workers) throws SodaliteException {
 		try {
