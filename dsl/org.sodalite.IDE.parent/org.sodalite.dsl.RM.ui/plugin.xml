@@ -393,6 +393,29 @@
               </with>
            </visibleWhen>
         </command>
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+              id="org.sodalite.dsl.RM.ui.popup.command.GenerationCommand"
+              label="Generate Ansible files"
+              style="push"
+              tooltip="Generate code">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
      </menu>
   </menuContribution>
   <menuContribution
@@ -447,7 +470,7 @@
                     <adapt
                           type="org.eclipse.core.resources.IResource">
                        <test
-                             property="org.eclipse.core.resources.name"
+                             property="org.eclipse.core.resources.IResource"
                              value="*.rm">
                        </test>
                     </adapt>
@@ -465,6 +488,22 @@
            label="Generate Ansible files"
            style="push"
            tooltip="Generate code">
+        <visibleWhen
+              checkEnabled="false">
+           <with
+                 variable="activeMenuSelection">
+              <iterate
+                    ifEmpty="false">
+                 <adapt
+                       type="org.eclipse.core.resources.IResource">
+                    <test
+                          property="org.eclipse.core.resources.IResource"
+                          value="*.rm">
+                    </test>
+                 </adapt>
+              </iterate>
+           </with>
+        </visibleWhen>
      </command>
   </menuContribution>
 	</extension>
