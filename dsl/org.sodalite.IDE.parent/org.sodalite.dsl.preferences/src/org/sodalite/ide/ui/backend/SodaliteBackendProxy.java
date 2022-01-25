@@ -76,7 +76,7 @@ public class SodaliteBackendProxy {
 
 		String grafanaURI = store.getString(PreferenceConstants.Grafana_Registry_URI).trim();
 		if (grafanaURI.isEmpty())
-			raiseConfigurationIssue("Grafana URI user not set");
+			raiseConfigurationIssue("Grafana Registry URI user not set");
 		if (!grafanaURI.endsWith("/"))
 			grafanaURI = grafanaURI.concat("/");
 
@@ -122,9 +122,11 @@ public class SodaliteBackendProxy {
 				SodaliteLogger.log("Security token: " + token);
 		}
 
-		SodaliteLogger.log(MessageFormat.format(
-				"Sodalite backend configured with [KB Reasoner API: {0}, IaC API: {1}, xOpera {2}, Keycloak {3}",
-				kbReasonerURI, iacURI, xoperaURI, keycloakURI));
+		SodaliteLogger.log(MessageFormat.format("Sodalite backend configured with "
+				+ "KB Reasoner endpoint: {0}, IaC endpoint: {1}, xOpera endpoint{2}, Keycloak endpoint: {3}, Image Builder endpoint: {4}, "
+				+ "PDS endpoint: {5}, Refactorer endpoint: {6}, NIFI endpoint: {7}, Grafana endpoint: {8}, Rules Server endpoint: {9}, Vault endpoint: {10}",
+				kbReasonerURI, iacURI, xoperaURI, keycloakURI, image_builder_URI, pdsURI, refactorerURI, nifiURI,
+				grafanaURI, rulesServerURI, vaultSecretUploaderURI));
 		return kbclient;
 	}
 

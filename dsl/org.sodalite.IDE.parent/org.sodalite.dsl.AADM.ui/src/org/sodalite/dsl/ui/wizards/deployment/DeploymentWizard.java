@@ -8,13 +8,12 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.UUID;
 
-import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.osgi.service.prefs.Preferences;
 import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
@@ -102,10 +101,12 @@ public class DeploymentWizard extends Wizard {
 			StringBuilder content = new StringBuilder();
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			// Adding additional inputs
-			Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-			String consul_ip = defaults.get(PreferenceConstants.Consul_IP, "");
-			String grafana_uri = defaults.get(PreferenceConstants.Grafana_URI, "");
-			String skydive_analyzer_uri = defaults.get(PreferenceConstants.SKYDIVE_ANALYZER_URI, "");
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			String grafana_uri = store.getString(PreferenceConstants.Grafana_URI).trim();
+			if (!grafana_uri.endsWith("/"))
+				grafana_uri = grafana_uri.concat("/");
+			String consul_ip = store.getString(PreferenceConstants.Consul_IP).trim();
+			String skydive_analyzer_uri = store.getString(PreferenceConstants.SKYDIVE_ANALYZER_URI).trim();
 			if (consul_ip.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
@@ -125,7 +126,12 @@ public class DeploymentWizard extends Wizard {
 			content.append("monitoring_id: " + this.monitoring_id + "\n");
 			// NIFI inputs
 			if (useDM) {
-				String NIFI_ENDPOINT = defaults.get(PreferenceConstants.NIFI_URI, "");
+				String NIFI_ENDPOINT = store.getString(PreferenceConstants.NIFI_URI).trim();
+				if (NIFI_ENDPOINT.isEmpty()) {
+					showErrorDialog(null, "Deploy AADM",
+							"NIFI endpoint not set. Please, check your SODALITE preferences");
+					return false;
+				}
 				content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
 				String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
 				content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
