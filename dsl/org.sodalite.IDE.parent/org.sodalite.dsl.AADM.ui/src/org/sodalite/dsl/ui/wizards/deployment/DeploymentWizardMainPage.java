@@ -260,12 +260,14 @@ public class DeploymentWizardMainPage extends WizardPage {
 					String input_name = st.nextToken();
 					String input_value = "";
 					String childLine = null;
-					while (true) {
-						childLine = iter.next();
-						if (childLine != null && !childLine.startsWith(" ")) {
-							break;
-						}
+
+					childLine = iter.next();
+					while (childLine != null && childLine.startsWith(" ")) {
 						input_value += childLine + "\n";
+						if (iter.hasNext())
+							childLine = iter.next();
+						else
+							childLine = null;
 					}
 
 					if (inputDefs.keySet().contains(input_name)) {
