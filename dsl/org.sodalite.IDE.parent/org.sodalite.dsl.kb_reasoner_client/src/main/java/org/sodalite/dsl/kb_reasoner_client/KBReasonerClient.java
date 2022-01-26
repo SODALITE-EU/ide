@@ -1117,18 +1117,36 @@ public class KBReasonerClient implements KBReasoner {
 	public IaCBuilderAADMRegistrationReport askIaCBuilderToRegisterAADM(String model_name, String blueprint_name,
 			String username, String aadm_json) throws SodaliteException {
 		Assert.notNull(aadm_json, "Pass a not null aadm_json");
-		String url = iacUri + "parse";
-
-		String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"blueprint_name\" : \"" + blueprint_name
-				+ "\",\n" + "\"username\" : \"" + username + "\",\n" + "\"data\" : " + aadm_json + "\n}";
-		URI uri;
 		try {
-			uri = new URI(url);
-		} catch (URISyntaxException ex) {
+			String url = iacUri + "parse";
+			String jsonContent = "{\n" + "\"name\" : \"" + model_name + "\",\n" + "\"blueprint_name\" : \""
+					+ blueprint_name + "\",\n" + "\"username\" : \"" + username + "\",\n" + "\"data\" : " + aadm_json
+					+ "\n}";
+			URI uri = new URI(url);
+			return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, uri,
+					HttpStatus.CREATED);
+		} catch (TokenExpiredException ex) {
+			// Renew AAI token and try again
+			if (IAM_enabled && !IAM_token_renewed) {
+				this.aai_token = getSecurityToken();
+				if (this.aai_token != null) {
+					IAM_token_renewed = true;
+					IaCBuilderAADMRegistrationReport data = askIaCBuilderToRegisterAADM(model_name, blueprint_name,
+							username, aadm_json);
+					IAM_token_renewed = false;
+					return data;
+				} else {
+					IAM_token_renewed = false;
+					throw ex;
+				}
+			} else {
+				throw ex;
+			}
+		} catch (HttpClientErrorException ex) {
+			throw new org.sodalite.dsl.kb_reasoner_client.exceptions.HttpClientErrorException(ex.getMessage());
+		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}
-		return postObjectAndReturnAnotherType(jsonContent, IaCBuilderAADMRegistrationReport.class, uri,
-				HttpStatus.CREATED);
 	}
 
 	@Override
@@ -2523,8 +2541,18 @@ public class KBReasonerClient implements KBReasoner {
 				throw new Exception("There was a problem inserting JSON object " + object + " in URI: " + uri);
 			}
 			return result;
-		} catch (HttpClientErrorException e) {
-			throw e;
+		} catch (HttpClientErrorException ex) {
+			log.info("There was a problem posting the JSON object(s) in uri: " + uri);
+			log.error(ex.getMessage(), ex);
+			if (ex.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+				throw new TokenExpiredException(ex.getMessage());
+			} else if (ex.getStatusCode() == HttpStatus.FORBIDDEN) {
+				throw new NotRolePermissionException(ex.getMessage());
+			} else if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+				throw new NotFoundException(ex.getMessage());
+			} else {
+				throw ex;
+			}
 		} catch (Exception ex) {
 			throw new SodaliteException(ex);
 		}
