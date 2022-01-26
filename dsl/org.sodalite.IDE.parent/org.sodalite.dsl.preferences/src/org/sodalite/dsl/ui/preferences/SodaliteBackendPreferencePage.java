@@ -49,6 +49,8 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.MONGODB_URI, "MongoDB URL:",
 				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Ansible_Defect_Predictor_URI, "Ansible defect predictor URL:",
+				getFieldEditorParent()));
 	}
 
 	/*

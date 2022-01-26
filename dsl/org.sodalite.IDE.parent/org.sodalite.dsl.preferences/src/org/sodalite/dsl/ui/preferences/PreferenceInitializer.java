@@ -105,6 +105,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		String mongodb_uri = prop.getProperty(PreferenceConstants.MONGODB_URI);
 		if (mongodb_uri == null)
 			mongodb_uri = "localhost:27017";
+		
+		String ansible_defect_predictor_uri = prop.getProperty(PreferenceConstants.Ansible_Defect_Predictor_URI);
+		if (ansible_defect_predictor_uri == null)
+			ansible_defect_predictor_uri = "http://localhost:5000/bugs/ansible/file";
 
 		LOGGER.log(new Status(Status.INFO, BUNDLE.getSymbolicName(),
 				MessageFormat.format("Default Sodalite backend services configuration read from properties: "
@@ -132,6 +136,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.KEYCLOAK_CLIENT_SECRET, keycloak_client_secret);
 		defaults.put(PreferenceConstants.KEYCLOAK_ENABLED, Boolean.toString(keycloak_enabled));
 		defaults.put(PreferenceConstants.MONGODB_URI, mongodb_uri);
+		defaults.put(PreferenceConstants.Ansible_Defect_Predictor_URI, ansible_defect_predictor_uri);
 	}
 
 	private Properties readDefaultProperties() {

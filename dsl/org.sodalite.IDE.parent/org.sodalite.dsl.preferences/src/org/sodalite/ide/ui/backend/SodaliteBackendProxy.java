@@ -152,4 +152,11 @@ public class SodaliteBackendProxy {
 		//MongoClient mongoClient = new MongoClient( "localhost" , 27017 ); 
 		return mongoClient;	
 	}
+	
+	public static String getAnsibleDefectPredictor() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String ansible_defect_predictor_uri = store.getString(PreferenceConstants.Ansible_Defect_Predictor_URI).trim();
+		return ansible_defect_predictor_uri;
+	}
+	
 }

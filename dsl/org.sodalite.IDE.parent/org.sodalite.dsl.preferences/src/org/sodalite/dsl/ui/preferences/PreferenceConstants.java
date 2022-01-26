@@ -44,4 +44,6 @@ public class PreferenceConstants {
 	public static final String VAULT_SECRET_UPLOADER_URI = "VAULT_SECRET_UPLOADER_URI";
 	
 	public static final String MONGODB_URI = "MongoDB_URI";
+	
+	public static final String Ansible_Defect_Predictor_URI = "Ansible_Defect_Predictor_URI";
 }

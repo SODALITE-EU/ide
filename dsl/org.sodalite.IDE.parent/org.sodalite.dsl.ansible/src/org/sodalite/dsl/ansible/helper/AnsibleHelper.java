@@ -617,6 +617,35 @@ public class AnsibleHelper {
 			return result;
 		}
 		
+		public static int nearestTaskOrPlayBinarySearch(int[] lines, int start, int end, int bugLine) {
+			if(end>=start) {
+				int mid = start + (end-start)/2;
+				if(lines[mid] == bugLine) {
+					return mid;
+				}
+				if (start == end - 1) {
+					if (Math.abs(lines[end] - bugLine) >= Math.abs(lines[start] - bugLine)) {
+						return start;
+					}
+					else {
+						return end;
+					}
+				}
+				if(start == end) {
+					return start;
+				}
+				if(lines[mid]>bugLine) {
+					return nearestTaskOrPlayBinarySearch(lines,start,mid,bugLine);
+				}
+				else {
+					return nearestTaskOrPlayBinarySearch(lines,mid,end,bugLine);
+				}
+			}
+			return -1;
+			
+		}
+		
+		
 		//https://stackoverflow.com/questions/39017692/xtext-filtering-content-assist-proposals-using-type-system
 		public static Boolean allowDefaultProposal(ICompletionProposalAcceptor acceptor) {
 			Field delegateField;

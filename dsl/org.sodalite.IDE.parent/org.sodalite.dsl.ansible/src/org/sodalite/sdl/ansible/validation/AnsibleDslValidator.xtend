@@ -23,7 +23,7 @@ import java.util.HashSet
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine
 
-import org.bson.conversions.Bson
+import org.bson.conversions.Bson;
 import com.mongodb.client.model.Aggregates
 import static com.mongodb.client.model.Filters.eq
 import com.mongodb.client.model.Projections
@@ -40,6 +40,29 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringWithoutQuotesImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EComposedValueImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.nodemodel.INode
+import org.sodalite.sdl.ansible.ansibleDsl.Model
+import org.eclipse.core.resources.IFile
+import java.util.Scanner
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import java.io.File
+
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.entity.mime.MultipartEntityBuilder
+import org.apache.http.entity.mime.content.FileBody
+import org.apache.http.HttpEntity
+import org.apache.http.HttpResponse
+import org.apache.http.client.methods.HttpPost
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
+import org.json.JSONObject
+import org.json.JSONArray
+import java.util.HashMap
+import org.apache.http.NoHttpResponseException
 
 /**
  * This class contains custom validation rules. 
@@ -713,6 +736,89 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			var long count = mongo_collection.countDocuments(eq("_id",roleName));
 			if(count==0){
 				error("The role ".concat(roleName).concat(" is not supported"),AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART)
+			}
+		}
+	}
+	
+	@Check
+	def chechCodeSmells(Model o){
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI fileURI = o.eResource.URI
+		var String AnsibleModelName = fileURI.segment(fileURI.segmentCount-1).replaceAll("%20", " ").replace(".ans","")
+		var String fileDirectory = fileURI.trimSegments(1).toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var File script;
+		if(new File(workspaceDir+fileDirectory+"/"+AnsibleModelName+".yaml").isFile()){
+			script = new File(workspaceDir+fileDirectory+"/"+AnsibleModelName+".yaml");
+		}
+		else if(new File(workspaceDir+fileDirectory+"/"+AnsibleModelName+".yml").isFile()){
+			script = new File(workspaceDir+fileDirectory+"/"+AnsibleModelName+".yml");
+		}
+		else{
+			return;
+		}
+		var Scanner scriptScanner = new Scanner(script);
+		var int lineNr = 1;
+		var HashMap<Integer,String> tasksOrPlays = new HashMap<Integer,String>()
+		//Find all Plays and Tasks in the Ansible script
+		while (scriptScanner.hasNextLine()){
+			var String line = scriptScanner.nextLine();
+			if(line.contains("- name:") || line.contains("-name:")){
+				tasksOrPlays.put(lineNr,line.split(":").get(1).trim)
+			}
+			lineNr++;
+		}
+		var List<Integer> tasksOrPlaysLinesNum = tasksOrPlays.keySet.stream.collect(Collectors.toList)
+		
+		
+		//Receive bug report from Ansible defect predictor
+		var String boundary = "011000010111000001101001"
+		var CloseableHttpClient httpclient = HttpClients.createDefault();
+		var HttpPost post = new HttpPost("http://localhost:5000/bugs/ansible/file");
+		var FileBody filebody = new FileBody(script);
+		var MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+		builder.boundary = boundary
+		builder.addPart("file", filebody);
+		var HttpEntity entity = builder.build();
+		post.setEntity(entity);
+		var HttpResponse response;
+		try{
+			response = httpclient.execute(post);
+		}
+		catch(NoHttpResponseException e){
+			System.out.println("No response from Ansible defect predictor")
+		}
+		var BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+		var StringBuilder stringbuilder = new StringBuilder();
+		for (var String line = null; (line = reader.readLine()) !== null;) {
+   		 stringbuilder.append(line).append("\n");
+		}
+		
+		//Relate bugs from Ansible script bug report to the Ansible model
+		var File ansibleModel;
+		ansibleModel = new File(workspaceDir+fileDirectory+"/"+AnsibleModelName+".ans");
+		var JSONObject json = new JSONObject(stringbuilder.toString());  
+		var JSONArray bugs = json.get("bugs") as JSONArray
+		for (var int i = 0; i < bugs.length(); i++){
+			var JSONObject bug = bugs.getJSONObject(i);
+			var JSONObject bugDetails = bug.getJSONObject("bug_info")
+			var int bugLineNum = bugDetails.getInt("line_number")
+			var String bugDescription = bugDetails.getString("description")
+			var int index = AnsibleHelper.nearestTaskOrPlayBinarySearch(tasksOrPlaysLinesNum,0,tasksOrPlaysLinesNum.size-1,bugLineNum)
+			if(index>bugLineNum){
+				index = index-1
+			}
+			var String name = tasksOrPlays.get(tasksOrPlaysLinesNum.get(index)).replace("\"","").replace("\\s","")
+			var Scanner modelScanner = new Scanner(ansibleModel);
+			var int offsetCounter = 1;
+			while (modelScanner.hasNextLine()){
+				var String modelLine = modelScanner.nextLine()
+				if(modelLine.replace("\"","").trim.replaceAll("\\s+","").contains(name.replace("\"","").trim.replaceAll("\\s+",""))){
+					getMessageAcceptor.acceptWarning("In the context of \""+name+"\" there is the following code smell: "+bugDescription,o,offsetCounter,1,null,null);
+					offsetCounter = offsetCounter + modelLine.length+1
+				}
+				else{
+					offsetCounter = offsetCounter + modelLine.length+1
+				}
 			}
 		}
 	}
