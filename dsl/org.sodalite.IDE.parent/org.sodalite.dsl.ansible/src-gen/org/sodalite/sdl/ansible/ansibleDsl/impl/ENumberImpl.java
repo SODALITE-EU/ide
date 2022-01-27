@@ -8,7 +8,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
@@ -26,7 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
  *
  * @generated
  */
-public class ENumberImpl extends MinimalEObjectImpl.Container implements ENumber
+public class ENumberImpl extends ENumberOrStringWithoutQuotesPassedImpl implements ENumber
 {
   /**
    * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.

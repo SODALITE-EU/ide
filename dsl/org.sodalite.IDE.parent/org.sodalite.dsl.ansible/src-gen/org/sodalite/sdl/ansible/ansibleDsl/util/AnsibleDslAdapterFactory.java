@@ -91,6 +91,26 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEUsedByBodyAdapter();
       }
       @Override
+      public Adapter caseNode(Node object)
+      {
+        return createNodeAdapter();
+      }
+      @Override
+      public Adapter caseLocalNode(LocalNode object)
+      {
+        return createLocalNodeAdapter();
+      }
+      @Override
+      public Adapter caseKBNode(KBNode object)
+      {
+        return createKBNodeAdapter();
+      }
+      @Override
+      public Adapter caseEPREFIX_TYPE(EPREFIX_TYPE object)
+      {
+        return createEPREFIX_TYPEAdapter();
+      }
+      @Override
       public Adapter caseEBase(EBase object)
       {
         return createEBaseAdapter();
@@ -99,6 +119,11 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEExecution(EExecution object)
       {
         return createEExecutionAdapter();
+      }
+      @Override
+      public Adapter caseEBlockTaskRole(EBlockTaskRole object)
+      {
+        return createEBlockTaskRoleAdapter();
       }
       @Override
       public Adapter caseEBlockTask(EBlockTask object)
@@ -144,6 +169,16 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseERoleInclusion(ERoleInclusion object)
       {
         return createERoleInclusionAdapter();
+      }
+      @Override
+      public Adapter caseERoleName(ERoleName object)
+      {
+        return createERoleNameAdapter();
+      }
+      @Override
+      public Adapter caseENumberOrStringWithoutQuotesPassed(ENumberOrStringWithoutQuotesPassed object)
+      {
+        return createENumberOrStringWithoutQuotesPassedAdapter();
       }
       @Override
       public Adapter caseERoleInclusions(ERoleInclusions object)
@@ -274,6 +309,26 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEMultiLineExpression(EMultiLineExpression object)
       {
         return createEMultiLineExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEJinjaOrStringWithoutQuotes(EJinjaOrStringWithoutQuotes object)
+      {
+        return createEJinjaOrStringWithoutQuotesAdapter();
+      }
+      @Override
+      public Adapter caseEJinjaAndStringWithoutQuotes(EJinjaAndStringWithoutQuotes object)
+      {
+        return createEJinjaAndStringWithoutQuotesAdapter();
+      }
+      @Override
+      public Adapter caseEStringWithoutQuotesPassed(EStringWithoutQuotesPassed object)
+      {
+        return createEStringWithoutQuotesPassedAdapter();
+      }
+      @Override
+      public Adapter caseEValueWithString(EValueWithString object)
+      {
+        return createEValueWithStringAdapter();
       }
       @Override
       public Adapter caseEStringPassed(EStringPassed object)
@@ -436,9 +491,29 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
         return createEInputOperationVariableReferenceAdapter();
       }
       @Override
+      public Adapter caseLocalEInputOperationVariableReference(LocalEInputOperationVariableReference object)
+      {
+        return createLocalEInputOperationVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseKBEInputOperationVariableReference(KBEInputOperationVariableReference object)
+      {
+        return createKBEInputOperationVariableReferenceAdapter();
+      }
+      @Override
       public Adapter caseEInputInterfaceVariableReference(EInputInterfaceVariableReference object)
       {
         return createEInputInterfaceVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseLocalEInputInterfaceVariableReference(LocalEInputInterfaceVariableReference object)
+      {
+        return createLocalEInputInterfaceVariableReferenceAdapter();
+      }
+      @Override
+      public Adapter caseKBEInputInterfaceVariableReference(KBEInputInterfaceVariableReference object)
+      {
+        return createKBEInputInterfaceVariableReferenceAdapter();
       }
       @Override
       public Adapter caseESetFactVariableReference(ESetFactVariableReference object)
@@ -499,6 +574,31 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEDictionaryPairJinja(EDictionaryPairJinja object)
       {
         return createEDictionaryPairJinjaAdapter();
+      }
+      @Override
+      public Adapter caseECollectionListPassed(ECollectionListPassed object)
+      {
+        return createECollectionListPassedAdapter();
+      }
+      @Override
+      public Adapter caseECollectionList(ECollectionList object)
+      {
+        return createECollectionListAdapter();
+      }
+      @Override
+      public Adapter caseECollectionListInLine(ECollectionListInLine object)
+      {
+        return createECollectionListInLineAdapter();
+      }
+      @Override
+      public Adapter caseECollectionFQN(ECollectionFQN object)
+      {
+        return createECollectionFQNAdapter();
+      }
+      @Override
+      public Adapter caseECollectionListIndented(ECollectionListIndented object)
+      {
+        return createECollectionListIndentedAdapter();
       }
       @Override
       public Adapter caseEList(EList object)
@@ -638,6 +738,66 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.Node <em>Node</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.Node
+   * @generated
+   */
+  public Adapter createNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.LocalNode <em>Local Node</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.LocalNode
+   * @generated
+   */
+  public Adapter createLocalNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.KBNode <em>KB Node</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.KBNode
+   * @generated
+   */
+  public Adapter createKBNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EPREFIX_TYPE <em>EPREFIX TYPE</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EPREFIX_TYPE
+   * @generated
+   */
+  public Adapter createEPREFIX_TYPEAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBase <em>EBase</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -663,6 +823,21 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEExecutionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EBlockTaskRole <em>EBlock Task Role</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EBlockTaskRole
+   * @generated
+   */
+  public Adapter createEBlockTaskRoleAdapter()
   {
     return null;
   }
@@ -798,6 +973,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createERoleInclusionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ERoleName <em>ERole Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ERoleName
+   * @generated
+   */
+  public Adapter createERoleNameAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ENumberOrStringWithoutQuotesPassed <em>ENumber Or String Without Quotes Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ENumberOrStringWithoutQuotesPassed
+   * @generated
+   */
+  public Adapter createENumberOrStringWithoutQuotesPassedAdapter()
   {
     return null;
   }
@@ -1188,6 +1393,66 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEMultiLineExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes <em>EJinja Or String Without Quotes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes
+   * @generated
+   */
+  public Adapter createEJinjaOrStringWithoutQuotesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndStringWithoutQuotes <em>EJinja And String Without Quotes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndStringWithoutQuotes
+   * @generated
+   */
+  public Adapter createEJinjaAndStringWithoutQuotesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EStringWithoutQuotesPassed <em>EString Without Quotes Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EStringWithoutQuotesPassed
+   * @generated
+   */
+  public Adapter createEStringWithoutQuotesPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EValueWithString <em>EValue With String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.EValueWithString
+   * @generated
+   */
+  public Adapter createEValueWithStringAdapter()
   {
     return null;
   }
@@ -1673,6 +1938,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.LocalEInputOperationVariableReference <em>Local EInput Operation Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.LocalEInputOperationVariableReference
+   * @generated
+   */
+  public Adapter createLocalEInputOperationVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.KBEInputOperationVariableReference <em>KBE Input Operation Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.KBEInputOperationVariableReference
+   * @generated
+   */
+  public Adapter createKBEInputOperationVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference <em>EInput Interface Variable Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1683,6 +1978,36 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEInputInterfaceVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.LocalEInputInterfaceVariableReference <em>Local EInput Interface Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.LocalEInputInterfaceVariableReference
+   * @generated
+   */
+  public Adapter createLocalEInputInterfaceVariableReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.KBEInputInterfaceVariableReference <em>KBE Input Interface Variable Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.KBEInputInterfaceVariableReference
+   * @generated
+   */
+  public Adapter createKBEInputInterfaceVariableReferenceAdapter()
   {
     return null;
   }
@@ -1863,6 +2188,81 @@ public class AnsibleDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEDictionaryPairJinjaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECollectionListPassed <em>ECollection List Passed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECollectionListPassed
+   * @generated
+   */
+  public Adapter createECollectionListPassedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECollectionList <em>ECollection List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECollectionList
+   * @generated
+   */
+  public Adapter createECollectionListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECollectionListInLine <em>ECollection List In Line</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECollectionListInLine
+   * @generated
+   */
+  public Adapter createECollectionListInLineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN <em>ECollection FQN</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN
+   * @generated
+   */
+  public Adapter createECollectionFQNAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sodalite.sdl.ansible.ansibleDsl.ECollectionListIndented <em>ECollection List Indented</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sodalite.sdl.ansible.ansibleDsl.ECollectionListIndented
+   * @generated
+   */
+  public Adapter createECollectionListIndentedAdapter()
   {
     return null;
   }

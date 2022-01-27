@@ -25,7 +25,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * </p>
  * <ul>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl#getValue_passed <em>Value passed</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,14 +53,14 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getValue_passed() <em>Value passed</em>}' containment reference.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue_passed()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected EValuePassed value_passed;
+  protected EValuePassed value;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,9 +114,9 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
    * @generated
    */
   @Override
-  public EValuePassed getValue_passed()
+  public EValuePassed getValue()
   {
-    return value_passed;
+    return value;
   }
 
   /**
@@ -124,13 +124,13 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue_passed(EValuePassed newValue_passed, NotificationChain msgs)
+  public NotificationChain basicSetValue(EValuePassed newValue, NotificationChain msgs)
   {
-    EValuePassed oldValue_passed = value_passed;
-    value_passed = newValue_passed;
+    EValuePassed oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARAMETER__VALUE_PASSED, oldValue_passed, newValue_passed);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARAMETER__VALUE, oldValue, newValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -142,20 +142,20 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
    * @generated
    */
   @Override
-  public void setValue_passed(EValuePassed newValue_passed)
+  public void setValue(EValuePassed newValue)
   {
-    if (newValue_passed != value_passed)
+    if (newValue != value)
     {
       NotificationChain msgs = null;
-      if (value_passed != null)
-        msgs = ((InternalEObject)value_passed).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARAMETER__VALUE_PASSED, null, msgs);
-      if (newValue_passed != null)
-        msgs = ((InternalEObject)newValue_passed).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARAMETER__VALUE_PASSED, null, msgs);
-      msgs = basicSetValue_passed(newValue_passed, msgs);
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARAMETER__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EPARAMETER__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARAMETER__VALUE_PASSED, newValue_passed, newValue_passed));
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EPARAMETER__VALUE, newValue, newValue));
   }
 
   /**
@@ -168,8 +168,8 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EPARAMETER__VALUE_PASSED:
-        return basicSetValue_passed(null, msgs);
+      case AnsibleDslPackage.EPARAMETER__VALUE:
+        return basicSetValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -186,8 +186,8 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
     {
       case AnsibleDslPackage.EPARAMETER__NAME:
         return getName();
-      case AnsibleDslPackage.EPARAMETER__VALUE_PASSED:
-        return getValue_passed();
+      case AnsibleDslPackage.EPARAMETER__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -205,8 +205,8 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
       case AnsibleDslPackage.EPARAMETER__NAME:
         setName((String)newValue);
         return;
-      case AnsibleDslPackage.EPARAMETER__VALUE_PASSED:
-        setValue_passed((EValuePassed)newValue);
+      case AnsibleDslPackage.EPARAMETER__VALUE:
+        setValue((EValuePassed)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -225,8 +225,8 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
       case AnsibleDslPackage.EPARAMETER__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AnsibleDslPackage.EPARAMETER__VALUE_PASSED:
-        setValue_passed((EValuePassed)null);
+      case AnsibleDslPackage.EPARAMETER__VALUE:
+        setValue((EValuePassed)null);
         return;
     }
     super.eUnset(featureID);
@@ -244,8 +244,8 @@ public class EParameterImpl extends MinimalEObjectImpl.Container implements EPar
     {
       case AnsibleDslPackage.EPARAMETER__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AnsibleDslPackage.EPARAMETER__VALUE_PASSED:
-        return value_passed != null;
+      case AnsibleDslPackage.EPARAMETER__VALUE:
+        return value != null;
     }
     return super.eIsSet(featureID);
   }

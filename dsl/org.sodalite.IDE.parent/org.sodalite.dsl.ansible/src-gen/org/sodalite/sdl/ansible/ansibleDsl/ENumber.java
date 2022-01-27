@@ -3,7 +3,6 @@
  */
 package org.sodalite.sdl.ansible.ansibleDsl;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ENumber extends EObject
+public interface ENumber extends ENumberOrStringWithoutQuotesPassed
 {
   /**
    * Returns the value of the '<em><b>Number</b></em>' attribute.

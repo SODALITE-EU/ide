@@ -14,6 +14,6 @@ package org.sodalite.sdl.ansible.ansibleDsl;
  * @model
  * @generated
  */
-public interface EStringPassed extends EValuePassed, EElementOfListIndented
+public interface EStringPassed extends EValueWithString, EElementOfListIndented
 {
 } // EStringPassed

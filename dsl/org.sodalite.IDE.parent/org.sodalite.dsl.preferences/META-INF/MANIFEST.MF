@@ -7,18 +7,12 @@ Bundle-Vendor: Atos Spain S.A.
 Automatic-Module-Name: org.sodalite.dsl.preferences
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.ui;bundle-version="3.114.0",
- org.eclipse.core.runtime;bundle-version="3.16.0"
+ org.eclipse.core.runtime;bundle-version="3.16.0",
+ org.apache.httpcomponents.httpclient;bundle-version="4.5.13"
 Export-Package: com.google.gson,
  com.mongodb,
  com.mongodb.client,
  com.mongodb.client.model,
- org.apache.http,
- org.apache.http.client.methods,
- org.apache.http.entity,
- org.apache.http.entity.mime,
- org.apache.http.entity.mime.content,
- org.apache.http.impl.client,
- org.apache.http.util,
  org.bson,
  org.bson.conversions,
  org.json,
@@ -32,7 +26,5 @@ Export-Package: com.google.gson,
 Bundle-Activator: org.sodalite.dsl.ui.preferences.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/kb_reasoner_client-0.6-SNAPSHOT-jar-with-dependencies.jar,
- .,
  lib/mongo-java-driver-3.11.2.jar,
- lib/httpclient-4.5.13.jar,
- lib/httpmime-4.5.13.jar
+ .

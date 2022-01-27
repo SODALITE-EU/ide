@@ -40,10 +40,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringWithoutQuotesImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EComposedValueImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.nodemodel.INode
 import org.sodalite.sdl.ansible.ansibleDsl.Model
-import org.eclipse.core.resources.IFile
 import java.util.Scanner
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.emf.common.util.URI

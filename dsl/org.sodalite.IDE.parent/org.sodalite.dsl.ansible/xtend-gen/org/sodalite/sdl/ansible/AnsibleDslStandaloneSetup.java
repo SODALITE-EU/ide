@@ -3,8 +3,6 @@
  */
 package org.sodalite.sdl.ansible;
 
-import org.sodalite.sdl.ansible.AnsibleDslStandaloneSetupGenerated;
-
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */

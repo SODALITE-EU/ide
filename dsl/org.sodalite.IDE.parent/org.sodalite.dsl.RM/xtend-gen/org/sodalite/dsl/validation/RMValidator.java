@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.validation.Check;
 import org.sodalite.dsl.rM.EPrimary;
 import org.sodalite.dsl.rM.RMPackage;
-import org.sodalite.dsl.validation.AbstractRMValidator;
 
 /**
  * This class contains custom validation rules.

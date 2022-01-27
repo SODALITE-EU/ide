@@ -36,7 +36,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EMultiLineExpression;
  *
  * @generated
  */
-public class EMultiLineExpressionImpl extends EStringPassedImpl implements EMultiLineExpression
+public class EMultiLineExpressionImpl extends EStringWithoutQuotesPassedImpl implements EMultiLineExpression
 {
   /**
    * The default value of the '{@link #getNew_line_command() <em>New line command</em>}' attribute.

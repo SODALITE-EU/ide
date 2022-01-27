@@ -23,17 +23,19 @@ import org.sodalite.dsl.validation.RMValidator;
 public class RMQuickfixProvider extends DefaultQuickfixProvider {
   @Fix(RMValidator.INVALID_PATH)
   public void fixRelativePath(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    final IModification _function = (IModificationContext context) -> {
-      IXtextDocument xtextDocument = context.getXtextDocument();
-      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
-      URI project_uri = xtextDocument.getResourceURI();
-      String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
-      int _segmentCount = project_uri.segmentCount();
-      int _minus = (_segmentCount - 1);
-      String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
-      intermediatePath = intermediatePath.replace(RMName, "");
-      String fix = "\"".concat((workspaceDir + intermediatePath)).concat("\"");
-      xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fix);
+    final IModification _function = new IModification() {
+      public void apply(final IModificationContext context) throws Exception {
+        IXtextDocument xtextDocument = context.getXtextDocument();
+        String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+        URI project_uri = xtextDocument.getResourceURI();
+        String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
+        int _segmentCount = project_uri.segmentCount();
+        int _minus = (_segmentCount - 1);
+        String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
+        intermediatePath = intermediatePath.replace(RMName, "");
+        String fix = "\"".concat((workspaceDir + intermediatePath)).concat("\"");
+        xtextDocument.replace((issue.getOffset()).intValue(), (issue.getLength()).intValue(), fix);
+      }
     };
     acceptor.accept(issue, 
       "Fix relative path", 
