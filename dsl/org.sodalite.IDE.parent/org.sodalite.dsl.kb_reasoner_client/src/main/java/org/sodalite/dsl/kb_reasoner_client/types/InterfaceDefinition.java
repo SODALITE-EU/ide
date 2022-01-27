@@ -15,10 +15,15 @@ import org.sodalite.dsl.kb_reasoner_client.json.InterfaceDefinitionJsonDeseriali
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.util.HashMap;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = InterfaceDefinitionJsonDeserializer.class)
 public class InterfaceDefinition extends KBEntity {
 	SuperType type;
+	List<OperationData> operations_in_interface;
+	HashMap<String, String> inputs;
 
 	public SuperType getType() {
 		return type;
@@ -27,4 +32,23 @@ public class InterfaceDefinition extends KBEntity {
 	public void setType(SuperType type) {
 		this.type = type;
 	}
+
+	public List<OperationData> getOperations_in_interface() {
+		return operations_in_interface;
+	}
+
+	public void setOperations_in_interface(List<OperationData> operations_in_interface) {
+		this.operations_in_interface = operations_in_interface;
+	}
+
+	public HashMap<String, String> getInputs() {
+		return inputs;
+	}
+
+	public void setInputs(HashMap<String, String> inputs) {
+		this.inputs = inputs;
+	}
+	
+	
+	
 }
