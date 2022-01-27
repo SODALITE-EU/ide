@@ -577,8 +577,7 @@ public class RMHelper {
 						try {
 							Files.copy(src, dest, options);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							SodaliteLogger.log(e);
 						}
 					}
 				}
@@ -592,8 +591,7 @@ public class RMHelper {
 					try {
 						Files.copy(src, dest, options);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						SodaliteLogger.log(e);
 					}
 				}
 				return localPath+"/"+fileName;
@@ -610,8 +608,7 @@ public class RMHelper {
 				try {
 					Files.copy(src, dest, options);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					SodaliteLogger.log(e);
 				}
 				return localPath+"/"+fileName;
 			}

@@ -22,6 +22,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN;
 import org.sodalite.sdl.ansible.ansibleDsl.ECollectionList;
@@ -661,16 +662,16 @@ public class AnsibleHelper {
 				
 			} catch (NoSuchFieldException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				SodaliteLogger.log(e1);
 			} catch (SecurityException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				SodaliteLogger.log(e1);
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			} catch (IllegalAccessException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			}
 			for(ConfigurableCompletionProposal proposal:proposals){
 				if(proposal.getAdditionalProposalInfo()!= null) {
@@ -700,16 +701,16 @@ public class AnsibleHelper {
 				
 			} catch (NoSuchFieldException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				SodaliteLogger.log(e1);
 			} catch (SecurityException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				SodaliteLogger.log(e1);
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			} catch (IllegalAccessException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			}
 			for(ConfigurableCompletionProposal proposal:proposals){
 				if(proposal.getDisplayString()!= null) {
