@@ -509,21 +509,21 @@ class AnsibleDslGenerator extends AbstractGenerator {
 				«space»loop: «compileLoopList((taskHandler.loop as ELoopOverList).loop_list, space)»
 				«IF (taskHandler.loop as ELoopOverList).loop_control !== null»
 					«space»loop_control:«»
-						«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
-							«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space, false)»
-						«ENDIF»
-						«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
-							«space»pause: «compileNumberPassed((taskHandler.loop as ELoopOverList).loop_control.pause, space)»
-						«ENDIF»
-						«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
-							«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var.name»
-						«ENDIF»
-						«IF (taskHandler.loop as ELoopOverList).loop_control.loop_var !== null»
-							«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var.name»
-						«ENDIF»
-						«IF (taskHandler.loop as ELoopOverList).loop_control.extended !== null»
-							«space»extended: «compileBooleanPassed((taskHandler.loop as ELoopOverList).loop_control.extended, space)»
-						«ENDIF»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
+					«space»«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space, false)»
+					«ENDIF»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
+					«space»«space»pause: «compileNumberPassed((taskHandler.loop as ELoopOverList).loop_control.pause, space)»
+					«ENDIF»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
+					«space»«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var.name»
+					«ENDIF»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.loop_var !== null»
+					«space»«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var.name»
+					«ENDIF»
+					«IF (taskHandler.loop as ELoopOverList).loop_control.extended !== null»
+					«space»«space»extended: «compileBooleanPassed((taskHandler.loop as ELoopOverList).loop_control.extended, space)»
+					«ENDIF»
 				«ENDIF»
 			«ENDIF»
 			«IF taskHandler.loop instanceof EUntil»
