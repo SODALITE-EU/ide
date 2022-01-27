@@ -60,9 +60,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 public class AnsibleHelper {
 	
+	public static String databaseName = "AnsibleDB";
+	
 	public static MongoCollection<Document> getAnsibleModules(){
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
-		MongoDatabase database = mongoClient.getDatabase("AnsibleDB");
+		MongoDatabase database = mongoClient.getDatabase(databaseName);
 		MongoCollection<Document> mongo_collection = database.getCollection("AnsibleGalaxyModules");
 		return mongo_collection;
 	
@@ -70,16 +72,16 @@ public class AnsibleHelper {
 	
 	public static MongoCollection<Document> getAnsibleCollections() {
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
-		MongoDatabase database = mongoClient.getDatabase("AnsibleDB");
-		MongoCollection<Document> mongo_collection = database.getCollection("AnsibleGalaxyCollections");
-		return mongo_collection;
+		MongoDatabase database = mongoClient.getDatabase(databaseName);
+		MongoCollection<Document> mongoCollection = database.getCollection("AnsibleGalaxyCollections");
+		return mongoCollection;
 	}
 	
 	public static MongoCollection<Document> getAnsibleRoles() {
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
-		MongoDatabase database = mongoClient.getDatabase("AnsibleDB");
-		MongoCollection<Document> mongo_collection = database.getCollection("AnsibleGalaxyRoles");
-		return mongo_collection;
+		MongoDatabase database = mongoClient.getDatabase(databaseName);
+		MongoCollection<Document> mongoCollection = database.getCollection("AnsibleGalaxyRoles");
+		return mongoCollection;
 	}
 	
 	
@@ -88,7 +90,7 @@ public class AnsibleHelper {
 	//With this method, we calculate all the possible collections that can contain 'model'
 	public static List<String> collectionsInScope(EObject model){
 		Iterable<EObject> containers = EcoreUtil2.getAllContainers(model);
-		List<String> collections = new ArrayList<String>();
+		List<String> collections = new ArrayList<>();
 		Iterator<EObject> it = containers.iterator();
 		List<ECollectionFQN> collectionsList = null;
 		EObject container;
@@ -111,18 +113,18 @@ public class AnsibleHelper {
 	//Find module's fully qualified name from MongoDB
 	public static List<String> findModuleFQN(EObject model,String moduleName){
 		
-		MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+		MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 		List<String> importedCollections = collectionsInScope(model);
 		List<String> potentialCollections = new ArrayList<>();
 		if(moduleName.equals("") ) {
 			potentialCollections.add("");
 			return potentialCollections;
 		}
-		FindIterable<Document> findIterable = mongo_collection.find(eq("modules.".concat(moduleName),new Document().append("$exists", "1"))).projection(Projections.include("_id"));
+		FindIterable<Document> findIterable = mongoCollection.find(eq("modules.".concat(moduleName),new Document().append("$exists", "1"))).projection(Projections.include("_id"));
 		Iterator<Document> contentIterator = findIterable.iterator();
 		while (contentIterator.hasNext()) {
-			Document exists_content = contentIterator.next();
-			potentialCollections.add((String)exists_content.get("_id"));
+			Document existsContent = contentIterator.next();
+			potentialCollections.add((String)existsContent.get("_id"));
 		}
 		potentialCollections.retainAll(importedCollections);
 		if(potentialCollections.size()>=1) {
@@ -132,24 +134,6 @@ public class AnsibleHelper {
 			potentialCollections.add("");
 			return potentialCollections;
 		}
-	//	for(String collection:importedCollections){
-		//	String moduleFQNName = collection.concat(".").concat(moduleName);
-			// the complex query below is the following: aggregate[$match:{id: collection},$project:{_id:0, exists: {$cond:[{$ifNull:['$modules.moduleName',false]},true,false]}}]}
-		//	Bson match = Aggregates.match(eq("_id",collection));
-		//	Bson exists_project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("exists",new Document().append("$cond", Arrays.asList(new Document().append("$ifNull", Arrays.asList("$modules.".concat(moduleName),false)),true,false)))));
-		//	Iterator<Document> existsIterator = mongo_collection.aggregate(Arrays.asList(match,exists_project)).iterator();
-		//	while (existsIterator.hasNext()) {
-		//		Document exists_content = existsIterator.next();
-		//		if((Boolean)exists_content.get("exists") == true) {
-		//			return moduleFQNName;
-		//		}
-		//	}
-			//long count = mongo_collection.countDocuments(eq("_id",moduleFQNName));
-			//if(count>=1){
-			//	return moduleFQNName;
-			//}			
-	//	}	
-	//	return "";
 	}
 	
 	//Find module's fully qualified name from MongoDB
@@ -157,34 +141,24 @@ public class AnsibleHelper {
 		if(roleName.equals("")) {
 			return "";
 		}
-		MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+		MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 		List<String> collections = collectionsInScope(model);
 			
 		for(String collection:collections){
 			String roleFQNName = collection.concat(".").concat(roleName);
 			Bson idFilter = Filters.eq("_id",collection);
 			Bson roleFilter = Filters.eq("roles", roleName);
-			long count = mongo_collection.countDocuments(Filters.and(idFilter, roleFilter));
+			long count = mongoCollection.countDocuments(Filters.and(idFilter, roleFilter));
 			if(count>=1){
 				return roleFQNName;
-			}	
-			// the complex query below is the following: aggregate[$match:{id: collection},$project:{_id:0, exists: {$cond:[{$ifNull:['$roles.roleName',false]},true,false]}}]}
-			//Bson match = Aggregates.match(eq("_id",collection));
-			//Bson exists_project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("exists",new Document().append("$cond", Arrays.asList(new Document().append("$ifNull", Arrays.asList("$roles.".concat(roleName),false)),true,false)))));
-			//Iterator<Document> existsIterator = mongo_collection.aggregate(Arrays.asList(match,exists_project)).iterator();
-			//while (existsIterator.hasNext()) {
-			//	Document exists_content = existsIterator.next();
-			//	if((Boolean)exists_content.get("exists") == true) {
-			//		return roleFQNName;
-			//	}
-			//}		
+			}		
 		}	
 		return "";
 	}
 		
 		
 		//Find the parameters of a module from MongoDB
-		public static Map<String, Map<String, Object>> findParameters(EModuleCall module,String fqn) {
+		public static Map<String, Map<String, Object>> findParameters(String fqn) {
 			
 			Map<String, Map<String, Object>> parameters = new HashMap<>();
 			String[] nameParts = fqn.split("\\.");
@@ -192,19 +166,19 @@ public class AnsibleHelper {
 			if(nameParts.length !=3) {
 				return parameters;
 			}
-			MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+			MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 			String projection = "modules".concat(".").concat(nameParts[2]).concat(".").concat("parameters");
 			
 			Bson match = Aggregates.match(eq("_id",nameParts[0].concat(".").concat(nameParts[1])));
 			Bson project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("parameters","$".concat(projection))));
-			Iterator<Document> contentIterator = mongo_collection.aggregate(Arrays.asList(match,project)).iterator();
+			Iterator<Document> contentIterator = mongoCollection.aggregate(Arrays.asList(match,project)).iterator();
 			while (contentIterator.hasNext()) {
 				Document moduleContent = contentIterator.next().get("parameters",Document.class);
 				Set<String> parametersKeys = moduleContent.keySet();
 				for(String parameterKey:parametersKeys) {
 					String parameterType;
 					List<String> description;
-					Map<String, Object> parameterDetails = new HashMap<String, Object>();
+					Map<String, Object> parameterDetails = new HashMap<>();
 					
 					if(moduleContent.get(parameterKey,Document.class).get("required") != null) {
 						parameterDetails.put("required", true);
@@ -234,7 +208,7 @@ public class AnsibleHelper {
 		
 		//Find the subparameters of a parameter from MongoDB
 		public static Map<String, Map<String, Object>> findSubparameters(String fqn,List<String> parameterPath){
-			MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+			MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 			String[] nameParts = fqn.split("\\.");
 			Map<String, Map<String, Object>> subparameters = new HashMap<>();
 			//if module name is not correct  return nothing
@@ -249,7 +223,7 @@ public class AnsibleHelper {
 			projection = projection.concat(".").concat("suboptions");
 			Bson match = Aggregates.match(eq("_id",nameParts[0].concat(".").concat(nameParts[1])));
 			Bson project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("suboptions","$".concat(projection))));
-			Iterator<Document> contentIterator = mongo_collection.aggregate(Arrays.asList(match,project)).iterator();
+			Iterator<Document> contentIterator = mongoCollection.aggregate(Arrays.asList(match,project)).iterator();
 			Set<String> subparameterKeys;
 			while (contentIterator.hasNext()) {
 				Document content = contentIterator.next().get("suboptions",Document.class);
@@ -258,7 +232,7 @@ public class AnsibleHelper {
 				}
 				subparameterKeys = content.keySet();
 				for(String subparameterKey:subparameterKeys) {
-					Map<String, Object> subparameterDetails = new HashMap<String, Object>();
+					Map<String, Object> subparameterDetails = new HashMap<>();
 					if(content.get(subparameterKey,Document.class).get("required") != null) {
 						subparameterDetails.put("required", true);
 					}
@@ -285,14 +259,14 @@ public class AnsibleHelper {
 		
 		//Find the details of a subparameter from MongoDB
 		public static Document findSubparameterDetails(EObject model) {
-			MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+			MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 			Document details = null;
 			EParameter parameter = EcoreUtil2.getContainerOfType(model,EParameter.class);
 			EModuleCall module = EcoreUtil2.getContainerOfType(parameter,EModuleCall.class);
 			String fqn = AnsibleHelper.calculateModuleName(module);
 			String[] nameParts = fqn.split("\\.");
 			Iterator<EObject> containers = EcoreUtil2.getAllContainers(model).iterator();
-			List<String> parameterPath = new ArrayList<String>();
+			List<String> parameterPath = new ArrayList<>();
 			if(model instanceof EJinjaAndString){
 				containers.next();
 			}
@@ -312,7 +286,7 @@ public class AnsibleHelper {
 			}
 			Bson match = Aggregates.match(eq("_id",nameParts[0].concat(".").concat(nameParts[1])));
 			Bson project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("details","$".concat(projection))));
-			Iterator<Document> contentIterator = mongo_collection.aggregate(Arrays.asList(match,project)).iterator();
+			Iterator<Document> contentIterator = mongoCollection.aggregate(Arrays.asList(match,project)).iterator();
 			while (contentIterator.hasNext()) {
 				Document content = contentIterator.next();
 				if(!content.isEmpty()) {
@@ -354,7 +328,6 @@ public class AnsibleHelper {
 			else if(fqn.equals("") && secondPart.equals("") && firstPart.split("\\.",-1).length == 1){
 				List<String> potentialCollections = findModuleFQN(module,firstPart);
 				if(potentialCollections.size()>1) {
-					//Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					Shell shell = Display.getCurrent().getActiveShell();
 					ListDialog dialog =  new ListDialog(shell);
 					dialog.setContentProvider(new ArrayContentProvider());
@@ -392,14 +365,14 @@ public class AnsibleHelper {
 				}
 				//Check if namespaceOrFqn refers to a Ansible namespace and is a reference to a defined variable => e.g. amazon
 				if(EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).size() >0 && collection.getCollectionName() != null){
-					EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-					namespace = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+					EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+					namespace = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 				}
 				//Check if namespaceOrFqn refers to a Ansible collection and is a reference to a defined variable => e.g. amazon.aws(fully qualified name)
 				if(EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).size() >0 && collection.getCollectionName() == null){
-					EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-					if(EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString().contains(".")){
-						result = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+					EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(namespaceOrFqn,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+					if(EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString().contains(".")){
+						result = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 					}
 				}
 			}
@@ -411,8 +384,8 @@ public class AnsibleHelper {
 				}
 				//Check if collection name is a reference to a defined variable 
 				if(EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).size() >0){
-					EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-					collectionName = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+					EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+					collectionName = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 				}	
 			}
 			//Retrieve full collection name of a collection,if it is not already defined
@@ -461,7 +434,7 @@ public class AnsibleHelper {
 		
 		//Create a list with the fully qualified names of the inserted collections
 		public static List<String> findAnsibleCollections(List<ECollectionFQN> collectionsList){
-			List<String> fqns = new ArrayList<String>();
+			List<String> fqns = new ArrayList<>();
 				for(ECollectionFQN collection:collectionsList){
 					String namespace ="";
 					String fqn = "";
@@ -474,13 +447,13 @@ public class AnsibleHelper {
 						}
 						//Check if namespace is a reference to a defined variable 
 						if(EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).size() >0 && collection.getCollectionName() != null){
-							EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-							namespace = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+							EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+							namespace = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 						}
 						//Check if fully qualified name is a reference to a defined variable 
 						if(EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).size() >0 && collection.getCollectionName() == null){
-							EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-							fqn = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+							EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getNamespaceOrFqn(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+							fqn = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 						}
 						
 					}
@@ -493,8 +466,8 @@ public class AnsibleHelper {
 						}
 						//Check if collection name is a reference to a defined variable 
 						if(EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).size() >0){
-							EVariableDeclaration variable_reference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-							collectionName = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+							EVariableDeclaration variableReference = (EVariableDeclaration) EcoreUtil2.getAllContentsOfType(collection.getCollectionName(),EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+							collectionName = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 						}	
 					}
 					
@@ -518,8 +491,8 @@ public class AnsibleHelper {
 				}
 				//Check if model is a reference to a defined variable
 				if(EcoreUtil2.getAllContentsOfType(model,EVariableDeclarationVariableReference.class).size() >0){
-					EVariableDeclaration variable_reference = EcoreUtil2.getAllContentsOfType(model,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
-					result = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString.class).get(0).getString();
+					EVariableDeclaration variableReference = EcoreUtil2.getAllContentsOfType(model,EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+					result = EcoreUtil2.getAllContentsOfType(variableReference,EJinjaOrString.class).get(0).getString();
 				}
 			}
 			
@@ -541,27 +514,33 @@ public class AnsibleHelper {
 		
 		//Get the value of a JinjaorString expression
 		public static String getEJinjaOrStringValue(EObject element) {
-			String result = "";
+			//String result = "";
+			StringBuilder resultBuilder = new StringBuilder();
 			if(element instanceof EJinjaOrString) {
 				if(((EJinjaOrString)element).getString()!= null) {
-					result = result + ((EJinjaOrString)element).getString();
+					//result = result + ((EJinjaOrString)element).getString();
+					resultBuilder.append(((EJinjaOrString)element).getString());
 				}
 			}
 			else if(element instanceof EJinjaOrStringWithoutQuotes) {
 				if(((EJinjaOrStringWithoutQuotes)element).getStringWithoutQuotes()!= null) {
-					result = result + ((EJinjaOrStringWithoutQuotes)element).getStringWithoutQuotes();
+					//result = result + ((EJinjaOrStringWithoutQuotes)element).getStringWithoutQuotes();
+					resultBuilder.append(((EJinjaOrStringWithoutQuotes)element).getStringWithoutQuotes());
 				}
 			}
 			if(EcoreUtil2.getAllContentsOfType(element,ESimpleValueJinja.class).size()>0) {
 				for(ESimpleValueJinja jinjaValue : EcoreUtil2.getAllContentsOfType(element,ESimpleValueJinja.class)) {
 					if(jinjaValue.getSimple_value()!= null) {
-						result = result + jinjaValue.getSimple_value();
+						//result = result + jinjaValue.getSimple_value();
+						resultBuilder.append(jinjaValue.getSimple_value());
 					}
 					else if(jinjaValue.getSimple_value_string()!=null) {
-						result = result + jinjaValue.getSimple_value_string();
+						//result = result + jinjaValue.getSimple_value_string();
+						resultBuilder.append(jinjaValue.getSimple_value_string());
 					}
 					else if(jinjaValue.getSimple_value_number()!=null) {
-						result = result + jinjaValue.getSimple_value_number();
+						//result = result + jinjaValue.getSimple_value_number();
+						resultBuilder.append(jinjaValue.getSimple_value_number());
 					}
 				}
 			}
@@ -569,53 +548,65 @@ public class AnsibleHelper {
 				for(EVariableDeclarationVariableReference variable_reference : EcoreUtil2.getAllContentsOfType(element,EVariableDeclarationVariableReference.class)) {		
 					for(EJinjaOrString variable_value: EcoreUtil2.getAllContentsOfType(variable_reference.getVariable_declaration_variable_reference(),EJinjaOrString.class)) {
 						if(EcoreUtil2.getContainerOfType(variable_value, EList.class)!= null) {
-							if(result.equals("")) {
-								result = "[" + getEJinjaOrStringValue(variable_value) + "]";
+							if(resultBuilder.equals("")) {
+								//result = "[" + getEJinjaOrStringValue(variable_value) + "]";
+								resultBuilder.append("[").append(getEJinjaOrStringValue(variable_value)).append("]");
 							}
 							else {
-								result = result.substring(0, result.length()-1) + "," + getEJinjaOrStringValue(variable_value) + "]" ;
+								//result = result.substring(0, result.length()-1) + "," + getEJinjaOrStringValue(variable_value) + "]" ;
+								resultBuilder.append(resultBuilder.substring(0, resultBuilder.length()-1)).append(",").append(getEJinjaOrStringValue(variable_value)).append("]");
 							}
 						}
 						else if(EcoreUtil2.getContainerOfType(variable_value, EDictionary.class)!= null) {
-							result = "{" + EcoreUtil2.getContainerOfType(variable_value, EDictionaryPair.class).getName()+":" + getEJinjaOrStringValue(variable_value) + "}";
+							//result = "{" + EcoreUtil2.getContainerOfType(variable_value, EDictionaryPair.class).getName()+":" + getEJinjaOrStringValue(variable_value) + "}";
+							resultBuilder.append("{").append(EcoreUtil2.getContainerOfType(variable_value, EDictionaryPair.class).getName()).append(":").append(getEJinjaOrStringValue(variable_value)).append("}");
 						}
 						else {
-							result = result + getEJinjaOrStringValue(variable_value);
+							//result = result + getEJinjaOrStringValue(variable_value);
+							resultBuilder.append(getEJinjaOrStringValue(variable_value));
 						}
 						
 					}
 					for(ESimpleValueWithoutString variable_value: EcoreUtil2.getAllContentsOfType(variable_reference.getVariable_declaration_variable_reference(),ESimpleValueWithoutString.class)) {
 						if(variable_value.getSimple_value()!= null) {
-							result = result + variable_value.getSimple_value();
+							//result = result + variable_value.getSimple_value();
+							resultBuilder.append(variable_value.getSimple_value());
 						}
 						else if(variable_value.getSimple_value_boolean()!=null) {
-							result = result + variable_value.getSimple_value_boolean().getBoolean_ansible();
+							//result = result + variable_value.getSimple_value_boolean().getBoolean_ansible();
+							resultBuilder.append( variable_value.getSimple_value_boolean().getBoolean_ansible());
 						}
 						else if(variable_value.getSimple_value_number()!=null) {
-							result = result + variable_value.getSimple_value_number().getNumber();
+							//result = result + variable_value.getSimple_value_number().getNumber();
+							resultBuilder.append(variable_value.getSimple_value_number().getNumber());
 						}
 					}
 				}
 			}
 			
-			return result;
+			//return result;
+			return resultBuilder.toString();
 		}
 		
 		
 		public static String getEJinjaAndStringValue(EObject model) {
-			String result = "";
+			//String result = "";
+			StringBuilder resultBuilder = new StringBuilder();
 			if(model instanceof EJinjaAndStringImpl) {
 				for(EJinjaOrString element:((EJinjaAndStringImpl)model).getJinja_expression_and_string()) {
-					result = result + getEJinjaOrStringValue(element);
+					//result = result + getEJinjaOrStringValue(element);
+					resultBuilder.append(getEJinjaOrStringValue(element));
 				}
 			}
 			if(model instanceof EJinjaAndStringWithoutQuotesImpl) {
 				for(EJinjaOrStringWithoutQuotes element:((EJinjaAndStringWithoutQuotesImpl)model).getJinja_expression_and_stringWithout()) {
-					result = result + getEJinjaOrStringValue(element);
+					//result = result + getEJinjaOrStringValue(element);
+					resultBuilder.append(getEJinjaOrStringValue(element));
 				}
 			}
 			
-			return result;
+			//return result;
+			return resultBuilder.toString();
 		}
 		
 		public static int nearestTaskOrPlayBinarySearch(int[] lines, int start, int end, int bugLine) {
@@ -647,44 +638,6 @@ public class AnsibleHelper {
 		}
 		
 		
-		//https://stackoverflow.com/questions/39017692/xtext-filtering-content-assist-proposals-using-type-system
-		public static Boolean allowDefaultProposal(ICompletionProposalAcceptor acceptor) {
-			Field delegateField;
-			Boolean allowDefaultProposal = true;
-			Collection<ConfigurableCompletionProposal> proposals = null;
-			try {
-				delegateField = acceptor.getClass().getSuperclass().getDeclaredField("delegate");
-				delegateField.setAccessible(true);
-				CompletionProposalComputer delegate = (CompletionProposalComputer) delegateField.get(acceptor);
-				Field proposalField = delegate.getClass().getDeclaredField("proposals");
-				proposalField.setAccessible(true);
-				proposals = (Collection<ConfigurableCompletionProposal>)proposalField.get(delegate);
-				
-			} catch (NoSuchFieldException e1) {
-				// TODO Auto-generated catch block
-				SodaliteLogger.log(e1);
-			} catch (SecurityException e1) {
-				// TODO Auto-generated catch block
-				SodaliteLogger.log(e1);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				SodaliteLogger.log(e);
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				SodaliteLogger.log(e);
-			}
-			for(ConfigurableCompletionProposal proposal:proposals){
-				if(proposal.getAdditionalProposalInfo()!= null) {
-					if(proposal.getAdditionalProposalInfo().equals("Permitted value")){
-						allowDefaultProposal = false;
-						break;
-					}
-				}
-			}
-			
-			return allowDefaultProposal;
-			
-		}
 		
 		//Check if the 'value' has already been put in the proposal's list
 		public static Boolean existProposal(String value,ICompletionProposalAcceptor acceptor) {
@@ -700,16 +653,12 @@ public class AnsibleHelper {
 				proposals = (Collection<ConfigurableCompletionProposal>)proposalField.get(delegate);
 				
 			} catch (NoSuchFieldException e1) {
-				// TODO Auto-generated catch block
 				SodaliteLogger.log(e1);
 			} catch (SecurityException e1) {
-				// TODO Auto-generated catch block
 				SodaliteLogger.log(e1);
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				SodaliteLogger.log(e);
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				SodaliteLogger.log(e);
 			}
 			for(ConfigurableCompletionProposal proposal:proposals){
@@ -724,7 +673,7 @@ public class AnsibleHelper {
 			return proposalExists;
 		}
 		
-		private static Map<String, String> cacheData = new HashMap<String, String>();
+		private static Map<String, String> cacheData = new HashMap<>();
 		static{
 			cacheData.put("currentModule", "");
 			cacheData.put("currentParameter", "");
@@ -742,7 +691,7 @@ public class AnsibleHelper {
 			AnsibleHelper.cacheData = cacheData;
 		}
 		
-		private static Map<String,Document> collectionData = new HashMap<String,Document>();
+		private static Map<String,Document> collectionData = new HashMap<>();
 
 		public static Map<String, Document> getCollectionData() {
 			return collectionData;

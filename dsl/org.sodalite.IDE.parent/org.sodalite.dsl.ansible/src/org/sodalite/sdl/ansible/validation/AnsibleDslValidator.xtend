@@ -129,7 +129,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkModuleRequiredParameters(EModuleCall module) {
 		var fqn = AnsibleHelper.calculateModuleName(module)
-		var parameters = AnsibleHelper.findParameters(module, fqn)
+		var parameters = AnsibleHelper.findParameters(fqn)
 		var requiredParameters = parameters.entrySet.stream.filter(map|map.getValue().containsKey("required")).map( p |
 			p.key
 		).collect(Collectors.toList)

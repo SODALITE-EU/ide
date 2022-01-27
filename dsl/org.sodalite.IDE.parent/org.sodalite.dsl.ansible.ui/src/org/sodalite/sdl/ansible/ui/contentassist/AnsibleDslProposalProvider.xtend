@@ -420,7 +420,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	def completeEParameter_Name_Module(EModuleCall module, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		
 		var fqn = AnsibleHelper.calculateModuleName(module)
-		var parameters = AnsibleHelper.findParameters(module,fqn)
+		var parameters = AnsibleHelper.findParameters(fqn)
 		var Styler requiredParameterStyler
 		for(String parameterKey:parameters.keySet){
 			var parameter = parameters.get(parameterKey)

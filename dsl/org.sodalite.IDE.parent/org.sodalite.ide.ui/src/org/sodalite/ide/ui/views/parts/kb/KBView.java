@@ -513,48 +513,46 @@ public class KBView {
 			@Override
 			public void run() {
 				try {
-					boolean Ansible_confirmed = MessageDialog.openConfirm(shell,
+					boolean ansibleConfirmed = MessageDialog.openConfirm(shell,
 							"Ansible files",
 							"Do you want to retrieve model's Ansible files?");
 					//Retrieve the Ansible files related to the selected RM in the local project directory
-					if(Ansible_confirmed) {
-						String RMName = node.getLabel();
-						RMName = RMName.split("\\.")[0];
-						IContainer AnsibleFolder =  targetFolder.getFolder(new Path(RMName+"-Ansible files"));
+					if(ansibleConfirmed) {
+						String rmName = node.getLabel();
+						rmName = rmName.split("\\.")[0];
+						IContainer ansibleFolder =  targetFolder.getFolder(new Path(rmName+"-Ansible files"));
 						try {
-							RMHelper.createFolder(AnsibleFolder, true, true, null);
+							RMHelper.createFolder(ansibleFolder, true, true, null);
 						} catch (CoreException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							SodaliteLogger.log(e);
 						}
 						for(String nodeKey : node.getModel().getNodeTypes().keySet()) {
-							NodeType AnsibleNode = node.getModel().getNodeTypes().get(nodeKey);
-							int node_index = nodeKey.lastIndexOf("/");
-							IContainer NodeFolder = AnsibleFolder.getFolder(new Path(nodeKey.substring(node_index+1)));
-							for(LinkedHashMap<String, InterfaceDefinition> map:AnsibleNode.getInterfaces()) {
+							NodeType ansibleNode = node.getModel().getNodeTypes().get(nodeKey);
+							int nodeIndex = nodeKey.lastIndexOf("/");
+							IContainer nodeFolder = ansibleFolder.getFolder(new Path(nodeKey.substring(nodeIndex+1)));
+							for(LinkedHashMap<String, InterfaceDefinition> map:ansibleNode.getInterfaces()) {
 								for(InterfaceDefinition inter:map.values()) {
 									String interfaceName = inter.getType().getLabel();
-									int interface_index = interfaceName.lastIndexOf(".");
-									IContainer InterfaceFolder = NodeFolder.getFolder(new Path(interfaceName.substring(interface_index+1)));
+									int interfaceIndex = interfaceName.lastIndexOf(".");
+									IContainer interfaceFolder = nodeFolder.getFolder(new Path(interfaceName.substring(interfaceIndex+1)));
 									try {
-										RMHelper.createFolder(InterfaceFolder, true, true, null);
+										RMHelper.createFolder(interfaceFolder, true, true, null);
 									} catch (CoreException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										SodaliteLogger.log(e);
 									}
 									for(OperationData operation:inter.getOperations_in_interface()) {
 										String operationName = operation.getOperation_name();
 										if(operation.getImplementationData()!=null) {
-											ImplementationData AnsibleData = operation.getImplementationData();
-											if(AnsibleData.getAnsibleModel()!=null) {
-												byte[] decodedBytes = Base64.getDecoder().decode(AnsibleData.getAnsibleModel());
+											ImplementationData ansibleData = operation.getImplementationData();
+											if(ansibleData.getAnsibleModel()!=null) {
+												byte[] decodedBytes = Base64.getDecoder().decode(ansibleData.getAnsibleModel());
 												String decodedAnsibleModel = new String(decodedBytes);
-												RMHelper.saveFileInFolder(operationName+".ans", decodedAnsibleModel, InterfaceFolder);
+												RMHelper.saveFileInFolder(operationName+".ans", decodedAnsibleModel, interfaceFolder);
 											}
-											else if(AnsibleData.getAnsibleModel()==null && AnsibleData.getAnsibleScript()!=null) {
-												byte[] decodedBytes = Base64.getDecoder().decode(AnsibleData.getAnsibleScript());
+											else if(ansibleData.getAnsibleModel()==null && ansibleData.getAnsibleScript()!=null) {
+												byte[] decodedBytes = Base64.getDecoder().decode(ansibleData.getAnsibleScript());
 												String decodedAnsibleScript = new String(decodedBytes);
-												RMHelper.saveFileInFolder(operationName+".yaml", decodedAnsibleScript, InterfaceFolder);
+												RMHelper.saveFileInFolder(operationName+".yaml", decodedAnsibleScript, interfaceFolder);
 											}
 										}
 									}
@@ -580,8 +578,8 @@ public class KBView {
 		IContainer root = RMHelper.getWorkspaceRoot();
 		String msg = "Select a workspace folder where to upload the models of the selected module";
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
-		int return_code = dialog.open();
-		if (return_code == ContainerSelectionDialog.OK) {
+		int returnCode = dialog.open();
+		if (returnCode == ContainerSelectionDialog.OK) {
 			Job job = Job.create("Retrieving model", (ICoreRunnable) monitor -> {
 				try {
 					ModelData modelData = null;

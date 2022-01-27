@@ -198,10 +198,8 @@ public class RMHelper {
 				String module2 = req.getRequirement().getNode().getModule();
 				if (module2 == null)
 					module2 = "";
-				if (req.getName().equals(requirement)) {
-					if (module1.equals(module2)) {
-						node = findNodeType(model, req.getRequirement().getNode().getType());
-					}
+				if (req.getName().equals(requirement) && module1.equals(module2)) {
+					node = findNodeType(model, req.getRequirement().getNode().getType());
 				}
 			}
 		}
@@ -471,9 +469,8 @@ public class RMHelper {
 	public static String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
 		path = path.substring(path.indexOf(File.separator));
-		Path file_path = FileSystems.getDefault().getPath(path);
-		String content = new String(Files.readAllBytes(file_path));
-		return content;
+		Path filePath = FileSystems.getDefault().getPath(path);
+		return new String(Files.readAllBytes(filePath));
 	}
 
 	public static String readFile(Path path) throws IOException {
@@ -557,64 +554,49 @@ public class RMHelper {
 		else if(result==1) {
 			File folderStructure = new File(absolutePath); 
 			if(folderStructure.exists() && folderStructure.isDirectory()) {
-				System.out.println("Folder structure exists");
+				SodaliteLogger.log("Folder structure exists");
 				if(selectedFile.equals(absolutePath+"/"+fileName)) {
 					return localPath+"/"+fileName;
 				}
 				File f = new File(absolutePath+"/"+fileName);
 				if(f.exists()) {
-					System.out.println("Implementation file already exists");
+					SodaliteLogger.log("Implementation file already exists");
 					boolean confirmed = MessageDialog.openConfirm(shell,
 							"Replace implementation file",
 							"Implementation file already exists.Do you want to replace current implementation file?");
 					if(confirmed) {
-						Path src = Paths.get(selectedFile);
-						Path dest = Paths.get(absolutePath+"/"+fileName);
-						CopyOption[] options = new CopyOption[] {
-							StandardCopyOption.COPY_ATTRIBUTES,
-							StandardCopyOption.REPLACE_EXISTING
-						};
-						try {
-							Files.copy(src, dest, options);
-						} catch (IOException e) {
-							SodaliteLogger.log(e);
-						}
+						copyFile(selectedFile,absolutePath+"/"+fileName);
 					}
 				}
 				else {
-					Path src = Paths.get(selectedFile);
-					Path dest = Paths.get(absolutePath+"/"+fileName);
-					CopyOption[] options = new CopyOption[] {
-						StandardCopyOption.COPY_ATTRIBUTES,
-						StandardCopyOption.REPLACE_EXISTING
-					};
-					try {
-						Files.copy(src, dest, options);
-					} catch (IOException e) {
-						SodaliteLogger.log(e);
-					}
+					copyFile(selectedFile,absolutePath+"/"+fileName);
 				}
 				return localPath+"/"+fileName;
 			}
 			else {
-				System.out.println("Folder structure does not exist");
+				SodaliteLogger.log("Folder structure does not exist");
 				folderStructure.mkdirs();
-				Path src = Paths.get(selectedFile);
-				Path dest = Paths.get(absolutePath+"/"+fileName);
-				CopyOption[] options = new CopyOption[] {
-					StandardCopyOption.COPY_ATTRIBUTES,
-					StandardCopyOption.REPLACE_EXISTING
-				};
-				try {
-					Files.copy(src, dest, options);
-				} catch (IOException e) {
-					SodaliteLogger.log(e);
-				}
+				copyFile(selectedFile,absolutePath+"/"+fileName);
 				return localPath+"/"+fileName;
 			}
 		}
 		else {
 			return "";
+		}
+	}
+	
+	
+	public static void copyFile(String selectedFile,String destinationPath) {
+		Path src = Paths.get(selectedFile);
+		Path dest = Paths.get(destinationPath);
+		CopyOption[] options = new CopyOption[] {
+			StandardCopyOption.COPY_ATTRIBUTES,
+			StandardCopyOption.REPLACE_EXISTING
+		};
+		try {
+			Files.copy(src, dest, options);
+		} catch (IOException e) {
+			SodaliteLogger.log(e);
 		}
 	}
 
