@@ -81,8 +81,10 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl;
 public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
   @Check
   public void checkCollectionNames(final ECollectionFQN collection) {
-    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), EVariableDeclarationVariableReference.class).size() > 0) && (collection.getCollectionName() == null))) {
-      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), EVariableDeclarationVariableReference.class).size() > 
+      0) && (collection.getCollectionName() == null))) {
+      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), 
+        EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
       boolean _contains = EcoreUtil2.<EJinjaOrString>getAllContentsOfType(variable_reference, EJinjaOrString.class).get(0).getString().contains(".");
       boolean _not = (!_contains);
       if (_not) {
@@ -100,8 +102,10 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
   
   @Check
   public void checkModuleName(final EModuleCall module) {
-    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), EVariableDeclarationVariableReference.class).size() > 0) && (module.getSecondPart() == null))) {
-      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), EVariableDeclarationVariableReference.class).size() > 0) && 
+      (module.getSecondPart() == null))) {
+      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), 
+        EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
       int _length = EcoreUtil2.<EJinjaOrString>getAllContentsOfType(variable_reference, EJinjaOrString.class).get(0).getString().split("\\.", (-1)).length;
       boolean _equals = (_length == 2);
       if (_equals) {
@@ -111,14 +115,16 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     EStringWithoutQuotesPassed _secondPart = module.getSecondPart();
     boolean _tripleNotEquals = (_secondPart != null);
     if (_tripleNotEquals) {
-      if (((EcoreUtil2.<EJinjaOrStringWithoutQuotes>getAllContentsOfType(module.getSecondPart(), EJinjaOrStringWithoutQuotes.class).size() > 0) && (module.getThirdPart() == null))) {
+      if (((EcoreUtil2.<EJinjaOrStringWithoutQuotes>getAllContentsOfType(module.getSecondPart(), EJinjaOrStringWithoutQuotes.class).size() > 0) && 
+        (module.getThirdPart() == null))) {
         String namespace = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(module.getFirstPart());
         String collectionName = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(module.getSecondPart());
         String fqn = namespace.concat(".").concat(collectionName);
         int _length_1 = fqn.split("\\.", (-1)).length;
         boolean _equals_1 = (_length_1 == 2);
         if (_equals_1) {
-          this.error("Module name is missing. Only namespace and collection name are defined", AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
+          this.error("Module name is missing. Only namespace and collection name are defined", 
+            AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
         }
       }
     }
@@ -144,7 +150,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
         return p.getName();
       }
     };
-    Set<String> insertedParameters = EcoreUtil2.<EParameter>getAllContentsOfType(module, EParameter.class).stream().<String>map(_function_2).collect(Collectors.<String>toSet());
+    Set<String> insertedParameters = EcoreUtil2.<EParameter>getAllContentsOfType(module, EParameter.class).stream().<String>map(_function_2).collect(
+      Collectors.<String>toSet());
     String errorMsg = "";
     for (final String param : requiredParameters) {
       boolean _contains = insertedParameters.contains(param);
@@ -161,7 +168,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       }
     }
     if ((errorMsg != "")) {
-      this.error("The following required parameters are missing: ".concat(errorMsg), AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
+      this.error("The following required parameters are missing: ".concat(errorMsg), 
+        AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
     }
   }
   
@@ -217,7 +225,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       }
     }
     if ((errorMsg != "")) {
-      this.error("The following required subparameters are missing: ".concat(errorMsg), AnsibleDslPackage.Literals.EPARAMETER__NAME);
+      this.error("The following required subparameters are missing: ".concat(errorMsg), 
+        AnsibleDslPackage.Literals.EPARAMETER__NAME);
     }
   }
   
@@ -290,7 +299,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
         }
       }
       if ((errorMsg != "")) {
-        this.error("The following required subparameters are missing: ".concat(errorMsg), AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME);
+        this.error("The following required subparameters are missing: ".concat(errorMsg), 
+          AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME);
       }
     }
   }
@@ -309,7 +319,9 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     List<String> choices = new ArrayList<String>();
     String projection = "modules".concat(".").concat(nameParts[2]).concat(".").concat("parameters").concat(".").concat(parameter.getName());
     Bson match = Aggregates.match(Filters.<String>eq("_id", (nameParts[0]).concat(".").concat(nameParts[1])));
-    Bson choices_project = Aggregates.project(Projections.fields(Projections.excludeId(), Projections.<String>computed("choices", "$".concat(projection).concat(".").concat("choices"))));
+    Bson choices_project = Aggregates.project(
+      Projections.fields(Projections.excludeId(), 
+        Projections.<String>computed("choices", "$".concat(projection).concat(".").concat("choices"))));
     Iterator<Document> choicesIterator = mongo_collection.aggregate(Arrays.<Bson>asList(match, choices_project)).iterator();
     while (choicesIterator.hasNext()) {
       {
@@ -339,12 +351,16 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           }
         }
         if (((valueExists).booleanValue() == false)) {
-          this.error("The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals), AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+          this.error(
+            "The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(
+              " is not allowed.\nPossible values can be the following:").concat(proposals), 
+            AnsibleDslPackage.Literals.EPARAMETER__VALUE);
         }
       }
     } else {
       if (((value instanceof EJinjaAndString) && (!choices.isEmpty()))) {
-        if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
+        if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && 
+          (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
           String proposals_1 = "";
           for (final String choice_1 : choices) {
             {
@@ -356,12 +372,15 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
             }
           }
           if (((valueExists).booleanValue() == false)) {
-            this.error("The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+            this.error(
+              "The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), 
+              AnsibleDslPackage.Literals.EPARAMETER__VALUE);
           }
         }
       } else {
         if (((value instanceof EJinjaAndStringWithoutQuotes) && (!choices.isEmpty()))) {
-          if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
+          if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && 
+            (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
             String proposals_2 = "";
             for (final String choice_2 : choices) {
               {
@@ -373,7 +392,9 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
               }
             }
             if (((valueExists).booleanValue() == false)) {
-              this.error("The value ".concat(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_2), AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+              this.error(
+                "The value ".concat(
+                  ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_2), AnsibleDslPackage.Literals.EPARAMETER__VALUE);
             }
           }
         }
@@ -396,7 +417,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     String _get_1 = nameParts[1];
     String collectionName = (_plus + _get_1);
     Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
-    Object _get_3 = ((Document) _get_2).get(nameParts[2]);
+    Object _get_3 = ((Document) _get_2).get(
+      nameParts[2]);
     Document moduleData = ((Document) _get_3);
     Object _get_4 = moduleData.get("parameters");
     Object _get_5 = ((Document) _get_4).get(parameter.getName());
@@ -412,7 +434,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           this.error("The value of the parameter is not integer", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
         }
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringImpl) || (parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
         String result = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _matches = result.matches("^\\d+");
         boolean _not = (!_matches);
@@ -432,7 +455,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           this.error("The value of the parameter is not boolean", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
         }
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
         String result_1 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _contains = booleanValues.contains(result_1);
         boolean _not_1 = (!_contains);
@@ -447,7 +471,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if ((_value_4 instanceof ESimpleValueWithoutStringImpl)) {
         this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
         String result_2 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _contains_1 = booleanValues.contains(result_2);
         if (_contains_1) {
@@ -475,7 +500,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if ((_value_7 instanceof EDictionaryImpl)) {
         this.error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
         String result_3 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _not_2 = (!(result_3.startsWith("[") && result_3.endsWith("]")));
         if (_not_2) {
@@ -493,7 +519,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if ((_value_9 instanceof EListImpl)) {
         this.error("The value of the parameter is not dictionary", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
         String result_4 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _not_3 = (!(result_4.startsWith("{") && result_4.endsWith("}")));
         if (_not_3) {
@@ -507,7 +534,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if ((_value_10 instanceof ESimpleValueWithoutStringImpl)) {
         this.error("The value of the parameter is not a path", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
       }
-      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
         String result_5 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
         boolean _matches_1 = result_5.matches("^/|(/[a-zA-Z0-9_-]+)+$");
         boolean _not_4 = (!_matches_1);
@@ -537,7 +565,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     String _get_1 = nameParts[1];
     String collectionName = (_plus + _get_1);
     Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
-    Object _get_3 = ((Document) _get_2).get(nameParts[2]);
+    Object _get_3 = ((Document) _get_2).get(
+      nameParts[2]);
     Document moduleData = ((Document) _get_3);
     Object _get_4 = moduleData.get("parameters");
     Object _get_5 = ((Document) _get_4).get(parameter.getName());
@@ -547,7 +576,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       String _plus_1 = ("The parameter " + _name);
       String _plus_2 = (_plus_1 + " is not included in module ");
       String _plus_3 = (_plus_2 + fqn);
-      this.error(_plus_3, AnsibleDslPackage.Literals.EPARAMETER__NAME);
+      this.error(_plus_3, 
+        AnsibleDslPackage.Literals.EPARAMETER__NAME);
     }
   }
   
@@ -587,7 +617,9 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
         projection = projection.concat(".").concat("suboptions").concat(".").concat(parameterPath.get(i));
       }
       Bson match = Aggregates.match(Filters.<String>eq("_id", (nameParts[0]).concat(".").concat(nameParts[1])));
-      Bson choices_project = Aggregates.project(Projections.fields(Projections.excludeId(), Projections.<String>computed("choices", "$".concat(projection.concat(".").concat("choices")))));
+      Bson choices_project = Aggregates.project(
+        Projections.fields(Projections.excludeId(), 
+          Projections.<String>computed("choices", "$".concat(projection.concat(".").concat("choices")))));
       Iterator<Document> choicesIterator = mongo_collection.aggregate(Arrays.<Bson>asList(match, choices_project)).iterator();
       while (choicesIterator.hasNext()) {
         {
@@ -617,12 +649,16 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
             }
           }
           if (((valueExists).booleanValue() == false)) {
-            this.error("The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals), AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error(
+              "The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(
+                " is not allowed.\nPossible values can be the following:").concat(proposals), 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
       } else {
         if (((value instanceof EJinjaAndString) && (!choices.isEmpty()))) {
-          if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
+          if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && 
+            (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
             String proposals_1 = "";
             for (final String choice_1 : choices) {
               {
@@ -634,12 +670,15 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
               }
             }
             if (((valueExists).booleanValue() == false)) {
-              this.error("The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+              this.error(
+                "The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), 
+                AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
             }
           }
         } else {
           if (((value instanceof EJinjaAndStringWithoutQuotes) && (!choices.isEmpty()))) {
-            if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
+            if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && 
+              (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
               String proposals_2 = "";
               for (final String choice_2 : choices) {
                 {
@@ -651,7 +690,11 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
                 }
               }
               if (((valueExists).booleanValue() == false)) {
-                this.error("The value ".concat(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_2), AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+                this.error(
+                  "The value ".concat(
+                    ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(
+                    " is not allowed.\nPossible values can be the following:").concat(proposals_2), 
+                  AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
               }
             }
           }
@@ -679,7 +722,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       String _get_1 = nameParts[1];
       String collectionName = (_plus + _get_1);
       Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
-      Object _get_3 = ((Document) _get_2).get(nameParts[2]);
+      Object _get_3 = ((Document) _get_2).get(
+        nameParts[2]);
       Document moduleData = ((Document) _get_3);
       Object _get_4 = moduleData.get("parameters");
       Object _get_5 = ((Document) _get_4).get(parameter.getName());
@@ -703,11 +747,13 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       for (int i = 1; (i < parameterPath.size()); i++) {
         if ((i == 1)) {
           Object _get_6 = parameterData.get("suboptions");
-          Object _get_7 = ((Document) _get_6).get(parameterPath.get(i));
+          Object _get_7 = ((Document) _get_6).get(
+            parameterPath.get(i));
           subparameterData = ((Document) _get_7);
         } else {
           Object _get_8 = subparameterData.get("suboptions");
-          Object _get_9 = ((Document) _get_8).get(parameterPath.get(i));
+          Object _get_9 = ((Document) _get_8).get(
+            parameterPath.get(i));
           subparameterData = ((Document) _get_9);
         }
       }
@@ -719,15 +765,18 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           EBooleanAnsible _simple_value_boolean = ((ESimpleValueWithoutStringImpl) _value_1).getSimple_value_boolean();
           boolean _tripleNotEquals_1 = (_simple_value_boolean != null);
           if (_tripleNotEquals_1) {
-            this.error("The value of the subparameter is not integer", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not integer", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringImpl) || (subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
           String result = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _matches = result.matches("^\\d+");
           boolean _not = (!_matches);
           if (_not) {
-            this.error("The value of the subparameter is not integer", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not integer", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
       }
@@ -739,15 +788,18 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           EBooleanAnsible _simple_value_boolean_1 = ((ESimpleValueWithoutStringImpl) _value_3).getSimple_value_boolean();
           boolean _tripleEquals = (_simple_value_boolean_1 == null);
           if (_tripleEquals) {
-            this.error("The value of the subparameter is not boolean", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not boolean", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
           String result_1 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _contains = booleanValues.contains(result_1);
           boolean _not_1 = (!_contains);
           if (_not_1) {
-            this.error("The value of the subparameter is not boolean", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not boolean", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
       }
@@ -755,41 +807,51 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if (_equals_1) {
         EValuePassed _value_4 = subparameter.getValue();
         if ((_value_4 instanceof ESimpleValueWithoutStringImpl)) {
-          this.error("The value of the subparameter is not string", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not string", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (parameter.getValue() instanceof EJinjaAndStringImpl))) {
           String result_2 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _contains_1 = booleanValues.contains(result_2);
           if (_contains_1) {
-            this.error("The value of the subparameter is not string", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
           if ((result_2.startsWith("[") && result_2.endsWith("]"))) {
-            this.error("The value of the subparameter is not string", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
           if ((result_2.startsWith("{") && result_2.endsWith("}"))) {
-            this.error("The value of the subparameter is not string", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
         EValuePassed _value_5 = subparameter.getValue();
         if ((_value_5 instanceof EComposedValueImpl)) {
-          this.error("The value of the subparameter is not string", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not string", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
       }
       boolean _contains_2 = subparameterData.get("type").toString().contains("list");
       if (_contains_2) {
         EValuePassed _value_6 = subparameter.getValue();
         if ((_value_6 instanceof ESimpleValueWithoutStringImpl)) {
-          this.error("The value of the subparameter is not list", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not list", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
         EValuePassed _value_7 = subparameter.getValue();
         if ((_value_7 instanceof EDictionaryImpl)) {
-          this.error("The value of the subparameter is not list", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not list", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
           String result_3 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _not_2 = (!(result_3.startsWith("[") && result_3.endsWith("]")));
           if (_not_2) {
-            this.error("The value of the subparameter is not list", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not list", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
       }
@@ -797,17 +859,21 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if (_equals_2) {
         EValuePassed _value_8 = subparameter.getValue();
         if ((_value_8 instanceof ESimpleValueWithoutStringImpl)) {
-          this.error("The value of the subparameter is not dictionary", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not dictionary", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
         EValuePassed _value_9 = subparameter.getValue();
         if ((_value_9 instanceof EListImpl)) {
-          this.error("The value of the subparameter is not dictionary", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not dictionary", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
           String result_4 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _not_3 = (!(result_4.startsWith("{") && result_4.endsWith("}")));
           if (_not_3) {
-            this.error("The value of the subparameter is not dictionary", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not dictionary", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
       }
@@ -815,19 +881,23 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       if (_equals_3) {
         EValuePassed _value_10 = subparameter.getValue();
         if ((_value_10 instanceof ESimpleValueWithoutStringImpl)) {
-          this.error("The value of the subparameter is not a path", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not a path", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
-        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
           String result_5 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
           boolean _matches_1 = result_5.matches("^/|(/[a-zA-Z0-9_-]+)+$");
           boolean _not_4 = (!_matches_1);
           if (_not_4) {
-            this.error("The value of the subparameter is not a path", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            this.error("The value of the subparameter is not a path", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
           }
         }
         EValuePassed _value_11 = subparameter.getValue();
         if ((_value_11 instanceof EComposedValueImpl)) {
-          this.error("The value of the subparameter is not a path", AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          this.error("The value of the subparameter is not a path", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
         }
       }
     }
@@ -852,7 +922,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       String _get_1 = nameParts[1];
       String collectionName = (_plus + _get_1);
       Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
-      Object _get_3 = ((Document) _get_2).get(nameParts[2]);
+      Object _get_3 = ((Document) _get_2).get(
+        nameParts[2]);
       Document moduleData = ((Document) _get_3);
       Object _get_4 = moduleData.get("parameters");
       Object _get_5 = ((Document) _get_4).get(parameter.getName());
@@ -876,11 +947,13 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       for (int i = 1; (i < parameterPath.size()); i++) {
         if ((i == 1)) {
           Object _get_6 = parameterData.get("suboptions");
-          Object _get_7 = ((Document) _get_6).get(parameterPath.get(i));
+          Object _get_7 = ((Document) _get_6).get(
+            parameterPath.get(i));
           subparameterData = ((Document) _get_7);
         } else {
           Object _get_8 = subparameterData.get("suboptions");
-          Object _get_9 = ((Document) _get_8).get(parameterPath.get(i));
+          Object _get_9 = ((Document) _get_8).get(
+            parameterPath.get(i));
           subparameterData = ((Document) _get_9);
         }
       }
@@ -905,7 +978,8 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     if (_notEquals) {
       long count = mongo_collection.countDocuments(Filters.<String>eq("_id", collectionName));
       if ((count == 0)) {
-        this.error("The collection ".concat(collectionName).concat(" is not supported"), AnsibleDslPackage.Literals.ECOLLECTION_FQN__NAMESPACE_OR_FQN);
+        this.error("The collection ".concat(collectionName).concat(" is not supported"), 
+          AnsibleDslPackage.Literals.ECOLLECTION_FQN__NAMESPACE_OR_FQN);
       }
     }
   }
@@ -916,12 +990,14 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
     String roleName = AnsibleHelper.calculateRoleName(role);
     boolean _equals = Objects.equal(roleName, "");
     if (_equals) {
-      this.error("The role does not belong to any of the imported collections or the name is wrong.", AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
+      this.error("The role does not belong to any of the imported collections or the name is wrong.", 
+        AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
     }
     if (((!Objects.equal(roleName, "")) && (roleName.split("\\.", (-1)).length == 2))) {
       long count = mongo_collection.countDocuments(Filters.<String>eq("_id", roleName));
       if ((count == 0)) {
-        this.error("The role ".concat(roleName).concat(" is not supported"), AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
+        this.error("The role ".concat(roleName).concat(" is not supported"), 
+          AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
       }
     }
   }
@@ -929,12 +1005,15 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
   @Check
   public void chechCodeSmells(final Model o) {
     try {
-      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", 
+        " ");
       URI fileURI = o.eResource().getURI();
       int _segmentCount = fileURI.segmentCount();
       int _minus = (_segmentCount - 1);
-      String AnsibleModelName = fileURI.segment(_minus).replaceAll("%20", " ").replace(".ans", "");
-      String fileDirectory = fileURI.trimSegments(1).toString().replaceAll("%20", " ").replace("platform:/resource", "");
+      String AnsibleModelName = fileURI.segment(_minus).replaceAll("%20", " ").replace(".ans", 
+        "");
+      String fileDirectory = fileURI.trimSegments(1).toString().replaceAll("%20", " ").replace("platform:/resource", 
+        "");
       File script = null;
       boolean _isFile = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".yaml")).isFile();
       if (_isFile) {
@@ -1014,9 +1093,11 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
           while (modelScanner.hasNextLine()) {
             {
               String modelLine = modelScanner.nextLine();
-              boolean _contains = modelLine.replace("\"", "").trim().replaceAll("\\s+", "").contains(name.replace("\"", "").trim().replaceAll("\\s+", ""));
+              boolean _contains = modelLine.replace("\"", "").trim().replaceAll("\\s+", "").contains(
+                name.replace("\"", "").trim().replaceAll("\\s+", ""));
               if (_contains) {
-                this.getMessageAcceptor().acceptWarning(((("In the context of \"" + name) + "\" there is the following code smell: ") + bugDescription), o, offsetCounter, 1, null, null);
+                this.getMessageAcceptor().acceptWarning(
+                  ((("In the context of \"" + name) + "\" there is the following code smell: ") + bugDescription), o, offsetCounter, 1, null, null);
                 int _length = modelLine.length();
                 int _plus = (offsetCounter + _length);
                 int _plus_1 = (_plus + 1);
