@@ -26,6 +26,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.Model;
 import org.sodalite.sdl.ansible.validation.AbstractAnsibleDslValidator;
 
 /**
@@ -433,5 +434,18 @@ public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
       + "\nThe method calculateRoleName(ERoleName) is undefined for the type Class<AnsibleHelper>"
       + "\nThe method or field EROLE_NAME__FIRST_PART is undefined for the type Class<Literals>"
       + "\nThe method or field EROLE_NAME__FIRST_PART is undefined for the type Class<Literals>");
+  }
+  
+  @Check
+  public void chechCodeSmells(final Model o) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nFileBody cannot be resolved to a type."
+      + "\nMultipartEntityBuilder cannot be resolved to a type."
+      + "\nFileBody cannot be resolved."
+      + "\nThe method or field MultipartEntityBuilder is undefined"
+      + "\ncreate cannot be resolved"
+      + "\nboundary cannot be resolved"
+      + "\naddPart cannot be resolved"
+      + "\nbuild cannot be resolved");
   }
 }

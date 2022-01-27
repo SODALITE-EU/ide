@@ -992,16 +992,20 @@ public class AnsibleDslGenerator extends AbstractGenerator {
               ELoopControl _loop_control = ((ELoopOverList) _loop_3).getLoop_control();
               boolean _tripleNotEquals_13 = (_loop_control != null);
               if (_tripleNotEquals_13) {
+                _builder.append(space);
+                _builder.append("loop_control:");
+                _builder.newLineIfNotEmpty();
                 {
                   ELoop _loop_4 = taskHandler.getLoop();
                   EValuePassed _label = ((ELoopOverList) _loop_4).getLoop_control().getLabel();
                   boolean _tripleNotEquals_14 = (_label != null);
                   if (_tripleNotEquals_14) {
-                    _builder.append(space);
+                    _builder.append("\t");
+                    _builder.append(space, "\t");
                     _builder.append("label: ");
                     ELoop _loop_5 = taskHandler.getLoop();
                     Object _compileValuePassed = this.compileValuePassed(((ELoopOverList) _loop_5).getLoop_control().getLabel(), space, false);
-                    _builder.append(_compileValuePassed);
+                    _builder.append(_compileValuePassed, "\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -1010,11 +1014,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                   ENumberPassed _pause = ((ELoopOverList) _loop_6).getLoop_control().getPause();
                   boolean _tripleNotEquals_15 = (_pause != null);
                   if (_tripleNotEquals_15) {
-                    _builder.append(space);
+                    _builder.append("\t");
+                    _builder.append(space, "\t");
                     _builder.append("pause: ");
                     ELoop _loop_7 = taskHandler.getLoop();
                     String _compileNumberPassed_2 = this.compileNumberPassed(((ELoopOverList) _loop_7).getLoop_control().getPause(), space);
-                    _builder.append(_compileNumberPassed_2);
+                    _builder.append(_compileNumberPassed_2, "\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -1023,11 +1028,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                   EIndexOrLoopVariable _index_var = ((ELoopOverList) _loop_8).getLoop_control().getIndex_var();
                   boolean _tripleNotEquals_16 = (_index_var != null);
                   if (_tripleNotEquals_16) {
-                    _builder.append(space);
+                    _builder.append("\t");
+                    _builder.append(space, "\t");
                     _builder.append("index_var: ");
                     ELoop _loop_9 = taskHandler.getLoop();
                     String _name = ((ELoopOverList) _loop_9).getLoop_control().getIndex_var().getName();
-                    _builder.append(_name);
+                    _builder.append(_name, "\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -1036,11 +1042,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                   EIndexOrLoopVariable _loop_var = ((ELoopOverList) _loop_10).getLoop_control().getLoop_var();
                   boolean _tripleNotEquals_17 = (_loop_var != null);
                   if (_tripleNotEquals_17) {
-                    _builder.append(space);
+                    _builder.append("\t");
+                    _builder.append(space, "\t");
                     _builder.append("loop_var: ");
                     ELoop _loop_11 = taskHandler.getLoop();
                     String _name_1 = ((ELoopOverList) _loop_11).getLoop_control().getLoop_var().getName();
-                    _builder.append(_name_1);
+                    _builder.append(_name_1, "\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -1049,11 +1056,12 @@ public class AnsibleDslGenerator extends AbstractGenerator {
                   EBooleanPassed _extended = ((ELoopOverList) _loop_12).getLoop_control().getExtended();
                   boolean _tripleNotEquals_18 = (_extended != null);
                   if (_tripleNotEquals_18) {
-                    _builder.append(space);
+                    _builder.append("\t");
+                    _builder.append(space, "\t");
                     _builder.append("extended: ");
                     ELoop _loop_13 = taskHandler.getLoop();
                     String _compileBooleanPassed_3 = this.compileBooleanPassed(((ELoopOverList) _loop_13).getLoop_control().getExtended(), space);
-                    _builder.append(_compileBooleanPassed_3);
+                    _builder.append(_compileBooleanPassed_3, "\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
