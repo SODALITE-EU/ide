@@ -84,6 +84,10 @@ public class AnsibleHelper {
 		return mongoCollection;
 	}
 	
+	public static String getAnsibleDefectPredictor() {
+		return SodaliteBackendProxy.getAnsibleDefectPredictor();
+	}
+	
 	
 	//EObject 'model' can be part of a collection.For example,it can be a module or a role.
 	//The container collection is defined somewhere in .ans file.

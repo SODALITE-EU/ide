@@ -60,6 +60,8 @@ import org.json.JSONObject
 import org.json.JSONArray
 import java.util.HashMap
 import org.apache.http.NoHttpResponseException
+import org.json.JSONException
+import org.sodalite.ide.ui.logger.SodaliteLogger
 
 /**
  * This class contains custom validation rules. 
@@ -851,7 +853,8 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		// Receive bug report from Ansible defect predictor
 		var String boundary = "011000010111000001101001"
 		var CloseableHttpClient httpclient = HttpClients.createDefault();
-		var HttpPost post = new HttpPost("http://localhost:5000/bugs/ansible/file");
+		var String defectPredictor = AnsibleHelper.getAnsibleDefectPredictor();
+		var HttpPost post = new HttpPost(defectPredictor);
 		var FileBody filebody = new FileBody(script);
 		var MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		builder.boundary = boundary
@@ -874,7 +877,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		// Relate bugs from Ansible script bug report to the Ansible model
 		var File ansibleModel;
 		ansibleModel = new File(workspaceDir + fileDirectory + "/" + AnsibleModelName + ".ans");
-		var JSONObject json = new JSONObject(stringbuilder.toString());
+		var JSONObject json;
+		try{
+			json = new JSONObject(stringbuilder.toString());
+		}
+		catch(JSONException e){
+			SodaliteLogger.log("No response from the defect predictor")
+		}
 		var JSONArray bugs = json.get("bugs") as JSONArray
 		for (var int i = 0; i < bugs.length(); i++) {
 			var JSONObject bug = bugs.getJSONObject(i);
