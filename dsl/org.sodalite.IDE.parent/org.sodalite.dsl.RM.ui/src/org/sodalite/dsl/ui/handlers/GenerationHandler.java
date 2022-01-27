@@ -96,11 +96,11 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
         		turtleOutput.setSetDerivedProperty(false);
         		turtleOutput.setKeepLocalHistory(true);
         		
-        		Map<String,OutputConfiguration> outputs = new HashMap<String,OutputConfiguration>(){{
-        			put(IFileSystemAccess.DEFAULT_OUTPUT,defaultOutput);
-        			put(ANSIBLE_OUTPUT,ansibleOutput);
-        			put(TURTLE_OUTPUT,turtleOutput);
-        		}};
+        		Map<String,OutputConfiguration> outputs = new HashMap<String,OutputConfiguration>();
+        		
+        		outputs.put(IFileSystemAccess.DEFAULT_OUTPUT,defaultOutput);
+        		outputs.put(ANSIBLE_OUTPUT,ansibleOutput);
+        		outputs.put(TURTLE_OUTPUT,turtleOutput);
                 
                 final EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
                 

@@ -113,7 +113,7 @@ public class AnsibleHelper {
 		MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
 		List<String> importedCollections = collectionsInScope(model);
 		List<String> potentialCollections = new ArrayList<>();
-		if(moduleName == "") {
+		if(moduleName.equals("") ) {
 			potentialCollections.add("");
 			return potentialCollections;
 		}
@@ -153,7 +153,7 @@ public class AnsibleHelper {
 	
 	//Find module's fully qualified name from MongoDB
 	public static String findRoleFQN(EObject model,String roleName){
-		if(roleName == "") {
+		if(roleName.equals("")) {
 			return "";
 		}
 		MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
@@ -346,11 +346,11 @@ public class AnsibleHelper {
 				thirdPart = getEJinjaOrStringWithoutQuotesValue(module.getThirdPart());
 			}
 			
-			if( fqn == "" && secondPart != ""){
-				fqn = (thirdPart != "") ? firstPart.concat(".").concat(secondPart).concat(".").concat(thirdPart) : firstPart.concat(".").concat(secondPart);
+			if( fqn.equals("") && !secondPart.equals("")){
+				fqn = (!thirdPart.equals("")) ? firstPart.concat(".").concat(secondPart).concat(".").concat(thirdPart) : firstPart.concat(".").concat(secondPart);
 			}
 			//if it is just the module name, find the collection in which it belongs and calculate the fully qualified name
-			else if(fqn == "" && secondPart == "" && firstPart.split("\\.",-1).length == 1){
+			else if(fqn.equals("") && secondPart.equals("") && firstPart.split("\\.",-1).length == 1){
 				List<String> potentialCollections = findModuleFQN(module,firstPart);
 				if(potentialCollections.size()>1) {
 					//Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -415,7 +415,7 @@ public class AnsibleHelper {
 				}	
 			}
 			//Retrieve full collection name of a collection,if it is not already defined
-			if( result == "" && collectionName != ""){
+			if( result.equals("") && !collectionName.equals("")){
 				result = namespace.concat(".").concat(collectionName);
 			}
 			return result;
@@ -444,14 +444,14 @@ public class AnsibleHelper {
 			if(role.getThirdPart() != null) {
 				thirdPart = getEJinjaOrStringWithoutQuotesValue(role.getThirdPart());
 			}
-			if( fqn == "" && secondPart != ""){
-				fqn = (thirdPart != "") ? firstPart.concat(".").concat(secondPart).concat(".").concat(thirdPart) : firstPart.concat(".").concat(secondPart);
+			if( fqn.equals("") && !secondPart.equals("")){
+				fqn = (!thirdPart.equals("")) ? firstPart.concat(".").concat(secondPart).concat(".").concat(thirdPart) : firstPart.concat(".").concat(secondPart);
 			}
 			//if it is just the role name, find the collection in which it belongs and calculate the fully qualified name
-			else if(fqn == "" && secondPart == "" && firstPart.split("\\.",-1).length == 1){
+			else if(fqn.equals("") && secondPart.equals("") && firstPart.split("\\.",-1).length == 1){
 				fqn = findRoleFQN(role,firstPart); 
 			}
-			else if(fqn == "" && secondPart == "" && firstPart.split("\\.",-1).length == 2){
+			else if(fqn.equals("") && secondPart.equals("") && firstPart.split("\\.",-1).length == 2){
 				fqn = firstPart; 
 			}
 			
@@ -498,7 +498,7 @@ public class AnsibleHelper {
 					}
 					
 					//Retrieve fully qualified name of a collection,if it is not already defined
-					if( fqn == ""){
+					if( fqn.equals("")){
 						fqn = namespace.concat(".").concat(collectionName);
 					}
 					fqns.add(fqn);
@@ -568,7 +568,7 @@ public class AnsibleHelper {
 				for(EVariableDeclarationVariableReference variable_reference : EcoreUtil2.getAllContentsOfType(element,EVariableDeclarationVariableReference.class)) {		
 					for(EJinjaOrString variable_value: EcoreUtil2.getAllContentsOfType(variable_reference.getVariable_declaration_variable_reference(),EJinjaOrString.class)) {
 						if(EcoreUtil2.getContainerOfType(variable_value, EList.class)!= null) {
-							if(result == "") {
+							if(result.equals("")) {
 								result = "[" + getEJinjaOrStringValue(variable_value) + "]";
 							}
 							else {
