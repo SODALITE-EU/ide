@@ -60,7 +60,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 public class AnsibleHelper {
 	
-	public static String databaseName = "AnsibleDB";
+	public static final String databaseName = "AnsibleDB";
 	
 	public static MongoCollection<Document> getAnsibleModules(){
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
@@ -552,64 +552,52 @@ public class AnsibleHelper {
 				for(EVariableDeclarationVariableReference variable_reference : EcoreUtil2.getAllContentsOfType(element,EVariableDeclarationVariableReference.class)) {		
 					for(EJinjaOrString variable_value: EcoreUtil2.getAllContentsOfType(variable_reference.getVariable_declaration_variable_reference(),EJinjaOrString.class)) {
 						if(EcoreUtil2.getContainerOfType(variable_value, EList.class)!= null) {
-							if(resultBuilder.equals("")) {
-								//result = "[" + getEJinjaOrStringValue(variable_value) + "]";
+							if(resultBuilder.toString().equals("")) {
 								resultBuilder.append("[").append(getEJinjaOrStringValue(variable_value)).append("]");
 							}
 							else {
-								//result = result.substring(0, result.length()-1) + "," + getEJinjaOrStringValue(variable_value) + "]" ;
 								resultBuilder.append(resultBuilder.substring(0, resultBuilder.length()-1)).append(",").append(getEJinjaOrStringValue(variable_value)).append("]");
 							}
 						}
 						else if(EcoreUtil2.getContainerOfType(variable_value, EDictionary.class)!= null) {
-							//result = "{" + EcoreUtil2.getContainerOfType(variable_value, EDictionaryPair.class).getName()+":" + getEJinjaOrStringValue(variable_value) + "}";
 							resultBuilder.append("{").append(EcoreUtil2.getContainerOfType(variable_value, EDictionaryPair.class).getName()).append(":").append(getEJinjaOrStringValue(variable_value)).append("}");
 						}
 						else {
-							//result = result + getEJinjaOrStringValue(variable_value);
 							resultBuilder.append(getEJinjaOrStringValue(variable_value));
 						}
 						
 					}
 					for(ESimpleValueWithoutString variable_value: EcoreUtil2.getAllContentsOfType(variable_reference.getVariable_declaration_variable_reference(),ESimpleValueWithoutString.class)) {
 						if(variable_value.getSimple_value()!= null) {
-							//result = result + variable_value.getSimple_value();
 							resultBuilder.append(variable_value.getSimple_value());
 						}
 						else if(variable_value.getSimple_value_boolean()!=null) {
-							//result = result + variable_value.getSimple_value_boolean().getBoolean_ansible();
 							resultBuilder.append( variable_value.getSimple_value_boolean().getBoolean_ansible());
 						}
 						else if(variable_value.getSimple_value_number()!=null) {
-							//result = result + variable_value.getSimple_value_number().getNumber();
 							resultBuilder.append(variable_value.getSimple_value_number().getNumber());
 						}
 					}
 				}
 			}
 			
-			//return result;
 			return resultBuilder.toString();
 		}
 		
 		
 		public static String getEJinjaAndStringValue(EObject model) {
-			//String result = "";
 			StringBuilder resultBuilder = new StringBuilder();
 			if(model instanceof EJinjaAndStringImpl) {
 				for(EJinjaOrString element:((EJinjaAndStringImpl)model).getJinja_expression_and_string()) {
-					//result = result + getEJinjaOrStringValue(element);
 					resultBuilder.append(getEJinjaOrStringValue(element));
 				}
 			}
 			if(model instanceof EJinjaAndStringWithoutQuotesImpl) {
 				for(EJinjaOrStringWithoutQuotes element:((EJinjaAndStringWithoutQuotesImpl)model).getJinja_expression_and_stringWithout()) {
-					//result = result + getEJinjaOrStringValue(element);
 					resultBuilder.append(getEJinjaOrStringValue(element));
 				}
 			}
 			
-			//return result;
 			return resultBuilder.toString();
 		}
 		
