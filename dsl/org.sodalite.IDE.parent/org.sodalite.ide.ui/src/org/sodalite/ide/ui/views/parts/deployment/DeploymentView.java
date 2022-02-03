@@ -60,6 +60,8 @@ public class DeploymentView {
 			} catch (Exception e) {
 				SodaliteLogger.log(e);
 			}
+		if (!grafana_uri.endsWith("/"))
+			grafana_uri += "/";
 	}
 
 	public DeploymentView() {

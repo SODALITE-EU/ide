@@ -9,7 +9,7 @@ inputs:
 		type: string
 	openstack-network-name:  
 		type: string 
-	security-groups:  
+	security-groups:   
  		type: string    
 	flavor-name:  
 		type: string
@@ -45,21 +45,29 @@ inputs:
 	username:
 		type: string
 		default: ""
-	flickr-db-user: 
-		type: string
-	flickr-db-pass: 
-		type: string
 	flicker-env:
 		type: map
+	webcam-env:
+		type: map
+	weather-env:
+		type: map
+	median-env:
+		type: map
+	S3_ACCESS_KEY:
+		type: string
+	S3_SECRET_KEY:
+		type: string
+	
+	
 	    	
 
 node_templates:
-	snow-security-rules:  
+	snow-security-rules:
 		type: openstack/sodalite.nodes.OpenStack.SecurityRules 
 		properties:
 			ports:  
 				component_ports:
-					port_range_max: 8084 
+					port_range_max: 8100
 					remote_ip_prefix: "0.0.0.0/0" 
 					port_range_min: 8080 
 					protocol: "tcp" 
@@ -235,6 +243,7 @@ node_templates:
 				entity: SELF
 				property: snow/snow-docker-network.name
 				req_cap: snow/snow-webcam-crawler.network
+			ports:  ['8092:8000'] 
 			volumes: [
 			"/tmp/conf/config.json:/SnowWatch-SODALITE/WebCamCrawler/config.json", 
 			"snow_volume_shots:/SnowWatch-SODALITE/data/shots", 
@@ -244,6 +253,7 @@ node_templates:
 			alias: "snow-webcam-crawler"
 			command: "34,40,50,62,608,666,822,852,943,1307,6666"
 			registry_url: get_input: docker-registry-url
+			env: get_input: webcam-env
 		requirements:  
 			host:  
 				node: snow/snow-docker-host
@@ -255,6 +265,8 @@ node_templates:
 				node: snow/snow-configuration-demo
 			dependency: 
 				node: snow/snow-docker-volume-daily-shots
+			dependency: 
+				node: snow/snow-minio 
 			network: 
 				node: snow/snow-docker-network 
 			registry: 
@@ -280,6 +292,9 @@ node_templates:
 			"{{ ansible_date_time.date }}", 
 			"34 40 50 62 608 666 822 852 943 1307 6666"]  
 			registry_url: get_input: docker-registry-url
+			ports:  ['8093:5010'] 
+			env: get_input: weather-env
+			
 		requirements:  
 			host:  
 				node: snow/snow-docker-host
@@ -293,6 +308,8 @@ node_templates:
 				node: snow/snow-docker-volume-daily-shots
 			dependency: 
 				node: snow/snow-configuration-demo
+			dependency: 
+				node: snow/snow-minio 
 			network: 
 				node: snow/snow-docker-network
 			registry: 
@@ -316,11 +333,17 @@ node_templates:
 			"{{ ansible_date_time.date }}", 
 			"34 40 50 62 608 666 822 852 943 1307 6666"]
 			registry_url: get_input: docker-registry-url
+			ports:  ['8094:5011'] 
+			env: get_input: median-env
+			
+			
 		requirements:  
 			host:  
 				node: snow/snow-docker-host
 			dependency: 
 				node: snow/snow-mysql
+			dependency: 
+				node: snow/snow-minio 
 			dependency: 
 				node: snow/snow-docker-volume-shots
 			dependency: 
@@ -333,7 +356,16 @@ node_templates:
 				node: snow/snow-docker-registry
 				
 		
-		
+	snow-minio-volume:
+		type: docker/sodalite.nodes.DockerVolume
+		properties:
+		    name: "minio-volume"
+		requirements:
+		    host:
+		        node: snow/snow-vm
+		    dependency:
+		        node: snow/snow-docker-host
+            
 	//3.5.1
 	snow-docker-volume-flicker:
 		type: docker/sodalite.nodes.DockerVolume
@@ -368,12 +400,14 @@ node_templates:
 				req_cap: snow/snow-flicker-crawler.network
 			image_name:  "snow-flicker-crawler:latest"
 			alias: "snow-flicker-crawler"
-			volumes: ["/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",
-			"snow-volume-flicker:/SnowWatch-SODALITE/data",
+			volumes: ["snow-volume-flicker:/SnowWatch-SODALITE/data",
 			"snow-volume-download:/SnowWatch-SODALITE/data/img_downloads"]
 			command: "-d -w -m"
 			registry_url: get_input: docker-registry-url
-			env: get_input: flicker-env				
+			ports:  ['8090:8080'] 
+			exposed_ports:  [8080]
+			env: get_input: flicker-env
+
 		requirements:  
 			host:  
 				node: snow/snow-docker-host
@@ -385,11 +419,41 @@ node_templates:
 				node: snow/snow-docker-volume-download 
 			dependency: 
 				node: snow/snow-configuration-demo 
+			dependency: 
+				node: snow/snow-minio 
 			network: 
 				node: snow/snow-docker-network
 			registry: 
 				node: snow/snow-docker-registry	
 				
+	snow-minio:
+		type: docker/sodalite.nodes.DockerizedComponent
+		properties:
+		    docker_network_name: get_property:
+		        entity: SELF
+		        property: snow/snow-docker-network.name
+		        req_cap: snow/snow-minio.network
+		    volumes: [ "minio-volume:/data" ]
+		    image_name: "minio/minio"
+		    alias: "snow-minio"
+		    ports: ['9000:9000','9001:9001']
+		    restart_policy: "always"
+		    command: [ "server /data --console-address ':9001'"]
+		    registry_url: get_input: docker-registry-url
+		    env:
+		        MINIO_ROOT_USER: get_input: S3_ACCESS_KEY
+		        MINIO_ROOT_PASSWORD: get_input: S3_SECRET_KEY
+		requirements:
+		    host:
+		        node: snow/snow-docker-host
+		    dependency:
+		        node: snow/snow-mysql
+		    dependency:
+		        node: snow/snow-minio-volume
+		    network:
+		        node: snow/snow-docker-network
+		    registry:
+		        node: snow/snow-docker-registry
 				
 	//4.5
 	snow-docker-volume-pickles:
@@ -411,6 +475,7 @@ node_templates:
 				req_cap: snow/snow-mountain-relevance-classifier.network
 			image_name:  "snow-mountain-relevance-classifier:latest"
 			alias: "snow-mountain-relevance-classifier"
+			ports: ['8091:5010']
 			volumes: ["/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",
 			"snow-volume-download:/SnowWatch-SODALITE/data/img_downloads",
 			"snow-volume-pickles:/SnowWatch-SODALITE/data/pickles"]
@@ -472,8 +537,8 @@ node_templates:
 			image_name:  "snow-mask-computation:latest"
 			alias: "snow-mask-computation"
 			volumes:  ["/tmp/docker:/tmp"]
-			ports:  ['8082:8080'] 
-			exposed_ports:  [8080]
+			ports:  ['8082:5000'] 
+			exposed_ports:  [5000]
 			restart_policy: "always"
 			registry_url: get_input: docker-registry-url
 		requirements:  
@@ -489,8 +554,8 @@ node_templates:
 			image_name:  "snow-index-computation:latest"
 			alias: "snow-index-computation"
 			volumes:  ["/tmp/docker:/tmp"]
-			ports:  ['8083:8080'] 
-			exposed_ports:  [8080]
+			ports:  ['8083:5005'] 
+			exposed_ports:  [5005]
 			restart_policy: "always"
 			registry_url: get_input: docker-registry-url
 		requirements:  
