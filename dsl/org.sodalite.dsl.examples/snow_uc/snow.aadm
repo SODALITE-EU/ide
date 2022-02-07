@@ -57,8 +57,6 @@ inputs:
 		type: string
 	S3_SECRET_KEY:
 		type: string
-	
-	
 	    	
 
 node_templates:
@@ -476,8 +474,7 @@ node_templates:
 			image_name:  "snow-mountain-relevance-classifier:latest"
 			alias: "snow-mountain-relevance-classifier"
 			ports: ['8091:5010']
-			volumes: ["/tmp/conf/config.json:/SnowWatch-SODALITE/config.json",
-			"snow-volume-download:/SnowWatch-SODALITE/data/img_downloads",
+			volumes: ["snow-volume-download:/SnowWatch-SODALITE/data/img_downloads",
 			"snow-volume-pickles:/SnowWatch-SODALITE/data/pickles"]
 			command: "{{ ansible_date_time.date }}"
 			registry_url: get_input: docker-registry-url

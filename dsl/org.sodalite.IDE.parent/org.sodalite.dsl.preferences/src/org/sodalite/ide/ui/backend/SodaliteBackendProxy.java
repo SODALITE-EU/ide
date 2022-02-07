@@ -2,8 +2,12 @@ package org.sodalite.ide.ui.backend;
 
 import java.text.MessageFormat;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -114,14 +118,19 @@ public class SodaliteBackendProxy {
 			if (keycloak_client_secret.isEmpty())
 				raiseConfigurationIssue("Keycloak client secret not set");
 
-			String token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id,
-					keycloak_client_secret);
-
-			if (token == null)
-				raiseConfigurationIssue(
-						"Security token could not be obtained. Check your IAM configuration in preferences");
-			else
-				SodaliteLogger.log("Security token: " + token);
+			String token = null;
+			try {
+				token = kbclient.setUserAccount(keycloak_user, keycloak_password, keycloak_client_id,
+						keycloak_client_secret);
+			} catch (SodaliteException ex) {
+				String message = "Security token could not be obtained. Check your IAM configuration in preferences";
+				if (PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null) {
+					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					MessageDialog.openError(shell, "IAM Configuration", message);
+				}
+				raiseConfigurationIssue(message);
+			}
+			SodaliteLogger.log("Security token: " + token);
 		}
 
 		SodaliteLogger.log(MessageFormat.format("Sodalite backend configured with "
@@ -135,28 +144,29 @@ public class SodaliteBackendProxy {
 	public static void raiseConfigurationIssue(String message) throws Exception {
 		throw new Exception(message + " in Sodalite preferences pages");
 	}
-	
+
 	private static MongoClient mongoClient;
+
 	private static void createMongoClient() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String mongoDB_URI = store.getString(PreferenceConstants.MONGODB_URI).trim();
 		String mongoDB_host = mongoDB_URI.split(":")[0];
 		String mongoDB_port = mongoDB_URI.split(":")[1];
-		mongoClient = new MongoClient( mongoDB_host , Integer.parseInt(mongoDB_port) );
+		mongoClient = new MongoClient(mongoDB_host, Integer.parseInt(mongoDB_port));
 	}
-	
+
 	public static MongoClient getMongoClient() {
-		if(mongoClient == null) {
+		if (mongoClient == null) {
 			createMongoClient();
 		}
-		//MongoClient mongoClient = new MongoClient( "localhost" , 27017 ); 
-		return mongoClient;	
+		// MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+		return mongoClient;
 	}
-	
+
 	public static String getAnsibleDefectPredictor() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String ansible_defect_predictor_uri = store.getString(PreferenceConstants.Ansible_Defect_Predictor_URI).trim();
 		return ansible_defect_predictor_uri;
 	}
-	
+
 }
