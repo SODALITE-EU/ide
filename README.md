@@ -18,13 +18,9 @@ Note: SODALITE IDE has been tested in the version 2021-09 R (4.21.0) of the Ecli
 
 ## IDE Installation from the Sodalite IDE update site
 ### Add Software sites for Sodalite IDE and dependencies
-1. In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the following update site location: https://sodalite-eu.github.io/ide/. 
-Then, click on *Add* button.  
-
+1. In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button at the right of the *Work with* row. In the dialog, give the name *Sirius-XText integration* and the following update site location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/. Then, click on *Add* button.  
+2. Back to the *Install* wizard, click again on the *Add* button at the right of the *Work with* row. In the dialog, give the name *"SODALITE IDE* and the following update site location: https://sodalite-eu.github.io/ide/.
 ![Dialog to add the SODALITE repository](images/Sodalite_Repository_Wizard.png)
-
-2. Following the same procedure as before add the following external software repositories to your list of software sites:
-Name: Sirius-XText integration, Location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/
 3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
 ![Dialog to select the SODALITE features to install](images/Sodalite_Installation_Wizard.png)
