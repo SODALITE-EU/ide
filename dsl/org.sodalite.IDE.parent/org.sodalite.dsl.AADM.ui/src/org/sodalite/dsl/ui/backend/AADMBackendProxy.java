@@ -303,7 +303,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-					Path aadmJsonPath = Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json");
+					Path aadmJsonPath = Paths.get(System.getProperty("user.home") + "/" + aadmName + ".json");
 					Files.write(aadmJsonPath, aadmJson.getBytes());
 					SodaliteLogger.log("AADM Json reported to IaCBuilder: " + aadmJson);
 					SodaliteLogger.log("AADM Json reported to IaCBuilder stored in " + aadmJsonPath);
