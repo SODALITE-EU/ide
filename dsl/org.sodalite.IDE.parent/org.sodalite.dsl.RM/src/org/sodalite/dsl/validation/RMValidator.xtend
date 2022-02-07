@@ -41,7 +41,7 @@ class RMValidator extends AbstractRMValidator {
 			if(relativePath !== null){
 				var Path path = Paths.get(relativePath+implementationPath.substring(1))
 				if(!Files.exists(path)){
-					error("This file does not exist taking into the path in 'relative_path'.",RMPackage.Literals.EPRIMARY__FILE)
+					error("This file does not exist taking into account the path in 'relative_path'.",RMPackage.Literals.EPRIMARY__FILE)
 				}
 			}
 			else{
@@ -54,6 +54,12 @@ class RMValidator extends AbstractRMValidator {
 				if(!Files.exists(path)){
 					error("The implementation file does not exist in the local path",RMPackage.Literals.EPRIMARY__FILE)
 				}
+			}
+		}
+		else{
+			var Path path = Paths.get(implementationPath)
+			if(!Files.exists(path)){
+				error("The implementation file does not exist in the specified path",RMPackage.Literals.EPRIMARY__FILE)
 			}
 		}
 	}

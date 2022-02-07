@@ -34,16 +34,8 @@ public class CustomOutputConfigurationProvider extends OutputConfigurationProvid
 		ansibleOutput.setSetDerivedProperty(false);
 		ansibleOutput.setKeepLocalHistory(true);
 		
-		OutputConfiguration turtleOutput = new OutputConfiguration(TURTLE_OUTPUT);
-		turtleOutput.setDescription("Turtle Output Folder");
-		turtleOutput.setOutputDirectory("./");
-		turtleOutput.setOverrideExistingResources(true);
-		turtleOutput.setCreateOutputDirectory(true);
-		turtleOutput.setCleanUpDerivedResources(false);
-		turtleOutput.setSetDerivedProperty(false);
-		turtleOutput.setKeepLocalHistory(true);
 		
-		return newHashSet(defaultOutput,ansibleOutput,turtleOutput);
+		return newHashSet(defaultOutput,ansibleOutput);
 	}
 
 }

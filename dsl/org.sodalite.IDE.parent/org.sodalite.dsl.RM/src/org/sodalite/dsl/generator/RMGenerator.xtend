@@ -82,6 +82,7 @@ import org.eclipse.swt.widgets.Shell
 import org.eclipse.ui.PlatformUI
 import java.nio.file.NoSuchFileException
 
+
 /**
  * Generates code from your model files on save.
  * 
@@ -205,11 +206,8 @@ class RMGenerator extends AbstractGenerator {
 				}
 			}
 		}
-		
-		var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
-		var projectName = intermediatePath.split("/").get(1).replaceAll("%20", " ")
-		intermediatePath = intermediatePath.replace("/"+projectName,"")
-		fsa.generateFile(intermediatePath+".ttl",CustomOutputConfigurationProvider::TURTLE_OUTPUT,  compileRM (resource))
+		val filename = getFilename(resource.URI)
+		fsa.generateFile(filename.replaceAll("%20", " "),  compileRM (resource))
 	}
 	
 	def compileAnsibleModel(String nodeType,String interfaceName,String operationName)'''
@@ -641,7 +639,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readImplementationFileAsString(o.operation.implementation.primary.file,o.operation.implementation.primary.eResource)»' ;
+	  exchange:value '«readImplementationFileAsString(o.operation.implementation.primary.file,o.operation.implementation.primary.eResource,o.operation.implementation.primary.relative_path)»' ;
 	.
 	
 	«IF o.operation.implementation.primary.relative_path !== null»
@@ -653,7 +651,7 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
-	«var String content = readImplementationFileAsString(o.operation.implementation.primary.file.replace(".yaml",".ans"),o.operation.implementation.primary.eResource) »
+	«var String content = readImplementationFileAsString(o.operation.implementation.primary.file.replace(".yaml",".ans"),o.operation.implementation.primary.eResource,o.operation.implementation.primary.relative_path) »
 	«IF content!== null»
 	«putParameterNumber(o, "primary.Ansible_model.content", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -1810,15 +1808,26 @@ class RMGenerator extends AbstractGenerator {
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.')) +".rm"
 	}
 	
-	def readImplementationFileAsString(String path,Resource resource){
+	def readImplementationFileAsString(String path,Resource resource,String relativePath){
 		
 		if(path.startsWith(".")){
-			var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
-			var String RMName = resource.URI.segment(resource.URI.segmentCount-1).replaceAll("%20", " ")
-			intermediatePath = intermediatePath.replace(RMName,"")
-			//var String projectName = resource.URI.segment(0)
-			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
-			var String absolutePath = workspaceDir + intermediatePath + path.replace("./","")
+			var String absolutePath
+			if(relativePath === null){
+				var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+				var String RMName = resource.URI.segment(resource.URI.segmentCount-1).replaceAll("%20", " ")
+				intermediatePath = intermediatePath.replace(RMName,"")
+				//var String projectName = resource.URI.segment(0)
+				var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+				absolutePath = workspaceDir + intermediatePath + path.replace("./","")
+			}
+			else{
+				if(relativePath.endsWith("/")){
+					absolutePath = relativePath.substring(0,relativePath.length-1) + path.substring(1)
+				}
+				else{
+					absolutePath = relativePath + path.substring(1)
+				}
+			}
 			try{
 				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
 				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
