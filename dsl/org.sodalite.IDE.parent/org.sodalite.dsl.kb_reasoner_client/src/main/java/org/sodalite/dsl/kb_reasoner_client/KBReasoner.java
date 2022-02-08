@@ -184,6 +184,7 @@ public interface KBReasoner {
 
 	void deleteHPCInfrastructure(String hpcName) throws SodaliteException;
 
-	String getNIFIAccessToken() throws SodaliteException;
+	String getJWT() throws SodaliteException;
 
+	String getNIFIAccessToken() throws SodaliteException;
 }
