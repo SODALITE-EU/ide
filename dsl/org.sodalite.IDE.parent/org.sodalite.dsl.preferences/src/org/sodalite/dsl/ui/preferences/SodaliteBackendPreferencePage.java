@@ -69,6 +69,7 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 		super.performOk();
 		try {
 			SodaliteBackendProxy.resetKBReasoner();
+			SodaliteBackendProxy.createMongoClient();
 		} catch (Exception e) {
 			SodaliteLogger.log(e);
 		}

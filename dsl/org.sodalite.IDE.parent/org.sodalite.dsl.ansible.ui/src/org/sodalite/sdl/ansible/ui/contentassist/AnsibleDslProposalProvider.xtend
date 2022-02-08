@@ -74,6 +74,8 @@ import org.eclipse.xtext.Keyword
 import java.util.Map
 import com.mongodb.client.FindIterable
 
+import org.sodalite.dsl.ansible.exceptions.MongoDBNotFound
+
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
@@ -419,8 +421,16 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	//Suggest parameters
 	def completeEParameter_Name_Module(EModuleCall module, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		
-		var fqn = AnsibleHelper.calculateModuleName(module)
-		var parameters = AnsibleHelper.findParameters(fqn)
+		var String fqn
+		var Map<String, Map<String, Object>> parameters
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+			parameters = AnsibleHelper.findParameters(fqn)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var parameters = AnsibleHelper.findParameters(fqn)
 		var Styler requiredParameterStyler
 		for(String parameterKey:parameters.keySet){
 			var parameter = parameters.get(parameterKey)
@@ -457,10 +467,17 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	//Suggest allowed values for a parameter
 	override void completeEParameter_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		var List<String> booleanValues =  Arrays.asList("yes","no","True","False","true","false")
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections()
+		var MongoCollection<Document> mongo_collection
+		var String fqn
 		var EParameter parameter = EcoreUtil2.getContainerOfType(model,EParameter)
 		var module = EcoreUtil2.getContainerOfType(parameter,EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+			fqn = AnsibleHelper.calculateModuleName(module)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var String[] nameParts = fqn.split("\\.");
 		var String type = ""
 		var List<String> choices = new ArrayList();
@@ -596,7 +613,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	def completeSubparameter_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		var parameter = EcoreUtil2.getContainerOfType(model,EParameter)
 		var module = EcoreUtil2.getContainerOfType(parameter,EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		var String fqn
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var containers = EcoreUtil2.getAllContainers(model).iterator()
 		var List<String> parameterPath = new ArrayList<String>()
 		if(model instanceof EJinjaAndString){
@@ -615,7 +638,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			}
 		}
 		parameterPath.add(0,parameter.name)
-		var subparameters = AnsibleHelper.findSubparameters(fqn,parameterPath)
+		var Map<String, Map<String, Object>> subparameters
+			try{
+				subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
 		var Styler requiredParameterStyler
 		for(String subparameterKey:subparameters.keySet){
 			var subparameter = subparameters.get(subparameterKey)
@@ -674,7 +703,14 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GREEN)
 						}	
 				}
-		var Document details = AnsibleHelper.findSubparameterDetails(model)
+		var Document details
+		try{
+			details = AnsibleHelper.findSubparameterDetails(model)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var Document details = AnsibleHelper.findSubparameterDetails(model)
 		if(details !== null){
 			var String choicesAvailability = ""
 			if(details.get("choices") !==null){
@@ -946,8 +982,14 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	
 	override void completeECollectionFQN_NamespaceOrFqn(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
 		
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var FindIterable<Document> iterDoc = mongo_collection.find().projection(Projections.include("namespace"))
 		// Getting the iterator
 		var Iterator<Document> it = iterDoc.iterator();
@@ -963,7 +1005,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	
 	override void completeECollectionFQN_CollectionName(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		val ansible_collection = EcoreUtil2.getContainerOfType(model,ECollectionFQNImpl)
 		var String namespace = ""
 		if (ansible_collection !== null){
@@ -993,7 +1041,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void completeEModuleCall_FirstPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var List<String> collections = new ArrayList<String>()
 		//Check if Task is contained inside a Block and find the modules that are contained in the defined Ansible collections
 		if(EcoreUtil2.getContainerOfType(model,EBlock) !== null){
@@ -1001,7 +1055,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			if(block.collections !== null){
 				if(EcoreUtil2.getAllContentsOfType(block.collections,ECollectionFQN).size >0){
 					val collectionsList = EcoreUtil2.getAllContentsOfType(block.collections,ECollectionFQN)
-					collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
 				}	
 			}
 			
@@ -1012,7 +1072,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			if(play.collections !== null){
 				if(EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN).size >0){
 					val collectionsList = EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN)
-					collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
 				}
 			}	
 		}
@@ -1066,7 +1132,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
     
 	
 	override void completeEModuleCall_SecondPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var FindIterable<Document> iterDoc
 		var String regex = "\\w+\\.\\w+" 
 		val module = EcoreUtil2.getContainerOfType(model,EModuleCall)
@@ -1111,7 +1183,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void completeEModuleCall_ThirdPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var String namespace =""
 		var String collectionName = ""
 		val ansible_module = EcoreUtil2.getContainerOfType(model,EModuleCall)
@@ -1392,14 +1470,26 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	
 	override void completeERoleName_FirstPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> collectionRoles_mongo = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> collectionRoles_mongo 
+		try{
+			collectionRoles_mongo = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var List<String> collections = new ArrayList<String>()
 		if(EcoreUtil2.getContainerOfType(model,EPlay) !== null){
 			var play = EcoreUtil2.getContainerOfType(model,EPlay)
 			if(play.collections !== null){
 				if(EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN).size >0){
 					val collectionsList = EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN)
-					collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
 				}
 			}	
 		}
@@ -1427,7 +1517,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void completeERoleName_SecondPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> collectionRoles_mongo = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> collectionRoles_mongo 
+		try{
+			collectionRoles_mongo = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var MongoCollection<Document> standaloneRoles_mongo = AnsibleHelper.ansibleRoles
 		var String regex = "\\w+\\.\\w+" 
 		val roleName = EcoreUtil2.getContainerOfType(model,ERoleName)
@@ -1470,7 +1566,13 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	
 	override void completeERoleName_ThirdPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleCollections
+		var MongoCollection<Document> mongo_collection 
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var String namespace =""
 		var String collectionName = ""
 		val roleName = EcoreUtil2.getContainerOfType(model,ERoleName)

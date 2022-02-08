@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.ui,
  org.sodalite.dsl.preferences;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.sodalite.dsl.ansible.helper,
+Export-Package: org.sodalite.dsl.ansible.exceptions,
+ org.sodalite.dsl.ansible.helper,
  org.sodalite.sdl.ansible,
  org.sodalite.sdl.ansible.ansibleDsl,
  org.sodalite.sdl.ansible.ansibleDsl.impl,

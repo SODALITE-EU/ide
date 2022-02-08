@@ -62,6 +62,8 @@ import java.util.HashMap
 import org.apache.http.NoHttpResponseException
 import org.json.JSONException
 import org.sodalite.ide.ui.logger.SodaliteLogger
+import org.sodalite.dsl.ansible.exceptions.MongoDBNotFound
+import java.util.Map
 
 /**
  * This class contains custom validation rules. 
@@ -130,8 +132,17 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 
 	@Check
 	def checkModuleRequiredParameters(EModuleCall module) {
-		var fqn = AnsibleHelper.calculateModuleName(module)
-		var parameters = AnsibleHelper.findParameters(fqn)
+		var String fqn
+		var Map<String, Map<String, Object>> parameters
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+			parameters = AnsibleHelper.findParameters(fqn)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var fqn = AnsibleHelper.calculateModuleName(module)
+		//var parameters = AnsibleHelper.findParameters(fqn)
 		var requiredParameters = parameters.entrySet.stream.filter(map|map.getValue().containsKey("required")).map( p |
 			p.key
 		).collect(Collectors.toList)
@@ -152,10 +163,22 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkRequiredSubparameters(EParameter parameter) {
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		var String fqn
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var List<String> parameterPath = new ArrayList<String>()
 		parameterPath.add(0, parameter.name)
-		var subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)
+		var Map<String, Map<String, Object>> subparameters
+			try{
+				subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
 		var requiredSubparameters = subparameters.entrySet.stream.filter(map|map.getValue().containsKey("required")).
 			map(p|p.key).collect(Collectors.toList)
 		var Set<String> insertedSubparameters = new HashSet<String>()
@@ -187,7 +210,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
 			var parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-			var fqn = AnsibleHelper.calculateModuleName(module)
+			var String fqn
+			try{
+				fqn = AnsibleHelper.calculateModuleName(module)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
 			var containers = EcoreUtil2.getAllContainers(subparameter).iterator()
 			var List<String> parameterPath = new ArrayList<String>()
 			if (subparameter instanceof EJinjaAndString) {
@@ -201,7 +230,14 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 				}
 			}
 			parameterPath.add(0, parameter.name)
-			var subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)
+			var Map<String, Map<String, Object>> subparameters
+			try{
+				subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
+			//var subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)
 			var requiredSubparameters = subparameters.entrySet.stream.
 				filter(map|map.getValue().containsKey("required")).map(p|p.key).collect(Collectors.toList)
 			var Set<String> insertedSubparameters = new HashSet<String>()
@@ -232,9 +268,17 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	// Check if a parameter has a value that is not allowed
 	@Check
 	def checkParameterValue(EParameter parameter) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+		var MongoCollection<Document> mongo_collection
+		var String fqn
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();
+			fqn = AnsibleHelper.calculateModuleName(module)		
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		
 		var String[] nameParts = fqn.split("\\.");
 		if (nameParts.length != 3) {
 			return
@@ -320,7 +364,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkParameterValueType(EParameter parameter) {
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		var String fqn
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var String[] nameParts = fqn.split("\\.");
 		if (nameParts.length != 3) {
 			return
@@ -447,7 +497,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkParameterName(EParameter parameter) {
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-		var fqn = AnsibleHelper.calculateModuleName(module)
+		var String fqn
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
 		var String[] nameParts = fqn.split("\\.");
 		if (nameParts.length != 3) {
 			return
@@ -466,10 +522,19 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkSubparameterValue(EDictionaryPair subparameter) {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
-			var MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+			var MongoCollection<Document> mongo_collection
+			var String fqn
 			var parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-			var fqn = AnsibleHelper.calculateModuleName(module)
+			try{
+				mongo_collection = AnsibleHelper.getAnsibleCollections();
+				fqn = AnsibleHelper.calculateModuleName(module)		
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
+			
+			
 			var String[] nameParts = fqn.split("\\.");
 			// if module name is not correct  return nothing
 			if (nameParts.length != 3) {
@@ -577,7 +642,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
 			var EParameter parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-			var fqn = AnsibleHelper.calculateModuleName(module)
+			var String fqn
+			try{
+				fqn = AnsibleHelper.calculateModuleName(module)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
 			var String[] nameParts = fqn.split("\\.");
 			// if module name is not correct  return nothing
 			if (nameParts.length != 3) {
@@ -745,7 +816,13 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
 			var EParameter parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
-			var fqn = AnsibleHelper.calculateModuleName(module)
+			var String fqn
+			try{
+				fqn = AnsibleHelper.calculateModuleName(module)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
 			var String[] nameParts = fqn.split("\\.");
 			// if module name is not correct  return nothing
 			if (nameParts.length != 3) {
@@ -791,8 +868,17 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	// check if a collection is supported by SODALITE
 	@Check
 	def checkCollectionSupport(ECollectionFQN collection) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
-		var String collectionName = AnsibleHelper.calculateCollectionName(collection)
+		var MongoCollection<Document> mongo_collection 
+		var String collectionName
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();
+			collectionName = AnsibleHelper.calculateCollectionName(collection)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		
+		//var String collectionName = AnsibleHelper.calculateCollectionName(collection)
 		if (collectionName != "") {
 			var long count = mongo_collection.countDocuments(eq("_id", collectionName));
 			if (count == 0) {
@@ -805,8 +891,16 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	// check if a role is supported by SODALITE
 	@Check
 	def checkRoleSupport(ERoleName role) {
-		var MongoCollection<Document> mongo_collection = AnsibleHelper.ansibleRoles
-		var String roleName = AnsibleHelper.calculateRoleName(role);
+		var MongoCollection<Document> mongo_collection
+		var String roleName
+		try{
+			mongo_collection = AnsibleHelper.ansibleRoles
+			roleName = AnsibleHelper.calculateRoleName(role);	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var String roleName = AnsibleHelper.calculateRoleName(role);
 		if (roleName == "") {
 			error("The role does not belong to any of the imported collections or the name is wrong.",
 				AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART)

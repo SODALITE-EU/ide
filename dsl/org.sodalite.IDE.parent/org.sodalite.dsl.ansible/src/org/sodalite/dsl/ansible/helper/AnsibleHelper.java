@@ -21,6 +21,7 @@ import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 
+import org.sodalite.dsl.ansible.exceptions.MongoDBNotFound;
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
@@ -62,23 +63,35 @@ public class AnsibleHelper {
 	
 	public static final String databaseName = "AnsibleDB";
 	
-	public static MongoCollection<Document> getAnsibleModules(){
+	public static MongoCollection<Document> getAnsibleModules() throws MongoDBNotFound{
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
+		if(mongoClient == null) {
+			//SodaliteLogger.log("There is no connection with the MongoDB");
+			throw new MongoDBNotFound("There is no connection with the MongoDB");
+		}
 		MongoDatabase database = mongoClient.getDatabase(databaseName);
 		MongoCollection<Document> mongo_collection = database.getCollection("AnsibleGalaxyModules");
 		return mongo_collection;
 	
 	}
 	
-	public static MongoCollection<Document> getAnsibleCollections() {
+	public static MongoCollection<Document> getAnsibleCollections() throws MongoDBNotFound {
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
+		if(mongoClient == null) {
+			//SodaliteLogger.log("There is no connection with the MongoDB"); 
+			throw new MongoDBNotFound("There is no connection with the MongoDB");
+		}
 		MongoDatabase database = mongoClient.getDatabase(databaseName);
 		MongoCollection<Document> mongoCollection = database.getCollection("AnsibleGalaxyCollections");
 		return mongoCollection;
 	}
 	
-	public static MongoCollection<Document> getAnsibleRoles() {
+	public static MongoCollection<Document> getAnsibleRoles() throws MongoDBNotFound {
 		MongoClient mongoClient = SodaliteBackendProxy.getMongoClient();
+		if(mongoClient == null) {
+			//SodaliteLogger.log("There is no connection with the MongoDB");
+			throw new MongoDBNotFound("There is no connection with the MongoDB");
+		}
 		MongoDatabase database = mongoClient.getDatabase(databaseName);
 		MongoCollection<Document> mongoCollection = database.getCollection("AnsibleGalaxyRoles");
 		return mongoCollection;
@@ -92,7 +105,7 @@ public class AnsibleHelper {
 	//EObject 'model' can be part of a collection.For example,it can be a module or a role.
 	//The container collection is defined somewhere in .ans file.
 	//With this method, we calculate all the possible collections that can contain 'model'
-	public static List<String> collectionsInScope(EObject model){
+	public static List<String> collectionsInScope(EObject model) throws MongoDBNotFound{
 		Iterable<EObject> containers = EcoreUtil2.getAllContainers(model);
 		List<String> collections = new ArrayList<>();
 		Iterator<EObject> it = containers.iterator();
@@ -115,7 +128,7 @@ public class AnsibleHelper {
 	
 	
 	//Find module's fully qualified name from MongoDB
-	public static List<String> findModuleFQN(EObject model,String moduleName){
+	public static List<String> findModuleFQN(EObject model,String moduleName) throws MongoDBNotFound{
 		
 		MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 		List<String> importedCollections = collectionsInScope(model);
@@ -141,7 +154,7 @@ public class AnsibleHelper {
 	}
 	
 	//Find module's fully qualified name from MongoDB
-	public static String findRoleFQN(EObject model,String roleName){
+	public static String findRoleFQN(EObject model,String roleName) throws MongoDBNotFound{
 		if(roleName.equals("")) {
 			return "";
 		}
@@ -162,7 +175,7 @@ public class AnsibleHelper {
 		
 		
 		//Find the parameters of a module from MongoDB
-		public static Map<String, Map<String, Object>> findParameters(String fqn) {
+		public static Map<String, Map<String, Object>> findParameters(String fqn) throws MongoDBNotFound {
 			
 			Map<String, Map<String, Object>> parameters = new HashMap<>();
 			String[] nameParts = fqn.split("\\.");
@@ -211,7 +224,7 @@ public class AnsibleHelper {
 		
 		
 		//Find the subparameters of a parameter from MongoDB
-		public static Map<String, Map<String, Object>> findSubparameters(String fqn,List<String> parameterPath){
+		public static Map<String, Map<String, Object>> findSubparameters(String fqn,List<String> parameterPath) throws MongoDBNotFound{
 			MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 			String[] nameParts = fqn.split("\\.");
 			Map<String, Map<String, Object>> subparameters = new HashMap<>();
@@ -262,7 +275,7 @@ public class AnsibleHelper {
 		}
 		
 		//Find the details of a subparameter from MongoDB
-		public static Document findSubparameterDetails(EObject model) {
+		public static Document findSubparameterDetails(EObject model) throws MongoDBNotFound {
 			MongoCollection<Document> mongoCollection = AnsibleHelper.getAnsibleCollections();
 			Document details = null;
 			EParameter parameter = EcoreUtil2.getContainerOfType(model,EParameter.class);
@@ -301,7 +314,7 @@ public class AnsibleHelper {
 		}
 		
 		
-		public static String calculateModuleName(EModuleCall module) {
+		public static String calculateModuleName(EModuleCall module) throws MongoDBNotFound {
 			String firstPart = "";
 			String secondPart="";
 			String thirdPart = "";
@@ -401,7 +414,7 @@ public class AnsibleHelper {
 		
 		
 		//Calculate the full name of a role
-		public static String calculateRoleName(ERoleName role) {
+		public static String calculateRoleName(ERoleName role) throws MongoDBNotFound {
 			String firstPart = "";
 			String secondPart="";
 			String thirdPart = "";

@@ -3,9 +3,11 @@ package org.sodalite.ide.ui.backend;
 import java.text.MessageFormat;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.slf4j.LoggerFactory;
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.ui.preferences.Activator;
@@ -13,6 +15,10 @@ import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 public class SodaliteBackendProxy {
 	private static KBReasonerClient kbReasonerClient = null;
@@ -146,21 +152,38 @@ public class SodaliteBackendProxy {
 	}
 
 	private static MongoClient mongoClient;
+	
 
-	private static void createMongoClient() {
+	public static void createMongoClient() {
+		MongoClientOptions opts = MongoClientOptions.builder()
+	            .serverSelectionTimeout(100)
+	            .build();
+		Logger logger = (Logger) LoggerFactory.getLogger("org.mongodb.driver");
+		logger.setLevel(Level.ERROR);
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String mongoDB_URI = store.getString(PreferenceConstants.MONGODB_URI).trim();
 		String mongoDB_host = mongoDB_URI.split(":")[0];
 		String mongoDB_port = mongoDB_URI.split(":")[1];
 		mongoClient = new MongoClient(mongoDB_host, Integer.parseInt(mongoDB_port));
+		mongoClient = new MongoClient(mongoDB_URI,opts);
+		try {
+			mongoClient.getAddress();
+		} catch (Exception e) {
+			SodaliteLogger.log("There is no connection with the MongoDB");
+		    mongoClient= null;
+		    return;
+		}
+		//mongoClient = new MongoClient( mongoDB_host , Integer.parseInt(mongoDB_port));
+		
 	}
 
+	
 	public static MongoClient getMongoClient() {
-		if (mongoClient == null) {
-			createMongoClient();
-		}
-		// MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-		return mongoClient;
+		return mongoClient;	
+	}
+
+	public static void setMongoClient(MongoClient mongoClient) {
+		SodaliteBackendProxy.mongoClient = mongoClient;
 	}
 
 	public static String getAnsibleDefectPredictor() {
