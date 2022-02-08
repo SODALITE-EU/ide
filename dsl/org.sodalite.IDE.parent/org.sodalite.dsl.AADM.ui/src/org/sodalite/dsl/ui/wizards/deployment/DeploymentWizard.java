@@ -106,6 +106,7 @@ public class DeploymentWizard extends Wizard {
 			if (!grafana_uri.endsWith("/"))
 				grafana_uri = grafana_uri.concat("/");
 			String consul_ip = store.getString(PreferenceConstants.Consul_IP).trim();
+			String hpc_exporter_uri = store.getString(PreferenceConstants.HPC_EXPORTER_URI).trim();
 			String skydive_analyzer_uri = store.getString(PreferenceConstants.SKYDIVE_ANALYZER_URI).trim();
 			if (consul_ip.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
@@ -114,6 +115,7 @@ public class DeploymentWizard extends Wizard {
 			}
 			content.append("deployment_label: " + this.deploymentLabel + "\n");
 			content.append("consul_server_address: " + consul_ip + "\n");
+			content.append("hpc_exporter_address: " + hpc_exporter_uri + "\n");
 			content.append("skydive_analyzer: " + skydive_analyzer_uri + "\n");
 			// Inject deploymentName in grafana_address template
 			// http://192.168.3.74:3000/d/xfpJB9FGz/sodalite-node-exporters?orgId=1&var-deployment_label={{

@@ -155,6 +155,7 @@ class AADMGenerator extends AbstractGenerator {
 	«includeDefaultInput("jwt")»
 	«includeDefaultInput("deployment_label")»
 	«includeDefaultInput("consul_server_address")»
+	«includeDefaultInput("hpc_exporter_address")»
 	«includeDefaultInput("grafana_address")»
 	«includeDefaultInput("skydive_analyzer")»
 	«includeDefaultInput("NIFI_ENDPOINT")»

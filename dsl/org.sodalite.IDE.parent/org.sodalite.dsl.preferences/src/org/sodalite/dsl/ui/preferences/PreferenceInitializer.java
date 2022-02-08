@@ -65,6 +65,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (consul_ip == null)
 			consul_ip = "192.168.3.74";
 
+		String hpc_exporter_uri = prop.getProperty(PreferenceConstants.HPC_EXPORTER_URI);
+		if (hpc_exporter_uri == null)
+			hpc_exporter_uri = "http://192.168.3.74:9100/";
+
 		String grafana_registry_uri = prop.getProperty(PreferenceConstants.Grafana_Registry_URI);
 		if (grafana_registry_uri == null)
 			grafana_registry_uri = "http://192.168.3.74:3001/";
@@ -101,11 +105,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if (!keycloak_enabled) {
 			keycloak_enabled = true;
 		}
-		
+
 		String mongodb_uri = prop.getProperty(PreferenceConstants.MONGODB_URI);
 		if (mongodb_uri == null)
 			mongodb_uri = "localhost:27017";
-		
+
 		String ansible_defect_predictor_uri = prop.getProperty(PreferenceConstants.Ansible_Defect_Predictor_URI);
 		if (ansible_defect_predictor_uri == null)
 			ansible_defect_predictor_uri = "http://localhost:5000/bugs/ansible/file";
@@ -126,6 +130,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaults.put(PreferenceConstants.Refactorer_URI, refactorer_uri);
 		defaults.put(PreferenceConstants.NIFI_URI, nifi_uri);
 		defaults.put(PreferenceConstants.Consul_IP, consul_ip);
+		defaults.put(PreferenceConstants.HPC_EXPORTER_URI, hpc_exporter_uri);
 		defaults.put(PreferenceConstants.Grafana_Registry_URI, grafana_registry_uri);
 		defaults.put(PreferenceConstants.Grafana_URI, grafana_uri);
 		defaults.put(PreferenceConstants.RulesServer_URI, rulesServer_uri);

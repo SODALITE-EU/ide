@@ -40,6 +40,8 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.NIFI_URI, "NIFI URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Consul_IP, "Consul IP:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.HPC_EXPORTER_URI, "HPC Exporter URI:",
+				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Grafana_Registry_URI, "Grafana Registry URL:",
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Grafana_URI, "Grafana URL:", getFieldEditorParent()));
@@ -47,10 +49,9 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.SKYDIVE_ANALYZER_URI, "Skydive Analyzer URL:",
 				getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.MONGODB_URI, "MongoDB URL:",
-				getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.Ansible_Defect_Predictor_URI, "Ansible defect predictor URL:",
-				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.MONGODB_URI, "MongoDB URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Ansible_Defect_Predictor_URI,
+				"Ansible defect predictor URL:", getFieldEditorParent()));
 	}
 
 	/*
