@@ -59,6 +59,7 @@ import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
 import org.sodalite.dsl.kb_reasoner_client.types.ValidRequirementNodeData;
+import org.springframework.util.Assert;
 
 class KBReasonerTest {
 	private KBReasoner kbclient;
@@ -73,6 +74,7 @@ class KBReasonerTest {
 	private final String KEYCLOAK_URI = "http://192.168.2.53:8080/";
 	private final String PDS_URI = "http://192.168.2.178:8089/";
 	private final String Refactorer_URI = "http://192.168.2.166:8080/";
+	private final String NIFI_URI = "https://192.168.2.91:9543/";
 	private final String Grafana_URI = "http://192.168.3.74:3001/";
 	private final String RulesServer_URI = "http://192.168.3.74:9092/";
 	private final String Vault_Secret_Uploader_URI = "http://192.168.3.74:8202/";
@@ -87,7 +89,7 @@ class KBReasonerTest {
 	@BeforeEach
 	void setup() throws IOException, Exception {
 		kbclient = new KBReasonerClient(KB_REASONER_URI, IaC_URI, image_builder__URI, xOPERA_URI, KEYCLOAK_URI, PDS_URI,
-				Refactorer_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
+				Refactorer_URI, NIFI_URI, Grafana_URI, RulesServer_URI, Vault_Secret_Uploader_URI);
 		Properties credentials = readCredentials();
 		if (AIM_Enabled)
 			kbclient.setUserAccount(credentials.getProperty("user"), credentials.getProperty("password"), client_id,
@@ -155,6 +157,15 @@ class KBReasonerTest {
 		assertFalse(policyTypes.getElements().isEmpty());
 		policyTypes.getElements().stream().forEach(type -> System.out
 				.println("Policy type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
+	}
+
+	@Test
+	void testGetArtifactTypes() throws Exception {
+		List<String> modules = Arrays.asList("artifacts");
+		ReasonerData<Type> artifactTypes = kbclient.getArtifactTypes(modules);
+		assertFalse(artifactTypes.getElements().isEmpty());
+		artifactTypes.getElements().stream().forEach(type -> System.out
+				.println("Artifact type: " + (type.getModule() != null ? type.getModule() : "") + type.getLabel()));
 	}
 
 	@Test
@@ -323,22 +334,24 @@ class KBReasonerTest {
 		String aadm_version = null;
 		String blueprint_id = "51d1671d-c9f5-418d-b19f-94437f5460ac";
 		String deployment_id = "612efea0-c666-42de-9803-5adce8d59eac";
+		String monitoring_id = "";
 		Path inputs_path = FileSystems.getDefault().getPath("src/test/resources/inputs.yaml");
 		String inputs = new String(Files.readAllBytes(inputs_path));
-		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id, inputs);
+		kbclient.notifyDeploymentToRefactoring(appName, aadm_id, aadm_version, blueprint_id, deployment_id,
+				monitoring_id, inputs);
 	}
 
 	@Test
 	void testGetBlueprintsForUser() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 	}
 
 	@Test
 	void testGetBlueprintForId() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(0).getBlueprint_id();
@@ -349,7 +362,7 @@ class KBReasonerTest {
 	@Test
 	void testGetDeploymentsForBlueprint() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
@@ -360,7 +373,7 @@ class KBReasonerTest {
 	@Test
 	void testGetDeploymentForId() throws Exception {
 		String username = "user_1";
-		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username);
+		BlueprintData blueprintData = kbclient.getBlueprintsForUser(username, false);
 		assertFalse(blueprintData.getElements().isEmpty());
 
 		String blueprint_id = blueprintData.getElements().get(1).getBlueprint_id();
@@ -385,6 +398,12 @@ class KBReasonerTest {
 		Path rules_path = FileSystems.getDefault().getPath("src/test/resources/test.alert.rules");
 		String rules = new String(Files.readAllBytes(rules_path));
 		kbclient.registerAlertingRules(monitoring_id, rules);
+	}
+
+	@Test
+	void testGetNIFIToken() throws Exception {
+		String token = kbclient.getNIFIAccessToken();
+		Assert.notNull(token);
 	}
 
 	private KBSaveReportData saveRM(String rmURI, String ttlPath, String dslPath, String name, String namespace)

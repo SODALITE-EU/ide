@@ -2,6 +2,7 @@ grammar org.sodalite.sdl.ansible.AnsibleDsl with org.eclipse.xtext.common.Termin
 
 generate ansibleDsl "http://www.sodalite.org/dsl/AnsibleDsl"
 import "http://www.sodalite.org/dsl/RM" as rm
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Model:
 	EPlaybook
@@ -20,11 +21,31 @@ EUsedByBody:
 	'used_by:'
 	BEGIN
 	(
-		'node_type:' node_type=[rm::ENodeType|STRING]
-		'operation:' operation=[rm::EOperationDefinition|STRING]
+		node = Node
+		
 	)
 	END
 ;
+
+Node:
+	LocalNode | KBNode
+;
+ LocalNode:
+ 	'node_type:' node_type= [rm::ENodeType|STRING]
+ 	'interface:' interface= [rm::EInterfaceDefinition|STRING]
+	'operation:' operation= [rm::EOperationDefinition|STRING]
+ ;
+ 
+ KBNode:
+ 	'node_type:' node_type= EPREFIX_TYPE
+ 	'interface:' interface= ID
+ 	'operation:' operation= ID
+ ;
+
+EPREFIX_TYPE:
+	(module=ID '/')? type=QUALIFIED_NAME
+;
+
 
 EBase:
 	EPlay | EExecution
@@ -32,6 +53,10 @@ EBase:
 
 EExecution:
 	EBlock | ETaskHandler | ERoleInclusion
+;
+
+EBlockTaskRole:
+	EBlockTask 
 ;
 
 EBlockTask:
@@ -56,7 +81,7 @@ EPlay:
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
-		('collections:' collections=EListPassed)? &
+		('collections:' collections=ECollectionListPassed)? &
 		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
@@ -102,7 +127,7 @@ EBlock:
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
-		('collections:' collections=EListPassed)? &
+		('collections:' collections=ECollectionListPassed)? &
 		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
@@ -141,7 +166,7 @@ ETask:
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
-		('collections:' collections=EListPassed)? &
+		('collections:' collections=ECollectionListPassed)? &
 		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
@@ -175,7 +200,7 @@ EHandler:
 		('debugger:' debugger=EStringPassed)? &
 		('module_defaults:' module_defaults=EValuePassed)? &
 		('environment:' environment=EValuePassed)? &
-		('collections:' collections=EListPassed)? &
+		('collections:' collections=ECollectionListPassed)? &
 		('tags_attribute:' tags=EListPassed)? &
 		('vars:'
 		BEGIN
@@ -197,8 +222,9 @@ EHandler:
 	END
 ;
 
+//
 EModuleCall:
-	'module:' name=STRING
+	'module:' firstPart = EStringWithoutQuotesPassed ('.' secondPart = EStringWithoutQuotesPassed ('.' thirdPart = EStringWithoutQuotesPassed)? )? 
 	(
 		BEGIN
 		(
@@ -213,14 +239,14 @@ EModuleCall:
 ;
 
 EParameter:
-	name=ID ':' value_passed=EValuePassed
+	name=ID ':' value = EValuePassed
 ;
 
 ERoleInclusion:
 	'role:'
 	BEGIN
 	(
-		'role_name:' name=EStringPassed
+		'role_name:' name=ERoleName
 		(
 			(privilege_escalation=EPrivilegeEscalation)? &
 			(validation_mode=EValidationMode)? &
@@ -229,7 +255,7 @@ ERoleInclusion:
 			('debugger:' debugger=EStringPassed)? &
 			('module_defaults:' module_defaults=EValuePassed)? &
 			('environment:' environment=EValuePassed)? &
-			('collections:' collections=EListPassed)? &
+			('collections:' collections=ECollectionListPassed)? &
 			('tags_attribute:' tags=EListPassed)? &
 			('vars:'
 			BEGIN
@@ -243,6 +269,15 @@ ERoleInclusion:
 	)
 	END
 ;
+
+ERoleName:
+	firstPart = ENumberOrStringWithoutQuotesPassed  ("." secondPart = EStringWithoutQuotesPassed ("." thirdPart = EStringWithoutQuotesPassed)? )?
+;
+
+ENumberOrStringWithoutQuotesPassed:
+	EStringWithoutQuotesPassed | ENumber
+;
+
 
 ERoleInclusions:
 	'roles_inclusions:'
@@ -450,11 +485,11 @@ ENotifiedTopic:
 ;
 
 EJinjaOrString:
-	EJinjaExpressionEvaluation | EJinjaStatement | string=STRING
+	EJinjaExpressionEvaluation | EJinjaStatement | string = STRING 
 ;
 
 EJinjaAndString:
-	(jinja_expression_and_string+=EJinjaOrString)+
+ 	(jinja_expression_and_string+=EJinjaOrString)+ 
 ;
 
 EMultiLineExpression:
@@ -464,12 +499,32 @@ EMultiLineExpression:
 	END
 ;
 
+EJinjaOrStringWithoutQuotes:
+	 EJinjaExpressionEvaluation | EJinjaStatement | stringWithoutQuotes = ID 
+;
+
+EJinjaAndStringWithoutQuotes:
+	(jinja_expression_and_stringWithout+=EJinjaOrStringWithoutQuotes)+
+;
+
+EStringWithoutQuotesPassed:
+	EJinjaAndStringWithoutQuotes | EMultiLineExpression
+;
+
+EValueWithString:
+	=> EStringPassed | EStringWithoutQuotesPassed 
+;
+
+//EValueWithString:
+//	EStringPassed  
+//;
+
 EStringPassed:
 	EJinjaAndString | EMultiLineExpression
 ;
 
 EValuePassed:
-	EStringPassed | EValueWithoutString
+	EValueWithString | EValueWithoutString 
 ;
 
 EValuePassedToJinjaExpression:
@@ -595,11 +650,27 @@ ERegisterVariable:
 ;
 
 EInputOperationVariableReference:
-	'operation_input:' name=[rm::EParameterDefinition|STRING]
+	reference = (LocalEInputOperationVariableReference | KBEInputOperationVariableReference)
+;
+
+LocalEInputOperationVariableReference:
+	'operation_input:' name= [rm::EParameterDefinition|STRING]
+;
+
+KBEInputOperationVariableReference:
+	'operation_input:' name= ID
 ;
 
 EInputInterfaceVariableReference:
+	reference = (LocalEInputInterfaceVariableReference | KBEInputInterfaceVariableReference)
+;
+
+LocalEInputInterfaceVariableReference:
 	'interface_input:' name=[rm::EPropertyDefinition|STRING]
+;
+
+KBEInputInterfaceVariableReference:
+	'interface_input:' name=ID
 ;
 
 ESetFactVariableReference:
@@ -633,7 +704,7 @@ EDictionary:
 ;
 
 EDictionaryInLine:
-	'{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '}'
+	'{' dictionary_pairs+=EDictionaryPair (',' dictionary_pairs+=EDictionaryPair)* '_}'
 ;
 
 EDictionaryIndented:
@@ -643,7 +714,7 @@ EDictionaryIndented:
 ;
 
 EDictionaryPair:
-	(name=ID | name=STRING) ':' value=EValuePassed
+	name=ID  ':' value=EValuePassed
 ;
 
 EDictionaryJinja:
@@ -653,6 +724,29 @@ EDictionaryJinja:
 
 EDictionaryPairJinja:
 	(name=ID | name=STRING) ':' value=EJinjaExpressionEvaluationWithoutBrackets
+;
+
+ECollectionListPassed:
+	EJinjaExpressionEvaluation | EJinjaStatement | ECollectionList
+;
+
+ECollectionList:
+	ECollectionListInLine | ECollectionListIndented
+;
+
+ECollectionListInLine:
+	'[' elements+=ECollectionFQN (',' elements+=ECollectionFQN)* ']'
+;
+//FQN = Fully Qualified Name
+ECollectionFQN:
+	 namespaceOrFqn = EStringWithoutQuotesPassed ('.' collectionName = EStringWithoutQuotesPassed)?
+;
+
+
+ECollectionListIndented:
+	BEGIN
+		( '-' elements+=ECollectionFQN)+
+	END
 ;
 
 EList:
@@ -701,7 +795,7 @@ EListPassed:
 ;
 
 ENumberPassed:
-	EJinjaExpressionEvaluation | EJinjaStatement | number_passed=ENumber | number_passed_null=NULL
+	EJinjaExpressionEvaluation | EJinjaStatement | number_passed=ENumber | number_passed_null=NULL 
 ;
 
 EBooleanPassed:
@@ -713,8 +807,11 @@ EBooleanAnsible:
 ;
 
 ENumber:
-	number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER
+	number=OCTAL_NUMBER | number=HEXADECIMAL_NUMBER | number=SIMPLE_NUMBER | number=EXPONENTIAL_NUMBER | number = INTEGER
 ;
+
+QUALIFIED_NAME: 
+	ID ('.' ID)+;
 
 terminal BOOLEAN:
 	'True' |'False' | 'true' | 'false'
@@ -750,9 +847,14 @@ terminal EXPONENTIAL_NUMBER:
 	SIMPLE_NUMBER('e'|'E')SIMPLE_NUMBER
 ;
 
+terminal INTEGER:
+	INT
+;
+
+
 @Override
 terminal ID:
-	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
+	'^'? ('a'..'z' | 'A'..'Z' | '_' | '0'..'9') ('a'..'z' | 'A'..'Z' | '_' | '-' | '0'..'9')*;
 
 //Positional blocks delimited with indentation
 terminal BEGIN: 'synthetic:BEGIN';

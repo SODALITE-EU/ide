@@ -203,7 +203,7 @@ node_templates:
 			registry:
 				node: snow/snow-docker-registry
 			host:
-				node: snow/snow-vm
+				node: snow/docker-host@v1.0
 
 	snow-webcam-crawler:
 		type: docker/sodalite.nodes.DockerizedComponent

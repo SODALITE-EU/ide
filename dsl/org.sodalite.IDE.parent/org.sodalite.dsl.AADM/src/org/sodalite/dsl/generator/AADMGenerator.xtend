@@ -76,6 +76,14 @@ import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.rM.GetAttribute
 import org.sodalite.dsl.aADM.AADM_Model
+import org.sodalite.dsl.rM.EArtifactDefinition
+import org.sodalite.dsl.rM.GetArtifact
+import java.util.Base64
+import java.lang.reflect.Method
+import java.util.Arrays
+import java.util.List
+import java.util.stream.Collectors
+import org.sodalite.dsl.helper.AADMDSLHelper
 
 /**
  * Generates code from your model files on save.
@@ -89,12 +97,14 @@ class AADMGenerator extends AbstractGenerator {
 	var int output_counter = 1
 	var int property_counter = 1
 	var int attribute_counter = 1
+	var int artifact_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int parameter_counter = 1
 	var int trigger_counter = 1
 	var Map<EPropertyAssignment, Integer> property_numbers
 	var Map<EAttributeAssignment, Integer> attribute_numbers
+	var Map<EArtifactDefinition, Integer> artifact_numbers
 	var Map<ERequirementAssignment, Integer> requirement_numbers
 	var Map<ECapabilityAssignment, Integer> capability_numbers
 	var Map<EObject, Map<String,Integer>> parameter_numbers
@@ -107,12 +117,14 @@ class AADMGenerator extends AbstractGenerator {
 		output_counter = 1
 		property_counter = 1
 		attribute_counter = 1
+		artifact_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
 		parameter_counter = 1
 		trigger_counter = 1
 		property_numbers = new HashMap<EPropertyAssignment, Integer>()
 		attribute_numbers = new HashMap<EAttributeAssignment, Integer>()
+		artifact_numbers = new HashMap<EArtifactDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementAssignment, Integer>()
 		capability_numbers = new HashMap<ECapabilityAssignment, Integer>()
 		parameter_numbers = new HashMap<EObject, Map<String, Integer>>()
@@ -145,12 +157,20 @@ class AADMGenerator extends AbstractGenerator {
 	«includeDefaultInput("consul_server_address")»
 	«includeDefaultInput("grafana_address")»
 	«includeDefaultInput("skydive_analyzer")»
+	«includeDefaultInput("NIFI_ENDPOINT")»
+	«includeDefaultInput("NIFI_API_ENDPOINT")»
+	«includeDefaultInput("NIFI_API_ACCESS_TOKEN")»
+	«includeDefaultInput("NIFI_API_VALIDATE_CERTS")»
 	
 	«FOR p:r.allContents.toIterable.filter(GetProperty)»
 		«p.compile»
 	«ENDFOR»
 	
 	«FOR a:r.allContents.toIterable.filter(GetAttribute)»
+		«a.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(GetArtifact)»
 		«a.compile»
 	«ENDFOR»
 	
@@ -175,6 +195,10 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDFOR»
 	
 	«FOR a:r.allContents.toIterable.filter(EAttributeAssignment)»
+	«a.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(EArtifactDefinition)»
 	«a.compile»
 	«ENDFOR»
 	
@@ -327,6 +351,42 @@ class AADMGenerator extends AbstractGenerator {
 	.	
 	'''
 	
+	def compile(GetArtifact a) '''
+	«IF a.artifact.artifact !== null»
+	«putParameterNumber(a, "artifact", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "artifact" ;  
+	  «IF a.artifact.artifact instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.artifact.artifact instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
+	.
+	«ENDIF»	
+	
+	«IF a.artifact.entity !== null»
+	«putParameterNumber(a, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value '«trim(a.artifact.entity.compile())»' ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(a, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_artifact" ;
+	  «IF a.artifact.artifact !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "artifact")» ;
+	  «ENDIF»	
+	  «IF a.artifact.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entity")» ;
+	  «ENDIF»
+	.	
+	'''
+	
 	def compile (EParameterDefinition p) '''
 	«putParameterNumber(p, "type", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -342,11 +402,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF p.parameter.^default !== null»
 	  «IF p.parameter.^default instanceof EFunction»
-	  «IF p.parameter.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	   «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.parameter.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -361,11 +417,7 @@ class AADMGenerator extends AbstractGenerator {
 	  exchange:name "value" ;
 	  «IF p.parameter.value !== null»
 	  «IF p.parameter.value instanceof EFunction»
-	  «IF p.parameter.value instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	   «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.value instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.parameter.value instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.value as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -417,9 +469,9 @@ class AADMGenerator extends AbstractGenerator {
 	  «IF e.value instanceof ESingleValue»
 	  exchange:value "«trim(processMultilineStringValue((e.value as ESingleValue).compile().toString))»" ;
 	  «ELSEIF e.value instanceof EFunction»
-	  
+	  exchange:hasParameter :Parameter_«getParameterNumber(e.value, "name")» ;
 	  «ELSEIF e.value instanceof ELIST»
-	  
+	  TODO
 	  «ENDIF»
 	.
 	
@@ -452,7 +504,7 @@ class AADMGenerator extends AbstractGenerator {
 	  «ENDIF»
 	  
 	  «IF n.node.optimization !== null»
-	  	  exchange:optimization '«readOptimization(n.node.optimization)»' ;
+	  exchange:optimization '«readOptimization(n.node.optimization)»' ;
 	  «ENDIF»
 	  «IF n.node.properties !== null»
 	  «FOR p:n.node.properties.properties»
@@ -472,6 +524,11 @@ class AADMGenerator extends AbstractGenerator {
 	  «IF n.node.capabilities !== null»
 	  «FOR c:n.node.capabilities.capabilities»
 	  exchange:capabilities :Capability_«capability_numbers.get(c)» ; 
+	  «ENDFOR»
+	  «ENDIF»
+	  «IF n.node.artifacts !== null»
+	  «FOR p:n.node.artifacts.artifacts»
+	  exchange:artifacts :Artifact_«artifact_numbers.get(p)» ;
 	  «ENDFOR»
 	  «ENDIF»
 	.  
@@ -535,11 +592,7 @@ class AADMGenerator extends AbstractGenerator {
 	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF p.value instanceof EFunction»
-	  	«IF p.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ELSEIF p.value instanceof GetProperty»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF p.value instanceof ESingleValue»
 	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -895,6 +948,22 @@ class AADMGenerator extends AbstractGenerator {
 	«ENDIF»
 	'''
 	
+	def compileNode (EPREFIX_ID t) '''
+	«IF t.version !== null»
+	  «getModule(t)»/«t.id»@«t.version»  
+	«ELSE»
+	  «getModule(t)»/«t.id»
+	«ENDIF»
+	'''
+		
+	def getModule(EPREFIX_ID id) {
+		if (id.module !== null)
+			return id.module
+		else
+			return AADMDSLHelper.getModule(id)
+	}
+	
+	
 	def compile (ESingleValue v) '''
 	«IF v instanceof ESTRING»
 	  «processStringValue((v as ESTRING).value)»
@@ -955,12 +1024,42 @@ class AADMGenerator extends AbstractGenerator {
 	    exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF a.value instanceof EFunction»
-	  	«IF a.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(a.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF a.value instanceof ESingleValue»
 	  exchange:value "«trim((a.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
+	.
+	'''
+	
+	def compile (EArtifactDefinition a) '''
+	«putParameterNumber(a, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(a.artifact.type.compile)»' ;
+	.
+	
+	«putParameterNumber(a, "file.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«a.artifact.file»' ;
+	.
+	
+	«putParameterNumber(a, "file.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(a.artifact.file)»' ;
+	.
+	
+	«artifact_numbers.put(a, artifact_counter)»
+	:Artifact_«artifact_counter++»
+	  rdf:type exchange:Artifact ;
+	  exchange:name "«a.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.content")» ;
 	.
 	'''
 	
@@ -991,7 +1090,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "node" ;
-	  exchange:value '«r.node.compile().trim»' ;  
+	  exchange:value '«r.node.compileNode().trim»' ;  
 	  .
 	
 	«requirement_numbers.put(r, requirement_counter)»
@@ -1047,8 +1146,8 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def readFileAsString(String path){
-		var String content = new String(Files.readAllBytes(Paths.get(path)));
-		return content.replaceAll("[\\t\\n\\r]+"," ")
+		return Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+//		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def getResourcePath(Resource r){

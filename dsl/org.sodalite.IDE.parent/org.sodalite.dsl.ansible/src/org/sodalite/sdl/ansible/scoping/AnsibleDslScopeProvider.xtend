@@ -18,18 +18,18 @@ import org.sodalite.dsl.rM.impl.EOperationDefinitionImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EVariableDeclarationVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl
-import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputOperationVariableReferenceImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl
-import org.sodalite.dsl.rM.EPropertyDefinition
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedHandlerImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl
-import org.sodalite.sdl.ansible.ansibleDsl.impl.EUsedByBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ENotifiedTopicImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.ESetFactVariableReferenceImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EParameterImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter
+import org.sodalite.sdl.ansible.ansibleDsl.impl.LocalNodeImpl
+import org.sodalite.dsl.rM.impl.EInterfaceDefinitionImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.LocalEInputOperationVariableReferenceImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.LocalEInputInterfaceVariableReferenceImpl
+import org.sodalite.dsl.rM.impl.EPropertiesImpl
 
 /** 
  * This class contains custom scoping description.
@@ -66,7 +66,7 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 				for (parameter: candidates){
 					val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
 					if (moduleCall !== null){
-						if (moduleCall.name == "set_fact") legitCandidates.add(parameter)
+						if (moduleCall.firstPart == "set_fact") legitCandidates.add(parameter)
 					}
 				}
 				return Scopes.scopeFor(legitCandidates)
@@ -82,69 +82,61 @@ class AnsibleDslScopeProvider extends AbstractAnsibleDslScopeProvider {
 			}
 		}
 		
-		/*if (context instanceof EDictionaryPairReferenceImpl && reference == AnsibleDslPackage.Literals.EDICTIONARY_PAIR_REFERENCE__NAME){
-			val declaredVariableReference = EcoreUtil2.getContainerOfType(context, EVariableDeclarationVariableReferenceImpl)
-			val tail = declaredVariableReference.tail
-			val index = tail.indexOf(context)
-			var candidatesOfDictionary = new ArrayList<EDictionaryPair>
-			if (index > 0){
-				val previousDictionaryPair = tail.get(index - 1).name
-				if (previousDictionaryPair.value instanceof EDictionaryImpl){
-					for (dictionaryPair : (previousDictionaryPair.value as EDictionaryImpl).dictionary_pairs){
-						candidatesOfDictionary.add(dictionaryPair)
-					}
-				}
-			}
-			else {
-				if (declaredVariableReference.variable_declaration_variable_reference instanceof EVariableDeclarationImpl){
-					if ((declaredVariableReference.variable_declaration_variable_reference as EVariableDeclarationImpl).value_passed instanceof EDictionaryImpl){
-						for (dictionaryPair : (((declaredVariableReference.variable_declaration_variable_reference as EVariableDeclarationImpl).value_passed) as EDictionaryImpl).dictionary_pairs){
-							candidatesOfDictionary.add(dictionaryPair)
-						}
-					}
-				}
-			}
-			return Scopes.scopeFor(candidatesOfDictionary)
-		}*/
 		
-		if (context instanceof EUsedByBodyImpl && reference == AnsibleDslPackage.Literals.EUSED_BY_BODY__OPERATION){
-			val nodeType = (context as EUsedByBodyImpl).node_type
-			if (nodeType !== null){
-				val candidates = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
+		if(context instanceof LocalNodeImpl && reference == AnsibleDslPackage.Literals.LOCAL_NODE__INTERFACE){
+			val nodeType = (context as LocalNodeImpl).node_type
+			if(nodeType !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(nodeType, EInterfaceDefinitionImpl)
 				return Scopes.scopeFor(candidates)
 			}
 		}
 		
-		if (context instanceof EInputOperationVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_OPERATION_VARIABLE_REFERENCE__NAME){
+  		if(context instanceof LocalNodeImpl && reference == AnsibleDslPackage.Literals.LOCAL_NODE__OPERATION){
+			val nodeType = (context as LocalNodeImpl).node_type
+			val interface = (context as LocalNodeImpl).interface
+			if(nodeType !== null){
+				val candidates = EcoreUtil2.getAllContentsOfType(interface, EOperationDefinitionImpl)
+				return Scopes.scopeFor(candidates)
+			}
+		}	
+
+		
+		if (context instanceof LocalEInputOperationVariableReferenceImpl && reference == AnsibleDslPackage.Literals.LOCAL_EINPUT_OPERATION_VARIABLE_REFERENCE__NAME){
 			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
 			val usedByBody = rootPlaybook.used_by
 			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					//the variables to scope for are the inputs of the specific operation in the RM
-					val candidates = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
-					return Scopes.scopeFor(candidates)
-				}	
+				if(usedByBody.node instanceof LocalNodeImpl){
+					val operation = (usedByBody.node as LocalNodeImpl).operation
+					if (operation !== null){
+						//the variables to scope for are the inputs of the specific operation in the RM
+						val candidates = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+						return Scopes.scopeFor(candidates)
+					}
+				}
 			}
 		}
 		
-		if (context instanceof EInputInterfaceVariableReferenceImpl && reference == AnsibleDslPackage.Literals.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME){
+		if (context instanceof LocalEInputInterfaceVariableReferenceImpl && reference == AnsibleDslPackage.Literals.LOCAL_EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME){
 			val rootPlaybook = EcoreUtil2.getContainerOfType(context, EPlaybookImpl)
-			val candidates = new ArrayList<EPropertyDefinition>
+			//val candidates = new ArrayList<EPropertyDefinition>
 			val usedByBody = rootPlaybook.used_by
 			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
+				if(usedByBody.node instanceof LocalNodeImpl){
+					val interface = (usedByBody.node as LocalNodeImpl).interface
+					if (interface !== null){
 					//the variables to scope for are the inputs defined in the specific interface in the RM
-					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
-					val inputsProperties = interfaceDefinitionBody.inputs
-					for (input : inputsProperties.properties){
-						candidates.add(input)
+						//val interfaceDefinitionBody = interface.interface
+						//val inputsProperties = interfaceDefinitionBody.inputs
+						//for (input : inputsProperties.properties){
+						//	candidates.add(input)
+						//}
+						val candidates = EcoreUtil2.getAllContentsOfType(interface,EPropertiesImpl)
+						return Scopes.scopeFor(candidates)
 					}
-					return Scopes.scopeFor(candidates)
-				}				
+				}
+								
 			}
-		}
+		} 
 		
 		//the topics to scope for are only the once defined in the current play
 		if (context instanceof EHandlerImpl && reference == AnsibleDslPackage.Literals.EHANDLER__LISTEN_TO){

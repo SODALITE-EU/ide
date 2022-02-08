@@ -198,7 +198,7 @@ public class NewAADMWizard extends BasicNewResourceWizard {
 
 		@Override
 		protected InputStream getInitialContents() {
-			String content = "node_templates:\n" + "\tmy_node:\n" + "\t\ttype: my.type";
+			String content = "module: test\n" + "node_templates:\n" + "\tmy_node:\n" + "\t\ttype: my.type";
 			return new ByteArrayInputStream(content.getBytes(Charset.forName("UTF-8")));
 		}
 	}

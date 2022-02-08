@@ -3,7 +3,74 @@
  */
 package org.sodalite.sdl.ansible.validation;
 
-import org.sodalite.sdl.ansible.validation.AbstractAnsibleDslValidator;
+import com.google.common.base.Objects;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NoHttpResponseException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.sodalite.dsl.ansible.helper.AnsibleHelper;
+import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
+import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryInLine;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryIndented;
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndStringWithoutQuotes;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes;
+import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
+import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
+import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleName;
+import org.sodalite.sdl.ansible.ansibleDsl.ESimpleValueWithoutString;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringWithoutQuotesPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclaration;
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.Model;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EComposedValueImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaAndStringWithoutQuotesImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EListImpl;
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ESimpleValueWithoutStringImpl;
 
 /**
  * This class contains custom validation rules.
@@ -12,4 +79,1041 @@ import org.sodalite.sdl.ansible.validation.AbstractAnsibleDslValidator;
  */
 @SuppressWarnings("all")
 public class AnsibleDslValidator extends AbstractAnsibleDslValidator {
+  @Check
+  public void checkCollectionNames(final ECollectionFQN collection) {
+    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), EVariableDeclarationVariableReference.class).size() > 
+      0) && (collection.getCollectionName() == null))) {
+      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(collection.getNamespaceOrFqn(), 
+        EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+      boolean _contains = EcoreUtil2.<EJinjaOrString>getAllContentsOfType(variable_reference, EJinjaOrString.class).get(0).getString().contains(".");
+      boolean _not = (!_contains);
+      if (_not) {
+        this.error("Collection name is missing.", AnsibleDslPackage.Literals.ECOLLECTION_FQN__NAMESPACE_OR_FQN);
+      }
+    }
+    int _size = EcoreUtil2.<EJinjaOrStringWithoutQuotes>getAllContentsOfType(collection.getNamespaceOrFqn(), EJinjaOrStringWithoutQuotes.class).size();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      if (((EcoreUtil2.<EJinjaOrStringWithoutQuotes>getAllContentsOfType(collection.getNamespaceOrFqn(), EJinjaOrStringWithoutQuotes.class).get(0).getStringWithoutQuotes() != null) && (collection.getCollectionName() == null))) {
+        this.error("Collection name is missing.", AnsibleDslPackage.Literals.ECOLLECTION_FQN__NAMESPACE_OR_FQN);
+      }
+    }
+  }
+  
+  @Check
+  public void checkModuleName(final EModuleCall module) {
+    if (((EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), EVariableDeclarationVariableReference.class).size() > 0) && 
+      (module.getSecondPart() == null))) {
+      final EVariableDeclaration variable_reference = EcoreUtil2.<EVariableDeclarationVariableReference>getAllContentsOfType(module.getFirstPart(), 
+        EVariableDeclarationVariableReference.class).get(0).getVariable_declaration_variable_reference();
+      int _length = EcoreUtil2.<EJinjaOrString>getAllContentsOfType(variable_reference, EJinjaOrString.class).get(0).getString().split("\\.", (-1)).length;
+      boolean _equals = (_length == 2);
+      if (_equals) {
+        this.error("Fully qualified module name is incomplete.", AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
+      }
+    }
+    EStringWithoutQuotesPassed _secondPart = module.getSecondPart();
+    boolean _tripleNotEquals = (_secondPart != null);
+    if (_tripleNotEquals) {
+      if (((EcoreUtil2.<EJinjaOrStringWithoutQuotes>getAllContentsOfType(module.getSecondPart(), EJinjaOrStringWithoutQuotes.class).size() > 0) && 
+        (module.getThirdPart() == null))) {
+        String namespace = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(module.getFirstPart());
+        String collectionName = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(module.getSecondPart());
+        String fqn = namespace.concat(".").concat(collectionName);
+        int _length_1 = fqn.split("\\.", (-1)).length;
+        boolean _equals_1 = (_length_1 == 2);
+        if (_equals_1) {
+          this.error("Module name is missing. Only namespace and collection name are defined", 
+            AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void checkModuleRequiredParameters(final EModuleCall module) {
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    Map<String, Map<String, Object>> parameters = AnsibleHelper.findParameters(module, fqn);
+    final Predicate<Map.Entry<String, Map<String, Object>>> _function = new Predicate<Map.Entry<String, Map<String, Object>>>() {
+      public boolean test(final Map.Entry<String, Map<String, Object>> map) {
+        return map.getValue().containsKey("required");
+      }
+    };
+    final Function<Map.Entry<String, Map<String, Object>>, String> _function_1 = new Function<Map.Entry<String, Map<String, Object>>, String>() {
+      public String apply(final Map.Entry<String, Map<String, Object>> p) {
+        return p.getKey();
+      }
+    };
+    List<String> requiredParameters = parameters.entrySet().stream().filter(_function).<String>map(_function_1).collect(Collectors.<String>toList());
+    final Function<EParameter, String> _function_2 = new Function<EParameter, String>() {
+      public String apply(final EParameter p) {
+        return p.getName();
+      }
+    };
+    Set<String> insertedParameters = EcoreUtil2.<EParameter>getAllContentsOfType(module, EParameter.class).stream().<String>map(_function_2).collect(
+      Collectors.<String>toSet());
+    String errorMsg = "";
+    for (final String param : requiredParameters) {
+      boolean _contains = insertedParameters.contains(param);
+      boolean _not = (!_contains);
+      if (_not) {
+        String _xifexpression = null;
+        boolean _equals = Objects.equal(errorMsg, "");
+        if (_equals) {
+          _xifexpression = errorMsg.concat(param);
+        } else {
+          _xifexpression = errorMsg.concat(",").concat(param);
+        }
+        errorMsg = _xifexpression;
+      }
+    }
+    if ((errorMsg != "")) {
+      this.error("The following required parameters are missing: ".concat(errorMsg), 
+        AnsibleDslPackage.Literals.EMODULE_CALL__FIRST_PART);
+    }
+  }
+  
+  @Check
+  public void checkRequiredSubparameters(final EParameter parameter) {
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    List<String> parameterPath = new ArrayList<String>();
+    parameterPath.add(0, parameter.getName());
+    Map<String, Map<String, Object>> subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath);
+    final Predicate<Map.Entry<String, Map<String, Object>>> _function = new Predicate<Map.Entry<String, Map<String, Object>>>() {
+      public boolean test(final Map.Entry<String, Map<String, Object>> map) {
+        return map.getValue().containsKey("required");
+      }
+    };
+    final Function<Map.Entry<String, Map<String, Object>>, String> _function_1 = new Function<Map.Entry<String, Map<String, Object>>, String>() {
+      public String apply(final Map.Entry<String, Map<String, Object>> p) {
+        return p.getKey();
+      }
+    };
+    List<String> requiredSubparameters = subparameters.entrySet().stream().filter(_function).<String>map(_function_1).collect(Collectors.<String>toList());
+    Set<String> insertedSubparameters = new HashSet<String>();
+    EList<EObject> contents = parameter.eContents();
+    for (final EObject content : contents) {
+      {
+        if ((content instanceof EDictionaryInLine)) {
+          EList<EDictionaryPair> _dictionary_pairs = ((EDictionaryInLine) content).getDictionary_pairs();
+          for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
+            insertedSubparameters.add(dictionary_pair.getName());
+          }
+        }
+        if ((content instanceof EDictionaryIndented)) {
+          EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryIndented) content).getDictionary_pairs();
+          for (final EDictionaryPair dictionary_pair_1 : _dictionary_pairs_1) {
+            insertedSubparameters.add(dictionary_pair_1.getName());
+          }
+        }
+      }
+    }
+    String errorMsg = "";
+    for (final String subparam : requiredSubparameters) {
+      boolean _contains = insertedSubparameters.contains(subparam);
+      boolean _not = (!_contains);
+      if (_not) {
+        String _xifexpression = null;
+        boolean _equals = Objects.equal(errorMsg, "");
+        if (_equals) {
+          _xifexpression = errorMsg.concat(subparam);
+        } else {
+          _xifexpression = errorMsg.concat(",").concat(subparam);
+        }
+        errorMsg = _xifexpression;
+      }
+    }
+    if ((errorMsg != "")) {
+      this.error("The following required subparameters are missing: ".concat(errorMsg), 
+        AnsibleDslPackage.Literals.EPARAMETER__NAME);
+    }
+  }
+  
+  @Check
+  public void checkRequiredSuboptions(final EDictionaryPair subparameter) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+      EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+      String fqn = AnsibleHelper.calculateModuleName(module);
+      Iterator<EObject> containers = EcoreUtil2.getAllContainers(subparameter).iterator();
+      List<String> parameterPath = new ArrayList<String>();
+      if ((subparameter instanceof EJinjaAndString)) {
+        containers.next();
+      }
+      parameterPath.add(0, subparameter.getName());
+      while (containers.hasNext()) {
+        {
+          EObject container = containers.next();
+          if ((container instanceof EDictionaryPair)) {
+            parameterPath.add(0, ((EDictionaryPair) container).getName());
+          }
+        }
+      }
+      parameterPath.add(0, parameter.getName());
+      Map<String, Map<String, Object>> subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath);
+      final Predicate<Map.Entry<String, Map<String, Object>>> _function = new Predicate<Map.Entry<String, Map<String, Object>>>() {
+        public boolean test(final Map.Entry<String, Map<String, Object>> map) {
+          return map.getValue().containsKey("required");
+        }
+      };
+      final Function<Map.Entry<String, Map<String, Object>>, String> _function_1 = new Function<Map.Entry<String, Map<String, Object>>, String>() {
+        public String apply(final Map.Entry<String, Map<String, Object>> p) {
+          return p.getKey();
+        }
+      };
+      List<String> requiredSubparameters = subparameters.entrySet().stream().filter(_function).<String>map(_function_1).collect(Collectors.<String>toList());
+      Set<String> insertedSubparameters = new HashSet<String>();
+      EList<EObject> contents = subparameter.eContents();
+      for (final EObject content : contents) {
+        {
+          if ((content instanceof EDictionaryInLine)) {
+            EList<EDictionaryPair> _dictionary_pairs = ((EDictionaryInLine) content).getDictionary_pairs();
+            for (final EDictionaryPair dictionary_pair : _dictionary_pairs) {
+              insertedSubparameters.add(dictionary_pair.getName());
+            }
+          }
+          if ((content instanceof EDictionaryIndented)) {
+            EList<EDictionaryPair> _dictionary_pairs_1 = ((EDictionaryIndented) content).getDictionary_pairs();
+            for (final EDictionaryPair dictionary_pair_1 : _dictionary_pairs_1) {
+              insertedSubparameters.add(dictionary_pair_1.getName());
+            }
+          }
+        }
+      }
+      String errorMsg = "";
+      for (final String subparam : requiredSubparameters) {
+        boolean _contains = insertedSubparameters.contains(subparam);
+        boolean _not = (!_contains);
+        if (_not) {
+          String _xifexpression = null;
+          boolean _equals = Objects.equal(errorMsg, "");
+          if (_equals) {
+            _xifexpression = errorMsg.concat(subparam);
+          } else {
+            _xifexpression = errorMsg.concat(",").concat(subparam);
+          }
+          errorMsg = _xifexpression;
+        }
+      }
+      if ((errorMsg != "")) {
+        this.error("The following required subparameters are missing: ".concat(errorMsg), 
+          AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME);
+      }
+    }
+  }
+  
+  @Check
+  public void checkParameterValue(final EParameter parameter) {
+    MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    String[] nameParts = fqn.split("\\.");
+    int _length = nameParts.length;
+    boolean _notEquals = (_length != 3);
+    if (_notEquals) {
+      return;
+    }
+    List<String> choices = new ArrayList<String>();
+    String projection = "modules".concat(".").concat(nameParts[2]).concat(".").concat("parameters").concat(".").concat(parameter.getName());
+    Bson match = Aggregates.match(Filters.<String>eq("_id", (nameParts[0]).concat(".").concat(nameParts[1])));
+    Bson choices_project = Aggregates.project(
+      Projections.fields(Projections.excludeId(), 
+        Projections.<String>computed("choices", "$".concat(projection).concat(".").concat("choices"))));
+    Iterator<Document> choicesIterator = mongo_collection.aggregate(Arrays.<Bson>asList(match, choices_project)).iterator();
+    while (choicesIterator.hasNext()) {
+      {
+        Document choices_content = choicesIterator.next();
+        boolean _isEmpty = choices_content.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          Object _get = choices_content.get("choices");
+          choices = ((List<String>) _get);
+        }
+      }
+    }
+    EValuePassed value = parameter.getValue();
+    Boolean valueExists = Boolean.valueOf(false);
+    if (((value instanceof ESimpleValueWithoutString) && (!choices.isEmpty()))) {
+      ENumber _simple_value_number = ((ESimpleValueWithoutString) value).getSimple_value_number();
+      boolean _tripleNotEquals = (_simple_value_number != null);
+      if (_tripleNotEquals) {
+        String proposals = "";
+        for (final String choice : choices) {
+          {
+            proposals = proposals.concat("\n").concat(choice);
+            boolean _equals = ((ESimpleValueWithoutString) value).getSimple_value_number().getNumber().equals(choice);
+            if (_equals) {
+              valueExists = Boolean.valueOf(true);
+            }
+          }
+        }
+        if (((valueExists).booleanValue() == false)) {
+          this.error(
+            "The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(
+              " is not allowed.\nPossible values can be the following:").concat(proposals), 
+            AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+    } else {
+      if (((value instanceof EJinjaAndString) && (!choices.isEmpty()))) {
+        if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && 
+          (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
+          String proposals_1 = "";
+          for (final String choice_1 : choices) {
+            {
+              proposals_1 = proposals_1.concat("\n").concat(choice_1);
+              boolean _equals = ((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString().equals(choice_1);
+              if (_equals) {
+                valueExists = Boolean.valueOf(true);
+              }
+            }
+          }
+          if (((valueExists).booleanValue() == false)) {
+            this.error(
+              "The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), 
+              AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+          }
+        }
+      } else {
+        if (((value instanceof EJinjaAndStringWithoutQuotes) && (!choices.isEmpty()))) {
+          if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && 
+            (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
+            String proposals_2 = "";
+            for (final String choice_2 : choices) {
+              {
+                proposals_2 = proposals_2.concat("\n").concat(choice_2);
+                boolean _equals = ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes().equals(choice_2);
+                if (_equals) {
+                  valueExists = Boolean.valueOf(true);
+                }
+              }
+            }
+            if (((valueExists).booleanValue() == false)) {
+              this.error(
+                "The value ".concat(
+                  ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_2), AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void checkParameterValueType(final EParameter parameter) {
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    String[] nameParts = fqn.split("\\.");
+    int _length = nameParts.length;
+    boolean _notEquals = (_length != 3);
+    if (_notEquals) {
+      return;
+    }
+    String _get = nameParts[0];
+    String _plus = (_get + ".");
+    String _get_1 = nameParts[1];
+    String collectionName = (_plus + _get_1);
+    Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
+    Object _get_3 = ((Document) _get_2).get(
+      nameParts[2]);
+    Document moduleData = ((Document) _get_3);
+    Object _get_4 = moduleData.get("parameters");
+    Object _get_5 = ((Document) _get_4).get(parameter.getName());
+    Document parameterData = ((Document) _get_5);
+    List<String> booleanValues = Arrays.<String>asList("True", "False", "true", "false", "yes", "no");
+    if ((parameterData.get("type").equals("integer") || parameterData.get("type").equals("int"))) {
+      EValuePassed _value = parameter.getValue();
+      if ((_value instanceof ESimpleValueWithoutStringImpl)) {
+        EValuePassed _value_1 = parameter.getValue();
+        EBooleanAnsible _simple_value_boolean = ((ESimpleValueWithoutStringImpl) _value_1).getSimple_value_boolean();
+        boolean _tripleNotEquals = (_simple_value_boolean != null);
+        if (_tripleNotEquals) {
+          this.error("The value of the parameter is not integer", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
+        String result = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _matches = result.matches("^\\d+");
+        boolean _not = (!_matches);
+        if (_not) {
+          this.error("The value of the parameter is not integer", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+    }
+    boolean _equals = parameterData.get("type").equals("boolean");
+    if (_equals) {
+      EValuePassed _value_2 = parameter.getValue();
+      if ((_value_2 instanceof ESimpleValueWithoutStringImpl)) {
+        EValuePassed _value_3 = parameter.getValue();
+        EBooleanAnsible _simple_value_boolean_1 = ((ESimpleValueWithoutStringImpl) _value_3).getSimple_value_boolean();
+        boolean _tripleEquals = (_simple_value_boolean_1 == null);
+        if (_tripleEquals) {
+          this.error("The value of the parameter is not boolean", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        String result_1 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _contains = booleanValues.contains(result_1);
+        boolean _not_1 = (!_contains);
+        if (_not_1) {
+          this.error("The value of the parameter is not boolean", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+    }
+    boolean _equals_1 = parameterData.get("type").equals("string");
+    if (_equals_1) {
+      EValuePassed _value_4 = parameter.getValue();
+      if ((_value_4 instanceof ESimpleValueWithoutStringImpl)) {
+        this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        String result_2 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _contains_1 = booleanValues.contains(result_2);
+        if (_contains_1) {
+          this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+        if ((result_2.startsWith("[") && result_2.endsWith("]"))) {
+          this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+        if ((result_2.startsWith("{") && result_2.endsWith("}"))) {
+          this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+      EValuePassed _value_5 = parameter.getValue();
+      if ((_value_5 instanceof EComposedValueImpl)) {
+        this.error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+    }
+    boolean _equals_2 = parameterData.get("type").equals("list");
+    if (_equals_2) {
+      EValuePassed _value_6 = parameter.getValue();
+      if ((_value_6 instanceof ESimpleValueWithoutStringImpl)) {
+        this.error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      EValuePassed _value_7 = parameter.getValue();
+      if ((_value_7 instanceof EDictionaryImpl)) {
+        this.error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        String result_3 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _not_2 = (!(result_3.startsWith("[") && result_3.endsWith("]")));
+        if (_not_2) {
+          this.error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+    }
+    boolean _equals_3 = parameterData.get("type").equals("dictionary");
+    if (_equals_3) {
+      EValuePassed _value_8 = parameter.getValue();
+      if ((_value_8 instanceof ESimpleValueWithoutStringImpl)) {
+        this.error("The value of the parameter is not dictionary", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      EValuePassed _value_9 = parameter.getValue();
+      if ((_value_9 instanceof EListImpl)) {
+        this.error("The value of the parameter is not dictionary", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        String result_4 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _not_3 = (!(result_4.startsWith("{") && result_4.endsWith("}")));
+        if (_not_3) {
+          this.error("The value of the parameter is not dictionary", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+    }
+    boolean _equals_4 = parameterData.get("type").equals("path");
+    if (_equals_4) {
+      EValuePassed _value_10 = parameter.getValue();
+      if ((_value_10 instanceof ESimpleValueWithoutStringImpl)) {
+        this.error("The value of the parameter is not a path", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+      if (((parameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+        (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+        String result_5 = AnsibleHelper.getEJinjaAndStringValue(parameter.getValue());
+        boolean _matches_1 = result_5.matches("^/|(/[a-zA-Z0-9_-]+)+$");
+        boolean _not_4 = (!_matches_1);
+        if (_not_4) {
+          this.error("The value of the parameter is not a path", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+        }
+      }
+      EValuePassed _value_11 = parameter.getValue();
+      if ((_value_11 instanceof EComposedValueImpl)) {
+        this.error("The value of the parameter is not a path", AnsibleDslPackage.Literals.EPARAMETER__VALUE);
+      }
+    }
+  }
+  
+  @Check
+  public void checkParameterName(final EParameter parameter) {
+    EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+    String fqn = AnsibleHelper.calculateModuleName(module);
+    String[] nameParts = fqn.split("\\.");
+    int _length = nameParts.length;
+    boolean _notEquals = (_length != 3);
+    if (_notEquals) {
+      return;
+    }
+    String _get = nameParts[0];
+    String _plus = (_get + ".");
+    String _get_1 = nameParts[1];
+    String collectionName = (_plus + _get_1);
+    Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
+    Object _get_3 = ((Document) _get_2).get(
+      nameParts[2]);
+    Document moduleData = ((Document) _get_3);
+    Object _get_4 = moduleData.get("parameters");
+    Object _get_5 = ((Document) _get_4).get(parameter.getName());
+    Document parameterData = ((Document) _get_5);
+    if ((parameterData == null)) {
+      String _name = parameter.getName();
+      String _plus_1 = ("The parameter " + _name);
+      String _plus_2 = (_plus_1 + " is not included in module ");
+      String _plus_3 = (_plus_2 + fqn);
+      this.error(_plus_3, 
+        AnsibleDslPackage.Literals.EPARAMETER__NAME);
+    }
+  }
+  
+  @Check
+  public void checkSubparameterValue(final EDictionaryPair subparameter) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+      EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+      EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+      String fqn = AnsibleHelper.calculateModuleName(module);
+      String[] nameParts = fqn.split("\\.");
+      int _length = nameParts.length;
+      boolean _notEquals = (_length != 3);
+      if (_notEquals) {
+        return;
+      }
+      List<String> choices = new ArrayList<String>();
+      Iterator<EObject> containers = EcoreUtil2.getAllContainers(subparameter).iterator();
+      List<String> parameterPath = new ArrayList<String>();
+      if ((subparameter instanceof EJinjaAndString)) {
+        containers.next();
+      }
+      parameterPath.add(0, subparameter.getName());
+      while (containers.hasNext()) {
+        {
+          EObject container = containers.next();
+          if ((container instanceof EDictionaryPair)) {
+            parameterPath.add(0, ((EDictionaryPair) container).getName());
+          }
+        }
+      }
+      parameterPath.add(0, parameter.getName());
+      String projection = "modules".concat(".").concat(nameParts[2]).concat(".").concat("parameters").concat(".").concat(parameterPath.get(0));
+      for (int i = 1; (i < parameterPath.size()); i++) {
+        projection = projection.concat(".").concat("suboptions").concat(".").concat(parameterPath.get(i));
+      }
+      Bson match = Aggregates.match(Filters.<String>eq("_id", (nameParts[0]).concat(".").concat(nameParts[1])));
+      Bson choices_project = Aggregates.project(
+        Projections.fields(Projections.excludeId(), 
+          Projections.<String>computed("choices", "$".concat(projection.concat(".").concat("choices")))));
+      Iterator<Document> choicesIterator = mongo_collection.aggregate(Arrays.<Bson>asList(match, choices_project)).iterator();
+      while (choicesIterator.hasNext()) {
+        {
+          Document choices_content = choicesIterator.next();
+          boolean _isEmpty = choices_content.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            Object _get = choices_content.get("choices");
+            choices = ((List<String>) _get);
+          }
+        }
+      }
+      EValuePassed value = subparameter.getValue();
+      Boolean valueExists = Boolean.valueOf(false);
+      if (((value instanceof ESimpleValueWithoutString) && (!choices.isEmpty()))) {
+        ENumber _simple_value_number = ((ESimpleValueWithoutString) value).getSimple_value_number();
+        boolean _tripleNotEquals_1 = (_simple_value_number != null);
+        if (_tripleNotEquals_1) {
+          String proposals = "";
+          for (final String choice : choices) {
+            {
+              proposals = proposals.concat("\n").concat(choice);
+              boolean _equals = ((ESimpleValueWithoutString) value).getSimple_value_number().getNumber().equals(choice);
+              if (_equals) {
+                valueExists = Boolean.valueOf(true);
+              }
+            }
+          }
+          if (((valueExists).booleanValue() == false)) {
+            this.error(
+              "The value ".concat(((ESimpleValueWithoutString) value).getSimple_value_number().getNumber()).concat(
+                " is not allowed.\nPossible values can be the following:").concat(proposals), 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+      } else {
+        if (((value instanceof EJinjaAndString) && (!choices.isEmpty()))) {
+          if (((((Object[])Conversions.unwrapArray(((EJinjaAndString) value).getJinja_expression_and_string(), Object.class)).length == 1) && 
+            (((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString() != null))) {
+            String proposals_1 = "";
+            for (final String choice_1 : choices) {
+              {
+                proposals_1 = proposals_1.concat("\n").concat(choice_1);
+                boolean _equals = ((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString().equals(choice_1);
+                if (_equals) {
+                  valueExists = Boolean.valueOf(true);
+                }
+              }
+            }
+            if (((valueExists).booleanValue() == false)) {
+              this.error(
+                "The value ".concat(((EJinjaAndString) value).getJinja_expression_and_string().get(0).getString()).concat(" is not allowed.\nPossible values can be the following:").concat(proposals_1), 
+                AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+            }
+          }
+        } else {
+          if (((value instanceof EJinjaAndStringWithoutQuotes) && (!choices.isEmpty()))) {
+            if (((((Object[])Conversions.unwrapArray(((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout(), Object.class)).length == 1) && 
+              (((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes() != null))) {
+              String proposals_2 = "";
+              for (final String choice_2 : choices) {
+                {
+                  proposals_2 = proposals_2.concat("\n").concat(choice_2);
+                  boolean _equals = ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes().equals(choice_2);
+                  if (_equals) {
+                    valueExists = Boolean.valueOf(true);
+                  }
+                }
+              }
+              if (((valueExists).booleanValue() == false)) {
+                this.error(
+                  "The value ".concat(
+                    ((EJinjaAndStringWithoutQuotes) value).getJinja_expression_and_stringWithout().get(0).getStringWithoutQuotes()).concat(
+                    " is not allowed.\nPossible values can be the following:").concat(proposals_2), 
+                  AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void checkSubparameterValueType(final EDictionaryPair subparameter) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+      EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+      String fqn = AnsibleHelper.calculateModuleName(module);
+      String[] nameParts = fqn.split("\\.");
+      int _length = nameParts.length;
+      boolean _notEquals = (_length != 3);
+      if (_notEquals) {
+        return;
+      }
+      String _get = nameParts[0];
+      String _plus = (_get + ".");
+      String _get_1 = nameParts[1];
+      String collectionName = (_plus + _get_1);
+      Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
+      Object _get_3 = ((Document) _get_2).get(
+        nameParts[2]);
+      Document moduleData = ((Document) _get_3);
+      Object _get_4 = moduleData.get("parameters");
+      Object _get_5 = ((Document) _get_4).get(parameter.getName());
+      Document parameterData = ((Document) _get_5);
+      Iterator<EObject> containers = EcoreUtil2.getAllContainers(subparameter).iterator();
+      List<String> parameterPath = new ArrayList<String>();
+      if ((subparameter instanceof EJinjaAndString)) {
+        containers.next();
+      }
+      parameterPath.add(0, subparameter.getName());
+      while (containers.hasNext()) {
+        {
+          EObject container = containers.next();
+          if ((container instanceof EDictionaryPair)) {
+            parameterPath.add(0, ((EDictionaryPair) container).getName());
+          }
+        }
+      }
+      parameterPath.add(0, parameter.getName());
+      Document subparameterData = new Document();
+      for (int i = 1; (i < parameterPath.size()); i++) {
+        if ((i == 1)) {
+          Object _get_6 = parameterData.get("suboptions");
+          Object _get_7 = ((Document) _get_6).get(
+            parameterPath.get(i));
+          subparameterData = ((Document) _get_7);
+        } else {
+          Object _get_8 = subparameterData.get("suboptions");
+          Object _get_9 = ((Document) _get_8).get(
+            parameterPath.get(i));
+          subparameterData = ((Document) _get_9);
+        }
+      }
+      List<String> booleanValues = Arrays.<String>asList("True", "False", "true", "false", "yes", "no");
+      if ((subparameterData.get("type").equals("integer") || subparameterData.get("type").equals("int"))) {
+        EValuePassed _value = subparameter.getValue();
+        if ((_value instanceof ESimpleValueWithoutStringImpl)) {
+          EValuePassed _value_1 = subparameter.getValue();
+          EBooleanAnsible _simple_value_boolean = ((ESimpleValueWithoutStringImpl) _value_1).getSimple_value_boolean();
+          boolean _tripleNotEquals_1 = (_simple_value_boolean != null);
+          if (_tripleNotEquals_1) {
+            this.error("The value of the subparameter is not integer", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl))) {
+          String result = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _matches = result.matches("^\\d+");
+          boolean _not = (!_matches);
+          if (_not) {
+            this.error("The value of the subparameter is not integer", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+      }
+      boolean _equals = subparameterData.get("type").equals("boolean");
+      if (_equals) {
+        EValuePassed _value_2 = subparameter.getValue();
+        if ((_value_2 instanceof ESimpleValueWithoutStringImpl)) {
+          EValuePassed _value_3 = subparameter.getValue();
+          EBooleanAnsible _simple_value_boolean_1 = ((ESimpleValueWithoutStringImpl) _value_3).getSimple_value_boolean();
+          boolean _tripleEquals = (_simple_value_boolean_1 == null);
+          if (_tripleEquals) {
+            this.error("The value of the subparameter is not boolean", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+          String result_1 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _contains = booleanValues.contains(result_1);
+          boolean _not_1 = (!_contains);
+          if (_not_1) {
+            this.error("The value of the subparameter is not boolean", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+      }
+      boolean _equals_1 = subparameterData.get("type").equals("string");
+      if (_equals_1) {
+        EValuePassed _value_4 = subparameter.getValue();
+        if ((_value_4 instanceof ESimpleValueWithoutStringImpl)) {
+          this.error("The value of the subparameter is not string", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (parameter.getValue() instanceof EJinjaAndStringImpl))) {
+          String result_2 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _contains_1 = booleanValues.contains(result_2);
+          if (_contains_1) {
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+          if ((result_2.startsWith("[") && result_2.endsWith("]"))) {
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+          if ((result_2.startsWith("{") && result_2.endsWith("}"))) {
+            this.error("The value of the subparameter is not string", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+        EValuePassed _value_5 = subparameter.getValue();
+        if ((_value_5 instanceof EComposedValueImpl)) {
+          this.error("The value of the subparameter is not string", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+      }
+      boolean _contains_2 = subparameterData.get("type").toString().contains("list");
+      if (_contains_2) {
+        EValuePassed _value_6 = subparameter.getValue();
+        if ((_value_6 instanceof ESimpleValueWithoutStringImpl)) {
+          this.error("The value of the subparameter is not list", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        EValuePassed _value_7 = subparameter.getValue();
+        if ((_value_7 instanceof EDictionaryImpl)) {
+          this.error("The value of the subparameter is not list", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+          String result_3 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _not_2 = (!(result_3.startsWith("[") && result_3.endsWith("]")));
+          if (_not_2) {
+            this.error("The value of the subparameter is not list", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+      }
+      boolean _equals_2 = subparameterData.get("type").equals("dictionary");
+      if (_equals_2) {
+        EValuePassed _value_8 = subparameter.getValue();
+        if ((_value_8 instanceof ESimpleValueWithoutStringImpl)) {
+          this.error("The value of the subparameter is not dictionary", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        EValuePassed _value_9 = subparameter.getValue();
+        if ((_value_9 instanceof EListImpl)) {
+          this.error("The value of the subparameter is not dictionary", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+          String result_4 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _not_3 = (!(result_4.startsWith("{") && result_4.endsWith("}")));
+          if (_not_3) {
+            this.error("The value of the subparameter is not dictionary", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+      }
+      boolean _equals_3 = subparameterData.get("type").equals("path");
+      if (_equals_3) {
+        EValuePassed _value_10 = subparameter.getValue();
+        if ((_value_10 instanceof ESimpleValueWithoutStringImpl)) {
+          this.error("The value of the subparameter is not a path", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+        if (((subparameter.getValue() instanceof EJinjaAndStringWithoutQuotesImpl) || 
+          (subparameter.getValue() instanceof EJinjaAndStringImpl))) {
+          String result_5 = AnsibleHelper.getEJinjaAndStringValue(subparameter.getValue());
+          boolean _matches_1 = result_5.matches("^/|(/[a-zA-Z0-9_-]+)+$");
+          boolean _not_4 = (!_matches_1);
+          if (_not_4) {
+            this.error("The value of the subparameter is not a path", 
+              AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+          }
+        }
+        EValuePassed _value_11 = subparameter.getValue();
+        if ((_value_11 instanceof EComposedValueImpl)) {
+          this.error("The value of the subparameter is not a path", 
+            AnsibleDslPackage.Literals.EDICTIONARY_PAIR__VALUE);
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void checkSubparameterName(final EDictionaryPair subparameter) {
+    EParameter _containerOfType = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
+      EParameter parameter = EcoreUtil2.<EParameter>getContainerOfType(subparameter, EParameter.class);
+      EModuleCall module = EcoreUtil2.<EModuleCall>getContainerOfType(parameter, EModuleCall.class);
+      String fqn = AnsibleHelper.calculateModuleName(module);
+      String[] nameParts = fqn.split("\\.");
+      int _length = nameParts.length;
+      boolean _notEquals = (_length != 3);
+      if (_notEquals) {
+        return;
+      }
+      String _get = nameParts[0];
+      String _plus = (_get + ".");
+      String _get_1 = nameParts[1];
+      String collectionName = (_plus + _get_1);
+      Object _get_2 = AnsibleHelper.getCollectionData().get(collectionName).get("modules");
+      Object _get_3 = ((Document) _get_2).get(
+        nameParts[2]);
+      Document moduleData = ((Document) _get_3);
+      Object _get_4 = moduleData.get("parameters");
+      Object _get_5 = ((Document) _get_4).get(parameter.getName());
+      Document parameterData = ((Document) _get_5);
+      Iterator<EObject> containers = EcoreUtil2.getAllContainers(subparameter).iterator();
+      List<String> parameterPath = new ArrayList<String>();
+      if ((subparameter instanceof EJinjaAndString)) {
+        containers.next();
+      }
+      parameterPath.add(0, subparameter.getName());
+      while (containers.hasNext()) {
+        {
+          EObject container = containers.next();
+          if ((container instanceof EDictionaryPair)) {
+            parameterPath.add(0, ((EDictionaryPair) container).getName());
+          }
+        }
+      }
+      parameterPath.add(0, parameter.getName());
+      Document subparameterData = new Document();
+      for (int i = 1; (i < parameterPath.size()); i++) {
+        if ((i == 1)) {
+          Object _get_6 = parameterData.get("suboptions");
+          Object _get_7 = ((Document) _get_6).get(
+            parameterPath.get(i));
+          subparameterData = ((Document) _get_7);
+        } else {
+          Object _get_8 = subparameterData.get("suboptions");
+          Object _get_9 = ((Document) _get_8).get(
+            parameterPath.get(i));
+          subparameterData = ((Document) _get_9);
+        }
+      }
+      if ((subparameterData == null)) {
+        String _name = subparameter.getName();
+        String _plus_1 = ("The subparameter " + _name);
+        String _plus_2 = (_plus_1 + " is not included in parameter ");
+        int _size = parameterPath.size();
+        int _minus = (_size - 2);
+        String _get_6 = parameterPath.get(_minus);
+        String _plus_3 = (_plus_2 + _get_6);
+        this.error(_plus_3, AnsibleDslPackage.Literals.EDICTIONARY_PAIR__NAME);
+      }
+    }
+  }
+  
+  @Check
+  public void checkCollectionSupport(final ECollectionFQN collection) {
+    MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleCollections();
+    String collectionName = AnsibleHelper.calculateCollectionName(collection);
+    boolean _notEquals = (!Objects.equal(collectionName, ""));
+    if (_notEquals) {
+      long count = mongo_collection.countDocuments(Filters.<String>eq("_id", collectionName));
+      if ((count == 0)) {
+        this.error("The collection ".concat(collectionName).concat(" is not supported"), 
+          AnsibleDslPackage.Literals.ECOLLECTION_FQN__NAMESPACE_OR_FQN);
+      }
+    }
+  }
+  
+  @Check
+  public void checkRoleSupport(final ERoleName role) {
+    MongoCollection<Document> mongo_collection = AnsibleHelper.getAnsibleRoles();
+    String roleName = AnsibleHelper.calculateRoleName(role);
+    boolean _equals = Objects.equal(roleName, "");
+    if (_equals) {
+      this.error("The role does not belong to any of the imported collections or the name is wrong.", 
+        AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
+    }
+    if (((!Objects.equal(roleName, "")) && (roleName.split("\\.", (-1)).length == 2))) {
+      long count = mongo_collection.countDocuments(Filters.<String>eq("_id", roleName));
+      if ((count == 0)) {
+        this.error("The role ".concat(roleName).concat(" is not supported"), 
+          AnsibleDslPackage.Literals.EROLE_NAME__FIRST_PART);
+      }
+    }
+  }
+  
+  @Check
+  public void chechCodeSmells(final Model o) {
+    try {
+      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", 
+        " ");
+      URI fileURI = o.eResource().getURI();
+      int _segmentCount = fileURI.segmentCount();
+      int _minus = (_segmentCount - 1);
+      String AnsibleModelName = fileURI.segment(_minus).replaceAll("%20", " ").replace(".ans", 
+        "");
+      String fileDirectory = fileURI.trimSegments(1).toString().replaceAll("%20", " ").replace("platform:/resource", 
+        "");
+      File script = null;
+      boolean _isFile = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".yaml")).isFile();
+      if (_isFile) {
+        File _file = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".yaml"));
+        script = _file;
+      } else {
+        boolean _isFile_1 = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".yml")).isFile();
+        if (_isFile_1) {
+          File _file_1 = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".yml"));
+          script = _file_1;
+        } else {
+          return;
+        }
+      }
+      Scanner scriptScanner = new Scanner(script);
+      int lineNr = 1;
+      HashMap<Integer, String> tasksOrPlays = new HashMap<Integer, String>();
+      while (scriptScanner.hasNextLine()) {
+        {
+          String line = scriptScanner.nextLine();
+          if ((line.contains("- name:") || line.contains("-name:"))) {
+            tasksOrPlays.put(Integer.valueOf(lineNr), (line.split(":")[1]).trim());
+          }
+          lineNr++;
+        }
+      }
+      List<Integer> tasksOrPlaysLinesNum = tasksOrPlays.keySet().stream().collect(Collectors.<Integer>toList());
+      String boundary = "011000010111000001101001";
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      HttpPost post = new HttpPost("http://localhost:5000/bugs/ansible/file");
+      FileBody filebody = new FileBody(script);
+      MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+      builder.setBoundary(boundary);
+      builder.addPart("file", filebody);
+      HttpEntity entity = builder.build();
+      post.setEntity(entity);
+      HttpResponse response = null;
+      try {
+        response = httpclient.execute(post);
+      } catch (final Throwable _t) {
+        if (_t instanceof NoHttpResponseException) {
+          System.out.println("No response from Ansible defect predictor");
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      InputStream _content = response.getEntity().getContent();
+      InputStreamReader _inputStreamReader = new InputStreamReader(_content, "UTF-8");
+      BufferedReader reader = new BufferedReader(_inputStreamReader);
+      StringBuilder stringbuilder = new StringBuilder();
+      for (String line = null; ((line = reader.readLine()) != null);) {
+        stringbuilder.append(line).append("\n");
+      }
+      File ansibleModel = null;
+      File _file_2 = new File(((((workspaceDir + fileDirectory) + "/") + AnsibleModelName) + ".ans"));
+      ansibleModel = _file_2;
+      String _string = stringbuilder.toString();
+      JSONObject json = new JSONObject(_string);
+      Object _get = json.get("bugs");
+      JSONArray bugs = ((JSONArray) _get);
+      for (int i = 0; (i < bugs.length()); i++) {
+        {
+          JSONObject bug = bugs.getJSONObject(i);
+          JSONObject bugDetails = bug.getJSONObject("bug_info");
+          int bugLineNum = bugDetails.getInt("line_number");
+          String bugDescription = bugDetails.getString("description");
+          final List<Integer> _converted_tasksOrPlaysLinesNum = (List<Integer>)tasksOrPlaysLinesNum;
+          int _size = tasksOrPlaysLinesNum.size();
+          int _minus_1 = (_size - 1);
+          int index = AnsibleHelper.nearestTaskOrPlayBinarySearch(((int[])Conversions.unwrapArray(_converted_tasksOrPlaysLinesNum, int.class)), 0, _minus_1, bugLineNum);
+          if ((index > bugLineNum)) {
+            index = (index - 1);
+          }
+          String name = tasksOrPlays.get(tasksOrPlaysLinesNum.get(index)).replace("\"", "").replace("\\s", "");
+          Scanner modelScanner = new Scanner(ansibleModel);
+          int offsetCounter = 1;
+          while (modelScanner.hasNextLine()) {
+            {
+              String modelLine = modelScanner.nextLine();
+              boolean _contains = modelLine.replace("\"", "").trim().replaceAll("\\s+", "").contains(
+                name.replace("\"", "").trim().replaceAll("\\s+", ""));
+              if (_contains) {
+                this.getMessageAcceptor().acceptWarning(
+                  ((("In the context of \"" + name) + "\" there is the following code smell: ") + bugDescription), o, offsetCounter, 1, null, null);
+                int _length = modelLine.length();
+                int _plus = (offsetCounter + _length);
+                int _plus_1 = (_plus + 1);
+                offsetCounter = _plus_1;
+              } else {
+                int _length_1 = modelLine.length();
+                int _plus_2 = (offsetCounter + _length_1);
+                int _plus_3 = (_plus_2 + 1);
+                offsetCounter = _plus_3;
+              }
+            }
+          }
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -4,6 +4,13 @@
 package org.sodalite.dsl.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.eclipse.xtext.validation.Issue
+import org.sodalite.dsl.validation.RMValidator
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.ui.editor.model.IXtextDocument
 
 /**
  * Custom quickfixes.
@@ -21,4 +28,24 @@ class RMQuickfixProvider extends DefaultQuickfixProvider {
 //			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
 //		]
 //	}
+	@Fix(RMValidator.INVALID_PATH)
+	def void fixRelativePath(Issue issue,IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue,
+			"Fix relative path",
+			"Fix relative path",
+			null,
+			[context |
+				var IXtextDocument xtextDocument = context.getXtextDocument();
+				var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+				var URI project_uri = xtextDocument.resourceURI
+				var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+				var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+				intermediatePath = intermediatePath.replace(RMName,"")
+				var String fix = "\"".concat(workspaceDir+intermediatePath).concat("\"")
+				xtextDocument.replace(issue.offset, issue.length, fix)
+				]
+		)
+	}
+
+
 }

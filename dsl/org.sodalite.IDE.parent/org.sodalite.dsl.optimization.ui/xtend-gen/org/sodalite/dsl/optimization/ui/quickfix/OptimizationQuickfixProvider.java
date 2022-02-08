@@ -43,11 +43,13 @@ public class OptimizationQuickfixProvider extends DefaultQuickfixProvider {
     final String message = MessageFormat.format("Create graph \"{0}\" in entity \"{1}\"", 
       this.convertGraphToString(value, ""), this.convertPathToString(path));
     final String sub_message = message;
-    final ISemanticModification _function = (EObject node, IModificationContext context) -> {
-      final String entrypointName = this.findEntryPoint(node, path);
-      Object _entryPoint = this.getEntryPoint(node, entrypointName);
-      final EObject entrypoint = ((EObject) _entryPoint);
-      this.createGraph(entrypoint, value);
+    final ISemanticModification _function = new ISemanticModification() {
+      public void apply(final EObject node, final IModificationContext context) throws Exception {
+        final String entrypointName = OptimizationQuickfixProvider.this.findEntryPoint(node, path);
+        Object _entryPoint = OptimizationQuickfixProvider.this.getEntryPoint(node, entrypointName);
+        final EObject entrypoint = ((EObject) _entryPoint);
+        OptimizationQuickfixProvider.this.createGraph(entrypoint, value);
+      }
     };
     acceptor.accept(issue, message, sub_message, "", _function);
   }

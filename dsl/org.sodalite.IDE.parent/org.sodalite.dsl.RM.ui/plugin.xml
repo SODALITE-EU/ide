@@ -322,6 +322,10 @@
         class="org.sodalite.dsl.ui.handlers.RMSaveHandler"
         commandId="org.sodalite.dsl.RM.ui.handler.saveRM">
   </handler>
+  <handler
+        class="org.sodalite.dsl.ui.RMExecutableExtensionFactory:org.sodalite.dsl.ui.handlers.GenerationHandler"
+        commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand">
+  </handler>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
@@ -340,6 +344,13 @@
         description="Save the RM into the KB"
         id="org.sodalite.dsl.RM.ui.command.saveRM"
         name="saveRM">
+  </command>
+  <command
+        categoryId="org.sodalite.category"
+        defaultHandler="org.sodalite.dsl.ui.RMExecutableExtensionFactory:org.sodalite.dsl.ui.handlers.GenerationHandler"
+        description="Generate Ansible files"
+        id="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+        name="generateAnsible">
   </command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -365,6 +376,29 @@
               label="Save RM  in the KB"
               style="push"
               tooltip="Save RM into the remote Sodalite Knowledge Base">
+           <visibleWhen
+                 checkEnabled="false">
+              <with
+                    variable="activeMenuSelection">
+                 <iterate
+                       ifEmpty="false">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.eclipse.core.resources.name"
+                             value="*.rm">
+                       </test>
+                    </adapt>
+                 </iterate>
+              </with>
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+              id="org.sodalite.dsl.RM.ui.popup.command.GenerationCommand"
+              label="Generate Ansible files"
+              style="push"
+              tooltip="Generate code">
            <visibleWhen
                  checkEnabled="false">
               <with
@@ -436,7 +470,7 @@
                     <adapt
                           type="org.eclipse.core.resources.IResource">
                        <test
-                             property="org.eclipse.core.resources.name"
+                             property="org.eclipse.core.resources.IResource"
                              value="*.rm">
                        </test>
                     </adapt>
@@ -445,6 +479,32 @@
            </visibleWhen>
         </command>
      </menu>
+  </menuContribution>
+  <menuContribution
+        allPopups="false"
+        locationURI="popup:#TextEditorContext?after=additions">
+     <command
+           commandId="org.sodalite.dsl.RM.ui.command.GenerationCommand"
+           label="Generate Ansible files"
+           style="push"
+           tooltip="Generate code">
+        <visibleWhen
+              checkEnabled="false">
+           <with
+                 variable="activeMenuSelection">
+              <iterate
+                    ifEmpty="false">
+                 <adapt
+                       type="org.eclipse.core.resources.IResource">
+                    <test
+                          property="org.eclipse.core.resources.IResource"
+                          value="*.rm">
+                    </test>
+                 </adapt>
+              </iterate>
+           </with>
+        </visibleWhen>
+     </command>
   </menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator for org.sodalite.dsl.RM -->

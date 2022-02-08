@@ -4,6 +4,8 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -36,11 +38,18 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 		addField(new StringFieldEditor(PreferenceConstants.xOPERA_URI, "xOPERA URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.PDS_URI, "PDS URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Refactorer_URI, "Refactorer URL:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.NIFI_URI, "NIFI URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Consul_IP, "Consul IP:", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Grafana_Registry_URI, "Grafana Registry URL:",
+				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.Grafana_URI, "Grafana URL:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.RulesServer_URI, "Rules Server URL:",
 				getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceConstants.SKYDIVE_ANALYZER_URI, "Skydive Analyzer URL:",
+				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.MONGODB_URI, "MongoDB URL:",
+				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.Ansible_Defect_Predictor_URI, "Ansible defect predictor URL:",
 				getFieldEditorParent()));
 	}
 
@@ -52,6 +61,17 @@ public class SodaliteBackendPreferencePage extends FieldEditorPreferencePage imp
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Sodalite Backend configuration");
+	}
+
+	@Override
+	public boolean performOk() {
+		super.performOk();
+		try {
+			SodaliteBackendProxy.resetKBReasoner();
+		} catch (Exception e) {
+			SodaliteLogger.log(e);
+		}
+		return true;
 	}
 
 }

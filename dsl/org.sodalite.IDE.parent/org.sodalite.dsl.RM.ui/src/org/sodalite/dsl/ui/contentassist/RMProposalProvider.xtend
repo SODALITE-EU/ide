@@ -52,10 +52,16 @@ import org.sodalite.dsl.rM.EPolicyType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
-import org.sodalite.dsl.ui.helper.BackendHelper
 import org.sodalite.dsl.ui.helper.RMHelper
 import org.eclipse.xtext.impl.KeywordImpl
 import org.sodalite.dsl.rM.EPREFIX_REF
+import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl
+import org.sodalite.dsl.rM.EArtifactDefinition
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.sodalite.dsl.rM.EInterfaceDefinition
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -96,7 +102,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			System.out.println("Invoking content assist for imports")
 			
-			val ReasonerData<String> modules = BackendHelper.getKBReasoner().modules
+			val ReasonerData<String> modules = SodaliteBackendProxy.getKBReasoner().modules
 				
 			System.out.println ("Modules retrieved from KB: " + modules.elements)
 			for (module: modules.elements){
@@ -132,7 +138,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getDataTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getDataTypes(importedModules)
 			System.out.println ("Data types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tData type: " + type.label)
@@ -176,7 +182,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> nodes = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+			val ReasonerData<Type> nodes = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
 			System.out.println ("Nodes retrieved from KB:")
 			for (node: nodes.elements){
 				System.out.println ("\tNode: " + node.label)
@@ -217,7 +223,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Types retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tInterface: " + type.label)
@@ -256,7 +262,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getPolicyTypes(importedModules)
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getPolicyTypes(importedModules)
 			System.out.println ("Policies retrieved from KB:")
 			for (type: types.elements){
 				System.out.println ("\tPolicy: " + type.label)
@@ -296,7 +302,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val List<String> importedModules = RMHelper.processListModules(model)
 			val String module = RMHelper.getModule(model)
 			
-			val ReasonerData<Type> relationships = BackendHelper.getKBReasoner().getRelationshipTypes(importedModules)
+			val ReasonerData<Type> relationships = SodaliteBackendProxy.getKBReasoner().getRelationshipTypes(importedModules)
 			System.out.println ("Relationships retrieved from KB:")
 			val Image image = getImage("icons/relationship.png")
 			for (relationship: relationships.elements){
@@ -335,7 +341,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val String module = RMHelper.getModule(model)
 			
 			
-			val ReasonerData<Type> capabilitiess = BackendHelper.getKBReasoner().getCapabilityTypes(importedModules)
+			val ReasonerData<Type> capabilitiess = SodaliteBackendProxy.getKBReasoner().getCapabilityTypes(importedModules)
 			System.out.println ("Capabilities retrieved from KB:")
 			val Image image = getImage("icons/capability.png")
 			for (cap: capabilitiess.elements){
@@ -374,7 +380,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val String module = RMHelper.getModule(model)
 		
 			
-			val ReasonerData<Type> interfaces = BackendHelper.getKBReasoner().getInterfaceTypes(importedModules)
+			val ReasonerData<Type> interfaces = SodaliteBackendProxy.getKBReasoner().getInterfaceTypes(importedModules)
 			System.out.println ("Interfaces retrieved from KB:")
 			val Image image = getImage("icons/interface.png")
 			for (interface: interfaces.elements){
@@ -388,14 +394,48 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			
 			//Add other interfaces defined locally in the model
 			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.interfaceTypes !== null)
+				for (interface: rootModel.interfaceTypes.interfaceTypes){
+					System.out.println ("\tLocal interface type: " + interface.name)
+					val proposalText = module + "/" + interface.name 
+					val displayText = module + "/" + interface.name 
+					val additionalProposalInfo = interface.interface.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
+	
+			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+		}catch (NotRolePermissionException ex){
+			RMHelper.showReadPermissionErrorDialog
+		}catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
+	override void completeEArtifactTypeBody_SuperType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			//Get modules from model
+			val List<String> importedModules = RMHelper.processListModules(model)
+			val String module = RMHelper.getModule(model)
 			
-			for (interface: rootModel.interfaceTypes.interfaceTypes){
-				System.out.println ("\tLocal interface type: " + interface.name)
-				val proposalText = module + "/" + interface.name 
-				val displayText = module + "/" + interface.name 
-				val additionalProposalInfo = interface.interface.description
+			val ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules)
+			val Image image = getImage("icons/artifact.png")
+			for (artifact: artifacts.elements){
+				val qartifact = artifact.module !== null?RMHelper.getLastSegment(artifact.module, '/') + '/' + artifact.label:artifact.label
+				val proposalText = qartifact
+				val displayText = qartifact
+				val additionalProposalInfo = artifact.description
 				createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
 			}
+			
+			//Add other artifacts defined locally in the model
+			val rootModel = RMHelper.findModel(model) as RM_Model
+			if (rootModel.artifactTypes !== null)
+				for (artifact: rootModel.artifactTypes.artifactTypes){
+					val proposalText = module + "/" + artifact.name 
+					val displayText = module + "/" + artifact.name 
+					val additionalProposalInfo = artifact.artifact.description
+					createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);	
+				}
 	
 			super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
 		}catch (NotRolePermissionException ex){
@@ -415,6 +455,10 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	override void completeERequirementDefinitionBody_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeENodeTypeBody_SuperType(model, assignment, context, acceptor)
+	}
+	
+	override void completeEArtifactDefinitionBody_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor)
 	}
 	
 	override void completeERequirementDefinitionBody_Relationship(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -444,6 +488,40 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		completeGetAttributeOrPropertyFunction_AttributeOrProperty( model, assignment, context, acceptor)
 	}
 	
+	override void completeGetArtifactBody_Artifact(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::artifact property")
+		var List<String> proposals = new ArrayList<String>()
+		val String module = RMHelper.getModule(model)
+		//Get entity in this GetProperty body. If null, return
+		var body = model as GetArtifactBodyImpl
+		var EObject node = RMHelper.getEntityType(body.eContainer as EFunction)
+		
+		if (node === null || !(node instanceof ENodeType)){
+			return
+		}
+		
+		//Get the artifacts defined within the entity
+		var List<EArtifactDefinition> artifacts = null
+		var String node_name = null
+		
+		val nodeType = (node as ENodeType)
+		if (nodeType.node.artifacts!==null)
+			artifacts = nodeType.node.artifacts.artifacts
+		node_name = nodeType.name
+		
+		for (artifact:artifacts){
+			proposals.add((module !== null? module + '/':'') + node_name + "." + artifact.name)
+		}
+
+		//Create proposals for each found property. Prefix property with req|cap name when applies
+		var Image image = null
+		image = getImage("icons/artifact.png")
+		
+		for (proposal: proposals){
+			createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+		}
+	}
+	
 	override void completeGetPropertyBody_Req_cap(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for GetPropertyBody::req_cap property")
 		completeGetAttributeOrPropertyFunction_Req_cap( model,  assignment,  context,  acceptor)
@@ -456,7 +534,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			var interfaceId = (type.module !== null? type.module + '/':'') + type.type
 			
 			if (interfaceId !== null){
-				val OperationDefinitionData operations = BackendHelper.getKBReasoner().getOperationsInInterface(interfaceId)
+				val OperationDefinitionData operations = SodaliteBackendProxy.getKBReasoner().getOperationsInInterface(interfaceId)
 				if (operations !== null){
 					val Image image = getImage("icons/operation.png")
 					for (oper: operations.elements){
@@ -618,6 +696,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		createEntityProposals (context, acceptor);
 	}
 	
+	override void completeGetArtifactBody_Entity(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("Invoking content assist for GetArtifactBody::entity property")
+		createEntityProposals (context, acceptor);
+	}
+	
 	override void completeEMapEntry_Key(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		System.out.println("Invoking content assist for EMapEntry::key property")
 		createEditableCompletionProposal ("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
@@ -634,8 +717,53 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	}
 	
 	override void completeEPrimary_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		var document = context.document
+		var offset = context.currentNode.offset
+		
+		val node = EcoreUtil2.getContainerOfType(model,ENodeType).name
+		val interface = EcoreUtil2.getContainerOfType(model,EInterfaceDefinition).name
+		val operation = EcoreUtil2.getContainerOfType(model,EOperationDefinition).name
+		RMName = RMName.split("\\.").get(0)
+		var String relativePath = RMName+"-Ansible files"+"/"+node+"/"+interface
+		var String localPath = intermediatePath+relativePath
+		var String absolutePath = workspaceDir+localPath
 		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
-		val input = "\"" + RMHelper.selectFile ("Select implementation primary file") + "\""
+		var input = RMHelper.selectImplementationFile("Select implementation primary file",absolutePath,localPath,operation+".yaml") 
+		//Relative path
+		if(input.equals(localPath+"/"+operation+".yaml")){
+			input = "\"" + "./" + relativePath+"/"+operation+".yaml" + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+		//No file has been selected
+		else if(input.empty){
+			return
+		}
+		//Absolute path
+		else{
+			input = "\"" + input + "\"" +"\n"
+			document.replace(offset,1,input)
+			createEditableCompletionProposal (input, input, null, context, "", acceptor);
+		}
+	}
+	
+	override void completeEPrimary_Relative_path(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+		var URI project_uri =  context.document.resourceURI
+		var String intermediatePath = project_uri.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+		var String RMName = project_uri.segment(project_uri.segmentCount-1).replaceAll("%20", " ")
+		intermediatePath = intermediatePath.replace(RMName,"")
+		createEditableCompletionProposal ("\"" + workspaceDir + intermediatePath + "\"", "\"" + workspaceDir + intermediatePath + "\"", null, context, "The path where current resource model is located", acceptor);
+	}
+	
+	override void completeEArtifactDefinitionBody_File(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// Show file selection dialog to the user. Get path of file selected by the user and provide suggestion
+		val input = "\"" + RMHelper.selectFile ("Select artifact file") + "\""
 		createEditableCompletionProposal (input, input, null, context, "", acceptor);
 	}
 	
@@ -648,8 +776,8 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	override void completeEEvenFilter_Node(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try{
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val ReasonerData<Type> types = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
-			val TemplateData templates = BackendHelper.getKBReasoner().getTemplates(importedModules)		
+			val ReasonerData<Type> types = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
+			val TemplateData templates = SodaliteBackendProxy.getKBReasoner().getTemplates(importedModules)		
 			createProposalsForTypeList(types, "icons/type.png", "icons/primitive_type.png", context, acceptor)
 			createProposalsForTemplateList(templates, "icons/resource2.png", context, acceptor)
 		}catch (NotRolePermissionException ex){
@@ -664,7 +792,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val EEvenFilter filter = model as EEvenFilter
 			if (filter.node !== null){
 				var String qnode = RMHelper.getNodeName (filter.node)
-				val RequirementDefinitionData reqs = BackendHelper.getKBReasoner().getTypeRequirements(qnode)
+				val RequirementDefinitionData reqs = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(qnode)
 				createProposalsForRequirementsList(reqs, "icons/requirement.png", context, acceptor)
 			}
 		}catch(SodaliteException ex){
@@ -676,7 +804,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			//Find local and KB node types
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules)
+			val TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules)
 			val type_image = "icons/type.png";	
 			val primitive_type_image = "icons/primitive_type.png";
 			createProposalsForTypeList(typeData, type_image, primitive_type_image, context, acceptor)
@@ -693,7 +821,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 		try{
 			//Find local and KB node types
 			val List<String> importedModules = RMHelper.processListModules(model)
-			val OperationDefinitionData operationsData = BackendHelper.getKBReasoner().getOperations(importedModules)
+			val OperationDefinitionData operationsData = SodaliteBackendProxy.getKBReasoner().getOperations(importedModules)
 			val type_image = "icons/operation.png";	
 			createProposalsForOperationData(operationsData, type_image, null, context, acceptor)
 			val List<EOperationDefinition> localOperations = RMHelper.findLocalOperations(model)
@@ -1314,7 +1442,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	
 	def proposeAttributesForEntityInKB(String resourceId, List<String> proposals){
 		try{
-			val AttributeDefinitionData attributeData = BackendHelper.getKBReasoner().getTypeAttributes(resourceId)
+			val AttributeDefinitionData attributeData = SodaliteBackendProxy.getKBReasoner().getTypeAttributes(resourceId)
 			for (attr:attributeData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var attr_owner = resourceId
@@ -1355,7 +1483,7 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 	def proposePropertiesForEntityInKB(String resourceId, List<String> proposals){
 		try{
 			//FIXME: obtain all properties for types subclasses of given resourceId
-			val PropertyDefinitionData propertyData = BackendHelper.getKBReasoner().getTypeProperties(resourceId)
+			val PropertyDefinitionData propertyData = SodaliteBackendProxy.getKBReasoner().getTypeProperties(resourceId)
 			for (prop:propertyData.elements){
 				val prefix = "https://www.sodalite.eu/ontologies/workspace/1/"
 				var prop_owner = resourceId
@@ -1413,14 +1541,14 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			val superType = node.node.superType.module !== null?
 				node.node.superType.module + '/' + node.node.superType.type:
 				node.node.superType.type
-			val RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(superType)
+			val RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(superType)
 			var Image image = getImage("icons/requirement.png")
 			for (req: reqData.elements){
 				val String proposal = superType + '.' + RMHelper.getLastSegment(req.uri.toString, '/')
 				createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
 			}
 			
-			val CapabilityDefinitionData capData = BackendHelper.getKBReasoner().getTypeCapabilities(superType)
+			val CapabilityDefinitionData capData = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(superType)
 			image = getImage("icons/capability.png")
 			for (cap: capData.elements){
 				val String proposal = superType + '.' + RMHelper.getLastSegment(cap.uri.toString, '/')
@@ -1509,11 +1637,11 @@ class RMProposalProvider extends AbstractRMProposalProvider {
 			}
 			if (model instanceof GetPropertyBodyImpl)
 				for (prop:properties){
-					proposals.add(module + '/' + node_name + "." + prop.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + prop.name)
 				}
 			else if (model instanceof GetAttributeBodyImpl)
 				for (attr:attributes){
-					proposals.add(module + '/' + node_name + "." + attr.name)
+					proposals.add((module !== null? module + '/':'') + node_name + "." + attr.name)
 				}
 		}
 		

@@ -3,9 +3,15 @@
  */
 package org.sodalite.sdl.ansible
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class AnsibleDslRuntimeModule extends AbstractAnsibleDslRuntimeModule {
+	
+	def Class<? extends IOutputConfigurationProvider> bindIOutputConfigurationProvider() {
+		return YAMLOutputConfigurationProvider
+	}
+	
 }

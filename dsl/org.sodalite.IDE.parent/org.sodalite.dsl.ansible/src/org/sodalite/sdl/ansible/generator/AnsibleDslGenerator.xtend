@@ -85,6 +85,23 @@ import org.sodalite.sdl.ansible.ansibleDsl.EVariableReference
 import org.sodalite.sdl.ansible.ansibleDsl.ESliceNotation
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString
+import org.sodalite.sdl.ansible.ansibleDsl.LocalEInputOperationVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.KBEInputOperationVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.LocalEInputInterfaceVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.KBEInputInterfaceVariableReference
+import org.sodalite.sdl.ansible.YAMLOutputConfigurationProvider
+import java.util.Arrays
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionListPassed
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionList
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionListInLine
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionListIndented
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN
+import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall
+import org.sodalite.sdl.ansible.ansibleDsl.EStringWithoutQuotesPassed
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndStringWithoutQuotes
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleName
+import org.sodalite.sdl.ansible.ansibleDsl.ENumberOrStringWithoutQuotesPassed
 
 /**
  * Generates code from your model files on save.
@@ -95,13 +112,15 @@ class AnsibleDslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (e : resource.allContents.toIterable.filter(EPlaybook)){
-			fsa.generateFile(e.name + '.yaml', compilePlays(e))
+			var String scriptFilePath = ""
+			for(segment : Arrays.copyOfRange(resource.URI.segments,2,resource.URI.segments.size-1)) {
+				scriptFilePath = scriptFilePath+"/"+ segment  //build the path in which the resource resides
+			}
+			scriptFilePath = scriptFilePath.replaceAll("%20", " ")
+			var String scriptFileName = resource.getURI().lastSegment.toString()
+			var String outFileBase = scriptFileName.substring(0,scriptFileName.lastIndexOf(".")) //extract the name of the resource without the extension
+			fsa.generateFile(scriptFilePath+"/"+outFileBase + '.yaml',YAMLOutputConfigurationProvider::YAML_OUTPUT, compilePlays(e))
 		}
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
 	}
 	
 	def compilePlays(EPlaybook playbook) '''
@@ -166,10 +185,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«ENDFOR»
 		«ENDIF»
 		«IF play.tasks_list.size !== 0»
-			
 			«space»tasks:
 			«FOR blockTask: play.tasks_list»
-				
 				«compileBlockTask(blockTask, space.concat('  '))»
 			«ENDFOR»
 		«ENDIF»
@@ -214,7 +231,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileRoleInclusion(ERoleInclusion roleInclusion, String space)'''
-		«space»- role: «compileStringPassed(roleInclusion.name, space, false)»
+		«space»- role: «compileRoleName(roleInclusion.getName(), space, false)»
 		«compileBaseAttributes(roleInclusion, space.concat('  '))»
 		«compileExecutionAttributes(roleInclusion, space.concat('  '))»
 		«IF roleInclusion.error_handling !== null»
@@ -272,7 +289,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»environment: «compileValuePassed(base.environment, space, false)»
 		«ENDIF»
 		«IF base.collections !== null»
-			«space»collections: «compileListPassed(base.collections, space)»
+			«space»collections: «compileCollectionListPassed(base.collections, space)»
 		«ENDIF»
 		«IF base.tags !== null»
 			«space»tags: «compileListPassed(base.tags, space)»
@@ -428,16 +445,16 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		«IF taskHandlerName(taskHandler, space) !== null»
 			«space»- name: «taskHandlerName(taskHandler, space.concat('  '))»
 			«IF taskHandler.module !== null»
-				«space.concat('  ')»«taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
+				«space.concat('  ')»«compileModuleName(taskHandler.module,space)»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
 				«FOR parameter: taskHandler.module.parameters»
-					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '), false)»
+					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value, space.concat('  ').concat('  '), false)»
 				«ENDFOR»
 			«ENDIF»
 		«ELSE»
 			«IF taskHandler.module !== null»
-				«space»- «taskHandler.module.name»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
+				«space»- «compileModuleName(taskHandler.module,space)»:«IF taskHandler.module.direct_parameter !== null» «compileValuePassed(taskHandler.module.direct_parameter, space.concat('  '), false)»«ENDIF»
 				«FOR parameter: taskHandler.module.parameters»
-					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value_passed, space.concat('  ').concat('  '), false)»
+					«space.concat('  ').concat('  ')»«parameter.name»: «compileValuePassed(parameter.value, space.concat('  ').concat('  '), false)»
 				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
@@ -491,20 +508,21 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«IF taskHandler.loop instanceof ELoopOverList»
 				«space»loop: «compileLoopList((taskHandler.loop as ELoopOverList).loop_list, space)»
 				«IF (taskHandler.loop as ELoopOverList).loop_control !== null»
+					«space»loop_control:«»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.label !== null»
-						«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space, false)»
+					«space»«space»label: «compileValuePassed((taskHandler.loop as ELoopOverList).loop_control.label, space, false)»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.pause !== null»
-						«space»pause: «compileNumberPassed((taskHandler.loop as ELoopOverList).loop_control.pause, space)»
+					«space»«space»pause: «compileNumberPassed((taskHandler.loop as ELoopOverList).loop_control.pause, space)»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.index_var !== null»
-						«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var.name»
+					«space»«space»index_var: «(taskHandler.loop as ELoopOverList).loop_control.index_var.name»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.loop_var !== null»
-						«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var.name»
+					«space»«space»loop_var: «(taskHandler.loop as ELoopOverList).loop_control.loop_var.name»
 					«ENDIF»
 					«IF (taskHandler.loop as ELoopOverList).loop_control.extended !== null»
-						«space»extended: «compileBooleanPassed((taskHandler.loop as ELoopOverList).loop_control.extended, space)»
+					«space»«space»extended: «compileBooleanPassed((taskHandler.loop as ELoopOverList).loop_control.extended, space)»
 					«ENDIF»
 				«ENDIF»
 			«ENDIF»
@@ -555,6 +573,12 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (dictionaryPassed instanceof EDictionary) return compileDictionary(dictionaryPassed, space)
 		else if (dictionaryPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(dictionaryPassed, space)).concat("\"")
 		else if (dictionaryPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(dictionaryPassed, space, false)).concat("\"")
+	}
+	
+	def compileCollectionListPassed(ECollectionListPassed collectionlistPassed, String space){
+		if (collectionlistPassed instanceof ECollectionList) return compileCollectionList(collectionlistPassed, space)
+		else if (collectionlistPassed instanceof EJinjaExpressionEvaluation) return "\"".concat(compileJinjaExpressionEvaluation(collectionlistPassed, space)).concat("\"")
+		else if (collectionlistPassed instanceof EJinjaStatement) return "\"".concat(compileJinjaStatement(collectionlistPassed, space, false)).concat("\"")
 	}
 	
 	def compileListPassed(EListPassed listPassed, String space){
@@ -726,6 +750,101 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		return stringToReturn
 	}
 	
+	def compileCollectionList(ECollectionList list, String space){
+		if (list instanceof ECollectionListInLine){
+			var newList = new ArrayList()
+			for (element: list.elements){
+				newList.add(compileCollectionFQN(element, space, false))
+			}
+			return newList
+		}
+		else if (list instanceof ECollectionListIndented){
+			var listString = ""
+			for (element : list.elements){
+				listString = listString.concat('\n').concat(space).concat("  - ").concat(compileCollectionFQN(element, space.concat("  "), false).toString())
+			}
+			return listString
+		}
+	}
+	
+	
+	def compileModuleName(EModuleCall module, String space){
+		var namespace = ""
+		var collectionName=""
+		var name = ""
+		var moduleName = ""
+		namespace = compileStringWithoutQuotesPassed(module.firstPart,space,false).replace("\"","")
+		if (module.secondPart !== null){
+			if(module.thirdPart !== null){
+				collectionName = compileStringWithoutQuotesPassed(module.secondPart,space,false).replace("\"","")
+				moduleName = compileStringWithoutQuotesPassed(module.thirdPart,space,false).replace("\"","")
+				name = "\"".concat(namespace).concat(".").concat(collectionName).concat(".").concat(moduleName).concat("\"")
+			}
+			else{
+				collectionName = compileStringWithoutQuotesPassed(module.secondPart,space,false).replace("\"","")
+				name = "\"".concat(namespace).concat(".").concat(collectionName).concat("\"")
+			}
+			
+		}
+		else{
+			name = moduleName.concat(namespace)
+		}
+		return name
+	}
+	
+	def compileCollectionFQN(ECollectionFQN collection, String space, boolean isInMultiLine){
+		var namespace = ""
+		var collectionName=""
+		var fqn = ""
+		if (collection.collectionName !== null){
+			namespace = compileStringWithoutQuotesPassed(collection.namespaceOrFqn,space,false).replace("\"","")
+			//namespace = compileStringWithoutQuotesPassed(collection.namespaceOrFqn,space,false)
+			//namespace.replace("\"",""); 
+			collectionName = compileStringWithoutQuotesPassed(collection.collectionName,space,false).replace("\"","")
+			//collectionName = compileStringWithoutQuotesPassed(collection.collectionName,space,false)
+			//collectionName.replace("\"",""); 
+			fqn = "\"".concat(namespace).concat(".").concat(collectionName).concat("\"")
+			//fqn = fqn.concat(compileStringPassed(collection.namespaceOrFqn,space,false)).concat(".").concat(compileStringPassed(collection.collectionName,space,false))
+		}
+		else{
+			fqn = fqn.concat(compileStringWithoutQuotesPassed(collection.namespaceOrFqn,space,false))
+		}
+		
+	/* 	if (collection instanceof ECollectionModuledFQN){
+			fqn = fqn.concat(compileStringPassed((collection as ECollectionModuledFQN).namespace,space,false)).concat(".").concat(compileStringPassed((collection as ECollectionModuledFQN).collectionName,space,false))
+		}
+		else if (collection instanceof ECollectionFullFQN){
+			fqn = compileStringPassed((collection as ECollectionFullFQN).fqn,space,false)
+		}*/
+		return fqn
+	}
+	
+	
+	def compileRoleName(ERoleName role, String space, boolean isInMultiLine){
+		var namespaceOrRoleName = ""
+		var collectionNameOrRoleName=""
+		var simpleRoleName = ""
+		var definedRoleName =""
+		
+		if(role.thirdPart !== null){
+			namespaceOrRoleName = compileNumberOrStringWithoutQuotesPassed(role.firstPart,space,false).replace("\"","")
+			collectionNameOrRoleName = compileStringWithoutQuotesPassed(role.secondPart,space,false).replace("\"","")
+			simpleRoleName = compileStringWithoutQuotesPassed(role.thirdPart,space,false).replace("\"","")
+			definedRoleName = "\"".concat(namespaceOrRoleName).concat(".").concat(collectionNameOrRoleName).concat(".").concat(simpleRoleName).concat("\"")
+		}
+		else if(role.secondPart !==null && role.thirdPart === null){
+			namespaceOrRoleName = compileNumberOrStringWithoutQuotesPassed(role.firstPart,space,false).replace("\"","")
+			collectionNameOrRoleName = compileStringWithoutQuotesPassed(role.secondPart,space,false).replace("\"","")
+			definedRoleName = "\"".concat(namespaceOrRoleName).concat(".").concat(collectionNameOrRoleName).concat("\"")
+		}
+		else{
+			namespaceOrRoleName = compileNumberOrStringWithoutQuotesPassed(role.firstPart,space,false).replace("\"","")
+			definedRoleName = "\"".concat(namespaceOrRoleName).concat("\"")
+		}
+		return definedRoleName
+	}
+	
+	
 	def compileList(EList list, String space){
 		if (list instanceof EListInLine){
 			var newList = new ArrayList()
@@ -753,6 +872,9 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		if (valuePassed instanceof EStringPassed){
 			return compileStringPassed(valuePassed, space, isInMultiLine)
 		}
+		else if (valuePassed instanceof EStringWithoutQuotesPassed){
+			return compileStringWithoutQuotesPassed(valuePassed, space, isInMultiLine)
+		}
 		else if (valuePassed instanceof EValueWithoutString){
 			return compileValueWithoutString(valuePassed, space)
 		}
@@ -764,6 +886,47 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 		else if (stringPassed instanceof EMultiLineExpression){
 			return compileMultiLineExpression(stringPassed, space)
+		}
+	}
+	
+	def compileStringWithoutQuotesPassed(EStringWithoutQuotesPassed stringWithoutQuotesPassed, String space, boolean isInMultiLine){
+		if (stringWithoutQuotesPassed instanceof EJinjaAndStringWithoutQuotes){
+			return compileJinjaAndStringWithoutQuotes(stringWithoutQuotesPassed, space, isInMultiLine)
+		}
+		else if (stringWithoutQuotesPassed instanceof EMultiLineExpression){
+			return compileMultiLineExpression(stringWithoutQuotesPassed, space)
+		}
+	}
+	
+	def compileNumberOrStringWithoutQuotesPassed(ENumberOrStringWithoutQuotesPassed numberOrStringWithoutQuotesPassed, String space, boolean isInMultiLine){
+		if (numberOrStringWithoutQuotesPassed instanceof EStringWithoutQuotesPassed){
+			return compileStringWithoutQuotesPassed(numberOrStringWithoutQuotesPassed, space, isInMultiLine)
+		}
+		else if (numberOrStringWithoutQuotesPassed instanceof ENumber){
+			return compileNumber(numberOrStringWithoutQuotesPassed)
+		}
+	}
+	
+	//if it's a line of a multiline, then the quotation marks must be absent
+	def compileJinjaAndStringWithoutQuotes(EJinjaAndStringWithoutQuotes jinja, String space, boolean isInMultiLine){
+		var stringToReturn = ""
+		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
+		for (jinjaOrWithoutQuotes : jinja.jinja_expression_and_stringWithout){
+			stringToReturn = stringToReturn.concat(compileJinjaOrStringWithoutQuotes(jinjaOrWithoutQuotes, space, isInMultiLine).toString())
+		}
+		if (!isInMultiLine) stringToReturn = stringToReturn.concat("\"")
+		return stringToReturn
+	}
+	
+	def compileJinjaOrStringWithoutQuotes(EJinjaOrStringWithoutQuotes jinja, String space, boolean isInMultiLine){
+		if (jinja.stringWithoutQuotes !== null){
+			return compileStringInPossibleMultiLine(jinja.stringWithoutQuotes, isInMultiLine)
+		}
+		else if (jinja instanceof EJinjaExpressionEvaluation){
+			return compileJinjaExpressionEvaluation(jinja, space)
+		}
+		else if (jinja instanceof EJinjaStatement){
+			return compileJinjaStatement(jinja, space, isInMultiLine)
 		}
 	}
 
@@ -786,6 +949,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 		}
 		return stringToReturn
 	}
+	
+	
 	
 	def compileJinjaOrString(EJinjaOrString jinja, String space, boolean isInMultiLine){
 		if (jinja.string !== null){
@@ -923,16 +1088,29 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			registerVariableString = registerVariableString.concat(variableReference.register_variable_reference.name)
 			return registerVariableString
 		}
-		else if (variableReference instanceof EInputOperationVariableReference){
+		else if (variableReference instanceof  EInputOperationVariableReference){
 			var inputOperationVariableString = ""
-			inputOperationVariableString = inputOperationVariableString.concat(variableReference.name.name)
+			if(variableReference.reference instanceof LocalEInputOperationVariableReference){
+				inputOperationVariableString = inputOperationVariableString.concat((variableReference.reference as LocalEInputOperationVariableReference).name.name)
+			}
+			else if(variableReference.reference instanceof  KBEInputOperationVariableReference){
+				inputOperationVariableString = inputOperationVariableString.concat((variableReference.reference as KBEInputOperationVariableReference).name)
+			}
 			return inputOperationVariableString
 		}
+		
 		else if (variableReference instanceof EInputInterfaceVariableReference){
 			var inputInterfaceVariableString = ""
-			inputInterfaceVariableString = inputInterfaceVariableString.concat(variableReference.name.name)
+			if(variableReference.reference instanceof LocalEInputInterfaceVariableReference){
+				inputInterfaceVariableString = inputInterfaceVariableString.concat((variableReference.reference as LocalEInputInterfaceVariableReference).name.name)	
+			}
+			else if(variableReference.reference instanceof KBEInputInterfaceVariableReference){
+				inputInterfaceVariableString = inputInterfaceVariableString.concat((variableReference.reference as KBEInputInterfaceVariableReference).name)	
+			}
+			
 			return inputInterfaceVariableString
 		}
+		
 		else if (variableReference instanceof EIndexOrLoopVariableReference){
 			var indexOrLoopVariableString = ""
 			indexOrLoopVariableString = indexOrLoopVariableString.concat(variableReference.index_or_loop_variable_reference.name)
@@ -1019,7 +1197,8 @@ class AnsibleDslGenerator extends AbstractGenerator {
 	}
 	
 	def compileDictionaryPair(EDictionaryPair dictionaryPair, String space){
-		return "\'".concat(dictionaryPair.name).concat("\'").concat(": ").concat(compileValuePassed(dictionaryPair.value, space, false).toString())
+		//return "\'".concat(dictionaryPair.name).concat("\'").concat(": ").concat(compileValuePassed(dictionaryPair.value, space, false).toString())
+		return dictionaryPair.name.concat(": ").concat(compileValuePassed(dictionaryPair.value, space, false).toString())
 	}
 	
 	def compileDictionaryOfListIndented(EDictionaryOfListIndented dictionary, String space){

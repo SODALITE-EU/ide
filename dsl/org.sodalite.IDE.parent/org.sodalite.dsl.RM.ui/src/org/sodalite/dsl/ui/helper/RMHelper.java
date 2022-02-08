@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.nio.file.CopyOption;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +25,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,7 +42,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.CapabilityDefinitionData;
 import org.sodalite.dsl.kb_reasoner_client.types.RequirementDefinition;
@@ -58,9 +61,11 @@ import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EPolicyType;
 import org.sodalite.dsl.rM.ERequirementDefinition;
+import org.sodalite.dsl.rM.GetArtifact;
 import org.sodalite.dsl.rM.GetAttribute;
 import org.sodalite.dsl.rM.GetProperty;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class RMHelper {
@@ -83,8 +88,8 @@ public class RMHelper {
 		return module.substring(module.lastIndexOf("/", module.length() - 2) + 1, module.length() - 1);
 	}
 
-	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws SodaliteException {
-		CapabilityDefinitionData capabilities = BackendHelper.getKBReasoner().getTypeCapabilities(nodeRef);
+	public static List<CapabilityDefinition> findCapabilitiesInNodeType(String nodeRef) throws Exception {
+		CapabilityDefinitionData capabilities = SodaliteBackendProxy.getKBReasoner().getTypeCapabilities(nodeRef);
 		return capabilities.getElements();
 	}
 
@@ -102,11 +107,12 @@ public class RMHelper {
 	public static List<EOperationDefinition> findLocalOperations(EObject object) {
 		List<EOperationDefinition> operations = new ArrayList<EOperationDefinition>();
 		RM_Model model = (RM_Model) findModel(object);
-		for (EInterfaceType _interface : model.getInterfaceTypes().getInterfaceTypes()) {
-			for (EOperationDefinition op : _interface.getInterface().getOperations().getOperations()) {
-				operations.add(op);
+		if (model != null)
+			for (EInterfaceType _interface : model.getInterfaceTypes().getInterfaceTypes()) {
+				for (EOperationDefinition op : _interface.getInterface().getOperations().getOperations()) {
+					operations.add(op);
+				}
 			}
-		}
 		return operations;
 	}
 
@@ -126,14 +132,14 @@ public class RMHelper {
 		return names.contains("getModule") && names.contains("getImports");
 	}
 
-	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws SodaliteException {
+	public static String findNodeByNameInKB(EPREFIX_TYPE node) throws Exception {
 		// Get modules from model
 		List<String> importedModules = getImportedModules(node);
 		String module = getModule(node);
 
 		// Add current module to imported ones for searching in the KB
 		importedModules.add(module);
-		TypeData typeData = BackendHelper.getKBReasoner().getNodeTypes(importedModules);
+		TypeData typeData = SodaliteBackendProxy.getKBReasoner().getNodeTypes(importedModules);
 		for (Type type : typeData.getElements()) {
 			String name = type.getUri().toString().substring(type.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(node.getType())) {
@@ -168,8 +174,8 @@ public class RMHelper {
 		return null;
 	}
 
-	public static String findRequirementNodeByNameInKB(String type, String reqName) throws SodaliteException {
-		RequirementDefinitionData reqData = BackendHelper.getKBReasoner().getTypeRequirements(type);
+	public static String findRequirementNodeByNameInKB(String type, String reqName) throws Exception {
+		RequirementDefinitionData reqData = SodaliteBackendProxy.getKBReasoner().getTypeRequirements(type);
 		for (RequirementDefinition req : reqData.getElements()) {
 			String name = req.getUri().toString().substring(req.getUri().toString().lastIndexOf('/') + 1);
 			if (name.equals(reqName))
@@ -180,19 +186,19 @@ public class RMHelper {
 	}
 
 	public static ENodeType findRequirementNodeInLocalType(String requirement, ENodeType nodeType) {
-		RM_Model model = (RM_Model) findModel(nodeType);
 		ENodeType node = null;
-		String module1 = model.getModule();
-		if (module1 == null)
-			module1 = "";
-		if (nodeType.getNode().getRequirements() == null)
-			return node;
-		for (ERequirementDefinition req : nodeType.getNode().getRequirements().getRequirements()) {
-			String module2 = req.getRequirement().getNode().getModule();
-			if (module2 == null)
-				module2 = "";
-			if (req.getName().equals(requirement)) {
-				if (module1.equals(module2)) {
+		RM_Model model = (RM_Model) findModel(nodeType);
+		if (model != null) {
+			String module1 = model.getModule();
+			if (module1 == null)
+				module1 = "";
+			if (nodeType.getNode().getRequirements() == null)
+				return node;
+			for (ERequirementDefinition req : nodeType.getNode().getRequirements().getRequirements()) {
+				String module2 = req.getRequirement().getNode().getModule();
+				if (module2 == null)
+					module2 = "";
+				if (req.getName().equals(requirement) && module1.equals(module2)) {
 					node = findNodeType(model, req.getRequirement().getNode().getType());
 				}
 			}
@@ -200,29 +206,31 @@ public class RMHelper {
 		return node;
 	}
 
-	public static String findRequirementTargetNode(ENodeType node, String req_name) throws SodaliteException {
+	public static String findRequirementTargetNode(ENodeType node, String req_name) throws Exception {
 		// Find requirement in local node
 		String nodeRef = null;
 		RM_Model model = (RM_Model) findModel(node);
-		ERequirementDefinition req = findRequirementInLocalType(req_name, node);
-		if (req != null) {
-			EPREFIX_TYPE req_node = req.getRequirement().getNode();
-			if (req_node != null) {
-				// Find requirement target node in local model, or
-				if (model.getModule().equals(req_node.getModule())) {
-					ENodeType target_node = findNodeType(model, req_node.getType());
-					if (target_node != null)
-						nodeRef = "local:" + getReference(target_node);
+		if (model != null) {
+			ERequirementDefinition req = findRequirementInLocalType(req_name, node);
+			if (req != null) {
+				EPREFIX_TYPE req_node = req.getRequirement().getNode();
+				if (req_node != null) {
+					// Find requirement target node in local model, or
+					if (model.getModule().equals(req_node.getModule())) {
+						ENodeType target_node = findNodeType(model, req_node.getType());
+						if (target_node != null)
+							nodeRef = "local:" + getReference(target_node);
+					}
+					if (nodeRef == null) {
+						// Find requirement target node in KB
+						nodeRef = "kb:" + findNodeByNameInKB(req_node);
+					}
 				}
-				if (nodeRef == null) {
-					// Find requirement target node in KB
-					nodeRef = "kb:" + findNodeByNameInKB(req_node);
-				}
+			} else {
+				// Find requirement in KB for node superclass, find node in KB
+				nodeRef = "kb:"
+						+ RMHelper.findRequirementNodeByNameInKB(getReference(node.getNode().getSuperType()), req_name);
 			}
-		} else {
-			// Find requirement in KB for node superclass, find node in KB
-			nodeRef = "kb:"
-					+ RMHelper.findRequirementNodeByNameInKB(getReference(node.getNode().getSuperType()), req_name);
 		}
 		return nodeRef;
 	}
@@ -240,6 +248,8 @@ public class RMHelper {
 			eEntityReference = ((GetProperty) function).getProperty().getEntity();
 		else if (function instanceof GetAttribute)
 			eEntityReference = ((GetAttribute) function).getAttribute().getEntity();
+		else if (function instanceof GetArtifact)
+			eEntityReference = ((GetArtifact) function).getArtifact().getEntity();
 
 		if (eEntityReference == null)
 			return null;
@@ -267,8 +277,11 @@ public class RMHelper {
 	}
 
 	public static List<String> getImportedModules(EObject object) {
+		List<String> modules = new ArrayList<>();
 		EObject model = findModel(object);
-		return invokeGetImports(model);
+		if (model != null)
+			modules = invokeGetImports(model);
+		return modules;
 	}
 
 	private static List<String> invokeGetImports(EObject model) {
@@ -279,7 +292,7 @@ public class RMHelper {
 			List<String> _imports = (List<String>) method.invoke(model, null);
 			imports.addAll(_imports);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 		}
 		return imports;
 	}
@@ -294,7 +307,7 @@ public class RMHelper {
 	public static String getLastSegment(EPREFIX_REF ref, String delimiter) {
 		if (ref instanceof EPREFIX_TYPE) {
 			return getLastSegment(((EPREFIX_TYPE) ref).getType(), delimiter);
-		} else if (ref instanceof EPREFIX_TYPE) {
+		} else if (ref instanceof EPREFIX_ID) {
 			return ((EPREFIX_ID) ref).getId();
 		} else {
 			return null;
@@ -302,8 +315,11 @@ public class RMHelper {
 	}
 
 	public static String getModule(EObject object) {
+		String module = null;
 		EObject model = findModel(object);
-		return invokeGetModule(model);
+		if (model != null)
+			module = invokeGetModule(model);
+		return module;
 	}
 
 	private static String invokeGetModule(EObject model) {
@@ -313,7 +329,7 @@ public class RMHelper {
 			Method method = model.getClass().getMethod("getModule", noparams);
 			module = (String) method.invoke(model, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 		}
 		return module;
 	}
@@ -453,9 +469,8 @@ public class RMHelper {
 	public static String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
 		path = path.substring(path.indexOf(File.separator));
-		Path file_path = FileSystems.getDefault().getPath(path);
-		String content = new String(Files.readAllBytes(file_path));
-		return content;
+		Path filePath = FileSystems.getDefault().getPath(path);
+		return new String(Files.readAllBytes(filePath));
 	}
 
 	public static String readFile(Path path) throws IOException {
@@ -490,22 +505,98 @@ public class RMHelper {
 		if (targetFile == null) {
 			MessageDialog.openError(shell, "Folder not found",
 					"Folder " + targetFolder.getName() + " could not be found");
-		}
-		if (!targetFile.exists()) {
-			saveContentInFile(filecontent, targetFile);
 		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				try {
-					targetFile.delete(false, null);
-					saveContentInFile(filecontent, targetFile);
-				} catch (CoreException e) {
-					SodaliteLogger.log("Error", e);
-				}
+			if (!targetFile.exists()) {
+				saveContentInFile(filecontent, targetFile);
+			} else {
+				boolean confirmed = MessageDialog.openConfirm(shell,
+						"Target file exists in folder " + targetFolder.getName(),
+						"Do you want to override target file " + targetFile.getName());
+				if (confirmed) {
+					try {
+						targetFile.delete(false, null);
+						saveContentInFile(filecontent, targetFile);
+					} catch (CoreException e) {
+						SodaliteLogger.log("Error", e);
+					}
 
+				}
 			}
+		}
+	}
+	
+	public static void createFolder(IContainer folder, boolean force, boolean local, IProgressMonitor monitor) throws CoreException {
+	    if (!folder.exists()) {
+	        IContainer parent = folder.getParent();
+	        if (parent instanceof IFolder) {
+	            createFolder((IFolder)parent, force, local, null);
+	        }
+	        ((IFolder)folder).create(force, local, monitor);
+	    }
+	}
+	
+	public static String selectImplementationFile(String dialogText,String absolutePath,String localPath,String fileName) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		FileDialog fileDialog = new FileDialog(shell);
+		fileDialog.setText(dialogText);
+		fileDialog.setFilterPath(absolutePath);
+		String selectedFile = fileDialog.open();
+		String[] labels = {"Absolute path","Relative path"};
+		MessageDialog dialog = new MessageDialog(shell, "Select .yaml file", null,
+				"Do you want to reference the implementation file with its absolute path or with its relative path with respect to current resource model? Please select one of the following options." 
+				, MessageDialog.QUESTION, labels, 1);
+		int result = dialog.open();
+		//The user selects to reference .yaml file with its absolute path
+		if(result==0) {
+			return selectedFile;
+		}
+		//The user selects to reference .yaml file with its relative path with respect to resource model
+		else if(result==1) {
+			File folderStructure = new File(absolutePath); 
+			if(folderStructure.exists() && folderStructure.isDirectory()) {
+				SodaliteLogger.log("Folder structure exists");
+				if(selectedFile.equals(absolutePath+"/"+fileName)) {
+					return localPath+"/"+fileName;
+				}
+				File f = new File(absolutePath+"/"+fileName);
+				if(f.exists()) {
+					SodaliteLogger.log("Implementation file already exists");
+					boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace implementation file",
+							"Implementation file already exists.Do you want to replace current implementation file?");
+					if(confirmed) {
+						copyFile(selectedFile,absolutePath+"/"+fileName);
+					}
+				}
+				else {
+					copyFile(selectedFile,absolutePath+"/"+fileName);
+				}
+				return localPath+"/"+fileName;
+			}
+			else {
+				SodaliteLogger.log("Folder structure does not exist");
+				folderStructure.mkdirs();
+				copyFile(selectedFile,absolutePath+"/"+fileName);
+				return localPath+"/"+fileName;
+			}
+		}
+		else {
+			return "";
+		}
+	}
+	
+	
+	public static void copyFile(String selectedFile,String destinationPath) {
+		Path src = Paths.get(selectedFile);
+		Path dest = Paths.get(destinationPath);
+		CopyOption[] options = new CopyOption[] {
+			StandardCopyOption.COPY_ATTRIBUTES,
+			StandardCopyOption.REPLACE_EXISTING
+		};
+		try {
+			Files.copy(src, dest, options);
+		} catch (IOException e) {
+			SodaliteLogger.log(e);
 		}
 	}
 
@@ -520,16 +611,17 @@ public class RMHelper {
 		if (targetFile == null) {
 			MessageDialog.openError(shell, "Folder not found",
 					"Folder " + targetFolder.getName() + " could not be found");
-		}
-		if (!targetFile.exists()) {
-			saveModel(model, targetFile);
 		} else {
-			boolean confirmed = MessageDialog.openConfirm(shell,
-					"Target file exists in folder " + targetFolder.getName(),
-					"Do you want to override target file " + targetFile.getName());
-			if (confirmed) {
-				targetFile.delete(false, null);
+			if (!targetFile.exists()) {
 				saveModel(model, targetFile);
+			} else {
+				boolean confirmed = MessageDialog.openConfirm(shell,
+						"Target file exists in folder " + targetFolder.getName(),
+						"Do you want to override target file " + targetFile.getName());
+				if (confirmed) {
+					targetFile.delete(false, null);
+					saveModel(model, targetFile);
+				}
 			}
 		}
 	}

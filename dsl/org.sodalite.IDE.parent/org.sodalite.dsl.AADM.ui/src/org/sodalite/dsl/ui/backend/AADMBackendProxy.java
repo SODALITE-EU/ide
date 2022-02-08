@@ -303,8 +303,10 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-					Files.write(Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json"),
-							aadmJson.getBytes());
+					Path aadmJsonPath = Paths.get(System.getProperty("user.home") + "/" + aadmName + ".json");
+					Files.write(aadmJsonPath, aadmJson.getBytes());
+					SodaliteLogger.log("AADM Json reported to IaCBuilder: " + aadmJson);
+					SodaliteLogger.log("AADM Json reported to IaCBuilder stored in " + aadmJsonPath);
 
 					subMonitor.worked(steps++);
 
@@ -356,9 +358,18 @@ public class AADMBackendProxy extends RMBackendProxy {
 					DeploymentStatusReport dsr = getKBReasoner()
 							.getAADMDeploymentStatus(depl_report.getDeployment_id());
 					while (!dsr.getState().equals("success")) {
-						if (dsr.getState().equals("failed"))
-							throw new Exception("Deployment failed as reported by xOpera");
-						TimeUnit.SECONDS.sleep(5);
+						if (dsr.getState().equals("failed")) {
+							String msg = "Deployment failed as reported by the Orchestrator\n";
+							if (dsr.getNode_error() != null) {
+								msg += "Deployment error reported by Orchestrator in: \n" + "node: "
+										+ dsr.getNode_error().getNode() + "\n" + "operation: "
+										+ dsr.getNode_error().getOperation() + "\n" + "task: "
+										+ dsr.getNode_error().getTask() + "\n";
+								msg += "Message: " + dsr.getNode_error().getMessage() + "\n";
+							}
+							throw new Exception(msg);
+						}
+						TimeUnit.SECONDS.sleep(10);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
 					subMonitor.worked(steps++);
@@ -373,7 +384,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					String appName = namespace != null && !namespace.isEmpty() ? namespace
 							: aadmName.substring(0, aadmName.indexOf(".aadm"));
 					getKBReasoner().notifyDeploymentToRefactoring(appName, aadm_id, mm.getVersion(),
-							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), inputs_yaml);
+							depl_report.getBlueprint_id(), depl_report.getDeployment_id(), monitoring_id, inputs_yaml);
 					subMonitor.worked(steps++);
 
 					// Upon completion, show dialog
@@ -394,6 +405,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 				} catch (NotRolePermissionException ex) {
 					showErrorDialog(null, "Save AADM", "You have not permissions to save this model. "
 							+ "\nPlease, check your permission in the SODALITE AAI");
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Deploy process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -460,6 +474,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					});
 					subMonitor.worked(-1);
 					subMonitor.done();
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Build image process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -694,25 +711,28 @@ public class AADMBackendProxy extends RMBackendProxy {
 		if (saveReport.hasErrors()) {
 			for (KBError error : saveReport.getErrors()) {
 				String message = error.getDescription() + ": " + error.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(error.getContext(), error.getEntity_name());
-				String path = createPath(hierarchyPath);
+				if (!error.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(error.getSuggestions()));
+				}
+				String path = error.getContext();
 				String pathType = getPathType(error.getType());
-				List<String> type = Arrays.asList(error.getType());
-				String code = getCode(type); // Code is used for quick fixes
-				List<String> data = Arrays.asList(error.getEntity_name(), error.getContext());
+				String code = null;
+				if (!error.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
+				Map<String, SortedSet<String>> data = new HashMap<>();
+				data.put(path, error.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.ERROR, code, data));
 			}
 		}
 
 		if (saveReport.hasWarnings()) {
 			for (KBWarning warning : saveReport.getWarnings()) {
-				String message = warning.getType() + " ." + warning.getDescription() + " Warning located at: "
+				String message = warning.getType() + ". " + warning.getDescription() + ". Warning located at: "
 						+ warning.getEntity_name();
-				List<String> hierarchyPath = Arrays.asList(warning.getContext(), warning.getEntity_name());
-				String path = createPath(hierarchyPath);
+				String path = warning.getContext();
 				String pathType = getPathType(warning.getType());
-				List<String> type = Arrays.asList(warning.getType());
-				String code = getCode(type); // Code is used for quick fixes
+				String code = ""; // No suggestions for quick fixes associated to warnings
 				List<String> data = Arrays.asList(warning.getEntity_name(), warning.getContext());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
 			}
@@ -720,11 +740,16 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 		if (saveReport.hasSuggestions()) {
 			for (KBSuggestion suggestion : saveReport.getSuggestions()) {
-				String message = MessageFormat.format("The following nodes can satisfy the requirement {0}: {1}",
-						getDependency(suggestion.getHierarchyPath()), getSuggestedNodes(suggestion.getSuggestions()));
-				String path = createPath(suggestion.getHierarchyPath());
-				String pathType = getPathType(suggestion.getHierarchyPath());
-				String code = getCode(suggestion.getHierarchyPath()); // Code is used for quick fixes
+				String message = suggestion.getDescription() + ": " + suggestion.getEntity_name();
+				if (!suggestion.getSuggestions().isEmpty()) {
+					message += MessageFormat.format("\nThe following fixes are suggested: {0}",
+							getSuggestedNodes(suggestion.getSuggestions()));
+				}
+				String path = suggestion.getContext();
+				String pathType = getPathType(suggestion.getType());
+				String code = null;
+				if (!suggestion.getSuggestions().isEmpty())
+					code = getCode(path); // Code is used for quick fixes
 				Map<String, SortedSet<String>> data = new HashMap<>();
 				data.put(path, suggestion.getSuggestions());
 				issues.add(new ValidationIssue(message, path, pathType, Severity.WARNING, code, data));
@@ -734,12 +759,12 @@ public class AADMBackendProxy extends RMBackendProxy {
 		return issues;
 	}
 
-	private String getCode(List<String> hierarchyPath) {
+	private String getCode(String hierarchyPath) {
 		// Assigns a suggestion code based in the issue hierarchy path
 		String code = "Suggestion";
 		if (hierarchyPath.contains("requirements")) {
 			code = ValidationIssue.REQUIREMENT;
-		} else if (hierarchyPath.contains("RequiredProperty")) {
+		} else if (hierarchyPath.contains("properties")) {
 			code = ValidationIssue.PROPERTY;
 		}
 
@@ -780,7 +805,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 			return "Property";
 		else if (type.contains("Capability"))
 			return "Capability";
-		else if (type.contains("Node"))
+		else if (type.contains("Node") || type.contains("RequirementExistence"))
 			return "Node_Template";
 		else
 			return null;
@@ -922,7 +947,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 
 	private String getRequirement(String path) {
 		String req = null;
-		Pattern pattern = Pattern.compile("requirements/(.*?)/");
+		Pattern pattern = Pattern.compile("/requirements/(.+)");
 		Matcher matcher = pattern.matcher(path);
 		if (matcher.find())
 			req = matcher.group(1);

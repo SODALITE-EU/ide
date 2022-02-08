@@ -2,7 +2,7 @@ package org.sodalite.dsl.kb_reasoner_client.types;
 
 public enum TypeKind {
 	DATATYPE("data"), NODETYPE("node"), CAPABILITY_TYPE("capability"), RELATIONSHIP_TYPE("relationship"),
-	INTERFACE_TYPE("interface"), POLICY_TYPE("policy");
+	INTERFACE_TYPE("interface"), POLICY_TYPE("policy"), ARTIFACT_TYPE("artifact");
 
 	private String label;
 

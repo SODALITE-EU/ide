@@ -18,12 +18,20 @@ public class DeleteDeploymentWizardDialog extends WizardDialog {
 		super.createButtonsForButtonBar(parent);
 
 		Button finishButton = getButton(IDialogConstants.FINISH_ID);
-		finishButton.setText("Delete");
+		finishButton.setText("Undeploy");
 
 	}
 
 	public int getWorkers() {
 		return ((DeleteDeploymentWizard) this.getWizard()).getWorkers();
+	}
+
+	public boolean getForce() {
+		return ((DeleteDeploymentWizard) this.getWizard()).getForce();
+	}
+
+	public boolean getDelete() {
+		return ((DeleteDeploymentWizard) this.getWizard()).getDelete();
 	}
 
 }

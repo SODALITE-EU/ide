@@ -1,3 +1,5 @@
+module:aws
+
 inputs:  
     vm-name:  
       type: list 

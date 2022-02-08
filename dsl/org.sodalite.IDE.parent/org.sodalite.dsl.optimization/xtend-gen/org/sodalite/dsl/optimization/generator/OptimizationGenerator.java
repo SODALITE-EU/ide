@@ -42,7 +42,6 @@ import org.sodalite.dsl.optimization.optimization.Optimization_Model;
 public class OptimizationGenerator extends AbstractGenerator {
   private boolean comma = false;
   
-  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     final String filename = this.getFilename(resource.getURI());
     fsa.generateFile(filename, this.compileOptimization(resource));

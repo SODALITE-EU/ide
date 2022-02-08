@@ -5,6 +5,8 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -53,4 +55,14 @@ public class UserAccountPreferencePage extends FieldEditorPreferencePage impleme
 		setDescription("Sodalite User Account configuration");
 	}
 
+	@Override
+	public boolean performOk() {
+		super.performOk();
+		try {
+			SodaliteBackendProxy.resetKBReasoner();
+		} catch (Exception e) {
+			SodaliteLogger.log(e);
+		}
+		return true;
+	}
 }

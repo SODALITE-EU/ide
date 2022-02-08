@@ -8,16 +8,15 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.UUID;
 
-import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.osgi.service.prefs.Preferences;
+import org.sodalite.dsl.ui.backend.AADMBackendProxy;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
-import org.sodalite.dsl.ui.helper.BackendHelper;
 import org.sodalite.dsl.ui.preferences.Activator;
 import org.sodalite.dsl.ui.preferences.PreferenceConstants;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
@@ -32,6 +31,8 @@ public class DeploymentWizard extends Wizard {
 	private String deploymentLabel = null;
 	private int workers = 0;
 	private boolean completeModel = false;
+	private boolean validateNiFiCerts = false;
+	private boolean useDM = false;
 	private String monitoring_id = null;
 
 	public DeploymentWizard(SortedMap<String, InputDef> inputDefs) {
@@ -84,6 +85,15 @@ public class DeploymentWizard extends Wizard {
 		// Get workers
 		this.workers = mainPage.getWorkers();
 
+		// Get completeModel
+		this.completeModel = mainPage.getCompleteModel();
+
+		// Get if data management is used
+		this.useDM = mainPage.getUseDataManagement();
+
+		// Get validate NIFI certificates
+		this.validateNiFiCerts = mainPage.getValidateNiFiCerts();
+
 		// Save inputs in temporal file
 		Map<String, String> inputs = mainPage.getInputs();
 		try {
@@ -91,10 +101,12 @@ public class DeploymentWizard extends Wizard {
 			StringBuilder content = new StringBuilder();
 			inputs.keySet().forEach(key -> content.append(key + ": " + inputs.get(key) + "\n"));
 			// Adding additional inputs
-			Preferences defaults = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-			String consul_ip = defaults.get(PreferenceConstants.Consul_IP, "");
-			String grafana_uri = defaults.get(PreferenceConstants.Grafana_URI, "");
-			String skydive_analyzer_uri = defaults.get(PreferenceConstants.SKYDIVE_ANALYZER_URI, "");
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			String grafana_uri = store.getString(PreferenceConstants.Grafana_URI).trim();
+			if (!grafana_uri.endsWith("/"))
+				grafana_uri = grafana_uri.concat("/");
+			String consul_ip = store.getString(PreferenceConstants.Consul_IP).trim();
+			String skydive_analyzer_uri = store.getString(PreferenceConstants.SKYDIVE_ANALYZER_URI).trim();
 			if (consul_ip.isEmpty() || grafana_uri.isEmpty()) {
 				showErrorDialog(null, "Deploy AADM",
 						"Consul or Grafana URIs not set. Please, check your SODALITE preferences");
@@ -112,15 +124,28 @@ public class DeploymentWizard extends Wizard {
 			content.append("grafana_address: " + grafana_address + "\n");
 			this.monitoring_id = UUID.randomUUID().toString();
 			content.append("monitoring_id: " + this.monitoring_id + "\n");
-			content.append("jwt: " + BackendHelper.getKBReasoner().getJWT() + "\n");
+			content.append("jwt: " + AADMBackendProxy.getKBReasoner().getJWT() + "\n");
+			// NIFI inputs
+			if (useDM) {
+				String NIFI_ENDPOINT = store.getString(PreferenceConstants.NIFI_URI).trim();
+				if (NIFI_ENDPOINT.isEmpty()) {
+					showErrorDialog(null, "Deploy AADM",
+							"NIFI endpoint not set. Please, check your SODALITE preferences");
+					return false;
+				}
+				content.append("NIFI_ENDPOINT: " + NIFI_ENDPOINT + "\n");
+				String NIFI_API_ENDPOINT = NIFI_ENDPOINT + "nifi-api";
+				content.append("NIFI_API_ENDPOINT: " + NIFI_API_ENDPOINT + "\n");
+				String NIFI_API_ACCESS_TOKEN = AADMBackendProxy.getKBReasoner().getNIFIAccessToken();
+				content.append("NIFI_API_ACCESS_TOKEN: " + NIFI_API_ACCESS_TOKEN + "\n");
+				Boolean NIFI_API_VALIDATE_CERTS = this.getValidateNiFiCerts();
+				content.append("NIFI_API_VALIDATE_CERTS: " + NIFI_API_VALIDATE_CERTS + "\n");
+			}
 			Files.write(this.inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
 		} catch (Exception e) {
 			SodaliteLogger.log("Error on closing wizard", e);
 			return false;
 		}
-
-		// Get completeModel
-		this.completeModel = mainPage.getCompleteModel();
 
 		return true;
 	}
@@ -147,6 +172,10 @@ public class DeploymentWizard extends Wizard {
 
 	public boolean getCompleteModel() {
 		return this.completeModel;
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return this.validateNiFiCerts;
 	}
 
 	public String getMonitoringId() {

@@ -318,7 +318,7 @@ public class Services {
 			EConditionClauseDefinitionAssert assertsConstraint = (EConditionClauseDefinitionAssert) constraint;
 			int index = assertsConstraint.getAssertions().size() - 1;
 			for (EAssertionDefinition assertion : assertsConstraint.getAssertions()) {
-				boolean placeDelimiter = delimiter != null & index-- > 0;
+				boolean placeDelimiter = delimiter != null && index-- > 0;
 				label += assertion.getAttribute_name() + parseConstraint(assertion.getConstraints())
 						+ (placeDelimiter ? delimiter : "");
 			}
@@ -755,11 +755,11 @@ public class Services {
 	}
 
 	public String renderRequirement(EPREFIX_TYPE req) throws Exception {
-		return AADM_Helper.renderType(req);
+		return AADM_Helper.renderEPREFIX_TYPE(req);
 	}
 
 	public String renderCapability(EPREFIX_TYPE cap) throws Exception {
-		return AADM_Helper.renderType(cap);
+		return AADM_Helper.renderEPREFIX_TYPE(cap);
 	}
 
 	public String renderRequirementNode(ERequirementAssignment req) throws Exception {
@@ -767,7 +767,7 @@ public class Services {
 	}
 
 	public String renderNodeType(ENodeTemplate node) throws Exception {
-		return AADM_Helper.renderType(node.getNode().getType());
+		return AADM_Helper.renderEPREFIX_TYPE(node.getNode().getType());
 	}
 
 	public String renderNodeTemplate(EPREFIX_ID template) throws Exception {
@@ -775,7 +775,7 @@ public class Services {
 	}
 
 	public String renderPolicyType(EPolicyDefinition policy) throws Exception {
-		return AADM_Helper.renderType(policy.getPolicy().getType());
+		return AADM_Helper.renderEPREFIX_TYPE(policy.getPolicy().getType());
 	}
 
 	public String renderParameterType(EParameterDefinition par) throws Exception {
@@ -982,14 +982,14 @@ public class Services {
 	public String renderGetPropertyReq_Cap(EPropertyAssignment property) {
 		EPREFIX_REF req_cap = ((GetProperty) property.getValue()).getProperty().getReq_cap();
 		if (req_cap != null)
-			return AADM_Helper.render(req_cap);
+			return AADM_Helper.renderType(req_cap);
 		else
 			return "";
 	}
 
 	public String renderGetPropertyProperty(EPropertyAssignment property) {
 		EPREFIX_REF prop = ((GetProperty) property.getValue()).getProperty().getProperty();
-		return AADM_Helper.render(prop);
+		return AADM_Helper.renderType(prop);
 	}
 
 	public String renderParameterType(EParameterDefinitionBody parameter) {

@@ -18,7 +18,7 @@ import "http://www.sodalite.org/dsl/optimization/Optimization" as opt
 
 AADM_Model:
 	('description:' description=STRING)? &
-	('module:' module=ID)? &
+	('module:' module=ID) &
 	('import:' imports+=ID)* &
 	('inputs:'
 		BEGIN
@@ -68,6 +68,10 @@ ENodeTemplateBody:
 	('capabilities:'
 	BEGIN
 		capabilities=ECapabilityAssignments
+	END)? &
+	('artifacts:'
+	BEGIN
+		artifacts=EArtifacts
 	END)?
 ;
 

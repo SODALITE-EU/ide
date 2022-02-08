@@ -10,22 +10,18 @@ This repository contains the Sodalite IDE (based on Eclipse).
 - scripts: scripts to publish the IDE during the dev-ops pipeline
 
 ## Requirements
-- Java SDK 11.0:
-Install the Java JDK 11.0 from [Oracle Downloads](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- Java SDK 11 or above (tested with JDK 16):
+Install the Java JDK 16 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java16)
 - Eclipse Modeling Tools:
 Install the Eclipse Modeling Tools instance from [Eclipse Downloads](https://www.eclipse.org/downloads/)
-Note: SODALITE IDE has been tested in the version 2020-06 R (4.16.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-modeling-tools)
+Note: SODALITE IDE has been tested in the version 2021-09 R (4.21.0) of the Eclipse Modeling Tools, which can be downloaded from [here](https://www.eclipse.org/downloads/packages/release/2021-09/r/eclipse-modeling-tools)
 
 ## IDE Installation from the Sodalite IDE update site
 ### Add Software sites for Sodalite IDE and dependencies
-1. In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button. In the dialog, give the name *"SODALITE IDE"* and the following update site location: https://sodalite-eu.github.io/ide/. 
-Then, click on *Add* button.  
-
+1. In Eclipse, select the menu option: *Help/Install New Software...*. Click on the *Add* button at the right of the *Work with* row. In the dialog, give the name *Sirius-XText integration* and the following update site location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/. Then, click on *Add* button.  
+2. Back to the *Install* wizard, click again on the *Add* button at the right of the *Work with* row. In the dialog, give the name *"SODALITE IDE* and the following update site location: https://sodalite-eu.github.io/ide/.
 ![Dialog to add the SODALITE repository](images/Sodalite_Repository_Wizard.png)
-
-2. Following the same procedure as before add the following external software repositories to your list of software sites:
-Name: Sirius-XText integration, Location: https://altran-mde.github.io/xtext-sirius-integration.io/p2/
-3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you also select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
+3. Make sure that in the *Install software* dialog window, in the *Work with* combo box, you select the *SODALITE IDE* entry. In the below panel, mark the *SODALITE IDE* checkbox. Be sure the chekbox *Contact all updates sites during install to find required software* is selected. Click twice the *Next* button. Accept the license, and finish the dialog. When prompted, accept. Restart Eclipse once the SODALITE IDE has been installed.
 
 ![Dialog to select the SODALITE features to install](images/Sodalite_Installation_Wizard.png)
 
@@ -36,10 +32,12 @@ Note: update site links are not browsable. Do not think these above links are wr
 Follow the following procedure to download the SODALITE IDE, build and install it into your Eclipse installation:
 
 ### Build the Sodalite IDE update site from sources
-
-1. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
-2. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
-3. Once complete, open the Eclipse Modeling Tools instance.
+1. Install the following dependencies required to build the IDE:
+- Java SDK 11 (Maven build does not work with a more recent JDK): Install the Java JDK 11 from [Oracle Downloads](https://www.oracle.com/java/technologies/downloads/#java11)
+- Maven: Install Maven from [Maven Download](https://maven.apache.org/download.cgi)
+2. Clone SODALITE IDE repository from GitHub: `git clone https://github.com/SODALITE-EU/ide.git`. This will create a local folder, hereafter referenced as *$IDE_REPO*
+3. Open a CLI and go to *$IDE_REPO/dsl/org.sodalite.IDE.parent* folder. Build the SODALITE IDE Eclipse repository (i.e. update site) using Maven, with this command: `mvn clean verify -U`
+4. Once complete, open the Eclipse Modeling Tools instance.
 
 ### Add Software sites for Sodalite IDE and dependencies
 

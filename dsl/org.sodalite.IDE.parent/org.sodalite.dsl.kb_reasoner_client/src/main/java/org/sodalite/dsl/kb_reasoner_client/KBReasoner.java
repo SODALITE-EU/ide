@@ -57,6 +57,8 @@ public interface KBReasoner {
 
 	TypeData getPolicyTypes(List<String> modules) throws SodaliteException;
 
+	TypeData getArtifactTypes(List<String> modules) throws SodaliteException;
+
 	TemplateData getTemplates(List<String> modules) throws SodaliteException;
 
 	ModuleData getModules() throws SodaliteException;
@@ -144,9 +146,9 @@ public interface KBReasoner {
 	PDSUpdateReport pdsUpdate(String inputs, String namespace, String platformType) throws SodaliteException;
 
 	void notifyDeploymentToRefactoring(String appName, String aadm_id, String aadm_version, String blueprint_id,
-			String deployment_id, String inputs) throws SodaliteException;
+			String deployment_id, String monitoring_id, String inputs) throws SodaliteException;
 
-	BlueprintData getBlueprintsForUser(String username) throws SodaliteException;
+	BlueprintData getBlueprintsForUser(String username, boolean active) throws SodaliteException;
 
 	BlueprintData getBlueprintForId(String blueprintId) throws SodaliteException;
 
@@ -154,10 +156,12 @@ public interface KBReasoner {
 
 	DeploymentData getDeploymentForId(String deploymentId) throws SodaliteException;
 
-	void deleteBlueprintForId(String blueprintId) throws SodaliteException;
+	void deleteBlueprintForId(String blueprintId, boolean force) throws SodaliteException;
 
-	DeploymentReport deleteDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers)
+	DeploymentReport undeployDeploymentForId(String deploymentId, Path inputs_yaml_path, int workers, boolean force)
 			throws SodaliteException;
+
+	void deleteDeploymentForId(String deploymentId, boolean force) throws SodaliteException;
 
 	DeploymentReport resumeDeploymentForId(String deploymentId, Path inputs_yaml_path, boolean clean_state, int workers)
 			throws SodaliteException;
@@ -182,4 +186,5 @@ public interface KBReasoner {
 
 	String getJWT() throws SodaliteException;
 
+	String getNIFIAccessToken() throws SodaliteException;
 }
