@@ -139,7 +139,11 @@ node_types:
 				entry_schema: sodalite.datatypes.OpenStack.env
 				required: false
 				default: ''
-					
+			additional_public_key:
+				description: "Additional public key that is added to VM authorized_keys. No new OpenStack keypair is created."
+				type: string
+				required: false
+				default: ""	
 		attributes: 
 			id:  
 				description: "OpenStack id of the VM"
