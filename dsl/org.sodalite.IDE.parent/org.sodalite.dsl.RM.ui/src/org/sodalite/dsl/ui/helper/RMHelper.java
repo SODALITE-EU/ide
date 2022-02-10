@@ -554,7 +554,7 @@ public class RMHelper {
 		else if(result==1) {
 			File folderStructure = new File(absolutePath); 
 			if(folderStructure.exists() && folderStructure.isDirectory()) {
-				SodaliteLogger.log("Folder structure exists");
+				//SodaliteLogger.log("Folder structure exists");
 				if(selectedFile.equals(absolutePath+"/"+fileName)) {
 					return localPath+"/"+fileName;
 				}
