@@ -16,6 +16,7 @@ import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -162,10 +163,19 @@ public class SodaliteBackendProxy {
 		logger.setLevel(Level.ERROR);
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String mongoDB_URI = store.getString(PreferenceConstants.MONGODB_URI).trim();
-		String mongoDB_host = mongoDB_URI.split(":")[0];
-		String mongoDB_port = mongoDB_URI.split(":")[1];
-		mongoClient = new MongoClient(mongoDB_host, Integer.parseInt(mongoDB_port));
-		mongoClient = new MongoClient(mongoDB_URI,opts);
+		String[] uriParts = mongoDB_URI.split(":");
+		String mongoDB_host;
+		String mongoDB_port;
+		if(uriParts.length == 2) {
+			mongoDB_host = mongoDB_URI.split(":")[0];
+			mongoDB_port = mongoDB_URI.split(":")[1];
+		}
+		else {
+			SodaliteLogger.log("MongoDB URL is wrong or missing");
+		    mongoClient= null;
+		    return;
+		}
+		mongoClient = new MongoClient(new ServerAddress(mongoDB_host, Integer.parseInt(mongoDB_port)), opts);
 		try {
 			mongoClient.getAddress();
 		} catch (Exception e) {
