@@ -1,9 +1,11 @@
 package org.sodalite.ide.ui.views.parts.deployment;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -310,18 +312,6 @@ public class BlueprintView {
 		return root;
 	}
 
-//	private void raiseConfigurationIssue(String message) throws Exception {
-//		Shell parent = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//		Display.getDefault().asyncExec(new Runnable() {
-//			@Override
-//			public void run() {
-//				MessageDialog.openError(parent, "Sodalite Preferences Error",
-//						message + " in Sodalite preferences pages");
-//			}
-//		});
-//		throw new Exception(message + " in Sodalite preferences pages");
-//	}
-
 	private void createContextMenu(TreeViewer viewer) {
 
 		MenuManager menuMgr = new MenuManager();
@@ -562,19 +552,65 @@ public class BlueprintView {
 		// Show resume deployment wizard dialog
 		try {
 			if (node.isDeployment()) {
-				ResumeWizardDialog dialog = new ResumeWizardDialog(shell, new ResumeWizard());
+				// Get deployment inputs
+				DeploymentData deploymentData = RMBackendProxy.getKBReasoner()
+						.getDeploymentForId(node.getDeployment().getDeployment_id());
+				Deployment deploymentDetails = deploymentData.getElements().get(0);
+
+				ResumeWizardDialog dialog = new ResumeWizardDialog(shell,
+						new ResumeWizard(deploymentDetails.getInputs()));
 				if (dialog.OK == dialog.open()) {
 					// Get inputs from Wizard
-					Path inputs_yaml_path = dialog.getInputsFile();
+					Path inputs_yaml_path = createInputsFile(dialog.getEditedInputs(), deploymentDetails.getInputs());
 					boolean clean_state = dialog.getCleanState();
 					int workers = dialog.getWorkers();
-					resumeDeployment(node, inputs_yaml_path, clean_state, workers);
+					String deploymentName = deploymentDetails.getInputs().get("deployment_label");
+					String monitoring_id = deploymentDetails.getInputs().get("monitoring_id");
+					resumeDeployment(node, inputs_yaml_path, clean_state, workers, deploymentName, monitoring_id);
 				}
 			}
 		} catch (Exception e) {
 			SodaliteLogger.log(e);
 			showErrorDialog("Resume deployment error", e.getMessage());
 		}
+	}
+
+	private Path createInputsFile(Map<String, String> editedInputs, Map<String, String> originalInputs)
+			throws SodaliteException {
+		Path inputsFile = null;
+		Map<String, String> inputs = updateInputs(editedInputs, originalInputs);
+		try {
+			inputsFile = File.createTempFile("inputs", null, new File(System.getProperty("user.home"))).toPath();
+			StringBuilder content = new StringBuilder();
+			inputs.keySet().forEach(key -> content.append(key + ": " + parseInputValue(inputs.get(key)) + "\n"));
+			Files.write(inputsFile, content.toString().getBytes(), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			throw new SodaliteException("Error creating resume deployment inputs in local file system");
+		}
+		return inputsFile;
+	}
+
+	private Map<String, String> updateInputs(Map<String, String> editedInputs, Map<String, String> originalInputs) {
+		Map<String, String> inputs = new HashMap<>();
+		for (String key : originalInputs.keySet()) {
+			String value = originalInputs.get(key);
+			if (editedInputs.containsKey(key))
+				value = editedInputs.get(key);
+			inputs.put(key, value);
+		}
+		return inputs;
+	}
+
+	private String parseInputValue(String value) {
+		String newValue = value;
+		final String TAB = "  ";
+		if (value.contains(":\n")) {
+			String[] tokens = value.split("\n");
+			newValue = "\n" + TAB + tokens[0] + "\n";
+			for (int i = 1; i < tokens.length; i++)
+				newValue += TAB + tokens[i] + "\n";
+		}
+		return newValue;
 	}
 
 	public void registerAlertingRules(DeploymentNode node) {
@@ -619,28 +655,61 @@ public class BlueprintView {
 		}
 	}
 
-	private void resumeDeployment(DeploymentNode node, Path inputs_yaml_path, boolean clean_state, int workers) {
+	private void resumeDeployment(DeploymentNode node, Path inputs_yaml_path, boolean clean_state, int workers,
+			String deployment_name, String monitoring_id) {
 		Job job = new Job("Resume deployment") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				int steps = 1;
-				int number_steps = 1;
+				int number_steps = 4;
 				SubMonitor subMonitor = SubMonitor.convert(monitor, number_steps);
 				try {
+					// Ask xOpera to resume the AADM blueprint
 					subMonitor.setTaskName("Resuming deployment");
-					DeploymentReport report = RMBackendProxy.getKBReasoner().resumeDeploymentForId(
+					DeploymentReport depl_report = RMBackendProxy.getKBReasoner().resumeDeploymentForId(
 							node.getDeployment().getDeployment_id(), inputs_yaml_path, clean_state, workers);
 					subMonitor.worked(steps++);
+
+					// Ask xOpera resume status: info/status (session-token): status JSON
+					subMonitor.setTaskName("Checking resume status");
+					DeploymentStatusReport dsr = RMBackendProxy.getKBReasoner()
+							.getAADMDeploymentStatus(depl_report.getDeployment_id());
+					while (!dsr.getState().equals("success")) {
+						if (dsr.getState().equals("failed")) {
+							String msg = "Deployment resume failed as reported by the Orchestrator\n";
+							if (dsr.getNode_error() != null) {
+								msg += "Deployment resume error reported by Orchestrator in: \n" + "node: "
+										+ dsr.getNode_error().getNode() + "\n" + "operation: "
+										+ dsr.getNode_error().getOperation() + "\n" + "task: "
+										+ dsr.getNode_error().getTask() + "\n";
+								msg += "Message: " + dsr.getNode_error().getMessage() + "\n";
+							}
+							throw new Exception(msg);
+						}
+						TimeUnit.SECONDS.sleep(10);
+						dsr = RMBackendProxy.getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
+					}
+					subMonitor.worked(steps++);
+
+					// Report deployment_label, deployment_id to Grafana Registry with IAM -
+					subMonitor.setTaskName("Reporting deployment to Monitoring Dashboard (Grafana)");
+					RMBackendProxy.getKBReasoner().createMonitoringDashboard(monitoring_id, deployment_name);
+					subMonitor.worked(steps++);
+
+					// Upon completion, show dialog
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							String message = "The selected deployment has been successfully resumed with: \ndeployment id: "
-									+ report.getDeployment_id();
-							String infoToPaste = "deployment id: " + report.getDeployment_id();
+							String message = "The selected deployment has been successfully resumed";
+							String infoToPaste = "blueprint id: " + depl_report.getBlueprint_id() + ", deployment_id: "
+									+ depl_report.getDeployment_id() + ", monitoring_id: " + monitoring_id;
 							showInfoDialog(infoToPaste, "Resume deployment", message);
 							SodaliteLogger.log(message);
 						}
 					});
+					subMonitor.worked(-1);
+					subMonitor.done();
+
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override

@@ -1,6 +1,6 @@
 package org.sodalite.ide.ui.wizards.resume;
 
-import java.nio.file.Path;
+import java.util.Map;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.wizard.IWizard;
@@ -24,8 +24,8 @@ public class ResumeWizardDialog extends WizardDialog {
 
 	}
 
-	public Path getInputsFile() {
-		return ((ResumeWizard) this.getWizard()).getInputsFile();
+	public Map<String, String> getEditedInputs() {
+		return ((ResumeWizard) this.getWizard()).getEditedInputs();
 	}
 
 	public int getWorkers() {
@@ -35,5 +35,4 @@ public class ResumeWizardDialog extends WizardDialog {
 	public boolean getCleanState() {
 		return ((ResumeWizard) this.getWizard()).getCleanState();
 	}
-
 }

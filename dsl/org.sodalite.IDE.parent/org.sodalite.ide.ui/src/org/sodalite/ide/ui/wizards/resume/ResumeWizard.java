@@ -1,18 +1,20 @@
 package org.sodalite.ide.ui.wizards.resume;
 
-import java.nio.file.Path;
+import java.util.Map;
 
 import org.eclipse.jface.wizard.Wizard;
 
 public class ResumeWizard extends Wizard {
 
 	protected ResumeWizardMainPage mainPage;
-	private Path inputsFile = null;
 	private int workers = 0;
 	private boolean clean_state = false;
+	private Map<String, String> inputs = null;
+	private Map<String, String> editedInputs = null;
 
-	public ResumeWizard() {
+	public ResumeWizard(Map<String, String> inputs) {
 		super();
+		this.inputs = inputs;
 		setNeedsProgressMonitor(true);
 	}
 
@@ -23,13 +25,18 @@ public class ResumeWizard extends Wizard {
 
 	@Override
 	public void addPages() {
-		mainPage = new ResumeWizardMainPage();
+		mainPage = new ResumeWizardMainPage(inputs);
 		addPage(mainPage);
 	}
 
 	@Override
 	public boolean canFinish() {
-		return mainPage.getInputsFile() != null;
+		Map<String, String> inputs = mainPage.getInputs();
+		return inputs.keySet().stream().allMatch(key -> isValidInput(key, inputs.get(key)));
+	}
+
+	private boolean isValidInput(String input, String value) {
+		return value != null && !value.isEmpty();
 	}
 
 	@Override
@@ -42,13 +49,13 @@ public class ResumeWizard extends Wizard {
 		this.clean_state = mainPage.getCleanState();
 
 		// Inputs file
-		this.inputsFile = mainPage.getInputsFile();
+		editedInputs = mainPage.getInputs();
 
 		return true;
 	}
 
-	public Path getInputsFile() {
-		return this.inputsFile;
+	public Map<String, String> getEditedInputs() {
+		return this.editedInputs;
 	}
 
 	public int getWorkers() {

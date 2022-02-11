@@ -1535,7 +1535,7 @@ public class KBReasonerClient implements KBReasoner {
 		try {
 			Assert.notNull(deploymentId, "Pass a not null deploymentId");
 			Assert.notNull(inputs_yaml_path, "Pass a not null inputs_yaml_path");
-			String url = xoperaUri + "deployment/" + deploymentId + "/deploy_continue&clean_state=" + clean_state;
+			String url = xoperaUri + "deployment/" + deploymentId + "/deploy_continue?clean_state=" + clean_state;
 			if (workers >= 0)
 				url += "&workers=" + workers;
 
