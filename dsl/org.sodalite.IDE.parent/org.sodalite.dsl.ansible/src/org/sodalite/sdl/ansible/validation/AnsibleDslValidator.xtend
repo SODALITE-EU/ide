@@ -948,6 +948,9 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		var String boundary = "011000010111000001101001"
 		var CloseableHttpClient httpclient = HttpClients.createDefault();
 		var String defectPredictor = AnsibleHelper.getAnsibleDefectPredictor();
+		if(defectPredictor.empty){
+			return;
+		}
 		var HttpPost post = new HttpPost(defectPredictor);
 		var FileBody filebody = new FileBody(script);
 		var MultipartEntityBuilder builder = MultipartEntityBuilder.create();
