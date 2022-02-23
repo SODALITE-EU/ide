@@ -122,6 +122,8 @@ public class ResumeWizardMainPage extends WizardPage {
 			// Text
 			Text text = null;
 			String inputValue = inputs.get(input);
+			if (inputValue == null)
+				inputValue = "";
 			if (inputValue.contains("{")) {
 				int number_lines = 5;
 				text = new Text(containerMain, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
