@@ -16,6 +16,7 @@ import org.sodalite.dsl.rM.EPropertyAssignment
 import org.sodalite.dsl.aADM.EAttributeAssignment
 import org.sodalite.dsl.aADM.EPolicyDefinition
 import org.sodalite.dsl.rM.ETriggerDefinition
+import org.sodalite.dsl.rM.EAssignmentValue
 
 /**
  * Customization of the default outline structure.
@@ -72,7 +73,7 @@ class AADMOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	override boolean _isLeaf(EObject modelElement) {
-  		if (modelElement instanceof EParameterDefinition) {
+  		if (modelElement instanceof EParameterDefinition || modelElement instanceof EAssignmentValue) {
   			return true
   		}
   		return super._isLeaf(modelElement)
