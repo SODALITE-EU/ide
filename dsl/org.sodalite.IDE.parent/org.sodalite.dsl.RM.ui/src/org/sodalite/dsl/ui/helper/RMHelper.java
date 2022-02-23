@@ -468,7 +468,10 @@ public class RMHelper {
 
 	public static String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
-		path = path.substring(path.indexOf(File.separator));
+		if (File.separator.equals("\\"))
+			path = path.substring(path.indexOf("/") + 1);
+		else
+			path = path.substring(path.indexOf("/"));
 		Path filePath = FileSystems.getDefault().getPath(path);
 		return new String(Files.readAllBytes(filePath));
 	}
