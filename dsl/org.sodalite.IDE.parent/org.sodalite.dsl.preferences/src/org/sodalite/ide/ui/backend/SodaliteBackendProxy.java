@@ -189,6 +189,9 @@ public class SodaliteBackendProxy {
 
 	
 	public static MongoClient getMongoClient() {
+		if(mongoClient == null) {
+			createMongoClient();
+		}
 		return mongoClient;	
 	}
 

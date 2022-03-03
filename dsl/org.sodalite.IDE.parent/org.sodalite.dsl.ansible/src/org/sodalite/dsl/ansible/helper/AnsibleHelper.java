@@ -29,6 +29,8 @@ import org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN;
 import org.sodalite.sdl.ansible.ansibleDsl.ECollectionList;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionary;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
+import org.sodalite.sdl.ansible.ansibleDsl.EInputOperationVariableReference;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes;
@@ -600,6 +602,12 @@ public class AnsibleHelper {
 		
 		public static String getEJinjaAndStringValue(EObject model) {
 			StringBuilder resultBuilder = new StringBuilder();
+			if(EcoreUtil2.getAllContentsOfType(model,EInputInterfaceVariableReference.class).size()>0) {
+				return "interface_input";
+			}
+			if(EcoreUtil2.getAllContentsOfType(model,EInputOperationVariableReference.class).size()>0) {
+				return "operation_input";
+			}
 			if(model instanceof EJinjaAndStringImpl) {
 				for(EJinjaOrString element:((EJinjaAndStringImpl)model).getJinja_expression_and_string()) {
 					resultBuilder.append(getEJinjaOrStringValue(element));
@@ -678,6 +686,7 @@ public class AnsibleHelper {
 			return proposalExists;
 		}
 		
+		//Cache some data that avoid asking the MongoDB database all the time
 		private static Map<String, String> cacheData = new HashMap<>();
 		static{
 			cacheData.put("currentModule", "");
@@ -696,15 +705,6 @@ public class AnsibleHelper {
 			AnsibleHelper.cacheData = cacheData;
 		}
 		
-		private static Map<String,Document> collectionData = new HashMap<>();
-
-		public static Map<String, Document> getCollectionData() {
-			return collectionData;
-		}
-
-		public static void setCollectionData(Map<String, Document> collectionData) {
-			AnsibleHelper.collectionData = collectionData;
-		}
 
 		
 		
