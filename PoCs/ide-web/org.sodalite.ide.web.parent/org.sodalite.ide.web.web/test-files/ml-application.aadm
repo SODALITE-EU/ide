@@ -1,0 +1,215 @@
+module: yosu
+
+import: docker
+import: openstack
+
+description: "ML Application deployment over OpenStack cloud"
+
+inputs:
+  ssh-key-name:  
+    type: string 
+  vm-name:  
+  	type: string 
+  image-name:  
+    type: string 
+  openstack-network-name:  
+    type: string 
+  openstack-floating-ip-pool:  
+    type: string 
+  security-group-name:  
+    type: string  
+  security-groups:  
+    type: string  
+  flavor-name:  
+    type: string
+  env:
+    type: map 
+  username:
+    type: string  
+
+node_templates:
+
+  // Setting up OpenStack resources //
+
+  // OpenStack security group for the ML Application
+  ml-app-security-group:
+    type: openstack/sodalite.nodes.OpenStack.SecurityRules
+    properties:
+      group_description: "Security group for ML App: includes ports for SSH, Training DB, Training and Prediction services"
+      group_name: get_input: security-group-name
+      env: get_input: env
+      ports:
+        ssh-port:
+          protocol: "tcp"
+          port_range_min: 22
+          port_range_max: 22
+          remote_ip_prefix: "0.0.0.0/0"
+        training-db-service-port:
+          protocol: "tcp"
+          port_range_min: 5000
+          port_range_max: 5000
+          remote_ip_prefix: "0.0.0.0/0"
+        training-service-port:
+          protocol: "tcp"
+          port_range_min: 5001
+          port_range_max: 5001
+          remote_ip_prefix: "0.0.0.0/0"
+        prediction-service-port:
+          protocol: "tcp"
+          port_range_min: 5002
+          port_range_max: 5002
+          remote_ip_prefix: "0.0.0.0/0"  
+
+  // OpenStack VM
+  sodalite-vm:  
+    type: openstack/sodalite.nodes.OpenStack.VM 
+    properties:  
+      name: get_input: vm-name
+      key_name: get_input: ssh-key-name
+      image: get_input: image-name
+      network: get_input: openstack-network-name
+      security_groups: get_input: security-groups
+      flavor: get_input: flavor-name
+      username: get_input: username
+      floating_ip_pools: get_input: openstack-floating-ip-pool
+      env: get_input: env
+      timeout: 600
+    requirements:
+      protected_by:
+        node: yosu/ml-app-security-group
+
+  // Setting up Docker environment on the OpenStack VM //
+
+  // Docker host
+  docker-host:
+    type: docker/sodalite.nodes.DockerHost
+    requirements:
+      host:
+        node: yosu/sodalite-vm
+
+  // Docker network
+  docker-network:
+    type: docker/sodalite.nodes.DockerNetwork
+    properties:
+      name: "ml-app-docker-network"
+    requirements:
+      host:
+        node: yosu/sodalite-vm
+      dependency:
+        node: yosu/docker-host
+
+  // Docker images shall be pulled from public registry
+  docker-public-registry:
+    type: docker/sodalite.nodes.DockerRegistry
+    properties:
+      docker_registry_url: "registry.hub.docker.com"
+      docker_user: ""
+      docker_pass: ""
+    requirements:
+      host:
+        node: yosu/sodalite-vm
+      dependency:
+        node: yosu/docker-host
+
+  // Deploying components of the ML application //
+
+  // Training DB service
+  training-db-service:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      alias: "trainingdb_service"
+      docker_network_name: get_property:
+        entity: SELF
+        property: yosu/docker-network.name
+        req_cap: yosu/training-db-service.network
+      image_name: "indikakumara/trainingdbapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
+      restart_policy: "always"
+      ports: ["5000:5000"]
+      env:
+        DB_URL: "sqlite:///features.db"
+    requirements:
+      host:
+        node: yosu/docker-host
+      network:
+        node: yosu/docker-network
+      registry:
+        node: yosu/docker-public-registry
+
+  // Volume for Training and Prediction services 
+  model-repo-volume:
+    type: docker/sodalite.nodes.DockerVolume
+    properties:
+      name: "model-repo"
+    requirements:
+      host:
+        node: yosu/sodalite-vm
+      dependency:
+        node: yosu/docker-host
+
+  // Training service
+  training-service:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      alias: "training_service"
+      docker_network_name: get_property:
+        entity: SELF
+        property: yosu/docker-network.name
+        req_cap: yosu/training-service.network
+      image_name: "indikakumara/trainapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
+      restart_policy: "always"
+      ports: ["5001:5000"]
+      volumes: ["model-repo:/usr/src/myapp/models"]
+      env:
+        TRAININGDB_API: "http://trainingdb_service:5000/training-db/diabetes"
+    requirements:
+      host:
+        node: yosu/docker-host
+      network:
+        node: yosu/docker-network
+      registry:
+        node: yosu/docker-public-registry
+      dependency:
+        node: yosu/training-db-service
+      dependency:
+        node: yosu/model-repo-volume
+
+  // Prediction service
+  prediction-service:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      alias: "prediction_service"
+      docker_network_name: get_property:
+        entity: SELF
+        property: yosu/docker-network.name
+        req_cap: yosu/prediction-service.network
+      image_name: "indikakumara/predictionapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
+      restart_policy: "always"
+      ports: ["5002:5000"]
+      volumes: ["model-repo:/usr/src/myapp/models"]
+    requirements:
+      host:
+        node: yosu/docker-host
+      network:
+        node: yosu/docker-network
+      registry:
+        node: yosu/docker-public-registry
+      dependency:
+        node: yosu/training-service
+      dependency:
+        node: yosu/model-repo-volume
+
+// Obtaining useful outputs, such as public IP of the VM //
+
+outputs:
+
+  // Public IP can be retrieved
+  // from the public_address attribute of the OpenStack VM
+  public_ip:
+    type: string
+    description: "The public IP of the provisioned VM"
+    value: get_attribute: 
+      entity: yosu/sodalite-vm
+      attribute: yosu/sodalite-vm.public_address
