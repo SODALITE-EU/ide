@@ -19,7 +19,6 @@ import org.sodalite.dsl.rM.EInterfaceDefinition
 import org.sodalite.dsl.rM.EValueExpression
 import org.sodalite.dsl.rM.ESTRING
 import org.eclipse.emf.ecore.util.EObjectContainmentEList
-import org.sodalite.dsl.rM.EValidSourceType
 import org.sodalite.dsl.rM.EOperationDefinition
 import org.sodalite.dsl.rM.EParameterDefinition
 import org.sodalite.dsl.rM.EFunction
@@ -73,6 +72,16 @@ import org.sodalite.dsl.rM.EExtendedTriggerCondition
 import org.sodalite.dsl.rM.EInterfaceType
 import org.sodalite.dsl.rM.RM_Model
 import java.util.Base64
+import org.sodalite.dsl.rM.EArtifactDefinition
+import org.sodalite.dsl.rM.GetArtifact
+import org.sodalite.dsl.rM.EArtifactType
+import org.sodalite.dsl.CustomOutputConfigurationProvider
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.swt.widgets.Shell
+import org.eclipse.ui.PlatformUI
+import java.nio.file.NoSuchFileException
+
 
 /**
  * Generates code from your model files on save.
@@ -84,6 +93,7 @@ class RMGenerator extends AbstractGenerator {
 	var int node_counter = 1
 	var int property_counter = 1
 	var int attribute_counter = 1
+	var int artifact_counter = 1
 	var int requirement_counter = 1
 	var int capability_counter = 1
 	var int capabilitytype_counter = 1
@@ -96,6 +106,7 @@ class RMGenerator extends AbstractGenerator {
 	var int operation_counter = 1
 	var Map<EPropertyDefinition, Integer> property_numbers
 	var Map<EAttributeDefinition, Integer> attribute_numbers
+	var Map<EArtifactDefinition, Integer> artifact_numbers
 	var Map<ERequirementDefinition, Integer> requirement_numbers
 	var Map<ECapabilityDefinition, Integer> capability_numbers
 	var Map<EInterfaceDefinition, Integer> interface_numbers
@@ -108,6 +119,7 @@ class RMGenerator extends AbstractGenerator {
 		node_counter = 1
 		property_counter = 1
 		attribute_counter = 1
+		artifact_counter = 1
 		requirement_counter = 1
 		capability_counter = 1
 		capabilitytype_counter = 1
@@ -120,6 +132,7 @@ class RMGenerator extends AbstractGenerator {
 		operation_counter = 1
 		property_numbers = new HashMap<EPropertyDefinition, Integer>()
 		attribute_numbers = new HashMap<EAttributeDefinition, Integer>()
+		artifact_numbers = new HashMap<EArtifactDefinition, Integer>()
 		requirement_numbers = new HashMap<ERequirementDefinition, Integer>()
 		capability_numbers = new HashMap<ECapabilityDefinition, Integer>()
 		parameter_numbers = new HashMap<Object, Map<String, Integer>>()
@@ -127,9 +140,91 @@ class RMGenerator extends AbstractGenerator {
 		trigger_numbers = new HashMap<ETriggerDefinition, Integer>()
 		operation_numbers = new HashMap<EOperationDefinition, Integer>()
 		
+		if(context.cancelIndicator === null){
+			var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+			var Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			var String localPath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+			var projectName = localPath.split("/").get(1).replaceAll("%20", " ")
+			//var RMName = getRMName(resource).replaceAll("%20", " ")
+			var String absolutePath = workspaceDir + localPath
+			absolutePath = absolutePath.replace(".rm","")
+			localPath = localPath.replace(".rm","").replace("/"+projectName,"")
+			//generate ansible files from RMs
+			for(node:resource.allContents.toIterable.filter(ENodeType)){
+				val nodeType = node.name
+				for (interface : node.eAllContents.toIterable.filter(EInterfaceDefinition)){
+					val interfaceName = interface.name
+					for(op: interface.interface.eAllContents.toIterable.filter(EOperationDefinition)){
+						val operationName = op.name
+						var AnsiblePath = absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName
+						var File ans_file = new File(AnsiblePath+".ans")
+						var File yaml_file = new File(AnsiblePath+".yaml")
+						if(ans_file.exists && yaml_file.exists){
+							//var BufferedReader ans_reader = new BufferedReader(new FileReader(absolutePath+".ans"));
+							//var String currentLine = ans_reader.readLine();
+							//System.out.println(currentLine)
+							val String[] labels = #['Replace both files','Replace only .ans file',"Replace only .yaml file","Do not replace anything"]
+							var MessageDialog dialog = new MessageDialog(shell, "Create new Ansible files", null,
+	    					"In folder " +absolutePath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+" exist already a .ans file and a .yaml file for operation "+operationName+". Please select one of the following options." , MessageDialog.QUESTION, labels, 3);
+	    					var int result = dialog.open();
+	    					//System.out.println(result);
+	    					if(result ==0){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+	    					else if(result ==1){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+	    					}
+	    					else if(result == 2){
+	    						fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+	    					}
+						}
+						else if(ans_file.exists && !yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .ans implementation file",
+							"Abstract implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							}
+						}
+						else if(!ans_file.exists && yaml_file.exists){
+							var boolean confirmed = MessageDialog.openConfirm(shell,
+							"Replace .yaml implementation file",
+							"Concrete implementation file for operation "+operationName+" already exists.Do you want to replace current implementation file?");
+							if(confirmed){
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+								fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+							}
+						}
+						else if(!ans_file.exists && !yaml_file.exists){
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".ans",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileAnsibleModel(nodeType,interfaceName,operationName))
+							fsa.generateFile(localPath+"-Ansible files"+"/"+nodeType+"/"+interfaceName+"/"+operationName+".yaml",CustomOutputConfigurationProvider::ANSIBLE_OUTPUT,compileYAMLAnsible())
+						}
+						
+						
+					}
+				}
+			}
+		}
 		val filename = getFilename(resource.URI)
-		fsa.generateFile(filename,  compileRM (resource))
+		fsa.generateFile(filename.replaceAll("%20", " "),  compileRM (resource))
 	}
+	
+	def compileAnsibleModel(String nodeType,String interfaceName,String operationName)'''
+	playbook_name:"«interfaceName»_interface_«operationName»_operation"
+	used_by: 
+		node_type:"«nodeType»"
+		interface:"«interfaceName»"
+		operation:"«operationName»"
+	plays:
+		play:
+			play_name:"example play"
+	
+	'''
+	
+	def compileYAMLAnsible()'''
+	- name: "example play"
+	'''
 	
 	
 	def compileRM(Resource r) '''
@@ -161,6 +256,10 @@ class RMGenerator extends AbstractGenerator {
 	«a.compile»
 	«ENDFOR»
 	
+	«FOR a:r.allContents.toIterable.filter(GetArtifact)»
+	«a.compile»
+	«ENDFOR»
+	
 	«FOR i:r.allContents.toIterable.filter(GetInput)»
 	«i.compile»
 	«ENDFOR»
@@ -185,8 +284,12 @@ class RMGenerator extends AbstractGenerator {
 	«t.compile»
 	«ENDFOR»
 	
- 	«FOR p:r.allContents.toIterable.filter(EAttributeDefinition)»
-	«p.compile»
+ 	«FOR a:r.allContents.toIterable.filter(EAttributeDefinition)»
+	«a.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(EArtifactDefinition)»
+	«a.compile»
 	«ENDFOR»
 	
  	«FOR i:r.allContents.toIterable.filter(EInterfaceDefinition)»
@@ -207,6 +310,10 @@ class RMGenerator extends AbstractGenerator {
 	
 	«FOR d:r.allContents.toIterable.filter(EDataType)»
 	«d.compile»
+	«ENDFOR»
+	
+	«FOR a:r.allContents.toIterable.filter(EArtifactType)»
+	«a.compile»
 	«ENDFOR»
 	
 	«FOR c:r.allContents.toIterable.filter(ECapabilityType)»
@@ -532,7 +639,7 @@ class RMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readFileAsString(o.operation.implementation.primary.file)»' ;
+	  exchange:value '«readImplementationFileAsString(o.operation.implementation.primary.file,o.operation.implementation.primary.eResource,o.operation.implementation.primary.relative_path)»' ;
 	.
 	
 	«IF o.operation.implementation.primary.relative_path !== null»
@@ -544,12 +651,31 @@ class RMGenerator extends AbstractGenerator {
 	.
 	«ENDIF»
 	
+	«var String content = readImplementationFileAsString(o.operation.implementation.primary.file.replace(".yaml",".ans"),o.operation.implementation.primary.eResource,o.operation.implementation.primary.relative_path) »
+	«IF content!== null»
+	«putParameterNumber(o, "primary.Ansible_model.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«content»' ;
+	.  
+	«putParameterNumber(o, "primary.Ansible_model", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "Ansible_model" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model.content")» ;
+	 .
+	«ENDIF»
+	
 	«putParameterNumber(o, "primary", parameter_counter)»
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "primary" ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.path")» ;
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.content")» ;
+	  «IF getParameterNumber(o, "primary.Ansible_model")!==null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.Ansible_model")» ;
+	  «ENDIF»
 	  «IF o.operation.implementation.primary.relative_path !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(o, "primary.relative_path")» ;
 	  «ENDIF»
@@ -662,11 +788,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "value" ;
 	  «IF p.parameter.value instanceof EFunction»
-	  «IF p.parameter.value instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	  «ELSEIF p.parameter.value instanceof GetProperty || p.parameter.value instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.value, "name")» ;
-	  «ENDIF»
 	  «ELSEIF p.parameter.value instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -679,11 +801,7 @@ class RMGenerator extends AbstractGenerator {
 	  rdf:type exchange:Parameter ;
 	  exchange:name "default" ;
 	  «IF p.parameter.^default instanceof EFunction»
-	  «IF p.parameter.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	  «ELSEIF p.parameter.^default instanceof GetProperty || p.parameter.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.parameter.^default, "name")» ;
-	  «ENDIF»
 	  «ELSEIF p.parameter.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.parameter.^default as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -962,6 +1080,42 @@ class RMGenerator extends AbstractGenerator {
 	.
 	'''
 	
+	def compile(GetArtifact a) '''
+	«IF a.artifact.artifact !== null»
+	«putParameterNumber(a, "artifact", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "artifact" ;  
+	  «IF a.artifact.artifact instanceof EPREFIX_TYPE»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_TYPE).type, ".")»' ; 
+	  «ELSEIF a.artifact.artifact instanceof EPREFIX_ID»
+	  exchange:value '«lastSegment((a.artifact.artifact as EPREFIX_ID).id, ".")»' ;
+	  «ENDIF»
+	.
+	«ENDIF»	
+	
+	«IF a.artifact.entity !== null»
+	«putParameterNumber(a, "entity", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "entity" ;  
+	  exchange:value '«trim(a.artifact.entity.compile())»' ; 
+	.
+	«ENDIF»		
+	
+	«putParameterNumber(a, "name", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "get_artifact" ;
+	  «IF a.artifact.artifact !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "artifact")» ;
+	  «ENDIF»	
+	  «IF a.artifact.entity !== null»
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entity")» ;
+	  «ENDIF»
+	.
+	'''
+	
 	def compile (GetInput gi)'''
 	«putParameterNumber(gi, "name", parameter_counter)»
 	:Parameter_«parameter_counter++»
@@ -1088,6 +1242,11 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:interfaces :Interface_«interface_numbers.get(i)» ; 
 	  «ENDFOR»
 	  «ENDIF»
+	  «IF n.node.artifacts !== null»
+	  «FOR a:n.node.artifacts.artifacts»
+	  exchange:artifacts :Artifact_«artifact_numbers.get(a)» ; 
+	  «ENDFOR»
+	  «ENDIF»
 	.  
 	'''
 	
@@ -1106,6 +1265,41 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:properties :Property_«property_numbers.get(p)» ; 
 	  «ENDFOR»
 	  «ENDIF»
+	.  
+	'''
+	
+	def compile(EArtifactType a) '''
+	
+	«IF a.artifact.file_ext !== null»
+	«putParameterNumber(a, "file_ext", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  «FOR EAlphaNumericValue ext:a.artifact.file_ext.list»
+	  exchange:listValue "«trim(ext.compile)»" ; 
+	  «ENDFOR»
+	.
+	«ENDIF»
+	
+	:ArtifactType_«data_type_counter++»
+	  rdf:type exchange:Type ;
+	  exchange:name "«a.name»" ;
+	  «IF a.artifact.superType !== null»
+	  exchange:derivesFrom '«trim(a.artifact.superType.compile)»' ;
+	  «ENDIF»
+	  «IF a.artifact.description !== null»
+	  exchange:description '«processDescription(a.artifact.description)»' ;
+	  «ENDIF»
+	  «IF a.artifact.mime_type !== null»
+	  exchange:mime_type '«a.artifact.mime_type»' ; 
+	  «ENDIF»
+	  «IF a.artifact.file_ext !== null»
+	  exchange:file_ext :Parameter_«getParameterNumber(a, "file_ext")» ;
+  	  «ENDIF»
+	  «IF a.artifact.properties !== null»
+	  «FOR p:a.artifact.properties.properties»
+	  exchange:properties :Property_«property_numbers.get(p)» ; 
+  	  «ENDFOR»
+  	  «ENDIF»
 	.  
 	'''
 	
@@ -1213,11 +1407,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:listValue "«trim(entry.compile().toString)»" ;
 	  «ENDFOR»
 	  «ELSEIF p.property.^default instanceof EFunction»
-	  «IF p.property.^default instanceof GetInput»
 	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
-	   «ELSEIF p.property.^default instanceof GetProperty || p.property.^default instanceof GetAttribute»
-	  exchange:hasParameter :Parameter_«getParameterNumber(p.property.^default, "name")» ;
-	   «ENDIF»
 	  «ELSEIF p.property.^default instanceof ESingleValue»
 	  exchange:value "«trim((p.property.^default as ESingleValue).compile.toString)»" ;
 	  «ENDIF»	  
@@ -1307,11 +1497,7 @@ class RMGenerator extends AbstractGenerator {
 	    	exchange:hasParameter :Parameter_«getParameterNumber(entry, "map")» ;
 	    «ENDFOR»	  
 	  «ELSEIF p.value instanceof EFunction»
-	  	«IF p.value instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ELSEIF p.value instanceof GetProperty || p.value instanceof GetAttribute»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(p.value, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF p.value instanceof ESingleValue»
 	  	exchange:value "«trim((p.value as ESingleValue).compile().toString)»" ;
 	  «ENDIF»
@@ -1432,11 +1618,7 @@ class RMGenerator extends AbstractGenerator {
 	  exchange:name "default" ;
 	  «IF a.attribute.^default !== null»
 	  «IF a.attribute.^default instanceof EFunction»
-	  	«IF a.attribute.^default instanceof GetInput»
 	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
-	  	«ELSEIF a.attribute.^default instanceof GetProperty || a.attribute.^default instanceof GetAttribute»
-	  	exchange:hasParameter :Parameter_«getParameterNumber(a.attribute.^default, "name")» ;
-	  	«ENDIF»
 	  «ELSEIF a.attribute.^default instanceof ESingleValue»
 	  	exchange:value "«trim((a.attribute.^default as ESingleValue).compile().toString)»" ;
 	  «ENDIF»  
@@ -1481,6 +1663,38 @@ class RMGenerator extends AbstractGenerator {
 	  «IF a.attribute.entry_schema !== null»
 	  exchange:hasParameter :Parameter_«getParameterNumber(a, "entry_schema")» ;
 	  «ENDIF»
+	.
+	'''
+
+	def compile (EArtifactDefinition a) '''
+	«putParameterNumber(a, "type", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "type" ;
+	  exchange:value '«trim(a.artifact.type.compile)»' ;
+	.
+	
+	«putParameterNumber(a, "file.path", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "path" ;
+	  exchange:value '«a.artifact.file»' ;
+	.
+	
+	«putParameterNumber(a, "file.content", parameter_counter)»
+	:Parameter_«parameter_counter++»
+	  rdf:type exchange:Parameter ;
+	  exchange:name "content" ;
+	  exchange:value '«readFileAsString(a.artifact.file)»' ;
+	.
+	
+	«artifact_numbers.put(a, artifact_counter)»
+	:Artifact_«artifact_counter++»
+	  rdf:type exchange:Artifact ;
+	  exchange:name "«a.name»" ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "type")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.path")» ;
+	  exchange:hasParameter :Parameter_«getParameterNumber(a, "file.content")» ;
 	.
 	'''
 	
@@ -1590,9 +1804,54 @@ class RMGenerator extends AbstractGenerator {
 		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.'))
 	}
 	
+	def String getRMName(Resource resource){
+		return resource.URI.lastSegment.substring(0, resource.URI.lastSegment.lastIndexOf('.')) +".rm"
+	}
+	
+	def readImplementationFileAsString(String path,Resource resource,String relativePath){
+		
+		if(path.startsWith(".")){
+			var String absolutePath
+			if(relativePath === null){
+				var String intermediatePath = resource.URI.toString.replaceAll("%20", " ").replace("platform:/resource", "")
+				var String RMName = resource.URI.segment(resource.URI.segmentCount-1).replaceAll("%20", " ")
+				intermediatePath = intermediatePath.replace(RMName,"")
+				//var String projectName = resource.URI.segment(0)
+				var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ")
+				absolutePath = workspaceDir + intermediatePath + path.replace("./","")
+			}
+			else{
+				if(relativePath.endsWith("/")){
+					absolutePath = relativePath.substring(0,relativePath.length-1) + path.substring(1)
+				}
+				else{
+					absolutePath = relativePath + path.substring(1)
+				}
+			}
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
+		else{
+			try{
+				var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+				return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+			}
+			catch(NoSuchFileException e){
+				return null
+			}
+			
+		}
+	}
+	
 	def readFileAsString(String path){
-		var String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
-		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+		return Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
+//		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def processDescription (String description){

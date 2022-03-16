@@ -303,7 +303,7 @@ public class AADMBackendProxy extends RMBackendProxy {
 					if (aadmJson == null)
 						throw new Exception("Processed ADDM could not be obtained from the KB");
 					// Save json for debugging
-					Path aadmJsonPath = Paths.get(System.getProperty("user.dir") + "/" + aadmName + ".json");
+					Path aadmJsonPath = Paths.get(System.getProperty("user.home") + "/" + aadmName + ".json");
 					Files.write(aadmJsonPath, aadmJson.getBytes());
 					SodaliteLogger.log("AADM Json reported to IaCBuilder: " + aadmJson);
 					SodaliteLogger.log("AADM Json reported to IaCBuilder stored in " + aadmJsonPath);
@@ -358,8 +358,17 @@ public class AADMBackendProxy extends RMBackendProxy {
 					DeploymentStatusReport dsr = getKBReasoner()
 							.getAADMDeploymentStatus(depl_report.getDeployment_id());
 					while (!dsr.getState().equals("success")) {
-						if (dsr.getState().equals("failed"))
-							throw new Exception("Deployment failed as reported by xOpera");
+						if (dsr.getState().equals("failed")) {
+							String msg = "Deployment failed as reported by the Orchestrator\n";
+							if (dsr.getNode_error() != null) {
+								msg += "Deployment error reported by Orchestrator in: \n" + "node: "
+										+ dsr.getNode_error().getNode() + "\n" + "operation: "
+										+ dsr.getNode_error().getOperation() + "\n" + "task: "
+										+ dsr.getNode_error().getTask() + "\n";
+								msg += "Message: " + dsr.getNode_error().getMessage() + "\n";
+							}
+							throw new Exception(msg);
+						}
 						TimeUnit.SECONDS.sleep(10);
 						dsr = getKBReasoner().getAADMDeploymentStatus(depl_report.getDeployment_id());
 					}
@@ -396,6 +405,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 				} catch (NotRolePermissionException ex) {
 					showErrorDialog(null, "Save AADM", "You have not permissions to save this model. "
 							+ "\nPlease, check your permission in the SODALITE AAI");
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Deploy process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
@@ -462,6 +474,9 @@ public class AADMBackendProxy extends RMBackendProxy {
 					});
 					subMonitor.worked(-1);
 					subMonitor.done();
+				} catch (InterruptedException e) {
+					SodaliteLogger.log("Build image process was interrupted", e);
+					Thread.currentThread().interrupt();
 				} catch (Exception e) {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override

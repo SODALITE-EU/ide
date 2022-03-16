@@ -10,8 +10,23 @@
         eType="#//EPlay" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EUsedByBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EReference" name="node_type" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//ENodeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EInterfaceDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EOperationDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KBNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node_type" eType="#//EPREFIX_TYPE"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EPREFIX_TYPE">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="privilege_escalation" eType="#//EPrivilegeEscalation"
@@ -28,7 +43,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//EValuePassed"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" eType="#//EListPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" eType="#//ECollectionListPassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" eType="#//EListPassed"
         containment="true"/>
@@ -43,7 +58,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="when_expression" eType="#//ECondition"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EBlockTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EBlockTaskRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EBlockTask" eSuperTypes="#//EBlockTaskRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="ETaskHandler" eSuperTypes="#//EExecution">
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//ETaskHandlerErrorHandling"
         containment="true"/>
@@ -114,7 +130,12 @@
         upperBound="-1" eType="#//ENotifiedTopic"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EModuleCall">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstPart" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondPart" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdPart" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="direct_parameter" eType="#//EValuePassed"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -122,15 +143,24 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EParameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value_passed" eType="#//EValuePassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EValuePassed"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusion" eSuperTypes="#//EExecution">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EStringPassed"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//ERoleName"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="error_handling" eType="#//EBlockAndRoleErrorHandling"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ERoleName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstPart" eType="#//ENumberOrStringWithoutQuotesPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondPart" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdPart" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ENumberOrStringWithoutQuotesPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="ERoleInclusions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//ERoleInclusion" containment="true"/>
@@ -269,12 +299,21 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression_and_string"
         upperBound="-1" eType="#//EJinjaOrString" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EMultiLineExpression" eSuperTypes="#//EStringPassed">
+  <eClassifiers xsi:type="ecore:EClass" name="EMultiLineExpression" eSuperTypes="#//EStringWithoutQuotesPassed #//EStringPassed">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="new_line_command" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//EJinjaAndString" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EStringPassed" eSuperTypes="#//EValuePassed #//EElementOfListIndented"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaOrStringWithoutQuotes">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringWithoutQuotes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaAndStringWithoutQuotes" eSuperTypes="#//EStringWithoutQuotesPassed">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression_and_stringWithout"
+        upperBound="-1" eType="#//EJinjaOrStringWithoutQuotes" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringWithoutQuotesPassed" eSuperTypes="#//ENumberOrStringWithoutQuotesPassed #//EValueWithString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EValueWithString" eSuperTypes="#//EValuePassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringPassed" eSuperTypes="#//EValueWithString #//EElementOfListIndented"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EValuePassedToJinjaExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EComposedValue" eSuperTypes="#//EValueWithoutString"/>
@@ -294,7 +333,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="simple_value_number" eType="#//ENumber"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluation" eSuperTypes="#//EJinjaOrString #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaExpressionEvaluation" eSuperTypes="#//EJinjaOrString #//EJinjaOrStringWithoutQuotes #//ECollectionListPassed #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jinja_expression" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
@@ -374,7 +413,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" upperBound="-1" eType="#//ETailElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EJinjaStatement" eSuperTypes="#//EJinjaOrString #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
+  <eClassifiers xsi:type="ecore:EClass" name="EJinjaStatement" eSuperTypes="#//EJinjaOrString #//EJinjaOrStringWithoutQuotes #//ECollectionListPassed #//EDictionaryPassed #//EListPassed #//ENumberPassed #//EBooleanPassed">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="else_block_sign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="else_body" eType="#//EValuePassed"
         containment="true"/>
@@ -434,10 +473,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputOperationVariableReference" eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalEInputOperationVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EParameterDefinition"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KBEInputOperationVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInputInterfaceVariableReference" eSuperTypes="#//EVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalEInputInterfaceVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass platform:/resource/org.sodalite.dsl.RM/model/generated/RM.ecore#//EPropertyDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KBEInputInterfaceVariableReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ESetFactVariableReference" eSuperTypes="#//EVariableReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//EParameter"/>
@@ -489,6 +542,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EJinjaExpressionEvaluationWithoutBrackets"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECollectionListPassed"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECollectionList" eSuperTypes="#//ECollectionListPassed">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//ECollectionFQN" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECollectionListInLine" eSuperTypes="#//ECollectionList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ECollectionFQN">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrFqn" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionName" eType="#//EStringWithoutQuotesPassed"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECollectionListIndented" eSuperTypes="#//ECollectionList"/>
   <eClassifiers xsi:type="ecore:EClass" name="EList" eSuperTypes="#//EComposedValue #//EElementOfListIndented #//EListPassed"/>
   <eClassifiers xsi:type="ecore:EClass" name="EListInLine" eSuperTypes="#//EList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
@@ -527,7 +593,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EBooleanAnsible">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_ansible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ENumber">
+  <eClassifiers xsi:type="ecore:EClass" name="ENumber" eSuperTypes="#//ENumberOrStringWithoutQuotesPassed">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

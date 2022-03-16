@@ -58,8 +58,10 @@ public class DeploymentView {
 			try {
 				RMBackendProxy.raiseConfigurationIssue("Grafana URL not set");
 			} catch (Exception e) {
-				e.printStackTrace();
+				SodaliteLogger.log(e);
 			}
+		if (!grafana_uri.endsWith("/"))
+			grafana_uri += "/";
 	}
 
 	public DeploymentView() {
@@ -205,10 +207,17 @@ public class DeploymentView {
 			}
 			root.addChild(instance_state);
 		}
-		root.addChild(new TreeNode<Node>(new Node("timestamp_start", deploymentDetails.getTimestamp_start())));
-		root.addChild(new TreeNode<Node>(new Node("timestamp_end", deploymentDetails.getTimestamp_end())));
-		root.addChild(new TreeNode<Node>(new Node("stdout", deploymentDetails.getStdout())));
-		root.addChild(new TreeNode<Node>(new Node("stderr", deploymentDetails.getStderr())));
+		if (deploymentDetails.getTimestamp_submission() != null)
+			root.addChild(
+					new TreeNode<Node>(new Node("timestamp_submission", deploymentDetails.getTimestamp_submission())));
+		if (deploymentDetails.getTimestamp_start() != null)
+			root.addChild(new TreeNode<Node>(new Node("timestamp_start", deploymentDetails.getTimestamp_start())));
+		if (deploymentDetails.getTimestamp_end() != null)
+			root.addChild(new TreeNode<Node>(new Node("timestamp_end", deploymentDetails.getTimestamp_end())));
+		if (deploymentDetails.getStdout() != null)
+			root.addChild(new TreeNode<Node>(new Node("stdout", deploymentDetails.getStdout())));
+		if (deploymentDetails.getStderr() != null)
+			root.addChild(new TreeNode<Node>(new Node("stderr", deploymentDetails.getStderr())));
 
 		viewer.setInput(root);
 		viewer.refresh();

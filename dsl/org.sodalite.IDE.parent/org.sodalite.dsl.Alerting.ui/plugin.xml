@@ -365,42 +365,42 @@
 			</command>
 		</menuContribution>
 		<menuContribution
-		     allPopups="false"
-		     locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
-		     <menu
-		           id="eu.sodalite.menu.projectexplorer"
-		           label="Sodalite">
-		        <command
+		      allPopups="false"
+		      locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+		      <menu
+		          id="eu.sodalite.menu.projectexplorer"
+		          label="Sodalite">
+		          <command
 		              commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
 		              id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
 		              label="Register alerting rules into monitoring"
 		              style="push"
 		              tooltip="Register alerting rules into the Sodalite monitoring platform">
-		           <visibleWhen
+		              <visibleWhen
 		                 checkEnabled="false">
-		              <with
+		                 <with
 		                    variable="activeMenuSelection">
-		                 <iterate
+		                    <iterate
 		                       ifEmpty="false">
-		                    <adapt
+		                       <adapt
 		                          type="org.eclipse.core.resources.IResource">
-		                       <test
+		                          <test
 		                             property="org.eclipse.core.resources.name"
 		                             value="*.alert">
-		                       </test>
-		                    </adapt>
-		                 </iterate>
-		              </with>
-	               </visibleWhen>
-		      </command>
-		      <command
-	              commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
-	              id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
-	              label="Deregister alerting rules in monitoring"
-	              style="push"
-	              tooltip="Deregister alerting rules in the Sodalite monitoring platform">
-	       	  </command>
-		   </menu>
+		                          </test>
+		                       </adapt>
+		                    </iterate>
+		                 </with>
+	                  </visibleWhen>
+		          </command>
+		          <command
+	                   commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
+	                   id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
+	                   label="Deregister alerting rules in monitoring"
+	                   style="push"
+	                   tooltip="Deregister alerting rules in the Sodalite monitoring platform">
+	       	      </command>
+		      </menu>
 		</menuContribution>
 		<menuContribution
 		     allPopups="false"
@@ -409,28 +409,28 @@
 		           id="eu.sodalite.menu.packageexplorer"
 		           label="Sodalite">
 		        <command
-		              commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
-		              id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
-		              label="Register alerting rules into monitoring"
-		              style="push"
-		              tooltip="Register alerting rules into the Sodalite monitoring platform">
-		           <visibleWhen
-		                 checkEnabled="false">
-		              <with
-		                    variable="activeMenuSelection">
-		                 <iterate
-		                       ifEmpty="false">
-		                    <adapt
-		                          type="org.eclipse.core.resources.IResource">
-		                       <test
-		                             property="org.eclipse.core.resources.name"
-		                             value="*.alert">
-		                       </test>
-		                    </adapt>
-		                 </iterate>
-		              </with>
-	               </visibleWhen>
-		      </command>
+                      commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
+                      id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
+                      label="Register alerting rules into monitoring"
+                      style="push"
+                      tooltip="Register alerting rules into the Sodalite monitoring platform">
+                      <visibleWhen
+                         checkEnabled="false">
+                         <with
+                            variable="activeMenuSelection">
+                            <iterate
+                               ifEmpty="false">
+                               <adapt
+                                  type="org.eclipse.core.resources.IResource">
+                                  <test
+                                     property="org.eclipse.core.resources.name"
+                                     value="*.alert">
+                                  </test>
+                               </adapt>
+                            </iterate>
+                         </with>
+                      </visibleWhen>
+                  </command>
 		      <command
 	              commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
 	              id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
@@ -447,28 +447,35 @@
 		           id="eu.sodalite.menu.siriusexplorer"
 		           label="Sodalite">
 		        <command
-		              commandId="org.sodalite.dsl.Alerting.ui.command.sendAlerts"
-		              id="org.sodalite.dsl.Alerting.ui.popup.command.sendAlerts"
-		              label="Register alerting rules into monitoring"
-		              style="push"
-		              tooltip="Register alerting rules into the Sodalite monitoring platform">
-		           <visibleWhen
-		                 checkEnabled="false">
-		              <with
-		                    variable="activeMenuSelection">
-		                 <iterate
-		                       ifEmpty="false">
-		                    <adapt
-		                          type="org.eclipse.core.resources.IResource">
-		                       <test
-		                             property="org.eclipse.core.resources.name"
-		                             value="*.alert">
-		                       </test>
-		                    </adapt>
-		                 </iterate>
-		              </with>
-	               </visibleWhen>
-		      </command>
+                      commandId="org.sodalite.dsl.Alerting.ui.command.registerAlerts"
+                      id="org.sodalite.dsl.Alerting.ui.popup.command.registerAlerts"
+                      label="Register alerting rules into monitoring"
+                      style="push"
+                      tooltip="Register alerting rules into the Sodalite monitoring platform">
+                      <visibleWhen
+                         checkEnabled="false">
+                         <with
+                            variable="activeMenuSelection">
+                            <iterate
+                               ifEmpty="false">
+                               <adapt
+                                  type="org.eclipse.core.resources.IResource">
+                                  <test
+                                     property="org.eclipse.core.resources.name"
+                                     value="*.alert">
+                                  </test>
+                               </adapt>
+                            </iterate>
+                         </with>
+                      </visibleWhen>
+                  </command>
+                  <command
+                      commandId="org.sodalite.dsl.Alerting.ui.command.deregisterAlerts"
+                      id="org.sodalite.dsl.Alerting.ui.popup.command.deregisterAlerts"
+                      label="Deregister alerting rules in monitoring"
+                      style="push"
+                      tooltip="Deregister alerting rules in the Sodalite monitoring platform">
+                  </command>
 		   </menu>
 		</menuContribution>
 	</extension>

@@ -15,7 +15,6 @@ import org.sodalite.sdl.ansible.ansibleDsl.impl.ERegisterVariableImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EHandlerImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EPlaybookImpl
 import org.sodalite.dsl.rM.impl.EParameterDefinitionImpl
-import org.sodalite.dsl.rM.impl.EInterfaceDefinitionBodyImpl
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EIndexOrLoopVariableImpl
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
@@ -27,13 +26,63 @@ import java.util.ArrayList
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter
 import org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl
 import org.eclipse.jface.viewers.StyledString
-import org.eclipse.xtext.CrossReference
+import org.sodalite.dsl.kb_reasoner_client.types.ReasonerData
+import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException
+import org.sodalite.ide.ui.logger.SodaliteLogger
+import java.util.List
+import org.sodalite.dsl.ui.helper.RMHelper
+import org.sodalite.dsl.kb_reasoner_client.types.Type
+import org.sodalite.sdl.ansible.ansibleDsl.impl.LocalNodeImpl
+import org.sodalite.sdl.ansible.ansibleDsl.impl.KBNodeImpl
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinitionData
+import org.sodalite.dsl.kb_reasoner_client.types.OperationData
+
+
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.model.Projections
+import static com.mongodb.client.model.Filters.eq
+import java.util.Iterator
+import org.bson.Document
+import org.sodalite.sdl.ansible.ansibleDsl.impl.ECollectionFQNImpl
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrString
+import org.sodalite.sdl.ansible.ansibleDsl.EVariableDeclarationVariableReference
+import org.sodalite.sdl.ansible.ansibleDsl.EBlock
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionFQN
+import org.sodalite.sdl.ansible.ansibleDsl.EPlay
+import org.sodalite.sdl.ansible.ansibleDsl.ETask
+import org.sodalite.sdl.ansible.ansibleDsl.EHandler
+import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall
+import org.eclipse.jface.viewers.StyledString.Styler
+import org.eclipse.swt.graphics.TextStyle
+import org.eclipse.swt.widgets.Display
+import org.eclipse.swt.SWT
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaOrStringWithoutQuotesImpl
+import org.sodalite.dsl.ansible.helper.AnsibleHelper
+import java.util.Set
+import com.mongodb.client.model.Aggregates
+import java.util.Arrays
+import org.bson.conversions.Bson
+import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPair
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaAndString
+import java.util.HashMap
+import org.sodalite.sdl.ansible.ansibleDsl.ERoleName
+import java.util.Collections
+import org.sodalite.sdl.ansible.ansibleDsl.impl.EDictionaryPairImpl
+import org.eclipse.xtext.Keyword
+import java.util.Map
+import com.mongodb.client.FindIterable
+
+import org.sodalite.dsl.ansible.exceptions.MongoDBNotFound
 
 /** 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
+	
+	
 	
 	final String PRIVILEGE_ESCALATION_DESCRIPTION = 
 	"This is used for setting up the privilege escalation.\n\n" + 
@@ -172,6 +221,10 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	"This is the classic 'with_<lookup>' keyword in Ansible.\n"+
 	"The user is supposed to write 'with' followed by a space and the <lookup>.\n"+
 	"Writing for example 'with items:' will be translated into 'with_items:'."
+		
+	
+		
+	 
 	
 	override void complete_EPrivilegeEscalation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createNonEditableCompletionProposal("privilege_escalation:", new StyledString("privilege_escalation:"), context, PRIVILEGE_ESCALATION_DESCRIPTION, acceptor)
@@ -242,32 +295,306 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	}
 	
 	override void complete_BOOLEAN(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("False", context));
-		acceptor.accept(createCompletionProposal("True", context));
-		acceptor.accept(createCompletionProposal("false", context));
-		acceptor.accept(createCompletionProposal("true", context));
+		
+		if(model instanceof EParameter){
+			if(AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentParameterType")
+			if(!type.equals("boolean") && !type.empty){
+				return
+			}
+		}
+		else if(model instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			if(AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentSubparameterType")
+			if(!type.equals("boolean") && !type.empty){
+				return
+			}
+		}
+		//Check if the proposed value has already been put in the proposal's list as a default value
+		if(!AnsibleHelper.existProposal("False",acceptor)){
+			acceptor.accept(createCompletionProposal("False", context));
+		}
+			
+		if(!AnsibleHelper.existProposal("True",acceptor)){
+			acceptor.accept(createCompletionProposal("True", context));
+		}
+			
+		if(!AnsibleHelper.existProposal("false",acceptor)){
+			acceptor.accept(createCompletionProposal("false", context));
+		}
+			
+		if(!AnsibleHelper.existProposal("true",acceptor)){
+			acceptor.accept(createCompletionProposal("true", context));
+		}
 	}
 
 	override void complete_BOOLEAN_ONLY_ANSIBLE(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("no", context));
-		acceptor.accept(createCompletionProposal("yes", context));
+		if(model instanceof EParameter){
+			if(AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentParameterType")
+			if(!type.equals("boolean") && !type.empty){
+				return
+			}
+		}
+		else if(model instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			if(AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentSubparameterType")
+			if(!type.equals("boolean") && !type.empty){
+				return
+			}
+		}
+
+		//Check if the proposed value has already been put in the proposal's list as a default value
+		if(!AnsibleHelper.existProposal("no",acceptor)){
+			acceptor.accept(createCompletionProposal("no", context));
+		}
+		if(!AnsibleHelper.existProposal("yes",acceptor)){
+			acceptor.accept(createCompletionProposal("yes", context));
+		}
+			
+		
+		
 	}
 	
 	override void complete_NULL(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("null", context));
+		if(model instanceof EParameter){
+			//check if the default proposal should be suggested to the user for parameter values.
+			//If there are 'choices' for the parameter then the proposal is not provided.
+			if(AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available")){
+				return
+			}
+		}
+		
+		else if(model instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			if(AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available")){
+				return
+			}
+		}
+		
+		if(!AnsibleHelper.existProposal("null",acceptor)){
+			acceptor.accept(createCompletionProposal("null", context));
+		}	
 	}
 	
 	override void complete_SIMPLE_NUMBER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if(model instanceof EParameter){
+			if(AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentParameterType")
+			if(!type.equals("int") && !type.equals("float") && !type.empty){
+				return
+			}
+		}
+		else if(model instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			if(AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available")){
+				return
+			}
+			var String type = AnsibleHelper.getCacheData().get("currentSubparameterType")
+			if(!type.equals("int") && !type.equals("float") && !type.empty){
+				return
+			}
+		}
 		createEditableCompletionProposal("0", "0 - NUMBER", context, "A number", acceptor)
+		
 	}
 	
 	override void completeEForStatement_Recursive(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("recursive", context))
 	}
 	
-	override void completeEParameter_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		createEditableCompletionProposal("Parameter_Name", "Parameter_Name - ID", context, "The identifier of the module parameter.", acceptor)
+	override void completeEParameter_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		createEditableCompletionProposal("Parameter_Name", "Parameter_Name", context, "Name of a parameter", acceptor)
+		if(model instanceof EModuleCall){
+			completeEParameter_Name_Module(model as EModuleCall,assignment,context,acceptor)
+		}
 	}
+	
+	//Suggest parameters
+	def completeEParameter_Name_Module(EModuleCall module, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		
+		var String fqn
+		var Map<String, Map<String, Object>> parameters
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+			parameters = AnsibleHelper.findParameters(fqn)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var parameters = AnsibleHelper.findParameters(fqn)
+		var Styler requiredParameterStyler
+		for(String parameterKey:parameters.keySet){
+			var parameter = parameters.get(parameterKey)
+			var String parameterType
+			var String description = ""
+			if(parameter.containsKey("required")){
+				requiredParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_RED)
+						}	
+				}
+			}
+			else{
+				requiredParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_BLACK)
+						}	
+				}
+			}
+			if(parameter.containsKey("description")){
+				description = parameter.get("description") as String
+			}
+			if(parameter.containsKey("type")){
+				parameterType = parameter.get("type") as String
+				createNonEditableCompletionProposal(parameterKey+":", new StyledString(parameterKey.concat(" - ").concat(parameterType),requiredParameterStyler), context, "Parameter of module ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
+			}
+			else{
+				createNonEditableCompletionProposal(parameterKey+":", new StyledString(parameterKey,requiredParameterStyler), context, "Parameter of module ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
+			}
+		}	
+	}	
+	
+	
+	//Suggest allowed values for a parameter
+	override void completeEParameter_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var List<String> booleanValues =  Arrays.asList("yes","no","True","False","true","false")
+		var MongoCollection<Document> mongo_collection
+		var String fqn
+		var EParameter parameter = EcoreUtil2.getContainerOfType(model,EParameter)
+		var module = EcoreUtil2.getContainerOfType(parameter,EModuleCall)
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+			fqn = AnsibleHelper.calculateModuleName(module)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var String[] nameParts = fqn.split("\\.");
+		var String type = ""
+		var List<String> choices = new ArrayList();
+		var String default_value = ""
+		var Styler defaultValueParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_BLUE)
+						}	
+				}
+		var Styler choicesValueParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GREEN)
+						}	
+				}
+		var String projection = "modules".concat(".").concat(nameParts.get(2)).concat(".").concat("parameters").concat(".").concat(parameter.name)
+		var Bson match = Aggregates.match(eq("_id",nameParts.get(0).concat(".").concat(nameParts.get(1))))
+		var Bson details_project = Aggregates.project(Projections.fields(Projections.excludeId(),Projections.computed("details","$".concat(projection))))
+		var Iterator<Document> detailsIterator = mongo_collection.aggregate(Arrays.asList(match,details_project)).iterator()
+		while (detailsIterator.hasNext()) {
+				var Document content = detailsIterator.next();
+				if(!content.empty){
+						var Document details = content.get("details") as Document
+						var String choicesAvailability = ""
+						if(details.get("choices") !==null){
+							choices = details.get("choices") as List<String>
+							choicesAvailability = "available"
+						}
+						else{
+							choices = Collections.<String>emptyList()
+							choicesAvailability = "not available"
+						}
+						default_value = (details.get("default") !==null) ? String.valueOf(details.get("default")) : ""
+						type = (details.get("type") !==null) ? String.valueOf(details.get("type")) : ""
+						var Map<String, String> cacheData = new HashMap<String, String>();
+						cacheData.put("currentModule",fqn)
+						cacheData.put("currentParameter", parameter.name);
+						cacheData.put("currentParameterType", type);
+						cacheData.put("currentParameterChoices", choicesAvailability);
+						AnsibleHelper.cacheData = cacheData
+				}	
+		}
+		if((choices === null || choices.empty) && default_value != ""){
+			createNonEditableCompletionProposal(default_value, new StyledString(default_value.concat(" - Default value"),defaultValueParameterStyler), context,"Default value", acceptor)			
+		}
+		
+		if (choices !== null){
+			for(choice:choices){
+				var String proposal
+				if(booleanValues.contains(choice)){
+					proposal = choice
+				}
+				else{
+					proposal = "\"".concat(choice).concat("\"")
+				}
+				if(choice.equals(default_value)){
+					createNonEditableCompletionProposal(proposal, new StyledString(choice.concat(" - Default value"),defaultValueParameterStyler), context,"Permitted value", acceptor)			
+				}
+				else{
+					createNonEditableCompletionProposal(proposal, new StyledString(choice,choicesValueParameterStyler), context,"Permitted value", acceptor)	
+				}	
+			}
+		}			
+	}	
+	
+	override void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor){
+				if(contentAssistContext.currentModel instanceof EParameter){
+					var String type = AnsibleHelper.getCacheData().get("currentParameterType")
+					if(!type.contains("list") && !type.empty && (keyword.value == "[" || keyword.value == "-")){
+						return
+					}
+					if(!type.equals("dictionary") && !type.empty && keyword.value == "{"){
+						return
+					}
+				}
+				else if(contentAssistContext.currentModel instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(contentAssistContext.currentModel,EParameter) !== null){
+					var String type = AnsibleHelper.getCacheData().get("currentSubparameterType")
+					if(!type.contains("list") && !type.empty && (keyword.value == "[" || keyword.value == "-")){
+						return
+					}
+					if(!type.equals("dictionary") && !type.empty && keyword.value == "{"){
+						return
+					}
+				}
+				super.completeKeyword(keyword, contentAssistContext, acceptor);
+			}
+	
+	override void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor){
+				
+				if(model instanceof EParameter){
+					//check if the default proposal for String type should be suggested to the user for parameter values.
+					//If there are 'choices' for the parameter then the proposal is not provided.
+					if(AnsibleHelper.getCacheData().get("currentParameterChoices").equals("available")){
+						return
+					}
+					var String type = AnsibleHelper.getCacheData().get("currentParameterType")
+					//if the parameter type is not string do not provide proposal
+					if(!type.equals("string") && !type.equals("path")  && !type.empty){
+						return
+					}
+				}
+				//check if the default proposal for String type should be suggested to the user for subparameter values.
+				//If there are 'choices' for the subparameter then the proposal is not provided.
+				//&& !AnsibleHelper.allowDefaultProposal(acceptor)
+				else if(model instanceof EDictionaryPairImpl && EcoreUtil2.getContainerOfType(model,EParameter) !== null ){
+					if(AnsibleHelper.getCacheData().get("currentSubparameterChoices").equals("available")){
+						return
+					}
+					var String type = AnsibleHelper.getCacheData().get("currentSubparameterType")
+					if(!type.equals("string") && !type.equals("path")  && !type.empty){
+						return
+					}
+				}
+				super.complete_STRING(model,ruleCall,context,acceptor)
+			}
+	
 	
 	override void completeEVariableDeclaration_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createEditableCompletionProposal("Variable_Name", "Variable_Name - ID", context, "The identifier of the variable to be declared.", acceptor)
@@ -275,6 +602,170 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	
 	override void completeEDictionaryPair_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createEditableCompletionProposal("Name", "Name - ID", context, "The identifier of a key of the dictionary.", acceptor)
+	
+		if(EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			completeSubparameter_Name(model,assignment,context,acceptor)
+		}
+		super.completeEDictionaryPair_Name(model,assignment,context,acceptor)
+	}
+	
+	//Suggest subparameters
+	def completeSubparameter_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var parameter = EcoreUtil2.getContainerOfType(model,EParameter)
+		var module = EcoreUtil2.getContainerOfType(parameter,EModuleCall)
+		var String fqn
+		try{
+			fqn = AnsibleHelper.calculateModuleName(module)	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var containers = EcoreUtil2.getAllContainers(model).iterator()
+		var List<String> parameterPath = new ArrayList<String>()
+		if(model instanceof EJinjaAndString){
+			containers.next
+		}
+		if(model instanceof EDictionaryPair){
+			if( (model as EDictionaryPair).value === null){
+				parameterPath.add(0,(model as EDictionaryPair).name)
+			}
+			
+		}
+		while(containers.hasNext){
+			var container = containers.next
+			if(container instanceof EDictionaryPair){
+				parameterPath.add(0,(container as EDictionaryPair).name)
+			}
+		}
+		parameterPath.add(0,parameter.name)
+		var Map<String, Map<String, Object>> subparameters
+			try{
+				subparameters = AnsibleHelper.findSubparameters(fqn, parameterPath)	
+			}
+			catch(MongoDBNotFound e){
+				return
+			}
+		var Styler requiredParameterStyler
+		for(String subparameterKey:subparameters.keySet){
+			var subparameter = subparameters.get(subparameterKey)
+			var String parameterType
+			var String description = ""
+			if(subparameter.containsKey("required")){
+				requiredParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_RED)
+						}	
+				}
+			}
+			else{
+				requiredParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_BLACK)
+						}	
+				}
+			}
+			if(subparameter.containsKey("description")){
+				description = subparameter.get("description") as String
+			}
+			if(subparameter.containsKey("type")){
+				parameterType = subparameter.get("type") as String
+				createNonEditableCompletionProposal(subparameterKey+":", new StyledString(subparameterKey.concat(" - ").concat(parameterType),requiredParameterStyler), context, "Subparameter of ".concat(parameterPath.get(parameterPath.size-1)).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
+			}
+			else{
+				createNonEditableCompletionProposal(subparameterKey+":", new StyledString(subparameterKey,requiredParameterStyler), context, "Subparameter of ".concat(parameterPath.get(parameterPath.size-1)).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
+			}
+		}
+	}
+	
+	override void completeEDictionaryPair_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if(EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			completeSubparameter_Value(model,assignment,context,acceptor)
+			
+		}
+		super.completeEDictionaryPair_Value(model,assignment,context,acceptor)
+		createNonEditableCompletionProposal(":",new StyledString(":"),context,"",acceptor)
+		
+	}
+	
+	//Suggest allowed values for a subparameter
+	def completeSubparameter_Value(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		var List<String> booleanValues =  Arrays.asList("yes","no","True","False","true","false")
+		var String type = ""
+		var List<String> choices = null
+		var String default_value = ""
+		var Styler defaultValueStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_BLUE)
+						}	
+				}
+		var Styler choicesValueParameterStyler = new Styler(){
+						override applyStyles(TextStyle textStyle) {
+							textStyle.foreground =  Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GREEN)
+						}	
+				}
+		var Document details
+		try{
+			details = AnsibleHelper.findSubparameterDetails(model)
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		//var Document details = AnsibleHelper.findSubparameterDetails(model)
+		if(details !== null){
+			var String choicesAvailability = ""
+			if(details.get("choices") !==null){
+				choices = details.get("choices") as List<String>
+				choicesAvailability = "available"
+			}
+			else{
+				choices = Collections.<String>emptyList()
+				choicesAvailability = "not available"
+			}
+			default_value = (details.get("default") !==null) ? String.valueOf(details.get("default")) : ""
+			type = (details.get("type") !==null) ? String.valueOf(details.get("type")) : ""
+			var Map<String, String> cacheData = new HashMap<String, String>();
+			cacheData.put("currentSubparameter", "");
+			cacheData.put("currentSubparameterType", type);
+			cacheData.put("currentSubparameterChoices", choicesAvailability);
+			AnsibleHelper.cacheData = cacheData
+		}
+	
+		if(choices === null && default_value != ""){
+			createNonEditableCompletionProposal(default_value, new StyledString(default_value.concat(" - Default value"),defaultValueStyler), context,"Default value", acceptor)			
+		}
+		
+		if (choices !== null){
+			for(choice:choices){
+				var String proposal
+				if(booleanValues.contains(choice)){
+					proposal = choice
+				}
+				else{
+					proposal = "\"".concat(choice).concat("\"")
+				}
+				if(choice.equals(default_value)){
+					createNonEditableCompletionProposal(proposal, new StyledString(choice.concat(" - Default value"),defaultValueStyler), context,"Permitted value", acceptor)
+				}
+				else{
+					createNonEditableCompletionProposal(proposal, new StyledString(choice,choicesValueParameterStyler), context,"Permitted value", acceptor)
+				}	
+			}
+		}
+		
+		
+	}
+	
+	override void completeEListInLine_Elements(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if(EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			completeSubparameter_Name(model,assignment,context,acceptor)
+		}
+		super.completeEListInLine_Elements(model,assignment,context,acceptor)
+	}
+	override void completeEListIndented_Elements(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if(EcoreUtil2.getContainerOfType(model,EParameter) !== null){
+			completeSubparameter_Name(model,assignment,context,acceptor)
+		}
+		super.completeEListIndented_Elements(model,assignment,context,acceptor)
 	}
 	
 	//suggests variables declared only in this specific play
@@ -296,16 +787,27 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 	override void completeESetFactVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeSetFactVariableReference(model, context, acceptor, false)
 	}
-
-	//suggest variables given in input by the tosca operation
-	override void completeEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	
+	//suggest variables given in input by the tosca operation of a local node type
+	override void completeLocalEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeInputOperationVariableReference(model, context, acceptor, false)
 	}
 	
-	//suggest variables given in input by the tosca interface
-	override void completeEInputInterfaceVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeInputInterfaceVariableReference(model, context, acceptor, false)
+	//suggest variables given in input by the tosca operation of a KB's node type
+	override void completeKBEInputOperationVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeInputOperationVariableReference(model, context, acceptor, false)
 	}
+	
+	//suggest variables given in input by the tosca interface of a local node type
+	override void completeLocalEInputInterfaceVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		completeInputInterfaceVariableReference(model,context,acceptor,false)
+	}
+	
+	//suggest variables given in input by the tosca interface of a KB's node type
+	override void completeKBEInputInterfaceVariableReference_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		completeInputInterfaceVariableReference(model,context,acceptor,false)
+	}
+
 	
 	//suggest all the possible variables that can be referenced
 	override void complete_EVariableReference(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -330,23 +832,114 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		completeInputInterfaceVariableReference(model, context, acceptor, true)
 	}
 	
-	//the operations suggested must belong to an interface of the selected node type
-	override void completeEUsedByBody_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	//suggest node types from KB
+ 	override void completeKBNode_Node_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try{
+			val ReasonerData<String> raw_modules = SodaliteBackendProxy.getKBReasoner().modules
+			var List<String> modules = newArrayList
+			for (raw_module: raw_modules.elements){
+				val String module = RMHelper.extractModule(raw_module)
+				modules.add(module)
+				
+			}
+			System.out.println ("Modules retrieved from KB: " + modules)
+			val ReasonerData<Type> nodes = SodaliteBackendProxy.KBReasoner.getNodeTypes(modules)
+			System.out.println ("Nodes retrieved from KB:")
+			for(node:nodes.elements){
+				System.out.println ("\tNode: " + node.label)
+				val String qnode = node.module !== null?RMHelper.getLastSegment(node.module, '/') + '/' +node.label:node.label
+				val String proposalText = qnode
+				val displayText = new StyledString(qnode)
+				//val displayText = qnode
+				val additionalProposalInfo = node.description
+				//var Image image = getImage("icons/type.png")
+				createNonEditableCompletionProposal(proposalText, displayText, context, additionalProposalInfo, acceptor)
+				//createNonEditableCompletionProposalNode(proposalText, displayText, context, additionalProposalInfo, acceptor)
+			}
+		} catch(SodaliteException ex){
+			SodaliteLogger.log(ex.message, ex);
+		}
+	}
+	
+	//suggest interface from local node type
+	override void completeLocalNode_Interface(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
 		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
 		if (playbook !== null){
 			val usedByBody = playbook.used_by
 			if (usedByBody !== null){
-				val nodeType = usedByBody.node_type
+				val nodeType = (usedByBody.node as LocalNodeImpl).node_type
 				if (nodeType !== null){
-					val candidatesOperation = EcoreUtil2.getAllContentsOfType(nodeType, EOperationDefinitionImpl)
-					for (candidate: candidatesOperation){
-						val interfaceDefinition = EcoreUtil2.getContainerOfType(candidate, EInterfaceDefinitionImpl)
-						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(interfaceDefinition.name, StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected node type.", acceptor)
+					val candidatesInterface= EcoreUtil2.getAllContentsOfType(nodeType, EInterfaceDefinitionImpl)
+					for (candidate: candidatesInterface){
+						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(candidate.name, StyledString.COUNTER_STYLER), context, "One of the interfaces belonging to the selected node type.", acceptor)
 					}
 				}
 			}
 		}
 	}
+	
+	//suggest interface from KB's node type
+	override void completeKBNode_Interface(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (playbook !== null){
+			val usedByBody = playbook.used_by
+			if (usedByBody !== null){
+				val nodeType = (usedByBody.node as KBNodeImpl).node_type
+				val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
+				val InterfaceDefinitionData candidatesInterfaces = SodaliteBackendProxy.KBReasoner.getTypeInterfaces(resourceId)
+				for (candidateInterface: candidatesInterfaces.elements){
+					val interface_label = RMHelper.getLastSegment(candidateInterface.uri.toString,'/')
+					val proposalText = interface_label
+					val displayText =  new StyledString(interface_label)
+					createNonEditableCompletionProposal(proposalText, displayText, context, "One of the interfaces belonging to the selected node type.", acceptor);
+				}
+			}
+		}
+	}
+	
+	//suggest operation from local node type
+ 	override void completeLocalNode_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (playbook !== null){
+			val usedByBody = playbook.used_by
+			if (usedByBody !== null){
+				val nodeType = (usedByBody.node as LocalNodeImpl).node_type
+				val interface = (usedByBody.node as LocalNodeImpl).interface
+				if (nodeType !== null){
+					val candidatesOperation = EcoreUtil2.getAllContentsOfType(interface, EOperationDefinitionImpl)
+					for (candidate: candidatesOperation){
+						val interfaceDefinition = EcoreUtil2.getContainerOfType(candidate, EInterfaceDefinitionImpl)
+						createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString(candidate.name.concat(" - Interface: ")).append(interfaceDefinition.name, StyledString.COUNTER_STYLER), context, "One of the operations belonging to the selected interface and node type.", acceptor)
+					}
+				}
+			}
+		}
+	} 
+	
+	//suggest operation from KB's node type
+	override void completeKBNode_Operation(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
+		val playbook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (playbook !== null){
+			val usedByBody = playbook.used_by
+			if (usedByBody !== null){
+				val nodeType = (usedByBody.node as KBNodeImpl).node_type
+				val interface = (usedByBody.node as KBNodeImpl).interface
+				val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
+				val InterfaceDefinitionData candidatesInterfaces = SodaliteBackendProxy.KBReasoner.getTypeInterfaces(resourceId)
+				for (candidateInterface: candidatesInterfaces.elements){
+					if(interface.equals(RMHelper.getLastSegment(candidateInterface.uri.toString, '/'))){
+						for(OperationData candidateOperation:candidateInterface.operations_in_interface){
+							val operation_label = candidateOperation.operation_name
+							val proposalText = operation_label
+							val displayText =  new StyledString(operation_label)
+							createNonEditableCompletionProposal(proposalText, displayText, context, "One of the operations belonging to the selected node type.", acceptor);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 
 	//suggest handlers defined only in this specific play
 	override void completeENotifiedHandler_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor){
@@ -385,6 +978,257 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		lookups.add("random_choice")
 		
 		for (lookup : lookups) acceptor.accept(createCompletionProposal(lookup, context))
+	}
+	
+	
+	override void completeECollectionFQN_NamespaceOrFqn(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var FindIterable<Document> iterDoc = mongo_collection.find().projection(Projections.include("namespace"))
+		// Getting the iterator
+		var Iterator<Document> it = iterDoc.iterator();
+		var String namespace
+		while (it.hasNext()) {
+			//namespaces.add(it.next().getString("namespace"))
+			//System.out.println(it.next().get("namespace"))
+			namespace = it.next().getString("namespace")
+			//createNonEditableCompletionProposal("\"".concat(namespace).concat("\""), new StyledString(namespace.concat(" - Namespace ")), context, "Collection Namespace as it is depicted in Ansible Galaxy", acceptor)
+			createNonEditableCompletionProposal(namespace, new StyledString(namespace.concat(" - Namespace ")), context, "Collection Namespace as it is depicted in Ansible Galaxy", acceptor)
+		}
+	}
+	
+	
+	override void completeECollectionFQN_CollectionName(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		val ansible_collection = EcoreUtil2.getContainerOfType(model,ECollectionFQNImpl)
+		var String namespace = ""
+		if (ansible_collection !== null){
+			if(EcoreUtil2.getAllContentsOfType(ansible_collection.namespaceOrFqn,EJinjaOrStringWithoutQuotes).size >0){
+				//Check if namespace is a String
+				if(EcoreUtil2.getAllContentsOfType(ansible_collection.namespaceOrFqn,EJinjaOrStringWithoutQuotes).get(0).stringWithoutQuotes !== null){
+					namespace = EcoreUtil2.getAllContentsOfType(ansible_collection.namespaceOrFqn,EJinjaOrStringWithoutQuotesImpl).get(0).stringWithoutQuotes
+				}
+				//Check if namespace is a reference to a defined variable
+				if(EcoreUtil2.getAllContentsOfType(ansible_collection.namespaceOrFqn,EVariableDeclarationVariableReference).size >0){
+					val variable_reference = EcoreUtil2.getAllContentsOfType(ansible_collection.namespaceOrFqn,EVariableDeclarationVariableReference).get(0).variable_declaration_variable_reference
+					namespace = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString).get(0).string
+				}
+			}
+			
+		}
+		var FindIterable<Document> iterDoc = mongo_collection.find(eq("namespace",namespace)).projection(Projections.include("collection_name"))
+		// Getting the iterator
+		var Iterator<Document> it = iterDoc.iterator();
+		var String collectionName
+		while (it.hasNext()) {
+			collectionName = it.next().getString("collection_name")
+			createNonEditableCompletionProposal(collectionName, new StyledString(collectionName.concat(" - Collection Name ")), context, "Collection Name as it is depicted in Ansible Galaxy", acceptor)
+			
+		}
+		
+	}
+	
+	override void completeEModuleCall_FirstPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var List<String> collections = new ArrayList<String>()
+		//Check if Task is contained inside a Block and find the modules that are contained in the defined Ansible collections
+		if(EcoreUtil2.getContainerOfType(model,EBlock) !== null){
+			var block = EcoreUtil2.getContainerOfType(model,EBlock)
+			if(block.collections !== null){
+				if(EcoreUtil2.getAllContentsOfType(block.collections,ECollectionFQN).size >0){
+					val collectionsList = EcoreUtil2.getAllContentsOfType(block.collections,ECollectionFQN)
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
+				}	
+			}
+			
+		}
+		//Check if Task is contained inside a Play and find the modules that are contained in the defined Ansible collections
+		if(EcoreUtil2.getContainerOfType(model,EPlay) !== null){
+			var play = EcoreUtil2.getContainerOfType(model,EPlay)
+			if(play.collections !== null){
+				if(EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN).size >0){
+					val collectionsList = EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN)
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
+				}
+			}	
+		}
+		
+		if(EcoreUtil2.getContainerOfType(model,ETask) !== null){
+			var task = EcoreUtil2.getContainerOfType(model,ETask)
+			if(task.collections !== null){
+				if(EcoreUtil2.getAllContentsOfType(task.collections,ECollectionFQN).size >0){
+					val collectionsList = EcoreUtil2.getAllContentsOfType(task.collections,ECollectionFQN)
+					collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+				}
+			}	
+		}
+		
+		if(EcoreUtil2.getContainerOfType(model,EHandler) !== null){
+			var handler = EcoreUtil2.getContainerOfType(model,EHandler)
+			if(handler.collections !== null){
+				if(EcoreUtil2.getAllContentsOfType(handler.collections,ECollectionFQN).size >0){
+					val collectionsList = EcoreUtil2.getAllContentsOfType(handler.collections,ECollectionFQN)
+					collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+				}
+			}	
+		}
+		
+		collections.add("ansible.builtin")
+		for(collection:collections){
+			var FindIterable<Document> ansible_collection = mongo_collection.find(eq("_id",collection)).projection(Projections.exclude("namespace","collection_name","_id"))
+			// Getting the iterator
+			var Iterator<Document> it = ansible_collection.iterator();
+			while (it.hasNext()){
+				var modules = it.next().get("modules",typeof(Document)).keySet()
+				for(module:modules){
+					createNonEditableCompletionProposal(module, new StyledString(module.concat(" - ").concat(collection)), context, "Module of collection ".concat(collection), acceptor)
+					
+				}
+			}
+		}
+		
+		
+		
+		var FindIterable<Document> iterDoc = mongo_collection.find().projection(Projections.include("namespace"))
+		// Getting the iterator
+		var Iterator<Document> it = iterDoc.iterator();
+		var String namespace
+		while (it.hasNext()) {
+			namespace = it.next().getString("namespace")
+			createNonEditableCompletionProposal(namespace, new StyledString(namespace.concat(" - Namespace ")), context, "Collection Namespace as it is depicted in Ansible Galaxy", acceptor)
+		}
+		
+	}
+    
+	
+	override void completeEModuleCall_SecondPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var FindIterable<Document> iterDoc
+		var String regex = "\\w+\\.\\w+" 
+		val module = EcoreUtil2.getContainerOfType(model,EModuleCall)
+		var String namespace = ""
+		if (module !== null){
+			if(EcoreUtil2.getAllContentsOfType(module.firstPart,EJinjaOrStringWithoutQuotes).size >0){
+				//Check if namespace is a String
+				if(EcoreUtil2.getAllContentsOfType(module.firstPart,EJinjaOrStringWithoutQuotes).get(0).stringWithoutQuotes !== null){
+					namespace = EcoreUtil2.getAllContentsOfType(module.firstPart,EJinjaOrStringWithoutQuotesImpl).get(0).stringWithoutQuotes
+				}
+				//Check if namespace is a reference to a defined variable
+				if(EcoreUtil2.getAllContentsOfType(module.firstPart,EVariableDeclarationVariableReference).size >0){
+					val variable_reference = EcoreUtil2.getAllContentsOfType(module.firstPart,EVariableDeclarationVariableReference).get(0).variable_declaration_variable_reference
+					namespace = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString).get(0).getString()
+				}
+			}
+			
+		}
+		
+		//Check if there is a variable that contains something like 'amazon.aws'(Ansible namespace and Ansible collection name together)
+		//If this is the case offer content proposals to select module
+		if(namespace.matches(regex)){
+			iterDoc = mongo_collection.find(eq("_id",namespace))
+			var Iterator<Document> it = iterDoc.iterator();
+			var Set<String> modules
+			while (it.hasNext()){
+				modules = it.next().get("modules",typeof(Document)).keySet()
+				for(moduleName:modules){
+					createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(namespace.concat(".").concat(moduleName))), context, "Module of collection ".concat(namespace.concat(".").concat(moduleName)), acceptor)
+				}
+			}
+		}
+		else{
+			iterDoc = mongo_collection.find(eq("namespace",namespace)).projection(Projections.include("collection_name"))
+			var Iterator<Document> it = iterDoc.iterator();
+			var String collectionName
+			while (it.hasNext()) {
+				collectionName = it.next().getString("collection_name")
+				createNonEditableCompletionProposal(collectionName, new StyledString(collectionName.concat(" - Collection Name ")), context, "Collection Name as it is depicted in Ansible Galaxy", acceptor)
+			}
+		}	
+	}
+	
+	override void completeEModuleCall_ThirdPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> mongo_collection
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var String namespace =""
+		var String collectionName = ""
+		val ansible_module = EcoreUtil2.getContainerOfType(model,EModuleCall)
+		if (ansible_module !== null){
+			if(EcoreUtil2.getAllContentsOfType(ansible_module.firstPart,EJinjaOrStringWithoutQuotes).size >0){
+				//Check if namespace is a String
+				if(EcoreUtil2.getAllContentsOfType(ansible_module.firstPart,EJinjaOrStringWithoutQuotes).get(0).stringWithoutQuotes !== null){
+					namespace = EcoreUtil2.getAllContentsOfType(ansible_module.firstPart,EJinjaOrStringWithoutQuotesImpl).get(0).stringWithoutQuotes
+				}
+				//Check if namespace is a reference to a defined variable
+				if(EcoreUtil2.getAllContentsOfType(ansible_module.firstPart,EVariableDeclarationVariableReference).size >0){
+					val variable_reference = EcoreUtil2.getAllContentsOfType(ansible_module.firstPart,EVariableDeclarationVariableReference).get(0).variable_declaration_variable_reference
+					namespace = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString).get(0).getString()
+				}
+			}
+			if(EcoreUtil2.getAllContentsOfType(ansible_module.secondPart,EJinjaOrStringWithoutQuotes).size >0){
+				//Check if collection name is a String
+				if(EcoreUtil2.getAllContentsOfType(ansible_module.secondPart,EJinjaOrStringWithoutQuotes).get(0).stringWithoutQuotes !== null){
+					collectionName = EcoreUtil2.getAllContentsOfType(ansible_module.secondPart,EJinjaOrStringWithoutQuotesImpl).get(0).stringWithoutQuotes
+				}
+				//Check if collection name is a reference to a defined variable
+				if(EcoreUtil2.getAllContentsOfType(ansible_module.secondPart,EVariableDeclarationVariableReference).size >0){
+					val variable_reference = EcoreUtil2.getAllContentsOfType(ansible_module.secondPart,EVariableDeclarationVariableReference).get(0).variable_declaration_variable_reference
+					collectionName = EcoreUtil2.getAllContentsOfType(variable_reference,EJinjaOrString).get(0).getString()
+				}
+			}
+		}
+		//Fully qualified name of a collection
+		var fqn = namespace.concat(".").concat(collectionName)
+		var FindIterable<Document> ansible_collection = mongo_collection.find(eq("_id",fqn)).projection(Projections.exclude("namespace","collection_name","_id"))
+		// Getting the iterator
+		var Iterator<Document> it = ansible_collection.iterator();
+		while (it.hasNext()){
+			var modules = it.next().get("modules",typeof(Document)).keySet()
+			for(module:modules){
+				createNonEditableCompletionProposal(module, new StyledString(module.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn), acceptor)
+			}
+		}
+		
 	}
 	
 	//suggest the "special variables": the ones described here: https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
@@ -506,7 +1350,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		for (parameter: candidatesSetFactsVariables){
 			val moduleCall = EcoreUtil2.getContainerOfType(parameter, EModuleCallImpl)
 			if (moduleCall !== null){
-				if (moduleCall.name == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
+				if (moduleCall.firstPart == "set_fact") legitCandidatesSetFactsVariables.add(parameter)
 			}
 		}
 		for (candidate: legitCandidatesSetFactsVariables){
@@ -519,29 +1363,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 	}
 	
-	//suggest variables given in input by the tosca operation
-	//if needsPrefix is true, the suggestion needs the "operation_input:" prefix
-	def void completeInputOperationVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
-		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
-		if (rootPlaybook !== null){
-			val usedByBody = rootPlaybook.used_by
-			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
-					for (candidate: candidatesInputVariableOperation){
-						if (needsPrefix){
-							createNonEditableCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), new StyledString("operation_input: ").append("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
-						}
-						else {
-							createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
-						}
-					}
-				}
-			}	
-		}
-	}
-
+	
 	//suggest variables given in input by the tosca interface
 	//if needsPrefix is true, the suggestion needs the "interface_input:" prefix	
 	def void completeInputInterfaceVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
@@ -549,29 +1371,237 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		if (rootPlaybook !== null){
 			val usedByBody = rootPlaybook.used_by
 			if (usedByBody !== null){
-				val operation = usedByBody.operation
-				if (operation !== null){
-					val interfaceDefinitionBody = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionBodyImpl)
-					val interfaceDefinition = EcoreUtil2.getContainerOfType(operation, EInterfaceDefinitionImpl)
-					val inputsProperties = interfaceDefinitionBody.inputs
-					if (inputsProperties !== null){
-						for (input : inputsProperties.properties){
-							if (needsPrefix){
-								createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
-							}
-							else {
-								createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interfaceDefinition.name + "' interface.", acceptor)
+				if(usedByBody.node instanceof LocalNodeImpl){
+					val interface = (usedByBody.node as LocalNodeImpl).interface
+					if(interface!==null){
+						if(interface.interface.inputs !== null){
+							val inputsProperties = interface.interface.inputs
+							for (input : inputsProperties.properties){
+								if (needsPrefix){
+									createNonEditableCompletionProposal("interface_input: ".concat("\"").concat(input.name).concat("\""), new StyledString("interface_input: ").append("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interface.name + "' interface.", acceptor)
+								}
+								else {
+									createNonEditableCompletionProposal("\"".concat(input.name).concat("\""), new StyledString("\"".concat(input.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + interface.name + "' interface.", acceptor)
+								}
 							}
 						}
 					}
-				}				
+				}
+				else if(usedByBody.node instanceof KBNodeImpl){
+					val nodeType = (usedByBody.node as KBNodeImpl).node_type
+					val nodeInterface = (usedByBody.node as KBNodeImpl).interface
+					val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
+					val InterfaceDefinitionData candidatesInterfaces = SodaliteBackendProxy.KBReasoner.getTypeInterfaces(resourceId)
+					for (candidateInterface: candidatesInterfaces.elements){
+						if(nodeInterface.equals(RMHelper.getLastSegment(candidateInterface.uri.toString, '/'))){
+							if(candidateInterface.inputs !== null){
+								val inputs = candidateInterface.inputs
+								for(String input:inputs.keySet()){
+									if (needsPrefix){
+										createNonEditableCompletionProposal("interface_input: ".concat(input), new StyledString("interface_input: ").append(input, StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + nodeInterface + "' interface.", acceptor)							
+									}
+									else {
+										createNonEditableCompletionProposal(input, new StyledString(input, StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + nodeInterface + "' interface.", acceptor)
+									}
+								}
+							}
+							
+						}
+						
+					} 
+				}
+								
 			}			
 		}		
 	}
+		
+
+	
+	//suggest variables given in input by the tosca operation
+	//if needsPrefix is true, the suggestion needs the "operation_input:" prefix
+ 	def void completeInputOperationVariableReference(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor, boolean needsPrefix){
+		val rootPlaybook = EcoreUtil2.getContainerOfType(model, EPlaybookImpl)
+		if (rootPlaybook !== null){
+			val usedByBody = rootPlaybook.used_by
+			if (usedByBody !== null){
+				if(usedByBody.node instanceof LocalNodeImpl){
+					val operation = (usedByBody.node as LocalNodeImpl).operation
+					if (operation !== null){
+						val candidatesInputVariableOperation = EcoreUtil2.getAllContentsOfType(operation, EParameterDefinitionImpl)
+						for (candidate: candidatesInputVariableOperation){
+							if (needsPrefix){
+								createNonEditableCompletionProposal("operation_input: ".concat("\"").concat(candidate.name).concat("\""), new StyledString("operation_input: ").append("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
+							}
+							else {
+								createNonEditableCompletionProposal("\"".concat(candidate.name).concat("\""), new StyledString("\"".concat(candidate.name).concat("\""), StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + operation.name + "' operation.", acceptor)
+							}
+						}
+					}
+				}
+				else if(usedByBody.node instanceof KBNodeImpl){
+					val nodeType = (usedByBody.node as KBNodeImpl).node_type
+					val nodeInterface = (usedByBody.node as KBNodeImpl).interface
+					val nodeOperation = (usedByBody.node as KBNodeImpl).operation
+					val resourceId = (nodeType.module !== null? nodeType.module + '/':'') + nodeType.type
+					val InterfaceDefinitionData candidatesInterfaces = SodaliteBackendProxy.KBReasoner.getTypeInterfaces(resourceId)
+					for (candidateInterface: candidatesInterfaces.elements){
+						if(nodeInterface.equals(RMHelper.getLastSegment(candidateInterface.uri.toString, '/'))){
+							for(OperationData candidateOperation:candidateInterface.operations_in_interface){
+								if(nodeOperation.equals(candidateOperation.operation_name)){
+									if(candidateOperation.inputs !== null){
+										val inputs = candidateOperation.inputs
+										for(String input:inputs.keySet()){
+											if (needsPrefix){
+												createNonEditableCompletionProposal("operation_input: ".concat(input), new StyledString("operation_input: ").append(input, StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + nodeOperation + "' operation.", acceptor)
+											}
+											else {
+												createNonEditableCompletionProposal(input, new StyledString(input, StyledString.COUNTER_STYLER).append(" - RM input"), context, "An input variable from the '" + nodeOperation + "' operation.", acceptor)
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	override void completeERoleName_FirstPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> collectionRoles_mongo 
+		try{
+			collectionRoles_mongo = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var List<String> collections = new ArrayList<String>()
+		if(EcoreUtil2.getContainerOfType(model,EPlay) !== null){
+			var play = EcoreUtil2.getContainerOfType(model,EPlay)
+			if(play.collections !== null){
+				if(EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN).size >0){
+					val collectionsList = EcoreUtil2.getAllContentsOfType(play.collections,ECollectionFQN)
+					//collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))
+					try{
+						collections.addAll(AnsibleHelper.findAnsibleCollections(collectionsList))	
+					}
+					catch(MongoDBNotFound e){
+						return
+					}
+				}
+			}	
+		}
+		
+		for(collection:collections){
+			var FindIterable<Document> ansible_collection = collectionRoles_mongo.find(eq("_id",collection)).projection(Projections.exclude("namespace","collection_name","_id"))
+			var Iterator<Document> it = ansible_collection.iterator();
+			while (it.hasNext()){
+				var List<String> roles = it.next().get("roles",typeof(ArrayList))
+				for(role:roles){
+					createNonEditableCompletionProposal(role, new StyledString(role.concat(" - ").concat(collection)), context, "Role of collection ".concat(collection), acceptor)	
+				}
+			}
+		}
+		
+		var MongoCollection<Document> standaloneRoles_mongo = AnsibleHelper.ansibleRoles
+		
+		var FindIterable<Document> iterDoc = standaloneRoles_mongo.find().projection(Projections.include("role_namespace"))
+		var Iterator<Document> it = iterDoc.iterator();
+		var String role_namespace
+		while (it.hasNext()) {
+			role_namespace = it.next().getString("role_namespace")
+			createNonEditableCompletionProposal(role_namespace, new StyledString(role_namespace.concat(" - Namespace ")), context, "Role Namespace as it is depicted in Ansible Galaxy", acceptor)
+		}
+	}
+	
+	override void completeERoleName_SecondPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> collectionRoles_mongo 
+		try{
+			collectionRoles_mongo = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var MongoCollection<Document> standaloneRoles_mongo = AnsibleHelper.ansibleRoles
+		var String regex = "\\w+\\.\\w+" 
+		val roleName = EcoreUtil2.getContainerOfType(model,ERoleName)
+		var String namespace = ""
+		if (roleName !== null){
+			namespace = AnsibleHelper.getENumberOrStringWithoutQuotesValue(roleName.getFirstPart())
+			var FindIterable<Document> iterDoc
+			//Check if there is a variable that contains something like 'amazon.aws'(Ansible namespace and Ansible collection name together)
+			//If this is the case offer content proposals to select role
+			if(namespace.matches(regex)){
+				iterDoc = collectionRoles_mongo.find(eq("_id",namespace))
+				var Iterator<Document> it = iterDoc.iterator();
+				var List<String> roles
+				while (it.hasNext()){
+					roles = it.next().get("roles",typeof(ArrayList))
+					for(role:roles){
+						createNonEditableCompletionProposal(role, new StyledString(role.concat(" - ").concat(namespace.concat(".").concat(role))), context, "Role of collection ".concat(namespace), acceptor)
+					}
+				}
+			}
+			else{
+				iterDoc = collectionRoles_mongo.find(eq("namespace",namespace)).projection(Projections.include("collection_name"))
+				var Iterator<Document> it = iterDoc.iterator();
+				var String collectionName
+				while (it.hasNext()) {
+					collectionName = it.next().getString("collection_name")
+					createNonEditableCompletionProposal(collectionName, new StyledString(collectionName.concat(" - Collection Name ")), context, "Collection Name as it is depicted in Ansible Galaxy", acceptor)
+				}
+				iterDoc = standaloneRoles_mongo.find(eq("role_namespace",namespace)).projection(Projections.include("role_name"))
+				var Iterator<Document> it = iterDoc.iterator();
+				var String role_name
+				while (it.hasNext()) {
+					role_name = it.next().getString("role_name")
+					createNonEditableCompletionProposal(role_name, new StyledString(role_name.concat(" - Role Name ")), context, "Role Name as it is depicted in Ansible Galaxy", acceptor)
+				}
+			}
+					
+		}
+	}
+	
+	
+	override void completeERoleName_ThirdPart(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		var MongoCollection<Document> mongo_collection 
+		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();	
+		}
+		catch(MongoDBNotFound e){
+			return
+		}
+		var String namespace =""
+		var String collectionName = ""
+		val roleName = EcoreUtil2.getContainerOfType(model,ERoleName)
+		if (roleName !== null){
+			namespace = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(roleName.getFirstPart())
+			collectionName = AnsibleHelper.getEJinjaOrStringWithoutQuotesValue(roleName.getSecondPart())
+		}
+		//Fully qualified name of a collection
+		var fqn = namespace.concat(".").concat(collectionName)
+		var FindIterable<Document> ansible_collection = mongo_collection.find(eq("_id",fqn)).projection(Projections.exclude("namespace","collection_name","_id"))
+		var Iterator<Document> it = ansible_collection.iterator();
+		while (it.hasNext()){
+			var List<String> roles = it.next().get("roles",typeof(ArrayList))
+			for(role:roles){
+				createNonEditableCompletionProposal(role, new StyledString(role.concat(" - ").concat(fqn)), context, "Role of collection ".concat(fqn), acceptor)	
+			}
+		}
+	}
+	
 	
 	def void createNonEditableCompletionProposal(String proposalText, StyledString displayText,
 	ContentAssistContext context, String additionalProposalInfo, ICompletionProposalAcceptor acceptor) {
-		var ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+		var ICompletionProposal proposal
+		if(context.prefix.startsWith("\"") && proposalText.endsWith("\"")){
+			proposal = createCompletionProposal(proposalText.substring(0,proposalText.length()-1), displayText, null, context)
+		}
+		else{
+			proposal = createCompletionProposal(proposalText, displayText, null, context)
+		}
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			val ConfigurableCompletionProposal configurable = proposal as ConfigurableCompletionProposal;
 			configurable.setAdditionalProposalInfo(additionalProposalInfo);

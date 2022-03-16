@@ -139,7 +139,11 @@ node_types:
 				entry_schema: sodalite.datatypes.OpenStack.env
 				required: false
 				default: ''
-					
+			additional_public_key:
+				description: "Additional public key that is added to VM authorized_keys. No new OpenStack keypair is created."
+				type: string
+				required: false
+				default: ""	
 		attributes: 
 			id:  
 				description: "OpenStack id of the VM"
@@ -246,7 +250,12 @@ node_types:
 								type: map
 								default: get_attribute: 
 									entity: SELF
-									attribute: openstack/sodalite.nodes.OpenStack.VM.tosca_name		
+									attribute: openstack/sodalite.nodes.OpenStack.VM.tosca_name
+							additional_public_key:
+								type: string
+								default: get_property:
+									entity: SELF
+									property: openstack/sodalite.nodes.OpenStack.VM.additional_public_key	
 																
 						implementation: 
 							primary: "/workspace/iac-modules/openstack/playbooks/vm_create.yml"							

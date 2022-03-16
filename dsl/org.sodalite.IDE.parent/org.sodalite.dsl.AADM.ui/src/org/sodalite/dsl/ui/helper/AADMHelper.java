@@ -2,6 +2,7 @@ package org.sodalite.dsl.ui.helper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -58,8 +59,8 @@ import org.sodalite.dsl.rM.EPREFIX_ID;
 import org.sodalite.dsl.rM.EPREFIX_REF;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
 import org.sodalite.dsl.rM.EParameterDefinition;
-import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
-import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
+import org.sodalite.dsl.rM.GetAttributeBody;
+import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.ide.ui.backend.SodaliteBackendProxy;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
@@ -112,12 +113,14 @@ public class AADMHelper extends RMHelper {
 			AADM_Model model = (AADM_Model) findModel(reqAssign);
 
 			for (ENodeTemplate node : model.getNodeTemplates().getNodeTemplates()) {
-				String node_id = (node.getNode().getType().getModule() != null
-						? node.getNode().getType().getModule() + '/'
-						: "") + node.getNode().getType().getType();
-				if (!candidateNodes.keySet().contains(node_id))
-					candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
-				candidateNodes.get(node_id).add(node);
+				if (node.getNode() != null) {
+					String node_id = (node.getNode().getType().getModule() != null
+							? node.getNode().getType().getModule() + '/'
+							: "") + node.getNode().getType().getType();
+					if (!candidateNodes.keySet().contains(node_id))
+						candidateNodes.put(node_id, new HashSet<ENodeTemplate>());
+					candidateNodes.get(node_id).add(node);
+				}
 			}
 
 			List<String> keys = new ArrayList<String>(candidateNodes.keySet());
@@ -320,8 +323,9 @@ public class AADMHelper extends RMHelper {
 		if (Files.exists(path)) {
 			Properties props = new Properties();
 			try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-					FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
-				props.load(Channels.newInputStream(channel));
+					FileLock lock = channel.lock(0L, Long.MAX_VALUE, true);
+					InputStream is = Channels.newInputStream(channel)) {
+				props.load(is);
 			}
 			uri = props.getProperty("URI");
 		}
@@ -390,7 +394,7 @@ public class AADMHelper extends RMHelper {
 			return getNodeTemplate(object.eContainer());
 	}
 
-	public static ENodeTemplate getEntityNode(GetPropertyBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetPropertyBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {
@@ -404,7 +408,7 @@ public class AADMHelper extends RMHelper {
 		return node;
 	}
 
-	public static ENodeTemplate getEntityNode(GetAttributeBodyImpl body) {
+	public static ENodeTemplate getEntityNode(GetAttributeBody body) {
 		EEntityReference eEntityReference = body.getEntity();
 		ENodeTemplate node = null;
 		if (eEntityReference instanceof EEntity) {

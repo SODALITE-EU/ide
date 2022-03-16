@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EModuleCall;
 import org.sodalite.sdl.ansible.ansibleDsl.EParameter;
+import org.sodalite.sdl.ansible.ansibleDsl.EStringWithoutQuotesPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 
 /**
@@ -32,7 +33,9 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getFirstPart <em>First Part</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getSecondPart <em>Second Part</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getThirdPart <em>Third Part</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getDirect_parameter <em>Direct parameter</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EModuleCallImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
@@ -42,24 +45,34 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
 public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EModuleCall
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getFirstPart() <em>First Part</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getFirstPart()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected EStringWithoutQuotesPassed firstPart;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getSecondPart() <em>Second Part</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getSecondPart()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected EStringWithoutQuotesPassed secondPart;
+
+  /**
+   * The cached value of the '{@link #getThirdPart() <em>Third Part</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getThirdPart()
+   * @generated
+   * @ordered
+   */
+  protected EStringWithoutQuotesPassed thirdPart;
 
   /**
    * The cached value of the '{@link #getDirect_parameter() <em>Direct parameter</em>}' containment reference.
@@ -108,9 +121,26 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * @generated
    */
   @Override
-  public String getName()
+  public EStringWithoutQuotesPassed getFirstPart()
   {
-    return name;
+    return firstPart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetFirstPart(EStringWithoutQuotesPassed newFirstPart, NotificationChain msgs)
+  {
+    EStringWithoutQuotesPassed oldFirstPart = firstPart;
+    firstPart = newFirstPart;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__FIRST_PART, oldFirstPart, newFirstPart);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -119,12 +149,120 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public void setFirstPart(EStringWithoutQuotesPassed newFirstPart)
   {
-    String oldName = name;
-    name = newName;
+    if (newFirstPart != firstPart)
+    {
+      NotificationChain msgs = null;
+      if (firstPart != null)
+        msgs = ((InternalEObject)firstPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__FIRST_PART, null, msgs);
+      if (newFirstPart != null)
+        msgs = ((InternalEObject)newFirstPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__FIRST_PART, null, msgs);
+      msgs = basicSetFirstPart(newFirstPart, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__FIRST_PART, newFirstPart, newFirstPart));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EStringWithoutQuotesPassed getSecondPart()
+  {
+    return secondPart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSecondPart(EStringWithoutQuotesPassed newSecondPart, NotificationChain msgs)
+  {
+    EStringWithoutQuotesPassed oldSecondPart = secondPart;
+    secondPart = newSecondPart;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__NAME, oldName, name));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__SECOND_PART, oldSecondPart, newSecondPart);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSecondPart(EStringWithoutQuotesPassed newSecondPart)
+  {
+    if (newSecondPart != secondPart)
+    {
+      NotificationChain msgs = null;
+      if (secondPart != null)
+        msgs = ((InternalEObject)secondPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__SECOND_PART, null, msgs);
+      if (newSecondPart != null)
+        msgs = ((InternalEObject)newSecondPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__SECOND_PART, null, msgs);
+      msgs = basicSetSecondPart(newSecondPart, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__SECOND_PART, newSecondPart, newSecondPart));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EStringWithoutQuotesPassed getThirdPart()
+  {
+    return thirdPart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetThirdPart(EStringWithoutQuotesPassed newThirdPart, NotificationChain msgs)
+  {
+    EStringWithoutQuotesPassed oldThirdPart = thirdPart;
+    thirdPart = newThirdPart;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__THIRD_PART, oldThirdPart, newThirdPart);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setThirdPart(EStringWithoutQuotesPassed newThirdPart)
+  {
+    if (newThirdPart != thirdPart)
+    {
+      NotificationChain msgs = null;
+      if (thirdPart != null)
+        msgs = ((InternalEObject)thirdPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__THIRD_PART, null, msgs);
+      if (newThirdPart != null)
+        msgs = ((InternalEObject)newThirdPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EMODULE_CALL__THIRD_PART, null, msgs);
+      msgs = basicSetThirdPart(newThirdPart, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EMODULE_CALL__THIRD_PART, newThirdPart, newThirdPart));
   }
 
   /**
@@ -202,6 +340,12 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EMODULE_CALL__FIRST_PART:
+        return basicSetFirstPart(null, msgs);
+      case AnsibleDslPackage.EMODULE_CALL__SECOND_PART:
+        return basicSetSecondPart(null, msgs);
+      case AnsibleDslPackage.EMODULE_CALL__THIRD_PART:
+        return basicSetThirdPart(null, msgs);
       case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
         return basicSetDirect_parameter(null, msgs);
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
@@ -220,8 +364,12 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EMODULE_CALL__NAME:
-        return getName();
+      case AnsibleDslPackage.EMODULE_CALL__FIRST_PART:
+        return getFirstPart();
+      case AnsibleDslPackage.EMODULE_CALL__SECOND_PART:
+        return getSecondPart();
+      case AnsibleDslPackage.EMODULE_CALL__THIRD_PART:
+        return getThirdPart();
       case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
         return getDirect_parameter();
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
@@ -241,8 +389,14 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EMODULE_CALL__NAME:
-        setName((String)newValue);
+      case AnsibleDslPackage.EMODULE_CALL__FIRST_PART:
+        setFirstPart((EStringWithoutQuotesPassed)newValue);
+        return;
+      case AnsibleDslPackage.EMODULE_CALL__SECOND_PART:
+        setSecondPart((EStringWithoutQuotesPassed)newValue);
+        return;
+      case AnsibleDslPackage.EMODULE_CALL__THIRD_PART:
+        setThirdPart((EStringWithoutQuotesPassed)newValue);
         return;
       case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
         setDirect_parameter((EValuePassed)newValue);
@@ -265,8 +419,14 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EMODULE_CALL__NAME:
-        setName(NAME_EDEFAULT);
+      case AnsibleDslPackage.EMODULE_CALL__FIRST_PART:
+        setFirstPart((EStringWithoutQuotesPassed)null);
+        return;
+      case AnsibleDslPackage.EMODULE_CALL__SECOND_PART:
+        setSecondPart((EStringWithoutQuotesPassed)null);
+        return;
+      case AnsibleDslPackage.EMODULE_CALL__THIRD_PART:
+        setThirdPart((EStringWithoutQuotesPassed)null);
         return;
       case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
         setDirect_parameter((EValuePassed)null);
@@ -288,31 +448,18 @@ public class EModuleCallImpl extends MinimalEObjectImpl.Container implements EMo
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EMODULE_CALL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AnsibleDslPackage.EMODULE_CALL__FIRST_PART:
+        return firstPart != null;
+      case AnsibleDslPackage.EMODULE_CALL__SECOND_PART:
+        return secondPart != null;
+      case AnsibleDslPackage.EMODULE_CALL__THIRD_PART:
+        return thirdPart != null;
       case AnsibleDslPackage.EMODULE_CALL__DIRECT_PARAMETER:
         return direct_parameter != null;
       case AnsibleDslPackage.EMODULE_CALL__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //EModuleCallImpl

@@ -9,15 +9,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.impl.KeywordImpl;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.osgi.framework.Bundle;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
@@ -46,6 +50,10 @@ import org.sodalite.dsl.kb_reasoner_client.types.Template;
 import org.sodalite.dsl.kb_reasoner_client.types.TemplateData;
 import org.sodalite.dsl.kb_reasoner_client.types.Type;
 import org.sodalite.dsl.kb_reasoner_client.types.TypeData;
+import org.sodalite.dsl.rM.EArtifactDefinition;
+import org.sodalite.dsl.rM.EArtifactType;
+import org.sodalite.dsl.rM.EArtifactTypes;
+import org.sodalite.dsl.rM.EArtifacts;
 import org.sodalite.dsl.rM.EAttributeDefinition;
 import org.sodalite.dsl.rM.EAttributes;
 import org.sodalite.dsl.rM.ECapabilities;
@@ -56,8 +64,10 @@ import org.sodalite.dsl.rM.EDataTypeName;
 import org.sodalite.dsl.rM.EEntityReference;
 import org.sodalite.dsl.rM.EEvenFilter;
 import org.sodalite.dsl.rM.EFunction;
+import org.sodalite.dsl.rM.EInterfaceDefinition;
 import org.sodalite.dsl.rM.EInterfaceDefinitionBody;
 import org.sodalite.dsl.rM.EInterfaceType;
+import org.sodalite.dsl.rM.EInterfaceTypes;
 import org.sodalite.dsl.rM.ENodeType;
 import org.sodalite.dsl.rM.EOperationDefinition;
 import org.sodalite.dsl.rM.EPREFIX_REF;
@@ -71,6 +81,7 @@ import org.sodalite.dsl.rM.ERequirements;
 import org.sodalite.dsl.rM.GetAttributeBody;
 import org.sodalite.dsl.rM.GetPropertyBody;
 import org.sodalite.dsl.rM.RM_Model;
+import org.sodalite.dsl.rM.impl.GetArtifactBodyImpl;
 import org.sodalite.dsl.rM.impl.GetAttributeBodyImpl;
 import org.sodalite.dsl.rM.impl.GetPropertyBodyImpl;
 import org.sodalite.dsl.ui.helper.RMHelper;
@@ -598,18 +609,83 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
         EObject _findModel = RMHelper.findModel(model);
         final RM_Model rootModel = ((RM_Model) _findModel);
-        EList<EInterfaceType> _interfaceTypes = rootModel.getInterfaceTypes().getInterfaceTypes();
-        for (final EInterfaceType interface__1 : _interfaceTypes) {
+        EInterfaceTypes _interfaceTypes = rootModel.getInterfaceTypes();
+        boolean _tripleNotEquals = (_interfaceTypes != null);
+        if (_tripleNotEquals) {
+          EList<EInterfaceType> _interfaceTypes_1 = rootModel.getInterfaceTypes().getInterfaceTypes();
+          for (final EInterfaceType interface__1 : _interfaceTypes_1) {
+            {
+              String _name = interface__1.getName();
+              String _plus = ("\tLocal interface type: " + _name);
+              System.out.println(_plus);
+              String _name_1 = interface__1.getName();
+              final String proposalText = ((module + "/") + _name_1);
+              String _name_2 = interface__1.getName();
+              final String displayText = ((module + "/") + _name_2);
+              final String additionalProposalInfo = interface__1.getInterface().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
+          }
+        }
+        super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
+      } catch (final Throwable _t) {
+        if (_t instanceof NotRolePermissionException) {
+          RMHelper.showReadPermissionErrorDialog();
+        } else if (_t instanceof SodaliteException) {
+          final SodaliteException ex_1 = (SodaliteException)_t;
+          SodaliteLogger.log(ex_1.getMessage(), ex_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void completeEArtifactTypeBody_SuperType(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    try {
+      try {
+        final List<String> importedModules = RMHelper.processListModules(model);
+        final String module = RMHelper.getModule(model);
+        final ReasonerData<Type> artifacts = SodaliteBackendProxy.getKBReasoner().getArtifactTypes(importedModules);
+        final Image image = this.getImage("icons/artifact.png");
+        List<Type> _elements = artifacts.getElements();
+        for (final Type artifact : _elements) {
           {
-            String _name = interface__1.getName();
-            String _plus = ("\tLocal interface type: " + _name);
-            System.out.println(_plus);
-            String _name_1 = interface__1.getName();
-            final String proposalText = ((module + "/") + _name_1);
-            String _name_2 = interface__1.getName();
-            final String displayText = ((module + "/") + _name_2);
-            final String additionalProposalInfo = interface__1.getInterface().getDescription();
+            String _xifexpression = null;
+            String _module = artifact.getModule();
+            boolean _tripleNotEquals = (_module != null);
+            if (_tripleNotEquals) {
+              String _lastSegment = RMHelper.getLastSegment(artifact.getModule(), "/");
+              String _plus = (_lastSegment + "/");
+              String _label = artifact.getLabel();
+              _xifexpression = (_plus + _label);
+            } else {
+              _xifexpression = artifact.getLabel();
+            }
+            final String qartifact = _xifexpression;
+            final String proposalText = qartifact;
+            final String displayText = qartifact;
+            final String additionalProposalInfo = artifact.getDescription();
             this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+          }
+        }
+        EObject _findModel = RMHelper.findModel(model);
+        final RM_Model rootModel = ((RM_Model) _findModel);
+        EArtifactTypes _artifactTypes = rootModel.getArtifactTypes();
+        boolean _tripleNotEquals = (_artifactTypes != null);
+        if (_tripleNotEquals) {
+          EList<EArtifactType> _artifactTypes_1 = rootModel.getArtifactTypes().getArtifactTypes();
+          for (final EArtifactType artifact_1 : _artifactTypes_1) {
+            {
+              String _name = artifact_1.getName();
+              final String proposalText = ((module + "/") + _name);
+              String _name_1 = artifact_1.getName();
+              final String displayText = ((module + "/") + _name_1);
+              final String additionalProposalInfo = artifact_1.getArtifact().getDescription();
+              this.createNonEditableCompletionProposal(proposalText, displayText, image, context, additionalProposalInfo, acceptor);
+            }
           }
         }
         super.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
@@ -640,6 +716,10 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.completeENodeTypeBody_SuperType(model, assignment, context, acceptor);
   }
   
+  public void completeEArtifactDefinitionBody_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    this.completeEArtifactTypeBody_SuperType(model, assignment, context, acceptor);
+  }
+  
   public void completeERequirementDefinitionBody_Relationship(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     this.completeERelationshipTypeBody_SuperType(model, assignment, context, acceptor);
   }
@@ -665,6 +745,45 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   public void completeGetPropertyBody_Property(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for GetPropertyBody::property property");
     this.completeGetAttributeOrPropertyFunction_AttributeOrProperty(model, assignment, context, acceptor);
+  }
+  
+  public void completeGetArtifactBody_Artifact(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetArtifactBody::artifact property");
+    List<String> proposals = new ArrayList<String>();
+    final String module = RMHelper.getModule(model);
+    GetArtifactBodyImpl body = ((GetArtifactBodyImpl) model);
+    EObject _eContainer = body.eContainer();
+    EObject node = RMHelper.getEntityType(((EFunction) _eContainer));
+    if (((node == null) || (!(node instanceof ENodeType)))) {
+      return;
+    }
+    List<EArtifactDefinition> artifacts = null;
+    String node_name = null;
+    final ENodeType nodeType = ((ENodeType) node);
+    EArtifacts _artifacts = nodeType.getNode().getArtifacts();
+    boolean _tripleNotEquals = (_artifacts != null);
+    if (_tripleNotEquals) {
+      artifacts = nodeType.getNode().getArtifacts().getArtifacts();
+    }
+    node_name = nodeType.getName();
+    for (final EArtifactDefinition artifact : artifacts) {
+      String _xifexpression = null;
+      if ((module != null)) {
+        _xifexpression = (module + "/");
+      } else {
+        _xifexpression = "";
+      }
+      String _plus = (_xifexpression + node_name);
+      String _plus_1 = (_plus + ".");
+      String _name = artifact.getName();
+      String _plus_2 = (_plus_1 + _name);
+      proposals.add(_plus_2);
+    }
+    Image image = null;
+    image = this.getImage("icons/artifact.png");
+    for (final String proposal : proposals) {
+      this.createEditableCompletionProposal(proposal, proposal, image, context, null, acceptor);
+    }
   }
   
   public void completeGetPropertyBody_Req_cap(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
@@ -856,6 +975,11 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
     this.createEntityProposals(context, acceptor);
   }
   
+  public void completeGetArtifactBody_Entity(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    System.out.println("Invoking content assist for GetArtifactBody::entity property");
+    this.createEntityProposals(context, acceptor);
+  }
+  
   public void completeEMapEntry_Key(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     System.out.println("Invoking content assist for EMapEntry::key property");
     this.createEditableCompletionProposal("map_key_name", "map_key_name", null, context, "Key name for map entry", acceptor);
@@ -872,7 +996,57 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
   }
   
   public void completeEPrimary_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-    String _selectFile = RMHelper.selectFile("Select implementation primary file");
+    try {
+      String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+      URI project_uri = context.getDocument().getResourceURI();
+      String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
+      int _segmentCount = project_uri.segmentCount();
+      int _minus = (_segmentCount - 1);
+      String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
+      intermediatePath = intermediatePath.replace(RMName, "");
+      IXtextDocument document = context.getDocument();
+      int offset = context.getCurrentNode().getOffset();
+      final String node = EcoreUtil2.<ENodeType>getContainerOfType(model, ENodeType.class).getName();
+      final String interface_ = EcoreUtil2.<EInterfaceDefinition>getContainerOfType(model, EInterfaceDefinition.class).getName();
+      final String operation = EcoreUtil2.<EOperationDefinition>getContainerOfType(model, EOperationDefinition.class).getName();
+      RMName = RMName.split("\\.")[0];
+      String relativePath = (((((RMName + "-Ansible files") + "/") + node) + "/") + interface_);
+      String localPath = (intermediatePath + relativePath);
+      String absolutePath = (workspaceDir + localPath);
+      String input = RMHelper.selectImplementationFile("Select implementation primary file", absolutePath, localPath, (operation + ".yaml"));
+      boolean _equals = input.equals((((localPath + "/") + operation) + ".yaml"));
+      if (_equals) {
+        input = ((((((("\"" + "./") + relativePath) + "/") + operation) + ".yaml") + "\"") + "\n");
+        document.replace(offset, 1, input);
+        this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+      } else {
+        boolean _isEmpty = input.isEmpty();
+        if (_isEmpty) {
+          return;
+        } else {
+          input = ((("\"" + input) + "\"") + "\n");
+          document.replace(offset, 1, input);
+          this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void completeEPrimary_Relative_path(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+    URI project_uri = context.getDocument().getResourceURI();
+    String intermediatePath = project_uri.toString().replaceAll("%20", " ").replace("platform:/resource", "");
+    int _segmentCount = project_uri.segmentCount();
+    int _minus = (_segmentCount - 1);
+    String RMName = project_uri.segment(_minus).replaceAll("%20", " ");
+    intermediatePath = intermediatePath.replace(RMName, "");
+    this.createEditableCompletionProposal(((("\"" + workspaceDir) + intermediatePath) + "\""), ((("\"" + workspaceDir) + intermediatePath) + "\""), null, context, "The path where current resource model is located", acceptor);
+  }
+  
+  public void completeEArtifactDefinitionBody_File(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    String _selectFile = RMHelper.selectFile("Select artifact file");
     String _plus = ("\"" + _selectFile);
     final String input = (_plus + "\"");
     this.createEditableCompletionProposal(input, input, null, context, "", acceptor);
@@ -1919,16 +2093,32 @@ public class RMProposalProvider extends AbstractRMProposalProvider {
         }
         if ((model instanceof GetPropertyBodyImpl)) {
           for (final EPropertyDefinition prop : properties) {
+            String _xifexpression = null;
+            if ((module != null)) {
+              _xifexpression = (module + "/");
+            } else {
+              _xifexpression = "";
+            }
+            String _plus = (_xifexpression + node_name);
+            String _plus_1 = (_plus + ".");
             String _name = prop.getName();
-            String _plus = ((((module + "/") + node_name) + ".") + _name);
-            proposals.add(_plus);
+            String _plus_2 = (_plus_1 + _name);
+            proposals.add(_plus_2);
           }
         } else {
           if ((model instanceof GetAttributeBodyImpl)) {
             for (final EAttributeDefinition attr : attributes) {
+              String _xifexpression_1 = null;
+              if ((module != null)) {
+                _xifexpression_1 = (module + "/");
+              } else {
+                _xifexpression_1 = "";
+              }
+              String _plus_3 = (_xifexpression_1 + node_name);
+              String _plus_4 = (_plus_3 + ".");
               String _name_1 = attr.getName();
-              String _plus_1 = ((((module + "/") + node_name) + ".") + _name_1);
-              proposals.add(_plus_1);
+              String _plus_5 = (_plus_4 + _name_1);
+              proposals.add(_plus_5);
             }
           }
         }

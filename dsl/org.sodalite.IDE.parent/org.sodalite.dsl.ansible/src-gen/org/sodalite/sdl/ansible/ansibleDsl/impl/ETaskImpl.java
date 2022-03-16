@@ -22,6 +22,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EAsynchronousSettings;
 import org.sodalite.sdl.ansible.ansibleDsl.EBase;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ECondition;
 import org.sodalite.sdl.ansible.ansibleDsl.EConnection;
 import org.sodalite.sdl.ansible.ansibleDsl.EDelegation;
@@ -156,7 +157,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    * @ordered
    */
-  protected EListPassed collections;
+  protected ECollectionListPassed collections;
 
   /**
    * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
@@ -675,7 +676,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public EListPassed getCollections()
+  public ECollectionListPassed getCollections()
   {
     return collections;
   }
@@ -685,9 +686,9 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCollections(EListPassed newCollections, NotificationChain msgs)
+  public NotificationChain basicSetCollections(ECollectionListPassed newCollections, NotificationChain msgs)
   {
-    EListPassed oldCollections = collections;
+    ECollectionListPassed oldCollections = collections;
     collections = newCollections;
     if (eNotificationRequired())
     {
@@ -703,7 +704,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
    * @generated
    */
   @Override
-  public void setCollections(EListPassed newCollections)
+  public void setCollections(ECollectionListPassed newCollections)
   {
     if (newCollections != collections)
     {
@@ -1498,7 +1499,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setEnvironment((EValuePassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__COLLECTIONS:
-        setCollections((EListPassed)newValue);
+        setCollections((ECollectionListPassed)newValue);
         return;
       case AnsibleDslPackage.ETASK__TAGS:
         setTags((EListPassed)newValue);
@@ -1580,7 +1581,7 @@ public class ETaskImpl extends EBlockTaskImpl implements ETask
         setEnvironment((EValuePassed)null);
         return;
       case AnsibleDslPackage.ETASK__COLLECTIONS:
-        setCollections((EListPassed)null);
+        setCollections((ECollectionListPassed)null);
         return;
       case AnsibleDslPackage.ETASK__TAGS:
         setTags((EListPassed)null);

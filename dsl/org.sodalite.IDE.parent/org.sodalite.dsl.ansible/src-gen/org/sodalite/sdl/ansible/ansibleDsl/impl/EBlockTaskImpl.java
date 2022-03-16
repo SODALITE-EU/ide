@@ -5,8 +5,6 @@ package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
 
@@ -17,7 +15,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EBlockTask;
  *
  * @generated
  */
-public class EBlockTaskImpl extends MinimalEObjectImpl.Container implements EBlockTask
+public class EBlockTaskImpl extends EBlockTaskRoleImpl implements EBlockTask
 {
   /**
    * <!-- begin-user-doc -->

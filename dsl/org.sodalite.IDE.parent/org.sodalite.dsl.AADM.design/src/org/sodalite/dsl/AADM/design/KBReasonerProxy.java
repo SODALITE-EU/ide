@@ -82,7 +82,7 @@ public class KBReasonerProxy {
 		String module = AADM_Helper.getBetweenLast2Delimiters(op.getDefinedIn(), "/");
 		String _interface = AADM_Helper.getLastSegment(op.getDefinedIn(), "/");
 		String oper_name = AADM_Helper.getLastSegment(op.getUri().toString(), "/");
-		String qOperation = module != "tosca" ? module + '/' + _interface + '.' + oper_name
+		String qOperation = !module.equals("tosca") ? module + '/' + _interface + '.' + oper_name
 				: _interface + '.' + oper_name;
 		return qOperation;
 	}
@@ -298,13 +298,13 @@ public class KBReasonerProxy {
 				ENodeTemplate filter_node = AADM_Helper.findNode(filter, filter.getNode());
 				if (filter_node != null) {
 					// A) Node lives in RM
-					filter_node_type = AADM_Helper.renderType(filter_node.getNode().getType());
+					filter_node_type = AADM_Helper.renderEPREFIX_TYPE(filter_node.getNode().getType());
 				}
 			}
 
 			if (filter_node_type == null) {
 				// B) Node lives in KB
-				filter_node_type = findNodeTemplateInKB(filter, AADM_Helper.render(filter.getNode()));
+				filter_node_type = findNodeTemplateInKB(filter, AADM_Helper.renderType(filter.getNode()));
 			}
 			if (filter_node_type != null) {
 				// Find capabilities defined in filter node template type
@@ -320,7 +320,7 @@ public class KBReasonerProxy {
 			ENodeTemplate req_node = AADM_Helper.findRequirementNodeInLocalModel(filter, filter.getRequirement());
 			if (req_node != null) { // A) Node lives in RM
 				// Find capabilities defined in req node type
-				String node_type = AADM_Helper.render(req_node.getNode().getType());
+				String node_type = AADM_Helper.renderEPREFIX_TYPE(req_node.getNode().getType());
 				CapabilityDefinitionData capabilityData = RMBackendProxy.getKBReasoner().getTypeCapabilities(node_type);
 				capabilityDefinitions = capabilityData.getElements();
 				cap_def_type = node_type; // FIXME take defining type from capability
@@ -365,8 +365,8 @@ public class KBReasonerProxy {
 					for (ERequirementAssignment req : node.getNode().getRequirements().getRequirements()) {
 						result.add(render(req, node));
 					}
-				} else { // KB node
-					String nodeType = AADM_Helper.renderType(node.getNode().getType());
+				} else { // KB node TODO fixme
+					String nodeType = AADM_Helper.renderType(filter.getNode());
 					RequirementDefinitionData data = RMBackendProxy.getKBReasoner().getTypeRequirements(nodeType);
 					if (data != null) {
 						for (RequirementDefinition reqDef : data.getElements()) {

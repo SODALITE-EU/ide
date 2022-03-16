@@ -68,6 +68,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_1(), "rule__EArtifactTypeBody__Group_1_1__0");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_2(), "rule__EArtifactTypeBody__Group_1_2__0");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_3(), "rule__EArtifactTypeBody__Group_1_3__0");
+			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getGroup_1_4(), "rule__EArtifactTypeBody__Group_1_4__0");
 			builder.put(grammarAccess.getECapabilityTypesAccess().getGroup(), "rule__ECapabilityTypes__Group__0");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getGroup(), "rule__ECapabilityType__Group__0");
 			builder.put(grammarAccess.getECapabilityTypeBodyAccess().getGroup(), "rule__ECapabilityTypeBody__Group__0");
@@ -131,6 +132,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getGroup_1_4(), "rule__ENodeTypeBody__Group_1_4__0");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getGroup_1_5(), "rule__ENodeTypeBody__Group_1_5__0");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getGroup_1_6(), "rule__ENodeTypeBody__Group_1_6__0");
+			builder.put(grammarAccess.getENodeTypeBodyAccess().getGroup_1_7(), "rule__ENodeTypeBody__Group_1_7__0");
 			builder.put(grammarAccess.getERelationshipTypesAccess().getGroup(), "rule__ERelationshipTypes__Group__0");
 			builder.put(grammarAccess.getERelationshipTypeAccess().getGroup(), "rule__ERelationshipType__Group__0");
 			builder.put(grammarAccess.getERelationshipTypeBodyAccess().getGroup(), "rule__ERelationshipTypeBody__Group__0");
@@ -194,6 +196,9 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getGroup_0(), "rule__GetPropertyBody__Group_0__0");
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getGroup_1(), "rule__GetPropertyBody__Group_1__0");
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getGroup_2(), "rule__GetPropertyBody__Group_2__0");
+			builder.put(grammarAccess.getGetArtifactAccess().getGroup(), "rule__GetArtifact__Group__0");
+			builder.put(grammarAccess.getGetArtifactBodyAccess().getGroup_0(), "rule__GetArtifactBody__Group_0__0");
+			builder.put(grammarAccess.getGetArtifactBodyAccess().getGroup_1(), "rule__GetArtifactBody__Group_1__0");
 			builder.put(grammarAccess.getECapabilitiesAccess().getGroup(), "rule__ECapabilities__Group__0");
 			builder.put(grammarAccess.getECapabilityDefinitionAccess().getGroup(), "rule__ECapabilityDefinition__Group__0");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getGroup_0(), "rule__ECapabilityDefinitionBody__Group_0__0");
@@ -210,6 +215,10 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getGroup_1(), "rule__ERequirementDefinitionBody__Group_1__0");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getGroup_2(), "rule__ERequirementDefinitionBody__Group_2__0");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getGroup_3(), "rule__ERequirementDefinitionBody__Group_3__0");
+			builder.put(grammarAccess.getEArtifactsAccess().getGroup(), "rule__EArtifacts__Group__0");
+			builder.put(grammarAccess.getEArtifactDefinitionAccess().getGroup(), "rule__EArtifactDefinition__Group__0");
+			builder.put(grammarAccess.getEArtifactDefinitionBodyAccess().getGroup_0(), "rule__EArtifactDefinitionBody__Group_0__0");
+			builder.put(grammarAccess.getEArtifactDefinitionBodyAccess().getGroup_1(), "rule__EArtifactDefinitionBody__Group_1__0");
 			builder.put(grammarAccess.getEConstraintsAccess().getGroup(), "rule__EConstraints__Group__0");
 			builder.put(grammarAccess.getEMaxLengthAccess().getGroup(), "rule__EMaxLength__Group__0");
 			builder.put(grammarAccess.getEMinLengthAccess().getGroup(), "rule__EMinLength__Group__0");
@@ -256,6 +265,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getDescriptionAssignment_1_1_1(), "rule__EArtifactTypeBody__DescriptionAssignment_1_1_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getMime_typeAssignment_1_2_1(), "rule__EArtifactTypeBody__Mime_typeAssignment_1_2_1");
 			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getFile_extAssignment_1_3_1(), "rule__EArtifactTypeBody__File_extAssignment_1_3_1");
+			builder.put(grammarAccess.getEArtifactTypeBodyAccess().getPropertiesAssignment_1_4_2(), "rule__EArtifactTypeBody__PropertiesAssignment_1_4_2");
 			builder.put(grammarAccess.getECapabilityTypesAccess().getCapabilityTypesAssignment_1(), "rule__ECapabilityTypes__CapabilityTypesAssignment_1");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getNameAssignment_0(), "rule__ECapabilityType__NameAssignment_0");
 			builder.put(grammarAccess.getECapabilityTypeAccess().getCapabilityAssignment_3(), "rule__ECapabilityType__CapabilityAssignment_3");
@@ -321,6 +331,7 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getInterfacesAssignment_1_4_2(), "rule__ENodeTypeBody__InterfacesAssignment_1_4_2");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getCapabilitiesAssignment_1_5_2(), "rule__ENodeTypeBody__CapabilitiesAssignment_1_5_2");
 			builder.put(grammarAccess.getENodeTypeBodyAccess().getRequirementsAssignment_1_6_2(), "rule__ENodeTypeBody__RequirementsAssignment_1_6_2");
+			builder.put(grammarAccess.getENodeTypeBodyAccess().getArtifactsAssignment_1_7_2(), "rule__ENodeTypeBody__ArtifactsAssignment_1_7_2");
 			builder.put(grammarAccess.getERelationshipTypesAccess().getRelationshipTypesAssignment_1(), "rule__ERelationshipTypes__RelationshipTypesAssignment_1");
 			builder.put(grammarAccess.getERelationshipTypeAccess().getNameAssignment_0(), "rule__ERelationshipType__NameAssignment_0");
 			builder.put(grammarAccess.getERelationshipTypeAccess().getRelationshipAssignment_3(), "rule__ERelationshipType__RelationshipAssignment_3");
@@ -388,6 +399,9 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getPropertyAssignment_0_1(), "rule__GetPropertyBody__PropertyAssignment_0_1");
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getEntityAssignment_1_1(), "rule__GetPropertyBody__EntityAssignment_1_1");
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getReq_capAssignment_2_1(), "rule__GetPropertyBody__Req_capAssignment_2_1");
+			builder.put(grammarAccess.getGetArtifactAccess().getArtifactAssignment_2(), "rule__GetArtifact__ArtifactAssignment_2");
+			builder.put(grammarAccess.getGetArtifactBodyAccess().getArtifactAssignment_0_1(), "rule__GetArtifactBody__ArtifactAssignment_0_1");
+			builder.put(grammarAccess.getGetArtifactBodyAccess().getEntityAssignment_1_1(), "rule__GetArtifactBody__EntityAssignment_1_1");
 			builder.put(grammarAccess.getECapabilitiesAccess().getCapabilitiesAssignment_1(), "rule__ECapabilities__CapabilitiesAssignment_1");
 			builder.put(grammarAccess.getECapabilityDefinitionAccess().getNameAssignment_0(), "rule__ECapabilityDefinition__NameAssignment_0");
 			builder.put(grammarAccess.getECapabilityDefinitionAccess().getCapabilityAssignment_3(), "rule__ECapabilityDefinition__CapabilityAssignment_3");
@@ -408,6 +422,11 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getRelationshipAssignment_2_1(), "rule__ERequirementDefinitionBody__RelationshipAssignment_2_1");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getStartAssignment_3_2(), "rule__ERequirementDefinitionBody__StartAssignment_3_2");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getEndAssignment_3_4(), "rule__ERequirementDefinitionBody__EndAssignment_3_4");
+			builder.put(grammarAccess.getEArtifactsAccess().getArtifactsAssignment_1(), "rule__EArtifacts__ArtifactsAssignment_1");
+			builder.put(grammarAccess.getEArtifactDefinitionAccess().getNameAssignment_0(), "rule__EArtifactDefinition__NameAssignment_0");
+			builder.put(grammarAccess.getEArtifactDefinitionAccess().getArtifactAssignment_3(), "rule__EArtifactDefinition__ArtifactAssignment_3");
+			builder.put(grammarAccess.getEArtifactDefinitionBodyAccess().getTypeAssignment_0_1(), "rule__EArtifactDefinitionBody__TypeAssignment_0_1");
+			builder.put(grammarAccess.getEArtifactDefinitionBodyAccess().getFileAssignment_1_1(), "rule__EArtifactDefinitionBody__FileAssignment_1_1");
 			builder.put(grammarAccess.getEConstraintsAccess().getConstraintsAssignment_1(), "rule__EConstraints__ConstraintsAssignment_1");
 			builder.put(grammarAccess.getEMaxLengthAccess().getValAssignment_1(), "rule__EMaxLength__ValAssignment_1");
 			builder.put(grammarAccess.getEMinLengthAccess().getValAssignment_1(), "rule__EMinLength__ValAssignment_1");
@@ -455,8 +474,10 @@ public class RMParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEParameterDefinitionBodyAccess().getUnorderedGroup_1(), "rule__EParameterDefinitionBody__UnorderedGroup_1");
 			builder.put(grammarAccess.getGetAttributeBodyAccess().getUnorderedGroup(), "rule__GetAttributeBody__UnorderedGroup");
 			builder.put(grammarAccess.getGetPropertyBodyAccess().getUnorderedGroup(), "rule__GetPropertyBody__UnorderedGroup");
+			builder.put(grammarAccess.getGetArtifactBodyAccess().getUnorderedGroup(), "rule__GetArtifactBody__UnorderedGroup");
 			builder.put(grammarAccess.getECapabilityDefinitionBodyAccess().getUnorderedGroup(), "rule__ECapabilityDefinitionBody__UnorderedGroup");
 			builder.put(grammarAccess.getERequirementDefinitionBodyAccess().getUnorderedGroup(), "rule__ERequirementDefinitionBody__UnorderedGroup");
+			builder.put(grammarAccess.getEArtifactDefinitionBodyAccess().getUnorderedGroup(), "rule__EArtifactDefinitionBody__UnorderedGroup");
 		}
 	}
 	

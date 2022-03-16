@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/test-classes" path="src">
-		<attributes>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry excluding="src/|src-gen/|xtend-gen/" kind="src" path=""/>
 	<classpathentry kind="src" output="target/test-classes" path="src-gen">
 		<attributes>

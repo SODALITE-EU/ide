@@ -4,13 +4,13 @@
 package org.sodalite.sdl.ansible.ansibleDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.sodalite.dsl.rM.EPropertyDefinition;
 
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
@@ -23,7 +23,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EInputInterfaceVariableReferenceImpl#getReference <em>Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.sodalite.sdl.ansible.ansibleDsl.EInputInterfaceVariableReference;
 public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl implements EInputInterfaceVariableReference
 {
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' reference.
+   * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getReference()
    * @generated
    * @ordered
    */
-  protected EPropertyDefinition name;
+  protected EObject reference;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,19 +67,9 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * @generated
    */
   @Override
-  public EPropertyDefinition getName()
+  public EObject getReference()
   {
-    if (name != null && name.eIsProxy())
-    {
-      InternalEObject oldName = (InternalEObject)name;
-      name = (EPropertyDefinition)eResolveProxy(oldName);
-      if (name != oldName)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME, oldName, name));
-      }
-    }
-    return name;
+    return reference;
   }
 
   /**
@@ -87,9 +77,16 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EPropertyDefinition basicGetName()
+  public NotificationChain basicSetReference(EObject newReference, NotificationChain msgs)
   {
-    return name;
+    EObject oldReference = reference;
+    reference = newReference;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE, oldReference, newReference);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -98,12 +95,36 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
    * @generated
    */
   @Override
-  public void setName(EPropertyDefinition newName)
+  public void setReference(EObject newReference)
   {
-    EPropertyDefinition oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME, oldName, name));
+    if (newReference != reference)
+    {
+      NotificationChain msgs = null;
+      if (reference != null)
+        msgs = ((InternalEObject)reference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE, null, msgs);
+      if (newReference != null)
+        msgs = ((InternalEObject)newReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE, null, msgs);
+      msgs = basicSetReference(newReference, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE, newReference, newReference));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE:
+        return basicSetReference(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -116,9 +137,8 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
-        if (resolve) return getName();
-        return basicGetName();
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE:
+        return getReference();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -133,8 +153,8 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
-        setName((EPropertyDefinition)newValue);
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE:
+        setReference((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -150,8 +170,8 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
-        setName((EPropertyDefinition)null);
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE:
+        setReference((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -167,8 +187,8 @@ public class EInputInterfaceVariableReferenceImpl extends EVariableReferenceImpl
   {
     switch (featureID)
     {
-      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__NAME:
-        return name != null;
+      case AnsibleDslPackage.EINPUT_INTERFACE_VARIABLE_REFERENCE__REFERENCE:
+        return reference != null;
     }
     return super.eIsSet(featureID);
   }

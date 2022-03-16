@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class AADMDSLHelper {
 	public static EObject findModel(EObject object) {
@@ -25,8 +26,11 @@ public class AADMDSLHelper {
 	}
 
 	public static String getModule(EObject object) {
+		String module = null;
 		EObject model = findModel(object);
-		return invokeGetModule(model);
+		if (model != null)
+			module = invokeGetModule(model);
+		return module;
 	}
 
 	private static String invokeGetModule(EObject model) {
@@ -36,7 +40,7 @@ public class AADMDSLHelper {
 			Method method = model.getClass().getMethod("getModule", noparams);
 			module = (String) method.invoke(model, null);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SodaliteLogger.log(e);
 		}
 		return module;
 	}

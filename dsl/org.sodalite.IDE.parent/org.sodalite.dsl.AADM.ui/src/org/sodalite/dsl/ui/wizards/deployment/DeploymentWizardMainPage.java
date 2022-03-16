@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.StringTokenizer;
@@ -33,14 +34,15 @@ import org.sodalite.dsl.ui.helper.AADMHelper.InputDef;
 import org.sodalite.ide.ui.logger.SodaliteLogger;
 
 public class DeploymentWizardMainPage extends WizardPage {
-	private Composite container;
 	private SortedMap<String, InputDef> inputDefs;
-	private Map<String, Text> inputWidgets = new HashMap<>();
+	private Map<String, InputWidget> inputWidgets = new HashMap<>();
 	private Path imageBuildConfPath = null;
 	private Spinner workersSpinner = null;
 	private Text versionTagText = null;
 	private Text deploymentNameText = null;
 	private Button completeModelCB = null;
+	private Button validateNiFiCertsCB = null;
+	private Button useDMCB = null;
 
 	protected DeploymentWizardMainPage(SortedMap<String, InputDef> inputDefs) {
 		super("AADM Deployment");
@@ -73,18 +75,29 @@ public class DeploymentWizardMainPage extends WizardPage {
 		Map<String, String> inputs = new HashMap<>();
 		for (String key : inputWidgets.keySet()) {
 			String type = inputDefs.get(key).getType();
-			String value = inputWidgets.get(key).getText();
-			if (type != null && (type.contains("map") || type.contains("list")))
-				value = "\n" + value;
+			boolean get_secret_checked = inputWidgets.get(key).getGetSecretCheckBox().getSelection();
+			String value = inputWidgets.get(key).getInputText().getText();
+			if (get_secret_checked) {
+				key = "_get_secret_" + key;
+			} else {
+				if (type != null && (type.contains("map") || type.contains("list")))
+					value = "\n" + value;
+			}
 			inputs.put(key, value);
 		}
 		return inputs;
-//		return inputWidgets.entrySet().stream()
-//				.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
 	}
 
 	public boolean getCompleteModel() {
 		return this.completeModelCB.getSelection();
+	}
+
+	public boolean getValidateNiFiCerts() {
+		return this.validateNiFiCertsCB.getSelection();
+	}
+
+	public boolean getUseDataManagement() {
+		return this.useDMCB.getSelection();
 	}
 
 	@Override
@@ -144,18 +157,13 @@ public class DeploymentWizardMainPage extends WizardPage {
 		Label imageBuildConfLabel = new Label(containerMain, SWT.NONE);
 		imageBuildConfLabel.setText("Select a image build configuration (optional):");
 
+		Button buttonSelectImageBuildConfFile = new Button(containerMain, SWT.PUSH);
+		buttonSelectImageBuildConfFile.setText("Select...");
+
 		Text imageBuildConfText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 		GridData imageBuildConfGridData = new GridData(GridData.FILL_HORIZONTAL);
 		imageBuildConfText.setLayoutData(imageBuildConfGridData);
 
-//		imageBuildConfText.addModifyListener(new ModifyListener() {
-//			public void modifyText(org.eclipse.swt.events.ModifyEvent e) {
-//				getWizard().getContainer().updateButtons();
-//			};
-//		});
-
-		Button buttonSelectImageBuildConfFile = new Button(containerMain, SWT.PUSH);
-		buttonSelectImageBuildConfFile.setText("Select...");
 		buttonSelectImageBuildConfFile.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -183,21 +191,38 @@ public class DeploymentWizardMainPage extends WizardPage {
 		GridData completeModelGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		completeModelCB.setLayoutData(completeModelGridData);
 
+		// Use data management
+		Label useDM = new Label(containerMain, SWT.NONE);
+		useDM.setText("Use Data Management (optional):");
+		useDM.setToolTipText("Check if your AADM requires data management support with Apache NIFI");
+
+		useDMCB = new Button(containerMain, SWT.CHECK);
+		GridData useDMGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		useDMCB.setLayoutData(useDMGridData);
+
+		// Validate NIF Certificates
+		Label validateNiFiCerts = new Label(containerMain, SWT.NONE);
+		validateNiFiCerts.setText("Validate NIF Certificates (optional):");
+		validateNiFiCerts.setToolTipText(
+				"Whether SSL certificates for NIFI should be validated. For self-signed certificates it should be unchecked");
+
+		validateNiFiCertsCB = new Button(containerMain, SWT.CHECK);
+		GridData validateNiFiCertsGridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		validateNiFiCertsCB.setLayoutData(validateNiFiCertsGridData);
+
 		// Inputs file
 		if (this.inputDefs != null && !this.inputDefs.isEmpty()) {
 			Label inputsFileLabel = new Label(containerMain, SWT.NONE);
 			inputsFileLabel.setText("Select an inputs file:");
 
+			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
+			buttonSelectFile.setText("Select...");
+
 			Text inputsFileText = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
 			GridData inputsFileGridData = new GridData(GridData.FILL_HORIZONTAL);
 			inputsFileText.setLayoutData(inputsFileGridData);
 
-			Button buttonSelectFile = new Button(containerMain, SWT.PUSH);
-			buttonSelectFile.setText("Select...");
 			buttonSelectFile.addListener(SWT.Selection, new Listener() {
-				private String current_key = null;
-				private String current_value = null;
-
 				public void handleEvent(Event event) {
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 					FileDialog fileDialog = new FileDialog(shell, SWT.MULTI);
@@ -207,53 +232,76 @@ public class DeploymentWizardMainPage extends WizardPage {
 
 					String selectedInputFile = fileDialog.open();
 					if (selectedInputFile != null) {
-						System.out.println("Selected inputs file: " + selectedInputFile);
 						inputsFileText.setText(selectedInputFile);
 						File file = new File(selectedInputFile);
 						// Read inputs from file
 						try (Stream<String> lines = Files.lines(file.toPath())) {
-							lines.forEach(
-									// Assign inputs values in wizard form
-									input -> processInput(input));
+							// If line ends with : process following lines as map
+							Iterator<String> iter = lines.iterator();
+							if (iter.hasNext()) {
+								processInput(iter.next(), iter);
+							}
 						} catch (IOException e) {
 							SodaliteLogger.log("Error", e);
 						}
 					}
 				}
 
-				private Object processInput(String input) {
-					if (input.isEmpty())
-						return input;
-					StringTokenizer st = new StringTokenizer(input, ":");
+				private void processInput(String line, Iterator<String> iter) {
+					if (!line.trim().endsWith(":")) { // key:value entry
+						processSingleInput(line, iter);
+					} else { // map entry
+						processMapInput(line, iter);
+					}
+				}
+
+				private void processMapInput(String line, Iterator<String> iter) {
+					StringTokenizer st = new StringTokenizer(line, ":");
+					String input_name = st.nextToken();
+					String input_value = "";
+					String childLine = null;
+
+					childLine = iter.next();
+					while (childLine != null && childLine.startsWith(" ")) {
+						input_value += childLine + "\n";
+						if (iter.hasNext())
+							childLine = iter.next();
+						else
+							childLine = null;
+					}
+
+					if (inputDefs.keySet().contains(input_name)) {
+						String input_key = input_name;
+						// Remove empty line
+						if (input_value.endsWith("\n"))
+							input_value = input_value.substring(0, input_value.length() - 1);
+						inputWidgets.get(input_key).getInputText().setText(input_value);
+					}
+
+					if (childLine != null)
+						processInput(childLine, iter);
+				}
+
+				private void processSingleInput(String line, Iterator<String> iter) {
+					if (line.isEmpty())
+						return;
+					StringTokenizer st = new StringTokenizer(line, ":");
 					String input_name = st.nextToken();
 					if (inputDefs.keySet().contains(input_name)) {
-						current_key = input_name;
-						if (st.hasMoreTokens()) {
-							String input_value = st.nextToken();
-							while (st.hasMoreTokens())
-								input_value += ":" + st.nextToken();
-							inputWidgets.get(current_key).setText(input_value);
-						}
+						String input_key = input_name;
+						String input_value = st.nextToken();
+						inputWidgets.get(input_key).getInputText().setText(input_value);
 					}
-//					else {
-//						if (st.hasMoreTokens()) {
-//							String input_value = st.nextToken();
-//							while (st.hasMoreTokens())
-//								input_value += ":" + st.nextToken();
-//							current_value = inputWidgets.get(current_key).getText();
-//
-//							inputWidgets.get(current_key)
-//									.setText(current_value + input_name + ":" + input_value + "\n");
-//						}
-//					}
 
-					return input;
+					if (iter.hasNext()) {
+						processInput(iter.next(), iter);
+					}
 				}
 			});
 
 			// Separator
 			Label separator = new Label(containerMain, SWT.SEPARATOR | SWT.HORIZONTAL);
-			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
 			separator.setLayoutData(data);
 
 			// Inputs
@@ -263,13 +311,29 @@ public class DeploymentWizardMainPage extends WizardPage {
 			Font font = new Font(containerMain.getDisplay(),
 					new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
 			inputsLabel.setFont(font);
-			data = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
+			data = new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1);
 			inputsLabel.setLayoutData(data);
+
+			Label getSecretLabel = new Label(containerMain, SWT.NONE);
+			getSecretLabel.setText("Get secret");
+			fontData = getSecretLabel.getFont().getFontData()[0];
+			font = new Font(containerMain.getDisplay(),
+					new FontData(fontData.getName(), fontData.getHeight(), SWT.BOLD));
+			getSecretLabel.setFont(font);
+			data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
+			getSecretLabel.setLayoutData(data);
 
 			for (String input : inputDefs.keySet()) {
 				// Label
 				Label label = new Label(containerMain, SWT.NONE);
 				label.setText(input);
+
+				// Get Secret checkbox
+				Button getSecretCB = new Button(containerMain, SWT.CHECK);
+				getSecretCB.setToolTipText(
+						"Check if input value should be retrieved by the orchestrator from the secret store for given value");
+				GridData getSecretGridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+				getSecretCB.setLayoutData(getSecretGridData);
 
 				// Text
 				Text text = null;
@@ -277,12 +341,12 @@ public class DeploymentWizardMainPage extends WizardPage {
 				if (inputType != null && (inputType.contains("map") || inputType.contains("list"))) {
 					int number_lines = 5;
 					text = new Text(containerMain, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
-					GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+					GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 					gridData.heightHint = number_lines * text.getLineHeight();
 					text.setLayoutData(gridData);
 				} else {
 					text = new Text(containerMain, SWT.BORDER | SWT.SINGLE);
-					GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+					GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 					text.setLayoutData(gd);
 				}
 				text.setText("");
@@ -293,7 +357,7 @@ public class DeploymentWizardMainPage extends WizardPage {
 					};
 				});
 
-				inputWidgets.put(input, text);
+				inputWidgets.put(input, new InputWidget(text, getSecretCB));
 			}
 		}
 
@@ -301,4 +365,22 @@ public class DeploymentWizardMainPage extends WizardPage {
 		setPageComplete(false);
 	}
 
+}
+
+class InputWidget {
+	Text inputText;
+	Button getSecretCheckBox;
+
+	public InputWidget(Text inputText, Button getSecretCheckBox) {
+		this.inputText = inputText;
+		this.getSecretCheckBox = getSecretCheckBox;
+	}
+
+	public Text getInputText() {
+		return inputText;
+	}
+
+	public Button getGetSecretCheckBox() {
+		return getSecretCheckBox;
+	}
 }

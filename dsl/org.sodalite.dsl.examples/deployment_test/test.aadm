@@ -22,6 +22,8 @@ inputs:
 		type: string
 	username:
 		type: string
+	env:
+		type: map
 		
 node_templates:
 	
@@ -35,6 +37,7 @@ node_templates:
 			security_groups: get_input: security-groups
 			flavor: get_input: flavor-name
 			username: get_input: username
+			env: get_input: env
 			
 	docker-host:
 		type: docker/sodalite.nodes.DockerHost

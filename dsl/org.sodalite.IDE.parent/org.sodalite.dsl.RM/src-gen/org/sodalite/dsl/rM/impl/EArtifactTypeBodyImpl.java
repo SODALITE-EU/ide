@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.sodalite.dsl.rM.EArtifactTypeBody;
+import org.sodalite.dsl.rM.ELIST;
 import org.sodalite.dsl.rM.EPREFIX_TYPE;
+import org.sodalite.dsl.rM.EProperties;
 import org.sodalite.dsl.rM.RMPackage;
 
 /**
@@ -28,6 +30,7 @@ import org.sodalite.dsl.rM.RMPackage;
  *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeBodyImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeBodyImpl#getMime_type <em>Mime type</em>}</li>
  *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeBodyImpl#getFile_ext <em>File ext</em>}</li>
+ *   <li>{@link org.sodalite.dsl.rM.impl.EArtifactTypeBodyImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @generated
@@ -85,24 +88,24 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
   protected String mime_type = MIME_TYPE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getFile_ext() <em>File ext</em>}' attribute.
+   * The cached value of the '{@link #getFile_ext() <em>File ext</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getFile_ext()
    * @generated
    * @ordered
    */
-  protected static final String FILE_EXT_EDEFAULT = null;
+  protected ELIST file_ext;
 
   /**
-   * The cached value of the '{@link #getFile_ext() <em>File ext</em>}' attribute.
+   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFile_ext()
+   * @see #getProperties()
    * @generated
    * @ordered
    */
-  protected String file_ext = FILE_EXT_EDEFAULT;
+  protected EProperties properties;
 
   /**
    * <!-- begin-user-doc -->
@@ -231,7 +234,7 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public String getFile_ext()
+  public ELIST getFile_ext()
   {
     return file_ext;
   }
@@ -241,13 +244,88 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setFile_ext(String newFile_ext)
+  public NotificationChain basicSetFile_ext(ELIST newFile_ext, NotificationChain msgs)
   {
-    String oldFile_ext = file_ext;
+    ELIST oldFile_ext = file_ext;
     file_ext = newFile_ext;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT, oldFile_ext, file_ext));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT, oldFile_ext, newFile_ext);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setFile_ext(ELIST newFile_ext)
+  {
+    if (newFile_ext != file_ext)
+    {
+      NotificationChain msgs = null;
+      if (file_ext != null)
+        msgs = ((InternalEObject)file_ext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT, null, msgs);
+      if (newFile_ext != null)
+        msgs = ((InternalEObject)newFile_ext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT, null, msgs);
+      msgs = basicSetFile_ext(newFile_ext, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT, newFile_ext, newFile_ext));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EProperties getProperties()
+  {
+    return properties;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetProperties(EProperties newProperties, NotificationChain msgs)
+  {
+    EProperties oldProperties = properties;
+    properties = newProperties;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES, oldProperties, newProperties);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setProperties(EProperties newProperties)
+  {
+    if (newProperties != properties)
+    {
+      NotificationChain msgs = null;
+      if (properties != null)
+        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES, null, msgs);
+      if (newProperties != null)
+        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES, null, msgs);
+      msgs = basicSetProperties(newProperties, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES, newProperties, newProperties));
   }
 
   /**
@@ -262,6 +340,10 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     {
       case RMPackage.EARTIFACT_TYPE_BODY__SUPER_TYPE:
         return basicSetSuperType(null, msgs);
+      case RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT:
+        return basicSetFile_ext(null, msgs);
+      case RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES:
+        return basicSetProperties(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -284,6 +366,8 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
         return getMime_type();
       case RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT:
         return getFile_ext();
+      case RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES:
+        return getProperties();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -308,7 +392,10 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
         setMime_type((String)newValue);
         return;
       case RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT:
-        setFile_ext((String)newValue);
+        setFile_ext((ELIST)newValue);
+        return;
+      case RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES:
+        setProperties((EProperties)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -334,7 +421,10 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
         setMime_type(MIME_TYPE_EDEFAULT);
         return;
       case RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT:
-        setFile_ext(FILE_EXT_EDEFAULT);
+        setFile_ext((ELIST)null);
+        return;
+      case RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES:
+        setProperties((EProperties)null);
         return;
     }
     super.eUnset(featureID);
@@ -357,7 +447,9 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
       case RMPackage.EARTIFACT_TYPE_BODY__MIME_TYPE:
         return MIME_TYPE_EDEFAULT == null ? mime_type != null : !MIME_TYPE_EDEFAULT.equals(mime_type);
       case RMPackage.EARTIFACT_TYPE_BODY__FILE_EXT:
-        return FILE_EXT_EDEFAULT == null ? file_ext != null : !FILE_EXT_EDEFAULT.equals(file_ext);
+        return file_ext != null;
+      case RMPackage.EARTIFACT_TYPE_BODY__PROPERTIES:
+        return properties != null;
     }
     return super.eIsSet(featureID);
   }
@@ -377,8 +469,6 @@ public class EArtifactTypeBodyImpl extends MinimalEObjectImpl.Container implemen
     result.append(description);
     result.append(", mime_type: ");
     result.append(mime_type);
-    result.append(", file_ext: ");
-    result.append(file_ext);
     result.append(')');
     return result.toString();
   }

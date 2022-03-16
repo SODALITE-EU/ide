@@ -1,5 +1,8 @@
 package org.sodalite.ide.ui.views.parts.kb;
 
+import java.util.Base64;
+import java.util.LinkedHashMap;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -8,8 +11,10 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -36,9 +41,13 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
+import org.sodalite.dsl.kb_reasoner_client.types.ImplementationData;
+import org.sodalite.dsl.kb_reasoner_client.types.InterfaceDefinition;
 import org.sodalite.dsl.kb_reasoner_client.types.Model;
 import org.sodalite.dsl.kb_reasoner_client.types.ModelData;
 import org.sodalite.dsl.kb_reasoner_client.types.ModuleData;
+import org.sodalite.dsl.kb_reasoner_client.types.NodeType;
+import org.sodalite.dsl.kb_reasoner_client.types.OperationData;
 import org.sodalite.dsl.ui.backend.RMBackendProxy;
 import org.sodalite.dsl.ui.helper.RMHelper;
 import org.sodalite.ide.ui.helper.UIHelper;
@@ -415,6 +424,7 @@ public class KBView {
 						if (node.getModel().getName().endsWith(".rm")) {
 							json = RMBackendProxy.getKBReasoner().getRM(node.getModel().getUri().toString());
 							model = JsonSerializer.serializeRMfromJson(json);
+							
 						} else if (node.getModel().getName().endsWith(".aadm")) {
 							// TODO manage version if required
 							String version = null;
@@ -428,6 +438,7 @@ public class KBView {
 							throw new SodaliteException("DSL could not be generated from JSON representation");
 					} else {
 						saveFileInFolderInUIThread(node.getModel().getDsl(), targetFolder, name, true);
+						saveAnsibleFilesInFolderInUIThread(node,targetFolder);
 					}
 
 				} catch (Exception e) {
@@ -496,6 +507,68 @@ public class KBView {
 			}
 		});
 	}
+	
+	private void saveAnsibleFilesInFolderInUIThread(ModelNode node, IContainer targetFolder) {
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					boolean ansibleConfirmed = MessageDialog.openConfirm(shell,
+							"Ansible files",
+							"Do you want to retrieve model's Ansible files?");
+					//Retrieve the Ansible files related to the selected RM in the local project directory
+					if(ansibleConfirmed) {
+						String rmName = node.getLabel();
+						rmName = rmName.split("\\.")[0];
+						IContainer ansibleFolder =  targetFolder.getFolder(new Path(rmName+"-Ansible files"));
+						try {
+							RMHelper.createFolder(ansibleFolder, true, true, null);
+						} catch (CoreException e) {
+							SodaliteLogger.log(e);
+						}
+						for(String nodeKey : node.getModel().getNodeTypes().keySet()) {
+							NodeType ansibleNode = node.getModel().getNodeTypes().get(nodeKey);
+							int nodeIndex = nodeKey.lastIndexOf("/");
+							IContainer nodeFolder = ansibleFolder.getFolder(new Path(nodeKey.substring(nodeIndex+1)));
+							for(LinkedHashMap<String, InterfaceDefinition> map:ansibleNode.getInterfaces()) {
+								for(InterfaceDefinition inter:map.values()) {
+									String interfaceName = inter.getType().getLabel();
+									int interfaceIndex = interfaceName.lastIndexOf(".");
+									IContainer interfaceFolder = nodeFolder.getFolder(new Path(interfaceName.substring(interfaceIndex+1)));
+									try {
+										RMHelper.createFolder(interfaceFolder, true, true, null);
+									} catch (CoreException e) {
+										SodaliteLogger.log(e);
+									}
+									for(OperationData operation:inter.getOperations_in_interface()) {
+										String operationName = operation.getOperation_name();
+										if(operation.getImplementationData()!=null) {
+											ImplementationData ansibleData = operation.getImplementationData();
+											if(ansibleData.getAnsibleModel()!=null) {
+												byte[] decodedBytes = Base64.getDecoder().decode(ansibleData.getAnsibleModel());
+												String decodedAnsibleModel = new String(decodedBytes);
+												RMHelper.saveFileInFolder(operationName+".ans", decodedAnsibleModel, interfaceFolder);
+											}
+											else if(ansibleData.getAnsibleModel()==null && ansibleData.getAnsibleScript()!=null) {
+												byte[] decodedBytes = Base64.getDecoder().decode(ansibleData.getAnsibleScript());
+												String decodedAnsibleScript = new String(decodedBytes);
+												RMHelper.saveFileInFolder(operationName+".yaml", decodedAnsibleScript, interfaceFolder);
+											}
+										}
+									}
+								}
+							}
+							
+						}
+					}
+				} catch (Exception e) {
+					SodaliteLogger.log(e);
+					MessageDialog.openError(shell, "Retrieve Ansible models", "Ansible models "
+							+ " could not be saved into your workspace\nPlease, contact Sodalite administrator");
+				}
+			}
+		});
+	}
 
 	private void retrieveModelsInModule(TreeNode<ModelNode> tn, ModelNode node) {
 		// Get models in module
@@ -505,8 +578,8 @@ public class KBView {
 		IContainer root = RMHelper.getWorkspaceRoot();
 		String msg = "Select a workspace folder where to upload the models of the selected module";
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(shell, root, false, msg);
-		int return_code = dialog.open();
-		if (return_code == ContainerSelectionDialog.OK) {
+		int returnCode = dialog.open();
+		if (returnCode == ContainerSelectionDialog.OK) {
 			Job job = Job.create("Retrieving model", (ICoreRunnable) monitor -> {
 				try {
 					ModelData modelData = null;

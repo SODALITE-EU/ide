@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EMultiLineExpression extends EStringPassed
+public interface EMultiLineExpression extends EStringWithoutQuotesPassed, EStringPassed
 {
   /**
    * Returns the value of the '<em><b>New line command</b></em>' attribute.

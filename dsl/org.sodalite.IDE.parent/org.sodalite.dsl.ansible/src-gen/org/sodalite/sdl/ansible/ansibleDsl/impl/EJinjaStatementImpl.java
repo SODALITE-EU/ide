@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.sodalite.sdl.ansible.ansibleDsl.AnsibleDslPackage;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanAnsible;
 import org.sodalite.sdl.ansible.ansibleDsl.EBooleanPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.ECollectionListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.EDictionaryPassed;
+import org.sodalite.sdl.ansible.ansibleDsl.EJinjaOrStringWithoutQuotes;
 import org.sodalite.sdl.ansible.ansibleDsl.EJinjaStatement;
 import org.sodalite.sdl.ansible.ansibleDsl.EListPassed;
 import org.sodalite.sdl.ansible.ansibleDsl.ENumber;
@@ -29,6 +31,7 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl#getStringWithoutQuotes <em>String Without Quotes</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl#getNumber_passed <em>Number passed</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl#getNumber_passed_null <em>Number passed null</em>}</li>
  *   <li>{@link org.sodalite.sdl.ansible.ansibleDsl.impl.EJinjaStatementImpl#getBoolean_passed <em>Boolean passed</em>}</li>
@@ -41,6 +44,26 @@ import org.sodalite.sdl.ansible.ansibleDsl.EValuePassed;
  */
 public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaStatement
 {
+  /**
+   * The default value of the '{@link #getStringWithoutQuotes() <em>String Without Quotes</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStringWithoutQuotes()
+   * @generated
+   * @ordered
+   */
+  protected static final String STRING_WITHOUT_QUOTES_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getStringWithoutQuotes() <em>String Without Quotes</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStringWithoutQuotes()
+   * @generated
+   * @ordered
+   */
+  protected String stringWithoutQuotes = STRING_WITHOUT_QUOTES_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getNumber_passed() <em>Number passed</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -150,6 +173,31 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   protected EClass eStaticClass()
   {
     return AnsibleDslPackage.Literals.EJINJA_STATEMENT;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getStringWithoutQuotes()
+  {
+    return stringWithoutQuotes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setStringWithoutQuotes(String newStringWithoutQuotes)
+  {
+    String oldStringWithoutQuotes = stringWithoutQuotes;
+    stringWithoutQuotes = newStringWithoutQuotes;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES, oldStringWithoutQuotes, stringWithoutQuotes));
   }
 
   /**
@@ -407,6 +455,8 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES:
+        return getStringWithoutQuotes();
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED:
         return getNumber_passed();
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED_NULL:
@@ -433,6 +483,9 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES:
+        setStringWithoutQuotes((String)newValue);
+        return;
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED:
         setNumber_passed((ENumber)newValue);
         return;
@@ -465,6 +518,9 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES:
+        setStringWithoutQuotes(STRING_WITHOUT_QUOTES_EDEFAULT);
+        return;
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED:
         setNumber_passed((ENumber)null);
         return;
@@ -497,6 +553,8 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   {
     switch (featureID)
     {
+      case AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES:
+        return STRING_WITHOUT_QUOTES_EDEFAULT == null ? stringWithoutQuotes != null : !STRING_WITHOUT_QUOTES_EDEFAULT.equals(stringWithoutQuotes);
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED:
         return number_passed != null;
       case AnsibleDslPackage.EJINJA_STATEMENT__NUMBER_PASSED_NULL:
@@ -521,6 +579,21 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
+    if (baseClass == EJinjaOrStringWithoutQuotes.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES: return AnsibleDslPackage.EJINJA_OR_STRING_WITHOUT_QUOTES__STRING_WITHOUT_QUOTES;
+        default: return -1;
+      }
+    }
+    if (baseClass == ECollectionListPassed.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == EDictionaryPassed.class)
     {
       switch (derivedFeatureID)
@@ -564,6 +637,21 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
+    if (baseClass == EJinjaOrStringWithoutQuotes.class)
+    {
+      switch (baseFeatureID)
+      {
+        case AnsibleDslPackage.EJINJA_OR_STRING_WITHOUT_QUOTES__STRING_WITHOUT_QUOTES: return AnsibleDslPackage.EJINJA_STATEMENT__STRING_WITHOUT_QUOTES;
+        default: return -1;
+      }
+    }
+    if (baseClass == ECollectionListPassed.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == EDictionaryPassed.class)
     {
       switch (baseFeatureID)
@@ -610,7 +698,9 @@ public class EJinjaStatementImpl extends EJinjaOrStringImpl implements EJinjaSta
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (number_passed_null: ");
+    result.append(" (stringWithoutQuotes: ");
+    result.append(stringWithoutQuotes);
+    result.append(", number_passed_null: ");
     result.append(number_passed_null);
     result.append(", boolean_passed_null: ");
     result.append(boolean_passed_null);
