@@ -94,6 +94,7 @@
 						input_text.type = "text";
 					} else {
 						var input_text = document.createElement("textarea");
+						input_text.form = "depl_form"
 						input_text.rows = 5;
 					}
 					input_text.name = input;
@@ -135,8 +136,12 @@
 				var div_inputs = document.querySelector('div[id="inputs"]');
 				for (var i=0; i<div_inputs.childNodes.length; i++){
 					input_element = div_inputs.childNodes[i];
-					if (input_element instanceof HTMLInputElement && (input_element.type == 'text' || input_element.type == 'textarea')){ //check input text
-						inputs += input_element.name + ": " + input_element.value + ";";
+					if ((input_element instanceof HTMLInputElement && input_element.type == 'text') || input_element.type == 'textarea'){ //check input text
+						value = processInputValue(input_element.value)
+						if (value.includes("%0A"))
+							inputs += input_element.name + ": %0A" + value + ";";
+						else
+							inputs += input_element.name + ": " + value + ";";
 					}
 				}
 				if (inputs != "")
@@ -144,6 +149,10 @@
 				editor.xtextServices.deploy(query);
 				$('.center').hide();
 			} );
+		}
+		
+		function processInputValue(value){
+			return value.replace(/\n/g, "%0A");
 		}
 		
 		function increase_worker() {

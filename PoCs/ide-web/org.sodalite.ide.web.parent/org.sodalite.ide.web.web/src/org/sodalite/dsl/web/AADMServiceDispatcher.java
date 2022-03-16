@@ -1,5 +1,6 @@
 package org.sodalite.dsl.web;
 
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import org.eclipse.xtext.web.server.IServiceContext;
@@ -62,7 +63,30 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 		}
 		return super.createServiceDescriptor(serviceType, context);
 	}
-	
+
+	private Object processInput(String entry) {
+		entry = entry.replaceAll(": ", ":");
+		StringBuffer sb = new StringBuffer();
+		StringTokenizer st = new StringTokenizer(entry, " ");
+		int tabs = 0;
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			appendTabs(sb, tabs);
+			if (token.endsWith(":")) {
+				sb.append(token).append("\n");
+				tabs++;
+			} else {
+				sb.append(token.replaceAll(":", ": ")).append("\n");
+			}
+		}
+		return sb.toString();
+	}
+
+	private void appendTabs(StringBuffer sb, int tabs) {
+		for (int i=0; i<tabs; i++)
+			sb.append("  ");
+	}
+
 	protected ServiceDescriptor getSaveAADMService(IServiceContext context) throws InvalidRequestException {
 		XtextWebDocumentAccess document = getDocumentAccess(context);
 		ServiceDescriptor serviceDescriptor = new ServiceDescriptor();
