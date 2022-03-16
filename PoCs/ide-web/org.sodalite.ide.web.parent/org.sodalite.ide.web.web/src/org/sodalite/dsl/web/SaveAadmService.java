@@ -45,7 +45,7 @@ public class SaveAadmService {
 					// Save AADM into the KB
 					String aadmDSL = it.getText();
 					String aadmURI = null;
-					String name = it.getResourceId().replace(".aadm", "");
+					String name = it.getResourceId();
 					String namespace = null;
 					try {
 						Pattern p = Pattern.compile("(?<=module:).*");
@@ -56,7 +56,7 @@ public class SaveAadmService {
 					} catch (Exception e) {
 						//namespace not found
 					}
-					String version = null;
+					String version = "";
 					aadmURI = SodaliteBackendProxy.saveAADM(ttl, aadmDSL, aadmURI, name, namespace, version);
 					return new DocumentStateResult(aadmURI);
 				} catch (IOException ioe) {
