@@ -129,7 +129,20 @@ a:hover {
 }
 
 input[type="text"]#form_text{
-	width: 50%
+	width: 70%
+}
+
+#form_text {
+  width: 70%;
+  resize: vertical;
+}
+
+#inputs {
+  text-align: end;
+}
+
+.formfield * {
+  vertical-align: middle;
 }
 
 .button {

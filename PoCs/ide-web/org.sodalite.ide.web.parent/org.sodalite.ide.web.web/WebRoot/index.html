@@ -71,10 +71,15 @@
 				let regexp2 = /([\w-]+):/g;
 				let iter = inputs_block.matchAll(regexp2);
 				let result = Array.from(iter);
-				for (key in result){
-					if (result[key][1] != "type" && result[key][1] != "default")
-						inputs.push(result[key][1]);
-				}
+				_inputs = result[0]["input"].split(/(\s+)/);
+				_inputs = _inputs.map(element => {
+				  return element.trim();
+				});
+				_inputs = _inputs.filter(e => e);
+				
+				var inputs = {}
+				for (i=0; i<_inputs.length; i+=3)
+					inputs[_inputs[i].slice(0, -1)] = _inputs[i + 2];
 			}	
 
 			// Populate AADM inputs in form
@@ -82,17 +87,22 @@
 			div_inputs.innerHTML = '';
 			if (div_inputs != null && div_inputs.childElementCount == 0){
 				var br = document.createElement("br");
-				for (var i=0; i<inputs.length; i++){
-					let input_label = document.createTextNode(inputs[i].concat(':'));
+				Object.entries(inputs).forEach(([input, type]) => {
+					let input_label = document.createTextNode(input.concat(':'));
 					var input_text = document.createElement("input");
-					input_text.type = "text";
-					input_text.name = inputs[i];
+					if (type != "map"){
+						input_text.type = "text";
+					} else {
+						var input_text = document.createElement("textarea");
+						input_text.rows = 5;
+					}
+					input_text.name = input;
 					input_text.id = "form_text";
 					input_text.value = "";
 					div_inputs.appendChild(input_label);
 					div_inputs.appendChild(input_text);
 					div_inputs.appendChild(br.cloneNode());
-				}
+				});
 			}
 			
 			const form = document.getElementById( "depl_form" );
@@ -125,7 +135,7 @@
 				var div_inputs = document.querySelector('div[id="inputs"]');
 				for (var i=0; i<div_inputs.childNodes.length; i++){
 					input_element = div_inputs.childNodes[i];
-					if (input_element instanceof HTMLInputElement && input_element.type == 'text'){ //check input text
+					if (input_element instanceof HTMLInputElement && (input_element.type == 'text' || input_element.type == 'textarea')){ //check input text
 						inputs += input_element.name + ": " + input_element.value + ";";
 					}
 				}
@@ -218,22 +228,61 @@ inputsfileField.addEventListener('change', (event) => {
       inputsFileContent = event.target.result;
       // Populate form with inputs values
       const inputs = inputsFileContent.split('\n');
-      for (var i=0; i<inputs.length; i++){
-    	  const input_entry = inputs[i];
-    	  if (input_entry != ""){
-	    	  const input_pair = input_entry.split(':');
-	    	  const input_key = input_pair[0];
-	    	  const input_value = input_pair[1].trim();
-	    	  //Find input field by name, set its value
-	    	  const input_field = document.querySelector('input[name="'.concat(input_key).concat('"]'));
-	    	  if (input_field != null){
-	    		  input_field.value = input_value;
-	    	  }
-    	  }
-      }
+      inputs.forEach(processInput);
     });
     reader.readAsText(inputsfile);
 });
+
+function processInput(line, index, lines) {
+	if (!line.trim().endsWith(":")) { // key:value entry
+		processSingleInput(line, index, lines);
+	} else { // map entry
+		processMapInput(line, index, lines);
+	}
+}
+
+function processMapInput(line, index, lines) {
+	st = line.split(':');
+	input_key = st[0];
+	input_value = "";
+	childLine = null;
+
+	childLine = lines[++index];
+	while (childLine != null && childLine.startsWith(" ")) {
+		input_value += childLine + "\n";
+		if (++index < lines.length)
+			childLine = lines[index];
+		else
+			childLine = null;
+	}
+	
+	const input_field = document.querySelector('textarea[name="'.concat(input_key).concat('"]'));
+  	if (input_field != null){
+  		if (input_value.endsWith("\n")){
+			input_value = input_value.substring(0, input_value.length - 1);
+  		}
+		input_field.value = input_value;
+  	}
+
+	if (!childLine)
+		processInput(childLine, index, lines);
+}
+
+function processSingleInput(line, index, lines) {
+	if (!line)
+		return;
+	st = line.split(':');
+	input_key = st[0];
+	input_value = st[1]
+	const input_field = document.querySelector('input[name="'.concat(input_key).concat('"]'));
+  	if (input_field != null){
+		input_field.value = input_value;
+  	}
+
+	if (++index < lines.length) {
+		processInput(lines[index], index, lines);
+	}
+}
 
 const ibfileField = document.querySelector('input[name="ibfilename"]');
 ibfileField.addEventListener('change', (event) => {
