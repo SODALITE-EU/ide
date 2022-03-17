@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.sodalite.dsl.kb_reasoner_client.KBReasonerClient;
 import org.sodalite.dsl.kb_reasoner_client.exceptions.NotRolePermissionException;
+import org.sodalite.dsl.kb_reasoner_client.exceptions.SodaliteException;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageReport;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatus;
 import org.sodalite.dsl.kb_reasoner_client.types.BuildImageStatusReport;

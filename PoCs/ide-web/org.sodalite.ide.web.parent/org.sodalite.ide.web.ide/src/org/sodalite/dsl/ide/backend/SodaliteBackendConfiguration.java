@@ -23,10 +23,10 @@ public class SodaliteBackendConfiguration {
 	final public static String Consul_IP = "https://consul.public-testbed.sodalite.eu"; // Public TestBed
 
 //	final public static String Grafana_Registry_URI = "http://192.168.3.74:3001/"; // Private TestBed
-	final public static String Grafana_Registry_URI = "https://grafana-registry.public-testbed.sodalite.eu"; // Public TestBed
+	final public static String Grafana_Registry_URI = "https://grafana-registry.public-testbed.sodalite.eu/"; // Public TestBed
 
 //	final public static String Grafana_URI = "http://192.168.3.74:3000/"; // Private TestBed
-	final public static String Grafana_URI = "https://grafana.public-testbed.sodalite.eu"; // Public TestBed
+	final public static String Grafana_URI = "https://grafana.public-testbed.sodalite.eu/"; // Public TestBed
 
 	final public static String RulesServer_URI = "http://192.168.3.74:9092/";
 

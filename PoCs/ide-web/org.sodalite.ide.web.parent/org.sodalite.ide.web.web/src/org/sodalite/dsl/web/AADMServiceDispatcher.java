@@ -1,19 +1,15 @@
 package org.sodalite.dsl.web;
 
-import java.util.StringTokenizer;
 import java.util.UUID;
 
 import org.eclipse.xtext.web.server.IServiceContext;
-import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
-import org.eclipse.xtext.web.server.XtextServiceDispatcher.ServiceDescriptor;
 import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
-import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
 import org.sodalite.dsl.ide.backend.SodaliteBackendConfiguration;
-
+import org.sodalite.dsl.ide.backend.SodaliteBackendProxy;
 import com.google.inject.Inject;
 
 public class AADMServiceDispatcher extends XtextServiceDispatcher {
@@ -55,36 +51,19 @@ public class AADMServiceDispatcher extends XtextServiceDispatcher {
 					String grafana_address = String.format(grafana_template, grafana_uri, deployment_name);
 					inputs_yaml += "grafana_address: " + grafana_address + "\n";
 					String monitoring_id = UUID.randomUUID().toString();
-					inputs_yaml += "monitoring_id: " + monitoring_id;
+					inputs_yaml += "monitoring_id: " + monitoring_id + "\n";
+					try {
+						inputs_yaml += "jwt: " + SodaliteBackendProxy.getKBReasoner().getJWT();
+					} catch (Exception e) {
+						// FIXME Error should be reported up
+						e.printStackTrace();
+					} 
 					String username = SodaliteBackendConfiguration.KEYCLOAK_USER;
 					return getDeployAADMService(context, inputs_yaml, imageBuildConf, version_tag, 
 							workers, completeModel, deployment_name, monitoring_id, username);
 			}
 		}
 		return super.createServiceDescriptor(serviceType, context);
-	}
-
-	private Object processInput(String entry) {
-		entry = entry.replaceAll(": ", ":");
-		StringBuffer sb = new StringBuffer();
-		StringTokenizer st = new StringTokenizer(entry, " ");
-		int tabs = 0;
-		while (st.hasMoreTokens()) {
-			String token = st.nextToken();
-			appendTabs(sb, tabs);
-			if (token.endsWith(":")) {
-				sb.append(token).append("\n");
-				tabs++;
-			} else {
-				sb.append(token.replaceAll(":", ": ")).append("\n");
-			}
-		}
-		return sb.toString();
-	}
-
-	private void appendTabs(StringBuffer sb, int tabs) {
-		for (int i=0; i<tabs; i++)
-			sb.append("  ");
 	}
 
 	protected ServiceDescriptor getSaveAADMService(IServiceContext context) throws InvalidRequestException {
