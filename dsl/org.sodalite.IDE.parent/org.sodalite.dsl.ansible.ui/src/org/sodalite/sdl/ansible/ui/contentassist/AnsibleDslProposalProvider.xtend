@@ -1141,7 +1141,7 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		}
 		var FindIterable<Document> iterDoc
 		var String regex = "\\w+\\.\\w+" 
-		val module = EcoreUtil2.getContainerOfType(model,EModuleCall)
+		val module = EcoreUtil2.getContainerOfType(model,EModuleCallImpl)
 		var String namespace = ""
 		if (module !== null){
 			if(EcoreUtil2.getAllContentsOfType(module.firstPart,EJinjaOrStringWithoutQuotes).size >0){
@@ -1223,9 +1223,11 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 		// Getting the iterator
 		var Iterator<Document> it = ansible_collection.iterator();
 		while (it.hasNext()){
-			var modules = it.next().get("modules",typeof(Document)).keySet()
-			for(module:modules){
-				createNonEditableCompletionProposal(module, new StyledString(module.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn), acceptor)
+			var modules = it.next().get("modules",typeof(Document))
+			for(moduleName:modules.keySet()){
+				var Document module = modules.get(moduleName) as Document
+				var String description = module.get("description") as String
+				createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
 			}
 		}
 		

@@ -289,7 +289,7 @@ class AnsibleDslGenerator extends AbstractGenerator {
 			«space»environment: «compileValuePassed(base.environment, space, false)»
 		«ENDIF»
 		«IF base.collections !== null»
-			«space»collections: «compileCollectionListPassed(base.collections, space)»
+			«space»collections:«compileCollectionListPassed(base.collections, space)»
 		«ENDIF»
 		«IF base.tags !== null»
 			«space»tags: «compileListPassed(base.tags, space)»

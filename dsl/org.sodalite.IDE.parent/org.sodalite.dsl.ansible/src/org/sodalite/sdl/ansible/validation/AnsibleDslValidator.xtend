@@ -64,6 +64,7 @@ import org.json.JSONException
 import org.sodalite.ide.ui.logger.SodaliteLogger
 import org.sodalite.dsl.ansible.exceptions.MongoDBNotFound
 import java.util.Map
+import java.util.Collections
 
 /**
  * This class contains custom validation rules. 
@@ -363,9 +364,11 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	// Check if a parameter has the value type 
 	@Check
 	def checkParameterValueType(EParameter parameter) {
+		var MongoCollection<Document> mongo_collection
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
 		var String fqn
 		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();
 			fqn = AnsibleHelper.calculateModuleName(module)	
 		}
 		catch(MongoDBNotFound e){
@@ -376,9 +379,31 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			return
 		}
 		var collectionName = nameParts.get(0) + "." + nameParts.get(1)
-		var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
-			nameParts.get(2)) as Document
-		var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+		
+		var String projection = "modules".concat(".").concat(nameParts.get(2)).concat(".").concat("parameters").
+			concat(".").concat(parameter.name)
+		var Bson match = Aggregates.match(eq("_id", nameParts.get(0).concat(".").concat(nameParts.get(1))))
+		var Bson params_project = Aggregates.project(
+			Projections.fields(Projections.excludeId(),
+				Projections.computed("params", "$".concat(projection))))
+		var Iterator<Document> paramsIterator = mongo_collection.aggregate(Arrays.asList(match, params_project)).
+			iterator()
+		
+		var Document parameterData
+		if(paramsIterator.hasNext()){
+			parameterData = (paramsIterator.next as Document).get("params") as Document
+		}
+		else{
+			return
+		}
+		
+		
+		//var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
+		//	nameParts.get(2)) as Document
+		//var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+		
+		
+		
 		var List<String> booleanValues = Arrays.asList("True", "False", "true", "false", "yes", "no");
 		// type checking for integer values
 		if (parameterData.get("type").equals("integer") || parameterData.get("type").equals("int")) {
@@ -434,7 +459,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 				if (result.startsWith("[") && result.endsWith("]")) {
 					error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 				}
-				if (result.startsWith("{") && result.endsWith("}")) {
+				if (result.startsWith("{") && !result.startsWith("{{") && result.endsWith("}") && !result.endsWith("}}")) {
 					error("The value of the parameter is not string", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 				}
 			}
@@ -443,7 +468,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			}
 		}
 
-		if (parameterData.get("type").equals("list")) {
+		if ((parameterData.get("type") as String).contains("list")) {
 			if (parameter.value instanceof ESimpleValueWithoutStringImpl) {
 				error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 			}
@@ -453,7 +478,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			if (parameter.value instanceof EJinjaAndStringWithoutQuotesImpl ||
 				parameter.value instanceof EJinjaAndStringImpl) {
 				var result = AnsibleHelper.getEJinjaAndStringValue(parameter.value)
-				if (!(result.startsWith("[") && result.endsWith("]"))) {
+				if (!(result.startsWith("[") && result.endsWith("]")) && (!result.equals("interface_input") && !result.equals("operation_input"))) {
 					error("The value of the parameter is not list", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 				}
 			}
@@ -469,7 +494,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			if (parameter.value instanceof EJinjaAndStringWithoutQuotesImpl ||
 				parameter.value instanceof EJinjaAndStringImpl) {
 				var result = AnsibleHelper.getEJinjaAndStringValue(parameter.value)
-				if (!(result.startsWith("{") && result.endsWith("}"))) {
+				if (!(result.startsWith("{") && result.endsWith("}"))&& (!result.equals("interface_input") && !result.equals("operation_input"))) {
 					error("The value of the parameter is not dictionary", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 				}
 			}
@@ -482,7 +507,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			if (parameter.value instanceof EJinjaAndStringWithoutQuotesImpl ||
 				parameter.value instanceof EJinjaAndStringImpl) {
 				var result = AnsibleHelper.getEJinjaAndStringValue(parameter.value)
-				if (!result.matches("^/|(/[a-zA-Z0-9_-]+)+$")) {
+				if (!result.matches("^/|(/[a-zA-Z0-9._-]+)+$") && !result.matches("^\\\\|(\\\\[a-zA-Z0-9._-]+)+$")) {
 					error("The value of the parameter is not a path", AnsibleDslPackage.Literals.EPARAMETER__VALUE)
 				}
 			}
@@ -496,9 +521,11 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	// Check if a parameter name is correct 
 	@Check
 	def checkParameterName(EParameter parameter) {
+		var MongoCollection<Document> mongo_collection
 		var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
 		var String fqn
 		try{
+			mongo_collection = AnsibleHelper.getAnsibleCollections();
 			fqn = AnsibleHelper.calculateModuleName(module)	
 		}
 		catch(MongoDBNotFound e){
@@ -508,14 +535,43 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		if (nameParts.length != 3) {
 			return
 		}
-		var collectionName = nameParts.get(0) + "." + nameParts.get(1)
+		
+		var String projection = "modules".concat(".").concat(nameParts.get(2)).concat(".").concat("parameters").
+			concat(".").concat(parameter.name)
+		var Bson match = Aggregates.match(eq("_id", nameParts.get(0).concat(".").concat(nameParts.get(1))))
+		var Bson params_project = Aggregates.project(
+			Projections.fields(Projections.excludeId(),
+				Projections.computed("params", "$".concat(projection))))
+		var Iterator<Document> paramsIterator = mongo_collection.aggregate(Arrays.asList(match, params_project)).
+			iterator()
+		//var int count = 0;
+		if(paramsIterator.hasNext()){
+			var Document examinedMondule = paramsIterator.next
+			if(examinedMondule.size!==0){
+				return
+			}
+			else{
+			error("The parameter " + parameter.name + " is not included in module " + fqn,
+				AnsibleDslPackage.Literals.EPARAMETER__NAME)
+			}
+			
+		}
+		
+		//while (paramsIterator.hasNext()) {
+		//	count =count+1
+		//}
+		//if(count ==0){
+			
+		//}
+		
+		/*var collectionName = nameParts.get(0) + "." + nameParts.get(1)
 		var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
 			nameParts.get(2)) as Document
 		var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
 		if (parameterData === null) {
 			error("The parameter " + parameter.name + " is not included in module " + fqn,
 				AnsibleDslPackage.Literals.EPARAMETER__NAME)
-		}
+		} */
 	}
 
 	// Check if a subparameter has a value that is not allowed(based on 'choices' from documentation)
@@ -640,10 +696,12 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkSubparameterValueType(EDictionaryPair subparameter) {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
+			var MongoCollection<Document> mongo_collection
 			var EParameter parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
 			var String fqn
 			try{
+				mongo_collection = AnsibleHelper.getAnsibleCollections();
 				fqn = AnsibleHelper.calculateModuleName(module)	
 			}
 			catch(MongoDBNotFound e){
@@ -655,9 +713,31 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 				return;
 			}
 			var collectionName = nameParts.get(0) + "." + nameParts.get(1)
-			var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
-				nameParts.get(2)) as Document
-			var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+			//var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
+			//	nameParts.get(2)) as Document
+			//var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+			
+			
+			var String projection = "modules".concat(".").concat(nameParts.get(2)).concat(".").concat("parameters").
+			concat(".").concat(parameter.name)
+			var Bson match = Aggregates.match(eq("_id", nameParts.get(0).concat(".").concat(nameParts.get(1))))
+			var Bson params_project = Aggregates.project(
+				Projections.fields(Projections.excludeId(),
+					Projections.computed("params", "$".concat(projection))))
+			var Iterator<Document> paramsIterator = mongo_collection.aggregate(Arrays.asList(match, params_project)).
+			iterator()
+		
+			var Document parameterData
+			if(paramsIterator.hasNext()){
+				parameterData = (paramsIterator.next as Document).get("params") as Document
+			}
+			else{
+				return
+			}
+			
+			
+			
+			
 			var containers = EcoreUtil2.getAllContainers(subparameter).iterator()
 
 			var List<String> parameterPath = new ArrayList<String>()
@@ -814,10 +894,12 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 	@Check
 	def checkSubparameterName(EDictionaryPair subparameter) {
 		if (EcoreUtil2.getContainerOfType(subparameter, EParameter) !== null) {
+			var MongoCollection<Document> mongo_collection
 			var EParameter parameter = EcoreUtil2.getContainerOfType(subparameter, EParameter)
 			var module = EcoreUtil2.getContainerOfType(parameter, EModuleCall)
 			var String fqn
 			try{
+				mongo_collection = AnsibleHelper.getAnsibleCollections();
 				fqn = AnsibleHelper.calculateModuleName(module)	
 			}
 			catch(MongoDBNotFound e){
@@ -829,9 +911,29 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 				return;
 			}
 			var collectionName = nameParts.get(0) + "." + nameParts.get(1)
-			var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
-				nameParts.get(2)) as Document
-			var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+			//var Document moduleData = (AnsibleHelper.collectionData.get(collectionName).get("modules") as Document).get(
+			//	nameParts.get(2)) as Document
+			//var Document parameterData = (moduleData.get("parameters") as Document).get(parameter.name) as Document
+			
+			
+			var String projection = "modules".concat(".").concat(nameParts.get(2)).concat(".").concat("parameters").
+			concat(".").concat(parameter.name)
+			var Bson match = Aggregates.match(eq("_id", nameParts.get(0).concat(".").concat(nameParts.get(1))))
+			var Bson params_project = Aggregates.project(
+				Projections.fields(Projections.excludeId(),
+					Projections.computed("params", "$".concat(projection))))
+			var Iterator<Document> paramsIterator = mongo_collection.aggregate(Arrays.asList(match, params_project)).
+			iterator()
+		
+			var Document parameterData
+			if(paramsIterator.hasNext()){
+				parameterData = (paramsIterator.next as Document).get("params") as Document
+			}
+			else{
+				return
+			}
+			
+			
 			var containers = EcoreUtil2.getAllContainers(subparameter).iterator()
 
 			var List<String> parameterPath = new ArrayList<String>()
@@ -914,7 +1016,7 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		}
 	}
 
-	@Check
+	@Check(NORMAL)
 	def chechCodeSmells(Model o) {
 		var String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20",
 			" ")
@@ -934,16 +1036,41 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		var Scanner scriptScanner = new Scanner(script);
 		var int lineNr = 1;
 		var HashMap<Integer, String> tasksOrPlays = new HashMap<Integer, String>()
+		var List<Integer> PlaysOrtasksLinesNum = new ArrayList()
+		var int taskIndentation
 		// Find all Plays and Tasks in the Ansible script
 		while (scriptScanner.hasNextLine()) {
 			var String line = scriptScanner.nextLine();
+			var int indentationLevel;
+			var int characterCounter=0;
+			
+			//System.out.println(line.charAt(characterCounter))
+			if(line.length()>0){
+				while(Character.isWhitespace(line.charAt(characterCounter))  &&  characterCounter<line.length()){
+					indentationLevel++
+					characterCounter++
+				}
+				if(line.trim.startsWith("tasks:")){
+					taskIndentation = indentationLevel
+				}
+				if(indentationLevel == 0 && line.trim.startsWith("-")){
+					PlaysOrtasksLinesNum.add(lineNr)
+				}
+				if(indentationLevel == taskIndentation+2 && line.trim.startsWith("-")){
+					PlaysOrtasksLinesNum.add(lineNr)
+				}
+			}
+			
+			
+			//var int a = line.length() - line.replaceAll(" ", "").length();
 			if (line.contains("- name:") || line.contains("-name:")) {
 				tasksOrPlays.put(lineNr, line.split(":").get(1).trim)
 			}
 			lineNr++;
 		}
-		var List<Integer> tasksOrPlaysLinesNum = tasksOrPlays.keySet.stream.collect(Collectors.toList)
-
+		//var List<Integer> tasksOrPlaysLinesNum = tasksOrPlays.keySet.stream.collect(Collectors.toList)
+		//Collections.sort(tasksOrPlaysLinesNum);
+		
 		// Receive bug report from Ansible defect predictor
 		var String boundary = "011000010111000001101001"
 		var CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -987,25 +1114,42 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 			var JSONObject bugDetails = bug.getJSONObject("bug_info")
 			var int bugLineNum = bugDetails.getInt("line_number")
 			var String bugDescription = bugDetails.getString("description")
-			var int index = AnsibleHelper.nearestTaskOrPlayBinarySearch(tasksOrPlaysLinesNum, 0,
-				tasksOrPlaysLinesNum.size - 1, bugLineNum)
+			var int index = AnsibleHelper.nearestTaskOrPlayBinarySearch(PlaysOrtasksLinesNum, 0,
+				PlaysOrtasksLinesNum.size - 1, bugLineNum)
 			if (index > bugLineNum) {
 				index = index - 1
 			}
-			var String name = tasksOrPlays.get(tasksOrPlaysLinesNum.get(index)).replace("\"", "").replace("\\s", "")
+			if(index == -1){
+				return
+			}
+			//var String name = tasksOrPlays.get(tasksOrPlaysLinesNum.get(index)).replace("\"", "").replace("\\s", "")
 			var Scanner modelScanner = new Scanner(ansibleModel);
 			var int offsetCounter = 1;
+			var int playOrTaskCounter = 0;
 			while (modelScanner.hasNextLine()) {
 				var String modelLine = modelScanner.nextLine()
-				if (modelLine.replace("\"", "").trim.replaceAll("\\s+", "").contains(
-					name.replace("\"", "").trim.replaceAll("\\s+", ""))) {
-					getMessageAcceptor.acceptWarning(
-						"In the context of \"" + name + "\" there is the following code smell: " + bugDescription, o,
-						offsetCounter, 1, null, null);
+				if(modelLine.trim.startsWith("play:") || modelLine.trim.startsWith("task_to_execute:")){
+					playOrTaskCounter++
+					if(playOrTaskCounter == index+1){
+						getMessageAcceptor.acceptWarning("There is the following code smell: " + bugDescription, o,
+						offsetCounter, 1, null, null	
+						);
+					}
 					offsetCounter = offsetCounter + modelLine.length + 1
-				} else {
+					
+				}
+				else{
 					offsetCounter = offsetCounter + modelLine.length + 1
 				}
+				//if (modelLine.replace("\"", "").trim.replaceAll("\\s+", "").contains(
+				//	name.replace("\"", "").trim.replaceAll("\\s+", "")) && (modelLine.contains("play_name:") || modelLine.contains("task_name:"))){
+				//	getMessageAcceptor.acceptWarning(
+				//		"In the context of \"" + name + "\" there is the following code smell: " + bugDescription, o,
+				//		offsetCounter, 1, null, null);
+				//	offsetCounter = offsetCounter + modelLine.length + 1
+				//} else {
+			//		offsetCounter = offsetCounter + modelLine.length + 1
+			//	}
 			}
 		}
 	}
