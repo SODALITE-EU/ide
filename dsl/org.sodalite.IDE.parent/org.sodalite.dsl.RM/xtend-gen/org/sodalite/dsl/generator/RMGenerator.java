@@ -269,10 +269,8 @@ public class RMGenerator extends AbstractGenerator {
         }
       }
     }
-    String intermediatePath = resource.getURI().toString().replaceAll("%20", " ").replace("platform:/resource", "");
-    String projectName_1 = (intermediatePath.split("/")[1]).replaceAll("%20", " ");
-    intermediatePath = intermediatePath.replace(("/" + projectName_1), "");
-    fsa.generateFile((intermediatePath + ".ttl"), CustomOutputConfigurationProvider.TURTLE_OUTPUT, this.compileRM(resource));
+    final String filename = this.getFilename(resource.getURI());
+    fsa.generateFile(filename.replaceAll("%20", " "), this.compileRM(resource));
   }
   
   public CharSequence compileAnsibleModel(final String nodeType, final String interfaceName, final String operationName) {
@@ -1493,7 +1491,7 @@ public class RMGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("  ");
         _builder.append("exchange:value \'");
-        String _readImplementationFileAsString = this.readImplementationFileAsString(o.getOperation().getImplementation().getPrimary().getFile(), o.getOperation().getImplementation().getPrimary().eResource());
+        String _readImplementationFileAsString = this.readImplementationFileAsString(o.getOperation().getImplementation().getPrimary().getFile(), o.getOperation().getImplementation().getPrimary().eResource(), o.getOperation().getImplementation().getPrimary().getRelative_path());
         _builder.append(_readImplementationFileAsString, "  ");
         _builder.append("\' ;");
         _builder.newLineIfNotEmpty();
@@ -1527,7 +1525,7 @@ public class RMGenerator extends AbstractGenerator {
           }
         }
         _builder.newLine();
-        String content = this.readImplementationFileAsString(o.getOperation().getImplementation().getPrimary().getFile().replace(".yaml", ".ans"), o.getOperation().getImplementation().getPrimary().eResource());
+        String content = this.readImplementationFileAsString(o.getOperation().getImplementation().getPrimary().getFile().replace(".yaml", ".ans"), o.getOperation().getImplementation().getPrimary().eResource(), o.getOperation().getImplementation().getPrimary().getRelative_path());
         _builder.newLineIfNotEmpty();
         {
           if ((content != null)) {
@@ -5090,9 +5088,9 @@ public class RMGenerator extends AbstractGenerator {
   public String getFilename(final URI uri) {
     String filename = uri.toString();
     filename = filename.replace("platform:/resource", "");
-    int _indexOf = filename.indexOf(File.separator, 1);
+    int _indexOf = filename.indexOf("/", 1);
     int _plus = (_indexOf + 1);
-    String _replaceFirst = filename.substring(_plus).replaceFirst(File.separator, ".");
+    String _replaceFirst = filename.substring(_plus).replaceFirst("/", ".");
     String _plus_1 = (_replaceFirst + ".ttl");
     filename = _plus_1;
     return filename;
@@ -5107,19 +5105,37 @@ public class RMGenerator extends AbstractGenerator {
     return (_substring + ".rm");
   }
   
-  public String readImplementationFileAsString(final String path, final Resource resource) {
+  public String readImplementationFileAsString(final String path, final Resource resource, final String relativePath) {
     try {
       boolean _startsWith = path.startsWith(".");
       if (_startsWith) {
-        String intermediatePath = resource.getURI().toString().replaceAll("%20", " ").replace("platform:/resource", "");
-        URI _uRI = resource.getURI();
-        int _segmentCount = resource.getURI().segmentCount();
-        int _minus = (_segmentCount - 1);
-        String RMName = _uRI.segment(_minus).replaceAll("%20", " ");
-        intermediatePath = intermediatePath.replace(RMName, "");
-        String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
-        String _replace = path.replace("./", "");
-        String absolutePath = ((workspaceDir + intermediatePath) + _replace);
+        String absolutePath = null;
+        if ((relativePath == null)) {
+          String intermediatePath = resource.getURI().toString().replaceAll("%20", " ").replace("platform:/resource", "");
+          URI _uRI = resource.getURI();
+          int _segmentCount = resource.getURI().segmentCount();
+          int _minus = (_segmentCount - 1);
+          String RMName = _uRI.segment(_minus).replaceAll("%20", " ");
+          intermediatePath = intermediatePath.replace(RMName, "");
+          String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
+          String _replace = path.replace("./", "");
+          String _plus = ((workspaceDir + intermediatePath) + _replace);
+          absolutePath = _plus;
+        } else {
+          boolean _endsWith = relativePath.endsWith("/");
+          if (_endsWith) {
+            int _length = relativePath.length();
+            int _minus_1 = (_length - 1);
+            String _substring = relativePath.substring(0, _minus_1);
+            String _substring_1 = path.substring(1);
+            String _plus_1 = (_substring + _substring_1);
+            absolutePath = _plus_1;
+          } else {
+            String _substring_2 = path.substring(1);
+            String _plus_2 = (relativePath + _substring_2);
+            absolutePath = _plus_2;
+          }
+        }
         try {
           String content = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(absolutePath)));
           return content.replace("\\", "\\\\").replace("\'", "\\\'").replaceAll("[\\n\\r]+", "\\\\n");

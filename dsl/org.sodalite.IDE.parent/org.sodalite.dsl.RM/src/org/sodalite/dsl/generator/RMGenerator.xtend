@@ -1796,7 +1796,7 @@ class RMGenerator extends AbstractGenerator {
 		var filename = uri.toString
 		filename = filename.replace("platform:/resource", "")
 		filename = filename.substring(
-				filename.indexOf(File.separator, 1) + 1).replaceFirst(File.separator, ".") + ".ttl";
+				filename.indexOf("/", 1) + 1).replaceFirst("/", ".") + ".ttl";
 		return filename 
 	}
 		

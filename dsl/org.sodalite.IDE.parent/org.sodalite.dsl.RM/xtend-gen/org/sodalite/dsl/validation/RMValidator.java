@@ -34,7 +34,7 @@ public class RMValidator extends AbstractRMValidator {
         boolean _exists = Files.exists(path);
         boolean _not = (!_exists);
         if (_not) {
-          this.error("This file does not exist taking into the path in \'relative_path\'.", RMPackage.Literals.EPRIMARY__FILE);
+          this.error("This file does not exist taking into account the path in \'relative_path\'.", RMPackage.Literals.EPRIMARY__FILE);
         }
       } else {
         String workspaceDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString().replaceAll("%20", " ");
@@ -52,6 +52,13 @@ public class RMValidator extends AbstractRMValidator {
         if (_not_1) {
           this.error("The implementation file does not exist in the local path", RMPackage.Literals.EPRIMARY__FILE);
         }
+      }
+    } else {
+      Path path_2 = Paths.get(implementationPath);
+      boolean _exists_2 = Files.exists(path_2);
+      boolean _not_2 = (!_exists_2);
+      if (_not_2) {
+        this.error("The implementation file does not exist in the specified path", RMPackage.Literals.EPRIMARY__FILE);
       }
     }
   }
