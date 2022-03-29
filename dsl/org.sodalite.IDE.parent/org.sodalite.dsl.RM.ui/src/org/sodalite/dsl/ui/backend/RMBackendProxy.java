@@ -162,7 +162,7 @@ public class RMBackendProxy extends SodaliteBackendProxy {
 
 	private String readFile(IFile file) throws IOException {
 		String path = file.getLocationURI().toString();
-		path = path.substring(path.indexOf(File.separator)).replaceAll("%20", " ");
+		path = path.substring(path.indexOf("/")).replaceAll("%20", " ");
 		if (path.matches("^\\/.:\\/.+")) // Windows path
 			path = path.substring(1);
 		Path file_path = FileSystems.getDefault().getPath(path);
