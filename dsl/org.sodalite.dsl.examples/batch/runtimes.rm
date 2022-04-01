@@ -23,9 +23,11 @@ node_types:
         default: ""
       puller_image:
         type: string
+        required: false
         default: "puller.sif"
       puller_image_remote:
         type: string
+        required: false
         default: "modakopt/modak:puller"
     attributes:
       images_location_full_path:

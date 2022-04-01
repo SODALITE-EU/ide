@@ -1,0 +1,301 @@
+module: datapipeline
+
+data_types:
+
+  sodalite.datatypes.datapipeline.PipelineBlockCanvas:
+    derived_from: tosca.datatypes.Root
+    properties:
+      origin_X:
+        type: float
+      origin_Y:
+        type: float
+
+
+capability_types:
+
+  sodalite.capabilities.datapipeline.ConnectToPipeline:
+    derived_from: tosca.capabilities.Endpoint
+
+
+node_types:
+
+  sodalite.nodes.datapipeline.PipelineBlock:
+    derived_from: tosca.nodes.Root
+    attributes:
+      pipeline_id:
+        type: string
+      template_id:
+        type: string
+    properties:
+      name:
+        type: string
+        description: "Name of the pipeline node"
+      template:
+        type: string
+        description: "Name of the template to use. It should match the template filename, e.g. some_template - some_template.xml"
+      canvas_layout:
+        type: map
+        entry_schema: datapipeline/sodalite.datatypes.datapipeline.PipelineBlockCanvas
+        default:
+          origin_X: 2.0
+          origin_Y: 3.0
+        required: false
+      root_process_group_id:
+        type: string
+        default: "root"
+        required: false
+      SchedulingStrategy:
+        type: string
+        description: "EVENT_DRIVEN (default), CRON_DRIVEN and TIMER_DRIVEN. EVENT_DRIVEN is similar to TIMER_DRIVEN with 0 sec value in NiFi."
+        required: false
+        default: "EVENT_DRIVEN"
+        constraints:
+          valid_values: [ "EVENT_DRIVEN", "CRON_DRIVEN", "TIMER_DRIVEN" ]
+      SchedulingPeriodTimer:
+        type: string
+        description: "For TIMER_DRIVEN give in sec. Run schedule in X sec."
+        required: false
+        default: "0 sec"
+      SchedulingPeriodCron:
+        type: string
+        description: "For CRON_DRIVEN give in CRON syntax. Run schedule at CRON time."
+        required: false
+        default: "* * * * * ?"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              name:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.name
+              template:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.template
+              canvas_layout:
+                type: map
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.canvas_layout
+              root_process_group_id:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.root_process_group_id
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/create.yaml"
+          start:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.pipeline_id
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/start.yaml"
+          stop:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.pipeline_id
+              root_process_group_id:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.root_process_group_id
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/stop.yaml"
+          delete:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.pipeline_id
+              root_process_group_id:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.root_process_group_id
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/delete.yaml"
+              dependencies: ["/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/disconnect.yaml"]
+
+  sodalite.nodes.datapipeline.PipelineBlock.Consumer:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock
+    requirements:
+      connectToPipeline:
+        capability: datapipeline/sodalite.capabilities.datapipeline.ConnectToPipeline
+        node: datapipeline/sodalite.nodes.datapipeline.PipelineBlock
+        relationship: datapipeline/sodalite.relationships.datapipeline.ConnectsTo
+        occurrences: [ 1, "UNBOUNDED" ]
+
+  sodalite.nodes.datapipeline.PipelineBlock.Publisher:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock
+    capabilities:
+      ConnectToPipeline:
+        occurrences: [ 1, "UNBOUNDED" ]
+        valid_source_types: [ datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer ]
+        type: datapipeline/sodalite.capabilities.datapipeline.ConnectToPipeline
+
+  sodalite.nodes.datapipeline.TransferCompletion:
+    derived_from: tosca.nodes.Root
+    properties:
+      total_monitor_time:
+        type: integer
+        default: 86400
+        description: "In seconds, default is a full day"
+        required: false
+      monitor_period:
+        type: integer
+        default: 20
+        description: "In seconds"
+        required: false
+    requirements:
+      consumer:
+        node: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+        capability: tosca.capabilities.Root
+        relationship: tosca.relationships.DependsOn
+        occurrences: [ 1, 1 ]
+      publisher:
+        node: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher
+        capability: tosca.capabilities.Root
+        relationship: tosca.relationships.DependsOn
+        occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          create:
+            inputs:
+              consumer_pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer.pipeline_id
+                  req_cap: datapipeline/sodalite.nodes.datapipeline.TransferCompletion.consumer
+              publisher_pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher.pipeline_id
+                  req_cap: datapipeline/sodalite.nodes.datapipeline.TransferCompletion.publisher
+              total_monitor_time:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.TransferCompletion.total_monitor_time
+              monitor_period:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.TransferCompletion.monitor_period
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/check.yaml"
+
+relationship_types:
+
+  sodalite.relationships.datapipeline.ConnectsTo:
+    derived_from: tosca.relationships.ConnectsTo
+    interfaces:
+      Configure:
+        type: tosca.interfaces.relationship.Configure
+        operations:
+          post_configure_source:
+            inputs:
+              root_process_group_id:
+                type: string
+                default: get_property: 
+                  entity: SOURCE
+                  property: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer.root_process_group_id
+              source_pipeline_id:
+                type: string
+                default: get_attribute: 
+                  entity: SOURCE
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer.pipeline_id
+              target_pipeline_id:
+                type: string
+                default: get_attribute: 
+                  entity: TARGET
+                  attribute: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher.pipeline_id
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/common/connect.yaml"

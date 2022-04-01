@@ -41,8 +41,79 @@ node_types:
         required: false
         type: string
         default: ""
+      hpc_label:
+        required: false
+        type: string
+        default: ""
+      scrape_interval:
+        required: false
+        type: integer
+        default: 15
     capabilities:
       resources:
         type: batch/sodalite.capabilities.WM.JobResources
       optimisations:
         type: batch/sodalite.capabilities.OptimisedTarget
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:  
+          start:
+            inputs:
+              scheduler: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.scheduler
+              hpc_label: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.hpc_label
+              scrape_interval: 
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.scrape_interval
+              ssh_host: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.hpc.WM.public_address
+              monitoring_id:
+                type: string
+                default: get_input: monitoring_id
+              deployment_label:
+                type: string
+                default: get_input: deployment_label
+              jwt:
+                type: string
+                default: get_input: jwt
+              hpc_exporter_address:
+                type: string
+                default: get_input: hpc_exporter_address
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/create_collector.yml"
+          delete:
+            inputs:
+              scheduler: 
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: batch/sodalite.nodes.hpc.WM.scheduler
+              ssh_host: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.hpc.WM.public_address
+              monitoring_id:
+                type: string
+                default: get_input: monitoring_id
+              jwt:
+                type: string
+                default: get_input: jwt
+              hpc_exporter_address:
+                type: string
+                default: get_input: hpc_exporter_address
+            implementation: 
+              primary: "/workspace/iac-modules/hpc/app/playbooks/delete_collector.yml"

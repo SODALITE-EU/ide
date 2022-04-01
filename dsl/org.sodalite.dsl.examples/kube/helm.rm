@@ -36,10 +36,12 @@ node_types:
         entry_schema: string
         default: "[]"
         description: "List of values files for Helm chart. Shall be as a list of artifact paths"
+        required: false
       values:
         type: map
         default: "{}"
         description: "Values for Helm chart. Overrites values from values_files"
+        required: false
     requirements:
       host:
         node: kube/sodalite.nodes.Kubernetes.Cluster

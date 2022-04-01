@@ -1,0 +1,536 @@
+module: clinical
+
+import: openstack
+import: docker
+import: datapipeline
+import: batch
+
+inputs:
+  ssh-key-name:  
+    type: string 
+  image-name:  
+    type: string 
+  openstack-network-name:  
+    type: string 
+  openstack-floating-ip-pool:  
+    type: string  
+  flavor-name:  
+    type: string
+  env:
+    type: map 
+  username:
+    type: string 
+
+  minio-endpoint:
+    type: string 
+  minio-access-key:
+    type: string 
+  minio-secret-key:
+    type: string 
+
+  dataset-list:
+    type: list
+  gridftp-host:
+    type: string
+  gridftp-port:
+    type: string
+  gridftp-username:
+    type: string
+  gridftp-usercert:
+    type: string
+  gridftp-userkey:
+    type: string
+
+node_templates:
+  
+  // Setting up HPC resources //
+  
+  // HLRS testbed
+  hlrs-testbed:
+    type: batch/sodalite.nodes.hpc.WM
+    properties:
+      scheduler: "torque"
+      username: "kamil"
+    attributes:
+      public_address: "sodalite-fe.hlrs.de"
+    capabilities:
+      resources:
+        properties:
+          gpus: 5
+          cpus: 200
+          memory: 650687
+      optimisations:
+        properties:
+          target: "hlrs-testbed"
+
+  // HLRS container runtime
+  hlrs-singularity-runtime:
+    type: batch/sodalite.nodes.batch.Container.Runtime
+    properties:
+      runtime: "singularity"
+      images_location: "images"
+      certs_location: "certs"
+      private_registry: "77.231.202.207"
+    requirements:
+      host:
+        node: clinical/hlrs-testbed
+
+
+  // Setting up OpenStack resources //
+
+  // OpenStack security group for the ML Application
+  clinical-security-group:
+    type: openstack/sodalite.nodes.OpenStack.SecurityRules
+    properties:
+      group_description: "Security group for SSH"
+      group_name: "clinical-security-group"
+      env: get_input: env
+      ports:
+        ssh-port:
+          protocol: "tcp"
+          port_range_min: 22
+          port_range_max: 22
+          remote_ip_prefix: "0.0.0.0/0"
+
+  // OpenStack VM
+  sodalite-vm:  
+    type: openstack/sodalite.nodes.OpenStack.VM 
+    properties:  
+      name: "clinical-sodalite-vm"
+      key_name: get_input: ssh-key-name
+      image: get_input: image-name
+      network: get_input: openstack-network-name
+      security_groups: "default,clinical-security-group"
+      flavor: get_input: flavor-name
+      username: get_input: username
+      floating_ip_pools: get_input: openstack-floating-ip-pool
+      env: get_input: env
+      timeout: 600
+      include_exporter: false
+    requirements:
+      protected_by:
+        node: clinical/clinical-security-group
+
+
+  // Setting up Docker environment on the OpenStack VM //
+
+  // Docker host
+  docker-host:
+    type: docker/sodalite.nodes.DockerHost
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+
+  // Docker network
+  docker-network:
+    type: docker/sodalite.nodes.DockerNetwork
+    properties:
+      name: "ml-app-docker-network"
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+
+  // Docker images shall be pulled from public registry
+  docker-public-registry:
+    type: docker/sodalite.nodes.DockerRegistry
+    properties:
+      docker_registry_url: "registry.hub.docker.com"
+      docker_user: ""
+      docker_pass: ""
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+
+  // Volume for Clinical UC data
+  clinical-volume:
+    type: docker/sodalite.nodes.DockerVolume
+    properties:
+      name: "clinical-volume"
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+
+  // Volume for S3 client credentials
+  mc-volume:
+    type: docker/sodalite.nodes.DockerVolume
+    properties:
+      name: "mc-cred"
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+      dependency:
+        node: clinical/clinical-volume
+
+  // Setting up S3 client
+  mc-alias:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/mc-alias.network
+      volumes: [ "clinical-volume:/data", "mc-cred:/cred" ]
+      image_name: "minio/mc"
+      alias: "mc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "bash -c 'mc -C /cred alias set minio $MINIO_ENDPOINT $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD'" ]
+      env:
+        MINIO_ENDPOINT: get_input: minio-endpoint
+        MINIO_ROOT_USER: get_input: minio-access-key
+        MINIO_ROOT_PASSWORD: get_input: minio-secret-key
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/mc-volume
+
+
+  // Clinical UC Workflow //
+
+  // Move initial input data from remote repository to S3
+  init-data-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList
+    properties:
+      name: "Clinical UC Init Data Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 300.0
+      List: get_input: dataset-list
+    requirements:
+      connectToPipeline: 
+        node: clinical/init-data-publisher
+
+  init-data-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket
+    properties:
+      name: "MinIO Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 300.0
+      BucketName: "clinical-input"
+      Region: "eu-central-1"
+      AccessKey: get_input: minio-access-key
+      SecretKey: get_input: minio-secret-key
+      EndpointOverrideURL: get_input: minio-endpoint
+    requirements:
+      dependency: 
+        node: clinical/mc-alias
+
+  init-data-transfer-completion:
+    type: datapipeline/sodalite.nodes.datapipeline.TransferCompletion
+    requirements:
+      consumer:
+        node: clinical/init-data-consumer
+      publisher:
+        node: clinical/init-data-publisher
+
+  // Copy init data from S3 to clinical volume
+  mc-cp-init-data:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/mc-cp-init-data.network
+      volumes: [ "clinical-volume:/data", "mc-cred:/cred" ]
+      image_name: "minio/mc"
+      alias: "mc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "mc -C /cred mirror minio/clinical-input/ /data/" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/init-data-transfer-completion
+
+  // Density Mapper
+  density-mapper:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/density-mapper.network
+      volumes: [ "clinical-volume:/workdir" ]
+      image_name: "sodaliteh2020/cadt:1.0.0"
+      alias: "dm"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "bash -c 'cadt < cadt-density-output-iso.input'" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/init-data-transfer-completion
+
+  // Copy dm data from clinical volume to S3
+  mc-cp-dm-data:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/mc-cp-dm-data.network
+      volumes: [ "clinical-volume:/data", "mc-cred:/cred" ]
+      image_name: "minio/mc"
+      alias: "mc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "mc -C /cred cp /data/L1L2-iso.dens minio/clinical-dm/" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/density-mapper
+
+  // Move dm data from S3 to GridFTP
+  dm-data-s3-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket
+    properties:
+      name: "Density Mapper Data MinIO Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 600.0
+      BucketName: "clinical-dm"
+      Region: "eu-central-1"
+      AccessKey: get_input: minio-access-key
+      SecretKey: get_input: minio-secret-key
+      EndpointOverrideURL: get_input: minio-endpoint
+    requirements:
+      connectToPipeline:
+        node: clinical/dm-data-gridftp-publisher
+
+  dm-data-gridftp-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP
+    properties:
+      name: "Density Mapper Data GridFTP Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 600.0
+      Host: get_input: gridftp-host
+      Port: get_input: gridftp-port
+      Username: get_input: gridftp-username
+      Path: "~/workflow-ide"
+      Usercert: get_input: gridftp-usercert
+      Userkey: get_input: gridftp-userkey
+    requirements:
+      dependency: 
+        node: clinical/mc-cp-dm-data
+
+  dm-result-transfer:
+    type: datapipeline/sodalite.nodes.datapipeline.TransferCompletion
+    requirements:
+      consumer:
+        node: clinical/dm-data-s3-consumer
+      publisher:
+        node: clinical/dm-data-gridftp-publisher
+
+  // Probabilistic Mapper
+  prob-mapper-app:
+    type: batch/sodalite.nodes.batch.Container.Application
+    optimization: hlrs.mpi
+    properties:
+      app_tag: "mpich"
+      app_type: "hpc"
+      mpi_ranks: 2
+      container_runtime: "private://moduli:1.0.0" // from private registry
+      executable: "bash -c \"mkdir -p moduli-output && cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/L1L2-iso.dens -o $WORKSPACE_DIR/moduli-output\""
+      build:
+        src: "file://localhost/mnt/nfs/home/kamil/moduli/.git"
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install setuptools && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+      dependency: 
+        node: clinical/dm-result-transfer
+
+  prob-mapper-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "prob-mapper-job"
+      node_count: 2
+      process_count_per_node: 1
+      wall_time_limit: "1:00:00"
+      standard_output_file: "prob-mapper.out"
+      standard_error_file: "prob-mapper.err"
+      combine_stdout_stderr: true
+      workspace: "~/workflow-ide"
+    requirements:
+      application:
+        node: clinical/prob-mapper-app
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+
+  pm-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/prob-mapper-job
+      host:
+        node: clinical/hlrs-testbed
+  
+  pm-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/pm-exec
+      host:
+        node: clinical/hlrs-testbed
+
+  // Move pm data from GridFTP to S3
+  pm-data-gridftp-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP
+    properties:
+      name: "Probabilistic Mapper Data GridFTP Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 900.0
+      Host: get_input: gridftp-host
+      Port: get_input: gridftp-port
+      Username: get_input: gridftp-username
+      Path: "~/workflow-ide/moduli-output/"
+      Usercert: get_input: gridftp-usercert
+      Userkey: get_input: gridftp-userkey
+    requirements:
+      connectToPipeline:
+        node: clinical/pm-data-s3-publisher
+
+  pm-data-s3-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket
+    properties:
+      name: "Probabilistic Mapper Data MinIO Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 900.0
+      BucketName: "clinical-pm"
+      Region: "eu-central-1"
+      AccessKey: get_input: minio-access-key
+      SecretKey: get_input: minio-secret-key
+      EndpointOverrideURL: get_input: minio-endpoint
+    requirements:
+      dependency: 
+        node: clinical/pm-result
+
+  pm-result-transfer:
+    type: datapipeline/sodalite.nodes.datapipeline.TransferCompletion
+    requirements:
+      consumer:
+        node: clinical/pm-data-gridftp-consumer
+      publisher:
+        node: clinical/pm-data-s3-publisher
+
+  // Copy pm data from S3 to clinical volume
+  mc-cp-pm-data:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/mc-cp-pm-data.network
+      volumes: [ "clinical-volume:/data", "mc-cred:/cred" ]
+      image_name: "minio/mc"
+      alias: "mc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "mc -C /cred mirror minio/clinical-pm/ /data/" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/pm-result-transfer
+
+  // Boundary Condition
+  boundary-condition:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/boundary-condition.network
+      volumes: [ "clinical-volume:/workdir" ]
+      image_name: "sodaliteh2020/cadt:1.0.0"
+      alias: "bc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "bash -c 'cadt < cadt-med-output-iso.input'" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/mc-cp-pm-data
+
+  // Copy bc data from clinical volume to S3
+  mc-cp-bc-data:
+    type: docker/sodalite.nodes.DockerizedComponent
+    properties:
+      docker_network_name: get_property:
+        entity: SELF
+        property: clinical/docker-network.name
+        req_cap: clinical/mc-cp-bc-data.network
+      volumes: [ "clinical-volume:/data", "mc-cred:/cred" ]
+      image_name: "minio/mc"
+      alias: "mc"
+      restart_policy: "no"
+      registry_url: get_input: docker-registry-url
+      command: [ "mc -C /cred cp /data/fort.1234 minio/clinical-output/" ]
+    requirements:
+      host:
+        node: clinical/docker-host
+      network:
+        node: clinical/docker-network
+      registry:
+        node: clinical/docker-public-registry
+      dependency:
+        node: clinical/boundary-condition
+
+
+// Obtaining useful outputs, such as public IP of the VM //
+
+outputs:
+
+  // Public IP can be retrieved
+  // from the public_address attribute of the OpenStack VM
+  public_ip:
+    type: string
+    description: "The public IP of the provisioned VM"
+    value: get_attribute: 
+      entity: clinical/sodalite-vm
+      attribute: clinical/sodalite-vm.public_address

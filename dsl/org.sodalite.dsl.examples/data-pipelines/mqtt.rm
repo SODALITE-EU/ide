@@ -1,0 +1,200 @@
+module: datapipeline
+
+node_types:
+
+  sodalite.nodes.datapipeline.Publisher.MQTT:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher
+    properties:
+      template:
+        type: string
+        description: "Name of the template to use. It should match the template filename, e.g. some_template - some_template.xml"
+        default: "PubMQTT_Local"
+        required: false
+      BrokerURI:
+        type: string
+      Topic:
+        type: string
+      Username:
+        type: string
+      Password:
+        type: string
+      QoS:
+        type: integer
+        default: 1
+        required: false
+      RetainMessage:
+        type: boolean
+        required: false
+        default: true
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute: 
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.pipeline_id
+              BrokerURI:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.BrokerURI
+              Topic:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.Topic
+              Username:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.Username
+              Password:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.Password
+              QoS:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.QoS
+              RetainMessage:
+                type: boolean
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.RetainMessage
+              SchedulingStrategy:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.SchedulingStrategy
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.SchedulingPeriodTimer
+              SchedulingPeriodCron:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.MQTT.SchedulingPeriodCron
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/mqtt/configure_pub.yaml"
+    artifacts:
+      PubMQTT_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/mqtt/PubMQTT_Local.xml"
+
+  sodalite.nodes.datapipeline.Consumer.MQTT:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+    properties:
+      template:
+        type: string
+        default: "ConMQTT_Local"
+        required: false
+      BrokerURI:
+        type: string
+      Topic:
+        type: string
+      Username:
+        type: string
+      Password:
+        type: string
+      QoS:
+        type: integer
+        required: false
+        default: 1
+      MaxQueueSize:
+        type: integer
+        required: false
+        default: 1024
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute: 
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.pipeline_id
+              BrokerURI:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.BrokerURI
+              Topic:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.Topic
+              Username:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.Username
+              Password:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.Password
+              QoS:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.QoS
+              MaxQueueSize:
+                type: integer
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.MaxQueueSize
+              SchedulingStrategy:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.SchedulingStrategy
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.SchedulingPeriodTimer
+              SchedulingPeriodCron:
+                type: string
+                default: get_property: 
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT.SchedulingPeriodCron
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/mqtt/configure_con.yaml"
+    artifacts:
+      ConMQTT_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/mqtt/ConMQTT_Local.xml"

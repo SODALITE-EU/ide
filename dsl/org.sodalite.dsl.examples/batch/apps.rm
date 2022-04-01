@@ -37,11 +37,11 @@ node_types:
         type: integer
         required: false
         default: "null"
-      pre-execution:
-        type: string
+      minimal_efficiency:
+        type: float
         required: false
         default: "null"
-      post-execution:
+      storage_class_pref:
         type: string
         required: false
         default: "null"
@@ -119,6 +119,8 @@ node_types:
     properties:
       content:
         type: string
+        required: false
+        default: ""
       workspace:
         type: string
         required: false
@@ -195,7 +197,7 @@ node_types:
     properties:
       job_name:
         type: string
-      account:
+      partition:
         type: string
         required: false
         default: "null"
@@ -219,27 +221,11 @@ node_types:
         type: integer
         required: false
         default: "null"
-      core_count_per_process:
-        type: integer
-        required: false
-        default: "null"
-      memory_limit:
-        type: scalar-unit.size
-        required: false
-        default: "null"
-      minimum_memory_per_processor:
-        type: scalar-unit.size
-        required: false
-        default: "null"
       request_gpus:
         type: integer
         required: false
         default: "null"
       request_specific_nodes:
-        type: string
-        required: false
-        default: "null"
-      job_array:
         type: string
         required: false
         default: "null"
@@ -255,19 +241,11 @@ node_types:
         type: boolean
         required: false
         default: "null"
-      architecture_constraint:
-        type: string
-        required: false
-        default: "null"
       copy_environment:
         type: boolean
         required: false
         default: "null"
       copy_environment_variable:
-        type: string
-        required: false
-        default: "null"
-      job_dependency:
         type: string
         required: false
         default: "null"
@@ -277,14 +255,6 @@ node_types:
         default: "null"
       email_address:
         type: string
-        required: false
-        default: "null"
-      defer_job:
-        type: string
-        required: false
-        default: "null"
-      node_exclusive:
-        type: boolean
         required: false
         default: "null"
     requirements:

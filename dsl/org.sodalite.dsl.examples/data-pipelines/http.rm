@@ -1,0 +1,203 @@
+module: datapipeline
+
+node_types:
+
+  sodalite.nodes.datapipeline.Consumer.HTTP.TextList:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+    properties:
+      template:
+        type: string
+        default: "ConHTTPTextList_Local"
+        required: false
+      List:
+        type: string
+        description: "Multiline string containing a URL per line"
+        default: ""
+        required: false
+      Filename:
+        type: string
+        description: "Name of the file. NiFi expression can be used. By default, the base name of the url is used."
+        default: "${url:substringAfterLast('/'):substringBefore('?')}"
+        required: false
+      ListHTTPSchedulingStrategy:
+        type: string
+        description: "See sodalite.nodes.datapipeline.PipelineBlock description"
+        default: "TIMER_DRIVEN"
+        required: false
+        constraints:
+          valid_values: [ "TIMER_DRIVEN" ]
+      ListHTTPSchedulingPeriodTimer:
+        type: string
+        description: "We have to schedule to retrieve files only once. Run the next time unrealistically long time after. TODO - to implement state management to retrieve files once (see ListS3 implementation)"
+        default: "100 weeks"
+        required: false
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.pipeline_id
+              List:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.List
+              Filename:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.Filename
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.SchedulingStrategy
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.SchedulingPeriodCron
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.SchedulingPeriodTimer
+              ListHTTPSchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.ListHTTPSchedulingStrategy
+              ListHTTPSchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList.ListHTTPSchedulingPeriodTimer
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/http/configure_text_list_con.yaml"
+    artifacts:
+      ConHTTPTextList_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/http/ConHTTPTextList_Local.xml"
+
+  sodalite.nodes.datapipeline.Consumer.HTTP.JsonList:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+    properties:
+      template:
+        type: string
+        default: "ConHTTPJsonList_Local"
+        required: false
+      List:
+        type: list
+        description: "JSON list of objects that will be split. Object must contain a URL that should be mapped to 'url' attribute via AttributeMap property"
+        default: []
+        required: false
+        entry_schema: map
+      AttributeMap:
+        type: map
+        description: "Maps arbitrary attributes into JSONPath Expressions"
+        default:
+          url: "$.url"
+        required: false
+      Filename:
+        type: string
+        description: "Name of the file. NiFi expression can be used. By default, the base name of the url is used."
+        default: "${url:substringAfterLast('/'):substringBefore('?')}"
+        required: false
+      ListHTTPSchedulingStrategy:
+        type: string
+        description: "See sodalite.nodes.datapipeline.PipelineBlock description"
+        default: "TIMER_DRIVEN"
+        required: false
+        constraints:
+          valid_values: [ "TIMER_DRIVEN" ]
+      ListHTTPSchedulingPeriodTimer:
+        type: string
+        description: "We have to schedule to retrieve files only once. Run the next time unrealistically long time after. TODO - to implement state management to retrieve files once (see ListS3 implementation)"
+        default: "100 weeks"
+        required: false
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.pipeline_id
+              List:
+                type: list
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.List
+              AttributeMap:
+                type: map
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.AttributeMap
+              Filename:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.Filename
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.SchedulingStrategy
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.SchedulingPeriodCron
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.SchedulingPeriodTimer
+              ListHTTPSchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.ListHTTPSchedulingStrategy
+              ListHTTPSchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList.ListHTTPSchedulingPeriodTimer
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/http/configure_json_list_con.yaml"
+    artifacts:
+      ConHTTPJsonList_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/http/ConHTTPJsonList_Local.xml"

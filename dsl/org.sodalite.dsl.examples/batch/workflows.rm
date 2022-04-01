@@ -48,15 +48,27 @@ node_types:
                   entity: SELF
                   property: batch/sodalite.nodes.batch.Container.JobExecution.workspace
                   req_cap: batch/sodalite.nodes.workflow.Job.execution
+              ssh_host: 
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: batch/sodalite.nodes.hpc.WM.public_address
+                  req_cap: batch/sodalite.nodes.workflow.Job.host
               env: 
                 type: map
                 default: get_attribute:
                   entity: SELF
                   attribute: batch/sodalite.nodes.batch.Container.JobExecution.env
                   req_cap: batch/sodalite.nodes.workflow.Job.execution
+              monitoring_id:
+                type: string
+                default: get_input: monitoring_id
+              hpc_exporter_address:
+                type: string
+                default: get_input: hpc_exporter_address
             implementation: 
               primary: "/workspace/iac-modules/hpc/app/playbooks/workflows/start.yml"
-              dependencies: ["/workspace/iac-modules/hpc/app/playbooks/workflows/batch/start_batch.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/slurm/start_slurm.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/torque/start_torque.yml"]
+              dependencies: ["/workspace/iac-modules/hpc/app/playbooks/workflows/batch/start_batch.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/slurm/start_slurm.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/torque/start_torque.yml", "/workspace/iac-modules/hpc/app/playbooks/workflows/register_jobid.yml"]
 
   sodalite.nodes.workflow.Result: 
     derived_from: tosca.nodes.SoftwareComponent
@@ -73,9 +85,11 @@ node_types:
       monitor_period:
         type: integer
         default: 10
+        required: false
       monitor_retries_headroom:
         type: integer
         default: 2
+        required: false
     interfaces:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard

@@ -1,0 +1,197 @@
+module: datapipeline
+
+node_types:
+
+  sodalite.nodes.datapipeline.Publisher.S3Bucket:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher
+    properties:
+      template:
+        type: string
+        description: "Name of the template to use. It should match the template filename, e.g. some_template - some_template.xml"
+        default: "PubS3Bucket_Local"
+        required: false
+      ObjectKey:
+        type: string
+        default: "${filename}"
+        required: false
+      BucketName:
+        type: string
+      Region:
+        type: string
+        default: "eu-central-1"
+        required: false
+      AccessKey:
+        type: string
+      SecretKey:
+        type: string
+      EndpointOverrideURL:
+        type: string
+        required: false
+        default: ""
+        description: "Should be set to a URL, if non-AWS services are used. By default AWS S3 will be used"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.pipeline_id
+              ObjectKey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.ObjectKey
+              BucketName:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.BucketName
+              Region:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.Region
+              AccessKey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.AccessKey
+              SecretKey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.SecretKey
+              EndpointOverrideURL:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.EndpointOverrideURL
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.SchedulingStrategy
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.SchedulingPeriodTimer
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket.SchedulingPeriodCron
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/s3/configure_pub.yaml"
+    artifacts:
+      PubS3Bucket_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/s3/PubS3Bucket_Local.xml"
+
+  sodalite.nodes.datapipeline.Consumer.S3Bucket:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+    properties:
+      template:
+        type: string
+        default: "ConS3Bucket_Local"
+        required: false
+      BucketName:
+        type: string
+      Region:
+        type: string
+        default: "eu-central-1"
+        required: false
+      AccessKey:
+        type: string
+      SecretKey:
+        type: string
+      EndpointOverrideURL:
+        type: string
+        required: false
+        default: ""
+        description: "Should be set to a URL, if non-AWS services are used. By default AWS S3 will be used"
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.pipeline_id
+              BucketName:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.BucketName
+              Region:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.Region
+              AccessKey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.AccessKey
+              SecretKey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.SecretKey
+              EndpointOverrideURL:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.EndpointOverrideURL
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.SchedulingStrategy
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.SchedulingPeriodTimer
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.S3Bucket.SchedulingPeriodCron
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/s3/configure_con.yaml"
+    artifacts:
+      ConS3Bucket_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/s3/ConS3Bucket_Local.xml"

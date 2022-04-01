@@ -3,8 +3,8 @@ optimization hlrs.mpi:
 	enable_autotuning: false
 	app_type: hpc
 	opt_build:
-		acc_type: none
 		cpu_type: x86
+		acc_type: nvidia
 	app_type-hpc:
 		config:
 			parallelisation: mpi

@@ -1,0 +1,54 @@
+module: clinical
+
+import: batch
+
+node_templates:
+
+  solver-hlrs:
+    type: batch/sodalite.nodes.batch.Container.Application
+    optimization: hlrs.mpi
+    properties:
+      app_tag: "code-aster"
+      app_type: "hpc"
+      arguments: "${ASTER_OUTPUT}"
+      mpi_ranks: 2
+      threads: 1
+    requirements:
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+
+  solver-hlrs-job:
+    type: batch/sodalite.nodes.batch.Container.JobExecution
+    properties:
+      job_name: "solver"
+      node_count: 1
+      process_count_per_node: 2
+      wall_time_limit: "1:00:00"
+      standard_output_file: "file.out"
+      combine_stdout_stderr: true
+      workspace: "~/clinical-uc"
+    requirements:
+      application:
+        node: clinical/solver-hlrs
+      runtime:
+        node: clinical/hlrs-singularity-runtime
+      host:
+        node: clinical/hlrs-testbed
+  
+  solver-hlrs-exec:
+    type: batch/sodalite.nodes.workflow.Job
+    requirements:
+      execution:
+        node: clinical/solver-hlrs-job
+      host:
+        node: clinical/hlrs-testbed
+  
+  solver-hlrs-result:
+    type: batch/sodalite.nodes.workflow.Result
+    requirements:
+      job:
+        node: clinical/solver-hlrs-exec
+      host:
+        node: clinical/hlrs-testbed

@@ -1,0 +1,46 @@
+module: datapipeline
+
+inputs:
+  dataset_list:
+    type: list
+  gridftp_host:
+    type: string
+  gridftp_port:
+    type: string
+  gridftp_username:
+    type: string
+  gridftp_dst_path:
+    type: string
+  _get_secret_gridftp_usercert:
+    type: string
+  _get_secret_gridftp_userkey:
+    type: string
+
+node_templates:
+
+  dataset-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.TextList
+    properties:
+      name: "Clinical UC Dataset Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 300.0
+      List: get_input: dataset_list
+      Filename: "${hostname():append('_'):append(${url:substringAfterLast('/'):substringBefore('?')}):append('.rar')}"
+    requirements:
+      connectToPipeline:
+        node: gridftp-publisher
+
+  gridftp-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP
+    properties:
+      name: "Clinical UC GridFTP Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 300.0
+      Host: get_input: gridftp_host
+      Port: get_input: gridftp_port
+      Username: get_input: gridftp_username
+      Path: get_input: gridftp_dst_path
+      Usercert: get_input: _get_secret_gridftp_usercert
+      Userkey: get_input: _get_secret_gridftp_userkey

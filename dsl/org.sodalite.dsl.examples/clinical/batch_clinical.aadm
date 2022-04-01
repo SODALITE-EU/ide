@@ -5,41 +5,13 @@ import: batch
 node_templates:
 
   // APPLICATIONS
-
-  ct-transform-merge-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "ct-transform-merge"
-      app_type: "python"
-      container_runtime: "docker://sodaliteh2020/paraview:5.9.1"
-      executable: "pvbatch Transform_and_Merge/Transform_and_Merge_v1.0.py"
-      arguments: "$tfi_1 $tfi_2 $tfi_3   $outpath   $tn_sam   $tlb_x $tub_x $tlb_y $tub_y $tlb_z $tub_z   $tit_xy_v1_x $tit_xy_v1_y $tit_xy_v1_z   $tit_xy_v2_x $tit_xy_v2_y $tit_xy_v2_z   $tit_yz_v1_x $tit_yz_v1_y $tit_yz_v1_z   $tit_yz_v2_x $tit_yz_v2_y $tit_yz_v2_z   $tit_xz_v1_x $tit_xz_v1_y $tit_xz_v1_z   $tit_xz_v2_x $tit_xz_v2_y $tit_xz_v2_z   $voi_lbx $voi_ubx $voi_lby $voi_uby $voi_lbz $voi_ubz"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  density-mapper-fmt-converter-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "density-mapper-fmt-converter"
-      app_type: "bash"
-      container_runtime: "docker://centos:7"
-      executable: "./scripts/density-mapper-converter.sh"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
   density-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application
     properties:
       app_tag: "density-mapper"
       app_type: "fortran"
-      container_runtime: "docker://sodaliteh2020/cadt:1.0.1"
-      executable: "cadt < ${outpath}/cadt-density-output.input"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-density-output-iso.input"
     requirements:
       runtime:
         node: clinical/hlrs-singularity-runtime
@@ -48,133 +20,29 @@ node_templates:
   
   prob-mapper-app:
     type: batch/sodalite.nodes.batch.Container.Application
-    optimization: hlrs.mpi
+    optimization: egi.mpi
     properties:
       app_tag: "prob-mapper"
       app_type: "hpc"
-      mpi_ranks: 8
-      container_runtime: "private://moduli:1.0.0"
+      mpi_ranks: 2
+      container_runtime: "private://moduli:1.0.0" // from private registry
       executable: "bash -c \"cd moduli/build/lib/moduli/ && python3 main_mpi.py -s -f $WORKSPACE_DIR/output/iso/L1L2-iso.dens -o $WORKSPACE_DIR/output/moduli\""
       build:
         src: "$HOME/moduli/.git"
-        build_command: "bash -c \"cd $pm_dir && python3 main_mpi.py -s -f $WORKSPACE_DIR/${outpath}/${cadt_project_name}.dens -o $WORKSPACE_DIR/${outpath}\""
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  lower-boundary-conditions-fmt-converter-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "lower-boundary-conditions-fmt-converter"
-      app_type: "bash"
-      container_runtime: "docker://centos:7"
-      executable: "./scripts/boundary-conditions-converter.sh"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  mode-boundary-conditions-fmt-converter-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "mode-boundary-conditions-fmt-converter"
-      app_type: "bash"
-      container_runtime: "docker://centos:7"
-      executable: "./scripts/boundary-conditions-converter.sh"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  higher-boundary-conditions-fmt-converter-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "higher-boundary-conditions-fmt-converter"
-      app_type: "bash"
-      container_runtime: "docker://centos:7"
-      executable: "./scripts/boundary-conditions-converter.sh"
+        build_command: "bash -c \"cd moduli && pip3 --no-cache-dir install setuptools && pip3 --no-cache-dir install numpy pandas mpi4py --user && python3 setup.py install --user\""
     requirements:
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:
         node: clinical/hlrs-testbed
   
-  lower-boundary-conditions-app:
+  boundary-condition-app:
     type: batch/sodalite.nodes.batch.Container.Application
     properties:
-      app_tag: "lower-boundary-conditions"
+      app_tag: "boundary-condition"
       app_type: "fortran"
-      container_runtime: "docker://sodaliteh2020/cadt:1.0.1"
-      executable: "cadt < ${outpath}/${density_interval}/cadt-med-output.input"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-boundary-conditions-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "mode-boundary-conditions"
-      app_type: "fortran"
-      container_runtime: "docker://sodaliteh2020/cadt:1.0.1"
-      executable: "cadt < ${outpath}/${density_interval}/cadt-med-output.input"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-boundary-conditions-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "higher-boundary-conditions"
-      app_type: "fortran"
-      container_runtime: "docker://sodaliteh2020/cadt:1.0.1"
-      executable: "cadt < ${outpath}/${density_interval}/cadt-med-output.input"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  lower-solver-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "lower-solver"
-      app_type: "hpc"
-      container_runtime: "docker://quay.io/tianyikillua/code_aster:latest"
-      executable: "./scripts/aster-run.sh"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-solver-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "mode-solver"
-      app_type: "hpc"
-      container_runtime: "docker://quay.io/tianyikillua/code_aster:latest"
-      executable: "./scripts/aster-run.sh"
-    requirements:
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-solver-app:
-    type: batch/sodalite.nodes.batch.Container.Application
-    properties:
-      app_tag: "higher-solver"
-      app_type: "hpc"
-      container_runtime: "docker://quay.io/tianyikillua/code_aster:latest"
-      executable: "./scripts/aster-run.sh"
+      container_runtime: "docker://sodaliteh2020/cadt:1.0.0" // from private registry
+      executable: "cadt < $(pwd)/input/cadt-med-output-iso.input"
     requirements:
       runtime:
         node: clinical/hlrs-singularity-runtime
@@ -183,86 +51,6 @@ node_templates:
 
 
   // JOB EXECUTIONS
-  ct-transform-merge-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "ct-transform-merge-job"
-      node_count: 1
-      process_count_per_node: 20
-      wall_time_limit: "1:00:00"
-      standard_output_file: "ct-transform-merge.out"
-      standard_error_file: "ct-transform-merge.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        outpath: "data/generated"
-        tfi_1: "data/input/2_BWSLWS_Kn._2.0_B50s.vtk"
-        tfi_2: "data/input/6_BWSLWS_Kn._1.5_SPO-imageOrientationPatient_1.vtk"
-        tfi_3: "data/input/7_BWSLWS_Kn._1.5_SPO-imageOrientationPatient_1.vtk"
-        tn_sam: 600
-        tlb_x: -88.0
-        tub_x: 79.0
-        tlb_y: -176.0
-        tub_y: -8.0
-        tlb_z: 112.0
-        tub_z: 342.0
-        tit_xy_v1_x: 1.0
-        tit_xy_v1_y: 0.0
-        tit_xy_v1_z: 0.0
-        tit_xy_v2_x: 0.0
-        tit_xy_v2_y: 1.0
-        tit_xy_v2_z: 0.0
-        tit_yz_v1_x: -0.0147400200175
-        tit_yz_v1_y: 0.99898576606205
-        tit_yz_v1_z: -0.0425461045843
-        tit_yz_v2_x: 0.0
-        tit_yz_v2_y: -0.0425507277345
-        tit_yz_v2_z: -0.9990943076453
-        tit_xz_v1_x: 1.0
-        tit_xz_v1_y: 0.0
-        tit_xz_v1_z: 0.0
-        tit_xz_v2_x: 0.0
-        tit_xz_v2_y: -0.0166743709533
-        tit_xz_v2_z: -0.9998609730124
-        voi_lbx: 80
-        voi_ubx: 500
-        voi_lby: 80
-        voi_uby: 450
-        voi_lbz: 350
-        voi_ubz: 599
-    requirements:
-      application:
-        node: clinical/ct-transform-merge-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  density-mapper-fmt-converter-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "density-mapper-fmt-converter-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "density-mapper-fmt-converter.out"
-      standard_error_file: "density-mapper-fmt-converter.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        outpath: "data/generated"
-        fe_model: "data/input/Tube_v1.0.med"
-        cadt_input_template: "data/input/cadt.input.template"
-        ct_header_template: "data/input/cadt_ct-header_template.dat"
-        cadt_project_name: "Tube_v1.0-iso"
-    requirements:
-      application:
-        node: clinical/density-mapper-fmt-converter-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
   density-mapper-job:
     type: batch/sodalite.nodes.batch.Container.JobExecution
     properties:
@@ -273,9 +61,7 @@ node_templates:
       standard_output_file: "density-mapper.out"
       standard_error_file: "density-mapper.err"
       combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        outpath: "data/generated"
+      workspace: "~/workflow-ide"
     requirements:
       application:
         node: clinical/density-mapper-app
@@ -289,16 +75,12 @@ node_templates:
     properties:
       job_name: "prob-mapper-job"
       node_count: 2
-      process_count_per_node: 2
+      process_count_per_node: 1
       wall_time_limit: "1:00:00"
       standard_output_file: "prob-mapper.out"
       standard_error_file: "prob-mapper.err"
       combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        pm_dir: "moduli/build/lib/moduli/"
-        outpath: "data/generated"
-        cadt_project_name: "Tube_v1.0-iso"
+      workspace: "~/workflow-ide"
     requirements:
       application:
         node: clinical/prob-mapper-app
@@ -306,218 +88,21 @@ node_templates:
         node: clinical/hlrs-singularity-runtime
       host:
         node: clinical/hlrs-testbed
-
-  lower-boundary-conditions-fmt-converter-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "lower-boundary-conditions-fmt-converter-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "lower-boundary-conditions-fmt-converter.out"
-      standard_error_file: "lower-boundary-conditions-fmt-converter.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "lower"
-        outpath: "data/generated"
-        fe_model: "data/input/Tube_v1.0.med"
-        cadt_input_template: "data/input/cadt.input.template"
-        cadt_project_name: "Tube_v1.0-iso"
-    requirements:
-      application:
-        node: clinical/lower-boundary-conditions-fmt-converter-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  mode-boundary-conditions-fmt-converter-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "mode-boundary-conditions-fmt-converter-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "mode-boundary-conditions-fmt-converter.out"
-      standard_error_file: "mode-boundary-conditions-fmt-converter.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "mode"
-        outpath: "data/generated"
-        fe_model: "data/input/Tube_v1.0.med"
-        cadt_input_template: "data/input/cadt.input.template"
-        cadt_project_name: "Tube_v1.0-iso"
-    requirements:
-      application:
-        node: clinical/mode-boundary-conditions-fmt-converter-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-
-  higher-boundary-conditions-fmt-converter-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "higher-boundary-conditions-fmt-converter-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "higher-boundary-conditions-fmt-converter.out"
-      standard_error_file: "higher-boundary-conditions-fmt-converter.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "higher"
-        outpath: "data/generated"
-        fe_model: "data/input/Tube_v1.0.med"
-        cadt_input_template: "data/input/cadt.input.template"
-        cadt_project_name: "Tube_v1.0-iso"
-    requirements:
-      application:
-        node: clinical/higher-boundary-conditions-fmt-converter-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
   
-  lower-boundary-conditions-job:
+  boundary-condition-job:
     type: batch/sodalite.nodes.batch.Container.JobExecution
     properties:
-      job_name: "lower-boundary-conditions-job"
+      job_name: "boundary-condition-job"
       node_count: 1
       process_count_per_node: 1
       wall_time_limit: "1:00:00"
-      standard_output_file: "lower-boundary-conditions.out"
-      standard_error_file: "lower-boundary-conditions.err"
+      standard_output_file: "boundary-condition.out"
+      standard_error_file: "boundary-condition.err"
       combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "lower"
-        outpath: "data/generated"
+      workspace: "~/workflow-ide"
     requirements:
       application:
-        node: clinical/lower-boundary-conditions-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-boundary-conditions-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "mode-boundary-conditions-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "mode-boundary-conditions.out"
-      standard_error_file: "mode-boundary-conditions.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "mode"
-        outpath: "data/generated"
-    requirements:
-      application:
-        node: clinical/mode-boundary-conditions-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-boundary-conditions-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "higher-boundary-conditions-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "higher-boundary-conditions.out"
-      standard_error_file: "higher-boundary-conditions.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "higher"
-        outpath: "data/generated"
-    requirements:
-      application:
-        node: clinical/higher-boundary-conditions-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  lower-solver-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "lower-solver-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "lower-solver.out"
-      standard_error_file: "lower-solver.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "lower"
-        outpath: "data/generated"
-        cadt_project_name: "Tube_v1.0-iso"
-        OPENBLAS_NUM_THREADS: 1
-        OPENBLAS_MAIN_FREE: 1
-    requirements:
-      application:
-        node: clinical/lower-solver-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-solver-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "mode-solver-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "mode-solver.out"
-      standard_error_file: "mode-solver.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "mode"
-        outpath: "data/generated"
-        cadt_project_name: "Tube_v1.0-iso"
-        OPENBLAS_NUM_THREADS: 1
-        OPENBLAS_MAIN_FREE: 1
-    requirements:
-      application:
-        node: clinical/mode-solver-app
-      runtime:
-        node: clinical/hlrs-singularity-runtime
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-solver-job:
-    type: batch/sodalite.nodes.batch.Container.JobExecution
-    properties:
-      job_name: "higher-solver-job"
-      node_count: 1
-      process_count_per_node: 1
-      wall_time_limit: "1:00:00"
-      standard_output_file: "higher-solver.out"
-      standard_error_file: "higher-solver.err"
-      combine_stdout_stderr: true
-      workspace: "~/clinical-uc"
-      env:
-        density_interval: "higher"
-        outpath: "data/generated"
-        cadt_project_name: "Tube_v1.0-iso"
-        OPENBLAS_NUM_THREADS: 1
-        OPENBLAS_MAIN_FREE: 1
-    requirements:
-      application:
-        node: clinical/higher-solver-app
+        node: clinical/boundary-condition-app
       runtime:
         node: clinical/hlrs-singularity-runtime
       host:
@@ -525,40 +110,6 @@ node_templates:
       
       
   // WORKFLOW
-  ct-tm-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution: 
-        node: clinical/ct-transform-merge-job
-      host:
-        node: clinical/hlrs-testbed
-
-  ct-tm-result:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution: 
-        node: clinical/ct-transform-merge-job
-      host:
-        node: clinical/hlrs-testbed
-
-  dm-fmt-converter-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution: 
-        node: clinical/density-mapper-fmt-fmt-converter-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/ct-tm-result
-  
-  dm-fmt-converter-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/dm-fmt-converter-exec
-      host:
-        node: clinical/hlrs-testbed
-
   dm-exec:
     type: batch/sodalite.nodes.workflow.Job
     requirements:
@@ -566,8 +117,6 @@ node_templates:
         node: clinical/density-mapper-job
       host:
         node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/dm-fmt-converter-result
   
   dm-result:
     type: batch/sodalite.nodes.workflow.Result
@@ -594,171 +143,21 @@ node_templates:
         node: clinical/pm-exec
       host:
         node: clinical/hlrs-testbed
-
-
-  // Lower density interval execution
-  lower-bc-fmt-converter-exec:
+  
+  bc-exec:
     type: batch/sodalite.nodes.workflow.Job
     requirements:
       execution:
-        node: clinical/lower-boundary-conditions-fmt-converter-job
+        node: clinical/boundary-condition-job
       host:
         node: clinical/hlrs-testbed
       dependency:
         node: clinical/pm-result
   
-  lower-bc-fmt-converter-result:
+  bc-result:
     type: batch/sodalite.nodes.workflow.Result
     requirements:
       job:
-        node: clinical/lower-bc-fmt-converter-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  lower-bc-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/lower-boundary-conditions-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/lower-bc-fmt-converter-result
-  
-  lower-bc-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/lower-bc-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  lower-solver-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/lower-solver-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/lower-bc-result
-  
-  lower-solver-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/lower-solver-exec
-      host:
-        node: clinical/hlrs-testbed
-
-
-  // Mode density interval execution
-  mode-bc-fmt-converter-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/mode-boundary-conditions-fmt-converter-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/pm-result
-  
-  mode-bc-fmt-converter-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/mode-bc-fmt-converter-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-bc-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/mode-boundary-conditions-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/mode-bc-fmt-converter-result
-  
-  mode-bc-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/mode-bc-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  mode-solver-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/mode-solver-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/mode-bc-result
-  
-  mode-solver-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/mode-solver-exec
-      host:
-        node: clinical/hlrs-testbed
-
-
-  // Higher density interval execution
-  higher-bc-fmt-converter-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/higher-boundary-conditions-fmt-converter-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/pm-result
-  
-  higher-bc-fmt-converter-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/higher-bc-fmt-converter-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-bc-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/higher-boundary-conditions-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/higher-bc-fmt-converter-result
-  
-  higher-bc-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/higher-bc-exec
-      host:
-        node: clinical/hlrs-testbed
-  
-  higher-solver-exec:
-    type: batch/sodalite.nodes.workflow.Job
-    requirements:
-      execution:
-        node: clinical/higher-solver-job
-      host:
-        node: clinical/hlrs-testbed
-      dependency:
-        node: clinical/higher-bc-result
-  
-  higher-solver-result:
-    type: batch/sodalite.nodes.workflow.Result
-    requirements:
-      job:
-        node: clinical/higher-solver-exec
+        node: clinical/bc-exec
       host:
         node: clinical/hlrs-testbed

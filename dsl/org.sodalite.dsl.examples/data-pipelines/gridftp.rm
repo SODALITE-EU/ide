@@ -1,0 +1,248 @@
+module: datapipeline
+
+node_types:
+
+  sodalite.nodes.datapipeline.Publisher.GridFTP:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Publisher
+    properties:
+      template:
+        type: string
+        description: "Name of the template to use. It should match the template filename, e.g. some_template - some_template.xml"
+        default: "PubGridFTP_Local"
+        required: false
+      Host:
+        type: string
+      Port:
+        type: tosca.datatypes.network.PortDef
+        default: 2811
+        required: false
+      Username:
+        type: string
+      Path:
+        type: string
+        default: "~/"
+        required: false
+        description: "A target directory, where the files will be copied to. The directory must exist beforehand. Default is the home directory"
+      Usercert:
+        type: string
+      Userkey:
+        type: string
+      BufferSize:
+        type: integer
+        default: 8192
+        required: false
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.pipeline_id
+              Host:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Host
+              Port:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Port
+              Username:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Username
+              Path:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Path
+              Usercert:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Usercert
+              Userkey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.Userkey
+              BufferSize:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.BufferSize
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.SchedulingStrategy
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.SchedulingPeriodTimer
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Publisher.GridFTP.SchedulingPeriodCron
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/gridftp/configure_pub.yaml"
+    artifacts:
+      PubGridFTP_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/gridftp/PubGridFTP_Local.xml"
+
+  sodalite.nodes.datapipeline.Consumer.GridFTP:
+    derived_from: datapipeline/sodalite.nodes.datapipeline.PipelineBlock.Consumer
+    properties:
+      template:
+        type: string
+        default: "ConGridFTP_Local"
+        required: false
+      Host:
+        type: string
+      Port:
+        type: tosca.datatypes.network.PortDef
+        default: 2811
+        required: false
+      Username:
+        type: string
+      Path:
+        type: string
+        default: "~/"
+        required: false
+      Usercert:
+        type: string
+      Userkey:
+        type: string
+      SchedulingStrategy:
+        type: string
+        description: "See sodalite.nodes.datapipeline.PipelineBlock description"
+        required: false
+        default: "TIMER_DRIVEN"
+        constraints:
+          valid_values: [ "TIMER_DRIVEN" ]
+      SchedulingPeriodTimer:
+        type: string
+        description: "Not to overload the processing, schedule it periodically."
+        required: false
+        default: "1 sec"
+        constraints:
+          valid_values: [ "1 sec" ]
+      ListGridFTPSchedulingStrategy:
+        type: string
+        description: "See sodalite.nodes.datapipeline.PipelineBlock description"
+        required: false
+        default: "TIMER_DRIVEN"
+        constraints:
+          valid_values: [ "TIMER_DRIVEN" ]
+      ListGridFTPSchedulingPeriodTimer:
+        type: string
+        description: "We have to schedule to retrieve files only once. Run the next time unrealistically long time after. TODO - to implement state management to retrieve files once (see ListS3 implementation)"
+        default: "100 weeks"
+        required: false
+        constraints:
+          valid_values: [ "100 weeks" ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        operations:
+          configure:
+            inputs:
+              pipeline_id:
+                type: string
+                default: get_attribute:
+                  entity: SELF
+                  attribute: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.pipeline_id
+              Host:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Host
+              Port:
+                type: integer
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Port
+              Username:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Username
+              Path:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Path
+              Usercert:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Usercert
+              Userkey:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.Userkey
+              SchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.SchedulingStrategy
+              SchedulingPeriodCron:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.SchedulingPeriodCron
+              SchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.SchedulingPeriodTimer
+              ListGridFTPSchedulingStrategy:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.ListGridFTPSchedulingStrategy
+              ListGridFTPSchedulingPeriodTimer:
+                type: string
+                default: get_property:
+                  entity: SELF
+                  property: datapipeline/sodalite.nodes.datapipeline.Consumer.GridFTP.ListGridFTPSchedulingPeriodTimer
+              NIFI_ENDPOINT:
+                type: string
+                default: get_input: NIFI_ENDPOINT
+              NIFI_API_ENDPOINT:
+                type: string
+                default: get_input: NIFI_API_ENDPOINT
+              NIFI_API_ACCESS_TOKEN:
+                type: string
+                default: get_input: NIFI_API_ACCESS_TOKEN
+              NIFI_API_VALIDATE_CERTS:
+                type: boolean
+                default: get_input: NIFI_API_VALIDATE_CERTS
+            implementation:
+              primary: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/playbooks/gridftp/configure_con.yaml"
+    artifacts:
+      ConGridFTP_Template:
+        type: tosca.artifacts.File
+        file: "/home/kml/sodalite/github-repo/iac-modules/data-pipelines/templates/gridftp/ConGridFTP_Local.xml"

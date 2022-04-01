@@ -1,0 +1,51 @@
+module: datapipeline
+
+inputs:
+  mqtt_broker_uri:
+    type: string
+  mqtt_topic:
+    type: string
+  mqtt_username:
+    type: string
+  mqtt_password:
+    type: string
+  _get_secret_minio_access_key:
+    type: string
+  _get_secret_minio_secret_key:
+    type: string
+  minio_endpoint:
+    type: string
+
+node_templates:
+
+  mqtt-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.MQTT
+    properties:
+      name: "KnowGo MQTT Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 300.0
+      BrokerURI: get_input: mqtt_broker_uri
+      Topic: "$share/knowgo-group/knowgo"
+      Username: get_input: mqtt_username
+      Password: get_input: mqtt_password
+      MaxQueueSize: 8096
+      SchedulingStrategy: "TIMER_DRIVEN"
+      SchedulingPeriodTimer: "1 sec"
+    requirements:
+      connectToPipeline:
+        node: s3-publisher
+
+  s3-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket
+    properties:
+      name: "Vehicle IoT MinIO Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 300.0
+      ObjectKey: "${hostname():append('/'):append(${filename}):append('.txt')}"
+      BucketName: "knowgo-events"
+      Region: "eu-central-1"
+      AccessKey: get_input: _get_secret_minio_access_key
+      SecretKey: get_input: _get_secret_minio_secret_key
+      EndpointOverrideURL: get_input: minio_endpoint

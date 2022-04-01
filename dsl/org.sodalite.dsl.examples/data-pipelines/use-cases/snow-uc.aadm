@@ -1,0 +1,45 @@
+module: datapipeline
+
+inputs:
+  webcam_object_list:
+    type: list
+  minio_access_key:
+    type: string
+  minio_secret_key:
+    type: string
+  minio_endpoint:
+    type: string
+
+node_templates:
+
+  webcam-consumer:
+    type: datapipeline/sodalite.nodes.datapipeline.Consumer.HTTP.JsonList
+    properties:
+      name: "Snow UC Webcam Consumer"
+      canvas_layout:
+        origin_X: 600.0
+        origin_Y: 300.0
+      List: get_input: webcam_object_list
+      AttributeMap:
+        id: "$.id"
+        name: "$.name"
+        url: "$.url"
+        lat: "$.lat"
+        lng: "$.lng"
+      Filename: "${hostname():append('/'):append(${id}):append('_'):append(${now():format('yyyy_MM_dd_HH_mm')}):append('.jpg')}"
+    requirements:
+      connectToPipeline: 
+        node: s3-publisher
+
+  s3-publisher:
+    type: datapipeline/sodalite.nodes.datapipeline.Publisher.S3Bucket
+    properties:
+      name: "MinIO Publisher"
+      canvas_layout:
+        origin_X: 1500.0
+        origin_Y: 300.0
+      BucketName: "wc-shots"
+      Region: "eu-central-1"
+      AccessKey: get_input: minio_access_key
+      SecretKey: get_input: minio_secret_key
+      EndpointOverrideURL: get_input: minio_endpoint

@@ -1,0 +1,114 @@
+module: clinical
+
+import: docker
+import: openstack
+import: batch
+
+inputs:
+  ssh-key-name:  
+    type: string 
+  vm-name:  
+    type: string 
+  image-name:  
+    type: string 
+  openstack-network-name:  
+    type: string 
+  openstack-floating-ip-pool:  
+    type: string 
+  security-group-name:  
+    type: string  
+  security-groups:  
+    type: string  
+  flavor-name:  
+    type: string
+  env:
+    type: map 
+  username:
+    type: string  
+
+node_templates:
+
+  // Setting up OpenStack resources //
+
+  // OpenStack security group for the ML Application
+  clinical-security-group:
+    type: openstack/sodalite.nodes.OpenStack.SecurityRules
+    properties:
+      group_description: "Security group for MinIO, SSH"
+      group_name: "clinical-security-group"
+      env: get_input: env
+      ports:
+        ssh-port:
+          protocol: "tcp"
+          port_range_min: 22
+          port_range_max: 22
+          remote_ip_prefix: "0.0.0.0/0"
+        minio-port:
+          protocol: "tcp"
+          port_range_min: 9000
+          port_range_max: 9001
+          remote_ip_prefix: "0.0.0.0/0"
+
+  // OpenStack VM
+  sodalite-vm:  
+    type: openstack/sodalite.nodes.OpenStack.VM 
+    properties:  
+      name: clinical-sodalite-vm
+      key_name: get_input: ssh-key-name
+      image: get_input: image-name
+      network: get_input: openstack-network-name
+      security_groups: "default,clinical-security-group"
+      flavor: get_input: flavor-name
+      username: get_input: username
+      floating_ip_pools: get_input: openstack-floating-ip-pool
+      env: get_input: env
+      timeout: 600
+    requirements:
+      protected_by:
+        node: clinical/clinical-security-group
+
+  // Setting up Docker environment on the OpenStack VM //
+
+  // Docker host
+  docker-host:
+    type: docker/sodalite.nodes.DockerHost
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+
+  // Docker network
+  docker-network:
+    type: docker/sodalite.nodes.DockerNetwork
+    properties:
+      name: "ml-app-docker-network"
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+
+  // Docker images shall be pulled from public registry
+  docker-public-registry:
+    type: docker/sodalite.nodes.DockerRegistry
+    properties:
+      docker_registry_url: "registry.hub.docker.com"
+      docker_user: ""
+      docker_pass: ""
+    requirements:
+      host:
+        node: clinical/sodalite-vm
+      dependency:
+        node: clinical/docker-host
+
+// Obtaining useful outputs, such as public IP of the VM //
+
+outputs:
+
+  // Public IP can be retrieved
+  // from the public_address attribute of the OpenStack VM
+  public_ip:
+    type: string
+    description: "The public IP of the provisioned VM"
+    value: get_attribute: 
+      entity: clinical/sodalite-vm
+      attribute: clinical/sodalite-vm.public_address

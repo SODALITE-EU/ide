@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_8BSl8Ed6EeyE0Yex1-4WrA" selectedViews="_8bw7cEd6EeyE0Yex1-4WrA" version="14.5.1.202106111100">
+  <semanticResources>solver.aadm</semanticResources>
+  <semanticResources>hlrs.mpi.opt</semanticResources>
+  <ownedViews xmi:type="viewpoint:DView" uid="_8bw7cEd6EeyE0Yex1-4WrA">
+    <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sodalite.dsl.AADM.design/description/AADM.odesign#//@ownedViewpoints[name='ADDMView']"/>
+  </ownedViews>
+</viewpoint:DAnalysis>
