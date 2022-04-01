@@ -79,10 +79,6 @@ import org.sodalite.dsl.aADM.AADM_Model
 import org.sodalite.dsl.rM.EArtifactDefinition
 import org.sodalite.dsl.rM.GetArtifact
 import java.util.Base64
-import java.lang.reflect.Method
-import java.util.Arrays
-import java.util.List
-import java.util.stream.Collectors
 import org.sodalite.dsl.helper.AADMDSLHelper
 
 /**
@@ -1151,7 +1147,8 @@ class AADMGenerator extends AbstractGenerator {
 	}
 	
 	def readFileAsString(String path){
-		return new String(Files.readAllBytes(Paths.get(path)));
+	    var String content = new String (Files.readAllBytes(Paths.get(path)))
+	    return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
 	}
 	
 	def getResourcePath(Resource r){
