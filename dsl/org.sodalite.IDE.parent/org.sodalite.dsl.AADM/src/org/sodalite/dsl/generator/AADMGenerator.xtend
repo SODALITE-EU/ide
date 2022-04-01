@@ -1051,7 +1051,7 @@ class AADMGenerator extends AbstractGenerator {
 	:Parameter_«parameter_counter++»
 	  rdf:type exchange:Parameter ;
 	  exchange:name "content" ;
-	  exchange:value '«readFileAsString(a.artifact.file)»' ;
+	  exchange:value '«readFileAsEncodedString(a.artifact.file)»' ;
 	.
 	
 	«artifact_numbers.put(a, artifact_counter)»
@@ -1146,9 +1146,12 @@ class AADMGenerator extends AbstractGenerator {
 		return readFileAsString(path)
 	}
 	
-	def readFileAsString(String path){
+	def readFileAsEncodedString(String path){
 		return Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get(path)));
-//		return content.replace("\\", "\\\\").replace("\'", "\\'").replaceAll("[\\n\\r]+","\\\\n")
+	}
+	
+	def readFileAsString(String path){
+		return new String(Files.readAllBytes(Paths.get(path)));
 	}
 	
 	def getResourcePath(Resource r){
