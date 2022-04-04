@@ -1109,11 +1109,21 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			// Getting the iterator
 			var Iterator<Document> it = ansible_collection.iterator();
 			while (it.hasNext()){
-				var modules = it.next().get("modules",typeof(Document)).keySet()
-				for(module:modules){
-					createNonEditableCompletionProposal(module, new StyledString(module.concat(" - ").concat(collection)), context, "Module of collection ".concat(collection), acceptor)
-					
+				var modules = it.next().get("modules",typeof(Document))
+				for(moduleName:modules.keySet()){
+					var Document module = modules.get(moduleName) as Document
+					var String description = module.get("description") as String
+					if(description !== null){
+						createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(collection)), context, "Module of collection ".concat(collection).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)	
+					}
+					else{
+						createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(collection)), context, "Module of collection ".concat(collection).concat("\n"), acceptor)		
+					}
 				}
+				//for(module:modules){
+				//	createNonEditableCompletionProposal(module, new StyledString(module.concat(" - ").concat(collection)), context, "Module of collection ".concat(collection), acceptor)
+					
+				//}
 			}
 		}
 		
@@ -1227,7 +1237,12 @@ class AnsibleDslProposalProvider extends AbstractAnsibleDslProposalProvider {
 			for(moduleName:modules.keySet()){
 				var Document module = modules.get(moduleName) as Document
 				var String description = module.get("description") as String
-				createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)
+				if(description !== null){
+					createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn).concat("\n").concat("Description:").concat("\n").concat(description), acceptor)	
+				}
+				else{
+					createNonEditableCompletionProposal(moduleName, new StyledString(moduleName.concat(" - ").concat(fqn)), context, "Module of collection ".concat(fqn).concat("\n"), acceptor)		
+				}
 			}
 		}
 		

@@ -73,16 +73,14 @@ import java.util.Collections
  */
 class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					AnsibleDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	//List of Behavioral Inventory Parameters - https://docs.ansible.com/ansible/2.7/user_guide/intro_inventory.html
+	var static List<String> inventoryParameters = Arrays.asList("ansible_connection", "ansible_host", "ansible_port",
+		"ansible_user","ansible_ssh_pass","ansible_ssh_private_key_file", "ansible_ssh_common_args", "ansible_sftp_extra_args",
+		"ansible_scp_extra_args", "ansible_ssh_extra_args", "ansible_ssh_pipelining", "ansible_ssh_executable", "ansible_become",
+		"ansible_become_method", "ansible_become_user", "ansible_become_pass", "ansible_become_exe", "ansible_become_flags",
+		"ansible_shell_type", "ansible_python_interpreter", "ansible_shell_executable"
+	)
+
 	@Check
 	def checkCollectionNames(ECollectionFQN collection) {
 		// Check if collection name,which is a reference to a variable, is correct
@@ -548,6 +546,9 @@ class AnsibleDslValidator extends AbstractAnsibleDslValidator {
 		if(paramsIterator.hasNext()){
 			var Document examinedMondule = paramsIterator.next
 			if(examinedMondule.size!==0){
+				return
+			}
+			else if(inventoryParameters.contains(parameter.name)){
 				return
 			}
 			else{
