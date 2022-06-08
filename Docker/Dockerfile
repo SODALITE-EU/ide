@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 WORKDIR /sodalite
 ARG DEBIAN_FRONTEND=noninteractive
 
