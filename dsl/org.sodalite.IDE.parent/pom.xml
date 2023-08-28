@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<xtextVersion>2.25.0</xtextVersion>
+		<xtextVersion>2.32.0</xtextVersion>
 		<xtendMavenPlugin>2.25.0</xtendMavenPlugin>
 		<mwe2LaunchVersion>2.12.1</mwe2LaunchVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,10 +16,10 @@
 		<!-- Tycho settings -->
 		<tycho-version>1.7.0</tycho-version>
 		<!-- Define overridable properties for tycho-surefire-plugin -->
-		<platformSystemProperties></platformSystemProperties>
-		<moduleProperties></moduleProperties>
-		<systemProperties></systemProperties>
-		<tycho.testArgLine></tycho.testArgLine>
+		<platformSystemProperties/>
+		<moduleProperties/>
+		<systemProperties/>
+		<tycho.testArgLine/>
 	</properties>
 	<modules>
 		<module>org.sodalite.dsl.AADM</module>
@@ -195,7 +195,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 <!-- 								<pluginExecution>
@@ -236,7 +236,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -258,7 +258,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
